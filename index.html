@@ -71,10 +71,30 @@ padding: 20px;
 color: #8b949e;
 font-size: 14px;
 }
+input, button {
+padding: 10px;
+margin: 5px 0;
+}
+#loginSection {
+max-width: 400px;
+margin: 20px auto;
+text-align: center;
+}
+#paidContent {
+display: none; /* Only show to paid members */
+}
 </style>
 </head>
 <body>
 <header>LoL Fundamentals</header>
+
+<!-- Member Login Section moved to top -->
+<section id="loginSection">
+<h2>Member Login</h2>
+<input type="email" id="email" placeholder="Enter your email" />
+<button onclick="login()">Login</button>
+<p id="loginMsg"></p>
+</section>
 
 <section class="hero">
 <h1>The Ultimate Diana Guide</h1>
@@ -104,15 +124,34 @@ font-size: 14px;
 </div>
 </section>
 
-<section class="section" id="enroll">
-<h2>Join the Guide</h2>
-<p>Access the complete written guide, matchup breakdowns, and frequent updates for just $12.99/month.</p>
-<a href="https://buy.stripe.com/8x2eV6aQ448A4RgewGejK00" class="btn" target="_blank">Join Now</a>
+<section class="section" id="paidContent">
+<h2>Exclusive Member Content</h2>
+<p>Welcome! You now have access to all the Diana guides, matchup breakdowns, and frequent updates.</p>
 </section>
 
 <footer>
 © 2025 LoL Fundamentals · Contact: <a href="mailto:arcsecond@lolfundamentals.com" style="color:#8b949e;">arcsecond@lolfundamentals.com</a>
 </footer>
+
+<script>
+async function login() {
+const email = document.getElementById('email').value;
+const res = await fetch('/login', {
+method: 'POST',
+headers: {'Content-Type': 'application/json'},
+body: JSON.stringify({email})
+});
+const data = await res.json();
+const msg = document.getElementById('loginMsg');
+if(data.success){
+msg.textContent = 'Access granted! Welcome, member.';
+document.getElementById('paidContent').style.display = 'block';
+document.getElementById('loginSection').style.display = 'none';
+} else {
+msg.textContent = 'Access denied. Please purchase membership.';
+}
+}
+</script>
 </body>
 </html>
 
