@@ -1,0 +1,33 @@
+// server.js
+const express = require('express');
+const bodyParser = require('body-parser');
+const app = express();
+const PORT = 3000;
+
+app.use(bodyParser.json());
+
+// In-memory members database (replace with real DB)
+let members = [
+// Example: {email: "member@example.com", membershipActive: true}
+];
+
+// Mock login endpoint
+app.post('/login', (req, res) => {
+const {email} = req.body;
+const user = members.find(u => u.email === email);
+if(user && user.membershipActive){
+res.json({success: true});
+} else {
+res.json({success: false});
+}
+});
+
+// Example Stripe webhook handler
+app.post('/webhook', bodyParser.raw({type: 'application/json'}), (req, res) => {
+// Stripe webhook code here
+// On successful payment, add/update member:
+// members.push({email: session.customer_email, membershipActive: true});
+res.json({received: true});
+});
+
+app.listen(PORT, () => console.log(`Server running on http://localhost:${PORT}`));
