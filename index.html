@@ -4,6 +4,14 @@
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 <title>LoL Fundamentals – The Ultimate Diana Guide</title>
+
+<!-- ✅ Memberstack Script -->
+<script 
+  data-memberstack-app="app_cmhn4sgjy002o0st44e9736tx" 
+  src="https://static.memberstack.com/scripts/v2/memberstack.js" 
+  type="text/javascript">
+</script>
+
 <style>
 body {
   margin: 0;
@@ -103,17 +111,18 @@ header {
   color: #c9aa71;
 }
 
-/* MemberStack Login */
+/* Member Login Section */
 #loginSection {
   max-width: 400px;
-  margin: 20px auto;
+  margin: 40px auto 20px;
   text-align: center;
 }
 #loginSection h2 {
   margin-bottom: 15px;
+  color: #c9aa71;
 }
 
-/* Paid content */
+/* Member-only content */
 #paidContent {
   display: none;
 }
@@ -140,17 +149,28 @@ footer a:hover {
 <body>
 <header>LoL Fundamentals</header>
 
-<!-- MemberStack Login -->
+<!-- ✅ Memberstack Login Only -->
 <section id="loginSection">
   <h2>Member Access</h2>
-  <a data-ms-member="login" href="#" class="btn">Login</a>
+  <button data-ms-modal="login" class="btn">Log In</button>
 </section>
 
+<!-- Hero Section -->
 <section class="hero">
   <h1>The Ultimate Diana Guide</h1>
-  <p>Master every aspect of Diana — from precise combo timing to high-elo matchup control. Written and refined by Arcsecond, the rank 1 Challenger Diana main.</p>
-  <!-- Replace 'pln_lol-fundamentals-bl2w04nv' with your actual plan ID -->
-  <a data-ms-membership="pln_lol-fundamentals-bl2w04nv" href="#" class="btn">Get Access – $12.99 / month</a>
+  <p>
+    Master every aspect of Diana — from precise combo timing to high-elo matchup control. 
+    Written and refined by Arcsecond, the rank 1 Challenger Diana main.
+  </p>
+
+  <!-- ✅ Memberstack Signup Button -->
+  <a 
+    data-ms-modal="signup"
+    data-ms-membership="pln_lol-fundamentals-bl2w04nv"
+    href="#"
+    class="btn">
+    Get Access – $12.99 / month
+  </a>
 </section>
 
 <section class="section">
@@ -175,8 +195,8 @@ footer a:hover {
   </div>
 </section>
 
-<!-- Member-only content -->
-<section class="section" id="paidContent" data-ms-content="true" data-ms-content-id="matchups">
+<!-- ✅ Member-only Content -->
+<section class="section" id="paidContent" data-ms-content="true">
   <h2>Exclusive Member Content</h2>
   <p>Welcome! You now have access to all the Diana guides, matchup breakdowns, and frequent updates.</p>
 </section>
@@ -186,9 +206,22 @@ footer a:hover {
   <a href="mailto:arcsecond@lolfundamentals.com">arcsecond@lolfundamentals.com</a>
 </footer>
 
-<!-- MemberStack Script -->
-<script data-memberstack-app="app_cmhn4sgjy002o0st44e9736tx" src="https://static.memberstack.com/scripts/v2/memberstack.js" type="text/javascript"></script>
+<script>
+  document.addEventListener("DOMContentLoaded", async function() {
+    console.log("✅ Memberstack initialized");
+    const member = await window.$memberstackDom.getCurrentMember();
+    if (member.data) {
+      console.log("Logged in:", member.data.email);
+      document.getElementById("paidContent").style.display = "block";
+      document.getElementById("loginSection").style.display = "none";
+    } else {
+      console.log("No member logged in");
+    }
+  });
+</script>
+
 </body>
 </html>
+
 
 
