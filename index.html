@@ -122,9 +122,10 @@ header {
   color: #c9aa71;
 }
 
-/* Member-only content */
-#paidContent {
+/* Member-only Dashboard Button */
+#dashboardBtn {
   display: none;
+  margin-top: 20px;
 }
 
 /* Footer */
@@ -153,6 +154,8 @@ footer a:hover {
 <section id="loginSection">
   <h2>Member Access</h2>
   <button data-ms-modal="login" class="btn">Log In</button>
+  <!-- Dashboard Button for logged-in members -->
+  <a id="dashboardBtn" href="members.html" class="btn">Go to Members Dashboard</a>
 </section>
 
 <!-- Hero Section -->
@@ -195,11 +198,6 @@ footer a:hover {
   </div>
 </section>
 
-<!-- ✅ Member-only Content (empty until member logs in) -->
-<section class="section" id="paidContent" data-ms-content="true">
-  <!-- Content will only show to logged-in members -->
-</section>
-
 <footer>
   © 2025 LoL Fundamentals · Contact:
   <a href="mailto:arcsecond@lolfundamentals.com">arcsecond@lolfundamentals.com</a>
@@ -209,14 +207,19 @@ footer a:hover {
   document.addEventListener("DOMContentLoaded", async function() {
     const member = await window.$memberstackDom.getCurrentMember();
     if (member.data) {
-      document.getElementById("paidContent").style.display = "block";
-      document.getElementById("loginSection").style.display = "none";
+      console.log("Logged in:", member.data.email);
+      // Show dashboard button
+      document.getElementById("dashboardBtn").style.display = "inline-block";
+      // Hide login button
+      document.querySelector('#loginSection button[data-ms-modal="login"]').style.display = "none";
     }
   });
 </script>
 
 </body>
 </html>
+
+
 
 
 
