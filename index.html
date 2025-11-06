@@ -62,6 +62,7 @@ text-decoration: none;
 font-weight: bold;
 transition: 0.3s;
 border: 1px solid #c9aa71;
+cursor: pointer;
 }
 .btn:hover {
 background: #4795ff;
@@ -102,35 +103,14 @@ box-shadow: 0 0 10px rgba(47,129,247,0.2);
 color: #c9aa71;
 }
 
-/* Login */
+/* MemberStack Login */
 #loginSection {
 max-width: 400px;
 margin: 20px auto;
 text-align: center;
-background: #161b22;
-border: 1px solid #2f81f7;
-padding: 20px;
-border-radius: 8px;
-box-shadow: 0 0 10px rgba(47,129,247,0.15);
 }
-input, button {
-padding: 10px;
-margin: 5px 0;
-border-radius: 4px;
-border: none;
-}
-input {
-width: 80%;
-text-align: center;
-}
-button {
-background: #2f81f7;
-color: white;
-cursor: pointer;
-font-weight: bold;
-}
-button:hover {
-background: #4795ff;
+#loginSection h2 {
+margin-bottom: 15px;
 }
 
 /* Paid content */
@@ -160,18 +140,16 @@ text-decoration: underline;
 <body>
 <header>LoL Fundamentals</header>
 
-<!-- Member Login Section -->
+<!-- MemberStack Login -->
 <section id="loginSection">
-<h2>Member Login</h2>
-<input type="email" id="email" placeholder="Enter your email" />
-<button onclick="login()">Login</button>
-<p id="loginMsg"></p>
+<h2>Member Access</h2>
+<a data-ms-member="login" href="#" class="btn">Login</a>
 </section>
 
 <section class="hero">
 <h1>The Ultimate Diana Guide</h1>
 <p>Master every aspect of Diana from precise combo timing to high-elo matchup control. Written and refined by Arcsecond, the rank 1 Challenger Diana main.</p>
-<a href="https://buy.stripe.com/8x2eV6aQ448A4RgewGejK00" class="btn" target="_blank">Get Access – $12.99 / month</a>
+<a data-ms-membership="your-tier-id" href="#" class="btn">Get Access – $12.99 / month</a>
 </section>
 
 <section class="section">
@@ -196,7 +174,8 @@ text-decoration: underline;
 </div>
 </section>
 
-<section class="section" id="paidContent">
+<!-- Member-only content -->
+<section class="section" id="paidContent" data-ms-content="true">
 <h2>Exclusive Member Content</h2>
 <p>Welcome! You now have access to all the Diana guides, matchup breakdowns, and frequent updates.</p>
 </section>
@@ -206,24 +185,7 @@ text-decoration: underline;
 <a href="mailto:arcsecond@lolfundamentals.com">arcsecond@lolfundamentals.com</a>
 </footer>
 
-<script>
-async function login() {
-const email = document.getElementById('email').value;
-const res = await fetch('/login', {
-method: 'POST',
-headers: {'Content-Type': 'application/json'},
-body: JSON.stringify({email})
-});
-const data = await res.json();
-const msg = document.getElementById('loginMsg');
-if(data.success){
-msg.textContent = 'Access granted! Welcome, member.';
-document.getElementById('paidContent').style.display = 'block';
-document.getElementById('loginSection').style.display = 'none';
-} else {
-msg.textContent = 'Access denied. Please purchase membership.';
-}
-}
-</script>
+<!-- MemberStack Script -->
+<script data-memberstack-app="app_cmhn4sgjy002o0st44e9736tx" src="https://static.memberstack.com/scripts/v2/memberstack.js" type="text/javascript"></script>
 </body>
 </html>
