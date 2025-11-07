@@ -100,6 +100,7 @@ header {
   opacity: 0.15;
   z-index: 1;
   border-radius: 10px;
+  pointer-events: none; /* Fix so clicks pass through */
 }
 
 /* Specific card backgrounds */
@@ -161,32 +162,32 @@ footer a:hover {
 <p>Choose a section to explore:</p>
 
 <div class="card-grid">
-  <a href="matchuphub.html" class="card diana-matchups">
-    <h3>Diana Mid Matchups</h3>
-    <p>Detailed breakdowns for every mid lane matchup. Learn optimal trades, wave control, and positioning.</p>
-  </a>
+<a href="matchuphub.html" class="card diana-matchups">
+  <h3>Diana Mid Matchups</h3>
+  <p>Detailed breakdowns for every mid lane matchup. Learn optimal trades, wave control, and positioning.</p>
+</a>
 
-  <a href="tierlist.html" class="card tierlist">
-    <h3>Tierlist</h3>
-    <p>Current champion tierlist showing which champions dominate the meta.</p>
-    <div class="tier-bar">
-      <div class="tier-s"></div>
-      <div class="tier-a"></div>
-      <div class="tier-b"></div>
-      <div class="tier-c"></div>
-      <div class="tier-d"></div>
-    </div>
-  </a>
+<a href="tierlist.html" class="card tierlist">
+  <h3>Tierlist</h3>
+  <p>Current champion tierlist showing which champions dominate the meta.</p>
+  <div class="tier-bar">
+    <div class="tier-s"></div>
+    <div class="tier-a"></div>
+    <div class="tier-b"></div>
+    <div class="tier-c"></div>
+    <div class="tier-d"></div>
+  </div>
+</a>
 
-  <a href="dianaguide.html" class="card diana-guide">
-    <h3>Diana Guide</h3>
-    <p>Comprehensive guide for mastering Diana, including combos, mechanics, and advanced tips.</p>
-  </a>
+<a href="dianaguide.html" class="card diana-guide">
+  <h3>Diana Guide</h3>
+  <p>Comprehensive guide for mastering Diana, including combos, mechanics, and advanced tips.</p>
+</a>
 
-  <a href="skills.html" class="card fundamentals">
-    <h3>Fundamentals Section</h3>
-    <p>Learn core League mechanics that every player should understand to improve faster.</p>
-  </a>
+<a href="skills.html" class="card fundamentals">
+  <h3>Fundamentals Section</h3>
+  <p>Learn core League mechanics that every player should understand to improve faster.</p>
+</a>
 </div>
 </section>
 
@@ -196,3 +197,4 @@ footer a:hover {
 </footer>
 </body>
 </html>
+
