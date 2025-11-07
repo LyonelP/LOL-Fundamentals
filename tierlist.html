@@ -12,66 +12,74 @@ body {
  color: #e6edf3;
  text-align: center;
 }
-/* Header */
 header {
  background: #0d1117;
  border-bottom: 2px solid #c9aa71;
- padding: 25px 20px;
+ padding: 20px;
  font-weight: bold;
  font-size: 26px;
  text-transform: uppercase;
  color: #c9aa71;
  letter-spacing: 1px;
 }
-/* Table styling */
+.back-btn {
+ display: inline-block;
+ margin: 10px 0;
+ padding: 8px 16px;
+ background: #c9aa71;
+ color: #0d1117;
+ text-decoration: none;
+ border-radius: 6px;
+ font-weight: bold;
+}
 .tierlist-table {
- margin: 60px auto;
+ margin: 20px auto 60px;
  border-collapse: collapse;
- width: 90%;
- max-width: 1100px;
- background: #0d1117;
+ width: 95%;
+ max-width: 1200px;
 }
 .tierlist-table th, .tierlist-table td {
  border: 1px solid #2f81f7;
  text-align: center;
  vertical-align: middle;
- padding: 10px;
+ padding: 6px 8px;
 }
 .tierlist-table th {
  background: #0f1722;
  color: #c9aa71;
- font-size: 1em;
+ font-size: 14px;
  border-bottom: 2px solid #2f81f7;
 }
 .tierlist-table td {
  height: 50px;
 }
-/* Champion column */
 .tierlist-table th:first-child,
 .tierlist-table td:first-child {
- width: 140px; /* narrower width */
+ width: 120px;
  text-align: left;
- padding-left: 12px;
+ padding-left: 8px;
 }
-/* Role columns equal size */
 .tierlist-table th:nth-child(n+2),
 .tierlist-table td:nth-child(n+2) {
  width: 90px;
  min-width: 90px;
 }
-/* Role header images */
 .role-header img {
  width: 28px;
  height: 28px;
  display: block;
- margin: 0 auto 4px;
- filter: brightness(1.2);
+ margin: 0 auto 2px;
+}
+.role-header div {
+ font-size: 12px;
+ margin-top: 2px;
+ color: #c9aa71;
 }
 /* Champion cell */
 .champion-cell {
  display: flex;
  align-items: center;
- gap: 8px;
+ gap: 6px;
 }
 .champion-cell img {
  width: 32px;
@@ -85,16 +93,17 @@ header {
  color: #c9aa71;
 }
 /* Tier colors */
-.tier-op { background: linear-gradient(135deg, #FFD700, #00BFFF); color: #000; } /* OP shiny gold/blue */
-.tier-s { background: linear-gradient(135deg, #FF0000, #C0C0C0); color: #000; } /* S Grandmaster red/silver */
-.tier-a { background: linear-gradient(135deg, #A020F0, #D8BFD8); color: #fff; } /* A Master purple shades */
-.tier-b { background: linear-gradient(135deg, #00BFFF, #E0FFFF); color: #000; } /* B Diamond blue/white */
-.tier-c { background: linear-gradient(135deg, #CD7F32, #B87333); color: #000; } /* C Bronze gradient */
+.tier-op { background: linear-gradient(135deg, #FFD700, #00BFFF); color: #000; } 
+.tier-s  { background: linear-gradient(135deg, #FF0000, #C0C0C0); color: #000; } 
+.tier-a  { background: linear-gradient(135deg, #A020F0, #D8BFD8); color: #fff; } 
+.tier-b  { background: linear-gradient(135deg, #00BFFF, #E0FFFF); color: #000; } 
+.tier-c  { background: linear-gradient(135deg, #CD7F32, #C0C0C0); color: #000; } /* Bronze → Silver */
 </style>
 </head>
 <body>
 
 <header>LoL Fundamentals – Tierlist</header>
+<a href="members-hub.html" class="back-btn">← Back to Members Hub</a>
 
 <table class="tierlist-table" id="tierlist">
  <thead>
@@ -111,17 +120,8 @@ header {
 </table>
 
 <script>
-// CSV source
 const csvUrl = "https://docs.google.com/spreadsheets/d/e/2PACX-1vRtIJeggpJ6cjGJt0OOds4OZDuHMMUxHCWzMiU1Bd4gJ8EvfZMXPE9p0X1K3yyeZs7bpFyQZHhHpnsu/pub?output=csv";
-
-// Tier to class map
-const tierMap = {
- 'OP': 'tier-op',
- 'S': 'tier-s',
- 'A': 'tier-a',
- 'B': 'tier-b',
- 'C': 'tier-c'
-};
+const tierMap = { 'OP':'tier-op','S':'tier-s','A':'tier-a','B':'tier-b','C':'tier-c' };
 
 async function loadTierlist() {
  const res = await fetch(csvUrl);
@@ -130,31 +130,26 @@ async function loadTierlist() {
  const tbody = document.querySelector("#tierlist tbody");
 
  lines.forEach((line, index) => {
- if(index === 0) return; // skip header
+ if(index === 0) return;
  const [champion, top, jungle, mid, adc, support] = line.split(",");
  const row = document.createElement("tr");
 
- // Champion cell
  const champCell = document.createElement("td");
  champCell.classList.add("champion-cell");
  const champName = champion.trim();
- const champUrlName = champName
- .normalize("NFD")
- .replace(/[\u0300-\u036f]/g, '')
- .replace(/[^a-zA-Z0-9]/g, '');
+ const champUrlName = champName.normalize("NFD").replace(/[\u0300-\u036f]/g,'').replace(/[^a-zA-Z0-9]/g,'');
  const champImage = `https://ddragon.leagueoflegends.com/cdn/14.23.1/img/champion/${champUrlName}.png`;
  champCell.innerHTML = `<img src="${champImage}" alt="${champName}"><div>${champName}</div>`;
  row.appendChild(champCell);
 
- // Role cells
- [top, jungle, mid, adc, support].forEach(tier => {
- const cell = document.createElement("td");
- if(tier) {
- const cleanTier = tier.trim().toUpperCase();
- cell.textContent = cleanTier;
- cell.className = tierMap[cleanTier] || '';
- }
- row.appendChild(cell);
+ [top,jungle,mid,adc,support].forEach(tier => {
+   const cell = document.createElement("td");
+   if(tier) {
+     const cleanTier = tier.trim().toUpperCase();
+     cell.textContent = cleanTier;
+     cell.className = tierMap[cleanTier] || '';
+   }
+   row.appendChild(cell);
  });
 
  tbody.appendChild(row);
@@ -166,4 +161,6 @@ loadTierlist();
 
 </body>
 </html>
+
+
 
