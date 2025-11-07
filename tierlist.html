@@ -71,12 +71,18 @@ header {
 }
 
 /* Champion column */
-.tierlist-table th:first-child,
+.tierlist-table th:first-child {
+ width: 140px;
+ text-align: left;
+ padding-left: 12px;
+}
+
 .tierlist-table td:first-child {
  width: auto;
  max-width: 180px;
  text-align: left;
- padding-left: 6px;
+ padding-left: 10px;
+ box-sizing: border-box;
 }
 
 /* Role columns equal size */
@@ -100,46 +106,45 @@ header {
  display: flex;
  align-items: center;
  gap: 8px;
- justify-content: flex-start;
 }
 .champion-cell img {
  width: 32px;
  height: 32px;
  border-radius: 6px;
  object-fit: cover;
+ flex-shrink: 0;
 }
 .champion-cell div {
  font-size: 0.95em;
  font-weight: 500;
  color: #c9aa71;
- line-height: 1.2;
+ white-space: nowrap;
+ overflow: hidden;
+ text-overflow: ellipsis;
 }
 
-/* Tier backgrounds using images */
-.tier-op {
- background: url('https://opgg-static.akamaized.net/images/tiers/challenger_0.png') center/cover no-repeat;
- color: #fff;
+/* Tier colors with background images for ranks */
+.tier-op { 
+ background: url('https://static.wikia.nocookie.net/leagueoflegends/images/3/3d/Emblem_Challenger.png') center/cover no-repeat;
+ color: #fff; 
  font-weight: bold;
+ text-shadow: 0 0 8px rgba(255,255,200,0.9), 0 0 15px rgba(255,255,150,0.6);
 }
-.tier-s {
- background: url('https://opgg-static.akamaized.net/images/tiers/grandmaster_0.png') center/cover no-repeat;
- color: #fff;
- font-weight: bold;
+.tier-s { 
+ background: url('https://static.wikia.nocookie.net/leagueoflegends/images/0/0f/Emblem_Grandmaster.png') center/cover no-repeat;
+ color: #fff; 
 }
-.tier-a {
- background: url('https://opgg-static.akamaized.net/images/tiers/master_0.png') center/cover no-repeat;
- color: #fff;
- font-weight: bold;
+.tier-a { 
+ background: url('https://static.wikia.nocookie.net/leagueoflegends/images/1/18/Emblem_Master.png') center/cover no-repeat;
+ color: #fff; 
 }
-.tier-b {
- background: url('https://opgg-static.akamaized.net/images/tiers/diamond_0.png') center/cover no-repeat;
- color: #fff;
- font-weight: bold;
+.tier-b { 
+ background: url('https://static.wikia.nocookie.net/leagueoflegends/images/d/d0/Emblem_Diamond.png') center/cover no-repeat;
+ color: #fff; 
 }
-.tier-c {
- background: url('https://opgg-static.akamaized.net/images/tiers/bronze_0.png') center/cover no-repeat;
- color: #000;
- font-weight: bold;
+.tier-c { 
+ background: url('https://static.wikia.nocookie.net/leagueoflegends/images/5/5e/Emblem_Bronze.png') center/cover no-repeat;
+ color: #000; 
 }
 
 /* Hover effect */
@@ -186,7 +191,6 @@ const tierMap = {
  'C': 'tier-c'
 };
 
-// Manual map for tricky champion names
 const nameFix = {
  "Cho'Gath": "Chogath",
  "Kha'Zix": "Khazix",
@@ -250,6 +254,4 @@ loadTierlist();
 
 </body>
 </html>
-
-
 
