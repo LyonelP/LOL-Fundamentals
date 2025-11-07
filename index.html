@@ -4,173 +4,121 @@
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 <title>LoL Fundamentals – The Ultimate Diana Guide</title>
-
 <style>
-body {
-  margin: 0;
-  font-family: "Beaufort for LOL", Arial, Helvetica, sans-serif;
-  background: #0a0f14;
-  color: #e6edf3;
-  line-height: 1.6;
-}
-
+body { margin:0; font-family:"Beaufort for LOL",Arial,Helvetica,sans-serif; background:#0a0f14; color:#e6edf3; line-height:1.6; }
 /* Header */
-header {
-  background: linear-gradient(90deg, #0a0f14, #1b2838);
-  border-bottom: 2px solid #c9aa71;
-  padding: 15px 20px;
-  text-align: center;
-  font-weight: bold;
-  font-size: 22px;
-  letter-spacing: 1px;
-  text-transform: uppercase;
-  color: #c9aa71;
-}
-
+header { background: linear-gradient(90deg,#0a0f14,#1b2838); border-bottom:2px solid #c9aa71; padding:15px 20px; text-align:center; font-weight:bold; font-size:22px; letter-spacing:1px; text-transform:uppercase; color:#c9aa71; }
 /* Hero */
-.hero {
-  text-align: center;
-  padding: 120px 20px;
-  background:
-    linear-gradient(to bottom, rgba(10,15,20,0.6), rgba(10,15,20,0.95)),
-    url("https://ddragon.leagueoflegends.com/cdn/img/champion/splash/Diana_0.jpg");
-  background-size: cover;
-  background-position: center;
-  color: #fff;
-  border-bottom: 1px solid #1f2937;
-}
-.hero h1 {
-  font-size: 3em;
-  margin-bottom: 10px;
-  text-shadow: 0 0 10px #2f81f7;
-}
-.hero p {
-  max-width: 600px;
-  margin: 0 auto 20px;
-  font-size: 1.15em;
-  color: #c9d1d9;
-  text-shadow: 0 0 8px rgba(0,0,0,0.6);
-}
-
+.hero { text-align:center; padding:120px 20px; background: linear-gradient(to bottom, rgba(10,15,20,0.6), rgba(10,15,20,0.95)), url("https://ddragon.leagueoflegends.com/cdn/img/champion/splash/Diana_0.jpg"); background-size:cover; background-position:center; color:#fff; border-bottom:1px solid #1f2937; }
+.hero h1 { font-size:3em; margin-bottom:10px; text-shadow:0 0 10px #2f81f7; }
+.hero p { max-width:600px; margin:0 auto 20px; font-size:1.15em; color:#c9d1d9; text-shadow:0 0 8px rgba(0,0,0,0.6); }
 /* Button */
-.btn {
-  display: inline-block;
-  background: #2f81f7;
-  color: white;
-  padding: 12px 25px;
-  border-radius: 5px;
-  text-decoration: none;
-  font-weight: bold;
-  transition: 0.3s;
-  border: 1px solid #c9aa71;
-  cursor: pointer;
-}
-.btn:hover {
-  background: #4795ff;
-}
-
+.btn { display:inline-block; background:#2f81f7; color:white; padding:12px 25px; border-radius:5px; text-decoration:none; font-weight:bold; transition:0.3s; border:1px solid #c9aa71; cursor:pointer; }
+.btn:hover { background:#4795ff; }
 /* Section */
-.section {
-  padding: 60px 20px;
-  max-width: 950px;
-  margin: auto;
-}
-.section h2 {
-  text-align: center;
-  color: #c9aa71;
-  font-size: 1.8em;
-  border-bottom: 1px solid #c9aa71;
-  padding-bottom: 10px;
-  width: fit-content;
-  margin: 0 auto 30px;
-}
-
+.section { padding:60px 20px; max-width:950px; margin:auto; }
+.section h2 { text-align:center; color:#c9aa71; font-size:1.8em; border-bottom:1px solid #c9aa71; padding-bottom:10px; width:fit-content; margin:0 auto 30px; }
 /* Cards */
-.cards {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
-  gap: 25px;
-}
-.card {
-  background: #161b22;
-  padding: 20px;
-  border-radius: 8px;
-  width: 260px;
-  border: 1px solid #2f81f7;
-  box-shadow: 0 0 10px rgba(47,129,247,0.2);
-}
-.card h3 {
-  color: #c9aa71;
-}
-
+.cards { display:flex; flex-wrap:wrap; justify-content:center; gap:25px; }
+.card { background:#161b22; padding:20px; border-radius:8px; width:260px; border:1px solid #2f81f7; box-shadow:0 0 10px rgba(47,129,247,0.2); }
+.card h3 { color:#c9aa71; }
+/* Login */
+#loginSection { max-width:400px; margin:20px auto; text-align:center; background:#161b22; border:1px solid #2f81f7; padding:20px; border-radius:8px; box-shadow:0 0 10px rgba(47,129,247,0.15); }
+input, button { padding:10px; margin:5px 0; border-radius:4px; border:none; }
+input { width:80%; text-align:center; }
+button { background:#2f81f7; color:white; cursor:pointer; font-weight:bold; }
+button:hover { background:#4795ff; }
 /* Footer */
-footer {
-  text-align: center;
-  padding: 30px;
-  color: #8b949e;
-  font-size: 14px;
-  background: #0a0f14;
-  border-top: 1px solid #1f2937;
-}
-footer a {
-  color: #c9aa71;
-  text-decoration: none;
-}
-footer a:hover {
-  text-decoration: underline;
-}
+footer { text-align:center; padding:30px; color:#8b949e; font-size:14px; background:#0a0f14; border-top:1px solid #1f2937; }
+footer a { color:#c9aa71; text-decoration:none; }
+footer a:hover { text-decoration:underline; }
 </style>
 </head>
 
 <body>
 <header>LoL Fundamentals</header>
 
-<!-- Hero Section -->
-<section class="hero">
-  <h1>The Ultimate Diana Guide</h1>
-  <p>
-    Master every aspect of Diana — from precise combo timing to high-elo matchup control. 
-    Written and refined by Arcsecond, the rank 1 Challenger Diana main.
-  </p>
+<section id="loginSection">
+<h2>Member Login</h2>
+<input type="email" id="email" placeholder="Enter your email" />
+<button onclick="login()">Login</button>
+<p id="loginMsg"></p>
+</section>
 
-  <!-- Stripe Checkout Button with redirect to account creation -->
-  <a 
-    href="https://buy.stripe.com/8x2eV6aQ448A4RgewGejK00"
-    onclick="event.preventDefault(); window.location.href='https://buy.stripe.com/8x2eV6aQ448A4RgewGejK00?success_url=https://lolfundamentals.com/account.html';"
-    class="btn">
-    Get Access – $12.99 / month
-  </a>
+<section class="hero">
+<h1>The Ultimate Diana Guide</h1>
+<p>Master every aspect of Diana from precise combo timing to high-elo matchup control. Written and refined by Arcsecond, the rank 1 Challenger Diana main.</p>
+<a href="https://buy.stripe.com/8x2eV6aQ448A4RgewGejK00" class="btn" target="_blank">Get Access – $12.99 / month</a>
 </section>
 
 <section class="section">
-  <h2>What You’ll Learn</h2>
-  <div class="cards">
-    <div class="card">
-      <h3>Wave Control</h3>
-      <p>Learn how to manipulate minions to create pressure, freeze lanes, and control tempo.</p>
-    </div>
-    <div class="card">
-      <h3>All-In Mechanics</h3>
-      <p>Perfect your combo sequencing, reset timings, and how to burst without overcommitting.</p>
-    </div>
-    <div class="card">
-      <h3>Mid-to-Late Macro</h3>
-      <p>Transition your early advantage into teamfight dominance and objective control.</p>
-    </div>
-    <div class="card">
-      <h3>Matchups</h3>
-      <p>Learn how to handle different opponents — from assassins to control mages and bruisers — with optimal trades, positioning, and wave management.</p>
-    </div>
-  </div>
+<h2>What You’ll Learn</h2>
+<div class="cards">
+<div class="card">
+<h3>Wave Control</h3>
+<p>Learn how to manipulate minions to create pressure, freeze lanes, and control tempo.</p>
+</div>
+<div class="card">
+<h3>All-In Mechanics</h3>
+<p>Perfect your combo sequencing, reset timings, and how to burst without overcommitting.</p>
+</div>
+<div class="card">
+<h3>Mid-to-Late Macro</h3>
+<p>Transition your early advantage into teamfight dominance and objective control.</p>
+</div>
+<div class="card">
+<h3>Matchups</h3>
+<p>Learn how to handle different opponents from assassins to control mages and bruisers with optimal trades, positioning, and wave management.</p>
+</div>
+</div>
 </section>
 
 <footer>
-  © 2025 LoL Fundamentals · Contact:
-  <a href="mailto:arcsecond@lolfundamentals.com">arcsecond@lolfundamentals.com</a>
+© 2025 LoL Fundamentals · Contact:
+<a href="mailto:arcsecond@lolfundamentals.com">arcsecond@lolfundamentals.com</a>
 </footer>
 
+<script>
+const sheetCSV = "https://docs.google.com/spreadsheets/d/e/2PACX-1vT5EmSFHS_N34tBepLj-u0yORqYfPPW4oP0zDazcuLpTb7Mx1a10hk0-79iz1E7PuTiqSTrPJvTIVn0/pub?output=csv";
+
+async function login() {
+  const email = document.getElementById("email").value.trim();
+  const msg = document.getElementById("loginMsg");
+  if(!email){ msg.textContent="Please enter your email."; return; }
+
+  try {
+    const res = await fetch(sheetCSV);
+    const text = await res.text();
+    const emails = text.split("\n").map(e => e.trim().toLowerCase());
+    if(emails.includes(email.toLowerCase())){
+      localStorage.setItem("memberEmail", email);
+      msg.style.color="green";
+      msg.textContent="Access granted! Redirecting...";
+      setTimeout(()=>{ window.location.href="members-hub.html"; }, 1000);
+    } else {
+      msg.style.color="red";
+      msg.textContent="Access denied. Please purchase membership.";
+    }
+  } catch(e) {
+    console.error(e);
+    msg.style.color="red";
+    msg.textContent="Error checking access.";
+  }
+}
+
+// Auto-login if returning member
+const savedEmail = localStorage.getItem("memberEmail");
+if(savedEmail){
+  fetch(sheetCSV)
+    .then(res=>res.text())
+    .then(text=>{
+      const emails = text.split("\n").map(e => e.trim().toLowerCase());
+      if(emails.includes(savedEmail.toLowerCase())){
+        window.location.href="members-hub.html";
+      }
+    });
+}
+</script>
 </body>
 </html>
-
 
