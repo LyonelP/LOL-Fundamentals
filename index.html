@@ -133,11 +133,6 @@ button:hover {
   background: #4795ff;
 }
 
-/* Paid content */
-#paidContent {
-  display: none;
-}
-
 /* Footer */
 footer {
   text-align: center;
@@ -196,43 +191,20 @@ footer a:hover {
   </div>
 </section>
 
-<section class="section" id="paidContent">
-  <h2>Exclusive Member Content</h2>
-  <p>Welcome! You now have access to all the Diana guides, matchup breakdowns, and frequent updates.</p>
-</section>
-
 <footer>
 © 2025 LoL Fundamentals · Contact:
 <a href="mailto:arcsecond@lolfundamentals.com">arcsecond@lolfundamentals.com</a>
 </footer>
 
 <script>
-// Google Sheet CSV of members
-const membersCSV = "https://docs.google.com/spreadsheets/d/e/2PACX-1vT5EmSFHS_N34tBepLj-u0yORqYfPPW4oP0zDazcuLpTb7Mx1a10hk0-79iz1E7PuTiqSTrPJvTIVn0/pub?output=csv";
-
-let validEmails = [];
-
-fetch(membersCSV)
-  .then(response => response.text())
-  .then(data => {
-    const rows = data.split("\n");
-    validEmails = rows.map(r => r.trim().toLowerCase());
-  });
-
-async function login() {
-  const emailInput = document.getElementById('email').value.trim().toLowerCase();
-  const msg = document.getElementById('loginMsg');
-
-  if(validEmails.includes(emailInput)){
-    // Automatically redirect to Member Hub
-    window.location.href = 'memberhub.html';
-  } else {
-    msg.textContent = 'Access denied. Please purchase membership.';
-  }
+function login() {
+  // Always redirect to Member Hub
+  window.location.href = 'memberhub.html';
 }
 </script>
 </body>
 </html>
+
 
 
 
