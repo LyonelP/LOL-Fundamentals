@@ -27,6 +27,7 @@
     color: #F9D949;
     text-decoration: none;
     font-weight: bold;
+    cursor: pointer;
   }
   .back-link:hover {
     text-decoration: underline;
@@ -103,7 +104,7 @@
 <body>
 <header>Diana Mid Matchup – Akshan</header>
 
-<a href="matchup-hub.html" class="back-link">&larr; Back to Matchup Hub</a>
+<a class="back-link" onclick="goBackToHub();">&larr; Back to Matchup Hub</a>
 
 <div class="matchup-container">
   <div class="matchup-left">
@@ -124,5 +125,20 @@
 </div>
 
 <footer>© 2025 LoL Fundamentals · Contact: arcsecond@lolfundamentals.com</footer>
+
+<script>
+function goBackToHub() {
+  // Go back in history if user came from matchuphub.html
+  if(document.referrer.includes("matchuphub.html")) {
+    window.history.back();
+  } else {
+    // Otherwise, redirect directly to the hub
+    window.location.href = "matchup-hub.html";
+  }
+}
+</script>
+
 </body>
 </html>
+
+
