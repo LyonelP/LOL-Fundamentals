@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>LoL Fundamentals – Skills Hub</title>
+<style>
+body {
+  margin: 0;
+  font-family: 'Beaufort for LOL', Arial, Helvetica, sans-serif;
+  background: #0a0f14;
+  color: #e6edf3;
+  text-align: center;
+}
+
+/* Header */
+header {
+  background: #0d1117;
+  border-bottom: 2px solid #c9aa71;
+  padding: 20px 10px;
+  font-weight: bold;
+  font-size: 26px;
+  text-transform: uppercase;
+  color: #c9aa71;
+  letter-spacing: 1px;
+}
+
+/* Back button */
+.back-button {
+  display: inline-block;
+  margin: 20px auto 10px;
+  padding: 10px 20px;
+  background: linear-gradient(135deg, #c9aa71, #e0c77b);
+  color: #000;
+  text-decoration: none;
+  border-radius: 8px;
+  font-weight: bold;
+  transition: all 0.3s;
+  box-shadow: 0 0 10px rgba(201,170,113,0.5);
+}
+.back-button::before {
+  content: "← ";
+}
+.back-button:hover {
+  background: linear-gradient(135deg, #e6c97f, #f0d88b);
+  box-shadow: 0 0 15px rgba(255,215,0,0.8);
+}
+
+/* Skill selector */
+#skill-select-container {
+  margin: 20px auto;
+}
+#skill-select {
+  padding: 10px 15px;
+  font-size: 16px;
+  border-radius: 6px;
+  border: none;
+  background: #0f1722;
+  color: #c9aa71;
+  cursor: pointer;
+}
+
+/* Skill display */
+#skill-info {
+  margin: 30px auto;
+  max-width: 900px;
+  background: #0d1117;
+  border: 1px solid #2f81f7;
+  padding: 20px;
+  border-radius: 10px;
+  text-align: left;
+  color: #c9aa71;
+  min-height: 150px;
+}
+
+/* Hover effect for skills */
+#skill-info:hover {
+  box-shadow: 0 0 15px rgba(47,129,247,0.5);
+}
+
+@media (max-width: 500px) {
+  header { font-size: 22px; padding: 15px 5px; }
+  #skill-select { font-size: 14px; padding: 8px 10px; }
+}
+</style>
+</head>
+<body>
+
+<header>LoL Fundamentals – Skills Hub</header>
+
+<a href="membershub.html" class="back-button">Back to Members Hub</a>
+
+<div id="skill-select-container">
+  <select id="skill-select">
+    <option disabled selected>Pick a skill</option>
+  </select>
+</div>
+
+<div id="skill-info">
+  <p>Select a skill above to view details.</p>
+</div>
+
+<script>
+// List of all fundamentals skills
+const skills = [
+"Map Awareness","Communication","Pings","Your Champion","Summoner Spell Usage","Mindset","Mouse Accuracy",
+"Reading Players","Win Conditions","Laning","Sieging","Baiting","Trading","Farming","Positioning","Reaction Time",
+"Rotations","Calls","Roaming","Power Spikes","FPS","Split Pushing","Lane Assignments","Wave Control","Itemization",
+"Vision","Objective Control","Animation Cancelling","Ganking","Not Raging/Blaming","Kiting","Auto Cancelling",
+"Target Selection","Champion Pool","Champion Kits","Identifying Player Strength Levels","Back Timings","Meta",
+"Damage/Poke","Contesting CS","Smiting","Level 1","Pathing","Ping/Internet","Match Ups/Champion Interactions",
+"Teamwork","Tab Screen","Peripherals","Early Game","Mid Game","Late Game","Champion Select","Team Compositions",
+"APM","Wave Clear","Bans"
+];
+
+// Populate select
+const select = document.getElementById('skill-select');
+skills.forEach(skill => {
+  const option = document.createElement('option');
+  option.value = skill;
+  option.textContent = skill;
+  select.appendChild(option);
+});
+
+// Show selected skill
+select.addEventListener('change', () => {
+  const skillInfo = document.getElementById('skill-info');
+  skillInfo.innerHTML = `<h2>${select.value}</h2><p>Coming soon!</p>`;
+});
+</script>
+
+</body>
+</html>
