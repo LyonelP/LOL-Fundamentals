@@ -20,21 +20,34 @@
     font-weight: bold;
     color: #58a6ff;
   }
-  .back-link {
+
+  /* Gold Back Button */
+  .back-button {
     display: block;
+    width: max-content;
     margin: 20px auto 30px auto;
-    text-align: center;
-    color: #F9D949;
+    padding: 10px 20px;
+    background: linear-gradient(135deg, #c9aa71, #e0c77b);
+    color: #000;
     text-decoration: none;
+    border-radius: 8px;
     font-weight: bold;
+    transition: all 0.3s;
+    box-shadow: 0 0 10px rgba(201,170,113,0.5);
+    text-align: center;
   }
-  .back-link:hover {
-    text-decoration: underline;
+  .back-button::before {
+    content: "← ";
   }
+  .back-button:hover {
+    background: linear-gradient(135deg, #e6c97f, #f0d88b);
+    box-shadow: 0 0 15px rgba(255,215,0,0.8);
+  }
+
   .matchup-container {
     display: flex;
     max-width: 900px;
-    margin: -15px auto 0 auto;
+    margin: 0 auto;
     gap: 15px;
     padding: 0 20px 10px 20px;
   }
@@ -88,7 +101,6 @@
       flex-direction: column;
       align-items: center;
       padding: 10px;
-      margin-top: -15px;
     }
     .matchup-left {
       justify-content: center;
@@ -103,7 +115,7 @@
 <body>
 <header>Diana Mid Matchup – Akali</header>
 
-<a href="matchup-hub.html" class="back-link">&larr; Back to Matchup Hub</a>
+<a href="matchuphub.html" class="back-button">Back to Matchup Hub</a>
 
 <div class="matchup-container">
   <div class="matchup-left">
