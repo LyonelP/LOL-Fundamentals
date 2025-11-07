@@ -12,6 +12,8 @@ body {
   color: #e6edf3;
   line-height: 1.6;
 }
+
+/* Header */
 header {
   background: linear-gradient(90deg, #0a0f14, #1b2838);
   border-bottom: 2px solid #c9aa71;
@@ -23,6 +25,8 @@ header {
   text-transform: uppercase;
   color: #c9aa71;
 }
+
+/* Hero */
 .hero {
   text-align: center;
   padding: 120px 20px;
@@ -46,6 +50,8 @@ header {
   color: #c9d1d9;
   text-shadow: 0 0 8px rgba(0,0,0,0.6);
 }
+
+/* Button */
 .btn {
   display: inline-block;
   background: #2f81f7;
@@ -57,7 +63,11 @@ header {
   transition: 0.3s;
   border: 1px solid #c9aa71;
 }
-.btn:hover { background: #4795ff; }
+.btn:hover {
+  background: #4795ff;
+}
+
+/* Section */
 .section {
   padding: 60px 20px;
   max-width: 950px;
@@ -72,6 +82,8 @@ header {
   width: fit-content;
   margin: 0 auto 30px;
 }
+
+/* Cards */
 .cards {
   display: flex;
   flex-wrap: wrap;
@@ -86,7 +98,11 @@ header {
   border: 1px solid #2f81f7;
   box-shadow: 0 0 10px rgba(47,129,247,0.2);
 }
-.card h3 { color: #c9aa71; }
+.card h3 {
+  color: #c9aa71;
+}
+
+/* Login */
 #loginSection {
   max-width: 400px;
   margin: 20px auto;
@@ -103,15 +119,26 @@ input, button {
   border-radius: 4px;
   border: none;
 }
-input { width: 80%; text-align: center; }
+input {
+  width: 80%;
+  text-align: center;
+}
 button {
   background: #2f81f7;
   color: white;
   cursor: pointer;
   font-weight: bold;
 }
-button:hover { background: #4795ff; }
-#paidContent { display: none; }
+button:hover {
+  background: #4795ff;
+}
+
+/* Paid content */
+#paidContent {
+  display: none;
+}
+
+/* Footer */
 footer {
   text-align: center;
   padding: 30px;
@@ -124,12 +151,16 @@ footer a {
   color: #c9aa71;
   text-decoration: none;
 }
-footer a:hover { text-decoration: underline; }
+footer a:hover {
+  text-decoration: underline;
+}
 </style>
 </head>
+
 <body>
 <header>LoL Fundamentals</header>
 
+<!-- Member Login Section -->
 <section id="loginSection">
   <h2>Member Login</h2>
   <input type="email" id="email" placeholder="Enter your email" />
@@ -146,10 +177,22 @@ footer a:hover { text-decoration: underline; }
 <section class="section">
   <h2>What You’ll Learn</h2>
   <div class="cards">
-    <div class="card"><h3>Wave Control</h3><p>Learn how to manipulate minions to create pressure, freeze lanes, and control tempo.</p></div>
-    <div class="card"><h3>All-In Mechanics</h3><p>Perfect your combo sequencing, reset timings, and how to burst without overcommitting.</p></div>
-    <div class="card"><h3>Mid-to-Late Macro</h3><p>Transition your early advantage into teamfight dominance and objective control.</p></div>
-    <div class="card"><h3>Matchups</h3><p>Learn how to handle different opponents from assassins to control mages and bruisers with optimal trades, positioning, and wave management.</p></div>
+    <div class="card">
+      <h3>Wave Control</h3>
+      <p>Learn how to manipulate minions to create pressure, freeze lanes, and control tempo.</p>
+    </div>
+    <div class="card">
+      <h3>All-In Mechanics</h3>
+      <p>Perfect your combo sequencing, reset timings, and how to burst without overcommitting.</p>
+    </div>
+    <div class="card">
+      <h3>Mid-to-Late Macro</h3>
+      <p>Transition your early advantage into teamfight dominance and objective control.</p>
+    </div>
+    <div class="card">
+      <h3>Matchups</h3>
+      <p>Learn how to handle different opponents from assassins to control mages and bruisers with optimal trades, positioning, and wave management.</p>
+    </div>
   </div>
 </section>
 
@@ -166,28 +209,30 @@ footer a:hover { text-decoration: underline; }
 <script>
 // Google Sheet CSV of members
 const membersCSV = "https://docs.google.com/spreadsheets/d/e/2PACX-1vT5EmSFHS_N34tBepLj-u0yORqYfPPW4oP0zDazcuLpTb7Mx1a10hk0-79iz1E7PuTiqSTrPJvTIVn0/pub?output=csv";
+
 let validEmails = [];
 
 fetch(membersCSV)
-  .then(res => res.text())
+  .then(response => response.text())
   .then(data => {
     const rows = data.split("\n");
     validEmails = rows.map(r => r.trim().toLowerCase());
   });
 
-function login() {
-  const email = document.getElementById('email').value.trim().toLowerCase();
-  if(validEmails.includes(email)){
-    // Hide login, show paid content briefly (optional)
-    document.getElementById('loginSection').style.display = 'none';
-    // Redirect instantly to member hub
+async function login() {
+  const emailInput = document.getElementById('email').value.trim().toLowerCase();
+  const msg = document.getElementById('loginMsg');
+
+  if(validEmails.includes(emailInput)){
+    // Automatically redirect to Member Hub
     window.location.href = 'memberhub.html';
   } else {
-    document.getElementById('loginMsg').textContent = 'Access denied. Please purchase membership.';
+    msg.textContent = 'Access denied. Please purchase membership.';
   }
 }
 </script>
 </body>
 </html>
+
 
 
