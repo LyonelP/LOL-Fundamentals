@@ -79,17 +79,25 @@ footer a:hover { text-decoration:underline; }
 </footer>
 
 <script>
-const sheetCSV = "https://docs.google.com/spreadsheets/d/e/2PACX-1vT5EmSFHS_N34tBepLj-u0yORqYfPPW4oP0zDazcuLpTb7Mx1a10hk0-79iz1E7PuTiqSTrPJvTIVn0/pub?output=csv";
+const sheetCSV = "https://docs.google.com/spreadsheets/d/e/2PACX-1vT5EmSFHS_N34tBepLj-u0yORfaNmkqUw8pqASVoE7otg5giU/pub?output=csv";
 
 async function login() {
   const email = document.getElementById("email").value.trim();
   const msg = document.getElementById("loginMsg");
-  if(!email){ msg.textContent="Please enter your email."; return; }
+  if(!email){ 
+    msg.style.color="red";
+    msg.textContent="Please enter your email."; 
+    return; 
+  }
 
   try {
     const res = await fetch(sheetCSV);
     const text = await res.text();
-    const emails = text.split("\n").map(e => e.trim().toLowerCase());
+
+    // Split rows and skip the header
+    const rows = text.split("\n").slice(1);
+    const emails = rows.map(r => r.split(",")[0].trim().toLowerCase());
+
     if(emails.includes(email.toLowerCase())){
       localStorage.setItem("memberEmail", email);
       msg.style.color="green";
@@ -106,13 +114,14 @@ async function login() {
   }
 }
 
-// Auto-login if returning member
+// Auto-login for returning members
 const savedEmail = localStorage.getItem("memberEmail");
 if(savedEmail){
   fetch(sheetCSV)
     .then(res=>res.text())
     .then(text=>{
-      const emails = text.split("\n").map(e => e.trim().toLowerCase());
+      const rows = text.split("\n").slice(1); // skip header
+      const emails = rows.map(r => r.split(",")[0].trim().toLowerCase());
       if(emails.includes(savedEmail.toLowerCase())){
         window.location.href="members-hub.html";
       }
