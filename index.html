@@ -31,7 +31,7 @@ button {
   color:white; 
   cursor:pointer; 
   font-weight:bold; 
-  margin-top:10px; /* moved slightly lower */
+  margin-top:10px; /* button slightly lower */
 }
 button:hover { background:#4795ff; }
 /* Footer */
@@ -88,7 +88,7 @@ footer a:hover { text-decoration:underline; }
 const sheetCSV = "https://docs.google.com/spreadsheets/d/e/2PACX-1vT5EmSFHS_N34tBepLj-u0yORfaNmkqUw8pqASVoE7otg5giU/pub?output=csv";
 
 async function login() {
-  const email = document.getElementById("email").value.trim();
+  const email = document.getElementById("email").value.trim().toLowerCase();
   const msg = document.getElementById("loginMsg");
   if(!email){ 
     msg.style.color="red";
@@ -100,11 +100,13 @@ async function login() {
     const res = await fetch(sheetCSV);
     const text = await res.text();
 
-    // Split rows and skip header
-    const rows = text.split("\n").slice(1);
-    const emails = rows.map(r => r.split(",")[0].trim().toLowerCase());
+    // Split rows, skip empty lines
+    const rows = text.split("\n").filter(r => r.trim() !== "");
+    
+    // Extract emails from first column, remove quotes, trim, lowercase
+    const emails = rows.map(r => r.split(",")[0].replace(/"/g,'').trim().toLowerCase());
 
-    if(emails.includes(email.toLowerCase())){
+    if(emails.includes(email)){
       localStorage.setItem("memberEmail", email);
       msg.style.color="green";
       msg.textContent="Access granted! Redirecting...";
@@ -126,8 +128,8 @@ if(savedEmail){
   fetch(sheetCSV)
     .then(res=>res.text())
     .then(text=>{
-      const rows = text.split("\n").slice(1); // skip header
-      const emails = rows.map(r => r.split(",")[0].trim().toLowerCase());
+      const rows = text.split("\n").filter(r => r.trim() !== "");
+      const emails = rows.map(r => r.split(",")[0].replace(/"/g,'').trim().toLowerCase());
       if(emails.includes(savedEmail.toLowerCase())){
         window.location.href="members-hub.html";
       }
@@ -136,3 +138,6 @@ if(savedEmail){
 </script>
 </body>
 </html>
+
+</html>
+
