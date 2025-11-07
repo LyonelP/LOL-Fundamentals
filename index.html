@@ -107,13 +107,28 @@ header {
   border-radius: 8px;
   box-shadow: 0 0 10px rgba(47,129,247,0.15);
 }
-#loginSection input {
-  width: 80%;
+input, button {
   padding: 10px;
   margin: 5px 0;
   border-radius: 4px;
   border: none;
+}
+input {
+  width: 80%;
   text-align: center;
+}
+button {
+  background: #2f81f7;
+  color: white;
+  cursor: pointer;
+  font-weight: bold;
+}
+button:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+button:hover:enabled {
+  background: #4795ff;
 }
 /* Footer */
 footer {
@@ -140,8 +155,9 @@ footer a:hover {
 <!-- Member Login Section -->
 <section id="loginSection">
   <h2>Member Login</h2>
-  <input type="email" placeholder="Enter your email" />
-  <a href="memberhub.html" class="btn">Login</a>
+  <input type="email" id="email" placeholder="Enter your email" />
+  <button id="loginBtn" disabled>Login</button>
+  <p id="loginMsg"></p>
 </section>
 
 <!-- Hero Section -->
@@ -179,7 +195,51 @@ footer a:hover {
 <a href="mailto:arcsecond@lolfundamentals.com">arcsecond@lolfundamentals.com</a>
 </footer>
 
+<script>
+// Google Sheet CSV published link
+const membersCSV = "https://docs.google.com/spreadsheets/d/e/2PACX-1vR-0OZki4X8kc33NfrLsGL47-7mFj3SzjyGx6hs4QcnvRXiE-cOaJfk4wgvyIf6XXpnuB8D-B4TqSrW/pub?output=csv";
+let validEmails = [];
+const loginBtn = document.getElementById('loginBtn');
+const msg = document.getElementById('loginMsg');
+const emailInput = document.getElementById('email');
+
+loginBtn.disabled = true;
+msg.textContent = "Loading membership list...";
+
+// Fetch emails from Google Sheet
+fetch(membersCSV)
+  .then(res => res.ok ? res.text() : Promise.reject("Failed to fetch"))
+  .then(data => {
+    const rows = data.split("\n").map(row => row.split(","));
+    validEmails = rows.map(r => r[0].trim().toLowerCase()).filter(e => e);
+    loginBtn.disabled = false;
+    msg.textContent = "";
+  })
+  .catch(err => {
+    console.error(err);
+    msg.textContent = "Error loading membership list. Try again later.";
+  });
+
+// Login function
+loginBtn.addEventListener('click', () => {
+  const email = emailInput.value.trim().toLowerCase();
+  if(validEmails.includes(email)){
+    localStorage.setItem('lolfundamentals_logged_in', 'true');
+    window.location.href = 'membershub.html';
+  } else {
+    msg.textContent = "Access denied. Please purchase membership.";
+  }
+});
+
+// Auto-redirect if already logged in
+if(localStorage.getItem('lolfundamentals_logged_in') === 'true'){
+  window.location.href = 'membershub.html';
+}
+</script>
+
 </body>
 </html>
+
+
 
 
