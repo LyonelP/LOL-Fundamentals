@@ -12,6 +12,7 @@ body {
   color: #e6edf3;
   line-height: 1.6;
 }
+/* Header */
 header {
   background: linear-gradient(90deg, #0a0f14, #1b2838);
   border-bottom: 2px solid #c9aa71;
@@ -23,6 +24,7 @@ header {
   text-transform: uppercase;
   color: #c9aa71;
 }
+/* Hero */
 .hero {
   text-align: center;
   padding: 120px 20px;
@@ -46,6 +48,7 @@ header {
   color: #c9d1d9;
   text-shadow: 0 0 8px rgba(0,0,0,0.6);
 }
+/* Button */
 .btn {
   display: inline-block;
   background: #2f81f7;
@@ -60,6 +63,7 @@ header {
 .btn:hover {
   background: #4795ff;
 }
+/* Section */
 .section {
   padding: 60px 20px;
   max-width: 950px;
@@ -74,6 +78,7 @@ header {
   width: fit-content;
   margin: 0 auto 30px;
 }
+/* Cards */
 .cards {
   display: flex;
   flex-wrap: wrap;
@@ -91,6 +96,7 @@ header {
 .card h3 {
   color: #c9aa71;
 }
+/* Login */
 #loginSection {
   max-width: 400px;
   margin: 20px auto;
@@ -101,25 +107,15 @@ header {
   border-radius: 8px;
   box-shadow: 0 0 10px rgba(47,129,247,0.15);
 }
-input, button {
+#loginSection input {
+  width: 80%;
   padding: 10px;
   margin: 5px 0;
   border-radius: 4px;
   border: none;
-}
-input {
-  width: 80%;
   text-align: center;
 }
-button {
-  background: #2f81f7;
-  color: white;
-  cursor: pointer;
-  font-weight: bold;
-}
-button:hover {
-  background: #4795ff;
-}
+/* Footer */
 footer {
   text-align: center;
   padding: 30px;
@@ -144,9 +140,8 @@ footer a:hover {
 <!-- Member Login Section -->
 <section id="loginSection">
   <h2>Member Login</h2>
-  <input type="email" id="email" placeholder="Enter your email" />
-  <button id="loginBtn" onclick="login()">Login</button>
-  <!-- No "loading" message anymore -->
+  <input type="email" placeholder="Enter your email" />
+  <a href="memberhub.html" class="btn">Login</a>
 </section>
 
 <!-- Hero Section -->
@@ -184,15 +179,7 @@ footer a:hover {
 <a href="mailto:arcsecond@lolfundamentals.com">arcsecond@lolfundamentals.com</a>
 </footer>
 
-<script>
-// Simple login button: just redirect
-function login() {
-  window.location.href = 'memberhub.html';
-}
-</script>
-
 </body>
 </html>
-
 
 
