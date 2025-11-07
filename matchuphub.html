@@ -18,6 +18,20 @@
     font-size: 28px;
     font-weight: bold;
     color: #58a6ff;
+    position: relative;
+  }
+  .back-btn {
+    position: absolute;
+    left: 20px;
+    top: 50%;
+    transform: translateY(-50%);
+    padding: 6px 12px;
+    font-size: 14px;
+    background: #c9aa71;
+    color: #0d1117;
+    text-decoration: none;
+    border-radius: 6px;
+    font-weight: bold;
   }
   .section-title {
     font-size: 24px;
@@ -27,7 +41,7 @@
   }
   .champion-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+    grid-template-columns: repeat(7, 1fr);
     gap: 20px;
     max-width: 1000px;
     margin: 0 auto 50px;
@@ -53,6 +67,7 @@
     height: 80px;
     border-radius: 8px;
     margin-bottom: 10px;
+    object-fit: contain;
   }
   .champion-name {
     font-size: 16px;
@@ -64,6 +79,11 @@
     padding: 25px 10px;
     font-size: 14px;
     color: #8b949e;
+  }
+  @media (max-width: 1000px) {
+    .champion-grid {
+      grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+    }
   }
   @media (max-width: 500px) {
     .champion-card img {
@@ -77,11 +97,16 @@
 </style>
 </head>
 <body>
-<header>LoL Fundamentals – Diana Mid Matchups</header>
+
+<header>
+  LoL Fundamentals – Diana Mid Matchups
+  <a href="members-hub.html" class="back-btn">← Back to Members Hub</a>
+</header>
 
 <div class="section-title">Select a Champion</div>
 
 <div class="champion-grid">
+  <!-- Champions in alphabetical order -->
   <a href="ahri.html" class="champion-card"><img src="https://ddragon.leagueoflegends.com/cdn/14.23.1/img/champion/Ahri.png" alt="Ahri"><div class="champion-name">Ahri</div></a>
   <a href="akali.html" class="champion-card"><img src="https://ddragon.leagueoflegends.com/cdn/14.23.1/img/champion/Akali.png" alt="Akali"><div class="champion-name">Akali</div></a>
   <a href="akshan.html" class="champion-card"><img src="https://ddragon.leagueoflegends.com/cdn/14.23.1/img/champion/Akshan.png" alt="Akshan"><div class="champion-name">Akshan</div></a>
@@ -111,6 +136,10 @@
   <a href="lucian.html" class="champion-card"><img src="https://ddragon.leagueoflegends.com/cdn/14.23.1/img/champion/Lucian.png" alt="Lucian"><div class="champion-name">Lucian</div></a>
   <a href="lux.html" class="champion-card"><img src="https://ddragon.leagueoflegends.com/cdn/14.23.1/img/champion/Lux.png" alt="Lux"><div class="champion-name">Lux</div></a>
   <a href="malphite.html" class="champion-card"><img src="https://ddragon.leagueoflegends.com/cdn/14.23.1/img/champion/Malphite.png" alt="Malphite"><div class="champion-name">Malphite</div></a>
+
+  <!-- Mel placed correctly after Malphite -->
+  <a href="mel.html" class="champion-card"><img src="https://static.wikia.nocookie.net/leagueoflegends/images/5/5e/Mel_OriginalCentered.jpg" alt="Mel"><div class="champion-name">Mel</div></a>
+
   <a href="malzahar.html" class="champion-card"><img src="https://ddragon.leagueoflegends.com/cdn/14.23.1/img/champion/Malzahar.png" alt="Malzahar"><div class="champion-name">Malzahar</div></a>
   <a href="nasus.html" class="champion-card"><img src="https://ddragon.leagueoflegends.com/cdn/14.23.1/img/champion/Nasus.png" alt="Nasus"><div class="champion-name">Nasus</div></a>
   <a href="neeko.html" class="champion-card"><img src="https://ddragon.leagueoflegends.com/cdn/14.23.1/img/champion/Neeko.png" alt="Neeko"><div class="champion-name">Neeko</div></a>
@@ -132,17 +161,19 @@
   <a href="tryndamere.html" class="champion-card"><img src="https://ddragon.leagueoflegends.com/cdn/14.23.1/img/champion/Tryndamere.png" alt="Tryndamere"><div class="champion-name">Tryndamere</div></a>
   <a href="twistedfate.html" class="champion-card"><img src="https://ddragon.leagueoflegends.com/cdn/14.23.1/img/champion/TwistedFate.png" alt="Twisted Fate"><div class="champion-name">Twisted Fate</div></a>
   <a href="veigar.html" class="champion-card"><img src="https://ddragon.leagueoflegends.com/cdn/14.23.1/img/champion/Veigar.png" alt="Veigar"><div class="champion-name">Veigar</div></a>
-  <a href="velkoz.html" class="champion-card"><img src="https://ddragon.leagueoflegends.com/cdn/14.23.1/img/champion/Velkoz.png" alt="Vel'Koz"><div class="champion-name">Vel'Koz</div></a>
-  <a href="vex.html" class="champion-card"><img src="https://ddragon.leagueoflegends.com/cdn/14.23.1/img/champion/Vex.png" alt="Vex"><div class="champion-name">Vex</div></a>
   <a href="viktor.html" class="champion-card"><img src="https://ddragon.leagueoflegends.com/cdn/14.23.1/img/champion/Viktor.png" alt="Viktor"><div class="champion-name">Viktor</div></a>
+  <a href="vladimir.html" class="champion-card"><img src="https://ddragon.leagueoflegends.com/cdn/14.23.1/img/champion/Vladimir.png" alt="Vladimir"><div class="champion-name">Vladimir</div></a>
   <a href="xerath.html" class="champion-card"><img src="https://ddragon.leagueoflegends.com/cdn/14.23.1/img/champion/Xerath.png" alt="Xerath"><div class="champion-name">Xerath</div></a>
-  <a href="yorick.html" class="champion-card"><img src="https://ddragon.leagueoflegends.com/cdn/14.23.1/img/champion/Yorick.png" alt="Yorick"><div class="champion-name">Yorick</div></a>
+  <a href="yasuo.html" class="champion-card"><img src="https://ddragon.leagueoflegends.com/cdn/14.23.1/img/champion/Yasuo.png" alt="Yasuo"><div class="champion-name">Yasuo</div></a>
+  <a href="yone.html" class="champion-card"><img src="https://ddragon.leagueoflegends.com/cdn/14.23.1/img/champion/Yone.png" alt="Yone"><div class="champion-name">Yone</div></a>
   <a href="zoe.html" class="champion-card"><img src="https://ddragon.leagueoflegends.com/cdn/14.23.1/img/champion/Zoe.png" alt="Zoe"><div class="champion-name">Zoe</div></a>
   <a href="zyra.html" class="champion-card"><img src="https://ddragon.leagueoflegends.com/cdn/14.23.1/img/champion/Zyra.png" alt="Zyra"><div class="champion-name">Zyra</div></a>
 </div>
 
 <footer>© 2025 LoL Fundamentals · Contact: arcsecond@lolfundamentals.com</footer>
+
 </body>
 </html>
+
 
 
