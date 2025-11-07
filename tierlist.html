@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>LoL Fundamentals – Tierlist</title>
+<style>
+body {
+ margin: 0;
+ font-family: "Beaufort for LOL", Arial, Helvetica, sans-serif;
+ background: #0a0f14;
+ color: #e6edf3;
+ line-height: 1.4;
+ text-align: center;
+}
+
+/* Header */
+header {
+ background: linear-gradient(90deg, #0a0f14, #1b2838);
+ border-bottom: 2px solid #c9aa71;
+ padding: 15px 20px;
+ font-weight: bold;
+ font-size: 24px;
+ letter-spacing: 1px;
+ text-transform: uppercase;
+ color: #c9aa71;
+}
+
+/* Table styling */
+.tierlist-table {
+ margin: 40px auto;
+ border-collapse: collapse;
+ width: 95%;
+ max-width: 1200px;
+ table-layout: auto; /* let champion column expand */
+}
+.tierlist-table th, .tierlist-table td {
+ border: 1px solid #2f81f7;
+ text-align: center;
+ vertical-align: middle;
+ word-wrap: break-word;
+}
+.tierlist-table th {
+ background: #161b22;
+ color: #c9aa71;
+ font-size: 0.9em;
+ padding: 10px 5px;
+ border-bottom: 2px solid #2f81f7;
+}
+
+/* Column widths */
+.tierlist-table th:first-child,
+.tierlist-table td:first-child {
+ width: auto;
+ min-width: 140px;
+ text-align: left;
+ padding-left: 8px;
+}
+
+.tierlist-table th:not(:first-child),
+.tierlist-table td:not(:first-child) {
+ width: 60px;
+}
+
+/* Role header images */
+.role-header img {
+ width: 36px;
+ height: 36px;
+ display: block;
+ margin: 0 auto 4px;
+}
+
+/* Champion cell */
+.champion-cell {
+ display: flex;
+ flex-direction: column;
+ align-items: center;
+ justify-content: center;
+ color: #c9aa71;
+ padding: 4px 6px;
+}
+.champion-cell img {
+ width: 36px;
+ height: 36px;
+ margin-bottom: 4px;
+ border-radius: 4px;
+ object-fit: cover;
+}
+.champion-cell div {
+ font-size: 0.9em;
+ text-align: center;
+ line-height: 1.2;
+ word-break: break-word;
+}
+
+/* Tier colors */
+.tier-op { background: #9B59B6; color: #fff; } /* Purple */
+.tier-s { background: #FFD700; color: #000; } /* Gold */
+.tier-a { background: #4CAF50; color: #fff; } /* Green */
+.tier-b { background: #3498DB; color: #fff; } /* Blue */
+.tier-c { background: #FF8C00; color: #000; } /* Orange */
+.tier-x { background: #808080; color: #fff; } /* Gray */
+
+/* Responsive */
+@media (max-width: 768px) {
+ .role-header img,
+ .champion-cell img {
+ width: 28px;
+ height: 28px;
+ }
+ .tierlist-table th:first-child,
+ .tierlist-table td:first-child {
+ min-width: 100px;
+ }
+}
+</style>
+</head>
+<body>
+
+<header>LoL Fundamentals – Tierlist</header>
+
+<table class="tierlist-table" id="tierlist">
+ <thead>
+ <tr class="role-header">
+ <th>Champion</th>
+ <th><img src="https://ddragon.leagueoflegends.com/cdn/13.23.1/img/position/top.png" alt="Top"></th>
+ <th><img src="https://ddragon.leagueoflegends.com/cdn/13.23.1/img/position/jungle.png" alt="Jungle"></th>
+ <th><img src="https://ddragon.leagueoflegends.com/cdn/13.23.1/img/position/mid.png" alt="Mid"></th>
+ <th><img src="https://ddragon.leagueoflegends.com/cdn/13.23.1/img/position/adc.png" alt="ADC"></th>
+ <th><img src="https://ddragon.leagueoflegends.com/cdn/13.23.1/img/position/support.png" alt="Support"></th>
+ </tr>
+ </thead>
+ <tbody></tbody>
+</table>
+
+<script>
+// CSV source
+const csvUrl = "https://docs.google.com/spreadsheets/d/e/2PACX-1vRtIJeggpJ6cjGJt0OOds4OZDuHMMUxHCWzMiU1Bd4gJ8EvfZMXPE9p0X1K3yyeZs7bpFyQZHhHpnsu/pub?output=csv";
+
+// Tier to class map
+const tierMap = {
+ 'OP': 'tier-op',
+ 'S': 'tier-s',
+ 'A': 'tier-a',
+ 'B': 'tier-b',
+ 'C': 'tier-c',
+ 'X': 'tier-x'
+};
+
+async function loadTierlist() {
+ const res = await fetch(csvUrl);
+ const text = await res.text();
+ const lines = text.split("\n").filter(l => l.trim() !== "");
+ const tbody = document.querySelector("#tierlist tbody");
+
+ lines.forEach((line, index) => {
+ if(index === 0) return; // skip header
+ const [champion, top, jungle, mid, adc, support] = line.split(",");
+ const row = document.createElement("tr");
+
+ // Champion cell
+ const champCell = document.createElement("td");
+ champCell.classList.add("champion-cell");
+ const champName = champion.trim();
+ const champUrlName = champName
+ .normalize("NFD")
+ .replace(/[\u0300-\u036f]/g,'')
+ .replace(/[^a-zA-Z0-9]/g,'');
+ const champImage = `https://ddragon.leagueoflegends.com/cdn/13.23.1/img/champion/${champUrlName}.png`;
+ champCell.innerHTML = `<img src="${champImage}" alt="${champName}"><div>${champName}</div>`;
+ row.appendChild(champCell);
+
+ // Role cells
+ [top, jungle, mid, adc, support].forEach(tier => {
+ const cell = document.createElement("td");
+ if(tier) {
+ const cleanTier = tier.trim().toUpperCase();
+ cell.textContent = cleanTier;
+ cell.className = tierMap[cleanTier] || '';
+ }
+ row.appendChild(cell);
+ });
+
+ tbody.appendChild(row);
+ });
+}
+
+loadTierlist();
+</script>
+
+</body>
+</html>
