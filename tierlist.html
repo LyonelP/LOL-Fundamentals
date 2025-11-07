@@ -76,7 +76,6 @@ header {
  width: 140px;
  text-align: left;
  padding-left: 12px;
- box-sizing: border-box;
 }
 
 /* Role columns equal size */
@@ -106,38 +105,43 @@ header {
  height: 32px;
  border-radius: 6px;
  object-fit: cover;
- flex-shrink: 0;
 }
 .champion-cell div {
  font-size: 0.95em;
  font-weight: 500;
  color: #c9aa71;
- white-space: nowrap;
- overflow: hidden;
- text-overflow: ellipsis;
 }
 
-/* Tier colors with background images for ranks */
+/* Tier colors */
 .tier-op { 
- background: url('https://static.wikia.nocookie.net/leagueoflegends/images/3/3d/Emblem_Challenger.png') center/cover no-repeat;
- color: #fff; 
+ background: linear-gradient(135deg, #fff300, #fffac8); 
+ color: #000; 
  font-weight: bold;
  text-shadow: 0 0 8px rgba(255,255,200,0.9), 0 0 15px rgba(255,255,150,0.6);
+ animation: opGlow 2.5s ease-in-out infinite alternate;
 }
+@keyframes opGlow {
+ 0% { text-shadow: 0 0 6px rgba(255,255,200,0.7), 0 0 12px rgba(255,255,150,0.5); }
+ 100% { text-shadow: 0 0 12px rgba(255,255,200,1), 0 0 25px rgba(255,255,150,0.9); }
+}
+
 .tier-s { 
- background: url('https://static.wikia.nocookie.net/leagueoflegends/images/0/0f/Emblem_Grandmaster.png') center/cover no-repeat;
- color: #fff; 
+ background: linear-gradient(135deg, #FF0000, #C0C0C0); 
+ color: #000; 
 }
+
 .tier-a { 
- background: url('https://static.wikia.nocookie.net/leagueoflegends/images/1/18/Emblem_Master.png') center/cover no-repeat;
+ background: linear-gradient(135deg, #A020F0, #D8BFD8); 
  color: #fff; 
 }
+
 .tier-b { 
- background: url('https://static.wikia.nocookie.net/leagueoflegends/images/d/d0/Emblem_Diamond.png') center/cover no-repeat;
- color: #fff; 
+ background: linear-gradient(135deg, #00BFFF, #E0FFFF); 
+ color: #000; 
 }
+
 .tier-c { 
- background: url('https://static.wikia.nocookie.net/leagueoflegends/images/5/5e/Emblem_Bronze.png') center/cover no-repeat;
+ background: linear-gradient(135deg, #CD7F32, #C0C0C0); 
  color: #000; 
 }
 
@@ -162,14 +166,14 @@ header {
 
 <table class="tierlist-table" id="tierlist">
  <thead>
-   <tr class="role-header">
-     <th>Champion</th>
-     <th><img src="https://static.wikia.nocookie.net/leagueoflegends/images/8/83/Top_icon.png" alt="Top"><div>Top</div></th>
-     <th><img src="https://static.wikia.nocookie.net/leagueoflegends/images/7/79/Jungle_icon.png" alt="Jungle"><div>Jungle</div></th>
-     <th><img src="https://static.wikia.nocookie.net/leagueoflegends/images/d/d0/Middle_icon.png" alt="Mid"><div>Mid</div></th>
-     <th><img src="https://static.wikia.nocookie.net/leagueoflegends/images/9/97/Bottom_icon.png" alt="ADC"><div>ADC</div></th>
-     <th><img src="https://static.wikia.nocookie.net/leagueoflegends/images/f/f0/Support_icon.png" alt="Support"><div>Support</div></th>
-   </tr>
+ <tr class="role-header">
+ <th>Champion</th>
+ <th><img src="https://static.wikia.nocookie.net/leagueoflegends/images/8/83/Top_icon.png" alt="Top"><div>Top</div></th>
+ <th><img src="https://static.wikia.nocookie.net/leagueoflegends/images/7/79/Jungle_icon.png" alt="Jungle"><div>Jungle</div></th>
+ <th><img src="https://static.wikia.nocookie.net/leagueoflegends/images/d/d0/Middle_icon.png" alt="Mid"><div>Mid</div></th>
+ <th><img src="https://static.wikia.nocookie.net/leagueoflegends/images/9/97/Bottom_icon.png" alt="ADC"><div>ADC</div></th>
+ <th><img src="https://static.wikia.nocookie.net/leagueoflegends/images/f/f0/Support_icon.png" alt="Support"><div>Support</div></th>
+ </tr>
  </thead>
  <tbody></tbody>
 </table>
@@ -185,6 +189,7 @@ const tierMap = {
  'C': 'tier-c'
 };
 
+// Manual map for tricky champion names
 const nameFix = {
  "Cho'Gath": "Chogath",
  "Kha'Zix": "Khazix",
@@ -223,7 +228,6 @@ async function loadTierlist() {
 
  const champCell = document.createElement("td");
  champCell.classList.add("champion-cell");
- champCell.style.width = "140px"; // match header
  const champName = champion.trim();
  const champUrlName = formatChampionName(champName);
  const champImage = `https://ddragon.leagueoflegends.com/cdn/14.23.1/img/champion/${champUrlName}.png`;
@@ -249,5 +253,6 @@ loadTierlist();
 
 </body>
 </html>
+
 
 
