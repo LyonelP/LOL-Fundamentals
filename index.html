@@ -134,9 +134,10 @@ footer a:hover {
     Written and refined by Arcsecond, the rank 1 Challenger Diana main.
   </p>
 
-  <!-- Stripe Checkout Button -->
+  <!-- Stripe Checkout Button with redirect to account creation -->
   <a 
     href="https://buy.stripe.com/8x2eV6aQ448A4RgewGejK00"
+    onclick="event.preventDefault(); window.location.href='https://buy.stripe.com/8x2eV6aQ448A4RgewGejK00?success_url=https://lolfundamentals.com/account.html';"
     class="btn">
     Get Access – $12.99 / month
   </a>
@@ -171,7 +172,5 @@ footer a:hover {
 
 </body>
 </html>
-
-
 
 
