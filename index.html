@@ -12,7 +12,6 @@ body {
   color: #e6edf3;
   line-height: 1.6;
 }
-/* Header */
 header {
   background: linear-gradient(90deg, #0a0f14, #1b2838);
   border-bottom: 2px solid #c9aa71;
@@ -24,7 +23,6 @@ header {
   text-transform: uppercase;
   color: #c9aa71;
 }
-/* Hero */
 .hero {
   text-align: center;
   padding: 120px 20px;
@@ -48,7 +46,6 @@ header {
   color: #c9d1d9;
   text-shadow: 0 0 8px rgba(0,0,0,0.6);
 }
-/* Button */
 .btn {
   display: inline-block;
   background: #2f81f7;
@@ -63,7 +60,6 @@ header {
 .btn:hover {
   background: #4795ff;
 }
-/* Section */
 .section {
   padding: 60px 20px;
   max-width: 950px;
@@ -78,7 +74,6 @@ header {
   width: fit-content;
   margin: 0 auto 30px;
 }
-/* Cards */
 .cards {
   display: flex;
   flex-wrap: wrap;
@@ -96,7 +91,6 @@ header {
 .card h3 {
   color: #c9aa71;
 }
-/* Login */
 #loginSection {
   max-width: 400px;
   margin: 20px auto;
@@ -126,7 +120,6 @@ button {
 button:hover {
   background: #4795ff;
 }
-/* Footer */
 footer {
   text-align: center;
   padding: 30px;
@@ -152,8 +145,8 @@ footer a:hover {
 <section id="loginSection">
   <h2>Member Login</h2>
   <input type="email" id="email" placeholder="Enter your email" />
-  <button onclick="login()">Login</button>
-  <p id="loginMsg"></p>
+  <button id="loginBtn" onclick="login()">Login</button>
+  <!-- No "loading" message anymore -->
 </section>
 
 <!-- Hero Section -->
@@ -192,39 +185,14 @@ footer a:hover {
 </footer>
 
 <script>
-// Google Sheet CSV published link
-const membersCSV = "https://docs.google.com/spreadsheets/d/e/2PACX-1vR-0OZki4X8kc33NfrLsGL47-7mFj3SzjyGx6hs4QcnvRXiE-cOaJfk4wgvyIf6XXpnuB8D-B4TqSrW/pub?output=csv";
-let validEmails = [];
-
-// Fetch all emails from the first column of the sheet
-fetch(membersCSV)
-  .then(response => response.text())
-  .then(data => {
-    const rows = data.split("\n").map(row => row.split(","));
-    validEmails = rows
-      .map(row => row[0].trim().toLowerCase()) // take first column (email)
-      .filter(email => email); // remove empty rows
-  });
-
+// Simple login button: just redirect
 function login() {
-  const emailInput = document.getElementById('email').value.trim().toLowerCase();
-  const msg = document.getElementById('loginMsg');
-
-  if(validEmails.includes(emailInput)){
-    msg.textContent = "Access granted! Redirecting...";
-    setTimeout(() => {
-      window.location.href = 'memberhub.html';
-    }, 1000);
-  } else {
-    msg.textContent = 'Access denied. Please purchase membership.';
-  }
+  window.location.href = 'memberhub.html';
 }
 </script>
 
 </body>
 </html>
-
-
 
 
 
