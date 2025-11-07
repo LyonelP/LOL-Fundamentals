@@ -97,45 +97,22 @@ async function login() {
     return;
   }
 
-  try {
-    const res = await fetch(sheetCSV);
-    const text = await res.text();
-    const emails = parseCSV(text);
-
-    console.log("Loaded emails from sheet:", emails);
-    console.log("User entered:", emailInput);
-
-    if(emails.includes(emailInput)){
-      localStorage.setItem("memberEmail", emailInput);
-      msg.style.color="green";
-      msg.textContent="Access granted! Redirecting...";
-      setTimeout(()=>{ window.location.href="members-hub.html"; }, 1000);
-    } else {
-      msg.style.color="red";
-      msg.textContent="Access denied. Email not found.";
-    }
-  } catch(e) {
-    console.error("Error fetching sheet:", e);
-    msg.style.color="red";
-    msg.textContent="Error checking access. Please try again later.";
-  }
+  // Just redirect for now, ignoring sheet access
+  localStorage.setItem("memberEmail", emailInput);
+  msg.style.color="green";
+  msg.textContent="Access granted! Redirecting...";
+  setTimeout(()=>{ window.location.href="memberhub3.html"; }, 1000);
 }
 
 // Auto-login if returning member
 const savedEmail = localStorage.getItem("memberEmail");
 if(savedEmail){
-  fetch(sheetCSV)
-    .then(res=>res.text())
-    .then(text=>{
-      const emails = parseCSV(text);
-      if(emails.includes(savedEmail.toLowerCase())){
-        window.location.href="members-hub.html";
-      }
-    })
-    .catch(e=>console.error(e));
+  window.location.href="memberhub3.html";
 }
 </script>
 </body>
 </html>
+
+
 
 
