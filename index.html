@@ -26,7 +26,13 @@ header { background: linear-gradient(90deg,#0a0f14,#1b2838); border-bottom:2px s
 #loginSection { max-width:400px; margin:20px auto; text-align:center; background:#161b22; border:1px solid #2f81f7; padding:20px; border-radius:8px; box-shadow:0 0 10px rgba(47,129,247,0.15); }
 input, button { padding:10px; margin:5px 0; border-radius:4px; border:none; }
 input { width:80%; text-align:center; }
-button { background:#2f81f7; color:white; cursor:pointer; font-weight:bold; }
+button { 
+  background:#2f81f7; 
+  color:white; 
+  cursor:pointer; 
+  font-weight:bold; 
+  margin-top:10px; /* moved slightly lower */
+}
 button:hover { background:#4795ff; }
 /* Footer */
 footer { text-align:center; padding:30px; color:#8b949e; font-size:14px; background:#0a0f14; border-top:1px solid #1f2937; }
@@ -94,7 +100,7 @@ async function login() {
     const res = await fetch(sheetCSV);
     const text = await res.text();
 
-    // Split rows and skip the header
+    // Split rows and skip header
     const rows = text.split("\n").slice(1);
     const emails = rows.map(r => r.split(",")[0].trim().toLowerCase());
 
@@ -130,4 +136,3 @@ if(savedEmail){
 </script>
 </body>
 </html>
-
