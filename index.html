@@ -196,14 +196,14 @@ footer a:hover {
 const membersCSV = "https://docs.google.com/spreadsheets/d/e/2PACX-1vR-0OZki4X8kc33NfrLsGL47-7mFj3SzjyGx6hs4QcnvRXiE-cOaJfk4wgvyIf6XXpnuB8D-B4TqSrW/pub?output=csv";
 let validEmails = [];
 
-// Fetch all emails from the sheet and only include active users
+// Fetch all emails from the first column of the sheet
 fetch(membersCSV)
   .then(response => response.text())
   .then(data => {
     const rows = data.split("\n").map(row => row.split(","));
     validEmails = rows
-      .filter(row => row[1]?.trim().toLowerCase() === "active") // check Status column
-      .map(row => row[0].trim().toLowerCase()); // take Email column
+      .map(row => row[0].trim().toLowerCase()) // take first column (email)
+      .filter(email => email); // remove empty rows
   });
 
 function login() {
@@ -223,6 +223,8 @@ function login() {
 
 </body>
 </html>
+
+
 
 
 
