@@ -13,7 +13,7 @@ header { background: linear-gradient(90deg,#0a0f14,#1b2838); border-bottom:2px s
 .hero h1 { font-size:3em; margin-bottom:10px; text-shadow:0 0 10px #2f81f7; }
 .hero p { max-width:600px; margin:0 auto 20px; font-size:1.15em; color:#c9d1d9; text-shadow:0 0 8px rgba(0,0,0,0.6); }
 /* Button */
-.btn { display:inline-block; background:#2f81f7; color:white; padding:12px 25px; border-radius:5px; text-decoration:none; font-weight:bold; transition:0.3s; border:1px solid #c9aa71; cursor:pointer; }
+.btn { display:inline-block; background:#2f81f7; color:white; padding:12px 25px; border-radius:5px; text-decoration:none; font-weight:bold; transition:0.3s; border:1px solid #c9aa71; cursor:pointer; margin-top:10px; }
 .btn:hover { background:#4795ff; }
 /* Section */
 .section { padding:60px 20px; max-width:950px; margin:auto; }
@@ -26,13 +26,7 @@ header { background: linear-gradient(90deg,#0a0f14,#1b2838); border-bottom:2px s
 #loginSection { max-width:400px; margin:20px auto; text-align:center; background:#161b22; border:1px solid #2f81f7; padding:20px; border-radius:8px; box-shadow:0 0 10px rgba(47,129,247,0.15); }
 input, button { padding:10px; margin:5px 0; border-radius:4px; border:none; }
 input { width:80%; text-align:center; }
-button { 
-  background:#2f81f7; 
-  color:white; 
-  cursor:pointer; 
-  font-weight:bold; 
-  margin-top:10px; /* button slightly lower */
-}
+button { background:#2f81f7; color:white; cursor:pointer; font-weight:bold; }
 button:hover { background:#4795ff; }
 /* Footer */
 footer { text-align:center; padding:30px; color:#8b949e; font-size:14px; background:#0a0f14; border-top:1px solid #1f2937; }
@@ -40,7 +34,6 @@ footer a { color:#c9aa71; text-decoration:none; }
 footer a:hover { text-decoration:underline; }
 </style>
 </head>
-
 <body>
 <header>LoL Fundamentals</header>
 
@@ -85,56 +78,64 @@ footer a:hover { text-decoration:underline; }
 </footer>
 
 <script>
-const sheetCSV = "https://docs.google.com/spreadsheets/d/e/2PACX-1vT5EmSFHS_N34tBepLj-u0yORfaNmkqUw8pqASVoE7otg5giU/pub?output=csv";
+const sheetCSV = "https://docs.google.com/spreadsheets/d/e/2PACX-1vT5EmSFHS_N34tBepLj-u0yORqYfPPW4oP0zDazcuLpTb7Mx1a10hk0-79iz1E7PuTiqSTrPJvTIVn0/pub?output=csv";
+
+function parseCSV(text) {
+  return text
+    .split("\n")
+    .map(r => r.split(",")[0].replace(/"/g,'').trim().toLowerCase())
+    .filter(e => e !== "");
+}
 
 async function login() {
-  const email = document.getElementById("email").value.trim().toLowerCase();
+  const emailInput = document.getElementById("email").value.trim().toLowerCase();
   const msg = document.getElementById("loginMsg");
-  if(!email){ 
+
+  if(!emailInput){
     msg.style.color="red";
-    msg.textContent="Please enter your email."; 
-    return; 
+    msg.textContent="Please enter your email.";
+    return;
   }
 
   try {
     const res = await fetch(sheetCSV);
     const text = await res.text();
+    const emails = parseCSV(text);
 
-    // Split rows, skip empty lines
-    const rows = text.split("\n").filter(r => r.trim() !== "");
-    
-    // Extract emails from first column, remove quotes, trim, lowercase
-    const emails = rows.map(r => r.split(",")[0].replace(/"/g,'').trim().toLowerCase());
+    console.log("Loaded emails from sheet:", emails);
+    console.log("User entered:", emailInput);
 
-    if(emails.includes(email)){
-      localStorage.setItem("memberEmail", email);
+    if(emails.includes(emailInput)){
+      localStorage.setItem("memberEmail", emailInput);
       msg.style.color="green";
       msg.textContent="Access granted! Redirecting...";
       setTimeout(()=>{ window.location.href="members-hub.html"; }, 1000);
     } else {
       msg.style.color="red";
-      msg.textContent="Access denied. Please purchase membership.";
+      msg.textContent="Access denied. Email not found.";
     }
   } catch(e) {
-    console.error(e);
+    console.error("Error fetching sheet:", e);
     msg.style.color="red";
-    msg.textContent="Error checking access.";
+    msg.textContent="Error checking access. Please try again later.";
   }
 }
 
-// Auto-login for returning members
+// Auto-login if returning member
 const savedEmail = localStorage.getItem("memberEmail");
 if(savedEmail){
   fetch(sheetCSV)
     .then(res=>res.text())
     .then(text=>{
-      const rows = text.split("\n").filter(r => r.trim() !== "");
-      const emails = rows.map(r => r.split(",")[0].replace(/"/g,'').trim().toLowerCase());
+      const emails = parseCSV(text);
       if(emails.includes(savedEmail.toLowerCase())){
         window.location.href="members-hub.html";
       }
-    });
+    })
+    .catch(e=>console.error(e));
 }
 </script>
 </body>
 </html>
+
+
