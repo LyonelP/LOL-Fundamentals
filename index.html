@@ -191,7 +191,7 @@ footer a:hover {
 
 <script>
 // Google Sheet CSV published link
-const membersCSV = "YOUR_GOOGLE_SHEET_CSV_LINK_HERE";
+const membersCSV = "https://docs.google.com/spreadsheets/d/e/2PACX-1vT5EmSFHS_N34tBepLj-u0yORqYfPPW4oP0zDazcuLpTb7Mx1a10hk0-79iz1E7PuTiqSTrPJvTIVn0/pub?output=csv";
 let validEmails = [];
 
 // Fetch all emails from the sheet
@@ -209,8 +209,10 @@ function login() {
   const msg = document.getElementById('loginMsg');
 
   if(validEmails.includes(emailInput)){
-    // Redirect to member hub
-    window.location.href = 'memberhub.html';
+    msg.textContent = "Access granted! Redirecting...";
+    setTimeout(() => {
+      window.location.href = 'memberhub.html';
+    }, 1000);
   } else {
     msg.textContent = 'Access denied. Please purchase membership.';
   }
