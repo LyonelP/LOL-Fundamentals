@@ -51,7 +51,7 @@ header {
   text-shadow: 0 0 8px rgba(0,0,0,0.6);
 }
 
-/* Button */
+/* Buttons */
 .btn {
   display: inline-block;
   background: #2f81f7;
@@ -65,6 +65,13 @@ header {
 }
 .btn:hover {
   background: #4795ff;
+}
+
+/* Smaller login button */
+.btn-small {
+  padding: 8px 16px;
+  font-size: 14px;
+  border-radius: 4px;
 }
 
 /* Section */
@@ -102,7 +109,7 @@ header {
   color: #c9aa71;
 }
 
-/* Login */
+/* Login Section */
 #loginSection {
   max-width: 400px;
   margin: 20px auto;
@@ -113,23 +120,25 @@ header {
   border-radius: 8px;
   box-shadow: 0 0 10px rgba(47,129,247,0.15);
 }
-input, button {
+#loginSection input {
+  width: 80%;
   padding: 10px;
   margin: 5px 0;
   border-radius: 4px;
   border: none;
-}
-input {
-  width: 80%;
   text-align: center;
 }
-button {
+#loginSection button {
   background: #2f81f7;
   color: white;
   cursor: pointer;
   font-weight: bold;
+  padding: 8px 16px;
+  font-size: 14px;
+  border-radius: 4px;
+  border: 1px solid #c9aa71;
 }
-button:hover {
+#loginSection button:hover {
   background: #4795ff;
 }
 
@@ -197,13 +206,34 @@ footer a:hover {
 </footer>
 
 <script>
+// Google Sheet CSV of members
+const membersCSV = "https://docs.google.com/spreadsheets/d/e/2PACX-1vT5EmSFHS_N34tBepLj-u0yORqYfPPW4oP0zDazcuLpTb7Mx1a10hk0-79iz1E7PuTiqSTrPJvTIVn0/pub?output=csv";
+
+let validEmails = [];
+
+// Fetch the list of valid emails
+fetch(membersCSV)
+  .then(response => response.text())
+  .then(data => {
+    const rows = data.split("\n");
+    validEmails = rows.map(r => r.trim().toLowerCase());
+  });
+
 function login() {
-  // Always redirect to Member Hub
-  window.location.href = 'memberhub.html';
+  const emailInput = document.getElementById('email').value.trim().toLowerCase();
+  const msg = document.getElementById('loginMsg');
+
+  if(validEmails.includes(emailInput)){
+    // Redirect directly to Member Hub
+    window.location.href = 'memberhub.html';
+  } else {
+    msg.textContent = 'Access denied. Please purchase membership.';
+  }
 }
 </script>
 </body>
 </html>
+
 
 
 
