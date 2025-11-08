@@ -46,23 +46,23 @@
     box-shadow: 0 0 15px rgba(255, 215, 0, 0.8);
   }
 
-  /* Role selector properly spaced below the back button */
+  /* Role selector – white border, closer spacing */
   #roleSelect {
     display: block;
-    margin: 20px auto 40px auto;
+    margin: 15px auto 25px auto;
     padding: 10px 18px;
     font-size: 16px;
     border-radius: 6px;
-    border: 1px solid #c9aa71;
+    border: 1px solid #fff;
     background: #161b22;
     color: #e6edf3;
-    box-shadow: 0 0 8px rgba(201, 170, 113, 0.2);
+    box-shadow: 0 0 8px rgba(255, 255, 255, 0.15);
   }
 
-  /* Tier container raised closer */
+  /* Raise everything below (tierlist) */
   #championCards {
     max-width: 1100px;
-    margin: 20px auto 60px auto; /* Reduced top margin from 0 → 20px */
+    margin: 10px auto 50px auto; /* tightened spacing */
     padding: 0 12px;
   }
 
@@ -70,7 +70,7 @@
     display: flex;
     flex-direction: column;
     align-items: center;
-    margin-bottom: 38px;
+    margin-bottom: 34px;
   }
 
   .tier-divider {
@@ -162,10 +162,8 @@
 
 <header>LoL Fundamentals – Tierlist</header>
 
-<!-- Back button -->
 <a href="membershub.html" class="back-button">Back to Members Hub</a>
 
-<!-- Dropdown directly below -->
 <select id="roleSelect" aria-label="Select role">
   <option value="Top">Top</option>
   <option value="Jungle">Jungle</option>
@@ -174,7 +172,6 @@
   <option value="Support">Support</option>
 </select>
 
-<!-- Champions section -->
 <div id="championCards" aria-live="polite"></div>
 
 <footer>
@@ -187,7 +184,8 @@ if (localStorage.getItem('lolfundamentals_logged_in') !== 'true') {
   window.location.href = 'index.html';
 }
 
-const CSV_URL = 'https://docs.google.com/spreadsheets/d/e/2PACX-1vRtIJeggpJ6cjGJt0OOds4OZDuHMMUxHCWzMiU1Bd4gJ8EvfZMXPE9p0X1K3yyeZs7bpFyQZHhHpnsu/pub?output=csv';
+const CSV_URL =
+  'https://docs.google.com/spreadsheets/d/e/2PACX-1vRtIJeggpJ6cjGJt0OOds4OZDuHMMUxHCWzMiU1Bd4gJ8EvfZMXPE9p0X1K3yyeZs7bpFyQZHhHpnsu/pub?output=csv';
 
 const IMG_NAME_OVERRIDES = {
   "Bel'Veth": "Belveth",
@@ -308,7 +306,5 @@ function renderTierGroups(champRanks, role) {
 </script>
 </body>
 </html>
-
-
 
 
