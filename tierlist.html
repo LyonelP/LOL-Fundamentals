@@ -44,7 +44,7 @@ header {
 
 /* Role selector */
 #roleSelect {
-  margin: 20px 0;
+  margin: 15px 0 25px 0;
   padding: 8px 12px;
   font-size: 16px;
   border-radius: 6px;
@@ -114,11 +114,6 @@ if(localStorage.getItem('lolfundamentals_logged_in') !== 'true'){
 // Tier order
 const tierOrder = ["OP","S","A","B","C","D"];
 
-// Normalize champion names for image URLs
-function normalizeChampion(name){
-  return name.replace(/[\s.'’]/g,"").replace(/é/g,"e").replace(/ü/g,"u").replace(/ø/g,"o");
-}
-
 // CSV URL
 const csvURL = "https://docs.google.com/spreadsheets/d/e/2PACX-1vRtIJeggpJ6cjGJt0OOds4OZDuHMMUxHCWzMiU1Bd4gJ8EvfZMXPE9p0X1K3yyeZs7bpFyQZHhHpnsu/pub?output=csv";
 
@@ -135,7 +130,7 @@ fetch(csvURL)
       headers.forEach((h,i)=> champ[h] = row[i] ? row[i].trim() : "");
       return champ;
     });
-    renderTierlist("Top"); // Default: Top lane
+    renderTierlist("Top"); // default Top lane
   });
 
 // Render champions grouped by tier
@@ -143,7 +138,6 @@ function renderTierlist(role){
   const container = document.getElementById("tierlistContainer");
   container.innerHTML = "";
 
-  // Filter champions by role
   const filteredChamps = champions.filter(ch => {
     if(role === "All") return true;
     return ch[role] && ch[role] !== "X";
@@ -152,7 +146,7 @@ function renderTierlist(role){
   tierOrder.forEach(tier => {
     const champsInTier = filteredChamps.filter(ch => {
       if(role === "All"){
-        return Object.entries(ch).some(([k,v]) => tierOrder.includes(v) && k !== "Champion" && v === tier);
+        return Object.entries(ch).some(([k,v]) => k !== "Champion" && v === tier);
       } else {
         return ch[role] === tier;
       }
@@ -167,13 +161,13 @@ function renderTierlist(role){
     grid.className = "champion-grid";
 
     champsInTier.forEach(ch => {
-      const imgName = normalizeChampion(ch["Champion"]);
-      const champTier = role === "All" ? Object.entries(ch).find(([k,v])=>tierOrder.includes(v) && k!=="Champion")[1] : ch[role];
+      const champName = ch["Champion"];
+      const imgName = champName.replace(/[\s.'’]/g,"").replace(/é/g,"e");
       const card = document.createElement("div");
       card.className = "champion-card";
       card.innerHTML = `
-        <img src="https://ddragon.leagueoflegends.com/cdn/14.23.1/img/champion/${imgName}.png" alt="${ch["Champion"]}">
-        <div>${ch["Champion"]} (${champTier})</div>
+        <img src="https://ddragon.leagueoflegends.com/cdn/14.23.1/img/champion/${imgName}.png" alt="${champName}">
+        <div>${champName}</div>
       `;
       grid.appendChild(card);
     });
@@ -191,5 +185,6 @@ document.getElementById("roleSelect").addEventListener("change",(e)=>{
 
 </body>
 </html>
+
 
 
