@@ -1,179 +1,192 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Diana Guide – Members Hub</title>
-  <style>
-    body {
-      margin: 0;
-      font-family: 'Beaufort for LOL', Arial, Helvetica, sans-serif;
-      /* Using Dark Valkyrie Diana splash as background */
-      background: url('https://ddragon.leagueoflegends.com/cdn/img/champion/splash/Diana_8.jpg') no-repeat center center fixed;
-      background-size: cover;
-      color: #e6edf3;
-      text-align: center;
-      overflow-x: hidden;
-    }
-    body::before {
-      content: "";
-      position: fixed;
-      top: 0; left: 0;
-      width: 100%; height: 100%;
-      background: rgba(10,15,20,0.85);
-      z-index: -1;
-    }
-    header {
-      background: rgba(13,17,23,0.9);
-      border-bottom: 2px solid #c9aa71;
-      padding: 20px 10px;
-      font-weight: bold;
-      font-size: 26px;
-      text-transform: uppercase;
-      color: #c9aa71;
-      letter-spacing: 1px;
-    }
-    .back-button {
-      display: inline-block;
-      margin: 20px auto 10px;
-      padding: 10px 20px;
-      background: linear-gradient(135deg, #c9aa71, #e0c77b);
-      color: #000;
-      text-decoration: none;
-      border-radius: 8px;
-      font-weight: bold;
-      transition: all 0.3s;
-      box-shadow: 0 0 10px rgba(201,170,113,0.5);
-    }
-    .back-button::before { content: "← "; }
-    .back-button:hover {
-      background: linear-gradient(135deg, #e6c97f, #f0d88b);
-      box-shadow: 0 0 15px rgba(255,215,0,0.8);
-    }
-    #section-select-container {
-      margin: 20px auto;
-    }
-    #section-select {
-      padding: 10px 15px;
-      font-size: 16px;
-      border-radius: 6px;
-      border: none;
-      background: #0f1722;
-      color: #c9aa71;
-      cursor: pointer;
-    }
-    #section-info {
-      margin: 30px auto;
-      max-width: 900px;
-      background: rgba(13,17,23,0.95);
-      border: 1px solid #2f81f7;
-      padding: 20px;
-      border-radius: 10px;
-      text-align: left;
-      color: #c9aa71;
-      min-height: 200px;
-    }
-    .rune-list li {
-      display: flex;
-      align-items: flex-start;
-      margin-bottom: 15px;
-    }
-    .rune-list img {
-      width: 50px;
-      height: 50px;
-      margin-right: 12px;
-      flex-shrink: 0;
-    }
-    @media (max-width: 600px) {
-      #section-select { font-size: 14px; padding: 8px 10px; }
-      .rune-list img { width: 40px; height: 40px; }
-    }
-  </style>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Diana Guide – Members Hub</title>
+<style>
+body {
+  margin: 0;
+  font-family: 'Beaufort for LOL', Arial, Helvetica, sans-serif;
+  background: url('https://ddragon.leagueoflegends.com/cdn/img/champion/splash/Diana_0.jpg') no-repeat center center fixed;
+  background-size: cover;
+  color: #e6edf3;
+  text-align: center;
+  overflow-x: hidden;
+}
+
+/* Overlay for readability */
+body::before {
+  content: "";
+  position: fixed;
+  top: 0; left: 0;
+  width: 100%; height: 100%;
+  background: rgba(10,15,20,0.75);
+  z-index: -1;
+}
+
+/* Header */
+header {
+  background: rgba(13,17,23,0.9);
+  border-bottom: 2px solid #c9aa71;
+  padding: 20px 10px;
+  font-weight: bold;
+  font-size: 26px;
+  text-transform: uppercase;
+  color: #c9aa71;
+  letter-spacing: 1px;
+}
+
+/* Back button */
+.back-button {
+  display: inline-block;
+  margin: 20px auto 10px;
+  padding: 10px 20px;
+  background: linear-gradient(135deg, #c9aa71, #e0c77b);
+  color: #000;
+  text-decoration: none;
+  border-radius: 8px;
+  font-weight: bold;
+  transition: all 0.3s;
+  box-shadow: 0 0 10px rgba(201,170,113,0.5);
+}
+.back-button::before { content: "← "; }
+.back-button:hover {
+  background: linear-gradient(135deg, #e6c97f, #f0d88b);
+  box-shadow: 0 0 15px rgba(255,215,0,0.8);
+}
+
+/* Dropdown */
+#section-select-container {
+  margin: 20px auto;
+}
+#section-select {
+  padding: 10px 15px;
+  font-size: 16px;
+  border-radius: 6px;
+  border: none;
+  background: #0f1722;
+  color: #c9aa71;
+  cursor: pointer;
+}
+
+/* Section display */
+#section-info {
+  margin: 30px auto;
+  max-width: 900px;
+  background: rgba(13,17,23,0.95);
+  border: 1px solid #2f81f7;
+  padding: 20px;
+  border-radius: 10px;
+  text-align: left;
+  color: #c9aa71;
+  min-height: 200px;
+}
+
+.rune-list li {
+  display: flex;
+  align-items: flex-start;
+  margin-bottom: 15px;
+}
+
+.rune-list img {
+  width: 50px;
+  height: 50px;
+  margin-right: 12px;
+  flex-shrink: 0;
+}
+
+#section-info:hover { box-shadow: 0 0 15px rgba(47,129,247,0.5); }
+
+@media (max-width: 600px) {
+  #section-select { font-size: 14px; padding: 8px 10px; }
+  .rune-list img { width: 40px; height: 40px; }
+}
+</style>
 </head>
 <body>
 
-  <header>Diana – Members Hub Guide</header>
-  <a href="membershub.html" class="back-button">Back to Members Hub</a>
+<header>Diana – Members Hub Guide</header>
+<a href="membershub.html" class="back-button">Back to Members Hub</a>
 
-  <div id="section-select-container">
-    <select id="section-select">
-      <option disabled selected>Select a section</option>
-      <option>Intro</option>
-      <option>Runes</option>
-      <option>Build</option>
-      <option>Summoner Spells</option>
-      <option>Abilities</option>
-      <option>Combos</option>
-      <option>Laning</option>
-      <option>Warding</option>
-      <option>Farming / Pushing</option>
-      <option>Teamfighting</option>
-      <option>Splitpushing</option>
-      <option>Closing Out The Game</option>
-      <option>Threats & Synergies</option>
-      <option>Pros & Cons</option>
-      <option>Extra Tips</option>
-    </select>
-  </div>
+<div id="section-select-container">
+  <select id="section-select">
+    <option disabled selected>Select a section</option>
+    <option>Intro</option>
+    <option>Runes</option>
+    <option>Build</option>
+    <option>Summoner Spells</option>
+    <option>Abilities</option>
+    <option>Combos</option>
+    <option>Laning</option>
+    <option>Warding</option>
+    <option>Farming / Pushing</option>
+    <option>Teamfighting</option>
+    <option>Splitpushing</option>
+    <option>Closing Out The Game</option>
+    <option>Threats & Synergies</option>
+    <option>Pros & Cons</option>
+    <option>Extra Tips</option>
+  </select>
+</div>
 
-  <div id="section-info">
-    <p>Select a section from above to view details.</p>
-  </div>
+<div id="section-info">
+  <p>Select a section from above to view details.</p>
+</div>
 
-  <script>
-    if (localStorage.getItem('lolfundamentals_logged_in') !== 'true') {
-      window.location.href = 'index.html';
-    }
+<script>
+// Require login
+if (localStorage.getItem('lolfundamentals_logged_in') !== 'true') {
+  window.location.href = 'index.html';
+}
 
-    const sectionSelect = document.getElementById('section-select');
-    const sectionInfo   = document.getElementById('section-info');
+const sectionSelect = document.getElementById('section-select');
+const sectionInfo = document.getElementById('section-info');
 
-    sectionSelect.addEventListener('change', () => {
-      const value = sectionSelect.value;
-      let content = `<h2>${value}</h2><p>Coming soon!</p>`;
+sectionSelect.addEventListener('change', () => {
+  let value = sectionSelect.value;
+  let content = `<h2>${value}</h2><p>Coming soon!</p>`;
 
-      if (value === "Runes") {
-        content = `
-        <ul class="rune-list">
-          <li>
-            <img src="https://ddragon.leagueoflegends.com/cdn/img/perk-images/Styles/Resolve/GraspOfTheUndying/GraspOfTheUndying.png" alt="Grasp Of The Undying">
-            <p><strong>Grasp Of The Undying:</strong> This is the only rune and tree that allows Diana to play the way she’s intended to be played. It’s the rune that gives her the potential to win every matchup while also not falling off nearly as hard as another option like phase rush which is her second best tree.</p>
-          </li>
-          <li>
-            <img src="https://ddragon.leagueoflegends.com/cdn/img/perk-images/Styles/Resolve/ShieldBash/ShieldBash.png" alt="Shield Bash">
-            <p><strong>Shield Bash:</strong> Will out damage most other runes, and Diana can proc it twice with W.</p>
-          </li>
-          <li>
-            <img src="https://ddragon.leagueoflegends.com/cdn/img/perk-images/Styles/Resolve/BonePlating/BonePlating.png" alt="Bone Plating">
-            <p><strong>Bone Plating:</strong> Best sustain tool in lane. Runes like Aery, Scorch, First Strike, and Comet all proc multiple plates. This also gives you the best chance of surviving a gank and winning a duel later on in the game.</p>
-          </li>
-          <li>
-            <img src="https://ddragon.leagueoflegends.com/cdn/img/perk-images/Styles/Resolve/SecondWind/SecondWind.png" alt="Second Wind">
-            <p><strong>Second Wind:</strong> Recently nerfed and only worth considering against Yasuo and Yone. Yasuo and Yone proc Bone Plating extremely easily with Q and will only get an extended trade with Lethal Tempo early. Even in these matchups I still often prefer Bone Plating because of the better scaling and the ability to survive ganks better.</p>
-          </li>
-          <li>
-            <img src="https://ddragon.leagueoflegends.com/cdn/img/perk-images/Styles/Resolve/Overgrowth/Overgrowth.png" alt="Overgrowth">
-            <p><strong>Overgrowth:</strong> Best way for Diana to gain health besides Grasp since the build doesn't include any health items. Diana requires health to engage melee champions and she has a 9% bonus health ratio on the shield strength that can be proc’d twice for a total ratio of 18%.</p>
-          </li>
-          <li>
-            <img src="https://ddragon.leagueoflegends.com/cdn/img/perk-images/Styles/Precision/ManaflowBand/ManaflowBand.png" alt="Manaflow Band">
-            <p><strong>Manaflow Band:</strong> This rune perfectly covers the amount of mana Diana requires to play the game. Without Manaflow Band you won’t be able to take full advantage of Diana’s side lane pressure. Diana should always be looking to take the enemy jungler’s camps especially now while her passive monster ratio is at 300%. Without Manaflow Band you won’t be able to deal with any champion that has resists since multiple damage rotations will be necessary to kill the enemy.</p>
-          </li>
-          <li>
-            <img src="https://ddragon.leagueoflegends.com/cdn/img/perk-images/Styles/Precision/Transcendence/Transcendence.png" alt="Transcendence">
-            <p><strong>Transcendence:</strong> This is the only way for Diana to gain haste besides Cryptobloom later on. It’s the perfect balance of having a little haste which is more efficient at lower values and gaining big cooldown reductions at crucial moments in team fights.</p>
-          </li>
-        </ul>
-        `;
-      }
+  if(value === "Runes"){
+    content = `
+    <ul class="rune-list">
+      <li>
+        <img src="https://ddragon.leagueoflegends.com/cdn/14.23.1/img/perk/GraspOfTheUndying.png" alt="Grasp Of The Undying">
+        <p><strong>Grasp Of The Undying:</strong> This is the only rune and tree that allows Diana to play the way she’s intended to be played. It’s the rune that gives her the potential to win every matchup while also not falling off nearly as hard as another option like phase rush which is her second best tree.</p>
+      </li>
+      <li>
+        <img src="https://ddragon.leagueoflegends.com/cdn/14.23.1/img/perk/ShieldBash.png" alt="Shield Bash">
+        <p><strong>Shield Bash:</strong> Will out damage most other runes, and Diana can proc it twice with W.</p>
+      </li>
+      <li>
+        <img src="https://ddragon.leagueoflegends.com/cdn/14.23.1/img/perk/BonePlating.png" alt="Bone Plating">
+        <p><strong>Bone Plating:</strong> Best sustain tool in lane. Runes like Aery, Scorch, First Strike, and Comet all proc multiple plates. This also gives you the best chance of surviving a gank and winning a duel later on in the game.</p>
+      </li>
+      <li>
+        <img src="https://ddragon.leagueoflegends.com/cdn/14.23.1/img/perk/SecondWind.png" alt="Second Wind">
+        <p><strong>Second Wind:</strong> Recently nerfed and only worth considering against Yasuo and Yone. Yasuo and Yone proc Bone Plating extremely easily with Q and will only get an extended trade with Lethal Tempo early. Even in these matchups I still often prefer Bone Plating because of the better scaling and the ability to survive ganks better.</p>
+      </li>
+      <li>
+        <img src="https://ddragon.leagueoflegends.com/cdn/14.23.1/img/perk/Overgrowth.png" alt="Overgrowth">
+        <p><strong>Overgrowth:</strong> Best way for Diana to gain health besides Grasp since the build doesn't include any health items. Diana requires health to engage melee champions and she has a 9% bonus health ratio on the shield strength that can be proc'd twice for a total ratio of 18%.</p>
+      </li>
+      <li>
+        <img src="https://ddragon.leagueoflegends.com/cdn/14.23.1/img/perk/ManaflowBand.png" alt="Manaflow Band">
+        <p><strong>Manaflow Band:</strong> This rune perfectly covers the amount of mana Diana requires to play the game. Without Manaflow Band you won’t be able to take full advantage of Diana’s side lane pressure. Diana should always be looking to take the enemy jungler’s camps especially now while her passive monster ratio is at 300%. Without Manaflow Band you won’t be able to deal with any champion that has resists since multiple damage rotations will be necessary to kill the enemy.</p>
+      </li>
+      <li>
+        <img src="https://ddragon.leagueoflegends.com/cdn/14.23.1/img/perk/Transcendence.png" alt="Transcendence">
+        <p><strong>Transcendence:</strong> This is the only way for Diana to gain haste besides Cryptobloom later on. It’s the perfect balance of having a little haste which is more efficient at lower values and gaining big cooldown reductions at crucial moments in team fights.</p>
+      </li>
+    </ul>
+    `;
+  }
 
-      sectionInfo.innerHTML = content;
-    });
-  </script>
+  sectionInfo.innerHTML = content;
+});
+</script>
 
 </body>
 </html>
-
-
 
 
