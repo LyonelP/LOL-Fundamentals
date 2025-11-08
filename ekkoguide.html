@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+<<!DOCTYPE html>
 <html lang="en">
 <head>
 <meta charset="UTF-8" />
@@ -210,12 +210,11 @@ header {
     <option>Summoner Spells</option>
     <option>Abilities</option>
     <option>Combos</option>
-    <option>Preferred Jungle Camps</option>
     <option>Level 1</option>
     <option>Jungle Routes</option>
+    <option>Closing Out The Game</option>
     <option>Hardest Matchups</option>
     <option>Team Fighting</option>
-    <option>Closing Out The Game</option>
   </select>
 </div>
 
@@ -283,15 +282,14 @@ sectionSelect.addEventListener('change', () => {
     content = `
       <h3>Build</h3>
       <div class="build-flow">
-        <div><img src="https://ddragon.leagueoflegends.com/cdn/14.21.1/img/item/1082.png" class="icon">Green Pet</div><span>→</span>
-        <div><img src="https://ddragon.leagueoflegends.com/cdn/14.21.1/img/item/1082.png" class="icon">Dark Seal</div><span>→</span>
-        <div><img src="https://ddragon.leagueoflegends.com/cdn/14.21.1/img/item/3115.png" class="icon">Nashor's Tooth</div><span>→</span>
-        <div><img src="https://ddragon.leagueoflegends.com/cdn/14.21.1/img/item/3020.png" class="icon">Sorcerer's Shoes</div><span>→</span>
-        <div><img src="https://ddragon.leagueoflegends.com/cdn/14.21.1/img/item/6672.png" class="icon">Hextech Rocketbelt</div><span>→</span>
-        <div><img src="https://ddragon.leagueoflegends.com/cdn/14.21.1/img/item/3089.png" class="icon">Rabadon's Deathcap</div><span>→</span>
-        <div><img src="https://ddragon.leagueoflegends.com/cdn/14.21.1/img/item/3100.png" class="icon">Lich Bane</div><span>→</span>
-        <div><img src="https://ddragon.leagueoflegends.com/cdn/14.21.1/img/item/3135.png" class="icon">Void Staff</div><span>→</span>
-        <div><img src="https://ddragon.leagueoflegends.com/cdn/14.21.1/img/item/3157.png" class="icon">Zhonya's Hourglass</div>
+        <div><img src="https://ddragon.leagueoflegends.com/cdn/img/item/2031.png" class="icon">Mosstomper Seedling</div><span>→</span>
+        <div><img src="https://ddragon.leagueoflegends.com/cdn/img/item/1082.png" class="icon">Dark Seal</div><span>→</span>
+        <div><img src="https://ddragon.leagueoflegends.com/cdn/img/item/3115.png" class="icon">Nashor's Tooth</div><span>→</span>
+        <div><img src="https://ddragon.leagueoflegends.com/cdn/img/item/3111.png" class="icon">Mercury's Treads</div><span>→</span>
+        <div><img src="https://ddragon.leagueoflegends.com/cdn/img/item/3157.png" class="icon">Zhonya's Hourglass</div><span>→</span>
+        <div><img src="https://ddragon.leagueoflegends.com/cdn/img/item/3089.png" class="icon">Rabadon's Deathcap</div><span>→</span>
+        <div><img src="https://ddragon.leagueoflegends.com/cdn/img/item/3100.png" class="icon">Lich Bane</div><span>→</span>
+        <div><img src="https://ddragon.leagueoflegends.com/cdn/img/item/3135.png" class="icon">Void Staff</div>
       </div>
     `;
   }
@@ -299,8 +297,8 @@ sectionSelect.addEventListener('change', () => {
   if(value === "Summoner Spells"){
     content = `
       <h3>Summoner Spells</h3>
-      <p><strong>Flash:</strong> Essential for outplays and mobility.</p>
-      <p><strong>Smite:</strong> Must-have for jungle clears, objective control, and ekko combos with blue smite.</p>
+      <p><img src="https://ddragon.leagueoflegends.com/cdn/12.23.1/img/spell/SummonerFlash.png" class="icon"><strong>Flash:</strong> Essential for outplays and mobility.</p>
+      <p><img src="https://ddragon.leagueoflegends.com/cdn/12.23.1/img/spell/SummonerSmite.png" class="icon"><strong>Smite:</strong> Must-have for jungle clears, objective control, and Ekko combos with blue smite.</p>
     `;
   }
 
@@ -326,19 +324,6 @@ sectionSelect.addEventListener('change', () => {
     `;
   }
 
-  if(value === "Preferred Jungle Camps"){
-    content = `
-      <h3>Preferred Jungle Camps</h3>
-      <p><strong>Raptors:</strong> Fast clear, good for early ganks.</p>
-      <p><strong>Krugs:</strong> Best for XP and gold.</p>
-      <p><strong>Wolves:</strong> Efficient clear, flexible pathing.</p>
-      <p><strong>Gromp:</strong> Usually cleared last; strong scaling XP.</p>
-      <p><strong>Scuttle Crab:</strong> Quick and heals well with W.</p>
-      <p><strong>Dragon:</strong> Clear after first clear; prioritize objectives.</p>
-      <p><em>Tip:</em> Smite camps at low HP to optimize passive.</p>
-    `;
-  }
-
   if(value === "Level 1"){
     content = `
       <h3>Level 1</h3>
@@ -356,6 +341,13 @@ sectionSelect.addEventListener('change', () => {
     `;
   }
 
+  if(value === "Closing Out The Game"){
+    content = `
+      <h3>Closing Out The Game</h3>
+      <p>Focus objectives like Baron/Elder. Use W, passive, Q to zone enemies and push waves. Avoid farming far from objectives. After core items, prioritize survival and objectives over kills.</p>
+    `;
+  }
+
   if(value === "Hardest Matchups"){
     content = `
       <h3>Hardest Matchups</h3>
@@ -370,20 +362,12 @@ sectionSelect.addEventListener('change', () => {
     `;
   }
 
-  if(value === "Closing Out The Game"){
-    content = `
-      <h3>Closing Out The Game</h3>
-      <p>Focus objectives like Baron/Elder. Use W, passive, Q to zone enemies and push waves. Avoid farming far from objectives. After core items, prioritize survival and objectives over kills.</p>
-    `;
-  }
-
   sectionInfo.innerHTML = content;
 });
 </script>
 
 </body>
 </html>
-
 
 
 
