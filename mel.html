@@ -42,7 +42,6 @@
     margin: -15px auto 0 auto; 
     gap: 15px; 
     padding: 0 20px 10px 20px; 
-    align-items: center;
   }
   .matchup-left { 
     display: flex; 
@@ -54,10 +53,9 @@
     width: 80px; 
     height: 80px; 
     border-radius: 8px; 
-    object-fit: cover;
   }
   .winrate-bubble { 
-    background: #F9D949; 
+    background: #F9D949; /* yellow for 51% */ 
     color: #0d1117; 
     font-weight: bold; 
     padding: 8px 14px; 
@@ -100,21 +98,26 @@
       padding: 10px; 
       margin-top: -15px; 
     }
-    .matchup-left { justify-content: center; }
-    .matchup-right { text-align: center; margin-top: 0px; }
+    .matchup-left { 
+      justify-content: center; 
+    }
+    .matchup-right { 
+      text-align: center; 
+      margin-top: 0px; 
+    }
   }
 </style>
 </head>
 <body>
 <header>Diana Mid Matchup – Mel</header>
 
-<div style="text-align: center;">
+<div style="text-align: center; margin-bottom: 30px;">
   <a href="matchup-hub.html" class="back-link">&larr; Back to Matchup Hub</a>
 </div>
 
 <div class="matchup-container">
   <div class="matchup-left">
-    <img src="https://static.wikia.nocookie.net/leagueoflegends/images/8/87/Mel_OriginalSkin_HD.jpg" alt="Mel">
+    <img src="https://static.wikia.nocookie.net/leagueoflegends/images/0/0b/MelSquare.png" alt="Mel">
     <div class="winrate-bubble">51%</div>
   </div>
   <div class="matchup-right">
