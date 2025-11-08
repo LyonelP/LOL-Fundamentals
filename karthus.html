@@ -24,12 +24,16 @@
     display: block;
     margin: 20px auto 30px auto;
     text-align: center;
-    color: #F9D949;
+    color: #0d1117;
+    background: #F9D949; /* gold button */
+    padding: 10px 18px;
     text-decoration: none;
     font-weight: bold;
+    border-radius: 8px;
+    width: fit-content;
   }
   .back-link:hover {
-    text-decoration: underline;
+    opacity: 0.9;
   }
   .matchup-container {
     display: flex;
@@ -50,7 +54,7 @@
     border-radius: 8px;
   }
   .winrate-bubble {
-    background: #4ade80; /* green for favorable */
+    background: #4ade80; /* light green bubble */
     color: #0d1117;
     font-weight: bold;
     padding: 8px 14px;
@@ -102,9 +106,13 @@
 </style>
 </head>
 <body>
+
+<!-- Memberstack login protection -->
+<div data-ms-member="true">
+
 <header>Diana Mid Matchup – Karthus</header>
 
-<a href="matchuphub.html" class="back-link">&larr; Back to Matchup Hub</a>
+<a href="members.html" class="back-link">&larr; Back to Members</a>
 
 <div class="matchup-container">
   <div class="matchup-left">
@@ -124,8 +132,17 @@
 </div>
 
 <footer>© 2025 LoL Fundamentals · Contact: arcsecond@lolfundamentals.com</footer>
+</div>
+
+<!-- Message for non-logged-in users -->
+<div data-ms-member="false" style="text-align:center; padding:50px; color:#F9D949;">
+  You must be logged in to view this matchup page. <br>
+  <a href="login.html" style="color:#58a6ff;">Log in here</a>
+</div>
+
 </body>
 </html>
+
 
 
 
