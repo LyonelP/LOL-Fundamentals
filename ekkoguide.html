@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Ekko Guide – Members Hub</title>
+<title>Ekko Jungle Guide – Members Hub</title>
 <style>
 body {
   margin: 0;
@@ -15,7 +15,7 @@ body {
   overflow-x: hidden;
 }
 
-/* Overlay for readability */
+/* Overlay */
 body::before {
   content: "";
   position: fixed;
@@ -79,11 +79,21 @@ header {
   padding: 20px;
   border-radius: 10px;
   text-align: left;
-  color: #c9aa71;
+  color: #fff;
   min-height: 200px;
 }
 
 #section-info:hover { box-shadow: 0 0 15px rgba(47,129,247,0.5); }
+
+#section-info h3 {
+  color: #c9aa71;
+  margin-top: 16px;
+}
+
+#section-info p {
+  margin: 8px 0 16px;
+  line-height: 1.6;
+}
 
 @media (max-width: 600px) {
   #section-select { font-size: 14px; padding: 8px 10px; }
@@ -92,7 +102,7 @@ header {
 </head>
 <body>
 
-<header>Ekko – Members Hub Guide</header>
+<header>Ekko Jungle – Members Hub Guide</header>
 <a href="membershub.html" class="back-button">Back to Members Hub</a>
 
 <div id="section-select-container">
@@ -104,15 +114,12 @@ header {
     <option>Summoner Spells</option>
     <option>Abilities</option>
     <option>Combos</option>
-    <option>Pathing</option>
-    <option>Warding</option>
-    <option>Farming / Pushing</option>
-    <option>Teamfighting</option>
-    <option>Splitpushing</option>
+    <option>Preferred Jungle Camps</option>
+    <option>Level 1</option>
+    <option>Jungle Routes</option>
+    <option>Hardest Matchups</option>
+    <option>Team Fighting</option>
     <option>Closing Out The Game</option>
-    <option>Threats & Synergies</option>
-    <option>Pros & Cons</option>
-    <option>Extra Tips</option>
   </select>
 </div>
 
@@ -133,12 +140,106 @@ sectionSelect.addEventListener('change', () => {
   let value = sectionSelect.value;
   let content = `<h2>${value}</h2><p>Coming soon!</p>`;
 
-  if(value === "Pathing"){
+  if(value === "Intro"){
     content = `
-      <h2>Pathing</h2>
-      <p>Ekko excels at jungle and side lane pressure when he paths efficiently. Knowing when to clear camps, gank, and rotate is crucial for maximizing Ekko's passive and ultimate cooldowns. Prioritize camps that give you experience advantage and time your movements to punish overextended enemies.</p>
-      <iframe width="100%" height="480" src="https://www.youtube.com/embed/placeholder" 
-      title="Ekko Pathing Video" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+      <h2>Intro</h2>
+      <p>Why Ekko jungle? I think Ekko performs best as a jungler. Smite is the strongest summoner spell to take alongside flash on Ekko, especially once upgraded to blue smite. The range on the slow, and burst, plus the ability to secure objectives fits Ekko’s play style perfectly. Ekko has a hard time laning, and his W, ult, and passive can be best utilized in roam, gank, dive, and flank scenarios. Also, he’s really fun to play!</p>
+    `;
+  }
+
+  if(value === "Runes"){
+    content = `<h2>Runes</h2><p>Coming soon!</p>`;
+  }
+
+  if(value === "Build"){
+    content = `<h2>Build</h2><p>Coming soon!</p>`;
+  }
+
+  if(value === "Summoner Spells"){
+    content = `
+      <h2>Summoner Spells</h2>
+      <p><strong>Flash:</strong> Still the best summoner spell in the game.</p>
+      <p><strong>Smite:</strong> I believe smite is the strongest summoner spell to take alongside flash on Ekko, especially once upgraded to blue smite. The range on the slow, and burst, plus the ability to secure objectives fits Ekko’s play style perfectly.</p>
+    `;
+  }
+
+  if(value === "Abilities"){
+    content = `
+      <h2>Abilities</h2>
+      <p><strong>Passive – Z-Drive Resonance:</strong> Almost all trades where you can proc the passive are worth it. Use the movement speed to reposition while waiting for cooldowns.</p>
+      <p><strong>Q – Timewinder:</strong> Great for fast pushing and fixing your laners’ waves.</p>
+      <p><strong>W – Parallel Convergence:</strong> Use to push enemies toward your desired location. The shield should be used to tank damage.</p>
+      <p><strong>E – Phase Dive:</strong> Great gap closer, can be used over most walls. Connect the second part of E whenever possible.</p>
+      <p><strong>R – Chronobreak:</strong> Great for tower diving, initiating fights, and stealing objectives.</p>
+    `;
+  }
+
+  if(value === "Combos"){
+    content = `
+      <h2>Combos</h2>
+      <p><strong>W E E Q AA:</strong> Basic combo. Lead with W out of vision.</p>
+      <p><strong>E E Q AA W AA:</strong> Best when already in E range of your target.</p>
+      <p><strong>E Q E AA:</strong> Best when Q is guaranteed to connect.</p>
+      <p><strong>Q AA E:</strong> Best for extended trades and close-range situations.</p>
+      <p><strong>W E Q:</strong> Safe way to slow an enemy and proc passive.</p>
+    `;
+  }
+
+  if(value === "Preferred Jungle Camps"){
+    content = `
+      <h2>Preferred Jungle Camps</h2>
+      <p><strong>Raptors:</strong> Favorite camp. Great healing from Hunter’s Talisman and Ravenous Hunter.</p>
+      <p><strong>Krugs:</strong> Best for experience, but time-consuming.</p>
+      <p><strong>Wolf Camp:</strong> Good for pathing out of base.</p>
+      <p><strong>Gromp:</strong> Hardest camp to clear, usually last before recall.</p>
+      <p><strong>Scuttle Crab:</strong> Clear extremely fast using W.</p>
+      <p><strong>Dragon:</strong> Ekko doesn’t clear quickly pre-Runic Echoes. Prioritize ganks and farming over dragon.</p>
+      <p><em>Tip:</em> Use smite early before passive to gain extra damage on camps.</p>
+    `;
+  }
+
+  if(value === "Level 1"){
+    content = `
+      <h2>Level 1</h2>
+      <p>Blue side: Ward tri bush to prevent invades and cheeses. Move towards mid and throw W toward pixel brush by dragon. Use W on starting camp at 1:27. Ekko’s autos deal more damage to lower health enemies. For last auto on red, wait for Hunter’s Talisman damage to tick before last auto (approx. 125 damage).</p>
+      <p>Red side: Mirror the same path, but tri bush ward for top lane less important.</p>
+    `;
+  }
+
+  if(value === "Jungle Routes"){
+    content = `
+      <h2>Jungle Routes</h2>
+      <p><strong>First Clear:</strong> Red start preferred. Blue start only if enemy may cheese red.</p>
+      <h3>Main Paths (Blue Side, mirrored for Red):</h3>
+      <ul>
+        <li>Red Buff → Raptors → Wolves → Blue Buff → Gromp or look for gank → Scuttle → Ganks/Invade</li>
+        <li>Red Buff → Raptors → Krugs → Enemy Blue → Wolf Camp/Gromp → Scuttle</li>
+        <li>Blue Buff → Gromp → Wolf Camp → Raptors → Red Buff → Krugs → Scuttle</li>
+        <li>Red Buff → Krugs → Raptors → Check Mid Gank → Wolves → Blue Buff → Scuttle</li>
+      </ul>
+      <p><strong>Tip:</strong> Scrying Orb can reveal scuttle area.</p>
+      <p><strong>Second Clear:</strong> Path to respawned camps unless a good gank is available. See detailed route options above.</p>
+    `;
+  }
+
+  if(value === "Hardest Matchups"){
+    content = `
+      <h2>Hardest Matchups</h2>
+      <p>Champions with high mobility and burst are hard for Ekko (e.g., Nidalee, Kha’Zix). They can force early ult and still have damage/mobility to follow and kill him at his original position.</p>
+    `;
+  }
+
+  if(value === "Team Fighting"){
+    content = `
+      <h2>Team Fighting</h2>
+      <p>Proc passive on as many targets as possible. Land W on priority targets. Delay ult for max healing and damage. Use movement speed to dodge melee autos. W passive and ult liberally, especially to proc passive on squishies.</p>
+    `;
+  }
+
+  if(value === "Closing Out The Game"){
+    content = `
+      <h2>Closing Out The Game</h2>
+      <p>Focus on Baron/Elder. Ekko is great at setup, protection, and steals. Use W, passive, and Q to zone and fast push waves to objectives. Avoid farming camps far from objectives. Item purchases past core items aren’t worth risking Baron/Dragon. Prioritize survival and objective control over kills.</p>
     `;
   }
 
