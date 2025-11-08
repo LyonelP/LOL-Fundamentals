@@ -88,6 +88,8 @@ header {
 #section-info h3 {
   color: #c9aa71;
   margin-top: 16px;
+  text-align: center;
+  text-transform: uppercase;
 }
 
 #section-info p {
@@ -97,6 +99,46 @@ header {
 
 #section-info ul {
   margin-left: 20px;
+}
+
+/* Icons */
+.icon {
+  width: 36px;
+  height: 36px;
+  vertical-align: middle;
+  border-radius: 6px;
+  margin-right: 6px;
+  transition: 0.2s ease;
+}
+.icon:hover {
+  filter: drop-shadow(0 0 6px #c9aa71);
+  transform: scale(1.05);
+}
+
+/* Rune layout */
+.rune-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 16px;
+  margin-top: 15px;
+}
+.rune-row {
+  display: flex;
+  gap: 14px;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+.rune-row img {
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  transition: 0.3s;
+  border: 2px solid transparent;
+}
+.rune-row img:hover {
+  border-color: #c9aa71;
+  transform: scale(1.1);
 }
 
 /* Build & Runes Cards */
@@ -124,6 +166,7 @@ header {
 }
 .card strong { display: block; margin-bottom: 6px; color: #e0c77b; }
 
+/* Build flow */
 .build-flow {
   display: flex;
   flex-wrap: wrap;
@@ -137,7 +180,7 @@ header {
   border: 1px solid #c9aa71;
   border-radius: 8px;
   padding: 10px 12px;
-  min-width: 100px;
+  min-width: 120px;
   text-align: center;
 }
 .build-flow span {
@@ -204,13 +247,17 @@ sectionSelect.addEventListener('change', () => {
   if(value === "Runes"){
     content = `
       <h3>Runes</h3>
-      <div class="card-container">
-        <div class="card"><strong>Keystone</strong>Dark Harvest</div>
-        <div class="card"><strong>Domination</strong>Sudden Impact</div>
-        <div class="card"><strong>Domination</strong>Grisly Momentos</div>
-        <div class="card"><strong>Domination</strong>Treasure Hunter</div>
-        <div class="card"><strong>Inspiration</strong>Magical Footwear</div>
-        <div class="card"><strong>Inspiration</strong>Jack of All Trades</div>
+      <div class="rune-container">
+        <div class="rune-row">
+          <img src="https://ddragon.leagueoflegends.com/cdn/img/perk-images/Styles/Domination/DarkHarvest/DarkHarvest.png" title="Dark Harvest">
+          <img src="https://ddragon.leagueoflegends.com/cdn/img/perk-images/Styles/Domination/SuddenImpact/SuddenImpact.png" title="Sudden Impact">
+          <img src="https://ddragon.leagueoflegends.com/cdn/img/perk-images/Styles/Domination/EyeballCollection/EyeballCollection.png" title="Eyeball Collection">
+          <img src="https://ddragon.leagueoflegends.com/cdn/img/perk-images/Styles/Domination/TreasureHunter/TreasureHunter.png" title="Treasure Hunter">
+        </div>
+        <div class="rune-row">
+          <img src="https://ddragon.leagueoflegends.com/cdn/img/perk-images/Styles/Inspiration/MagicalFootwear/MagicalFootwear.png" title="Magical Footwear">
+          <img src="https://ddragon.leagueoflegends.com/cdn/img/perk-images/Styles/Inspiration/CosmicInsight/CosmicInsight.png" title="Cosmic Insight">
+        </div>
       </div>
     `;
   }
@@ -219,14 +266,13 @@ sectionSelect.addEventListener('change', () => {
     content = `
       <h3>Build</h3>
       <div class="build-flow">
-        <div>Green Pet</div><span>→</span>
-        <div>Dark Seal</div><span>→</span>
-        <div>Nashor's Tooth</div><span>→</span>
-        <div>Mercury's Treads</div><span>→</span>
-        <div>Lich Bane</div><span>→</span>
-        <div>Rabadon's Deathcap</div><span>→</span>
-        <div>Zhonya's Hourglass</div><span>→</span>
-        <div>Void Staff</div>
+        <div><img src="https://ddragon.leagueoflegends.com/cdn/14.21.1/img/item/1082.png" class="icon">Dark Seal</div><span>→</span>
+        <div><img src="https://ddragon.leagueoflegends.com/cdn/14.21.1/img/item/3115.png" class="icon">Nashor's Tooth</div><span>→</span>
+        <div><img src="https://ddragon.leagueoflegends.com/cdn/14.21.1/img/item/3111.png" class="icon">Mercury's Treads</div><span>→</span>
+        <div><img src="https://ddragon.leagueoflegends.com/cdn/14.21.1/img/item/3100.png" class="icon">Lich Bane</div><span>→</span>
+        <div><img src="https://ddragon.leagueoflegends.com/cdn/14.21.1/img/item/3089.png" class="icon">Rabadon's Deathcap</div><span>→</span>
+        <div><img src="https://ddragon.leagueoflegends.com/cdn/14.21.1/img/item/3157.png" class="icon">Zhonya's Hourglass</div><span>→</span>
+        <div><img src="https://ddragon.leagueoflegends.com/cdn/14.21.1/img/item/3135.png" class="icon">Void Staff</div>
       </div>
     `;
   }
@@ -323,6 +369,7 @@ sectionSelect.addEventListener('change', () => {
 
 </body>
 </html>
+
 
 
 
