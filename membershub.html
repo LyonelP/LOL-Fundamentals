@@ -43,15 +43,9 @@ header {
 /* Card Grid */
 .card-grid {
   display: grid;
-  grid-template-columns: repeat(3, 1fr); /* fixed 3 columns */
   gap: 25px;
   justify-items: center;
-  margin-bottom: 30px;
-}
-
-/* Second row adjustment */
-.card-grid.second-row {
-  grid-template-columns: repeat(2, 1fr); /* two cards in second row */
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
 }
 
 /* Individual Card */
@@ -60,16 +54,15 @@ header {
   border: 2px solid #c9aa71;
   border-radius: 12px;
   padding: 20px 15px;
-  min-height: 220px; /* fixed height to unify all cards */
+  min-height: 180px;
   display: flex;
   flex-direction: column;
-  justify-content: flex-end;
+  justify-content: center; /* vertically center text */
   transition: transform 0.3s, box-shadow 0.3s;
   text-decoration: none;
   color: #e6edf3;
   position: relative;
   overflow: hidden;
-  width: 100%; /* ensures consistent sizing across grid */
 }
 
 /* Card hover effect */
@@ -180,9 +173,14 @@ footer a:hover {
   background: #ff5959;
 }
 
-@media (max-width: 900px) {
-  .card-grid { grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); }
-  .card-grid.second-row { grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); }
+/* Desktop grid fix: first row 3 cards, second row 2 cards */
+@media(min-width: 900px){
+  .card-grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+  .tierlist, .fundamentals {
+    justify-self: center;
+  }
 }
 </style>
 </head>
@@ -194,7 +192,6 @@ footer a:hover {
 <h2>Your Member Hub</h2>
 <p>Choose a section to explore:</p>
 
-<!-- First row: Guides -->
 <div class="card-grid">
   <a href="matchuphub.html" class="card diana-matchups">
     <h3>Diana Mid Matchups</h3>
@@ -208,12 +205,9 @@ footer a:hover {
 
   <a href="ekkoguide.html" class="card ekko-guide">
     <h3>Ekko Guide</h3>
-    <p>Comprehensive guide for mastering Ekko Jungle, including combos, mechanics, and advanced tips.</p>
+    <p>Complete guide to playing Ekko Jungle, including combos, pathing, and advanced mechanics.</p>
   </a>
-</div>
 
-<!-- Second row: Fundamentals and Tierlist -->
-<div class="card-grid second-row">
   <a href="skills.html" class="card fundamentals">
     <h3>Fundamentals</h3>
     <p>Learn core League mechanics that every player should understand to improve faster.</p>
