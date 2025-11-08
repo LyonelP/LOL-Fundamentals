@@ -7,8 +7,10 @@
 <style>
   body { margin: 0; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; background: #0d1117; color: #e6edf3; line-height: 1.4; }
   header { background: #161b22; padding: 10px 20px; text-align: center; font-size: 28px; font-weight: bold; color: #58a6ff; }
-  .back-link { display: block; margin: 20px auto 30px auto; text-align: center; color: #F9D949; text-decoration: none; font-weight: bold; }
-  .back-link:hover { text-decoration: underline; }
+  
+  .back-link { display: block; margin: 20px auto 30px auto; text-align: center; color: #c9aa71; /* gold color */ text-decoration: none; font-weight: bold; padding: 8px 15px; border: 1px solid #c9aa71; border-radius: 5px; width: fit-content; }
+  .back-link:hover { background: #c9aa71; color: #0d1117; }
+
   .matchup-container { display: flex; max-width: 900px; margin: -15px auto 0 auto; gap: 15px; padding: 0 20px 10px 20px; }
   .matchup-left { display: flex; align-items: center; gap: 10px; flex: 0 0 auto; }
   .matchup-left img { width: 80px; height: 80px; border-radius: 8px; }
@@ -18,13 +20,18 @@
   .matchup-right ul { padding-left: 20px; margin: 0; }
   .matchup-right li { margin-bottom: 6px; }
   footer { text-align: center; padding: 15px 10px; font-size: 14px; color: #8b949e; }
-  @media (max-width: 600px) { .matchup-container { flex-direction: column; align-items: center; padding: 10px; margin-top: -15px; } .matchup-left { justify-content: center; } .matchup-right { text-align: center; margin-top: 0px; } }
+
+  @media (max-width: 600px) { 
+    .matchup-container { flex-direction: column; align-items: center; padding: 10px; margin-top: -15px; } 
+    .matchup-left { justify-content: center; } 
+    .matchup-right { text-align: center; margin-top: 0px; } 
+  }
 </style>
 </head>
 <body>
 <header>Diana Mid Matchup – Annie</header>
 
-<a href="matchuphub.html" class="back-link">&larr; Back to Matchup Hub</a>
+<a href="matchuphub.html" id="backLink" class="back-link">&larr; Back to Matchup Hub</a>
 
 <div class="matchup-container">
   <div class="matchup-left">
@@ -44,5 +51,19 @@
 </div>
 
 <footer>© 2025 LoL Fundamentals · Contact: arcsecond@lolfundamentals.com</footer>
+
+<script>
+const backLink = document.getElementById('backLink');
+
+// Require login to access matchup hub
+backLink.addEventListener('click', function(e) {
+  if (localStorage.getItem('lolfundamentals_logged_in') !== 'true') {
+    e.preventDefault(); // stop navigation
+    alert('You must be logged in to access the Matchup Hub.');
+  }
+});
+</script>
 </body>
 </html>
+
+
