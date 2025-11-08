@@ -1,88 +1,171 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
+<meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Diana Guide – Coming Soon</title>
+<title>Diana Guide – LoL Fundamentals</title>
 <style>
-  body {
-    margin: 0;
-    font-family: "Beaufort for LOL", Arial, Helvetica, sans-serif;
-    background: #0a0f14;
-    color: #e6edf3;
-    text-align: center;
-  }
+body {
+  margin: 0;
+  font-family: 'Beaufort for LOL', Arial, Helvetica, sans-serif;
+  background: #0a0f14;
+  color: #e6edf3;
+  text-align: center;
+}
 
-  header {
-    background: #0d1117;
-    border-bottom: 2px solid #c9aa71;
-    padding: 20px 10px;
-    font-weight: bold;
-    font-size: 28px;
-    text-transform: uppercase;
-    color: #c9aa71;
-    letter-spacing: 1px;
-  }
+/* Header */
+header {
+  background: #0d1117;
+  border-bottom: 2px solid #c9aa71;
+  padding: 20px 10px;
+  font-weight: bold;
+  font-size: 26px;
+  text-transform: uppercase;
+  color: #c9aa71;
+  letter-spacing: 1px;
+}
 
-  .back-button {
-    display: inline-block;
-    margin: 20px auto 10px;
-    padding: 10px 20px;
-    background: linear-gradient(135deg, #c9aa71, #e0c77b);
-    color: #000;
-    text-decoration: none;
-    border-radius: 8px;
-    font-weight: bold;
-    transition: all 0.3s;
-    box-shadow: 0 0 10px rgba(201,170,113,0.5);
-  }
-  .back-button::before {
-    content: "← ";
-  }
-  .back-button:hover {
-    background: linear-gradient(135deg, #e6c97f, #f0d88b);
-    box-shadow: 0 0 15px rgba(255,215,0,0.8);
-  }
+/* Back button */
+.back-button {
+  display: inline-block;
+  margin: 20px auto 10px;
+  padding: 10px 20px;
+  background: linear-gradient(135deg, #c9aa71, #e0c77b);
+  color: #000;
+  text-decoration: none;
+  border-radius: 8px;
+  font-weight: bold;
+  transition: all 0.3s;
+  box-shadow: 0 0 10px rgba(201,170,113,0.5);
+}
+.back-button::before { content: "← "; }
+.back-button:hover {
+  background: linear-gradient(135deg, #e6c97f, #f0d88b);
+  box-shadow: 0 0 15px rgba(255,215,0,0.8);
+}
 
-  main {
-    max-width: 800px;
-    margin: 50px auto;
-    padding: 0 10px;
-  }
+/* Section selector */
+#section-select-container {
+  margin: 20px auto;
+}
+#section-select {
+  padding: 10px 15px;
+  font-size: 16px;
+  border-radius: 6px;
+  border: none;
+  background: #0f1722;
+  color: #c9aa71;
+  cursor: pointer;
+}
 
-  h1 {
-    font-size: 36px;
-    color: #c9aa71;
-    margin-bottom: 20px;
-  }
+/* Section display */
+#section-info {
+  margin: 30px auto;
+  max-width: 900px;
+  background: #0d1117;
+  border: 1px solid #2f81f7;
+  padding: 20px;
+  border-radius: 10px;
+  text-align: left;
+  color: #c9aa71;
+  min-height: 200px;
+}
 
-  p {
-    font-size: 20px;
-    color: #e6edf3;
-    margin-bottom: 40px;
-  }
+/* Hover effect */
+#section-info:hover {
+  box-shadow: 0 0 15px rgba(47,129,247,0.5);
+}
 
-  .image-placeholder {
-    width: 150px;
-    height: 150px;
-    margin: 0 auto 30px;
-    background: url('https://ddragon.leagueoflegends.com/cdn/14.23.1/img/champion/Diana.png') no-repeat center;
-    background-size: contain;
-    opacity: 0.8;
-  }
+@media (max-width: 500px) {
+  header { font-size: 22px; padding: 15px 5px; }
+  #section-select { font-size: 14px; padding: 8px 10px; }
+}
 </style>
 </head>
 <body>
 
-<header>The Ultimate Diana Guide</header>
+<header>Diana Mid Lane Guide</header>
 
 <a href="membershub.html" class="back-button">Back to Members Hub</a>
 
-<main>
-  <div class="image-placeholder"></div>
-  <h1>Coming Soon!</h1>
-  <p>The Diana guide is still in the works!</p>
-</main>
+<div id="section-select-container">
+  <select id="section-select">
+    <option disabled selected>Pick a section</option>
+  </select>
+</div>
+
+<div id="section-info">
+  <p>Select a section above to view details.</p>
+</div>
+
+<script>
+// Require login
+if (localStorage.getItem('lolfundamentals_logged_in') !== 'true') {
+  window.location.href = 'index.html';
+}
+
+// Diana guide sections
+const sections = [
+  "Introduction","Runes","Build","Summoner Spells","Abilities","Combos","Laning","Warding",
+  "Farming/Pushing","Teamfighting","Splitpushing","Closing Out the Game","Threats and Synergies",
+  "Pros and Cons","Extra Tips"
+];
+
+// Populate select dropdown
+const select = document.getElementById('section-select');
+sections.forEach(section => {
+  const option = document.createElement('option');
+  option.value = section;
+  option.textContent = section;
+  select.appendChild(option);
+});
+
+// Show selected section content
+select.addEventListener('change', () => {
+  const info = document.getElementById('section-info');
+  let content = `<h2>${select.value}</h2><p>Coming soon!</p>`;
+
+  // Add example content per section (replace later with full guide)
+  switch(select.value){
+    case "Introduction":
+      content = `<h2>Introduction</h2><p>Diana is a burst mage assassin with high all-in potential and strong scaling. This guide covers everything from laning to late-game strategies.</p>`;
+      break;
+    case "Runes":
+      content = `<h2>Runes</h2><ul><li>Primary: Electrocute or Conqueror</li><li>Secondary: Sorcery (Nimbus Cloak, Celerity)</li><li>Stat Shards: Attack Speed, Adaptive Force, Armor/Magic Resist</li></ul>`;
+      break;
+    case "Build":
+      content = `<h2>Build</h2><ul><li>Core: Night Harvester, Zhonya's Hourglass</li><li>Situational: Banshee’s Veil, Void Staff, Morellonomicon</li><li>Boots: Sorcerer's Shoes</li></ul>`;
+      break;
+    case "Abilities":
+      content = `<h2>Abilities</h2><ul><li>Passive – Moonsilver Blade</li><li>Q – Crescent Strike</li><li>W – Pale Cascade</li><li>E – Lunar Rush</li><li>R – Moonfall</li></ul>`;
+      break;
+    case "Combos":
+      content = `<h2>Combos</h2><ul><li>Standard: Q → W → E → Auto → R</li><li>All-in: W → E → Q → R → Ignite</li></ul>`;
+      break;
+    case "Laning":
+      content = `<h2>Laning</h2><p>Focus on farming and poking with Q. Engage after using your W shield and avoid extended trades if abilities are down.</p>`;
+      break;
+    case "Farming/Pushing":
+      content = `<h2>Farming/Pushing</h2><p>Use Q + W to clear waves efficiently. Push only when enemy mid is missing or after vision is secured.</p>`;
+      break;
+    case "Teamfighting":
+      content = `<h2>Teamfighting</h2><p>Flank using R and engage on squishy targets. Avoid getting locked down by CC.</p>`;
+      break;
+    case "Splitpushing":
+      content = `<h2>Splitpushing</h2><p>Diana can quickly take towers with W + E. Only split when your team can handle 4v5 scenarios.</p>`;
+      break;
+    case "Extra Tips":
+      content = `<h2>Extra Tips</h2><ul><li>Track enemy cooldowns before engaging.</li><li>Use minions to gap close with E.</li><li>Coordinate with jungler for mid-lane all-ins.</li></ul>`;
+      break;
+    default:
+      content = `<h2>${select.value}</h2><p>Coming soon!</p>`;
+  }
+
+  info.innerHTML = content;
+});
+</script>
 
 </body>
 </html>
+
+
