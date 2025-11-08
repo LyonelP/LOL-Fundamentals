@@ -95,6 +95,10 @@ header {
   line-height: 1.6;
 }
 
+#section-info ul {
+  margin-left: 20px;
+}
+
 @media (max-width: 600px) {
   #section-select { font-size: 14px; padding: 8px 10px; }
 }
@@ -148,11 +152,30 @@ sectionSelect.addEventListener('change', () => {
   }
 
   if(value === "Runes"){
-    content = `<h2>Runes</h2><p>Coming soon!</p>`;
+    content = `
+      <h2>Runes</h2>
+      <ul>
+        <li><strong>Keystone:</strong> Dark Harvest</li>
+        <li><strong>Domination:</strong> Sudden Impact, Grisly Momentos, Treasure Hunter</li>
+        <li><strong>Inspiration:</strong> Magical Footwear, Jack of All Trades</li>
+      </ul>
+    `;
   }
 
   if(value === "Build"){
-    content = `<h2>Build</h2><p>Coming soon!</p>`;
+    content = `
+      <h2>Build</h2>
+      <ul>
+        <li>Green Pet (starting item)</li>
+        <li>Dark Seal</li>
+        <li>Nashor's Tooth</li>
+        <li>Mercury's Treads</li>
+        <li>Lich Bane</li>
+        <li>Rabadon's Deathcap</li>
+        <li>Zhonya's Hourglass</li>
+        <li>Void Staff</li>
+      </ul>
+    `;
   }
 
   if(value === "Summoner Spells"){
@@ -249,3 +272,5 @@ sectionSelect.addEventListener('change', () => {
 
 </body>
 </html>
+
+
