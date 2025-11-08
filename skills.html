@@ -130,23 +130,57 @@ skills.forEach(skill => {
 // Show selected skill
 select.addEventListener('change', () => {
   const skillInfo = document.getElementById('skill-info');
+  let content = `<h2>${select.value}</h2><p>Coming soon!</p>`;
 
-  if (select.value === "Laning") {
-    skillInfo.innerHTML = `
-      <h2>Laning</h2>
-      <p>Learn all about effective laning techniques, wave management, and matchup knowledge.</p>
-      <iframe width="100%" height="480" src="https://www.youtube.com/embed/WUi9pOT6wYc" 
-      title="Laning Skill Video" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-    `;
-  } else {
-    skillInfo.innerHTML = `<h2>${select.value}</h2><p>Coming soon!</p>`;
+  // Special cases with video embeds
+  switch(select.value) {
+    case "Laning":
+      content = `
+        <h2>Laning</h2>
+        <p>Learn all about effective laning techniques, wave management, and matchup knowledge.</p>
+        <iframe width="100%" height="480" src="https://www.youtube.com/embed/WUi9pOT6wYc" 
+        title="Laning Skill Video" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+      `;
+      break;
+    case "Farming":
+      content = `
+        <h2>Farming</h2>
+        <p>Improve your CSing and gold income efficiently.</p>
+        <iframe width="100%" height="480" src="https://www.youtube.com/embed/BhTvcMmCY_o?start=22" 
+        title="Farming Skill Video" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+      `;
+      break;
+    case "Roaming":
+      content = `
+        <h2>Roaming</h2>
+        <p>Learn when and how to roam effectively to help your team.</p>
+        <iframe width="100%" height="480" src="https://www.youtube.com/embed/th7kVKYUgIk" 
+        title="Roaming Skill Video" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+      `;
+      break;
+    case "Split Pushing":
+      content = `
+        <h2>Split Pushing</h2>
+        <p>Master splitpushing to apply pressure and create advantages.</p>
+        <iframe width="100%" height="480" src="https://www.youtube.com/embed/th7kVKYUgIk" 
+        title="Split Pushing Skill Video" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+      `;
+      break;
+    case "Wave Control":
+      content = `
+        <h2>Wave Control</h2>
+        <p>Learn how to manipulate waves to gain advantages in lane.</p>
+        <iframe width="100%" height="480" src="https://www.youtube.com/embed/edDOUuxFaH8" 
+        title="Wave Control Skill Video" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+      `;
+      break;
   }
+
+  skillInfo.innerHTML = content;
 });
 </script>
 
 </body>
 </html>
-
-
 
 
