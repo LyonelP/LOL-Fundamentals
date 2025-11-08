@@ -8,7 +8,8 @@
     body {
       margin: 0;
       font-family: 'Beaufort for LOL', Arial, Helvetica, sans-serif;
-      background: url('https://example.com/winterblessed‑diana‑splash.jpg') no-repeat center center fixed;
+      /* Using Dark Valkyrie Diana splash as background */
+      background: url('https://ddragon.leagueoflegends.com/cdn/img/champion/splash/Diana_8.jpg') no-repeat center center fixed;
       background-size: cover;
       color: #e6edf3;
       text-align: center;
@@ -19,7 +20,7 @@
       position: fixed;
       top: 0; left: 0;
       width: 100%; height: 100%;
-      background: rgba(10,15,20,0.80);
+      background: rgba(10,15,20,0.85);
       z-index: -1;
     }
     header {
@@ -91,87 +92,88 @@
 </head>
 <body>
 
-<header>Diana – Members Hub Guide</header>
-<a href="membershub.html" class="back-button">Back to Members Hub</a>
+  <header>Diana – Members Hub Guide</header>
+  <a href="membershub.html" class="back-button">Back to Members Hub</a>
 
-<div id="section-select-container">
-  <select id="section-select">
-    <option disabled selected>Select a section</option>
-    <option>Intro</option>
-    <option>Runes</option>
-    <option>Build</option>
-    <option>Summoner Spells</option>
-    <option>Abilities</option>
-    <option>Combos</option>
-    <option>Laning</option>
-    <option>Warding</option>
-    <option>Farming / Pushing</option>
-    <option>Teamfighting</option>
-    <option>Splitpushing</option>
-    <option>Closing Out The Game</option>
-    <option>Threats & Synergies</option>
-    <option>Pros & Cons</option>
-    <option>Extra Tips</option>
-  </select>
-</div>
+  <div id="section-select-container">
+    <select id="section-select">
+      <option disabled selected>Select a section</option>
+      <option>Intro</option>
+      <option>Runes</option>
+      <option>Build</option>
+      <option>Summoner Spells</option>
+      <option>Abilities</option>
+      <option>Combos</option>
+      <option>Laning</option>
+      <option>Warding</option>
+      <option>Farming / Pushing</option>
+      <option>Teamfighting</option>
+      <option>Splitpushing</option>
+      <option>Closing Out The Game</option>
+      <option>Threats & Synergies</option>
+      <option>Pros & Cons</option>
+      <option>Extra Tips</option>
+    </select>
+  </div>
 
-<div id="section-info">
-  <p>Select a section from above to view details.</p>
-</div>
+  <div id="section-info">
+    <p>Select a section from above to view details.</p>
+  </div>
 
-<script>
-  if (localStorage.getItem('lolfundamentals_logged_in') !== 'true') {
-    window.location.href = 'index.html';
-  }
-
-  const sectionSelect = document.getElementById('section-select');
-  const sectionInfo   = document.getElementById('section-info');
-
-  sectionSelect.addEventListener('change', () => {
-    const value   = sectionSelect.value;
-    let content   = `<h2>${value}</h2><p>Coming soon!</p>`;
-
-    if (value === "Runes") {
-      content = `
-      <ul class="rune-list">
-        <li>
-          <img src="https://upload.wikimedia.org/wikipedia/en/e/e2/Grasp_of_the_Undying_icon.png" alt="Grasp Of The Undying">
-          <p><strong>Grasp Of The Undying:</strong> This is the only rune and tree that allows Diana to play the way she’s intended to be played. It’s the rune that gives her the potential to win every matchup while also not falling off nearly as hard as another option like phase rush which is her second best tree.</p>
-        </li>
-        <li>
-          <img src="https://upload.wikimedia.org/wikipedia/en/5/56/Shield_Bash_icon.png" alt="Shield Bash">
-          <p><strong>Shield Bash:</strong> Will out damage most other runes, and Diana can proc it twice with W.</p>
-        </li>
-        <li>
-          <img src="https://upload.wikimedia.org/wikipedia/en/9/9a/Bone_Plating_icon.png" alt="Bone Plating">
-          <p><strong>Bone Plating:</strong> Best sustain tool in lane. Runes like Aery, Scorch, First Strike, and Comet all proc multiple plates. This also gives you the best chance of surviving a gank and winning a duel later on in the game.</p>
-        </li>
-        <li>
-          <img src="https://upload.wikimedia.org/wikipedia/en/1/1d/Second_Wind_icon.png" alt="Second Wind">
-          <p><strong>Second Wind:</strong> Recently nerfed and only worth considering against Yasuo and Yone. Yasuo and Yone proc Bone Plating extremely easily with Q and will only get an extended trade with Lethal Tempo early. Even in these matchups I still often prefer Bone Plating because of the better scaling and the ability to survive ganks better.</p>
-        </li>
-        <li>
-          <img src="https://upload.wikimedia.org/wikipedia/en/8/8b/Overgrowth_icon.png" alt="Overgrowth">
-          <p><strong>Overgrowth:</strong> Best way for Diana to gain health besides Grasp since the build doesn't include any health items. Diana requires health to engage melee champions and she has a 9% bonus health ratio on the shield strength that can be proc'd twice for a total ratio of 18%.</p>
-        </li>
-        <li>
-          <img src="https://upload.wikimedia.org/wikipedia/en/2/2a/Manaflow_Band_icon.png" alt="Manaflow Band">
-          <p><strong>Manaflow Band:</strong> This rune perfectly covers the amount of mana Diana requires to play the game. Without Manaflow Band you won’t be able to take full advantage of Diana’s side lane pressure. Diana should always be looking to take the enemy jungler’s camps especially now while her passive monster ratio is at 300%. Without Manaflow Band you won’t be able to deal with any champion that has resists since multiple damage rotations will be necessary to kill the enemy.</p>
-        </li>
-        <li>
-          <img src="https://upload.wikimedia.org/wikipedia/en/3/33/Transcendence_icon.png" alt="Transcendence">
-          <p><strong>Transcendence:</strong> This is the only way for Diana to gain haste besides Cryptobloom later on. It’s the perfect balance of having a little haste which is more efficient at lower values and gaining big cooldown reductions at crucial moments in team fights.</p>
-        </li>
-      </ul>
-      `;
+  <script>
+    if (localStorage.getItem('lolfundamentals_logged_in') !== 'true') {
+      window.location.href = 'index.html';
     }
 
-    sectionInfo.innerHTML = content;
-  });
-</script>
+    const sectionSelect = document.getElementById('section-select');
+    const sectionInfo   = document.getElementById('section-info');
+
+    sectionSelect.addEventListener('change', () => {
+      const value = sectionSelect.value;
+      let content = `<h2>${value}</h2><p>Coming soon!</p>`;
+
+      if (value === "Runes") {
+        content = `
+        <ul class="rune-list">
+          <li>
+            <img src="https://ddragon.leagueoflegends.com/cdn/img/perk-images/Styles/Resolve/GraspOfTheUndying/GraspOfTheUndying.png" alt="Grasp Of The Undying">
+            <p><strong>Grasp Of The Undying:</strong> This is the only rune and tree that allows Diana to play the way she’s intended to be played. It’s the rune that gives her the potential to win every matchup while also not falling off nearly as hard as another option like phase rush which is her second best tree.</p>
+          </li>
+          <li>
+            <img src="https://ddragon.leagueoflegends.com/cdn/img/perk-images/Styles/Resolve/ShieldBash/ShieldBash.png" alt="Shield Bash">
+            <p><strong>Shield Bash:</strong> Will out damage most other runes, and Diana can proc it twice with W.</p>
+          </li>
+          <li>
+            <img src="https://ddragon.leagueoflegends.com/cdn/img/perk-images/Styles/Resolve/BonePlating/BonePlating.png" alt="Bone Plating">
+            <p><strong>Bone Plating:</strong> Best sustain tool in lane. Runes like Aery, Scorch, First Strike, and Comet all proc multiple plates. This also gives you the best chance of surviving a gank and winning a duel later on in the game.</p>
+          </li>
+          <li>
+            <img src="https://ddragon.leagueoflegends.com/cdn/img/perk-images/Styles/Resolve/SecondWind/SecondWind.png" alt="Second Wind">
+            <p><strong>Second Wind:</strong> Recently nerfed and only worth considering against Yasuo and Yone. Yasuo and Yone proc Bone Plating extremely easily with Q and will only get an extended trade with Lethal Tempo early. Even in these matchups I still often prefer Bone Plating because of the better scaling and the ability to survive ganks better.</p>
+          </li>
+          <li>
+            <img src="https://ddragon.leagueoflegends.com/cdn/img/perk-images/Styles/Resolve/Overgrowth/Overgrowth.png" alt="Overgrowth">
+            <p><strong>Overgrowth:</strong> Best way for Diana to gain health besides Grasp since the build doesn't include any health items. Diana requires health to engage melee champions and she has a 9% bonus health ratio on the shield strength that can be proc’d twice for a total ratio of 18%.</p>
+          </li>
+          <li>
+            <img src="https://ddragon.leagueoflegends.com/cdn/img/perk-images/Styles/Precision/ManaflowBand/ManaflowBand.png" alt="Manaflow Band">
+            <p><strong>Manaflow Band:</strong> This rune perfectly covers the amount of mana Diana requires to play the game. Without Manaflow Band you won’t be able to take full advantage of Diana’s side lane pressure. Diana should always be looking to take the enemy jungler’s camps especially now while her passive monster ratio is at 300%. Without Manaflow Band you won’t be able to deal with any champion that has resists since multiple damage rotations will be necessary to kill the enemy.</p>
+          </li>
+          <li>
+            <img src="https://ddragon.leagueoflegends.com/cdn/img/perk-images/Styles/Precision/Transcendence/Transcendence.png" alt="Transcendence">
+            <p><strong>Transcendence:</strong> This is the only way for Diana to gain haste besides Cryptobloom later on. It’s the perfect balance of having a little haste which is more efficient at lower values and gaining big cooldown reductions at crucial moments in team fights.</p>
+          </li>
+        </ul>
+        `;
+      }
+
+      sectionInfo.innerHTML = content;
+    });
+  </script>
 
 </body>
 </html>
+
 
 
 
