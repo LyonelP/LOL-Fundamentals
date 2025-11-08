@@ -10,9 +10,11 @@ body {
   font-family: "Beaufort for LOL", Arial, Helvetica, sans-serif;
   background: #0a0f14;
   color: #e6edf3;
-  line-height: 1.6;
+  line-height: 1.4;
   text-align: center;
 }
+
+/* Header */
 header {
   background: linear-gradient(90deg, #0a0f14, #1b2838);
   border-bottom: 2px solid #c9aa71;
@@ -24,57 +26,90 @@ header {
   color: #c9aa71;
 }
 
-/* Gold Back Button with arrow */
+/* Back Button */
 .back-button {
-  display: inline-block;
+  display: block;
+  width: max-content;
   margin: 20px auto 15px auto;
-  padding: 10px 25px;
+  padding: 10px 20px;
   background: linear-gradient(135deg, #c9aa71, #e0c77b);
   color: #000;
   text-decoration: none;
   border-radius: 8px;
   font-weight: bold;
   transition: all 0.3s;
+  box-shadow: 0 0 10px rgba(201,170,113,0.5);
 }
 .back-button::before { content: "← "; }
 .back-button:hover {
   background: linear-gradient(135deg, #e6c97f, #f0d88b);
+  box-shadow: 0 0 15px rgba(255,215,0,0.8);
 }
 
+/* Role Dropdown */
 #roleSelect {
-  margin: 10px 0 25px 0;
-  padding: 8px 12px;
+  margin: 15px auto 30px auto;
+  padding: 8px 15px;
   font-size: 16px;
   border-radius: 6px;
   border: none;
-  background: #161b22;
-  color: #e6edf3;
+  cursor: pointer;
 }
 
-.tierlist {
+/* Champion Cards */
+.cards {
   display: flex;
   flex-wrap: wrap;
-  max-width: 1000px;
-  margin: 0 auto 40px auto;
   justify-content: center;
+  gap: 20px;
+  max-width: 1000px;
+  margin: auto;
 }
-.champion-card {
-  width: 100px;
+.card {
+  width: 120px;
+  border-radius: 10px;
+  background: #161b22;
+  border: 2px solid #2f81f7;
+  padding: 10px;
+  box-shadow: 0 0 8px rgba(47,129,247,0.2);
   text-align: center;
-  font-size: 0.85em;
-  margin: 8px;
+  cursor: pointer;
+  transition: transform 0.2s, box-shadow 0.2s;
 }
-.champion-card img {
-  width: 80px;
-  height: 80px;
+.card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 0 15px rgba(47,129,247,0.5);
+}
+.card img {
+  width: 100px;
+  height: 100px;
   border-radius: 8px;
-  display: block;
-  margin: 0 auto 5px auto;
 }
-.rank-badge {
+.card .champ-name {
+  margin: 5px 0 0 0;
   font-weight: bold;
+  font-size: 14px;
+}
+.card .champ-rank {
+  font-size: 13px;
+  color: #c9aa71;
   margin-top: 2px;
 }
+
+/* Footer */
+footer {
+  text-align: center;
+  padding: 25px;
+  font-size: 14px;
+  color: #8b949e;
+  background: #0a0f14;
+  border-top: 1px solid #1f2937;
+}
+footer a {
+  color: #c9aa71;
+  text-decoration: none;
+}
+footer a:hover { text-decoration: underline; }
 </style>
 </head>
 <body>
@@ -84,6 +119,7 @@ header {
 <a href="membershub.html" class="back-button">Back to Members Hub</a>
 
 <select id="roleSelect">
+  <option value="all">All Roles</option>
   <option value="Top">Top</option>
   <option value="Jungle">Jungle</option>
   <option value="Mid">Mid</option>
@@ -91,7 +127,13 @@ header {
   <option value="Support">Support</option>
 </select>
 
-<div id="tierlistContainer" class="tierlist"></div>
+<div class="cards" id="championCards">
+  <!-- Champion cards will be injected here -->
+</div>
+
+<footer>
+© 2025 LoL Fundamentals · Contact: <a href="mailto:arcsecond@lolfundamentals.com">arcsecond@lolfundamentals.com</a>
+</footer>
 
 <script>
 // Require login
@@ -99,219 +141,116 @@ if(localStorage.getItem('lolfundamentals_logged_in') !== 'true'){
   window.location.href = 'index.html';
 }
 
-// CSV URL
-const csvURL = "https://docs.google.com/spreadsheets/d/e/2PACX-1vRtIJeggpJ6cjGJt0OOds4OZDuHMMUxHCWzMiU1Bd4gJ8EvfZMXPE9p0X1K3yyeZs7bpFyQZHhHpnsu/pub?output=csv";
+// Champion data
+const champions = [
+  {name:"Aatrox", role:"Top"}, {name:"Ahri", role:"Mid"}, {name:"Akali", role:"Mid"},
+  {name:"Akshan", role:"ADC"}, {name:"Alistar", role:"Support"}, {name:"Amumu", role:"Jungle"},
+  {name:"Anivia", role:"Mid"}, {name:"Annie", role:"Mid"}, {name:"Aphelios", role:"ADC"},
+  {name:"Ashe", role:"ADC"}, {name:"Aurelion Sol", role:"Mid"}, {name:"Azir", role:"Mid"},
+  {name:"Bard", role:"Support"}, {name:"Blitzcrank", role:"Support"}, {name:"Brand", role:"Mid"},
+  {name:"Braum", role:"Support"}, {name:"Caitlyn", role:"ADC"}, {name:"Camille", role:"Top"},
+  {name:"Cassiopeia", role:"Mid"}, {name:"Cho'Gath", role:"Top"}, {name:"Corki", role:"ADC"},
+  {name:"Diana", role:"Mid"}, {name:"Dr. Mundo", role:"Top"}, {name:"Draven", role:"ADC"},
+  {name:"Ekko", role:"Mid"}, {name:"Elise", role:"Jungle"}, {name:"Evelynn", role:"Jungle"},
+  {name:"Ezreal", role:"ADC"}, {name:"Fiddlesticks", role:"Jungle"}, {name:"Fiora", role:"Top"},
+  {name:"Fizz", role:"Mid"}, {name:"Galio", role:"Mid"}, {name:"Gangplank", role:"Top"},
+  {name:"Garen", role:"Top"}, {name:"Gnar", role:"Top"}, {name:"Gragas", role:"Jungle"},
+  {name:"Graves", role:"Jungle"}, {name:"Gwen", role:"Top"}, {name:"Hecarim", role:"Jungle"},
+  {name:"Heimerdinger", role:"Top"}, {name:"Illaoi", role:"Top"}, {name:"Irelia", role:"Top"},
+  {name:"Ivern", role:"Jungle"}, {name:"Janna", role:"Support"}, {name:"Jarvan IV", role:"Jungle"},
+  {name:"Jax", role:"Top"}, {name:"Jayce", role:"Top"}, {name:"Jhin", role:"ADC"},
+  {name:"Jinx", role:"ADC"}, {name:"Kaisa", role:"ADC"}, {name:"Kalista", role:"ADC"},
+  {name:"Karma", role:"Support"}, {name:"Karthus", role:"Mid"}, {name:"Kassadin", role:"Mid"},
+  {name:"Katarina", role:"Mid"}, {name:"Kayle", role:"Top"}, {name:"Kayn", role:"Jungle"},
+  {name:"Kennen", role:"Top"}, {name:"Kha'Zix", role:"Jungle"}, {name:"Kindred", role:"Jungle"},
+  {name:"Kled", role:"Top"}, {name:"Kog'Maw", role:"ADC"}, {name:"LeBlanc", role:"Mid"},
+  {name:"Lee Sin", role:"Jungle"}, {name:"Leona", role:"Support"}, {name:"Lillia", role:"Jungle"},
+  {name:"Lissandra", role:"Mid"}, {name:"Lucian", role:"ADC"}, {name:"Lulu", role:"Support"},
+  {name:"Lux", role:"Mid"}, {name:"Malphite", role:"Top"}, {name:"Malzahar", role:"Mid"},
+  {name:"Maokai", role:"Top"}, {name:"Master Yi", role:"Jungle"}, {name:"Miss Fortune", role:"ADC"},
+  {name:"Mordekaiser", role:"Top"}, {name:"Morgana", role:"Support"}, {name:"Nami", role:"Support"},
+  {name:"Nasus", role:"Top"}, {name:"Nautilus", role:"Support"}, {name:"Neeko", role:"Mid"},
+  {name:"Nidalee", role:"Jungle"}, {name:"Nilah", role:"ADC"}, {name:"Nocturne", role:"Jungle"},
+  {name:"Nunu & Willump", role:"Jungle"}, {name:"Olaf", role:"Jungle"}, {name:"Orianna", role:"Mid"},
+  {name:"Ornn", role:"Top"}, {name:"Pantheon", role:"Top"}, {name:"Poppy", role:"Top"},
+  {name:"Pyke", role:"Support"}, {name:"Qiyana", role:"Mid"}, {name:"Quinn", role:"Top"},
+  {name:"Rakan", role:"Support"}, {name:"Rammus", role:"Jungle"}, {name:"Rek'Sai", role:"Jungle"},
+  {name:"Rell", role:"Support"}, {name:"Renekton", role:"Top"}, {name:"Rengar", role:"Jungle"},
+  {name:"Riven", role:"Top"}, {name:"Rumble", role:"Top"}, {name:"Ryze", role:"Mid"},
+  {name:"Samira", role:"ADC"}, {name:"Sejuani", role:"Jungle"}, {name:"Senna", role:"Support"},
+  {name:"Seraphine", role:"Support"}, {name:"Sett", role:"Top"}, {name:"Shaco", role:"Jungle"},
+  {name:"Shen", role:"Top"}, {name:"Shyvana", role:"Jungle"}, {name:"Singed", role:"Top"},
+  {name:"Sion", role:"Top"}, {name:"Sivir", role:"ADC"}, {name:"Skarner", role:"Jungle"},
+  {name:"Sona", role:"Support"}, {name:"Soraka", role:"Support"}, {name:"Swain", role:"Mid"},
+  {name:"Sylas", role:"Mid"}, {name:"Syndra", role:"Mid"}, {name:"Tahm Kench", role:"Support"},
+  {name:"Taliyah", role:"Mid"}, {name:"Talon", role:"Mid"}, {name:"Taric", role:"Support"},
+  {name:"Teemo", role:"Top"}, {name:"Thresh", role:"Support"}, {name:"Tristana", role:"ADC"},
+  {name:"Trundle", role:"Jungle"}, {name:"Tryndamere", role:"Top"}, {name:"Twisted Fate", role:"Mid"},
+  {name:"Twitch", role:"ADC"}, {name:"Udyr", role:"Jungle"}, {name:"Urgot", role:"Top"},
+  {name:"Varus", role:"ADC"}, {name:"Vayne", role:"ADC"}, {name:"Veigar", role:"Mid"},
+  {name:"Vel'Koz", role:"Mid"}, {name:"Vex", role:"Mid"}, {name:"Vi", role:"Jungle"},
+  {name:"Viego", role:"Jungle"}, {name:"Viktor", role:"Mid"}, {name:"Vladimir", role:"Mid"},
+  {name:"Volibear", role:"Top"}, {name:"Warwick", role:"Jungle"}, {name:"Xayah", role:"ADC"},
+  {name:"Xerath", role:"Mid"}, {name:"Xin Zhao", role:"Jungle"}, {name:"Yasuo", role:"Mid"},
+  {name:"Yone", role:"Mid"}, {name:"Yorick", role:"Top"}, {name:"Yuumi", role:"Support"},
+  {name:"Zac", role:"Jungle"}, {name:"Zed", role:"Mid"}, {name:"Ziggs", role:"Mid"},
+  {name:"Zilean", role:"Support"}, {name:"Zoe", role:"Mid"}, {name:"Zyra", role:"Support"}
+];
 
-// Static mapping of champion names → their League CDN images
-const championImages = {
-  "Aatrox": "Aatrox.png",
-  "Ahri": "Ahri.png",
-  "Akali": "Akali.png",
-  "Akshan": "Akshan.png",
-  "Alistar": "Alistar.png",
-  "Amumu": "Amumu.png",
-  "Anivia": "Anivia.png",
-  "Annie": "Annie.png",
-  "Aphelios": "Aphelios.png",
-  "Ashe": "Ashe.png",
-  "AurelionSol": "AurelionSol.png",
-  "Azir": "Azir.png",
-  "Bard": "Bard.png",
-  "Blitzcrank": "Blitzcrank.png",
-  "Brand": "Brand.png",
-  "Braum": "Braum.png",
-  "Caitlyn": "Caitlyn.png",
-  "Camille": "Camille.png",
-  "Cassiopeia": "Cassiopeia.png",
-  "ChoGath": "ChoGath.png",
-  "Corki": "Corki.png",
-  "Darius": "Darius.png",
-  "Diana": "Diana.png",
-  "DrMundo": "DrMundo.png",
-  "Draven": "Draven.png",
-  "Ekko": "Ekko.png",
-  "Elise": "Elise.png",
-  "Evelynn": "Evelynn.png",
-  "Ezreal": "Ezreal.png",
-  "Fiddlesticks": "Fiddlesticks.png",
-  "Fiora": "Fiora.png",
-  "Fizz": "Fizz.png",
-  "Galio": "Galio.png",
-  "Gangplank": "Gangplank.png",
-  "Garen": "Garen.png",
-  "Gnar": "Gnar.png",
-  "Gragas": "Gragas.png",
-  "Graves": "Graves.png",
-  "Gwen": "Gwen.png",
-  "Hecarim": "Hecarim.png",
-  "Heimerdinger": "Heimerdinger.png",
-  "Illaoi": "Illaoi.png",
-  "Irelia": "Irelia.png",
-  "Ivern": "Ivern.png",
-  "Janna": "Janna.png",
-  "JarvanIV": "JarvanIV.png",
-  "Jax": "Jax.png",
-  "Jayce": "Jayce.png",
-  "Jhin": "Jhin.png",
-  "Jinx": "Jinx.png",
-  "Kaisa": "Kai'Sa.png",
-  "Kalista": "Kalista.png",
-  "Karma": "Karma.png",
-  "Karthus": "Karthus.png",
-  "Kassadin": "Kassadin.png",
-  "Katarina": "Katarina.png",
-  "Kayle": "Kayle.png",
-  "Kayn": "Kayn.png",
-  "Kennen": "Kennen.png",
-  "KhaZix": "Khazix.png",
-  "Kindred": "Kindred.png",
-  "Kled": "Kled.png",
-  "KogMaw": "KogMaw.png",
-  "LeBlanc": "Leblanc.png",
-  "LeeSin": "LeeSin.png",
-  "Leona": "Leona.png",
-  "Lillia": "Lillia.png",
-  "Lissandra": "Lissandra.png",
-  "Lucian": "Lucian.png",
-  "Lulu": "Lulu.png",
-  "Lux": "Lux.png",
-  "Malphite": "Malphite.png",
-  "Malzahar": "Malzahar.png",
-  "Maokai": "Maokai.png",
-  "MasterYi": "MasterYi.png",
-  "MissFortune": "MissFortune.png",
-  "Mordekaiser": "Mordekaiser.png",
-  "Morgana": "Morgana.png",
-  "Nami": "Nami.png",
-  "Nasus": "Nasus.png",
-  "Nautilus": "Nautilus.png",
-  "Neeko": "Neeko.png",
-  "Nidalee": "Nidalee.png",
-  "Nilah": "Nilah.png",
-  "Nocturne": "Nocturne.png",
-  "Nunu": "Nunu.png",
-  "Olaf": "Olaf.png",
-  "Orianna": "Orianna.png",
-  "Ornn": "Ornn.png",
-  "Pantheon": "Pantheon.png",
-  "Poppy": "Poppy.png",
-  "Pyke": "Pyke.png",
-  "Qiyana": "Qiyana.png",
-  "Quinn": "Quinn.png",
-  "Rakan": "Rakan.png",
-  "Rammus": "Rammus.png",
-  "RekSai": "RekSai.png",
-  "Rell": "Rell.png",
-  "Renata": "Renata.png",
-  "Renekton": "Renekton.png",
-  "Rengar": "Rengar.png",
-  "Riven": "Riven.png",
-  "Rumble": "Rumble.png",
-  "Ryze": "Ryze.png",
-  "Samira": "Samira.png",
-  "Sejuani": "Sejuani.png",
-  "Senna": "Senna.png",
-  "Seraphine": "Seraphine.png",
-  "Sett": "Sett.png",
-  "Shaco": "Shaco.png",
-  "Shen": "Shen.png",
-  "Shyvana": "Shyvana.png",
-  "Singed": "Singed.png",
-  "Sion": "Sion.png",
-  "Sivir": "Sivir.png",
-  "Skarner": "Skarner.png",
-  "Sona": "Sona.png",
-  "Soraka": "Soraka.png",
-  "Swain": "Swain.png",
-  "Sylas": "Sylas.png",
-  "Syndra": "Syndra.png",
-  "TahmKench": "TahmKench.png",
-  "Taliyah": "Taliyah.png",
-  "Talon": "Talon.png",
-  "Taric": "Taric.png",
-  "Teemo": "Teemo.png",
-  "Thresh": "Thresh.png",
-  "Tristana": "Tristana.png",
-  "Trundle": "Trundle.png",
-  "Tryndamere": "Tryndamere.png",
-  "TwistedFate": "TwistedFate.png",
-  "Twitch": "Twitch.png",
-  "Udyr": "Udyr.png",
-  "Urgot": "Urgot.png",
-  "Varus": "Varus.png",
-  "Vayne": "Vayne.png",
-  "Veigar": "Veigar.png",
-  "VelKoz": "Velkoz.png",
-  "Vex": "Vex.png",
-  "Vi": "Vi.png",
-  "Viego": "Viego.png",
-  "Viktor": "Viktor.png",
-  "Vladimir": "Vladimir.png",
-  "Volibear": "Volibear.png",
-  "Warwick": "Warwick.png",
-  "Xayah": "Xayah.png",
-  "Xerath": "Xerath.png",
-  "XinZhao": "XinZhao.png",
-  "Yasuo": "Yasuo.png",
-  "Yone": "Yone.png",
-  "Yorick": "Yorick.png",
-  "Yuumi": "Yuumi.png",
-  "Zac": "Zac.png",
-  "Zed": "Zed.png",
-  "Zeri": "Zeri.png",
-  "Ziggs": "Ziggs.png",
-  "Zilean": "Zilean.png",
-  "Zoe": "Zoe.png",
-  "Zyra": "Zyra.png"
-};
+// Pull tier data from Google Sheet
+const tierCSV = "https://docs.google.com/spreadsheets/d/e/2PACX-1vRtIJeggpJ6cjGJt0OOds4OZDuHMMUxHCWzMiU1Bd4gJ8EvfZMXPE9p0X1K3yyeZs7bpFyQZHhHpnsu/pub?output=csv";
+let champRanks = {}; // { "Ahri": "S", ... }
 
-let champions = [];
-
-// Load CSV
-fetch(csvURL)
+fetch(tierCSV)
   .then(res => res.text())
   .then(data => {
-    const rows = data.trim().split("\n").map(r => r.split(","));
-    const headers = rows[0].map(h => h.trim().replace(/["']/g,""));
-    champions = rows.slice(1).map(row => {
-      let champ = {};
-      headers.forEach((h,i) => champ[h] = row[i] ? row[i].trim() : "");
-      return champ;
+    const rows = data.split("\n").slice(1); // skip header
+    rows.forEach(r => {
+      const [name, top, jungle, mid, adc, support] = r.split(",");
+      champRanks[name.trim()] = {Top: top, Jungle: jungle, Mid: mid, ADC: adc, Support: support};
     });
-    renderTierlist("Top");
-  });
+    renderCards();
+  })
+  .catch(err => console.error(err));
 
-// Render champions
-function renderTierlist(role){
-  const container = document.getElementById("tierlistContainer");
+function renderCards() {
+  const role = document.getElementById('roleSelect').value;
+  const container = document.getElementById('championCards');
   container.innerHTML = "";
 
-  const filteredChamps = champions.filter(ch => ch[role] && ch[role] !== "X");
+  // Filter champions based on role
+  let filtered = champions.filter(champ => role === "all" || champ.role === role);
 
-  filteredChamps.forEach(ch => {
-    const champName = ch["Champion"];
-    const rank = ch[role];
-    const imgFile = championImages[champName] || "placeholder.png";
+  // Sort by rank OP > S > A > B > C > D
+  const rankOrder = ["OP","S","A","B","C","D"];
+  filtered.sort((a,b)=>{
+    const rankA = champRanks[a.name]?.[a.role] || "D";
+    const rankB = champRanks[b.name]?.[b.role] || "D";
+    return rankOrder.indexOf(rankA) - rankOrder.indexOf(rankB);
+  });
+
+  filtered.forEach(champ=>{
+    const rank = champRanks[champ.name]?.[champ.role] || "-";
+    const imgName = champ.name.replace(/\s/g,'').replace(/'/g,"").replace(/&/g,"").replace(/\./g,"");
+    const imgURL = `https://ddragon.leagueoflegends.com/cdn/14.23.1/img/champion/${imgName}.png`;
 
     const card = document.createElement("div");
-    card.className = "champion-card";
+    card.className = "card";
     card.innerHTML = `
-      <img src="https://ddragon.leagueoflegends.com/cdn/14.23.1/img/champion/${imgFile}" alt="${champName}">
-      <div>${champName}</div>
-      <div class="rank-badge">${rank}</div>
+      <img src="${imgURL}" alt="${champ.name}">
+      <div class="champ-name">${champ.name}</div>
+      <div class="champ-rank">${rank}</div>
     `;
     container.appendChild(card);
   });
 }
 
-// Role selector
-document.getElementById("roleSelect").addEventListener("change",(e)=>{
-  renderTierlist(e.target.value);
-});
+document.getElementById('roleSelect').addEventListener('change', renderCards);
 </script>
 
 </body>
 </html>
+
 
 
 
