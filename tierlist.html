@@ -25,7 +25,7 @@
   }
   .back-button {
     display:inline-block;
-    margin:20px auto;
+    margin:20px auto 10px auto;
     padding:10px 20px;
     background:linear-gradient(135deg,#c9aa71,#e0c77b);
     color:#000;
@@ -115,6 +115,7 @@
 
 <a href="membershub.html" class="back-button">Back to Members Hub</a>
 
+<!-- Moved role dropdown directly below back button -->
 <select id="roleSelect" aria-label="Select role">
   <option value="Top">Top</option>
   <option value="Jungle">Jungle</option>
@@ -160,10 +161,10 @@ const IMG_NAME_OVERRIDES = {
   "Twisted Fate": "TwistedFate",
   "Xin Zhao": "XinZhao",
   "Lee Sin": "LeeSin",
-  "Nunu & Willump": "Nunu",
   "Vel'Koz": "Velkoz",
-  "Azir": "Azir",
-  "Bel'Beth": "Belveth" /* in case CSV name variant */
+  "Bel'Beth": "Belveth",
+  "Renata Glasc": "Renata",
+  "Mell": "Mel" 
 };
 
 /* normalize a champion name into Riot CDN filename (fallback) */
@@ -171,11 +172,8 @@ function getImageName(champName){
   if(!champName) return null;
   if(IMG_NAME_OVERRIDES[champName]) return IMG_NAME_OVERRIDES[champName];
 
-  // remove accents
   const normalized = champName.normalize('NFD').replace(/[\u0300-\u036f]/g, '');
-  // remove punctuation and spaces, apostrophes, ampersand, periods
   const cleaned = normalized.replace(/[\s'’&\.\-]/g, '');
-  // Some names need capitalization preserved as Riot uses CamelCase filenames; assume removing spaces/punct is enough
   return cleaned;
 }
 
@@ -189,7 +187,7 @@ async function loadCSV(url){
   const txt = await fetch(url).then(r=>r.text());
   const lines = txt.trim().split('\n').map(l => l.replace(/\r/g,''));
   const header = lines[0].split(',').map(h => h.trim());
-  const champions = {}; // { "Ahri": {Top:"",Jungle:"",Mid:"S",...} }
+  const champions = {};
   for(let i=1;i<lines.length;i++){
     if(!lines[i].trim()) continue;
     const cols = lines[i].split(',');
@@ -210,16 +208,14 @@ function renderTierGroups(champRanks, role){
   container.innerHTML = '';
   const rankOrder = ['OP','S','A','B','C','D'];
 
-  // For each rank, collect champions that have that rank for the role and are not "X" or empty
   rankOrder.forEach(rank => {
     const champsInRank = Object.keys(champRanks).filter(name => {
       const val = (champRanks[name] && champRanks[name][role]) ? champRanks[name][role].trim() : '';
       return val && val.toUpperCase() === rank && val.toUpperCase() !== 'X';
     });
 
-    if(champsInRank.length === 0) return; // skip empty ranks
+    if(champsInRank.length === 0) return;
 
-    // Create tier group
     const tierGroup = document.createElement('div');
     tierGroup.className = 'tier-group';
 
@@ -233,7 +229,6 @@ function renderTierGroups(champRanks, role){
 
     champsInRank.forEach(champName => {
       const imgName = getImageName(champName);
-      // Riot CDN uses exact file names like "Ahri.png" or "Belveth.png"
       const imgURL = imgName ? `https://ddragon.leagueoflegends.com/cdn/14.23.1/img/champion/${imgName}.png` : PLACEHOLDER;
       const card = document.createElement('div');
       card.className = 'card';
@@ -254,10 +249,8 @@ function renderTierGroups(champRanks, role){
 (async function init(){
   try{
     const champRanks = await loadCSV(CSV_URL);
-    // set role change handler
     const roleSelect = document.getElementById('roleSelect');
     roleSelect.addEventListener('change', ()=> renderTierGroups(champRanks, roleSelect.value));
-    // initial render
     renderTierGroups(champRanks, roleSelect.value || 'Top');
   }catch(err){
     console.error('Failed to load CSV',err);
@@ -267,4 +260,5 @@ function renderTierGroups(champRanks, role){
 </script>
 </body>
 </html>
+
 
