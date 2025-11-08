@@ -63,7 +63,7 @@
     border-radius: 8px;
   }
   .winrate-bubble {
-    background: #f97316; /* orange for 47%-48% */
+    background: #F9D949; /* yellow for 49-51% */
     color: #0d1117;
     font-weight: bold;
     padding: 8px 14px;
@@ -111,6 +111,12 @@
     }
   }
 </style>
+<script>
+// LOGIN PROTECTION: redirect to login page if not logged in
+if (localStorage.getItem('lolfundamentals_logged_in') !== 'true') {
+    window.location.href = 'index.html'; // replace with your login page
+}
+</script>
 </head>
 <body>
 
@@ -137,8 +143,11 @@
 </div>
 
 <footer>© 2025 LoL Fundamentals · Contact: arcsecond@lolfundamentals.com</footer>
+
 </body>
 </html>
+
+
 
 
 
