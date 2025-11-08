@@ -13,8 +13,6 @@ body {
   line-height: 1.6;
   text-align: center;
 }
-
-/* Header */
 header {
   background: linear-gradient(90deg, #0a0f14, #1b2838);
   border-bottom: 2px solid #c9aa71;
@@ -25,15 +23,11 @@ header {
   text-transform: uppercase;
   color: #c9aa71;
 }
-
-/* Section */
 .section {
   padding: 40px 20px;
   max-width: 1200px;
   margin: auto;
 }
-
-/* Role Dropdown */
 #roleSelect {
   padding: 8px 12px;
   font-size: 16px;
@@ -44,16 +38,12 @@ header {
   color: #e6edf3;
   cursor: pointer;
 }
-
-/* Champion Grid */
 .champion-grid {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
   gap: 20px;
   justify-items: center;
 }
-
-/* Champion Card */
 .champ-card {
   background: #161b22;
   border: 2px solid #c9aa71;
@@ -81,8 +71,6 @@ header {
   margin: 0;
   font-size: 14px;
 }
-
-/* Back Button */
 .back-button {
   display: inline-block;
   margin: 20px auto;
@@ -102,8 +90,6 @@ header {
   background: linear-gradient(135deg, #e6c97f, #f0d88b);
   box-shadow: 0 0 15px rgba(255,215,0,0.8);
 }
-
-/* Footer */
 footer {
   text-align: center;
   padding: 30px;
@@ -124,23 +110,20 @@ footer a:hover {
 <body>
 
 <header>LoL Fundamentals – Tierlist</header>
-
 <a href="membershub.html" class="back-button">Back to Members Hub</a>
 
 <section class="section">
-  <h2>Champion Tierlist</h2>
-  <p>Select a role to view champions:</p>
-  <select id="roleSelect" onchange="changeRole(this.value)">
-    <option value="Top">Top</option>
-    <option value="Jungle">Jungle</option>
-    <option value="Mid">Mid</option>
-    <option value="ADC">ADC</option>
-    <option value="Support">Support</option>
-  </select>
+<h2>Champion Tierlist</h2>
+<p>Select a role to view champions:</p>
+<select id="roleSelect" onchange="changeRole(this.value)">
+  <option value="Top">Top</option>
+  <option value="Jungle">Jungle</option>
+  <option value="Mid">Mid</option>
+  <option value="ADC">ADC</option>
+  <option value="Support">Support</option>
+</select>
 
-  <div class="champion-grid" id="champGrid">
-    <!-- Champions will populate here -->
-  </div>
+<div class="champion-grid" id="champGrid"></div>
 </section>
 
 <footer>
@@ -154,7 +137,14 @@ if(localStorage.getItem('lolfundamentals_logged_in') !== 'true'){
   window.location.href = 'index.html';
 }
 
-// Google Sheet CSV for tiers
+// Tier order
+const tierOrder = ["OP","S","A","B","C","D"];
+
+// Map Google Sheet name to Dragon key
+function normalizeChampion(name){
+  return name.replace(/[\s.'"]/g,"").replace(/é/g,"e");
+}
+
 const tierCSV = "https://docs.google.com/spreadsheets/d/e/2PACX-1vRtIJeggpJ6cjGJt0OOds4OZDuHMMUxHCWzMiU1Bd4gJ8EvfZMXPE9p0X1K3yyeZs7bpFyQZHhHpnsu/pub?output=csv";
 let champions = [];
 let selectedRole = "Top";
@@ -164,13 +154,11 @@ fetch(tierCSV)
   .then(data => {
     const rows = data.split("\n").map(r => r.split(","));
     const headers = rows.shift();
-
     champions = rows.map(r => {
       const champ = {};
       headers.forEach((h,i) => champ[h.trim()] = r[i] ? r[i].trim() : "");
       return champ;
     });
-
     renderChampions();
   });
 
@@ -185,13 +173,13 @@ function renderChampions(){
 
   champions
     .filter(c => c[selectedRole] && c[selectedRole].toLowerCase() !== "x")
-    .sort((a,b) => a[selectedRole].localeCompare(b[selectedRole]))
+    .sort((a,b) => tierOrder.indexOf(a[selectedRole]) - tierOrder.indexOf(b[selectedRole]))
     .forEach(c => {
       const card = document.createElement("div");
       card.className = "champ-card";
       const champName = c.Champion;
       const champTier = c[selectedRole];
-      const champImg = `https://ddragon.leagueoflegends.com/cdn/14.23.1/img/champion/${champName}.png`;
+      const champImg = `https://ddragon.leagueoflegends.com/cdn/14.23.1/img/champion/${normalizeChampion(champName)}.png`;
       card.innerHTML = `
         <img src="${champImg}" alt="${champName}">
         <h4>${champName}</h4>
@@ -201,6 +189,6 @@ function renderChampions(){
     });
 }
 </script>
-
 </body>
 </html>
+
