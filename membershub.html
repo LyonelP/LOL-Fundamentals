@@ -5,13 +5,20 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 <title>LoL Fundamentals – Members Hub</title>
 <style>
-body {
+html, body {
+  height: 100%;
   margin: 0;
   font-family: "Beaufort for LOL", Arial, Helvetica, sans-serif;
   background: #0a0f14;
   color: #e6edf3;
   line-height: 1.6;
-  text-align: center;
+}
+
+/* Use flex to center main content while keeping footer at bottom */
+body {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
 }
 
 /* Header */
@@ -24,19 +31,25 @@ header {
   letter-spacing: 1px;
   text-transform: uppercase;
   color: #c9aa71;
+  text-align: center;
 }
 
-/* Section */
-.section {
-  padding: 20px 20px; /* reduced top padding to raise content */
+/* Main content container */
+.main-content {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: center; /* vertically center content */
+  padding: 20px;
   max-width: 1000px;
-  margin: 0 auto; /* no top margin, moves section up */
+  margin: 0 auto;
+  text-align: center;
 }
 
 /* Section title */
-.section h2 {
+.main-content h2 {
   color: #c9aa71;
-  margin-bottom: 20px; /* reduced to bring following content closer */
+  margin-bottom: 20px;
 }
 
 /* Card Grid */
@@ -45,7 +58,7 @@ header {
   grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
   gap: 25px;
   justify-items: center;
-  margin-top: 15px; /* spacing between heading and cards */
+  margin-top: 15px;
 }
 
 /* Individual Card */
@@ -65,30 +78,26 @@ header {
   overflow: hidden;
 }
 
-/* Card hover effect */
 .card:hover {
   transform: translateY(-5px);
   box-shadow: 0 10px 20px rgba(47,129,247,0.3);
 }
 
-/* Card Header */
 .card h3 {
   color: #c9aa71;
   margin-bottom: 10px;
   font-size: 1.2em;
-  z-index: 2;
   position: relative;
+  z-index: 2;
 }
 
-/* Card Description */
 .card p {
   font-size: 0.9em;
   line-height: 1.3;
-  z-index: 2;
   position: relative;
+  z-index: 2;
 }
 
-/* Card Background Image */
 .card::before {
   content: "";
   position: absolute;
@@ -103,7 +112,6 @@ header {
   border-radius: 10px;
 }
 
-/* Specific card backgrounds */
 .card.diana-matchups::before {
   background-image: url('https://ddragon.leagueoflegends.com/cdn/img/champion/splash/Diana_0.jpg');
 }
@@ -119,7 +127,7 @@ header {
   background-position: center;
 }
 
-/* Tierlist card visual */
+/* Tierlist bar */
 .card.tierlist .tier-bar {
   margin-top: 10px;
   width: 100%;
@@ -127,8 +135,8 @@ header {
   border-radius: 6px;
   display: flex;
   overflow: hidden;
-  z-index: 2;
   position: relative;
+  z-index: 2;
 }
 .tier-s { background: #f94144; flex: 1; }
 .tier-a { background: #f3722c; flex: 1; }
@@ -139,24 +147,17 @@ header {
 /* Footer */
 footer {
   text-align: center;
-  padding: 30px;
+  padding: 20px;
   color: #8b949e;
   font-size: 14px;
   background: #0a0f14;
   border-top: 1px solid #1f2937;
 }
-footer a {
-  color: #c9aa71;
-  text-decoration: none;
-}
-footer a:hover {
-  text-decoration: underline;
-}
 
 /* Logout Button */
 #logoutBtn {
   display: block;
-  margin: 30px auto; /* slightly closer to content */
+  margin: 10px auto 20px auto;
   padding: 12px 25px;
   background: #f94144;
   color: #fff;
@@ -175,39 +176,39 @@ footer a:hover {
 
 <header>LoL Fundamentals – Members Hub</header>
 
-<section class="section">
-<h2>Your Member Hub</h2>
-<p>Choose a section to explore:</p>
+<div class="main-content">
+  <h2>Your Member Hub</h2>
+  <p>Choose a section to explore:</p>
 
-<div class="card-grid">
-  <a href="matchuphub.html" class="card diana-matchups">
-    <h3>Diana Mid Matchups</h3>
-    <p>Detailed breakdowns for every mid lane matchup. Learn optimal trades, wave control, and positioning.</p>
-  </a>
+  <div class="card-grid">
+    <a href="matchuphub.html" class="card diana-matchups">
+      <h3>Diana Mid Matchups</h3>
+      <p>Detailed breakdowns for every mid lane matchup. Learn optimal trades, wave control, and positioning.</p>
+    </a>
 
-  <a href="tierlist.html" class="card tierlist">
-    <h3>Tierlist</h3>
-    <p>Current champion tierlist showing which champions dominate the meta.</p>
-    <div class="tier-bar">
-      <div class="tier-s"></div>
-      <div class="tier-a"></div>
-      <div class="tier-b"></div>
-      <div class="tier-c"></div>
-      <div class="tier-d"></div>
-    </div>
-  </a>
+    <a href="tierlist.html" class="card tierlist">
+      <h3>Tierlist</h3>
+      <p>Current champion tierlist showing which champions dominate the meta.</p>
+      <div class="tier-bar">
+        <div class="tier-s"></div>
+        <div class="tier-a"></div>
+        <div class="tier-b"></div>
+        <div class="tier-c"></div>
+        <div class="tier-d"></div>
+      </div>
+    </a>
 
-  <a href="dianaguide.html" class="card diana-guide">
-    <h3>Diana Guide</h3>
-    <p>Comprehensive guide for mastering Diana, including combos, mechanics, and advanced tips.</p>
-  </a>
+    <a href="dianaguide.html" class="card diana-guide">
+      <h3>Diana Guide</h3>
+      <p>Comprehensive guide for mastering Diana, including combos, mechanics, and advanced tips.</p>
+    </a>
 
-  <a href="skills.html" class="card fundamentals">
-    <h3>Fundamentals Section</h3>
-    <p>Learn core League mechanics that every player should understand to improve faster.</p>
-  </a>
+    <a href="skills.html" class="card fundamentals">
+      <h3>Fundamentals Section</h3>
+      <p>Learn core League mechanics that every player should understand to improve faster.</p>
+    </a>
+  </div>
 </div>
-</section>
 
 <button id="logoutBtn" onclick="logout()">Logout</button>
 
@@ -230,6 +231,7 @@ function logout() {
 
 </body>
 </html>
+
 
 
 
