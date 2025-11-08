@@ -83,24 +83,10 @@ header {
   min-height: 200px;
 }
 
-.rune-list li {
-  display: flex;
-  align-items: flex-start;
-  margin-bottom: 15px;
-}
-
-.rune-list img {
-  width: 50px;
-  height: 50px;
-  margin-right: 12px;
-  flex-shrink: 0;
-}
-
 #section-info:hover { box-shadow: 0 0 15px rgba(47,129,247,0.5); }
 
 @media (max-width: 600px) {
   #section-select { font-size: 14px; padding: 8px 10px; }
-  .rune-list img { width: 40px; height: 40px; }
 }
 </style>
 </head>
@@ -149,35 +135,13 @@ sectionSelect.addEventListener('change', () => {
 
   if(value === "Runes"){
     content = `
-    <ul class="rune-list">
-      <li>
-        <img src="https://ddragon.leagueoflegends.com/cdn/14.23.1/img/perk/GraspOfTheUndying.png" alt="Grasp Of The Undying">
-        <p><strong>Grasp Of The Undying:</strong> This is the only rune and tree that allows Diana to play the way she’s intended to be played. It’s the rune that gives her the potential to win every matchup while also not falling off nearly as hard as another option like phase rush which is her second best tree.</p>
-      </li>
-      <li>
-        <img src="https://ddragon.leagueoflegends.com/cdn/14.23.1/img/perk/ShieldBash.png" alt="Shield Bash">
-        <p><strong>Shield Bash:</strong> Will out damage most other runes, and Diana can proc it twice with W.</p>
-      </li>
-      <li>
-        <img src="https://ddragon.leagueoflegends.com/cdn/14.23.1/img/perk/BonePlating.png" alt="Bone Plating">
-        <p><strong>Bone Plating:</strong> Best sustain tool in lane. Runes like Aery, Scorch, First Strike, and Comet all proc multiple plates. This also gives you the best chance of surviving a gank and winning a duel later on in the game.</p>
-      </li>
-      <li>
-        <img src="https://ddragon.leagueoflegends.com/cdn/14.23.1/img/perk/SecondWind.png" alt="Second Wind">
-        <p><strong>Second Wind:</strong> Recently nerfed and only worth considering against Yasuo and Yone. Yasuo and Yone proc Bone Plating extremely easily with Q and will only get an extended trade with Lethal Tempo early. Even in these matchups I still often prefer Bone Plating because of the better scaling and the ability to survive ganks better.</p>
-      </li>
-      <li>
-        <img src="https://ddragon.leagueoflegends.com/cdn/14.23.1/img/perk/Overgrowth.png" alt="Overgrowth">
-        <p><strong>Overgrowth:</strong> Best way for Diana to gain health besides Grasp since the build doesn't include any health items. Diana requires health to engage melee champions and she has a 9% bonus health ratio on the shield strength that can be proc'd twice for a total ratio of 18%.</p>
-      </li>
-      <li>
-        <img src="https://ddragon.leagueoflegends.com/cdn/14.23.1/img/perk/ManaflowBand.png" alt="Manaflow Band">
-        <p><strong>Manaflow Band:</strong> This rune perfectly covers the amount of mana Diana requires to play the game. Without Manaflow Band you won’t be able to take full advantage of Diana’s side lane pressure. Diana should always be looking to take the enemy jungler’s camps especially now while her passive monster ratio is at 300%. Without Manaflow Band you won’t be able to deal with any champion that has resists since multiple damage rotations will be necessary to kill the enemy.</p>
-      </li>
-      <li>
-        <img src="https://ddragon.leagueoflegends.com/cdn/14.23.1/img/perk/Transcendence.png" alt="Transcendence">
-        <p><strong>Transcendence:</strong> This is the only way for Diana to gain haste besides Cryptobloom later on. It’s the perfect balance of having a little haste which is more efficient at lower values and gaining big cooldown reductions at crucial moments in team fights.</p>
-      </li>
+    <ul>
+      <li><p><strong>Grasp Of The Undying:</strong> This is the only rune and tree that allows Diana to play the way she’s intended to be played. It’s the rune that gives her the potential to win every matchup while also not falling off nearly as hard as another option like Phase Rush, which is her second best tree.</p></li>
+      <li><p><strong>Shield Bash:</strong> Will out damage most other runes, and Diana can proc it twice with W.</p></li>
+      <li><p><strong>Bone Plating:</strong> Best sustain tool in lane. Runes like Aery, Scorch, First Strike, and Comet all proc multiple plates. This also gives you the best chance of surviving a gank and winning a duel later on in the game.</p></li>
+      <li><p><strong>Overgrowth:</strong> Best way for Diana to gain health besides Grasp since the build doesn't include any health items. Diana requires health to engage melee champions and she has a 9% bonus health ratio on the shield strength that can be proc'd twice for a total ratio of 18%.</p></li>
+      <li><p><strong>Manaflow Band:</strong> This rune perfectly covers the amount of mana Diana requires to play the game. Without Manaflow Band you won’t be able to take full advantage of Diana’s side lane pressure. Diana should always be looking to take the enemy jungler’s camps especially now while her passive monster ratio is at 300%. Without Manaflow Band you won’t be able to deal with any champion that has resists since multiple damage rotations will be necessary to kill the enemy.</p></li>
+      <li><p><strong>Transcendence:</strong> This is the only way for Diana to gain haste besides Cryptobloom later on. It’s the perfect balance of having a little haste which is more efficient at lower values and gaining big cooldown reductions at crucial moments in team fights.</p></li>
     </ul>
     `;
   }
@@ -188,6 +152,8 @@ sectionSelect.addEventListener('change', () => {
 
 </body>
 </html>
+
+
 
 
 
