@@ -157,7 +157,7 @@ footer a:hover {
   <h2>Member Login</h2>
   <input type="email" id="email" placeholder="Enter your email" />
   <button id="loginBtn" disabled>Login</button>
-  <p id="loginMsg">Loading membership list...</p>
+  <p id="loginMsg"></p>
 </section>
 
 <!-- Hero Section -->
@@ -196,36 +196,31 @@ footer a:hover {
 </footer>
 
 <script>
-// Google Sheet CSV link
+// Google Sheet CSV published link
 const membersCSV = "https://docs.google.com/spreadsheets/d/e/2PACX-1vR-0OZki4X8kc33NfrLsGL47-7mFj3SzjyGx6hs4QcnvRXiE-cOaJfk4wgvyIf6XXpnuB8D-B4TqSrW/pub?output=csv";
 let validEmails = [];
 const loginBtn = document.getElementById('loginBtn');
 const msg = document.getElementById('loginMsg');
 const emailInput = document.getElementById('email');
 
-// Fetch emails
-async function fetchEmails() {
-  try {
-    const res = await fetch(membersCSV + "?t=" + new Date().getTime(), { cache: "no-store" });
-    if(!res.ok) throw new Error("Failed to fetch CSV");
-    const data = await res.text();
-    validEmails = data
-      .split(/\r?\n/)
-      .map(row => row.split(",")[0].trim().toLowerCase())
-      .filter(email => email);
+loginBtn.disabled = true;
+msg.textContent = "Loading membership list...";
+
+// Fetch emails from Google Sheet
+fetch(membersCSV)
+  .then(res => res.ok ? res.text() : Promise.reject("Failed to fetch"))
+  .then(data => {
+    const rows = data.split("\n").map(row => row.split(","));
+    validEmails = rows.map(r => r[0].trim().toLowerCase()).filter(e => e);
     loginBtn.disabled = false;
     msg.textContent = "";
-  } catch(err) {
+  })
+  .catch(err => {
     console.error(err);
     msg.textContent = "Error loading membership list. Try again later.";
-  }
-}
+  });
 
-// Initial fetch and poll every 5s
-fetchEmails();
-setInterval(fetchEmails, 5000);
-
-// Login button
+// Login function
 loginBtn.addEventListener('click', () => {
   const email = emailInput.value.trim().toLowerCase();
   if(validEmails.includes(email)){
@@ -244,6 +239,5 @@ if(localStorage.getItem('lolfundamentals_logged_in') === 'true'){
 
 </body>
 </html>
-
 
 
