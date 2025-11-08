@@ -28,15 +28,19 @@ header {
 
 /* Section */
 .section {
-  padding: 60px 20px;
+  padding: 20px 20px 60px 20px; /* top padding reduced */
   max-width: 1000px;
-  margin: 40px auto;
+  margin: 0 auto; /* remove extra margin */
 }
 
 /* Section title */
 .section h2 {
   color: #c9aa71;
-  margin-bottom: 40px;
+  margin-top: 0;      /* no extra space above heading */
+  margin-bottom: 20px; /* smaller gap to paragraph */
+}
+.section p {
+  margin-bottom: 40px; /* space before cards */
 }
 
 /* Card Grid */
@@ -229,6 +233,7 @@ function logout() {
 
 </body>
 </html>
+
 
 
 
