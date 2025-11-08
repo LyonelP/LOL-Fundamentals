@@ -85,13 +85,6 @@ header {
 
 #section-info:hover { box-shadow: 0 0 15px rgba(47,129,247,0.5); }
 
-#section-info h3 {
-  color: #c9aa71;
-  margin-top: 16px;
-  text-align: center;
-  text-transform: uppercase;
-}
-
 #section-info p {
   margin: 8px 0 16px;
   line-height: 1.6;
@@ -212,9 +205,9 @@ header {
     <option>Combos</option>
     <option>Level 1</option>
     <option>Jungle Routes</option>
-    <option>Closing Out The Game</option>
     <option>Hardest Matchups</option>
     <option>Team Fighting</option>
+    <option>Closing Out The Game</option>
   </select>
 </div>
 
@@ -223,7 +216,6 @@ header {
 </div>
 
 <script>
-// Require login
 if (localStorage.getItem('lolfundamentals_logged_in') !== 'true') {
   window.location.href = 'index.html';
 }
@@ -237,14 +229,12 @@ sectionSelect.addEventListener('change', () => {
 
   if(value === "Intro"){
     content = `
-      <h3>Intro</h3>
       <p>Why Ekko jungle? Ekko excels in the jungle because his mobility, crowd control, and burst allow for strong ganks and objective control. Smite synergizes perfectly with his kit — the slow and burst from blue smite make securing kills and objectives easy. His W, ult, and passive thrive in flanks, dives, and skirmishes. Plus, he's incredibly fun to play!</p>
     `;
   }
 
   if(value === "Runes"){
     content = `
-      <h3>Runes</h3>
       <div class="rune-container">
         <div class="rune-info">
           <img src="https://ddragon.leagueoflegends.com/cdn/img/perk-images/Styles/Domination/DarkHarvest/DarkHarvest.png" class="icon">
@@ -281,15 +271,14 @@ sectionSelect.addEventListener('change', () => {
 
   if(value === "Build"){
     content = `
-      <h3>Build</h3>
       <div class="build-flow">
         <div><img src="https://ddragon.leagueoflegends.com/cdn/14.21.1/img/item/2031.png" class="icon">Mosstomper Seedling</div><span>→</span>
         <div><img src="https://ddragon.leagueoflegends.com/cdn/14.21.1/img/item/1082.png" class="icon">Dark Seal</div><span>→</span>
         <div><img src="https://ddragon.leagueoflegends.com/cdn/14.21.1/img/item/3115.png" class="icon">Nashor's Tooth</div><span>→</span>
         <div><img src="https://ddragon.leagueoflegends.com/cdn/14.21.1/img/item/3111.png" class="icon">Mercury's Treads</div><span>→</span>
-        <div><img src="https://ddragon.leagueoflegends.com/cdn/14.21.1/img/item/3157.png" class="icon">Zhonya's Hourglass</div><span>→</span>
-        <div><img src="https://ddragon.leagueoflegends.com/cdn/14.21.1/img/item/3089.png" class="icon">Rabadon's Deathcap</div><span>→</span>
         <div><img src="https://ddragon.leagueoflegends.com/cdn/14.21.1/img/item/3100.png" class="icon">Lich Bane</div><span>→</span>
+        <div><img src="https://ddragon.leagueoflegends.com/cdn/14.21.1/img/item/3089.png" class="icon">Rabadon's Deathcap</div><span>→</span>
+        <div><img src="https://ddragon.leagueoflegends.com/cdn/14.21.1/img/item/3157.png" class="icon">Zhonya's Hourglass</div><span>→</span>
         <div><img src="https://ddragon.leagueoflegends.com/cdn/14.21.1/img/item/3135.png" class="icon">Void Staff</div>
       </div>
     `;
@@ -297,7 +286,6 @@ sectionSelect.addEventListener('change', () => {
 
   if(value === "Summoner Spells"){
     content = `
-      <h3>Summoner Spells</h3>
       <p><img src="https://ddragon.leagueoflegends.com/cdn/14.21.1/img/spell/SummonerFlash.png" class="icon"><strong>Flash:</strong> Essential for outplays and mobility.</p>
       <p><img src="https://ddragon.leagueoflegends.com/cdn/14.21.1/img/spell/SummonerSmite.png" class="icon"><strong>Smite:</strong> Must‑have for jungle clears, objective control, and Ekko combos with blue smite.</p>
     `;
@@ -305,19 +293,17 @@ sectionSelect.addEventListener('change', () => {
 
   if(value === "Abilities"){
     content = `
-      <h3>Abilities</h3>
-      <p><img src="https://ddragon.leagueoflegends.com/cdn/14.21.1/img/passive/Ekko_P.png" class="icon"><strong>Passive – Z‑Drive Resonance:</strong> Every 3rd hit deals bonus magic damage and grants move speed. Key for early clears and extended fights.</p>
-      <p><img src="https://ddragon.leagueoflegends.com/cdn/14.21.1/img/spell/EkkoQ.png" class="icon"><strong>Q – Timewinder:</strong> Main poke and clear tool. Double‑hit for max damage — aim so it hits twice on camps or enemies.</p>
-      <p><img src="https://ddragon.leagueoflegends.com/cdn/14.21.1/img/spell/EkkoW.png" class="icon"><strong>W – Parallel Convergence:</strong> Shield and stun zone. Best when cast from fog before a gank or dive; gives massive outplay potential.</p>
-      <p><img src="https://ddragon.leagueoflegends.com/cdn/14.21.1/img/spell/EkkoE.png" class="icon"><strong>E – Phase Dive:</strong> Mobility + auto reset. Use through walls or in quick burst combos with Q.</p>
-      <p><img src="https://ddragon.leagueoflegends.com/cdn/14.21.1/img/spell/EkkoR.png" class="icon"><strong>R – Chronobreak:</strong> Rewind time, heal, and burst. Perfect for tower dives or baiting assassins.</p>
+      <p><img src="https://ddragon.leagueoflegends.com/cdn/14.21.1/img/passive/Ekko_P.png" class="icon"><strong>Passive – Z‑Drive Resonance:</strong> Every 3rd hit deals bonus magic damage and grants move speed.</p>
+      <p><img src="https://ddragon.leagueoflegends.com/cdn/14.21.1/img/spell/EkkoQ.png" class="icon"><strong>Q – Timewinder:</strong> Main poke and clear tool.</p>
+      <p><img src="https://ddragon.leagueoflegends.com/cdn/14.21.1/img/spell/EkkoW.png" class="icon"><strong>W – Parallel Convergence:</strong> Shield and stun zone.</p>
+      <p><img src="https://ddragon.leagueoflegends.com/cdn/14.21.1/img/spell/EkkoE.png" class="icon"><strong>E – Phase Dive:</strong> Mobility + auto reset.</p>
+      <p><img src="https://ddragon.leagueoflegends.com/cdn/14.21.1/img/spell/EkkoR.png" class="icon"><strong>R – Chronobreak:</strong> Rewind time, heal, and burst.</p>
     `;
   }
 
   if(value === "Combos"){
     content = `
-      <h3>Combos</h3>
-      <p><strong>W E E Q AA:</strong> Basic combo, lead with W from fog of war.</p>
+      <p><strong>W E E Q AA:</strong> Basic combo.</p>
       <p><strong>E E Q AA W AA:</strong> Best for extended trades.</p>
       <p><strong>E Q E AA:</strong> Guaranteed burst if Q hits.</p>
       <p><strong>Q AA E:</strong> Quick trades or finishing off targets.</p>
@@ -327,45 +313,41 @@ sectionSelect.addEventListener('change', () => {
 
   if(value === "Level 1"){
     content = `
-      <h3>Level 1</h3>
-      <p>Blue side: Ward tri bush, move mid, throw W toward pixel brush. Use W on starting camp at 1:27. Last auto should wait for Hunter’s Talisman damage (approx 125).</p>
+      <p>Blue side: Ward tri bush, move mid, throw W toward pixel brush. Use W on starting camp at 1:27.</p>
       <p>Red side: Mirror path; tri bush ward less critical for top.</p>
     `;
   }
 
   if(value === "Jungle Routes"){
     content = `
-      <h3>Jungle Routes</h3>
-      <p><strong>First Clear:</strong> Red → Raptors → Wolves → Blue → Gromp → Scuttle → Ganks</p>
-      <p><strong>Alternative:</strong> Blue → Gromp → Wolves → Raptors → Red → Krugs → Scuttle</p>
-      <p><strong>Second Clear:</strong> Path to respawned camps or look for ganks.</p>
+      <p><strong>First Clear:</strong></p>
+      <p><img src="https://ddragon.leagueoflegends.com/cdn/14.21.1/img/map/monsters/Red_Melee.png" class="icon"> → 
+         <img src="https://ddragon.leagueoflegends.com/cdn/14.21.1/img/map/monsters/Raptor.png" class="icon"> → 
+         <img src="https://ddragon.leagueoflegends.com/cdn/14.21.1/img/map/monsters/Wolf.png" class="icon"> → 
+         <img src="https://ddragon.leagueoflegends.com/cdn/14.21.1/img/map/monsters/Blue_Melee.png" class="icon"> → 
+         <img src="https://ddragon.leagueoflegends.com/cdn/14.21.1/img/map/monsters/Gromp.png" class="icon"> → 
+         <img src="https://ddragon.leagueoflegends.com/cdn/14.21.1/img/map/monsters/ScuttleCrab.png" class="icon"> → Ganks
+      </p>
       <h4 style="color:#c9aa71; margin-top:16px;">Preferred Jungle Camps</h4>
-      <p><strong>Raptors:</strong> Fast clear, strong gank potential.</p>
-      <p><strong>Krugs:</strong> Highest XP/minor camp; great if time allows full clear.</p>
-      <p><strong>Wolves:</strong> Solid gold and flex pathing.</p>
-      <p><strong>Gromp:</strong> Often last; strong XP for scaling.</p>
-      <p><strong>Scuttle Crab:</strong> Priority objective—grants river control and vision.</p>
-    `;
-  }
-
-  if(value === "Closing Out The Game"){
-    content = `
-      <h3>Closing Out The Game</h3>
-      <p>Focus objectives like Baron/Elder. Use W, passive, Q to zone enemies and push waves. Avoid farming far from objectives. After core items, prioritize survival and objectives over kills.</p>
+      <p>Raptors, Krugs, Wolves, Gromp, Scuttle Crab</p>
     `;
   }
 
   if(value === "Hardest Matchups"){
     content = `
-      <h3>Hardest Matchups</h3>
       <p>Champions with high mobility and burst like Nidalee and Kha’Zix are difficult. They can force early ult usage and punish Ekko’s positioning.</p>
     `;
   }
 
   if(value === "Team Fighting"){
     content = `
-      <h3>Team Fighting</h3>
       <p>Proc passive on as many targets as possible. Land W on priority targets. Delay ult for maximum healing/damage. Use mobility to dodge key abilities. W + passive + ult are crucial for squishy targets.</p>
+    `;
+  }
+
+  if(value === "Closing Out The Game"){
+    content = `
+      <p>Focus objectives like Baron/Elder. Use W, passive, Q to zone enemies and push waves. Avoid farming far from objectives. After core items, prioritize survival and objectives over kills.</p>
     `;
   }
 
