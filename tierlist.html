@@ -1,8 +1,8 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
 <title>LoL Fundamentals – Tierlist</title>
 <style>
 body {
@@ -10,7 +10,7 @@ body {
   font-family: "Beaufort for LOL", Arial, Helvetica, sans-serif;
   background: #0a0f14;
   color: #e6edf3;
-  line-height: 1.4;
+  line-height: 1.6;
   text-align: center;
 }
 
@@ -26,11 +26,10 @@ header {
   color: #c9aa71;
 }
 
-/* Back Button */
+/* Gold Back Button */
 .back-button {
-  display: block;
-  width: max-content;
-  margin: 20px auto 15px auto;
+  display: inline-block;
+  margin: 20px auto;
   padding: 10px 20px;
   background: linear-gradient(135deg, #c9aa71, #e0c77b);
   color: #000;
@@ -40,78 +39,85 @@ header {
   transition: all 0.3s;
   box-shadow: 0 0 10px rgba(201,170,113,0.5);
 }
-.back-button::before { content: "← "; }
+.back-button::before {
+  content: "← ";
+}
 .back-button:hover {
   background: linear-gradient(135deg, #e6c97f, #f0d88b);
   box-shadow: 0 0 15px rgba(255,215,0,0.8);
 }
 
-/* Role Dropdown */
+/* Role selector */
 #roleSelect {
-  margin: 15px auto 30px auto;
+  margin: 15px auto 40px auto;
   padding: 8px 15px;
   font-size: 16px;
   border-radius: 6px;
   border: none;
-  cursor: pointer;
+  background: #161b22;
+  color: #e6edf3;
 }
 
-/* Champion Cards */
-.cards {
+/* Tier container */
+.tier-group {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-bottom: 40px;
+}
+.tier-divider {
+  text-align: center;
+  font-weight: bold;
+  font-size: 20px;
+  margin-bottom: 15px;
+  color: #c9aa71;
+}
+
+/* Cards inside each tier group */
+.tier-cards {
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
   gap: 20px;
   max-width: 1000px;
-  margin: auto;
 }
+
+/* Champion Card */
 .card {
-  width: 120px;
-  border-radius: 10px;
   background: #161b22;
-  border: 2px solid #2f81f7;
+  border: 2px solid #c9aa71;
+  border-radius: 10px;
+  width: 120px;
   padding: 10px;
-  box-shadow: 0 0 8px rgba(47,129,247,0.2);
   text-align: center;
-  cursor: pointer;
-  transition: transform 0.2s, box-shadow 0.2s;
-}
-.card:hover {
-  transform: translateY(-5px);
-  box-shadow: 0 0 15px rgba(47,129,247,0.5);
+  color: #e6edf3;
+  transition: transform 0.3s, box-shadow 0.3s;
 }
 .card img {
   width: 100px;
   height: 100px;
   border-radius: 8px;
+  margin-bottom: 5px;
 }
-.card .champ-name {
-  margin: 5px 0 0 0;
+.card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 5px 15px rgba(201,170,113,0.5);
+}
+.champ-name {
   font-weight: bold;
-  font-size: 14px;
+  margin-bottom: 2px;
 }
-.card .champ-rank {
-  font-size: 13px;
-  color: #c9aa71;
-  margin-top: 2px;
-}
-
-/* Tier Divider */
-.tier-divider {
-  width: 100%;
-  text-align: left;
-  font-weight: bold;
-  font-size: 18px;
-  margin: 30px 0 10px 10px;
+.champ-rank {
+  font-size: 0.9em;
   color: #c9aa71;
 }
 
 /* Footer */
 footer {
   text-align: center;
-  padding: 25px;
-  font-size: 14px;
+  padding: 30px;
   color: #8b949e;
+  font-size: 14px;
   background: #0a0f14;
   border-top: 1px solid #1f2937;
 }
@@ -119,7 +125,9 @@ footer a {
   color: #c9aa71;
   text-decoration: none;
 }
-footer a:hover { text-decoration: underline; }
+footer a:hover {
+  text-decoration: underline;
+}
 </style>
 </head>
 <body>
@@ -136,91 +144,195 @@ footer a:hover { text-decoration: underline; }
   <option value="Support">Support</option>
 </select>
 
-<div class="cards" id="championCards">
-  <!-- Champion cards will be injected here -->
-</div>
+<div id="championCards"></div>
 
 <footer>
-© 2025 LoL Fundamentals · Contact: <a href="mailto:arcsecond@lolfundamentals.com">arcsecond@lolfundamentals.com</a>
+© 2025 LoL Fundamentals · Contact:
+<a href="mailto:arcsecond@lolfundamentals.com">arcsecond@lolfundamentals.com</a>
 </footer>
 
 <script>
-// Require login
+// Require login to view page
 if(localStorage.getItem('lolfundamentals_logged_in') !== 'true'){
   window.location.href = 'index.html';
 }
 
-// Champion data
+// Fetch the CSV tierlist
+let champRanks = {};
+fetch('https://docs.google.com/spreadsheets/d/e/2PACX-1vRtIJeggpJ6cjGJt0OOds4OZDuHMMUxHCWzMiU1Bd4gJ8EvfZMXPE9p0X1K3yyeZs7bpFyQZHhHpnsu/pub?output=csv')
+.then(res => res.text())
+.then(csv => {
+  const lines = csv.split('\n');
+  const headers = lines[0].split(',');
+  lines.slice(1).forEach(line => {
+    const cols = line.split(',');
+    const champName = cols[0];
+    champRanks[champName] = {};
+    for(let i=1;i<headers.length;i++){
+      champRanks[champName][headers[i]] = cols[i];
+    }
+  });
+  renderCards();
+});
+
+// Champion list (all champions)
 const champions = [
-  {name:"Aatrox", role:"Top"}, {name:"Ahri", role:"Mid"}, {name:"Akali", role:"Mid"},
-  {name:"Akshan", role:"ADC"}, {name:"Alistar", role:"Support"}, {name:"Amumu", role:"Jungle"},
-  {name:"Anivia", role:"Mid"}, {name:"Annie", role:"Mid"}, {name:"Aphelios", role:"ADC"},
-  {name:"Ashe", role:"ADC"}, {name:"Aurelion Sol", role:"Mid"}, {name:"Azir", role:"Mid"},
-  {name:"Bard", role:"Support"}, {name:"Blitzcrank", role:"Support"}, {name:"Brand", role:"Mid"},
-  {name:"Braum", role:"Support"}, {name:"Caitlyn", role:"ADC"}, {name:"Camille", role:"Top"},
-  {name:"Cassiopeia", role:"Mid"}, {name:"Cho'Gath", role:"Top"}, {name:"Corki", role:"ADC"},
-  {name:"Diana", role:"Mid"}, {name:"Dr. Mundo", role:"Top"}, {name:"Draven", role:"ADC"},
-  {name:"Ekko", role:"Mid"}, {name:"Elise", role:"Jungle"}, {name:"Evelynn", role:"Jungle"},
-  {name:"Ezreal", role:"ADC"}, {name:"Fiddlesticks", role:"Jungle"}, {name:"Fiora", role:"Top"},
-  {name:"Fizz", role:"Mid"}, {name:"Galio", role:"Mid"}, {name:"Gangplank", role:"Top"},
-  {name:"Garen", role:"Top"}, {name:"Gnar", role:"Top"}, {name:"Gragas", role:"Jungle"},
-  {name:"Graves", role:"Jungle"}, {name:"Gwen", role:"Top"}, {name:"Hecarim", role:"Jungle"},
-  {name:"Heimerdinger", role:"Top"}, {name:"Illaoi", role:"Top"}, {name:"Irelia", role:"Top"},
-  {name:"Ivern", role:"Jungle"}, {name:"Janna", role:"Support"}, {name:"Jarvan IV", role:"Jungle"},
-  {name:"Jax", role:"Top"}, {name:"Jayce", role:"Top"}, {name:"Jhin", role:"ADC"},
-  {name:"Jinx", role:"ADC"}, {name:"Kaisa", role:"ADC"}, {name:"Kalista", role:"ADC"},
-  {name:"Karma", role:"Support"}, {name:"Karthus", role:"Mid"}, {name:"Kassadin", role:"Mid"},
-  {name:"Katarina", role:"Mid"}, {name:"Kayle", role:"Top"}, {name:"Kayn", role:"Jungle"},
-  {name:"Kennen", role:"Top"}, {name:"Kha'Zix", role:"Jungle"}, {name:"Kindred", role:"Jungle"},
-  {name:"Kled", role:"Top"}, {name:"Kog'Maw", role:"ADC"}, {name:"LeBlanc", role:"Mid"},
-  {name:"Lee Sin", role:"Jungle"}, {name:"Leona", role:"Support"}, {name:"Lillia", role:"Jungle"},
-  {name:"Lissandra", role:"Mid"}, {name:"Lucian", role:"ADC"}, {name:"Lulu", role:"Support"},
-  {name:"Lux", role:"Mid"}, {name:"Malphite", role:"Top"}, {name:"Malzahar", role:"Mid"},
-  {name:"Maokai", role:"Top"}, {name:"Master Yi", role:"Jungle"}, {name:"Miss Fortune", role:"ADC"},
-  {name:"Mordekaiser", role:"Top"}, {name:"Morgana", role:"Support"}, {name:"Nami", role:"Support"},
-  {name:"Nasus", role:"Top"}, {name:"Nautilus", role:"Support"}, {name:"Neeko", role:"Mid"},
-  {name:"Nidalee", role:"Jungle"}, {name:"Nilah", role:"ADC"}, {name:"Nocturne", role:"Jungle"},
-  {name:"Nunu & Willump", role:"Jungle"}, {name:"Olaf", role:"Jungle"}, {name:"Orianna", role:"Mid"},
-  {name:"Ornn", role:"Top"}, {name:"Pantheon", role:"Top"}, {name:"Poppy", role:"Top"},
-  {name:"Pyke", role:"Support"}, {name:"Qiyana", role:"Mid"}, {name:"Quinn", role:"Top"},
-  {name:"Rakan", role:"Support"}, {name:"Rammus", role:"Jungle"}, {name:"Rek'Sai", role:"Jungle"},
-  {name:"Rell", role:"Support"}, {name:"Renekton", role:"Top"}, {name:"Rengar", role:"Jungle"},
-  {name:"Riven", role:"Top"}, {name:"Rumble", role:"Top"}, {name:"Ryze", role:"Mid"},
-  {name:"Samira", role:"ADC"}, {name:"Sejuani", role:"Jungle"}, {name:"Senna", role:"Support"},
-  {name:"Seraphine", role:"Support"}, {name:"Sett", role:"Top"}, {name:"Shaco", role:"Jungle"},
-  {name:"Shen", role:"Top"}, {name:"Shyvana", role:"Jungle"}, {name:"Singed", role:"Top"},
-  {name:"Sion", role:"Top"}, {name:"Sivir", role:"ADC"}, {name:"Skarner", role:"Jungle"},
-  {name:"Sona", role:"Support"}, {name:"Soraka", role:"Support"}, {name:"Swain", role:"Mid"},
-  {name:"Sylas", role:"Mid"}, {name:"Syndra", role:"Mid"}, {name:"Tahm Kench", role:"Support"},
-  {name:"Taliyah", role:"Mid"}, {name:"Talon", role:"Mid"}, {name:"Taric", role:"Support"},
-  {name:"Teemo", role:"Top"}, {name:"Thresh", role:"Support"}, {name:"Tristana", role:"ADC"},
-  {name:"Trundle", role:"Jungle"}, {name:"Tryndamere", role:"Top"}, {name:"Twisted Fate", role:"Mid"},
-  {name:"Twitch", role:"ADC"}, {name:"Udyr", role:"Jungle"}, {name:"Urgot", role:"Top"},
-  {name:"Varus", role:"ADC"}, {name:"Vayne", role:"ADC"}, {name:"Veigar", role:"Mid"},
-  {name:"Vel'Koz", role:"Mid"}, {name:"Vex", role:"Mid"}, {name:"Vi", role:"Jungle"},
-  {name:"Viego", role:"Jungle"}, {name:"Viktor", role:"Mid"}, {name:"Vladimir", role:"Mid"},
-  {name:"Volibear", role:"Top"}, {name:"Warwick", role:"Jungle"}, {name:"Xayah", role:"ADC"},
-  {name:"Xerath", role:"Mid"}, {name:"Xin Zhao", role:"Jungle"}, {name:"Yasuo", role:"Mid"},
-  {name:"Yone", role:"Mid"}, {name:"Yorick", role:"Top"}, {name:"Yuumi", role:"Support"},
-  {name:"Zac", role:"Jungle"}, {name:"Zed", role:"Mid"}, {name:"Ziggs", role:"Mid"},
-  {name:"Zilean", role:"Support"}, {name:"Zoe", role:"Mid"}, {name:"Zyra", role:"Support"}
+  {name:"Aatrox", role:"Top"},
+  {name:"Ahri", role:"Mid"},
+  {name:"Akali", role:"Mid"},
+  {name:"Akshan", role:"Top"},
+  {name:"Alistar", role:"Support"},
+  {name:"Amumu", role:"Jungle"},
+  {name:"Anivia", role:"Mid"},
+  {name:"Annie", role:"Mid"},
+  {name:"Aphelios", role:"ADC"},
+  {name:"Ashe", role:"ADC"},
+  {name:"Aurelion Sol", role:"Mid"},
+  {name:"Azir", role:"Mid"},
+  {name:"Bard", role:"Support"},
+  {name:"Blitzcrank", role:"Support"},
+  {name:"Brand", role:"Support"},
+  {name:"Braum", role:"Support"},
+  {name:"Caitlyn", role:"ADC"},
+  {name:"Camille", role:"Top"},
+  {name:"Cassiopeia", role:"Mid"},
+  {name:"Cho'Gath", role:"Top"},
+  {name:"Corki", role:"ADC"},
+  {name:"Darius", role:"Top"},
+  {name:"Diana", role:"Mid"},
+  {name:"Dr. Mundo", role:"Top"},
+  {name:"Draven", role:"ADC"},
+  {name:"Ekko", role:"Mid"},
+  {name:"Elise", role:"Jungle"},
+  {name:"Evelynn", role:"Jungle"},
+  {name:"Ezreal", role:"ADC"},
+  {name:"Fiddlesticks", role:"Jungle"},
+  {name:"Fiora", role:"Top"},
+  {name:"Fizz", role:"Mid"},
+  {name:"Galio", role:"Top"},
+  {name:"Gangplank", role:"Top"},
+  {name:"Garen", role:"Top"},
+  {name:"Gnar", role:"Top"},
+  {name:"Gragas", role:"Jungle"},
+  {name:"Graves", role:"Jungle"},
+  {name:"Hecarim", role:"Jungle"},
+  {name:"Heimerdinger", role:"Mid"},
+  {name:"Illaoi", role:"Top"},
+  {name:"Irelia", role:"Top"},
+  {name:"Ivern", role:"Jungle"},
+  {name:"Janna", role:"Support"},
+  {name:"Jarvan IV", role:"Jungle"},
+  {name:"Jax", role:"Top"},
+  {name:"Jayce", role:"Top"},
+  {name:"Jhin", role:"ADC"},
+  {name:"Jinx", role:"ADC"},
+  {name:"Kaisa", role:"ADC"},
+  {name:"Kalista", role:"ADC"},
+  {name:"Karma", role:"Support"},
+  {name:"Karthus", role:"Jungle"},
+  {name:"Kassadin", role:"Mid"},
+  {name:"Katarina", role:"Mid"},
+  {name:"Kayle", role:"Top"},
+  {name:"Kayn", role:"Jungle"},
+  {name:"Kennen", role:"Top"},
+  {name:"Kha'Zix", role:"Jungle"},
+  {name:"Kindred", role:"Jungle"},
+  {name:"Kled", role:"Top"},
+  {name:"Kog'Maw", role:"ADC"},
+  {name:"LeBlanc", role:"Mid"},
+  {name:"Lee Sin", role:"Jungle"},
+  {name:"Leona", role:"Support"},
+  {name:"Lillia", role:"Jungle"},
+  {name:"Lissandra", role:"Mid"},
+  {name:"Lucian", role:"ADC"},
+  {name:"Lulu", role:"Support"},
+  {name:"Lux", role:"Mid"},
+  {name:"Malphite", role:"Top"},
+  {name:"Malzahar", role:"Mid"},
+  {name:"Maokai", role:"Top"},
+  {name:"Master Yi", role:"Jungle"},
+  {name:"Miss Fortune", role:"ADC"},
+  {name:"Mordekaiser", role:"Top"},
+  {name:"Morgana", role:"Support"},
+  {name:"Nami", role:"Support"},
+  {name:"Nasus", role:"Top"},
+  {name:"Nautilus", role:"Support"},
+  {name:"Neeko", role:"Mid"},
+  {name:"Nidalee", role:"Jungle"},
+  {name:"Nilah", role:"ADC"},
+  {name:"Nocturne", role:"Jungle"},
+  {name:"Nunu & Willump", role:"Jungle"},
+  {name:"Olaf", role:"Top"},
+  {name:"Orianna", role:"Mid"},
+  {name:"Ornn", role:"Top"},
+  {name:"Pantheon", role:"Top"},
+  {name:"Poppy", role:"Top"},
+  {name:"Pyke", role:"Support"},
+  {name:"Qiyana", role:"Mid"},
+  {name:"Quinn", role:"Top"},
+  {name:"Rakan", role:"Support"},
+  {name:"Rammus", role:"Jungle"},
+  {name:"Rek'Sai", role:"Jungle"},
+  {name:"Rell", role:"Support"},
+  {name:"Renekton", role:"Top"},
+  {name:"Rengar", role:"Jungle"},
+  {name:"Riven", role:"Top"},
+  {name:"Rumble", role:"Top"},
+  {name:"Ryze", role:"Mid"},
+  {name:"Samira", role:"ADC"},
+  {name:"Sejuani", role:"Jungle"},
+  {name:"Senna", role:"ADC"},
+  {name:"Seraphine", role:"Support"},
+  {name:"Sett", role:"Top"},
+  {name:"Shaco", role:"Jungle"},
+  {name:"Shen", role:"Top"},
+  {name:"Shyvana", role:"Top"},
+  {name:"Singed", role:"Top"},
+  {name:"Sion", role:"Top"},
+  {name:"Sivir", role:"ADC"},
+  {name:"Skarner", role:"Jungle"},
+  {name:"Sona", role:"Support"},
+  {name:"Soraka", role:"Support"},
+  {name:"Swain", role:"Mid"},
+  {name:"Sylas", role:"Mid"},
+  {name:"Syndra", role:"Mid"},
+  {name:"Tahm Kench", role:"Support"},
+  {name:"Taliyah", role:"Mid"},
+  {name:"Talon", role:"Mid"},
+  {name:"Taric", role:"Support"},
+  {name:"Teemo", role:"Top"},
+  {name:"Thresh", role:"Support"},
+  {name:"Tristana", role:"ADC"},
+  {name:"Trundle", role:"Top"},
+  {name:"Tryndamere", role:"Top"},
+  {name:"Twisted Fate", role:"Mid"},
+  {name:"Twitch", role:"ADC"},
+  {name:"Udyr", role:"Jungle"},
+  {name:"Urgot", role:"Top"},
+  {name:"Varus", role:"ADC"},
+  {name:"Vayne", role:"ADC"},
+  {name:"Veigar", role:"Mid"},
+  {name:"Vel'Koz", role:"Mid"},
+  {name:"Vi", role:"Jungle"},
+  {name:"Viego", role:"Jungle"},
+  {name:"Viktor", role:"Mid"},
+  {name:"Vladimir", role:"Mid"},
+  {name:"Volibear", role:"Top"},
+  {name:"Warwick", role:"Jungle"},
+  {name:"Wukong", role:"Top"},
+  {name:"Xayah", role:"ADC"},
+  {name:"Xerath", role:"Mid"},
+  {name:"Xin Zhao", role:"Jungle"},
+  {name:"Yasuo", role:"Mid"},
+  {name:"Yone", role:"Mid"},
+  {name:"Yuumi", role:"Support"},
+  {name:"Zac", role:"Jungle"},
+  {name:"Zed", role:"Mid"},
+  {name:"Ziggs", role:"Mid"},
+  {name:"Zilean", role:"Support"},
+  {name:"Zoe", role:"Mid"},
+  {name:"Zyra", role:"Support"}
 ];
-
-// Pull tier data from Google Sheet
-const tierCSV = "https://docs.google.com/spreadsheets/d/e/2PACX-1vRtIJeggpJ6cjGJt0OOds4OZDuHMMUxHCWzMiU1Bd4gJ8EvfZMXPE9p0X1K3yyeZs7bpFyQZHhHpnsu/pub?output=csv";
-let champRanks = {}; // { "Ahri": {Top:"-", Jungle:"-", Mid:"S", ...} }
-
-fetch(tierCSV)
-  .then(res => res.text())
-  .then(data => {
-    const rows = data.split("\n").slice(1); // skip header
-    rows.forEach(r => {
-      const [name, top, jungle, mid, adc, support] = r.split(",");
-      champRanks[name.trim()] = {Top: top, Jungle: jungle, Mid: mid, ADC: adc, Support: support};
-    });
-    renderCards();
-  })
-  .catch(err => console.error(err));
 
 function renderCards() {
   const role = document.getElementById('roleSelect').value;
@@ -231,11 +343,16 @@ function renderCards() {
   rankOrder.forEach(rank => {
     const tierChamps = champions.filter(champ => champ.role===role && (champRanks[champ.name]?.[role]||"-") === rank);
     if(tierChamps.length>0){
-      // Divider
+      const tierGroup = document.createElement("div");
+      tierGroup.className = "tier-group";
+
       const divider = document.createElement("div");
       divider.className = "tier-divider";
       divider.textContent = rank;
-      container.appendChild(divider);
+      tierGroup.appendChild(divider);
+
+      const tierCards = document.createElement("div");
+      tierCards.className = "tier-cards";
 
       tierChamps.forEach(champ=>{
         const imgName = champ.name.replace(/\s/g,'').replace(/'/g,"").replace(/&/g,"").replace(/\./g,"");
@@ -247,17 +364,18 @@ function renderCards() {
           <div class="champ-name">${champ.name}</div>
           <div class="champ-rank">${rank}</div>
         `;
-        container.appendChild(card);
+        tierCards.appendChild(card);
       });
+
+      tierGroup.appendChild(tierCards);
+      container.appendChild(tierGroup);
     }
   });
 }
 
 document.getElementById('roleSelect').addEventListener('change', renderCards);
 </script>
-
 </body>
 </html>
-
 
 
