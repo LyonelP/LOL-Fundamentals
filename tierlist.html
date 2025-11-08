@@ -1,258 +1,157 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
+<meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>LoL Fundamentals – Tierlist</title>
 <style>
 body {
- margin: 0;
- font-family: "Beaufort for LOL", Arial, Helvetica, sans-serif;
- background: #0a0f14;
- color: #e6edf3;
- text-align: center;
+  margin: 0;
+  font-family: "Beaufort for LOL", Arial, Helvetica, sans-serif;
+  background: #0a0f14;
+  color: #e6edf3;
+  line-height: 1.6;
+  text-align: center;
+  display: none; /* Hide content until login verified */
 }
 
 /* Header */
 header {
- background: #0d1117;
- border-bottom: 2px solid #c9aa71;
- padding: 20px 10px;
- font-weight: bold;
- font-size: 26px;
- text-transform: uppercase;
- color: #c9aa71;
- letter-spacing: 1px;
+  background: linear-gradient(90deg, #0a0f14, #1b2838);
+  border-bottom: 2px solid #c9aa71;
+  padding: 15px 20px;
+  font-weight: bold;
+  font-size: 24px;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  color: #c9aa71;
 }
 
-/* Back button */
-.back-button {
- display: inline-block;
- margin: 20px auto 10px;
- padding: 10px 20px;
- background: linear-gradient(135deg, #c9aa71, #e0c77b);
- color: #000;
- text-decoration: none;
- border-radius: 8px;
- font-weight: bold;
- transition: all 0.3s;
- box-shadow: 0 0 10px rgba(201,170,113,0.5);
-}
-.back-button::before {
- content: "← ";
-}
-.back-button:hover {
- background: linear-gradient(135deg, #e6c97f, #f0d88b);
- box-shadow: 0 0 15px rgba(255,215,0,0.8);
+/* Section */
+.section {
+  padding: 60px 20px;
+  max-width: 1000px;
+  margin: 40px auto;
 }
 
-/* Table styling */
-.tierlist-table {
- margin: 20px auto 60px;
- border-collapse: collapse;
- width: 90%;
- max-width: 1100px;
- background: #0d1117;
-}
-.tierlist-table th, .tierlist-table td {
- border: 1px solid #2f81f7;
- text-align: center;
- vertical-align: middle;
- padding: 10px;
-}
-.tierlist-table th {
- background: #0f1722;
- color: #c9aa71;
- font-size: 1em;
- border-bottom: 2px solid #2f81f7;
-}
-.tierlist-table td {
- height: 50px;
+/* Tierlist grid */
+.tierlist-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+  gap: 15px;
+  justify-items: center;
+  margin-top: 30px;
 }
 
-/* Champion column */
-.tierlist-table th:first-child,
-.tierlist-table td:first-child {
- width: 140px;
- text-align: left;
- padding-left: 12px;
+/* Champion card */
+.champ-card {
+  background: #161b22;
+  border: 2px solid #c9aa71;
+  border-radius: 12px;
+  padding: 10px;
+  width: 100%;
+  max-width: 150px;
+  transition: transform 0.3s, box-shadow 0.3s;
+  text-decoration: none;
+  color: #e6edf3;
+}
+.champ-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 10px 20px rgba(47,129,247,0.3);
+}
+.champ-card img {
+  width: 100%;
+  border-radius: 6px;
 }
 
-/* Role columns equal size */
-.tierlist-table th:nth-child(n+2),
-.tierlist-table td:nth-child(n+2) {
- width: 90px;
- min-width: 90px;
+/* Logout Button */
+#logoutBtn {
+  display: block;
+  margin: 80px auto 20px auto;
+  padding: 8px 20px;
+  background: #f94144;
+  color: #fff;
+  font-weight: bold;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: 0.3s;
+}
+#logoutBtn:hover {
+  background: #ff5959;
 }
 
-/* Role header images */
-.role-header img {
- width: 28px;
- height: 28px;
- display: block;
- margin: 0 auto 4px;
- filter: brightness(1.2);
+/* Footer */
+footer {
+  text-align: center;
+  padding: 30px;
+  color: #8b949e;
+  font-size: 14px;
+  background: #0a0f14;
+  border-top: 1px solid #1f2937;
 }
-
-/* Champion cell */
-.champion-cell {
- display: flex;
- align-items: center;
- gap: 8px;
+footer a {
+  color: #c9aa71;
+  text-decoration: none;
 }
-.champion-cell img {
- width: 32px;
- height: 32px;
- border-radius: 6px;
- object-fit: cover;
-}
-.champion-cell div {
- font-size: 0.95em;
- font-weight: 500;
- color: #c9aa71;
-}
-
-/* Tier colors */
-.tier-op { 
- background: linear-gradient(135deg, #fff300, #fffac8); 
- color: #000; 
- font-weight: bold;
- text-shadow: 0 0 8px rgba(255,255,200,0.9), 0 0 15px rgba(255,255,150,0.6);
- animation: opGlow 2.5s ease-in-out infinite alternate;
-}
-@keyframes opGlow {
- 0% { text-shadow: 0 0 6px rgba(255,255,200,0.7), 0 0 12px rgba(255,255,150,0.5); }
- 100% { text-shadow: 0 0 12px rgba(255,255,200,1), 0 0 25px rgba(255,255,150,0.9); }
-}
-
-.tier-s { 
- background: linear-gradient(135deg, #FF0000, #C0C0C0); 
- color: #000; 
-}
-
-.tier-a { 
- background: linear-gradient(135deg, #A020F0, #D8BFD8); 
- color: #fff; 
-}
-
-.tier-b { 
- background: linear-gradient(135deg, #00BFFF, #E0FFFF); 
- color: #000; 
-}
-
-.tier-c { 
- background: linear-gradient(135deg, #CD7F32, #C0C0C0); 
- color: #000; 
-}
-
-/* Hover effect */
-.tierlist-table tr:hover td {
- background-color: rgba(47,129,247,0.1);
-}
-
-@media (max-width: 500px) {
- header { font-size: 22px; padding: 15px 5px; }
- .champion-cell div { font-size: 0.85em; }
- .tierlist-table th:nth-child(n+2),
- .tierlist-table td:nth-child(n+2) { width: 70px; min-width: 70px; }
+footer a:hover {
+  text-decoration: underline;
 }
 </style>
 </head>
 <body>
-
 <header>LoL Fundamentals – Tierlist</header>
 
-<a href="membershub.html" class="back-button">Back to Members Hub</a>
+<section class="section">
+<h2>Champion Tierlist</h2>
+<p>See the strongest to weakest champions in the current meta.</p>
 
-<table class="tierlist-table" id="tierlist">
- <thead>
- <tr class="role-header">
- <th>Champion</th>
- <th><img src="https://static.wikia.nocookie.net/leagueoflegends/images/8/83/Top_icon.png" alt="Top"><div>Top</div></th>
- <th><img src="https://static.wikia.nocookie.net/leagueoflegends/images/7/79/Jungle_icon.png" alt="Jungle"><div>Jungle</div></th>
- <th><img src="https://static.wikia.nocookie.net/leagueoflegends/images/d/d0/Middle_icon.png" alt="Mid"><div>Mid</div></th>
- <th><img src="https://static.wikia.nocookie.net/leagueoflegends/images/9/97/Bottom_icon.png" alt="ADC"><div>ADC</div></th>
- <th><img src="https://static.wikia.nocookie.net/leagueoflegends/images/f/f0/Support_icon.png" alt="Support"><div>Support</div></th>
- </tr>
- </thead>
- <tbody></tbody>
-</table>
+<div class="tierlist-grid" id="tierlistContainer">
+  <!-- Champion cards will be injected here via JavaScript -->
+</div>
+
+<button id="logoutBtn">Logout</button>
+</section>
+
+<footer>
+© 2025 LoL Fundamentals · Contact:
+<a href="mailto:arcsecond@lolfundamentals.com">arcsecond@lolfundamentals.com</a>
+</footer>
 
 <script>
-const csvUrl = "https://docs.google.com/spreadsheets/d/e/2PACX-1vRtIJeggpJ6cjGJt0OOds4OZDuHMMUxHCWzMiU1Bd4gJ8EvfZMXPE9p0X1K3yyeZs7bpFyQZHhHpnsu/pub?output=csv";
-
-const tierMap = {
- 'OP': 'tier-op',
- 'S': 'tier-s',
- 'A': 'tier-a',
- 'B': 'tier-b',
- 'C': 'tier-c'
-};
-
-// Manual map for tricky champion names
-const nameFix = {
- "Cho'Gath": "Chogath",
- "Kha'Zix": "Khazix",
- "Vel'Koz": "Velkoz",
- "Kai'Sa": "Kaisa",
- "Bel'Veth": "Belveth",
- "Renata Glasc": "Renata",
- "Nunu & Willump": "Nunu",
- "Wukong": "MonkeyKing",
- "LeBlanc": "Leblanc",
- "Kog'Maw": "KogMaw",
- "Tahm Kench": "TahmKench"
-};
-
-function formatChampionName(name) {
- const clean = name.trim();
- if (nameFix[clean]) return nameFix[clean];
- return clean
- .normalize("NFD")
- .replace(/[\u0300-\u036f]/g, '')
- .replace(/['’]/g, '')
- .replace(/\s+/g, '')
- .replace(/[^a-zA-Z0-9]/g, '');
+// Require login before showing anything
+if(localStorage.getItem('lolfundamentals_logged_in') !== 'true'){
+  window.location.href = 'index.html';
+} else {
+  document.body.style.display = "block"; // Show content after login check
 }
 
-async function loadTierlist() {
- const res = await fetch(csvUrl);
- const text = await res.text();
- const lines = text.split("\n").filter(l => l.trim() !== "");
- const tbody = document.querySelector("#tierlist tbody");
+// Logout button
+document.getElementById('logoutBtn').addEventListener('click', () => {
+  localStorage.removeItem('lolfundamentals_logged_in');
+  window.location.href = 'index.html';
+});
 
- lines.forEach((line, index) => {
- if(index === 0) return;
- const [champion, top, jungle, mid, adc, support] = line.split(",");
- const row = document.createElement("tr");
+// Example champions for Tierlist (replace or extend as needed)
+const champions = [
+  { name: "Ahri", img: "https://ddragon.leagueoflegends.com/cdn/14.23.1/img/champion/Ahri.png", tier: "S" },
+  { name: "Akshan", img: "https://ddragon.leagueoflegends.com/cdn/14.23.1/img/champion/Akshan.png", tier: "A" },
+  { name: "Diana", img: "https://ddragon.leagueoflegends.com/cdn/14.23.1/img/champion/Diana.png", tier: "S" },
+  { name: "Ekko", img: "https://ddragon.leagueoflegends.com/cdn/14.23.1/img/champion/Ekko.png", tier: "B" }
+];
 
- const champCell = document.createElement("td");
- champCell.classList.add("champion-cell");
- const champName = champion.trim();
- const champUrlName = formatChampionName(champName);
- const champImage = `https://ddragon.leagueoflegends.com/cdn/14.23.1/img/champion/${champUrlName}.png`;
- champCell.innerHTML = `<img src="${champImage}" alt="${champName}" onerror="this.src='https://static.wikia.nocookie.net/leagueoflegends/images/3/3a/Summoner_Icon.png';"><div>${champName}</div>`;
- row.appendChild(champCell);
-
- [top, jungle, mid, adc, support].forEach(tier => {
- const cell = document.createElement("td");
- if(tier) {
- const cleanTier = tier.trim().toUpperCase();
- cell.textContent = cleanTier;
- cell.className = tierMap[cleanTier] || '';
- }
- row.appendChild(cell);
- });
-
- tbody.appendChild(row);
- });
-}
-
-loadTierlist();
+const container = document.getElementById('tierlistContainer');
+champions.forEach(champ => {
+  const card = document.createElement('a');
+  card.href = "#"; 
+  card.className = "champ-card";
+  card.innerHTML = `<img src="${champ.img}" alt="${champ.name}"><h4>${champ.name}</h4><p>Tier: ${champ.tier}</p>`;
+  container.appendChild(card);
+});
 </script>
-
 </body>
 </html>
+
 
 
 
