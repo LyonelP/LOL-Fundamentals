@@ -44,6 +44,14 @@
 </style>
 </head>
 <body>
+
+<script>
+// Require login to view page
+if (localStorage.getItem('lolfundamentals_logged_in') !== 'true') {
+  window.location.href = 'login.html';
+}
+</script>
+
 <header>Diana Mid Matchup – Katarina</header>
 
 <div style="text-align: center;">
@@ -69,13 +77,8 @@
 
 <footer>© 2025 LoL Fundamentals · Contact: arcsecond@lolfundamentals.com</footer>
 
-<script>
-// Require login to view page
-if (localStorage.getItem('lolfundamentals_logged_in') !== 'true') {
-  alert('You must be logged in to view this page.');
-  window.location.href = 'login.html';
-}
-</script>
 </body>
 </html>
+
+
 
