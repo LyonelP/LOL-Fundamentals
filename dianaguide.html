@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Diana Guide – LoL Fundamentals</title>
+<title>Diana Guide – Runes</title>
 <style>
 body {
   margin: 0;
@@ -19,7 +19,7 @@ header {
   border-bottom: 2px solid #c9aa71;
   padding: 20px 10px;
   font-weight: bold;
-  font-size: 26px;
+  font-size: 28px;
   text-transform: uppercase;
   color: #c9aa71;
   letter-spacing: 1px;
@@ -38,17 +38,19 @@ header {
   transition: all 0.3s;
   box-shadow: 0 0 10px rgba(201,170,113,0.5);
 }
-.back-button::before { content: "← "; }
+.back-button::before {
+  content: "← ";
+}
 .back-button:hover {
   background: linear-gradient(135deg, #e6c97f, #f0d88b);
   box-shadow: 0 0 15px rgba(255,215,0,0.8);
 }
 
-/* Section selector */
-#section-select-container {
+/* Skill selector */
+#skill-select-container {
   margin: 20px auto;
 }
-#section-select {
+#skill-select {
   padding: 10px 15px;
   font-size: 16px;
   border-radius: 6px;
@@ -58,8 +60,8 @@ header {
   cursor: pointer;
 }
 
-/* Section display */
-#section-info {
+/* Skill display */
+#skill-info {
   margin: 30px auto;
   max-width: 900px;
   background: #0d1117;
@@ -68,104 +70,102 @@ header {
   border-radius: 10px;
   text-align: left;
   color: #c9aa71;
-  min-height: 200px;
+  min-height: 150px;
 }
 
-/* Hover effect */
-#section-info:hover {
+/* Hover effect for skills */
+#skill-info:hover {
   box-shadow: 0 0 15px rgba(47,129,247,0.5);
+}
+
+#skill-info ul {
+  list-style: none;
+  padding: 0;
+}
+#skill-info li {
+  display: flex;
+  align-items: flex-start;
+  margin-bottom: 10px;
+}
+#skill-info li img {
+  width: 40px;
+  height: 40px;
+  margin-right: 10px;
 }
 
 @media (max-width: 500px) {
   header { font-size: 22px; padding: 15px 5px; }
-  #section-select { font-size: 14px; padding: 8px 10px; }
+  #skill-select { font-size: 14px; padding: 8px 10px; }
 }
 </style>
 </head>
 <body>
 
-<header>Diana Mid Lane Guide</header>
+<header>Diana Guide – Runes</header>
 
 <a href="membershub.html" class="back-button">Back to Members Hub</a>
 
-<div id="section-select-container">
-  <select id="section-select">
-    <option disabled selected>Pick a section</option>
+<div id="skill-select-container">
+  <select id="skill-select">
+    <option disabled selected>Pick a skill</option>
+    <option value="Runes">Runes</option>
   </select>
 </div>
 
-<div id="section-info">
-  <p>Select a section above to view details.</p>
+<div id="skill-info">
+  <p>Select a skill above to view details.</p>
 </div>
 
 <script>
 // Require login
 if (localStorage.getItem('lolfundamentals_logged_in') !== 'true') {
-  window.location.href = 'index.html';
+  window.location.href = 'index.html'; // redirect to login
 }
 
-// Diana guide sections
-const sections = [
-  "Introduction","Runes","Build","Summoner Spells","Abilities","Combos","Laning","Warding",
-  "Farming/Pushing","Teamfighting","Splitpushing","Closing Out the Game","Threats and Synergies",
-  "Pros and Cons","Extra Tips"
-];
-
-// Populate select dropdown
-const select = document.getElementById('section-select');
-sections.forEach(section => {
-  const option = document.createElement('option');
-  option.value = section;
-  option.textContent = section;
-  select.appendChild(option);
-});
-
-// Show selected section content
+// Show selected skill
+const select = document.getElementById('skill-select');
 select.addEventListener('change', () => {
-  const info = document.getElementById('section-info');
-  let content = `<h2>${select.value}</h2><p>Coming soon!</p>`;
-
-  // Add example content per section (replace later with full guide)
-  switch(select.value){
-    case "Introduction":
-      content = `<h2>Introduction</h2><p>Diana is a burst mage assassin with high all-in potential and strong scaling. This guide covers everything from laning to late-game strategies.</p>`;
-      break;
-    case "Runes":
-      content = `<h2>Runes</h2><ul><li>Primary: Electrocute or Conqueror</li><li>Secondary: Sorcery (Nimbus Cloak, Celerity)</li><li>Stat Shards: Attack Speed, Adaptive Force, Armor/Magic Resist</li></ul>`;
-      break;
-    case "Build":
-      content = `<h2>Build</h2><ul><li>Core: Night Harvester, Zhonya's Hourglass</li><li>Situational: Banshee’s Veil, Void Staff, Morellonomicon</li><li>Boots: Sorcerer's Shoes</li></ul>`;
-      break;
-    case "Abilities":
-      content = `<h2>Abilities</h2><ul><li>Passive – Moonsilver Blade</li><li>Q – Crescent Strike</li><li>W – Pale Cascade</li><li>E – Lunar Rush</li><li>R – Moonfall</li></ul>`;
-      break;
-    case "Combos":
-      content = `<h2>Combos</h2><ul><li>Standard: Q → W → E → Auto → R</li><li>All-in: W → E → Q → R → Ignite</li></ul>`;
-      break;
-    case "Laning":
-      content = `<h2>Laning</h2><p>Focus on farming and poking with Q. Engage after using your W shield and avoid extended trades if abilities are down.</p>`;
-      break;
-    case "Farming/Pushing":
-      content = `<h2>Farming/Pushing</h2><p>Use Q + W to clear waves efficiently. Push only when enemy mid is missing or after vision is secured.</p>`;
-      break;
-    case "Teamfighting":
-      content = `<h2>Teamfighting</h2><p>Flank using R and engage on squishy targets. Avoid getting locked down by CC.</p>`;
-      break;
-    case "Splitpushing":
-      content = `<h2>Splitpushing</h2><p>Diana can quickly take towers with W + E. Only split when your team can handle 4v5 scenarios.</p>`;
-      break;
-    case "Extra Tips":
-      content = `<h2>Extra Tips</h2><ul><li>Track enemy cooldowns before engaging.</li><li>Use minions to gap close with E.</li><li>Coordinate with jungler for mid-lane all-ins.</li></ul>`;
-      break;
-    default:
-      content = `<h2>${select.value}</h2><p>Coming soon!</p>`;
+  const skillInfo = document.getElementById('skill-info');
+  if (select.value === "Runes") {
+    skillInfo.innerHTML = `
+      <h2>Runes</h2>
+      <ul>
+        <li>
+          <img src="https://ddragon.leagueoflegends.com/cdn/14.23.1/img/perk/GraspOfTheUndying.png" alt="Grasp Of The Undying">
+          <span><strong>Grasp Of The Undying:</strong> This is the only rune and tree that allows Diana to play the way she’s intended to be played. It gives her the potential to win every matchup while not falling off as hard as Phase Rush.</span>
+        </li>
+        <li>
+          <img src="https://ddragon.leagueoflegends.com/cdn/14.23.1/img/perk/ShieldBash.png" alt="Shield Bash">
+          <span><strong>Shield Bash:</strong> Will out damage most other runes, and Diana can proc it twice with W.</span>
+        </li>
+        <li>
+          <img src="https://ddragon.leagueoflegends.com/cdn/14.23.1/img/perk/BonePlating.png" alt="Bone Plating">
+          <span><strong>Bone Plating:</strong> Best sustain tool in lane. Runes like Aery, Scorch, First Strike, and Comet all proc multiple plates. Gives the best chance to survive ganks and win duels later.</span>
+        </li>
+        <li>
+          <img src="https://ddragon.leagueoflegends.com/cdn/14.23.1/img/perk/SecondWind.png" alt="Second Wind">
+          <span><strong>Second Wind:</strong> Only worth considering against Yasuo and Yone. Bone Plating is often preferred for better scaling and survivability.</span>
+        </li>
+        <li>
+          <img src="https://ddragon.leagueoflegends.com/cdn/14.23.1/img/perk/Overgrowth.png" alt="Overgrowth">
+          <span><strong>Overgrowth:</strong> Best way for Diana to gain health besides Grasp. Provides bonus health scaling for shield strength.</span>
+        </li>
+        <li>
+          <img src="https://ddragon.leagueoflegends.com/cdn/14.23.1/img/perk/ManaflowBand.png" alt="Manaflow Band">
+          <span><strong>Manaflow Band:</strong> Covers Diana’s mana needs to pressure side lanes and jungle camps effectively. Essential for multi-rotation damage.</span>
+        </li>
+        <li>
+          <img src="https://ddragon.leagueoflegends.com/cdn/14.23.1/img/perk/Transcendence.png" alt="Transcendence">
+          <span><strong>Transcendence:</strong> Provides crucial ability haste and efficient cooldown reduction for mid/late teamfights.</span>
+        </li>
+      </ul>
+    `;
   }
-
-  info.innerHTML = content;
 });
 </script>
 
 </body>
 </html>
+
 
 
