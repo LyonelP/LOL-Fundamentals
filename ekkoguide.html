@@ -1,4 +1,4 @@
-<<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
 <meta charset="UTF-8" />
@@ -223,6 +223,7 @@ header {
 </div>
 
 <script>
+// Require login
 if (localStorage.getItem('lolfundamentals_logged_in') !== 'true') {
   window.location.href = 'index.html';
 }
@@ -247,7 +248,7 @@ sectionSelect.addEventListener('change', () => {
       <div class="rune-container">
         <div class="rune-info">
           <img src="https://ddragon.leagueoflegends.com/cdn/img/perk-images/Styles/Domination/DarkHarvest/DarkHarvest.png" class="icon">
-          <span><strong>Dark Harvest:</strong> Scales perfectly with Ekko's burst and resets; lets you one-shot in late fights.</span>
+          <span><strong>Dark Harvest:</strong> Scales perfectly with Ekko's burst and resets; lets you one‑shot in late fights.</span>
         </div>
         <div class="rune-info">
           <img src="https://ddragon.leagueoflegends.com/cdn/img/perk-images/Styles/Domination/SuddenImpact/SuddenImpact.png" class="icon">
@@ -255,11 +256,11 @@ sectionSelect.addEventListener('change', () => {
         </div>
         <div class="rune-info">
           <img src="https://ddragon.leagueoflegends.com/cdn/img/perk-images/Styles/Domination/EyeballCollection/EyeballCollection.png" class="icon">
-          <span><strong>Eyeball Collection:</strong> Free AP for kills and assists; snowballs Ekko's mid-game power.</span>
+          <span><strong>Eyeball Collection:</strong> Free AP for kills and assists; snowballs Ekko’s mid‑game power.</span>
         </div>
         <div class="rune-info">
           <img src="https://ddragon.leagueoflegends.com/cdn/img/perk-images/Styles/Domination/TreasureHunter/TreasureHunter.png" class="icon">
-          <span><strong>Treasure Hunter:</strong> Gives extra gold; helps snowball early Ekko powerspikes.</span>
+          <span><strong>Treasure Hunter:</strong> Gives extra gold; helps snowball early Ekko power spikes.</span>
         </div>
         <div class="rune-info">
           <img src="https://ddragon.leagueoflegends.com/cdn/img/perk-images/Styles/Inspiration/MagicalFootwear/MagicalFootwear.png" class="icon">
@@ -270,7 +271,7 @@ sectionSelect.addEventListener('change', () => {
           <span><strong>Cosmic Insight:</strong> CDR on Smite, Flash, and Ult; crucial for Ekko jungle rotations.</span>
         </div>
         <div class="rune-row">
-          <img src="https://ddragon.leagueoflegends.com/cdn/img/perk-images/StatMods/StatModsAdaptiveForceIcon.png" title="Adaptive Force">
+          <img src="https://ddragon.leagueoflegends.com/cdn/img/perk-images/StatMods/StatModsAttackSpeedIcon.png" title="Attack Speed">
           <img src="https://ddragon.leagueoflegends.com/cdn/img/perk-images/StatMods/StatModsAdaptiveForceIcon.png" title="Adaptive Force">
           <img src="https://ddragon.leagueoflegends.com/cdn/img/perk-images/StatMods/StatModsHealthScalingIcon.png" title="Health Scaling">
         </div>
@@ -282,14 +283,14 @@ sectionSelect.addEventListener('change', () => {
     content = `
       <h3>Build</h3>
       <div class="build-flow">
-        <div><img src="https://ddragon.leagueoflegends.com/cdn/img/item/2031.png" class="icon">Mosstomper Seedling</div><span>→</span>
-        <div><img src="https://ddragon.leagueoflegends.com/cdn/img/item/1082.png" class="icon">Dark Seal</div><span>→</span>
-        <div><img src="https://ddragon.leagueoflegends.com/cdn/img/item/3115.png" class="icon">Nashor's Tooth</div><span>→</span>
-        <div><img src="https://ddragon.leagueoflegends.com/cdn/img/item/3111.png" class="icon">Mercury's Treads</div><span>→</span>
-        <div><img src="https://ddragon.leagueoflegends.com/cdn/img/item/3157.png" class="icon">Zhonya's Hourglass</div><span>→</span>
-        <div><img src="https://ddragon.leagueoflegends.com/cdn/img/item/3089.png" class="icon">Rabadon's Deathcap</div><span>→</span>
-        <div><img src="https://ddragon.leagueoflegends.com/cdn/img/item/3100.png" class="icon">Lich Bane</div><span>→</span>
-        <div><img src="https://ddragon.leagueoflegends.com/cdn/img/item/3135.png" class="icon">Void Staff</div>
+        <div><img src="https://ddragon.leagueoflegends.com/cdn/14.21.1/img/item/2031.png" class="icon">Mosstomper Seedling</div><span>→</span>
+        <div><img src="https://ddragon.leagueoflegends.com/cdn/14.21.1/img/item/1082.png" class="icon">Dark Seal</div><span>→</span>
+        <div><img src="https://ddragon.leagueoflegends.com/cdn/14.21.1/img/item/3115.png" class="icon">Nashor's Tooth</div><span>→</span>
+        <div><img src="https://ddragon.leagueoflegends.com/cdn/14.21.1/img/item/3111.png" class="icon">Mercury's Treads</div><span>→</span>
+        <div><img src="https://ddragon.leagueoflegends.com/cdn/14.21.1/img/item/3157.png" class="icon">Zhonya's Hourglass</div><span>→</span>
+        <div><img src="https://ddragon.leagueoflegends.com/cdn/14.21.1/img/item/3089.png" class="icon">Rabadon's Deathcap</div><span>→</span>
+        <div><img src="https://ddragon.leagueoflegends.com/cdn/14.21.1/img/item/3100.png" class="icon">Lich Bane</div><span>→</span>
+        <div><img src="https://ddragon.leagueoflegends.com/cdn/14.21.1/img/item/3135.png" class="icon">Void Staff</div>
       </div>
     `;
   }
@@ -297,16 +298,16 @@ sectionSelect.addEventListener('change', () => {
   if(value === "Summoner Spells"){
     content = `
       <h3>Summoner Spells</h3>
-      <p><img src="https://ddragon.leagueoflegends.com/cdn/12.23.1/img/spell/SummonerFlash.png" class="icon"><strong>Flash:</strong> Essential for outplays and mobility.</p>
-      <p><img src="https://ddragon.leagueoflegends.com/cdn/12.23.1/img/spell/SummonerSmite.png" class="icon"><strong>Smite:</strong> Must-have for jungle clears, objective control, and Ekko combos with blue smite.</p>
+      <p><img src="https://ddragon.leagueoflegends.com/cdn/14.21.1/img/spell/SummonerFlash.png" class="icon"><strong>Flash:</strong> Essential for outplays and mobility.</p>
+      <p><img src="https://ddragon.leagueoflegends.com/cdn/14.21.1/img/spell/SummonerSmite.png" class="icon"><strong>Smite:</strong> Must‑have for jungle clears, objective control, and Ekko combos with blue smite.</p>
     `;
   }
 
   if(value === "Abilities"){
     content = `
       <h3>Abilities</h3>
-      <p><img src="https://ddragon.leagueoflegends.com/cdn/14.21.1/img/passive/Ekko_P.png" class="icon"><strong>Passive – Z-Drive Resonance:</strong> Every 3rd hit deals bonus magic damage and grants move speed. Key for early clears and extended fights.</p>
-      <p><img src="https://ddragon.leagueoflegends.com/cdn/14.21.1/img/spell/EkkoQ.png" class="icon"><strong>Q – Timewinder:</strong> Main poke and clear tool. Double hit for max damage — aim so it hits twice on camps or enemies.</p>
+      <p><img src="https://ddragon.leagueoflegends.com/cdn/14.21.1/img/passive/Ekko_P.png" class="icon"><strong>Passive – Z‑Drive Resonance:</strong> Every 3rd hit deals bonus magic damage and grants move speed. Key for early clears and extended fights.</p>
+      <p><img src="https://ddragon.leagueoflegends.com/cdn/14.21.1/img/spell/EkkoQ.png" class="icon"><strong>Q – Timewinder:</strong> Main poke and clear tool. Double‑hit for max damage — aim so it hits twice on camps or enemies.</p>
       <p><img src="https://ddragon.leagueoflegends.com/cdn/14.21.1/img/spell/EkkoW.png" class="icon"><strong>W – Parallel Convergence:</strong> Shield and stun zone. Best when cast from fog before a gank or dive; gives massive outplay potential.</p>
       <p><img src="https://ddragon.leagueoflegends.com/cdn/14.21.1/img/spell/EkkoE.png" class="icon"><strong>E – Phase Dive:</strong> Mobility + auto reset. Use through walls or in quick burst combos with Q.</p>
       <p><img src="https://ddragon.leagueoflegends.com/cdn/14.21.1/img/spell/EkkoR.png" class="icon"><strong>R – Chronobreak:</strong> Rewind time, heal, and burst. Perfect for tower dives or baiting assassins.</p>
@@ -338,6 +339,12 @@ sectionSelect.addEventListener('change', () => {
       <p><strong>First Clear:</strong> Red → Raptors → Wolves → Blue → Gromp → Scuttle → Ganks</p>
       <p><strong>Alternative:</strong> Blue → Gromp → Wolves → Raptors → Red → Krugs → Scuttle</p>
       <p><strong>Second Clear:</strong> Path to respawned camps or look for ganks.</p>
+      <h4 style="color:#c9aa71; margin-top:16px;">Preferred Jungle Camps</h4>
+      <p><strong>Raptors:</strong> Fast clear, strong gank potential.</p>
+      <p><strong>Krugs:</strong> Highest XP/minor camp; great if time allows full clear.</p>
+      <p><strong>Wolves:</strong> Solid gold and flex pathing.</p>
+      <p><strong>Gromp:</strong> Often last; strong XP for scaling.</p>
+      <p><strong>Scuttle Crab:</strong> Priority objective—grants river control and vision.</p>
     `;
   }
 
@@ -351,7 +358,7 @@ sectionSelect.addEventListener('change', () => {
   if(value === "Hardest Matchups"){
     content = `
       <h3>Hardest Matchups</h3>
-      <p>Champions with high mobility and burst like Nidalee and Kha'Zix are difficult. They can force early ult usage and punish Ekko's positioning.</p>
+      <p>Champions with high mobility and burst like Nidalee and Kha’Zix are difficult. They can force early ult usage and punish Ekko’s positioning.</p>
     `;
   }
 
@@ -368,8 +375,3 @@ sectionSelect.addEventListener('change', () => {
 
 </body>
 </html>
-
-
-
-
-
