@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
+<meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>LoL Fundamentals – Skills Hub</title>
 <style>
@@ -101,6 +101,11 @@ header {
 </div>
 
 <script>
+// Require login
+if (localStorage.getItem('lolfundamentals_logged_in') !== 'true') {
+  window.location.href = 'index.html'; // redirect to login
+}
+
 // List of all fundamentals skills
 const skills = [
 "Map Awareness","Communication","Pings","Your Champion","Summoner Spell Usage","Mindset","Mouse Accuracy",
@@ -125,17 +130,13 @@ skills.forEach(skill => {
 // Show selected skill
 select.addEventListener('change', () => {
   const skillInfo = document.getElementById('skill-info');
-  
-  if (select.value === "Map Awareness") {
+
+  if (select.value === "Laning") {
     skillInfo.innerHTML = `
-      <h2>${select.value}</h2>
-      <div style="position:relative;padding-bottom:56.25%;height:0;overflow:hidden;">
-        <iframe src="https://www.youtube.com/embed/5dMKeChf53s" 
-                frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
-                allowfullscreen 
-                style="position:absolute;top:0;left:0;width:100%;height:100%;">
-        </iframe>
-      </div>
+      <h2>Laning</h2>
+      <p>Learn all about effective laning techniques, wave management, and matchup knowledge.</p>
+      <iframe width="100%" height="480" src="https://www.youtube.com/embed/WUi9pOT6wYc" 
+      title="Laning Skill Video" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
     `;
   } else {
     skillInfo.innerHTML = `<h2>${select.value}</h2><p>Coming soon!</p>`;
@@ -145,5 +146,7 @@ select.addEventListener('change', () => {
 
 </body>
 </html>
+
+
 
 
