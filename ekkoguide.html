@@ -138,15 +138,9 @@ header {
 
 .card {
   background: rgba(20,25,35,0.85);
-  border: 1px solid #c9aa71;
-  border-radius: 10px;
   padding: 15px;
   text-align: center;
   transition: all 0.3s;
-}
-.card:hover {
-  background: rgba(30,35,45,0.95);
-  box-shadow: 0 0 10px #c9aa71;
 }
 .card strong { display: block; margin-bottom: 6px; color: #e0c77b; }
 
@@ -160,9 +154,6 @@ header {
   margin-top: 10px;
 }
 .build-flow div {
-  background: rgba(20,25,35,0.85);
-  border: 1px solid #c9aa71;
-  border-radius: 8px;
   padding: 10px 12px;
   min-width: 120px;
   text-align: center;
@@ -238,28 +229,31 @@ sectionSelect.addEventListener('change', () => {
         </div>
         <div class="rune-info">
           <img src="https://ddragon.leagueoflegends.com/cdn/img/perk-images/Styles/Domination/SuddenImpact/SuddenImpact.png" class="icon">
-          <span><strong>Sudden Impact:</strong> Synergizes with E dash for consistent magic pen after every engage.</span>
+          <span><strong>Sudden Impact:</strong> Synergizes with E dash for consistent magic pen.</span>
         </div>
         <div class="rune-info">
           <img src="https://ddragon.leagueoflegends.com/cdn/img/perk-images/Styles/Domination/EyeballCollection/EyeballCollection.png" class="icon">
-          <span><strong>Eyeball Collection:</strong> Free AP for kills and assists; snowballs Ekko’s mid-game power.</span>
+          <span><strong>Eyeball Collection:</strong> Free AP for kills and assists; snowballs Ekko’s mid‑game power.</span>
         </div>
         <div class="rune-info">
           <img src="https://ddragon.leagueoflegends.com/cdn/img/perk-images/Styles/Domination/TreasureHunter/TreasureHunter.png" class="icon">
-          <span><strong>Treasure Hunter:</strong> Gives extra gold; helps snowball early Ekko power spikes.</span>
+          <span><strong>Treasure Hunter:</strong> Gives extra gold; helps snowball early.</span>
         </div>
         <div class="rune-info">
           <img src="https://ddragon.leagueoflegends.com/cdn/img/perk-images/Styles/Inspiration/MagicalFootwear/MagicalFootwear.png" class="icon">
-          <span><strong>Magical Footwear:</strong> Free boots for faster core build; movement speed advantage.</span>
+          <span><strong>Magical Footwear:</strong> Free boots for faster core build.</span>
         </div>
         <div class="rune-info">
-          <img src="https://ddragon.leagueoflegends.com/cdn/img/perk-images/Styles/Inspiration/JackOfAllTrades/JackOfAllTrades.png" class="icon">
-          <span><strong>Jack of All Trades:</strong> Provides adaptive stats, helping Ekko scale in early fights.</span>
+          <img src="https://ddragon.leagueoflegends.com/cdn/img/perk-images/Styles/Inspiration/CosmicInsight/CosmicInsight.png" class="icon">
+          <span><strong>Cosmic Insight:</strong> Provides ability and summoner spell cooldown reduction—vital for Ekko jungle.</span>
         </div>
         <div class="rune-row">
           <img src="https://ddragon.leagueoflegends.com/cdn/img/perk-images/StatMods/StatModsAttackSpeedIcon.png" title="Attack Speed">
+          <span>Attack Speed</span>
           <img src="https://ddragon.leagueoflegends.com/cdn/img/perk-images/StatMods/StatModsAdaptiveForceIcon.png" title="Adaptive Force">
-          <img src="https://ddragon.leagueoflegends.com/cdn/img/perk-images/StatMods/StatModsHealthScalingIcon.png" title="Health Scaling">
+          <span>Adaptive Force</span>
+          <img src="https://ddragon.leagueoflegends.com/cdn/img/perk-images/StatMods/StatModsHealthScalingIcon.png" title="Scaling Health">
+          <span>Scaling Health</span>
         </div>
       </div>
     `;
@@ -271,26 +265,70 @@ sectionSelect.addEventListener('change', () => {
       <div class="card-container">
         <div class="card"><strong>Starting items</strong>
           <div class="build-flow">
-            <div><img src="https://ddragon.leagueoflegends.com/cdn/14.21.1/img/item/2031.png" class="icon">Mosstomper Seedling</div>
+            <div><img src="https://ddragon.leagueoflegends.com/cdn/14.21.1/img/item/1082.png" class="icon">Dark Seal</div>
+            <span>→</span>
             <div><img src="https://ddragon.leagueoflegends.com/cdn/14.21.1/img/item/1052.png" class="icon">Amp Tome</div>
-            <div><img src="https://ddragon.leagueoflegends.com/cdn/14.21.1/img/item/1082.png" class="icon">Mercury's Treads</div>
+            <span>→</span>
+            <div><img src="https://ddragon.leagueoflegends.com/cdn/14.21.1/img/item/2031.png" class="icon">Mosstomper Seedling</div>
           </div>
         </div>
         <div class="card"><strong>Core items</strong>
           <div class="build-flow">
             <div><img src="https://ddragon.leagueoflegends.com/cdn/14.21.1/img/item/3115.png" class="icon">Nashor's Tooth</div>
+            <span>→</span>
             <div><img src="https://ddragon.leagueoflegends.com/cdn/14.21.1/img/item/3100.png" class="icon">Lich Bane</div>
+            <span>→</span>
             <div><img src="https://ddragon.leagueoflegends.com/cdn/14.21.1/img/item/3089.png" class="icon">Rabadon's Deathcap</div>
           </div>
         </div>
         <div class="card"><strong>Final items</strong>
           <div class="build-flow">
             <div><img src="https://ddragon.leagueoflegends.com/cdn/14.21.1/img/item/3157.png" class="icon">Zhonya's Hourglass</div>
+            <span>→</span>
             <div><img src="https://ddragon.leagueoflegends.com/cdn/14.21.1/img/item/3135.png" class="icon">Void Staff</div>
-            <div><img src="https://ddragon.leagueoflegends.com/cdn/14.21.1/img/item/2138.png" class="icon">Elixirs</div>
+            <span>→</span>
+            <div><img src="https://ddragon.leagueoflegends.com/cdn/14.21.1/img/item/2138.png" class="icon">Elixir(s)</div>
           </div>
         </div>
       </div>
+    `;
+  }
+
+  if(value === "Summoner spells"){
+    content = `
+      ${header}
+      <p><img src="https://ddragon.leagueoflegends.com/cdn/14.21.1/img/spell/SummonerFlash.png" class="icon"><strong>Flash:</strong> Essential for outplays and mobility.</p>
+      <p><img src="https://ddragon.leagueoflegends.com/cdn/14.21.1/img/spell/SummonerSmite.png" class="icon"><strong>Smite:</strong> Must‑have for jungle clears, objective control, and Ekko combos with blue smite.</p>
+    `;
+  }
+
+  if(value === "Abilities"){
+    content = `
+      ${header}
+      <p><img src="https://ddragon.leagueoflegends.com/cdn/14.21.1/img/passive/Ekko_P.png" class="icon"><strong>Passive – Z‑Drive Resonance:</strong> Every 3rd hit deals bonus magic damage and grants movespeed.</p>
+      <p><img src="https://ddragon.leagueoflegends.com/cdn/14.21.1/img/spell/EkkoQ.png" class="icon"><strong>Q – Timewinder:</strong> Main poke and clear tool.</p>
+      <p><img src="https://ddragon.leagueoflegends.com/cdn/14.21.1/img/spell/EkkoW.png" class="icon"><strong>W – Parallel Convergence:</strong> Shield & stun zone.</p>
+      <p><img src="https://ddragon.leagueoflegends.com/cdn/14.21.1/img/spell/EkkoE.png" class="icon"><strong>E – Phase Dive:</strong> Mobility + auto‑reset.</p>
+      <p><img src="https://ddragon.leagueoflegends.com/cdn/14.21.1/img/spell/EkkoR.png" class="icon"><strong>R – Chronobreak:</strong> Rewind time, heal, burst.</p>
+    `;
+  }
+
+  if(value === "Combos"){
+    content = `
+      ${header}
+      <p><strong>W E E Q AA:</strong> Basic combo.</p>
+      <p><strong>E E Q AA W AA:</strong> Best for extended trades.</p>
+      <p><strong>E Q E AA:</strong> Guaranteed burst if Q hits.</p>
+      <p><strong>Q AA E:</strong> Quick trades or finishing off targets.</p>
+      <p><strong>W E Q:</strong> Safe slow + passive proc.</p>
+    `;
+  }
+
+  if(value === "Level 1"){
+    content = `
+      ${header}
+      <p>Blue side: Ward tri bush, move mid, throw W toward pixel brush. Use W on starting camp at 1:27.</p>
+      <p>Red side: Mirror path; tri bush ward less critical.</p>
     `;
   }
 
@@ -298,27 +336,57 @@ sectionSelect.addEventListener('change', () => {
     content = `
       ${header}
       <div class="card-container">
-        <div class="card"><strong>First Clear</strong>
+        <div class="card"><strong>First clear path</strong>
           <div class="build-flow">
             <div><img src="https://ddragon.leagueoflegends.com/cdn/img/champion/loading/RedBrum.png" class="icon">Red Buff</div>
+            <span>→</span>
             <div><img src="https://ddragon.leagueoflegends.com/cdn/img/champion/loading/Raptors.png" class="icon">Raptors</div>
+            <span>→</span>
             <div><img src="https://ddragon.leagueoflegends.com/cdn/img/champion/loading/Wolves.png" class="icon">Wolves</div>
+            <span>→</span>
             <div><img src="https://ddragon.leagueoflegends.com/cdn/img/champion/loading/Blue.png" class="icon">Blue Buff</div>
+            <span>→</span>
             <div><img src="https://ddragon.leagueoflegends.com/cdn/img/champion/loading/Gromp.png" class="icon">Gromp</div>
+            <span>→</span>
             <div><img src="https://ddragon.leagueoflegends.com/cdn/img/champion/loading/Scuttle.png" class="icon">Scuttle</div>
           </div>
         </div>
-        <div class="card"><strong>Second Clear / Ganks</strong>
+        <div class="card"><strong>Second clear / gank transition</strong>
           <div class="build-flow">
             <div><img src="https://ddragon.leagueoflegends.com/cdn/img/champion/loading/RedBrum.png" class="icon">Red Buff</div>
+            <span>→</span>
             <div><img src="https://ddragon.leagueoflegends.com/cdn/img/champion/loading/Krugs.png" class="icon">Krugs</div>
+            <span>→</span>
             <div><img src="https://ddragon.leagueoflegends.com/cdn/img/champion/loading/Wolves.png" class="icon">Wolves</div>
+            <span>→</span>
             <div><img src="https://ddragon.leagueoflegends.com/cdn/img/champion/loading/Blue.png" class="icon">Blue Buff</div>
+            <span>→</span>
             <div><img src="https://ddragon.leagueoflegends.com/cdn/img/champion/loading/Scuttle.png" class="icon">Scuttle</div>
           </div>
         </div>
       </div>
-      <p>Preferred jungle camps: Raptors for heals, Krugs for XP, Wolf camp for clear speed, Gromp for challenging camp, Scuttle for vision and fast XP. Dragon control early if possible.</p>
+      <p>Preferred jungle camps: Raptors (heals & gank potential), Krugs (XP heavy), Wolves (clear speed), Gromp (challenging camp for scaling), Scuttle (vision & objective control).</p>
+    `;
+  }
+
+  if(value === "Hardest matchups"){
+    content = `
+      ${header}
+      <p>Champions with high mobility and burst like Nidalee and Kha’Zix are difficult. They can force early ult usage and punish Ekko’s positioning.</p>
+    `;
+  }
+
+  if(value === "Team fighting"){
+    content = `
+      ${header}
+      <p>Proc passive on as many targets as possible. Land W on priority targets. Delay ult for maximum healing/damage. Use mobility to dodge key abilities. W + passive + ult are crucial for squishy targets.</p>
+    `;
+  }
+
+  if(value === "Closing out the game"){
+    content = `
+      ${header}
+      <p>Focus objectives like Baron/Elder. Use W, passive, Q to zone enemies and push waves. Avoid farming far from objectives. After core items, prioritize survival and objectives over kills.</p>
     `;
   }
 
