@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>LoL Fundamentals – Skills Hub</title>
+<title>Diana Runes – LoL Fundamentals</title>
 <style>
 body {
   margin: 0;
@@ -47,143 +47,84 @@ header {
   box-shadow: 0 0 15px rgba(255,215,0,0.8);
 }
 
-/* Skill selector */
-#skill-select-container {
-  margin: 20px auto;
-}
-#skill-select {
-  padding: 10px 15px;
-  font-size: 16px;
-  border-radius: 6px;
-  border: none;
-  background: rgba(15,23,34,0.85);
-  color: #c9aa71;
-  cursor: pointer;
-}
-
-/* Skill display */
-#skill-info {
-  margin: 30px auto;
+/* Runes container */
+#runes-container {
   max-width: 900px;
+  margin: 30px auto;
   background: rgba(13,17,23,0.85);
-  border: 1px solid #2f81f7;
   padding: 20px;
   border-radius: 10px;
   text-align: left;
-  color: #c9aa71;
-  min-height: 150px;
 }
 
-/* Hover effect for skills */
-#skill-info:hover {
+.rune-item {
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+  margin-bottom: 15px;
+}
+
+.rune-item img {
+  width: 48px;
+  height: 48px;
+  flex-shrink: 0;
+}
+
+.rune-item p {
+  margin: 0;
+  font-size: 16px;
+  color: #c9aa71;
+}
+
+/* Hover effect */
+#runes-container:hover {
   box-shadow: 0 0 15px rgba(47,129,247,0.5);
 }
 
-@media (max-width: 500px) {
+@media (max-width: 600px) {
   header { font-size: 22px; padding: 15px 5px; }
-  #skill-select { font-size: 14px; padding: 8px 10px; }
+  .rune-item { flex-direction: column; align-items: center; text-align: center; }
+  .rune-item img { margin-bottom: 5px; }
 }
 </style>
 </head>
 <body>
 
-<header>LoL Fundamentals – Skills Hub</header>
+<header>Diana Runes – LoL Fundamentals</header>
 
 <a href="membershub.html" class="back-button">Back to Members Hub</a>
 
-<div id="skill-select-container">
-  <select id="skill-select">
-    <option disabled selected>Pick a skill</option>
-  </select>
+<div id="runes-container">
+  <div class="rune-item">
+    <img src="https://ddragon.leagueoflegends.com/cdn/14.23.1/img/perk/8020.png" alt="Grasp Of The Undying">
+    <p><strong>Grasp Of The Undying:</strong> This is the only rune and tree that allows Diana to play the way she’s intended to be played. It’s the rune that gives her the potential to win every matchup while also not falling off nearly as hard as another option like Phase Rush which is her second best tree.</p>
+  </div>
+
+  <div class="rune-item">
+    <img src="https://ddragon.leagueoflegends.com/cdn/14.23.1/img/perk/8014.png" alt="Shield Bash">
+    <p><strong>Shield Bash:</strong> Will out damage most other runes, and Diana can proc it twice with W.</p>
+  </div>
+
+  <div class="rune-item">
+    <img src="https://ddragon.leagueoflegends.com/cdn/14.23.1/img/perk/9111.png" alt="Bone Plating">
+    <p><strong>Bone Plating:</strong> Best sustain tool in lane. Runes like Aery, Scorch, First Strike, and Comet all proc multiple plates. This also gives you the best chance of surviving a gank and winning a duel later on in the game.</p>
+  </div>
+
+  <div class="rune-item">
+    <img src="https://ddragon.leagueoflegends.com/cdn/14.23.1/img/perk/9101.png" alt="Overgrowth">
+    <p><strong>Overgrowth:</strong> Best way for Diana to gain health besides Grasp, since the build doesn't include any health items. Diana requires health to engage melee champions and she has a 9% bonus health ratio on the shield strength that can be proc’ed twice for a total ratio of 18%.</p>
+  </div>
+
+  <div class="rune-item">
+    <img src="https://ddragon.leagueoflegends.com/cdn/14.23.1/img/perk/8008.png" alt="Manaflow Band">
+    <p><strong>Manaflow Band:</strong> This rune perfectly covers the amount of mana Diana requires to play the game. Without Manaflow Band you won’t be able to take full advantage of Diana’s side lane pressure. Diana should always be looking to take the enemy jungler’s camps, especially now while her passive monster ratio is at 300%. Without Manaflow Band you always won’t be able to deal with any champion that has resists since multiple damage rotations will be necessary to kill the enemy.</p>
+  </div>
+
+  <div class="rune-item">
+    <img src="https://ddragon.leagueoflegends.com/cdn/14.23.1/img/perk/8214.png" alt="Transcendence">
+    <p><strong>Transcendence:</strong> This is the only way for Diana to gain Haste besides CrypBloom later on. It’s the perfect balance of having a little haste which is more efficient at lower values and gaining big cooldown reductions at crucial moments in team fights.</p>
+  </div>
 </div>
-
-<div id="skill-info">
-  <p>Select a skill above to view details.</p>
-</div>
-
-<script>
-// Require login
-if (localStorage.getItem('lolfundamentals_logged_in') !== 'true') {
-  window.location.href = 'index.html'; // redirect to login
-}
-
-// List of all fundamentals skills
-const skills = [
-"Map Awareness","Communication","Pings","Your Champion","Summoner Spell Usage","Mindset","Mouse Accuracy",
-"Reading Players","Win Conditions","Laning","Sieging","Baiting","Trading","Farming","Positioning","Reaction Time",
-"Rotations","Calls","Roaming","Power Spikes","FPS","Split Pushing","Lane Assignments","Wave Control","Itemization",
-"Vision","Objective Control","Animation Cancelling","Ganking","Not Raging/Blaming","Kiting","Auto Cancelling",
-"Target Selection","Champion Pool","Champion Kits","Identifying Player Strength Levels","Back Timings","Meta",
-"Damage/Poke","Contesting CS","Smiting","Level 1","Pathing","Ping/Internet","Match Ups/Champion Interactions",
-"Teamwork","Tab Screen","Peripherals","Early Game","Mid Game","Late Game","Champion Select","Team Compositions",
-"APM","Wave Clear","Bans"
-];
-
-// Populate select
-const select = document.getElementById('skill-select');
-skills.forEach(skill => {
-  const option = document.createElement('option');
-  option.value = skill;
-  option.textContent = skill;
-  select.appendChild(option);
-});
-
-// Show selected skill
-select.addEventListener('change', () => {
-  const skillInfo = document.getElementById('skill-info');
-  let content = `<h2>${select.value}</h2><p>Coming soon!</p>`;
-
-  // Special cases with video embeds
-  switch(select.value) {
-    case "Laning":
-      content = `
-        <h2>Laning</h2>
-        <p>Learn all about effective laning techniques, wave management, and matchup knowledge.</p>
-        <iframe width="100%" height="480" src="https://www.youtube.com/embed/WUi9pOT6wYc" 
-        title="Laning Skill Video" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-      `;
-      break;
-    case "Farming":
-      content = `
-        <h2>Farming</h2>
-        <p>Improve your CSing and gold income efficiently.</p>
-        <iframe width="100%" height="480" src="https://www.youtube.com/embed/BhTvcMmCY_o?start=22" 
-        title="Farming Skill Video" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-      `;
-      break;
-    case "Roaming":
-      content = `
-        <h2>Roaming</h2>
-        <p>Learn when and how to roam effectively to help your team.</p>
-        <iframe width="100%" height="480" src="https://www.youtube.com/embed/th7kVKYUgIk" 
-        title="Roaming Skill Video" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-      `;
-      break;
-    case "Split Pushing":
-      content = `
-        <h2>Split Pushing</h2>
-        <p>Master splitpushing to apply pressure and create advantages.</p>
-        <iframe width="100%" height="480" src="https://www.youtube.com/embed/th7kVKYUgIk" 
-        title="Split Pushing Skill Video" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-      `;
-      break;
-    case "Wave Control":
-      content = `
-        <h2>Wave Control</h2>
-        <p>Learn how to manipulate waves to gain advantages in lane.</p>
-        <iframe width="100%" height="480" src="https://www.youtube.com/embed/edDOUuxFaH8" 
-        title="Wave Control Skill Video" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-      `;
-      break;
-  }
-
-  skillInfo.innerHTML = content;
-});
-</script>
 
 </body>
 </html>
-
-
-
-
