@@ -256,19 +256,19 @@ sectionSelect.addEventListener('change', () => {
         </div>
         <div class="rune-info">
           <img src="https://ddragon.leagueoflegends.com/cdn/img/perk-images/Styles/Domination/EyeballCollection/EyeballCollection.png" class="icon">
-          <span><strong>Eyeball Collection:</strong> Free AP for doing what you already want — killing and ganking.</span>
+          <span><strong>Eyeball Collection:</strong> Free AP for kills and assists; snowballs Ekko's mid-game power.</span>
         </div>
         <div class="rune-info">
           <img src="https://ddragon.leagueoflegends.com/cdn/img/perk-images/Styles/Domination/TreasureHunter/TreasureHunter.png" class="icon">
-          <span><strong>Treasure Hunter:</strong> Snowball rune; stacks give you an early AP lead to dominate mid-game.</span>
+          <span><strong>Treasure Hunter:</strong> Gives extra gold; helps snowball early Ekko powerspikes.</span>
         </div>
         <div class="rune-info">
           <img src="https://ddragon.leagueoflegends.com/cdn/img/perk-images/Styles/Inspiration/MagicalFootwear/MagicalFootwear.png" class="icon">
-          <span><strong>Magical Footwear:</strong> Free boots means faster core build; gives valuable movement speed.</span>
+          <span><strong>Magical Footwear:</strong> Free boots for faster core build; movement speed advantage.</span>
         </div>
         <div class="rune-info">
           <img src="https://ddragon.leagueoflegends.com/cdn/img/perk-images/Styles/Inspiration/CosmicInsight/CosmicInsight.png" class="icon">
-          <span><strong>Cosmic Insight:</strong> CDR for Smite, Flash, and Ult — vital for an assassin jungler like Ekko.</span>
+          <span><strong>Cosmic Insight:</strong> CDR on Smite, Flash, and Ult; crucial for Ekko jungle rotations.</span>
         </div>
         <div class="rune-row">
           <img src="https://ddragon.leagueoflegends.com/cdn/img/perk-images/StatMods/StatModsAdaptiveForceIcon.png" title="Adaptive Force">
@@ -276,6 +276,31 @@ sectionSelect.addEventListener('change', () => {
           <img src="https://ddragon.leagueoflegends.com/cdn/img/perk-images/StatMods/StatModsHealthScalingIcon.png" title="Health Scaling">
         </div>
       </div>
+    `;
+  }
+
+  if(value === "Build"){
+    content = `
+      <h3>Build</h3>
+      <div class="build-flow">
+        <div><img src="https://ddragon.leagueoflegends.com/cdn/14.21.1/img/item/1082.png" class="icon">Green Pet</div><span>→</span>
+        <div><img src="https://ddragon.leagueoflegends.com/cdn/14.21.1/img/item/1082.png" class="icon">Dark Seal</div><span>→</span>
+        <div><img src="https://ddragon.leagueoflegends.com/cdn/14.21.1/img/item/3115.png" class="icon">Nashor's Tooth</div><span>→</span>
+        <div><img src="https://ddragon.leagueoflegends.com/cdn/14.21.1/img/item/3020.png" class="icon">Sorcerer's Shoes</div><span>→</span>
+        <div><img src="https://ddragon.leagueoflegends.com/cdn/14.21.1/img/item/6672.png" class="icon">Hextech Rocketbelt</div><span>→</span>
+        <div><img src="https://ddragon.leagueoflegends.com/cdn/14.21.1/img/item/3089.png" class="icon">Rabadon's Deathcap</div><span>→</span>
+        <div><img src="https://ddragon.leagueoflegends.com/cdn/14.21.1/img/item/3100.png" class="icon">Lich Bane</div><span>→</span>
+        <div><img src="https://ddragon.leagueoflegends.com/cdn/14.21.1/img/item/3135.png" class="icon">Void Staff</div><span>→</span>
+        <div><img src="https://ddragon.leagueoflegends.com/cdn/14.21.1/img/item/3157.png" class="icon">Zhonya's Hourglass</div>
+      </div>
+    `;
+  }
+
+  if(value === "Summoner Spells"){
+    content = `
+      <h3>Summoner Spells</h3>
+      <p><strong>Flash:</strong> Essential for outplays and mobility.</p>
+      <p><strong>Smite:</strong> Must-have for jungle clears, objective control, and ekko combos with blue smite.</p>
     `;
   }
 
@@ -290,12 +315,76 @@ sectionSelect.addEventListener('change', () => {
     `;
   }
 
+  if(value === "Combos"){
+    content = `
+      <h3>Combos</h3>
+      <p><strong>W E E Q AA:</strong> Basic combo, lead with W from fog of war.</p>
+      <p><strong>E E Q AA W AA:</strong> Best for extended trades.</p>
+      <p><strong>E Q E AA:</strong> Guaranteed burst if Q hits.</p>
+      <p><strong>Q AA E:</strong> Quick trades or finishing off targets.</p>
+      <p><strong>W E Q:</strong> Safe slow + passive proc.</p>
+    `;
+  }
+
+  if(value === "Preferred Jungle Camps"){
+    content = `
+      <h3>Preferred Jungle Camps</h3>
+      <p><strong>Raptors:</strong> Fast clear, good for early ganks.</p>
+      <p><strong>Krugs:</strong> Best for XP and gold.</p>
+      <p><strong>Wolves:</strong> Efficient clear, flexible pathing.</p>
+      <p><strong>Gromp:</strong> Usually cleared last; strong scaling XP.</p>
+      <p><strong>Scuttle Crab:</strong> Quick and heals well with W.</p>
+      <p><strong>Dragon:</strong> Clear after first clear; prioritize objectives.</p>
+      <p><em>Tip:</em> Smite camps at low HP to optimize passive.</p>
+    `;
+  }
+
+  if(value === "Level 1"){
+    content = `
+      <h3>Level 1</h3>
+      <p>Blue side: Ward tri bush, move mid, throw W toward pixel brush. Use W on starting camp at 1:27. Last auto should wait for Hunter’s Talisman damage (approx 125).</p>
+      <p>Red side: Mirror path; tri bush ward less critical for top.</p>
+    `;
+  }
+
+  if(value === "Jungle Routes"){
+    content = `
+      <h3>Jungle Routes</h3>
+      <p><strong>First Clear:</strong> Red → Raptors → Wolves → Blue → Gromp → Scuttle → Ganks</p>
+      <p><strong>Alternative:</strong> Blue → Gromp → Wolves → Raptors → Red → Krugs → Scuttle</p>
+      <p><strong>Second Clear:</strong> Path to respawned camps or look for ganks.</p>
+    `;
+  }
+
+  if(value === "Hardest Matchups"){
+    content = `
+      <h3>Hardest Matchups</h3>
+      <p>Champions with high mobility and burst like Nidalee and Kha'Zix are difficult. They can force early ult usage and punish Ekko's positioning.</p>
+    `;
+  }
+
+  if(value === "Team Fighting"){
+    content = `
+      <h3>Team Fighting</h3>
+      <p>Proc passive on as many targets as possible. Land W on priority targets. Delay ult for maximum healing/damage. Use mobility to dodge key abilities. W + passive + ult are crucial for squishy targets.</p>
+    `;
+  }
+
+  if(value === "Closing Out The Game"){
+    content = `
+      <h3>Closing Out The Game</h3>
+      <p>Focus objectives like Baron/Elder. Use W, passive, Q to zone enemies and push waves. Avoid farming far from objectives. After core items, prioritize survival and objectives over kills.</p>
+    `;
+  }
+
   sectionInfo.innerHTML = content;
 });
 </script>
 
 </body>
 </html>
+
+
 
 
 
