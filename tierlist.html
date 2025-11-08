@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8" />
+<meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>LoL Fundamentals – Tierlist</title>
 <style>
@@ -95,12 +95,12 @@ header {
 <a href="membershub.html" class="back-button">Back to Members Hub</a>
 
 <select id="roleSelect">
-  <option value="All">All Roles</option>
   <option value="Top">Top</option>
   <option value="Jungle">Jungle</option>
   <option value="Mid">Mid</option>
   <option value="ADC">ADC</option>
   <option value="Support">Support</option>
+  <option value="All">All Roles</option>
 </select>
 
 <div id="tierlistContainer" class="tierlist"></div>
@@ -114,7 +114,7 @@ if(localStorage.getItem('lolfundamentals_logged_in') !== 'true'){
 // Tier order
 const tierOrder = ["OP","S","A","B","C","D"];
 
-// Normalize champion names to load images
+// Normalize champion names for image URLs
 function normalizeChampion(name){
   return name.replace(/[\s.'’]/g,"").replace(/é/g,"e").replace(/ü/g,"u").replace(/ø/g,"o");
 }
@@ -124,43 +124,51 @@ const csvURL = "https://docs.google.com/spreadsheets/d/e/2PACX-1vRtIJeggpJ6cjGJt
 
 let champions = [];
 
+// Load CSV
 fetch(csvURL)
   .then(res => res.text())
   .then(data => {
-    const rows = data.split("\n").map(r => r.split(","));
+    const rows = data.trim().split("\n").map(r => r.split(","));
     const headers = rows[0].map(h => h.trim());
     champions = rows.slice(1).map(row => {
       let champ = {};
-      headers.forEach((h,i) => champ[h] = row[i] ? row[i].trim() : "");
+      headers.forEach((h,i)=> champ[h] = row[i] ? row[i].trim() : "");
       return champ;
     });
-    renderTierlist("All");
+    renderTierlist("Top"); // Default: Top lane
   });
 
 // Render champions grouped by tier
 function renderTierlist(role){
   const container = document.getElementById("tierlistContainer");
   container.innerHTML = "";
-  
+
+  // Filter champions by role
   const filteredChamps = champions.filter(ch => {
     if(role === "All") return true;
     return ch[role] && ch[role] !== "X";
   });
 
   tierOrder.forEach(tier => {
-    const champsInTier = filteredChamps.filter(ch => ch[role] === tier || (role==="All" && Object.values(ch).includes(tier)));
+    const champsInTier = filteredChamps.filter(ch => {
+      if(role === "All"){
+        return Object.entries(ch).some(([k,v]) => tierOrder.includes(v) && k !== "Champion" && v === tier);
+      } else {
+        return ch[role] === tier;
+      }
+    });
     if(champsInTier.length === 0) return;
 
     const section = document.createElement("div");
     section.className = "tier-section";
     section.innerHTML = `<h2>${tier}</h2>`;
+
     const grid = document.createElement("div");
     grid.className = "champion-grid";
-    
+
     champsInTier.forEach(ch => {
-      let imgName = normalizeChampion(ch["Champion"]);
-      let roleTier = role === "All" ? Object.entries(ch).find(([k,v])=>tierOrder.includes(v) && k !== "Champion")[0] : role;
-      let champTier = ch[roleTier];
+      const imgName = normalizeChampion(ch["Champion"]);
+      const champTier = role === "All" ? Object.entries(ch).find(([k,v])=>tierOrder.includes(v) && k!=="Champion")[1] : ch[role];
       const card = document.createElement("div");
       card.className = "champion-card";
       card.innerHTML = `
@@ -169,19 +177,19 @@ function renderTierlist(role){
       `;
       grid.appendChild(card);
     });
+
     section.appendChild(grid);
     container.appendChild(section);
   });
 }
 
 // Role selector
-document.getElementById("roleSelect").addEventListener("change", (e)=>{
+document.getElementById("roleSelect").addEventListener("change",(e)=>{
   renderTierlist(e.target.value);
 });
 </script>
 
 </body>
 </html>
-
 
 
