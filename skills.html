@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Diana Runes – LoL Fundamentals</title>
+<title>Diana Guide – LoL Fundamentals</title>
 <style>
 body {
   margin: 0;
@@ -76,8 +76,34 @@ header {
   color: #c9aa71;
 }
 
-/* Hover effect */
-#runes-container:hover {
+/* Skill selector */
+#skill-select-container {
+  margin: 20px auto;
+}
+#skill-select {
+  padding: 10px 15px;
+  font-size: 16px;
+  border-radius: 6px;
+  border: none;
+  background: #0f1722;
+  color: #c9aa71;
+  cursor: pointer;
+}
+
+/* Skill display */
+#skill-info {
+  margin: 30px auto;
+  max-width: 900px;
+  background: rgba(13,17,23,0.85);
+  border: 1px solid #2f81f7;
+  padding: 20px;
+  border-radius: 10px;
+  text-align: left;
+  color: #c9aa71;
+  min-height: 150px;
+}
+
+#skill-info:hover {
   box-shadow: 0 0 15px rgba(47,129,247,0.5);
 }
 
@@ -85,16 +111,19 @@ header {
   header { font-size: 22px; padding: 15px 5px; }
   .rune-item { flex-direction: column; align-items: center; text-align: center; }
   .rune-item img { margin-bottom: 5px; }
+  #skill-select { font-size: 14px; padding: 8px 10px; }
 }
 </style>
 </head>
 <body>
 
-<header>Diana Runes – LoL Fundamentals</header>
+<header>Diana Guide – LoL Fundamentals</header>
 
 <a href="membershub.html" class="back-button">Back to Members Hub</a>
 
 <div id="runes-container">
+  <h2>Diana Runes</h2>
+
   <div class="rune-item">
     <img src="https://ddragon.leagueoflegends.com/cdn/14.23.1/img/perk/8020.png" alt="Grasp Of The Undying">
     <p><strong>Grasp Of The Undying:</strong> This is the only rune and tree that allows Diana to play the way she’s intended to be played. It’s the rune that gives her the potential to win every matchup while also not falling off nearly as hard as another option like Phase Rush which is her second best tree.</p>
@@ -126,5 +155,43 @@ header {
   </div>
 </div>
 
+<div id="skill-select-container">
+  <select id="skill-select">
+    <option disabled selected>Pick a skill</option>
+  </select>
+</div>
+
+<div id="skill-info">
+  <p>Select a skill above to view details.</p>
+</div>
+
+<script>
+// Require login
+if (localStorage.getItem('lolfundamentals_logged_in') !== 'true') {
+  window.location.href = 'index.html';
+}
+
+// Skills array
+const skills = [
+"Intro","Runes","Build","Summoner Spells","Abilities","Combos","Laning","Warding","Farming/Pushing","Teamfighting",
+"Splitpushing","Closing Out the Game","Threats and Synergies","Pros and Cons","Extra Tips"
+];
+
+const select = document.getElementById('skill-select');
+skills.forEach(skill => {
+  const option = document.createElement('option');
+  option.value = skill;
+  option.textContent = skill;
+  select.appendChild(option);
+});
+
+// Display selected skill
+select.addEventListener('change', () => {
+  const skillInfo = document.getElementById('skill-info');
+  skillInfo.innerHTML = `<h2>${select.value}</h2><p>Coming soon!</p>`;
+});
+</script>
+
 </body>
 </html>
+
