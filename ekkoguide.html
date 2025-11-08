@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Ekko Guide – Members Hub</title>
+<style>
+body {
+  margin: 0;
+  font-family: 'Beaufort for LOL', Arial, Helvetica, sans-serif;
+  background: url('https://ddragon.leagueoflegends.com/cdn/img/champion/splash/Ekko_0.jpg') no-repeat center center fixed;
+  background-size: cover;
+  color: #e6edf3;
+  text-align: center;
+  overflow-x: hidden;
+}
+
+/* Overlay for readability */
+body::before {
+  content: "";
+  position: fixed;
+  top: 0; left: 0;
+  width: 100%; height: 100%;
+  background: rgba(10,15,20,0.75);
+  z-index: -1;
+}
+
+/* Header */
+header {
+  background: rgba(13,17,23,0.9);
+  border-bottom: 2px solid #c9aa71;
+  padding: 20px 10px;
+  font-weight: bold;
+  font-size: 26px;
+  text-transform: uppercase;
+  color: #c9aa71;
+  letter-spacing: 1px;
+}
+
+/* Back button */
+.back-button {
+  display: inline-block;
+  margin: 20px auto 10px;
+  padding: 10px 20px;
+  background: linear-gradient(135deg, #c9aa71, #e0c77b);
+  color: #000;
+  text-decoration: none;
+  border-radius: 8px;
+  font-weight: bold;
+  transition: all 0.3s;
+  box-shadow: 0 0 10px rgba(201,170,113,0.5);
+}
+.back-button::before { content: "← "; }
+.back-button:hover {
+  background: linear-gradient(135deg, #e6c97f, #f0d88b);
+  box-shadow: 0 0 15px rgba(255,215,0,0.8);
+}
+
+/* Dropdown */
+#section-select-container {
+  margin: 20px auto;
+}
+#section-select {
+  padding: 10px 15px;
+  font-size: 16px;
+  border-radius: 6px;
+  border: none;
+  background: #0f1722;
+  color: #c9aa71;
+  cursor: pointer;
+}
+
+/* Section display */
+#section-info {
+  margin: 30px auto;
+  max-width: 900px;
+  background: rgba(13,17,23,0.95);
+  border: 1px solid #2f81f7;
+  padding: 20px;
+  border-radius: 10px;
+  text-align: left;
+  color: #c9aa71;
+  min-height: 200px;
+}
+
+#section-info:hover { box-shadow: 0 0 15px rgba(47,129,247,0.5); }
+
+@media (max-width: 600px) {
+  #section-select { font-size: 14px; padding: 8px 10px; }
+}
+</style>
+</head>
+<body>
+
+<header>Ekko – Members Hub Guide</header>
+<a href="membershub.html" class="back-button">Back to Members Hub</a>
+
+<div id="section-select-container">
+  <select id="section-select">
+    <option disabled selected>Select a section</option>
+    <option>Intro</option>
+    <option>Runes</option>
+    <option>Build</option>
+    <option>Summoner Spells</option>
+    <option>Abilities</option>
+    <option>Combos</option>
+    <option>Pathing</option>
+    <option>Warding</option>
+    <option>Farming / Pushing</option>
+    <option>Teamfighting</option>
+    <option>Splitpushing</option>
+    <option>Closing Out The Game</option>
+    <option>Threats & Synergies</option>
+    <option>Pros & Cons</option>
+    <option>Extra Tips</option>
+  </select>
+</div>
+
+<div id="section-info">
+  <p>Select a section from above to view details.</p>
+</div>
+
+<script>
+// Require login
+if (localStorage.getItem('lolfundamentals_logged_in') !== 'true') {
+  window.location.href = 'index.html';
+}
+
+const sectionSelect = document.getElementById('section-select');
+const sectionInfo = document.getElementById('section-info');
+
+sectionSelect.addEventListener('change', () => {
+  let value = sectionSelect.value;
+  let content = `<h2>${value}</h2><p>Coming soon!</p>`;
+
+  if(value === "Pathing"){
+    content = `
+      <h2>Pathing</h2>
+      <p>Ekko excels at jungle and side lane pressure when he paths efficiently. Knowing when to clear camps, gank, and rotate is crucial for maximizing Ekko's passive and ultimate cooldowns. Prioritize camps that give you experience advantage and time your movements to punish overextended enemies.</p>
+      <iframe width="100%" height="480" src="https://www.youtube.com/embed/placeholder" 
+      title="Ekko Pathing Video" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+    `;
+  }
+
+  sectionInfo.innerHTML = content;
+});
+</script>
+
+</body>
+</html>
