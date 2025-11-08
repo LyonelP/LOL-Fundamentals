@@ -12,7 +12,7 @@ body {
   color: #e6edf3;
   line-height: 1.6;
   text-align: center;
-  display: none; /* Hide content until login verified */
+  display: none; /* hide until login check */
 }
 
 /* Header */
@@ -27,58 +27,68 @@ header {
   color: #c9aa71;
 }
 
+/* Gold Back Button */
+.back-button {
+  display: block;
+  width: max-content;
+  margin: 20px auto 30px auto;
+  padding: 10px 20px;
+  background: linear-gradient(135deg, #c9aa71, #e0c77b);
+  color: #000;
+  text-decoration: none;
+  border-radius: 8px;
+  font-weight: bold;
+  transition: all 0.3s;
+  box-shadow: 0 0 10px rgba(201,170,113,0.5);
+  text-align: center;
+}
+.back-button::before {
+  content: "← ";
+}
+.back-button:hover {
+  background: linear-gradient(135deg, #e6c97f, #f0d88b);
+  box-shadow: 0 0 15px rgba(255,215,0,0.8);
+}
+
 /* Section */
 .section {
-  padding: 60px 20px;
-  max-width: 1000px;
-  margin: 40px auto;
+  padding: 40px 20px;
+  max-width: 1200px;
+  margin: 0 auto;
 }
 
 /* Tierlist grid */
 .tierlist-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
-  gap: 15px;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 20px;
   justify-items: center;
-  margin-top: 30px;
 }
 
-/* Champion card */
+/* Champion card (gold style) */
 .champ-card {
   background: #161b22;
   border: 2px solid #c9aa71;
   border-radius: 12px;
-  padding: 10px;
+  padding: 20px 15px;
   width: 100%;
-  max-width: 150px;
   transition: transform 0.3s, box-shadow 0.3s;
   text-decoration: none;
   color: #e6edf3;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  position: relative;
+  overflow: hidden;
 }
 .champ-card:hover {
   transform: translateY(-5px);
-  box-shadow: 0 10px 20px rgba(47,129,247,0.3);
+  box-shadow: 0 10px 20px rgba(201,170,113,0.4);
 }
 .champ-card img {
   width: 100%;
   border-radius: 6px;
-}
-
-/* Logout Button */
-#logoutBtn {
-  display: block;
-  margin: 80px auto 20px auto;
-  padding: 8px 20px;
-  background: #f94144;
-  color: #fff;
-  font-weight: bold;
-  border: none;
-  border-radius: 6px;
-  cursor: pointer;
-  transition: 0.3s;
-}
-#logoutBtn:hover {
-  background: #ff5959;
+  margin-bottom: 10px;
 }
 
 /* Footer */
@@ -100,17 +110,18 @@ footer a:hover {
 </style>
 </head>
 <body>
+
 <header>LoL Fundamentals – Tierlist</header>
+
+<a href="membershub.html" class="back-button">Back to Members Hub</a>
 
 <section class="section">
 <h2>Champion Tierlist</h2>
-<p>See the strongest to weakest champions in the current meta.</p>
+<p>Filtered by role and ranked by tier.</p>
 
 <div class="tierlist-grid" id="tierlistContainer">
-  <!-- Champion cards will be injected here via JavaScript -->
+  <!-- Champion cards will be dynamically inserted here -->
 </div>
-
-<button id="logoutBtn">Logout</button>
 </section>
 
 <footer>
@@ -119,39 +130,37 @@ footer a:hover {
 </footer>
 
 <script>
-// Require login before showing anything
+// Require login
 if(localStorage.getItem('lolfundamentals_logged_in') !== 'true'){
   window.location.href = 'index.html';
 } else {
-  document.body.style.display = "block"; // Show content after login check
+  document.body.style.display = 'block';
 }
 
-// Logout button
-document.getElementById('logoutBtn').addEventListener('click', () => {
-  localStorage.removeItem('lolfundamentals_logged_in');
-  window.location.href = 'index.html';
-});
-
-// Example champions for Tierlist (replace or extend as needed)
+// Example champions array with role flags (x = exclude)
 const champions = [
-  { name: "Ahri", img: "https://ddragon.leagueoflegends.com/cdn/14.23.1/img/champion/Ahri.png", tier: "S" },
-  { name: "Akshan", img: "https://ddragon.leagueoflegends.com/cdn/14.23.1/img/champion/Akshan.png", tier: "A" },
-  { name: "Diana", img: "https://ddragon.leagueoflegends.com/cdn/14.23.1/img/champion/Diana.png", tier: "S" },
-  { name: "Ekko", img: "https://ddragon.leagueoflegends.com/cdn/14.23.1/img/champion/Ekko.png", tier: "B" }
+  { name: "Ahri", img: "https://ddragon.leagueoflegends.com/cdn/14.23.1/img/champion/Ahri.png", tier: "S", roles: {top: "x", jungle: "x", mid: "✓", adc: "x", support: "x"} },
+  { name: "Akshan", img: "https://ddragon.leagueoflegends.com/cdn/14.23.1/img/champion/Akshan.png", tier: "A", roles: {top: "x", jungle: "x", mid: "x", adc: "✓", support: "x"} },
+  { name: "Diana", img: "https://ddragon.leagueoflegends.com/cdn/14.23.1/img/champion/Diana.png", tier: "S", roles: {top: "x", jungle: "x", mid: "✓", adc: "x", support: "x"} },
+  { name: "Ekko", img: "https://ddragon.leagueoflegends.com/cdn/14.23.1/img/champion/Ekko.png", tier: "B", roles: {top: "x", jungle: "✓", mid: "✓", adc: "x", support: "x"} },
+  // add all other champions here
 ];
+
+// Specify which role you want to display for this page
+const displayRole = "mid"; // can be top, jungle, mid, adc, support
 
 const container = document.getElementById('tierlistContainer');
 champions.forEach(champ => {
-  const card = document.createElement('a');
-  card.href = "#"; 
-  card.className = "champ-card";
-  card.innerHTML = `<img src="${champ.img}" alt="${champ.name}"><h4>${champ.name}</h4><p>Tier: ${champ.tier}</p>`;
-  container.appendChild(card);
+  if(champ.roles[displayRole] !== "x") {
+    const card = document.createElement('a');
+    card.href = "#"; 
+    card.className = "champ-card";
+    card.innerHTML = `<img src="${champ.img}" alt="${champ.name}"><h4>${champ.name}</h4><p>Tier: ${champ.tier}</p>`;
+    container.appendChild(card);
+  }
 });
 </script>
 </body>
 </html>
-
-
 
 
