@@ -43,9 +43,9 @@ header {
 /* Card Grid */
 .card-grid {
   display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
   gap: 25px;
   justify-items: center;
-  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
 }
 
 /* Individual Card */
@@ -57,13 +57,13 @@ header {
   min-height: 180px;
   display: flex;
   flex-direction: column;
-  justify-content: flex-end;
+  justify-content: center; /* vertical centering */
+  text-align: center; /* horizontal centering */
   transition: transform 0.3s, box-shadow 0.3s;
   text-decoration: none;
   color: #e6edf3;
   position: relative;
   overflow: hidden;
-  text-align: left; /* align text consistently */
 }
 
 /* Card hover effect */
@@ -123,7 +123,7 @@ header {
   background-position: center;
 }
 
-/* Tierlist card visual */
+/* Tierlist bar */
 .card.tierlist .tier-bar {
   margin-top: 10px;
   width: 100%;
@@ -173,16 +173,6 @@ footer a:hover {
 #logoutBtn:hover {
   background: #ff5959;
 }
-
-/* Desktop grid fix: first row 3 cards, second row 2 cards */
-@media(min-width: 900px){
-  .card-grid {
-    grid-template-columns: repeat(3, 1fr);
-  }
-  .tierlist, .fundamentals {
-    justify-self: center;
-  }
-}
 </style>
 </head>
 <body>
@@ -206,7 +196,7 @@ footer a:hover {
 
   <a href="ekkoguide.html" class="card ekko-guide">
     <h3>Ekko Guide</h3>
-    <p>Complete guide to playing Ekko jungle, including combos, pathing, and advanced mechanics.</p>
+    <p>Comprehensive guide for mastering Ekko Jungle, including combos, mechanics, and advanced tips.</p>
   </a>
 
   <a href="tierlist.html" class="card tierlist">
@@ -249,6 +239,7 @@ function logout() {
 
 </body>
 </html>
+
 
 
 
