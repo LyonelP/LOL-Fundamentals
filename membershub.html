@@ -28,16 +28,16 @@ header {
 
 /* Section */
 .section {
-  padding: 40px 20px;  /* slightly reduced from 60px */
+  padding: 40px 20px;
   max-width: 1000px;
-  margin: 20px auto;   /* moved up from 40px */
+  margin: 20px auto;
 }
 
 /* Section title */
 .section h2 {
   color: #c9aa71;
-  margin-top: 0;       /* removed extra top margin */
-  margin-bottom: 30px; /* slightly smaller spacing from paragraph */
+  margin-top: 0;
+  margin-bottom: 30px;
 }
 
 /* Card Grid */
@@ -109,6 +109,9 @@ header {
 }
 .card.diana-guide::before {
   background-image: url('https://ddragon.leagueoflegends.com/cdn/img/champion/splash/Diana_1.jpg');
+}
+.card.ekko-guide::before {
+  background-image: url('https://ddragon.leagueoflegends.com/cdn/img/champion/splash/Ekko_0.jpg');
 }
 .card.tierlist::before {
   background: linear-gradient(to bottom, #1b2838 0%, #161b22 100%);
@@ -202,6 +205,11 @@ footer a:hover {
     <p>Comprehensive guide for mastering Diana, including combos, mechanics, and advanced tips.</p>
   </a>
 
+  <a href="ekkoguide.html" class="card ekko-guide">
+    <h3>Ekko Guide</h3>
+    <p>Master Ekko with combos, pathing tips, and jungle mechanics to dominate the Rift.</p>
+  </a>
+
   <a href="skills.html" class="card fundamentals">
     <h3>Fundamentals Section</h3>
     <p>Learn core League mechanics that every player should understand to improve faster.</p>
@@ -230,5 +238,6 @@ function logout() {
 
 </body>
 </html>
+
 
 
