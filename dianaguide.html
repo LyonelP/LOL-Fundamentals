@@ -1,9 +1,9 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8" />
+<meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Diana Guide – Runes</title>
+<title>The Ultimate Diana Guide</title>
 <style>
 body {
   margin: 0;
@@ -13,7 +13,6 @@ body {
   text-align: center;
 }
 
-/* Header */
 header {
   background: #0d1117;
   border-bottom: 2px solid #c9aa71;
@@ -25,7 +24,6 @@ header {
   letter-spacing: 1px;
 }
 
-/* Back button */
 .back-button {
   display: inline-block;
   margin: 20px auto 10px;
@@ -46,126 +44,179 @@ header {
   box-shadow: 0 0 15px rgba(255,215,0,0.8);
 }
 
-/* Skill selector */
-#skill-select-container {
-  margin: 20px auto;
-}
-#skill-select {
-  padding: 10px 15px;
-  font-size: 16px;
-  border-radius: 6px;
-  border: none;
-  background: #0f1722;
-  color: #c9aa71;
-  cursor: pointer;
-}
-
-/* Skill display */
-#skill-info {
-  margin: 30px auto;
+main {
   max-width: 900px;
-  background: #0d1117;
-  border: 1px solid #2f81f7;
-  padding: 20px;
-  border-radius: 10px;
+  margin: 50px auto;
+  padding: 0 15px;
   text-align: left;
+}
+
+h1, h2 {
   color: #c9aa71;
-  min-height: 150px;
 }
 
-/* Hover effect for skills */
-#skill-info:hover {
-  box-shadow: 0 0 15px rgba(47,129,247,0.5);
+h1 {
+  text-align: center;
+  font-size: 36px;
+  margin-bottom: 30px;
 }
 
-#skill-info ul {
-  list-style: none;
-  padding: 0;
+h2 {
+  font-size: 28px;
+  margin-top: 40px;
+  margin-bottom: 15px;
 }
-#skill-info li {
+
+p, li {
+  font-size: 18px;
+  line-height: 1.5;
+}
+
+ul {
+  padding-left: 20px;
+}
+
+.rune-list li {
   display: flex;
   align-items: flex-start;
-  margin-bottom: 10px;
-}
-#skill-info li img {
-  width: 40px;
-  height: 40px;
-  margin-right: 10px;
+  margin-bottom: 15px;
 }
 
-@media (max-width: 500px) {
-  header { font-size: 22px; padding: 15px 5px; }
-  #skill-select { font-size: 14px; padding: 8px 10px; }
+.rune-list img {
+  width: 50px;
+  height: 50px;
+  margin-right: 12px;
+  flex-shrink: 0;
+}
+
+@media (max-width: 600px) {
+  main { padding: 0 10px; }
+  h1 { font-size: 28px; }
+  h2 { font-size: 22px; }
+  p, li { font-size: 16px; }
+  .rune-list img { width: 40px; height: 40px; }
 }
 </style>
 </head>
 <body>
 
-<header>Diana Guide – Runes</header>
+<header>The Ultimate Diana Guide</header>
 
 <a href="membershub.html" class="back-button">Back to Members Hub</a>
 
-<div id="skill-select-container">
-  <select id="skill-select">
-    <option disabled selected>Pick a skill</option>
-    <option value="Runes">Runes</option>
-  </select>
-</div>
+<main>
 
-<div id="skill-info">
-  <p>Select a skill above to view details.</p>
-</div>
+<h1>Diana – Mid Lane Guide</h1>
 
-<script>
-// Require login
-if (localStorage.getItem('lolfundamentals_logged_in') !== 'true') {
-  window.location.href = 'index.html'; // redirect to login
-}
+<section id="intro">
+<h2>Intro</h2>
+<p>Coming soon!</p>
+</section>
 
-// Show selected skill
-const select = document.getElementById('skill-select');
-select.addEventListener('change', () => {
-  const skillInfo = document.getElementById('skill-info');
-  if (select.value === "Runes") {
-    skillInfo.innerHTML = `
-      <h2>Runes</h2>
-      <ul>
-        <li>
-          <img src="https://ddragon.leagueoflegends.com/cdn/14.23.1/img/perk/GraspOfTheUndying.png" alt="Grasp Of The Undying">
-          <span><strong>Grasp Of The Undying:</strong> This is the only rune and tree that allows Diana to play the way she’s intended to be played. It gives her the potential to win every matchup while not falling off as hard as Phase Rush.</span>
-        </li>
-        <li>
-          <img src="https://ddragon.leagueoflegends.com/cdn/14.23.1/img/perk/ShieldBash.png" alt="Shield Bash">
-          <span><strong>Shield Bash:</strong> Will out damage most other runes, and Diana can proc it twice with W.</span>
-        </li>
-        <li>
-          <img src="https://ddragon.leagueoflegends.com/cdn/14.23.1/img/perk/BonePlating.png" alt="Bone Plating">
-          <span><strong>Bone Plating:</strong> Best sustain tool in lane. Runes like Aery, Scorch, First Strike, and Comet all proc multiple plates. Gives the best chance to survive ganks and win duels later.</span>
-        </li>
-        <li>
-          <img src="https://ddragon.leagueoflegends.com/cdn/14.23.1/img/perk/SecondWind.png" alt="Second Wind">
-          <span><strong>Second Wind:</strong> Only worth considering against Yasuo and Yone. Bone Plating is often preferred for better scaling and survivability.</span>
-        </li>
-        <li>
-          <img src="https://ddragon.leagueoflegends.com/cdn/14.23.1/img/perk/Overgrowth.png" alt="Overgrowth">
-          <span><strong>Overgrowth:</strong> Best way for Diana to gain health besides Grasp. Provides bonus health scaling for shield strength.</span>
-        </li>
-        <li>
-          <img src="https://ddragon.leagueoflegends.com/cdn/14.23.1/img/perk/ManaflowBand.png" alt="Manaflow Band">
-          <span><strong>Manaflow Band:</strong> Covers Diana’s mana needs to pressure side lanes and jungle camps effectively. Essential for multi-rotation damage.</span>
-        </li>
-        <li>
-          <img src="https://ddragon.leagueoflegends.com/cdn/14.23.1/img/perk/Transcendence.png" alt="Transcendence">
-          <span><strong>Transcendence:</strong> Provides crucial ability haste and efficient cooldown reduction for mid/late teamfights.</span>
-        </li>
-      </ul>
-    `;
-  }
-});
-</script>
+<section id="runes">
+<h2>Runes</h2>
+<ul class="rune-list">
+<li>
+<img src="https://ddragon.leagueoflegends.com/cdn/14.23.1/img/perk/GraspOfTheUndying.png" alt="Grasp Of The Undying">
+<p><strong>Grasp Of The Undying:</strong> This is the only rune and tree that allows Diana to play the way she’s intended to be played. It’s the rune that gives her the potential to win every matchup while also not falling off nearly as hard as another option like phase rush which is her second best tree.</p>
+</li>
+<li>
+<img src="https://ddragon.leagueoflegends.com/cdn/14.23.1/img/perk/ShieldBash.png" alt="Shield Bash">
+<p><strong>Shield Bash:</strong> Will out damage most other runes, and Diana can proc it twice with W.</p>
+</li>
+<li>
+<img src="https://ddragon.leagueoflegends.com/cdn/14.23.1/img/perk/BonePlating.png" alt="Bone Plating">
+<p><strong>Bone Plating:</strong> Best sustain tool in lane. Runes like Aery, Scorch, First Strike, and Comet all proc multiple plates. This also gives you the best chance of surviving a gank and winning a duel later on in the game.</p>
+</li>
+<li>
+<img src="https://ddragon.leagueoflegends.com/cdn/14.23.1/img/perk/SecondWind.png" alt="Second Wind">
+<p><strong>Second Wind:</strong> Recently nerfed and only worth considering against Yasuo and Yone. Yasuo and Yone proc Bone Plating extremely easily with Q and will only get an extended trade with Lethal Tempo early. Even in these matchups I still often prefer Bone Plating because of the better scaling and the ability to survive ganks better.</p>
+</li>
+<li>
+<img src="https://ddragon.leagueoflegends.com/cdn/14.23.1/img/perk/Overgrowth.png" alt="Overgrowth">
+<p><strong>Overgrowth:</strong> Best way for Diana to gain health besides Grasp since the build doesn't include any health items. Diana requires health to engage melee champions and she has a 9% bonus health ratio on the shield strength that can be proc'd twice for a total ratio of 18%.</p>
+</li>
+<li>
+<img src="https://ddragon.leagueoflegends.com/cdn/14.23.1/img/perk/ManaflowBand.png" alt="Manaflow Band">
+<p><strong>Manaflow Band:</strong> This rune perfectly covers the amount of mana Diana requires to play the game. Without Manaflow Band you won’t be able to take full advantage of Diana’s side lane pressure. Diana should always be looking to take the enemy jungler’s camps especially now while her passive monster ratio is at 300%. Without Manaflow Band you won’t be able to deal with any champion that has resists since multiple damage rotations will be necessary to kill the enemy.</p>
+</li>
+<li>
+<img src="https://ddragon.leagueoflegends.com/cdn/14.23.1/img/perk/Transcendence.png" alt="Transcendence">
+<p><strong>Transcendence:</strong> This is the only way for Diana to gain haste besides Cryptobloom later on. It’s the perfect balance of having a little haste which is more efficient at lower values and gaining big cooldown reductions at crucial moments in team fights.</p>
+</li>
+</ul>
+</section>
+
+<section id="build">
+<h2>Build</h2>
+<p>Coming soon!</p>
+</section>
+
+<section id="summoner-spells">
+<h2>Summoner Spells</h2>
+<p>Coming soon!</p>
+</section>
+
+<section id="abilities">
+<h2>Abilities</h2>
+<p>Coming soon!</p>
+</section>
+
+<section id="combos">
+<h2>Combos</h2>
+<p>Coming soon!</p>
+</section>
+
+<section id="laning">
+<h2>Laning</h2>
+<p>Coming soon!</p>
+</section>
+
+<section id="warding">
+<h2>Warding</h2>
+<p>Coming soon!</p>
+</section>
+
+<section id="farming-pushing">
+<h2>Farming / Pushing</h2>
+<p>Coming soon!</p>
+</section>
+
+<section id="teamfighting">
+<h2>Teamfighting</h2>
+<p>Coming soon!</p>
+</section>
+
+<section id="splitpushing">
+<h2>Splitpushing</h2>
+<p>Coming soon!</p>
+</section>
+
+<section id="closing">
+<h2>Closing Out The Game</h2>
+<p>Coming soon!</p>
+</section>
+
+<section id="threats-synergies">
+<h2>Threats & Synergies</h2>
+<p>Coming soon!</p>
+</section>
+
+<section id="pros-cons">
+<h2>Pros & Cons</h2>
+<p>Coming soon!</p>
+</section>
+
+<section id="extra-tips">
+<h2>Extra Tips</h2>
+<p>Coming soon!</p>
+</section>
+
+</main>
 
 </body>
 </html>
+
 
 
 
