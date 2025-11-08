@@ -127,6 +127,13 @@ header {
   gap: 12px;
   margin-top: 35px;
 }
+.rune-row {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  margin-top: 10px;
+}
+.rune-row span { margin-left: 8px; }
 
 /* Build & Runes Cards */
 .card-container {
@@ -138,6 +145,8 @@ header {
 
 .card {
   background: rgba(20,25,35,0.85);
+  border: 1px solid #c9aa71;
+  border-radius: 10px;
   padding: 15px;
   text-align: center;
   transition: all 0.3s;
@@ -154,6 +163,8 @@ header {
   margin-top: 10px;
 }
 .build-flow div {
+  border: 1px solid #c9aa71;
+  border-radius: 8px;
   padding: 10px 12px;
   min-width: 120px;
   text-align: center;
@@ -200,6 +211,7 @@ header {
 </div>
 
 <script>
+// Require login
 if (localStorage.getItem('lolfundamentals_logged_in') !== 'true') {
   window.location.href = 'index.html';
 }
@@ -225,35 +237,32 @@ sectionSelect.addEventListener('change', () => {
       <div class="rune-container">
         <div class="rune-info">
           <img src="https://ddragon.leagueoflegends.com/cdn/img/perk-images/Styles/Domination/DarkHarvest/DarkHarvest.png" class="icon">
-          <span><strong>Dark Harvest:</strong> Scales perfectly with Ekko's burst and resets.</span>
+          <span><strong>Dark Harvest</strong></span>
         </div>
         <div class="rune-info">
           <img src="https://ddragon.leagueoflegends.com/cdn/img/perk-images/Styles/Domination/SuddenImpact/SuddenImpact.png" class="icon">
-          <span><strong>Sudden Impact:</strong> Synergizes with E dash for consistent magic pen.</span>
+          <span><strong>Sudden Impact</strong></span>
         </div>
         <div class="rune-info">
           <img src="https://ddragon.leagueoflegends.com/cdn/img/perk-images/Styles/Domination/EyeballCollection/EyeballCollection.png" class="icon">
-          <span><strong>Eyeball Collection:</strong> Free AP for kills and assists; snowballs Ekko’s mid‑game power.</span>
+          <span><strong>Eyeball Collection</strong></span>
         </div>
         <div class="rune-info">
           <img src="https://ddragon.leagueoflegends.com/cdn/img/perk-images/Styles/Domination/TreasureHunter/TreasureHunter.png" class="icon">
-          <span><strong>Treasure Hunter:</strong> Gives extra gold; helps snowball early.</span>
+          <span><strong>Treasure Hunter</strong></span>
         </div>
         <div class="rune-info">
           <img src="https://ddragon.leagueoflegends.com/cdn/img/perk-images/Styles/Inspiration/MagicalFootwear/MagicalFootwear.png" class="icon">
-          <span><strong>Magical Footwear:</strong> Free boots for faster core build.</span>
+          <span><strong>Magical Footwear</strong></span>
         </div>
         <div class="rune-info">
           <img src="https://ddragon.leagueoflegends.com/cdn/img/perk-images/Styles/Inspiration/CosmicInsight/CosmicInsight.png" class="icon">
-          <span><strong>Cosmic Insight:</strong> Provides ability and summoner spell cooldown reduction—vital for Ekko jungle.</span>
+          <span><strong>Cosmic Insight</strong></span>
         </div>
         <div class="rune-row">
-          <img src="https://ddragon.leagueoflegends.com/cdn/img/perk-images/StatMods/StatModsAttackSpeedIcon.png" title="Attack Speed">
-          <span>Attack Speed</span>
-          <img src="https://ddragon.leagueoflegends.com/cdn/img/perk-images/StatMods/StatModsAdaptiveForceIcon.png" title="Adaptive Force">
-          <span>Adaptive Force</span>
-          <img src="https://ddragon.leagueoflegends.com/cdn/img/perk-images/StatMods/StatModsHealthScalingIcon.png" title="Scaling Health">
-          <span>Scaling Health</span>
+          <div><img src="https://ddragon.leagueoflegends.com/cdn/img/perk-images/StatMods/StatModsAttackSpeedIcon.png" class="icon"><span>Attack Speed</span></div>
+          <div><img src="https://ddragon.leagueoflegends.com/cdn/img/perk-images/StatMods/StatModsAdaptiveForceIcon.png" class="icon"><span>Adaptive Force</span></div>
+          <div><img src="https://ddragon.leagueoflegends.com/cdn/img/perk-images/StatMods/StatModsHealthScalingIcon.png" class="icon"><span>Scaling Health</span></div>
         </div>
       </div>
     `;
@@ -265,11 +274,11 @@ sectionSelect.addEventListener('change', () => {
       <div class="card-container">
         <div class="card"><strong>Starting items</strong>
           <div class="build-flow">
+            <div><img src="https://ddragon.leagueoflegends.com/cdn/14.21.1/img/item/2031.png" class="icon">Mosstomper Seedling</div>
+            <span>→</span>
             <div><img src="https://ddragon.leagueoflegends.com/cdn/14.21.1/img/item/1082.png" class="icon">Dark Seal</div>
             <span>→</span>
             <div><img src="https://ddragon.leagueoflegends.com/cdn/14.21.1/img/item/1052.png" class="icon">Amp Tome</div>
-            <span>→</span>
-            <div><img src="https://ddragon.leagueoflegends.com/cdn/14.21.1/img/item/2031.png" class="icon">Mosstomper Seedling</div>
           </div>
         </div>
         <div class="card"><strong>Core items</strong>
@@ -336,36 +345,40 @@ sectionSelect.addEventListener('change', () => {
     content = `
       ${header}
       <div class="card-container">
-        <div class="card"><strong>First clear path</strong>
+        <div class="card"><strong>First clear</strong>
           <div class="build-flow">
-            <div><img src="https://ddragon.leagueoflegends.com/cdn/img/champion/loading/RedBrum.png" class="icon">Red Buff</div>
+            <div><img src="https://ddragon.leagueoflegends.com/cdn/img/champion/loading/ScuttleCrab.png" class="icon">Scuttle Crab</div>
+            <span>→</span>
+            <div><img src="https://ddragon.leagueoflegends.com/cdn/img/champion/loading/BlueSentinel.png" class="icon">Blue Sentinel</div>
+            <span>→</span>
+            <div><img src="https://ddragon.leagueoflegends.com/cdn/img/champion/loading/RedBrambleback.png" class="icon">Red Brambleback</div>
             <span>→</span>
             <div><img src="https://ddragon.leagueoflegends.com/cdn/img/champion/loading/Raptors.png" class="icon">Raptors</div>
             <span>→</span>
-            <div><img src="https://ddragon.leagueoflegends.com/cdn/img/champion/loading/Wolves.png" class="icon">Wolves</div>
+            <div><img src="https://ddragon.leagueoflegends.com/cdn/img/champion/loading/MurkWolves.png" class="icon">Murk Wolves</div>
             <span>→</span>
-            <div><img src="https://ddragon.leagueoflegends.com/cdn/img/champion/loading/Blue.png" class="icon">Blue Buff</div>
+            <div><img src="https://ddragon.leagueoflegends.com/cdn/img/champion/loading/Krugs.png" class="icon">Krugs</div>
             <span>→</span>
             <div><img src="https://ddragon.leagueoflegends.com/cdn/img/champion/loading/Gromp.png" class="icon">Gromp</div>
-            <span>→</span>
-            <div><img src="https://ddragon.leagueoflegends.com/cdn/img/champion/loading/Scuttle.png" class="icon">Scuttle</div>
           </div>
         </div>
         <div class="card"><strong>Second clear / gank transition</strong>
           <div class="build-flow">
-            <div><img src="https://ddragon.leagueoflegends.com/cdn/img/champion/loading/RedBrum.png" class="icon">Red Buff</div>
+            <div><img src="https://ddragon.leagueoflegends.com/cdn/img/champion/loading/ScuttleCrab.png" class="icon">Scuttle Crab</div>
+            <span>→</span>
+            <div><img src="https://ddragon.leagueoflegends.com/cdn/img/champion/loading/RedBrambleback.png" class="icon">Red Brambleback</div>
+            <span>→</span>
+            <div><img src="https://ddragon.leagueoflegends.com/cdn/img/champion/loading/MurkWolves.png" class="icon">Murk Wolves</div>
             <span>→</span>
             <div><img src="https://ddragon.leagueoflegends.com/cdn/img/champion/loading/Krugs.png" class="icon">Krugs</div>
             <span>→</span>
-            <div><img src="https://ddragon.leagueoflegends.com/cdn/img/champion/loading/Wolves.png" class="icon">Wolves</div>
+            <div><img src="https://ddragon.leagueoflegends.com/cdn/img/champion/loading/BlueSentinel.png" class="icon">Blue Sentinel</div>
             <span>→</span>
-            <div><img src="https://ddragon.leagueoflegends.com/cdn/img/champion/loading/Blue.png" class="icon">Blue Buff</div>
-            <span>→</span>
-            <div><img src="https://ddragon.leagueoflegends.com/cdn/img/champion/loading/Scuttle.png" class="icon">Scuttle</div>
+            <div><img src="https://ddragon.leagueoflegends.com/cdn/img/champion/loading/Gromp.png" class="icon">Gromp</div>
           </div>
         </div>
       </div>
-      <p>Preferred jungle camps: Raptors (heals & gank potential), Krugs (XP heavy), Wolves (clear speed), Gromp (challenging camp for scaling), Scuttle (vision & objective control).</p>
+      <p>Preferred jungle camps: Blue Sentinel, Red Brambleback, Raptors, Murk Wolves, Krugs, Gromp, Scuttle Crab for vision and control.</p>
     `;
   }
 
