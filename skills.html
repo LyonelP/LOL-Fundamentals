@@ -8,28 +8,15 @@
 body {
   margin: 0;
   font-family: 'Beaufort for LOL', Arial, Helvetica, sans-serif;
-  /* Runeterra-themed background */
-  background: url('https://ddragon.leagueoflegends.com/cdn/img/champion/splash/Ahri_10.jpg') no-repeat center center fixed;
-  background-size: cover;
   color: #e6edf3;
   text-align: center;
-  position: relative;
-  overflow-x: hidden;
-}
-
-/* Dark overlay for readability */
-body::before {
-  content: "";
-  position: fixed;
-  top: 0; left: 0;
-  width: 100%; height: 100%;
-  background: rgba(10,15,20,0.85);
-  z-index: -1;
+  background: url('https://64.media.tumblr.com/594ac290bec6d5e9ad98b5f53404f00b/245c4c3ee469f81d-e4/s1280x1920/1cda4284320eb2031758a9859dfe14ff8bbc50ba.jpg') no-repeat center center fixed;
+  background-size: cover;
 }
 
 /* Header */
 header {
-  background: rgba(13,17,23,0.9);
+  background: rgba(13,17,23,0.85);
   border-bottom: 2px solid #c9aa71;
   padding: 20px 10px;
   font-weight: bold;
@@ -52,7 +39,9 @@ header {
   transition: all 0.3s;
   box-shadow: 0 0 10px rgba(201,170,113,0.5);
 }
-.back-button::before { content: "← "; }
+.back-button::before {
+  content: "← ";
+}
 .back-button:hover {
   background: linear-gradient(135deg, #e6c97f, #f0d88b);
   box-shadow: 0 0 15px rgba(255,215,0,0.8);
@@ -67,7 +56,7 @@ header {
   font-size: 16px;
   border-radius: 6px;
   border: none;
-  background: #0f1722;
+  background: rgba(15,23,34,0.85);
   color: #c9aa71;
   cursor: pointer;
 }
@@ -76,7 +65,7 @@ header {
 #skill-info {
   margin: 30px auto;
   max-width: 900px;
-  background: rgba(13,17,23,0.95);
+  background: rgba(13,17,23,0.85);
   border: 1px solid #2f81f7;
   padding: 20px;
   border-radius: 10px;
@@ -99,6 +88,7 @@ header {
 <body>
 
 <header>LoL Fundamentals – Skills Hub</header>
+
 <a href="membershub.html" class="back-button">Back to Members Hub</a>
 
 <div id="skill-select-container">
@@ -114,7 +104,7 @@ header {
 <script>
 // Require login
 if (localStorage.getItem('lolfundamentals_logged_in') !== 'true') {
-  window.location.href = 'index.html';
+  window.location.href = 'index.html'; // redirect to login
 }
 
 // List of all fundamentals skills
