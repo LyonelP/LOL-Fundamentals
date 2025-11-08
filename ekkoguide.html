@@ -124,9 +124,33 @@ header {
 }
 .card strong { display: block; margin-bottom: 6px; color: #e0c77b; }
 
+.build-flow {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+  gap: 8px;
+  margin-top: 10px;
+}
+.build-flow div {
+  background: rgba(20,25,35,0.85);
+  border: 1px solid #c9aa71;
+  border-radius: 8px;
+  padding: 10px 12px;
+  min-width: 100px;
+  text-align: center;
+}
+.build-flow span {
+  font-size: 18px;
+  color: #c9aa71;
+}
+
+/* Media query */
 @media (max-width: 600px) {
   #section-select { font-size: 14px; padding: 8px 10px; }
   .card-container { flex-direction: column; gap: 10px; }
+  .build-flow { flex-direction: column; }
+  .build-flow span { display: none; }
 }
 </style>
 </head>
@@ -172,52 +196,44 @@ sectionSelect.addEventListener('change', () => {
 
   if(value === "Intro"){
     content = `
+      <h3>Intro</h3>
       <p>Why Ekko jungle? I think Ekko performs best as a jungler. Smite is the strongest summoner spell to take alongside flash on Ekko, especially once upgraded to blue smite. The range on the slow, and burst, plus the ability to secure objectives fits Ekko’s play style perfectly. Ekko has a hard time laning, and his W, ult, and passive can be best utilized in roam, gank, dive, and flank scenarios. Also, he’s really fun to play!</p>
     `;
   }
 
   if(value === "Runes"){
     content = `
+      <h3>Runes</h3>
       <div class="card-container">
-        <div class="card">
-          <strong>Keystone</strong>Dark Harvest
-        </div>
-        <div class="card">
-          <strong>Domination</strong>Sudden Impact
-        </div>
-        <div class="card">
-          <strong>Domination</strong>Grisly Momentos
-        </div>
-        <div class="card">
-          <strong>Domination</strong>Treasure Hunter
-        </div>
-        <div class="card">
-          <strong>Inspiration</strong>Magical Footwear
-        </div>
-        <div class="card">
-          <strong>Inspiration</strong>Jack of All Trades
-        </div>
+        <div class="card"><strong>Keystone</strong>Dark Harvest</div>
+        <div class="card"><strong>Domination</strong>Sudden Impact</div>
+        <div class="card"><strong>Domination</strong>Grisly Momentos</div>
+        <div class="card"><strong>Domination</strong>Treasure Hunter</div>
+        <div class="card"><strong>Inspiration</strong>Magical Footwear</div>
+        <div class="card"><strong>Inspiration</strong>Jack of All Trades</div>
       </div>
     `;
   }
 
   if(value === "Build"){
     content = `
-      <div class="card-container">
-        <div class="card">Green Pet</div>
-        <div class="card">Dark Seal</div>
-        <div class="card">Nashor's Tooth</div>
-        <div class="card">Mercury's Treads</div>
-        <div class="card">Lich Bane</div>
-        <div class="card">Rabadon's Deathcap</div>
-        <div class="card">Zhonya's Hourglass</div>
-        <div class="card">Void Staff</div>
+      <h3>Build</h3>
+      <div class="build-flow">
+        <div>Green Pet</div><span>→</span>
+        <div>Dark Seal</div><span>→</span>
+        <div>Nashor's Tooth</div><span>→</span>
+        <div>Mercury's Treads</div><span>→</span>
+        <div>Lich Bane</div><span>→</span>
+        <div>Rabadon's Deathcap</div><span>→</span>
+        <div>Zhonya's Hourglass</div><span>→</span>
+        <div>Void Staff</div>
       </div>
     `;
   }
 
   if(value === "Summoner Spells"){
     content = `
+      <h3>Summoner Spells</h3>
       <p><strong>Flash:</strong> Still the best summoner spell in the game.</p>
       <p><strong>Smite:</strong> Strongest summoner spell alongside Flash. Use upgraded blue smite for slow, burst, and objective control.</p>
     `;
@@ -225,6 +241,7 @@ sectionSelect.addEventListener('change', () => {
 
   if(value === "Abilities"){
     content = `
+      <h3>Abilities</h3>
       <p><strong>Passive – Z-Drive Resonance:</strong> Trades that proc passive are worth it. Use movement speed to reposition while waiting for cooldowns.</p>
       <p><strong>Q – Timewinder:</strong> Fast wave pushing and lane fixing.</p>
       <p><strong>W – Parallel Convergence:</strong> Push enemies, shield yourself, tank damage, and control fights.</p>
@@ -235,6 +252,7 @@ sectionSelect.addEventListener('change', () => {
 
   if(value === "Combos"){
     content = `
+      <h3>Combos</h3>
       <p><strong>W E E Q AA:</strong> Basic combo, lead with W out of vision.</p>
       <p><strong>E E Q AA W AA:</strong> Best when already in E range.</p>
       <p><strong>E Q E AA:</strong> Best when Q is guaranteed to hit.</p>
@@ -245,6 +263,7 @@ sectionSelect.addEventListener('change', () => {
 
   if(value === "Preferred Jungle Camps"){
     content = `
+      <h3>Preferred Jungle Camps</h3>
       <p><strong>Raptors:</strong> Favorite, heals well, great gank positioning.</p>
       <p><strong>Krugs:</strong> High experience, time-consuming.</p>
       <p><strong>Wolf Camp:</strong> Good clear, pathing.</p>
@@ -257,6 +276,7 @@ sectionSelect.addEventListener('change', () => {
 
   if(value === "Level 1"){
     content = `
+      <h3>Level 1</h3>
       <p>Blue side: Ward tri bush, move mid, throw W toward pixel brush. Use W on starting camp at 1:27. Last auto should wait for Hunter’s Talisman damage (approx 125).</p>
       <p>Red side: Mirror path; tri bush ward less critical for top.</p>
     `;
@@ -264,6 +284,7 @@ sectionSelect.addEventListener('change', () => {
 
   if(value === "Jungle Routes"){
     content = `
+      <h3>Jungle Routes</h3>
       <p><strong>First Clear:</strong> Red start preferred, blue start only if enemy may cheese red.</p>
       <ul>
         <li>Red Buff → Raptors → Wolves → Blue Buff → Gromp/gank → Scuttle → Ganks/Invade</li>
@@ -277,18 +298,21 @@ sectionSelect.addEventListener('change', () => {
 
   if(value === "Hardest Matchups"){
     content = `
+      <h3>Hardest Matchups</h3>
       <p>Champions with high mobility and burst (e.g., Nidalee, Kha’Zix) are difficult. They can force early ult and still kill Ekko at original position.</p>
     `;
   }
 
   if(value === "Team Fighting"){
     content = `
+      <h3>Team Fighting</h3>
       <p>Proc passive on as many targets as possible, land W on priority targets. Delay ult for max healing/damage. Use movement speed to dodge melee autos. W passive + ult liberally, especially on squishies.</p>
     `;
   }
 
   if(value === "Closing Out The Game"){
     content = `
+      <h3>Closing Out The Game</h3>
       <p>Focus on Baron/Elder. Use W, passive, Q to zone and fast push waves to objectives. Avoid farming far from objectives. Post-core items, prioritize survival/objectives over kills.</p>
     `;
   }
