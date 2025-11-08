@@ -48,6 +48,20 @@ header {
   justify-items: center;
 }
 
+/* Make first row 3 cards and second row 2 cards on desktop */
+@media(min-width: 900px){
+  .card-grid {
+    grid-template-areas:
+      "diana-matchups diana-guide ekko-guide"
+      "tierlist fundamentals";
+  }
+  .diana-matchups { grid-area: diana-matchups; }
+  .diana-guide { grid-area: diana-guide; }
+  .ekko-guide { grid-area: ekko-guide; }
+  .tierlist { grid-area: tierlist; }
+  .fundamentals { grid-area: fundamentals; }
+}
+
 /* Individual Card */
 .card {
   background: #161b22;
@@ -188,6 +202,16 @@ footer a:hover {
     <p>Detailed breakdowns for every mid lane matchup. Learn optimal trades, wave control, and positioning.</p>
   </a>
 
+  <a href="dianaguide.html" class="card diana-guide">
+    <h3>Diana Guide</h3>
+    <p>Comprehensive guide for mastering Diana, including combos, mechanics, and advanced tips.</p>
+  </a>
+
+  <a href="ekkoguide.html" class="card ekko-guide">
+    <h3>Ekko Guide</h3>
+    <p>Master Ekko with combos, pathing tips, and jungle mechanics to dominate the Rift.</p>
+  </a>
+
   <a href="tierlist.html" class="card tierlist">
     <h3>Tierlist</h3>
     <p>Current champion tierlist showing which champions dominate the meta.</p>
@@ -200,18 +224,8 @@ footer a:hover {
     </div>
   </a>
 
-  <a href="dianaguide.html" class="card diana-guide">
-    <h3>Diana Guide</h3>
-    <p>Comprehensive guide for mastering Diana, including combos, mechanics, and advanced tips.</p>
-  </a>
-
-  <a href="ekkoguide.html" class="card ekko-guide">
-    <h3>Ekko Guide</h3>
-    <p>Master Ekko with combos, pathing tips, and jungle mechanics to dominate the Rift.</p>
-  </a>
-
   <a href="skills.html" class="card fundamentals">
-    <h3>Fundamentals Section</h3>
+    <h3>Fundamentals</h3>
     <p>Learn core League mechanics that every player should understand to improve faster.</p>
   </a>
 </div>
@@ -227,7 +241,7 @@ footer a:hover {
 <script>
 // Require login
 if (localStorage.getItem('lolfundamentals_logged_in') !== 'true') {
-  window.location.href = 'index.html'; // redirect to login
+  window.location.href = 'index.html';
 }
 
 function logout() {
