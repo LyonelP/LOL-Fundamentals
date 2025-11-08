@@ -23,9 +23,11 @@ header {
   text-transform: uppercase;
   color: #c9aa71;
 }
+
+/* Gold Back Button with arrow */
 .back-button {
   display: inline-block;
-  margin: 20px auto;
+  margin: 20px auto 15px auto;
   padding: 10px 25px;
   background: linear-gradient(135deg, #c9aa71, #e0c77b);
   color: #000;
@@ -34,11 +36,13 @@ header {
   font-weight: bold;
   transition: all 0.3s;
 }
+.back-button::before { content: "← "; }
 .back-button:hover {
   background: linear-gradient(135deg, #e6c97f, #f0d88b);
 }
+
 #roleSelect {
-  margin: 15px 0 25px 0;
+  margin: 10px 0 25px 0;
   padding: 8px 12px;
   font-size: 16px;
   border-radius: 6px;
@@ -46,30 +50,19 @@ header {
   background: #161b22;
   color: #e6edf3;
 }
+
 .tierlist {
   display: flex;
-  flex-direction: column;
+  flex-wrap: wrap;
   max-width: 1000px;
   margin: 0 auto 40px auto;
-}
-.tier-section {
-  margin-bottom: 40px;
-}
-.tier-section h2 {
-  margin-bottom: 15px;
-  color: #c9aa71;
-  font-size: 1.5em;
-  text-align: left;
-}
-.champion-grid {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 15px;
+  justify-content: center;
 }
 .champion-card {
   width: 100px;
   text-align: center;
   font-size: 0.85em;
+  margin: 8px;
 }
 .champion-card img {
   width: 80px;
@@ -77,6 +70,10 @@ header {
   border-radius: 8px;
   display: block;
   margin: 0 auto 5px auto;
+}
+.rank-badge {
+  font-weight: bold;
+  margin-top: 2px;
 }
 </style>
 </head>
@@ -92,7 +89,6 @@ header {
   <option value="Mid">Mid</option>
   <option value="ADC">ADC</option>
   <option value="Support">Support</option>
-  <option value="All">All Roles</option>
 </select>
 
 <div id="tierlistContainer" class="tierlist"></div>
@@ -102,9 +98,6 @@ header {
 if(localStorage.getItem('lolfundamentals_logged_in') !== 'true'){
   window.location.href = 'index.html';
 }
-
-// Tier order
-const tierOrder = ["OP","S","A","B","C","D"];
 
 // CSV URL
 const csvURL = "https://docs.google.com/spreadsheets/d/e/2PACX-1vRtIJeggpJ6cjGJt0OOds4OZDuHMMUxHCWzMiU1Bd4gJ8EvfZMXPE9p0X1K3yyeZs7bpFyQZHhHpnsu/pub?output=csv";
@@ -116,13 +109,13 @@ fetch(csvURL)
   .then(res => res.text())
   .then(data => {
     const rows = data.trim().split("\n").map(r => r.split(","));
-    let headers = rows[0].map(h => h.trim().replace(/["']/g,""));
+    const headers = rows[0].map(h => h.trim().replace(/["']/g,""));
     champions = rows.slice(1).map(row => {
       let champ = {};
       headers.forEach((h,i) => champ[h] = row[i] ? row[i].trim() : "");
       return champ;
     });
-    renderTierlist("Top"); // default Top lane
+    renderTierlist("Top"); // default role
   });
 
 // Normalize champion name for image URL
@@ -130,47 +123,25 @@ function normalizeName(name){
   return name.replace(/[\s.'’]/g,"").replace(/é/g,"e").replace(/û/g,"u").replace(/ö/g,"o");
 }
 
-// Render champions grouped by tier
+// Render champions for selected role
 function renderTierlist(role){
   const container = document.getElementById("tierlistContainer");
   container.innerHTML = "";
 
-  const filteredChamps = champions.filter(ch => {
-    if(role === "All") return true;
-    return ch[role] && ch[role] !== "X";
-  });
+  const filteredChamps = champions.filter(ch => ch[role] && ch[role] !== "X");
 
-  tierOrder.forEach(tier => {
-    const champsInTier = filteredChamps.filter(ch => {
-      if(role === "All"){
-        return Object.entries(ch).some(([k,v]) => k !== "Champion" && v === tier);
-      } else {
-        return ch[role] === tier;
-      }
-    });
-    if(champsInTier.length === 0) return;
-
-    const section = document.createElement("div");
-    section.className = "tier-section";
-    section.innerHTML = `<h2>${tier}</h2>`;
-
-    const grid = document.createElement("div");
-    grid.className = "champion-grid";
-
-    champsInTier.forEach(ch => {
-      const champName = ch["Champion"];
-      const imgName = normalizeName(champName);
-      const card = document.createElement("div");
-      card.className = "champion-card";
-      card.innerHTML = `
-        <img src="https://ddragon.leagueoflegends.com/cdn/14.23.1/img/champion/${imgName}.png" alt="${champName}">
-        <div>${champName}</div>
-      `;
-      grid.appendChild(card);
-    });
-
-    section.appendChild(grid);
-    container.appendChild(section);
+  filteredChamps.forEach(ch => {
+    const champName = ch["Champion"];
+    const rank = ch[role];
+    const imgName = normalizeName(champName);
+    const card = document.createElement("div");
+    card.className = "champion-card";
+    card.innerHTML = `
+      <img src="https://ddragon.leagueoflegends.com/cdn/14.23.1/img/champion/${imgName}.png" alt="${champName}">
+      <div>${champName}</div>
+      <div class="rank-badge">${rank}</div>
+    `;
+    container.appendChild(card);
   });
 }
 
@@ -182,7 +153,6 @@ document.getElementById("roleSelect").addEventListener("change",(e)=>{
 
 </body>
 </html>
-
 
 
 
