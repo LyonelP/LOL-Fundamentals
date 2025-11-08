@@ -96,6 +96,16 @@ header {
   margin-top: 2px;
 }
 
+/* Tier Divider */
+.tier-divider {
+  width: 100%;
+  text-align: left;
+  font-weight: bold;
+  font-size: 18px;
+  margin: 30px 0 10px 10px;
+  color: #c9aa71;
+}
+
 /* Footer */
 footer {
   text-align: center;
@@ -119,7 +129,6 @@ footer a:hover { text-decoration: underline; }
 <a href="membershub.html" class="back-button">Back to Members Hub</a>
 
 <select id="roleSelect">
-  <option value="all">All Roles</option>
   <option value="Top">Top</option>
   <option value="Jungle">Jungle</option>
   <option value="Mid">Mid</option>
@@ -199,7 +208,7 @@ const champions = [
 
 // Pull tier data from Google Sheet
 const tierCSV = "https://docs.google.com/spreadsheets/d/e/2PACX-1vRtIJeggpJ6cjGJt0OOds4OZDuHMMUxHCWzMiU1Bd4gJ8EvfZMXPE9p0X1K3yyeZs7bpFyQZHhHpnsu/pub?output=csv";
-let champRanks = {}; // { "Ahri": "S", ... }
+let champRanks = {}; // { "Ahri": {Top:"-", Jungle:"-", Mid:"S", ...} }
 
 fetch(tierCSV)
   .then(res => res.text())
@@ -218,30 +227,29 @@ function renderCards() {
   const container = document.getElementById('championCards');
   container.innerHTML = "";
 
-  // Filter champions based on role
-  let filtered = champions.filter(champ => role === "all" || champ.role === role);
-
-  // Sort by rank OP > S > A > B > C > D
   const rankOrder = ["OP","S","A","B","C","D"];
-  filtered.sort((a,b)=>{
-    const rankA = champRanks[a.name]?.[a.role] || "D";
-    const rankB = champRanks[b.name]?.[b.role] || "D";
-    return rankOrder.indexOf(rankA) - rankOrder.indexOf(rankB);
-  });
+  rankOrder.forEach(rank => {
+    const tierChamps = champions.filter(champ => champ.role===role && (champRanks[champ.name]?.[role]||"-") === rank);
+    if(tierChamps.length>0){
+      // Divider
+      const divider = document.createElement("div");
+      divider.className = "tier-divider";
+      divider.textContent = rank;
+      container.appendChild(divider);
 
-  filtered.forEach(champ=>{
-    const rank = champRanks[champ.name]?.[champ.role] || "-";
-    const imgName = champ.name.replace(/\s/g,'').replace(/'/g,"").replace(/&/g,"").replace(/\./g,"");
-    const imgURL = `https://ddragon.leagueoflegends.com/cdn/14.23.1/img/champion/${imgName}.png`;
-
-    const card = document.createElement("div");
-    card.className = "card";
-    card.innerHTML = `
-      <img src="${imgURL}" alt="${champ.name}">
-      <div class="champ-name">${champ.name}</div>
-      <div class="champ-rank">${rank}</div>
-    `;
-    container.appendChild(card);
+      tierChamps.forEach(champ=>{
+        const imgName = champ.name.replace(/\s/g,'').replace(/'/g,"").replace(/&/g,"").replace(/\./g,"");
+        const imgURL = `https://ddragon.leagueoflegends.com/cdn/14.23.1/img/champion/${imgName}.png`;
+        const card = document.createElement("div");
+        card.className = "card";
+        card.innerHTML = `
+          <img src="${imgURL}" alt="${champ.name}">
+          <div class="champ-name">${champ.name}</div>
+          <div class="champ-rank">${rank}</div>
+        `;
+        container.appendChild(card);
+      });
+    }
   });
 }
 
@@ -250,8 +258,6 @@ document.getElementById('roleSelect').addEventListener('change', renderCards);
 
 </body>
 </html>
-
-
 
 
 
