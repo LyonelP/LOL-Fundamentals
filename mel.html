@@ -7,33 +7,40 @@
 <style>
   body {
     margin: 0;
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans‑serif;
     background: #0d1117;
     color: #e6edf3;
-    line-height: 1.4;
+    line‑height: 1.4;
+    display: none; /* hide until login verified */
   }
   header {
     background: #161b22;
     padding: 10px 20px;
-    text-align: center;
+    text‑align: center;
     font-size: 28px;
     font-weight: bold;
     color: #58a6ff;
   }
   .back-link {
-    display: block;
-    margin: 20px auto 30px auto;
-    text-align: center;
-    color: #F9D949; /* gold/yellow */
-    text-decoration: none;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    background: #c9aa71;
+    color: #0d1117;
     font-weight: bold;
+    text-decoration: none;
+    padding: 10px 20px;
+    border-radius: 25px;
+    border: 1px solid #c9aa71;
+    margin: 20px auto 30px auto;
   }
-  .back-link:hover {
-    text-decoration: underline;
+  .back‑link:hover {
+    background: #e6c17c;
+    color: #0d1117;
   }
   .matchup-container {
     display: flex;
-    max-width: 900px;
+    max‑width: 900px;
     margin: -15px auto 0 auto;
     gap: 15px;
     padding: 0 20px 10px 20px;
@@ -50,7 +57,7 @@
     border-radius: 8px;
   }
   .winrate-bubble {
-    background: #F9D949; /* yellow for 51% */
+    background: #F9D949; /* yellow for ~51% */
     color: #0d1117;
     font-weight: bold;
     padding: 8px 14px;
@@ -103,7 +110,9 @@
 <body>
 <header>Diana Mid Matchup – Mel</header>
 
-<a href="matchup-hub.html" class="back-link">&larr; Back to Matchup Hub</a>
+<div style="text-align: center;">
+  <a href="matchuphub.html" class="back-link">&larr; Back to Matchup Hub</a>
+</div>
 
 <div class="matchup-container">
   <div class="matchup-left">
@@ -113,15 +122,26 @@
   <div class="matchup-right">
     <h2>Matchup Notes</h2>
     <ul>
-      <li>Mel has consistent poke and lane pressure; watch for spell combos.</li>
+      <li>Mel has consistent poke and lane pressure; watch for her spell combos.</li>
       <li>Look for windows to engage after her abilities are used.</li>
       <li>Wave management can bait her into unsafe trades.</li>
-      <li>Post-level 6, Mel’s ultimate is dangerous; engage when it’s on cooldown.</li>
+      <li>Post‑level 6, Mel’s ultimate is dangerous; engage when it’s on cooldown.</li>
       <li>Use mobility to dodge key abilities and capitalize on cooldowns.</li>
     </ul>
   </div>
 </div>
 
-<footer>© 2025 LoL Fundamentals · Contact: arcsecond@lolfundamentals.com</footer>
+<footer>© 2025 LoL Fundamentals · Contact: arcsecond@lolfundamentals.com</footer>
+
+<script>
+if (localStorage.getItem('lolfundamentals_logged_in') !== 'true') {
+  alert('You must be logged in to view this page.');
+  window.location.href = 'login.html';
+} else {
+  document.body.style.display = 'block';
+}
+</script>
 </body>
 </html>
+
+
