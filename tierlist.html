@@ -15,7 +15,6 @@ body {
   display: none; /* hide until login check */
 }
 
-/* Header */
 header {
   background: linear-gradient(90deg, #0a0f14, #1b2838);
   border-bottom: 2px solid #c9aa71;
@@ -27,7 +26,6 @@ header {
   color: #c9aa71;
 }
 
-/* Gold Back Button */
 .back-button {
   display: block;
   width: max-content;
@@ -50,48 +48,63 @@ header {
   box-shadow: 0 0 15px rgba(255,215,0,0.8);
 }
 
-/* Section */
 .section {
   padding: 40px 20px;
   max-width: 1200px;
   margin: 0 auto;
 }
 
-/* Tierlist grid */
+.role-select {
+  margin-bottom: 30px;
+  font-size: 16px;
+  padding: 6px 12px;
+  border-radius: 6px;
+  border: 1px solid #c9aa71;
+  background: #161b22;
+  color: #e6edf3;
+  font-weight: bold;
+}
+
 .tierlist-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
   gap: 20px;
   justify-items: center;
 }
 
-/* Champion card (gold style) */
 .champ-card {
   background: #161b22;
   border: 2px solid #c9aa71;
   border-radius: 12px;
-  padding: 20px 15px;
-  width: 100%;
-  transition: transform 0.3s, box-shadow 0.3s;
+  padding: 10px;
+  width: 160px;
   text-decoration: none;
   color: #e6edf3;
+  transition: transform 0.3s, box-shadow 0.3s;
   display: flex;
   flex-direction: column;
-  justify-content: flex-end;
-  position: relative;
-  overflow: hidden;
+  align-items: center;
 }
 .champ-card:hover {
   transform: translateY(-5px);
   box-shadow: 0 10px 20px rgba(201,170,113,0.4);
 }
 .champ-card img {
-  width: 100%;
+  width: 100px;
+  height: 100px;
   border-radius: 6px;
-  margin-bottom: 10px;
+  margin-bottom: 6px;
+}
+.champ-card h4 {
+  margin: 0;
+  font-size: 16px;
+  font-weight: bold;
+}
+.champ-card p {
+  margin: 4px 0 0 0;
+  font-size: 14px;
 }
 
-/* Footer */
 footer {
   text-align: center;
   padding: 30px;
@@ -117,11 +130,16 @@ footer a:hover {
 
 <section class="section">
 <h2>Champion Tierlist</h2>
-<p>Filtered by role and ranked by tier.</p>
 
-<div class="tierlist-grid" id="tierlistContainer">
-  <!-- Champion cards will be dynamically inserted here -->
-</div>
+<select class="role-select" id="roleSelect">
+  <option value="top">Top</option>
+  <option value="jungle">Jungle</option>
+  <option value="mid" selected>Mid</option>
+  <option value="adc">ADC</option>
+  <option value="support">Support</option>
+</select>
+
+<div class="tierlist-grid" id="tierlistContainer"></div>
 </section>
 
 <footer>
@@ -143,24 +161,41 @@ const champions = [
   { name: "Akshan", img: "https://ddragon.leagueoflegends.com/cdn/14.23.1/img/champion/Akshan.png", tier: "A", roles: {top: "x", jungle: "x", mid: "x", adc: "✓", support: "x"} },
   { name: "Diana", img: "https://ddragon.leagueoflegends.com/cdn/14.23.1/img/champion/Diana.png", tier: "S", roles: {top: "x", jungle: "x", mid: "✓", adc: "x", support: "x"} },
   { name: "Ekko", img: "https://ddragon.leagueoflegends.com/cdn/14.23.1/img/champion/Ekko.png", tier: "B", roles: {top: "x", jungle: "✓", mid: "✓", adc: "x", support: "x"} },
-  // add all other champions here
+  // add more champions here
 ];
 
-// Specify which role you want to display for this page
-const displayRole = "mid"; // can be top, jungle, mid, adc, support
+// Order for tiers
+const tierOrder = { S: 1, A: 2, B: 3, C: 4, D: 5 };
 
-const container = document.getElementById('tierlistContainer');
-champions.forEach(champ => {
-  if(champ.roles[displayRole] !== "x") {
-    const card = document.createElement('a');
-    card.href = "#"; 
-    card.className = "champ-card";
-    card.innerHTML = `<img src="${champ.img}" alt="${champ.name}"><h4>${champ.name}</h4><p>Tier: ${champ.tier}</p>`;
-    container.appendChild(card);
-  }
+function renderTierlist(role){
+  const container = document.getElementById('tierlistContainer');
+  container.innerHTML = "";
+  
+  champions
+    .filter(champ => champ.roles[role] !== "x")
+    .sort((a,b) => tierOrder[a.tier] - tierOrder[b.tier])
+    .forEach(champ => {
+      const card = document.createElement('a');
+      card.href = "#"; 
+      card.className = "champ-card";
+      card.innerHTML = `<img src="${champ.img}" alt="${champ.name}">
+                        <h4>${champ.name}</h4>
+                        <p>Tier: ${champ.tier}</p>`;
+      container.appendChild(card);
+    });
+}
+
+// Initial render
+renderTierlist('mid');
+
+// Update on dropdown change
+document.getElementById('roleSelect').addEventListener('change', (e) => {
+  renderTierlist(e.target.value);
 });
 </script>
 </body>
 </html>
+
+
 
 
