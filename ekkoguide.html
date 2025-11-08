@@ -80,7 +80,7 @@ header {
   border-radius: 10px;
   text-align: left;
   color: #fff;
-  min-height: 200px;
+  min-height: 300px;
   position: relative;
 }
 
@@ -120,14 +120,15 @@ header {
 /* Rune layout */
 .rune-container {
   display: flex;
-  flex-direction: column;
+  flex-direction: row;
   align-items: flex-start;
-  gap: 16px;
+  gap: 20px;
   margin-top: 45px;
 }
 .rune-info {
   display: flex;
-  align-items: center;
+  flex-direction: column;
+  align-items: flex-start;
   gap: 10px;
 }
 
@@ -136,32 +137,20 @@ header {
   display: flex;
   flex-direction: column;
   gap: 10px;
-  margin-left: 10px;
+  margin-top: 10px;
 }
 
 /* Build & Runes Cards */
 .card-container {
   display: flex;
-  flex-wrap: wrap;
   justify-content: center;
+  flex-wrap: wrap;
   margin-top: 10px;
   gap: 12px;
-}
-.card {
-  background: rgba(20,25,35,0.85);
   border: 1px solid #c9aa71;
-  border-radius: 10px;
-  padding: 15px;
-  min-width: 140px;
-  flex: 1 1 120px;
-  text-align: center;
-  transition: all 0.3s;
+  padding: 10px;
+  border-radius: 8px;
 }
-.card:hover {
-  background: rgba(30,35,45,0.95);
-  box-shadow: 0 0 10px #c9aa71;
-}
-.card strong { display: block; margin-bottom: 6px; color: #e0c77b; }
 
 /* Build flow */
 .build-flow {
@@ -174,6 +163,7 @@ header {
 }
 .build-flow div {
   display: flex;
+  flex-direction: column;
   align-items: center;
   justify-content: center;
   background: rgba(20,25,35,0.85);
@@ -184,8 +174,9 @@ header {
   text-align: center;
 }
 .build-flow span {
-  font-size: 18px;
+  font-size: 22px;
   color: #c9aa71;
+  margin: 0 4px;
 }
 
 /* Media query */
@@ -247,33 +238,17 @@ sectionSelect.addEventListener('change', () => {
       <h3>Runes</h3>
       <div class="rune-container">
         <div class="rune-info">
-          <img src="https://ddragon.leagueoflegends.com/cdn/img/perk-images/Styles/Domination/DarkHarvest/DarkHarvest.png" class="icon">
-          <span><strong>Dark Harvest:</strong> Scales perfectly with Ekko's burst and resets; lets you one-shot in late fights.</span>
-        </div>
-        <div class="rune-info">
-          <img src="https://ddragon.leagueoflegends.com/cdn/img/perk-images/Styles/Domination/SuddenImpact/SuddenImpact.png" class="icon">
-          <span><strong>Sudden Impact:</strong> Synergizes with E dash for consistent magic pen after every engage.</span>
-        </div>
-        <div class="rune-info">
-          <img src="https://ddragon.leagueoflegends.com/cdn/img/perk-images/Styles/Domination/EyeballCollection/EyeballCollection.png" class="icon">
-          <span><strong>Eyeball Collection:</strong> Free AP for doing what you already want — killing and ganking.</span>
-        </div>
-        <div class="rune-info">
-          <img src="https://ddragon.leagueoflegends.com/cdn/img/perk-images/Styles/Domination/TreasureHunter/TreasureHunter.png" class="icon">
-          <span><strong>Treasure Hunter:</strong> Snowball rune; stacks give you an early AP lead to dominate mid-game.</span>
-        </div>
-        <div class="rune-info">
-          <img src="https://ddragon.leagueoflegends.com/cdn/img/perk-images/Styles/Inspiration/MagicalFootwear/MagicalFootwear.png" class="icon">
-          <span><strong>Magical Footwear:</strong> Free boots means faster core build; gives valuable movement speed.</span>
-        </div>
-        <div class="rune-info">
-          <img src="https://ddragon.leagueoflegends.com/cdn/img/perk-images/Styles/Inspiration/CosmicInsight/CosmicInsight.png" class="icon">
-          <span><strong>Cosmic Insight:</strong> CDR for Smite, Flash, and Ult — vital for an assassin jungler like Ekko.</span>
-        </div>
-        <div class="stat-shards">
-          <div><img src="https://ddragon.leagueoflegends.com/cdn/img/perk-images/StatMods/StatModsAttackSpeedIcon.png" class="icon"> Attack Speed</div>
-          <div><img src="https://ddragon.leagueoflegends.com/cdn/img/perk-images/StatMods/StatModsAdaptiveForceIcon.png" class="icon"> Adaptive Force</div>
-          <div><img src="https://ddragon.leagueoflegends.com/cdn/img/perk-images/StatMods/StatModsHealthScalingIcon.png" class="icon"> Scaling Health</div>
+          <div><img src="https://ddragon.leagueoflegends.com/cdn/img/perk-images/Styles/Domination/DarkHarvest/DarkHarvest.png" class="icon"> <strong>Dark Harvest:</strong> Scales perfectly with Ekko's burst and resets; lets you one-shot in late fights.</div>
+          <div><img src="https://ddragon.leagueoflegends.com/cdn/img/perk-images/Styles/Domination/SuddenImpact/SuddenImpact.png" class="icon"> <strong>Sudden Impact:</strong> Synergizes with E dash for consistent magic pen after every engage.</div>
+          <div><img src="https://ddragon.leagueoflegends.com/cdn/img/perk-images/Styles/Domination/EyeballCollection/EyeballCollection.png" class="icon"> <strong>Eyeball Collection:</strong> Free AP for doing what you already want — killing and ganking.</div>
+          <div><img src="https://ddragon.leagueoflegends.com/cdn/img/perk-images/Styles/Domination/TreasureHunter/TreasureHunter.png" class="icon"> <strong>Treasure Hunter:</strong> Snowball rune; stacks give you an early AP lead to dominate mid-game.</div>
+          <div><img src="https://ddragon.leagueoflegends.com/cdn/img/perk-images/Styles/Inspiration/MagicalFootwear/MagicalFootwear.png" class="icon"> <strong>Magical Footwear:</strong> Free boots means faster core build; gives valuable movement speed.</div>
+          <div><img src="https://ddragon.leagueoflegends.com/cdn/img/perk-images/Styles/Inspiration/CosmicInsight/CosmicInsight.png" class="icon"> <strong>Cosmic Insight:</strong> CDR for Smite, Flash, and Ult — vital for an assassin jungler like Ekko.</div>
+          <div class="stat-shards">
+            <div><img src="https://ddragon.leagueoflegends.com/cdn/img/perk-images/StatMods/StatModsAttackSpeedIcon.png" class="icon"> Attack Speed</div>
+            <div><img src="https://ddragon.leagueoflegends.com/cdn/img/perk-images/StatMods/StatModsAdaptiveForceIcon.png" class="icon"> Adaptive Force</div>
+            <div><img src="https://ddragon.leagueoflegends.com/cdn/img/perk-images/StatMods/StatModsHealthScalingIcon.png" class="icon"> Scaling Health</div>
+          </div>
         </div>
       </div>
     `;
@@ -283,44 +258,57 @@ sectionSelect.addEventListener('change', () => {
     content = `
       <h3>Build</h3>
       <h4 style="color:#c9aa71; margin-top:45px;">Starting Items</h4>
-      <div class="card-container">
-        <div class="card"><img src="https://ddragon.leagueoflegends.com/cdn/13.16.1/img/item/2031.png" class="icon"><br>Mosstomper Seedling</div>
-        <div class="card"><img src="https://ddragon.leagueoflegends.com/cdn/13.16.1/img/item/1052.png" class="icon"><br>Dark Seal</div>
-        <div class="card"><img src="https://ddragon.leagueoflegends.com/cdn/13.16.1/img/item/1001.png" class="icon"><br>Amp Tome</div>
-        <div class="card"><img src="https://ddragon.leagueoflegends.com/cdn/13.16.1/img/item/3009.png" class="icon"><br>Tier 1 Boots</div>
+      <div class="build-flow">
+        <div><img src="https://ddragon.leagueoflegends.com/cdn/13.16.1/img/item/2031.png" class="icon"><br>Mosstomper Seedling</div>
+        <span class="arrow">→</span>
+        <div><img src="https://ddragon.leagueoflegends.com/cdn/13.16.1/img/item/1052.png" class="icon"><br>Dark Seal</div>
+        <span class="arrow">→</span>
+        <div><img src="https://ddragon.leagueoflegends.com/cdn/13.16.1/img/item/1052.png" class="icon"><br>Amp Tome</div>
+        <span class="arrow">→</span>
+        <div><img src="https://ddragon.leagueoflegends.com/cdn/13.16.1/img/item/1001.png" class="icon"><br>Boots</div>
       </div>
       <h4 style="color:#c9aa71;">Core Items</h4>
-      <div class="card-container">
-        <div class="card"><img src="https://ddragon.leagueoflegends.com/cdn/13.16.1/img/item/3115.png" class="icon"><br>Nashor's Tooth</div>
-        <div class="card"><img src="https://ddragon.leagueoflegends.com/cdn/13.16.1/img/item/3020.png" class="icon"><br>Mercury Treads</div>
-        <div class="card"><img src="https://ddragon.leagueoflegends.com/cdn/13.16.1/img/item/3090.png" class="icon"><br>Lich Bane</div>
-        <div class="card"><img src="https://ddragon.leagueoflegends.com/cdn/13.16.1/img/item/3089.png" class="icon"><br>Rabadon's Deathcap</div>
+      <div class="build-flow">
+        <div><img src="https://ddragon.leagueoflegends.com/cdn/13.16.1/img/item/3115.png" class="icon"><br>Nashor's Tooth</div>
+        <span class="arrow">→</span>
+        <div><img src="https://ddragon.leagueoflegends.com/cdn/13.16.1/img/item/3022.png" class="icon"><br>Mercury Treads</div>
+        <span class="arrow">→</span>
+        <div><img src="https://ddragon.leagueoflegends.com/cdn/13.16.1/img/item/3090.png" class="icon"><br>Lich Bane</div>
+        <span class="arrow">→</span>
+        <div><img src="https://ddragon.leagueoflegends.com/cdn/13.16.1/img/item/3089.png" class="icon"><br>Deathcap</div>
       </div>
       <h4 style="color:#c9aa71;">Final Items</h4>
-      <div class="card-container">
-        <div class="card"><img src="https://ddragon.leagueoflegends.com/cdn/13.16.1/img/item/3157.png" class="icon"><br>Zhonya's Hourglass</div>
-        <div class="card"><img src="https://ddragon.leagueoflegends.com/cdn/13.16.1/img/item/3135.png" class="icon"><br>Void Staff</div>
-        <div class="card"><img src="https://ddragon.leagueoflegends.com/cdn/13.16.1/img/item/2003.png" class="icon"><br>Elixirs</div>
+      <div class="build-flow">
+        <div><img src="https://ddragon.leagueoflegends.com/cdn/13.16.1/img/item/3157.png" class="icon"><br>Hourglass</div>
+        <span class="arrow">→</span>
+        <div><img src="https://ddragon.leagueoflegends.com/cdn/13.16.1/img/item/3135.png" class="icon"><br>Void Staff</div>
+        <span class="arrow">→</span>
+        <div><img src="https://ddragon.leagueoflegends.com/cdn/13.16.1/img/item/2003.png" class="icon"><br>Elixirs</div>
       </div>
     `;
   }
 
-  if(value === "Summoner Spells"){
+  if(value === "Pathing"){
     content = `
-      <h3>Summoner spells</h3>
-      <div class="rune-container">
-        <div class="rune-info">
-          <img src="https://ddragon.leagueoflegends.com/cdn/13.16.1/img/spell/SummonerFlash.png" class="icon">
-          <span><strong>Flash:</strong> Best summoner spell in the game.</span>
-        </div>
-        <div class="rune-info">
-          <img src="https://ddragon.leagueoflegends.com/cdn/13.16.1/img/spell/SummonerSmite.png" class="icon">
-          <span><strong>Smite:</strong> Strongest summoner spell alongside Flash. Use upgraded blue smite for slow, burst, and objective control.</span>
-        </div>
+      <h3>Pathing</h3>
+      <div class="build-flow">
+        <div>Red Brambleback</div>
+        <span class="arrow">→</span>
+        <div>Krugs</div>
+        <span class="arrow">→</span>
+        <div>Raptors</div>
+        <span class="arrow">→</span>
+        <div>Murk Wolves</div>
+        <span class="arrow">→</span>
+        <div>Blue Sentinel</div>
+        <span class="arrow">→</span>
+        <div>Gromp</div>
       </div>
+      <p>Start at Red Brambleback, then clear Krugs → Raptors → Murk Wolves → Blue → Gromp. Focus on efficient smite usage and pathing to maximize XP and gold while preparing for early ganks. Your objective is to reach level 3 quickly for early pressure and invade opportunities.</p>
     `;
   }
 
+  // Other sections (Abilities, Summoner Spells, Combos, Level 1, Hardest Matchups, Team Fighting, Closing Out the Game)
   if(value === "Abilities"){
     content = `
       <h3>Abilities</h3>
@@ -332,52 +320,56 @@ sectionSelect.addEventListener('change', () => {
     `;
   }
 
-  if(value === "Combos"){
+  if(value === "Summoner Spells"){
     content = `
-      <h3>Combos</h3>
-      <p><strong>W E E Q AA:</strong> Basic combo, lead with W out of vision.</p>
-      <p><strong>E E Q AA W AA:</strong> Best when already in E range.</p>
-      <p><strong>E Q E AA:</strong> Best when Q is guaranteed to hit.</p>
-      <p><strong>Q AA E:</strong> Extended trades or close-range situations.</p>
-      <p><strong>W E Q:</strong> Safe slow to proc passive.</p>
+      <h3>Summoner spells</h3>
+      <div class="rune-info">
+        <div><img src="https://ddragon.leagueoflegends.com/cdn/13.16.1/img/spell/SummonerSmite.png" class="icon"> Smite</div>
+        <div><img src="https://ddragon.leagueoflegends.com/cdn/13.16.1/img/spell/SummonerFlash.png" class="icon"> Flash</div>
+      </div>
     `;
   }
 
-  if(value === "Pathing"){
+  if(value === "Combos"){
     content = `
-      <h3>Pathing</h3>
-      <p><strong>First clear:</strong> Red Buff → Krugs → Raptors → Wolves → Blue Buff → Gromp → Scuttle → Ganks/Invades</p>
-      <p><strong>Second clear:</strong> Path to respawned camps or look for ganks.</p>
-      <p><em>Tip:</em> Smite before passive on camps for extra damage. Use efficient jungle routes to maximize XP and gold.</p>
+      <h3>Combos</h3>
+      <ul>
+        <li>E → Q → Auto → W (for all-in engages)</li>
+        <li>Flash → W → Q → E (surprise gank or tower dive)</li>
+        <li>R to dodge key enemy spells and reset fight</li>
+      </ul>
     `;
   }
 
   if(value === "Level 1"){
     content = `
       <h3>Level 1</h3>
-      <p>Blue side: Ward tri bush, move mid, throw W toward pixel brush. Use W on starting camp at 1:27. Last auto should wait for Hunter’s Talisman damage (approx 125).</p>
-      <p>Red side: Mirror path; tri bush ward less critical for top.</p>
+      <p>Start at Red Brambleback with Mosstomper Seedling. Pull early leash for smooth clear. Level Q first to help with early jungle pressure and ganks.</p>
     `;
   }
 
   if(value === "Hardest Matchups"){
     content = `
       <h3>Hardest matchups</h3>
-      <p>Champions with high mobility and burst (e.g., Nidalee, Kha’Zix) are difficult. They can force early ult and still duel well.</p>
+      <ul>
+        <li>Warwick – strong early dueling and sustain</li>
+        <li>Lee Sin – mobile, can punish early mistakes</li>
+        <li>Hecarim – fast clears, can gank before you can respond</li>
+      </ul>
     `;
   }
 
   if(value === "Team Fighting"){
     content = `
       <h3>Team fighting</h3>
-      <p>Flank with W from fog or behind enemy, use E-Q-AA combo, ult to survive heavy focus. Focus squishy backline; peel with W if necessary.</p>
+      <p>Look for flanks using E and W to engage. Use R for resets or to negate focused CC. Target backline squishies for maximum burst potential.</p>
     `;
   }
 
   if(value === "Closing Out the Game"){
     content = `
       <h3>Closing out the game</h3>
-      <p>Baron/Dragon focus. Use ult for safe tower dives. Sweep wards and look for flank opportunities. Split push if behind and keep farm up.</p>
+      <p>Prioritize vision control, Baron/Dragon setups, and pick opportunities. Use R strategically to bait enemies and secure objectives. Keep pressure on side lanes while team groups mid for 5v5s.</p>
     `;
   }
 
