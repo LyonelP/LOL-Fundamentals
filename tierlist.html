@@ -102,6 +102,169 @@ if(localStorage.getItem('lolfundamentals_logged_in') !== 'true'){
 // CSV URL
 const csvURL = "https://docs.google.com/spreadsheets/d/e/2PACX-1vRtIJeggpJ6cjGJt0OOds4OZDuHMMUxHCWzMiU1Bd4gJ8EvfZMXPE9p0X1K3yyeZs7bpFyQZHhHpnsu/pub?output=csv";
 
+// Static mapping of champion names → their League CDN images
+const championImages = {
+  "Aatrox": "Aatrox.png",
+  "Ahri": "Ahri.png",
+  "Akali": "Akali.png",
+  "Akshan": "Akshan.png",
+  "Alistar": "Alistar.png",
+  "Amumu": "Amumu.png",
+  "Anivia": "Anivia.png",
+  "Annie": "Annie.png",
+  "Aphelios": "Aphelios.png",
+  "Ashe": "Ashe.png",
+  "AurelionSol": "AurelionSol.png",
+  "Azir": "Azir.png",
+  "Bard": "Bard.png",
+  "Blitzcrank": "Blitzcrank.png",
+  "Brand": "Brand.png",
+  "Braum": "Braum.png",
+  "Caitlyn": "Caitlyn.png",
+  "Camille": "Camille.png",
+  "Cassiopeia": "Cassiopeia.png",
+  "ChoGath": "ChoGath.png",
+  "Corki": "Corki.png",
+  "Darius": "Darius.png",
+  "Diana": "Diana.png",
+  "DrMundo": "DrMundo.png",
+  "Draven": "Draven.png",
+  "Ekko": "Ekko.png",
+  "Elise": "Elise.png",
+  "Evelynn": "Evelynn.png",
+  "Ezreal": "Ezreal.png",
+  "Fiddlesticks": "Fiddlesticks.png",
+  "Fiora": "Fiora.png",
+  "Fizz": "Fizz.png",
+  "Galio": "Galio.png",
+  "Gangplank": "Gangplank.png",
+  "Garen": "Garen.png",
+  "Gnar": "Gnar.png",
+  "Gragas": "Gragas.png",
+  "Graves": "Graves.png",
+  "Gwen": "Gwen.png",
+  "Hecarim": "Hecarim.png",
+  "Heimerdinger": "Heimerdinger.png",
+  "Illaoi": "Illaoi.png",
+  "Irelia": "Irelia.png",
+  "Ivern": "Ivern.png",
+  "Janna": "Janna.png",
+  "JarvanIV": "JarvanIV.png",
+  "Jax": "Jax.png",
+  "Jayce": "Jayce.png",
+  "Jhin": "Jhin.png",
+  "Jinx": "Jinx.png",
+  "Kaisa": "Kai'Sa.png",
+  "Kalista": "Kalista.png",
+  "Karma": "Karma.png",
+  "Karthus": "Karthus.png",
+  "Kassadin": "Kassadin.png",
+  "Katarina": "Katarina.png",
+  "Kayle": "Kayle.png",
+  "Kayn": "Kayn.png",
+  "Kennen": "Kennen.png",
+  "KhaZix": "Khazix.png",
+  "Kindred": "Kindred.png",
+  "Kled": "Kled.png",
+  "KogMaw": "KogMaw.png",
+  "LeBlanc": "Leblanc.png",
+  "LeeSin": "LeeSin.png",
+  "Leona": "Leona.png",
+  "Lillia": "Lillia.png",
+  "Lissandra": "Lissandra.png",
+  "Lucian": "Lucian.png",
+  "Lulu": "Lulu.png",
+  "Lux": "Lux.png",
+  "Malphite": "Malphite.png",
+  "Malzahar": "Malzahar.png",
+  "Maokai": "Maokai.png",
+  "MasterYi": "MasterYi.png",
+  "MissFortune": "MissFortune.png",
+  "Mordekaiser": "Mordekaiser.png",
+  "Morgana": "Morgana.png",
+  "Nami": "Nami.png",
+  "Nasus": "Nasus.png",
+  "Nautilus": "Nautilus.png",
+  "Neeko": "Neeko.png",
+  "Nidalee": "Nidalee.png",
+  "Nilah": "Nilah.png",
+  "Nocturne": "Nocturne.png",
+  "Nunu": "Nunu.png",
+  "Olaf": "Olaf.png",
+  "Orianna": "Orianna.png",
+  "Ornn": "Ornn.png",
+  "Pantheon": "Pantheon.png",
+  "Poppy": "Poppy.png",
+  "Pyke": "Pyke.png",
+  "Qiyana": "Qiyana.png",
+  "Quinn": "Quinn.png",
+  "Rakan": "Rakan.png",
+  "Rammus": "Rammus.png",
+  "RekSai": "RekSai.png",
+  "Rell": "Rell.png",
+  "Renata": "Renata.png",
+  "Renekton": "Renekton.png",
+  "Rengar": "Rengar.png",
+  "Riven": "Riven.png",
+  "Rumble": "Rumble.png",
+  "Ryze": "Ryze.png",
+  "Samira": "Samira.png",
+  "Sejuani": "Sejuani.png",
+  "Senna": "Senna.png",
+  "Seraphine": "Seraphine.png",
+  "Sett": "Sett.png",
+  "Shaco": "Shaco.png",
+  "Shen": "Shen.png",
+  "Shyvana": "Shyvana.png",
+  "Singed": "Singed.png",
+  "Sion": "Sion.png",
+  "Sivir": "Sivir.png",
+  "Skarner": "Skarner.png",
+  "Sona": "Sona.png",
+  "Soraka": "Soraka.png",
+  "Swain": "Swain.png",
+  "Sylas": "Sylas.png",
+  "Syndra": "Syndra.png",
+  "TahmKench": "TahmKench.png",
+  "Taliyah": "Taliyah.png",
+  "Talon": "Talon.png",
+  "Taric": "Taric.png",
+  "Teemo": "Teemo.png",
+  "Thresh": "Thresh.png",
+  "Tristana": "Tristana.png",
+  "Trundle": "Trundle.png",
+  "Tryndamere": "Tryndamere.png",
+  "TwistedFate": "TwistedFate.png",
+  "Twitch": "Twitch.png",
+  "Udyr": "Udyr.png",
+  "Urgot": "Urgot.png",
+  "Varus": "Varus.png",
+  "Vayne": "Vayne.png",
+  "Veigar": "Veigar.png",
+  "VelKoz": "Velkoz.png",
+  "Vex": "Vex.png",
+  "Vi": "Vi.png",
+  "Viego": "Viego.png",
+  "Viktor": "Viktor.png",
+  "Vladimir": "Vladimir.png",
+  "Volibear": "Volibear.png",
+  "Warwick": "Warwick.png",
+  "Xayah": "Xayah.png",
+  "Xerath": "Xerath.png",
+  "XinZhao": "XinZhao.png",
+  "Yasuo": "Yasuo.png",
+  "Yone": "Yone.png",
+  "Yorick": "Yorick.png",
+  "Yuumi": "Yuumi.png",
+  "Zac": "Zac.png",
+  "Zed": "Zed.png",
+  "Zeri": "Zeri.png",
+  "Ziggs": "Ziggs.png",
+  "Zilean": "Zilean.png",
+  "Zoe": "Zoe.png",
+  "Zyra": "Zyra.png"
+};
+
 let champions = [];
 
 // Load CSV
@@ -115,15 +278,10 @@ fetch(csvURL)
       headers.forEach((h,i) => champ[h] = row[i] ? row[i].trim() : "");
       return champ;
     });
-    renderTierlist("Top"); // default role
+    renderTierlist("Top");
   });
 
-// Normalize champion name for image URL
-function normalizeName(name){
-  return name.replace(/[\s.'’]/g,"").replace(/é/g,"e").replace(/û/g,"u").replace(/ö/g,"o");
-}
-
-// Render champions for selected role
+// Render champions
 function renderTierlist(role){
   const container = document.getElementById("tierlistContainer");
   container.innerHTML = "";
@@ -133,11 +291,12 @@ function renderTierlist(role){
   filteredChamps.forEach(ch => {
     const champName = ch["Champion"];
     const rank = ch[role];
-    const imgName = normalizeName(champName);
+    const imgFile = championImages[champName] || "placeholder.png";
+
     const card = document.createElement("div");
     card.className = "champion-card";
     card.innerHTML = `
-      <img src="https://ddragon.leagueoflegends.com/cdn/14.23.1/img/champion/${imgName}.png" alt="${champName}">
+      <img src="https://ddragon.leagueoflegends.com/cdn/14.23.1/img/champion/${imgFile}" alt="${champName}">
       <div>${champName}</div>
       <div class="rank-badge">${rank}</div>
     `;
@@ -153,6 +312,7 @@ document.getElementById("roleSelect").addEventListener("change",(e)=>{
 
 </body>
 </html>
+
 
 
 
