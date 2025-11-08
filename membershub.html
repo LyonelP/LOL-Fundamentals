@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
 <title>LoL Fundamentals – Members Hub</title>
 <style>
 body {
@@ -28,15 +28,15 @@ header {
 
 /* Section */
 .section {
-  padding: 60px 20px;
+  padding: 40px 20px; /* reduced from 60px to raise content */
   max-width: 1000px;
-  margin: 40px auto;
+  margin: 20px auto; /* reduced top margin */
 }
 
 /* Section title */
 .section h2 {
   color: #c9aa71;
-  margin-bottom: 40px;
+  margin-bottom: 30px; /* slightly reduced */
 }
 
 /* Card Grid */
@@ -45,6 +45,7 @@ header {
   grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
   gap: 25px;
   justify-items: center;
+  margin-top: 20px; /* added spacing from heading */
 }
 
 /* Individual Card */
@@ -135,23 +136,6 @@ header {
 .tier-c { background: #f9c74f; flex: 1; }
 .tier-d { background: #90be6d; flex: 1; }
 
-/* Logout Button */
-#logoutBtn {
-  display: block;
-  margin: 160px auto 20px auto; /* very low above footer */
-  padding: 8px 20px;
-  background: #f94144;
-  color: #fff;
-  font-weight: bold;
-  border: none;
-  border-radius: 6px;
-  cursor: pointer;
-  transition: 0.3s;
-}
-#logoutBtn:hover {
-  background: #ff5959;
-}
-
 /* Footer */
 footer {
   text-align: center;
@@ -168,9 +152,27 @@ footer a {
 footer a:hover {
   text-decoration: underline;
 }
+
+/* Logout Button */
+#logoutBtn {
+  display: block;
+  margin: 40px auto;
+  padding: 12px 25px;
+  background: #f94144;
+  color: #fff;
+  font-weight: bold;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: 0.3s;
+}
+#logoutBtn:hover {
+  background: #ff5959;
+}
 </style>
 </head>
 <body>
+
 <header>LoL Fundamentals – Members Hub</header>
 
 <section class="section">
@@ -205,10 +207,9 @@ footer a:hover {
     <p>Learn core League mechanics that every player should understand to improve faster.</p>
   </a>
 </div>
-
-<!-- Logout Button -->
-<button id="logoutBtn">Logout</button>
 </section>
+
+<button id="logoutBtn" onclick="logout()">Logout</button>
 
 <footer>
 © 2025 LoL Fundamentals · Contact:
@@ -216,19 +217,18 @@ footer a:hover {
 </footer>
 
 <script>
-// Require login to view page
-if(localStorage.getItem('lolfundamentals_logged_in') !== 'true'){
+// Require login
+if (localStorage.getItem('lolfundamentals_logged_in') !== 'true') {
   window.location.href = 'index.html';
 }
 
-// Logout button functionality
-document.getElementById('logoutBtn').addEventListener('click', () => {
+function logout() {
   localStorage.removeItem('lolfundamentals_logged_in');
   window.location.href = 'index.html';
-});
+}
 </script>
+
 </body>
 </html>
-
 
 
