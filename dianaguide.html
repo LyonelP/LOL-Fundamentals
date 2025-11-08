@@ -81,12 +81,20 @@ header {
   text-align: left;
   color: #c9aa71;
   min-height: 200px;
+  overflow-y: auto;
+  max-height: 70vh;
 }
+
+#section-info h2 { color: #c9aa71; margin-top: 0; }
+#section-info p { color: #e6edf3; margin-bottom: 0.9em; line-height: 1.45; }
+#section-info ul { margin-left: 1.1em; margin-bottom: 0.9em; }
+#section-info li { margin-bottom: 0.6em; }
 
 #section-info:hover { box-shadow: 0 0 15px rgba(47,129,247,0.5); }
 
 @media (max-width: 600px) {
   #section-select { font-size: 14px; padding: 8px 10px; }
+  #section-info { padding: 15px; max-height: 60vh; }
 }
 </style>
 </head>
@@ -129,29 +137,267 @@ if (localStorage.getItem('lolfundamentals_logged_in') !== 'true') {
 const sectionSelect = document.getElementById('section-select');
 const sectionInfo = document.getElementById('section-info');
 
-sectionSelect.addEventListener('change', () => {
-  let value = sectionSelect.value;
-  let content = `<h2>${value}</h2><p>Coming soon!</p>`;
+const sections = {
+  "Intro": `
+    <h2>Intro</h2>
+    <p><strong>Why Diana?</strong> Diana has numerous ways to carry a game. She has a strong early game, laning phase, and can transition well into the side lane in the mid game. She can make picks, teamfight well, splitpush, push waves quickly, farm jungle camps, and has great damage for dragons and barons. She’s also a pick that you can play pretty much every game as long as your team doesn’t need an AD mid laner.</p>
+  `,
 
-  if(value === "Runes"){
-    content = `
+  "Runes": `
+    <h2>Runes</h2>
     <ul>
-      <li><p><strong>Grasp Of The Undying:</strong> This is the only rune and tree that allows Diana to play the way she’s intended to be played. It’s the rune that gives her the potential to win every matchup while also not falling off nearly as hard as another option like Phase Rush, which is her second best tree.</p></li>
+      <li><p><strong>Grasp Of The Undying:</strong> This is the only rune and tree that allows Diana to play the way she’s intended to be played. It’s the rune that gives her the potential to win every matchup while also not falling off nearly as hard as another option like Phase Rush which is her second best tree.</p></li>
       <li><p><strong>Shield Bash:</strong> Will out damage most other runes, and Diana can proc it twice with W.</p></li>
       <li><p><strong>Bone Plating:</strong> Best sustain tool in lane. Runes like Aery, Scorch, First Strike, and Comet all proc multiple plates. This also gives you the best chance of surviving a gank and winning a duel later on in the game.</p></li>
       <li><p><strong>Overgrowth:</strong> Best way for Diana to gain health besides Grasp since the build doesn't include any health items. Diana requires health to engage melee champions and she has a 9% bonus health ratio on the shield strength that can be proc'd twice for a total ratio of 18%.</p></li>
       <li><p><strong>Manaflow Band:</strong> This rune perfectly covers the amount of mana Diana requires to play the game. Without Manaflow Band you won’t be able to take full advantage of Diana’s side lane pressure. Diana should always be looking to take the enemy jungler’s camps especially now while her passive monster ratio is at 300%. Without Manaflow Band you won’t be able to deal with any champion that has resists since multiple damage rotations will be necessary to kill the enemy.</p></li>
       <li><p><strong>Transcendence:</strong> This is the only way for Diana to gain haste besides Cryptobloom later on. It’s the perfect balance of having a little haste which is more efficient at lower values and gaining big cooldown reductions at crucial moments in team fights.</p></li>
     </ul>
-    `;
-  }
+  `,
 
-  sectionInfo.innerHTML = content;
+  "Build": `
+    <h2>Build</h2>
+    <h3>Starting Items</h3>
+    <ul>
+      <li><p><strong>Doran’s Ring:</strong> The most efficient item in the game and it gives the perfect stats for laning.</p></li>
+      <li><p><strong>Dark Seal:</strong> I always buy this unless I can build a full Stormsurge on my first buy. The health, AP and snowball potential is exactly what Diana needs. It’s worth it even though I rarely upgrade it to Mejai’s Soulstealer.</p></li>
+      <li><p><strong>Cloth Armor:</strong> I’ll purchase this after Dark Seal or if I only have 300 gold on the first back and I’m against an AD mid/jg combo like Qiyana/Graves.</p></li>
+      <li><p><strong>Null Magic Mantle:</strong> This is the most efficient item besides the Doran’s items. Always look to pick this up against an AP mid/jg combo or even against poke champions like Ezreal. Magic resistance is strongest against poke champions because of their longer cooldowns/low execute damage and sustain damage and their need to land poke to be able to play up in lane.</p></li>
+      <li><p><strong>Mercury Treads:</strong> If the Null Magic Mantle was purchased it’s often upgraded into Merc Treads unless it’s a low CC AP mid/jg combo of Azir/Nidalee for example. Tenacity is also a crucial stat for Diana. I’ll mostly wait for Elixir of Iron to gain tenacity since Magic Pen boots are often more important at the moment and MR can be gained through Banshee's Veil.</p></li>
+      <li><p><strong>Sorcerer's Shoes:</strong> Diana’s go-to boot now. Diana’s ratios have been buffed but she still heavily relies on her base damages. Pen boots work well early though — pen naturally falls off making additional pen after the first item like Stormsurge unnecessary.</p></li>
+      <li><p><strong>Ninja Tabi:</strong> Always build Sorcerer Shoes instead of tank boots even against full AD team compositions (note: you previously considered tanks but currently prefer Sorcerer's). AD champions inherently have high DPS making defensive options worse. The combination of pen boots plus early Hourglass is significantly better.</p></li>
+    </ul>
+
+    <h3>Core Items</h3>
+    <ul>
+      <li><p><strong>Hourglass:</strong> I often build this item third now, since the build path became more efficient. Stopwatch is almost always a good buy after Nashor’s Tooth.</p></li>
+      <li><p><strong>Death Cap:</strong> Diana’s ratios have been heavily nerfed but still a good late game option after Hourglass and Banshee’s. If I have 2300 and a large rod already purchased, I might opt for it before Banshee’s since the next buy can be a Negatron Cloak. When deciding between Deathcap and Cryptobloom or Void Staff, I’ll try to buy Deathcap if I have enough gold for the large rod buys and there are still carries on the enemy team without MR.</p></li>
+      <li><p><strong>Banshee’s Veil:</strong> This is core part of Diana’s build now since she almost always opts for magic penetration boots. It’s the best way for Diana to gain MR, helps guarantee a combo/engage, and makes her harder to pick off.</p></li>
+      <li><p><strong>Cryptobloom:</strong> I think Cryptobloom is slightly superior to Void Staff unless everyone on the enemy team has purchased a magic resistance item. Having additional haste and a heal that can swing a team fight makes a much larger difference.</p></li>
+    </ul>
+
+    <h3>Elixirs</h3>
+    <ul>
+      <li><p><strong>Elixir of Iron:</strong> I’ll almost always opt for this elixir instead of Sorcery for the tenacity and health.</p></li>
+      <li><p><strong>Elixir of Sorcery:</strong> Helps Diana push towers even faster. I won’t start buying Elixirs on Diana until very late though because she has so many core items to complete.</p></li>
+    </ul>
+  `,
+
+  "Summoner Spells": `
+    <h2>Summoner Spells</h2>
+    <ul>
+      <li><p><strong>Flash:</strong> A must-have on Diana. Diana is too easy to lock down with CC to run Ghost. Flash also enables all of her flash combos.</p></li>
+      <li><p><strong>Teleport:</strong> Teleport used to be a must on Diana and is still a good option, but with the addition of early game homeguards and the slow TP channel the early game strength is no longer there. Diana also doesn’t scale like she used to and Teleport is better on scaling champions.</p></li>
+      <li><p><strong>Ignite:</strong> My new go-to spell because of Diana’s early kill pressure even at level 2 now. They have also buffed the scaling damage on this spell. The runes and build are also extremely aggressive and having Ignite fends off ganks better than TPing back to a frozen wave and then having to deal with the jungler.</p></li>
+    </ul>
+  `,
+
+  "Abilities": `
+    <h2>Abilities</h2>
+    <h3>Passive — Moonsilver Blade</h3>
+    <p>Diana’s passive has changed from a burst tool to an attack speed DPS tool. The ratio is only .5 and Diana’s kit doesn’t enable her to get too many auto-attacks off so it's mostly to boost early game trades, and take objectives. Diana’s main source of damage. The passive has high base damage and a great AP ratio of .8.</p>
+
+    <h3>Q — Crescent Strike</h3>
+    <p>Great for pushing from range. Diana Q reveals targets and can be used to check an area and enable R dashes.<br>
+    <strong>Tip:</strong> Diana can Q + Flash. This combo is good when you need two R dashes to kill the opponent or when going into a fight against multiple enemies.</p>
+
+    <h3>W — Pale Cascade</h3>
+    <p>W gives an instant shield and three orbs that can be proc’d for damage. Proccing all 3 resets the shield.<br>
+    <strong>Tip:</strong> Avoid using W when you’re unable to proc all orbs.<br>
+    <strong>Tip:</strong> 1 orb can be used to safely last hit and the remaining two can be used to thin out the wave or to trade with the enemy.<br>
+    <strong>Tip:</strong> If the enemy can block one of W orbs from the first use then W won’t go on cooldown for around 5 seconds and Diana won’t receive the second shield. This is common against Yasuo’s Wind Wall.</p>
+
+    <h3>E — Lunar Rush</h3>
+    <p>Quick targeted engage. E will reset if the target has Moonlight from Q on them. E also resets now if a minion dies from Q if the E was cast immediately afterwards. Casting E places you behind your target. You can auto attack at the end of the animation as well.</p>
+
+    <h3>R — Moonfall</h3>
+    <p>AOE ability and knockup that is great for teamfights, and catching out opponents. The pull and slow also help Diana utilize her passive or guarantee a Q. Can be cast during E, and be animation cancelled with E. Quick targeted engage. Diana R can be used to dodge skillshots. After using R, Diana will land behind her target.<br>
+    <strong>Tip:</strong> Diana can R + Flash. Diana R also interrupts channels and dashes although the window to cancel a dash is smaller now and needs to be cast at the start of their dash.</p>
+  `,
+
+  "Combos": `
+    <h2>Combos</h2>
+    <p>Stack your passive before a combo. Diana is often strongest when there are more targets around to stack her passive on. This includes minion waves, jungle camps, and even enemy towers.</p>
+
+    <ul>
+      <li><p><strong>Q E W AA E:</strong> This is the most basic combo.</p></li>
+      <li><p><strong>E W Q R R:</strong> This combo is best when your enemy is in E range. E almost guarantees Q to land.</p></li>
+      <li><p><strong>E Q E AA:</strong> This combo is best when ... (use for fast trades and wave + burst).</p></li>
+      <li><p><strong>Q AA E AA:</strong> This combo is best for extended trades.</p></li>
+      <li><p><strong>E W AA Q:</strong> Quick burst combo but gives the enemy a chance to retaliate if the combo didn’t do enough damage.</p></li>
+      <li><p><strong>Passive E W AA Q:</strong> Better variation than the one above that most champions won’t be able to trade back against.</p></li>
+    </ul>
+
+    <p><strong>Tips:</strong></p>
+    <ul>
+      <li><p>Diana R can be cast before Q lands and the reset will still be applied. If you know your Q is going to land you pretty much always want to do this combo.</p></li>
+      <li><p>Diana E can interrupt dashes. If you're not going to get an R reset this becomes even more important. If they have a dash available you normally want to E immediately after R since they are most likely to use their dash during that time. If they wait to dash you'll still have applied the knock up and the slow.</p></li>
+      <li><p>When chasing an enemy down a lane, check the minion waves in that lane on the minimap so you know when you can Q → R to the minion wave to catch up.</p></li>
+      <li><p>Use Diana W when right next to your target to maximize her damage. Diana W can also be used during R so it's normally best to activate it right before you land.</p></li>
+      <li><p>The Moonlight applied by Diana's Q lasts 3 seconds. Waiting to use your R until right before Moonlight fades will allow you to get more dashes off, as another Q will be available soon.</p></li>
+      <li><p>Diana can cast E right before she lands.</p></li>
+      <li><p>It's good to use E at the beginning of your burst combo to almost guarantee the Q.</p></li>
+    </ul>
+  `,
+
+  "Laning": `
+    <h2>Laning</h2>
+    <h3>Level 1:</h3>
+    <p>First thing you want to do is check your opponent's items and see if they didn’t buy a Doran's item. Not having a Doran's item makes your opponent extremely vulnerable to all-ins so the main goal is to keep them in lane until level 3. I’ll trade slightly less until then to make sure I’m healthy enough to go for the all-in. If they bought a Doran's item, I’ll look for a Q as soon as I can. I’ll move up with the ranged creeps and try to get a read on their movement as they move up to the wave.</p>
+
+    <h3>Level 2:</h3>
+    <p>Take W level 2 unless the enemy is below half health and even if you’re considering taking E wait to level it up until your Q is going to hit them. If it’s a standard lane, use W to thin out the wave in ranged matchups and to trade aggressively with Grasp and autos in melee matchups. Continue to look for Q’s but save the cooldown for the level 3 power spike.</p>
+
+    <h3>Level 3:</h3>
+    <p>If you crashed the wave level 2, then you want to try to auto the first melee creep if they let you.</p>
+
+    <h3>Level 4–5:</h3>
+    <p>Level 5 is a big spike: two Qs on ranged creeps gives huge priority. Use this to reset, roam, or set up dives. If you crashed level 2 and want to look for a fight, move towards the side bush hugging the wall to bait your opponent into following.</p>
+
+    <h3>Level 6:</h3>
+    <p>At level 6 you get your R — look for all-ins post-6 with proper combo timing and jungle coordination.</p>
+
+    <h3>Level 10+:</h3>
+    <p>If you have prio look to push the incoming minion wave as soon as possible. If the lane is more even and you have to be worried about poke or a gank then stay in fog of war until the wave is about to settle to come out and Q the wave. If it’s a cannon wave be extra careful.</p>
+
+    <ul>
+      <li><p>Tip: Diana R can be used in lane to draw your opponent into taking more minion hits after they've auto-attacked you. Use this on cannon waves.</p></li>
+      <li><p>Tip: Save your cooldowns to bait the opponent into chasing. It will make it easier to land your Q and turn.</p></li>
+      <li><p>Tip: Make sure you stay close to minions to proc the second shield from Diana W.</p></li>
+    </ul>
+  `,
+
+  "Warding": `
+    <h2>Warding</h2>
+    <p><strong>Level 1:</strong> I’ll only look for the ward on Raptors if teammates are going with me and if it’s after 50 seconds when the enemy team could be stacked above the red bush. On Diana you always want to place your wards on the side that your Q arcs back to. On the blue side this means warding top side and on red side bot side. Your first ward is placed after the first or second wave right above the entrance to the river. If they have a jungler who can gank lvl 1 then place this right before the first wave settles. After your first back you want to try to always have a pink in that side bush that you’ve been warding towards. As the game continues you'll be able to push faster and move the ward towards the enemy Raptors.</p>
+
+    <p><strong>Level 2:</strong> Normally place your ward at the entrance to Raptors above the wall before 2:25 to make sure the jungler isn't 3 yet. If being pushed in, wait to ward or place it in the side bush towards Raptors.</p>
+
+    <p><strong>Level 3–5:</strong> If you haven’t warded by level 3 aim to ward into river or the side bush. If you have a pink, place it in the side bush towards top on blue side (or towards bot on red side).</p>
+
+    <p><strong>Level 6–9:</strong> Place wards to catch roams and scuttle. Move wards toward objectives and side bushes to help your split pushing and map control.</p>
+
+    <p><strong>Level 10–18:</strong> Ward for objectives — Baron and Dragon walls, enemy tri-bushes, and deep wards near buff entrances depending on which side you’re pressuring. Adjust wards when rotating or swapping lanes; pink the tri-bush when splitpushing, and place green wards above walls to catch rotations early.</p>
+  `,
+
+  "Farming / Pushing": `
+    <h2>Farming / Pushing</h2>
+    <p>Diana is one of the best pushers in the game. Her passive, Q, and W all deal great AOE damage, and the R reset can be used to reach targets faster. Her passive can also be applied to towers making her one of the fastest tower pushers in the game.</p>
+
+    <p><strong>Tips:</strong></p>
+    <ul>
+      <li><p>On blue side, vision on the left side of the lane is more valuable since you want to position left of the wave for your Q to hit all the minions.</p></li>
+      <li><p>Don’t be afraid to solo Dragon later into the game if you have priority and vision.</p></li>
+      <li><p>Farming combo: Q the wave, E through a melee minion or the cannon if present, use W to finish off ranged creeps, then turn to melee creeps and finish them off with passive.</p></li>
+      <li><p>Farming Tip 1: Under tower early — stack passive from melee creeps, wait for tower shot on ranged creep, then use passive and auto the remaining creeps.</p></li>
+      <li><p>Farming Tip 2: Diana’s W assists last hits. Each sphere is roughly one auto early game; kite back between spheres to secure CS.</p></li>
+    </ul>
+  `,
+
+  "Teamfighting": `
+    <h2>Teamfighting</h2>
+    <p>Diana has great teamfighting. Look to deal enough damage to a priority target that they are required to leave the fight. Ideally they should be in execute range of your next Q. Teamfighting becomes a lot stronger on Diana with Stopwatch or Hourglass: you can pull in multiple targets with R, then W Q R, and Stopwatch to survive and keep dishing out damage.</p>
+
+    <p><strong>Tips:</strong></p>
+    <ul>
+      <li><p>If you can, hold second R activation until multiple enemies are clumped to maximize AoE damage.</p></li>
+      <li><p>Use R defensively to interrupt enemy engages or peel for your carries when necessary.</p></li>
+    </ul>
+  `,
+
+  "Splitpushing": `
+    <h2>Splitpushing</h2>
+    <p>Diana is one of the best splitpushers in the game. She wins most 1v1s, pushes waves insanely fast, and takes towers quickly.</p>
+
+    <p><strong>Notes:</strong></p>
+    <ul>
+      <li><p>Stronger splitpushing on blue side top lane and weaker on red side bot lane.</p></li>
+      <li><p>Blue Side Top Split Push: Higher chance the top tier 1 tower remains, making split pressure safer and more valuable.</p></li>
+      <li><p>Red Side Bot Split Push: Bot tower is likely taken earlier — easier to be dove but still pressureable.</p></li>
+    </ul>
+
+    <p><strong>Tips:</strong></p>
+    <ul>
+      <li><p>Diana’s passive will only be applied to inhibitors when standing right next to them — same for Nexus positioning.</p></li>
+      <li><p>Use teleport or team windows to convert split pressure into objectives.</p></li>
+    </ul>
+  `,
+
+  "Closing Out The Game": `
+    <h2>Closing Out The Game</h2>
+    <p>Diana's best way of getting wins is by forcing early surrenders through taking multiple mid towers early. Otherwise closing out a game relies heavily on Baron as well as dragons/elder. Baron spawn has been pushed back to 25 minutes. This gives Diana extra time to play for the split push. The split push must be paused if Dragon or Baron are contested.</p>
+
+    <p><strong>Tips:</strong></p>
+    <ul>
+      <li><p>If you’re on blue side you can trade second Dragon for the tier 2 tower to create pressure windows.</p></li>
+      <li><p>Use your push to force enemy rotations, create map pressure, and pick target windows for your team. Diana can close games quickly with proper objective focus.</p></li>
+    </ul>
+  `,
+
+  "Threats & Synergies": `
+    <h2>Threats & Synergies</h2>
+    <h3>Threats</h3>
+    <p>Any champion with high sustain damage and survivability counters Diana. Diana has to commit to the fight and if she can’t burst or out-DPS the enemy champion she’ll die.</p>
+
+    <h3>Counters</h3>
+    <p>Common counters include Yasuo, Irelia, and Sylas. Diana is most vulnerable to champions with high sustained damage and fighters that are hard to kill. Diana doesn't have the sustain damage anymore or the mobility to consistently outduel those champions once they reach key items. Most top lane champions can outscale or counter Diana if they buy MR early, but it's possible to beat them before they buy MR.</p>
+    <p><em>See the Diana mid matchup guide for specific counters and matchup tips.</em></p>
+
+    <h3>Synergies</h3>
+    <p>Diana synergizes well with champions that can follow her engage or stall fights to allow her to split push or find flanks.</p>
+    <ul>
+      <li><p><strong>Thresh:</strong> Can pull Diana back out of danger when needed and set up picks.</p></li>
+      <li><p><strong>Yasuo:</strong> The ult combo is strong when they can follow up on your knock-ups.</p></li>
+      <li><p><strong>Camille:</strong> Works well in coordinated engages.</p></li>
+    </ul>
+
+    <h3>Bad Synergies</h3>
+    <p>Having multiple splitpushers is never ideal. Example: Fiora and Tryndamere both compete for split pressure and don’t follow Diana's engage well.</p>
+  `,
+
+  "Pros & Cons": `
+    <h2>Pros & Cons</h2>
+    <h3>Pros</h3>
+    <ul>
+      <li><p><strong>Burst:</strong> Diana has some of the fastest and reliable burst in the game.</p></li>
+      <li><p><strong>Dives:</strong> Diana is still a great tower diver and backline diver. Use the tower to stack passive and close distance for Q + full combo. Keep track of Flashes.</p></li>
+      <li><p><strong>Pushing:</strong> Diana can push waves extremely quickly and melt towers when left alone or with priority.</p></li>
+      <li><p><strong>Splitpushing:</strong> From ~14–24 minutes, Diana often switches to the side lane where she excels at catching opponents out and taking towers.</p></li>
+    </ul>
+
+    <h3>Cons</h3>
+    <ul>
+      <li><p><strong>Extremely vulnerable to ganks:</strong> Diana’s only mobility is E; she is punishable if caught out.</p></li>
+      <li><p><strong>Weak scaling (in some metas):</strong> Diana relies on pen and base damages — as enemies buy MR she can fall off. Being melee with limited mobility also makes her easier to pick off.</p></li>
+      <li><p><strong>Punishing mistakes:</strong> One mistake can prevent Diana from executing her playstyle — she relies on being ahead to snowball towers and camps.</p></li>
+    </ul>
+  `,
+
+  "Extra Tips": `
+    <h2>Extra Tips</h2>
+    <ol>
+      <li>Double switching with E.</li>
+      <li>E → auto will hit faster than E → Q; it's harder to outplay.</li>
+      <li>Against champions like Ezreal it's best to hold E until after they use E.</li>
+      <li>Always try to do a full-range Q even when the enemy is right next to you.</li>
+      <li>Use minions to proc the second part of Diana’s W.</li>
+      <li>Auto → Q → auto is better than Q → auto → auto in many trades.</li>
+      <li>Diana can jump to Baron and Dragon with E at specific spots — practice those angles.</li>
+      <li>If you can get your passive stacks and the enemy has Flash, R into auto with passive then a full Q towards where they might Flash to secure the kill.</li>
+    </ol>
+  `
+};
+
+sectionSelect.addEventListener('change', () => {
+  const val = sectionSelect.value;
+  sectionInfo.innerHTML = sections[val] || '<p>Coming soon!</p>';
 });
 </script>
 
 </body>
 </html>
+
+
 
 
 
