@@ -151,27 +151,9 @@ footer a {
 footer a:hover {
   text-decoration: underline;
 }
-
-/* Logout Button */
-#logoutBtn {
-  display: block;
-  margin: 40px auto;
-  padding: 12px 25px;
-  background: #f94144;
-  color: #fff;
-  font-weight: bold;
-  border: none;
-  border-radius: 6px;
-  cursor: pointer;
-  transition: 0.3s;
-}
-#logoutBtn:hover {
-  background: #ff5959;
-}
 </style>
 </head>
 <body>
-
 <header>LoL Fundamentals – Members Hub</header>
 
 <section class="section">
@@ -208,26 +190,10 @@ footer a:hover {
 </div>
 </section>
 
-<button id="logoutBtn" onclick="logout()">Logout</button>
-
 <footer>
 © 2025 LoL Fundamentals · Contact:
 <a href="mailto:arcsecond@lolfundamentals.com">arcsecond@lolfundamentals.com</a>
 </footer>
-
-<script>
-// Require login
-if (localStorage.getItem('lolfundamentals_logged_in') !== 'true') {
-  window.location.href = 'index.html'; // redirect to login
-}
-
-function logout() {
-  localStorage.removeItem('lolfundamentals_logged_in');
-  window.location.href = 'index.html';
-}
-</script>
-
 </body>
 </html>
-
 
