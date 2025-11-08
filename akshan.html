@@ -20,22 +20,25 @@
     font-weight: bold;
     color: #58a6ff;
   }
-  .back-link {
-    display: block;
-    max-width: 220px;
+  .back-button {
+    display: inline-block;
     margin: 20px auto 30px auto;
-    text-align: center;
-    background: #F9D949; /* gold */
-    color: #0d1117;
+    padding: 10px 20px;
+    background: linear-gradient(135deg, #c9aa71, #e0c77b);
+    color: #000;
     text-decoration: none;
+    border-radius: 8px;
     font-weight: bold;
-    padding: 10px 15px;
-    border-radius: 25px;
-    font-size: 16px;
-    transition: 0.3s;
+    text-align: center;
+    transition: all 0.3s;
+    box-shadow: 0 0 10px rgba(201,170,113,0.5);
   }
-  .back-link:hover {
-    background: #e0c33b;
+  .back-button::before {
+    content: "← ";
+  }
+  .back-button:hover {
+    background: linear-gradient(135deg, #e6c97f, #f0d88b);
+    box-shadow: 0 0 15px rgba(255,215,0,0.8);
   }
   .matchup-container {
     display: flex;
@@ -110,7 +113,7 @@
 
 <header>Diana Mid Matchup – Akshan</header>
 
-<a href="membershub.html" class="back-link">&larr; Back to Matchup Hub</a>
+<a href="matchup-hub.html" class="back-button">Back to Matchup Hub</a>
 
 <div class="matchup-container">
   <div class="matchup-left">
@@ -133,9 +136,9 @@
 <footer>© 2025 LoL Fundamentals · Contact: arcsecond@lolfundamentals.com</footer>
 
 <script>
-// Protect page: redirect if not logged in
+// Require login for this page
 if(localStorage.getItem('lolfundamentals_logged_in') !== 'true'){
-    window.location.href = 'index.html';
+  window.location.href = 'login.html';
 }
 </script>
 
