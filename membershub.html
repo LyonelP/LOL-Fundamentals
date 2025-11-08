@@ -28,15 +28,15 @@ header {
 
 /* Section */
 .section {
-  padding: 40px 20px; /* reduced from 60px to raise content */
+  padding: 20px 20px; /* reduced top padding to raise content */
   max-width: 1000px;
-  margin: 20px auto; /* reduced top margin */
+  margin: 0 auto; /* no top margin, moves section up */
 }
 
 /* Section title */
 .section h2 {
   color: #c9aa71;
-  margin-bottom: 30px; /* slightly reduced */
+  margin-bottom: 20px; /* reduced to bring following content closer */
 }
 
 /* Card Grid */
@@ -45,7 +45,7 @@ header {
   grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
   gap: 25px;
   justify-items: center;
-  margin-top: 20px; /* added spacing from heading */
+  margin-top: 15px; /* spacing between heading and cards */
 }
 
 /* Individual Card */
@@ -156,7 +156,7 @@ footer a:hover {
 /* Logout Button */
 #logoutBtn {
   display: block;
-  margin: 40px auto;
+  margin: 30px auto; /* slightly closer to content */
   padding: 12px 25px;
   background: #f94144;
   color: #fff;
@@ -230,5 +230,6 @@ function logout() {
 
 </body>
 </html>
+
 
 
