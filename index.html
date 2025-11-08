@@ -1,31 +1,32 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>LoL Fundamentals – The Ultimate Diana Guide</title>
 <style>
-body { margin: 0; font-family: "Beaufort for LOL", Arial, Helvetica, sans-serif; background: #0a0f14; color: #e6edf3; line-height: 1.6; }
-header { background: linear-gradient(90deg, #0a0f14, #1b2838); border-bottom: 2px solid #c9aa71; padding: 15px 20px; text-align: center; font-weight: bold; font-size: 22px; letter-spacing: 1px; text-transform: uppercase; color: #c9aa71; }
-.hero { text-align: center; padding: 120px 20px; background: linear-gradient(to bottom, rgba(10,15,20,0.6), rgba(10,15,20,0.95)), url("https://ddragon.leagueoflegends.com/cdn/img/champion/splash/Diana_0.jpg"); background-size: cover; background-position: center; color: #fff; border-bottom: 1px solid #1f2937; }
-.hero h1 { font-size: 3em; margin-bottom: 10px; text-shadow: 0 0 10px #2f81f7; }
-.hero p { max-width: 600px; margin: 0 auto 20px; font-size: 1.15em; color: #c9d1d9; text-shadow: 0 0 8px rgba(0,0,0,0.6); }
-.btn { display: inline-block; background: #2f81f7; color: white; padding: 12px 25px; border-radius: 5px; text-decoration: none; font-weight: bold; transition: 0.3s; border: 1px solid #c9aa71; }
-.btn:hover { background: #4795ff; }
-.section { padding: 60px 20px; max-width: 950px; margin: auto; }
-.section h2 { text-align: center; color: #c9aa71; font-size: 1.8em; border-bottom: 1px solid #c9aa71; padding-bottom: 10px; width: fit-content; margin: 0 auto 30px; }
-.cards { display: flex; flex-wrap: wrap; justify-content: center; gap: 25px; }
-.card { background: #161b22; padding: 20px; border-radius: 8px; width: 260px; border: 1px solid #2f81f7; box-shadow: 0 0 10px rgba(47,129,247,0.2); }
-.card h3 { color: #c9aa71; }
-#loginSection { max-width: 400px; margin: 20px auto; text-align: center; background: #161b22; border: 1px solid #2f81f7; padding: 20px; border-radius: 8px; box-shadow: 0 0 10px rgba(47,129,247,0.15); }
-input, button { padding: 10px; margin: 5px 0; border-radius: 4px; border: none; }
-input { width: 80%; text-align: center; }
-button { background: #2f81f7; color: white; cursor: pointer; font-weight: bold; }
-button:disabled { opacity: 0.5; cursor: not-allowed; }
-button:hover:enabled { background: #4795ff; }
-footer { text-align: center; padding: 30px; color: #8b949e; font-size: 14px; background: #0a0f14; border-top: 1px solid #1f2937; }
-footer a { color: #c9aa71; text-decoration: none; }
-footer a:hover { text-decoration: underline; }
+body { margin:0; font-family:"Beaufort for LOL", Arial, Helvetica, sans-serif; background:#0a0f14; color:#e6edf3; line-height:1.6; }
+header { background: linear-gradient(90deg,#0a0f14,#1b2838); border-bottom:2px solid #c9aa71; padding:15px 20px; text-align:center; font-weight:bold; font-size:22px; letter-spacing:1px; text-transform:uppercase; color:#c9aa71; }
+.hero { text-align:center; padding:120px 20px; background:linear-gradient(to bottom, rgba(10,15,20,0.6), rgba(10,15,20,0.95)), url("https://ddragon.leagueoflegends.com/cdn/img/champion/splash/Diana_0.jpg"); background-size:cover; background-position:center; color:#fff; border-bottom:1px solid #1f2937; }
+.hero h1 { font-size:3em; margin-bottom:10px; text-shadow:0 0 10px #2f81f7; }
+.hero p { max-width:600px; margin:0 auto 20px; font-size:1.15em; color:#c9d1d9; text-shadow:0 0 8px rgba(0,0,0,0.6); }
+.btn { display:inline-block; background:#2f81f7; color:white; padding:12px 25px; border-radius:5px; text-decoration:none; font-weight:bold; transition:0.3s; border:1px solid #c9aa71; }
+.btn:hover { background:#4795ff; }
+.section { padding:60px 20px; max-width:950px; margin:auto; }
+.section h2 { text-align:center; color:#c9aa71; font-size:1.8em; border-bottom:1px solid #c9aa71; padding-bottom:10px; width:fit-content; margin:0 auto 30px; }
+.cards { display:flex; flex-wrap:wrap; justify-content:center; gap:25px; }
+.card { background:#161b22; padding:20px; border-radius:8px; width:260px; border:1px solid #2f81f7; box-shadow:0 0 10px rgba(47,129,247,0.2); }
+.card h3 { color:#c9aa71; }
+/* Login Section */
+#loginSection { max-width:400px; margin:20px auto; text-align:center; background:#161b22; border:1px solid #2f81f7; padding:20px; border-radius:8px; box-shadow:0 0 10px rgba(47,129,247,0.15); }
+input, button { padding:10px; margin:5px 0; border-radius:4px; border:none; }
+input { width:80%; text-align:center; }
+button { background:#2f81f7; color:white; cursor:pointer; font-weight:bold; }
+button:disabled { opacity:0.5; cursor:not-allowed; }
+button:hover:enabled { background:#4795ff; }
+footer { text-align:center; padding:30px; color:#8b949e; font-size:14px; background:#0a0f14; border-top:1px solid #1f2937; }
+footer a { color:#c9aa71; text-decoration:none; }
+footer a:hover { text-decoration:underline; }
 </style>
 </head>
 <body>
@@ -35,7 +36,7 @@ footer a:hover { text-decoration: underline; }
 <!-- Member Login Section -->
 <section id="loginSection">
   <h2>Member Login</h2>
-  <input type="email" id="email" placeholder="Enter your email" />
+  <input type="email" id="email" placeholder="Enter your email">
   <button id="loginBtn" disabled>Login</button>
   <p id="loginMsg">Loading membership list...</p>
 </section>
@@ -76,14 +77,15 @@ footer a:hover { text-decoration: underline; }
 </footer>
 
 <script>
-// CSV link from Google Sheets
+// Google Sheet CSV link
 const membersCSV = "https://docs.google.com/spreadsheets/d/e/2PACX-1vR-0OZki4X8kc33NfrLsGL47-7mFj3SzjyGx6hs4QcnvRXiE-cOaJfk4wgvyIf6XXpnuB8D-B4TqSrW/pub?output=csv";
 let validEmails = [];
 const loginBtn = document.getElementById('loginBtn');
 const msg = document.getElementById('loginMsg');
 const emailInput = document.getElementById('email');
+const loginSection = document.getElementById('loginSection');
 
-// Fetch emails and allow fast recognition
+// Fetch emails and enable login
 async function fetchEmails() {
   try {
     const res = await fetch(membersCSV + "?t=" + new Date().getTime(), { cache: "no-store" });
@@ -91,30 +93,30 @@ async function fetchEmails() {
     validEmails = data.split("\n").map(r => r.split(",")[0].trim().toLowerCase()).filter(e => e);
     loginBtn.disabled = false;
     msg.textContent = "";
-  } catch (err) {
+  } catch(err) {
     console.error(err);
     msg.textContent = "Error loading membership list. Try again later.";
   }
 }
 
-// Initial fetch + poll every 5s
+// Poll every 5s for fast recognition
 fetchEmails();
 setInterval(fetchEmails, 5000);
 
-// Login
+// Login button
 loginBtn.addEventListener('click', () => {
   const email = emailInput.value.trim().toLowerCase();
-  if(validEmails.includes(email)){
+  if(validEmails.includes(email)) {
     localStorage.setItem('lolfundamentals_logged_in', 'true');
-    window.location.href = 'membershub.html';
+    loginSection.style.display = "none"; // hide login
   } else {
     msg.textContent = "Access denied. Please purchase membership.";
   }
 });
 
-// Auto redirect if logged in
-if(localStorage.getItem('lolfundamentals_logged_in') === 'true'){
-  window.location.href = 'membershub.html';
+// Auto hide login if already logged in
+if(localStorage.getItem('lolfundamentals_logged_in') === 'true') {
+  loginSection.style.display = "none";
 }
 </script>
 
