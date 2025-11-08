@@ -43,10 +43,15 @@ header {
 /* Card Grid */
 .card-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  grid-template-columns: repeat(3, 1fr); /* fixed 3 columns */
   gap: 25px;
   justify-items: center;
   margin-bottom: 30px;
+}
+
+/* Second row adjustment */
+.card-grid.second-row {
+  grid-template-columns: repeat(2, 1fr); /* two cards in second row */
 }
 
 /* Individual Card */
@@ -55,7 +60,7 @@ header {
   border: 2px solid #c9aa71;
   border-radius: 12px;
   padding: 20px 15px;
-  min-height: 180px;
+  min-height: 220px; /* fixed height to unify all cards */
   display: flex;
   flex-direction: column;
   justify-content: flex-end;
@@ -64,6 +69,7 @@ header {
   color: #e6edf3;
   position: relative;
   overflow: hidden;
+  width: 100%; /* ensures consistent sizing across grid */
 }
 
 /* Card hover effect */
@@ -173,6 +179,11 @@ footer a:hover {
 #logoutBtn:hover {
   background: #ff5959;
 }
+
+@media (max-width: 900px) {
+  .card-grid { grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); }
+  .card-grid.second-row { grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); }
+}
 </style>
 </head>
 <body>
@@ -202,7 +213,7 @@ footer a:hover {
 </div>
 
 <!-- Second row: Fundamentals and Tierlist -->
-<div class="card-grid">
+<div class="card-grid second-row">
   <a href="skills.html" class="card fundamentals">
     <h3>Fundamentals</h3>
     <p>Learn core League mechanics that every player should understand to improve faster.</p>
@@ -232,7 +243,7 @@ footer a:hover {
 <script>
 // Require login
 if (localStorage.getItem('lolfundamentals_logged_in') !== 'true') {
-  window.location.href = 'index.html'; // redirect to login
+  window.location.href = 'index.html';
 }
 
 function logout() {
@@ -243,7 +254,6 @@ function logout() {
 
 </body>
 </html>
-
 
 
 
