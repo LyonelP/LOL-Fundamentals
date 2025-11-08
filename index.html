@@ -30,9 +30,10 @@ header {
   padding: 120px 20px;
   background:
     linear-gradient(to bottom, rgba(10,15,20,0.6), rgba(10,15,20,0.95)),
-    url("https://ddragon.leagueoflegends.com/cdn/img/champion/splash/Diana_0.jpg");
-  background-size: cover;
-  background-position: center;
+    url("https://ddragon.leagueoflegends.com/cdn/img/champion/splash/Diana_0.jpg"),
+    url("https://ddragon.leagueoflegends.com/cdn/img/champion/splash/Ekko_0.jpg");
+  background-size: cover, cover;
+  background-position: center, center;
   color: #fff;
   border-bottom: 1px solid #1f2937;
 }
@@ -164,7 +165,7 @@ footer a:hover {
 <!-- Hero Section -->
 <section class="hero">
 <h1>The Ultimate Diana & Ekko Guide</h1>
-<p>Master every aspect of Diana and Ekko, from precise combo timing and matchup control to advanced guides covering skill fundamentals, ultimate mechanics, and tier insights. Written by Arcsecond, the rank 1 Challenger Diana main.</p>
+<p>Master every aspect of Diana and Ekko, from precise combo timing and matchup control to advanced guides covering skill fundamentals, ultimate mechanics, and tier insights. Written by Arcsecond, the rank 1 Challenger Ekko and Diana main.</p>
 <a href="https://buy.stripe.com/8x2eV6aQ448A4RgewGejK00" class="btn" target="_blank">Get Access – $12.99 / month</a>
 </section>
 
@@ -177,16 +178,16 @@ footer a:hover {
     <p>Core skills including combos, wave management, positioning, and warding for consistent gameplay improvement.</p>
   </div>
   <div class="card">
-    <h3>Diana Matchup Guide</h3>
-    <p>Detailed breakdowns for every mid lane champion, teaching optimal trades, wave control, and all-in timings.</p>
+    <h3>Diana Guide</h3>
+    <p>A comprehensive guide covering Diana's full kit, itemization, playstyle, and advanced strategies.</p>
   </div>
   <div class="card">
     <h3>Ekko Guide</h3>
     <p>Complete guide to playing Ekko Jungle, including combos, pathing, and advanced mechanics.</p>
   </div>
   <div class="card">
-    <h3>Ultimate Guides</h3>
-    <p>Comprehensive coverage of Diana and Ekko's kits, itemization, and advanced strategies for competitive play.</p>
+    <h3>Diana Matchup Guide</h3>
+    <p>Detailed breakdowns for every mid lane champion, teaching optimal trades, wave control, and all-in timings.</p>
   </div>
   <div class="card">
     <h3>Tierlist</h3>
@@ -211,7 +212,6 @@ const emailInput = document.getElementById('email');
 loginBtn.disabled = true;
 msg.textContent = "Loading membership list...";
 
-// Fetch emails from Google Sheet
 fetch(membersCSV)
 .then(res => res.ok ? res.text() : Promise.reject("Failed to fetch"))
 .then(data => {
@@ -225,7 +225,6 @@ fetch(membersCSV)
   msg.textContent = "Error loading membership list. Try again later.";
 });
 
-// Login function
 loginBtn.addEventListener('click', () => {
   const email = emailInput.value.trim().toLowerCase();
   if(validEmails.includes(email)){
@@ -236,7 +235,6 @@ loginBtn.addEventListener('click', () => {
   }
 });
 
-// Auto-redirect if already logged in
 if(localStorage.getItem('lolfundamentals_logged_in') === 'true'){
   window.location.href = 'membershub.html';
 }
@@ -244,6 +242,8 @@ if(localStorage.getItem('lolfundamentals_logged_in') === 'true'){
 
 </body>
 </html>
+
+
 
 
 
