@@ -1,160 +1,222 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="utf-8" />
-<meta name="viewport" content="width=device-width,initial-scale=1" />
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Ekko Jungle Guide – Members Hub</title>
 <style>
-  :root {
-    --gold: #c9aa71;
-    --bg: rgba(13,17,23,0.95);
-    --card-bg: rgba(20,25,35,0.85);
-    --accent: #2f81f7;
-  }
+body {
+  margin: 0;
+  font-family: 'Beaufort for LOL', Arial, Helvetica, sans-serif;
+  background: url('https://ddragon.leagueoflegends.com/cdn/img/champion/splash/Ekko_0.jpg') no-repeat center center fixed;
+  background-size: cover;
+  color: #e6edf3;
+  text-align: center;
+  overflow-x: hidden;
+}
 
-  body{
-    margin:0;
-    font-family: 'Beaufort for LOL', Arial, Helvetica, sans-serif;
-    background: url('https://ddragon.leagueoflegends.com/cdn/img/champion/splash/Ekko_0.jpg') no-repeat center center fixed;
-    background-size: cover;
-    color:#e6edf3;
-    text-align:center;
-    overflow-x:hidden;
-  }
+/* Overlay */
+body::before {
+  content: "";
+  position: fixed;
+  top: 0; left: 0;
+  width: 100%; height: 100%;
+  background: rgba(10,15,20,0.75);
+  z-index: -1;
+}
 
-  /* overlay */
-  body::before{
-    content:"";
-    position:fixed;
-    inset:0;
-    background: rgba(10,15,20,0.75);
-    z-index:-1;
-  }
+/* Header */
+header {
+  background: rgba(13,17,23,0.9);
+  border-bottom: 2px solid #c9aa71;
+  padding: 20px 10px;
+  font-weight: bold;
+  font-size: 26px;
+  text-transform: uppercase;
+  color: #c9aa71;
+  letter-spacing: 1px;
+  text-align: center;
+}
 
-  header{
-    background: var(--bg);
-    border-bottom: 2px solid var(--gold);
-    padding:20px 10px;
-    font-weight:700;
-    font-size:26px;
-    text-transform:uppercase;
-    color:var(--gold);
-    letter-spacing:1px;
-  }
+/* Back button */
+.back-button {
+  display: inline-block;
+  margin: 20px auto 10px;
+  padding: 10px 20px;
+  background: linear-gradient(135deg, #c9aa71, #e0c77b);
+  color: #000;
+  text-decoration: none;
+  border-radius: 8px;
+  font-weight: bold;
+  transition: all 0.3s;
+  box-shadow: 0 0 10px rgba(201,170,113,0.5);
+}
+.back-button::before { content: "← "; }
+.back-button:hover {
+  background: linear-gradient(135deg, #e6c97f, #f0d88b);
+  box-shadow: 0 0 15px rgba(255,215,0,0.8);
+}
 
-  .back-button{
-    display:inline-block;
-    margin:20px auto 10px;
-    padding:10px 20px;
-    background: linear-gradient(135deg,var(--gold),#e0c77b);
-    color:#000;
-    text-decoration:none;
-    border-radius:8px;
-    font-weight:700;
-    transition: all .3s;
-    box-shadow: 0 0 10px rgba(201,170,113,0.45);
-  }
-  .back-button::before{ content:"← "; }
-  .back-button:hover{
-    background: linear-gradient(135deg,#e6c97f,#f0d88b);
-    box-shadow: 0 0 15px rgba(255,215,0,0.8);
-  }
+/* Dropdown */
+#section-select-container {
+  margin: 20px auto;
+}
+#section-select {
+  padding: 10px 15px;
+  font-size: 16px;
+  border-radius: 6px;
+  border: none;
+  background: #0f1722;
+  color: #c9aa71;
+  cursor: pointer;
+}
 
-  #section-select-container{ margin:20px auto; }
-  #section-select{
-    padding:10px 15px;
-    font-size:16px;
-    border-radius:6px;
-    border:none;
-    background:#0f1722;
-    color:var(--gold);
-    cursor:pointer;
-  }
+/* Section display */
+#section-info {
+  margin: 30px auto;
+  max-width: 900px;
+  background: rgba(13,17,23,0.95);
+  border: 1px solid #2f81f7;
+  padding: 20px;
+  border-radius: 10px;
+  text-align: left;
+  color: #fff;
+  min-height: 200px;
+  position: relative;
+}
 
-  #section-info{
-    margin:30px auto;
-    max-width:900px;
-    background: var(--bg);
-    border:1px solid var(--accent);
-    padding:20px;
-    border-radius:10px;
-    text-align:left;
-    color:#fff;
-    min-height:220px;
-    position:relative;
-  }
-  #section-info:hover{ box-shadow:0 0 15px rgba(47,129,247,0.5); }
+#section-info h3 {
+  color: #c9aa71;
+  margin-top: 0;
+  position: absolute;
+  top: 10px;
+  left: 20px;
+  text-transform: capitalize;
+}
 
-  /* header inside section */
-  #section-info h3{
-    position:absolute;
-    top:10px;
-    left:20px;
-    color:var(--gold);
-    margin:0;
-    font-size:22px;
-    text-transform:capitalize; /* only first letter capitalized */
-  }
+#section-info p {
+  margin: 8px 0 16px;
+  line-height: 1.6;
+}
 
-  #section-info p{ margin:32px 0 16px; line-height:1.6; }
-  #section-info ul{ margin-left:20px; }
+#section-info ul {
+  margin-left: 20px;
+}
 
-  /* icons */
-  .icon{
-    width:36px;
-    height:36px;
-    vertical-align:middle;
-    border-radius:6px;
-    margin-right:8px;
-    transition: .15s ease;
-  }
-  .icon:hover{ filter: drop-shadow(0 0 6px var(--gold)); transform:scale(1.05); }
+/* Icons */
+.icon {
+  width: 36px;
+  height: 36px;
+  vertical-align: middle;
+  border-radius: 6px;
+  margin-right: 6px;
+  transition: 0.2s ease;
+}
+.icon:hover {
+  filter: drop-shadow(0 0 6px #c9aa71);
+  transform: scale(1.05);
+}
 
-  /* rune layout */
-  .rune-container{ display:flex; flex-direction:column; align-items:flex-start; gap:12px; margin-top:44px; }
-  .rune-info{ display:flex; align-items:center; gap:10px; max-width:720px; }
-  .rune-info strong{ color:#e0c77b; display:block; }
-  .stat-shards{ display:flex; flex-direction:column; gap:8px; margin-top:12px; }
-  .stat-shards div{ display:flex; align-items:center; gap:8px; }
+/* Rune layout */
+.rune-container {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 12px;
+  margin-top: 40px;
+}
+.rune-info {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
 
-  /* card layout for build/pathing */
-  .card-container{ display:flex; flex-direction:column; gap:12px; margin-top:28px; }
-  .card{ background: var(--card-bg); border:1px solid var(--gold); border-radius:10px; padding:14px; transition:all .2s; }
-  .card strong{ display:block; margin-bottom:8px; color:#e0c77b; font-weight:700; text-transform:capitalize; }
+/* Stat shards vertical */
+.stat-shards {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  margin-top: 15px;
+  margin-left: 20px;
+}
 
-  .build-flow{ display:flex; flex-wrap:wrap; gap:10px; align-items:center; justify-content:center; margin-top:8px; }
-  .build-flow .item{ border:1px solid var(--gold); border-radius:8px; padding:8px 10px; min-width:140px; background:rgba(20,25,35,0.9); display:flex; align-items:center; gap:10px; justify-content:center; }
-  .build-arrow{ font-size:18px; color:var(--gold); }
+/* Build & Runes Cards */
+.card-container {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  margin-top: 40px;
+  gap: 12px;
+  border: 1px solid #c9aa71;
+  padding: 10px;
+  border-radius: 8px;
+}
 
-  /* small helpers */
-  .muted{ color:#cbd5e1; font-size:14px; }
-  .note{ font-size:13px; color:#d1d5db; }
+.card {
+  background: rgba(20,25,35,0.85);
+  border: 1px solid #c9aa71;
+  border-radius: 10px;
+  padding: 15px;
+  min-width: 120px;
+  flex: 1 1 120px;
+  text-align: center;
+  transition: all 0.3s;
+}
+.card:hover {
+  background: rgba(30,35,45,0.95);
+  box-shadow: 0 0 10px #c9aa71;
+}
+.card strong { display: block; margin-bottom: 6px; color: #e0c77b; }
 
-  @media (max-width:600px){
-    #section-info h3{ position:static; margin-bottom:8px; text-align:left; }
-    .build-flow{ flex-direction:column; }
-  }
+/* Build flow */
+.build-flow {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+  gap: 8px;
+  margin-top: 10px;
+}
+.build-flow div {
+  background: rgba(20,25,35,0.85);
+  border: 1px solid #c9aa71;
+  border-radius: 8px;
+  padding: 10px 12px;
+  min-width: 120px;
+  text-align: center;
+}
+.build-flow span {
+  font-size: 18px;
+  color: #c9aa71;
+}
+
+/* Media query */
+@media (max-width: 600px) {
+  #section-select { font-size: 14px; padding: 8px 10px; }
+  .card-container { flex-direction: column; gap: 10px; }
+  .build-flow { flex-direction: column; }
+  .build-flow span { display: none; }
+}
 </style>
 </head>
 <body>
 
 <header>Ekko Jungle – Members Hub Guide</header>
-<a class="back-button" href="membershub.html">Back to Members Hub</a>
+<a href="membershub.html" class="back-button">Back to Members Hub</a>
 
 <div id="section-select-container">
-  <select id="section-select" aria-label="Select guide section">
+  <select id="section-select">
     <option disabled selected>Select a section</option>
     <option>Intro</option>
     <option>Runes</option>
     <option>Build</option>
-    <option>Summoner spells</option>
+    <option>Summoner Spells</option>
     <option>Abilities</option>
     <option>Combos</option>
-    <option>Level 1</option>
     <option>Pathing</option>
-    <option>Hardest matchups</option>
-    <option>Team fighting</option>
-    <option>Closing out the game</option>
+    <option>Level 1</option>
+    <option>Team Fighting</option>
+    <option>Closing Out the Game</option>
   </select>
 </div>
 
@@ -163,218 +225,171 @@
 </div>
 
 <script>
-  // require login
-  if (localStorage.getItem('lolfundamentals_logged_in') !== 'true') {
-    window.location.href = 'index.html';
+if (localStorage.getItem('lolfundamentals_logged_in') !== 'true') {
+  window.location.href = 'index.html';
+}
+
+const sectionSelect = document.getElementById('section-select');
+const sectionInfo = document.getElementById('section-info');
+
+sectionSelect.addEventListener('change', () => {
+  let value = sectionSelect.value;
+  let content = `<p>Coming soon!</p>`;
+
+  if(value === "Intro"){
+    content = `
+      <h3>Intro</h3>
+      <p>Why Ekko jungle? Ekko excels in the jungle because his mobility, crowd control, and burst allow for strong ganks and objective control. Smite synergizes perfectly with his kit — the slow and burst from blue smite make securing kills and objectives easy. His W, ult, and passive thrive in flanks, dives, and skirmishes. Plus, he's incredibly fun to play!</p>
+    `;
   }
 
-  const sectionSelect = document.getElementById('section-select');
-  const sectionInfo = document.getElementById('section-info');
-
-  sectionSelect.addEventListener('change', () => {
-    const value = sectionSelect.value;
-    let header = `<h3>${value}</h3>`;
-    let content = `<p>Coming soon!</p>`;
-
-    /* Intro */
-    if (value === "Intro") {
-      content = `
-        ${header}
-        <p>Why Ekko jungle? Ekko excels in the jungle because his mobility, crowd control, and burst allow for strong ganks and objective control. Smite synergizes perfectly with his kit — the slow and burst from blue smite make securing kills and objectives easy. His W, ult, and passive thrive in flanks, dives, and skirmishes. Plus, he's incredibly fun to play!</p>
-      `;
-    }
-
-    /* Runes */
-    if (value === "Runes") {
-      content = `
-        ${header}
-        <div class="rune-container">
-          <div class="rune-info">
-            <img class="icon" src="https://ddragon.leagueoflegends.com/cdn/img/perk-images/Styles/Domination/DarkHarvest/DarkHarvest.png" alt="Dark Harvest"> 
-            <div><strong>Dark Harvest</strong><div class="muted">Scales perfectly with Ekko's burst and resets; lets you one-shot in late fights.</div></div>
-          </div>
-
-          <div class="rune-info">
-            <img class="icon" src="https://ddragon.leagueoflegends.com/cdn/img/perk-images/Styles/Domination/SuddenImpact/SuddenImpact.png" alt="Sudden Impact">
-            <div><strong>Sudden Impact</strong><div class="muted">Synergizes with E dash for consistent magic penetration after engages.</div></div>
-          </div>
-
-          <div class="rune-info">
-            <img class="icon" src="https://ddragon.leagueoflegends.com/cdn/img/perk-images/Styles/Domination/EyeballCollection/EyeballCollection.png" alt="Eyeball Collection">
-            <div><strong>Eyeball Collection</strong><div class="muted">Free AP from takedowns; helps Ekko scale mid-game.</div></div>
-          </div>
-
-          <div class="rune-info">
-            <img class="icon" src="https://ddragon.leagueoflegends.com/cdn/img/perk-images/Styles/Domination/TreasureHunter/TreasureHunter.png" alt="Treasure Hunter">
-            <div><strong>Treasure Hunter</strong><div class="muted">Snowball gold on takedowns — speeds early powerspikes.</div></div>
-          </div>
-
-          <div class="rune-info">
-            <img class="icon" src="https://ddragon.leagueoflegends.com/cdn/img/perk-images/Styles/Inspiration/MagicalFootwear/MagicalFootwear.png" alt="Magical Footwear">
-            <div><strong>Magical Footwear</strong><div class="muted">Free boots; saves gold and gives movement advantage for roams/ganks.</div></div>
-          </div>
-
-          <div class="rune-info">
-            <img class="icon" src="https://ddragon.leagueoflegends.com/cdn/img/perk-images/Styles/Inspiration/CosmicInsight/CosmicInsight.png" alt="Cosmic Insight">
-            <div><strong>Cosmic Insight</strong><div class="muted">Cooldown reduction for summoners/abilities: excellent on Ekko (smite/flash/ult uptime).</div></div>
-          </div>
-
-          <div class="stat-shards">
-            <div><img class="icon" src="https://ddragon.leagueoflegends.com/cdn/img/perk-images/StatMods/StatModsAttackSpeedIcon.png" alt="Attack Speed"><span>Attack Speed</span></div>
-            <div><img class="icon" src="https://ddragon.leagueoflegends.com/cdn/img/perk-images/StatMods/StatModsAdaptiveForceIcon.png" alt="Adaptive Force"><span>Adaptive Force</span></div>
-            <div><img class="icon" src="https://ddragon.leagueoflegends.com/cdn/img/perk-images/StatMods/StatModsHealthScalingIcon.png" alt="Scaling Health"><span>Scaling Health</span></div>
-          </div>
+  if(value === "Runes"){
+    content = `
+      <h3>Runes</h3>
+      <div class="rune-container">
+        <div class="rune-info">
+          <img src="https://ddragon.leagueoflegends.com/cdn/img/perk-images/Styles/Domination/DarkHarvest/DarkHarvest.png" class="icon">
+          <span><strong>Dark Harvest:</strong> Scales perfectly with Ekko's burst and resets; lets you one-shot in late fights.</span>
         </div>
-      `;
-    }
-
-    /* Build */
-    if (value === "Build") {
-      // Using item images from Data Dragon where appropriate.
-      // Mosstomper Seedling uses a placeholder item image (health potion id) as requested attempt.
-      content = `
-        ${header}
-        <div class="card-container">
-
-          <div class="card">
-            <strong>Starting items</strong>
-            <div class="build-flow">
-              <div class="item"><img class="icon" src="https://ddragon.leagueoflegends.com/cdn/14.21.1/img/item/2003.png" alt="Mosstomper Seedling (placeholder)">Mosstomper Seedling</div>
-              <div class="build-arrow">→</div>
-              <div class="item"><img class="icon" src="https://ddragon.leagueoflegends.com/cdn/14.21.1/img/item/1082.png" alt="Dark Seal">Dark Seal</div>
-              <div class="build-arrow">→</div>
-              <div class="item"><img class="icon" src="https://ddragon.leagueoflegends.com/cdn/14.21.1/img/item/1052.png" alt="Amp Tome">Amp Tome</div>
-              <div class="build-arrow">→</div>
-              <div class="item"><img class="icon" src="https://ddragon.leagueoflegends.com/cdn/14.21.1/img/item/1001.png" alt="Boots of Speed">Tier-1 Boots</div>
-            </div>
-          </div>
-
-          <div class="card">
-            <strong>Core items</strong>
-            <div class="build-flow">
-              <div class="item"><img class="icon" src="https://ddragon.leagueoflegends.com/cdn/14.21.1/img/item/3111.png" alt="Mercury's Treads">Mercury's Treads</div>
-              <div class="build-arrow">→</div>
-              <div class="item"><img class="icon" src="https://ddragon.leagueoflegends.com/cdn/14.21.1/img/item/3115.png" alt="Nashor's Tooth">Nashor's Tooth</div>
-              <div class="build-arrow">→</div>
-              <div class="item"><img class="icon" src="https://ddragon.leagueoflegends.com/cdn/14.21.1/img/item/3100.png" alt="Lich Bane">Lich Bane</div>
-              <div class="build-arrow">→</div>
-              <div class="item"><img class="icon" src="https://ddragon.leagueoflegends.com/cdn/14.21.1/img/item/3089.png" alt="Rabadon's Deathcap">Rabadon's Deathcap</div>
-            </div>
-          </div>
-
-          <div class="card">
-            <strong>Final items</strong>
-            <div class="build-flow">
-              <div class="item"><img class="icon" src="https://ddragon.leagueoflegends.com/cdn/14.21.1/img/item/3157.png" alt="Zhonya's Hourglass">Zhonya's Hourglass</div>
-              <div class="build-arrow">→</div>
-              <div class="item"><img class="icon" src="https://ddragon.leagueoflegends.com/cdn/14.21.1/img/item/3135.png" alt="Void Staff">Void Staff</div>
-              <div class="build-arrow">→</div>
-              <div class="item"><img class="icon" src="https://ddragon.leagueoflegends.com/cdn/14.21.1/img/item/2138.png" alt="Elixir">Elixir(s)</div>
-            </div>
-          </div>
-
+        <div class="rune-info">
+          <img src="https://ddragon.leagueoflegends.com/cdn/img/perk-images/Styles/Domination/SuddenImpact/SuddenImpact.png" class="icon">
+          <span><strong>Sudden Impact:</strong> Synergizes with E dash for consistent magic pen after every engage.</span>
         </div>
-        <p class="note">Note: images use Riot Data Dragon icons. Mosstomper Seedling is a custom lore item — currently shown with an available potion icon as a placeholder; tell me if you'd like a different placeholder or a custom uploaded logo.</p>
-      `;
-    }
+        <div class="rune-info">
+          <img src="https://ddragon.leagueoflegends.com/cdn/img/perk-images/Styles/Domination/EyeballCollection/EyeballCollection.png" class="icon">
+          <span><strong>Eyeball Collection:</strong> Free AP for killing and ganking.</span>
+        </div>
+        <div class="rune-info">
+          <img src="https://ddragon.leagueoflegends.com/cdn/img/perk-images/Styles/Domination/TreasureHunter/TreasureHunter.png" class="icon">
+          <span><strong>Treasure Hunter:</strong> Snowball rune; stacks give you an early AP lead.</span>
+        </div>
+        <div class="rune-info">
+          <img src="https://ddragon.leagueoflegends.com/cdn/img/perk-images/Styles/Inspiration/MagicalFootwear/MagicalFootwear.png" class="icon">
+          <span><strong>Magical Footwear:</strong> Free boots, faster core build; gives valuable movement speed.</span>
+        </div>
+        <div class="rune-info">
+          <img src="https://ddragon.leagueoflegends.com/cdn/img/perk-images/Styles/Inspiration/CosmicInsight/CosmicInsight.png" class="icon">
+          <span><strong>Cosmic Insight:</strong> CDR for Smite, Flash, and Ult — vital for Ekko.</span>
+        </div>
+        <div class="stat-shards">
+          <span>Attack Speed</span>
+          <span>Adaptive Force</span>
+          <span>Scaling Health</span>
+        </div>
+      </div>
+    `;
+  }
 
-    /* Summoner spells */
-    if (value === "Summoner spells") {
-      content = `
-        ${header}
-        <p><img class="icon" src="https://ddragon.leagueoflegends.com/cdn/14.21.1/img/spell/SummonerFlash.png" alt="Flash Icon"> <strong>Flash:</strong> Essential for outplays and mobility.</p>
-        <p><img class="icon" src="https://ddragon.leagueoflegends.com/cdn/14.21.1/img/spell/SummonerSmite.png" alt="Smite Icon"> <strong>Smite:</strong> Must-have for jungle clears, objective control, and upgraded blue smite plays.</p>
-      `;
-    }
+  if(value === "Build"){
+    content = `
+      <h3>Build</h3>
+      <div class="card-container">
+        <strong>Starting Items</strong>
+        <div class="build-flow">
+          <div><img src="https://ddragon.leagueoflegends.com/cdn/13.18.1/img/item/2031.png" class="icon"><br>Mosstomper Seedling</div>
+          <span>→</span>
+          <div><img src="https://ddragon.leagueoflegends.com/cdn/13.18.1/img/item/1052.png" class="icon"><br>Dark Seal</div>
+          <span>→</span>
+          <div><img src="https://ddragon.leagueoflegends.com/cdn/13.18.1/img/item/1058.png" class="icon"><br>Amp Tome</div>
+          <span>→</span>
+          <div><img src="https://ddragon.leagueoflegends.com/cdn/13.18.1/img/item/1001.png" class="icon"><br>Tier 1 Boots</div>
+        </div>
 
-    /* Abilities */
-    if (value === "Abilities") {
-      content = `
-        ${header}
-        <p><img class="icon" src="https://ddragon.leagueoflegends.com/cdn/14.21.1/img/passive/Ekko_P.png" alt="Passive"> <strong>Passive – Z-Drive Resonance:</strong> Every 3rd hit deals bonus magic damage and grants movement speed; important for clears and trades.</p>
-        <p><img class="icon" src="https://ddragon.leagueoflegends.com/cdn/14.21.1/img/spell/EkkoQ.png" alt="Q"> <strong>Q – Timewinder:</strong> Poke and wide clear tool — aim to hit twice on monsters or champions for full damage.</p>
-        <p><img class="icon" src="https://ddragon.leagueoflegends.com/cdn/14.21.1/img/spell/EkkoW.png" alt="W"> <strong>W – Parallel Convergence:</strong> Cast from fog or flank; shield + stun zone for teamfights and ganks.</p>
-        <p><img class="icon" src="https://ddragon.leagueoflegends.com/cdn/14.21.1/img/spell/EkkoE.png" alt="E"> <strong>E – Phase Dive:</strong> Mobility + auto reset — use through walls and to secure executes.</p>
-        <p><img class="icon" src="https://ddragon.leagueoflegends.com/cdn/14.21.1/img/spell/EkkoR.png" alt="R"> <strong>R – Chronobreak:</strong> Rewind to safety, heal, and deal burst at your origin point — excellent outplay tool.</p>
-      `;
-    }
+        <strong>Core Items</strong>
+        <div class="build-flow">
+          <div><img src="https://ddragon.leagueoflegends.com/cdn/13.18.1/img/item/3115.png" class="icon"><br>Nashor's Tooth</div>
+          <span>→</span>
+          <div><img src="https://ddragon.leagueoflegends.com/cdn/13.18.1/img/item/3001.png" class="icon"><br>Mercury Treads</div>
+          <span>→</span>
+          <div><img src="https://ddragon.leagueoflegends.com/cdn/13.18.1/img/item/3100.png" class="icon"><br>Lich Bane</div>
+          <span>→</span>
+          <div><img src="https://ddragon.leagueoflegends.com/cdn/13.18.1/img/item/3089.png" class="icon"><br>Rabadon's Deathcap</div>
+        </div>
 
-    /* Combos */
-    if (value === "Combos") {
-      content = `
-        ${header}
-        <p><strong>W E E Q AA:</strong> Basic gank combo; open with W from fog.</p>
-        <p><strong>E E Q AA W AA:</strong> Extended trade when in range.</p>
-        <p><strong>E Q E AA:</strong> Burst combo when Q is guaranteed.</p>
-        <p><strong>Q AA E:</strong> Quick trades or finishing.</p>
-        <p><strong>W E Q:</strong> Safe slow into passive proc.</p>
-      `;
-    }
+        <strong>Final Items</strong>
+        <div class="build-flow">
+          <div><img src="https://ddragon.leagueoflegends.com/cdn/13.18.1/img/item/3157.png" class="icon"><br>Zhonya's Hourglass</div>
+          <span>→</span>
+          <div><img src="https://ddragon.leagueoflegends.com/cdn/13.18.1/img/item/3135.png" class="icon"><br>Void Staff</div>
+          <span>→</span>
+          <div><img src="https://ddragon.leagueoflegends.com/cdn/13.18.1/img/item/2003.png" class="icon"><br>Elixirs</div>
+        </div>
+      </div>
+    `;
+  }
 
-    /* Level 1 */
-    if (value === "Level 1") {
-      content = `
-        ${header}
-        <p>Blue side: Ward tri-bush, move mid, throw W toward pixel brush. Use W on starting camp around 1:27. Last auto timing should consider Hunter's Talisman / jungle item damage.</p>
-        <p>Red side: Mirror path; tri-bush ward is lower priority for top-side starts.</p>
-      `;
-    }
+  if(value === "Summoner Spells"){
+    content = `
+      <h3>Summoner spells</h3>
+      <div class="rune-container">
+        <div class="rune-info">
+          <img src="https://ddragon.leagueoflegends.com/cdn/13.18.1/img/spell/SummonerFlash.png" class="icon">
+          <span><strong>Flash:</strong> Still the best summoner spell in the game.</span>
+        </div>
+        <div class="rune-info">
+          <img src="https://ddragon.leagueoflegends.com/cdn/13.18.1/img/spell/SummonerSmite.png" class="icon">
+          <span><strong>Smite:</strong> Strongest summoner spell alongside Flash. Use upgraded blue smite for slow, burst, and objective control.</span>
+        </div>
+      </div>
+    `;
+  }
 
-    /* Pathing (reverted and cleaned up, no icons) */
-    if (value === "Pathing") {
-      content = `
-        ${header}
-        <p><strong>First clear</strong></p>
-        <p>Red buff → Raptors → Wolves → Blue buff → Gromp → Scuttle → Look for ganks or Krugs if safe.</p>
+  if(value === "Abilities"){
+    content = `
+      <h3>Abilities</h3>
+      <p><img src="https://ddragon.leagueoflegends.com/cdn/14.21.1/img/passive/Ekko_P.png" class="icon"><strong>Passive – Z-Drive Resonance:</strong> Every 3rd hit deals bonus magic damage and grants move speed. Key for early clears and extended fights.</p>
+      <p><img src="https://ddragon.leagueoflegends.com/cdn/14.21.1/img/spell/EkkoQ.png" class="icon"><strong>Q – Timewinder:</strong> Main poke and clear tool. Double hit for max damage — aim so it hits twice on camps or enemies.</p>
+      <p><img src="https://ddragon.leagueoflegends.com/cdn/14.21.1/img/spell/EkkoW.png" class="icon"><strong>W – Parallel Convergence:</strong> Shield and stun zone. Best when cast from fog before a gank or dive; gives massive outplay potential.</p>
+      <p><img src="https://ddragon.leagueoflegends.com/cdn/14.21.1/img/spell/EkkoE.png" class="icon"><strong>E – Phase Dive:</strong> Mobility + auto reset. Use through walls or in quick burst combos with Q.</p>
+      <p><img src="https://ddragon.leagueoflegends.com/cdn/14.21.1/img/spell/EkkoR.png" class="icon"><strong>R – Chronobreak:</strong> Rewind time, heal, and burst. Perfect for tower dives or baiting assassins.</p>
+    `;
+  }
 
-        <p><strong>Alternative clear</strong></p>
-        <ul>
-          <li>Blue start → Gromp → Wolves → Raptors → Red → Krugs → Scuttle</li>
-          <li>Red start → Krugs → Raptors → Check mid → Wolves → Blue → Scuttle</li>
-        </ul>
+  if(value === "Combos"){
+    content = `
+      <h3>Combos</h3>
+      <p><strong>W E E Q AA:</strong> Basic combo, lead with W out of vision.</p>
+      <p><strong>E E Q AA W AA:</strong> Best when already in E range.</p>
+      <p><strong>E Q E AA:</strong> Best when Q is guaranteed to hit.</p>
+      <p><strong>Q AA E:</strong> Extended trades or close-range situations.</p>
+      <p><strong>W E Q:</strong> Safe slow to proc passive.</p>
+    `;
+  }
 
-        <p><strong>Preferred jungle camps</strong></p>
-        <ul>
-          <li><strong>Raptors:</strong> Quick clear, sustain and gank pressure.</li>
-          <li><strong>Krugs:</strong> High XP — great when you have time to full clear.</li>
-          <li><strong>Wolves / Murk Wolves:</strong> Solid gold and pathing options.</li>
-          <li><strong>Gromp:</strong> Toughest camp but good experience.</li>
-          <li><strong>Blue Sentinel / Red Brambleback:</strong> Buff control for clears & ganks.</li>
-          <li><strong>Scuttle Crab:</strong> Priority objective — vision and river control; take it when you can safely contest.</li>
-        </ul>
+  if(value === "Pathing"){
+    content = `
+      <h3>Pathing</h3>
+      <p><strong>First clear:</strong> Red Brambleback → Krugs → Raptors → Murk Wolves → Blue Sentinel → Gromp → Scuttle Crab</p>
+      <p><em>Tip:</em> Smite camps efficiently, start red and follow the path above, secure vision with scuttle before ganking. Always optimize jungle routes to maintain tempo and level advantage.</p>
+    `;
+  }
 
-        <p class="note">Tip: Smite camps to manage passive + HP efficiently; use W to speed clears and set up ganks. If lanes are pushed in, look to gank earlier instead of full clearing Krugs.</p>
-      `;
-    }
+  if(value === "Level 1"){
+    content = `
+      <h3>Level 1</h3>
+      <p>Blue side: Ward tri bush, move mid, throw W toward pixel brush. Use W on starting camp at 1:27. Last auto should wait for Hunter’s Talisman damage (approx 125).</p>
+      <p>Red side: Mirror path; tri bush ward less critical for top.</p>
+    `;
+  }
 
-    /* Hardest matchups */
-    if (value === "Hardest matchups") {
-      content = `
-        ${header}
-        <p>Champions with high mobility and early burst (e.g., Nidalee, Kha'Zix) can punish Ekko's positioning and force early ult usage. Play safe, track enemy jungle, and prioritize vision.</p>
-      `;
-    }
+  if(value === "Team Fighting"){
+    content = `
+      <h3>Team fighting</h3>
+      <p>Proc passive on as many targets as possible, land W on priority targets. Delay ult for max healing/damage. Use movement speed to dodge melee autos. W passive + ult liberally, especially on squishies.</p>
+    `;
+  }
 
-    /* Team fighting */
-    if (value === "Team fighting") {
-      content = `
-        ${header}
-        <p>Proc passive on as many targets as possible. Land W to zone priority targets and set up your E/R combos. Delay R to maximize healing/damage when diving. Prioritize survival and objective control after the engage.</p>
-      `;
-    }
+  if(value === "Closing Out the Game"){
+    content = `
+      <h3>Closing out the game</h3>
+      <p>Focus on Baron/Elder. Use W, passive, Q to zone and fast push waves to objectives. Avoid farming far from objectives. Post-core items, prioritize survival/objectives over kills.</p>
+    `;
+  }
 
-    /* Closing out the game (last) */
-    if (value === "Closing out the game") {
-      content = `
-        ${header}
-        <p>Focus Baron/Elder spawns and objective control. Use W, Q, passive to zone and force enemies away from objectives; avoid farming far from objectives and prioritize vision control. After your core items, prioritize survival and picking the correct fights.</p>
-      `;
-    }
-
-    // set content
-    sectionInfo.innerHTML = content;
-  });
+  sectionInfo.innerHTML = content;
+});
 </script>
 
 </body>
 </html>
+
