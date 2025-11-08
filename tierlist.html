@@ -13,6 +13,8 @@ body {
   line-height: 1.6;
   text-align: center;
 }
+
+/* Header */
 header {
   background: linear-gradient(90deg, #0a0f14, #1b2838);
   border-bottom: 2px solid #c9aa71;
@@ -23,99 +25,77 @@ header {
   text-transform: uppercase;
   color: #c9aa71;
 }
-.section {
-  padding: 40px 20px;
-  max-width: 1200px;
-  margin: auto;
-}
-#roleSelect {
-  padding: 8px 12px;
-  font-size: 16px;
-  border-radius: 6px;
-  border: 1px solid #c9aa71;
-  margin-bottom: 30px;
-  background: #161b22;
-  color: #e6edf3;
-  cursor: pointer;
-}
-.champion-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
-  gap: 20px;
-  justify-items: center;
-}
-.champ-card {
-  background: #161b22;
-  border: 2px solid #c9aa71;
-  border-radius: 12px;
-  width: 140px;
-  padding: 10px;
-  text-align: center;
-  transition: transform 0.3s, box-shadow 0.3s;
-}
-.champ-card:hover {
-  transform: translateY(-5px);
-  box-shadow: 0 10px 20px rgba(47,129,247,0.3);
-}
-.champ-card img {
-  width: 80px;
-  height: 80px;
-  border-radius: 8px;
-}
-.champ-card h4 {
-  color: #c9aa71;
-  margin: 8px 0 4px 0;
-  font-size: 16px;
-}
-.champ-card p {
-  margin: 0;
-  font-size: 14px;
-}
+
+/* Back button */
 .back-button {
   display: inline-block;
   margin: 20px auto;
-  padding: 10px 20px;
+  padding: 10px 25px;
   background: linear-gradient(135deg, #c9aa71, #e0c77b);
   color: #000;
   text-decoration: none;
   border-radius: 8px;
   font-weight: bold;
   transition: all 0.3s;
-  box-shadow: 0 0 10px rgba(201,170,113,0.5);
-}
-.back-button::before {
-  content: "← ";
 }
 .back-button:hover {
   background: linear-gradient(135deg, #e6c97f, #f0d88b);
-  box-shadow: 0 0 15px rgba(255,215,0,0.8);
 }
-footer {
-  text-align: center;
-  padding: 30px;
-  color: #8b949e;
-  font-size: 14px;
-  background: #0a0f14;
-  border-top: 1px solid #1f2937;
+
+/* Role selector */
+#roleSelect {
+  margin: 20px 0;
+  padding: 8px 12px;
+  font-size: 16px;
+  border-radius: 6px;
+  border: none;
+  background: #161b22;
+  color: #e6edf3;
 }
-footer a {
+
+/* Tierlist grid */
+.tierlist {
+  display: flex;
+  flex-direction: column;
+  max-width: 1000px;
+  margin: 0 auto 40px auto;
+}
+.tier-section {
+  margin-bottom: 40px;
+}
+.tier-section h2 {
+  margin-bottom: 15px;
   color: #c9aa71;
-  text-decoration: none;
+  font-size: 1.5em;
+  text-align: left;
 }
-footer a:hover {
-  text-decoration: underline;
+.champion-grid {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 15px;
+}
+.champion-card {
+  width: 100px;
+  text-align: center;
+  font-size: 0.85em;
+}
+.champion-card img {
+  width: 80px;
+  height: 80px;
+  border-radius: 8px;
+  display: block;
+  margin: 0 auto 5px auto;
 }
 </style>
 </head>
 <body>
 
 <header>LoL Fundamentals – Tierlist</header>
+
 <a href="membershub.html" class="back-button">Back to Members Hub</a>
 
-<section class="section">
-<h2>Champion Tierlist</h2>
-<p>Select a role to view champions:</p>
-<select id="roleSelect" onchange="changeRole(this.value)">
+<select id="roleSelect">
+  <option value="All">All Roles</option>
   <option value="Top">Top</option>
   <option value="Jungle">Jungle</option>
   <option value="Mid">Mid</option>
@@ -123,13 +103,7 @@ footer a:hover {
   <option value="Support">Support</option>
 </select>
 
-<div class="champion-grid" id="champGrid"></div>
-</section>
-
-<footer>
-© 2025 LoL Fundamentals · Contact:
-<a href="mailto:arcsecond@lolfundamentals.com">arcsecond@lolfundamentals.com</a>
-</footer>
+<div id="tierlistContainer" class="tierlist"></div>
 
 <script>
 // Require login
@@ -140,55 +114,74 @@ if(localStorage.getItem('lolfundamentals_logged_in') !== 'true'){
 // Tier order
 const tierOrder = ["OP","S","A","B","C","D"];
 
-// Map Google Sheet name to Dragon key
+// Normalize champion names to load images
 function normalizeChampion(name){
-  return name.replace(/[\s.'"]/g,"").replace(/é/g,"e");
+  return name.replace(/[\s.'’]/g,"").replace(/é/g,"e").replace(/ü/g,"u").replace(/ø/g,"o");
 }
 
-const tierCSV = "https://docs.google.com/spreadsheets/d/e/2PACX-1vRtIJeggpJ6cjGJt0OOds4OZDuHMMUxHCWzMiU1Bd4gJ8EvfZMXPE9p0X1K3yyeZs7bpFyQZHhHpnsu/pub?output=csv";
-let champions = [];
-let selectedRole = "Top";
+// CSV URL
+const csvURL = "https://docs.google.com/spreadsheets/d/e/2PACX-1vRtIJeggpJ6cjGJt0OOds4OZDuHMMUxHCWzMiU1Bd4gJ8EvfZMXPE9p0X1K3yyeZs7bpFyQZHhHpnsu/pub?output=csv";
 
-fetch(tierCSV)
+let champions = [];
+
+fetch(csvURL)
   .then(res => res.text())
   .then(data => {
     const rows = data.split("\n").map(r => r.split(","));
-    const headers = rows.shift();
-    champions = rows.map(r => {
-      const champ = {};
-      headers.forEach((h,i) => champ[h.trim()] = r[i] ? r[i].trim() : "");
+    const headers = rows[0].map(h => h.trim());
+    champions = rows.slice(1).map(row => {
+      let champ = {};
+      headers.forEach((h,i) => champ[h] = row[i] ? row[i].trim() : "");
       return champ;
     });
-    renderChampions();
+    renderTierlist("All");
   });
 
-function changeRole(role){
-  selectedRole = role;
-  renderChampions();
-}
+// Render champions grouped by tier
+function renderTierlist(role){
+  const container = document.getElementById("tierlistContainer");
+  container.innerHTML = "";
+  
+  const filteredChamps = champions.filter(ch => {
+    if(role === "All") return true;
+    return ch[role] && ch[role] !== "X";
+  });
 
-function renderChampions(){
-  const grid = document.getElementById("champGrid");
-  grid.innerHTML = "";
+  tierOrder.forEach(tier => {
+    const champsInTier = filteredChamps.filter(ch => ch[role] === tier || (role==="All" && Object.values(ch).includes(tier)));
+    if(champsInTier.length === 0) return;
 
-  champions
-    .filter(c => c[selectedRole] && c[selectedRole].toLowerCase() !== "x")
-    .sort((a,b) => tierOrder.indexOf(a[selectedRole]) - tierOrder.indexOf(b[selectedRole]))
-    .forEach(c => {
+    const section = document.createElement("div");
+    section.className = "tier-section";
+    section.innerHTML = `<h2>${tier}</h2>`;
+    const grid = document.createElement("div");
+    grid.className = "champion-grid";
+    
+    champsInTier.forEach(ch => {
+      let imgName = normalizeChampion(ch["Champion"]);
+      let roleTier = role === "All" ? Object.entries(ch).find(([k,v])=>tierOrder.includes(v) && k !== "Champion")[0] : role;
+      let champTier = ch[roleTier];
       const card = document.createElement("div");
-      card.className = "champ-card";
-      const champName = c.Champion;
-      const champTier = c[selectedRole];
-      const champImg = `https://ddragon.leagueoflegends.com/cdn/14.23.1/img/champion/${normalizeChampion(champName)}.png`;
+      card.className = "champion-card";
       card.innerHTML = `
-        <img src="${champImg}" alt="${champName}">
-        <h4>${champName}</h4>
-        <p>Tier: ${champTier}</p>
+        <img src="https://ddragon.leagueoflegends.com/cdn/14.23.1/img/champion/${imgName}.png" alt="${ch["Champion"]}">
+        <div>${ch["Champion"]} (${champTier})</div>
       `;
       grid.appendChild(card);
     });
+    section.appendChild(grid);
+    container.appendChild(section);
+  });
 }
+
+// Role selector
+document.getElementById("roleSelect").addEventListener("change", (e)=>{
+  renderTierlist(e.target.value);
+});
 </script>
+
 </body>
 </html>
+
+
 
