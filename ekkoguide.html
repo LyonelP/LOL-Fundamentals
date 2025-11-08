@@ -81,12 +81,23 @@ header {
   text-align: left;
   color: #fff;
   min-height: 200px;
+  position: relative;
 }
 
 #section-info:hover { box-shadow: 0 0 15px rgba(47,129,247,0.5); }
 
+#section-info h3 {
+  position: absolute;
+  top: 10px;
+  left: 20px;
+  color: #c9aa71;
+  margin: 0;
+  font-size: 22px;
+  text-transform: uppercase;
+}
+
 #section-info p {
-  margin: 8px 0 16px;
+  margin: 28px 0 16px;
   line-height: 1.6;
 }
 
@@ -114,7 +125,7 @@ header {
   flex-direction: column;
   align-items: center;
   gap: 16px;
-  margin-top: 15px;
+  margin-top: 35px;
 }
 .rune-row {
   display: flex;
@@ -186,6 +197,7 @@ header {
   .card-container { flex-direction: column; gap: 10px; }
   .build-flow { flex-direction: column; }
   .build-flow span { display: none; }
+  #section-info h3 { position: static; margin-bottom: 12px; }
 }
 </style>
 </head>
@@ -204,7 +216,7 @@ header {
     <option>Abilities</option>
     <option>Combos</option>
     <option>Level 1</option>
-    <option>Jungle Routes</option>
+    <option>Pathing</option>
     <option>Hardest Matchups</option>
     <option>Team Fighting</option>
     <option>Closing Out The Game</option>
@@ -226,15 +238,18 @@ const sectionInfo = document.getElementById('section-info');
 sectionSelect.addEventListener('change', () => {
   let value = sectionSelect.value;
   let content = `<p>Coming soon!</p>`;
+  let header = `<h3>${value}</h3>`;
 
   if(value === "Intro"){
     content = `
+      ${header}
       <p>Why Ekko jungle? Ekko excels in the jungle because his mobility, crowd control, and burst allow for strong ganks and objective control. Smite synergizes perfectly with his kit — the slow and burst from blue smite make securing kills and objectives easy. His W, ult, and passive thrive in flanks, dives, and skirmishes. Plus, he's incredibly fun to play!</p>
     `;
   }
 
   if(value === "Runes"){
     content = `
+      ${header}
       <div class="rune-container">
         <div class="rune-info">
           <img src="https://ddragon.leagueoflegends.com/cdn/img/perk-images/Styles/Domination/DarkHarvest/DarkHarvest.png" class="icon">
@@ -257,8 +272,8 @@ sectionSelect.addEventListener('change', () => {
           <span><strong>Magical Footwear:</strong> Free boots for faster core build; movement speed advantage.</span>
         </div>
         <div class="rune-info">
-          <img src="https://ddragon.leagueoflegends.com/cdn/img/perk-images/Styles/Inspiration/CosmicInsight/CosmicInsight.png" class="icon">
-          <span><strong>Cosmic Insight:</strong> CDR on Smite, Flash, and Ult; crucial for Ekko jungle rotations.</span>
+          <img src="https://ddragon.leagueoflegends.com/cdn/img/perk-images/Styles/Inspiration/JackOfAllTrades/JackOfAllTrades.png" class="icon">
+          <span><strong>Jack of All Trades:</strong> Provides adaptive stats, helping Ekko scale in early fights.</span>
         </div>
         <div class="rune-row">
           <img src="https://ddragon.leagueoflegends.com/cdn/img/perk-images/StatMods/StatModsAttackSpeedIcon.png" title="Attack Speed">
@@ -271,6 +286,7 @@ sectionSelect.addEventListener('change', () => {
 
   if(value === "Build"){
     content = `
+      ${header}
       <div class="build-flow">
         <div><img src="https://ddragon.leagueoflegends.com/cdn/14.21.1/img/item/2031.png" class="icon">Mosstomper Seedling</div><span>→</span>
         <div><img src="https://ddragon.leagueoflegends.com/cdn/14.21.1/img/item/1082.png" class="icon">Dark Seal</div><span>→</span>
@@ -286,6 +302,7 @@ sectionSelect.addEventListener('change', () => {
 
   if(value === "Summoner Spells"){
     content = `
+      ${header}
       <p><img src="https://ddragon.leagueoflegends.com/cdn/14.21.1/img/spell/SummonerFlash.png" class="icon"><strong>Flash:</strong> Essential for outplays and mobility.</p>
       <p><img src="https://ddragon.leagueoflegends.com/cdn/14.21.1/img/spell/SummonerSmite.png" class="icon"><strong>Smite:</strong> Must‑have for jungle clears, objective control, and Ekko combos with blue smite.</p>
     `;
@@ -293,6 +310,7 @@ sectionSelect.addEventListener('change', () => {
 
   if(value === "Abilities"){
     content = `
+      ${header}
       <p><img src="https://ddragon.leagueoflegends.com/cdn/14.21.1/img/passive/Ekko_P.png" class="icon"><strong>Passive – Z‑Drive Resonance:</strong> Every 3rd hit deals bonus magic damage and grants move speed.</p>
       <p><img src="https://ddragon.leagueoflegends.com/cdn/14.21.1/img/spell/EkkoQ.png" class="icon"><strong>Q – Timewinder:</strong> Main poke and clear tool.</p>
       <p><img src="https://ddragon.leagueoflegends.com/cdn/14.21.1/img/spell/EkkoW.png" class="icon"><strong>W – Parallel Convergence:</strong> Shield and stun zone.</p>
@@ -303,6 +321,7 @@ sectionSelect.addEventListener('change', () => {
 
   if(value === "Combos"){
     content = `
+      ${header}
       <p><strong>W E E Q AA:</strong> Basic combo.</p>
       <p><strong>E E Q AA W AA:</strong> Best for extended trades.</p>
       <p><strong>E Q E AA:</strong> Guaranteed burst if Q hits.</p>
@@ -313,40 +332,39 @@ sectionSelect.addEventListener('change', () => {
 
   if(value === "Level 1"){
     content = `
+      ${header}
       <p>Blue side: Ward tri bush, move mid, throw W toward pixel brush. Use W on starting camp at 1:27.</p>
       <p>Red side: Mirror path; tri bush ward less critical for top.</p>
     `;
   }
 
-  if(value === "Jungle Routes"){
+  if(value === "Pathing"){
     content = `
-      <p><strong>First Clear:</strong></p>
-      <p><img src="https://ddragon.leagueoflegends.com/cdn/14.21.1/img/map/monsters/Red_Melee.png" class="icon"> → 
-         <img src="https://ddragon.leagueoflegends.com/cdn/14.21.1/img/map/monsters/Raptor.png" class="icon"> → 
-         <img src="https://ddragon.leagueoflegends.com/cdn/14.21.1/img/map/monsters/Wolf.png" class="icon"> → 
-         <img src="https://ddragon.leagueoflegends.com/cdn/14.21.1/img/map/monsters/Blue_Melee.png" class="icon"> → 
-         <img src="https://ddragon.leagueoflegends.com/cdn/14.21.1/img/map/monsters/Gromp.png" class="icon"> → 
-         <img src="https://ddragon.leagueoflegends.com/cdn/14.21.1/img/map/monsters/ScuttleCrab.png" class="icon"> → Ganks
-      </p>
-      <h4 style="color:#c9aa71; margin-top:16px;">Preferred Jungle Camps</h4>
-      <p>Raptors, Krugs, Wolves, Gromp, Scuttle Crab</p>
+      ${header}
+      <p><strong>First Clear:</strong> Red Buff → Raptors → Wolves → Blue Buff → Gromp → Scuttle → Ganks</p>
+      <p><strong>Second Clear:</strong> Look for respawned camps, counter jungle, or ganks.</p>
+      <p><strong>Preferred Jungle Camps:</strong> Raptors, Krugs, Wolves, Gromp, Scuttle</p>
+      <p><em>Tips:</em> Smite camps before passive triggers for extra damage; W for faster clears; gank after first clear if lanes pushed.</p>
     `;
   }
 
   if(value === "Hardest Matchups"){
     content = `
+      ${header}
       <p>Champions with high mobility and burst like Nidalee and Kha’Zix are difficult. They can force early ult usage and punish Ekko’s positioning.</p>
     `;
   }
 
   if(value === "Team Fighting"){
     content = `
+      ${header}
       <p>Proc passive on as many targets as possible. Land W on priority targets. Delay ult for maximum healing/damage. Use mobility to dodge key abilities. W + passive + ult are crucial for squishy targets.</p>
     `;
   }
 
   if(value === "Closing Out The Game"){
     content = `
+      ${header}
       <p>Focus objectives like Baron/Elder. Use W, passive, Q to zone enemies and push waves. Avoid farming far from objectives. After core items, prioritize survival and objectives over kills.</p>
     `;
   }
