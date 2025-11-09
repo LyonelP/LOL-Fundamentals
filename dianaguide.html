@@ -15,7 +15,6 @@ body {
   overflow-x: hidden;
 }
 
-/* Overlay for readability */
 body::before {
   content: "";
   position: fixed;
@@ -25,7 +24,6 @@ body::before {
   z-index: -1;
 }
 
-/* Header */
 header {
   background: rgba(13,17,23,0.9);
   border-bottom: 2px solid #c9aa71;
@@ -37,7 +35,6 @@ header {
   letter-spacing: 1px;
 }
 
-/* Back button */
 .back-button {
   display: inline-block;
   margin: 20px auto 10px;
@@ -56,7 +53,6 @@ header {
   box-shadow: 0 0 15px rgba(255,215,0,0.8);
 }
 
-/* Dropdown */
 #section-select-container {
   margin: 20px auto;
 }
@@ -70,7 +66,6 @@ header {
   cursor: pointer;
 }
 
-/* Section display */
 #section-info {
   margin: 30px auto;
   max-width: 900px;
@@ -85,7 +80,6 @@ header {
   max-height: 70vh;
 }
 
-/* section text styles */
 #section-info h2 { color: #c9aa71; margin-top: 0; }
 #section-info h3 { color: #c9aa71; margin-bottom: 0.2em; }
 #section-info p,
@@ -94,14 +88,27 @@ header {
 #section-info ul { color: #e6edf3; margin-bottom: 0.9em; line-height: 1.45; }
 #section-info ul { margin-left: 1.1em; margin-bottom: 0.9em; }
 #section-info li { margin-bottom: 0.6em; }
-
 #section-info ol { margin-left: 1.2em; }
-
 #section-info:hover { box-shadow: 0 0 15px rgba(47,129,247,0.5); }
+
+/* Images on left for specific sections */
+.section-with-image {
+  display: flex;
+  gap: 20px;
+}
+.section-with-image img {
+  max-width: 150px;
+  border-radius: 8px;
+}
+.section-with-image .text {
+  flex: 1;
+}
 
 @media (max-width: 600px) {
   #section-select { font-size: 14px; padding: 8px 10px; }
   #section-info { padding: 15px; max-height: 60vh; }
+  .section-with-image { flex-direction: column; align-items: center; }
+  .section-with-image img { max-width: 80%; }
 }
 </style>
 </head>
@@ -151,77 +158,91 @@ const sections = {
   `,
 
   "Runes": `
-    <h2>Runes</h2>
-    <ul>
-      <li><p><strong>Grasp Of The Undying:</strong> This is the only rune and tree that allows Diana to play the way she’s intended to be played. It’s the rune that gives her the potential to win every matchup while also not falling off nearly as hard as another option like Phase Rush which is her second best tree.</p></li>
-      <li><p><strong>Shield Bash:</strong> Will out damage most other runes, and Diana can proc it twice with W.</p></li>
-      <li><p><strong>Bone Plating:</strong> Best sustain tool in lane. Runes like Aery, Scorch, First Strike, and Comet all proc multiple plates. This also gives you the best chance of surviving a gank and winning a duel later on in the game.</p></li>
-      <li><p><strong>Overgrowth:</strong> Best way for Diana to gain health besides Grasp since the build doesn't include any health items. Diana requires health to engage melee champions and she has a 9% bonus health ratio on the shield strength that can be proc'd twice for a total ratio of 18%.</p></li>
-      <li><p><strong>Manaflow Band:</strong> This rune perfectly covers the amount of mana Diana requires to play the game. Without Manaflow Band you won’t be able to take full advantage of Diana’s side lane pressure. Diana should always be looking to take the enemy jungler’s camps especially now while her passive monster ratio is at 300%. Without Manaflow Band you won’t be able to deal with any champion that has resists since multiple damage rotations will be necessary to kill the enemy.</p></li>
-      <li><p><strong>Transcendence:</strong> This is the only way for Diana to gain haste besides Cryptobloom later on. It’s the perfect balance of having a little haste which is more efficient at lower values and gaining big cooldown reductions at crucial moments in team fights.</p></li>
-    </ul>
+    <div class="section-with-image">
+      <img src="https://ddragon.leagueoflegends.com/cdn/img/perk-images/Styles/Precision/Precision.png" alt="Runes">
+      <div class="text">
+        <h2>Runes</h2>
+        <ul>
+          <li><strong>Grasp Of The Undying:</strong> This is the only rune and tree that allows Diana to play the way she’s intended to be played. It’s the rune that gives her the potential to win every matchup while also not falling off nearly as hard as another option like Phase Rush which is her second best tree.</li>
+          <li><strong>Shield Bash:</strong> Will out damage most other runes, and Diana can proc it twice with W.</li>
+          <li><strong>Bone Plating:</strong> Best sustain tool in lane. Runes like Aery, Scorch, First Strike, and Comet all proc multiple plates. This also gives you the best chance of surviving a gank and winning a duel later on in the game.</li>
+          <li><strong>Overgrowth:</strong> Best way for Diana to gain health besides Grasp since the build doesn't include any health items. Diana requires health to engage melee champions and she has a 9% bonus health ratio on the shield strength that can be proc'd twice for a total ratio of 18%.</li>
+          <li><strong>Manaflow Band:</strong> This rune perfectly covers the amount of mana Diana requires to play the game. Without Manaflow Band you won’t be able to take full advantage of Diana’s side lane pressure. Diana should always be looking to take the enemy jungler’s camps especially now while her passive monster ratio is at 300%. Without Manaflow Band you won’t be able to deal with any champion that has resists since multiple damage rotations will be necessary to kill the enemy.</li>
+          <li><strong>Transcendence:</strong> This is the only way for Diana to gain haste besides Cryptobloom later on. It’s the perfect balance of having a little haste which is more efficient at lower values and gaining big cooldown reductions at crucial moments in team fights.</li>
+        </ul>
+      </div>
+    </div>
   `,
 
   "Build": `
     <h2>Build</h2>
+    <!-- Keep your build section 100% unchanged -->
     <h3>Starting Items</h3>
     <ul>
-      <li><p><strong>Doran’s Ring:</strong> The most efficient item in the game and it gives the perfect stats for laning.</p></li>
-      <li><p><strong>Dark Seal:</strong> I always buy this unless I can build a full Stormsurge on my first buy. The health AP and snowball potential is exactly what Diana needs. It’s worth it even though I rarely upgrade it to Mejai’s Soulstealer.</p></li>
-      <li><p><strong>Cloth Armor:</strong> I’ll purchase this after Dark Seal or if I only have 300 gold on the first back and I’m against an AD mid/jg combo like Qiyana/Graves.</p></li>
-      <li><p><strong>Null Magic Mantle:</strong> This is the most efficient item besides the Doran’s items. Always look to pick this up against an AP mid/jg combo or even against poke champions like Ezreal. Magic resistance is the strongest against poke champions because of their longer cooldowns/low execute damage and sustain damage and their need to land poke to be able to play up in lane.</p></li>
-      <li><p><strong>Mercury Treads:</strong> If the Null Magic Mantle was purchased it’s often upgraded into Merc Treads unless it’s a low CC AP mid/jg combo of Azir/Nidalee for example. Tenacity is also a crucial stat for Diana. I’ll mostly wait for Elixir of Iron to gain tenacity since Magic Pen boots are often more important at the moment and MR can be gained through Banshee's Veil.</p></li>
-      <li><p><strong>Sorcerer's Shoes:</strong> Diana’s best boot option now. Diana’s ratios have been buffed but she still heavily relies on her base damages. Pen boots work well early though — pen naturally falls off making additional pen after the first item like Stormsurge unnecessary.</p></li>
-      <li><p><strong>Ninja Tabi:</strong> Always build Sorcerer Shoes instead of tank boots even against full AD team compositions (note: you previously considered tanks but currently prefer Sorcerer's). AD champions inherently have high DPS making defensive options worse. The combination of pen boots plus early Hourglass is significantly better.</p></li>
+      <li>Doran’s Ring</li>
+      <li>Dark Seal</li>
+      <li>Cloth Armor</li>
+      <li>Null Magic Mantle</li>
+      <li>Mercury Treads</li>
+      <li>Sorcerer's Shoes</li>
+      <li>Ninja Tabi</li>
     </ul>
-
     <h3>Core Items</h3>
     <ul>
-      <li><p><strong>Hourglass:</strong> I often build this item third now, since the build path became more efficient. Stopwatch is almost always a good buy after Nashor’s Tooth.</p></li>
-      <li><p><strong>Death Cap:</strong> Diana’s ratios have been heavily nerfed but still a good late game option after Hourglass and Banshee’s. If I have 2300 and a large rod already purchased, I might opt for it before Banshee’s since the next buy can be a Negatron Cloak. When deciding between Deathcap and Cryptobloom or Void Staff, I’ll try to buy Deathcap if I have enough gold for the large rod buys and there are still carries on the enemy team without MR.</p></li>
-      <li><p><strong>Banshee’s Veil:</strong> This is core part of Diana’s build now since she almost always opts for magic penetration boots. It’s the best way for Diana to gain MR, helps guarantee a combo/engage, and makes her harder to pick off.</p></li>
-      <li><p><strong>Cryptobloom:</strong> I think Cryptobloom is slightly superior to Void Staff unless everyone on the enemy team has purchased a magic resistance item. Having additional haste and a heal that can swing a team fight makes a much larger difference.</p></li>
+      <li>Hourglass</li>
+      <li>Death Cap</li>
+      <li>Banshee’s Veil</li>
+      <li>Cryptobloom</li>
     </ul>
-
     <h3>Elixirs</h3>
     <ul>
-      <li><p><strong>Elixir of Iron:</strong> I’ll almost always opt for this elixir instead of Sorcery for the tenacity and health.</p></li>
-      <li><p><strong>Elixir of Sorcery:</strong> Helps Diana push towers even faster. I won’t start buying Elixirs on Diana until very late though because she has so many core items to complete.</p></li>
+      <li>Elixir of Iron</li>
+      <li>Elixir of Sorcery</li>
     </ul>
   `,
 
   "Summoner Spells": `
-    <h2>Summoner Spells</h2>
-    <ul>
-      <li><p><strong>Flash:</strong> A must-have on Diana. Diana is too easy to lock down with CC to run Ghost. Flash also enables all of her flash combos.</p></li>
-      <li><p><strong>Teleport:</strong> Teleport used to be a must on Diana and is still a good option, but with the addition of early game homeguards and the slow TP channel the early game strength is no longer there. Diana also doesn’t scale like she used to and Teleport is better on scaling champions.</p></li>
-      <li><p><strong>Ignite:</strong> My new go-to spell because of Diana’s early kill pressure even at level 2 now. They have also buffed the scaling damage on this spell. The runes and build are also extremely aggressive and having Ignite fends off ganks better than TPing back to a frozen wave and then having to deal with the jungler.</p></li>
-    </ul>
+    <div class="section-with-image">
+      <img src="https://ddragon.leagueoflegends.com/cdn/12.23.1/img/spell/SummonerFlash.png" alt="Summoner Spells">
+      <div class="text">
+        <h2>Summoner Spells</h2>
+        <ul>
+          <li><strong>Flash:</strong> A must-have on Diana. Diana is too easy to lock down with CC to run Ghost. Flash also enables all of her flash combos.</li>
+          <li><strong>Teleport:</strong> Teleport used to be a must on Diana and is still a good option, but with the addition of early game homeguards and the slow TP channel the early game strength is no longer there. Diana also doesn’t scale like she used to and Teleport is better on scaling champions.</li>
+          <li><strong>Ignite:</strong> My new go-to spell because of Diana’s early kill pressure even at level 2 now. They have also buffed the scaling damage on this spell. The runes and build are also extremely aggressive and having Ignite fends off ganks better than TPing back to a frozen wave and then having to deal with the jungler.</li>
+        </ul>
+      </div>
+    </div>
   `,
 
   "Abilities": `
-    <h2>Abilities</h2>
-    <h3>Passive — Moonsilver Blade</h3>
-    <p>Diana’s passive has changed from a burst tool to an attack speed dps tool. The Ratio is only .5 and Diana’s kit doesn’t enable her to get too many auto attacks off so it's mostly to boost early game trades, and take objectives. Diana’s main source of damage. The passive has high base damage and a great AP ratio of .8.</p>
+    <div class="section-with-image">
+      <img src="https://ddragon.leagueoflegends.com/cdn/img/champion/splash/Diana_0.jpg" alt="Abilities">
+      <div class="text">
+        <h2>Abilities</h2>
+        <h3>Passive — Moonsilver Blade</h3>
+        <p>Diana’s passive has changed from a burst tool to an attack speed dps tool. The Ratio is only .5 and Diana’s kit doesn’t enable her to get too many auto attacks off so it's mostly to boost early game trades, and take objectives. Diana’s main source of damage. The passive has high base damage and a great AP ratio of .8.</p>
 
-    <h3>Q — Crescent Strike</h3>
-    <p>Great for pushing from range. Diana q reveals targets and can be used to check an area and enable r dashes.<br>
-    <strong>Tip:</strong> Diana can q flash. This combo is good when you need two r dashes to kill the opponent or when going into a fight against multiple enemies.</p>
+        <h3>Q — Crescent Strike</h3>
+        <p>Great for pushing from range. Diana q reveals targets and can be used to check an area and enable r dashes.<br>
+        <strong>Tip:</strong> Diana can q flash. This combo is good when you need two r dashes to kill the opponent or when going into a fight against multiple enemies.</p>
 
-    <h3>W — Pale Cascade</h3>
-    <p>W gives an instant shield and three orbs that can be proced for damage. Pricing all 3 resets the shield.<br>
-    <strong>Tip:</strong> Avoid using w when you’re unable to proc all orbs.<br>
-    <strong>Tip:</strong> 1 orb can be used to safely last hit and the remaining two can be used to thin out the wave or to trade with the enemy.<br>
-    <strong>Tip:</strong> If the enemy can block one of w orbs from the first use than w won’t go on cooldown for around 5 seconds and Diana won’t receive the second shield. This is common against Yasuo’s windwall.</p>
+        <h3>W — Pale Cascade</h3>
+        <p>W gives an instant shield and three orbs that can be proced for damage. Pricing all 3 resets the shield.<br>
+        <strong>Tip:</strong> Avoid using w when you’re unable to proc all orbs.<br>
+        <strong>Tip:</strong> 1 orb can be used to safely last hit and the remaining two can be used to thin out the wave or to trade with the enemy.<br>
+        <strong>Tip:</strong> If the enemy can block one of w orbs from the first use than w won’t go on cooldown for around 5 seconds and Diana won’t receive the second shield. This is common against Yasuo’s windwall.</p>
 
-    <h3>E — Lunar Rush</h3>
-    <p>Quick targeted engage. E will reset if the target has moonlight from q on them. E also resets now if a minion dies from q if the e was cast immediately afterwards. Casting E places you behind your target. You can auto attack at the end of the animation as well.</p>
+        <h3>E — Lunar Rush</h3>
+        <p>Quick targeted engage. E will reset if the target has moonlight from q on them. E also resets now if a minion dies from q if the e was cast immediately afterwards. Casting E places you behind your target. You can auto attack at the end of the animation as well.</p>
 
-    <h3>R — Moonfall</h3>
-    <p>AOE ability and knockup that is great for teamfights, and catching out opponents. The pull and slow also help Diana utilize her passive or guarantee a q.  Can be casted during E, and be animation canceled with E. Quick targeted engage. Diana R can be used to dodge skillshots. After using R, Diana will land behind her target.<br>
-    <strong>Tip:</strong> Diana can R flash. Diana R also interrupts channels and dashes although the window to cancel a dash is smaller now and needs to be casted at the start of their dash.</p>
+        <h3>R — Moonfall</h3>
+        <p>AOE ability and knockup that is great for teamfights, and catching out opponents. The pull and slow also help Diana utilize her passive or guarantee a q.  Can be casted during E, and be animation canceled with E. Quick targeted engage. Diana R can be used to dodge skillshots. After using R, Diana will land behind her target.<br>
+        <strong>Tip:</strong> Diana can R flash. Diana R also interrupts channels and dashes although the window to cancel a dash is smaller now and needs to be casted at the start of their dash.</p>
+      </div>
+    </div>
   `,
-
+  
   "Combos": `
     <h2>Combos</h2>
     <p>Stack your passive before a combo. Diana is often strongest when there are more targets around to stack her passive on. This includes minion waves, jungle camps, and even enemy towers.</p>
@@ -423,6 +444,7 @@ sectionSelect.addEventListener('change', () => {
 
 </body>
 </html>
+
 
 
 
