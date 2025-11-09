@@ -72,7 +72,7 @@ header {
 
 /* Section display */
 #section-info {
-  margin: 20px auto 40px;
+  margin: 20px auto;
   max-width: 900px;
   background: rgba(13,17,23,0.95);
   border: 1px solid #2f81f7;
@@ -80,21 +80,22 @@ header {
   border-radius: 10px;
   text-align: left;
   color: #fff;
-  min-height: 250px;
+  min-height: 200px;
   position: relative;
 }
 
 #section-info:hover { box-shadow: 0 0 15px rgba(47,129,247,0.5); }
 
 #section-info h3 {
+  position: relative;
+  margin-top: 0;
   color: #c9aa71;
-  margin: 0 0 10px 0;
   font-size: 22px;
   text-transform: capitalize;
 }
 
 #section-info p {
-  margin: 10px 0;
+  margin: 10px 0 14px;
   line-height: 1.6;
 }
 
@@ -122,26 +123,27 @@ header {
   flex-direction: column;
   align-items: flex-start;
   gap: 12px;
-  margin-top: 20px;
+  margin-top: 15px;
 }
-.rune-row {
-  display: flex;
-  flex-direction: row;
-  gap: 20px;
-  margin-top: 10px;
-}
-.rune-row div {
+.rune-info {
   display: flex;
   align-items: center;
 }
-.rune-row span { margin-left: 6px; }
+.rune-info span {
+  margin-left: 8px;
+}
+.rune-row {
+  display: flex;
+  gap: 12px;
+  margin-top: 10px;
+}
 
 /* Build & Runes Cards */
 .card-container {
   display: flex;
   flex-direction: column;
-  gap: 15px;
-  margin-top: 15px;
+  gap: 12px;
+  margin-top: 20px;
 }
 
 .card {
@@ -152,7 +154,7 @@ header {
   text-align: center;
   transition: all 0.3s;
 }
-.card strong { display: block; margin-bottom: 10px; color: #e0c77b; font-size: 18px; }
+.card strong { display: block; margin-bottom: 8px; color: #e0c77b; }
 
 /* Build flow */
 .build-flow {
@@ -237,27 +239,27 @@ sectionSelect.addEventListener('change', () => {
       <div class="rune-container">
         <div class="rune-info">
           <img src="https://ddragon.leagueoflegends.com/cdn/img/perk-images/Styles/Domination/DarkHarvest/DarkHarvest.png" class="icon">
-          <span><strong>Dark Harvest:</strong> Gain damage from low-health enemies to execute them.</span>
+          <span><strong>Dark Harvest:</strong> Scaling damage, perfect for jungle burst.</span>
         </div>
         <div class="rune-info">
           <img src="https://ddragon.leagueoflegends.com/cdn/img/perk-images/Styles/Domination/SuddenImpact/SuddenImpact.png" class="icon">
-          <span><strong>Sudden Impact:</strong> Bonus lethality/magic pen after dashes or blinks.</span>
+          <span><strong>Sudden Impact:</strong> Synergizes with Ekko's E and R for extra lethality/magic penetration.</span>
         </div>
         <div class="rune-info">
           <img src="https://ddragon.leagueoflegends.com/cdn/img/perk-images/Styles/Domination/EyeballCollection/EyeballCollection.png" class="icon">
-          <span><strong>Eyeball Collection:</strong> Gain permanent adaptive force for takedowns.</span>
+          <span><strong>Eyeball Collection:</strong> Snowball your lead by collecting champion takedowns.</span>
         </div>
         <div class="rune-info">
           <img src="https://ddragon.leagueoflegends.com/cdn/img/perk-images/Styles/Domination/TreasureHunter/TreasureHunter.png" class="icon">
-          <span><strong>Treasure Hunter:</strong> Gain gold for unique takedowns.</span>
+          <span><strong>Treasure Hunter:</strong> Extra gold on takedowns helps accelerate core item timing.</span>
         </div>
         <div class="rune-info">
           <img src="https://ddragon.leagueoflegends.com/cdn/img/perk-images/Styles/Inspiration/MagicalFootwear/MagicalFootwear.png" class="icon">
-          <span><strong>Magical Footwear:</strong> Free boots at 12 mins with bonus movement speed.</span>
+          <span><strong>Magical Footwear:</strong> Free boots for efficient pathing.</span>
         </div>
         <div class="rune-info">
           <img src="https://ddragon.leagueoflegends.com/cdn/img/perk-images/Styles/Inspiration/CosmicInsight/CosmicInsight.png" class="icon">
-          <span><strong>Cosmic Insight:</strong> Cooldown reduction on items, summoner spells, and trinkets.</span>
+          <span><strong>Cosmic Insight:</strong> Reduced cooldowns for summoner spells and items.</span>
         </div>
         <div class="rune-row">
           <div><img src="https://ddragon.leagueoflegends.com/cdn/img/perk-images/StatMods/StatModsAttackSpeedIcon.png" class="icon"><span>Attack Speed</span></div>
@@ -278,22 +280,22 @@ sectionSelect.addEventListener('change', () => {
             <span>→</span>
             <div><img src="https://ddragon.leagueoflegends.com/cdn/14.21.1/img/item/1082.png" class="icon">Dark Seal</div>
             <span>→</span>
-            <div><img src="https://ddragon.leagueoflegends.com/cdn/14.21.1/img/item/1001.png" class="icon">Boots</div>
+            <div><img src="https://ddragon.leagueoflegends.com/cdn/14.21.1/img/item/1052.png" class="icon">Amp Tome</div>
           </div>
         </div>
         <div class="card"><strong>Core items</strong>
           <div class="build-flow">
             <div><img src="https://ddragon.leagueoflegends.com/cdn/14.21.1/img/item/3115.png" class="icon">Nashor's Tooth</div>
             <span>→</span>
-            <div><img src="https://ddragon.leagueoflegends.com/cdn/14.21.1/img/item/3089.png" class="icon">Rabadon's Deathcap</div>
+            <div><img src="https://ddragon.leagueoflegends.com/cdn/14.21.1/img/item/3009.png" class="icon">Mercury Treads</div>
             <span>→</span>
-            <div><img src="https://ddragon.leagueoflegends.com/cdn/14.21.1/img/item/3001.png" class="icon">Mercury Treads</div>
+            <div><img src="https://ddragon.leagueoflegends.com/cdn/14.21.1/img/item/3100.png" class="icon">Lich Bane</div>
+            <span>→</span>
+            <div><img src="https://ddragon.leagueoflegends.com/cdn/14.21.1/img/item/3089.png" class="icon">Rabadon's Deathcap</div>
           </div>
         </div>
         <div class="card"><strong>Final items</strong>
           <div class="build-flow">
-            <div><img src="https://ddragon.leagueoflegends.com/cdn/14.21.1/img/item/3100.png" class="icon">Lich Bane</div>
-            <span>→</span>
             <div><img src="https://ddragon.leagueoflegends.com/cdn/14.21.1/img/item/3157.png" class="icon">Zhonya's Hourglass</div>
             <span>→</span>
             <div><img src="https://ddragon.leagueoflegends.com/cdn/14.21.1/img/item/3135.png" class="icon">Void Staff</div>
@@ -309,17 +311,17 @@ sectionSelect.addEventListener('change', () => {
     content = `
       ${header}
       <p><img src="https://ddragon.leagueoflegends.com/cdn/14.21.1/img/spell/SummonerFlash.png" class="icon"><strong>Flash:</strong> Essential for outplays and mobility.</p>
-      <p><img src="https://ddragon.leagueoflegends.com/cdn/14.21.1/img/spell/SummonerSmite.png" class="icon"><strong>Smite:</strong> Must-have for jungle clears, objective control, and Ekko combos with blue smite.</p>
+      <p><img src="https://ddragon.leagueoflegends.com/cdn/14.21.1/img/spell/SummonerSmite.png" class="icon"><strong>Smite:</strong> Must‑have for jungle clears, objective control, and Ekko combos with blue smite.</p>
     `;
   }
 
   if(value === "Abilities"){
     content = `
       ${header}
-      <p><img src="https://ddragon.leagueoflegends.com/cdn/14.21.1/img/passive/Ekko_P.png" class="icon"><strong>Passive – Z-Drive Resonance:</strong> Every 3rd hit deals bonus magic damage and grants movement speed.</p>
+      <p><img src="https://ddragon.leagueoflegends.com/cdn/14.21.1/img/passive/Ekko_P.png" class="icon"><strong>Passive – Z‑Drive Resonance:</strong> Every 3rd hit deals bonus magic damage and grants movespeed.</p>
       <p><img src="https://ddragon.leagueoflegends.com/cdn/14.21.1/img/spell/EkkoQ.png" class="icon"><strong>Q – Timewinder:</strong> Main poke and clear tool.</p>
       <p><img src="https://ddragon.leagueoflegends.com/cdn/14.21.1/img/spell/EkkoW.png" class="icon"><strong>W – Parallel Convergence:</strong> Shield & stun zone.</p>
-      <p><img src="https://ddragon.leagueoflegends.com/cdn/14.21.1/img/spell/EkkoE.png" class="icon"><strong>E – Phase Dive:</strong> Mobility + auto-reset.</p>
+      <p><img src="https://ddragon.leagueoflegends.com/cdn/14.21.1/img/spell/EkkoE.png" class="icon"><strong>E – Phase Dive:</strong> Mobility + auto‑reset.</p>
       <p><img src="https://ddragon.leagueoflegends.com/cdn/14.21.1/img/spell/EkkoR.png" class="icon"><strong>R – Chronobreak:</strong> Rewind time, heal, burst.</p>
     `;
   }
@@ -338,38 +340,44 @@ sectionSelect.addEventListener('change', () => {
   if(value === "Level 1"){
     content = `
       ${header}
-      <p>Blue side: Ward tri bush, move mid, throw W toward pixel brush. Use W on starting camp at 1:27.</p>
-      <p>Red side: Mirror path; tri bush ward less critical.</p>
+      <p>Blue side: Start Blue Buff → Gromp → Wolves → Raptors → Red Buff. Ward tri bush, move mid if possible.</p>
+      <p>Red side: Start Red Buff → Krugs → Wolves → Raptors → Blue Buff. Adjust jungle path as needed.</p>
     `;
   }
 
   if(value === "Pathing"){
     content = `
       ${header}
-      <p><strong>First clear:</strong> Scuttle Crab → Blue Buff → Red Buff → Raptors → Murk Wolves → Krugs → Gromp</p>
-      <p><strong>Second clear / gank transition:</strong> Scuttle Crab → Red Buff → Murk Wolves → Krugs → Blue Buff → Gromp</p>
-      <p>Preferred jungle camps: Blue Buff, Red Buff, Raptors, Murk Wolves, Krugs, Gromp, Scuttle Crab for vision and control.</p>
+      <p><strong>Recommended full jungle path:</strong></p>
+      <ul>
+        <li>Start at your bot side buff (Blue or Red depending on side)</li>
+        <li>Clear Krugs / Gromp → Wolves → Raptors</li>
+        <li>Take opposite buff</li>
+        <li>Look for early gank mid or top if safe</li>
+        <li>Secure scuttle crab and continue jungle rotations based on enemy positioning</li>
+      </ul>
+      <p>Always prioritize vision, objectives, and opportunistic ganks.</p>
     `;
   }
 
   if(value === "Hardest matchups"){
     content = `
       ${header}
-      <p>Champions with high mobility and burst like Nidalee, Kha’Zix, and Lee Sin are difficult. They can punish early ult usage and force Ekko to play cautiously. Avoid extended fights without vision and communicate with lanes for counter-ganks.</p>
+      <p>Champions like Nidalee, Kha’Zix, and Lee Sin can heavily punish Ekko early. High mobility and burst can force your ult usage and invade your jungle.</p>
     `;
   }
 
   if(value === "Team fighting"){
     content = `
       ${header}
-      <p>Focus passive procs on multiple targets. Land W on high-priority enemies for AoE stun. Use R strategically to escape or re-engage. E-Q combos allow for quick assassination of squishy targets while staying safe.</p>
+      <p>Use W on priority targets and zone. Focus passive procs on multiple targets. Delay R for maximum healing/damage. Use mobility to dodge critical spells and reposition effectively. Always target squishy carries when possible.</p>
     `;
   }
 
   if(value === "Closing out the game"){
     content = `
       ${header}
-      <p>Prioritize objectives like Baron and Elder Dragon. Use W and passive to zone enemies while pushing waves. Avoid overextending alone. After core items, ensure survival and coordinate with team to secure wins efficiently.</p>
+      <p>Prioritize Baron and Elder control. Use W, passive, and Q to zone enemies and control waves. Avoid deep farming; focus on objectives and vision. After finishing core items, protect yourself and team while securing the win.</p>
     `;
   }
 
@@ -380,9 +388,9 @@ sectionSelect.addEventListener('change', () => {
 </body>
 </html>
 
- 
 
  
+
 
 
 
