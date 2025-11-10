@@ -162,34 +162,27 @@ footer a:hover {
 
 <script>
 function cancelSubscription() {
-  // Grab the logged-in user's email from localStorage
   const email = localStorage.getItem('lolfundamentals_email') || 'unknown';
-
-  // Get confirmation message and button
   const confirmMsg = document.getElementById('confirmMessage');
   const button = document.querySelector('.cancel-btn');
 
-  // Create hidden form for POST
   const form = document.createElement('form');
   form.method = 'POST';
   form.action = 'https://script.google.com/macros/s/AKfycbyGanpj6hUdAczjz7l9xutZ5q_Hvwi-Xqf_tLQIlp1o-LxY_jNjiL1rNS7Y00Iau3I-/exec';
   form.target = 'hidden_iframe';
 
-  // Email
   const inputEmail = document.createElement('input');
   inputEmail.type = 'hidden';
   inputEmail.name = 'email';
   inputEmail.value = email;
   form.appendChild(inputEmail);
 
-  // Notes
   const inputNotes = document.createElement('input');
   inputNotes.type = 'hidden';
   inputNotes.name = 'notes';
   inputNotes.value = 'User requested cancellation';
   form.appendChild(inputNotes);
 
-  // Reason (optional)
   const reasonTextarea = document.getElementById('cancelReason');
   const inputReason = document.createElement('input');
   inputReason.type = 'hidden';
@@ -199,7 +192,6 @@ function cancelSubscription() {
 
   document.body.appendChild(form);
 
-  // Hidden iframe
   let iframe = document.getElementById('hidden_iframe');
   if (!iframe) {
     iframe = document.createElement('iframe');
@@ -209,10 +201,8 @@ function cancelSubscription() {
     document.body.appendChild(iframe);
   }
 
-  // Submit form
   form.submit();
 
-  // Show confirmation message and hide button
   button.style.display = 'none';
   confirmMsg.style.display = 'block';
 }
@@ -220,7 +210,6 @@ function cancelSubscription() {
 
 </body>
 </html>
-
 
 
 
