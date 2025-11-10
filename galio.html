@@ -59,10 +59,10 @@
   <div class="matchup-right">
     <h2>Matchup Notes</h2>
     <ul>
-      <li>Look for as many q's as possible lvl 1 before he levels up w and has the magic shield. He'll naturally push the wave back with his q and passive. Avoid his passive at all costs, especially level 1. </li>
-      <li>Position close but away from the ranged creeps since that's where he wants to throw his q. </li>
+      <li>Look for as many q's as possible lvl 1 before he levels up w and has the magic shield. He'll naturally push the wave back with his q and passive. Avoid his passive at all costs, especially level 1.</li>
+      <li>Position close but away from the ranged creeps since that's where he wants to throw his q.</li>
       <li>Your ability to kill him depends a lot on whether or not they took aftershock.</li>
-      <li> If he goes for an e trade you almost always want to look for a long return trade. Just make sure the jungler isn't around. Since Galio naturally pushes you don't have to worry about him freezing the wave and can be patient waiting at tower for the wave instead of setting yourself up to be ganked.</li>
+      <li>If he goes for an e trade you almost always want to look for a long return trade. Just make sure the jungler isn't around. Since Galio naturally pushes you don't have to worry about him freezing the wave and can be patient waiting at tower for the wave instead of setting yourself up to be ganked.</li>
     </ul>
   </div>
 </div>
@@ -70,19 +70,16 @@
 <footer>© 2025 LoL Fundamentals · Contact: arcsecond@lolfundamentals.com</footer>
 
 <script>
-// Enforce same login protection as brand page
-(function() {
-  const sessionKey = sessionStorage.getItem('lolfundamentals_session');
-  const token = localStorage.getItem('lolfundamentals_token');
-
-  if (!sessionKey || !token) {
-    alert('You must be logged in to access this page.');
-    window.location.href = 'login.html';
-  }
-})();
+// Match brand login protection exactly
+if (localStorage.getItem('lolfundamentals_logged_in') !== 'true') {
+  alert('You must be logged in to view this page.');
+  window.location.href = 'login.html';
+}
 </script>
 </body>
 </html>
+
+
 
 
 
