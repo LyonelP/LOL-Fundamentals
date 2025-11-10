@@ -36,7 +36,9 @@ if (localStorage.getItem('lolfundamentals_logged_in') !== 'true') {
   .matchup-container { display: flex; max-width: 900px; margin: -15px auto 0 auto; gap: 15px; padding: 0 20px 10px 20px; }
   .matchup-left { display: flex; align-items: center; gap: 10px; flex: 0 0 auto; }
   .matchup-left img { width: 80px; height: 80px; border-radius: 8px; }
-  .winrate-bubble { background: #16a34a; color: #0d1117; font-weight: bold; padding: 8px 14px; border-radius: 25px; font-size: 16px; white-space: nowrap; }
+
+  /* Winrate bubble updated to green like Gragas */
+  .winrate-bubble { background: #86efac; color: #0d1117; font-weight: bold; padding: 8px 14px; border-radius: 25px; font-size: 16px; white-space: nowrap; }
 
   .matchup-right { flex: 1; color: #e6edf3; display: flex; flex-direction: column; justify-content: flex-start; margin-top: 0px; }
   .matchup-right h2 { margin: 0 0 15px 0; font-size: 22px; }
@@ -67,10 +69,9 @@ if (localStorage.getItem('lolfundamentals_logged_in') !== 'true') {
   <div class="matchup-right">
     <h2>Matchup Notes</h2>
     <ul>
-      <li>Stand by the ranged creeps to always take reduced q damage if hit, and for him to push the wave. 
-</li>
-      <li>Karthus is extremely vulnerable to all ins and jungle ganks.</li>
-      <li>Remember he can cast spells again when oom, once he dies.</li>
+      <li>Stand by the ranged creeps to always take reduced Q damage if hit, and for him to push the wave.</li>
+      <li>Karthus is extremely vulnerable to all-ins and jungle ganks.</li>
+      <li>Remember he can cast spells again when OOM, once he dies.</li>
     </ul>
   </div>
 </div>
@@ -78,6 +79,8 @@ if (localStorage.getItem('lolfundamentals_logged_in') !== 'true') {
 <footer>© 2025 LoL Fundamentals · Contact: arcsecond@lolfundamentals.com</footer>
 </body>
 </html>
+
+
 
 
 
