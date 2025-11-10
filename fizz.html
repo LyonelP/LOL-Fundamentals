@@ -3,12 +3,20 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Diana Mid vs Fizz</title>
+<title>Diana Mid vs Aurelion Sol</title>
+
+<!-- Early redirect before rendering -->
+<script>
+  if (localStorage.getItem('lolfundamentals_logged_in') !== 'true') {
+    window.location.replace('login.html');
+  }
+</script>
+
 <style>
   body { margin: 0; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; background: #0d1117; color: #e6edf3; line-height: 1.4; }
   header { background: #161b22; padding: 10px 20px; text-align: center; font-size: 28px; font-weight: bold; color: #58a6ff; }
 
-  /* Gold Back Button */
+  /* Gold bubble for Back to Matchup Hub */
   .back-link {
     display: inline-flex;
     align-items: center;
@@ -20,14 +28,18 @@
     padding: 10px 20px;
     border-radius: 25px;
     border: 1px solid #c9aa71;
-    margin: 20px auto 30px auto;
   }
-  .back-link:hover { background: #e6c17c; color: #0d1117; }
+  .back-link:hover {
+    background: #e6c17c;
+    color: #0d1117;
+  }
 
   .matchup-container { display: flex; max-width: 900px; margin: -15px auto 0 auto; gap: 15px; padding: 0 20px 10px 20px; }
   .matchup-left { display: flex; align-items: center; gap: 10px; flex: 0 0 auto; }
   .matchup-left img { width: 80px; height: 80px; border-radius: 8px; }
-  .winrate-bubble { background: #4ade80; color: #0d1117; font-weight: bold; padding: 8px 14px; border-radius: 25px; font-size: 16px; white-space: nowrap; }
+
+  /* Winrate bubble */
+  .winrate-bubble { background: #86efac; color: #0d1117; font-weight: bold; padding: 8px 14px; border-radius: 25px; font-size: 16px; white-space: nowrap; }
 
   .matchup-right { flex: 1; color: #e6edf3; display: flex; flex-direction: column; justify-content: flex-start; margin-top: 0px; }
   .matchup-right h2 { margin: 0 0 15px 0; font-size: 22px; }
@@ -44,41 +56,33 @@
 </style>
 </head>
 <body>
-<header>Diana Mid Matchup – Fizz</header>
+<header>Diana Mid Matchup – Aurelion Sol</header>
 
-<!-- Centered Gold Back Button -->
-<div style="text-align: center;">
-  <a href="matchuphub.html" class="back-link">&larr; Back to Matchup Hub</a>
+<!-- Centered Back Button -->
+<div style="text-align: center; margin: 20px 0 30px 0;">
+  <a href="matchuphub.html" id="backLink" class="back-link">&larr; Back to Matchup Hub</a>
 </div>
 
 <div class="matchup-container">
   <div class="matchup-left">
-    <img src="https://ddragon.leagueoflegends.com/cdn/14.23.1/img/champion/Fizz.png" alt="Fizz">
+    <img src="https://ddragon.leagueoflegends.com/cdn/14.23.1/img/champion/AurelionSol.png" alt="Aurelion Sol">
     <div class="winrate-bubble">53%</div>
   </div>
   <div class="matchup-right">
     <h2>Matchup Notes</h2>
     <ul>
-      <li>Fizz has high mobility and burst; avoid trading after he uses Playful/Trickster.</li>
-      <li>All-ins are strong post-level 6 if his ultimate is down.</li>
-      <li>Wave control is important to prevent him from roaming effectively.</li>
-      <li>Use vision in river and jungle entrances to avoid surprise engages.</li>
-      <li>Try to bait him into committing with Q + W before engaging fully.</li>
-      <li>Focus on dodging skill shots and punishing cooldowns for safe trades.</li>
+      <li>Aurelion Sol has strong waveclear and roaming potential; avoid extended trades.</li>
+      <li>Look for engages when his stars are on cooldown for safer trades.</li>
+      <li>Post-level 6, dodge his roaming Ult to prevent giving up kills elsewhere.</li>
+      <li>Control vision in side lanes to track his movements effectively.</li>
+      <li>Use Diana's burst to punish his squishier early game moments.</li>
     </ul>
   </div>
 </div>
 
 <footer>© 2025 LoL Fundamentals · Contact: arcsecond@lolfundamentals.com</footer>
-
-<script>
-// Require login to view page
-if (localStorage.getItem('lolfundamentals_logged_in') !== 'true') {
-  alert('You must be logged in to view this page.');
-  window.location.href = 'login.html';
-}
-</script>
 </body>
 </html>
+
 
 
