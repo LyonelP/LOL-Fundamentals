@@ -72,13 +72,19 @@
 <footer>© 2025 LoL Fundamentals · Contact: arcsecond@lolfundamentals.com</footer>
 
 <script>
-// Require login to view page
-if (localStorage.getItem('lolfundamentals_logged_in') !== 'true') {
-  alert('You must be logged in to view this page.');
-  window.location.href = 'login.html';
-}
+// Enforce same login protection as brand page
+(function() {
+  const sessionKey = sessionStorage.getItem('lolfundamentals_session');
+  const token = localStorage.getItem('lolfundamentals_token');
+
+  if (!sessionKey || !token) {
+    alert('You must be logged in to access this page.');
+    window.location.href = 'login.html';
+  }
+})();
 </script>
 </body>
 </html>
+
 
 
