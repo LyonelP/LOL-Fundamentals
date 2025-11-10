@@ -158,7 +158,7 @@ function cancelSubscription() {
   confirmMsg.style.display = 'none';
   errorMsg.style.display = 'none';
 
-  fetch('https://script.google.com/macros/s/AKfycbxLjrGnC25JD2g26ImeS4DinPqcgvhZLIar45ZBOBjhcP-uwOI7JWR24wgXVZGx-GzU/exec', {
+  fetch('https://script.google.com/macros/s/AKfycbyGanpj6hUdAczjz7l9xutZ5q_Hvwi-Xqf_tLQIlp1o-LxY_jNjiL1rNS7Y00Iau3I-/exec', {
     method: 'POST',
     body: JSON.stringify({ email: email, notes: "User requested cancellation" }),
     headers: { 'Content-Type': 'application/json' }
@@ -182,7 +182,6 @@ function cancelSubscription() {
 
 </body>
 </html>
-
 
 
 
