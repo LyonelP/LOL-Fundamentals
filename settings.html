@@ -8,15 +8,26 @@
 body {
   margin: 0;
   font-family: 'Beaufort for LOL', Arial, Helvetica, sans-serif;
-  background: linear-gradient(180deg, #0d1117 0%, #161b22 100%);
+  background: url('https://ddragon.leagueoflegends.com/cdn/img/champion/splash/Diana_0.jpg') no-repeat center center fixed;
+  background-size: cover;
   color: #e6edf3;
   text-align: center;
   overflow-x: hidden;
 }
 
+/* Overlay for readability */
+body::before {
+  content: "";
+  position: fixed;
+  top: 0; left: 0;
+  width: 100%; height: 100%;
+  background: rgba(10,15,20,0.75);
+  z-index: -1;
+}
+
 /* Header */
 header {
-  background: rgba(13,17,23,0.95);
+  background: rgba(13,17,23,0.9);
   border-bottom: 2px solid #c9aa71;
   padding: 20px 10px;
   font-weight: bold;
@@ -29,7 +40,7 @@ header {
 /* Back button */
 .back-button {
   display: inline-block;
-  margin: 30px auto 20px;
+  margin: 25px auto 40px;
   padding: 10px 20px;
   background: linear-gradient(135deg, #c9aa71, #e0c77b);
   color: #000;
@@ -45,74 +56,108 @@ header {
   box-shadow: 0 0 15px rgba(255,215,0,0.8);
 }
 
-/* Settings Container */
+/* Settings container */
 .settings-container {
-  margin: 50px auto;
   max-width: 600px;
+  margin: 0 auto 60px;
   background: rgba(13,17,23,0.95);
   border: 1px solid #2f81f7;
-  padding: 40px;
   border-radius: 12px;
-  text-align: center;
+  padding: 40px 25px;
   box-shadow: 0 0 15px rgba(47,129,247,0.3);
+  text-align: center;
 }
 
 .settings-container h2 {
   color: #c9aa71;
   margin-bottom: 20px;
-  text-transform: uppercase;
-  letter-spacing: 1px;
+}
+
+.settings-container p {
+  color: #e6edf3;
+  margin-bottom: 30px;
+  font-size: 16px;
+  line-height: 1.5;
 }
 
 /* Cancel button */
-.cancel-button {
+.cancel-btn {
   display: inline-block;
-  padding: 12px 25px;
-  background: linear-gradient(135deg, #8b0000, #b22222);
+  padding: 14px 30px;
+  background: #f94144;
   color: #fff;
-  text-decoration: none;
-  font-weight: bold;
+  border: none;
   border-radius: 8px;
-  transition: all 0.3s;
-  box-shadow: 0 0 10px rgba(178,34,34,0.5);
-}
-.cancel-button:hover {
-  background: linear-gradient(135deg, #a00000, #d62d2d);
-  box-shadow: 0 0 15px rgba(255,80,80,0.8);
-}
-
-/* Thank you / sorry message */
-.message {
-  margin-top: 25px;
-  color: #e6edf3;
+  font-weight: bold;
   font-size: 16px;
-  opacity: 0.85;
+  cursor: pointer;
+  transition: all 0.3s;
+  box-shadow: 0 0 10px rgba(249,65,68,0.4);
+}
+.cancel-btn:hover {
+  background: #ff5959;
+  box-shadow: 0 0 18px rgba(255,90,90,0.6);
+  transform: translateY(-2px);
 }
 
-@media (max-width: 600px) {
-  .settings-container {
-    padding: 25px;
-    margin: 30px 15px;
-  }
-  .cancel-button {
-    padding: 10px 20px;
-  }
+/* Confirmation message */
+#confirmMessage {
+  display: none;
+  color: #c9aa71;
+  margin-top: 25px;
+  font-size: 17px;
+  font-weight: bold;
+}
+
+/* Footer */
+footer {
+  text-align: center;
+  padding: 30px;
+  color: #8b949e;
+  font-size: 14px;
+  background: #0a0f14;
+  border-top: 1px solid #1f2937;
+}
+footer a {
+  color: #c9aa71;
+  text-decoration: none;
+}
+footer a:hover {
+  text-decoration: underline;
 }
 </style>
 </head>
 <body>
 
-<header>Account Settings</header>
+<header>Settings</header>
 <a href="membershub.html" class="back-button">Back to Members Hub</a>
 
 <div class="settings-container">
   <h2>Manage Subscription</h2>
-  <a href="mailto:support@lolfundamentals.com?subject=Cancel%20My%20Subscription" class="cancel-button">Cancel Subscription</a>
-  <p class="message">We’re sorry to see you go, and thank you for supporting LoL Fundamentals!</p>
+  <p>If you wish to cancel your subscription, you can do so below. This action will stop future payments but you’ll retain access until your current billing cycle ends.</p>
+
+  <button class="cancel-btn" onclick="cancelSubscription()">Cancel Subscription</button>
+  <div id="confirmMessage">Your cancellation request has been received.</div>
 </div>
+
+<footer>
+© 2025 LoL Fundamentals · Contact:
+<a href="mailto:arcsecond@lolfundamentals.com">arcsecond@lolfundamentals.com</a>
+</footer>
+
+<script>
+function cancelSubscription() {
+  // In production, you’d connect this to Stripe’s customer portal or your backend.
+  document.querySelector('.cancel-btn').style.display = 'none';
+  document.getElementById('confirmMessage').style.display = 'block';
+  // Optionally redirect to Stripe customer portal:
+  // window.location.href = 'https://billing.stripe.com/p/login/your-portal-link';
+}
+</script>
 
 </body>
 </html>
+
 
 
 
