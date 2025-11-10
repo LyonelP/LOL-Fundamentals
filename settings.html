@@ -100,15 +100,14 @@ header {
   transform: translateY(-2px);
 }
 
-/* Confirmation / Error messages */
-#confirmMessage, #errorMessage {
+/* Confirmation message */
+#confirmMessage {
   display: none;
+  color: #c9aa71;
   margin-top: 25px;
   font-size: 17px;
   font-weight: bold;
 }
-#confirmMessage { color: #c9aa71; }
-#errorMessage { color: #f94144; }
 
 /* Footer */
 footer {
@@ -138,8 +137,7 @@ footer a:hover {
   <p>If you wish to cancel your subscription, you can do so below. This action will stop future payments but you’ll retain access until your current billing cycle ends.</p>
 
   <button class="cancel-btn" onclick="cancelSubscription()">Cancel Subscription</button>
-  <div id="confirmMessage">Your cancellation request has been received. Thank you for being part of LoL Fundamentals.</div>
-  <div id="errorMessage">Error sending cancellation request. Please try again.</div>
+  <div id="confirmMessage">Your cancellation request has been received. Thank you for being part of LoL Fundamentals!</div>
 </div>
 
 <footer>
@@ -149,39 +147,17 @@ footer a:hover {
 
 <script>
 function cancelSubscription() {
-  const email = localStorage.getItem('lolfundamentals_email') || 'unknown';
-  const button = document.querySelector('.cancel-btn');
-  const confirmMsg = document.getElementById('confirmMessage');
-  const errorMsg = document.getElementById('errorMessage');
+  const email = encodeURIComponent(localStorage.getItem('lolfundamentals_email') || 'unknown');
+  const notes = encodeURIComponent("User requested cancellation");
 
-  // Hide messages first
-  confirmMsg.style.display = 'none';
-  errorMsg.style.display = 'none';
-
-  fetch('https://script.google.com/macros/s/AKfycbyGanpj6hUdAczjz7l9xutZ5q_Hvwi-Xqf_tLQIlp1o-LxY_jNjiL1rNS7Y00Iau3I-/exec', {
-    method: 'POST',
-    body: JSON.stringify({ email: email, notes: "User requested cancellation" }),
-    headers: { 'Content-Type': 'application/json' }
-  })
-  .then(response => response.json())
-  .then(data => {
-    if (data.status === 'success') {
-      button.style.display = 'none';
-      confirmMsg.style.display = 'block';
-    } else {
-      errorMsg.style.display = 'block';
-      console.error('Apps Script response error:', data);
-    }
-  })
-  .catch(err => {
-    errorMsg.style.display = 'block';
-    console.error('Network or CORS error:', err);
-  });
+  // Redirect to Apps Script to log the cancellation
+  window.location.href = `YOUR_WEB_APP_URL?email=${email}&notes=${notes}`;
 }
 </script>
 
 </body>
 </html>
+
 
 
 
