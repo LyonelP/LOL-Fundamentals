@@ -100,14 +100,15 @@ header {
   transform: translateY(-2px);
 }
 
-/* Confirmation message */
-#confirmMessage {
+/* Confirmation / Error messages */
+#confirmMessage, #errorMessage {
   display: none;
-  color: #c9aa71;
   margin-top: 25px;
   font-size: 17px;
   font-weight: bold;
 }
+#confirmMessage { color: #c9aa71; }
+#errorMessage { color: #f94144; }
 
 /* Footer */
 footer {
@@ -138,6 +139,7 @@ footer a:hover {
 
   <button class="cancel-btn" onclick="cancelSubscription()">Cancel Subscription</button>
   <div id="confirmMessage">Your cancellation request has been received. Thank you for being part of LoL Fundamentals.</div>
+  <div id="errorMessage">Error sending cancellation request. Please try again.</div>
 </div>
 
 <footer>
@@ -147,10 +149,15 @@ footer a:hover {
 
 <script>
 function cancelSubscription() {
-  // Get the logged-in user's email from localStorage
   const email = localStorage.getItem('lolfundamentals_email') || 'unknown';
+  const button = document.querySelector('.cancel-btn');
+  const confirmMsg = document.getElementById('confirmMessage');
+  const errorMsg = document.getElementById('errorMessage');
 
-  // Send to Google Sheet via Apps Script
+  // Hide messages first
+  confirmMsg.style.display = 'none';
+  errorMsg.style.display = 'none';
+
   fetch('https://script.google.com/macros/s/AKfycbxLjrGnC25JD2g26ImeS4DinPqcgvhZLIar45ZBOBjhcP-uwOI7JWR24wgXVZGx-GzU/exec', {
     method: 'POST',
     body: JSON.stringify({ email: email, notes: "User requested cancellation" }),
@@ -158,18 +165,24 @@ function cancelSubscription() {
   })
   .then(response => response.json())
   .then(data => {
-    document.querySelector('.cancel-btn').style.display = 'none';
-    document.getElementById('confirmMessage').style.display = 'block';
+    if (data.status === 'success') {
+      button.style.display = 'none';
+      confirmMsg.style.display = 'block';
+    } else {
+      errorMsg.style.display = 'block';
+      console.error('Apps Script response error:', data);
+    }
   })
   .catch(err => {
-    alert('Error sending cancellation request. Please try again.');
-    console.error(err);
+    errorMsg.style.display = 'block';
+    console.error('Network or CORS error:', err);
   });
 }
 </script>
 
 </body>
 </html>
+
 
 
 
