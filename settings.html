@@ -8,21 +8,10 @@
 body {
   margin: 0;
   font-family: 'Beaufort for LOL', Arial, Helvetica, sans-serif;
-  background: url('https://ddragon.leagueoflegends.com/cdn/img/champion/splash/Diana_0.jpg') no-repeat center center fixed;
-  background-size: cover;
+  background: linear-gradient(180deg, #0a0f14 0%, #161b22 100%);
   color: #e6edf3;
   text-align: center;
   overflow-x: hidden;
-}
-
-/* Overlay for readability */
-body::before {
-  content: "";
-  position: fixed;
-  top: 0; left: 0;
-  width: 100%; height: 100%;
-  background: rgba(10,15,20,0.75);
-  z-index: -1;
 }
 
 /* Header */
@@ -137,7 +126,7 @@ footer a:hover {
   <p>If you wish to cancel your subscription, you can do so below. This action will stop future payments but you’ll retain access until your current billing cycle ends.</p>
 
   <button class="cancel-btn" onclick="cancelSubscription()">Cancel Subscription</button>
-  <div id="confirmMessage">Your cancellation request has been received.</div>
+  <div id="confirmMessage">Your cancellation request has been received. Thank you for being part of LoL Fundamentals.</div>
 </div>
 
 <footer>
@@ -147,16 +136,28 @@ footer a:hover {
 
 <script>
 function cancelSubscription() {
-  // In production, you’d connect this to Stripe’s customer portal or your backend.
-  document.querySelector('.cancel-btn').style.display = 'none';
-  document.getElementById('confirmMessage').style.display = 'block';
-  // Optionally redirect to Stripe customer portal:
-  // window.location.href = 'https://billing.stripe.com/p/login/your-portal-link';
+  const email = localStorage.getItem('lolfundamentals_email') || 'unknown';
+
+  fetch('https://script.google.com/macros/s/AKfycbxLjrGnC25JD2g26ImeS4DinPqcgvhZLIar45ZBOBjhcP-uwOI7JWR24wgXVZGx-GzU/exec', {
+    method: 'POST',
+    body: JSON.stringify({ email: email, notes: "User requested cancellation" }),
+    headers: { 'Content-Type': 'application/json' }
+  })
+  .then(response => response.json())
+  .then(data => {
+    document.querySelector('.cancel-btn').style.display = 'none';
+    document.getElementById('confirmMessage').style.display = 'block';
+  })
+  .catch(err => {
+    alert('Error sending cancellation request.');
+    console.error(err);
+  });
 }
 </script>
 
 </body>
 </html>
+
 
 
 
