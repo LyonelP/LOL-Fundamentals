@@ -5,7 +5,14 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Diana Mid vs Galio</title>
 <style>
-  body { margin: 0; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; background: #0d1117; color: #e6edf3; line-height: 1.4; }
+  body { 
+    margin: 0; 
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; 
+    background: #0d1117; 
+    color: #e6edf3; 
+    line-height: 1.4; 
+    display: none; /* Prevent content flash */
+  }
   header { background: #161b22; padding: 10px 20px; text-align: center; font-size: 28px; font-weight: bold; color: #58a6ff; }
 
   /* Gold Back Button */
@@ -13,7 +20,7 @@
     display: inline-flex;
     align-items: center;
     justify-content: center;
-    background: #c9aa71; /* gold */
+    background: #c9aa71;
     color: #0d1117;
     font-weight: bold;
     text-decoration: none;
@@ -70,14 +77,18 @@
 <footer>© 2025 LoL Fundamentals · Contact: arcsecond@lolfundamentals.com</footer>
 
 <script>
-// Match brand login protection exactly
-if (localStorage.getItem('lolfundamentals_logged_in') !== 'true') {
-  alert('You must be logged in to view this page.');
-  window.location.href = 'login.html';
-}
+// Match Brand login requirement — prevent content flash
+document.addEventListener('DOMContentLoaded', () => {
+  if (localStorage.getItem('lolfundamentals_logged_in') === 'true') {
+    document.body.style.display = 'block';
+  } else {
+    window.location.replace('login.html');
+  }
+});
 </script>
 </body>
 </html>
+
 
 
 
