@@ -4,6 +4,14 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Diana Mid vs Fizz</title>
+
+<!-- Prevent page flash before login check -->
+<script>
+  if (localStorage.getItem('lolfundamentals_logged_in') !== 'true') {
+    window.location.replace('login.html');
+  }
+</script>
+
 <style>
   body { margin: 0; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; background: #0d1117; color: #e6edf3; line-height: 1.4; }
   header { background: #161b22; padding: 10px 20px; text-align: center; font-size: 28px; font-weight: bold; color: #58a6ff; }
@@ -59,24 +67,15 @@
   <div class="matchup-right">
     <h2>Matchup Notes</h2>
     <ul>
-      <li>Fizz wins the level 1 trade if he can E your first Q. The qQhas to be thrown at max range to avoid this. He can also win the matchup if he gets the push and hits lvl 2 first. 
-</li>
-      <li>Fizz has to rely on jungle ganks to turn the matchup. One thing to be careful in this matchup is pushing for plates since his q ult on the wave will win him the trade if he can chase you down the entire lane.</li>
-      <li>Watch out for Fizz’s Q onto a minion into R combo especially when he's coming off of a reset.</li>
-      <li>Once you have Hourglass and Banshees Veil there's very little Fizz can do against you.</li>
+      <li>Fizz wins the level 1 trade if he can E your first Q. The Q has to be thrown at max range to avoid this. He can also win the matchup if he gets the push and hits level 2 first.</li>
+      <li>Fizz has to rely on jungle ganks to turn the matchup. Be careful when pushing for plates since his Q + R on the wave will win him the trade if he can chase you down the entire lane.</li>
+      <li>Watch out for Fizz’s Q onto a minion into R combo, especially when he's coming off a reset.</li>
+      <li>Once you have Hourglass and Banshee’s Veil, there’s very little Fizz can do against you.</li>
     </ul>
   </div>
 </div>
 
 <footer>© 2025 LoL Fundamentals · Contact: arcsecond@lolfundamentals.com</footer>
-
-<script>
-// Require login to view page
-if (localStorage.getItem('lolfundamentals_logged_in') !== 'true') {
-  alert('You must be logged in to view this page.');
-  window.location.href = 'login.html';
-}
-</script>
 </body>
 </html>
 
