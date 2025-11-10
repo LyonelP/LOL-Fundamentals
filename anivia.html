@@ -4,6 +4,14 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Diana Mid vs Anivia</title>
+
+<!-- Early redirect before rendering -->
+<script>
+  if (localStorage.getItem('lolfundamentals_logged_in') !== 'true') {
+    window.location.replace('login.html');
+  }
+</script>
+
 <style>
   body { margin: 0; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; background: #0d1117; color: #e6edf3; line-height: 1.4; }
   
@@ -61,7 +69,7 @@
 
 <!-- Centered Back Button -->
 <div style="text-align: center; margin: 20px 0 30px 0;">
-  <a href="matchuphub.html" id="backLink" class="back-link">&larr; Back to Matchup Hub</a>
+  <a href="matchuphub.html" class="back-link">&larr; Back to Matchup Hub</a>
 </div>
 
 <div class="matchup-container">
@@ -72,29 +80,18 @@
   <div class="matchup-right">
     <h2>Matchup Notes</h2>
     <ul>
-      <li>Bait out Anivias Q’s Level 1 by moving up the minion wave as if you were going for an auto but then move towards the side that Anvia is throwing it from for an easy dodge. </li>
-      <li>After baiting out the q think out the wave so can’t look for auto attack.She has a low base health so the minion aggro she takes from autoing will hurt.</li>
-      <li>Even with your sustain damage from passive, be careful committing to killing her in egg form. Especially early enemies will have time to rotate and you might not have lethal damage. </li>
-      <li>The best way to play the matchup is often to get her into lethal range with Q poke but to not proc the passive. She won't be able to push out the wave that way and you can wait for jungle assistance to finish her off.</li>
+      <li>Bait out Anivia’s Q level 1 by walking up as if to auto the wave, then sidestep toward the direction she casts from for an easy dodge.</li>
+      <li>After baiting her Q, thin out the wave so she can’t safely auto you. Her low base health makes minion aggro punishing.</li>
+      <li>Be careful committing to her egg early; even if you have sustain damage, nearby enemies may rotate before you secure the kill.</li>
+      <li>Best approach is to poke her with Q to get her to lethal but avoid proccing egg. She’ll struggle to clear waves, letting your jungler finish her off later.</li>
     </ul>
   </div>
 </div>
 
 <footer>© 2025 LoL Fundamentals · Contact: arcsecond@lolfundamentals.com</footer>
-
-<script>
-const backLink = document.getElementById('backLink');
-
-// Require login to access matchup hub
-backLink.addEventListener('click', function(e) {
-  if (localStorage.getItem('lolfundamentals_logged_in') !== 'true') {
-    e.preventDefault(); // stop navigation
-    alert('You must be logged in to access the Matchup Hub.');
-  }
-});
-</script>
 </body>
 </html>
+
 
 
 
