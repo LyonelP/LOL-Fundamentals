@@ -15,7 +15,6 @@
   }
   header { background: #161b22; padding: 10px 20px; text-align: center; font-size: 28px; font-weight: bold; color: #58a6ff; }
 
-  /* Gold Back Button */
   .back-link {
     display: inline-flex;
     align-items: center;
@@ -35,8 +34,8 @@
   .matchup-left { display: flex; align-items: center; gap: 10px; flex: 0 0 auto; }
   .matchup-left img { width: 80px; height: 80px; border-radius: 8px; }
 
-  /* Winrate bubble */
-  .winrate-bubble { background: #facc15; /* yellow */ color: #0d1117; font-weight: bold; padding: 8px 14px; border-radius: 25px; font-size: 16px; white-space: nowrap; }
+  /* Winrate bubble in exact yellow */
+  .winrate-bubble { background: #F9D949; color: #0d1117; font-weight: bold; padding: 8px 14px; border-radius: 25px; font-size: 16px; white-space: nowrap; }
 
   .matchup-right { flex: 1; color: #e6edf3; display: flex; flex-direction: column; justify-content: flex-start; margin-top: 0px; }
   .matchup-right h2 { margin: 0 0 15px 0; font-size: 22px; }
@@ -75,16 +74,18 @@
 <footer>© 2025 LoL Fundamentals · Contact: arcsecond@lolfundamentals.com</footer>
 
 <script>
-// Check login before showing page
+// Require login before showing page
 if (localStorage.getItem('lolfundamentals_logged_in') !== 'true') {
   alert('You must be logged in to view this page.');
   window.location.href = 'login.html';
 } else {
-  document.body.style.display = 'block'; // show page
+  document.body.style.display = 'block';
 }
 </script>
 </body>
 </html>
+
+
 
 
 
