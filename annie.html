@@ -4,9 +4,16 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Diana Mid vs Annie</title>
+
+<!-- Early redirect before rendering -->
+<script>
+  if (localStorage.getItem('lolfundamentals_logged_in') !== 'true') {
+    window.location.replace('login.html');
+  }
+</script>
+
 <style>
   body { margin: 0; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; background: #0d1117; color: #e6edf3; line-height: 1.4; }
-  
   header { background: #161b22; padding: 10px 20px; text-align: center; font-size: 28px; font-weight: bold; color: #58a6ff; }
 
   /* Gold bubble for Back to Matchup Hub */
@@ -30,7 +37,7 @@
   .matchup-container { display: flex; max-width: 900px; margin: -15px auto 0 auto; gap: 15px; padding: 0 20px 10px 20px; }
   .matchup-left { display: flex; align-items: center; gap: 10px; flex: 0 0 auto; }
   .matchup-left img { width: 80px; height: 80px; border-radius: 8px; }
-  
+
   /* Winrate bubble */
   .winrate-bubble {
     background: #facc15; /* bright yellow */
@@ -82,19 +89,9 @@
 </div>
 
 <footer>© 2025 LoL Fundamentals · Contact: arcsecond@lolfundamentals.com</footer>
-
-<script>
-const backLink = document.getElementById('backLink');
-
-// Require login to access matchup hub
-backLink.addEventListener('click', function(e) {
-  if (localStorage.getItem('lolfundamentals_logged_in') !== 'true') {
-    e.preventDefault(); // stop navigation
-    alert('You must be logged in to access the Matchup Hub.');
-  }
-});
-</script>
 </body>
 </html>
+
+
 
 
