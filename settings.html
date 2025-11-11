@@ -5,7 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Settings – LoL Fundamentals</title>
 
-<!-- Login requirement (redirect if not logged in) -->
+<!-- Require login before page loads -->
 <script>
   if (localStorage.getItem('lolfundamentals_logged_in') !== 'true') {
     window.location.replace('login.html');
@@ -144,7 +144,7 @@ function cancelSubscription() {
   const confirmMsg = document.getElementById('confirmMessage');
   const button = document.querySelector('.cancel-btn');
 
-  fetch('https://script.google.com/macros/s/AKfycbyGanpj6hUdAczjz7l9xutZ5q_Hvwi-Xqf_tLQIlp1o-LxY_jNjiL1rNS7Y00Iau3I-/exec', {
+  fetch('YOUR_SCRIPT_URL_HERE', {
     method: 'POST',
     headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
     body: `email=${encodeURIComponent(email)}&notes=${encodeURIComponent('User requested cancellation')}&reason=${encodeURIComponent(reason)}`
@@ -152,17 +152,22 @@ function cancelSubscription() {
   .then(res => res.json())
   .then(data => {
     console.log('Server response:', data);
-    button.style.display = 'none';
-    confirmMsg.style.display = 'block';
+    if (data.status === 'success') {
+      button.style.display = 'none';
+      confirmMsg.style.display = 'block';
+    } else {
+      alert('Error: ' + (data.message || 'Unknown issue'));
+    }
   })
   .catch(err => {
-    alert('Error sending cancellation: ' + err);
+    alert('Fetch error: ' + err.message);
   });
 }
 </script>
 
 </body>
 </html>
+
 
 
 
