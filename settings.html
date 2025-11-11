@@ -14,8 +14,6 @@ body {
   text-align: center;
   overflow-x: hidden;
 }
-
-/* Overlay for readability */
 body::before {
   content: "";
   position: fixed;
@@ -24,8 +22,6 @@ body::before {
   background: rgba(10,15,20,0.75);
   z-index: -1;
 }
-
-/* Header */
 header {
   background: rgba(13,17,23,0.9);
   border-bottom: 2px solid #c9aa71;
@@ -36,8 +32,6 @@ header {
   color: #c9aa71;
   letter-spacing: 1px;
 }
-
-/* Back button */
 .back-button {
   display: inline-block;
   margin: 25px auto 40px;
@@ -55,8 +49,6 @@ header {
   background: linear-gradient(135deg, #e6c97f, #f0d88b);
   box-shadow: 0 0 15px rgba(255,215,0,0.8);
 }
-
-/* Settings container */
 .settings-container {
   max-width: 600px;
   margin: 0 auto 60px;
@@ -67,20 +59,8 @@ header {
   box-shadow: 0 0 15px rgba(47,129,247,0.3);
   text-align: center;
 }
-
-.settings-container h2 {
-  color: #c9aa71;
-  margin-bottom: 20px;
-}
-
-.settings-container p {
-  color: #e6edf3;
-  margin-bottom: 20px;
-  font-size: 16px;
-  line-height: 1.5;
-}
-
-/* Reason textarea */
+.settings-container h2 { color: #c9aa71; margin-bottom: 20px; }
+.settings-container p { color: #e6edf3; margin-bottom: 20px; font-size: 16px; line-height: 1.5; }
 #cancelReason {
   width: 100%;
   margin-bottom: 15px;
@@ -92,8 +72,6 @@ header {
   font-size: 14px;
   resize: none;
 }
-
-/* Cancel button */
 .cancel-btn {
   display: inline-block;
   padding: 14px 30px;
@@ -112,8 +90,6 @@ header {
   box-shadow: 0 0 18px rgba(255,90,90,0.6);
   transform: translateY(-2px);
 }
-
-/* Confirmation message */
 #confirmMessage {
   display: none;
   color: #c9aa71;
@@ -121,8 +97,6 @@ header {
   font-size: 17px;
   font-weight: bold;
 }
-
-/* Footer */
 footer {
   text-align: center;
   padding: 30px;
@@ -131,13 +105,8 @@ footer {
   background: #0a0f14;
   border-top: 1px solid #1f2937;
 }
-footer a {
-  color: #c9aa71;
-  text-decoration: none;
-}
-footer a:hover {
-  text-decoration: underline;
-}
+footer a { color: #c9aa71; text-decoration: none; }
+footer a:hover { text-decoration: underline; }
 </style>
 </head>
 <body>
@@ -163,48 +132,24 @@ footer a:hover {
 <script>
 function cancelSubscription() {
   const email = localStorage.getItem('lolfundamentals_email') || 'unknown';
+  const reason = document.getElementById('cancelReason').value || '';
   const confirmMsg = document.getElementById('confirmMessage');
   const button = document.querySelector('.cancel-btn');
 
-  const form = document.createElement('form');
-  form.method = 'POST';
-  form.action = 'https://script.google.com/macros/s/AKfycbyGanpj6hUdAczjz7l9xutZ5q_Hvwi-Xqf_tLQIlp1o-LxY_jNjiL1rNS7Y00Iau3I-/exec';
-  form.target = 'hidden_iframe';
-
-  const inputEmail = document.createElement('input');
-  inputEmail.type = 'hidden';
-  inputEmail.name = 'email';
-  inputEmail.value = email;
-  form.appendChild(inputEmail);
-
-  const inputNotes = document.createElement('input');
-  inputNotes.type = 'hidden';
-  inputNotes.name = 'notes';
-  inputNotes.value = 'User requested cancellation';
-  form.appendChild(inputNotes);
-
-  const reasonTextarea = document.getElementById('cancelReason');
-  const inputReason = document.createElement('input');
-  inputReason.type = 'hidden';
-  inputReason.name = 'reason';
-  inputReason.value = reasonTextarea.value || '';
-  form.appendChild(inputReason);
-
-  document.body.appendChild(form);
-
-  let iframe = document.getElementById('hidden_iframe');
-  if (!iframe) {
-    iframe = document.createElement('iframe');
-    iframe.name = 'hidden_iframe';
-    iframe.id = 'hidden_iframe';
-    iframe.style.display = 'none';
-    document.body.appendChild(iframe);
-  }
-
-  form.submit();
-
-  button.style.display = 'none';
-  confirmMsg.style.display = 'block';
+  fetch('https://script.google.com/macros/s/AKfycbyGanpj6hUdAczjz7l9xutZ5q_Hvwi-Xqf_tLQIlp1o-LxY_jNjiL1rNS7Y00Iau3I-/exec', {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+    body: `email=${encodeURIComponent(email)}&notes=${encodeURIComponent('User requested cancellation')}&reason=${encodeURIComponent(reason)}`
+  })
+  .then(res => res.json())
+  .then(data => {
+    console.log('Server response:', data);
+    button.style.display = 'none';
+    confirmMsg.style.display = 'block';
+  })
+  .catch(err => {
+    alert('Error sending cancellation: ' + err);
+  });
 }
 </script>
 
