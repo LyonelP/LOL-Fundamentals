@@ -4,6 +4,14 @@
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Settings – LoL Fundamentals</title>
+
+<!-- Login requirement (redirect if not logged in) -->
+<script>
+  if (localStorage.getItem('lolfundamentals_logged_in') !== 'true') {
+    window.location.replace('login.html');
+  }
+</script>
+
 <style>
 body {
   margin: 0;
@@ -155,7 +163,6 @@ function cancelSubscription() {
 
 </body>
 </html>
-
 
 
 
