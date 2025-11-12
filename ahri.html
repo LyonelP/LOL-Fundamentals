@@ -41,7 +41,7 @@ header {
   font-weight: bold;
   font-size: 26px;
   text-transform: uppercase;
-  color: #c9aa71;
+  color: #c9aa71; /* gold */
   letter-spacing: 1px;
 }
 
@@ -64,29 +64,56 @@ header {
   box-shadow: 0 0 15px rgba(255,215,0,0.8);
 }
 
-/* Content container */
-.content-container {
-  margin: 20px auto 50px auto;
+/* Matchup container */
+.matchup-container {
+  display: flex;
   max-width: 900px;
-  background: rgba(13,17,23,0.95);
-  border: 1px solid #2f81f7;
-  border-radius: 10px;
-  padding: 20px;
-  text-align: left;
-  color: #fff;
+  margin: 20px auto 50px auto;
+  gap: 15px;
+  padding: 0 20px 10px 20px;
+}
+
+.matchup-left {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+  flex: 0 0 auto;
+}
+.matchup-left img {
+  width: 80px;
+  height: 80px;
+  border-radius: 8px;
+}
+.winrate-bubble {
+  background: #F9D949; /* yellow for 49-51% */
+  color: #0d1117;
+  font-weight: bold;
+  padding: 8px 14px;
+  border-radius: 25px;
   font-size: 16px;
-  line-height: 1.6;
-  position: relative;
+  white-space: nowrap;
 }
-.content-container h2 {
-  color: #c9aa71;
-  margin-top: 0;
+
+.matchup-right {
+  flex: 1;
+  color: #fff;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  margin-top: 0px;
 }
-.content-container ul {
-  margin-left: 20px;
+.matchup-right h2 {
+  margin: 0 0 15px 0;
+  font-size: 22px;
+  color: #c9aa71; /* gold */
 }
-.content-container li {
-  margin-bottom: 10px;
+.matchup-right ul {
+  padding-left: 20px;
+  margin: 0;
+}
+.matchup-right li {
+  margin-bottom: 6px;
 }
 
 footer {
@@ -97,26 +124,40 @@ footer {
 }
 
 @media (max-width: 600px) {
-  header { font-size: 24px; padding: 15px; }
-  .content-container { margin: 15px 10px 30px 10px; padding: 15px; }
+  .matchup-container {
+    flex-direction: column;
+    align-items: center;
+    padding: 10px;
+  }
+  .matchup-left {
+    justify-content: center;
+  }
+  .matchup-right {
+    text-align: center;
+    margin-top: 0px;
+  }
 }
 </style>
 </head>
 <body>
 
 <header>Diana Mid vs Ahri</header>
+
 <a href="matchuphub.html" class="back-button">Back to Matchup Hub</a>
 
-<div class="content-container">
-  <h2>Matchup Overview</h2>
-  <p>This section covers Diana's matchup against Ahri in mid lane. Key considerations, trades, and early strategies are highlighted to maximize your performance.</p>
-
-  <h2>Matchup Notes</h2>
-  <ul>
-    <li>Ahri’s best trade lvl 1 is to auto W auto towards but river bush on blue side and top river side on red side moving towards Diana with the movement speed from W and often dodging the Q by moving inside the Q arc. Counter this by only throwing max range Q’s and waiting for her to start autoing the wave.</li>
-    <li>It's crucial to thin out the wave against Ahri to prevent her from trading well with autos and finding easy charms on you.</li>
-    <li>Build Verdant Barrier or Banshee’s Veil early. Ahri’s burst pattern revolves around her charm; a spell shield completely negates her main threat.</li>
-  </ul>
+<div class="matchup-container">
+  <div class="matchup-left">
+    <img src="https://ddragon.leagueoflegends.com/cdn/14.23.1/img/champion/Ahri.png" alt="Ahri">
+    <div class="winrate-bubble">49%</div>
+  </div>
+  <div class="matchup-right">
+    <h2>Matchup Notes</h2>
+    <ul>
+      <li>Ahri’s best trade lvl 1 is to auto W auto towards but river bush on blue side and top river side on red side moving towards Diana with the movement speed from W and often dodging the Q by moving inside the Q arc. Counter this by only throwing max range Q’s and waiting for her to start autoing the wave.</li>
+      <li>It's crucial to thin out the wave against Ahri to prevent her from trading well with autos and finding easy charms on you.</li>
+      <li>Build Verdant Barrier or Banshee’s Veil early. Ahri’s burst pattern revolves around her charm; a spell shield completely negates her main threat.</li>
+    </ul>
+  </div>
 </div>
 
 <footer>© 2025 LoL Fundamentals · Contact: arcsecond@lolfundamentals.com</footer>
