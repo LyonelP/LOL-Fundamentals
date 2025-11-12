@@ -5,7 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Diana Mid vs Ahri</title>
 
-<!-- Early redirect before rendering -->
+<!-- Login check -->
 <script>
   if (localStorage.getItem('lolfundamentals_logged_in') !== 'true') {
     window.location.replace('login.html');
@@ -13,155 +13,116 @@
 </script>
 
 <style>
-  body {
-    margin: 0;
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    text-align: center;
-    color: #e6edf3;
-    line-height: 1.4;
-    background: url('https://64.media.tumblr.com/594ac290bec6d5e9ad98b5f53404f00b/245c4c3ee469f81d-e4/s1280x1920/1cda4284320eb2031758a9859dfe14ff8bbc50ba.jpg') no-repeat center center fixed;
-    background-size: cover;
-    overflow-x: hidden;
-  }
+body {
+  margin: 0;
+  font-family: 'Beaufort for LOL', Arial, Helvetica, sans-serif;
+  text-align: center;
+  color: #fff;
+  background: url('https://64.media.tumblr.com/594ac290bec6d5e9ad98b5f53404f00b/245c4c3ee469f81d-e4/s1280x1920/1cda4284320eb2031758a9859dfe14ff8bbc50ba.jpg') no-repeat center center fixed;
+  background-size: cover;
+  overflow-x: hidden;
+}
 
-  /* Overlay for readability */
-  body::before {
-    content: "";
-    position: fixed;
-    top: 0; left: 0;
-    width: 100%; height: 100%;
-    background: rgba(10,15,20,0.75);
-    z-index: -1;
-  }
+/* Overlay for readability */
+body::before {
+  content: "";
+  position: fixed;
+  top: 0; left: 0;
+  width: 100%; height: 100%;
+  background: rgba(10,15,20,0.75);
+  z-index: -1;
+}
 
-  header {
-    background: rgba(13,17,23,0.9);
-    border-bottom: 2px solid #c9aa71;
-    padding: 10px 20px;
-    text-align: center;
-    font-size: 28px;
-    font-weight: bold;
-    color: #c9aa71; /* gold */
-  }
+/* Header */
+header {
+  background: rgba(13,17,23,0.9);
+  border-bottom: 2px solid #c9aa71;
+  padding: 20px 10px;
+  font-weight: bold;
+  font-size: 26px;
+  text-transform: uppercase;
+  color: #c9aa71;
+  letter-spacing: 1px;
+}
 
-  /* Gold Back Button */
-  .back-button {
-    display: block;
-    width: max-content;
-    margin: 20px auto 30px auto;
-    padding: 10px 20px;
-    background: linear-gradient(135deg, #c9aa71, #e0c77b);
-    color: #000;
-    text-decoration: none;
-    border-radius: 8px;
-    font-weight: bold;
-    transition: all 0.3s;
-    box-shadow: 0 0 10px rgba(201,170,113,0.5);
-    text-align: center;
-  }
-  .back-button::before {
-    content: "← ";
-  }
-  .back-button:hover {
-    background: linear-gradient(135deg, #e6c97f, #f0d88b);
-    box-shadow: 0 0 15px rgba(255,215,0,0.8);
-  }
+/* Back button */
+.back-button {
+  display: inline-block;
+  margin: 20px auto 10px;
+  padding: 10px 20px;
+  background: linear-gradient(135deg, #c9aa71, #e0c77b);
+  color: #000;
+  text-decoration: none;
+  border-radius: 8px;
+  font-weight: bold;
+  transition: all 0.3s;
+  box-shadow: 0 0 10px rgba(201,170,113,0.5);
+}
+.back-button::before { content: "← "; }
+.back-button:hover {
+  background: linear-gradient(135deg, #e6c97f, #f0d88b);
+  box-shadow: 0 0 15px rgba(255,215,0,0.8);
+}
 
-  .matchup-container {
-    display: flex;
-    max-width: 900px;
-    margin: -15px auto 0 auto;
-    gap: 15px;
-    padding: 0 20px 10px 20px;
-  }
-  .matchup-left {
-    display: flex;
-    align-items: center;
-    gap: 10px;
-    flex: 0 0 auto;
-  }
-  .matchup-left img {
-    width: 80px;
-    height: 80px;
-    border-radius: 8px;
-  }
-  .winrate-bubble {
-    background: #F9D949; /* yellow for 49-51% */
-    color: #0d1117;
-    font-weight: bold;
-    padding: 8px 14px;
-    border-radius: 25px;
-    font-size: 16px;
-    white-space: nowrap;
-  }
-  .matchup-right {
-    flex: 1;
-    color: #e6edf3;
-    display: flex;
-    flex-direction: column;
-    justify-content: flex-start;
-    margin-top: 0px;
-  }
-  .matchup-right h2 {
-    margin: 0 0 15px 0;
-    font-size: 22px;
-    color: #c9aa71; /* gold subheader */
-  }
-  .matchup-right ul {
-    padding-left: 20px;
-    margin: 0;
-  }
-  .matchup-right li {
-    margin-bottom: 6px;
-  }
-  footer {
-    text-align: center;
-    padding: 15px 10px;
-    font-size: 14px;
-    color: #8b949e;
-  }
-  @media (max-width: 600px) {
-    .matchup-container {
-      flex-direction: column;
-      align-items: center;
-      padding: 10px;
-      margin-top: -15px;
-    }
-    .matchup-left {
-      justify-content: center;
-    }
-    .matchup-right {
-      text-align: center;
-      margin-top: 0px;
-    }
-  }
+/* Content container */
+.content-container {
+  margin: 20px auto 50px auto;
+  max-width: 900px;
+  background: rgba(13,17,23,0.95);
+  border: 1px solid #2f81f7;
+  border-radius: 10px;
+  padding: 20px;
+  text-align: left;
+  color: #fff;
+  font-size: 16px;
+  line-height: 1.6;
+  position: relative;
+}
+.content-container h2 {
+  color: #c9aa71;
+  margin-top: 0;
+}
+.content-container ul {
+  margin-left: 20px;
+}
+.content-container li {
+  margin-bottom: 10px;
+}
+
+footer {
+  text-align: center;
+  padding: 15px 10px;
+  font-size: 14px;
+  color: #8b949e;
+}
+
+@media (max-width: 600px) {
+  header { font-size: 24px; padding: 15px; }
+  .content-container { margin: 15px 10px 30px 10px; padding: 15px; }
+}
 </style>
 </head>
 <body>
 
-<header>Diana Mid Matchup – Ahri</header>
-
+<header>Diana Mid vs Ahri</header>
 <a href="matchuphub.html" class="back-button">Back to Matchup Hub</a>
 
-<div class="matchup-container">
-  <div class="matchup-left">
-    <img src="https://ddragon.leagueoflegends.com/cdn/14.23.1/img/champion/Ahri.png" alt="Ahri">
-    <div class="winrate-bubble">49%</div>
-  </div>
-  <div class="matchup-right">
-    <h2>Matchup Notes</h2>
-    <ul>
-      <li>Ahri’s best trade lvl 1 is to auto W auto towards but river bush on blue side and top river side on red side moving towards Diana with the movement speed from W and often dodging the Q by moving inside the Q arc. Counter this by only throwing max range Q’s and waiting for her to start autoing the wave.</li>
-      <li>It's crucial to thin out the wave against Ahri to prevent her from trading well with autos and finding easy charms on you.</li>
-      <li>Build Verdant Barrier or Banshee’s Veil early. Ahri’s burst pattern revolves around her charm; a spell shield completely negates her main threat.</li>
-    </ul>
-  </div>
+<div class="content-container">
+  <h2>Matchup Overview</h2>
+  <p>This section covers Diana's matchup against Ahri in mid lane. Key considerations, trades, and early strategies are highlighted to maximize your performance.</p>
+
+  <h2>Matchup Notes</h2>
+  <ul>
+    <li>Ahri’s best trade lvl 1 is to auto W auto towards but river bush on blue side and top river side on red side moving towards Diana with the movement speed from W and often dodging the Q by moving inside the Q arc. Counter this by only throwing max range Q’s and waiting for her to start autoing the wave.</li>
+    <li>It's crucial to thin out the wave against Ahri to prevent her from trading well with autos and finding easy charms on you.</li>
+    <li>Build Verdant Barrier or Banshee’s Veil early. Ahri’s burst pattern revolves around her charm; a spell shield completely negates her main threat.</li>
+  </ul>
 </div>
 
 <footer>© 2025 LoL Fundamentals · Contact: arcsecond@lolfundamentals.com</footer>
+
 </body>
 </html>
-
 
 
 
