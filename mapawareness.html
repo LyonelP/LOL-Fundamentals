@@ -5,116 +5,126 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Map Awareness – LoL Fundamentals</title>
 
-<!-- Login check -->
-<script>
-  if (localStorage.getItem('lolfundamentals_logged_in') !== 'true') {
-    window.location.replace('login.html');
-  }
-</script>
-
 <style>
-  body {
-    margin: 0;
-    font-family: 'Beaufort for LOL', Arial, Helvetica, sans-serif;
-    color: #fff;
-    background: url('https://64.media.tumblr.com/594ac290bec6d5e9ad98b5f53404f00b/245c4c3ee469f81d-e4/s1280x1920/1cda4284320eb2031758b.jpg') no-repeat center center fixed;
-    background-size: cover;
-  }
-
-  header {
-    display: flex;
-    justify-content: flex-start;
-    align-items: center;
-    padding: 20px;
-    font-size: 28px;
-    font-weight: bold;
-    color: #F9D949; /* gold for the skill name */
-    text-shadow: 1px 1px 4px #000;
-  }
-
-  .back-button {
-    display: inline-block;
-    margin: 0 20px 20px 20px;
-    padding: 10px 20px;
-    background: linear-gradient(135deg, #c9aa71, #e0c77b);
-    color: #000;
-    text-decoration: none;
-    border-radius: 8px;
-    font-weight: bold;
-    transition: all 0.3s;
-    box-shadow: 0 0 10px rgba(201,170,113,0.5);
-  }
-  .back-button::before { content: "← "; }
-  .back-button:hover {
-    background: linear-gradient(135deg, #e6c97f, #f0d88b);
-    box-shadow: 0 0 15px rgba(255,215,0,0.8);
-  }
-
-  .content-container {
-    max-width: 900px;
-    margin: 0 auto 50px auto;
-    padding: 20px;
-    background: rgba(13,17,23,0.85); /* semi-transparent background behind text */
-    border-radius: 8px;
-    color: #fff;
-    font-size: 16px;
-    line-height: 1.5;
-  }
-
-  h2 {
-    color: #F9D949; /* gold headings */
-    margin-bottom: 12px;
-  }
-
-  ul {
-    padding-left: 20px;
-  }
-
-  li {
-    margin-bottom: 10px;
-  }
-
-  footer {
-    text-align: center;
-    padding: 15px 10px;
-    font-size: 14px;
-    color: #8b949e;
-  }
-
-  @media (max-width: 600px) {
-    header { font-size: 24px; padding: 15px; }
-    .content-container { padding: 15px; margin: 0 10px 30px 10px; }
-  }
+body {
+  margin: 0;
+  font-family: 'Beaufort for LOL', Arial, Helvetica, sans-serif;
+  background: url('https://64.media.tumblr.com/594ac290bec6d5e9ad98b5f53404f00b/245c4c3ee469f81d-e4/s1280x1920/1cda4284320eb2031758b.jpg') no-repeat center center fixed;
+  background-size: cover;
+  color: #e6edf3;
+  text-align: center;
+  overflow-x: hidden;
+}
+body::before {
+  content: "";
+  position: fixed;
+  top: 0; left: 0;
+  width: 100%; height: 100%;
+  background: rgba(10,15,20,0.75);
+  z-index: -1;
+}
+header {
+  background: rgba(13,17,23,0.9);
+  border-bottom: 2px solid #c9aa71;
+  padding: 20px 10px;
+  font-weight: bold;
+  font-size: 26px;
+  text-transform: uppercase;
+  color: #c9aa71;
+  letter-spacing: 1px;
+}
+.back-button {
+  display: inline-block;
+  margin: 20px auto 10px;
+  padding: 10px 20px;
+  background: linear-gradient(135deg, #c9aa71, #e0c77b);
+  color: #000;
+  text-decoration: none;
+  border-radius: 8px;
+  font-weight: bold;
+  transition: all 0.3s;
+  box-shadow: 0 0 10px rgba(201,170,113,0.5);
+}
+.back-button::before { content: "← "; }
+.back-button:hover {
+  background: linear-gradient(135deg, #e6c97f, #f0d88b);
+  box-shadow: 0 0 15px rgba(255,215,0,0.8);
+}
+#section-select-container {
+  margin: 20px auto;
+}
+#section-select {
+  padding: 10px 15px;
+  font-size: 16px;
+  border-radius: 6px;
+  border: none;
+  background: #0f1722;
+  color: #c9aa71;
+  cursor: pointer;
+}
+#section-info {
+  margin: 20px auto;
+  max-width: 900px;
+  background: rgba(13,17,23,0.95);
+  border: 1px solid #2f81f7;
+  padding: 15px 20px;
+  border-radius: 10px;
+  text-align: left;
+  color: #fff;
+  min-height: 200px;
+}
+#section-info h3 { color: #c9aa71; font-size: 22px; margin-top: 0; }
+#section-info p, #section-info ul { margin: 10px 0 14px; line-height: 1.6; }
+#section-info ul { margin-left: 20px; }
+@media (max-width:600px){#section-select{font-size:14px;padding:8px 10px;}}
 </style>
+
+<script>
+if(localStorage.getItem('lolfundamentals_logged_in')!=='true'){
+  window.location.replace('login.html');
+}
+</script>
 </head>
 
 <body>
 
-<header>Map Awareness</header>
-
+<header>Map Awareness – Skills Hub</header>
 <a href="skillshub.html" class="back-button">Back to Skills Hub</a>
 
-<div class="content-container">
-  <h2>What is Map Awareness?</h2>
-  <p>Map Awareness is your ability to check the minimap frequently and quickly while gathering all of the information presented. Strong map awareness allows you to anticipate plays, avoid ganks, and make better macro decisions.</p>
-
-  <h2>Things to Look Out For</h2>
-  <ul>
-    <li><strong>Where your teammates are in lane:</strong> Did they just back, or are they playing up at the enemy tower? If they just recalled, playing aggressive is riskier. If they’re pushing up at tower, try to match their push. If you can’t, ping them back — they’re more likely to get ganked.</li>
-    <li><strong>Flashes and abilities being used:</strong> Keep mental or written track of key cooldowns across the map.</li>
-    <li><strong>Jungle camp respawn timers:</strong> Tracking these helps you predict jungle pathing and future ganks.</li>
-    <li><strong>Teleport opportunities:</strong> Watch for wards to TP to — or enemy TPs being channeled.</li>
-    <li><strong>What’s warded:</strong> Be aware of vision control and which areas are safe or unsafe to move through.</li>
-    <li><strong>What the enemy does after pushing in a wave:</strong> Are they roaming, warding, or recalling? Each gives different map information.</li>
-    <li><strong>When the first tower falls bot lane:</strong> This usually means the enemy bot lane will rotate mid or top after resetting. Ping and prepare accordingly.</li>
-  </ul>
+<div id="section-select-container">
+  <select id="section-select">
+    <option disabled selected>Select a section</option>
+    <option>Intro</option>
+    <option>Importance</option>
+    <option>Key Points</option>
+    <option>Tips</option>
+    <option>Common Mistakes</option>
+  </select>
 </div>
 
-<footer>© 2025 LoL Fundamentals · Contact: arcsecond@lolfundamentals.com</footer>
+<div id="section-info">
+  <p>Select a section from above to view details.</p>
+</div>
+
+<script>
+const sectionSelect = document.getElementById('section-select');
+const sectionInfo = document.getElementById('section-info');
+
+const sections = {
+  "Intro": "<h3>Intro</h3><p>Map Awareness is your ability to check the minimap frequently and quickly while gathering all of the information presented.</p>",
+  "Importance": "<h3>Importance</h3><p>Strong map awareness helps you anticipate plays, avoid ganks, and make better macro decisions.</p>",
+  "Key Points": "<h3>Key Points</h3><ul><li>Where your teammates are in lane</li><li>Flashes and abilities being used</li><li>Jungle camp respawn timers</li><li>Ward and TP info</li><li>What's warded</li><li>Enemy actions after pushing waves</li><li>First tower fall rotations</li></ul>",
+  "Tips": "<h3>Tips</h3><p>Always glance at the minimap every few seconds, communicate missing enemies, and track objectives.</p>",
+  "Common Mistakes": "<h3>Common Mistakes</h3><p>Failing to track enemy rotations, ignoring wards, and missing TP opportunities.</p>"
+};
+
+sectionSelect.addEventListener('change', e => {
+  sectionInfo.innerHTML = sections[e.target.value] || "<p>Coming soon!</p>";
+});
+</script>
 
 </body>
 </html>
-
 
 
 
