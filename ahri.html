@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
+<meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Diana Mid vs Ahri</title>
 
@@ -16,17 +16,32 @@
   body {
     margin: 0;
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    background: #0d1117;
+    text-align: center;
     color: #e6edf3;
     line-height: 1.4;
+    background: url('https://64.media.tumblr.com/594ac290bec6d5e9ad98b5f53404f00b/245c4c3ee469f81d-e4/s1280x1920/1cda4284320eb2031758a9859dfe14ff8bbc50ba.jpg') no-repeat center center fixed;
+    background-size: cover;
+    overflow-x: hidden;
   }
+
+  /* Overlay for readability */
+  body::before {
+    content: "";
+    position: fixed;
+    top: 0; left: 0;
+    width: 100%; height: 100%;
+    background: rgba(10,15,20,0.75);
+    z-index: -1;
+  }
+
   header {
-    background: #161b22;
+    background: rgba(13,17,23,0.9);
+    border-bottom: 2px solid #c9aa71;
     padding: 10px 20px;
     text-align: center;
     font-size: 28px;
     font-weight: bold;
-    color: #58a6ff;
+    color: #c9aa71; /* gold */
   }
 
   /* Gold Back Button */
@@ -90,6 +105,7 @@
   .matchup-right h2 {
     margin: 0 0 15px 0;
     font-size: 22px;
+    color: #c9aa71; /* gold subheader */
   }
   .matchup-right ul {
     padding-left: 20px;
@@ -135,7 +151,7 @@
   <div class="matchup-right">
     <h2>Matchup Notes</h2>
     <ul>
-      <li>Ahri’s best trade lvl 1 is to auto w auto towards but river bush on blue side and top river side on red side moving towards Diana with the movement speed from w and often dodging the q by moving inside the q arc. Counter this by only throwing max range Q’s and waiting for her to start autoing the wave.</li>
+      <li>Ahri’s best trade lvl 1 is to auto W auto towards but river bush on blue side and top river side on red side moving towards Diana with the movement speed from W and often dodging the Q by moving inside the Q arc. Counter this by only throwing max range Q’s and waiting for her to start autoing the wave.</li>
       <li>It's crucial to thin out the wave against Ahri to prevent her from trading well with autos and finding easy charms on you.</li>
       <li>Build Verdant Barrier or Banshee’s Veil early. Ahri’s burst pattern revolves around her charm; a spell shield completely negates her main threat.</li>
     </ul>
@@ -145,6 +161,8 @@
 <footer>© 2025 LoL Fundamentals · Contact: arcsecond@lolfundamentals.com</footer>
 </body>
 </html>
+
+
 
 
 
