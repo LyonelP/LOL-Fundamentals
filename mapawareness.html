@@ -5,7 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Map Awareness – LoL Fundamentals</title>
 
-<!-- Early redirect before rendering -->
+<!-- Login check -->
 <script>
   if (localStorage.getItem('lolfundamentals_logged_in') !== 'true') {
     window.location.replace('login.html');
@@ -15,26 +15,26 @@
 <style>
   body {
     margin: 0;
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    background: #0d1117;
-    color: #e6edf3;
-    line-height: 1.4;
+    font-family: 'Beaufort for LOL', Arial, Helvetica, sans-serif;
+    color: #fff;
+    background: url('https://64.media.tumblr.com/594ac290bec6d5e9ad98b5f53404f00b/245c4c3ee469f81d-e4/s1280x1920/1cda4284320eb2031758b.jpg') no-repeat center center fixed;
+    background-size: cover;
   }
 
   header {
-    background: #161b22;
-    padding: 10px 20px;
-    text-align: center;
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    padding: 20px;
     font-size: 28px;
     font-weight: bold;
-    color: #58a6ff;
+    color: #F9D949; /* gold for the skill name */
+    text-shadow: 1px 1px 4px #000;
   }
 
-  /* Gold Back Button */
   .back-button {
-    display: block;
-    width: max-content;
-    margin: 20px auto 30px auto;
+    display: inline-block;
+    margin: 0 20px 20px 20px;
     padding: 10px 20px;
     background: linear-gradient(135deg, #c9aa71, #e0c77b);
     color: #000;
@@ -43,55 +43,34 @@
     font-weight: bold;
     transition: all 0.3s;
     box-shadow: 0 0 10px rgba(201,170,113,0.5);
-    text-align: center;
   }
-  .back-button::before {
-    content: "← ";
-  }
+  .back-button::before { content: "← "; }
   .back-button:hover {
     background: linear-gradient(135deg, #e6c97f, #f0d88b);
     box-shadow: 0 0 15px rgba(255,215,0,0.8);
   }
 
-  .section-container {
+  .content-container {
     max-width: 900px;
-    margin: -10px auto 0 auto;
-    padding: 0 20px 30px 20px;
-  }
-
-  .intro {
-    background: #161b22;
-    border-radius: 8px;
+    margin: 0 auto 50px auto;
     padding: 20px;
-    margin-bottom: 25px;
-  }
-
-  .intro h2 {
-    color: #f9d949;
-    margin-bottom: 10px;
-  }
-
-  .intro p {
+    background: rgba(13,17,23,0.85); /* semi-transparent background behind text */
+    border-radius: 8px;
+    color: #fff;
     font-size: 16px;
+    line-height: 1.5;
   }
 
-  .awareness-list {
-    background: #161b22;
-    border-radius: 8px;
-    padding: 20px;
-  }
-
-  .awareness-list h2 {
-    color: #f9d949;
+  h2 {
+    color: #F9D949; /* gold headings */
     margin-bottom: 12px;
   }
 
-  .awareness-list ul {
+  ul {
     padding-left: 20px;
-    margin: 0;
   }
 
-  .awareness-list li {
+  li {
     margin-bottom: 10px;
   }
 
@@ -103,10 +82,8 @@
   }
 
   @media (max-width: 600px) {
-    .section-container {
-      padding: 10px;
-      margin-top: -15px;
-    }
+    header { font-size: 24px; padding: 15px; }
+    .content-container { padding: 15px; margin: 0 10px 30px 10px; }
   }
 </style>
 </head>
@@ -117,32 +94,26 @@
 
 <a href="skillshub.html" class="back-button">Back to Skills Hub</a>
 
-<div class="section-container">
-  <div class="intro">
-    <h2>What is Map Awareness?</h2>
-    <p>Map Awareness is your ability to check the minimap frequently and quickly while gathering all of the information presented. Strong map awareness allows you to anticipate plays, avoid ganks, and make better macro decisions.</p>
-  </div>
+<div class="content-container">
+  <h2>What is Map Awareness?</h2>
+  <p>Map Awareness is your ability to check the minimap frequently and quickly while gathering all of the information presented. Strong map awareness allows you to anticipate plays, avoid ganks, and make better macro decisions.</p>
 
-  <div class="awareness-list">
-    <h2>Things to Look Out For</h2>
-    <ul>
-      <li><strong>Where your teammates are in lane:</strong> Did they just back, or are they playing up at the enemy tower? If they just recalled, playing aggressive is riskier. If they’re pushing up at tower, try to match their push. If you can’t, ping them back — they’re more likely to get ganked.</li>
-      <li><strong>Flashes and abilities being used:</strong> Keep mental or written track of key cooldowns across the map.</li>
-      <li><strong>Jungle camp respawn timers:</strong> Tracking these helps you predict jungle pathing and future ganks.</li>
-      <li><strong>Teleport opportunities:</strong> Watch for wards to TP to — or enemy TPs being channeled.</li>
-      <li><strong>What’s warded:</strong> Be aware of vision control and which areas are safe or unsafe to move through.</li>
-      <li><strong>What the enemy does after pushing in a wave:</strong> Are they roaming, warding, or recalling? Each gives different map information.</li>
-      <li><strong>When the first tower falls bot lane:</strong> This usually means the enemy bot lane will rotate mid or top after resetting. Ping and prepare accordingly.</li>
-    </ul>
-  </div>
+  <h2>Things to Look Out For</h2>
+  <ul>
+    <li><strong>Where your teammates are in lane:</strong> Did they just back, or are they playing up at the enemy tower? If they just recalled, playing aggressive is riskier. If they’re pushing up at tower, try to match their push. If you can’t, ping them back — they’re more likely to get ganked.</li>
+    <li><strong>Flashes and abilities being used:</strong> Keep mental or written track of key cooldowns across the map.</li>
+    <li><strong>Jungle camp respawn timers:</strong> Tracking these helps you predict jungle pathing and future ganks.</li>
+    <li><strong>Teleport opportunities:</strong> Watch for wards to TP to — or enemy TPs being channeled.</li>
+    <li><strong>What’s warded:</strong> Be aware of vision control and which areas are safe or unsafe to move through.</li>
+    <li><strong>What the enemy does after pushing in a wave:</strong> Are they roaming, warding, or recalling? Each gives different map information.</li>
+    <li><strong>When the first tower falls bot lane:</strong> This usually means the enemy bot lane will rotate mid or top after resetting. Ping and prepare accordingly.</li>
+  </ul>
 </div>
 
 <footer>© 2025 LoL Fundamentals · Contact: arcsecond@lolfundamentals.com</footer>
 
 </body>
 </html>
-
-
 
 
 
