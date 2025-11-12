@@ -8,7 +8,7 @@
 body {
   margin: 0;
   font-family: 'Beaufort for LOL', Arial, Helvetica, sans-serif;
-  color: #e6edf3;
+  color: #fff;
   text-align: center;
   background: url('https://64.media.tumblr.com/594ac290bec6d5e9ad98b5f53404f00b/245c4c3ee469f81d-e4/s1280x1920/1cda4284320eb2031758a9859dfe14ff8bbc50ba.jpg') no-repeat center center fixed;
   background-size: cover;
@@ -39,146 +39,126 @@ header {
   transition: all 0.3s;
   box-shadow: 0 0 10px rgba(201,170,113,0.5);
 }
-.back-button::before {
-  content: "← ";
-}
+.back-button::before { content: "← "; }
 .back-button:hover {
   background: linear-gradient(135deg, #e6c97f, #f0d88b);
   box-shadow: 0 0 15px rgba(255,215,0,0.8);
 }
 
-/* Skill selector */
-#skill-select-container {
-  margin: 20px auto;
+/* Skills grid */
+.skills-container {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+  gap: 18px;
+  padding: 30px;
+  max-width: 1300px;
+  margin: 0 auto;
 }
-#skill-select {
-  padding: 10px 15px;
-  font-size: 16px;
-  border-radius: 6px;
-  border: none;
-  background: rgba(15,23,34,0.85);
-  color: #c9aa71;
+
+/* Skill card */
+.skill-card {
+  background: rgba(13,17,23,0.6);
+  border: 2px solid #c9aa71;
+  border-radius: 8px;
+  padding: 16px;
+  text-align: center;
+  color: #fff;
+  transition: transform 0.25s, box-shadow 0.3s;
   cursor: pointer;
 }
-
-/* Skill display */
-#skill-info {
-  margin: 30px auto;
-  max-width: 900px;
-  background: rgba(13,17,23,0.85);
-  border: 1px solid #2f81f7;
-  padding: 20px;
-  border-radius: 10px;
-  text-align: left;
-  color: #c9aa71;
-  min-height: 150px;
+.skill-card:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 0 15px rgba(201,170,113,0.6);
 }
 
-/* Hover effect for skills */
-#skill-info:hover {
-  box-shadow: 0 0 15px rgba(47,129,247,0.5);
+.skill-card img {
+  width: 40px;
+  height: 40px;
+  filter: brightness(0) invert(1);
+  margin-bottom: 10px;
+}
+
+.skill-card h3 {
+  margin: 0;
+  font-size: 15px;
+  color: #fff;
 }
 
 @media (max-width: 500px) {
   header { font-size: 22px; padding: 15px 5px; }
-  #skill-select { font-size: 14px; padding: 8px 10px; }
+  .skills-container { grid-template-columns: repeat(auto-fit, minmax(140px, 1fr)); }
 }
 </style>
 </head>
 <body>
 
 <header>LoL Fundamentals – Skills Hub</header>
-
 <a href="membershub.html" class="back-button">Back to Members Hub</a>
 
-<div id="skill-select-container">
-  <select id="skill-select">
-    <option disabled selected>Pick a skill</option>
-  </select>
-</div>
-
-<div id="skill-info">
-  <p>Select a skill above to view details.</p>
-</div>
+<div class="skills-container" id="skills-container"></div>
 
 <script>
-// Require login
-if (localStorage.getItem('lolfundamentals_logged_in') !== 'true') {
-  window.location.href = 'index.html'; // redirect to login
+const skills = {
+  "Map Awareness": "https://img.icons8.com/ios-filled/50/ffffff/map.png",
+  "Communication": "https://img.icons8.com/ios-filled/50/ffffff/speech-bubble.png",
+  "Pings": "https://img.icons8.com/ios-filled/50/ffffff/alarm.png",
+  "Summoner Spells": "https://img.icons8.com/ios-filled/50/ffffff/lightning-bolt.png",
+  "Roaming": "https://img.icons8.com/ios-filled/50/ffffff/sprint.png",
+  "Farming": "https://img.icons8.com/ios-filled/50/ffffff/wheat.png",
+  "Positioning": "https://img.icons8.com/ios-filled/50/ffffff/compass.png",
+  "Vision": "https://img.icons8.com/ios-filled/50/ffffff/eye.png",
+  "Teamwork": "https://img.icons8.com/ios-filled/50/ffffff/group.png",
+  "Pathing": "https://img.icons8.com/ios-filled/50/ffffff/route.png",
+  "Trading": "https://img.icons8.com/ios-filled/50/ffffff/swords.png",
+  "Wave Control": "https://img.icons8.com/ios-filled/50/ffffff/planning.png",
+  "Power Spikes": "https://img.icons8.com/ios-filled/50/ffffff/bicep.png",
+  "Mindset": "https://img.icons8.com/ios-filled/50/ffffff/brain.png",
+  "Kiting": "https://img.icons8.com/ios-filled/50/ffffff/moving-backwards.png",
+  "Ganking": "https://img.icons8.com/ios-filled/50/ffffff/surprise.png",
+  "Animation Cancelling": "https://img.icons8.com/ios-filled/50/ffffff/combo.png",
+  "Back Timings": "https://img.icons8.com/ios-filled/50/ffffff/back-arrow.png",
+  "Target Selection": "https://img.icons8.com/ios-filled/50/ffffff/target.png",
+  "Mouse Accuracy": "https://img.icons8.com/ios-filled/50/ffffff/mouse.png",
+  "Reading Players": "https://img.icons8.com/ios-filled/50/ffffff/book.png",
+  "Win Conditions": "https://img.icons8.com/ios-filled/50/ffffff/trophy.png",
+  "Laning": "https://img.icons8.com/ios-filled/50/ffffff/flag.png",
+  "Sieging": "https://img.icons8.com/ios-filled/50/ffffff/castle.png",
+  "Baiting": "https://img.icons8.com/ios-filled/50/ffffff/fish.png",
+  "Farming Efficiency": "https://img.icons8.com/ios-filled/50/ffffff/wheat.png",
+  "Reaction Time": "https://img.icons8.com/ios-filled/50/ffffff/stopwatch.png",
+  "Rotations": "https://img.icons8.com/ios-filled/50/ffffff/refresh.png",
+  "Calls": "https://img.icons8.com/ios-filled/50/ffffff/phone.png",
+  "FPS": "https://img.icons8.com/ios-filled/50/ffffff/computer.png",
+  "Split Pushing": "https://img.icons8.com/ios-filled/50/ffffff/flag.png",
+  "Lane Assignments": "https://img.icons8.com/ios-filled/50/ffffff/map.png",
+  "Auto Cancelling": "https://img.icons8.com/ios-filled/50/ffffff/cancel.png",
+  "Meta": "https://img.icons8.com/ios-filled/50/ffffff/book.png",
+  "Damage/Poke": "https://img.icons8.com/ios-filled/50/ffffff/sword.png",
+  "Contesting CS": "https://img.icons8.com/ios-filled/50/ffffff/minus.png",
+  "Smiting": "https://img.icons8.com/ios-filled/50/ffffff/lightning-bolt.png",
+  "Level 1": "https://img.icons8.com/ios-filled/50/ffffff/1-circle.png",
+  "Ping/Internet": "https://img.icons8.com/ios-filled/50/ffffff/wifi.png",
+  "Match Ups/Champion Interactions": "https://img.icons8.com/ios-filled/50/ffffff/duel.png",
+  "Tab Screen": "https://img.icons8.com/ios-filled/50/ffffff/menu.png",
+  "Peripherals": "https://img.icons8.com/ios-filled/50/ffffff/keyboard.png",
+  "Early Game": "https://img.icons8.com/ios-filled/50/ffffff/sun.png",
+  "Mid Game": "https://img.icons8.com/ios-filled/50/ffffff/noon.png",
+  "Late Game": "https://img.icons8.com/ios-filled/50/ffffff/moon.png",
+  "Champion Select": "https://img.icons8.com/ios-filled/50/ffffff/lobby.png",
+  "Team Compositions": "https://img.icons8.com/ios-filled/50/ffffff/organization.png",
+  "APM": "https://img.icons8.com/ios-filled/50/ffffff/speed.png",
+  "Wave Clear": "https://img.icons8.com/ios-filled/50/ffffff/dead-enemy.png",
+  "Bans": "https://img.icons8.com/ios-filled/50/ffffff/x.png",
+  "Not Raging/Blaming": "https://img.icons8.com/ios-filled/50/ffffff/peace.png"
+};
+
+const container = document.getElementById('skills-container');
+for (const [name, icon] of Object.entries(skills)) {
+  const card = document.createElement('div');
+  card.className = 'skill-card';
+  card.innerHTML = `<img src="${icon}" alt="${name} Icon"><h3>${name}</h3>`;
+  container.appendChild(card);
 }
-
-// List of all fundamentals skills
-const skills = [
-"Map Awareness","Communication","Pings","Your Champion","Summoner Spell Usage","Mindset","Mouse Accuracy",
-"Reading Players","Win Conditions","Laning","Sieging","Baiting","Trading","Farming","Positioning","Reaction Time",
-"Rotations","Calls","Roaming","Power Spikes","FPS","Split Pushing","Lane Assignments","Wave Control","Itemization",
-"Vision","Objective Control","Animation Cancelling","Ganking","Not Raging/Blaming","Kiting","Auto Cancelling",
-"Target Selection","Champion Pool","Champion Kits","Identifying Player Strength Levels","Back Timings","Meta",
-"Damage/Poke","Contesting CS","Smiting","Level 1","Pathing","Ping/Internet","Match Ups/Champion Interactions",
-"Teamwork","Tab Screen","Peripherals","Early Game","Mid Game","Late Game","Champion Select","Team Compositions",
-"APM","Wave Clear","Bans"
-];
-
-// Populate select
-const select = document.getElementById('skill-select');
-skills.forEach(skill => {
-  const option = document.createElement('option');
-  option.value = skill;
-  option.textContent = skill;
-  select.appendChild(option);
-});
-
-// Show selected skill
-select.addEventListener('change', () => {
-  const skillInfo = document.getElementById('skill-info');
-  let content = `<h2>${select.value}</h2><p>Coming soon!</p>`;
-
-  // Special cases with video embeds
-  switch(select.value) {
-    case "Laning":
-      content = `
-        <h2>Laning</h2>
-        <p>Learn all about effective laning techniques, wave management, and matchup knowledge.</p>
-        <iframe width="100%" height="480" src="https://www.youtube.com/embed/WUi9pOT6wYc" 
-        title="Laning Skill Video" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-      `;
-      break;
-    case "Farming":
-      content = `
-        <h2>Farming</h2>
-        <p>Improve your CSing and gold income efficiently.</p>
-        <iframe width="100%" height="480" src="https://www.youtube.com/embed/BhTvcMmCY_o?start=22" 
-        title="Farming Skill Video" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-      `;
-      break;
-    case "Roaming":
-      content = `
-        <h2>Roaming</h2>
-        <p>Learn when and how to roam effectively to help your team.</p>
-        <iframe width="100%" height="480" src="https://www.youtube.com/embed/th7kVKYUgIk" 
-        title="Roaming Skill Video" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-      `;
-      break;
-    case "Split Pushing":
-      content = `
-        <h2>Split Pushing</h2>
-        <p>Master splitpushing to apply pressure and create advantages.</p>
-        <iframe width="100%" height="480" src="https://www.youtube.com/embed/th7kVKYUgIk" 
-        title="Split Pushing Skill Video" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-      `;
-      break;
-    case "Wave Control":
-      content = `
-        <h2>Wave Control</h2>
-        <p>Learn how to manipulate waves to gain advantages in lane.</p>
-        <iframe width="100%" height="480" src="https://www.youtube.com/embed/edDOUuxFaH8" 
-        title="Wave Control Skill Video" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-      `;
-      break;
-  }
-
-  skillInfo.innerHTML = content;
-});
 </script>
 
 </body>
