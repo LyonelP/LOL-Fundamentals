@@ -4,6 +4,14 @@
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>LoL Fundamentals – Skills Hub</title>
+
+<!-- Login check (same as other pages) -->
+<script>
+  if (localStorage.getItem('lolfundamentals_logged_in') !== 'true') {
+    window.location.replace('login.html');
+  }
+</script>
+
 <style>
 body {
   margin: 0;
@@ -16,7 +24,7 @@ body {
 
 /* Header */
 header {
-  background: rgba(13,17,23,0.85);
+  background: rgba(13,17,23,0.9);
   border-bottom: 2px solid #c9aa71;
   padding: 20px 10px;
   font-weight: bold;
@@ -57,7 +65,7 @@ header {
 
 /* Skill card */
 .skill-card {
-  background: rgba(13,17,23,0.85); /* less transparent now */
+  background: rgba(13,17,23,0.9); /* slightly less transparent */
   border: 2px solid #c9aa71;
   border-radius: 8px;
   padding: 25px 10px;
@@ -78,6 +86,7 @@ header {
 }
 </style>
 </head>
+
 <body>
 
 <header>LoL Fundamentals – Skills Hub</header>
@@ -111,6 +120,7 @@ skills.forEach(skill => {
 
 </body>
 </html>
+
 
 
 
