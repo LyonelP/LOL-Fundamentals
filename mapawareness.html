@@ -1,11 +1,11 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8" />
+<meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Settings – LoL Fundamentals</title>
+<title>Map Awareness – LoL Fundamentals</title>
 
-<!-- Require login before page loads -->
+<!-- Early redirect before rendering -->
 <script>
   if (localStorage.getItem('lolfundamentals_logged_in') !== 'true') {
     window.location.replace('login.html');
@@ -13,157 +13,131 @@
 </script>
 
 <style>
-body {
-  margin: 0;
-  font-family: 'Beaufort for LOL', Arial, Helvetica, sans-serif;
-  background: url('https://ddragon.leagueoflegends.com/cdn/img/champion/splash/Diana_0.jpg') no-repeat center center fixed;
-  background-size: cover;
-  color: #e6edf3;
-  text-align: center;
-  overflow-x: hidden;
-}
-body::before {
-  content: "";
-  position: fixed;
-  top: 0; left: 0;
-  width: 100%; height: 100%;
-  background: rgba(10,15,20,0.75);
-  z-index: -1;
-}
-header {
-  background: rgba(13,17,23,0.9);
-  border-bottom: 2px solid #c9aa71;
-  padding: 20px 10px;
-  font-weight: bold;
-  font-size: 26px;
-  text-transform: uppercase;
-  color: #c9aa71;
-  letter-spacing: 1px;
-}
-.back-button {
-  display: inline-block;
-  margin: 25px auto 40px;
-  padding: 10px 20px;
-  background: linear-gradient(135deg, #c9aa71, #e0c77b);
-  color: #000;
-  text-decoration: none;
-  border-radius: 8px;
-  font-weight: bold;
-  transition: all 0.3s;
-  box-shadow: 0 0 10px rgba(201,170,113,0.5);
-}
-.back-button::before { content: "← "; }
-.back-button:hover {
-  background: linear-gradient(135deg, #e6c97f, #f0d88b);
-  box-shadow: 0 0 15px rgba(255,215,0,0.8);
-}
-.settings-container {
-  max-width: 600px;
-  margin: 0 auto 60px;
-  background: rgba(13,17,23,0.95);
-  border: 1px solid #2f81f7;
-  border-radius: 12px;
-  padding: 40px 25px;
-  box-shadow: 0 0 15px rgba(47,129,247,0.3);
-  text-align: center;
-}
-.settings-container h2 { color: #c9aa71; margin-bottom: 20px; }
-.settings-container p { color: #e6edf3; margin-bottom: 20px; font-size: 16px; line-height: 1.5; }
-#cancelReason {
-  width: 100%;
-  margin-bottom: 15px;
-  padding: 10px;
-  border-radius: 6px;
-  border: none;
-  background: #0f1722;
-  color: #c9aa71;
-  font-size: 14px;
-  resize: none;
-}
-.cancel-btn {
-  display: inline-block;
-  padding: 14px 30px;
-  background: #f94144;
-  color: #fff;
-  border: none;
-  border-radius: 8px;
-  font-weight: bold;
-  font-size: 16px;
-  cursor: pointer;
-  transition: all 0.3s;
-  box-shadow: 0 0 10px rgba(249,65,68,0.4);
-}
-.cancel-btn:hover {
-  background: #ff5959;
-  box-shadow: 0 0 18px rgba(255,90,90,0.6);
-  transform: translateY(-2px);
-}
-#confirmMessage {
-  display: none;
-  color: #c9aa71;
-  margin-top: 25px;
-  font-size: 17px;
-  font-weight: bold;
-}
-footer {
-  text-align: center;
-  padding: 30px;
-  color: #8b949e;
-  font-size: 14px;
-  background: #0a0f14;
-  border-top: 1px solid #1f2937;
-}
-footer a { color: #c9aa71; text-decoration: none; }
-footer a:hover { text-decoration: underline; }
+  body {
+    margin: 0;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background: #0d1117;
+    color: #e6edf3;
+    line-height: 1.4;
+  }
+
+  header {
+    background: #161b22;
+    padding: 10px 20px;
+    text-align: center;
+    font-size: 28px;
+    font-weight: bold;
+    color: #58a6ff;
+  }
+
+  /* Gold Back Button */
+  .back-button {
+    display: block;
+    width: max-content;
+    margin: 20px auto 30px auto;
+    padding: 10px 20px;
+    background: linear-gradient(135deg, #c9aa71, #e0c77b);
+    color: #000;
+    text-decoration: none;
+    border-radius: 8px;
+    font-weight: bold;
+    transition: all 0.3s;
+    box-shadow: 0 0 10px rgba(201,170,113,0.5);
+    text-align: center;
+  }
+  .back-button::before {
+    content: "← ";
+  }
+  .back-button:hover {
+    background: linear-gradient(135deg, #e6c97f, #f0d88b);
+    box-shadow: 0 0 15px rgba(255,215,0,0.8);
+  }
+
+  .section-container {
+    max-width: 900px;
+    margin: -10px auto 0 auto;
+    padding: 0 20px 30px 20px;
+  }
+
+  .intro {
+    background: #161b22;
+    border-radius: 8px;
+    padding: 20px;
+    margin-bottom: 25px;
+  }
+
+  .intro h2 {
+    color: #f9d949;
+    margin-bottom: 10px;
+  }
+
+  .intro p {
+    font-size: 16px;
+  }
+
+  .awareness-list {
+    background: #161b22;
+    border-radius: 8px;
+    padding: 20px;
+  }
+
+  .awareness-list h2 {
+    color: #f9d949;
+    margin-bottom: 12px;
+  }
+
+  .awareness-list ul {
+    padding-left: 20px;
+    margin: 0;
+  }
+
+  .awareness-list li {
+    margin-bottom: 10px;
+  }
+
+  footer {
+    text-align: center;
+    padding: 15px 10px;
+    font-size: 14px;
+    color: #8b949e;
+  }
+
+  @media (max-width: 600px) {
+    .section-container {
+      padding: 10px;
+      margin-top: -15px;
+    }
+  }
 </style>
 </head>
+
 <body>
 
-<header>Settings</header>
-<a href="membershub.html" class="back-button">Back to Members Hub</a>
+<header>Map Awareness</header>
 
-<div class="settings-container">
-  <h2>Manage Subscription</h2>
-  <p>If you wish to cancel your subscription, you can do so below. This action will stop future payments but you’ll retain access until your current billing cycle ends.</p>
+<a href="skillshub.html" class="back-button">Back to Skills Hub</a>
 
-  <textarea id="cancelReason" placeholder="Optional: Tell us why..."></textarea>
-  <br>
-  <button class="cancel-btn" onclick="cancelSubscription()">Cancel Subscription</button>
-  <div id="confirmMessage">Your cancellation request has been received.</div>
+<div class="section-container">
+  <div class="intro">
+    <h2>What is Map Awareness?</h2>
+    <p>Map Awareness is your ability to check the minimap frequently and quickly while gathering all of the information presented. Strong map awareness allows you to anticipate plays, avoid ganks, and make better macro decisions.</p>
+  </div>
+
+  <div class="awareness-list">
+    <h2>Things to Look Out For</h2>
+    <ul>
+      <li><strong>Where your teammates are in lane:</strong> Did they just back, or are they playing up at the enemy tower? If they just recalled, playing aggressive is riskier. If they’re pushing up at tower, try to match their push. If you can’t, ping them back — they’re more likely to get ganked.</li>
+      <li><strong>Flashes and abilities being used:</strong> Keep mental or written track of key cooldowns across the map.</li>
+      <li><strong>Jungle camp respawn timers:</strong> Tracking these helps you predict jungle pathing and future ganks.</li>
+      <li><strong>Teleport opportunities:</strong> Watch for wards to TP to — or enemy TPs being channeled.</li>
+      <li><strong>What’s warded:</strong> Be aware of vision control and which areas are safe or unsafe to move through.</li>
+      <li><strong>What the enemy does after pushing in a wave:</strong> Are they roaming, warding, or recalling? Each gives different map information.</li>
+      <li><strong>When the first tower falls bot lane:</strong> This usually means the enemy bot lane will rotate mid or top after resetting. Ping and prepare accordingly.</li>
+    </ul>
+  </div>
 </div>
 
-<footer>
-© 2025 LoL Fundamentals · Contact:
-<a href="mailto:arcsecond@lolfundamentals.com">arcsecond@lolfundamentals.com</a>
-</footer>
-
-<script>
-function cancelSubscription() {
-  const email = localStorage.getItem('lolfundamentals_email') || 'unknown';
-  const reason = document.getElementById('cancelReason').value || '';
-  const confirmMsg = document.getElementById('confirmMessage');
-  const button = document.querySelector('.cancel-btn');
-
-  fetch('YOUR_SCRIPT_URL_HERE', {
-    method: 'POST',
-    headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
-    body: `email=${encodeURIComponent(email)}&notes=${encodeURIComponent('User requested cancellation')}&reason=${encodeURIComponent(reason)}`
-  })
-  .then(res => res.json())
-  .then(data => {
-    console.log('Server response:', data);
-    if (data.status === 'success') {
-      button.style.display = 'none';
-      confirmMsg.style.display = 'block';
-    } else {
-      alert('Error: ' + (data.message || 'Unknown issue'));
-    }
-  })
-  .catch(err => {
-    alert('Fetch error: ' + err.message);
-  });
-}
-</script>
+<footer>© 2025 LoL Fundamentals · Contact: arcsecond@lolfundamentals.com</footer>
 
 </body>
 </html>
