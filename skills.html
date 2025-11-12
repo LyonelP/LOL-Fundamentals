@@ -5,7 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>LoL Fundamentals – Skills Hub</title>
 
-<!-- Login check (same as other pages) -->
+<!-- Login check -->
 <script>
   if (localStorage.getItem('lolfundamentals_logged_in') !== 'true') {
     window.location.replace('login.html');
@@ -65,7 +65,7 @@ header {
 
 /* Skill card */
 .skill-card {
-  background: rgba(13,17,23,0.9); /* slightly less transparent */
+  background: rgba(13,17,23,0.9);
   border: 2px solid #c9aa71;
   border-radius: 8px;
   padding: 25px 10px;
@@ -74,10 +74,13 @@ header {
   transition: transform 0.25s, box-shadow 0.3s;
   cursor: pointer;
   font-size: 15px;
+  text-decoration: none;
+  display: block;
 }
 .skill-card:hover {
   transform: translateY(-3px);
   box-shadow: 0 0 15px rgba(201,170,113,0.6);
+  color: #f9d949;
 }
 
 @media (max-width: 500px) {
@@ -110,16 +113,23 @@ const skills = [
 ];
 
 const container = document.getElementById('skills-container');
+
 skills.forEach(skill => {
-  const card = document.createElement('div');
-  card.className = 'skill-card';
-  card.textContent = skill;
-  container.appendChild(card);
+  const link = document.createElement('a');
+  link.className = 'skill-card';
+  
+  // turn skill name into lowercase filename without spaces or symbols
+  const fileName = skill.toLowerCase().replace(/[^a-z0-9]/g, '');
+  link.href = fileName + '.html';
+  link.textContent = skill;
+  
+  container.appendChild(link);
 });
 </script>
 
 </body>
 </html>
+
 
 
 
