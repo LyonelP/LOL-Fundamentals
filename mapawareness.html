@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
+<meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Map Awareness – LoL Fundamentals</title>
 
@@ -9,12 +9,14 @@
 body {
   margin: 0;
   font-family: 'Beaufort for LOL', Arial, Helvetica, sans-serif;
-  background: url('https://64.media.tumblr.com/594ac290bec6d5e9ad98b5f53404f00b/245c4c3ee469f81d-e4/s1280x1920/1cda4284320eb2031758b.jpg') no-repeat center center fixed;
+  background: url('https://images.contentstack.io/v3/assets/bltb6530b271fddd0b1/blt35c0f30e469b2f8b/64f2c77ad21b690f96c03269/league_map_minimap.jpg') no-repeat center center fixed;
   background-size: cover;
   color: #e6edf3;
   text-align: center;
   overflow-x: hidden;
 }
+
+/* Overlay */
 body::before {
   content: "";
   position: fixed;
@@ -23,6 +25,8 @@ body::before {
   background: rgba(10,15,20,0.75);
   z-index: -1;
 }
+
+/* Header */
 header {
   background: rgba(13,17,23,0.9);
   border-bottom: 2px solid #c9aa71;
@@ -33,6 +37,8 @@ header {
   color: #c9aa71;
   letter-spacing: 1px;
 }
+
+/* Back button */
 .back-button {
   display: inline-block;
   margin: 20px auto 10px;
@@ -50,21 +56,24 @@ header {
   background: linear-gradient(135deg, #e6c97f, #f0d88b);
   box-shadow: 0 0 15px rgba(255,215,0,0.8);
 }
+
+/* Content container (Ekko-style) */
 .content-container {
-  max-width: 900px;
   margin: 20px auto 50px auto;
+  max-width: 900px;
   background: rgba(13,17,23,0.95);
   border: 1px solid #2f81f7;
-  padding: 20px;
   border-radius: 10px;
+  padding: 20px;
   text-align: left;
   color: #fff;
   font-size: 16px;
   line-height: 1.6;
+  position: relative;
 }
 .content-container h2 {
-  color: #F9D949; /* gold headings */
-  margin-bottom: 12px;
+  color: #F9D949; /* gold heading */
+  margin-top: 0;
 }
 .content-container ul {
   margin-left: 20px;
@@ -72,32 +81,34 @@ header {
 .content-container li {
   margin-bottom: 10px;
 }
+
 footer {
   text-align: center;
   padding: 15px 10px;
   font-size: 14px;
   color: #8b949e;
 }
-@media (max-width:600px){
-  header{font-size:24px;padding:15px;}
-  .content-container{padding:15px;margin:20px 10px 30px 10px;}
+
+@media (max-width: 600px) {
+  header { font-size: 24px; padding: 15px; }
+  .content-container { margin: 15px 10px 30px 10px; padding: 15px; }
 }
 </style>
 
 <script>
-if(localStorage.getItem('lolfundamentals_logged_in')!=='true'){
+if(localStorage.getItem('lolfundamentals_logged_in') !== 'true'){
   window.location.replace('login.html');
 }
 </script>
-</head>
 
+</head>
 <body>
 
 <header>Map Awareness</header>
 <a href="skillshub.html" class="back-button">Back to Skills Hub</a>
 
 <div class="content-container">
-  <h2>What is Map Awareness?</h2>
+  <h2>Map Awareness</h2>
   <p>Map Awareness is your ability to check the minimap frequently and quickly while gathering all of the information presented. Strong map awareness allows you to anticipate plays, avoid ganks, and make better macro decisions.</p>
 
   <h2>Things to Look Out For</h2>
@@ -116,6 +127,8 @@ if(localStorage.getItem('lolfundamentals_logged_in')!=='true'){
 
 </body>
 </html>
+
+
 
 
 
