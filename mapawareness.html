@@ -9,7 +9,8 @@
 body {
   margin: 0;
   font-family: 'Beaufort for LOL', Arial, Helvetica, sans-serif;
-  background: url('https://images.contentstack.io/v3/assets/bltb6530b271fddd0b1/blt35c0f30e469b2f8b/64f2c77ad21b690f96c03269/league_map_minimap.jpg') no-repeat center center fixed;
+  /* League-themed background */
+  background: url('https://ddragon.leagueoflegends.com/cdn/img/champion/splash/Ahri_0.jpg') no-repeat center center fixed;
   background-size: cover;
   color: #e6edf3;
   text-align: center;
@@ -34,7 +35,7 @@ header {
   font-weight: bold;
   font-size: 26px;
   text-transform: uppercase;
-  color: #c9aa71;
+  color: #c9aa71; /* gold header */
   letter-spacing: 1px;
 }
 
@@ -57,7 +58,7 @@ header {
   box-shadow: 0 0 15px rgba(255,215,0,0.8);
 }
 
-/* Content container (Ekko-style) */
+/* Content container */
 .content-container {
   margin: 20px auto 50px auto;
   max-width: 900px;
@@ -66,13 +67,13 @@ header {
   border-radius: 10px;
   padding: 20px;
   text-align: left;
-  color: #fff;
+  color: #fff; /* white text */
   font-size: 16px;
   line-height: 1.6;
   position: relative;
 }
 .content-container h2 {
-  color: #F9D949; /* gold heading */
+  color: #c9aa71; /* gold headings */
   margin-top: 0;
 }
 .content-container ul {
@@ -105,7 +106,7 @@ if(localStorage.getItem('lolfundamentals_logged_in') !== 'true'){
 <body>
 
 <header>Map Awareness</header>
-<a href="skillshub.html" class="back-button">Back to Skills Hub</a>
+<a href="skills.html" class="back-button">Back to Skills Hub</a>
 
 <div class="content-container">
   <h2>Map Awareness</h2>
