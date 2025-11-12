@@ -60,28 +60,16 @@ header {
   background: rgba(13,17,23,0.6);
   border: 2px solid #c9aa71;
   border-radius: 8px;
-  padding: 16px;
+  padding: 25px 10px;
   text-align: center;
   color: #fff;
   transition: transform 0.25s, box-shadow 0.3s;
   cursor: pointer;
+  font-size: 15px;
 }
 .skill-card:hover {
   transform: translateY(-3px);
   box-shadow: 0 0 15px rgba(201,170,113,0.6);
-}
-
-.skill-card img {
-  width: 40px;
-  height: 40px;
-  filter: brightness(0) invert(1);
-  margin-bottom: 10px;
-}
-
-.skill-card h3 {
-  margin: 0;
-  font-size: 15px;
-  color: #fff;
 }
 
 @media (max-width: 500px) {
@@ -98,71 +86,33 @@ header {
 <div class="skills-container" id="skills-container"></div>
 
 <script>
-const skills = {
-  "Map Awareness": "https://img.icons8.com/ios-filled/50/ffffff/map.png",
-  "Communication": "https://img.icons8.com/ios-filled/50/ffffff/speech-bubble.png",
-  "Pings": "https://img.icons8.com/ios-filled/50/ffffff/alarm.png",
-  "Summoner Spells": "https://img.icons8.com/ios-filled/50/ffffff/lightning-bolt.png",
-  "Roaming": "https://img.icons8.com/ios-filled/50/ffffff/sprint.png",
-  "Farming": "https://img.icons8.com/ios-filled/50/ffffff/wheat.png",
-  "Positioning": "https://img.icons8.com/ios-filled/50/ffffff/compass.png",
-  "Vision": "https://img.icons8.com/ios-filled/50/ffffff/eye.png",
-  "Teamwork": "https://img.icons8.com/ios-filled/50/ffffff/group.png",
-  "Pathing": "https://img.icons8.com/ios-filled/50/ffffff/route.png",
-  "Trading": "https://img.icons8.com/ios-filled/50/ffffff/swords.png",
-  "Wave Control": "https://img.icons8.com/ios-filled/50/ffffff/planning.png",
-  "Power Spikes": "https://img.icons8.com/ios-filled/50/ffffff/bicep.png",
-  "Mindset": "https://img.icons8.com/ios-filled/50/ffffff/brain.png",
-  "Kiting": "https://img.icons8.com/ios-filled/50/ffffff/moving-backwards.png",
-  "Ganking": "https://img.icons8.com/ios-filled/50/ffffff/surprise.png",
-  "Animation Cancelling": "https://img.icons8.com/ios-filled/50/ffffff/combo.png",
-  "Back Timings": "https://img.icons8.com/ios-filled/50/ffffff/back-arrow.png",
-  "Target Selection": "https://img.icons8.com/ios-filled/50/ffffff/target.png",
-  "Mouse Accuracy": "https://img.icons8.com/ios-filled/50/ffffff/mouse.png",
-  "Reading Players": "https://img.icons8.com/ios-filled/50/ffffff/book.png",
-  "Win Conditions": "https://img.icons8.com/ios-filled/50/ffffff/trophy.png",
-  "Laning": "https://img.icons8.com/ios-filled/50/ffffff/flag.png",
-  "Sieging": "https://img.icons8.com/ios-filled/50/ffffff/castle.png",
-  "Baiting": "https://img.icons8.com/ios-filled/50/ffffff/fish.png",
-  "Farming Efficiency": "https://img.icons8.com/ios-filled/50/ffffff/wheat.png",
-  "Reaction Time": "https://img.icons8.com/ios-filled/50/ffffff/stopwatch.png",
-  "Rotations": "https://img.icons8.com/ios-filled/50/ffffff/refresh.png",
-  "Calls": "https://img.icons8.com/ios-filled/50/ffffff/phone.png",
-  "FPS": "https://img.icons8.com/ios-filled/50/ffffff/computer.png",
-  "Split Pushing": "https://img.icons8.com/ios-filled/50/ffffff/flag.png",
-  "Lane Assignments": "https://img.icons8.com/ios-filled/50/ffffff/map.png",
-  "Auto Cancelling": "https://img.icons8.com/ios-filled/50/ffffff/cancel.png",
-  "Meta": "https://img.icons8.com/ios-filled/50/ffffff/book.png",
-  "Damage/Poke": "https://img.icons8.com/ios-filled/50/ffffff/sword.png",
-  "Contesting CS": "https://img.icons8.com/ios-filled/50/ffffff/minus.png",
-  "Smiting": "https://img.icons8.com/ios-filled/50/ffffff/lightning-bolt.png",
-  "Level 1": "https://img.icons8.com/ios-filled/50/ffffff/1-circle.png",
-  "Ping/Internet": "https://img.icons8.com/ios-filled/50/ffffff/wifi.png",
-  "Match Ups/Champion Interactions": "https://img.icons8.com/ios-filled/50/ffffff/duel.png",
-  "Tab Screen": "https://img.icons8.com/ios-filled/50/ffffff/menu.png",
-  "Peripherals": "https://img.icons8.com/ios-filled/50/ffffff/keyboard.png",
-  "Early Game": "https://img.icons8.com/ios-filled/50/ffffff/sun.png",
-  "Mid Game": "https://img.icons8.com/ios-filled/50/ffffff/noon.png",
-  "Late Game": "https://img.icons8.com/ios-filled/50/ffffff/moon.png",
-  "Champion Select": "https://img.icons8.com/ios-filled/50/ffffff/lobby.png",
-  "Team Compositions": "https://img.icons8.com/ios-filled/50/ffffff/organization.png",
-  "APM": "https://img.icons8.com/ios-filled/50/ffffff/speed.png",
-  "Wave Clear": "https://img.icons8.com/ios-filled/50/ffffff/dead-enemy.png",
-  "Bans": "https://img.icons8.com/ios-filled/50/ffffff/x.png",
-  "Not Raging/Blaming": "https://img.icons8.com/ios-filled/50/ffffff/peace.png"
-};
+const skills = [
+  "Map Awareness", "Communication", "Pings", "Summoner Spells", "Roaming", 
+  "Farming", "Positioning", "Vision", "Teamwork", "Pathing", 
+  "Trading", "Wave Control", "Power Spikes", "Mindset", "Kiting",
+  "Ganking", "Animation Cancelling", "Back Timings", "Target Selection", "Mouse Accuracy",
+  "Reading Players", "Win Conditions", "Laning", "Sieging", "Baiting",
+  "Farming Efficiency", "Reaction Time", "Rotations", "Calls", "FPS",
+  "Split Pushing", "Lane Assignments", "Auto Cancelling", "Meta", "Damage/Poke",
+  "Contesting CS", "Smiting", "Level 1", "Ping/Internet", "Match Ups/Champion Interactions",
+  "Tab Screen", "Peripherals", "Early Game", "Mid Game", "Late Game",
+  "Champion Select", "Team Compositions", "APM", "Wave Clear", "Bans", 
+  "Not Raging/Blaming"
+];
 
 const container = document.getElementById('skills-container');
-for (const [name, icon] of Object.entries(skills)) {
+skills.forEach(skill => {
   const card = document.createElement('div');
   card.className = 'skill-card';
-  card.innerHTML = `<img src="${icon}" alt="${name} Icon"><h3>${name}</h3>`;
+  card.textContent = skill;
   container.appendChild(card);
-}
+});
 </script>
 
 </body>
 </html>
+
+
 
 
 
