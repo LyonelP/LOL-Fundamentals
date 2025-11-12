@@ -35,6 +35,8 @@ header {
   background-position: center;
   color: #fff;
   border-bottom: 1px solid #1f2937;
+  position: relative;
+  z-index: 1;
 }
 .hero h1 {
   font-size: 3em;
@@ -59,6 +61,9 @@ header {
   font-weight: bold;
   transition: 0.3s;
   border: 1px solid #c9aa71;
+  cursor: pointer;
+  position: relative;
+  z-index: 2;
 }
 .btn:hover {
   background: #4795ff;
@@ -165,7 +170,7 @@ footer a:hover {
 <section class="hero">
 <h1>The Ultimate Diana & Ekko Guide</h1>
 <p>Master every aspect of League of Legends with champions like Diana and Ekko. Learn precise combos, matchup strategies, and advanced tips to elevate your gameplay. Written by Arcsecond, rank 1 Challenger Ekko and Diana player.</p>
-<a href="https://buy.stripe.com/dRmaEQbU820s0B03S2ejK01" rel="noopener noreferrer" class="btn" target="_blank">Get Access</a>
+<button class="btn" id="accessBtn">Get Access</button>
 </section>
 
 <!-- What You’ll Learn Section -->
@@ -201,6 +206,11 @@ footer a:hover {
 </footer>
 
 <script>
+// Stripe link fix: open in new tab when button is clicked
+document.getElementById("accessBtn").addEventListener("click", () => {
+  window.open("https://buy.stripe.com/dRmaEQbU820s0B03S2ejK01", "_blank", "noopener,noreferrer");
+});
+
 // Google Sheet CSV published link
 const membersCSV = "https://docs.google.com/spreadsheets/d/e/2PACX-1vR-0OZki4X8kc33NfrLsGL47-7mFj3SzjyGx6hs4QcnvRXiE-cOaJfk4wgvyIf6XXpnuB8D-B4TqSrW/pub?output=csv";
 let validEmails = [];
