@@ -23,7 +23,7 @@ body {
   overflow-x: hidden;
 }
 
-/* Overlay for readability */
+/* Overlay */
 body::before {
   content: "";
   position: fixed;
@@ -64,45 +64,41 @@ header {
   box-shadow: 0 0 15px rgba(255,215,0,0.8);
 }
 
-/* Content container */
+/* Content */
 .content-container {
   margin: 20px auto 50px auto;
-  max-width: 900px;
+  max-width: 950px;
   background: rgba(13,17,23,0.95);
   border: 1px solid #2f81f7;
   border-radius: 10px;
-  padding: 20px;
+  padding: 25px;
   text-align: left;
   color: #fff;
   font-size: 16px;
   line-height: 1.6;
-  position: relative;
 }
 .content-container h2 {
   color: #c9aa71;
   margin-top: 0;
 }
-.content-container h3 {
-  color: #2f81f7;
-  margin-top: 20px;
+.spell {
+  margin-bottom: 20px;
 }
-.content-container ul {
-  margin-left: 20px;
-}
-.content-container li {
-  margin-bottom: 10px;
+.spell img {
+  width: 28px;
+  height: 28px;
+  vertical-align: middle;
+  margin-right: 10px;
+  border-radius: 4px;
+  border: 1px solid #444;
 }
 
+/* Footer */
 footer {
   text-align: center;
   padding: 15px 10px;
   font-size: 14px;
   color: #8b949e;
-}
-
-@media (max-width: 600px) {
-  header { font-size: 24px; padding: 15px; }
-  .content-container { margin: 15px 10px 30px 10px; padding: 15px; }
 }
 </style>
 </head>
@@ -113,40 +109,50 @@ footer {
 
 <div class="content-container">
   <h2>Summoner Spell Usage</h2>
-  <p>This is a really underrated skill. The most basic example is using Flash to dodge a play completely instead of flashing later after having taken damage and Flash having to be used anyways.</p>
+  <p>Summoner spell usage is one of the most underrated skills in League. The most basic example is using Flash to dodge a play completely instead of flashing later after taking damage and still needing to use Flash anyway.</p>
 
-  <h3>Flash</h3>
-  <p>Flash is the most used summoner spell in the game since the instant ability to move a substantial distance is extremely strong. The most basic example is using Flash to dodge a play completely instead of flashing later after having taken damage and Flash having to be used anyways. Knowing which walls can be flashed and from where is also extremely important, as well as which abilities can be extended or altered with Flash.</p>
+  <div class="spell">
+    <p><img src="https://ddragon.leagueoflegends.com/cdn/14.9.1/img/spell/SummonerFlash.png" alt="Flash"> <strong>Flash:</strong> Flash is the most used summoner spell in the game since the instant ability to move a substantial distance is extremely strong. Knowing which walls can be flashed and from where is also important, as well as which abilities can be extended or altered with Flash.</p>
+  </div>
 
-  <h3>Ghost</h3>
-  <p>How early this should be casted is the main distinguisher for skill on this summoner spell. It also increases one’s ability to kite because more distance can be spread between each auto attack.</p>
+  <div class="spell">
+    <p><img src="https://ddragon.leagueoflegends.com/cdn/14.9.1/img/spell/SummonerHaste.png" alt="Ghost"> <strong>Ghost:</strong> How early this should be cast is the main distinguisher for skill with this spell. It increases one’s ability to kite by allowing more distance between each auto attack.</p>
+  </div>
 
-  <h3>Heal</h3>
-  <p>Heal timing can be difficult as the healing can be reduced from healing reduction. You also want to maximize the burst of movement speed it gives. The trickiest part about the summoner spell is knowing when to sacrifice it for a teammate. If they still died when using it and it barely helped you, then you know it was a mistake to use it then.</p>
+  <div class="spell">
+    <p><img src="https://ddragon.leagueoflegends.com/cdn/14.9.1/img/spell/SummonerHeal.png" alt="Heal"> <strong>Heal:</strong> Heal timing can be difficult since it can be reduced by healing reduction. You also want to maximize the burst of movement speed it gives. The hardest part is knowing when to sacrifice it for a teammate — if they still die and it barely helps you, it was a mistake to use it.</p>
+  </div>
 
-  <h3>Ignite</h3>
-  <p>Knowing exactly how much damage it does for the execute and only using it if you didn’t have the time and damage them without. It should pretty much only be used early when playing support or when using it for the healing reduction.</p>
+  <div class="spell">
+    <p><img src="https://ddragon.leagueoflegends.com/cdn/14.9.1/img/spell/SummonerDot.png" alt="Ignite"> <strong>Ignite:</strong> Knowing exactly how much damage it deals for an execute and only using it when you don’t have time to deal the damage yourself is key. It’s mostly used early or for applying healing reduction.</p>
+  </div>
 
-  <h3>Exhaust</h3>
-  <p>Great against certain champions like Yasuo, Zed, Diana, and Talon that have strong ultimates with a short delay on them. It’s even better on champions that have a hard time exiting the fight or waiting out the Exhaust. It’s also mostly used bot lane on supports without hard crowd control.</p>
+  <div class="spell">
+    <p><img src="https://ddragon.leagueoflegends.com/cdn/14.9.1/img/spell/SummonerExhaust.png" alt="Exhaust"> <strong>Exhaust:</strong> Great against champions like Yasuo, Zed, Diana, or Talon who have strong ultimates with a short delay. It’s even better on champions who struggle to exit fights. Mostly used bot lane on supports without hard CC.</p>
+  </div>
 
-  <h3>Teleport</h3>
-  <p>This is the most complicated summoner spell in the game, although it was simplified early by giving it such a long channel. Now it’s mostly used as a reset tool during lane. Ideally you make it back to lane before the enemy has started or finished their recall. If it’s past 10 minutes you can TP straight to the wave to start pushing it into the enemy tower faster, since the easiest way to keep someone in lane is to fast push the wave into tower.</p>
+  <div class="spell">
+    <p><img src="https://ddragon.leagueoflegends.com/cdn/14.9.1/img/spell/SummonerTeleport.png" alt="Teleport"> <strong>Teleport:</strong> The most complex summoner spell in the game. It’s now mostly a lane reset tool — ideally you return before your opponent finishes recalling. After 10 minutes, teleporting directly to a wave can help push it into tower faster, keeping opponents stuck in lane.</p>
+  </div>
 
-  <h3>Cleanse</h3>
-  <p>Possibly taken mid against a champion like Lissandra, but even then Teleport is often still the better choice. Cleanse is mostly taken on ADCs against champions like Ashe. Timing a Cleanse perfectly after being CC’d is always impressive.</p>
+  <div class="spell">
+    <p><img src="https://ddragon.leagueoflegends.com/cdn/14.9.1/img/spell/SummonerBoost.png" alt="Cleanse"> <strong>Cleanse:</strong> Sometimes taken mid against a champion like Lissandra, but more often on ADCs versus Ashe or other CC-heavy champs. Perfectly timing Cleanse after being CC’d always feels satisfying.</p>
+  </div>
 
-  <h3>Smite</h3>
-  <p>Everyone knows how important timing Smite is for securing objectives like Baron and Dragon. The only thing to track now is when your Smite deals 600, 900, or 1200 damage. Smite can also be used to clear out minions or, when fully upgraded, to clear a camp quickly.</p>
+  <div class="spell">
+    <p><img src="https://ddragon.leagueoflegends.com/cdn/14.9.1/img/spell/SummonerSmite.png" alt="Smite"> <strong>Smite:</strong> Timing Smite to secure Baron or Dragon is crucial. Track whether your Smite deals 600, 900, or 1200 damage. Fully upgraded, it can also be used to clear minions or camps efficiently.</p>
+  </div>
 
-  <h3>Barrier</h3>
-  <p>Barrier is mostly taken on champions that can't take advantage of the movement from Ghost or Heal. Barrier is good on champions like Xerath who are stationary while ulting. It’s now mostly taken on ADC champions after the last buff.</p>
+  <div class="spell">
+    <p><img src="https://ddragon.leagueoflegends.com/cdn/14.9.1/img/spell/SummonerBarrier.png" alt="Barrier"> <strong>Barrier:</strong> Typically taken by champions who can’t benefit from Ghost or Heal’s movement. Great on stationary champions like Xerath during his ultimate, and recently more common on ADCs after buffs.</p>
+  </div>
 </div>
 
 <footer>© 2025 LoL Fundamentals · All rights reserved</footer>
 
 </body>
 </html>
+
 
 
 
