@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Reading Players – LoL Fundamentals</title>
+<title>Mouse Accuracy – LoL Fundamentals</title>
 
 <!-- Login check -->
 <script>
@@ -20,7 +20,9 @@ body {
   color: #fff;
   background: url('https://64.media.tumblr.com/594ac290bec6d5e9ad98b5f53404f00b/245c4c3ee469f81d-e4/s1280x1920/1cda4284320eb2031758bbc50ba.jpg') no-repeat center center fixed;
   background-size: cover;
+  position: relative;
   overflow-x: hidden;
+  z-index: 0;
 }
 
 /* Overlay for readability */
@@ -30,10 +32,9 @@ body::before {
   top: 0; left: 0;
   width: 100%; height: 100%;
   background: rgba(10,15,20,0.75);
-  z-index: -1;
+  z-index: 0;
 }
 
-/* Header */
 header {
   background: rgba(13,17,23,0.9);
   border-bottom: 2px solid #c9aa71;
@@ -43,9 +44,10 @@ header {
   text-transform: uppercase;
   color: #c9aa71;
   letter-spacing: 1px;
+  position: relative;
+  z-index: 1;
 }
 
-/* Back button */
 .back-button {
   display: inline-block;
   margin: 20px auto 10px;
@@ -57,6 +59,8 @@ header {
   font-weight: bold;
   transition: all 0.3s;
   box-shadow: 0 0 10px rgba(201,170,113,0.5);
+  position: relative;
+  z-index: 1;
 }
 .back-button::before { content: "← "; }
 .back-button:hover {
@@ -64,7 +68,6 @@ header {
   box-shadow: 0 0 15px rgba(255,215,0,0.8);
 }
 
-/* Content container */
 .content-container {
   margin: 20px auto 50px auto;
   max-width: 900px;
@@ -77,16 +80,11 @@ header {
   font-size: 16px;
   line-height: 1.6;
   position: relative;
+  z-index: 1;
 }
 .content-container h2 {
   color: #c9aa71;
   margin-top: 0;
-}
-.content-container ul {
-  margin-left: 20px;
-}
-.content-container li {
-  margin-bottom: 10px;
 }
 
 footer {
@@ -94,6 +92,8 @@ footer {
   padding: 15px 10px;
   font-size: 14px;
   color: #8b949e;
+  position: relative;
+  z-index: 1;
 }
 
 @media (max-width: 600px) {
@@ -104,27 +104,20 @@ footer {
 </head>
 <body>
 
-<header>Reading Players</header>
+<header>Mouse Accuracy</header>
 <a href="skills.html" class="back-button">Back to Skills Hub</a>
 
 <div class="content-container">
-  <h2>Reading Players</h2>
-  <p>Reading players is one of the most advanced skills in League of Legends. It requires experience, observation, and understanding gameplay patterns to anticipate your opponent's actions.</p>
+  <h2>Mouse Accuracy</h2>
+  <p>Mouse accuracy is simply how precise your clicks are when playing the game. Higher accuracy means you’ll reliably land abilities, move efficiently, and avoid misclicks that can cost you fights.</p>
 
-  <h2>Patterns to Look For in Your Opponent</h2>
-  <ul>
-    <li><strong>Aggression level:</strong> Do they try to fight as soon as they come to lane?</li>
-    <li><strong>Pushing level:</strong> How quickly and often do they push the wave?</li>
-    <li><strong>Roaming level:</strong> How often do they leave lane, and how often do they commit to a full roam?</li>
-    <li><strong>Dodging patterns:</strong> Pay attention to which side they prefer to dodge. Many players never dodge forward, even though it can be one of the most rewarding ways to avoid damage.</li>
-  </ul>
+  <p>A warm-up exercise I like is picking a spot on the minimap, such as a specific tower, and seeing how quickly and accurately I can click that point. Then I immediately center the camera back on my champion and repeat this a few times at the start of the game. This improves both speed and precision, making your in-game actions more consistent.</p>
 </div>
 
 <footer>© 2025 LoL Fundamentals · All rights reserved</footer>
 
 </body>
 </html>
-
 
 
 
