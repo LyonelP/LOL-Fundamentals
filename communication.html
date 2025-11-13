@@ -54,6 +54,7 @@ header {
   transition: all 0.3s;
   box-shadow: 0 0 10px rgba(201,170,113,0.5);
 }
+.back-button::before { content: "← "; }
 .back-button:hover {
   background: linear-gradient(135deg, #e6c97f, #f0d88b);
   box-shadow: 0 0 15px rgba(255,215,0,0.8);
@@ -64,6 +65,7 @@ header {
   max-width: 900px;
   background: rgba(13,17,23,0.95);
   border-radius: 10px;
+  border: 2px solid #2f81f7; /* Blue border for entire section */
   padding: 20px;
   text-align: left;
   color: #fff;
@@ -71,20 +73,9 @@ header {
   line-height: 1.6;
   position: relative;
 }
-
 .content-container h2 {
   color: #c9aa71;
   margin-top: 0;
-}
-
-.ping-section {
-  margin-top: 25px;
-}
-.ping-item {
-  margin-bottom: 12px;
-  padding: 8px 0;
-  font-size: 16px;
-  color: #fff;
 }
 
 footer {
@@ -110,23 +101,17 @@ footer {
   <p>The best way to communicate with your team is through pings. I’ve found that pinging twice and checking to see if the communication was received before pinging again works best. Chat is best used for keeping your team morale high. Time spent typing is time not spent playing, so it’s best to minimize it.</p>
   <p>Typing <strong>“gj”</strong> after someone makes a good play is great, and <strong>“ty”</strong> if someone hands over a buff to you. When you’re behind or the enemy makes a good play, typing <strong>“np we’re fine”</strong> or <strong>“we’ll win”</strong> works wonders. Using the thumbs‑up emote instead of typing “gj” is also effective and faster.</p>
 
-  <div class="ping-section">
-    <h2>Common Pings</h2>
-
-    <div class="ping-item"><strong>Danger:</strong> Warn teammates of enemy roam or gank.</div>
-    <div class="ping-item"><strong>Assist Me:</strong> I need help securing an objective or winning a fight.</div>
-    <div class="ping-item"><strong>On My Way:</strong> I'm coming to help with an objective or fight. Don't use this ping until you're close to the fight.</div>
-    <div class="ping-item"><strong>Enemy Missing (MIA):</strong> Enemy laner disappeared into fog of war.</div>
-
-  </div>
+  <h2>Common Pings</h2>
+  <p><strong>Danger:</strong> Warn teammates of enemy roam or gank.</p>
+  <p><strong>Assist Me:</strong> I need help securing an objective or winning a fight.</p>
+  <p><strong>On My Way:</strong> I'm coming to help with an objective or fight. Don't use this ping until you're close to the fight.</p>
+  <p><strong>Enemy Missing (MIA):</strong> Enemy laner disappeared into fog of war.</p>
 </div>
 
 <footer>© 2025 LoL Fundamentals · All rights reserved</footer>
 
 </body>
 </html>
-
-
 
 
 
