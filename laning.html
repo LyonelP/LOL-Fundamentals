@@ -66,13 +66,93 @@ header {
 
 /* Content container */
 .content-container {
-  margin: 20px auto 60px auto; /* extra bottom space so video isn't flush to footer */
-  max-width: 1100px;            /* allow bigger video on wide screens *
+  margin: 20px auto 60px auto;
+  max-width: 1000px;
+  background: rgba(13,17,23,0.95);
+  border: 1px solid #2f81f7;
+  border-radius: 10px;
+  padding: 24px;
+  text-align: left;
+  color: #fff;
+  font-size: 16px;
+  line-height: 1.6;
+  position: relative;
+}
+.content-container h2 {
+  color: #c9aa71;
+  margin-top: 0;
+}
+.content-container ul {
+  margin-left: 20px;
+  list-style-type: disc;
+}
 
+/* Responsive video */
+.video-wrap {
+  position: relative;
+  padding-bottom: 56.25%; /* 16:9 aspect ratio */
+  height: 0;
+  overflow: hidden;
+  max-width: 100%;
+  border-radius: 10px;
+  margin: 25px auto 50px auto;
+  box-shadow: 0 0 25px rgba(0,0,0,0.6);
+}
+.video-wrap iframe {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  border: 0;
+  border-radius: 10px;
+}
 
+/* Footer */
+footer {
+  text-align: center;
+  padding: 15px 10px;
+  font-size: 14px;
+  color: #8b949e;
+}
 
+@media (max-width: 600px) {
+  header { font-size: 24px; padding: 15px; }
+  .content-container { margin: 15px 10px 40px 10px; padding: 15px; }
+}
+</style>
+</head>
+<body>
 
+<header>Laning</header>
+<a href="skills.html" class="back-button">Back to Skills Hub</a>
 
+<div class="content-container">
+  <h2>Laning</h2>
+  <p>The laning phase in League of Legends can be broken down into several core components that every player should master:</p>
+  <ul>
+    <li><strong>Farming:</strong> Securing minion kills efficiently to build gold and XP.</li>
+    <li><strong>Pushing:</strong> Applying pressure by moving the wave towards your opponent’s tower.</li>
+    <li><strong>Pulling:</strong> Bringing the wave closer to your tower safely to create favourable conditions.</li>
+    <li><strong>Positioning:</strong> Staying in the optimal spot to trade, avoid ganks, and pressure the wave.</li>
+    <li><strong>Abilities:</strong> Using your champion’s kit effectively in trades, wave control, and harass.</li>
+    <li><strong>Resource and Ability Management:</strong> Managing your health, mana/energy, cooldowns and summoner spells to maintain lane control.</li>
+  </ul>
+
+  <p>Here’s a video that helps visualise these laning fundamentals:</p>
+
+  <div class="video-wrap">
+    <iframe src="https://www.youtube.com/embed/WUi9pOT6wYc"
+      title="Laning Phase Fundamentals"
+      allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+      allowfullscreen></iframe>
+  </div>
+</div>
+
+<footer>© 2025 LoL Fundamentals · All rights reserved</footer>
+
+</body>
+</html>
 
 
 
