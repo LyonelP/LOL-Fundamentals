@@ -83,23 +83,6 @@ header {
   color: #f9d949;
 }
 
-/* Footer */
-footer {
-  text-align: center;
-  padding: 20px 10px;
-  font-size: 14px;
-  color: #8b949e;
-  background: rgba(13,17,23,0.9);
-  border-top: 1px solid #2f81f7;
-}
-footer a {
-  color: #c9aa71;
-  text-decoration: none;
-}
-footer a:hover {
-  text-decoration: underline;
-}
-
 @media (max-width: 500px) {
   header { font-size: 22px; padding: 15px 5px; }
   .skills-container { grid-template-columns: repeat(auto-fit, minmax(140px, 1fr)); }
@@ -115,6 +98,7 @@ footer a:hover {
 <div class="skills-container" id="skills-container"></div>
 
 <script>
+// Skill setup
 const skills = [
   "Map Awareness", "Communication", "Summoner Spells", "Roaming", 
   "Farming", "Positioning", "Vision", "Teamwork", "Pathing", 
@@ -138,13 +122,8 @@ skills.forEach(skill => {
 });
 </script>
 
-<footer>
-© 2025 LoL Fundamentals · All rights reserved
-</footer>
-
 </body>
 </html>
-
 
 
 
