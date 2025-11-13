@@ -23,6 +23,7 @@ body {
   overflow-x: hidden;
 }
 
+/* Overlay for readability */
 body::before {
   content: "";
   position: fixed;
@@ -32,6 +33,7 @@ body::before {
   z-index: -1;
 }
 
+/* Header */
 header {
   background: rgba(13,17,23,0.9);
   border-bottom: 2px solid #c9aa71;
@@ -39,10 +41,11 @@ header {
   font-weight: bold;
   font-size: 26px;
   text-transform: uppercase;
-  color: #c9aa71;
+  color: #c9aa71; /* gold */
   letter-spacing: 1px;
 }
 
+/* Back button */
 .back-button {
   display: inline-block;
   margin: 20px auto 10px;
@@ -61,22 +64,29 @@ header {
   box-shadow: 0 0 15px rgba(255,215,0,0.8);
 }
 
+/* Content container */
 .content-container {
-  margin: 20px auto;
-  max-width: 700px;
+  margin: 20px auto 50px auto;
+  max-width: 900px;
   background: rgba(13,17,23,0.95);
   border: 1px solid #2f81f7;
   border-radius: 10px;
-  padding: 15px 20px;
+  padding: 20px;
   text-align: left;
+  color: #fff; /* white text */
   font-size: 16px;
-  line-height: 1.5;
-  color: #fff;
+  line-height: 1.6;
+  position: relative;
 }
-
 .content-container h2 {
-  color: #c9aa71;
+  color: #c9aa71; /* gold headings */
   margin-top: 0;
+}
+.content-container ul {
+  margin-left: 20px;
+}
+.content-container li {
+  margin-bottom: 10px;
 }
 
 footer {
@@ -84,13 +94,11 @@ footer {
   padding: 15px 10px;
   font-size: 14px;
   color: #8b949e;
-  border-top: 1px solid #1f2937;
-  background: rgba(13,17,23,0.9);
 }
 
 @media (max-width: 600px) {
   header { font-size: 24px; padding: 15px; }
-  .content-container { margin: 15px 10px; padding: 15px; }
+  .content-container { margin: 15px 10px 30px 10px; padding: 15px; }
 }
 </style>
 </head>
@@ -109,6 +117,7 @@ footer {
 
 </body>
 </html>
+
 
 
 
