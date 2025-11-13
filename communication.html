@@ -5,7 +5,6 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Communication – LoL Fundamentals</title>
 
-  <!-- Login check -->
   <script>
     if (localStorage.getItem('lolfundamentals_logged_in') !== 'true') {
       window.location.replace('login.html');
@@ -65,7 +64,6 @@
       margin: 20px auto 50px auto;
       max-width: 900px;
       background: rgba(13,17,23,0.95);
-      border: 1px solid #2f81f7;
       border-radius: 10px;
       padding: 20px;
       text-align: left;
@@ -87,10 +85,7 @@
       align-items: center;
       gap: 12px;
       margin-bottom: 12px;
-      padding: 10px;
-      border-radius: 8px;
-      border: 2px solid #2f81f7;
-      background: rgba(13,17,23,0.9);
+      padding: 8px 0; /* spacing, no border */
     }
     .ping-item img {
       width: 36px;
@@ -131,23 +126,23 @@
       <h2>Common Pings</h2>
 
       <div class="ping-item">
-        <img src="https://static.wikia.nocookie.net/leagueoflegends/images/4/4f/LoL_ping_danger.png" alt="Danger Ping">
-        <span><strong>Danger:</strong> Warn teammates of enemy threats or risky areas.</span>
+        <img src="https://static.wikia.nocookie.net/leagueoflegends/images/9/9e/All_In_ping.png" alt="All In Ping">
+        <span><strong>All‑In:</strong> Engage now with full commitment.</span>
       </div>
 
       <div class="ping-item">
-        <img src="https://static.wikia.nocookie.net/leagueoflegends/images/0/0e/LoL_ping_On_My_Way.png" alt="On My Way Ping">
-        <span><strong>On My Way:</strong> Let teammates know you’re moving toward them or an objective.</span>
+        <img src="https://static.wikia.nocookie.net/leagueoflegends/images/a/a4/On_My_Way_ping.png" alt="On My Way Ping">
+        <span><strong>On My Way:</strong> Moving to help or rotate.</span>
       </div>
 
       <div class="ping-item">
-        <img src="https://static.wikia.nocookie.net/leagueoflegends/images/0/0d/LoL_ping_Assist_Me.png" alt="Assist Me Ping">
-        <span><strong>Assist Me:</strong> Ask for help to secure an objective, push a lane, or contest vision.</span>
+        <img src="https://static.wikia.nocookie.net/leagueoflegends/images/0/0d/Assist_Me_ping.png" alt="Assist Me Ping">
+        <span><strong>Assist Me:</strong> I need help with this.</span>
       </div>
 
       <div class="ping-item">
-        <img src="https://static.wikia.nocookie.net/leagueoflegends/images/8/84/LoL_ping_missing.png" alt="Enemy Missing Ping">
-        <span><strong>Enemy Missing (MIA):</strong> Alert your team that your lane opponent has disappeared.</span>
+        <img src="https://static.wikia.nocookie.net/leagueoflegends/images/5/5a/Enemy_Missing_ping.png" alt="Enemy Missing Ping">
+        <span><strong>Enemy Missing (MIA):</strong> Enemy laner disappeared — be cautious.</span>
       </div>
 
     </div>
@@ -157,7 +152,6 @@
 
 </body>
 </html>
-
 
 
 
