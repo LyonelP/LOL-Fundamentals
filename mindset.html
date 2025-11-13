@@ -23,7 +23,7 @@ body {
   overflow-x: hidden;
 }
 
-/* Overlay */
+/* Overlay for readability */
 body::before {
   content: "";
   position: fixed;
@@ -33,6 +33,7 @@ body::before {
   z-index: -1;
 }
 
+/* Header */
 header {
   background: rgba(13,17,23,0.9);
   border-bottom: 2px solid #c9aa71;
@@ -44,6 +45,7 @@ header {
   letter-spacing: 1px;
 }
 
+/* Back button */
 .back-button {
   display: inline-block;
   margin: 20px auto 10px;
@@ -74,19 +76,8 @@ header {
   color: #fff;
   font-size: 16px;
   line-height: 1.6;
-  display: flex;
-  align-items: flex-start;
-  gap: 15px;
+  position: relative;
 }
-.content-container img {
-  width: 60px;
-  height: 60px;
-  margin-top: 4px;
-}
-.content-container div {
-  flex: 1;
-}
-
 .content-container h2 {
   color: #c9aa71;
   margin-top: 0;
@@ -101,8 +92,7 @@ footer {
 
 @media (max-width: 600px) {
   header { font-size: 24px; padding: 15px; }
-  .content-container { flex-direction: column; margin: 15px 10px 30px 10px; padding: 15px; }
-  .content-container img { margin: 0 auto 10px auto; }
+  .content-container { margin: 15px 10px 30px 10px; padding: 15px; }
 }
 </style>
 </head>
@@ -112,22 +102,18 @@ footer {
 <a href="skills.html" class="back-button">Back to Skills Hub</a>
 
 <div class="content-container">
-  <img src="https://img.icons8.com/ios-filled/100/ffffff/brain.png" alt="Mindset Icon"/>
-  <div>
-    <h2>Mindset</h2>
-    <p>In my opinion, there are three reasons to play League of Legends: for fun, to improve at the game, or for a specific goal.</p>
+  <h2>Mindset</h2>
+  <p>In my opinion, there are three reasons to play League of Legends: for fun, to improve at the game, or for a specific goal.</p>
 
-    <p>Only focus on what you can control. The amount you can influence often surprises players. For example, if your lane opponent scores a successful gank, it is almost always due to poor lane control or bad tempo.</p>
+  <p>Only focus on what you can control. The amount you can influence often surprises players. For example, if your lane opponent scores a successful gank, it is almost always due to poor lane control or bad tempo.</p>
 
-    <p>If something tilting happens, try to absorb that frustration as quickly as possible and continue executing the best plays throughout the game.</p>
-  </div>
+  <p>If something tilting happens, try to absorb that frustration as quickly as possible and continue executing the best plays throughout the game.</p>
 </div>
 
 <footer>© 2025 LoL Fundamentals · All rights reserved</footer>
 
 </body>
 </html>
-
 
 
 
