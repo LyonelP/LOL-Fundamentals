@@ -3,20 +3,39 @@
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>LoL Fundamentals – Skills Hub</title>
+<title>Sieging – LoL Fundamentals</title>
+
+<!-- Login check -->
+<script>
+  if (localStorage.getItem('lolfundamentals_logged_in') !== 'true') {
+    window.location.replace('login.html');
+  }
+</script>
+
 <style>
 body {
   margin: 0;
   font-family: 'Beaufort for LOL', Arial, Helvetica, sans-serif;
-  color: #e6edf3;
   text-align: center;
-  background: url('https://64.media.tumblr.com/594ac290bec6d5e9ad98b5f53404f00b/245c4c3ee469f81d-e4/s1280x1920/1cda4284320eb2031758a9859dfe14ff8bbc50ba.jpg') no-repeat center center fixed;
+  color: #fff;
+  background: url('https://64.media.tumblr.com/2c91bb9a7d9a86129a3bb43a0b8dff87/ee9fcb2e2fda2e7e-cc/s1280x1920/47293f5a08aeb8ed8b2c10ab0d43753a51c9ee6c.jpg') no-repeat center center fixed;
   background-size: cover;
+  overflow-x: hidden;
+}
+
+/* Overlay */
+body::before {
+  content: "";
+  position: fixed;
+  top: 0; left: 0;
+  width: 100%; height: 100%;
+  background: rgba(10,15,20,0.75);
+  z-index: -1;
 }
 
 /* Header */
 header {
-  background: rgba(13,17,23,0.85);
+  background: rgba(13,17,23,0.9);
   border-bottom: 2px solid #c9aa71;
   padding: 20px 10px;
   font-weight: bold;
@@ -39,151 +58,84 @@ header {
   transition: all 0.3s;
   box-shadow: 0 0 10px rgba(201,170,113,0.5);
 }
-.back-button::before {
-  content: "← ";
-}
+.back-button::before { content: "← "; }
 .back-button:hover {
   background: linear-gradient(135deg, #e6c97f, #f0d88b);
   box-shadow: 0 0 15px rgba(255,215,0,0.8);
 }
 
-/* Skill selector */
-#skill-select-container {
-  margin: 20px auto;
-}
-#skill-select {
-  padding: 10px 15px;
-  font-size: 16px;
-  border-radius: 6px;
-  border: none;
-  background: rgba(15,23,34,0.85);
-  color: #c9aa71;
-  cursor: pointer;
-}
-
-/* Skill display */
-#skill-info {
-  margin: 30px auto;
-  max-width: 900px;
-  background: rgba(13,17,23,0.85);
+/* Content */
+.content-container {
+  margin: 20px auto 60px auto;
+  max-width: 1000px;
+  background: rgba(13,17,23,0.95);
   border: 1px solid #2f81f7;
-  padding: 20px;
   border-radius: 10px;
+  padding: 24px;
   text-align: left;
+  color: #fff;
+  font-size: 16px;
+  line-height: 1.6;
+}
+.content-container h2 {
   color: #c9aa71;
-  min-height: 150px;
+  margin-top: 0;
+}
+.content-container ul {
+  margin-left: 20px;
+  list-style-type: disc;
 }
 
-/* Hover effect for skills */
-#skill-info:hover {
-  box-shadow: 0 0 15px rgba(47,129,247,0.5);
+/* Footer */
+footer {
+  text-align: center;
+  padding: 15px 10px;
+  font-size: 14px;
+  color: #8b949e;
 }
 
-@media (max-width: 500px) {
-  header { font-size: 22px; padding: 15px 5px; }
-  #skill-select { font-size: 14px; padding: 8px 10px; }
+@media (max-width: 600px) {
+  header { font-size: 24px; padding: 15px; }
+  .content-container { margin: 15px 10px 40px 10px; padding: 15px; }
 }
 </style>
 </head>
 <body>
 
-<header>LoL Fundamentals – Skills Hub</header>
+<header>Sieging</header>
+<a href="skills.html" class="back-button">Back to Skills Hub</a>
 
-<a href="membershub.html" class="back-button">Back to Members Hub</a>
+<div class="content-container">
+  <h2>Sieging</h2>
+  <p>
+    <strong>Sieging</strong> refers to the coordinated effort of pushing for <strong>tower damage</strong>, usually with multiple team members grouped together. 
+    The main goal of a siege is to create enough pressure that the <strong>enemy ADC and team cannot safely defend or auto-attack the tower</strong>.
+  </p>
 
-<div id="skill-select-container">
-  <select id="skill-select">
-    <option disabled selected>Pick a skill</option>
-  </select>
+  <p>
+    Effective sieging comes down to controlling vision, wave management, and spacing — all while threatening engage or poke. 
+    A good siege forces the enemy to make a tough choice: stay and risk dying, or back off and lose tower health.
+  </p>
+
+  <h3>Core Concepts of Sieging</h3>
+  <ul>
+    <li><strong>Wave Setup:</strong> Always build a wave before grouping — crashing minions under tower draws enemy focus.</li>
+    <li><strong>Vision Control:</strong> Clear flanks and river wards to make it unsafe for the enemy to engage.</li>
+    <li><strong>Positioning:</strong> Keep poke champs and ADC in front range, bruisers and engage tools at the sides ready to punish oversteps.</li>
+    <li><strong>Poke and Threat:</strong> Slowly chip the tower or enemy HP to make the next push lethal.</li>
+    <li><strong>Patience:</strong> Most failed sieges come from diving too early or overstaying after a wave is cleared.</li>
+  </ul>
+
+  <p>
+    A clean siege doesn’t rely on brute force — it’s about <strong>forcing pressure through consistency and control</strong>. 
+    Sometimes the best siege ends with a tower, sometimes with a pick, and sometimes just by suffocating map space for the next objective.
+  </p>
 </div>
 
-<div id="skill-info">
-  <p>Select a skill above to view details.</p>
-</div>
-
-<script>
-// Require login
-if (localStorage.getItem('lolfundamentals_logged_in') !== 'true') {
-  window.location.href = 'index.html'; // redirect to login
-}
-
-// List of all fundamentals skills
-const skills = [
-"Map Awareness","Communication","Pings","Your Champion","Summoner Spell Usage","Mindset","Mouse Accuracy",
-"Reading Players","Win Conditions","Laning","Sieging","Baiting","Trading","Farming","Positioning","Reaction Time",
-"Rotations","Calls","Roaming","Power Spikes","FPS","Split Pushing","Lane Assignments","Wave Control","Itemization",
-"Vision","Objective Control","Animation Cancelling","Ganking","Not Raging/Blaming","Kiting","Auto Cancelling",
-"Target Selection","Champion Pool","Champion Kits","Identifying Player Strength Levels","Back Timings","Meta",
-"Damage/Poke","Contesting CS","Smiting","Level 1","Pathing","Ping/Internet","Match Ups/Champion Interactions",
-"Teamwork","Tab Screen","Peripherals","Early Game","Mid Game","Late Game","Champion Select","Team Compositions",
-"APM","Wave Clear","Bans"
-];
-
-// Populate select
-const select = document.getElementById('skill-select');
-skills.forEach(skill => {
-  const option = document.createElement('option');
-  option.value = skill;
-  option.textContent = skill;
-  select.appendChild(option);
-});
-
-// Show selected skill
-select.addEventListener('change', () => {
-  const skillInfo = document.getElementById('skill-info');
-  let content = `<h2>${select.value}</h2><p>Coming soon!</p>`;
-
-  // Special cases with video embeds
-  switch(select.value) {
-    case "Laning":
-      content = `
-        <h2>Laning</h2>
-        <p>Learn all about effective laning techniques, wave management, and matchup knowledge.</p>
-        <iframe width="100%" height="480" src="https://www.youtube.com/embed/WUi9pOT6wYc" 
-        title="Laning Skill Video" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-      `;
-      break;
-    case "Farming":
-      content = `
-        <h2>Farming</h2>
-        <p>Improve your CSing and gold income efficiently.</p>
-        <iframe width="100%" height="480" src="https://www.youtube.com/embed/BhTvcMmCY_o?start=22" 
-        title="Farming Skill Video" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-      `;
-      break;
-    case "Roaming":
-      content = `
-        <h2>Roaming</h2>
-        <p>Learn when and how to roam effectively to help your team.</p>
-        <iframe width="100%" height="480" src="https://www.youtube.com/embed/th7kVKYUgIk" 
-        title="Roaming Skill Video" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-      `;
-      break;
-    case "Split Pushing":
-      content = `
-        <h2>Split Pushing</h2>
-        <p>Master splitpushing to apply pressure and create advantages.</p>
-        <iframe width="100%" height="480" src="https://www.youtube.com/embed/th7kVKYUgIk" 
-        title="Split Pushing Skill Video" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-      `;
-      break;
-    case "Wave Control":
-      content = `
-        <h2>Wave Control</h2>
-        <p>Learn how to manipulate waves to gain advantages in lane.</p>
-        <iframe width="100%" height="480" src="https://www.youtube.com/embed/edDOUuxFaH8" 
-        title="Wave Control Skill Video" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-      `;
-      break;
-  }
-
-  skillInfo.innerHTML = content;
-});
-</script>
+<footer>© 2025 LoL Fundamentals · All rights reserved</footer>
 
 </body>
 </html>
-
 
 
 
