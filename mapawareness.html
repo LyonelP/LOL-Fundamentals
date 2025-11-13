@@ -75,7 +75,7 @@ header {
   gap: 20px;
 }
 
-/* Content */
+/* Content box */
 .content-container {
   flex: 1 1 600px;
   background: rgba(13,17,23,0.95);
@@ -98,19 +98,23 @@ header {
   margin-bottom: 10px;
 }
 
-/* Minimap image */
+/* Minimap image box */
 .minimap {
   flex: 0 1 350px;
-  border: 2px solid #2f81f7;
+  border: 1px solid #2f81f7;
   border-radius: 10px;
   background: rgba(13,17,23,0.9);
   box-shadow: 0 0 15px rgba(47,129,247,0.4);
-  overflow: hidden;
+  padding: 10px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 .minimap img {
   width: 100%;
+  height: auto;
+  border-radius: 8px;
   display: block;
-  border-radius: 10px;
 }
 
 /* Footer */
@@ -121,6 +125,7 @@ footer {
   color: #8b949e;
 }
 
+/* Mobile fixes */
 @media (max-width: 800px) {
   .main-section {
     flex-direction: column;
@@ -128,6 +133,7 @@ footer {
   }
   .minimap {
     max-width: 90%;
+    margin-top: 15px;
   }
 }
 </style>
@@ -155,7 +161,8 @@ footer {
   </div>
 
   <div class="minimap">
-    <img src="https://static.wikia.nocookie.net/leagueoflegends/images/7/7f/Summoner%27s_Rift_Minimap.png" alt="League of Legends Minimap">
+    <img src="https://static.wikia.nocookie.net/leagueoflegends/images/f/f8/Summoner%27s_Rift_Minimap.png" 
+         alt="League of Legends Summoner's Rift Minimap">
   </div>
 </div>
 
@@ -163,8 +170,6 @@ footer {
 
 </body>
 </html>
-
-
 
 
 
