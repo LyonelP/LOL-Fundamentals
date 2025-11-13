@@ -3,9 +3,9 @@
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Settings – LoL Fundamentals</title>
+<title>Animation Cancelling – LoL Fundamentals</title>
 
-<!-- Require login before page loads -->
+<!-- Login check -->
 <script>
   if (localStorage.getItem('lolfundamentals_logged_in') !== 'true') {
     window.location.replace('login.html');
@@ -16,12 +16,14 @@
 body {
   margin: 0;
   font-family: 'Beaufort for LOL', Arial, Helvetica, sans-serif;
-  background: url('https://ddragon.leagueoflegends.com/cdn/img/champion/splash/Diana_0.jpg') no-repeat center center fixed;
-  background-size: cover;
-  color: #e6edf3;
   text-align: center;
+  color: #fff;
+  background: url('https://64.media.tumblr.com/594ac290bec6d5e9ad98b5f53404f00b/245c4c3ee469f81d-e4/s1280x1920/1cda4284320eb2031758a9859dfe14ff8bbc50ba.jpg') no-repeat center center fixed;
+  background-size: cover;
   overflow-x: hidden;
 }
+
+/* Overlay for readability */
 body::before {
   content: "";
   position: fixed;
@@ -30,6 +32,8 @@ body::before {
   background: rgba(10,15,20,0.75);
   z-index: -1;
 }
+
+/* Header */
 header {
   background: rgba(13,17,23,0.9);
   border-bottom: 2px solid #c9aa71;
@@ -40,9 +44,11 @@ header {
   color: #c9aa71;
   letter-spacing: 1px;
 }
+
+/* Back button */
 .back-button {
   display: inline-block;
-  margin: 25px auto 40px;
+  margin: 20px auto 10px;
   padding: 10px 20px;
   background: linear-gradient(135deg, #c9aa71, #e0c77b);
   color: #000;
@@ -57,116 +63,70 @@ header {
   background: linear-gradient(135deg, #e6c97f, #f0d88b);
   box-shadow: 0 0 15px rgba(255,215,0,0.8);
 }
-.settings-container {
-  max-width: 600px;
-  margin: 0 auto 60px;
+
+/* Content container */
+.content-container {
+  margin: 20px auto 50px auto;
+  max-width: 900px;
   background: rgba(13,17,23,0.95);
   border: 1px solid #2f81f7;
-  border-radius: 12px;
-  padding: 40px 25px;
-  box-shadow: 0 0 15px rgba(47,129,247,0.3);
-  text-align: center;
-}
-.settings-container h2 { color: #c9aa71; margin-bottom: 20px; }
-.settings-container p { color: #e6edf3; margin-bottom: 20px; font-size: 16px; line-height: 1.5; }
-#cancelReason {
-  width: 100%;
-  margin-bottom: 15px;
-  padding: 10px;
-  border-radius: 6px;
-  border: none;
-  background: #0f1722;
-  color: #c9aa71;
-  font-size: 14px;
-  resize: none;
-}
-.cancel-btn {
-  display: inline-block;
-  padding: 14px 30px;
-  background: #f94144;
+  border-radius: 10px;
+  padding: 20px;
+  text-align: left;
   color: #fff;
-  border: none;
-  border-radius: 8px;
-  font-weight: bold;
   font-size: 16px;
-  cursor: pointer;
-  transition: all 0.3s;
-  box-shadow: 0 0 10px rgba(249,65,68,0.4);
+  line-height: 1.6;
+  position: relative;
 }
-.cancel-btn:hover {
-  background: #ff5959;
-  box-shadow: 0 0 18px rgba(255,90,90,0.6);
-  transform: translateY(-2px);
-}
-#confirmMessage {
-  display: none;
+.content-container h2 {
   color: #c9aa71;
-  margin-top: 25px;
-  font-size: 17px;
-  font-weight: bold;
+  margin-top: 0;
 }
+.content-container ul {
+  margin-left: 20px;
+}
+.content-container li {
+  margin-bottom: 10px;
+}
+
 footer {
   text-align: center;
-  padding: 30px;
-  color: #8b949e;
+  padding: 15px 10px;
   font-size: 14px;
-  background: #0a0f14;
-  border-top: 1px solid #1f2937;
+  color: #8b949e;
 }
-footer a { color: #c9aa71; text-decoration: none; }
-footer a:hover { text-decoration: underline; }
+
+@media (max-width: 600px) {
+  header { font-size: 24px; padding: 15px; }
+  .content-container { margin: 15px 10px 30px 10px; padding: 15px; }
+}
 </style>
 </head>
 <body>
 
-<header>Settings</header>
-<a href="membershub.html" class="back-button">Back to Members Hub</a>
+<header>Animation Cancelling</header>
+<a href="skills.html" class="back-button">Back to Skills Hub</a>
 
-<div class="settings-container">
-  <h2>Manage Subscription</h2>
-  <p>If you wish to cancel your subscription, you can do so below. This action will stop future payments but you’ll retain access until your current billing cycle ends.</p>
+<div class="content-container">
+  <h2>Animation Cancelling</h2>
+  <p>Animation cancelling is the technique of interrupting the animation of an ability or auto attack in order to perform another action faster, allowing you to maximize damage, movement, and responsiveness. It is a key mechanical skill in League of Legends that can give you a huge advantage in trades, combos, and duels.</p>
 
-  <textarea id="cancelReason" placeholder="Optional: Tell us why..."></textarea>
-  <br>
-  <button class="cancel-btn" onclick="cancelSubscription()">Cancel Subscription</button>
-  <div id="confirmMessage">Your cancellation request has been received.</div>
+  <h2>Tips for Animation Cancelling</h2>
+  <ul>
+    <li>Understand which abilities and auto attacks can be cancelled and by what actions (e.g., movement, using another ability, or using an item).</li>
+    <li>Practice combos in the practice tool to feel the timing between cancelling animations and starting the next action.</li>
+    <li>Use animation cancelling to reposition after an auto attack, avoid skillshots, or chain abilities efficiently.</li>
+    <li>Prioritize cancelling long animations like Diana’s Q or Ekko’s E to maximize DPS in short trades.</li>
+    <li>Combine animation cancelling with kiting for optimal damage while staying safe.</li>
+  </ul>
 </div>
 
-<footer>
-© 2025 LoL Fundamentals · Contact:
-<a href="mailto:arcsecond@lolfundamentals.com">arcsecond@lolfundamentals.com</a>
-</footer>
-
-<script>
-function cancelSubscription() {
-  const email = localStorage.getItem('lolfundamentals_email') || 'unknown';
-  const reason = document.getElementById('cancelReason').value || '';
-  const confirmMsg = document.getElementById('confirmMessage');
-  const button = document.querySelector('.cancel-btn');
-
-  fetch('YOUR_SCRIPT_URL_HERE', {
-    method: 'POST',
-    headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
-    body: `email=${encodeURIComponent(email)}&notes=${encodeURIComponent('User requested cancellation')}&reason=${encodeURIComponent(reason)}`
-  })
-  .then(res => res.json())
-  .then(data => {
-    console.log('Server response:', data);
-    if (data.status === 'success') {
-      button.style.display = 'none';
-      confirmMsg.style.display = 'block';
-    } else {
-      alert('Error: ' + (data.message || 'Unknown issue'));
-    }
-  })
-  .catch(err => {
-    alert('Fetch error: ' + err.message);
-  });
-}
-</script>
+<footer>© 2025 LoL Fundamentals · All rights reserved</footer>
 
 </body>
 </html>
+
+
 
 
 
