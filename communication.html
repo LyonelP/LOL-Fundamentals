@@ -17,7 +17,6 @@ body {
   font-family: 'Beaufort for LOL', Arial, Helvetica, sans-serif;
   text-align: center;
   color: #fff;
-  /* Properly encoded background URL */
   background: url('https://64.media.tumblr.com/594ac290bec6d5e9ad98b5f53404f00b/245c4c3ee469f81d-e4/s1280x1920/1cda4284320eb2031758a9859dfe14ff8bbc50ba.jpg') no-repeat center center fixed;
   background-size: cover;
   overflow-x: hidden;
@@ -55,7 +54,6 @@ header {
   transition: all 0.3s;
   box-shadow: 0 0 10px rgba(201,170,113,0.5);
 }
-.back-button::before { content: "← "; }
 .back-button:hover {
   background: linear-gradient(135deg, #e6c97f, #f0d88b);
   box-shadow: 0 0 15px rgba(255,215,0,0.8);
@@ -83,17 +81,8 @@ header {
   margin-top: 25px;
 }
 .ping-item {
-  display: flex;
-  align-items: center;
-  gap: 12px;
   margin-bottom: 12px;
-  padding: 8px 0; /* spacing, no border */
-}
-.ping-item img {
-  width: 36px;
-  height: 36px;
-}
-.ping-item span {
+  padding: 8px 0;
   font-size: 16px;
   color: #fff;
 }
@@ -108,7 +97,6 @@ footer {
 @media (max-width: 600px) {
   header { font-size: 24px; padding: 15px; }
   .content-container { margin: 15px 10px 30px 10px; padding: 15px; }
-  .ping-item img { width: 30px; height: 30px; }
 }
 </style>
 </head>
@@ -125,29 +113,10 @@ footer {
   <div class="ping-section">
     <h2>Common Pings</h2>
 
-    <!-- Danger (red) -->
-    <div class="ping-item">
-      <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACgAAAAoCAYAAACM/rhtAAAABmJLR0QA/wD/AP+gvaeTAAABK0lEQVRYhe2LWw6CMAyGv8w6oUukW+oqHILSERBRJTsUrZEJiccRvQLa0g0F10qp62p/sv98D7bzPcH/uQVgAgKZB2UA4IHhBBGQD6CTuqQAZAGhg8Yv4FQ23pqwIqioBZzCVEAEjQgQ5nM4XkYxpNwi4QY57iov1vu4Dxqkly86mZiguQAFZg+woLzWyZ8AqUF3rZKx0yBA5UHVSmX6Zuxg64R0C+wauhh4Aucd0gqMMyB+gc0D0cP8C2T+C3p9AvthrTQSDPDjjVpS5vQCOX0ThN8FLzvo6FFld3RA0zl0G1/EGe25Dv7KKw6jug1gK4gYbJNU5Yc0hAU9UNZr44HSsXMdU8loUqX0JdxIkiOBE9v8pjhiLQPZSkCsNZm5OlkJUagSpkQ1ITBgDGlrdfJM5AKvABvpYKXPpJvlA8gv6Aem6xEflUcoEjLv9l/vl9pLv0DG3gtzE4/7mHAAAAAElFTkSuQmCC" alt="Danger Ping">
-      <span><strong>Danger:</strong> Warn teammates of enemy roam or gank.</span>
-    </div>
-
-    <!-- Assist Me (blue) -->
-    <div class="ping-item">
-      <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACgAAAAoCAYAAACM/rhtAAAABmJLR0QA/wD/AP+gvaeTAAABNUlEQVRYhe2UsW7CMAxGf6kI6ICYBs6mSh0YWk1gFMQkUTqpK+gUev00Kl0PnE2327iZ2w0AJAGmBMEHAqEoAAoHmhEOmY+H2EtUciiIsau4JM3AdSGWZ62kidloVPAFLZoH+xLI63cV5x6Aw7GsQ+oAFJY32J3I0OKX0Gie09qsNe4gZ0Lv4g/AzZjv/I7AYpV4dX8XggOp2Y/orgtSMI2D3iLRuq2EFTLgZZ8Vl8IH+i4BGC1nLIACcnzm8pnlUyFZwEcwUoBOZoebZglEE7CbWAZ9fKcJ9AA5gAhDgEiyfjEanqgP4A0ZsfgTdOeGAxPh+M8dz/WJbxRVHlBsHoEpBDzRrChWCCCFVaAi7oC1+YdgCrvQIpQR6jiV+c5TbRiedQYrnugBd1gs+QzY8L+0Umt8o3bMO0yrDujUdkMMqQbYn1NudvLQ/AFh0ReN+f1TVxOhBsD9N3C0uAH3BmUD8n8T/4T1qgUfCWwAAAABJRU5ErkJggg==" alt="Assist Me Ping">
-      <span><strong>Assist Me:</strong> I need help securing an objective or winning a fight.</span>
-    </div>
-
-    <!-- On My Way (green) -->
-    <div class="ping-item">
-      <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACgAAAAoCAYAAACM/rhtAAAABmJLR0QA/wD/AP+gvaeTAAABJElEQVRYhe2UQQrCMAxFX5ahLSABrYtEaBonbjCJJb2gp66gG2k0g+gKp9g/URmjrFUEAwE4kY3wENjaAQWl9OWT0UaZrXkZChCN+v9h/QBhwLJXPAKxgBFMWU4Y2M7Y9qt9vb1MTwEtJHbaHgAk0kK/wRB4P9AYqXMIH2rLjCBwImGMlRiKN27WmUgniCXZgZggULZH+l7CZ1YsgYhADQzW2q/O80z28D8LbMeV6B1k4myXQoPEuZDUAUqDsXCdedidkgvv1xYJbKi6tQWDuHrYBc0E1qWOiF0jwXACgk8IYgH2ShXwyDpFKd7pgeSgWQ4z3LgUzoJakA2sye7JUj2l6UY0IfwqhVYQKyJjYQ1qAujAHVcKhwAC7u6rrplOPeAiMrYqLgPF2k1w2efXHgU3xv4FN/hb8SfS8ldqgAAAAASUVORK5CYII=" alt="On My Way Ping">
-      <span><strong>On My Way:</strong> I'm coming to help with an objective or fight. Don't use this ping until you're close to the fight</span>
-    </div>
-
-    <!-- Enemy Missing (yellow) -->
-    <div class="ping-item">
-      <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACgAAAAoCAYAAACM/rhtAAAABmJLR0QA/wD/AP+gvaeTAAABKUlEQVRYhe2XS0rDMBCEv2QUhapQU6kk6lWUofgAZnYhY6howQLQS5hCWCyxoVB/Upbd4as23bh4u7oQENgDgBezv9z99klBAAkAVKAO+ls0SnHSnzvSyAE6pmr1dlGAz7Fyg0NmUm7xgl2BBj9IgxYI4Oh4HgSZlb4P0TaEHVv8FqwgAvLEG4N6YLxyhL33f/lcYysBeCuN7gop8lN+qBcfgkZOyUcoa4LK39pCUXyIWQ2GHCo3a+7o7a0APhbGCJ5pYgPggEzpTJ+/2xR4hON+YbB6XJ4G7dgXZNkRXxC1Z0F6D1+/wI8DwKRE/g8B/A/IiXOGMQU/0/mH0B/D+CklYyd1wCgCIkaTLDX+zEwg2VLxD3EPhG+iUoFftxKs2Nx5uBgzlGkJVcjqeCA+GnS/6G0EDqVQ9QW7qKFSRfI3EwX1lgyFb2I+vk2a+aAbs9SaT6gTE1xSs4OqNwjMBTTKFP+f0yoE38/Hbb2n4BGHPKY+QFN+wX8udxtbqlOwAAAAASUVORK5CYII=" alt="Enemy Missing Ping">
-      <span><strong>Enemy Missing (MIA):</strong> Enemy laner disappeared into fog of war.</span>
-    </div>
+    <div class="ping-item"><strong>Danger:</strong> Warn teammates of enemy roam or gank.</div>
+    <div class="ping-item"><strong>Assist Me:</strong> I need help securing an objective or winning a fight.</div>
+    <div class="ping-item"><strong>On My Way:</strong> I'm coming to help with an objective or fight. Don't use this ping until you're close to the fight.</div>
+    <div class="ping-item"><strong>Enemy Missing (MIA):</strong> Enemy laner disappeared into fog of war.</div>
 
   </div>
 </div>
