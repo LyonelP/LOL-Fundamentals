@@ -22,6 +22,16 @@ body {
   background-size: cover;
 }
 
+/* Overlay for readability */
+body::before {
+  content: "";
+  position: fixed;
+  top: 0; left: 0;
+  width: 100%; height: 100%;
+  background: rgba(10,15,20,0.75);
+  z-index: -1;
+}
+
 /* Header */
 header {
   background: rgba(13,17,23,0.9);
@@ -83,6 +93,23 @@ header {
   color: #f9d949;
 }
 
+/* Footer */
+footer {
+  text-align: center;
+  padding: 20px 10px;
+  font-size: 14px;
+  color: #8b949e;
+  background: rgba(13,17,23,0.9);
+  border-top: 1px solid #2f81f7;
+}
+footer a {
+  color: #c9aa71;
+  text-decoration: none;
+}
+footer a:hover {
+  text-decoration: underline;
+}
+
 @media (max-width: 500px) {
   header { font-size: 22px; padding: 15px 5px; }
   .skills-container { grid-template-columns: repeat(auto-fit, minmax(140px, 1fr)); }
@@ -104,7 +131,7 @@ const skills = [
   "Trading", "Wave Control", "Power Spikes", "Mindset", "Kiting",
   "Ganking", "Animation Cancelling", "Back Timings", "Target Selection", "Mouse Accuracy",
   "Reading Players", "Win Conditions", "Laning", "Sieging", "Baiting",
-  "Reaction Time", "Split Pushing", "Lane Assignments", "Damage/Poke",
+  "Reaction Time", "Split Pushing", "Lane Assignments", "Damage",
   "Matchups", "Tab Screen", "Early Game", "Mid Game", "Late Game",
   "Champion Select", "Not Raging/Blaming"
 ];
@@ -121,8 +148,13 @@ skills.forEach(skill => {
 });
 </script>
 
+<footer>
+© 2025 LoL Fundamentals · All rights reserved
+</footer>
+
 </body>
 </html>
+
 
 
 
