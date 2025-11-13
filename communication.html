@@ -23,7 +23,7 @@ body {
   overflow-x: hidden;
 }
 
-/* Overlay */
+/* Overlay for readability */
 body::before {
   content: "";
   position: fixed;
@@ -69,7 +69,6 @@ header {
   margin: 20px auto 50px auto;
   max-width: 900px;
   background: rgba(13,17,23,0.95);
-  border: 1px solid #2f81f7;
   border-radius: 10px;
   padding: 20px;
   text-align: left;
@@ -92,10 +91,10 @@ header {
   align-items: center;
   gap: 12px;
   margin-bottom: 12px;
-  background: rgba(47,129,247,0.1); /* subtle border/background */
   padding: 10px;
   border-radius: 8px;
-  border: 1px solid rgba(47,129,247,0.5);
+  border: 2px solid #2f81f7;        /* solid border */
+  background: rgba(13,17,23,0.9);   /* background contrast */
 }
 .ping-item img {
   width: 36px;
@@ -138,23 +137,23 @@ footer {
     <h2>Common Pings</h2>
 
     <div class="ping-item">
-      <img src="https://raw.githubusercontent.com/RiotGames/developer-relations/main/docs/static/images/pings/Danger.png" alt="Danger Ping">
+      <img src="https://static.wikia.nocookie.net/leagueoflegends/images/4/4f/LoL_ping_danger.png" alt="Danger Ping">
       <span><strong>Danger:</strong> Warn teammates of enemy threats or risky areas.</span>
     </div>
 
     <div class="ping-item">
-      <img src="https://raw.githubusercontent.com/RiotGames/developer-relations/main/docs/static/images/pings/OnMyWay.png" alt="On My Way Ping">
+      <img src="https://static.wikia.nocookie.net/leagueoflegends/images/0/0e/LoL_ping_On_My_Way.png" alt="On My Way Ping">
       <span><strong>On My Way:</strong> Let teammates know you’re moving toward them or an objective.</span>
     </div>
 
     <div class="ping-item">
-      <img src="https://raw.githubusercontent.com/RiotGames/developer-relations/main/docs/static/images/pings/AssistMe.png" alt="Assist Me Ping">
+      <img src="https://static.wikia.nocookie.net/leagueoflegends/images/0/0d/LoL_ping_Assist_Me.png" alt="Assist Me Ping">
       <span><strong>Assist Me:</strong> Ask for help to secure an objective, push a lane, or contest vision.</span>
     </div>
 
     <div class="ping-item">
-      <img src="https://raw.githubusercontent.com/RiotGames/developer-relations/main/docs/static/images/pings/Missing.png" alt="Missing Ping">
-      <span><strong>Missing (MIA):</strong> Alert your team that your lane opponent has disappeared.</span>
+      <img src="https://static.wikia.nocookie.net/leagueoflegends/images/8/84/LoL_ping_missing.png" alt="Enemy Missing Ping">
+      <span><strong>Enemy Missing (MIA):</strong> Alert your team that your lane opponent has disappeared.</span>
     </div>
 
   </div>
