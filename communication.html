@@ -5,11 +5,10 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Communication – LoL Fundamentals</title>
 
-<!-- Login check -->
 <script>
-  if (localStorage.getItem('lolfundamentals_logged_in') !== 'true') {
-    window.location.replace('login.html');
-  }
+if (localStorage.getItem('lolfundamentals_logged_in') !== 'true') {
+  window.location.replace('login.html');
+}
 </script>
 
 <style>
@@ -23,7 +22,6 @@ body {
   overflow-x: hidden;
 }
 
-/* Overlay for readability */
 body::before {
   content: "";
   position: fixed;
@@ -33,7 +31,6 @@ body::before {
   z-index: -1;
 }
 
-/* Header */
 header {
   background: rgba(13,17,23,0.9);
   border-bottom: 2px solid #c9aa71;
@@ -45,7 +42,6 @@ header {
   letter-spacing: 1px;
 }
 
-/* Back button */
 .back-button {
   display: inline-block;
   margin: 20px auto 10px;
@@ -64,7 +60,6 @@ header {
   box-shadow: 0 0 15px rgba(255,215,0,0.8);
 }
 
-/* Content container */
 .content-container {
   margin: 20px auto 50px auto;
   max-width: 900px;
@@ -75,38 +70,27 @@ header {
   color: #fff;
   font-size: 16px;
   line-height: 1.6;
-  position: relative;
-}
-.content-container h2 {
-  color: #c9aa71;
-  margin-top: 0;
 }
 
-/* Ping section */
-.ping-section {
-  margin-top: 25px;
-}
+.content-container h2 { color: #c9aa71; margin-top: 0; }
+
+.ping-section { margin-top: 25px; }
 .ping-item {
   display: flex;
   align-items: center;
   gap: 12px;
   margin-bottom: 12px;
-  padding: 10px;
-  border-radius: 8px;
-  border: 2px solid #2f81f7;        /* solid border */
-  background: rgba(13,17,23,0.9);   /* background contrast */
+  padding: 5px 0; /* no border, subtle spacing */
 }
 .ping-item img {
   width: 36px;
   height: 36px;
-  border-radius: 6px;
 }
 .ping-item span {
   font-size: 16px;
   color: #fff;
 }
 
-/* Footer */
 footer {
   text-align: center;
   padding: 15px 10px;
@@ -132,27 +116,26 @@ footer {
 
   <p>Typing <strong>“gj”</strong> after someone makes a good play is great, and <strong>“ty”</strong> if someone hands over a buff to you. When you’re behind or the enemy makes a good play, typing <strong>“np we’re fine”</strong> or <strong>“we’ll win”</strong> works wonders. Using the thumbs-up emote instead of typing “gj” is also effective and faster.</p>
 
-  <!-- Ping Icons Section -->
   <div class="ping-section">
     <h2>Common Pings</h2>
 
     <div class="ping-item">
-      <img src="https://static.wikia.nocookie.net/leagueoflegends/images/4/4f/LoL_ping_danger.png" alt="Danger Ping">
+      <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAABFUlEQVRYR+2XwQ2DMBBFb+6zR7hBxFwtgFZcAfyCW8AOZTxFA7hY1u2B3H3nX7HDf/1bdyX00DQFshloKnKX+gk9gGxAErIAjP7CyYgZjDaD2WYAkgH2K8oQ/4tRCArNkV3hCk7psKwArUoZghsH+IAlpT7lwFvDZYwj6F4ZhS1vMGL6w+VILtYmrA4sYtZixhXvQ+Z+S5vFeypSl6kY5/Hf8pW89hCZwHLyWeuIVXco+9fIhC3h9HCyk1X3l0guw7+Oejw3hS2xAghsrH3v1o1+QlYr4A0W7QXtb8Ai4FP0FqH7URAAAAAElFTkSuQmCC" alt="Danger Ping">
       <span><strong>Danger:</strong> Warn teammates of enemy threats or risky areas.</span>
     </div>
 
     <div class="ping-item">
-      <img src="https://static.wikia.nocookie.net/leagueoflegends/images/0/0e/LoL_ping_On_My_Way.png" alt="On My Way Ping">
+      <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAABJklEQVRYR+2XwQ2CMBBFz/fSAF3IAnYJbAHWQO8AWwDk3PAEV8hBEBt3ZXdz4+mT6lsHeZ8+2P8DVxAsFIC2VwQCzM8p4gDJgmJxgD3kCmrLzgALyF8jsUUL6YolB7QYx5D1DzDLnF7ZcRy3huFbcV5XcZy0FqXjNMsU1piT1hwjZqYAXvNfXqG8w1iOagYjPDZ0rYg5vMi6JLM8Yh+GdYBdy5g7oQ5A6fZV7FTdsmY5JeLwWQivnIz5YB3pM3xfVswJ+IQAy4BvwILcAawMeZAvwG6hFA0J7Kw0YAAAAASUVORK5CYII=" alt="On My Way Ping">
       <span><strong>On My Way:</strong> Let teammates know you’re moving toward them or an objective.</span>
     </div>
 
     <div class="ping-item">
-      <img src="https://static.wikia.nocookie.net/leagueoflegends/images/0/0d/LoL_ping_Assist_Me.png" alt="Assist Me Ping">
+      <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAABHUlEQVRYR+2XwQ2CMBBFz/fSAF3IAnYJbAHWQO8AWwDk3PAEV8hBEBt3ZXdz4+mT6lsHeZ8+2P8DVxAsFIC2VwQCzM8p4gDJgmJxgD3kCmrLzgALyF8jsUUL6YolB7QYx5D1DzDLnF7ZcRy3huFbcV5XcZy0FqXjNMsU1piT1hwjZqYAXvNfXqG8w1iOagYjPDZ0rYg5vMi6JLM8Yh+GdYBdy5g7oQ5A6fZV7FTdsmY5JeLwWQivnIz5YB3pM3xfVswJ+IQAy4BvwILcAawMeZAvwG6hFA0J7Kw0YAAAAASUVORK5CYII=" alt="Assist Me Ping">
       <span><strong>Assist Me:</strong> Ask for help to secure an objective, push a lane, or contest vision.</span>
     </div>
 
     <div class="ping-item">
-      <img src="https://static.wikia.nocookie.net/leagueoflegends/images/8/84/LoL_ping_missing.png" alt="Enemy Missing Ping">
+      <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAABGklEQVRYR+2XwQ2CMBBFz/fSAF3IAnYJbAHWQO8AWwDk3PAEV8hBEBt3ZXdz4+mT6lsHeZ8+2P8DVxAsFIC2VwQCzM8p4gDJgmJxgD3kCmrLzgALyF8jsUUL6YolB7QYx5D1DzDLnF7ZcRy3huFbcV5XcZy0FqXjNMsU1piT1hwjZqYAXvNfXqG8w1iOagYjPDZ0rYg5vMi6JLM8Yh+GdYBdy5g7oQ5A6fZV7FTdsmY5JeLwWQivnIz5YB3pM3xfVswJ+IQAy4BvwILcAawMeZAvwG6hFA0J7Kw0YAAAAASUVORK5CYII=" alt="Enemy Missing Ping">
       <span><strong>Enemy Missing (MIA):</strong> Alert your team that your lane opponent has disappeared.</span>
     </div>
 
