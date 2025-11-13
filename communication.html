@@ -23,7 +23,7 @@ body {
   overflow-x: hidden;
 }
 
-/* Overlay for readability */
+/* Overlay */
 body::before {
   content: "";
   position: fixed;
@@ -82,13 +82,31 @@ header {
   color: #c9aa71;
   margin-top: 0;
 }
-.content-container ul {
-  margin-left: 20px;
+
+/* Ping section */
+.ping-section {
+  margin-top: 25px;
 }
-.content-container li {
-  margin-bottom: 10px;
+.ping-item {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 12px;
+  background: rgba(255,255,255,0.05);
+  padding: 10px;
+  border-radius: 8px;
+}
+.ping-item img {
+  width: 36px;
+  height: 36px;
+  border-radius: 6px;
+}
+.ping-item span {
+  font-size: 16px;
+  color: #fff;
 }
 
+/* Footer */
 footer {
   text-align: center;
   padding: 15px 10px;
@@ -99,6 +117,7 @@ footer {
 @media (max-width: 600px) {
   header { font-size: 24px; padding: 15px; }
   .content-container { margin: 15px 10px 30px 10px; padding: 15px; }
+  .ping-item img { width: 30px; height: 30px; }
 }
 </style>
 </head>
@@ -113,14 +132,52 @@ footer {
 
   <p>Typing <strong>“gj”</strong> after someone makes a good play is great, and <strong>“ty”</strong> if someone hands over a buff to you. When you’re behind or the enemy makes a good play, typing <strong>“np we’re fine”</strong> or <strong>“we’ll win”</strong> works wonders. Using the thumbs-up emote instead of typing “gj” is also effective and faster.</p>
 
-  </ul>
+  <!-- Ping Icons Section -->
+  <div class="ping-section">
+    <h2>Common Pings</h2>
+
+    <div class="ping-item">
+      <img src="https://ddragon.leagueoflegends.com/cdn/14.23.1/img/ping/Danger.png" alt="Danger Ping">
+      <span><strong>Danger:</strong> Warn teammates of enemy threats or risky areas.</span>
+    </div>
+
+    <div class="ping-item">
+      <img src="https://ddragon.leagueoflegends.com/cdn/14.23.1/img/ping/OnMyWay.png" alt="On My Way Ping">
+      <span><strong>On My Way:</strong> Let teammates know you’re moving toward them or an objective.</span>
+    </div>
+
+    <div class="ping-item">
+      <img src="https://ddragon.leagueoflegends.com/cdn/14.23.1/img/ping/AssistMe.png" alt="Assist Me Ping">
+      <span><strong>Assist Me:</strong> Ask for help to secure an objective, push a lane, or contest vision.</span>
+    </div>
+
+    <div class="ping-item">
+      <img src="https://ddragon.leagueoflegends.com/cdn/14.23.1/img/ping/Missing.png" alt="Missing Ping">
+      <span><strong>Missing (MIA):</strong> Alert your team that your lane opponent has disappeared.</span>
+    </div>
+
+    <div class="ping-item">
+      <img src="https://ddragon.leagueoflegends.com/cdn/14.23.1/img/ping/Retreat.png" alt="Retreat Ping">
+      <span><strong>Retreat:</strong> Tell your teammates to fall back from danger or bad fights.</span>
+    </div>
+
+    <div class="ping-item">
+      <img src="https://ddragon.leagueoflegends.com/cdn/14.23.1/img/ping/VisionCleared.png" alt="Vision Cleared Ping">
+      <span><strong>Vision Cleared:</strong> Indicate that an area is free of enemy wards or traps.</span>
+    </div>
+
+    <div class="ping-item">
+      <img src="https://ddragon.leagueoflegends.com/cdn/14.23.1/img/ping/NeedVision.png" alt="Need Vision Ping">
+      <span><strong>Need Vision:</strong> Ask teammates to place wards in key areas for better map control.</span>
+    </div>
+
+  </div>
 </div>
 
-<footer>© 2025 LoL Fundamentals · Contact: arcsecond@lolfundamentals.com</footer>
+<footer>© 2025 LoL Fundamentals · All rights reserved.</footer>
 
 </body>
 </html>
-
 
 
 
