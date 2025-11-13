@@ -41,7 +41,7 @@ header {
   font-weight: bold;
   font-size: 26px;
   text-transform: uppercase;
-  color: #c9aa71; /* gold */
+  color: #c9aa71;
   letter-spacing: 1px;
 }
 
@@ -64,22 +64,31 @@ header {
   box-shadow: 0 0 15px rgba(255,215,0,0.8);
 }
 
-/* Content container */
+/* Layout container for text + minimap */
+.main-section {
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  flex-wrap: wrap;
+  margin: 20px auto 50px;
+  max-width: 1100px;
+  gap: 20px;
+}
+
+/* Content */
 .content-container {
-  margin: 20px auto 50px auto;
-  max-width: 900px;
+  flex: 1 1 600px;
   background: rgba(13,17,23,0.95);
   border: 1px solid #2f81f7;
   border-radius: 10px;
   padding: 20px;
   text-align: left;
-  color: #fff; /* white text */
+  color: #fff;
   font-size: 16px;
   line-height: 1.6;
-  position: relative;
 }
 .content-container h2 {
-  color: #c9aa71; /* gold headings */
+  color: #c9aa71;
   margin-top: 0;
 }
 .content-container ul {
@@ -89,6 +98,22 @@ header {
   margin-bottom: 10px;
 }
 
+/* Minimap image */
+.minimap {
+  flex: 0 1 350px;
+  border: 2px solid #2f81f7;
+  border-radius: 10px;
+  background: rgba(13,17,23,0.9);
+  box-shadow: 0 0 15px rgba(47,129,247,0.4);
+  overflow: hidden;
+}
+.minimap img {
+  width: 100%;
+  display: block;
+  border-radius: 10px;
+}
+
+/* Footer */
 footer {
   text-align: center;
   padding: 15px 10px;
@@ -96,9 +121,14 @@ footer {
   color: #8b949e;
 }
 
-@media (max-width: 600px) {
-  header { font-size: 24px; padding: 15px; }
-  .content-container { margin: 15px 10px 30px 10px; padding: 15px; }
+@media (max-width: 800px) {
+  .main-section {
+    flex-direction: column;
+    align-items: center;
+  }
+  .minimap {
+    max-width: 90%;
+  }
 }
 </style>
 </head>
@@ -107,28 +137,32 @@ footer {
 <header>Map Awareness</header>
 <a href="skills.html" class="back-button">Back to Skills Hub</a>
 
-<div class="content-container">
-  <h2>Map Awareness</h2>
-  <p>Map Awareness is your ability to check the minimap frequently and quickly while gathering all of the information presented. Strong map awareness allows you to anticipate plays, avoid ganks, and make better macro decisions.</p>
+<div class="main-section">
+  <div class="content-container">
+    <h2>Map Awareness</h2>
+    <p>Map Awareness is your ability to check the minimap frequently and quickly while gathering all of the information presented. Strong map awareness allows you to anticipate plays, avoid ganks, and make better macro decisions.</p>
 
-  <h2>Things to Look Out For</h2>
-  <ul>
-    <li><strong>Where your teammates are in lane:</strong> Did they just back, or are they playing up at the enemy tower? If they just recalled, playing aggressive is riskier. If they’re pushing up at tower, try to match their push. If you can’t, ping them back since you won't be able to capitalize off of them getting ganked.</li>
-    <li><strong>Flashes and abilities being used:</strong> Keep mental or written track of key cooldowns across the map.</li>
-    <li><strong>Jungle camp respawn timers:</strong> Tracking these helps you predict jungle pathing and future ganks.</li>
-    <li><strong>Teleport opportunities:</strong> Watch for wards to TP to or enemy TPs being channeled.</li>
-    <li><strong>What’s warded:</strong> Be aware of vision control and which areas are safe or unsafe to move through.</li>
-    <li><strong>What the enemy does after pushing in a wave:</strong> Are they roaming, warding, or recalling? Each gives different map information.</li>
-    <li><strong>When the first tower falls bot lane:</strong> This usually means the enemy bot lane will rotate mid or top after resetting. Ping and prepare accordingly.</li>
-  </ul>
+    <h2>Things to Look Out For</h2>
+    <ul>
+      <li><strong>Where your teammates are in lane:</strong> Did they just back, or are they playing up at the enemy tower? If they just recalled, playing aggressive is riskier. If they’re pushing up at tower, try to match their push. If you can’t, ping them back since you won't be able to capitalize off of them getting ganked.</li>
+      <li><strong>Flashes and abilities being used:</strong> Keep mental or written track of key cooldowns across the map.</li>
+      <li><strong>Jungle camp respawn timers:</strong> Tracking these helps you predict jungle pathing and future ganks.</li>
+      <li><strong>Teleport opportunities:</strong> Watch for wards to TP to or enemy TPs being channeled.</li>
+      <li><strong>What’s warded:</strong> Be aware of vision control and which areas are safe or unsafe to move through.</li>
+      <li><strong>What the enemy does after pushing in a wave:</strong> Are they roaming, warding, or recalling? Each gives different map information.</li>
+      <li><strong>When the first tower falls bot lane:</strong> This usually means the enemy bot lane will rotate mid or top after resetting. Ping and prepare accordingly.</li>
+    </ul>
+  </div>
+
+  <div class="minimap">
+    <img src="https://static.wikia.nocookie.net/leagueoflegends/images/7/7f/Summoner%27s_Rift_Minimap.png" alt="League of Legends Minimap">
+  </div>
 </div>
 
 <footer>© 2025 LoL Fundamentals · Contact: arcsecond@lolfundamentals.com</footer>
 
 </body>
 </html>
-
-
 
 
 
