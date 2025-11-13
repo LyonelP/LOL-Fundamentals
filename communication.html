@@ -1,148 +1,159 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Communication – LoL Fundamentals</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Communication – LoL Fundamentals</title>
 
-<script>
-if (localStorage.getItem('lolfundamentals_logged_in') !== 'true') {
-  window.location.replace('login.html');
-}
-</script>
+  <!-- Login check -->
+  <script>
+    if (localStorage.getItem('lolfundamentals_logged_in') !== 'true') {
+      window.location.replace('login.html');
+    }
+  </script>
 
-<style>
-body {
-  margin: 0;
-  font-family: 'Beaufort for LOL', Arial, Helvetica, sans-serif;
-  text-align: center;
-  color: #fff;
-  background: url('https://64.media.tumblr.com/594ac290bec6d5e9ad98b5f53404f00b/245c4c3ee469f81d-e4/s1280x1920/1cda4284320eb2031758a9859dfe14ff8bbc50ba.jpg') no-repeat center center fixed;
-  background-size: cover;
-  overflow-x: hidden;
-}
+  <style>
+    body {
+      margin: 0;
+      font-family: 'Beaufort for LOL', Arial, Helvetica, sans-serif;
+      text-align: center;
+      color: #fff;
+      background: url('https://64.media.tumblr.com/594ac290bec6d5e9ad98b5f53404f00b/245c4c3ee469f81d-e4/s1280x1920/1cda4284320eb2031758a9859dfe14ff8bbc50ba.jpg') no-repeat center center fixed;
+      background-size: cover;
+      overflow-x: hidden;
+    }
 
-body::before {
-  content: "";
-  position: fixed;
-  top: 0; left: 0;
-  width: 100%; height: 100%;
-  background: rgba(10,15,20,0.75);
-  z-index: -1;
-}
+    body::before {
+      content: "";
+      position: fixed;
+      top: 0; left: 0;
+      width: 100%; height: 100%;
+      background: rgba(10,15,20,0.75);
+      z-index: -1;
+    }
 
-header {
-  background: rgba(13,17,23,0.9);
-  border-bottom: 2px solid #c9aa71;
-  padding: 20px 10px;
-  font-weight: bold;
-  font-size: 26px;
-  text-transform: uppercase;
-  color: #c9aa71;
-  letter-spacing: 1px;
-}
+    header {
+      background: rgba(13,17,23,0.9);
+      border-bottom: 2px solid #c9aa71;
+      padding: 20px 10px;
+      font-weight: bold;
+      font-size: 26px;
+      text-transform: uppercase;
+      color: #c9aa71;
+      letter-spacing: 1px;
+    }
 
-.back-button {
-  display: inline-block;
-  margin: 20px auto 10px;
-  padding: 10px 20px;
-  background: linear-gradient(135deg, #c9aa71, #e0c77b);
-  color: #000;
-  text-decoration: none;
-  border-radius: 8px;
-  font-weight: bold;
-  transition: all 0.3s;
-  box-shadow: 0 0 10px rgba(201,170,113,0.5);
-}
-.back-button::before { content: "← "; }
-.back-button:hover {
-  background: linear-gradient(135deg, #e6c97f, #f0d88b);
-  box-shadow: 0 0 15px rgba(255,215,0,0.8);
-}
+    .back-button {
+      display: inline-block;
+      margin: 20px auto 10px;
+      padding: 10px 20px;
+      background: linear-gradient(135deg, #c9aa71, #e0c77b);
+      color: #000;
+      text-decoration: none;
+      border-radius: 8px;
+      font-weight: bold;
+      transition: all 0.3s;
+      box-shadow: 0 0 10px rgba(201,170,113,0.5);
+    }
+    .back-button::before { content: "← "; }
+    .back-button:hover {
+      background: linear-gradient(135deg, #e6c97f, #f0d88b);
+      box-shadow: 0 0 15px rgba(255,215,0,0.8);
+    }
 
-.content-container {
-  margin: 20px auto 50px auto;
-  max-width: 900px;
-  background: rgba(13,17,23,0.95);
-  border-radius: 10px;
-  padding: 20px;
-  text-align: left;
-  color: #fff;
-  font-size: 16px;
-  line-height: 1.6;
-}
+    .content-container {
+      margin: 20px auto 50px auto;
+      max-width: 900px;
+      background: rgba(13,17,23,0.95);
+      border: 1px solid #2f81f7;
+      border-radius: 10px;
+      padding: 20px;
+      text-align: left;
+      color: #fff;
+      font-size: 16px;
+      line-height: 1.6;
+      position: relative;
+    }
+    .content-container h2 {
+      color: #c9aa71;
+      margin-top: 0;
+    }
 
-.content-container h2 { color: #c9aa71; margin-top: 0; }
+    .ping-section {
+      margin-top: 25px;
+    }
+    .ping-item {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      margin-bottom: 12px;
+      padding: 10px;
+      border-radius: 8px;
+      border: 2px solid #2f81f7;
+      background: rgba(13,17,23,0.9);
+    }
+    .ping-item img {
+      width: 36px;
+      height: 36px;
+    }
+    .ping-item span {
+      font-size: 16px;
+      color: #fff;
+    }
 
-.ping-section { margin-top: 25px; }
-.ping-item {
-  display: flex;
-  align-items: center;
-  gap: 12px;
-  margin-bottom: 12px;
-  padding: 5px 0; /* no border, subtle spacing */
-}
-.ping-item img {
-  width: 36px;
-  height: 36px;
-}
-.ping-item span {
-  font-size: 16px;
-  color: #fff;
-}
+    footer {
+      text-align: center;
+      padding: 15px 10px;
+      font-size: 14px;
+      color: #8b949e;
+    }
 
-footer {
-  text-align: center;
-  padding: 15px 10px;
-  font-size: 14px;
-  color: #8b949e;
-}
-
-@media (max-width: 600px) {
-  header { font-size: 24px; padding: 15px; }
-  .content-container { margin: 15px 10px 30px 10px; padding: 15px; }
-  .ping-item img { width: 30px; height: 30px; }
-}
-</style>
+    @media (max-width: 600px) {
+      header { font-size: 24px; padding: 15px; }
+      .content-container { margin: 15px 10px 30px 10px; padding: 15px; }
+      .ping-item img { width: 30px; height: 30px; }
+    }
+  </style>
 </head>
 <body>
 
-<header>Communication</header>
-<a href="skills.html" class="back-button">Back to Skills Hub</a>
+  <header>Communication</header>
+  <a href="skills.html" class="back-button">Back to Skills Hub</a>
 
-<div class="content-container">
-  <h2>Communication</h2>
-  <p>The best way to communicate with your team is through pings. I’ve found that pinging twice and checking to see if the communication was received before pinging again works best. Chat is best used for keeping your team morale high. Time spent typing is time not spent playing, so it’s best to minimize it.</p>
+  <div class="content-container">
+    <h2>Communication</h2>
+    <p>The best way to communicate with your team is through pings. I’ve found that pinging twice and checking to see if the communication was received before pinging again works best. Chat is best used for keeping your team morale high. Time spent typing is time not spent playing, so it’s best to minimize it.</p>
 
-  <p>Typing <strong>“gj”</strong> after someone makes a good play is great, and <strong>“ty”</strong> if someone hands over a buff to you. When you’re behind or the enemy makes a good play, typing <strong>“np we’re fine”</strong> or <strong>“we’ll win”</strong> works wonders. Using the thumbs-up emote instead of typing “gj” is also effective and faster.</p>
+    <p>Typing <strong>“gj”</strong> after someone makes a good play is great, and <strong>“ty”</strong> if someone hands over a buff to you. When you’re behind or the enemy makes a good play, typing <strong>“np we’re fine”</strong> or <strong>“we’ll win”</strong> works wonders. Using the thumbs‑up emote instead of typing “gj” is also effective and faster.</p>
 
-  <div class="ping-section">
-    <h2>Common Pings</h2>
+    <!-- Ping Icons Section -->
+    <div class="ping-section">
+      <h2>Common Pings</h2>
 
-    <div class="ping-item">
-      <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAABFUlEQVRYR+2XwQ2DMBBFb+6zR7hBxFwtgFZcAfyCW8AOZTxFA7hY1u2B3H3nX7HDf/1bdyX00DQFshloKnKX+gk9gGxAErIAjP7CyYgZjDaD2WYAkgH2K8oQ/4tRCArNkV3hCk7psKwArUoZghsH+IAlpT7lwFvDZYwj6F4ZhS1vMGL6w+VILtYmrA4sYtZixhXvQ+Z+S5vFeypSl6kY5/Hf8pW89hCZwHLyWeuIVXco+9fIhC3h9HCyk1X3l0guw7+Oejw3hS2xAghsrH3v1o1+QlYr4A0W7QXtb8Ai4FP0FqH7URAAAAAElFTkSuQmCC" alt="Danger Ping">
-      <span><strong>Danger:</strong> Warn teammates of enemy threats or risky areas.</span>
+      <div class="ping-item">
+        <img src="https://static.wikia.nocookie.net/leagueoflegends/images/4/4f/LoL_ping_danger.png" alt="Danger Ping">
+        <span><strong>Danger:</strong> Warn teammates of enemy threats or risky areas.</span>
+      </div>
+
+      <div class="ping-item">
+        <img src="https://static.wikia.nocookie.net/leagueoflegends/images/0/0e/LoL_ping_On_My_Way.png" alt="On My Way Ping">
+        <span><strong>On My Way:</strong> Let teammates know you’re moving toward them or an objective.</span>
+      </div>
+
+      <div class="ping-item">
+        <img src="https://static.wikia.nocookie.net/leagueoflegends/images/0/0d/LoL_ping_Assist_Me.png" alt="Assist Me Ping">
+        <span><strong>Assist Me:</strong> Ask for help to secure an objective, push a lane, or contest vision.</span>
+      </div>
+
+      <div class="ping-item">
+        <img src="https://static.wikia.nocookie.net/leagueoflegends/images/8/84/LoL_ping_missing.png" alt="Enemy Missing Ping">
+        <span><strong>Enemy Missing (MIA):</strong> Alert your team that your lane opponent has disappeared.</span>
+      </div>
+
     </div>
-
-    <div class="ping-item">
-      <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAABJklEQVRYR+2XwQ2CMBBFz/fSAF3IAnYJbAHWQO8AWwDk3PAEV8hBEBt3ZXdz4+mT6lsHeZ8+2P8DVxAsFIC2VwQCzM8p4gDJgmJxgD3kCmrLzgALyF8jsUUL6YolB7QYx5D1DzDLnF7ZcRy3huFbcV5XcZy0FqXjNMsU1piT1hwjZqYAXvNfXqG8w1iOagYjPDZ0rYg5vMi6JLM8Yh+GdYBdy5g7oQ5A6fZV7FTdsmY5JeLwWQivnIz5YB3pM3xfVswJ+IQAy4BvwILcAawMeZAvwG6hFA0J7Kw0YAAAAASUVORK5CYII=" alt="On My Way Ping">
-      <span><strong>On My Way:</strong> Let teammates know you’re moving toward them or an objective.</span>
-    </div>
-
-    <div class="ping-item">
-      <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAABHUlEQVRYR+2XwQ2CMBBFz/fSAF3IAnYJbAHWQO8AWwDk3PAEV8hBEBt3ZXdz4+mT6lsHeZ8+2P8DVxAsFIC2VwQCzM8p4gDJgmJxgD3kCmrLzgALyF8jsUUL6YolB7QYx5D1DzDLnF7ZcRy3huFbcV5XcZy0FqXjNMsU1piT1hwjZqYAXvNfXqG8w1iOagYjPDZ0rYg5vMi6JLM8Yh+GdYBdy5g7oQ5A6fZV7FTdsmY5JeLwWQivnIz5YB3pM3xfVswJ+IQAy4BvwILcAawMeZAvwG6hFA0J7Kw0YAAAAASUVORK5CYII=" alt="Assist Me Ping">
-      <span><strong>Assist Me:</strong> Ask for help to secure an objective, push a lane, or contest vision.</span>
-    </div>
-
-    <div class="ping-item">
-      <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAABGklEQVRYR+2XwQ2CMBBFz/fSAF3IAnYJbAHWQO8AWwDk3PAEV8hBEBt3ZXdz4+mT6lsHeZ8+2P8DVxAsFIC2VwQCzM8p4gDJgmJxgD3kCmrLzgALyF8jsUUL6YolB7QYx5D1DzDLnF7ZcRy3huFbcV5XcZy0FqXjNMsU1piT1hwjZqYAXvNfXqG8w1iOagYjPDZ0rYg5vMi6JLM8Yh+GdYBdy5g7oQ5A6fZV7FTdsmY5JeLwWQivnIz5YB3pM3xfVswJ+IQAy4BvwILcAawMeZAvwG6hFA0J7Kw0YAAAAASUVORK5CYII=" alt="Enemy Missing Ping">
-      <span><strong>Enemy Missing (MIA):</strong> Alert your team that your lane opponent has disappeared.</span>
-    </div>
-
   </div>
-</div>
 
-<footer>© 2025 LoL Fundamentals · All rights reserved.</footer>
+  <footer>© 2025 LoL Fundamentals · All rights reserved.</footer>
 
 </body>
 </html>
