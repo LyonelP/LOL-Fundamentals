@@ -65,7 +65,7 @@ header {
   max-width: 900px;
   background: rgba(13,17,23,0.95);
   border-radius: 10px;
-  border: 2px solid #2f81f7; /* Blue border for entire section */
+  border: 2px solid #2f81f7; /* Blue border */
   padding: 20px;
   text-align: left;
   color: #fff;
@@ -78,6 +78,17 @@ header {
   margin-top: 0;
 }
 
+/* Ping wheel image bottom right */
+.ping-wheel {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  width: 140px;
+  opacity: 0.9;
+  z-index: 10;
+  pointer-events: none;
+}
+
 footer {
   text-align: center;
   padding: 15px 10px;
@@ -88,6 +99,7 @@ footer {
 @media (max-width: 600px) {
   header { font-size: 24px; padding: 15px; }
   .content-container { margin: 15px 10px 30px 10px; padding: 15px; }
+  .ping-wheel { width: 100px; bottom: 15px; right: 15px; }
 }
 </style>
 </head>
@@ -99,7 +111,8 @@ footer {
 <div class="content-container">
   <h2>Communication</h2>
   <p>The best way to communicate with your team is through pings. I’ve found that pinging twice and checking to see if the communication was received before pinging again works best. Chat is best used for keeping your team morale high. Time spent typing is time not spent playing, so it’s best to minimize it.</p>
-  <p>Typing <strong>“gj”</strong> after someone makes a good play is great, and <strong>“ty”</strong> if someone hands over a buff to you. When you’re behind or the enemy makes a good play, typing <strong>“np we’re fine”</strong> or <strong>“we’ll win”</strong> works wonders. Using the thumbs‑up emote instead of typing “gj” is also effective and faster.</p>
+
+  <p>Typing <strong>“gj”</strong> after someone makes a good play is great, and <strong>“ty”</strong> if someone hands over a buff to you. When you’re behind or the enemy makes a good play, typing <strong>“np we’re fine”</strong> or <strong>“we’ll win”</strong> works wonders. Using the thumbs-up emote instead of typing “gj” is also effective and faster.</p>
 
   <h2>Common Pings</h2>
   <p><strong>Danger:</strong> Warn teammates of enemy roam or gank.</p>
@@ -108,10 +121,16 @@ footer {
   <p><strong>Enemy Missing (MIA):</strong> Enemy laner disappeared into fog of war.</p>
 </div>
 
+<!-- Ping wheel image -->
+<img src="https://static.wikia.nocookie.net/leagueoflegends/images/1/1f/Ping_Wheel_2023.png"
+     alt="Ping Wheel"
+     class="ping-wheel">
+
 <footer>© 2025 LoL Fundamentals · All rights reserved</footer>
 
 </body>
 </html>
+
 
 
 
