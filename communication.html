@@ -83,13 +83,14 @@ header {
   display: flex;
   align-items: center;
   gap: 10px;
-  margin: 8px 0;
+  margin: 10px 0;
 }
 
 .ping-icon {
-  width: 28px;
-  height: 28px;
+  width: 30px;
+  height: 30px;
 }
+
 footer {
   text-align: center;
   padding: 15px 10px;
@@ -118,32 +119,48 @@ footer {
 
   <h2>Common Pings</h2>
 
+  <!-- Danger -->
   <div class="ping-line">
-    <img class="ping-icon" src="https://i.imgur.com/63w9QdD.png" alt="Danger Ping">
+    <svg class="ping-icon" viewBox="0 0 50 50">
+      <circle cx="25" cy="25" r="22" fill="red" stroke="black" stroke-width="3"/>
+      <polygon points="25,8 35,35 15,35" fill="white"/>
+    </svg>
     <p><strong>Danger:</strong> Warn teammates of enemy roam or gank.</p>
   </div>
 
+  <!-- Assist Me -->
   <div class="ping-line">
-    <img class="ping-icon" src="https://i.imgur.com/7zC0Gbs.png" alt="Assist Me Ping">
+    <svg class="ping-icon" viewBox="0 0 50 50">
+      <circle cx="25" cy="25" r="22" fill="dodgerblue" stroke="black" stroke-width="3"/>
+      <circle cx="25" cy="25" r="8" fill="white"/>
+    </svg>
     <p><strong>Assist Me:</strong> I need help securing an objective or winning a fight.</p>
   </div>
 
+  <!-- On My Way -->
   <div class="ping-line">
-    <img class="ping-icon" src="https://i.imgur.com/nmDnMj1.png" alt="On My Way Ping">
+    <svg class="ping-icon" viewBox="0 0 50 50">
+      <circle cx="25" cy="25" r="22" fill="#4CAF50" stroke="black" stroke-width="3"/>
+      <polygon points="20,15 35,25 20,35" fill="white"/>
+    </svg>
     <p><strong>On My Way:</strong> I'm coming to help with an objective or fight. Don't use this ping until you're close to the fight.</p>
   </div>
 
+  <!-- Enemy Missing -->
   <div class="ping-line">
-    <img class="ping-icon" src="https://i.imgur.com/kXHkPwH.png" alt="Enemy Missing Ping">
+    <svg class="ping-icon" viewBox="0 0 50 50">
+      <circle cx="25" cy="25" r="22" fill="gold" stroke="black" stroke-width="3"/>
+      <text x="25" y="32" font-size="22" text-anchor="middle" fill="black">?</text>
+    </svg>
     <p><strong>Enemy Missing (MIA):</strong> Enemy laner disappeared into fog of war.</p>
   </div>
 
 </div>
 
 <footer>© 2025 LoL Fundamentals · All rights reserved</footer>
-
 </body>
 </html>
+
 
 
 
