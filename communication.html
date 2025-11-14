@@ -6,9 +6,9 @@
 <title>Communication – LoL Fundamentals</title>
 
 <script>
-  if (localStorage.getItem('lolfundamentals_logged_in') !== 'true') {
-    window.location.replace('login.html');
-  }
+if (localStorage.getItem('lolfundamentals_logged_in') !== 'true') {
+  window.location.replace('login.html');
+}
 </script>
 
 <style>
@@ -21,6 +21,7 @@ body {
   background-size: cover;
   overflow-x: hidden;
 }
+
 body::before {
   content: "";
   position: fixed;
@@ -29,6 +30,7 @@ body::before {
   background: rgba(10,15,20,0.75);
   z-index: -1;
 }
+
 header {
   background: rgba(13,17,23,0.9);
   border-bottom: 2px solid #c9aa71;
@@ -39,6 +41,7 @@ header {
   color: #c9aa71;
   letter-spacing: 1px;
 }
+
 .back-button {
   display: inline-block;
   margin: 20px auto 10px;
@@ -56,6 +59,7 @@ header {
   background: linear-gradient(135deg, #e6c97f, #f0d88b);
   box-shadow: 0 0 15px rgba(255,215,0,0.8);
 }
+
 .content-container {
   margin: 20px auto 50px auto;
   max-width: 900px;
@@ -69,9 +73,22 @@ header {
   line-height: 1.6;
   position: relative;
 }
+
 .content-container h2 {
   color: #c9aa71;
   margin-top: 0;
+}
+
+.ping-line {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin: 8px 0;
+}
+
+.ping-icon {
+  width: 28px;
+  height: 28px;
 }
 footer {
   text-align: center;
@@ -79,6 +96,7 @@ footer {
   font-size: 14px;
   color: #8b949e;
 }
+
 @media (max-width: 600px) {
   header { font-size: 24px; padding: 15px; }
   .content-container { margin: 15px 10px 30px 10px; padding: 15px; }
@@ -92,24 +110,33 @@ footer {
 <a href="skills.html" class="back-button">Back to Skills Hub</a>
 
 <div class="content-container">
-
   <h2>Communication</h2>
+
   <p>The best way to communicate with your team is through pings. I’ve found that pinging twice and checking to see if the communication was received before pinging again works best. Chat is best used for keeping your team morale high. Time spent typing is time not spent playing, so it’s best to minimize it.</p>
 
-  <p>Typing <strong>“gj”</strong> after someone makes a good play is great, and <strong>“ty”</strong> if someone hands over a buff to you. When you’re behind or the enemy makes a good play, typing <strong>“np we’re fine”</strong> or <strong>“we’ll win”</strong> works wonders. Using the thumbs‑up emote instead of typing “gj” is also effective and faster.</p>
+  <p>Typing <strong>“gj”</strong> after someone makes a good play is great, and <strong>“ty”</strong> if someone hands over a buff to you. When you’re behind or the enemy makes a good play, typing <strong>“np we’re fine”</strong> or <strong>“we’ll win”</strong> works wonders. Using the thumbs-up emote instead of typing “gj” is also effective and faster.</p>
 
   <h2>Common Pings</h2>
-  <p><strong>Danger:</strong> Warn teammates of enemy roam or gank.</p>
-  <p><strong>Assist Me:</strong> I need help securing an objective or winning a fight.</p>
-  <p><strong>On My Way:</strong> I'm coming to help with an objective or fight. Don't use this ping until you're close to the fight.</p>
-  <p><strong>Enemy Missing (MIA):</strong> Enemy laner disappeared into fog of war.</p>
 
-  <!-- Ping wheel image -->
-  <img
-    src="https://upload.wikimedia.org/wikipedia/commons/9/9b/League_of_Legends_ping_wheel.png"
-    alt="LoL Smart Ping Wheel"
-    style="width:100%; max-width:500px; display:block; margin:25px auto; border:2px solid #2f81f7; border-radius:10px;"
-  />
+  <div class="ping-line">
+    <img class="ping-icon" src="https://i.imgur.com/63w9QdD.png" alt="Danger Ping">
+    <p><strong>Danger:</strong> Warn teammates of enemy roam or gank.</p>
+  </div>
+
+  <div class="ping-line">
+    <img class="ping-icon" src="https://i.imgur.com/7zC0Gbs.png" alt="Assist Me Ping">
+    <p><strong>Assist Me:</strong> I need help securing an objective or winning a fight.</p>
+  </div>
+
+  <div class="ping-line">
+    <img class="ping-icon" src="https://i.imgur.com/nmDnMj1.png" alt="On My Way Ping">
+    <p><strong>On My Way:</strong> I'm coming to help with an objective or fight. Don't use this ping until you're close to the fight.</p>
+  </div>
+
+  <div class="ping-line">
+    <img class="ping-icon" src="https://i.imgur.com/kXHkPwH.png" alt="Enemy Missing Ping">
+    <p><strong>Enemy Missing (MIA):</strong> Enemy laner disappeared into fog of war.</p>
+  </div>
 
 </div>
 
