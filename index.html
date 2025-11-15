@@ -52,6 +52,9 @@ header {
   font-size: 1.15em;
   color: #c9d1d9;
   text-shadow: 0 0 10px rgba(0,0,0,0.6);
+  background: rgba(10,15,20,0.5); /* subtle dark background */
+  padding: 12px 15px;
+  border-radius: 6px;
 }
 
 /* CTA BUTTON */
@@ -76,17 +79,13 @@ header {
 }
 
 /* HERO OVERLAYS */
-
-/* Very subtle blue overlay */
 .hero .blueOverlay {
   position: absolute;
   inset: 0;
-  background: rgba(47,129,247,0.08); /* very light */
+  background: rgba(47,129,247,0.08);
   pointer-events: none;
   z-index: 1;
 }
-
-/* Moving particles */
 .hero .particles {
   position: absolute;
   inset: 0;
@@ -101,14 +100,11 @@ header {
   border-radius: 50%;
   animation: floatParticles 6s infinite ease-in-out;
 }
-
 @keyframes floatParticles {
   0% { transform: translateY(0px) translateX(0px) scale(1); opacity: 1; }
   50% { transform: translateY(-80px) translateX(20px) scale(1.2); opacity: 0.6; }
   100% { transform: translateY(0px) translateX(0px) scale(1); opacity: 1; }
 }
-
-/* Aura Pulse */
 .hero .aura {
   position: absolute;
   inset: 0;
@@ -118,7 +114,6 @@ header {
   pointer-events: none;
   z-index: 3;
 }
-
 @keyframes auraPulse {
   0% { opacity: 0.25; transform: scale(1); }
   50% { opacity: 0.45; transform: scale(1.1); }
@@ -130,14 +125,15 @@ header {
   padding: 60px 20px;
   max-width: 950px;
   margin: auto;
+  text-align: center; /* fix centering */
 }
 .section h2 {
-  text-align: center;
   color: #c9aa71;
   font-size: 2.1em;
-  position: relative;
   display: inline-block;
   padding-bottom: 12px;
+  position: relative;
+  margin-bottom: 40px;
 }
 .section h2::after {
   content: "";
@@ -248,7 +244,7 @@ footer a:hover {
   <div class="aura"></div>
 
   <h1>The Ultimate Diana & Ekko Guide</h1>
-  <p>Master every aspect of League of Legends with champions like Diana and Ekko. Learn precise combos, matchup strategies, and advanced tips to elevate your gameplay.</p>
+  <p>Master every aspect of League of Legends with champions like Diana and Ekko. Learn precise combos, matchup strategies, and advanced tips to elevate your gameplay. Written by Arcsecond, rank 1 Challenger Ekko and Diana player.</p>
   <button class="btn" id="accessBtn">Get Access</button>
 </section>
 
