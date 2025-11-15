@@ -131,6 +131,12 @@ header {
   max-width: 100%;
   border-radius: 8px;
   margin: 10px 0;
+  cursor: pointer;
+  transition: transform 0.2s, box-shadow 0.2s;
+}
+.example img:hover {
+  transform: scale(1.03);
+  box-shadow: 0 0 15px rgba(255,255,255,0.4);
 }
 
 /* Footer */
@@ -173,74 +179,88 @@ footer {
       allowfullscreen></iframe>
   </div>
 
-  <h2>Practical Examples: Right vs Wrong</h2>
+  <h2>Interactive Examples: Click the Correct Choice</h2>
 
   <!-- Farming Example -->
   <h3>Farming / CS</h3>
+  <p>Click the champion that is in the correct position for safe last-hitting:</p>
   <div class="example-container">
-    <div class="example right">
-      <h4>✅ Right</h4>
-      <img src="lane_right_cs.png" alt="Champion correctly last-hitting">
-      <p>Champion is standing behind minions, autoing the correct minion to secure last hits efficiently.</p>
+    <div class="example">
+      <img src="lane_right_cs.png" alt="Correct CS" onclick="checkAnswer(1,true)">
+      <p>Option A</p>
     </div>
-    <div class="example wrong">
-      <h4>❌ Wrong</h4>
-      <img src="lane_wrong_cs.png" alt="Champion missing CS">
-      <p>Champion overextends or auto-attacks the wrong minions, missing gold and XP.</p>
+    <div class="example">
+      <img src="lane_wrong_cs.png" alt="Wrong CS" onclick="checkAnswer(1,false)">
+      <p>Option B</p>
     </div>
   </div>
+  <p id="feedback1" style="font-weight:bold; margin-top:10px;"></p>
 
   <!-- Pushing / Trading Example -->
   <h3>Pushing & Trading</h3>
+  <p>Click the champion correctly pushing first:</p>
   <div class="example-container">
-    <div class="example right">
-      <h4>✅ Right</h4>
-      <img src="lane_right_push.png" alt="Champion pushing first">
-      <p>Pushing first to force enemy into unfavorable trades while setting up lane control.</p>
+    <div class="example">
+      <img src="lane_right_push.png" alt="Correct Push" onclick="checkAnswer(2,true)">
+      <p>Option A</p>
     </div>
-    <div class="example wrong">
-      <h4>❌ Wrong</h4>
-      <img src="lane_wrong_push.png" alt="Champion mis-pushing">
-      <p>Pushing late or recklessly, allowing the enemy to trade freely or roam.</p>
+    <div class="example">
+      <img src="lane_wrong_push.png" alt="Wrong Push" onclick="checkAnswer(2,false)">
+      <p>Option B</p>
     </div>
   </div>
+  <p id="feedback2" style="font-weight:bold; margin-top:10px;"></p>
 
   <!-- Pulling / Lane Position Example -->
   <h3>Lane Positioning / Pulling</h3>
+  <p>Click the champion correctly positioned for safe lane control:</p>
   <div class="example-container">
-    <div class="example right">
-      <h4>✅ Right</h4>
-      <img src="lane_right_pull.png" alt="Champion correctly positioned">
-      <p>Safe position that doesn’t push wave too fast but overextends the enemy, controlling the lane.</p>
+    <div class="example">
+      <img src="lane_right_pull.png" alt="Correct Pull" onclick="checkAnswer(3,true)">
+      <p>Option A</p>
     </div>
-    <div class="example wrong">
-      <h4>❌ Wrong</h4>
-      <img src="lane_wrong_pull.png" alt="Champion poorly positioned">
-      <p>Champion overextends or stands too far back, losing lane control and CS opportunities.</p>
+    <div class="example">
+      <img src="lane_wrong_pull.png" alt="Wrong Pull" onclick="checkAnswer(3,false)">
+      <p>Option B</p>
     </div>
   </div>
+  <p id="feedback3" style="font-weight:bold; margin-top:10px;"></p>
 
   <!-- Positioning Example -->
   <h3>Positioning</h3>
+  <p>Click the champion standing in the safest position:</p>
   <div class="example-container">
-    <div class="example right">
-      <h4>✅ Right</h4>
-      <img src="lane_right_position.png" alt="Good lane positioning">
-      <p>Standing behind minions, avoiding skill shots, ready to trade or disengage safely.</p>
+    <div class="example">
+      <img src="lane_right_position.png" alt="Correct Position" onclick="checkAnswer(4,true)">
+      <p>Option A</p>
     </div>
-    <div class="example wrong">
-      <h4>❌ Wrong</h4>
-      <img src="lane_wrong_position.png" alt="Bad lane positioning">
-      <p>Exposed in front of minions, taking unnecessary poke and gank risk.</p>
+    <div class="example">
+      <img src="lane_wrong_position.png" alt="Wrong Position" onclick="checkAnswer(4,false)">
+      <p>Option B</p>
     </div>
   </div>
+  <p id="feedback4" style="font-weight:bold; margin-top:10px;"></p>
 
 </div>
 
 <footer>© 2025 LoL Fundamentals · All rights reserved</footer>
 
+<script>
+function checkAnswer(feedbackId, isCorrect) {
+  const feedback = document.getElementById("feedback" + feedbackId);
+  if(isCorrect) {
+    feedback.textContent = "✅ Correct! Well done.";
+    feedback.style.color = "#4CAF50";
+  } else {
+    feedback.textContent = "❌ Wrong! Try to notice why this position is unsafe.";
+    feedback.style.color = "#F44336";
+  }
+}
+</script>
+
 </body>
 </html>
+
 
 
 
