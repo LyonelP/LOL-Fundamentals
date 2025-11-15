@@ -4,6 +4,7 @@
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 <title>LoL Fundamentals – The Ultimate Diana & Ekko Guide</title>
+
 <style>
 body {
   margin: 0;
@@ -11,7 +12,9 @@ body {
   background: #0a0f14;
   color: #e6edf3;
   line-height: 1.6;
+  overflow-x: hidden;
 }
+
 /* Header */
 header {
   background: linear-gradient(90deg, #0a0f14, #1b2838);
@@ -23,18 +26,37 @@ header {
   letter-spacing: 1px;
   text-transform: uppercase;
   color: #c9aa71;
+  position: relative;
+  z-index: 10;
 }
+
+/* Background video */
+#bgVideo {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  z-index: -2;
+  opacity: 0.75;
+}
+
+/* Dark gradient overlay for readability */
+#overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(to bottom, rgba(10,15,20,0.45), rgba(10,15,20,0.95));
+  z-index: -1;
+}
+
 /* Hero */
 .hero {
   text-align: center;
-  padding: 120px 20px;
-  background:
-    linear-gradient(to bottom, rgba(10,15,20,0.6), rgba(10,15,20,0.95)),
-    url("https://ddragon.leagueoflegends.com/cdn/img/champion/splash/Diana_0.jpg");
-  background-size: cover;
-  background-position: center;
-  color: #fff;
-  border-bottom: 1px solid #1f2937;
+  padding: 160px 20px 100px;
   position: relative;
   z-index: 1;
 }
@@ -50,6 +72,7 @@ header {
   color: #c9d1d9;
   text-shadow: 0 0 8px rgba(0,0,0,0.6);
 }
+
 /* Button */
 .btn {
   display: inline-block;
@@ -69,11 +92,14 @@ header {
 .btn:hover {
   background: #4795ff;
 }
+
 /* Section */
 .section {
   padding: 60px 20px;
   max-width: 950px;
   margin: auto;
+  position: relative;
+  z-index: 1;
 }
 .section h2 {
   text-align: center;
@@ -84,6 +110,7 @@ header {
   width: fit-content;
   margin: 0 auto 30px;
 }
+
 /* Cards */
 .cards {
   display: flex;
@@ -92,27 +119,30 @@ header {
   gap: 25px;
 }
 .card {
-  background: #161b22;
+  background: rgba(22,27,34,0.92);
   padding: 20px;
   border-radius: 8px;
   width: 260px;
   border: 1px solid #2f81f7;
-  box-shadow: 0 0 10px rgba(47,129,247,0.2);
+  box-shadow: 0 0 10px rgba(47,129,247,0.25);
   text-align: center;
 }
 .card h3 {
   color: #c9aa71;
 }
+
 /* Login */
 #loginSection {
   max-width: 400px;
   margin: 20px auto;
   text-align: center;
-  background: #161b22;
+  background: rgba(22,27,34,0.92);
   border: 1px solid #2f81f7;
   padding: 20px;
   border-radius: 8px;
   box-shadow: 0 0 10px rgba(47,129,247,0.15);
+  position: relative;
+  z-index: 1;
 }
 input, button {
   padding: 10px;
@@ -137,6 +167,7 @@ button:disabled {
 button:hover:enabled {
   background: #4795ff;
 }
+
 /* Footer */
 footer {
   text-align: center;
@@ -145,6 +176,8 @@ footer {
   font-size: 14px;
   background: #0a0f14;
   border-top: 1px solid #1f2937;
+  position: relative;
+  z-index: 1;
 }
 footer a {
   color: #c9aa71;
@@ -156,6 +189,14 @@ footer a:hover {
 </style>
 </head>
 <body>
+
+<!-- Background Video -->
+<video autoplay muted loop playsinline id="bgVideo">
+  <source src="assets/blood-moon-diana.mp4" type="video/mp4">
+</video>
+
+<!-- Dark overlay -->
+<div id="overlay"></div>
 
 <header>LoL Fundamentals</header>
 
@@ -207,12 +248,12 @@ footer a:hover {
 </footer>
 
 <script>
-// Stripe link fix: open in new tab when button is clicked
+// Stripe link fix
 document.getElementById("accessBtn").addEventListener("click", () => {
   window.open("https://buy.stripe.com/3cI4gse2g20serQagqejK04", "_blank", "noopener,noreferrer");
 });
 
-// Google Sheet CSV published link
+// Membership CSV
 const membersCSV = "https://docs.google.com/spreadsheets/d/e/2PACX-1vR-0OZki4X8kc33NfrLsGL47-7mFj3SzjyGx6hs4QcnvRXiE-cOaJfk4wgvyIf6XXpnuB8D-B4TqSrW/pub?output=csv";
 let validEmails = [];
 const loginBtn = document.getElementById('loginBtn');
