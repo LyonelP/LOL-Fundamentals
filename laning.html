@@ -87,6 +87,27 @@ header {
   list-style-type: disc;
 }
 
+/* Video wrapper */
+.video-wrap {
+  position: relative;
+  padding-bottom: 56.25%;
+  height: 0;
+  overflow: hidden;
+  max-width: 100%;
+  border-radius: 10px;
+  margin: 25px auto 50px auto;
+  box-shadow: 0 0 25px rgba(0,0,0,0.6);
+}
+.video-wrap iframe {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  border: 0;
+  border-radius: 10px;
+}
+
 /* Right/Wrong examples */
 .example-container {
   display: flex;
@@ -106,7 +127,7 @@ header {
 }
 .example.right h4 { color: #4CAF50; }
 .example.wrong h4 { color: #F44336; }
-.example img, .example video {
+.example img {
   max-width: 100%;
   border-radius: 8px;
   margin: 10px 0;
@@ -134,11 +155,11 @@ footer {
 
 <div class="content-container">
   <h2>Laning Fundamentals</h2>
-  <p>The laning phase in League of Legends can be broken down into several core components that every player should master:</p>
+  <p>The laning phase in League of Legends can be broken down into core components every player should master:</p>
   <ul>
-    <li><strong>Farming:</strong> Securing minion kills efficiently to build gold and XP.</li>
-    <li><strong>Pushing:</strong> Applying pressure by moving the wave towards your opponent’s tower.</li>
-    <li><strong>Pulling / Freezing:</strong> Bringing the wave closer to your tower safely to create favorable conditions.</li>
+    <li><strong>Farming:</strong> Securing more last-hits per wave than your opponent.</li>
+    <li><strong>Pushing:</strong> Pushing first so your opponent has a hard time trading, resetting, or roaming.</li>
+    <li><strong>Pulling / Lane Positioning:</strong> Maintaining a safer lane position that doesn’t push too fast while overextending your opponent.</li>
     <li><strong>Positioning:</strong> Staying in the optimal spot to trade, avoid ganks, and pressure the wave.</li>
     <li><strong>Abilities:</strong> Using your champion’s kit effectively in trades, wave control, and harass.</li>
     <li><strong>Resource & Ability Management:</strong> Managing health, mana/energy, cooldowns, and summoner spells to maintain lane control.</li>
@@ -155,47 +176,47 @@ footer {
   <h2>Practical Examples: Right vs Wrong</h2>
 
   <!-- Farming Example -->
-  <h3>Farming (CS)</h3>
+  <h3>Farming / CS</h3>
   <div class="example-container">
     <div class="example right">
       <h4>✅ Right</h4>
-      <img src="right_cs.gif" alt="Correct CS Example">
-      <p>Last-hitting under turret efficiently, maximizing gold without overextending.</p>
+      <img src="lane_right_cs.png" alt="Champion correctly last-hitting">
+      <p>Champion is standing behind minions, autoing the correct minion to secure last hits efficiently.</p>
     </div>
     <div class="example wrong">
       <h4>❌ Wrong</h4>
-      <img src="wrong_cs.gif" alt="Missed CS Example">
-      <p>Missing multiple minions, or using abilities unnecessarily on minions.</p>
+      <img src="lane_wrong_cs.png" alt="Champion missing CS">
+      <p>Champion overextends or auto-attacks the wrong minions, missing gold and XP.</p>
     </div>
   </div>
 
-  <!-- Trading Example -->
-  <h3>Trading / Harass</h3>
+  <!-- Pushing / Trading Example -->
+  <h3>Pushing & Trading</h3>
   <div class="example-container">
     <div class="example right">
       <h4>✅ Right</h4>
-      <img src="right_trade.gif" alt="Safe Trade Example">
-      <p>Short trade with minion advantage, retreating immediately after poke.</p>
+      <img src="lane_right_push.png" alt="Champion pushing first">
+      <p>Pushing first to force enemy into unfavorable trades while setting up lane control.</p>
     </div>
     <div class="example wrong">
       <h4>❌ Wrong</h4>
-      <img src="wrong_trade.gif" alt="Overextending Trade Example">
-      <p>Overextending into enemy minion wave and taking unnecessary damage.</p>
+      <img src="lane_wrong_push.png" alt="Champion mis-pushing">
+      <p>Pushing late or recklessly, allowing the enemy to trade freely or roam.</p>
     </div>
   </div>
 
-  <!-- Wave Control Example -->
-  <h3>Wave Control</h3>
+  <!-- Pulling / Lane Position Example -->
+  <h3>Lane Positioning / Pulling</h3>
   <div class="example-container">
     <div class="example right">
       <h4>✅ Right</h4>
-      <img src="right_wave.gif" alt="Correct Wave Control">
-      <p>Freezing near your tower to deny gold/XP and protect from ganks.</p>
+      <img src="lane_right_pull.png" alt="Champion correctly positioned">
+      <p>Safe position that doesn’t push wave too fast but overextends the enemy, controlling the lane.</p>
     </div>
     <div class="example wrong">
       <h4>❌ Wrong</h4>
-      <img src="wrong_wave.gif" alt="Poor Wave Control">
-      <p>Over-pushing into enemy tower without vision, creating a gank opportunity.</p>
+      <img src="lane_wrong_pull.png" alt="Champion poorly positioned">
+      <p>Champion overextends or stands too far back, losing lane control and CS opportunities.</p>
     </div>
   </div>
 
@@ -204,24 +225,24 @@ footer {
   <div class="example-container">
     <div class="example right">
       <h4>✅ Right</h4>
-      <img src="right_position.gif" alt="Good Positioning">
-      <p>Standing behind minions, avoiding skill shots and jungle threats.</p>
+      <img src="lane_right_position.png" alt="Good lane positioning">
+      <p>Standing behind minions, avoiding skill shots, ready to trade or disengage safely.</p>
     </div>
     <div class="example wrong">
       <h4>❌ Wrong</h4>
-      <img src="wrong_position.gif" alt="Bad Positioning">
-      <p>Exposed in front of minions, taking unnecessary poke and pressure.</p>
+      <img src="lane_wrong_position.png" alt="Bad lane positioning">
+      <p>Exposed in front of minions, taking unnecessary poke and gank risk.</p>
     </div>
   </div>
 
-  <h2>Next Steps</h2>
-  <p>For more in-depth training, check out our guides on <a href="wave-control.html">Wave Control</a> and <a href="positioning.html">Positioning</a>.</p>
 </div>
 
 <footer>© 2025 LoL Fundamentals · All rights reserved</footer>
 
 </body>
 </html>
+
+
 
 
 
