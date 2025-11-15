@@ -4,72 +4,128 @@
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 <title>LoL Fundamentals – The Ultimate Diana & Ekko Guide</title>
+
 <style>
 body {
   margin: 0;
   font-family: "Beaufort for LOL", Arial, Helvetica, sans-serif;
-  background: #0a0f14;
+  background: radial-gradient(circle at top, #0f1620, #0a0f14 70%);
   color: #e6edf3;
   line-height: 1.6;
 }
-/* Header */
+
 header {
   background: linear-gradient(90deg, #0a0f14, #1b2838);
   border-bottom: 2px solid #c9aa71;
-  padding: 15px 20px;
+  padding: 18px 20px;
   text-align: center;
   font-weight: bold;
-  font-size: 22px;
-  letter-spacing: 1px;
+  font-size: 24px;
+  letter-spacing: 1.5px;
   text-transform: uppercase;
   color: #c9aa71;
+  text-shadow: 0 0 8px rgba(201,170,113,0.4);
 }
-/* Hero */
+
 .hero {
-  text-align: center;
-  padding: 120px 20px;
-  background:
-    linear-gradient(to bottom, rgba(10,15,20,0.6), rgba(10,15,20,0.95)),
-    url("https://ddragon.leagueoflegends.com/cdn/img/champion/splash/Diana_0.jpg");
-  background-size: cover;
-  background-position: center;
-  color: #fff;
-  border-bottom: 1px solid #1f2937;
   position: relative;
-  z-index: 1;
+  text-align: center;
+  padding: 140px 20px;
+  background: url("https://ddragon.leagueoflegends.com/cdn/img/champion/splash/Diana_0.jpg") center/cover no-repeat;
+  overflow: hidden;
+  border-bottom: 1px solid #1f2937;
 }
+
+/* HERO TEXT */
 .hero h1 {
+  position: relative;
+  z-index: 10;
   font-size: 3em;
   margin-bottom: 10px;
-  text-shadow: 0 0 10px #2f81f7;
+  text-shadow: 0 0 12px #2f81f7;
 }
 .hero p {
+  position: relative;
+  z-index: 10;
   max-width: 650px;
   margin: 0 auto 20px;
   font-size: 1.15em;
   color: #c9d1d9;
-  text-shadow: 0 0 8px rgba(0,0,0,0.6);
+  text-shadow: 0 0 10px rgba(0,0,0,0.6);
 }
-/* Button */
+
+/* CTA BUTTON */
 .btn {
+  position: relative;
+  z-index: 10;
   display: inline-block;
   background: #2f81f7;
   color: white;
-  padding: 14px 30px;
-  border-radius: 5px;
+  padding: 16px 35px;
+  border-radius: 6px;
   text-decoration: none;
   font-weight: bold;
-  font-size: 1.05em;
+  font-size: 1.1em;
   transition: 0.3s;
   border: 1px solid #c9aa71;
-  cursor: pointer;
-  position: relative;
-  z-index: 2;
+  box-shadow: 0 0 18px rgba(47,129,247,0.4);
 }
 .btn:hover {
   background: #4795ff;
+  box-shadow: 0 0 25px rgba(47,129,247,0.55);
 }
-/* Section */
+
+/* HERO OVERLAYS */
+
+/* Toned-down blue overlay */
+.hero .blueOverlay {
+  position: absolute;
+  inset: 0;
+  background: rgba(47,129,247,0.25); /* less strong */
+  pointer-events: none;
+  z-index: 1;
+}
+
+/* Moving particles */
+.hero .particles {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  z-index: 2;
+}
+.particles span {
+  position: absolute;
+  width: 4px;
+  height: 4px;
+  background: rgba(47,129,247,0.9);
+  border-radius: 50%;
+  animation: floatParticles 6s infinite ease-in-out;
+}
+
+@keyframes floatParticles {
+  0% { transform: translateY(0px) translateX(0px) scale(1); opacity: 1; }
+  50% { transform: translateY(-80px) translateX(20px) scale(1.2); opacity: 0.6; }
+  100% { transform: translateY(0px) translateX(0px) scale(1); opacity: 1; }
+}
+
+/* Aura Pulse */
+.hero .aura {
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(circle at 50% 20%, rgba(47,129,247,0.2), transparent 70%);
+  opacity: 0.3;
+  animation: auraPulse 7s infinite ease-in-out;
+  pointer-events: none;
+  z-index: 3;
+}
+
+@keyframes auraPulse {
+  0% { opacity: 0.25; transform: scale(1); }
+  50% { opacity: 0.45; transform: scale(1.1); }
+  100% { opacity: 0.25; transform: scale(1); }
+}
+
+/* SECTIONS */
 .section {
   padding: 60px 20px;
   max-width: 950px;
@@ -78,13 +134,22 @@ header {
 .section h2 {
   text-align: center;
   color: #c9aa71;
-  font-size: 1.8em;
-  border-bottom: 1px solid #c9aa71;
-  padding-bottom: 10px;
-  width: fit-content;
-  margin: 0 auto 30px;
+  font-size: 2.1em;
+  position: relative;
+  display: inline-block;
+  padding-bottom: 12px;
 }
-/* Cards */
+.section h2::after {
+  content: "";
+  width: 60%;
+  height: 2px;
+  background: linear-gradient(90deg, transparent, #c9aa71, transparent);
+  position: absolute;
+  bottom: 0;
+  left: 20%;
+}
+
+/* CARDS */
 .cards {
   display: flex;
   flex-wrap: wrap;
@@ -93,26 +158,33 @@ header {
 }
 .card {
   background: #161b22;
-  padding: 20px;
-  border-radius: 8px;
+  padding: 22px;
+  border-radius: 10px;
   width: 260px;
-  border: 1px solid #2f81f7;
-  box-shadow: 0 0 10px rgba(47,129,247,0.2);
+  border: 1px solid rgba(47,129,247,0.4);
+  box-shadow: 0 0 12px rgba(47,129,247,0.18);
   text-align: center;
+  transition: transform 0.25s ease, box-shadow 0.25s ease;
+}
+.card:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 6px 18px rgba(47,129,247,0.35);
 }
 .card h3 {
   color: #c9aa71;
 }
-/* Login */
+
+/* LOGIN */
 #loginSection {
-  max-width: 400px;
-  margin: 20px auto;
+  backdrop-filter: blur(6px);
+  background: rgba(22,27,34,0.75);
+  border: 1px solid rgba(47,129,247,0.4);
+  box-shadow: 0 0 18px rgba(47,129,247,0.25);
+  padding: 30px;
+  border-radius: 10px;
+  max-width: 420px;
+  margin: 40px auto;
   text-align: center;
-  background: #161b22;
-  border: 1px solid #2f81f7;
-  padding: 20px;
-  border-radius: 8px;
-  box-shadow: 0 0 10px rgba(47,129,247,0.15);
 }
 input, button {
   padding: 10px;
@@ -137,7 +209,8 @@ button:disabled {
 button:hover:enabled {
   background: #4795ff;
 }
-/* Footer */
+
+/* FOOTER */
 footer {
   text-align: center;
   padding: 30px;
@@ -155,11 +228,12 @@ footer a:hover {
 }
 </style>
 </head>
+
 <body>
 
 <header>LoL Fundamentals</header>
 
-<!-- Member Login Section -->
+<!-- LOGIN -->
 <section id="loginSection">
 <h2>Member Login</h2>
 <input type="email" id="email" placeholder="Enter your email" />
@@ -167,14 +241,18 @@ footer a:hover {
 <p id="loginMsg"></p>
 </section>
 
-<!-- Hero Section -->
+<!-- HERO -->
 <section class="hero">
-<h1>The Ultimate Diana & Ekko Guide</h1>
-<p>Master every aspect of League of Legends with champions like Diana and Ekko. Learn precise combos, matchup strategies, and advanced tips to elevate your gameplay. Written by Arcsecond, rank 1 Challenger Ekko and Diana player.</p>
-<button class="btn" id="accessBtn">Get Access</button>
+  <div class="blueOverlay"></div>
+  <div class="particles"></div>
+  <div class="aura"></div>
+
+  <h1>The Ultimate Diana & Ekko Guide</h1>
+  <p>Master every aspect of League of Legends with champions like Diana and Ekko. Learn precise combos, matchup strategies, and advanced tips to elevate your gameplay. Written by Arcsecond, rank 1 Challenger Ekko and Diana player.</p>
+  <button class="btn" id="accessBtn">Get Access</button>
 </section>
 
-<!-- What You’ll Learn Section -->
+<!-- CONTENT -->
 <section class="section">
 <h2>What You’ll Learn</h2>
 <div class="cards">
@@ -207,12 +285,12 @@ footer a:hover {
 </footer>
 
 <script>
-// Stripe link fix: open in new tab when button is clicked
+// Access button
 document.getElementById("accessBtn").addEventListener("click", () => {
   window.open("https://buy.stripe.com/3cI4gse2g20serQagqejK04", "_blank", "noopener,noreferrer");
 });
 
-// Google Sheet CSV published link
+// Members login
 const membersCSV = "https://docs.google.com/spreadsheets/d/e/2PACX-1vR-0OZki4X8kc33NfrLsGL47-7mFj3SzjyGx6hs4QcnvRXiE-cOaJfk4wgvyIf6XXpnuB8D-B4TqSrW/pub?output=csv";
 let validEmails = [];
 const loginBtn = document.getElementById('loginBtn');
@@ -248,11 +326,21 @@ loginBtn.addEventListener('click', () => {
 if(localStorage.getItem('lolfundamentals_logged_in') === 'true'){
   window.location.href = 'membershub.html';
 }
+
+// Generate moving particles
+const particlesContainer = document.querySelector('.particles');
+for(let i=0;i<50;i++){
+  const span = document.createElement('span');
+  span.style.left = Math.random() * 100 + "%";
+  span.style.top = Math.random() * 100 + "%";
+  span.style.animationDuration = 4 + Math.random()*4 + "s";
+  span.style.animationDelay = Math.random()*4 + "s";
+  particlesContainer.appendChild(span);
+}
 </script>
 
 </body>
 </html>
-
 
 
 
