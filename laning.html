@@ -87,25 +87,29 @@ header {
   list-style-type: disc;
 }
 
-/* Responsive video */
-.video-wrap {
-  position: relative;
-  padding-bottom: 56.25%; /* 16:9 aspect ratio */
-  height: 0;
-  overflow: hidden;
-  max-width: 100%;
-  border-radius: 10px;
-  margin: 25px auto 50px auto;
-  box-shadow: 0 0 25px rgba(0,0,0,0.6);
+/* Right/Wrong examples */
+.example-container {
+  display: flex;
+  gap: 20px;
+  flex-wrap: wrap;
+  margin-top: 15px;
 }
-.video-wrap iframe {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  border: 0;
-  border-radius: 10px;
+.example {
+  flex: 1 1 45%;
+  background: rgba(255,255,255,0.05);
+  padding: 15px;
+  border-radius: 8px;
+  text-align: center;
+}
+.example h4 {
+  color: #2f81f7;
+}
+.example.right h4 { color: #4CAF50; }
+.example.wrong h4 { color: #F44336; }
+.example img, .example video {
+  max-width: 100%;
+  border-radius: 8px;
+  margin: 10px 0;
 }
 
 /* Footer */
@@ -119,6 +123,7 @@ footer {
 @media (max-width: 600px) {
   header { font-size: 24px; padding: 15px; }
   .content-container { margin: 15px 10px 40px 10px; padding: 15px; }
+  .example-container { flex-direction: column; }
 }
 </style>
 </head>
@@ -128,31 +133,96 @@ footer {
 <a href="skills.html" class="back-button">Back to Skills Hub</a>
 
 <div class="content-container">
-  <h2>Laning</h2>
+  <h2>Laning Fundamentals</h2>
   <p>The laning phase in League of Legends can be broken down into several core components that every player should master:</p>
   <ul>
     <li><strong>Farming:</strong> Securing minion kills efficiently to build gold and XP.</li>
     <li><strong>Pushing:</strong> Applying pressure by moving the wave towards your opponent’s tower.</li>
-    <li><strong>Pulling:</strong> Bringing the wave closer to your tower safely to create favourable conditions.</li>
+    <li><strong>Pulling / Freezing:</strong> Bringing the wave closer to your tower safely to create favorable conditions.</li>
     <li><strong>Positioning:</strong> Staying in the optimal spot to trade, avoid ganks, and pressure the wave.</li>
     <li><strong>Abilities:</strong> Using your champion’s kit effectively in trades, wave control, and harass.</li>
-    <li><strong>Resource and Ability Management:</strong> Managing your health, mana/energy, cooldowns and summoner spells to maintain lane control.</li>
+    <li><strong>Resource & Ability Management:</strong> Managing health, mana/energy, cooldowns, and summoner spells to maintain lane control.</li>
   </ul>
 
-  <p>Here’s a video that helps visualise these laning fundamentals:</p>
-
+  <p>Here’s a video that helps visualize these fundamentals:</p>
   <div class="video-wrap">
     <iframe src="https://www.youtube.com/embed/WUi9pOT6wYc"
       title="Laning Phase Fundamentals"
       allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
       allowfullscreen></iframe>
   </div>
+
+  <h2>Practical Examples: Right vs Wrong</h2>
+
+  <!-- Farming Example -->
+  <h3>Farming (CS)</h3>
+  <div class="example-container">
+    <div class="example right">
+      <h4>✅ Right</h4>
+      <img src="right_cs.gif" alt="Correct CS Example">
+      <p>Last-hitting under turret efficiently, maximizing gold without overextending.</p>
+    </div>
+    <div class="example wrong">
+      <h4>❌ Wrong</h4>
+      <img src="wrong_cs.gif" alt="Missed CS Example">
+      <p>Missing multiple minions, or using abilities unnecessarily on minions.</p>
+    </div>
+  </div>
+
+  <!-- Trading Example -->
+  <h3>Trading / Harass</h3>
+  <div class="example-container">
+    <div class="example right">
+      <h4>✅ Right</h4>
+      <img src="right_trade.gif" alt="Safe Trade Example">
+      <p>Short trade with minion advantage, retreating immediately after poke.</p>
+    </div>
+    <div class="example wrong">
+      <h4>❌ Wrong</h4>
+      <img src="wrong_trade.gif" alt="Overextending Trade Example">
+      <p>Overextending into enemy minion wave and taking unnecessary damage.</p>
+    </div>
+  </div>
+
+  <!-- Wave Control Example -->
+  <h3>Wave Control</h3>
+  <div class="example-container">
+    <div class="example right">
+      <h4>✅ Right</h4>
+      <img src="right_wave.gif" alt="Correct Wave Control">
+      <p>Freezing near your tower to deny gold/XP and protect from ganks.</p>
+    </div>
+    <div class="example wrong">
+      <h4>❌ Wrong</h4>
+      <img src="wrong_wave.gif" alt="Poor Wave Control">
+      <p>Over-pushing into enemy tower without vision, creating a gank opportunity.</p>
+    </div>
+  </div>
+
+  <!-- Positioning Example -->
+  <h3>Positioning</h3>
+  <div class="example-container">
+    <div class="example right">
+      <h4>✅ Right</h4>
+      <img src="right_position.gif" alt="Good Positioning">
+      <p>Standing behind minions, avoiding skill shots and jungle threats.</p>
+    </div>
+    <div class="example wrong">
+      <h4>❌ Wrong</h4>
+      <img src="wrong_position.gif" alt="Bad Positioning">
+      <p>Exposed in front of minions, taking unnecessary poke and pressure.</p>
+    </div>
+  </div>
+
+  <h2>Next Steps</h2>
+  <p>For more in-depth training, check out our guides on <a href="wave-control.html">Wave Control</a> and <a href="positioning.html">Positioning</a>.</p>
 </div>
 
 <footer>© 2025 LoL Fundamentals · All rights reserved</footer>
 
 </body>
 </html>
+
 
 
 
