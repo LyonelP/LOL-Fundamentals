@@ -27,11 +27,13 @@ header {
   text-shadow: 0 0 8px rgba(201,170,113,0.4);
 }
 
+/* HERO */
 .hero {
   position: relative;
   text-align: center;
   padding: 140px 20px;
-  background: url("https://ddragon.leagueoflegends.com/cdn/img/champion/splash/Diana_0.jpg") center/cover no-repeat;
+  background: url("https://ddragon.leagueoflegends.com/cdn/img/champion/splash/Diana_0.jpg") no-repeat center top;
+  background-size: cover;
   overflow: hidden;
   border-bottom: 1px solid #1f2937;
 }
@@ -51,7 +53,7 @@ header {
   margin: 0 auto 20px;
   font-size: 1.15em;
   color: #d0d8e0; /* slightly brighter for readability */
-  text-shadow: 0 0 14px rgba(0,0,0,0.7); /* stronger shadow for contrast */
+  text-shadow: 0 0 14px rgba(0,0,0,0.7);
 }
 
 /* CTA BUTTON */
@@ -219,6 +221,13 @@ footer a {
 footer a:hover {
   text-decoration: underline;
 }
+
+/* MOBILE ADJUSTMENT FOR HERO IMAGE */
+@media (max-width: 600px) {
+  .hero {
+    background-position: center 25%; /* keep Diana's face visible */
+  }
+}
 </style>
 </head>
 
@@ -263,77 +272,6 @@ footer a:hover {
   </div>
   <div class="card">
     <h3>Diana Matchup Guide</h3>
-    <p>Detailed breakdowns for every mid lane champion, teaching optimal trades, wave control, and all-in timings.</p>
-  </div>
-  <div class="card">
-    <h3>Tierlist</h3>
-    <p>Rankings for each role in the current meta, highlighting strongest picks and counters.</p>
-  </div>
-</div>
-</section>
-
-<footer>
-© 2025 LoL Fundamentals · Contact:
-<a href="mailto:arcsecond@lolfundamentals.com">arcsecond@lolfundamentals.com</a>
-</footer>
-
-<script>
-// Access button
-document.getElementById("accessBtn").addEventListener("click", () => {
-  window.open("https://buy.stripe.com/3cI4gse2g20serQagqejK04", "_blank", "noopener,noreferrer");
-});
-
-// Members login
-const membersCSV = "https://docs.google.com/spreadsheets/d/e/2PACX-1vR-0OZki4X8kc33NfrLsGL47-7mFj3SzjyGx6hs4QcnvRXiE-cOaJfk4wgvyIf6XXpnuB8D-B4TqSrW/pub?output=csv";
-let validEmails = [];
-const loginBtn = document.getElementById('loginBtn');
-const msg = document.getElementById('loginMsg');
-const emailInput = document.getElementById('email');
-
-loginBtn.disabled = true;
-msg.textContent = "Loading membership list...";
-
-fetch(membersCSV)
-.then(res => res.ok ? res.text() : Promise.reject("Failed to fetch"))
-.then(data => {
-  const rows = data.split("\n").map(row => row.split(","));
-  validEmails = rows.map(r => r[0].trim().toLowerCase()).filter(e => e);
-  loginBtn.disabled = false;
-  msg.textContent = "";
-})
-.catch(err => {
-  console.error(err);
-  msg.textContent = "Error loading membership list. Try again later.";
-});
-
-loginBtn.addEventListener('click', () => {
-  const email = emailInput.value.trim().toLowerCase();
-  if(validEmails.includes(email)){
-    localStorage.setItem('lolfundamentals_logged_in', 'true');
-    window.location.href = 'membershub.html';
-  } else {
-    msg.textContent = "Access denied. Please purchase membership.";
-  }
-});
-
-if(localStorage.getItem('lolfundamentals_logged_in') === 'true'){
-  window.location.href = 'membershub.html';
-}
-
-// Generate moving particles
-const particlesContainer = document.querySelector('.particles');
-for(let i=0;i<50;i++){
-  const span = document.createElement('span');
-  span.style.left = Math.random() * 100 + "%";
-  span.style.top = Math.random() * 100 + "%";
-  span.style.animationDuration = 4 + Math.random()*4 + "s";
-  span.style.animationDelay = Math.random()*4 + "s";
-  particlesContainer.appendChild(span);
-}
-</script>
-
-</body>
-</html>
 
 
 
