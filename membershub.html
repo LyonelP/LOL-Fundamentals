@@ -40,6 +40,15 @@ header {
   margin-top: 0;
   margin-bottom: 30px;
 }
+.section h2::after {
+  content: '';
+  display: block;
+  width: 50px;
+  height: 3px;
+  background: #c9aa71;
+  margin: 10px auto 0 auto;
+  border-radius: 2px;
+}
 
 /* Card Grid */
 .card-grid {
@@ -87,6 +96,7 @@ header {
   line-height: 1.3;
   z-index: 2;
   position: relative;
+  text-shadow: 0 1px 2px rgba(0,0,0,0.5);
 }
 
 /* Card Background Image */
@@ -178,6 +188,7 @@ footer a:hover {
 }
 #logoutBtn:hover {
   background: #ff5959;
+  transform: scale(1.05);
 }
 
 /* Desktop grid fix */
@@ -188,6 +199,48 @@ footer a:hover {
   .tierlist, .fundamentals, .coaching {
     justify-self: center;
   }
+}
+
+/* Coaching Tooltip */
+.card.coaching {
+  cursor: pointer;
+}
+
+.card.coaching::after {
+  content: "Click to book 25% off coaching!";
+  position: absolute;
+  bottom: 110%;
+  left: 50%;
+  transform: translateX(-50%);
+  background: #c9aa71;
+  color: #0a0f14;
+  padding: 6px 12px;
+  border-radius: 6px;
+  font-size: 0.85em;
+  white-space: nowrap;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.3s ease, transform 0.3s ease;
+  z-index: 10;
+}
+
+.card.coaching::before {
+  content: '';
+  position: absolute;
+  bottom: 100%;
+  left: 50%;
+  transform: translateX(-50%);
+  border-width: 6px;
+  border-style: solid;
+  border-color: transparent transparent #c9aa71 transparent;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.card.coaching:hover::after,
+.card.coaching:hover::before {
+  opacity: 1;
+  transform: translateX(-50%) translateY(-5px);
 }
 </style>
 </head>
@@ -262,8 +315,6 @@ function logout() {
 
 </body>
 </html>
-
-
 
 
 
