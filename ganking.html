@@ -82,16 +82,26 @@ header {
   color: #c9aa71;
   margin-top: 0;
 }
+
+/* Video container with golden hover */
 .video-container {
   text-align: center;
   margin: 20px 0;
+  border-radius: 10px;
+  overflow: hidden;
+  transition: box-shadow 0.3s, transform 0.3s, border 0.3s;
 }
 .video-container iframe {
   width: 100%;
   max-width: 800px;
   height: 450px;
   border: none;
-  border-radius: 8px;
+  border-radius: 10px;
+}
+.video-container:hover {
+  transform: scale(1.02);
+  box-shadow: 0 0 20px rgba(201,170,113,0.8);
+  border: 2px solid #c9aa71;
 }
 
 footer {
@@ -123,6 +133,7 @@ footer {
 
 </body>
 </html>
+
 
 
 
