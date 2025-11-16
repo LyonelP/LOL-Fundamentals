@@ -87,7 +87,7 @@ header {
   list-style-type: disc;
 }
 
-/* Video wrapper */
+/* Video wrapper with gold hover */
 .video-wrap {
   position: relative;
   padding-bottom: 56.25%;
@@ -97,6 +97,7 @@ header {
   border-radius: 10px;
   margin: 25px auto 50px auto;
   box-shadow: 0 0 25px rgba(0,0,0,0.6);
+  transition: transform 0.3s, box-shadow 0.3s, border 0.3s;
 }
 .video-wrap iframe {
   position: absolute;
@@ -106,6 +107,11 @@ header {
   height: 100%;
   border: 0;
   border-radius: 10px;
+}
+.video-wrap:hover {
+  transform: scale(1.02);
+  box-shadow: 0 0 25px rgba(201,170,113,0.8);
+  border: 2px solid #c9aa71;
 }
 
 /* Right/Wrong examples with gold hover */
@@ -123,7 +129,7 @@ header {
   border-radius: 8px;
   text-align: center;
   cursor: pointer;
-  transition: transform 0.2s, box-shadow 0.2s;
+  transition: transform 0.2s, box-shadow 0.2s, border 0.2s;
 }
 .example img {
   max-width: 100%;
@@ -132,7 +138,7 @@ header {
 .example:hover {
   transform: scale(1.03);
   box-shadow: 0 0 15px rgba(201,170,113,0.7); /* golden glow */
-  border: 2px solid #c9aa71; /* optional golden border */
+  border: 2px solid #c9aa71; /* golden border */
 }
 
 /* Footer */
@@ -163,9 +169,10 @@ footer {
     <li><strong>Pushing:</strong> Pushing first so your opponent has a hard time trading, resetting, or roaming.</li>
     <li><strong>Pulling / Lane Positioning:</strong> Maintaining a safer lane position that doesn’t push too fast while overextending your opponent.</li>
     <li><strong>Positioning:</strong> Staying in the optimal spot to trade, avoid damage/ganks, and to pressure the wave.</li>
-    <li><strong>Resource & Ability Management:</strong> Managing health, mana/energy, cooldowns, abilites, autos and summoner spells to maintain lane control.</li>
+    <li><strong>Resource & Ability Management:</strong> Managing health, mana/energy, cooldowns, abilities, autos and summoner spells to maintain lane control.</li>
   </ul>
 
+  <!-- Video with golden hover -->
   <div class="video-wrap">
     <iframe src="https://www.youtube.com/embed/WUi9pOT6wYc"
       title="Laning Phase Fundamentals"
@@ -254,6 +261,8 @@ function checkAnswer(feedbackId, isCorrect) {
 
 </body>
 </html>
+
+
 
 
 
