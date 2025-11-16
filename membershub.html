@@ -8,26 +8,15 @@
 body {
   margin: 0;
   font-family: "Beaufort for LOL", Arial, Helvetica, sans-serif;
-  background: url('https://images.unsplash.com/photo-1532298229144-0ec0c57515c7?auto=format&fit=crop&w=1350&q=80') no-repeat center center fixed;
-  background-size: cover;
+  background: #0a0f14;
   color: #e6edf3;
+  line-height: 1.6;
   text-align: center;
-  position: relative;
-}
-
-/* Dark overlay for readability */
-body::before {
-  content: "";
-  position: fixed;
-  top: 0; left: 0;
-  width: 100%; height: 100%;
-  background: rgba(10, 15, 20, 0.65);
-  z-index: -1;
 }
 
 /* Header */
 header {
-  background: rgba(13,17,23,0.85);
+  background: linear-gradient(90deg, #0a0f14, #1b2838);
   border-bottom: 2px solid #c9aa71;
   padding: 15px 20px;
   font-weight: bold;
@@ -62,7 +51,7 @@ header {
 
 /* Individual Card */
 .card {
-  background: rgba(22,27,34,0.9);
+  background: #161b22;
   border: 2px solid #c9aa71;
   border-radius: 12px;
   padding: 20px 15px;
@@ -76,10 +65,11 @@ header {
   position: relative;
   overflow: hidden;
 }
+
+/* Card hover effect */
 .card:hover {
   transform: translateY(-5px);
-  box-shadow: 0 10px 25px rgba(201,170,113,0.5);
-  color: #f9d949;
+  box-shadow: 0 10px 20px rgba(47,129,247,0.3);
 }
 
 /* Card Header */
@@ -103,13 +93,15 @@ header {
 .card::before {
   content: "";
   position: absolute;
-  top: 0; left: 0;
-  width: 100%; height: 100%;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
   background-size: cover;
   background-position: center;
   opacity: 0.15;
   z-index: 1;
-  border-radius: 12px;
+  border-radius: 10px;
 }
 
 /* Specific card backgrounds */
@@ -137,7 +129,7 @@ header {
   opacity: 0.2;
 }
 
-/* Tierlist bar */
+/* Tierlist card visual */
 .card.tierlist .tier-bar {
   margin-top: 10px;
   width: 100%;
@@ -188,24 +180,33 @@ footer a:hover {
   background: #ff5959;
 }
 
+/* Desktop grid fix */
 @media(min-width: 900px){
   .card-grid {
     grid-template-columns: repeat(3, 1fr);
   }
-  .tierlist, .fundamentals, .coaching { justify-self: center; }
+  .tierlist, .fundamentals, .coaching {
+    justify-self: center;
+  }
 }
 </style>
 </head>
 <body>
-<header>LoL Fundamentals – Members Hub</header>
+
+<header>
+  LoL Fundamentals – Members Hub
+</header>
+
 <section class="section">
 <h2>Your Member Hub</h2>
 <p>Choose a section to explore:</p>
+
 <div class="card-grid">
   <a href="skills.html" class="card fundamentals">
     <h3>Fundamentals</h3>
     <p>Learn core League mechanics that every player should understand to improve faster.</p>
   </a>
+
   <a href="tierlist.html" class="card tierlist">
     <h3>Tierlist</h3>
     <p>Current champion tierlist showing which champions dominate the meta.</p>
@@ -217,40 +218,54 @@ footer a:hover {
       <div class="tier-d"></div>
     </div>
   </a>
+
   <a href="https://buy.stripe.com/5kQeV6f6kgVmbfE88iejK03" class="card coaching">
     <h3>Coaching</h3>
     <p>Book a personalized 1-hour coaching session. Members receive 25% off!</p>
   </a>
+
   <a href="dianaguide.html" class="card diana-guide">
     <h3>Diana Guide</h3>
     <p>Comprehensive guide for mastering Diana, including combos, mechanics, and advanced tips.</p>
   </a>
+
   <a href="matchuphub.html" class="card diana-matchups">
     <h3>Diana Mid Matchups</h3>
     <p>Detailed breakdowns for every mid lane matchup. Learn optimal trades, wave control, and positioning.</p>
   </a>
+
   <a href="ekkoguide.html" class="card ekko-guide">
     <h3>Ekko Guide</h3>
     <p>Complete guide to playing Ekko Jungle, including combos, pathing, and advanced mechanics.</p>
   </a>
 </div>
 </section>
+
 <button id="logoutBtn" onclick="logout()">Logout</button>
+
 <footer>
-© 2025 LoL Fundamentals · Contact: 
+© 2025 LoL Fundamentals · Contact:
 <a href="mailto:arcsecond@lolfundamentals.com">arcsecond@lolfundamentals.com</a>
 </footer>
+
 <script>
+// Require login
 if (localStorage.getItem('lolfundamentals_logged_in') !== 'true') {
   window.location.href = 'index.html';
 }
+
 function logout() {
   localStorage.removeItem('lolfundamentals_logged_in');
   window.location.href = 'index.html';
 }
 </script>
+
 </body>
 </html>
+
+
+
+
 
 
 
