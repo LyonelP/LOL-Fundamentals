@@ -5,13 +5,26 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 <title>LoL Fundamentals – Members Hub</title>
 <style>
+/* Body and background */
 body {
   margin: 0;
   font-family: "Beaufort for LOL", Arial, Helvetica, sans-serif;
-  background: #0a0f14;
   color: #e6edf3;
-  line-height: 1.6;
   text-align: center;
+  background: url('https://i.imgur.com/yourStarBackground.jpg') no-repeat center center fixed;
+  background-size: cover;
+  position: relative;
+  overflow-x: hidden;
+}
+
+/* Overlay to dim background */
+body::before {
+  content: "";
+  position: fixed;
+  top: 0; left: 0;
+  width: 100%; height: 100%;
+  background: rgba(0,0,0,0.25); /* subtle dark overlay */
+  z-index: -1;
 }
 
 /* Header */
@@ -51,7 +64,7 @@ header {
 
 /* Individual Card */
 .card {
-  background: #161b22;
+  background: rgba(22,27,34,0.9);
   border: 2px solid #c9aa71;
   border-radius: 12px;
   padding: 20px 15px;
@@ -69,7 +82,8 @@ header {
 /* Card hover effect */
 .card:hover {
   transform: translateY(-5px);
-  box-shadow: 0 10px 20px rgba(47,129,247,0.3);
+  box-shadow: 0 10px 20px rgba(201,170,113,0.3);
+  color: #f9d949;
 }
 
 /* Card Header */
@@ -245,7 +259,6 @@ function logout() {
 </script>
 </body>
 </html>
-
 
 
 
