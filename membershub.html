@@ -185,28 +185,20 @@ footer a:hover {
   .card-grid {
     grid-template-columns: repeat(3, 1fr);
   }
-  .tierlist, .fundamentals, .coaching {
-    justify-self: center;
-  }
+  .tierlist, .fundamentals, .coaching { justify-self: center; }
 }
 </style>
 </head>
 <body>
-
-<header>
-  LoL Fundamentals – Members Hub
-</header>
-
+<header>LoL Fundamentals – Members Hub</header>
 <section class="section">
 <h2>Your Member Hub</h2>
 <p>Choose a section to explore:</p>
-
 <div class="card-grid">
   <a href="skills.html" class="card fundamentals">
     <h3>Fundamentals</h3>
     <p>Learn core League mechanics that every player should understand to improve faster.</p>
   </a>
-
   <a href="tierlist.html" class="card tierlist">
     <h3>Tierlist</h3>
     <p>Current champion tierlist showing which champions dominate the meta.</p>
@@ -218,50 +210,42 @@ footer a:hover {
       <div class="tier-d"></div>
     </div>
   </a>
-
   <a href="https://buy.stripe.com/5kQeV6f6kgVmbfE88iejK03" class="card coaching">
     <h3>Coaching</h3>
     <p>Book a personalized 1-hour coaching session. Members receive 25% off!</p>
   </a>
-
   <a href="dianaguide.html" class="card diana-guide">
     <h3>Diana Guide</h3>
     <p>Comprehensive guide for mastering Diana, including combos, mechanics, and advanced tips.</p>
   </a>
-
   <a href="matchuphub.html" class="card diana-matchups">
     <h3>Diana Mid Matchups</h3>
     <p>Detailed breakdowns for every mid lane matchup. Learn optimal trades, wave control, and positioning.</p>
   </a>
-
   <a href="ekkoguide.html" class="card ekko-guide">
     <h3>Ekko Guide</h3>
     <p>Complete guide to playing Ekko Jungle, including combos, pathing, and advanced mechanics.</p>
   </a>
 </div>
 </section>
-
 <button id="logoutBtn" onclick="logout()">Logout</button>
-
 <footer>
-© 2025 LoL Fundamentals · Contact:
+© 2025 LoL Fundamentals · Contact: 
 <a href="mailto:arcsecond@lolfundamentals.com">arcsecond@lolfundamentals.com</a>
 </footer>
-
 <script>
 // Require login
 if (localStorage.getItem('lolfundamentals_logged_in') !== 'true') {
   window.location.href = 'index.html';
 }
-
 function logout() {
   localStorage.removeItem('lolfundamentals_logged_in');
   window.location.href = 'index.html';
 }
 </script>
-
 </body>
 </html>
+
 
 
 
