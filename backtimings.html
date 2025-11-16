@@ -89,27 +89,21 @@ header {
   margin-bottom: 10px;
 }
 
-/* Embedded video */
+/* Embedded video - permanent gold border glow */
 .video-container {
   margin-top: 30px;
   text-align: center;
-  transition: all 0.3s;
   border-radius: 10px;
   overflow: hidden;
+  border: 2px solid #c9aa71;
+  box-shadow: 0 0 20px rgba(201,170,113,0.8);
 }
 .video-container iframe {
   width: 100%;
   max-width: 800px;
   height: 450px;
-  border: 2px solid transparent;
+  border: none;
   border-radius: 10px;
-  transition: all 0.3s;
-}
-
-/* Hover glow effect for video */
-.video-container:hover iframe {
-  border: 2px solid #c9aa71;
-  box-shadow: 0 0 20px rgba(201,170,113,0.8);
 }
 
 footer {
@@ -151,6 +145,7 @@ footer {
 
 </body>
 </html>
+
 
 
 
