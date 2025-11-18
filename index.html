@@ -5,144 +5,86 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 <title>LoL Fundamentals – The Ultimate Diana & Ekko Guide</title>
 <style>
-/* ---------------- GENERAL ---------------- */
 body {
   margin: 0;
   font-family: "Beaufort for LOL", Arial, Helvetica, sans-serif;
-  background: radial-gradient(circle at top, #0f1620, #0a0f14 70%);
+  background: #0a0f14;
   color: #e6edf3;
   line-height: 1.6;
 }
-
-/* ---------------- HEADER ---------------- */
+/* Header */
 header {
   background: linear-gradient(90deg, #0a0f14, #1b2838);
   border-bottom: 2px solid #c9aa71;
-  padding: 18px 20px;
+  padding: 15px 20px;
   text-align: center;
   font-weight: bold;
-  font-size: 24px;
-  letter-spacing: 1.5px;
+  font-size: 22px;
+  letter-spacing: 1px;
   text-transform: uppercase;
   color: #c9aa71;
-  text-shadow: 0 0 8px rgba(201,170,113,0.4);
 }
-
-/* ---------------- HERO ---------------- */
+/* Hero */
 .hero {
-  position: relative;
   text-align: center;
-  padding: 140px 20px;
-  background: url("https://ddragon.leagueoflegends.com/cdn/img/champion/splash/Diana_0.jpg") center/cover no-repeat;
-  overflow: hidden;
+  padding: 120px 20px;
+  background:
+    linear-gradient(to bottom, rgba(10,15,20,0.6), rgba(10,15,20,0.95)),
+    url("https://ddragon.leagueoflegends.com/cdn/img/champion/splash/Diana_0.jpg");
+  background-size: cover;
+  background-position: center;
+  color: #fff;
   border-bottom: 1px solid #1f2937;
-}
-
-.hero h1 {
   position: relative;
-  z-index: 10;
+  z-index: 1;
+}
+.hero h1 {
   font-size: 3em;
   margin-bottom: 10px;
-  text-shadow: 0 0 12px #2f81f7;
+  text-shadow: 0 0 10px #2f81f7;
 }
 .hero p {
-  position: relative;
-  z-index: 10;
   max-width: 650px;
   margin: 0 auto 20px;
   font-size: 1.15em;
-  color: #d0d8e0;
-  text-shadow: 0 0 14px rgba(0,0,0,0.7);
+  color: #c9d1d9;
+  text-shadow: 0 0 8px rgba(0,0,0,0.6);
 }
+/* Button */
 .btn {
-  position: relative;
-  z-index: 10;
   display: inline-block;
   background: #2f81f7;
   color: white;
-  padding: 16px 35px;
-  border-radius: 6px;
+  padding: 14px 30px;
+  border-radius: 5px;
   text-decoration: none;
   font-weight: bold;
-  font-size: 1.1em;
+  font-size: 1.05em;
   transition: 0.3s;
   border: 1px solid #c9aa71;
-  box-shadow: 0 0 18px rgba(47,129,247,0.4);
   cursor: pointer;
+  position: relative;
+  z-index: 2;
 }
 .btn:hover {
   background: #4795ff;
-  box-shadow: 0 0 25px rgba(47,129,247,0.55);
 }
-
-/* ---------------- HERO OVERLAYS ---------------- */
-.hero .blueOverlay {
-  position: absolute;
-  inset: 0;
-  background: rgba(47,129,247,0.08);
-  pointer-events: none;
-  z-index: 1;
-}
-.hero .particles {
-  position: absolute;
-  inset: 0;
-  pointer-events: none;
-  z-index: 2;
-}
-.particles span {
-  position: absolute;
-  width: 4px;
-  height: 4px;
-  background: rgba(47,129,247,0.9);
-  border-radius: 50%;
-  animation: floatParticles 6s infinite ease-in-out;
-}
-@keyframes floatParticles {
-  0% { transform: translateY(0px) translateX(0px) scale(1); opacity: 1; }
-  50% { transform: translateY(-80px) translateX(20px) scale(1.2); opacity: 0.6; }
-  100% { transform: translateY(0px) translateX(0px) scale(1); opacity: 1; }
-}
-.hero .aura {
-  position: absolute;
-  inset: 0;
-  background: radial-gradient(circle at 50% 20%, rgba(47,129,247,0.2), transparent 70%);
-  opacity: 0.3;
-  animation: auraPulse 7s infinite ease-in-out;
-  pointer-events: none;
-  z-index: 3;
-}
-@keyframes auraPulse {
-  0% { opacity: 0.25; transform: scale(1); }
-  50% { opacity: 0.45; transform: scale(1.1); }
-  100% { opacity: 0.25; transform: scale(1); }
-}
-
-/* ---------------- SECTIONS ---------------- */
+/* Section */
 .section {
   padding: 60px 20px;
   max-width: 950px;
   margin: auto;
-  text-align: center;
 }
 .section h2 {
+  text-align: center;
   color: #c9aa71;
-  font-size: 2.1em;
-  display: inline-block;
-  padding-bottom: 12px;
-  position: relative;
-  margin-bottom: 40px;
+  font-size: 1.8em;
+  border-bottom: 1px solid #c9aa71;
+  padding-bottom: 10px;
+  width: fit-content;
+  margin: 0 auto 30px;
 }
-.section h2::after {
-  content: "";
-  width: 60%;
-  height: 2px;
-  background: linear-gradient(90deg, transparent, #c9aa71, transparent);
-  position: absolute;
-  bottom: 0;
-  left: 20%;
-}
-
-/* ---------------- CARDS ---------------- */
+/* Cards */
 .cards {
   display: flex;
   flex-wrap: wrap;
@@ -151,38 +93,51 @@ header {
 }
 .card {
   background: #161b22;
-  padding: 22px;
-  border-radius: 10px;
+  padding: 20px;
+  border-radius: 8px;
   width: 260px;
-  border: 1px solid rgba(47,129,247,0.4);
-  box-shadow: 0 0 12px rgba(47,129,247,0.18);
+  border: 1px solid #2f81f7;
+  box-shadow: 0 0 10px rgba(47,129,247,0.2);
   text-align: center;
-  transition: transform 0.25s ease, box-shadow 0.25s ease;
 }
-.card:hover {
-  transform: translateY(-6px);
-  box-shadow: 0 6px 18px rgba(47,129,247,0.35);
+.card h3 {
+  color: #c9aa71;
 }
-.card h3 { color: #c9aa71; }
-
-/* ---------------- LOGIN SECTION ---------------- */
+/* Login */
 #loginSection {
-  backdrop-filter: blur(6px);
-  background: rgba(22,27,34,0.75);
-  border: 1px solid rgba(47,129,247,0.4);
-  box-shadow: 0 0 18px rgba(47,129,247,0.25);
-  padding: 30px;
-  border-radius: 10px;
-  max-width: 420px;
-  margin: 40px auto;
+  max-width: 400px;
+  margin: 20px auto;
+  text-align: center;
+  background: #161b22;
+  border: 1px solid #2f81f7;
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0 0 10px rgba(47,129,247,0.15);
+}
+input, button {
+  padding: 10px;
+  margin: 5px 0;
+  border-radius: 4px;
+  border: none;
+}
+input {
+  width: 80%;
   text-align: center;
 }
-input, button { padding: 10px; margin: 5px 0; border-radius: 4px; border: none; }
-input { width: 80%; text-align: center; }
-button:hover { opacity: 0.85; }
-#loginMsg { margin-top: 10px; color: #ffbaba; }
-
-/* ---------------- FOOTER ---------------- */
+button {
+  background: #2f81f7;
+  color: white;
+  cursor: pointer;
+  font-weight: bold;
+}
+button:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+button:hover:enabled {
+  background: #4795ff;
+}
+/* Footer */
 footer {
   text-align: center;
   padding: 30px;
@@ -191,161 +146,112 @@ footer {
   background: #0a0f14;
   border-top: 1px solid #1f2937;
 }
-footer a { color: #c9aa71; text-decoration: none; }
-footer a:hover { text-decoration: underline; }
+footer a {
+  color: #c9aa71;
+  text-decoration: none;
+}
+footer a:hover {
+  text-decoration: underline;
+}
 </style>
 </head>
 <body>
 
 <header>LoL Fundamentals</header>
 
-<!-- LOGIN / SIGNUP -->
+<!-- Member Login Section -->
 <section id="loginSection">
-  <h2>Member Login / Signup</h2>
-  <input type="email" id="email" placeholder="Enter your email" />
-  <input type="password" id="password" placeholder="Enter your password" />
-  <br>
-  <button id="loginBtn">Login</button>
-  <button id="signupBtn">Sign Up</button>
-  <button id="resetBtn">Forgot Password</button>
-  <p id="loginMsg"></p>
+<h2>Member Login</h2>
+<input type="email" id="email" placeholder="Enter your email" />
+<button id="loginBtn" disabled>Login</button>
+<p id="loginMsg"></p>
 </section>
 
-<!-- HERO -->
+<!-- Hero Section -->
 <section class="hero">
-  <div class="blueOverlay"></div>
-  <div class="particles"></div>
-  <div class="aura"></div>
-
-  <h1>The Ultimate Diana & Ekko Guide</h1>
-  <p>Master every aspect of League of Legends with champions like Diana and Ekko. Learn precise combos, matchup strategies, and advanced tips to elevate your gameplay.</p>
-  <button class="btn" id="accessBtn">Get Access</button>
+<h1>The Ultimate Diana & Ekko Guide</h1>
+<p>Master every aspect of League of Legends with champions like Diana and Ekko. Learn precise combos, matchup strategies, and advanced tips to elevate your gameplay. Written by Arcsecond, rank 1 Challenger Ekko and Diana player.</p>
+<button class="btn" id="accessBtn">Get Access</button>
 </section>
 
-<!-- CONTENT -->
+<!-- What You’ll Learn Section -->
 <section class="section">
 <h2>What You’ll Learn</h2>
 <div class="cards">
   <div class="card">
     <h3>Fundamentals</h3>
-    <p>Core skills including combos, wave management, positioning, and warding.</p>
+    <p>Core skills including combos, wave management, positioning, and warding for consistent gameplay improvement.</p>
   </div>
   <div class="card">
     <h3>Diana Guide</h3>
-    <p>A comprehensive guide covering Diana's full kit and advanced strategies.</p>
+    <p>A comprehensive guide covering Diana's full kit, itemization, playstyle, and advanced strategies.</p>
   </div>
   <div class="card">
     <h3>Ekko Guide</h3>
-    <p>Complete guide to playing Ekko Jungle, including combos and pathing.</p>
+    <p>Complete guide to playing Ekko Jungle, including combos, pathing, and advanced mechanics.</p>
   </div>
   <div class="card">
     <h3>Diana Matchup Guide</h3>
-    <p>Detailed breakdowns for every mid lane champion and all-in timings.</p>
+    <p>Detailed breakdowns for every mid lane champion, teaching optimal trades, wave control, and all-in timings.</p>
   </div>
   <div class="card">
     <h3>Tierlist</h3>
-    <p>Rankings for each role in the current meta highlighting strongest picks.</p>
+    <p>Rankings for each role in the current meta, highlighting strongest picks and counters.</p>
   </div>
 </div>
 </section>
 
 <footer>
-© 2025 LoL Fundamentals · Contact: <a href="mailto:arcsecond@lolfundamentals.com">arcsecond@lolfundamentals.com</a>
+© 2025 LoL Fundamentals · Contact:
+<a href="mailto:arcsecond@lolfundamentals.com">arcsecond@lolfundamentals.com</a>
 </footer>
 
-<!-- FIREBASE AUTH SCRIPT -->
-<script type="module">
-import { initializeApp } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-app.js";
-import { getAuth, signInWithEmailAndPassword, createUserWithEmailAndPassword, sendPasswordResetEmail, signOut } 
-  from "https://www.gstatic.com/firebasejs/10.8.0/firebase-auth.js";
-import { getFirestore, doc, setDoc, getDoc } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-firestore.js";
-
-// Firebase config
-const firebaseConfig = {
-  apiKey: "AIzaSyCFRcEV7wdivqONnkjJubAZOjPMixrHMBI",
-  authDomain: "lol-fundamentals.firebaseapp.com",
-  projectId: "lol-fundamentals",
-  storageBucket: "lol-fundamentals.firebasestorage.app",
-  messagingSenderId: "1038440427584",
-  appId: "1:1038440427584:web:a82207151fd370dbedefa5",
-  measurementId: "G-21QY21LQGN"
-};
-
-// Initialize Firebase
-const app = initializeApp(firebaseConfig);
-const auth = getAuth(app);
-const db = getFirestore(app);
-
-// GET ACCESS BUTTON (Stripe)
+<script>
+// Stripe link fix: open in new tab when button is clicked
 document.getElementById("accessBtn").addEventListener("click", () => {
-  window.open("https://buy.stripe.com/3cI4gse2g20serQagqejK04", "_blank");
+  window.open("https://buy.stripe.com/3cI4gse2g20serQagqejK04", "_blank", "noopener,noreferrer");
 });
 
-// SIGNUP
-document.getElementById("signupBtn").addEventListener("click", async () => {
-  const email = document.getElementById("email").value.trim();
-  const password = document.getElementById("password").value.trim();
-  const msg = document.getElementById("loginMsg");
+// Google Sheet CSV published link
+const membersCSV = "https://docs.google.com/spreadsheets/d/e/2PACX-1vR-0OZki4X8kc33NfrLsGL47-7mFj3SzjyGx6hs4QcnvRXiE-cOaJfk4wgvyIf6XXpnuB8D-B4TqSrW/pub?output=csv";
+let validEmails = [];
+const loginBtn = document.getElementById('loginBtn');
+const msg = document.getElementById('loginMsg');
+const emailInput = document.getElementById('email');
 
-  try {
-    const userCredential = await createUserWithEmailAndPassword(auth, email, password);
-    const uid = userCredential.user.uid;
-    await setDoc(doc(db, "users", uid), { email, paid: false });
-    msg.textContent = "Signup successful! Please complete payment to access members area.";
-  } catch (error) {
-    msg.textContent = error.message;
+loginBtn.disabled = true;
+msg.textContent = "Loading membership list...";
+
+fetch(membersCSV)
+.then(res => res.ok ? res.text() : Promise.reject("Failed to fetch"))
+.then(data => {
+  const rows = data.split("\n").map(row => row.split(","));
+  validEmails = rows.map(r => r[0].trim().toLowerCase()).filter(e => e);
+  loginBtn.disabled = false;
+  msg.textContent = "";
+})
+.catch(err => {
+  console.error(err);
+  msg.textContent = "Error loading membership list. Try again later.";
+});
+
+loginBtn.addEventListener('click', () => {
+  const email = emailInput.value.trim().toLowerCase();
+  if(validEmails.includes(email)){
+    localStorage.setItem('lolfundamentals_logged_in', 'true');
+    window.location.href = 'membershub.html';
+  } else {
+    msg.textContent = "Access denied. Please purchase membership.";
   }
 });
 
-// LOGIN
-document.getElementById("loginBtn").addEventListener("click", async () => {
-  const email = document.getElementById("email").value.trim();
-  const password = document.getElementById("password").value.trim();
-  const msg = document.getElementById("loginMsg");
-
-  try {
-    const userCredential = await signInWithEmailAndPassword(auth, email, password);
-    const uid = userCredential.user.uid;
-    const docSnap = await getDoc(doc(db, "users", uid));
-
-    if (docSnap.exists() && docSnap.data().paid) {
-      window.location.href = "membershub.html";
-    } else {
-      msg.textContent = "Access denied. You must purchase membership first.";
-      await signOut(auth);
-    }
-  } catch (error) {
-    msg.textContent = error.message;
-  }
-});
-
-// RESET PASSWORD
-document.getElementById("resetBtn").addEventListener("click", async () => {
-  const email = document.getElementById("email").value.trim();
-  const msg = document.getElementById("loginMsg");
-  try {
-    await sendPasswordResetEmail(auth, email);
-    msg.textContent = "Password reset email sent!";
-  } catch (error) {
-    msg.textContent = error.message;
-  }
-});
-
-// PARTICLES
-const particlesContainer = document.querySelector('.particles');
-for(let i=0;i<50;i++){
-  const span = document.createElement('span');
-  span.style.left = Math.random() * 100 + "%";
-  span.style.top = Math.random() * 100 + "%";
-  span.style.animationDuration = 4 + Math.random()*4 + "s";
-  span.style.animationDelay = Math.random()*4 + "s";
-  particlesContainer.appendChild(span);
+if(localStorage.getItem('lolfundamentals_logged_in') === 'true'){
+  window.location.href = 'membershub.html';
 }
 </script>
 
 </body>
 </html>
-
 
 
 
