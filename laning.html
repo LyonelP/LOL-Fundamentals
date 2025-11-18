@@ -141,6 +141,14 @@ header {
   border: 2px solid #c9aa71; /* golden border */
 }
 
+/* Feedback text initially hidden */
+.feedback {
+  font-weight: bold;
+  margin-top: 10px;
+  opacity: 0;
+  transition: opacity 0.4s ease;
+}
+
 /* Footer */
 footer {
   text-align: center;
@@ -195,7 +203,7 @@ footer {
       <p>Option B</p>
     </div>
   </div>
-  <p id="feedback1" style="font-weight:bold; margin-top:10px;"></p>
+  <p id="feedback1" class="feedback"></p>
 
   <!-- Pushing / Trading Example -->
   <h3>Pushing & Trading</h3>
@@ -210,7 +218,7 @@ footer {
       <p>Option B</p>
     </div>
   </div>
-  <p id="feedback2" style="font-weight:bold; margin-top:10px;"></p>
+  <p id="feedback2" class="feedback"></p>
 
   <!-- Pulling / Lane Position Example -->
   <h3>Lane Positioning / Pulling</h3>
@@ -225,7 +233,7 @@ footer {
       <p>Option B</p>
     </div>
   </div>
-  <p id="feedback3" style="font-weight:bold; margin-top:10px;"></p>
+  <p id="feedback3" class="feedback"></p>
 
   <!-- Positioning Example -->
   <h3>Positioning</h3>
@@ -240,7 +248,7 @@ footer {
       <p>Option B</p>
     </div>
   </div>
-  <p id="feedback4" style="font-weight:bold; margin-top:10px;"></p>
+  <p id="feedback4" class="feedback"></p>
 
 </div>
 
@@ -256,11 +264,13 @@ function checkAnswer(feedbackId, isCorrect) {
     feedback.textContent = "❌ Wrong! Try to notice why this position is unsafe.";
     feedback.style.color = "#F44336";
   }
+  feedback.style.opacity = 1; // show feedback with fade effect
 }
 </script>
 
 </body>
 </html>
+
 
 
 
