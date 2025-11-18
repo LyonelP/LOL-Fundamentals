@@ -137,16 +137,15 @@ header {
 }
 .example:hover {
   transform: scale(1.03);
-  box-shadow: 0 0 15px rgba(201,170,113,0.7); /* golden glow */
-  border: 2px solid #c9aa71; /* golden border */
+  box-shadow: 0 0 15px rgba(201,170,113,0.7);
+  border: 2px solid #c9aa71;
 }
 
-/* Feedback text initially hidden */
+/* Feedback styling */
 .feedback {
+  display: none; /* hidden by default */
   font-weight: bold;
   margin-top: 10px;
-  opacity: 0;
-  transition: opacity 0.4s ease;
 }
 
 /* Footer */
@@ -194,13 +193,11 @@ footer {
   <h3>Farming / CS</h3>
   <p>Click the champion that is in the correct position for safe last hitting:</p>
   <div class="example-container">
-    <div class="example" onclick="checkAnswer(1,true)">
+    <div class="example" onclick="checkAnswer('feedback1',true)">
       <img src="https://cdn.pixabay.com/photo/2020/09/14/17/24/fantasy-5578786_1280.png" alt="Correct CS">
-      <p>Option A</p>
     </div>
-    <div class="example" onclick="checkAnswer(1,false)">
+    <div class="example" onclick="checkAnswer('feedback1',false)">
       <img src="https://cdn.pixabay.com/photo/2019/08/14/20/16/fantasy-4408677_1280.png" alt="Wrong CS">
-      <p>Option B</p>
     </div>
   </div>
   <p id="feedback1" class="feedback"></p>
@@ -209,13 +206,11 @@ footer {
   <h3>Pushing & Trading</h3>
   <p>Click the champion correctly pushing first:</p>
   <div class="example-container">
-    <div class="example" onclick="checkAnswer(2,true)">
+    <div class="example" onclick="checkAnswer('feedback2',true)">
       <img src="https://cdn.pixabay.com/photo/2017/01/31/13/14/fantasy-2027616_1280.png" alt="Correct Push">
-      <p>Option A</p>
     </div>
-    <div class="example" onclick="checkAnswer(2,false)">
+    <div class="example" onclick="checkAnswer('feedback2',false)">
       <img src="https://cdn.pixabay.com/photo/2019/10/09/19/08/fantasy-4532101_1280.png" alt="Wrong Push">
-      <p>Option B</p>
     </div>
   </div>
   <p id="feedback2" class="feedback"></p>
@@ -224,13 +219,11 @@ footer {
   <h3>Lane Positioning / Pulling</h3>
   <p>Click the champion correctly positioned for safe lane control:</p>
   <div class="example-container">
-    <div class="example" onclick="checkAnswer(3,true)">
+    <div class="example" onclick="checkAnswer('feedback3',true)">
       <img src="https://cdn.pixabay.com/photo/2020/06/20/11/24/fantasy-5323516_1280.png" alt="Correct Pull">
-      <p>Option A</p>
     </div>
-    <div class="example" onclick="checkAnswer(3,false)">
+    <div class="example" onclick="checkAnswer('feedback3',false)">
       <img src="https://cdn.pixabay.com/photo/2020/07/06/18/58/fantasy-5374257_1280.png" alt="Wrong Pull">
-      <p>Option B</p>
     </div>
   </div>
   <p id="feedback3" class="feedback"></p>
@@ -239,13 +232,11 @@ footer {
   <h3>Positioning</h3>
   <p>Click the champion standing in the safest position:</p>
   <div class="example-container">
-    <div class="example" onclick="checkAnswer(4,true)">
+    <div class="example" onclick="checkAnswer('feedback4',true)">
       <img src="https://cdn.pixabay.com/photo/2018/09/17/09/48/fantasy-3688651_1280.png" alt="Correct Position">
-      <p>Option A</p>
     </div>
-    <div class="example" onclick="checkAnswer(4,false)">
+    <div class="example" onclick="checkAnswer('feedback4',false)">
       <img src="https://cdn.pixabay.com/photo/2018/09/17/09/45/fantasy-3688645_1280.png" alt="Wrong Position">
-      <p>Option B</p>
     </div>
   </div>
   <p id="feedback4" class="feedback"></p>
@@ -256,7 +247,8 @@ footer {
 
 <script>
 function checkAnswer(feedbackId, isCorrect) {
-  const feedback = document.getElementById("feedback" + feedbackId);
+  const feedback = document.getElementById(feedbackId);
+  feedback.style.display = "block"; // show the feedback
   if (isCorrect) {
     feedback.textContent = "✅ Correct!";
     feedback.style.color = "#4CAF50";
@@ -264,13 +256,11 @@ function checkAnswer(feedbackId, isCorrect) {
     feedback.textContent = "❌ Wrong! Try to notice why this position is unsafe.";
     feedback.style.color = "#F44336";
   }
-  feedback.style.opacity = 1; // show feedback with fade effect
 }
 </script>
 
 </body>
 </html>
-
 
 
 
