@@ -92,12 +92,9 @@ header {
 #section-info li,
 #section-info ol,
 #section-info ul { color: #e6edf3; margin-bottom: 0.9em; line-height: 1.45; }
-
-#section-info ul { margin-left: 0; padding-left: 0; }
-#section-info li { margin-bottom: 0.6em; display: flex; align-items: center; }
-#section-info li img.icon { width: 32px; height: 32px; margin-right: 10px; border-radius: 4px; border: 1px solid #c9aa71; }
-
-#section-info ol { margin-left: 1.2em; }
+#section-info ul { margin-left: 1.1em; margin-bottom: 0.9em; padding-left: 0; list-style: none; }
+.icon-list li { display: flex; align-items: flex-start; margin-bottom: 0.6em; }
+.icon-list img.icon { width: 24px; height: 24px; margin-right: 10px; margin-top: 3px; }
 
 #section-info:hover { box-shadow: 0 0 15px rgba(47,129,247,0.5); }
 
@@ -120,16 +117,6 @@ header {
     <option>Build</option>
     <option>Summoner Spells</option>
     <option>Abilities</option>
-    <option>Combos</option>
-    <option>Laning</option>
-    <option>Warding</option>
-    <option>Farming / Pushing</option>
-    <option>Teamfighting</option>
-    <option>Splitpushing</option>
-    <option>Closing Out The Game</option>
-    <option>Threats & Synergies</option>
-    <option>Pros & Cons</option>
-    <option>Extra Tips</option>
   </select>
 </div>
 
@@ -147,57 +134,44 @@ const sectionSelect = document.getElementById('section-select');
 const sectionInfo = document.getElementById('section-info');
 
 const sections = {
-"Intro": `
-<h2>Intro</h2>
-<p><strong>Why Diana?</strong> Diana has numerous ways to carry a game. She has a strong early game, laning phase, and can transition well into the side lane in the mid game. She can make picks, teamfight well, splitpush, push waves quickly, farm jungle camps, and has great damage for dragons and barons. She’s also a pick that you can play pretty much every game as long as your team doesn’t need an AD mid laner.</p>
-`,
+  "Intro": `
+    <h2>Intro</h2>
+    <p><strong>Why Diana?</strong> Diana has numerous ways to carry a game. She has a strong early game, laning phase, and can transition well into the side lane in the mid game. She can make picks, teamfight well, splitpush, push waves quickly, farm jungle camps, and has great damage for dragons and barons. She’s also a pick that you can play pretty much every game as long as your team doesn’t need an AD mid laner.</p>
+  `,
 
-"Runes": `
-<h2>Runes</h2>
-<ul>
-  <li><img class="icon" src="https://ddragon.leagueoflegends.com/cdn/14.24.1/img/perk/8437.png" alt="Grasp Of The Undying"><span><strong>Grasp Of The Undying:</strong> This is the only rune and tree that allows Diana to play the way she’s intended to be played...</span></li>
-  <li><img class="icon" src="https://ddragon.leagueoflegends.com/cdn/14.24.1/img/perkStyle/8400.png" alt="Shield Bash"><span><strong>Shield Bash:</strong> Will out damage most other runes, and Diana can proc it twice with W.</span></li>
-  <li><img class="icon" src="https://ddragon.leagueoflegends.com/cdn/14.24.1/img/perk/8473.png" alt="Bone Plating"><span><strong>Bone Plating:</strong> Best sustain tool in lane...</span></li>
-  <li><img class="icon" src="https://ddragon.leagueoflegends.com/cdn/14.24.1/img/perk/8451.png" alt="Overgrowth"><span><strong>Overgrowth:</strong> Best way for Diana to gain health besides Grasp...</span></li>
-  <li><img class="icon" src="https://ddragon.leagueoflegends.com/cdn/14.24.1/img/perk/8000.png" alt="Manaflow Band"><span><strong>Manaflow Band:</strong> Covers the amount of mana Diana requires...</span></li>
-  <li><img class="icon" src="https://ddragon.leagueoflegends.com/cdn/14.24.1/img/perk/8210.png" alt="Transcendence"><span><strong>Transcendence:</strong> Gain haste and cooldown reduction in team fights.</span></li>
-</ul>
-`,
+  "Runes": `
+    <h2>Runes</h2>
+    <ul class="icon-list">
+      <li><img class="icon" src="https://ddragon.leagueoflegends.com/cdn/13.18.1/img/rune/GraspOfTheUndying.png" alt="Grasp of the Undying"><p><strong>Grasp Of The Undying:</strong> This is the only rune and tree that allows Diana to play the way she’s intended to be played. It’s the rune that gives her the potential to win every matchup while also not falling off nearly as hard as another option like Phase Rush which is her second best tree.</p></li>
+      <li><img class="icon" src="https://ddragon.leagueoflegends.com/cdn/13.18.1/img/rune/ShieldBash.png" alt="Shield Bash"><p><strong>Shield Bash:</strong> Will out damage most other runes, and Diana can proc it twice with W.</p></li>
+      <li><img class="icon" src="https://ddragon.leagueoflegends.com/cdn/13.18.1/img/rune/BonePlating.png" alt="Bone Plating"><p><strong>Bone Plating:</strong> Best sustain tool in lane. Runes like Aery, Scorch, First Strike, and Comet all proc multiple plates. This also gives you the best chance of surviving a gank and winning a duel later on in the game.</p></li>
+      <li><img class="icon" src="https://ddragon.leagueoflegends.com/cdn/13.18.1/img/rune/Overgrowth.png" alt="Overgrowth"><p><strong>Overgrowth:</strong> Best way for Diana to gain health besides Grasp since the build doesn't include any health items. Diana requires health to engage melee champions and she has a 9% bonus health ratio on the shield strength that can be proc'd twice for a total ratio of 18%.</p></li>
+      <li><img class="icon" src="https://ddragon.leagueoflegends.com/cdn/13.18.1/img/rune/ManaflowBand.png" alt="Manaflow Band"><p><strong>Manaflow Band:</strong> This rune perfectly covers the amount of mana Diana requires to play the game. Without Manaflow Band you won’t be able to take full advantage of Diana’s side lane pressure. Diana should always be looking to take the enemy jungler’s camps especially now while her passive monster ratio is at 300%. Without Manaflow Band you won’t be able to deal with any champion that has resists since multiple damage rotations will be necessary to kill the enemy.</p></li>
+      <li><img class="icon" src="https://ddragon.leagueoflegends.com/cdn/13.18.1/img/rune/Transcendence.png" alt="Transcendence"><p><strong>Transcendence:</strong> This is the only way for Diana to gain haste besides Cryptobloom later on. It’s the perfect balance of having a little haste which is more efficient at lower values and gaining big cooldown reductions at crucial moments in team fights.</p></li>
+    </ul>
+  `,
 
-"Build": `
-<h2>Build</h2>
-<h3>Starting Items</h3>
-<ul>
-  <li><img class="icon" src="https://ddragon.leagueoflegends.com/cdn/14.24.1/img/item/1056.png" alt="Doran's Ring"><span><strong>Doran’s Ring:</strong> The most efficient item in the game and it gives the perfect stats for laning.</span></li>
-  <li><img class="icon" src="https://ddragon.leagueoflegends.com/cdn/14.24.1/img/item/1082.png" alt="Dark Seal"><span><strong>Dark Seal:</strong> I always buy this unless I can build a full Stormsurge...</span></li>
-  <li><img class="icon" src="https://ddragon.leagueoflegends.com/cdn/14.24.1/img/item/1029.png" alt="Cloth Armor"><span><strong>Cloth Armor:</strong> Purchase this after Dark Seal or if you only have 300 gold on first back.</span></li>
-  <li><img class="icon" src="https://ddragon.leagueoflegends.com/cdn/14.24.1/img/item/1027.png" alt="Null Magic Mantle"><span><strong>Null Magic Mantle:</strong> Efficient vs AP poke champions...</span></li>
-  <li><img class="icon" src="https://ddragon.leagueoflegends.com/cdn/14.24.1/img/item/3111.png" alt="Mercury Treads"><span><strong>Mercury Treads:</strong> Often upgraded from Null Magic Mantle.</span></li>
-  <li><img class="icon" src="https://ddragon.leagueoflegends.com/cdn/14.24.1/img/item/3020.png" alt="Sorcerer's Shoes"><span><strong>Sorcerer's Shoes:</strong> Diana’s best boot option now.</span></li>
-  <li><img class="icon" src="https://ddragon.leagueoflegends.com/cdn/14.24.1/img/item/3047.png" alt="Ninja Tabi"><span><strong>Ninja Tabi:</strong> Optional vs AD teams, but mostly prefer Sorcerer Shoes.</span></li>
-</ul>
-<h3>Core Items</h3>
-<ul>
-  <li><img class="icon" src="https://ddragon.leagueoflegends.com/cdn/14.24.1/img/item/3110.png" alt="Hourglass"><span><strong>Hourglass:</strong> Often built third, stopwatch first after Nashor’s Tooth.</span></li>
-  <li><img class="icon" src="https://ddragon.leagueoflegends.com/cdn/14.24.1/img/item/3089.png" alt="Deathcap"><span><strong>Death Cap:</strong> Strong late game AP item.</span></li>
-  <li><img class="icon" src="https://ddragon.leagueoflegends.com/cdn/14.24.1/img/item/3025.png" alt="Banshee’s Veil"><span><strong>Banshee’s Veil:</strong> Core part of Diana’s build.</span></li>
-  <li><img class="icon" src="https://ddragon.leagueoflegends.com/cdn/14.24.1/img/item/3916.png" alt="Cryptobloom"><span><strong>Cryptobloom:</strong> Superior to Void Staff in most cases.</span></li>
-</ul>
-<h3>Elixirs</h3>
-<ul>
-  <li><img class="icon" src="https://ddragon.leagueoflegends.com/cdn/14.24.1/img/item/2037.png" alt="Elixir of Iron"><span><strong>Elixir of Iron:</strong> Provides tenacity and health.</span></li>
-  <li><img class="icon" src="https://ddragon.leagueoflegends.com/cdn/14.24.1/img/item/2033.png" alt="Elixir of Sorcery"><span><strong>Elixir of Sorcery:</strong> Helps push towers late game.</span></li>
-</ul>
-`,
+  "Build": `
+    <h2>Build</h2>
+    <h3>Starting Items</h3>
+    <ul class="icon-list">
+      <li><img class="icon" src="https://ddragon.leagueoflegends.com/cdn/13.18.1/img/item/1056.png" alt="Doran's Ring"><p><strong>Doran’s Ring:</strong> The most efficient item in the game and it gives the perfect stats for laning.</p></li>
+      <li><img class="icon" src="https://ddragon.leagueoflegends.com/cdn/13.18.1/img/item/1082.png" alt="Dark Seal"><p><strong>Dark Seal:</strong> I always buy this unless I can build a full Stormsurge on my first buy. The health AP and snowball potential is exactly what Diana needs. It’s worth it even though I rarely upgrade it to Mejai’s Soulstealer.</p></li>
+      <li><img class="icon" src="https://ddragon.leagueoflegends.com/cdn/13.18.1/img/item/1029.png" alt="Cloth Armor"><p><strong>Cloth Armor:</strong> I’ll purchase this after Dark Seal or if I only have 300 gold on the first back and I’m against an AD mid/jg combo like Qiyana/Graves.</p></li>
+      <li><img class="icon" src="https://ddragon.leagueoflegends.com/cdn/13.18.1/img/item/1028.png" alt="Null Magic Mantle"><p><strong>Null Magic Mantle:</strong> This is the most efficient item besides the Doran’s items. Always look to pick this up against an AP mid/jg combo or even against poke champions like Ezreal. Magic resistance is the strongest against poke champions because of their longer cooldowns/low execute damage and sustain damage and their need to land poke to be able to play up in lane.</p></li>
+      <li><img class="icon" src="https://ddragon.leagueoflegends.com/cdn/13.18.1/img/item/3111.png" alt="Mercury Treads"><p><strong>Mercury Treads:</strong> If the Null Magic Mantle was purchased it’s often upgraded into Merc Treads unless it’s a low CC AP mid/jg combo of Azir/Nidalee for example. Tenacity is also a crucial stat for Diana. I’ll mostly wait for Elixir of Iron to gain tenacity since Magic Pen boots are often more important at the moment and MR can be gained through Banshee's Veil.</p></li>
+      <li><img class="icon" src="https://ddragon.leagueoflegends.com/cdn/13.18.1/img/item/3020.png" alt="Sorcerer's Shoes"><p><strong>Sorcerer's Shoes:</strong> Diana’s best boot option now. Diana’s ratios have been buffed but she still heavily relies on her base damages. Pen boots work well early though — pen naturally falls off making additional pen after the first item like Stormsurge unnecessary.</p></li>
+    </ul>
+  `,
 
-"Summoner Spells": `
-<h2>Summoner Spells</h2>
-<ul>
-  <li><img class="icon" src="https://ddragon.leagueoflegends.com/cdn/14.24.1/img/spell/SummonerFlash.png" alt="Flash"><span><strong>Flash:</strong> Essential for Diana’s combos and mobility.</span></li>
-  <li><img class="icon" src="https://ddragon.leagueoflegends.com/cdn/14.24.1/img/spell/SummonerTeleport.png" alt="Teleport"><span><strong>Teleport:</strong> Good option for scaling and side lane impact.</span></li>
-  <li><img class="icon" src="https://ddragon.leagueoflegends.com/cdn/14.24.1/img/spell/SummonerIgnite.png" alt="Ignite"><span><strong>Ignite:</strong> Strong early kill pressure at level 2+.</span></li>
-</ul>
-`,
+  "Summoner Spells": `
+    <h2>Summoner Spells</h2>
+    <ul class="icon-list">
+      <li><img class="icon" src="https://ddragon.leagueoflegends.com/cdn/13.18.1/img/spell/SummonerFlash.png" alt="Flash"><p><strong>Flash:</strong> A must-have on Diana. Diana is too easy to lock down with CC to run Ghost. Flash also enables all of her flash combos.</p></li>
+      <li><img class="icon" src="https://ddragon.leagueoflegends.com/cdn/13.18.1/img/spell/SummonerTeleport.png" alt="Teleport"><p><strong>Teleport:</strong> Teleport used to be a must on Diana and is still a good option, but with the addition of early game homeguards and the slow TP channel the early game strength is no longer there. Diana also doesn’t scale like she used to and Teleport is better on scaling champions.</p></li>
+      <li><img class="icon" src="https://ddragon.leagueoflegends.com/cdn/13.18.1/img/spell/SummonerDot.png" alt="Ignite"><p><strong>Ignite:</strong> My new go-to spell because of Diana’s early kill pressure even at level 2 now. They have also buffed the scaling damage on this spell. The runes and build are also extremely aggressive and having Ignite fends off ganks better than TPing back to a frozen wave and then having to deal with the jungler.</p></li>
+    </ul>
+  `,
   
   "Abilities": `
     <h2>Abilities</h2>
@@ -429,6 +403,7 @@ sectionSelect.addEventListener('change', () => {
 
 </body>
 </html>
+
 
 
 
