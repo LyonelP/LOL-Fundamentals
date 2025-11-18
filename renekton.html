@@ -33,7 +33,15 @@
   .matchup-container { display: flex; max-width: 900px; margin: -15px auto 0 auto; gap: 15px; padding: 0 20px 10px 20px; }
   .matchup-left { display: flex; align-items: center; gap: 10px; flex: 0 0 auto; }
   .matchup-left img { width: 80px; height: 80px; border-radius: 8px; }
-  .winrate-bubble { background: #4ade80; color: #0d1117; font-weight: bold; padding: 8px 14px; border-radius: 25px; font-size: 16px; white-space: nowrap; }
+  .winrate-bubble { 
+    background: #F9D949; /* yellow matching Veigar style */
+    color: #0d1117; 
+    font-weight: bold; 
+    padding: 8px 14px; 
+    border-radius: 25px; 
+    font-size: 16px; 
+    white-space: nowrap; 
+  }
 
   .matchup-right { flex: 1; color: #e6edf3; display: flex; flex-direction: column; justify-content: flex-start; margin-top: 0px; }
   .matchup-right h2 { margin: 0 0 15px 0; font-size: 22px; }
@@ -64,8 +72,8 @@
   <div class="matchup-right">
     <h2>Matchup Notes</h2>
     <ul>
-      <li>Luckily they nerfed his base MR so your poke sticks and you can threaten all ins.</li>
-      <li>The only play you actually have to watch out for is his flash w since you won’t  be able to get a w off and he can look to burst you in that window.</li>
+      <li>Luckily they nerfed his base MR so your poke sticks and you can threaten all-ins.</li>
+      <li>The only play you actually have to watch out for is his flash W since you won’t be able to get a W off and he can look to burst you in that window.</li>
     </ul>
   </div>
 </div>
@@ -73,13 +81,13 @@
 <footer>© 2025 LoL Fundamentals · Contact: arcsecond@lolfundamentals.com</footer>
 
 <script>
-// Require login before showing page
-if (localStorage.getItem('lolfundamentals_logged_in') !== 'true') {
-  alert('You must be logged in to view this page.');
-  window.location.href = 'login.html';
-} else {
-  document.body.style.display = 'block';
-}
+  // Require login before showing page
+  if (localStorage.getItem('lolfundamentals_logged_in') !== 'true') {
+    alert('You must be logged in to view this page.');
+    window.location.href = 'login.html';
+  } else {
+    document.body.style.display = 'block';
+  }
 </script>
 </body>
 </html>
