@@ -4,8 +4,8 @@
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 <title>LoL Fundamentals – The Ultimate Diana & Ekko Guide</title>
-
 <style>
+/* ---------------- GENERAL ---------------- */
 body {
   margin: 0;
   font-family: "Beaufort for LOL", Arial, Helvetica, sans-serif;
@@ -14,6 +14,7 @@ body {
   line-height: 1.6;
 }
 
+/* ---------------- HEADER ---------------- */
 header {
   background: linear-gradient(90deg, #0a0f14, #1b2838);
   border-bottom: 2px solid #c9aa71;
@@ -27,6 +28,7 @@ header {
   text-shadow: 0 0 8px rgba(201,170,113,0.4);
 }
 
+/* ---------------- HERO ---------------- */
 .hero {
   position: relative;
   text-align: center;
@@ -36,7 +38,6 @@ header {
   border-bottom: 1px solid #1f2937;
 }
 
-/* HERO TEXT */
 .hero h1 {
   position: relative;
   z-index: 10;
@@ -50,11 +51,9 @@ header {
   max-width: 650px;
   margin: 0 auto 20px;
   font-size: 1.15em;
-  color: #d0d8e0; /* slightly brighter for readability */
-  text-shadow: 0 0 14px rgba(0,0,0,0.7); /* stronger shadow for contrast */
+  color: #d0d8e0;
+  text-shadow: 0 0 14px rgba(0,0,0,0.7);
 }
-
-/* CTA BUTTON */
 .btn {
   position: relative;
   z-index: 10;
@@ -69,13 +68,14 @@ header {
   transition: 0.3s;
   border: 1px solid #c9aa71;
   box-shadow: 0 0 18px rgba(47,129,247,0.4);
+  cursor: pointer;
 }
 .btn:hover {
   background: #4795ff;
   box-shadow: 0 0 25px rgba(47,129,247,0.55);
 }
 
-/* HERO OVERLAYS */
+/* ---------------- HERO OVERLAYS ---------------- */
 .hero .blueOverlay {
   position: absolute;
   inset: 0;
@@ -117,7 +117,7 @@ header {
   100% { opacity: 0.25; transform: scale(1); }
 }
 
-/* SECTIONS */
+/* ---------------- SECTIONS ---------------- */
 .section {
   padding: 60px 20px;
   max-width: 950px;
@@ -142,7 +142,7 @@ header {
   left: 20%;
 }
 
-/* CARDS */
+/* ---------------- CARDS ---------------- */
 .cards {
   display: flex;
   flex-wrap: wrap;
@@ -163,11 +163,9 @@ header {
   transform: translateY(-6px);
   box-shadow: 0 6px 18px rgba(47,129,247,0.35);
 }
-.card h3 {
-  color: #c9aa71;
-}
+.card h3 { color: #c9aa71; }
 
-/* LOGIN */
+/* ---------------- LOGIN SECTION ---------------- */
 #loginSection {
   backdrop-filter: blur(6px);
   background: rgba(22,27,34,0.75);
@@ -179,31 +177,12 @@ header {
   margin: 40px auto;
   text-align: center;
 }
-input, button {
-  padding: 10px;
-  margin: 5px 0;
-  border-radius: 4px;
-  border: none;
-}
-input {
-  width: 80%;
-  text-align: center;
-}
-button {
-  background: #2f81f7;
-  color: white;
-  cursor: pointer;
-  font-weight: bold;
-}
-button:disabled {
-  opacity: 0.5;
-  cursor: not-allowed;
-}
-button:hover:enabled {
-  background: #4795ff;
-}
+input, button { padding: 10px; margin: 5px 0; border-radius: 4px; border: none; }
+input { width: 80%; text-align: center; }
+button:hover { opacity: 0.85; }
+#loginMsg { margin-top: 10px; color: #ffbaba; }
 
-/* FOOTER */
+/* ---------------- FOOTER ---------------- */
 footer {
   text-align: center;
   padding: 30px;
@@ -212,26 +191,24 @@ footer {
   background: #0a0f14;
   border-top: 1px solid #1f2937;
 }
-footer a {
-  color: #c9aa71;
-  text-decoration: none;
-}
-footer a:hover {
-  text-decoration: underline;
-}
+footer a { color: #c9aa71; text-decoration: none; }
+footer a:hover { text-decoration: underline; }
 </style>
 </head>
-
 <body>
 
 <header>LoL Fundamentals</header>
 
-<!-- LOGIN -->
+<!-- LOGIN / SIGNUP -->
 <section id="loginSection">
-<h2>Member Login</h2>
-<input type="email" id="email" placeholder="Enter your email" />
-<button id="loginBtn" disabled>Login</button>
-<p id="loginMsg"></p>
+  <h2>Member Login / Signup</h2>
+  <input type="email" id="email" placeholder="Enter your email" />
+  <input type="password" id="password" placeholder="Enter your password" />
+  <br>
+  <button id="loginBtn">Login</button>
+  <button id="signupBtn">Sign Up</button>
+  <button id="resetBtn">Forgot Password</button>
+  <p id="loginMsg"></p>
 </section>
 
 <!-- HERO -->
@@ -241,7 +218,7 @@ footer a:hover {
   <div class="aura"></div>
 
   <h1>The Ultimate Diana & Ekko Guide</h1>
-  <p>Master every aspect of League of Legends with champions like Diana and Ekko. Learn precise combos, matchup strategies, and advanced tips to elevate your gameplay. Written by Arcsecond, rank 1 Challenger Ekko and Diana player.</p>
+  <p>Master every aspect of League of Legends with champions like Diana and Ekko. Learn precise combos, matchup strategies, and advanced tips to elevate your gameplay.</p>
   <button class="btn" id="accessBtn">Get Access</button>
 </section>
 
@@ -251,76 +228,110 @@ footer a:hover {
 <div class="cards">
   <div class="card">
     <h3>Fundamentals</h3>
-    <p>Core skills including combos, wave management, positioning, and warding for consistent gameplay improvement.</p>
+    <p>Core skills including combos, wave management, positioning, and warding.</p>
   </div>
   <div class="card">
     <h3>Diana Guide</h3>
-    <p>A comprehensive guide covering Diana's full kit, itemization, playstyle, and advanced strategies.</p>
+    <p>A comprehensive guide covering Diana's full kit and advanced strategies.</p>
   </div>
   <div class="card">
     <h3>Ekko Guide</h3>
-    <p>Complete guide to playing Ekko Jungle, including combos, pathing, and advanced mechanics.</p>
+    <p>Complete guide to playing Ekko Jungle, including combos and pathing.</p>
   </div>
   <div class="card">
     <h3>Diana Matchup Guide</h3>
-    <p>Detailed breakdowns for every mid lane champion, teaching optimal trades, wave control, and all-in timings.</p>
+    <p>Detailed breakdowns for every mid lane champion and all-in timings.</p>
   </div>
   <div class="card">
     <h3>Tierlist</h3>
-    <p>Rankings for each role in the current meta, highlighting strongest picks and counters.</p>
+    <p>Rankings for each role in the current meta highlighting strongest picks.</p>
   </div>
 </div>
 </section>
 
 <footer>
-© 2025 LoL Fundamentals · Contact:
-<a href="mailto:arcsecond@lolfundamentals.com">arcsecond@lolfundamentals.com</a>
+© 2025 LoL Fundamentals · Contact: <a href="mailto:arcsecond@lolfundamentals.com">arcsecond@lolfundamentals.com</a>
 </footer>
 
-<script>
-// Access button
+<!-- FIREBASE AUTH SCRIPT -->
+<script type="module">
+import { initializeApp } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-app.js";
+import { getAuth, signInWithEmailAndPassword, createUserWithEmailAndPassword, sendPasswordResetEmail, signOut } 
+  from "https://www.gstatic.com/firebasejs/10.8.0/firebase-auth.js";
+import { getFirestore, doc, setDoc, getDoc } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-firestore.js";
+
+// Firebase config
+const firebaseConfig = {
+  apiKey: "AIzaSyCFRcEV7wdivqONnkjJubAZOjPMixrHMBI",
+  authDomain: "lol-fundamentals.firebaseapp.com",
+  projectId: "lol-fundamentals",
+  storageBucket: "lol-fundamentals.firebasestorage.app",
+  messagingSenderId: "1038440427584",
+  appId: "1:1038440427584:web:a82207151fd370dbedefa5",
+  measurementId: "G-21QY21LQGN"
+};
+
+// Initialize Firebase
+const app = initializeApp(firebaseConfig);
+const auth = getAuth(app);
+const db = getFirestore(app);
+
+// GET ACCESS BUTTON (Stripe)
 document.getElementById("accessBtn").addEventListener("click", () => {
-  window.open("https://buy.stripe.com/3cI4gse2g20serQagqejK04", "_blank", "noopener,noreferrer");
+  window.open("https://buy.stripe.com/3cI4gse2g20serQagqejK04", "_blank");
 });
 
-// Members login
-const membersCSV = "https://docs.google.com/spreadsheets/d/e/2PACX-1vR-0OZki4X8kc33NfrLsGL47-7mFj3SzjyGx6hs4QcnvRXiE-cOaJfk4wgvyIf6XXpnuB8D-B4TqSrW/pub?output=csv";
-let validEmails = [];
-const loginBtn = document.getElementById('loginBtn');
-const msg = document.getElementById('loginMsg');
-const emailInput = document.getElementById('email');
+// SIGNUP
+document.getElementById("signupBtn").addEventListener("click", async () => {
+  const email = document.getElementById("email").value.trim();
+  const password = document.getElementById("password").value.trim();
+  const msg = document.getElementById("loginMsg");
 
-loginBtn.disabled = true;
-msg.textContent = "Loading membership list...";
-
-fetch(membersCSV)
-.then(res => res.ok ? res.text() : Promise.reject("Failed to fetch"))
-.then(data => {
-  const rows = data.split("\n").map(row => row.split(","));
-  validEmails = rows.map(r => r[0].trim().toLowerCase()).filter(e => e);
-  loginBtn.disabled = false;
-  msg.textContent = "";
-})
-.catch(err => {
-  console.error(err);
-  msg.textContent = "Error loading membership list. Try again later.";
-});
-
-loginBtn.addEventListener('click', () => {
-  const email = emailInput.value.trim().toLowerCase();
-  if(validEmails.includes(email)){
-    localStorage.setItem('lolfundamentals_logged_in', 'true');
-    window.location.href = 'membershub.html';
-  } else {
-    msg.textContent = "Access denied. Please purchase membership.";
+  try {
+    const userCredential = await createUserWithEmailAndPassword(auth, email, password);
+    const uid = userCredential.user.uid;
+    await setDoc(doc(db, "users", uid), { email, paid: false });
+    msg.textContent = "Signup successful! Please complete payment to access members area.";
+  } catch (error) {
+    msg.textContent = error.message;
   }
 });
 
-if(localStorage.getItem('lolfundamentals_logged_in') === 'true'){
-  window.location.href = 'membershub.html';
-}
+// LOGIN
+document.getElementById("loginBtn").addEventListener("click", async () => {
+  const email = document.getElementById("email").value.trim();
+  const password = document.getElementById("password").value.trim();
+  const msg = document.getElementById("loginMsg");
 
-// Generate moving particles
+  try {
+    const userCredential = await signInWithEmailAndPassword(auth, email, password);
+    const uid = userCredential.user.uid;
+    const docSnap = await getDoc(doc(db, "users", uid));
+
+    if (docSnap.exists() && docSnap.data().paid) {
+      window.location.href = "membershub.html";
+    } else {
+      msg.textContent = "Access denied. You must purchase membership first.";
+      await signOut(auth);
+    }
+  } catch (error) {
+    msg.textContent = error.message;
+  }
+});
+
+// RESET PASSWORD
+document.getElementById("resetBtn").addEventListener("click", async () => {
+  const email = document.getElementById("email").value.trim();
+  const msg = document.getElementById("loginMsg");
+  try {
+    await sendPasswordResetEmail(auth, email);
+    msg.textContent = "Password reset email sent!";
+  } catch (error) {
+    msg.textContent = error.message;
+  }
+});
+
+// PARTICLES
 const particlesContainer = document.querySelector('.particles');
 for(let i=0;i<50;i++){
   const span = document.createElement('span');
@@ -334,6 +345,7 @@ for(let i=0;i<50;i++){
 
 </body>
 </html>
+
 
 
 
