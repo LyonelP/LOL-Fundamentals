@@ -92,7 +92,7 @@ header {
   display: flex;
   flex-direction: column;
   align-items: center;
-  max-width: 1000px; /* made wider */
+  max-width: 1000px; /* wider cards */
   margin: 0 auto;
   position: relative;
 }
@@ -145,7 +145,7 @@ header {
   margin-bottom: 15px;
   font-size: 18px;
   width: 100%;
-  max-width: 800px; /* made wider */
+  max-width: 900px; /* wider skill cards */
   box-shadow: 0 4px 12px rgba(0,0,0,0.5);
   transition: transform 0.25s, box-shadow 0.3s;
 }
@@ -236,10 +236,8 @@ const sidebar = document.getElementById('sidebar');
 const container = document.getElementById('skills-container');
 
 function loadSection(sectionName){
-  // Hide header for Pre Game section
-  const showHeader = sectionName !== "Pre Game";
   container.innerHTML = `
-    ${showHeader ? `<h2>${sectionName}</h2>` : ""}
+    <h2>${sectionName}</h2>
     <ul class="skill-list">
       ${skillData[sectionName].map(skill => `<li><a href="${skill.toLowerCase().replace(/[^a-z0-9]/g,'')}.html">${skill}</a></li>`).join('')}
     </ul>
@@ -261,12 +259,11 @@ Object.keys(skillData).forEach((section, i) => {
   sidebar.appendChild(a);
 });
 
-// Load first section by default
+// Load first section by default (Pre Game)
 loadSection(Object.keys(skillData)[0]);
 </script>
 
 </body>
 </html>
-
 
 
