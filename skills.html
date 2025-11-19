@@ -63,8 +63,7 @@ header {
   border-right: 2px solid #c9aa71;
   display: flex;
   flex-direction: column;
-  justify-content: center; /* center vertically */
-  padding-top: 0; /* remove top padding to allow centering */
+  padding-top: 20px; /* original top-aligned padding */
   box-sizing: border-box;
   z-index: 10;
 }
@@ -77,7 +76,7 @@ header {
   transition: all 0.3s;
   font-weight: bold;
   text-align: center;
-  margin: 5px 0; /* small spacing between links */
+  margin: 5px 0;
 }
 
 .sidebar a:hover,
@@ -94,7 +93,7 @@ header {
   display: flex;
   flex-direction: column;
   align-items: center;
-  max-width: 1400px; /* make main content wider */
+  max-width: 1400px; /* wider main content */
   margin: 0 auto;
   position: relative;
 }
@@ -128,7 +127,7 @@ header {
 
 .skills-center h2 {
   color: #c9aa71;
-  margin: 10px 0 15px 0; /* close to back button */
+  margin: 10px 0 15px 0; /* closer to back button */
   text-align: center;
 }
 
@@ -147,7 +146,7 @@ header {
   margin-bottom: 15px;
   font-size: 18px;
   width: 100%;
-  max-width: 1300px; /* almost double previous width */
+  max-width: 1600px; /* almost double previous width */
   box-shadow: 0 4px 12px rgba(0,0,0,0.5);
   transition: transform 0.25s, box-shadow 0.3s;
 }
@@ -185,8 +184,7 @@ footer {
     border-right: none;
     border-bottom: 2px solid #c9aa71;
     top: 62px;
-    justify-content: flex-start; /* horizontal layout */
-    padding: 0;
+    padding-top: 10px;
   }
   .sidebar a {
     flex: 1;
@@ -201,7 +199,7 @@ footer {
     border-bottom: 4px solid #c9aa71;
   }
   .main-content {
-    padding: 120px 10px 20px 10px; /* mobile top padding */
+    padding: 140px 10px 20px 10px; /* proper mobile spacing */
     max-width: 100%;
   }
   .skills-center h2 {
@@ -211,7 +209,7 @@ footer {
   .skill-list li {
     font-size: 16px;
     padding: 14px;
-    max-width: 100%; /* full width on mobile */
+    max-width: 100%; /* fill mobile width */
   }
 }
 </style>
