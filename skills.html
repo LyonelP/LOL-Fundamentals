@@ -46,57 +46,57 @@ header {
   box-shadow: 0 0 15px rgba(255,215,0,0.8);
 }
 
-/* Phase buttons */
-.phase-buttons {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
-  margin: 40px 20px 20px;
-  gap: 20px;
+/* Dropdown style */
+.phase-container {
+  width: 90%;
+  max-width: 600px;
+  margin: 20px auto;
+  text-align: left;
 }
 
 .phase-btn {
+  width: 100%;
   background: rgba(201,170,113,0.85);
   border: none;
-  padding: 15px 25px;
+  padding: 15px 20px;
   font-size: 18px;
   font-weight: bold;
   color: #000;
   border-radius: 12px;
   cursor: pointer;
+  margin-bottom: 10px;
   transition: 0.3s;
 }
-.phase-btn:hover, .phase-btn.active {
+.phase-btn:hover {
   background: linear-gradient(135deg, #e6c97f, #f0d88b);
   box-shadow: 0 0 15px rgba(255,215,0,0.8);
-  transform: translateY(-3px);
+  transform: translateY(-2px);
 }
 
-/* Skills grid */
-#skills-container {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
-  gap: 20px;
-  max-width: 1400px;
-  margin: 20px auto 60px;
+.skills-container {
+  display: none; /* hidden by default */
+  flex-wrap: wrap;
+  gap: 15px;
+  margin-top: 10px;
+  padding-left: 20px;
 }
 
 .skill-card {
+  display: inline-block;
   background: rgba(13,17,23,0.85);
   border: 2px solid #c9aa71;
   border-radius: 10px;
-  padding: 20px 15px;
-  text-align: center;
+  padding: 10px 15px;
   color: #fff;
-  font-size: 15px;
+  font-size: 14px;
   text-decoration: none;
   cursor: pointer;
   transition: 0.25s;
   box-shadow: 0 0 8px rgba(201,170,113,0.3);
 }
 .skill-card:hover {
-  transform: translateY(-3px);
-  box-shadow: 0 0 20px rgba(201,170,113,0.7);
+  transform: translateY(-2px);
+  box-shadow: 0 0 15px rgba(201,170,113,0.7);
   color: #f9d949;
 }
 
@@ -109,11 +109,6 @@ footer {
   margin-top: 20px;
 }
 
-@media(max-width:500px){
-  header{ font-size:24px; padding:15px 5px; }
-  .phase-btn{ font-size:16px; padding:12px 18px; }
-  #skills-container{ grid-template-columns: repeat(auto-fit, minmax(140px, 1fr)); }
-}
 </style>
 </head>
 
@@ -121,52 +116,51 @@ footer {
 <header>LoL Fundamentals – Skills Hub</header>
 <a href="membershub.html" class="back-button">Back to Members Hub</a>
 
-<div class="phase-buttons">
-  <button class="phase-btn" data-phase="pre-skills">Pre Game</button>
-  <button class="phase-btn" data-phase="early-skills">Early Game</button>
-  <button class="phase-btn" data-phase="mid-skills">Mid Game</button>
-  <button class="phase-btn" data-phase="late-skills">Late Game</button>
-  <button class="phase-btn" data-phase="advanced-skills">Advanced</button>
-  <button class="phase-btn" data-phase="out-skills">Out of Game</button>
-</div>
+<div class="phase-container" id="phase-container"></div>
 
-<div id="skills-container"></div>
+<footer>© 2025 LoL Fundamentals · All rights reserved</footer>
 
 <script>
-// Full skill list
+// Skills by phase
 const skillCategories = {
-  "pre-skills": ["Champion Select","Mouse Accuracy","Summoner Spells","Matchups"],
-  "early-skills": ["Farming","Positioning","Trading","Wave Control","Back Timings","Power Spikes","Pathing","Laning","Map Awareness","Kiting"],
-  "mid-skills": ["Roaming","Vision","Teamwork","Ganking","Split Pushing","Sieging","Baiting","Reaction Time","Mid Game"],
-  "late-skills": ["Late Game","Damage","Target Selection","Tab Screen","Lane Assignments","Early Game"],
-  "advanced-skills": ["Animation Cancelling","Reading Players","Win Conditions"],
-  "out-skills": ["Setup","Mindset","Not Raging/Blaming","Communication"]
+  "Pre Game": ["Champion Select","Mouse Accuracy","Summoner Spells","Matchups"],
+  "Early Game": ["Farming","Positioning","Trading","Wave Control","Back Timings","Power Spikes","Pathing","Laning","Map Awareness","Kiting"],
+  "Mid Game": ["Roaming","Vision","Teamwork","Ganking","Split Pushing","Sieging","Baiting","Reaction Time","Mid Game"],
+  "Late Game": ["Late Game","Damage","Target Selection","Tab Screen","Lane Assignments","Early Game"],
+  "Advanced": ["Animation Cancelling","Reading Players","Win Conditions"],
+  "Out of Game": ["Setup","Mindset","Not Raging/Blaming","Communication"]
 };
 
-// Render skills when a phase is clicked
-const container = document.getElementById('skills-container');
-function showSkills(phase) {
-  container.innerHTML = "";
-  document.querySelectorAll('.phase-btn').forEach(btn => btn.classList.remove('active'));
-  document.querySelector(`.phase-btn[data-phase="${phase}"]`).classList.add('active');
+// Build dropdowns
+const phaseContainer = document.getElementById('phase-container');
 
-  skillCategories[phase].forEach(skill => {
+for (const [phase, skills] of Object.entries(skillCategories)) {
+  const btn = document.createElement('button');
+  btn.className = 'phase-btn';
+  btn.textContent = phase;
+
+  const skillsDiv = document.createElement('div');
+  skillsDiv.className = 'skills-container';
+
+  skills.forEach(skill => {
     const card = document.createElement('a');
     card.className = 'skill-card';
     card.textContent = skill;
     card.href = skill.toLowerCase().replace(/[^a-z0-9]/g,'') + '.html';
-    container.appendChild(card);
+    skillsDiv.appendChild(card);
   });
+
+  btn.addEventListener('click', () => {
+    // Toggle display
+    skillsDiv.style.display = skillsDiv.style.display === 'flex' ? 'none' : 'flex';
+  });
+
+  phaseContainer.appendChild(btn);
+  phaseContainer.appendChild(skillsDiv);
 }
-
-// Click events
-document.querySelectorAll('.phase-btn').forEach(btn => {
-  btn.addEventListener('click', () => showSkills(btn.dataset.phase));
-});
 </script>
-
-<footer>© 2025 LoL Fundamentals · All rights reserved</footer>
 </body>
 </html>
+
 
 
