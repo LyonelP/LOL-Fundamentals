@@ -4,6 +4,7 @@
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>LoL Fundamentals – Skills Hub</title>
+
 <style>
 body {
   margin: 0;
@@ -11,35 +12,36 @@ body {
   color: #fff;
   background: url('https://64.media.tumblr.com/594ac290bec6d5e9ad98b5f53404f00b/245c4c3ee469f81d-e4/s1280x1920/1cda4284320eb2031758a9859dfe14ff8bbc50ba.jpg') no-repeat center center fixed;
   background-size: cover;
-  display: flex;
-  flex-direction: column;
   min-height: 100vh;
-  position: relative;
 }
 
-/* ----------- ADDED HEADER (matching Members Hub) ------------ */
+/* Header */
 header {
   background: linear-gradient(90deg, #0a0f14, #1b2838);
   border-bottom: 2px solid #c9aa71;
-  padding: 15px 20px;
+  padding: 0 20px;
   font-weight: bold;
   font-size: 24px;
   letter-spacing: 1px;
   text-transform: uppercase;
   color: #c9aa71;
   text-align: center;
-  position: relative;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 60px;
+  line-height: 60px;
   z-index: 20;
 }
-/* ------------------------------------------------------------ */
 
 /* Sidebar */
 .sidebar {
   position: fixed;
-  top: 70px; /* moved down below header */
+  top: 60px; /* aligns directly under header */
   left: 0;
   width: 250px;
-  height: calc(100vh - 70px);
+  height: calc(100vh - 60px);
   background: rgba(13,17,23,0.95);
   border-right: 2px solid #c9aa71;
   display: flex;
@@ -60,7 +62,8 @@ header {
   text-align: center;
 }
 
-.sidebar a:hover, .sidebar a.active {
+.sidebar a:hover,
+.sidebar a.active {
   background: rgba(201,170,113,0.2);
   border-left: 4px solid #c9aa71;
   color: #c9aa71;
@@ -70,20 +73,17 @@ header {
 .main-content {
   margin-left: 250px;
   padding: 20px 40px;
-  padding-top: 100px; /* space under header */
+  padding-top: 80px; /* ensures content sits below header */
   flex: 1;
   display: flex;
   flex-direction: column;
   align-items: center;
-  overflow-x: hidden;
   max-width: calc(100vw - 250px);
   position: relative;
+  overflow-x: hidden;
 }
 
 .skills-center {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
   width: 100%;
   max-width: 900px;
   z-index: 2;
@@ -159,13 +159,15 @@ footer {
   padding: 15px;
   font-size: 14px;
   color: #bbb;
+  padding-bottom: 40px;
 }
 
 /* Mobile adjustments */
 @media(max-width: 700px){
   header {
-    font-size: 20px;
-    padding: 12px;
+    height: auto;
+    line-height: normal;
+    padding: 15px 0;
   }
 
   .sidebar {
@@ -181,20 +183,20 @@ footer {
 
   .sidebar a {
     flex: 1;
-    text-align: center;
     border-left: none;
     border-bottom: 4px solid transparent;
     padding: 12px 10px;
   }
 
-  .sidebar a.active, .sidebar a:hover {
+  .sidebar a.active,
+  .sidebar a:hover {
     border-left: none;
     border-bottom: 4px solid #c9aa71;
   }
 
   .main-content {
     margin-left: 0;
-    padding: 90px 20px 20px; /* keep spacing under header */
+    padding-top: 130px; /* header + mobile sidebar */
     max-width: 100vw;
   }
 
@@ -205,6 +207,7 @@ footer {
 }
 </style>
 </head>
+
 <body>
 
 <header>LoL Fundamentals – Skills Hub</header>
@@ -220,7 +223,7 @@ footer {
 
 <script>
 // Login requirement
-if(localStorage.getItem('lolfundamentals_logged_in') !== 'true'){
+if (localStorage.getItem('lolfundamentals_logged_in') !== 'true') {
   window.location.href = 'login.html';
 }
 
@@ -268,4 +271,6 @@ loadSection(Object.keys(skillData)[0]);
 
 </body>
 </html>
+
+
 
