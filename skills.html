@@ -51,7 +51,7 @@ header {
 .section {
   width: 90%;
   max-width: 800px;
-  margin: 0 auto 20px;
+  margin: 0 auto 25px;
   text-align: left;
 }
 
@@ -85,20 +85,22 @@ header {
   margin-top: -3px;
 }
 
+/* Skill cards */
 .skill-link {
   display: block;
-  background: rgba(13,17,23,0.7);
-  padding: 10px 12px;
+  background: rgba(0,0,0,0.8);
+  padding: 12px 15px;
   border: 2px solid #c9aa71;
-  border-radius: 8px;
-  margin-bottom: 10px;
-  font-size: 16px;
-  color: #fff;
+  border-radius: 10px;
+  margin-bottom: 12px;
+  font-size: 17px;
+  font-weight: 500;
+  color: #c9aa71;
   text-decoration: none;
   transition: 0.25s;
 }
 .skill-link:hover {
-  background: rgba(13,17,23,0.95);
+  background: rgba(20,20,20,1);
   transform: translateY(-2px);
   box-shadow: 0 0 15px rgba(201,170,113,0.7);
   color: #f9d949;
@@ -126,24 +128,49 @@ footer {
 <script>
 const skillData = {
   "Pre Game": [
-    "Champion Select","Mouse Accuracy","Summoner Spells","Matchups"
+    "Champion Select",
+    "Mouse Accuracy",
+    "Summoner Spells",
+    "Matchups"
   ],
   "Early Game": [
-    "Farming","Positioning","Trading","Wave Control","Back Timings",
-    "Power Spikes","Pathing","Laning","Map Awareness","Kiting"
+    "Farming",
+    "Positioning",
+    "Trading",
+    "Wave Control",
+    "Back Timings",
+    "Power Spikes",
+    "Pathing",
+    "Laning",
+    "Map Awareness",
+    "Kiting"
   ],
   "Mid Game": [
-    "Roaming","Vision","Teamwork","Ganking","Split Pushing","Sieging",
-    "Baiting","Reaction Time"
+    "Roaming",
+    "Vision",
+    "Teamwork",
+    "Ganking",
+    "Split Pushing",
+    "Sieging",
+    "Baiting",
+    "Reaction Time"
   ],
   "Late Game": [
-    "Damage","Target Selection","Tab Screen","Lane Assignments"
+    "Damage",
+    "Target Selection",
+    "Tab Screen",
+    "Lane Assignments"
   ],
   "Advanced": [
-    "Animation Cancelling","Reading Players","Win Conditions"
+    "Animation Cancelling",
+    "Reading Players",
+    "Win Conditions"
   ],
   "Out of Game": [
-    "Setup","Mindset","Not Raging/Blaming","Communication"
+    "Setup",
+    "Mindset",
+    "Not Raging/Blaming",
+    "Communication"
   ]
 };
 
@@ -180,7 +207,4 @@ Object.entries(skillData).forEach(([section, skills]) => {
 
 </body>
 </html>
-
-
-
 
