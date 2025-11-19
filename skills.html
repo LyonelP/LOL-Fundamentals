@@ -11,8 +11,7 @@ body {
   font-family: 'Beaufort for LOL', Arial, Helvetica, sans-serif;
   color: #fff;
   text-align: center;
-  background: url('https://64.media.tumblr.com/594ac290bec6d5e9ad98b5f53404f00b/245c4c3ee469f81d-e4/s1280x1920/1cda4284320eb2031758a9859dfe14ff8bbc50ba.jpg') 
-    no-repeat center center fixed;
+  background: url('https://64.media.tumblr.com/594ac290bec6d5e9ad98b5f53404f00b/245c4c3ee469f81d-e4/s1280x1920/1cda4284320eb2031758a9859dfe14ff8bbc50ba.jpg') no-repeat center center fixed;
   background-size: cover;
 }
 
@@ -51,57 +50,72 @@ header {
 .section {
   width: 90%;
   max-width: 800px;
-  margin: 0 auto 20px;
-  text-align: left;
+  margin: 10px auto 25px;
+  text-align: center;
+  transition: all 0.3s ease;
 }
 
 .section-header {
   width: 100%;
-  background: rgba(0,0,0,0.75);
+  background: linear-gradient(135deg, #c9aa71, #e0c77b);
   border: 2px solid #c9aa71;
   padding: 15px 20px;
   font-size: 20px;
   font-weight: bold;
-  color: #fff;
+  color: #000;
   border-radius: 10px;
   cursor: pointer;
-  transition: 0.3s;
-}
-.section-header:hover {
-  background: linear-gradient(135deg, #e6c97f, #f0d88b);
-  box-shadow: 0 0 12px rgba(255,215,0,0.7);
-  transform: translateY(-2px);
+  position: relative;
+  text-align: center;
+  transition: all 0.3s;
 }
 
-/* Skills list */
+.section-header::after {
+  content: '▼';
+  position: absolute;
+  right: 20px;
+  font-size: 18px;
+  transition: transform 0.3s;
+}
+
+.section-header.active::after {
+  transform: rotate(-180deg);
+}
+
 .skills-list {
   display: none;
-  background: rgba(0,0,0,0.7);
-  border-left: 2px solid #c9aa71;
-  border-bottom: 2px solid #c9aa71;
-  border-right: 2px solid #c9aa71;
+  background: rgba(0,0,0,0.75);
+  border: 2px solid #c9aa71;
   border-radius: 0 0 10px 10px;
-  padding: 15px 20px;
-  margin-top: -3px;
+  padding: 20px;
+  margin-top: -2px;
+  text-align: center;
+  animation: fadeIn 0.4s ease forwards;
 }
 
 .skill-link {
-  display: block;
+  display: inline-block;
   background: rgba(0,0,0,0.85);
-  padding: 10px 12px;
+  padding: 12px 20px;
   border: 2px solid #c9aa71;
-  border-radius: 8px;
-  margin-bottom: 10px;
+  border-radius: 10px;
+  margin: 10px;
   font-size: 16px;
   color: #fff;
   text-decoration: none;
-  transition: 0.25s;
+  min-width: 140px;
+  transition: all 0.25s ease;
 }
 .skill-link:hover {
   background: rgba(0,0,0,0.95);
-  transform: translateY(-2px);
+  transform: translateY(-3px);
   box-shadow: 0 0 15px rgba(201,170,113,0.7);
   color: #fff;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(-5px); }
+  to { opacity: 1; transform: translateY(0); }
 }
 
 /* Footer */
@@ -124,27 +138,19 @@ footer {
 <footer>© 2025 LoL Fundamentals · All rights reserved</footer>
 
 <script>
+// Login requirement
+if (localStorage.getItem('lolfundamentals_logged_in') !== 'true') {
+  window.location.href = 'login.html';
+}
+
+// Skill data
 const skillData = {
-  "Pre Game": [
-    "Champion Select","Mouse Accuracy","Summoner Spells","Matchups"
-  ],
-  "Early Game": [
-    "Farming","Positioning","Trading","Wave Control","Back Timings",
-    "Power Spikes","Pathing","Laning","Map Awareness","Kiting"
-  ],
-  "Mid Game": [
-    "Roaming","Vision","Teamwork","Ganking","Split Pushing","Sieging",
-    "Baiting","Reaction Time"
-  ],
-  "Late Game": [
-    "Damage","Target Selection","Tab Screen","Lane Assignments"
-  ],
-  "Advanced": [
-    "Animation Cancelling","Reading Players","Win Conditions"
-  ],
-  "Out of Game": [
-    "Setup","Mindset","Not Raging/Blaming","Communication"
-  ]
+  "Pre Game": ["Champion Select","Mouse Accuracy","Summoner Spells","Matchups"],
+  "Early Game": ["Farming","Positioning","Trading","Wave Control","Back Timings","Power Spikes","Pathing","Laning","Map Awareness","Kiting"],
+  "Mid Game": ["Roaming","Vision","Teamwork","Ganking","Split Pushing","Sieging","Baiting","Reaction Time"],
+  "Late Game": ["Damage","Target Selection","Tab Screen","Lane Assignments"],
+  "Advanced": ["Animation Cancelling","Reading Players","Win Conditions"],
+  "Out of Game": ["Setup","Mindset","Not Raging/Blaming","Communication"]
 };
 
 const container = document.getElementById('sections');
@@ -169,7 +175,16 @@ Object.entries(skillData).forEach(([section, skills]) => {
   });
 
   header.addEventListener('click', () => {
+    // Close other sections
+    document.querySelectorAll('.skills-list').forEach(sl => {
+      if(sl !== list) sl.style.display = 'none';
+    });
+    document.querySelectorAll('.section-header').forEach(h => {
+      if(h !== header) h.classList.remove('active');
+    });
+
     list.style.display = list.style.display === 'block' ? 'none' : 'block';
+    header.classList.toggle('active');
   });
 
   wrapper.appendChild(header);
