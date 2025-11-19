@@ -66,14 +66,6 @@ header {
   align-items: center;
   cursor: pointer;
   transition: transform 0.25s, box-shadow 0.3s, background 0.3s;
-  position: relative;
-}
-
-.section-header .description {
-  font-size: 14px;
-  font-weight: normal;
-  color: #f0d88b;
-  margin-left: 10px;
 }
 
 .section-header::after {
@@ -87,7 +79,7 @@ header {
   transform: rotate(90deg);
 }
 
-/* Hover effect */
+/* Hover effect for section header */
 .section-header:hover {
   background: rgba(0,0,0,0.95);
   box-shadow: 0 0 15px rgba(255,215,0,0.7);
@@ -110,14 +102,14 @@ header {
   font-size: 16px;
   color: #fff;
   text-decoration: none;
-  transition: all 0.25s;
+  transition: transform 0.25s, box-shadow 0.3s, background 0.3s;
 }
 
+/* Hover effect for skill links */
 .skill-link:hover {
-  background: linear-gradient(135deg, #e6c97f, #f0d88b);
-  color: #000;
-  transform: translateY(-2px);
-  box-shadow: 0 0 12px rgba(255,215,0,0.7);
+  background: rgba(0,0,0,0.95);
+  box-shadow: 0 0 15px rgba(255,215,0,0.7);
+  transform: scale(1.02);
 }
 
 /* Footer */
@@ -136,11 +128,8 @@ footer {
   .section-header {
     font-size: 18px;
     padding: 15px;
-  }
-  .section-header .description {
-    display: block;
-    margin-left: 0;
-    margin-top: 5px;
+    flex-direction: column;
+    align-items: flex-start;
   }
   .skill-link {
     font-size: 15px;
@@ -199,16 +188,7 @@ Object.entries(skillData).forEach(([section, data]) => {
 
   const header = document.createElement('div');
   header.className = 'section-header';
-
-  const title = document.createElement('span');
-  title.textContent = section;
-
-  const desc = document.createElement('span');
-  desc.className = 'description';
-  desc.textContent = data.desc;
-
-  header.appendChild(title);
-  header.appendChild(desc);
+  header.textContent = `${section}: ${data.desc}`; // Section text with description inline
 
   const list = document.createElement('div');
   list.className = 'skills-list';
@@ -240,9 +220,6 @@ Object.entries(skillData).forEach(([section, data]) => {
 
 </body>
 </html>
-
-
-
 
 
 
