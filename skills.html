@@ -116,52 +116,6 @@ header {
   box-shadow: 0 0 15px rgba(255,215,0,0.8);
 }
 
-/* Skills section */
-.skills-center {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  width: 100%;
-}
-
-.skills-center h2 {
-  color: #c9aa71;
-  margin: 10px 0 20px 0;
-  text-align: center;
-}
-
-/* Skill list */
-.skill-list {
-  list-style: none;
-  padding: 0;
-  width: 100%;
-}
-
-.skill-list li {
-  background: rgba(0,0,0,0.85);
-  border: 2px solid #c9aa71;
-  border-radius: 12px;
-  padding: 18px 20px;
-  margin-bottom: 15px;
-  font-size: 18px;
-  width: 100%;
-  box-shadow: 0 4px 12px rgba(0,0,0,0.5);
-  transition: transform 0.25s, box-shadow 0.3s;
-}
-
-.skill-list li a {
-  text-decoration: none;
-  color: #fff;
-  display: block;
-}
-
-.skill-list li:hover {
-  background: rgba(0,0,0,0.95);
-  transform: scale(1.03);
-  box-shadow: 0 8px 20px rgba(0,0,0,0.7);
-  color: #c9aa71;
-}
-
 /* Footer */
 footer {
   text-align: center;
@@ -198,7 +152,6 @@ footer {
     padding: 120px 20px 30px 20px;
     max-width: 100%;
   }
-  .skill-list li { font-size: 16px; padding: 14px 16px; }
 }
 </style>
 </head>
@@ -234,14 +187,9 @@ const skillData = {
 const sidebar = document.getElementById('sidebar');
 const container = document.getElementById('skills-container');
 
+// Remove the detailed skill cards, just show the section title
 function loadSection(sectionName){
-  const skills = skillData[sectionName];
-  container.innerHTML = `
-    <h2>${sectionName}</h2>
-    <ul class="skill-list">
-      ${skills.map(skill => `<li><a href="${skill.toLowerCase().replace(/[^a-z0-9]/g,'')}.html">${skill}</a></li>`).join('')}
-    </ul>
-  `;
+  container.innerHTML = `<h2>${sectionName}</h2>`;
 }
 
 // Sidebar links
@@ -265,5 +213,7 @@ loadSection(Object.keys(skillData)[0]);
 
 </body>
 </html>
+
+
 
 
