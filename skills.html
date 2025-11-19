@@ -24,7 +24,7 @@ body {
   flex-direction: column;
 }
 
-/* Overlay */
+/* Overlay for readability */
 body::before {
   content: "";
   position: fixed;
@@ -87,7 +87,7 @@ header {
 
 /* Main content */
 .main-content {
-  padding: 100px 40px 50px 40px; /* top padding for header */
+  padding: 100px 40px 50px 40px;
   flex: 1;
   display: flex;
   flex-direction: column;
@@ -211,9 +211,7 @@ footer {
 
 <div class="main-content">
   <a href="membershub.html" class="back-button">Back to Members Hub</a>
-  <div id="skills-container" class="skills-center">
-    <!-- No default Pre Game / other sections -->
-  </div>
+  <div id="skills-container" class="skills-center"></div>
 </div>
 
 <footer>© 2025 LoL Fundamentals · All rights reserved</footer>
@@ -260,11 +258,11 @@ Object.keys(skillData).forEach((section, i) => {
   });
   sidebar.appendChild(a);
 });
+
+// Load first section automatically so skills are visible
+document.querySelectorAll('.sidebar a')[0].classList.add('active');
+loadSection(Object.keys(skillData)[0]);
 </script>
 
 </body>
 </html>
-
-
-
-
