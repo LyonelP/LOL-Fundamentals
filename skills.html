@@ -53,27 +53,39 @@ header {
   box-shadow: 0 0 15px rgba(255,215,0,0.8);
 }
 
+/* Skill Section */
+.skill-section {
+  padding: 25px 15px;
+  max-width: 1300px;
+  margin: 30px auto;
+  text-align: left;
+}
+.skill-section h2 {
+  color: #f9d949;
+  margin-bottom: 15px;
+  border-bottom: 2px solid #c9aa71;
+  padding-bottom: 5px;
+}
+
 /* Skills grid */
 .skills-container {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
-  gap: 18px;
-  padding: 30px;
-  max-width: 1300px;
-  margin: 0 auto;
+  grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+  gap: 15px;
+  margin-top: 15px;
 }
 
 /* Skill card */
 .skill-card {
-  background: rgba(13,17,23,0.9);
+  background: rgba(13,17,23,0.85);
   border: 2px solid #c9aa71;
   border-radius: 8px;
-  padding: 25px 10px;
+  padding: 20px 10px;
   text-align: center;
   color: #fff;
   transition: transform 0.25s, box-shadow 0.3s;
   cursor: pointer;
-  font-size: 15px;
+  font-size: 14px;
   text-decoration: none;
   display: block;
 }
@@ -104,32 +116,53 @@ footer {
 <header>LoL Fundamentals – Skills Hub</header>
 <a href="membershub.html" class="back-button">Back to Members Hub</a>
 
-<div class="skills-container" id="skills-container"></div>
+<div class="skill-section">
+  <h2>Starter Skills – Where to Begin</h2>
+  <div class="skills-container" id="starter-skills"></div>
+</div>
+
+<div class="skill-section">
+  <h2>Early Game</h2>
+  <div class="skills-container" id="early-skills"></div>
+</div>
+
+<div class="skill-section">
+  <h2>Mid Game & Teamplay</h2>
+  <div class="skills-container" id="mid-skills"></div>
+</div>
+
+<div class="skill-section">
+  <h2>Advanced Mechanics & Mindset</h2>
+  <div class="skills-container" id="advanced-skills"></div>
+</div>
 
 <script>
-// Skill setup
-const skills = [
-  "Map Awareness", "Communication", "Summoner Spells", "Roaming", 
-  "Farming", "Positioning", "Vision", "Teamwork", "Pathing", 
-  "Trading", "Wave Control", "Power Spikes", "Mindset", "Kiting",
-  "Ganking", "Animation Cancelling", "Back Timings", "Target Selection", "Mouse Accuracy",
-  "Reading Players", "Win Conditions", "Laning", "Sieging", "Baiting",
-  "Reaction Time", "Split Pushing", "Lane Assignments", "Damage",
-  "Setup",  // <-- added card here
-  "Matchups", "Tab Screen", "Early Game", "Mid Game", "Late Game",
-  "Champion Select", "Not Raging/Blaming"
-];
+// Categorized skills
+const skillCategories = {
+  "starter": ["Mouse Accuracy", "Farming", "Positioning", "Map Awareness", "Laning", "Champion Select"],
+  "early": ["Summoner Spells", "Trading", "Wave Control", "Power Spikes", "Back Timings", "Pathing"],
+  "mid": ["Roaming", "Vision", "Teamwork", "Ganking", "Split Pushing", "Sieging", "Baiting", "Reaction Time"],
+  "advanced": ["Animation Cancelling", "Mindset", "Target Selection", "Reading Players", "Win Conditions", "Not Raging/Blaming", "Damage", "Setup", "Lane Assignments", "Tab Screen", "Mid Game", "Late Game"]
+};
 
-const container = document.getElementById('skills-container');
+// Helper function to render skills
+function renderSkills(categoryId, skills) {
+  const container = document.getElementById(categoryId);
+  skills.forEach(skill => {
+    const link = document.createElement('a');
+    link.className = 'skill-card';
+    const fileName = skill.toLowerCase().replace(/[^a-z0-9]/g, '');
+    link.href = fileName + '.html';
+    link.textContent = skill;
+    container.appendChild(link);
+  });
+}
 
-skills.forEach(skill => {
-  const link = document.createElement('a');
-  link.className = 'skill-card';
-  const fileName = skill.toLowerCase().replace(/[^a-z0-9]/g, '');
-  link.href = fileName + '.html';
-  link.textContent = skill;
-  container.appendChild(link);
-});
+// Render all categories
+renderSkills('starter-skills', skillCategories.starter);
+renderSkills('early-skills', skillCategories.early);
+renderSkills('mid-skills', skillCategories.mid);
+renderSkills('advanced-skills', skillCategories.advanced);
 </script>
 
 <footer>© 2025 LoL Fundamentals · All rights reserved</footer>
