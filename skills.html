@@ -92,7 +92,7 @@ header {
   display: flex;
   flex-direction: column;
   align-items: center;
-  max-width: 1000px; /* wider cards */
+  max-width: 1000px;
   margin: 0 auto;
   position: relative;
 }
@@ -126,7 +126,7 @@ header {
 
 .skills-center h2 {
   color: #c9aa71;
-  margin: 10px 0 20px 0;
+  margin: 30px 0 20px 0; /* more top margin to separate from back button */
   text-align: center;
 }
 
@@ -145,7 +145,7 @@ header {
   margin-bottom: 15px;
   font-size: 18px;
   width: 100%;
-  max-width: 900px; /* wider skill cards */
+  max-width: 100%; /* full width */
   box-shadow: 0 4px 12px rgba(0,0,0,0.5);
   transition: transform 0.25s, box-shadow 0.3s;
 }
@@ -196,10 +196,16 @@ footer {
     border-bottom: 4px solid #c9aa71;
   }
   .main-content {
-    padding: 120px 20px 30px 20px;
+    padding: 160px 20px 30px 20px; /* extra top padding for mobile */
     max-width: 100%;
   }
-  .skill-list li { font-size: 16px; padding: 14px 16px; }
+  .skill-list li {
+    font-size: 16px;
+    padding: 14px 16px;
+  }
+  .skills-center h2 {
+    margin-top: 20px;
+  }
 }
 </style>
 </head>
@@ -265,5 +271,6 @@ loadSection(Object.keys(skillData)[0]);
 
 </body>
 </html>
+
 
 
