@@ -4,18 +4,9 @@
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>LoL Fundamentals – Skills Hub</title>
-
 <style>
-/* Base */
-:root {
-  --gold: #c9aa71;
-  --bg-dark: #0a0f14;
-}
-html, body {
-  height: 100%;
-  margin: 0;
-}
 body {
+  margin: 0;
   font-family: 'Beaufort for LOL', Arial, Helvetica, sans-serif;
   color: #fff;
   background: url('https://64.media.tumblr.com/594ac290bec6d5e9ad98b5f53404f00b/245c4c3ee469f81d-e4/s1280x1920/1cda4284320eb2031758a9859dfe14ff8bbc50ba.jpg') no-repeat center center fixed;
@@ -23,95 +14,95 @@ body {
   display: flex;
   flex-direction: column;
   min-height: 100vh;
+  position: relative;
   overflow-x: hidden;
 }
 
-/* Header (fixed) */
+/* Header */
 header {
-  background: linear-gradient(90deg, var(--bg-dark), #1b2838);
-  border-bottom: 2px solid var(--gold);
-  padding: 0 20px;
+  background: linear-gradient(90deg, #0a0f14, #1b2838);
+  border-bottom: 2px solid #c9aa71;
+  padding: 15px 20px;
   font-weight: bold;
   font-size: 24px;
   letter-spacing: 1px;
   text-transform: uppercase;
-  color: var(--gold);
-  text-align: center;
+  color: #c9aa71;
   position: fixed;
   top: 0;
-  left: 0;
   width: 100%;
+  z-index: 50;
   height: 60px;
-  line-height: 60px;
-  z-index: 40;
-  box-sizing: border-box;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 /* Sidebar */
 .sidebar {
   position: fixed;
-  top: 60px; /* sits directly below header */
+  top: 60px; /* aligned directly under header */
   left: 0;
   width: 250px;
   height: calc(100vh - 60px);
   background: rgba(13,17,23,0.95);
-  border-right: 2px solid var(--gold);
+  border-right: 2px solid #c9aa71;
   display: flex;
   flex-direction: column;
   align-items: stretch;
-  padding-top: 12px;
+  padding-top: 20px;
   box-sizing: border-box;
-  z-index: 30;
-  overflow-y: auto;
+  z-index: 10;
 }
 
-/* Sidebar link styles (matching your previous look) */
 .sidebar a {
   color: #fff;
   text-decoration: none;
-  padding: 16px 18px;
+  padding: 18px 20px;
   border-left: 4px solid transparent;
-  transition: all 0.2s ease;
+  transition: all 0.3s;
   font-weight: bold;
-  text-align: left;
-  display: block;
-}
-.sidebar a:hover, .sidebar a.active {
-  background: rgba(201,170,113,0.12);
-  border-left: 4px solid var(--gold);
-  color: var(--gold);
-}
-
-/* Main content area */
-.main-content {
-  margin-left: 250px; /* room for sidebar */
-  padding: 20px 40px;
-  padding-top: 90px; /* leave space for header + a little breathing room */
-  flex: 1 0 auto;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  box-sizing: border-box;
-  min-height: calc(100vh - 60px);
-  position: relative;
-}
-
-/* Skill container */
-.skills-center {
-  width: 100%;
-  max-width: 900px;
-  z-index: 20;
-  margin-bottom: 20px;
-}
-.main-content h2 {
-  color: var(--gold);
-  margin: 10px 0 18px;
   text-align: center;
 }
 
-/* Skill-list (restored original look) */
+.sidebar a:hover, .sidebar a.active {
+  background: rgba(201,170,113,0.2);
+  border-left: 4px solid #c9aa71;
+  color: #c9aa71;
+}
+
+/* Main content */
+.main-content {
+  margin-left: 250px;
+  padding: 20px 40px;
+  padding-top: 80px; /* FIXED — now sits correctly under header */
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  overflow-x: hidden;
+  max-width: calc(100vw - 250px);
+  position: relative;
+}
+
+.skills-center {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+  max-width: 900px;
+  z-index: 2;
+}
+
+.main-content h2 {
+  color: #c9aa71;
+  margin: 10px 0 20px;
+  text-align: center;
+}
+
+/* Skill cards */
 .skill-list {
-  margin-top: 8px;
+  margin-top: 15px;
   list-style-type: none;
   padding: 0;
   width: 100%;
@@ -119,45 +110,47 @@ header {
   flex-direction: column;
   align-items: center;
 }
+
 .skill-list li {
   background: rgba(0,0,0,0.85);
-  border: 2px solid var(--gold);
+  border: 2px solid #c9aa71;
   border-radius: 12px;
   padding: 18px 20px;
-  margin-bottom: 12px;
+  margin-bottom: 15px;
   font-size: 18px;
   transition: transform 0.25s, box-shadow 0.3s;
   width: 100%;
   max-width: 700px;
   box-shadow: 0 4px 12px rgba(0,0,0,0.5);
 }
+
 .skill-list li a {
   text-decoration: none;
   color: #fff;
   display: block;
 }
+
 .skill-list li:hover {
   background: rgba(0,0,0,0.95);
   box-shadow: 0 8px 20px rgba(0,0,0,0.7);
-  transform: scale(1.02);
-  color: var(--gold);
+  transform: scale(1.03);
+  color: #c9aa71;
 }
 
-/* Back button (restored) */
+/* Back button */
 .back-button {
   display: inline-block;
-  margin-bottom: 12px;
+  margin-bottom: 10px;
   padding: 12px 22px;
-  background: linear-gradient(135deg, var(--gold), #e0c77b);
+  background: linear-gradient(135deg, #c9aa71, #e0c77b);
   color: #000;
   text-decoration: none;
   border-radius: 8px;
   font-weight: bold;
   transition: all 0.3s;
-  box-shadow: 0 0 10px rgba(201,170,113,0.35);
+  box-shadow: 0 0 10px rgba(201,170,113,0.5);
   min-width: 220px;
   text-align: center;
-  z-index: 25;
 }
 .back-button::before { content: "← "; }
 .back-button:hover {
@@ -165,86 +158,73 @@ header {
   box-shadow: 0 0 15px rgba(255,215,0,0.8);
 }
 
-/* Footer that sticks to bottom */
+/* Footer */
 footer {
   text-align: center;
-  padding: 18px 16px;
+  padding: 15px;
   font-size: 14px;
-  color: #bbb;
-  background: rgba(0,0,0,0.15);
-  border-top: 1px solid rgba(255,255,255,0.03);
-  margin-top: auto; /* push footer to bottom */
-  box-sizing: border-box;
-  width: 100%;
-  position: relative;
-  z-index: 10;
+  color: #c9aa71;
+  background: none !important; /* FIXED — removed bar */
+  border: none !important;
+  margin-top: auto;
 }
 
-/* Responsive/mobile adjustments */
-@media (max-width: 900px) {
+/* Mobile adjustments */
+@media(max-width: 700px){
   .sidebar {
     position: relative;
     width: 100%;
     height: auto;
-    top: 60px;
-    border-right: none;
-    border-bottom: 2px solid var(--gold);
     flex-direction: row;
     overflow-x: auto;
-    padding: 6px 0;
+    padding: 8px 0;
+    border-right: none;
+    border-bottom: 2px solid #c9aa71;
+    top: 60px;
   }
   .sidebar a {
-    padding: 10px 14px;
-    flex: 1 0 auto;
+    flex: 1;
     text-align: center;
     border-left: none;
     border-bottom: 4px solid transparent;
+    padding: 12px 10px;
   }
   .sidebar a.active, .sidebar a:hover {
-    border-bottom: 4px solid var(--gold);
+    border-bottom: 4px solid #c9aa71;
   }
-
   .main-content {
     margin-left: 0;
-    padding-top: 140px; /* header + mobile sidebar space */
+    padding: 15px 20px;
+    padding-top: 100px;
+    max-width: 100vw;
   }
-  .skill-list li { font-size: 16px; padding: 14px 16px; }
-}
-
-/* Small tweak to ensure long content scrolls without overlapping header */
-.content-scroll {
-  width: 100%;
-  max-width: 900px;
-  box-sizing: border-box;
+  .skill-list li {
+    font-size: 16px;
+    padding: 14px 16px;
+  }
 }
 </style>
 </head>
 <body>
 
-<header>LoL Fundamentals – Skills Hub</header>
+<header>Skills Hub</header>
 
-<!-- Sidebar (links are filled by script below) -->
 <div class="sidebar" id="sidebar"></div>
 
-<!-- Main content -->
 <div class="main-content">
   <a href="membershub.html" class="back-button">Back to Members Hub</a>
-
-  <div id="skills-container" class="skills-center content-scroll">
-    <!-- Section content injected by JS -->
-  </div>
+  <div id="skills-container" class="skills-center"></div>
 </div>
 
 <footer>© 2025 LoL Fundamentals · All rights reserved</footer>
 
 <script>
-// REQUIRE LOGIN (restored original behavior)
-if (localStorage.getItem('lolfundamentals_logged_in') !== 'true') {
-  // keep same redirect that you used earlier
+// Login requirement
+if(localStorage.getItem('lolfundamentals_logged_in') !== 'true'){
   window.location.href = 'login.html';
 }
 
-/* Skill data (restored exactly) */
+// Skill data
 const skillData = {
   "Pre Game": ["Champion Select","Mouse Accuracy","Summoner Spells","Matchups","Communication","Build"],
   "Early Game": ["Level 1","Farming","Trading","Wave Control","Back Timings","Build","Power Spikes","Pathing","Laning","Map Awareness","Ganking","Roaming"],
@@ -254,37 +234,11 @@ const skillData = {
   "Out of Game": ["Setup","Mindset","Not Raging/Blaming","Reaction Time","Meta"]
 };
 
-/* Build sidebar links dynamically (keeps original behavior) */
 const sidebar = document.getElementById('sidebar');
 const container = document.getElementById('skills-container');
 
-function createSidebarLink(text, index) {
-  const a = document.createElement('a');
-  a.href = '#';
-  a.textContent = text;
-  if (index === 0) a.classList.add('active');
-  a.addEventListener('click', (e) => {
-    e.preventDefault();
-    // remove active on others
-    document.querySelectorAll('.sidebar a').forEach(link => link.classList.remove('active'));
-    a.classList.add('active');
-    loadSection(text);
-    // on narrow screens, optionally scroll to top of content
-    if (window.innerWidth <= 900) {
-      window.scrollTo({ top: 0, behavior: 'smooth' });
-    }
-  });
-  return a;
-}
-
-/* Add each section link */
-Object.keys(skillData).forEach((section, i) => {
-  sidebar.appendChild(createSidebarLink(section, i));
-});
-
-/* Render a section's skills into #skills-container */
-function loadSection(sectionName) {
-  const skills = skillData[sectionName] || [];
+function loadSection(sectionName){
+  const skills = skillData[sectionName];
   container.innerHTML = `
     <h2>${sectionName}</h2>
     <ul class="skill-list">
@@ -293,27 +247,26 @@ function loadSection(sectionName) {
   `;
 }
 
-/* Load first section by default */
-loadSection(Object.keys(skillData)[0]);
-
-/* Accessibility: allow keyboard navigation for sidebar links */
-sidebar.addEventListener('keydown', (e) => {
-  const links = Array.from(sidebar.querySelectorAll('a'));
-  const currentIndex = links.findIndex(l => l.classList.contains('active'));
-  if (e.key === 'ArrowDown') {
+// Sidebar links
+Object.keys(skillData).forEach((section, i) => {
+  const a = document.createElement('a');
+  a.href = '#';
+  a.textContent = section;
+  if(i === 0) a.classList.add('active');
+  a.addEventListener('click', (e) => {
     e.preventDefault();
-    const next = links[Math.min(currentIndex + 1, links.length - 1)];
-    next && next.click();
-  } else if (e.key === 'ArrowUp') {
-    e.preventDefault();
-    const prev = links[Math.max(currentIndex - 1, 0)];
-    prev && prev.click();
-  }
+    document.querySelectorAll('.sidebar a').forEach(link => link.classList.remove('active'));
+    a.classList.add('active');
+    loadSection(section);
+  });
+  sidebar.appendChild(a);
 });
+
+// Load first section by default
+loadSection(Object.keys(skillData)[0]);
 </script>
 
 </body>
 </html>
-
 
 
