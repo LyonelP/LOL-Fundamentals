@@ -16,7 +16,7 @@ body {
   position: relative;
 }
 
-/* Sidebar at top-left corner */
+/* Sidebar at top-left corner only */
 .sidebar {
   position: fixed;
   top: 0;
@@ -27,9 +27,9 @@ body {
   border-right: 2px solid #c9aa71;
   display: flex;
   flex-direction: column;
-  justify-content: flex-start;
+  justify-content: flex-start; /* start from top */
   align-items: stretch;
-  padding-top: 20px;
+  padding-top: 20px; /* moved down from top edge a bit */
   box-sizing: border-box;
   z-index: 10;
 }
@@ -50,29 +50,15 @@ body {
   color: #c9aa71;
 }
 
-/* Main content */
+/* Main content stays exactly the same */
 .main-content {
   margin-left: 250px;
   padding: 20px 40px;
-  flex: 1;
   display: flex;
   flex-direction: column;
   align-items: center;
   overflow-x: hidden;
   position: relative;
-}
-
-/* Gradient overlay on main content to soften empty space */
-.main-content::before {
-  content: "";
-  position: absolute;
-  top: 0;
-  left: 250px;
-  width: calc(100% - 250px);
-  height: 100%;
-  background: linear-gradient(to right, rgba(0,0,0,0), rgba(0,0,0,0.2));
-  pointer-events: none;
-  z-index: 1;
 }
 
 .skills-center {
@@ -254,7 +240,6 @@ loadSection(Object.keys(skillData)[0]);
 
 </body>
 </html>
-
 
 
 
