@@ -16,7 +16,7 @@ body {
   flex-direction: column;
 }
 
-/* Main container for sidebar + content */
+/* Main container */
 .main-wrapper {
   display: flex;
   flex: 1;
@@ -27,9 +27,9 @@ body {
   width: 250px;
   background: rgba(13,17,23,0.95);
   border-right: 2px solid #c9aa71;
-  padding-top: 20px;
   display: flex;
   flex-direction: column;
+  justify-content: center; /* Center vertically */
   align-items: stretch;
   flex-shrink: 0;
 }
@@ -41,6 +41,7 @@ body {
   border-left: 4px solid transparent;
   transition: all 0.3s;
   font-weight: bold;
+  text-align: center;
 }
 
 .sidebar a:hover, .sidebar a.active {
@@ -56,26 +57,21 @@ body {
   overflow-y: auto;
   display: flex;
   flex-direction: column;
+  align-items: center;
 }
 
 .main-content h2 {
   color: #c9aa71;
-  margin-bottom: 10px;
-}
-
-.section-desc {
-  color: #fff;
-  background: rgba(0,0,0,0.7);
-  padding: 10px 15px;
-  border-left: 4px solid #c9aa71;
-  border-radius: 6px;
   margin-bottom: 15px;
 }
 
+/* Skills list */
 .skill-list {
   margin-top: 15px;
   list-style-type: none;
   padding: 0;
+  width: 100%;
+  max-width: 600px;
 }
 
 .skill-list li {
@@ -104,7 +100,7 @@ body {
   transform: scale(1.02);
 }
 
-/* Back button from Ekko guide */
+/* Back button (same size as Ekko guide) */
 .back-button {
   display: inline-block;
   margin-bottom: 20px;
@@ -116,6 +112,8 @@ body {
   font-weight: bold;
   transition: all 0.3s;
   box-shadow: 0 0 10px rgba(201,170,113,0.5);
+  min-width: 220px;
+  text-align: center;
 }
 .back-button::before { content: "← "; }
 .back-button:hover {
@@ -129,8 +127,6 @@ footer {
   padding: 15px;
   font-size: 14px;
   color: #bbb;
-  border-top: 2px solid rgba(201,170,113,0.5);
-  background: rgba(13,17,23,0.9);
 }
 
 /* Mobile adjustments */
@@ -140,9 +136,9 @@ footer {
   }
   .sidebar {
     width: 100%;
-    display: flex;
     flex-direction: row;
     overflow-x: auto;
+    justify-content: flex-start;
   }
   .sidebar a {
     flex: 1;
@@ -156,6 +152,10 @@ footer {
   }
   .main-content {
     padding: 20px;
+  }
+  .skill-list li {
+    font-size: 15px;
+    padding: 10px 12px;
   }
 }
 </style>
@@ -181,24 +181,23 @@ if(localStorage.getItem('lolfundamentals_logged_in') !== 'true'){
 
 // Skill data
 const skillData = {
-  "Pre Game": { desc: "Skills to focus on before the game starts", skills: ["Champion Select","Mouse Accuracy","Summoner Spells","Matchups","Communication","Build"] },
-  "Early Game": { desc: "First 14 minutes of the game", skills: ["Level 1","Farming","Trading","Wave Control","Back Timings","Build","Power Spikes","Pathing","Laning","Map Awareness","Ganking","Roaming"] },
-  "Mid Game": { desc: "14-25 minutes of the game", skills: ["Teamwork","Split Pushing","Sieging","Baiting","Lane Assignments","Vision"] },
-  "Late Game": { desc: "25 minutes onward", skills: ["Damage","Target Selection","Tab Screen","Win Conditions","Rotations"] },
-  "Advanced": { desc: "High level skills", skills: ["Animation Cancelling","Reading Players","Kiting","Positioning"] },
-  "Out of Game": { desc: "Skills to focus on when not playing", skills: ["Setup","Mindset","Not Raging/Blaming","Reaction Time","Meta"] }
+  "Pre Game": ["Champion Select","Mouse Accuracy","Summoner Spells","Matchups","Communication","Build"],
+  "Early Game": ["Level 1","Farming","Trading","Wave Control","Back Timings","Build","Power Spikes","Pathing","Laning","Map Awareness","Ganking","Roaming"],
+  "Mid Game": ["Teamwork","Split Pushing","Sieging","Baiting","Lane Assignments","Vision"],
+  "Late Game": ["Damage","Target Selection","Tab Screen","Win Conditions","Rotations"],
+  "Advanced": ["Animation Cancelling","Reading Players","Kiting","Positioning"],
+  "Out of Game": ["Setup","Mindset","Not Raging/Blaming","Reaction Time","Meta"]
 };
 
 const sidebar = document.getElementById('sidebar');
 const container = document.getElementById('skills-container');
 
 function loadSection(sectionName){
-  const data = skillData[sectionName];
+  const skills = skillData[sectionName];
   container.innerHTML = `
     <h2>${sectionName}</h2>
-    <div class="section-desc">${data.desc}</div>
     <ul class="skill-list">
-      ${data.skills.map(skill => `<li><a href="${skill.toLowerCase().replace(/[^a-z0-9]/g, '')}.html">${skill}</a></li>`).join('')}
+      ${skills.map(skill => `<li><a href="${skill.toLowerCase().replace(/[^a-z0-9]/g,'')}.html">${skill}</a></li>`).join('')}
     </ul>
   `;
 }
@@ -224,7 +223,4 @@ loadSection(Object.keys(skillData)[0]);
 
 </body>
 </html>
-
-
-
 
