@@ -12,11 +12,11 @@ body {
   background: url('https://64.media.tumblr.com/594ac290bec6d5e9ad98b5f53404f00b/245c4c3ee469f81d-e4/s1280x1920/1cda4284320eb2031758a9859dfe14ff8bbc50ba.jpg') no-repeat center center fixed;
   background-size: cover;
   display: flex;
-  min-height: 100vh;
   flex-direction: column;
+  min-height: 100vh;
 }
 
-/* Main container */
+/* Main wrapper */
 .main-wrapper {
   display: flex;
   flex: 1;
@@ -25,11 +25,12 @@ body {
 /* Sidebar */
 .sidebar {
   width: 250px;
+  height: 100vh; /* Full viewport height */
   background: rgba(13,17,23,0.95);
   border-right: 2px solid #c9aa71;
   display: flex;
   flex-direction: column;
-  justify-content: center; /* Center vertically */
+  justify-content: center; /* Vertically center links */
   align-items: stretch;
   flex-shrink: 0;
 }
@@ -37,7 +38,7 @@ body {
 .sidebar a {
   color: #fff;
   text-decoration: none;
-  padding: 15px 20px;
+  padding: 18px 20px;
   border-left: 4px solid transparent;
   transition: all 0.3s;
   font-weight: bold;
@@ -53,7 +54,7 @@ body {
 /* Main content */
 .main-content {
   flex: 1;
-  padding: 30px;
+  padding: 40px;
   overflow-y: auto;
   display: flex;
   flex-direction: column;
@@ -62,25 +63,25 @@ body {
 
 .main-content h2 {
   color: #c9aa71;
-  margin-bottom: 15px;
+  margin-bottom: 20px;
 }
 
-/* Skills list */
+/* Skills list (larger cards) */
 .skill-list {
   margin-top: 15px;
   list-style-type: none;
   padding: 0;
   width: 100%;
-  max-width: 600px;
+  max-width: 700px; /* Increase max width */
 }
 
 .skill-list li {
   background: rgba(0,0,0,0.85);
   border: 2px solid #c9aa71;
-  border-radius: 10px;
-  padding: 12px 15px;
-  margin-bottom: 10px;
-  font-size: 16px;
+  border-radius: 12px; /* Slightly bigger corners */
+  padding: 18px 20px;  /* Larger padding */
+  margin-bottom: 15px;
+  font-size: 18px;     /* Larger font */
   transition: transform 0.25s, box-shadow 0.3s;
 }
 
@@ -96,15 +97,15 @@ body {
 
 .skill-list li:hover {
   background: rgba(0,0,0,0.95);
-  box-shadow: 0 0 15px rgba(255,215,0,0.7);
-  transform: scale(1.02);
+  box-shadow: 0 0 20px rgba(255,215,0,0.8);
+  transform: scale(1.03);
 }
 
-/* Back button (same size as Ekko guide) */
+/* Back button (Ekko style) */
 .back-button {
   display: inline-block;
-  margin-bottom: 20px;
-  padding: 10px 20px;
+  margin-bottom: 25px;
+  padding: 12px 22px;
   background: linear-gradient(135deg, #c9aa71, #e0c77b);
   color: #000;
   text-decoration: none;
@@ -136,15 +137,18 @@ footer {
   }
   .sidebar {
     width: 100%;
+    height: auto;
     flex-direction: row;
     overflow-x: auto;
     justify-content: flex-start;
+    padding: 10px 0;
   }
   .sidebar a {
     flex: 1;
     text-align: center;
     border-left: none;
     border-bottom: 4px solid transparent;
+    padding: 12px 10px;
   }
   .sidebar a.active, .sidebar a:hover {
     border-left: none;
@@ -154,8 +158,8 @@ footer {
     padding: 20px;
   }
   .skill-list li {
-    font-size: 15px;
-    padding: 10px 12px;
+    font-size: 16px;
+    padding: 14px 16px;
   }
 }
 </style>
@@ -223,4 +227,6 @@ loadSection(Object.keys(skillData)[0]);
 
 </body>
 </html>
+
+
 
