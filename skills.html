@@ -63,7 +63,7 @@ header {
   border-right: 2px solid #c9aa71;
   display: flex;
   flex-direction: column;
-  padding-top: 20px; /* original top-aligned padding */
+  padding-top: 20px;
   box-sizing: border-box;
   z-index: 10;
 }
@@ -93,7 +93,7 @@ header {
   display: flex;
   flex-direction: column;
   align-items: center;
-  max-width: 1400px; /* wider main content */
+  max-width: 1400px;
   margin: 0 auto;
   position: relative;
 }
@@ -127,7 +127,7 @@ header {
 
 .skills-center h2 {
   color: #c9aa71;
-  margin: 10px 0 15px 0; /* closer to back button */
+  margin: 10px 0 15px 0;
   text-align: center;
 }
 
@@ -142,11 +142,15 @@ header {
   background: rgba(0,0,0,0.85);
   border: 2px solid #c9aa71;
   border-radius: 12px;
-  padding: 18px 20px;
-  margin-bottom: 15px;
-  font-size: 18px;
+  padding: 30px 25px; /* taller cards */
+  margin-bottom: 20px;
+  font-size: 20px; /* slightly bigger text */
   width: 100%;
-  max-width: 1600px; /* almost double previous width */
+  max-width: 1600px; /* very wide cards */
+  min-height: 150px; /* tall cards */
+  display: flex;
+  align-items: center; /* center text vertically */
+  justify-content: center;
   box-shadow: 0 4px 12px rgba(0,0,0,0.5);
   transition: transform 0.25s, box-shadow 0.3s;
 }
@@ -155,6 +159,7 @@ header {
   text-decoration: none;
   color: #fff;
   display: block;
+  text-align: center;
 }
 
 .skill-list li:hover {
@@ -199,7 +204,7 @@ footer {
     border-bottom: 4px solid #c9aa71;
   }
   .main-content {
-    padding: 140px 10px 20px 10px; /* proper mobile spacing */
+    padding: 140px 10px 20px 10px;
     max-width: 100%;
   }
   .skills-center h2 {
@@ -208,8 +213,9 @@ footer {
   }
   .skill-list li {
     font-size: 16px;
-    padding: 14px;
-    max-width: 100%; /* fill mobile width */
+    padding: 20px;
+    min-height: 120px;
+    max-width: 100%;
   }
 }
 </style>
@@ -276,5 +282,4 @@ loadSection(Object.keys(skillData)[0]);
 
 </body>
 </html>
-
 
