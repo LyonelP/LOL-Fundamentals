@@ -66,6 +66,14 @@ header {
   align-items: center;
   cursor: pointer;
   transition: transform 0.25s, box-shadow 0.3s, background 0.3s;
+  position: relative;
+}
+
+.section-header .description {
+  font-size: 14px;
+  font-weight: normal;
+  color: #fff;
+  margin-left: 10px;
 }
 
 .section-header::after {
@@ -79,9 +87,9 @@ header {
   transform: rotate(90deg);
 }
 
-/* Hover effect for section header */
-.section-header:hover {
-  background: rgba(0,0,0,0.95);
+/* Hover effect for section headers and skills */
+.hover-effect {
+  background: rgba(0,0,0,0.95) !important;
   box-shadow: 0 0 15px rgba(255,215,0,0.7);
   transform: scale(1.02);
 }
@@ -105,11 +113,11 @@ header {
   transition: transform 0.25s, box-shadow 0.3s, background 0.3s;
 }
 
-/* Hover effect for skill links */
 .skill-link:hover {
   background: rgba(0,0,0,0.95);
   box-shadow: 0 0 15px rgba(255,215,0,0.7);
   transform: scale(1.02);
+  color: #fff;
 }
 
 /* Footer */
@@ -130,6 +138,11 @@ footer {
     padding: 15px;
     flex-direction: column;
     align-items: flex-start;
+  }
+  .section-header .description {
+    display: block;
+    margin-left: 0;
+    margin-top: 5px;
   }
   .skill-link {
     font-size: 15px;
@@ -154,30 +167,12 @@ if(localStorage.getItem('lolfundamentals_logged_in') !== 'true'){
 }
 
 const skillData = {
-  "Pre Game": {
-    desc: "Skills to focus on before the game starts",
-    skills: ["Champion Select","Mouse Accuracy","Summoner Spells","Matchups","Communication"]
-  },
-  "Early Game": {
-    desc: "First 14 minutes of the game",
-    skills: ["Level 1","Farming","Trading","Wave Control","Back Timings","Build","Power Spikes","Pathing","Laning","Map Awareness","Ganking","Roaming"]
-  },
-  "Mid Game": {
-    desc: "Around 14-15 minutes of the game",
-    skills: ["Teamwork","Split Pushing","Sieging","Baiting","Lane Assignments","Vision"]
-  },
-  "Late Game": {
-    desc: "Past 25 minutes",
-    skills: ["Damage","Target Selection","Tab Screen","Win Conditions"]
-  },
-  "Advanced": {
-    desc: "High level skills",
-    skills: ["Animation Cancelling","Reading Players","Kiting","Positioning"]
-  },
-  "Out of Game": {
-    desc: "Skills to focus on when not playing",
-    skills: ["Setup","Mindset","Not Raging/Blaming","Reaction Time","Meta"]
-  }
+  "Pre Game": { desc: "Skills to focus on before the game starts", skills: ["Champion Select","Mouse Accuracy","Summoner Spells","Matchups","Communication"] },
+  "Early Game": { desc: "First 14 minutes of the game", skills: ["Level 1","Farming","Trading","Wave Control","Back Timings","Build","Power Spikes","Pathing","Laning","Map Awareness","Ganking","Roaming"] },
+  "Mid Game": { desc: "Around 14-15 minutes of the game", skills: ["Teamwork","Split Pushing","Sieging","Baiting","Lane Assignments","Vision"] },
+  "Late Game": { desc: "Past 25 minutes", skills: ["Damage","Target Selection","Tab Screen","Win Conditions"] },
+  "Advanced": { desc: "High level skills", skills: ["Animation Cancelling","Reading Players","Kiting","Positioning"] },
+  "Out of Game": { desc: "Skills to focus on when not playing", skills: ["Setup","Mindset","Not Raging/Blaming","Reaction Time","Meta"] }
 };
 
 const container = document.getElementById('sections');
@@ -188,7 +183,20 @@ Object.entries(skillData).forEach(([section, data]) => {
 
   const header = document.createElement('div');
   header.className = 'section-header';
-  header.textContent = `${section}: ${data.desc}`; // Section text with description inline
+
+  const title = document.createElement('span');
+  title.textContent = section;
+
+  const desc = document.createElement('span');
+  desc.className = 'description';
+  desc.textContent = data.desc;
+
+  header.appendChild(title);
+  header.appendChild(desc);
+
+  // Hover effect for section header
+  header.addEventListener('mouseover', () => header.classList.add('hover-effect'));
+  header.addEventListener('mouseout', () => header.classList.remove('hover-effect'));
 
   const list = document.createElement('div');
   list.className = 'skills-list';
@@ -220,6 +228,7 @@ Object.entries(skillData).forEach(([section, data]) => {
 
 </body>
 </html>
+
 
 
 
