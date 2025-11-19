@@ -58,12 +58,13 @@ header {
   padding: 25px 15px;
   max-width: 1300px;
   margin: 30px auto;
-  text-align: left;
+  text-align: center; /* Center the section */
 }
 .skill-section h2 {
-  color: #f9d949;
+  color: #c9aa71; /* Gold for all sections */
   margin-bottom: 15px;
   border-bottom: 2px solid #c9aa71;
+  display: inline-block;
   padding-bottom: 5px;
 }
 
@@ -73,6 +74,7 @@ header {
   grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
   gap: 15px;
   margin-top: 15px;
+  justify-content: center;
 }
 
 /* Skill card */
@@ -117,8 +119,8 @@ footer {
 <a href="membershub.html" class="back-button">Back to Members Hub</a>
 
 <div class="skill-section">
-  <h2>Starter Skills – Where to Begin</h2>
-  <div class="skills-container" id="starter-skills"></div>
+  <h2>Pre Game</h2>
+  <div class="skills-container" id="pre-skills"></div>
 </div>
 
 <div class="skill-section">
@@ -127,22 +129,34 @@ footer {
 </div>
 
 <div class="skill-section">
-  <h2>Mid Game & Teamplay</h2>
+  <h2>Mid Game</h2>
   <div class="skills-container" id="mid-skills"></div>
 </div>
 
 <div class="skill-section">
-  <h2>Advanced Mechanics & Mindset</h2>
+  <h2>Late Game</h2>
+  <div class="skills-container" id="late-skills"></div>
+</div>
+
+<div class="skill-section">
+  <h2>Advanced</h2>
   <div class="skills-container" id="advanced-skills"></div>
+</div>
+
+<div class="skill-section">
+  <h2>Out of Game</h2>
+  <div class="skills-container" id="out-skills"></div>
 </div>
 
 <script>
 // Categorized skills
 const skillCategories = {
-  "starter": ["Mouse Accuracy", "Farming", "Positioning", "Map Awareness", "Laning", "Champion Select"],
-  "early": ["Summoner Spells", "Trading", "Wave Control", "Power Spikes", "Back Timings", "Pathing"],
-  "mid": ["Roaming", "Vision", "Teamwork", "Ganking", "Split Pushing", "Sieging", "Baiting", "Reaction Time"],
-  "advanced": ["Animation Cancelling", "Mindset", "Target Selection", "Reading Players", "Win Conditions", "Not Raging/Blaming", "Damage", "Setup", "Lane Assignments", "Tab Screen", "Mid Game", "Late Game"]
+  "pre-skills": ["Champion Select", "Mouse Accuracy", "Summoner Spells", "Not Raging/Blaming"],
+  "early-skills": ["Farming", "Positioning", "Trading", "Wave Control", "Back Timings", "Power Spikes", "Pathing", "Laning", "Map Awareness"],
+  "mid-skills": ["Roaming", "Vision", "Teamwork", "Ganking", "Split Pushing", "Sieging", "Baiting", "Reaction Time", "Reading Players", "Win Conditions"],
+  "late-skills": ["Mid Game", "Late Game", "Target Selection", "Setup", "Lane Assignments", "Damage"],
+  "advanced-skills": ["Animation Cancelling", "Mindset"],
+  "out-skills": ["Communication"]
 };
 
 // Helper function to render skills
@@ -159,17 +173,15 @@ function renderSkills(categoryId, skills) {
 }
 
 // Render all categories
-renderSkills('starter-skills', skillCategories.starter);
-renderSkills('early-skills', skillCategories.early);
-renderSkills('mid-skills', skillCategories.mid);
-renderSkills('advanced-skills', skillCategories.advanced);
+for (const [categoryId, skills] of Object.entries(skillCategories)) {
+  renderSkills(categoryId, skills);
+}
 </script>
 
 <footer>© 2025 LoL Fundamentals · All rights reserved</footer>
 
 </body>
 </html>
-
 
 
 
