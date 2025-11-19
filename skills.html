@@ -42,23 +42,19 @@ header {
 }
 .back-button::before { content: "← "; }
 .back-button:hover {
-  background: linear-gradient(135deg, #f9d949, #ffe47a);
+  background: linear-gradient(135deg, #e6c97f, #f0d88b);
   box-shadow: 0 0 15px rgba(255,215,0,0.8);
 }
 
-/* Phase buttons area */
+/* Phase buttons */
 .phase-buttons {
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
   margin: 40px 20px 20px;
   gap: 20px;
-  padding: 25px;
-  background: rgba(0,0,0,0.3);
-  border-radius: 12px;
 }
 
-/* Phase buttons */
 .phase-btn {
   background: rgba(201,170,113,0.85);
   border: none;
@@ -71,7 +67,8 @@ header {
   transition: 0.3s;
 }
 .phase-btn:hover, .phase-btn.active {
-  background: #f9d949; /* gold hover */
+  background: linear-gradient(135deg, #e6c97f, #f0d88b);
+  box-shadow: 0 0 15px rgba(255,215,0,0.8);
   transform: translateY(-3px);
 }
 
@@ -136,7 +133,7 @@ footer {
 <div id="skills-container"></div>
 
 <script>
-// Full original skill list
+// Full skill list
 const skillCategories = {
   "pre-skills": ["Champion Select","Mouse Accuracy","Summoner Spells","Matchups"],
   "early-skills": ["Farming","Positioning","Trading","Wave Control","Back Timings","Power Spikes","Pathing","Laning","Map Awareness","Kiting"],
@@ -146,11 +143,10 @@ const skillCategories = {
   "out-skills": ["Setup","Mindset","Not Raging/Blaming","Communication"]
 };
 
-// Render skills for selected phase
+// Render skills when a phase is clicked
 const container = document.getElementById('skills-container');
 function showSkills(phase) {
   container.innerHTML = "";
-  // Highlight active button
   document.querySelectorAll('.phase-btn').forEach(btn => btn.classList.remove('active'));
   document.querySelector(`.phase-btn[data-phase="${phase}"]`).classList.add('active');
 
@@ -167,9 +163,6 @@ function showSkills(phase) {
 document.querySelectorAll('.phase-btn').forEach(btn => {
   btn.addEventListener('click', () => showSkills(btn.dataset.phase));
 });
-
-// Optional: load Pre Game by default
-showSkills("pre-skills");
 </script>
 
 <footer>© 2025 LoL Fundamentals · All rights reserved</footer>
