@@ -21,6 +21,7 @@ body {
   background-size: cover;
 }
 
+/* Header */
 header {
   background: rgba(13,17,23,0.95);
   border-bottom: 2px solid #c9aa71;
@@ -33,6 +34,7 @@ header {
   text-shadow: 0 0 5px #000;
 }
 
+/* Back button */
 .back-button {
   display: inline-block;
   margin: 20px auto 10px;
@@ -51,15 +53,19 @@ header {
   box-shadow: 0 0 15px rgba(255,215,0,0.8);
 }
 
+/* Section */
 .skill-section {
   padding: 25px 15px;
   max-width: 1300px;
   margin: 40px auto;
   text-align: center;
+  background: rgba(0,0,0,0.4);
+  border-radius: 12px;
+  margin-bottom: 30px;
 }
 .skill-section h2 {
   color: #c9aa71;
-  font-size: 26px;
+  font-size: 28px;
   margin-bottom: 20px;
   border-bottom: 2px solid #c9aa71;
   display: inline-block;
@@ -67,6 +73,7 @@ header {
   text-shadow: 0 0 5px #000;
 }
 
+/* Grid */
 .skills-container {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
@@ -75,6 +82,7 @@ header {
   justify-content: center;
 }
 
+/* Skill card */
 .skill-card {
   background: rgba(13,17,23,0.85);
   border: 2px solid #c9aa71;
@@ -145,17 +153,17 @@ footer {
 </div>
 
 <script>
-// All original skills categorized properly
+// Full original skill list categorized into new phases
 const skillCategories = {
-  "pre-skills": ["Champion Select", "Mouse Accuracy", "Summoner Spells"],
-  "early-skills": ["Farming", "Positioning", "Trading", "Wave Control", "Back Timings", "Power Spikes", "Pathing", "Laning", "Map Awareness"],
+  "pre-skills": ["Champion Select", "Mouse Accuracy", "Summoner Spells", "Matchups"],
+  "early-skills": ["Farming", "Positioning", "Trading", "Wave Control", "Back Timings", "Power Spikes", "Pathing", "Laning", "Map Awareness", "Kiting"],
   "mid-skills": ["Roaming", "Vision", "Teamwork", "Ganking", "Split Pushing", "Sieging", "Baiting", "Reaction Time", "Mid Game"],
-  "late-skills": ["Late Game", "Damage", "Target Selection", "Tab Screen", "Lane Assignments"],
+  "late-skills": ["Late Game", "Damage", "Target Selection", "Tab Screen", "Lane Assignments", "Early Game"],
   "advanced-skills": ["Animation Cancelling", "Reading Players", "Win Conditions"],
   "out-skills": ["Setup", "Mindset", "Not Raging/Blaming", "Communication"]
 };
 
-// Render skills
+// Render all skills
 for (const [categoryId, skills] of Object.entries(skillCategories)) {
   const container = document.getElementById(categoryId);
   skills.forEach(skill => {
@@ -173,7 +181,6 @@ for (const [categoryId, skills] of Object.entries(skillCategories)) {
 
 </body>
 </html>
-
 
 
 
