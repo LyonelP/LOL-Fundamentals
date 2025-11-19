@@ -4,121 +4,131 @@
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>LoL Fundamentals – Skills Hub</title>
-
 <style>
 body {
-  margin: 0;
-  font-family: 'Beaufort for LOL', Arial, Helvetica, sans-serif;
-  color: #fff;
-  text-align: center;
-  background: url('https://64.media.tumblr.com/594ac290bec6d5e9ad98b5f53404f00b/245c4c3ee469f81d-e4/s1280x1920/1cda4284320eb2031758a9859dfe14ff8bbc50ba.jpg') no-repeat center center fixed;
-  background-size: cover;
+margin: 0;
+font-family: 'Beaufort for LOL', Arial, Helvetica, sans-serif;
+color: #fff;
+text-align: center;
+background: url('https://64.media.tumblr.com/594ac290bec6d5e9ad98b5f53404f00b/245c4c3ee469f81d-e4/s1280x1920/1cda4284320eb2031758a9859dfe14ff8bbc50ba.jpg') no-repeat center center fixed;
+background-size: cover;
 }
 
 /* Header */
 header {
-  background: rgba(13,17,23,0.9);
-  border-bottom: 2px solid #c9aa71;
-  padding: 20px 10px;
-  font-weight: bold;
-  font-size: 28px;
-  text-transform: uppercase;
-  color: #c9aa71;
-  letter-spacing: 1px;
+background: rgba(13,17,23,0.9);
+border-bottom: 2px solid #c9aa71;
+padding: 20px 10px;
+font-weight: bold;
+font-size: 28px;
+text-transform: uppercase;
+color: #c9aa71;
+letter-spacing: 1px;
 }
 
 /* Back button */
 .back-button {
-  display: inline-block;
-  margin: 20px auto;
-  padding: 10px 20px;
-  background: linear-gradient(135deg, #c9aa71, #e0c77b);
-  color: #000;
-  text-decoration: none;
-  border-radius: 8px;
-  font-weight: bold;
-  transition: 0.3s;
-  box-shadow: 0 0 10px rgba(201,170,113,0.5);
+display: inline-block;
+margin: 20px auto;
+padding: 10px 20px;
+background: linear-gradient(135deg, #c9aa71, #e0c77b);
+color: #000;
+text-decoration: none;
+border-radius: 8px;
+font-weight: bold;
+transition: all 0.3s;
+box-shadow: 0 0 10px rgba(201,170,113,0.5);
 }
 .back-button::before { content: "← "; }
 .back-button:hover {
-  background: linear-gradient(135deg, #e6c97f, #f0d88b);
-  box-shadow: 0 0 15px rgba(255,215,0,0.7);
+background: linear-gradient(135deg, #e6c97f, #f0d88b);
+box-shadow: 0 0 15px rgba(255,215,0,0.8);
 }
 
-/* Sections */
+/* Section cards */
 .section {
-  width: 90%;
-  max-width: 800px;
-  margin: 15px auto;
-  text-align: left;
+width: 90%;
+max-width: 350px;
+margin: 15px auto;
+text-align: left;
 }
 
 .section-header {
-  width: 100%;
-  background: rgba(0,0,0,0.85);
-  border: 2px solid #c9aa71;
-  padding: 15px 20px;
-  font-size: 20px;
-  font-weight: bold;
-  color: #fff;
-  border-radius: 10px;
-  cursor: pointer;
-  position: relative;
-  transition: all 0.3s;
+background: rgba(0,0,0,0.85);
+border: 2px solid #c9aa71;
+border-radius: 12px;
+padding: 18px 20px;
+font-size: 20px;
+font-weight: bold;
+color: #fff;
+display: flex;
+justify-content: space-between;
+align-items: center;
+cursor: pointer;
+transition: transform 0.25s, box-shadow 0.3s;
 }
 
 .section-header::after {
-  content: '▼';
-  position: absolute;
-  right: 20px;
-  font-size: 18px;
-  transition: transform 0.3s;
+content: "➤";
+font-size: 18px;
+color: #c9aa71;
+transition: transform 0.3s;
 }
 
 .section-header.active::after {
-  transform: rotate(-180deg);
+transform: rotate(90deg);
 }
 
+/* Skills list */
 .skills-list {
-  display: none;
-  background: rgba(0,0,0,0.75);
-  border-left: 2px solid #c9aa71;
-  border-right: 2px solid #c9aa71;
-  border-bottom: 2px solid #c9aa71;
-  border-radius: 0 0 10px 10px;
-  padding: 15px 20px;
-  margin-top: -2px;
+display: none;
+margin-top: 8px;
 }
 
 .skill-link {
-  display: block;
-  background: rgba(0,0,0,0.85);
-  padding: 12px 15px;
-  border: 2px solid #c9aa71;
-  border-radius: 8px;
-  margin-bottom: 10px;
-  font-size: 16px;
-  color: #fff;
-  text-decoration: none;
-  transition: all 0.25s ease;
+display: block;
+background: rgba(0,0,0,0.85);
+border: 2px solid #c9aa71;
+border-radius: 10px;
+padding: 12px 15px;
+margin-bottom: 8px;
+font-size: 16px;
+color: #fff;
+text-decoration: none;
+transition: all 0.25s;
 }
+
 .skill-link:hover {
-  background: rgba(0,0,0,0.95);
-  transform: translateY(-3px);
-  box-shadow: 0 0 15px rgba(201,170,113,0.7);
+background: linear-gradient(135deg, #e6c97f, #f0d88b);
+color: #000;
+transform: translateY(-2px);
+box-shadow: 0 0 12px rgba(255,215,0,0.7);
 }
 
 /* Footer */
 footer {
-  text-align: center;
-  padding: 20px;
-  font-size: 14px;
-  color: #bbb;
+text-align: center;
+padding: 20px;
+font-size: 14px;
+color: #bbb;
+}
+
+/* Mobile adjustments */
+@media(max-width: 500px){
+.section {
+max-width: 95%;
+}
+.section-header {
+font-size: 18px;
+padding: 15px;
+}
+.skill-link {
+font-size: 15px;
+padding: 10px 12px;
+}
 }
 </style>
 </head>
-
 <body>
 
 <header>LoL Fundamentals – Skills Hub</header>
@@ -130,62 +140,60 @@ footer {
 
 <script>
 // Login requirement
-if (localStorage.getItem('lolfundamentals_logged_in') !== 'true') {
-  window.location.href = 'login.html';
+if(localStorage.getItem('lolfundamentals_logged_in') !== 'true'){
+window.location.href = 'login.html';
 }
 
-// Skill data
 const skillData = {
-  "Pre Game": ["Champion Select","Mouse Accuracy","Summoner Spells","Matchups"],
-  "Early Game": ["Level 1","Farming","Positioning","Trading","Wave Control","Back Timings","Power Spikes","Pathing","Laning","Map Awareness","Kiting"],
-  "Mid Game": ["Roaming","Vision","Teamwork","Ganking","Split Pushing","Sieging","Baiting","Reaction Time"],
-  "Late Game": ["Damage","Target Selection","Tab Screen","Lane Assignments"],
-  "Advanced": ["Animation Cancelling","Reading Players","Win Conditions"],
-  "Out of Game": ["Setup","Mindset","Not Raging/Blaming","Communication"]
+"Pre Game": ["Champion Select","Mouse Accuracy","Summoner Spells","Matchups","Communication"],
+"Early Game": ["Farming","Trading","Wave Control","Back Timings","Build","Power Spikes","Pathing","Laning","Map Awareness","Ganking","Roaming"],
+"Mid Game": ["Teamwork","Split Pushing","Sieging","Baiting","Lane Assignments","Vision"],
+"Late Game": ["Damage","Target Selection","Tab Screen","Win Conditions"],
+"Advanced": ["Animation Cancelling","Reading Players","Kiting","Positioning"],
+"Out of Game": ["Setup","Mindset","Not Raging/Blaming","Reaction Time"]
 };
 
 const container = document.getElementById('sections');
 
 Object.entries(skillData).forEach(([section, skills]) => {
-  const wrapper = document.createElement('div');
-  wrapper.className = 'section';
+const wrapper = document.createElement('div');
+wrapper.className = 'section';
 
-  const header = document.createElement('div');
-  header.className = 'section-header';
-  header.textContent = section;
+const header = document.createElement('div');
+header.className = 'section-header';
+header.textContent = section;
 
-  const list = document.createElement('div');
-  list.className = 'skills-list';
+const list = document.createElement('div');
+list.className = 'skills-list';
 
-  skills.forEach(skill => {
-    const a = document.createElement('a');
-    a.className = 'skill-link';
-    a.textContent = skill;
-    a.href = skill.toLowerCase().replace(/[^a-z0-9]/g, '') + '.html';
-    list.appendChild(a);
-  });
+skills.forEach(skill => {
+const a = document.createElement('a');
+a.className = 'skill-link';
+a.textContent = skill;
+a.href = skill.toLowerCase().replace(/[^a-z0-9]/g, '') + '.html';
+list.appendChild(a);
+});
 
-  header.addEventListener('click', () => {
-    // Close other sections
-    document.querySelectorAll('.skills-list').forEach(sl => {
-      if(sl !== list) sl.style.display = 'none';
-    });
-    document.querySelectorAll('.section-header').forEach(h => {
-      if(h !== header) h.classList.remove('active');
-    });
+header.addEventListener('click', () => {
+const isActive = header.classList.contains('active');
+document.querySelectorAll('.section-header').forEach(h => h.classList.remove('active'));
+document.querySelectorAll('.skills-list').forEach(l => l.style.display = 'none');
 
-    list.style.display = list.style.display === 'block' ? 'none' : 'block';
-    header.classList.toggle('active');
-  });
+if(!isActive){
+header.classList.add('active');
+list.style.display = 'block';
+}
+});
 
-  wrapper.appendChild(header);
-  wrapper.appendChild(list);
-  container.appendChild(wrapper);
+wrapper.appendChild(header);
+wrapper.appendChild(list);
+container.appendChild(wrapper);
 });
 </script>
 
 </body>
 </html>
+
 
 
 
