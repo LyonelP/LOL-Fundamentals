@@ -4,6 +4,14 @@
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>LoL Fundamentals – Skills Hub</title>
+
+<!-- Login check -->
+<script>
+  if (localStorage.getItem('lolfundamentals_logged_in') !== 'true') {
+    window.location.replace('login.html');
+  }
+</script>
+
 <style>
 body {
   margin: 0;
@@ -14,58 +22,62 @@ body {
   display: flex;
   flex-direction: column;
   min-height: 100vh;
-  position: relative;
   overflow-x: hidden;
+}
+
+/* Overlay for readability */
+body::before {
+  content: "";
+  position: fixed;
+  top: 0; left: 0;
+  width: 100%; height: 100%;
+  background: rgba(10,15,20,0.75);
+  z-index: -1;
 }
 
 /* Header */
 header {
-  background: linear-gradient(90deg, #0a0f14, #1b2838);
+  background: rgba(13,17,23,0.9);
   border-bottom: 2px solid #c9aa71;
-  padding: 15px 20px;
+  padding: 20px 10px;
   font-weight: bold;
-  font-size: 24px;
-  letter-spacing: 1px;
+  font-size: 26px;
   text-transform: uppercase;
   color: #c9aa71;
-  position: fixed;
-  top: 0;
-  width: 100%;
-  z-index: 50;
-  height: 60px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
+  letter-spacing: 1px;
+  text-align: center;
 }
 
 /* Sidebar */
 .sidebar {
-  position: fixed;
-  top: 60px;
-  left: 0;
+  margin-top: 10px; /* small margin below header */
   width: 250px;
-  height: calc(100vh - 60px);
   background: rgba(13,17,23,0.95);
   border-right: 2px solid #c9aa71;
   display: flex;
   flex-direction: column;
   align-items: stretch;
-  padding-top: 20px;
+  padding-top: 10px;
   box-sizing: border-box;
+  position: fixed;
+  top: 76px; /* header + small margin */
+  left: 0;
+  height: calc(100vh - 76px);
   z-index: 10;
 }
 
 .sidebar a {
   color: #fff;
   text-decoration: none;
-  padding: 18px 20px;
+  padding: 15px 20px;
   border-left: 4px solid transparent;
-  transition: all 0.3s;
   font-weight: bold;
   text-align: center;
+  transition: all 0.3s;
 }
 
-.sidebar a:hover, .sidebar a.active {
+.sidebar a.active,
+.sidebar a:hover {
   background: rgba(201,170,113,0.2);
   border-left: 4px solid #c9aa71;
   color: #c9aa71;
@@ -74,15 +86,32 @@ header {
 /* Main content */
 .main-content {
   margin-left: 250px;
+  margin-top: 76px; /* same as sidebar top */
   padding: 20px 40px;
-  padding-top: 90px; /* below header */
-  flex: 1;
   display: flex;
   flex-direction: column;
   align-items: center;
-  overflow-x: hidden;
   max-width: calc(100vw - 250px);
-  position: relative;
+  flex: 1;
+}
+
+/* Back button */
+.back-button {
+  display: inline-block;
+  margin-bottom: 20px;
+  padding: 12px 22px;
+  background: linear-gradient(135deg, #c9aa71, #e0c77b);
+  color: #000;
+  text-decoration: none;
+  border-radius: 8px;
+  font-weight: bold;
+  transition: all 0.3s;
+  box-shadow: 0 0 10px rgba(201,170,113,0.5);
+}
+.back-button::before { content: "← "; }
+.back-button:hover {
+  background: linear-gradient(135deg, #e6c97f, #f0d88b);
+  box-shadow: 0 0 15px rgba(255,215,0,0.8);
 }
 
 /* Skills container */
@@ -92,20 +121,18 @@ header {
   align-items: center;
   width: 100%;
   max-width: 900px;
-  z-index: 2;
 }
 
-/* Section title */
-.main-content h2 {
+/* Section titles */
+.skills-center h2 {
   color: #c9aa71;
   margin: 10px 0 20px;
   text-align: center;
 }
 
-/* Skill cards */
+/* Skill list */
 .skill-list {
-  margin-top: 15px;
-  list-style-type: none;
+  list-style: none;
   padding: 0;
   width: 100%;
   display: flex;
@@ -120,10 +147,10 @@ header {
   padding: 18px 20px;
   margin-bottom: 15px;
   font-size: 18px;
-  transition: transform 0.25s, box-shadow 0.3s;
   width: 100%;
   max-width: 700px;
   box-shadow: 0 4px 12px rgba(0,0,0,0.5);
+  transition: transform 0.25s, box-shadow 0.3s;
 }
 
 .skill-list li a {
@@ -139,71 +166,41 @@ header {
   color: #c9aa71;
 }
 
-/* Back button */
-.back-button {
-  display: inline-block;
-  margin-bottom: 20px; /* spacing from header */
-  padding: 12px 22px;
-  background: linear-gradient(135deg, #c9aa71, #e0c77b);
-  color: #000;
-  text-decoration: none;
-  border-radius: 8px;
-  font-weight: bold;
-  transition: all 0.3s;
-  box-shadow: 0 0 10px rgba(201,170,113,0.5);
-  min-width: 220px;
-  text-align: center;
-}
-.back-button::before { content: "← "; }
-.back-button:hover {
-  background: linear-gradient(135deg, #e6c97f, #f0d88b);
-  box-shadow: 0 0 15px rgba(255,215,0,0.8);
-}
-
 /* Footer */
 footer {
   text-align: center;
   padding: 15px;
   font-size: 14px;
   color: #fff;
-  background: none;
-  border: none;
   margin-top: auto;
 }
 
-/* Mobile adjustments */
+/* Mobile */
 @media(max-width: 700px){
   .sidebar {
     position: relative;
     width: 100%;
     height: auto;
     flex-direction: row;
-    overflow-x: auto;
-    padding: 8px 0;
+    top: auto;
     border-right: none;
     border-bottom: 2px solid #c9aa71;
-    top: 60px;
   }
   .sidebar a {
     flex: 1;
-    text-align: center;
     border-left: none;
     border-bottom: 4px solid transparent;
     padding: 12px 10px;
   }
-  .sidebar a.active, .sidebar a:hover {
-    border-bottom: 4px solid #c9aa71;
-  }
+  .sidebar a.active,
+  .sidebar a:hover { border-bottom: 4px solid #c9aa71; }
   .main-content {
     margin-left: 0;
-    padding: 15px 20px;
-    padding-top: 110px; /* mobile spacing for header */
     max-width: 100vw;
+    padding: 15px 20px;
+    margin-top: 20px; /* small spacing for mobile */
   }
-  .skill-list li {
-    font-size: 16px;
-    padding: 14px 16px;
-  }
+  .skill-list li { font-size: 16px; padding: 14px 16px; }
 }
 </style>
 </head>
@@ -270,5 +267,3 @@ loadSection(Object.keys(skillData)[0]);
 
 </body>
 </html>
-
-
