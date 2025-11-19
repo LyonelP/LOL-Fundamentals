@@ -1,16 +1,9 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8" />
+<meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>LoL Fundamentals – Skills Hub</title>
-
-<script>
-  if (localStorage.getItem('lolfundamentals_logged_in') !== 'true') {
-    window.location.replace('login.html');
-  }
-</script>
-
 <style>
 body {
   margin: 0;
@@ -21,7 +14,6 @@ body {
   background-size: cover;
 }
 
-/* Header */
 header {
   background: rgba(13,17,23,0.95);
   border-bottom: 2px solid #c9aa71;
@@ -34,7 +26,6 @@ header {
   text-shadow: 0 0 5px #000;
 }
 
-/* Back button */
 .back-button {
   display: inline-block;
   margin: 20px auto 10px;
@@ -53,36 +44,38 @@ header {
   box-shadow: 0 0 15px rgba(255,215,0,0.8);
 }
 
-/* Section */
-.skill-section {
-  padding: 25px 15px;
-  max-width: 1300px;
-  margin: 40px auto;
-  text-align: center;
-  background: rgba(0,0,0,0.4);
-  border-radius: 12px;
-  margin-bottom: 30px;
-}
-.skill-section h2 {
-  color: #c9aa71;
-  font-size: 28px;
-  margin-bottom: 20px;
-  border-bottom: 2px solid #c9aa71;
-  display: inline-block;
-  padding-bottom: 5px;
-  text-shadow: 0 0 5px #000;
+.phase-buttons {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  margin: 40px 0 20px;
+  gap: 15px;
 }
 
-/* Grid */
-.skills-container {
+.phase-btn {
+  background: rgba(201,170,113,0.8);
+  border: none;
+  padding: 15px 25px;
+  font-size: 18px;
+  font-weight: bold;
+  color: #000;
+  border-radius: 10px;
+  cursor: pointer;
+  transition: 0.3s;
+}
+.phase-btn:hover {
+  background: #f9d949;
+  transform: translateY(-3px);
+}
+
+#skills-container {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
   gap: 15px;
-  margin-top: 15px;
-  justify-content: center;
+  max-width: 1200px;
+  margin: 20px auto 60px;
 }
 
-/* Skill card */
 .skill-card {
   background: rgba(13,17,23,0.85);
   border: 2px solid #c9aa71;
@@ -91,10 +84,9 @@ header {
   text-align: center;
   color: #fff;
   transition: transform 0.25s, box-shadow 0.3s;
-  cursor: pointer;
   font-size: 14px;
+  cursor: pointer;
   text-decoration: none;
-  display: block;
 }
 .skill-card:hover {
   transform: translateY(-3px);
@@ -110,77 +102,64 @@ footer {
   margin-top: 20px;
 }
 
-@media (max-width: 500px) {
-  header { font-size: 24px; padding: 15px 5px; }
-  .skills-container { grid-template-columns: repeat(auto-fit, minmax(140px, 1fr)); }
+@media(max-width:500px){
+  header{ font-size:24px; padding:15px 5px; }
+  .phase-btn{ font-size:16px; padding:12px 18px; }
+  #skills-container{ grid-template-columns: repeat(auto-fit, minmax(140px, 1fr)); }
 }
 </style>
 </head>
 
 <body>
-
 <header>LoL Fundamentals – Skills Hub</header>
 <a href="membershub.html" class="back-button">Back to Members Hub</a>
 
-<div class="skill-section">
-  <h2>Pre Game</h2>
-  <div class="skills-container" id="pre-skills"></div>
+<div class="phase-buttons">
+  <button class="phase-btn" data-phase="pre-skills">Pre Game</button>
+  <button class="phase-btn" data-phase="early-skills">Early Game</button>
+  <button class="phase-btn" data-phase="mid-skills">Mid Game</button>
+  <button class="phase-btn" data-phase="late-skills">Late Game</button>
+  <button class="phase-btn" data-phase="advanced-skills">Advanced</button>
+  <button class="phase-btn" data-phase="out-skills">Out of Game</button>
 </div>
 
-<div class="skill-section">
-  <h2>Early Game</h2>
-  <div class="skills-container" id="early-skills"></div>
-</div>
-
-<div class="skill-section">
-  <h2>Mid Game</h2>
-  <div class="skills-container" id="mid-skills"></div>
-</div>
-
-<div class="skill-section">
-  <h2>Late Game</h2>
-  <div class="skills-container" id="late-skills"></div>
-</div>
-
-<div class="skill-section">
-  <h2>Advanced</h2>
-  <div class="skills-container" id="advanced-skills"></div>
-</div>
-
-<div class="skill-section">
-  <h2>Out of Game</h2>
-  <div class="skills-container" id="out-skills"></div>
-</div>
+<div id="skills-container"></div>
 
 <script>
-// Full original skill list categorized into new phases
+// All original skills categorized
 const skillCategories = {
-  "pre-skills": ["Champion Select", "Mouse Accuracy", "Summoner Spells", "Matchups"],
-  "early-skills": ["Farming", "Positioning", "Trading", "Wave Control", "Back Timings", "Power Spikes", "Pathing", "Laning", "Map Awareness", "Kiting"],
-  "mid-skills": ["Roaming", "Vision", "Teamwork", "Ganking", "Split Pushing", "Sieging", "Baiting", "Reaction Time", "Mid Game"],
-  "late-skills": ["Late Game", "Damage", "Target Selection", "Tab Screen", "Lane Assignments", "Early Game"],
-  "advanced-skills": ["Animation Cancelling", "Reading Players", "Win Conditions"],
-  "out-skills": ["Setup", "Mindset", "Not Raging/Blaming", "Communication"]
+  "pre-skills": ["Champion Select","Mouse Accuracy","Summoner Spells","Matchups"],
+  "early-skills": ["Farming","Positioning","Trading","Wave Control","Back Timings","Power Spikes","Pathing","Laning","Map Awareness","Kiting"],
+  "mid-skills": ["Roaming","Vision","Teamwork","Ganking","Split Pushing","Sieging","Baiting","Reaction Time","Mid Game"],
+  "late-skills": ["Late Game","Damage","Target Selection","Tab Screen","Lane Assignments","Early Game"],
+  "advanced-skills": ["Animation Cancelling","Reading Players","Win Conditions"],
+  "out-skills": ["Setup","Mindset","Not Raging/Blaming","Communication"]
 };
 
-// Render all skills
-for (const [categoryId, skills] of Object.entries(skillCategories)) {
-  const container = document.getElementById(categoryId);
-  skills.forEach(skill => {
-    const link = document.createElement('a');
-    link.className = 'skill-card';
-    const fileName = skill.toLowerCase().replace(/[^a-z0-9]/g, '');
-    link.href = fileName + '.html';
-    link.textContent = skill;
-    container.appendChild(link);
+// Render skills for selected phase
+const container = document.getElementById('skills-container');
+function showSkills(phase) {
+  container.innerHTML = "";
+  skillCategories[phase].forEach(skill => {
+    const card = document.createElement('a');
+    card.className = 'skill-card';
+    card.textContent = skill;
+    card.href = skill.toLowerCase().replace(/[^a-z0-9]/g,'') + '.html';
+    container.appendChild(card);
   });
 }
+
+// Add click events
+document.querySelectorAll('.phase-btn').forEach(btn => {
+  btn.addEventListener('click', () => showSkills(btn.dataset.phase));
+});
 </script>
 
 <footer>© 2025 LoL Fundamentals · All rights reserved</footer>
-
 </body>
 </html>
+
+
 
 
 
