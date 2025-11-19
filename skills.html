@@ -49,7 +49,7 @@ header {
 .section {
   width: 80%;
   max-width: 600px;
-  margin: 15px auto;
+  margin: 20px auto;
   text-align: left;
 }
 
@@ -65,7 +65,15 @@ header {
   justify-content: space-between;
   align-items: center;
   cursor: pointer;
-  transition: transform 0.25s, box-shadow 0.3s;
+  transition: transform 0.25s, box-shadow 0.3s, background 0.3s;
+  position: relative;
+}
+
+.section-header .description {
+  font-size: 14px;
+  font-weight: normal;
+  color: #f0d88b;
+  margin-left: 10px;
 }
 
 .section-header::after {
@@ -77,6 +85,13 @@ header {
 
 .section-header.active::after {
   transform: rotate(90deg);
+}
+
+/* Hover effect */
+.section-header:hover {
+  background: rgba(0,0,0,0.95);
+  box-shadow: 0 0 15px rgba(255,215,0,0.7);
+  transform: scale(1.02);
 }
 
 /* Skills list */
@@ -122,6 +137,11 @@ footer {
     font-size: 18px;
     padding: 15px;
   }
+  .section-header .description {
+    display: block;
+    margin-left: 0;
+    margin-top: 5px;
+  }
   .skill-link {
     font-size: 15px;
     padding: 10px 12px;
@@ -145,28 +165,55 @@ if(localStorage.getItem('lolfundamentals_logged_in') !== 'true'){
 }
 
 const skillData = {
-  "Pre Game": ["Champion Select","Mouse Accuracy","Summoner Spells","Matchups","Communication"],
-  "Early Game": ["Level 1","Farming","Trading","Wave Control","Back Timings","Build","Power Spikes","Pathing","Laning","Map Awareness","Ganking","Roaming"],
-  "Mid Game": ["Teamwork","Split Pushing","Sieging","Baiting","Lane Assignments","Vision"],
-  "Late Game": ["Damage","Target Selection","Tab Screen","Win Conditions"],
-  "Advanced": ["Animation Cancelling","Reading Players","Kiting","Positioning"],
-  "Out of Game": ["Setup","Mindset","Not Raging/Blaming","Reaction Time"]
+  "Pre Game": {
+    desc: "Skills to focus on before the game starts",
+    skills: ["Champion Select","Mouse Accuracy","Summoner Spells","Matchups","Communication"]
+  },
+  "Early Game": {
+    desc: "First 14 minutes of the game",
+    skills: ["Level 1","Farming","Trading","Wave Control","Back Timings","Build","Power Spikes","Pathing","Laning","Map Awareness","Ganking","Roaming"]
+  },
+  "Mid Game": {
+    desc: "Around 14-15 minutes of the game",
+    skills: ["Teamwork","Split Pushing","Sieging","Baiting","Lane Assignments","Vision"]
+  },
+  "Late Game": {
+    desc: "Past 25 minutes",
+    skills: ["Damage","Target Selection","Tab Screen","Win Conditions"]
+  },
+  "Advanced": {
+    desc: "High level skills",
+    skills: ["Animation Cancelling","Reading Players","Kiting","Positioning"]
+  },
+  "Out of Game": {
+    desc: "Skills to focus on when not playing",
+    skills: ["Setup","Mindset","Not Raging/Blaming","Reaction Time","Meta"]
+  }
 };
 
 const container = document.getElementById('sections');
 
-Object.entries(skillData).forEach(([section, skills]) => {
+Object.entries(skillData).forEach(([section, data]) => {
   const wrapper = document.createElement('div');
   wrapper.className = 'section';
 
   const header = document.createElement('div');
   header.className = 'section-header';
-  header.textContent = section;
+
+  const title = document.createElement('span');
+  title.textContent = section;
+
+  const desc = document.createElement('span');
+  desc.className = 'description';
+  desc.textContent = data.desc;
+
+  header.appendChild(title);
+  header.appendChild(desc);
 
   const list = document.createElement('div');
   list.className = 'skills-list';
 
-  skills.forEach(skill => {
+  data.skills.forEach(skill => {
     const a = document.createElement('a');
     a.className = 'skill-link';
     a.textContent = skill;
@@ -193,6 +240,8 @@ Object.entries(skillData).forEach(([section, skills]) => {
 
 </body>
 </html>
+
+
 
 
 
