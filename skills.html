@@ -46,25 +46,26 @@ header {
   box-shadow: 0 0 15px rgba(255,215,0,0.8);
 }
 
-/* Dropdown style */
+/* Phase container */
 .phase-container {
   width: 90%;
-  max-width: 600px;
-  margin: 20px auto;
+  max-width: 700px;
+  margin: 30px auto 60px;
   text-align: left;
 }
 
+/* Phase buttons */
 .phase-btn {
   width: 100%;
   background: rgba(201,170,113,0.85);
   border: none;
-  padding: 15px 20px;
+  padding: 15px 25px;
   font-size: 18px;
   font-weight: bold;
   color: #000;
   border-radius: 12px;
   cursor: pointer;
-  margin-bottom: 10px;
+  margin-bottom: 5px;
   transition: 0.3s;
 }
 .phase-btn:hover {
@@ -73,14 +74,19 @@ header {
   transform: translateY(-2px);
 }
 
+/* Skills container */
 .skills-container {
   display: none; /* hidden by default */
+  display: flex;
   flex-wrap: wrap;
-  gap: 15px;
-  margin-top: 10px;
-  padding-left: 20px;
+  gap: 12px;
+  padding: 10px 20px 20px 20px;
+  margin-bottom: 15px;
+  border-left: 2px solid #c9aa71; /* indentation line */
+  border-radius: 0 8px 8px 0;
 }
 
+/* Skill cards */
 .skill-card {
   display: inline-block;
   background: rgba(13,17,23,0.85);
@@ -109,6 +115,12 @@ footer {
   margin-top: 20px;
 }
 
+/* Responsive tweaks */
+@media(max-width:600px){
+  .phase-container { width: 95%; }
+  .phase-btn { font-size: 16px; padding: 12px 18px; }
+  .skills-container { gap: 10px; padding-left: 15px; }
+}
 </style>
 </head>
 
@@ -151,7 +163,6 @@ for (const [phase, skills] of Object.entries(skillCategories)) {
   });
 
   btn.addEventListener('click', () => {
-    // Toggle display
     skillsDiv.style.display = skillsDiv.style.display === 'flex' ? 'none' : 'flex';
   });
 
@@ -161,6 +172,7 @@ for (const [phase, skills] of Object.entries(skillCategories)) {
 </script>
 </body>
 </html>
+
 
 
 
