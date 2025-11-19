@@ -35,12 +35,12 @@ body::before {
 
 header {
   background: rgba(13,17,23,0.9);
-  border-bottom: 2px solid #c9aa71;
+  border-bottom: 2px solid #FFD700;
   padding: 20px 10px;
   font-weight: bold;
   font-size: 26px;
   text-transform: uppercase;
-  color: #c9aa71;
+  color: #FFD700;
   letter-spacing: 1px;
 }
 
@@ -48,17 +48,17 @@ header {
   display: inline-block;
   margin: 20px auto 10px;
   padding: 10px 20px;
-  background: linear-gradient(135deg, #c9aa71, #e0c77b);
+  background: linear-gradient(135deg, #FFD700, #e0c77b);
   color: #000;
   text-decoration: none;
   border-radius: 8px;
   font-weight: bold;
   transition: all 0.3s;
-  box-shadow: 0 0 10px rgba(201,170,113,0.5);
+  box-shadow: 0 0 10px rgba(255,215,0,0.5);
 }
 .back-button::before { content: "← "; }
 .back-button:hover {
-  background: linear-gradient(135deg, #e6c97f, #f0d88b);
+  background: linear-gradient(135deg, #ffe066, #f0d88b);
   box-shadow: 0 0 15px rgba(255,215,0,0.8);
 }
 
@@ -75,11 +75,9 @@ header {
   line-height: 1.6;
   position: relative;
 }
-
-.content-container h2,
-.content-container h3 {
-  color: #c9aa71; /* GOLD HEADERS */
-  margin-top: 20px;
+.content-container h2, .content-container h3 {
+  color: #FFD700;
+  margin-top: 0;
 }
 
 footer {
@@ -104,9 +102,6 @@ footer {
   <h2>Build</h2>
   <p>The build is a core part of every game. It defines how your champion scales throughout early, mid, and late phases. Selecting the right items allows you to maximize your power spikes, adapt to the enemy team, and optimize your role in team fights.</p>
   
-  <h3>Runes</h3>
-  <p>Select your runes to complement your playstyle and champion. Consider key keystones, secondary paths, and adaptive stats to optimize performance in your lane and team fights.</p>
-
   <h3>Starting Items</h3>
   <p>Focus on items that help you sustain and trade in lane. Prioritize health, mana, or damage based on your champion and matchup.</p>
   
@@ -118,11 +113,17 @@ footer {
   
   <h3>Final/Endgame Items</h3>
   <p>Finish your build with items that maximize your damage output, survivability, or utility to impact late game team fights.</p>
+
+  <h3>Runes</h3>
+  <p>Runes provide additional stats and effects that enhance your champion’s performance in lane and team fights. Choose runes based on your playstyle, matchup, and overall strategy.</p>
+  <ul>
+    <li><strong>Primary Path:</strong> Keystone + 3 additional runes that maximize your champion’s main strengths.</li>
+    <li><strong>Secondary Path:</strong> Select minor runes that complement your build or cover weaknesses.</li>
+    <li><strong>Shard Stats:</strong> Choose adaptive, armor, or magic resist shards based on matchup needs.</li>
+  </ul>
 </div>
 
 <footer>© 2025 LoL Fundamentals · All rights reserved</footer>
 
 </body>
 </html>
-
-
