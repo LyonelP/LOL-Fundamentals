@@ -12,7 +12,14 @@ body {
   background: url('https://64.media.tumblr.com/594ac290bec6d5e9ad98b5f53404f00b/245c4c3ee469f81d-e4/s1280x1920/1cda4284320eb2031758a9859dfe14ff8bbc50ba.jpg') no-repeat center center fixed;
   background-size: cover;
   display: flex;
-  height: 100vh;
+  min-height: 100vh;
+  flex-direction: column;
+}
+
+/* Main container for sidebar + content */
+.main-wrapper {
+  display: flex;
+  flex: 1;
 }
 
 /* Sidebar */
@@ -24,6 +31,7 @@ body {
   display: flex;
   flex-direction: column;
   align-items: stretch;
+  flex-shrink: 0;
 }
 
 .sidebar a {
@@ -46,11 +54,22 @@ body {
   flex: 1;
   padding: 30px;
   overflow-y: auto;
+  display: flex;
+  flex-direction: column;
 }
 
 .main-content h2 {
   color: #c9aa71;
   margin-bottom: 10px;
+}
+
+.section-desc {
+  color: #fff;
+  background: rgba(0,0,0,0.7);
+  padding: 10px 15px;
+  border-left: 4px solid #c9aa71;
+  border-radius: 6px;
+  margin-bottom: 15px;
 }
 
 .skill-list {
@@ -69,18 +88,23 @@ body {
   transition: transform 0.25s, box-shadow 0.3s;
 }
 
+.skill-list li a {
+  text-decoration: none;
+  color: #fff;
+  display: block;
+}
+
+.skill-list li a:hover {
+  color: #c9aa71;
+}
+
 .skill-list li:hover {
   background: rgba(0,0,0,0.95);
   box-shadow: 0 0 15px rgba(255,215,0,0.7);
   transform: scale(1.02);
 }
 
-/* Header */
-.header {
-  display: none;
-}
-
-/* Back button (if needed) */
+/* Back button */
 .back-button {
   display: inline-block;
   margin-bottom: 20px;
@@ -102,14 +126,16 @@ body {
 /* Footer */
 footer {
   text-align: center;
-  padding: 20px;
+  padding: 15px;
   font-size: 14px;
   color: #bbb;
+  border-top: 2px solid rgba(201,170,113,0.5);
+  background: rgba(13,17,23,0.9);
 }
 
 /* Mobile adjustments */
 @media(max-width: 700px){
-  body {
+  .main-wrapper {
     flex-direction: column;
   }
   .sidebar {
@@ -136,11 +162,13 @@ footer {
 </head>
 <body>
 
-<div class="sidebar" id="sidebar"></div>
+<div class="main-wrapper">
+  <div class="sidebar" id="sidebar"></div>
 
-<div class="main-content">
-  <a href="membershub.html" class="back-button">Back to Members Hub</a>
-  <div id="skills-container"></div>
+  <div class="main-content">
+    <a href="membershub.html" class="back-button">Back to Members Hub</a>
+    <div id="skills-container"></div>
+  </div>
 </div>
 
 <footer>© 2025 LoL Fundamentals · All rights reserved</footer>
@@ -161,21 +189,18 @@ const skillData = {
   "Out of Game": { desc: "Skills to focus on when not playing", skills: ["Setup","Mindset","Not Raging/Blaming","Reaction Time","Meta"] }
 };
 
-// Build sidebar and content
 const sidebar = document.getElementById('sidebar');
 const container = document.getElementById('skills-container');
 
 function loadSection(sectionName){
   const data = skillData[sectionName];
-  container.innerHTML = `<h2>${sectionName}</h2><p style="color:#f0d88b;">${data.desc}</p>`;
-  const ul = document.createElement('ul');
-  ul.className = 'skill-list';
-  data.skills.forEach(skill => {
-    const li = document.createElement('li');
-    li.textContent = skill;
-    ul.appendChild(li);
-  });
-  container.appendChild(ul);
+  container.innerHTML = `
+    <h2>${sectionName}</h2>
+    <div class="section-desc">${data.desc}</div>
+    <ul class="skill-list">
+      ${data.skills.map(skill => `<li><a href="${skill.toLowerCase().replace(/[^a-z0-9]/g, '')}.html">${skill}</a></li>`).join('')}
+    </ul>
+  `;
 }
 
 // Sidebar links
@@ -199,6 +224,8 @@ loadSection(Object.keys(skillData)[0]);
 
 </body>
 </html>
+
+
 
 
 
