@@ -12,24 +12,25 @@ body {
   background: url('https://64.media.tumblr.com/594ac290bec6d5e9ad98b5f53404f00b/245c4c3ee469f81d-e4/s1280x1920/1cda4284320eb2031758a9859dfe14ff8bbc50ba.jpg') no-repeat center center fixed;
   background-size: cover;
   display: flex;
+  flex-direction: column;
   min-height: 100vh;
   position: relative;
 }
 
-/* Sidebar at top-left corner only */
+/* Sidebar */
 .sidebar {
   position: fixed;
   top: 0;
   left: 0;
   width: 250px;
-  height: 100%;
+  height: 100vh;
   background: rgba(13,17,23,0.95);
   border-right: 2px solid #c9aa71;
   display: flex;
   flex-direction: column;
-  justify-content: flex-start; /* start from top */
+  justify-content: flex-start; /* moved from center to top */
   align-items: stretch;
-  padding-top: 20px; /* moved down from top edge a bit */
+  padding-top: 20px; /* small space from top */
   box-sizing: border-box;
   z-index: 10;
 }
@@ -50,15 +51,29 @@ body {
   color: #c9aa71;
 }
 
-/* Main content stays exactly the same */
+/* Main content */
 .main-content {
   margin-left: 250px;
   padding: 20px 40px;
+  flex: 1;
   display: flex;
   flex-direction: column;
   align-items: center;
   overflow-x: hidden;
   position: relative;
+}
+
+/* Gradient overlay on main content to soften empty space */
+.main-content::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 250px;
+  width: calc(100% - 250px);
+  height: 100%;
+  background: linear-gradient(to right, rgba(0,0,0,0), rgba(0,0,0,0.2));
+  pointer-events: none;
+  z-index: 1;
 }
 
 .skills-center {
@@ -72,7 +87,7 @@ body {
 
 .main-content h2 {
   color: #c9aa71;
-  margin: 10px 0 20px; /* slightly lower than Back button */
+  margin: 10px 0 20px;
   text-align: center;
 }
 
