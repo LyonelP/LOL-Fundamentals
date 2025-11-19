@@ -87,12 +87,12 @@ header {
 
 /* Main content */
 .main-content {
-  padding: 100px 40px 50px 40px;
+  padding: 100px 20px 50px 20px; /* reduced padding for wider cards */
   flex: 1;
   display: flex;
   flex-direction: column;
   align-items: center;
-  max-width: 1000px;
+  max-width: 1200px; /* wider main content */
   margin: 0 auto;
   position: relative;
 }
@@ -100,7 +100,7 @@ header {
 /* Back button */
 .back-button {
   display: inline-block;
-  margin-bottom: 20px;
+  margin-bottom: 10px; /* smaller gap before Pre Game header */
   padding: 10px 20px;
   background: linear-gradient(135deg, #c9aa71, #e0c77b);
   color: #000;
@@ -126,7 +126,7 @@ header {
 
 .skills-center h2 {
   color: #c9aa71;
-  margin: 30px 0 20px 0; /* more top margin to separate from back button */
+  margin: 10px 0 15px 0; /* closer to back button */
   text-align: center;
 }
 
@@ -145,7 +145,7 @@ header {
   margin-bottom: 15px;
   font-size: 18px;
   width: 100%;
-  max-width: 100%; /* full width */
+  max-width: 1100px; /* much wider cards */
   box-shadow: 0 4px 12px rgba(0,0,0,0.5);
   transition: transform 0.25s, box-shadow 0.3s;
 }
@@ -196,15 +196,17 @@ footer {
     border-bottom: 4px solid #c9aa71;
   }
   .main-content {
-    padding: 160px 20px 30px 20px; /* extra top padding for mobile */
+    padding: 140px 10px 20px 10px; /* adjust top padding for mobile */
     max-width: 100%;
+  }
+  .skills-center h2 {
+    margin-top: 10px; /* reduce gap on mobile */
+    font-size: 20px;
   }
   .skill-list li {
     font-size: 16px;
-    padding: 14px 16px;
-  }
-  .skills-center h2 {
-    margin-top: 20px;
+    padding: 14px;
+    max-width: 100%;
   }
 }
 </style>
@@ -271,6 +273,5 @@ loadSection(Object.keys(skillData)[0]);
 
 </body>
 </html>
-
 
 
