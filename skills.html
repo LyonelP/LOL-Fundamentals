@@ -34,7 +34,7 @@ body::before {
   z-index: -1;
 }
 
-/* Header (exactly as you sent) */
+/* Header */
 header {
   background: rgba(13,17,23,0.9);
   border-bottom: 2px solid #c9aa71;
@@ -56,7 +56,7 @@ header {
   white-space: normal;
 }
 
-/* Sidebar / Taskbar */
+/* Sidebar */
 .sidebar {
   position: fixed;
   top: 62px;
@@ -182,18 +182,17 @@ footer {
 
 /* Mobile adjustments */
 @media(max-width: 700px){
-  /* Keep header exactly as sent */
+  /* Header smaller */
   header {
-    font-size: 26px;
-    padding: 20px;
+    font-size: 18px;
+    padding: 10px 15px;
     line-height: 1.2;
-    text-align: center;
   }
 
   /* Taskbar flush below header */
   .sidebar {
     position: fixed;
-    top: 62px; /* directly below header */
+    top: 50px;       /* height of header */
     left: 0;
     width: 100%;
     height: 50px;
@@ -204,7 +203,6 @@ footer {
     display: flex;
     z-index: 99;
     border-bottom: 2px solid #c9aa71;
-    padding: 0;
   }
 
   .sidebar a {
@@ -215,10 +213,7 @@ footer {
     padding: 12px 15px;
     white-space: nowrap;
     box-sizing: border-box;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    height: 100%;
+    display: block;
   }
 
   .sidebar a.active,
@@ -227,9 +222,9 @@ footer {
     color: #c9aa71;
   }
 
-  /* Main content spacing */
+  /* Main content below header + taskbar */
   .main-content {
-    padding: 115px 10px 20px 10px; /* header + taskbar height */
+    padding: 110px 10px 20px 10px; /* header + taskbar height + spacing */
     max-width: 100%;
   }
 
@@ -309,6 +304,4 @@ loadSection(Object.keys(skillData)[0]);
 
 </body>
 </html>
-
-
 
