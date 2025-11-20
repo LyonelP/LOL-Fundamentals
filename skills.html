@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8" />
+<meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>LoL Fundamentals – Skills Hub</title>
 
@@ -56,7 +56,7 @@ header {
 
 /* Back button */
 .back-button {
-  display: block;
+  display: inline-block;
   margin: 100px auto 20px;
   padding: 10px 20px;
   background: linear-gradient(135deg, #c9aa71, #e0c77b);
@@ -65,10 +65,8 @@ header {
   border-radius: 8px;
   font-weight: bold;
   font-size: 16px;
-  text-align: center;
+  transition: all 0.3s;
   box-shadow: 0 0 10px rgba(201,170,113,0.5);
-  width: 180px;
-  max-width: 180px;
 }
 .back-button::before { content: "← "; }
 .back-button:hover {
@@ -91,13 +89,10 @@ header {
   appearance: none;
   -webkit-appearance: none;
   -moz-appearance: none;
-  display: block;
-  margin: 0 auto;
-  width: 180px;
-  max-width: 90%;
+  width: 220px;
   background-image: url("data:image/svg+xml;utf8,<svg fill='%23c9aa71' height='12' viewBox='0 0 24 24' width='12' xmlns='http://www.w3.org/2000/svg'><path d='M7 10l5 5 5-5z'/></svg>");
   background-repeat: no-repeat;
-  background-position: right 12px center;
+  background-position: right 10px center;
   background-size: 12px;
 }
 
@@ -113,8 +108,12 @@ header {
   margin-bottom: 30px;
 }
 
-#intro-box p:first-child {
-  color: #c9aa71; /* only first line (Welcome...) is gold */
+/* Gold Welcome text only */
+#intro-box strong:first-child {
+  color: #c9aa71;
+  display: block;
+  font-size: 22px;
+  margin-bottom: 10px;
 }
 
 /* Skills section */
@@ -173,10 +172,9 @@ footer {
 /* Mobile adjustments */
 @media(max-width: 700px){
   header { font-size: 18px; padding: 10px 15px; }
-  .back-button { width: 180px; max-width: 180px; font-size: 16px; }
-  #section-select { width: 180px; max-width: 90%; font-size: 16px; padding: 10px 15px; }
+  #section-select { width: 90%; font-size: 14px; padding: 8px 10px; }
   .skill-list li { width: 85vw; font-size: 16px; padding: 14px; }
-  #intro-box { width: 85vw; font-size: 16px; }
+  #intro-box { width: 85vw; font-size: 16px; padding: 15px; }
 }
 </style>
 </head>
@@ -220,11 +218,6 @@ footer {
 <footer>© 2025 LoL Fundamentals · All rights reserved</footer>
 
 <script>
-// Login requirement
-if(localStorage.getItem('lolfundamentals_logged_in') !== 'true'){
-  window.location.href = 'login.html';
-}
-
 // Skill data
 const skillData = {
   "Pre Game": ["Champion Select","Mouse Accuracy","Summoner Spells","Matchups","Communication","Build"],
@@ -262,5 +255,7 @@ skillList.style.display = 'none';
 
 </body>
 </html>
+
+
 
 
