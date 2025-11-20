@@ -91,18 +91,34 @@ header {
   max-width: 400px;
   text-align: center;
   margin-bottom: 20px;
+  position: relative;
 }
 
 select {
   width: 100%;
-  padding: 12px;
+  padding: 12px 20px 12px 12px; /* space for arrow */
   font-size: 18px;
   border-radius: 8px;
   border: 2px solid #c9aa71;
   background: rgba(13,17,23,0.9);
-  color: #fff;
+  color: #c9aa71;
   appearance: none;
+  -webkit-appearance: none;
+  -moz-appearance: none;
   cursor: pointer;
+  position: relative;
+}
+
+/* Custom arrow */
+#dropdown-container::after {
+  content: "▼";
+  color: #c9aa71;
+  position: absolute;
+  right: 12px;
+  top: 50%;
+  transform: translateY(-50%);
+  pointer-events: none;
+  font-size: 16px;
 }
 
 /* Skills section */
@@ -174,7 +190,7 @@ footer {
 
   #dropdown-container select {
     font-size: 16px;
-    padding: 10px;
+    padding: 10px 12px;
   }
 
   .skill-list li {
@@ -192,7 +208,7 @@ footer {
 <div class="main-content">
   <a href="membershub.html" class="back-button">Back to Members Hub</a>
 
-  <!-- Dropdown menu replaces sidebar -->
+  <!-- Dropdown menu replaces sidebar links -->
   <div id="dropdown-container">
     <select id="section-dropdown">
       <option value="Pre Game">Pre Game</option>
@@ -248,5 +264,7 @@ dropdown.addEventListener('change', () => {
 
 </body>
 </html>
+
+
 
 
