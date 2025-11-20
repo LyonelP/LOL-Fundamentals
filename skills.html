@@ -93,7 +93,7 @@ header {
   display: flex;
   flex-direction: column;
   align-items: center;
-  max-width: 1400px;
+  max-width: 2000px; /* allow cards to be very wide */
   margin: 0 auto;
   position: relative;
 }
@@ -146,7 +146,7 @@ header {
   margin-bottom: 20px;
   font-size: 18px;
   width: 100%;
-  max-width: 1200px; /* very wide */
+  max-width: 2000px; /* extremely wide cards */
   box-shadow: 0 4px 12px rgba(0,0,0,0.5);
   transition: transform 0.25s, box-shadow 0.3s;
 }
@@ -178,14 +178,15 @@ footer {
 @media(max-width: 700px){
   .sidebar {
     position: relative;
+    top: 0;
     width: 100%;
     height: auto;
     flex-direction: row;
     overflow-x: auto;
     border-right: none;
     border-bottom: 2px solid #c9aa71;
-    top: 62px;
     padding-top: 10px;
+    margin-top: 62px; /* below header */
   }
   .sidebar a {
     flex: 1;
@@ -200,7 +201,7 @@ footer {
     border-bottom: 4px solid #c9aa71;
   }
   .main-content {
-    padding: 140px 10px 20px 10px;
+    padding: 20px 10px 20px 10px;
     max-width: 100%;
   }
   .skills-center h2 {
@@ -277,4 +278,6 @@ loadSection(Object.keys(skillData)[0]);
 
 </body>
 </html>
+
+
 
