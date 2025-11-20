@@ -227,10 +227,13 @@ const sections = {
 <div class="build-section">
   <h3>Core Items</h3>
   <ul style="list-style:none; padding-left:0;">
+
+    <!-- Stormsurge added -->
     <li style="margin-bottom:1em;">
       <img src="https://ddragon.leagueoflegends.com/cdn/13.23.1/img/item/4646.png" width="32" style="vertical-align:middle; margin-right:8px;" alt="Stormsurge">
       <strong>Stormsurge:</strong> Diana’s best early damage spike and the most efficient first item for her new kit. The movement burst feels perfect for sticking to targets and guarantees your Q → R setups.
     </li>
+
     <li style="margin-bottom:1em;">
       <img src="https://ddragon.leagueoflegends.com/cdn/13.23.1/img/item/3157.png" width="32" style="vertical-align:middle; margin-right:8px;" alt="Zhonya's Hourglass">
       <strong>Hourglass:</strong> This is Diana's most core item now after her rework. I'll always buy this item second or even first against some AD Mid/JG combos.
@@ -243,8 +246,10 @@ const sections = {
       <img src="https://ddragon.leagueoflegends.com/cdn/13.23.1/img/item/3089.png" width="32" style="vertical-align:middle; margin-right:8px;" alt="Rabadon's Deathcap">
       <strong>Death Cap:</strong> Diana’s ratios have been heavily nerfed but still a good late game option after Hourglass and Banshee’s. If I have 2300 and a large rod already purchased, I might opt for it before Banshee’s since the next buy can be a Negatron Cloak. When deciding between Deathcap and Cryptbloom or Void Staff, I’ll try to buy Deathcap if I have enough gold for the large rod buys and there are still carries on the enemy team without MR.
     </li>
+
+    <!-- Correct Cryptbloom icon -->
     <li style="margin-bottom:1em;">
-      <img src="https://ddragon.leagueoflegends.com/cdn/13.23.1/img/item/3137.png" width="32" style="vertical-align:middle; margin-right:8px;" alt="Cryptbloom">
+      <img src="https://ddragon.leagueoflegends.com/cdn/13.23.1/img/item/4645.png" width="32" style="vertical-align:middle; margin-right:8px;" alt="Cryptbloom">
       <strong>Cryptbloom:</strong> I think Cryptbloom is slightly superior to Void Staff unless everyone on the enemy team has purchased a magic resistance item. Having additional haste and a heal that can swing a team fight makes a much larger difference.
     </li>
   </ul>
@@ -264,34 +269,26 @@ const sections = {
   </ul>
 </div>
 
+<!-- Example Full Build (tight 3x2) -->
 <div class="build-section">
   <h3>Example Standard Full Build</h3>
-  <div style="display: grid; grid-template-columns: repeat(3, auto); grid-gap: 0.5em; align-items: center;">
-    <div style="text-align: center;">
-      <img src="https://ddragon.leagueoflegends.com/cdn/13.23.1/img/item/3020.png" width="48" alt="Sorcerer's Shoes"><br>
-      <strong>Sorcerer’s Shoes</strong>
-    </div>
-    <div style="text-align: center;">
-      <img src="https://ddragon.leagueoflegends.com/cdn/13.23.1/img/item/4646.png" width="48" alt="Stormsurge"><br>
-      <strong>Stormsurge</strong>
-    </div>
-    <div style="text-align: center;">
-      <img src="https://ddragon.leagueoflegends.com/cdn/13.23.1/img/item/3157.png" width="48" alt="Zhonya's Hourglass"><br>
-      <strong>Hourglass</strong>
-    </div>
-    <div style="text-align: center;">
-      <img src="https://ddragon.leagueoflegends.com/cdn/13.23.1/img/item/3102.png" width="48" alt="Banshee's Veil"><br>
-      <strong>Banshee’s Veil</strong>
-    </div>
-    <div style="text-align: center;">
-      <img src="https://ddragon.leagueoflegends.com/cdn/13.23.1/img/item/3089.png" width="48" alt="Rabadon's Deathcap"><br>
-      <strong>Deathcap</strong>
-    </div>
-    <div style="text-align: center;">
-      <img src="https://ddragon.leagueoflegends.com/cdn/13.23.1/img/item/3137.png" width="48" alt="Cryptbloom"><br>
-      <strong>Cryptbloom</strong>
-    </div>
+
+  <div style="
+    display: grid;
+    grid-template-columns: repeat(3, 36px);
+    gap: 6px 14px;
+    justify-content: start;
+    align-items: center;
+  ">
+    <img src="https://ddragon.leagueoflegends.com/cdn/13.23.1/img/item/3020.png" width="36" alt="Sorcerer's Shoes">
+    <img src="https://ddragon.leagueoflegends.com/cdn/13.23.1/img/item/4646.png" width="36" alt="Stormsurge">
+    <img src="https://ddragon.leagueoflegends.com/cdn/13.23.1/img/item/3157.png" width="36" alt="Zhonya's Hourglass">
+
+    <img src="https://ddragon.leagueoflegends.com/cdn/13.23.1/img/item/3102.png" width="36" alt="Banshee's Veil">
+    <img src="https://ddragon.leagueoflegends.com/cdn/13.23.1/img/item/3089.png" width="36" alt="Rabadon's Deathcap">
+    <img src="https://ddragon.leagueoflegends.com/cdn/13.23.1/img/item/4645.png" width="36" alt="Cryptbloom">
   </div>
+
 </div>
 
   `,
@@ -545,6 +542,7 @@ sectionSelect.addEventListener('change', () => {
 
 </body>
 </html>
+
 
 
 
