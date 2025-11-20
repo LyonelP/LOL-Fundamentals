@@ -1,9 +1,15 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
+<meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>LoL Fundamentals – Skills Hub</title>
+
+<script>
+  if (localStorage.getItem('lolfundamentals_logged_in') !== 'true') {
+    window.location.replace('login.html');
+  }
+</script>
 
 <style>
 body {
@@ -16,7 +22,6 @@ body {
   min-height: 100vh;
   display: flex;
   flex-direction: column;
-  align-items: center;
 }
 
 /* Overlay */
@@ -40,17 +45,19 @@ header {
   color: #c9aa71;
   letter-spacing: 1px;
   text-align: center;
-  width: 100%;
   position: fixed;
   top: 0;
   left: 0;
+  width: 100%;
   z-index: 100;
+  line-height: 1.2;
+  box-sizing: border-box;
 }
 
 /* Back button */
 .back-button {
   display: block;
-  margin: 100px auto 20px; /* space from header */
+  margin: 100px auto 20px;
   padding: 10px 20px;
   background: linear-gradient(135deg, #c9aa71, #e0c77b);
   color: #000;
@@ -60,8 +67,8 @@ header {
   font-size: 16px;
   text-align: center;
   box-shadow: 0 0 10px rgba(201,170,113,0.5);
-  width: 220px;
-  max-width: 90%;
+  width: 180px;
+  max-width: 180px;
 }
 .back-button::before { content: "← "; }
 .back-button:hover {
@@ -71,7 +78,7 @@ header {
 
 /* Dropdown */
 #section-select-container {
-  margin-bottom: 30px;
+  margin: 20px auto;
 }
 #section-select {
   padding: 10px 15px;
@@ -84,10 +91,10 @@ header {
   appearance: none;
   -webkit-appearance: none;
   -moz-appearance: none;
-  width: 220px;
-  max-width: 90%;
   display: block;
   margin: 0 auto;
+  width: 180px;
+  max-width: 90%;
   background-image: url("data:image/svg+xml;utf8,<svg fill='%23c9aa71' height='12' viewBox='0 0 24 24' width='12' xmlns='http://www.w3.org/2000/svg'><path d='M7 10l5 5 5-5z'/></svg>");
   background-repeat: no-repeat;
   background-position: right 12px center;
@@ -104,14 +111,15 @@ header {
   text-align: left;
   font-size: 18px;
   margin-bottom: 30px;
-  color: #fff; /* all text white */
 }
-#intro-box .gold {
-  color: #c9aa71; /* only Welcome is gold */
+
+#intro-box p:first-child {
+  color: #c9aa71; /* only first line (Welcome...) is gold */
 }
 
 /* Skills section */
 #skills-container {
+  margin-top: 20px;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -138,6 +146,7 @@ header {
   box-shadow: 0 4px 12px rgba(0,0,0,0.5);
   transition: transform 0.25s, box-shadow 0.3s;
 }
+
 .skill-list li a {
   text-decoration: none;
   color: #fff;
@@ -164,10 +173,10 @@ footer {
 /* Mobile adjustments */
 @media(max-width: 700px){
   header { font-size: 18px; padding: 10px 15px; }
-  .back-button { width: 90%; font-size: 16px; }
-  #section-select { width: 90%; font-size: 16px; padding: 10px 15px; }
-  #intro-box { width: 90%; font-size: 16px; }
+  .back-button { width: 180px; max-width: 180px; font-size: 16px; }
+  #section-select { width: 180px; max-width: 90%; font-size: 16px; padding: 10px 15px; }
   .skill-list li { width: 85vw; font-size: 16px; padding: 14px; }
+  #intro-box { width: 85vw; font-size: 16px; }
 }
 </style>
 </head>
@@ -190,8 +199,9 @@ footer {
 </div>
 
 <div id="skills-container">
+  <!-- Intro box shown initially -->
   <div id="intro-box">
-    <p><span class="gold"><strong>Welcome to the Skills Hub!</strong></span></p>
+    <p><strong>Welcome to the Skills Hub!</strong></p>
     <p>Here’s what each section covers:</p>
     <ul>
       <li><strong>Pre Game:</strong> Champion select, summoner spells, communication, and build planning.</li>
@@ -210,10 +220,12 @@ footer {
 <footer>© 2025 LoL Fundamentals · All rights reserved</footer>
 
 <script>
+// Login requirement
 if(localStorage.getItem('lolfundamentals_logged_in') !== 'true'){
   window.location.href = 'login.html';
 }
 
+// Skill data
 const skillData = {
   "Pre Game": ["Champion Select","Mouse Accuracy","Summoner Spells","Matchups","Communication","Build"],
   "Early Game": ["Level 1","Farming","Trading","Wave Control","Back Timings","Build","Power Spikes","Pathing","Laning","Map Awareness","Ganking","Roaming"],
@@ -241,11 +253,14 @@ sectionSelect.addEventListener('change', () => {
     ).join('');
   }
 });
+
+// Preload intro
+sectionSelect.value = "Select a section";
+introBox.style.display = 'block';
+skillList.style.display = 'none';
 </script>
 
 </body>
 </html>
-
-
 
 
