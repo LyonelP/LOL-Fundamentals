@@ -93,7 +93,7 @@ header {
   display: flex;
   flex-direction: column;
   align-items: center;
-  max-width: none; /* allow cards to grow */
+  max-width: none;
   margin: 0 auto;
   position: relative;
 }
@@ -186,8 +186,9 @@ footer {
     z-index: 50;
   }
 
+  /* Sidebar fully below header */
   .sidebar {
-    position: relative;
+    position: relative; 
     top: 0;
     width: 100%;
     height: auto;
@@ -196,7 +197,7 @@ footer {
     border-right: none;
     border-bottom: 2px solid #c9aa71;
     padding: 10px 0;
-    margin-top: 62px; /* below header */
+    margin-top: 82px; /* enough space for fixed header */
     box-sizing: border-box;
   }
 
@@ -297,3 +298,4 @@ loadSection(Object.keys(skillData)[0]);
 
 </body>
 </html>
+
