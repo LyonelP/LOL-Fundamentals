@@ -16,11 +16,11 @@ body {
   margin: 0;
   font-family: 'Beaufort for LOL', Arial, Helvetica, sans-serif;
   color: #fff;
-  background: url('https://64.media.tumblr.com/594ac290bec6d5e9ad98b5f53404f00b/245c4c3ee469f81d-e4/s1280x1920/1cda4284320eb2031758bbc50ba.jpg') no-repeat center center fixed;
-  background-size: cover;
   min-height: 100vh;
   display: flex;
   flex-direction: column;
+  background: url('https://64.media.tumblr.com/594ac290bec6d5e9ad98b5f53404f00b/245c4c3ee469f81d-e4/s1280x1920/1cda4284320eb2031758bbc50ba.jpg') no-repeat center center fixed;
+  background-size: cover;
 }
 
 /* Overlay */
@@ -50,51 +50,21 @@ header {
   width: 100%;
   z-index: 100;
   line-height: 1.2;
-  box-sizing: border-box;
-  overflow-wrap: break-word;
-  white-space: normal;
-}
-
-/* Dropdown menu */
-#dropdown-container {
-  margin-top: 82px; /* header + spacing */
-  width: 90%;
-  max-width: 600px;
-  text-align: center;
-  margin-left: auto;
-  margin-right: auto;
-  position: relative;
-  z-index: 90;
-}
-
-select {
-  width: 100%;
-  padding: 12px;
-  font-size: 18px;
-  border-radius: 8px;
-  border: 2px solid #c9aa71;
-  background: rgba(13,17,23,0.9);
-  color: #fff;
-  appearance: none;
-  cursor: pointer;
 }
 
 /* Main content */
 .main-content {
   padding: 20px;
-  flex: 1;
+  margin-top: 100px; /* space for header */
   display: flex;
   flex-direction: column;
   align-items: center;
-  max-width: none;
-  margin: 0 auto;
-  margin-top: 20px;
 }
 
 /* Back button */
 .back-button {
   display: inline-block;
-  margin-bottom: 10px;
+  margin-bottom: 20px;
   padding: 10px 20px;
   background: linear-gradient(135deg, #c9aa71, #e0c77b);
   color: #000;
@@ -108,6 +78,30 @@ select {
 .back-button:hover {
   background: linear-gradient(135deg, #e6c97f, #f0d88b);
   box-shadow: 0 0 15px rgba(255,215,0,0.8);
+}
+
+/* Dropdown menu */
+#dropdown-container {
+  width: 220px; /* same as Ekko */
+  margin-bottom: 20px;
+}
+
+select {
+  width: 100%;
+  padding: 8px 12px;
+  font-size: 16px;
+  border-radius: 6px;
+  border: 2px solid #c9aa71;
+  background: rgba(13,17,23,0.9);
+  color: #c9aa71;
+  cursor: pointer;
+  appearance: none;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  background-image: url("data:image/svg+xml;utf8,<svg fill='%23c9aa71' height='12' viewBox='0 0 24 24' width='12' xmlns='http://www.w3.org/2000/svg'><path d='M7 10l5 5 5-5z'/></svg>");
+  background-repeat: no-repeat;
+  background-position: right 10px center;
+  background-size: 12px;
 }
 
 /* Intro box */
@@ -191,7 +185,7 @@ footer {
   }
 
   #dropdown-container {
-    margin-top: 72px;
+    width: 90%;
   }
 
   .skill-list li {
@@ -211,19 +205,20 @@ footer {
 
 <header>LoL Fundamentals – Skills Hub</header>
 
-<div id="dropdown-container">
-  <select id="section-dropdown">
-    <option value="Pre Game">Pre Game</option>
-    <option value="Early Game">Early Game</option>
-    <option value="Mid Game">Mid Game</option>
-    <option value="Late Game">Late Game</option>
-    <option value="Advanced">Advanced</option>
-    <option value="Out of Game">Out of Game</option>
-  </select>
-</div>
-
 <div class="main-content">
   <a href="membershub.html" class="back-button">Back to Members Hub</a>
+
+  <div id="dropdown-container">
+    <select id="section-dropdown">
+      <option disabled selected>Select a section</option>
+      <option value="Pre Game">Pre Game</option>
+      <option value="Early Game">Early Game</option>
+      <option value="Mid Game">Mid Game</option>
+      <option value="Late Game">Late Game</option>
+      <option value="Advanced">Advanced</option>
+      <option value="Out of Game">Out of Game</option>
+    </select>
+  </div>
 
   <div id="intro-box">
     <p><strong>Welcome to the Skills Hub!</strong></p>
@@ -236,7 +231,7 @@ footer {
       <li><strong>Advanced:</strong> Animation cancelling, positioning, and high-level strategy.</li>
       <li><strong>Out of Game:</strong> Setup, mindset, and meta knowledge.</li>
     </ul>
-    <p>Select a section above to see the skill cards.</p>
+    <p>Select a section from the dropdown above to see the skill cards.</p>
   </div>
 
   <div id="skills-container" class="skills-center"></div>
@@ -269,7 +264,7 @@ function loadSection(sectionName){
   `;
 }
 
-// Load initial section
+// Dropdown change event
 dropdown.addEventListener('change', () => {
   loadSection(dropdown.value);
 });
@@ -277,3 +272,4 @@ dropdown.addEventListener('change', () => {
 
 </body>
 </html>
+
