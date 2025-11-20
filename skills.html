@@ -146,9 +146,9 @@ header {
   margin-bottom: 20px;
   font-size: 18px;
   width: 56vw;        /* 25% smaller than previous 75vw */
-  max-width: 1400px;  /* optional max limit */
+  max-width: 1400px;
   margin-left: auto;
-  margin-right: auto; /* center */
+  margin-right: auto;
   box-shadow: 0 4px 12px rgba(0,0,0,0.5);
   transition: transform 0.25s, box-shadow 0.3s;
 }
@@ -178,6 +178,14 @@ footer {
 
 /* Mobile adjustments */
 @media(max-width: 700px){
+  header {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    z-index: 50;
+  }
+
   .sidebar {
     position: relative;
     top: 0;
@@ -187,31 +195,39 @@ footer {
     overflow-x: auto;
     border-right: none;
     border-bottom: 2px solid #c9aa71;
-    padding-top: 10px;
+    padding: 10px 0;
     margin-top: 62px; /* below header */
+    box-sizing: border-box;
   }
+
   .sidebar a {
     flex: 1;
     text-align: center;
     border-left: none;
     border-bottom: 4px solid transparent;
     padding: 12px 10px;
-    margin: 0;
+    margin: 0 5px;
+    white-space: nowrap;
   }
+
   .sidebar a.active,
   .sidebar a:hover {
     border-bottom: 4px solid #c9aa71;
   }
+
   .main-content {
     padding: 20px 10px 20px 10px;
     max-width: 100%;
+    margin-top: 0;
   }
+
   .skills-center h2 {
     margin-top: 10px;
     font-size: 20px;
   }
+
   .skill-list li {
-    width: 85vw;   /* slightly smaller on mobile */
+    width: 85vw;   
     max-width: 100%;
     font-size: 16px;
     padding: 14px;
@@ -281,4 +297,3 @@ loadSection(Object.keys(skillData)[0]);
 
 </body>
 </html>
-
