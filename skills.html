@@ -89,7 +89,6 @@ header {
   -moz-appearance: none;
   width: 220px;
   max-width: 90%;
-  /* Single down arrow like Ekko hub */
   background-image: url("data:image/svg+xml;utf8,<svg fill='%23c9aa71' height='12' viewBox='0 0 24 24' width='12' xmlns='http://www.w3.org/2000/svg'><path d='M7 10l5 5 5-5z'/></svg>");
   background-repeat: no-repeat;
   background-position: right 12px center;
@@ -106,7 +105,11 @@ header {
   text-align: left;
   font-size: 18px;
   margin-bottom: 30px;
-  color: #c9aa71;
+  color: #fff; /* main text white */
+}
+
+#intro-box strong, #intro-box li strong {
+  color: #c9aa71; /* only titles in gold */
 }
 
 /* Skills section */
@@ -190,7 +193,6 @@ footer {
 </div>
 
 <div id="skills-container">
-  <!-- Intro box shown initially -->
   <div id="intro-box">
     <p><strong>Welcome to the Skills Hub!</strong></p>
     <p>Here’s what each section covers:</p>
@@ -211,12 +213,10 @@ footer {
 <footer>© 2025 LoL Fundamentals · All rights reserved</footer>
 
 <script>
-// Login requirement
 if(localStorage.getItem('lolfundamentals_logged_in') !== 'true'){
   window.location.href = 'login.html';
 }
 
-// Skill data
 const skillData = {
   "Pre Game": ["Champion Select","Mouse Accuracy","Summoner Spells","Matchups","Communication","Build"],
   "Early Game": ["Level 1","Farming","Trading","Wave Control","Back Timings","Build","Power Spikes","Pathing","Laning","Map Awareness","Ganking","Roaming"],
@@ -245,7 +245,6 @@ sectionSelect.addEventListener('change', () => {
   }
 });
 
-// Preload intro
 sectionSelect.value = "Select a section";
 introBox.style.display = 'block';
 skillList.style.display = 'none';
@@ -253,3 +252,5 @@ skillList.style.display = 'none';
 
 </body>
 </html>
+
+
