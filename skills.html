@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
+<meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>LoL Fundamentals – Skills Hub</title>
 
@@ -12,19 +12,15 @@
 </script>
 
 <style>
-html, body {
-  margin: 0;
-  padding: 0;
-  font-family: 'Beaufort for LOL', Arial, Helvetica, sans-serif;
-  height: 100%;
-  color: #fff;
-}
-
 body {
+  margin: 0;
+  font-family: 'Beaufort for LOL', Arial, Helvetica, sans-serif;
+  color: #fff;
   background: url('https://64.media.tumblr.com/594ac290bec6d5e9ad98b5f53404f00b/245c4c3ee469f81d-e4/s1280x1920/1cda4284320eb2031758bbc50ba.jpg') no-repeat center center fixed;
   background-size: cover;
-  overflow-x: hidden;
-  position: relative;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
 }
 
 /* Overlay */
@@ -34,16 +30,7 @@ body::before {
   top:0; left:0;
   width:100%; height:100%;
   background: rgba(10,15,20,0.25);
-  z-index: 0;
-}
-
-/* Container to keep content above overlay */
-.container {
-  position: relative;
-  z-index: 1;
-  display: flex;
-  flex-direction: column;
-  min-height: 100vh;
+  z-index: -1;
 }
 
 /* Header */
@@ -61,26 +48,61 @@ header {
   top: 0;
   left: 0;
   width: 100%;
-  z-index: 10;
+  z-index: 100;
   line-height: 1.2;
   box-sizing: border-box;
+  overflow-wrap: break-word;
+  white-space: normal;
+}
+
+/* Dropdown menu */
+#dropdown-container {
+  margin-top: 82px; /* header + spacing */
+  width: 90%;
+  max-width: 600px;
+  text-align: center;
+  margin-left: auto;
+  margin-right: auto;
+  position: relative;
+  z-index: 90;
+}
+
+select {
+  width: 100%;
+  padding: 12px;
+  font-size: 18px;
+  border-radius: 8px;
+  border: 2px solid #c9aa71;
+  background: rgba(13,17,23,0.9);
+  color: #fff;
+  appearance: none;
+  cursor: pointer;
+}
+
+/* Main content */
+.main-content {
+  padding: 20px;
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  max-width: none;
+  margin: 0 auto;
+  margin-top: 20px;
 }
 
 /* Back button */
 .back-button {
   display: inline-block;
-  margin: 100px auto 20px;
+  margin-bottom: 10px;
   padding: 10px 20px;
   background: linear-gradient(135deg, #c9aa71, #e0c77b);
   color: #000;
   text-decoration: none;
   border-radius: 8px;
   font-weight: bold;
-  font-size: 16px;
   transition: all 0.3s;
   box-shadow: 0 0 10px rgba(201,170,113,0.5);
-  position: relative;
-  z-index: 2;
 }
 .back-button::before { content: "← "; }
 .back-button:hover {
@@ -88,54 +110,34 @@ header {
   box-shadow: 0 0 15px rgba(255,215,0,0.8);
 }
 
-/* Dropdown */
-#section-select-container {
-  margin: 20px auto;
-  z-index: 2;
-  position: relative;
-}
-#section-select {
-  padding: 8px 12px;
-  font-size: 16px;
-  border-radius: 6px;
-  border: none;
-  background: #0f1722;
-  color: #c9aa71;
-  cursor: pointer;
-  appearance: none;
-  -webkit-appearance: none;
-  -moz-appearance: none;
-  width: 220px;
-  background-image: url("data:image/svg+xml;utf8,<svg fill='%23c9aa71' height='12' viewBox='0 0 24 24' width='12' xmlns='http://www.w3.org/2000/svg'><path d='M7 10l5 5 5-5z'/></svg>");
-  background-repeat: no-repeat;
-  background-position: right 10px center;
-  background-size: 12px;
-}
-
 /* Intro box */
 #intro-box {
   max-width: 900px;
-  background: rgba(0,0,0,0.7);
-  border: 2px solid #c9aa71;
+  background: rgba(15,23,34,0.85);
+  border: 2px solid #2f81f7;
   border-radius: 12px;
   padding: 20px;
-  text-align: left;
+  margin: 20px 0;
   font-size: 18px;
-  margin: 20px auto 30px;
-  position: relative;
-  z-index: 2;
+  text-align: left;
 }
 
 /* Skills section */
-#skills-container {
+.skills-center {
   display: flex;
   flex-direction: column;
   align-items: center;
   width: 100%;
-  position: relative;
-  z-index: 2;
+  margin-top: 20px;
 }
 
+.skills-center h2 {
+  color: #c9aa71;
+  margin: 10px 0 15px 0;
+  text-align: center;
+}
+
+/* Skill list */
 .skill-list {
   list-style: none;
   padding: 0;
@@ -178,41 +180,51 @@ footer {
   font-size: 14px;
   color: #fff;
   margin-top: auto;
-  position: relative;
-  z-index: 2;
 }
 
 /* Mobile adjustments */
 @media(max-width: 700px){
-  header { font-size: 18px; padding: 10px 15px; }
-  #section-select { width: 90%; font-size: 14px; padding: 8px 10px; }
-  .skill-list li { width: 85vw; font-size: 16px; padding: 14px; }
-  #intro-box { width: 85vw; font-size: 16px; }
+  header {
+    font-size: 18px;
+    padding: 10px 15px;
+    line-height: 1.2;
+  }
+
+  #dropdown-container {
+    margin-top: 72px;
+  }
+
+  .skill-list li {
+    width: 85vw;
+    font-size: 16px;
+    padding: 14px;
+  }
+
+  #intro-box {
+    width: 85vw;
+    font-size: 16px;
+  }
 }
 </style>
 </head>
 <body>
 
-<div class="container">
-
 <header>LoL Fundamentals – Skills Hub</header>
 
-<a href="membershub.html" class="back-button">Back to Members Hub</a>
-
-<div id="section-select-container">
-  <select id="section-select">
-    <option selected>Select a section</option>
-    <option>Pre Game</option>
-    <option>Early Game</option>
-    <option>Mid Game</option>
-    <option>Late Game</option>
-    <option>Advanced</option>
-    <option>Out of Game</option>
+<div id="dropdown-container">
+  <select id="section-dropdown">
+    <option value="Pre Game">Pre Game</option>
+    <option value="Early Game">Early Game</option>
+    <option value="Mid Game">Mid Game</option>
+    <option value="Late Game">Late Game</option>
+    <option value="Advanced">Advanced</option>
+    <option value="Out of Game">Out of Game</option>
   </select>
 </div>
 
-<div id="skills-container">
-  <!-- Intro box shown initially -->
+<div class="main-content">
+  <a href="membershub.html" class="back-button">Back to Members Hub</a>
+
   <div id="intro-box">
     <p><strong>Welcome to the Skills Hub!</strong></p>
     <p>Here’s what each section covers:</p>
@@ -227,19 +239,12 @@ footer {
     <p>Select a section above to see the skill cards.</p>
   </div>
 
-  <ul class="skill-list" id="skill-list" style="display:none;"></ul>
+  <div id="skills-container" class="skills-center"></div>
 </div>
 
 <footer>© 2025 LoL Fundamentals · All rights reserved</footer>
 
-</div>
-
 <script>
-// Login requirement
-if(localStorage.getItem('lolfundamentals_logged_in') !== 'true'){
-  window.location.href = 'login.html';
-}
-
 // Skill data
 const skillData = {
   "Pre Game": ["Champion Select","Mouse Accuracy","Summoner Spells","Matchups","Communication","Build"],
@@ -250,32 +255,25 @@ const skillData = {
   "Out of Game": ["Setup","Mindset","Not Raging/Blaming","Reaction Time","Meta"]
 };
 
-const sectionSelect = document.getElementById('section-select');
-const skillList = document.getElementById('skill-list');
+const container = document.getElementById('skills-container');
+const dropdown = document.getElementById('section-dropdown');
 const introBox = document.getElementById('intro-box');
 
-sectionSelect.addEventListener('change', () => {
-  const selected = sectionSelect.value;
+function loadSection(sectionName){
+  introBox.style.display = 'none';
+  container.innerHTML = `
+    <h2>${sectionName}</h2>
+    <ul class="skill-list">
+      ${skillData[sectionName].map(skill => `<li><a href="${skill.toLowerCase().replace(/[^a-z0-9]/g,'')}.html">${skill}</a></li>`).join('')}
+    </ul>
+  `;
+}
 
-  if(selected === "Select a section"){
-    introBox.style.display = 'block';
-    skillList.style.display = 'none';
-  } else {
-    introBox.style.display = 'none';
-    skillList.style.display = 'block';
-    skillList.innerHTML = skillData[selected].map(skill => 
-      `<li><a href="${skill.toLowerCase().replace(/[^a-z0-9]/g,'')}.html">${skill}</a></li>`
-    ).join('');
-  }
+// Load initial section
+dropdown.addEventListener('change', () => {
+  loadSection(dropdown.value);
 });
-
-// Preload intro
-sectionSelect.value = "Select a section";
-introBox.style.display = 'block';
-skillList.style.display = 'none';
 </script>
 
 </body>
 </html>
-
-
