@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
+<meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>LoL Fundamentals – Skills Hub</title>
 
@@ -24,7 +24,6 @@ body {
   flex-direction: column;
 }
 
-/* Overlay */
 body::before {
   content: "";
   position: fixed;
@@ -34,7 +33,6 @@ body::before {
   z-index: -1;
 }
 
-/* Header */
 header {
   background: rgba(13,17,23,0.9);
   border-bottom: 2px solid #c9aa71;
@@ -54,7 +52,6 @@ header {
   box-sizing: border-box;
 }
 
-/* Back button */
 .back-button {
   display: inline-block;
   margin: 100px auto 20px;
@@ -74,7 +71,6 @@ header {
   box-shadow: 0 0 15px rgba(255,215,0,0.8);
 }
 
-/* Dropdown */
 #section-select-container {
   margin: 20px auto;
 }
@@ -96,7 +92,6 @@ header {
   background-size: 12px;
 }
 
-/* Intro box */
 #intro-box {
   max-width: 900px;
   background: rgba(0,0,0,0.7);
@@ -108,12 +103,10 @@ header {
   margin-bottom: 30px;
 }
 
-/* Make welcome text gold */
 #intro-box p strong:first-of-type {
   color: #c9aa71;
 }
 
-/* Skills section */
 #skills-container {
   margin-top: 20px;
   display: flex;
@@ -157,7 +150,6 @@ header {
   color: #c9aa71;
 }
 
-/* Footer */
 footer {
   text-align: center;
   padding: 15px;
@@ -166,19 +158,15 @@ footer {
   margin-top: auto;
 }
 
-/* Mobile adjustments */
 @media(max-width: 700px){
   header { font-size: 18px; padding: 10px 15px; }
-
-  /* Full-width dropdown with arrow correctly positioned */
   #section-select { 
     width: 100%;
     max-width: 95vw;
     font-size: 14px;
-    padding: 8px 30px 8px 12px; /* extra right padding for arrow */
-    background-position: right 10px center; /* keep arrow at right */
+    padding: 8px 30px 8px 12px;
+    background-position: right 10px center;
   }
-
   .skill-list li { width: 85vw; font-size: 16px; padding: 14px; }
   #intro-box { width: 85vw; font-size: 16px; }
 }
@@ -203,7 +191,6 @@ footer {
 </div>
 
 <div id="skills-container">
-  <!-- Intro box shown initially -->
   <div id="intro-box">
     <p><strong>Welcome to the Skills Hub!</strong></p>
     <p>Here’s what each section covers:</p>
@@ -243,30 +230,46 @@ const sectionSelect = document.getElementById('section-select');
 const skillList = document.getElementById('skill-list');
 const introBox = document.getElementById('intro-box');
 
-sectionSelect.addEventListener('change', () => {
-  const selected = sectionSelect.value;
-
-  if(selected === "Select a section"){
+// Render skill list
+function renderSkills(section) {
+  if(section === "Select a section"){
     introBox.style.display = 'block';
     skillList.style.display = 'none';
   } else {
     introBox.style.display = 'none';
     skillList.style.display = 'block';
-    skillList.innerHTML = skillData[selected].map(skill => 
-      `<li><a href="${skill.toLowerCase().replace(/[^a-z0-9]/g,'')}.html">${skill}</a></li>`
-    ).join('');
+    skillList.innerHTML = skillData[section].map(skill => {
+      const link = skill.toLowerCase().replace(/[^a-z0-9]/g,'') + ".html";
+      return `<li><a href="${link}" onclick="localStorage.setItem('lastSection','${section}')">${skill}</a></li>`;
+    }).join('');
   }
+}
+
+// Open last section if returning from skill
+const lastSection = localStorage.getItem('lastSection');
+if(lastSection && skillData[lastSection]){
+  sectionSelect.value = lastSection;
+  renderSkills(lastSection);
+} else {
+  sectionSelect.value = "Select a section";
+  renderSkills("Select a section");
+}
+
+// Dropdown change
+sectionSelect.addEventListener('change', () => {
+  const selected = sectionSelect.value;
+  renderSkills(selected);
+  if(selected !== "Select a section") localStorage.setItem('lastSection', selected);
 });
 
-// Preload intro
-sectionSelect.value = "Select a section";
-introBox.style.display = 'block';
-skillList.style.display = 'none';
+// Clear lastSection when leaving hub
+document.querySelector('.back-button').addEventListener('click', () => {
+  localStorage.removeItem('lastSection');
+});
 </script>
 
 </body>
 </html>
-
 
 
 
