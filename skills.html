@@ -54,14 +54,34 @@ header {
   box-sizing: border-box;
 }
 
+/* Back button */
+.back-button {
+  display: inline-block;
+  margin: 100px auto 20px; /* adjust so it sits below header */
+  padding: 12px 24px;
+  background: linear-gradient(135deg, #c9aa71, #e0c77b);
+  color: #000;
+  text-decoration: none;
+  border-radius: 8px;
+  font-weight: bold;
+  font-size: 18px;
+  transition: all 0.3s;
+  box-shadow: 0 0 10px rgba(201,170,113,0.5);
+}
+.back-button::before { content: "← "; }
+.back-button:hover {
+  background: linear-gradient(135deg, #e6c97f, #f0d88b);
+  box-shadow: 0 0 15px rgba(255,215,0,0.8);
+}
+
 /* Dropdown */
 #section-select-container {
-  margin: 100px auto 20px;
+  margin: 0 auto 20px;
   max-width: 900px;
   text-align: center;
 }
 #section-select {
-  padding: 10px 15px;
+  padding: 12px 18px;
   font-size: 18px;
   border-radius: 6px;
   border: none;
@@ -71,29 +91,11 @@ header {
   appearance: none;
   -webkit-appearance: none;
   -moz-appearance: none;
+  width: 300px;
   background-image: url("data:image/svg+xml;utf8,<svg fill='%23c9aa71' height='16' viewBox='0 0 24 24' width='16' xmlns='http://www.w3.org/2000/svg'><path d='M7 10l5 5 5-5z'/></svg>");
   background-repeat: no-repeat;
   background-position: right 10px center;
   background-size: 16px;
-}
-
-/* Back button */
-.back-button {
-  display: inline-block;
-  margin: 20px auto 10px;
-  padding: 10px 20px;
-  background: linear-gradient(135deg, #c9aa71, #e0c77b);
-  color: #000;
-  text-decoration: none;
-  border-radius: 8px;
-  font-weight: bold;
-  transition: all 0.3s;
-  box-shadow: 0 0 10px rgba(201,170,113,0.5);
-}
-.back-button::before { content: "← "; }
-.back-button:hover {
-  background: linear-gradient(135deg, #e6c97f, #f0d88b);
-  box-shadow: 0 0 15px rgba(255,215,0,0.8);
 }
 
 /* Skills section */
@@ -108,7 +110,8 @@ header {
 .skill-list {
   list-style: none;
   padding: 0;
-  width: 100%;
+  width: 75%; /* wider cards */
+  max-width: 1400px;
 }
 
 .skill-list li {
@@ -118,10 +121,7 @@ header {
   padding: 18px 20px;
   margin-bottom: 20px;
   font-size: 18px;
-  width: 56vw;
-  max-width: 1400px;
-  margin-left: auto;
-  margin-right: auto;
+  width: 100%;
   box-shadow: 0 4px 12px rgba(0,0,0,0.5);
   transition: transform 0.25s, box-shadow 0.3s;
 }
@@ -151,8 +151,9 @@ footer {
 
 /* Mobile adjustments */
 @media(max-width: 700px){
-  #section-select { font-size: 16px; padding: 10px 12px; }
-  .skill-list li { width: 85vw; font-size: 16px; padding: 14px; }
+  #section-select { font-size: 16px; padding: 10px 14px; width: 90%; }
+  .skill-list { width: 85vw; font-size: 16px; padding: 14px; }
+  .back-button { margin: 80px auto 15px; font-size: 16px; padding: 10px 18px; }
 }
 </style>
 </head>
@@ -179,7 +180,6 @@ footer {
 <footer>© 2025 LoL Fundamentals · All rights reserved</footer>
 
 <script>
-// Require login
 if(localStorage.getItem('lolfundamentals_logged_in') !== 'true'){
   window.location.href = 'login.html';
 }
@@ -216,4 +216,5 @@ sectionSelect.addEventListener('change', () => {
 
 </body>
 </html>
+
 
