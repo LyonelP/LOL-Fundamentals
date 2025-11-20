@@ -74,26 +74,34 @@ header {
   box-shadow: 0 0 15px rgba(255,215,0,0.8);
 }
 
-/* Dropdown */
+/* Dropdown styled like Ekko guide */
 #section-select-container {
   margin: 20px auto;
 }
+
 #section-select {
-  padding: 8px 12px; /* smaller like before */
+  padding: 10px 15px;
   font-size: 16px;
   border-radius: 6px;
-  border: none;
+  border: 1px solid #c9aa71;
   background: #0f1722;
   color: #c9aa71;
   cursor: pointer;
+  width: 260px;
   appearance: none;
   -webkit-appearance: none;
   -moz-appearance: none;
-  width: 220px;
-  background-image: url("data:image/svg+xml;utf8,<svg fill='%23c9aa71' height='12' viewBox='0 0 24 24' width='12' xmlns='http://www.w3.org/2000/svg'><path d='M7 10l5 5 5-5z'/></svg>");
+
+  /* Gold arrow like Ekko page */
+  background-image: url("data:image/svg+xml;utf8,<svg fill='%23c9aa71' height='20' viewBox='0 0 24 24' width='20' xmlns='http://www.w3.org/2000/svg'><path d='M7 10l5 5 5-5z'/></svg>");
   background-repeat: no-repeat;
-  background-position: right 10px center;
-  background-size: 12px;
+  background-position: right 12px center;
+  background-size: 20px;
+}
+
+/* Select hover */
+#section-select:hover {
+  border-color: #e0c77b;
 }
 
 /* Skills section */
@@ -152,7 +160,7 @@ footer {
 /* Mobile adjustments */
 @media(max-width: 700px){
   header { font-size: 18px; padding: 10px 15px; }
-  #section-select { width: 90%; font-size: 14px; padding: 8px 10px; }
+  #section-select { width: 90%; font-size: 14px; padding: 10px 12px; }
   .skill-list li { width: 85vw; font-size: 16px; padding: 14px; }
 }
 </style>
@@ -165,7 +173,7 @@ footer {
 
 <div id="section-select-container">
   <select id="section-select">
-    <option disabled selected>Select a section</option>
+    <option selected>Select a section</option>
     <option>Pre Game</option>
     <option>Early Game</option>
     <option>Mid Game</option>
@@ -182,13 +190,9 @@ footer {
 <footer>© 2025 LoL Fundamentals · All rights reserved</footer>
 
 <script>
-// Login requirement
-if(localStorage.getItem('lolfundamentals_logged_in') !== 'true'){
-  window.location.href = 'login.html';
-}
-
 // Skill data
 const skillData = {
+  "Select a section": [],
   "Pre Game": ["Champion Select","Mouse Accuracy","Summoner Spells","Matchups","Communication","Build"],
   "Early Game": ["Level 1","Farming","Trading","Wave Control","Back Timings","Build","Power Spikes","Pathing","Laning","Map Awareness","Ganking","Roaming"],
   "Mid Game": ["Teamwork","Split Pushing","Sieging","Baiting","Lane Assignments","Vision"],
@@ -202,17 +206,25 @@ const skillList = document.getElementById('skill-list');
 
 sectionSelect.addEventListener('change', () => {
   const selected = sectionSelect.value;
-  skillList.innerHTML = skillData[selected].map(skill => 
+  const items = skillData[selected];
+
+  if (!items.length) {
+    skillList.innerHTML = `<li style="text-align:center;color:#c9aa71;background:none;border:none;box-shadow:none;font-size:20px;">Select a section to begin</li>`;
+    return;
+  }
+
+  skillList.innerHTML = items.map(skill => 
     `<li><a href="${skill.toLowerCase().replace(/[^a-z0-9]/g,'')}.html">${skill}</a></li>`
   ).join('');
 });
 
-// Preload first section
-sectionSelect.value = "Pre Game";
+// Default state
+sectionSelect.value = "Select a section";
 sectionSelect.dispatchEvent(new Event('change'));
 </script>
 
 </body>
 </html>
+
 
 
