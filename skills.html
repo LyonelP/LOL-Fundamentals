@@ -145,10 +145,10 @@ header {
   padding: 18px 20px;
   margin-bottom: 20px;
   font-size: 18px;
-  width: 100%;
-  max-width: 2100px; /* ~75% wider than before */
+  width: 75vw;        /* 75% of viewport width */
+  max-width: 1400px;  /* optional max limit */
   margin-left: auto;
-  margin-right: auto; /* center the cards */
+  margin-right: auto; /* center */
   box-shadow: 0 4px 12px rgba(0,0,0,0.5);
   transition: transform 0.25s, box-shadow 0.3s;
 }
@@ -211,9 +211,10 @@ footer {
     font-size: 20px;
   }
   .skill-list li {
+    width: 95vw;   /* almost full width on mobile */
+    max-width: 100%;
     font-size: 16px;
     padding: 14px;
-    max-width: 100%;
   }
 }
 </style>
@@ -280,7 +281,5 @@ loadSection(Object.keys(skillData)[0]);
 
 </body>
 </html>
-
-
 
 
