@@ -182,7 +182,7 @@ footer {
 
 /* Mobile adjustments */
 @media(max-width: 700px){
-  /* Keep header as it was before (perfect) */
+  /* Keep header as-is (previous perfect version) */
   header {
     font-size: 22px;
     padding: 15px 15px;
@@ -190,48 +190,47 @@ footer {
     text-align: center;
   }
 
-  /* Taskbar below header, horizontal */
+  /* Taskbar horizontal below header */
   .sidebar {
     position: fixed;
-    top: 60px; /* flush under header */
+    top: 60px; /* directly below header */
     left: 0;
     width: 100%;
     height: 50px;
-    display: flex;
     flex-direction: row;
-    background: rgba(13,17,23,0.95);
-    border-bottom: 2px solid #c9aa71;
     overflow-x: auto;
     overflow-y: hidden;
+    background: rgba(13,17,23,0.95);
+    display: flex;
     z-index: 99;
+    border-bottom: 2px solid #c9aa71;
     padding: 0;
   }
 
   .sidebar a {
     flex: 0 0 auto;
+    text-align: center;
+    border: none;
+    margin: 0;
+    padding: 12px 15px;
+    white-space: nowrap;
+    box-sizing: border-box;
+    display: block;
     height: 100%;
     display: flex;
     align-items: center;
     justify-content: center;
-    text-align: center;
-    color: #fff;
-    text-decoration: none;
-    font-weight: bold;
-    white-space: nowrap;
-    padding: 0 15px;
-    margin: 0;
   }
 
   .sidebar a.active,
   .sidebar a:hover {
     background: rgba(201,170,113,0.2);
     color: #c9aa71;
-    border: none;
   }
 
   /* Main content spacing */
   .main-content {
-    padding-top: 115px; /* header + taskbar height */
+    padding: 115px 10px 20px 10px; /* header + taskbar height */
     max-width: 100%;
   }
 
@@ -252,6 +251,7 @@ footer {
 <body>
 
 <header>LoL Fundamentals – Skills Hub</header>
+
 <div class="sidebar" id="sidebar"></div>
 
 <div class="main-content">
