@@ -93,7 +93,7 @@ header {
   display: flex;
   flex-direction: column;
   align-items: center;
-  max-width: 2000px; /* allow cards to be very wide */
+  max-width: none; /* allow cards to grow */
   margin: 0 auto;
   position: relative;
 }
@@ -146,7 +146,9 @@ header {
   margin-bottom: 20px;
   font-size: 18px;
   width: 100%;
-  max-width: 2000px; /* extremely wide cards */
+  max-width: 2100px; /* ~75% wider than before */
+  margin-left: auto;
+  margin-right: auto; /* center the cards */
   box-shadow: 0 4px 12px rgba(0,0,0,0.5);
   transition: transform 0.25s, box-shadow 0.3s;
 }
@@ -278,6 +280,5 @@ loadSection(Object.keys(skillData)[0]);
 
 </body>
 </html>
-
 
 
