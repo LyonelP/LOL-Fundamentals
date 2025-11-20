@@ -55,46 +55,21 @@ header {
   white-space: normal;
 }
 
-/* Dropdown menu */
-#dropdown-container {
-  margin-top: 82px; /* header + spacing */
-  width: 90%;
-  max-width: 600px;
-  text-align: center;
-  margin-left: auto;
-  margin-right: auto;
-  position: relative;
-  z-index: 90;
-}
-
-select {
-  width: 100%;
-  padding: 12px;
-  font-size: 18px;
-  border-radius: 8px;
-  border: 2px solid #c9aa71;
-  background: rgba(13,17,23,0.9);
-  color: #fff;
-  appearance: none;
-  cursor: pointer;
-}
-
 /* Main content */
 .main-content {
-  padding: 20px;
+  padding: 120px 20px 50px 20px; /* space for header */
   flex: 1;
   display: flex;
   flex-direction: column;
   align-items: center;
   max-width: none;
   margin: 0 auto;
-  margin-top: 20px;
 }
 
 /* Back button */
 .back-button {
   display: inline-block;
-  margin-bottom: 10px;
+  margin-bottom: 15px;
   padding: 10px 20px;
   background: linear-gradient(135deg, #c9aa71, #e0c77b);
   color: #000;
@@ -110,13 +85,32 @@ select {
   box-shadow: 0 0 15px rgba(255,215,0,0.8);
 }
 
+/* Dropdown menu */
+#dropdown-container {
+  width: 90%;
+  max-width: 400px;
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+select {
+  width: 100%;
+  padding: 12px;
+  font-size: 18px;
+  border-radius: 8px;
+  border: 2px solid #c9aa71;
+  background: rgba(13,17,23,0.9);
+  color: #fff;
+  appearance: none;
+  cursor: pointer;
+}
+
 /* Skills section */
 .skills-center {
   display: flex;
   flex-direction: column;
   align-items: center;
   width: 100%;
-  margin-top: 20px;
 }
 
 .skills-center h2 {
@@ -178,8 +172,9 @@ footer {
     line-height: 1.2;
   }
 
-  #dropdown-container {
-    margin-top: 72px;
+  #dropdown-container select {
+    font-size: 16px;
+    padding: 10px;
   }
 
   .skill-list li {
@@ -194,19 +189,21 @@ footer {
 
 <header>LoL Fundamentals – Skills Hub</header>
 
-<div id="dropdown-container">
-  <select id="section-dropdown">
-    <option value="Pre Game">Pre Game</option>
-    <option value="Early Game">Early Game</option>
-    <option value="Mid Game">Mid Game</option>
-    <option value="Late Game">Late Game</option>
-    <option value="Advanced">Advanced</option>
-    <option value="Out of Game">Out of Game</option>
-  </select>
-</div>
-
 <div class="main-content">
   <a href="membershub.html" class="back-button">Back to Members Hub</a>
+
+  <!-- Dropdown menu replaces sidebar -->
+  <div id="dropdown-container">
+    <select id="section-dropdown">
+      <option value="Pre Game">Pre Game</option>
+      <option value="Early Game">Early Game</option>
+      <option value="Mid Game">Mid Game</option>
+      <option value="Late Game">Late Game</option>
+      <option value="Advanced">Advanced</option>
+      <option value="Out of Game">Out of Game</option>
+    </select>
+  </div>
+
   <div id="skills-container" class="skills-center"></div>
 </div>
 
