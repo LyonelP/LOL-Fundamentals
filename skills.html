@@ -34,7 +34,7 @@ body::before {
   z-index: -1;
 }
 
-/* Header */
+/* Header (exactly as you sent) */
 header {
   background: rgba(13,17,23,0.9);
   border-bottom: 2px solid #c9aa71;
@@ -182,18 +182,18 @@ footer {
 
 /* Mobile adjustments */
 @media(max-width: 700px){
-  /* Keep header as-is (previous perfect version) */
+  /* Keep header exactly as sent */
   header {
-    font-size: 22px;
-    padding: 15px 15px;
+    font-size: 26px;
+    padding: 20px;
     line-height: 1.2;
     text-align: center;
   }
 
-  /* Taskbar horizontal below header */
+  /* Taskbar flush below header */
   .sidebar {
     position: fixed;
-    top: 60px; /* directly below header */
+    top: 62px; /* directly below header */
     left: 0;
     width: 100%;
     height: 50px;
@@ -215,11 +215,10 @@ footer {
     padding: 12px 15px;
     white-space: nowrap;
     box-sizing: border-box;
-    display: block;
-    height: 100%;
     display: flex;
     align-items: center;
     justify-content: center;
+    height: 100%;
   }
 
   .sidebar a.active,
@@ -310,5 +309,6 @@ loadSection(Object.keys(skillData)[0]);
 
 </body>
 </html>
+
 
 
