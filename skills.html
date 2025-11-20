@@ -50,6 +50,7 @@ header {
   left: 0;
   width: 100%;
   z-index: 50;
+  line-height: 1.2;
 }
 
 /* Sidebar */
@@ -179,12 +180,13 @@ footer {
 /* Mobile adjustments */
 @media(max-width: 700px){
   header {
-    font-size: 20px;      /* smaller header text */
-    padding: 12px 10px;   /* less vertical padding */
-    letter-spacing: 0.5px;
+    font-size: 20px;      
+    padding: 10px 10px;   
+    line-height: 1.2;     
+    text-align: center;
   }
 
-  /* Sidebar below smaller header */
+  /* Sidebar below header with smaller gaps */
   .sidebar {
     position: relative; 
     top: 0;
@@ -194,8 +196,8 @@ footer {
     overflow-x: auto;
     border-right: none;
     border-bottom: 2px solid #c9aa71;
-    padding: 10px 0;
-    margin-top: 60px; /* match smaller header height */
+    padding: 5px 0;    
+    margin-top: 60px;   
     box-sizing: border-box;
   }
 
@@ -204,14 +206,15 @@ footer {
     text-align: center;
     border-left: none;
     border-bottom: 4px solid transparent;
-    padding: 12px 10px;
-    margin: 0 5px;
+    padding: 10px 8px;    
+    margin: 0 3px;       
     white-space: nowrap;
+    box-sizing: border-box;
   }
 
   .sidebar a.active,
   .sidebar a:hover {
-    border-bottom: 4px solid #c9aa71;
+    border-bottom: 4px solid #c9aa71; 
   }
 
   .main-content {
@@ -296,4 +299,3 @@ loadSection(Object.keys(skillData)[0]);
 
 </body>
 </html>
-
