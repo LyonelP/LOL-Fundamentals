@@ -12,16 +12,19 @@
 </script>
 
 <style>
-body {
+html, body {
   margin: 0;
+  padding: 0;
   font-family: 'Beaufort for LOL', Arial, Helvetica, sans-serif;
+  height: 100%;
   color: #fff;
+}
+
+body {
   background: url('https://64.media.tumblr.com/594ac290bec6d5e9ad98b5f53404f00b/245c4c3ee469f81d-e4/s1280x1920/1cda4284320eb2031758bbc50ba.jpg') no-repeat center center fixed;
   background-size: cover;
   overflow-x: hidden;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
+  position: relative;
 }
 
 /* Overlay */
@@ -31,7 +34,16 @@ body::before {
   top:0; left:0;
   width:100%; height:100%;
   background: rgba(10,15,20,0.25);
-  z-index: -1;
+  z-index: 0;
+}
+
+/* Container to keep content above overlay */
+.container {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
 }
 
 /* Header */
@@ -49,7 +61,7 @@ header {
   top: 0;
   left: 0;
   width: 100%;
-  z-index: 100;
+  z-index: 10;
   line-height: 1.2;
   box-sizing: border-box;
 }
@@ -67,6 +79,8 @@ header {
   font-size: 16px;
   transition: all 0.3s;
   box-shadow: 0 0 10px rgba(201,170,113,0.5);
+  position: relative;
+  z-index: 2;
 }
 .back-button::before { content: "← "; }
 .back-button:hover {
@@ -77,6 +91,8 @@ header {
 /* Dropdown */
 #section-select-container {
   margin: 20px auto;
+  z-index: 2;
+  position: relative;
 }
 #section-select {
   padding: 8px 12px;
@@ -105,16 +121,19 @@ header {
   padding: 20px;
   text-align: left;
   font-size: 18px;
-  margin-bottom: 30px;
+  margin: 20px auto 30px;
+  position: relative;
+  z-index: 2;
 }
 
 /* Skills section */
 #skills-container {
-  margin-top: 20px;
   display: flex;
   flex-direction: column;
   align-items: center;
   width: 100%;
+  position: relative;
+  z-index: 2;
 }
 
 .skill-list {
@@ -159,6 +178,8 @@ footer {
   font-size: 14px;
   color: #fff;
   margin-top: auto;
+  position: relative;
+  z-index: 2;
 }
 
 /* Mobile adjustments */
@@ -171,6 +192,8 @@ footer {
 </style>
 </head>
 <body>
+
+<div class="container">
 
 <header>LoL Fundamentals – Skills Hub</header>
 
@@ -208,6 +231,8 @@ footer {
 </div>
 
 <footer>© 2025 LoL Fundamentals · All rights reserved</footer>
+
+</div>
 
 <script>
 // Login requirement
@@ -252,8 +277,5 @@ skillList.style.display = 'none';
 
 </body>
 </html>
-
-
-
 
 
