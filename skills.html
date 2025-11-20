@@ -34,6 +34,26 @@ body::before {
   z-index: -1;
 }
 
+/* Header */
+header {
+  background: rgba(13,17,23,0.9);
+  border-bottom: 2px solid #c9aa71;
+  padding: 20px;
+  font-weight: bold;
+  font-size: 26px;
+  text-transform: uppercase;
+  color: #c9aa71;
+  letter-spacing: 1px;
+  text-align: center;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  z-index: 100;
+  line-height: 1.2;
+  box-sizing: border-box;
+}
+
 /* Back button */
 .back-button {
   display: inline-block;
@@ -74,6 +94,18 @@ body::before {
   background-repeat: no-repeat;
   background-position: right 10px center;
   background-size: 12px;
+}
+
+/* Intro box */
+#intro-box {
+  max-width: 900px;
+  background: rgba(0,0,0,0.7);
+  border: 2px solid #c9aa71;
+  border-radius: 12px;
+  padding: 20px;
+  text-align: left;
+  font-size: 18px;
+  margin-bottom: 30px;
 }
 
 /* Skills section */
@@ -120,18 +152,6 @@ body::before {
   color: #c9aa71;
 }
 
-/* Intro box */
-#intro-box {
-  max-width: 900px;
-  background: rgba(0,0,0,0.7);
-  border: 2px solid #c9aa71;
-  border-radius: 12px;
-  padding: 20px;
-  text-align: left;
-  font-size: 18px;
-  margin-bottom: 30px;
-}
-
 /* Footer */
 footer {
   text-align: center;
@@ -143,6 +163,7 @@ footer {
 
 /* Mobile adjustments */
 @media(max-width: 700px){
+  header { font-size: 18px; padding: 10px 15px; }
   #section-select { width: 90%; font-size: 14px; padding: 8px 10px; }
   .skill-list li { width: 85vw; font-size: 16px; padding: 14px; }
   #intro-box { width: 85vw; font-size: 16px; }
@@ -151,10 +172,13 @@ footer {
 </head>
 <body>
 
+<header>LoL Fundamentals – Skills Hub</header>
+
 <a href="membershub.html" class="back-button">Back to Members Hub</a>
 
 <div id="section-select-container">
   <select id="section-select">
+    <option selected>Select a section</option>
     <option>Pre Game</option>
     <option>Early Game</option>
     <option>Mid Game</option>
@@ -208,23 +232,28 @@ const introBox = document.getElementById('intro-box');
 sectionSelect.addEventListener('change', () => {
   const selected = sectionSelect.value;
 
-  // Hide intro box when selecting a section
-  introBox.style.display = 'none';
-  skillList.style.display = 'block';
-
-  // Populate skill cards
-  skillList.innerHTML = skillData[selected].map(skill => 
-    `<li><a href="${skill.toLowerCase().replace(/[^a-z0-9]/g,'')}.html">${skill}</a></li>`
-  ).join('');
+  if(selected === "Select a section"){
+    introBox.style.display = 'block';
+    skillList.style.display = 'none';
+  } else {
+    introBox.style.display = 'none';
+    skillList.style.display = 'block';
+    skillList.innerHTML = skillData[selected].map(skill => 
+      `<li><a href="${skill.toLowerCase().replace(/[^a-z0-9]/g,'')}.html">${skill}</a></li>`
+    ).join('');
+  }
 });
 
 // Preload intro
+sectionSelect.value = "Select a section";
 introBox.style.display = 'block';
 skillList.style.display = 'none';
 </script>
 
 </body>
 </html>
+
+
 
 
 
