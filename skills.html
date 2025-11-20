@@ -189,28 +189,26 @@ footer {
     text-align: center;
   }
 
-  /* Taskbar below header, fully highlighted, flush connection */
+  /* Taskbar below header, horizontal */
   .sidebar {
     position: fixed;
-    top: 0;                  /* start at top, same as header */
+    top: 60px; /* flush under header */
     left: 0;
     width: 100%;
-    height: auto;
+    height: 50px;
     display: flex;
-    flex-direction: column;
+    flex-direction: row;  /* horizontal */
     background: rgba(13,17,23,0.95);
     border-bottom: 2px solid #c9aa71;
+    overflow-x: auto;     /* scroll if too many items */
+    overflow-y: hidden;
     z-index: 99;
-  }
-
-  /* Wrap header + taskbar in fixed container for mobile */
-  body > header + .sidebar {
-    margin-top: 60px; /* push content below header */
+    padding: 0;
   }
 
   .sidebar a {
-    flex: 1;                 /* equal width for each button */
-    height: 50px;            /* taskbar item height */
+    flex: 0 0 auto;          /* auto width */
+    height: 100%;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -219,18 +217,19 @@ footer {
     text-decoration: none;
     font-weight: bold;
     white-space: nowrap;
+    padding: 0 15px;
     margin: 0;
   }
 
   .sidebar a.active,
   .sidebar a:hover {
-    background: rgba(201,170,113,0.2); /* full highlight */
+    background: rgba(201,170,113,0.2);
     color: #c9aa71;
     border: none;
   }
 
   .main-content {
-    padding-top: 120px; /* header + taskbar height */
+    padding-top: 120px; /* header + taskbar */
     max-width: 100%;
   }
 
@@ -309,6 +308,5 @@ loadSection(Object.keys(skillData)[0]);
 
 </body>
 </html>
-
 
 
