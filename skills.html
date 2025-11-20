@@ -57,7 +57,7 @@ header {
 /* Back button */
 .back-button {
   display: inline-block;
-  margin: 100px auto 20px; /* original size */
+  margin: 100px auto 20px;
   padding: 10px 20px;
   background: linear-gradient(135deg, #c9aa71, #e0c77b);
   color: #000;
@@ -79,8 +79,8 @@ header {
   margin: 20px auto;
 }
 #section-select {
-  padding: 12px 18px;
-  font-size: 18px; /* bigger dropdown text */
+  padding: 8px 12px; /* smaller like before */
+  font-size: 16px;
   border-radius: 6px;
   border: none;
   background: #0f1722;
@@ -89,11 +89,11 @@ header {
   appearance: none;
   -webkit-appearance: none;
   -moz-appearance: none;
-  width: 300px;
-  background-image: url("data:image/svg+xml;utf8,<svg fill='%23c9aa71' height='16' viewBox='0 0 24 24' width='16' xmlns='http://www.w3.org/2000/svg'><path d='M7 10l5 5 5-5z'/></svg>");
+  width: 220px;
+  background-image: url("data:image/svg+xml;utf8,<svg fill='%23c9aa71' height='12' viewBox='0 0 24 24' width='12' xmlns='http://www.w3.org/2000/svg'><path d='M7 10l5 5 5-5z'/></svg>");
   background-repeat: no-repeat;
   background-position: right 10px center;
-  background-size: 16px;
+  background-size: 12px;
 }
 
 /* Skills section */
@@ -152,7 +152,7 @@ footer {
 /* Mobile adjustments */
 @media(max-width: 700px){
   header { font-size: 18px; padding: 10px 15px; }
-  #section-select { width: 90%; font-size: 16px; padding: 10px 12px; }
+  #section-select { width: 90%; font-size: 14px; padding: 8px 10px; }
   .skill-list li { width: 85vw; font-size: 16px; padding: 14px; }
 }
 </style>
@@ -214,4 +214,5 @@ sectionSelect.dispatchEvent(new Event('change'));
 
 </body>
 </html>
+
 
