@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8" />
+<meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>LoL Fundamentals – Skills Hub</title>
 
@@ -57,14 +57,14 @@ header {
 /* Back button */
 .back-button {
   display: inline-block;
-  margin: 100px auto 20px; /* adjust so it sits below header */
-  padding: 12px 24px;
+  margin: 100px auto 20px; /* original size */
+  padding: 10px 20px;
   background: linear-gradient(135deg, #c9aa71, #e0c77b);
   color: #000;
   text-decoration: none;
   border-radius: 8px;
   font-weight: bold;
-  font-size: 18px;
+  font-size: 16px;
   transition: all 0.3s;
   box-shadow: 0 0 10px rgba(201,170,113,0.5);
 }
@@ -76,13 +76,11 @@ header {
 
 /* Dropdown */
 #section-select-container {
-  margin: 0 auto 20px;
-  max-width: 900px;
-  text-align: center;
+  margin: 20px auto;
 }
 #section-select {
   padding: 12px 18px;
-  font-size: 18px;
+  font-size: 18px; /* bigger dropdown text */
   border-radius: 6px;
   border: none;
   background: #0f1722;
@@ -99,19 +97,18 @@ header {
 }
 
 /* Skills section */
-.skills-center {
+#skills-container {
+  margin-top: 20px;
   display: flex;
   flex-direction: column;
   align-items: center;
   width: 100%;
 }
 
-/* Skill list */
 .skill-list {
   list-style: none;
   padding: 0;
-  width: 75%; /* wider cards */
-  max-width: 1400px;
+  width: 100%;
 }
 
 .skill-list li {
@@ -121,7 +118,10 @@ header {
   padding: 18px 20px;
   margin-bottom: 20px;
   font-size: 18px;
-  width: 100%;
+  width: 56vw;
+  max-width: 1400px;
+  margin-left: auto;
+  margin-right: auto;
   box-shadow: 0 4px 12px rgba(0,0,0,0.5);
   transition: transform 0.25s, box-shadow 0.3s;
 }
@@ -151,9 +151,9 @@ footer {
 
 /* Mobile adjustments */
 @media(max-width: 700px){
-  #section-select { font-size: 16px; padding: 10px 14px; width: 90%; }
-  .skill-list { width: 85vw; font-size: 16px; padding: 14px; }
-  .back-button { margin: 80px auto 15px; font-size: 16px; padding: 10px 18px; }
+  header { font-size: 18px; padding: 10px 15px; }
+  #section-select { width: 90%; font-size: 16px; padding: 10px 12px; }
+  .skill-list li { width: 85vw; font-size: 16px; padding: 14px; }
 }
 </style>
 </head>
@@ -165,7 +165,7 @@ footer {
 
 <div id="section-select-container">
   <select id="section-select">
-    <option disabled>Select a section</option>
+    <option disabled selected>Select a section</option>
     <option>Pre Game</option>
     <option>Early Game</option>
     <option>Mid Game</option>
@@ -175,15 +175,19 @@ footer {
   </select>
 </div>
 
-<div id="skills-container" class="skills-center"></div>
+<div id="skills-container">
+  <ul class="skill-list" id="skill-list"></ul>
+</div>
 
 <footer>© 2025 LoL Fundamentals · All rights reserved</footer>
 
 <script>
+// Login requirement
 if(localStorage.getItem('lolfundamentals_logged_in') !== 'true'){
   window.location.href = 'login.html';
 }
 
+// Skill data
 const skillData = {
   "Pre Game": ["Champion Select","Mouse Accuracy","Summoner Spells","Matchups","Communication","Build"],
   "Early Game": ["Level 1","Farming","Trading","Wave Control","Back Timings","Build","Power Spikes","Pathing","Laning","Map Awareness","Ganking","Roaming"],
@@ -194,27 +198,20 @@ const skillData = {
 };
 
 const sectionSelect = document.getElementById('section-select');
-const container = document.getElementById('skills-container');
+const skillList = document.getElementById('skill-list');
 
-function loadSection(sectionName){
-  container.innerHTML = `
-    <ul class="skill-list">
-      ${skillData[sectionName].map(skill => `<li><a href="${skill.toLowerCase().replace(/[^a-z0-9]/g,'')}.html">${skill}</a></li>`).join('')}
-    </ul>
-  `;
-}
+sectionSelect.addEventListener('change', () => {
+  const selected = sectionSelect.value;
+  skillList.innerHTML = skillData[selected].map(skill => 
+    `<li><a href="${skill.toLowerCase().replace(/[^a-z0-9]/g,'')}.html">${skill}</a></li>`
+  ).join('');
+});
 
 // Preload first section
-sectionSelect.selectedIndex = 1; // Pre Game
-loadSection(sectionSelect.value);
-
-// Update on change
-sectionSelect.addEventListener('change', () => {
-  loadSection(sectionSelect.value);
-});
+sectionSelect.value = "Pre Game";
+sectionSelect.dispatchEvent(new Event('change'));
 </script>
 
 </body>
 </html>
-
 
