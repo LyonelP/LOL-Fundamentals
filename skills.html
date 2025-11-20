@@ -169,7 +169,12 @@ footer {
 /* Mobile adjustments */
 @media(max-width: 700px){
   header { font-size: 18px; padding: 10px 15px; }
-  #section-select { width: 95%; font-size: 14px; padding: 8px 10px; }
+  #section-select { 
+    width: 100%;       /* full width of container */
+    max-width: 95vw;   /* leave some space from edges */
+    font-size: 14px; 
+    padding: 8px 12px; /* ensure arrow has space */
+  }
   .skill-list li { width: 85vw; font-size: 16px; padding: 14px; }
   #intro-box { width: 85vw; font-size: 16px; }
 }
@@ -257,5 +262,6 @@ skillList.style.display = 'none';
 
 </body>
 </html>
+
 
 
