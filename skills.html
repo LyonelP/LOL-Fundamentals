@@ -16,7 +16,7 @@ body {
   margin: 0;
   font-family: 'Beaufort for LOL', Arial, Helvetica, sans-serif;
   color: #fff;
-  background: url('https://64.media.tumblr.com/594ac290bec6d5e9ad98b5f53404f00b/245c4c3ee469f81d-e4/s1280x1920/1cda4284320eb2031758a9859dfe14ff8bbc50ba.jpg') no-repeat center center fixed;
+  background: url('https://64.media.tumblr.com/594ac290bec6d5e9ad98b5f53404f00b/245c4c3ee469f81d-e4/s1280x1920/1cda4284320eb2031758bbc50ba.jpg') no-repeat center center fixed;
   background-size: cover;
   overflow-x: hidden;
   min-height: 100vh;
@@ -32,26 +32,6 @@ body::before {
   width:100%; height:100%;
   background: rgba(10,15,20,0.25);
   z-index: -1;
-}
-
-/* Header */
-header {
-  background: rgba(13,17,23,0.9);
-  border-bottom: 2px solid #c9aa71;
-  padding: 20px;
-  font-weight: bold;
-  font-size: 26px;
-  text-transform: uppercase;
-  color: #c9aa71;
-  letter-spacing: 1px;
-  text-align: center;
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  z-index: 100;
-  line-height: 1.2;
-  box-sizing: border-box;
 }
 
 /* Back button */
@@ -79,7 +59,7 @@ header {
   margin: 20px auto;
 }
 #section-select {
-  padding: 8px 12px; /* smaller like before */
+  padding: 8px 12px;
   font-size: 16px;
   border-radius: 6px;
   border: none;
@@ -140,6 +120,18 @@ header {
   color: #c9aa71;
 }
 
+/* Intro box */
+#intro-box {
+  max-width: 900px;
+  background: rgba(0,0,0,0.7);
+  border: 2px solid #c9aa71;
+  border-radius: 12px;
+  padding: 20px;
+  text-align: left;
+  font-size: 18px;
+  margin-bottom: 30px;
+}
+
 /* Footer */
 footer {
   text-align: center;
@@ -151,21 +143,18 @@ footer {
 
 /* Mobile adjustments */
 @media(max-width: 700px){
-  header { font-size: 18px; padding: 10px 15px; }
   #section-select { width: 90%; font-size: 14px; padding: 8px 10px; }
   .skill-list li { width: 85vw; font-size: 16px; padding: 14px; }
+  #intro-box { width: 85vw; font-size: 16px; }
 }
 </style>
 </head>
 <body>
 
-<header>LoL Fundamentals – Skills Hub</header>
-
 <a href="membershub.html" class="back-button">Back to Members Hub</a>
 
 <div id="section-select-container">
   <select id="section-select">
-    <option disabled selected>Select a section</option>
     <option>Pre Game</option>
     <option>Early Game</option>
     <option>Mid Game</option>
@@ -176,7 +165,22 @@ footer {
 </div>
 
 <div id="skills-container">
-  <ul class="skill-list" id="skill-list"></ul>
+  <!-- Intro box shown initially -->
+  <div id="intro-box">
+    <p><strong>Welcome to the Skills Hub!</strong></p>
+    <p>Here’s what each section covers:</p>
+    <ul>
+      <li><strong>Pre Game:</strong> Champion select, summoner spells, communication, and build planning.</li>
+      <li><strong>Early Game:</strong> Laning, farming, trading, pathing, and first ganks.</li>
+      <li><strong>Mid Game:</strong> Team fights, objectives, roaming, and map control.</li>
+      <li><strong>Late Game:</strong> Damage prioritization, rotations, and closing out.</li>
+      <li><strong>Advanced:</strong> Animation cancelling, positioning, and high-level strategy.</li>
+      <li><strong>Out of Game:</strong> Setup, mindset, and meta knowledge.</li>
+    </ul>
+    <p>Select a section above to see the skill cards.</p>
+  </div>
+
+  <ul class="skill-list" id="skill-list" style="display:none;"></ul>
 </div>
 
 <footer>© 2025 LoL Fundamentals · All rights reserved</footer>
@@ -199,19 +203,28 @@ const skillData = {
 
 const sectionSelect = document.getElementById('section-select');
 const skillList = document.getElementById('skill-list');
+const introBox = document.getElementById('intro-box');
 
 sectionSelect.addEventListener('change', () => {
   const selected = sectionSelect.value;
+
+  // Hide intro box when selecting a section
+  introBox.style.display = 'none';
+  skillList.style.display = 'block';
+
+  // Populate skill cards
   skillList.innerHTML = skillData[selected].map(skill => 
     `<li><a href="${skill.toLowerCase().replace(/[^a-z0-9]/g,'')}.html">${skill}</a></li>`
   ).join('');
 });
 
-// Preload first section
-sectionSelect.value = "Pre Game";
-sectionSelect.dispatchEvent(new Event('change'));
+// Preload intro
+introBox.style.display = 'block';
+skillList.style.display = 'none';
 </script>
 
 </body>
 </html>
+
+
 
