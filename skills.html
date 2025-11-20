@@ -22,7 +22,6 @@ body {
   min-height: 100vh;
   display: flex;
   flex-direction: column;
-  align-items: center;
 }
 
 /* Overlay */
@@ -58,7 +57,7 @@ header {
 /* Back button */
 .back-button {
   display: inline-block;
-  margin: 120px auto 20px;
+  margin: 100px auto 20px;
   padding: 10px 20px;
   background: linear-gradient(135deg, #c9aa71, #e0c77b);
   color: #000;
@@ -78,10 +77,9 @@ header {
 /* Dropdown */
 #section-select-container {
   margin: 20px auto;
-  text-align: center;
 }
 #section-select {
-  padding: 10px 15px;
+  padding: 8px 12px;
   font-size: 16px;
   border-radius: 6px;
   border: none;
@@ -92,7 +90,6 @@ header {
   -webkit-appearance: none;
   -moz-appearance: none;
   width: 220px;
-  max-width: 90vw;
   background-image: url("data:image/svg+xml;utf8,<svg fill='%23c9aa71' height='12' viewBox='0 0 24 24' width='12' xmlns='http://www.w3.org/2000/svg'><path d='M7 10l5 5 5-5z'/></svg>");
   background-repeat: no-repeat;
   background-position: right 10px center;
@@ -101,7 +98,6 @@ header {
 
 /* Intro box */
 #intro-box {
-  width: 90%;
   max-width: 900px;
   background: rgba(0,0,0,0.7);
   border: 2px solid #c9aa71;
@@ -109,16 +105,7 @@ header {
   padding: 20px;
   text-align: left;
   font-size: 18px;
-  margin: 20px auto 30px;
-  box-sizing: border-box;
-}
-
-/* Gold Welcome text only */
-#intro-box strong:first-child {
-  color: #c9aa71;
-  display: block;
-  font-size: 22px;
-  margin-bottom: 10px;
+  margin-bottom: 30px;
 }
 
 /* Skills section */
@@ -177,10 +164,9 @@ footer {
 /* Mobile adjustments */
 @media(max-width: 700px){
   header { font-size: 18px; padding: 10px 15px; }
-  #section-select { width: 90%; font-size: 14px; padding: 10px; }
-  .skill-list li { width: 90%; font-size: 16px; padding: 14px; }
-  #intro-box { width: 90%; font-size: 16px; padding: 15px; margin: 15px auto 25px; }
-  .back-button { font-size: 14px; padding: 8px 16px; margin-top: 100px; }
+  #section-select { width: 90%; font-size: 14px; padding: 8px 10px; }
+  .skill-list li { width: 85vw; font-size: 16px; padding: 14px; }
+  #intro-box { width: 85vw; font-size: 16px; }
 }
 </style>
 </head>
@@ -224,6 +210,11 @@ footer {
 <footer>© 2025 LoL Fundamentals · All rights reserved</footer>
 
 <script>
+// Login requirement
+if(localStorage.getItem('lolfundamentals_logged_in') !== 'true'){
+  window.location.href = 'login.html';
+}
+
 // Skill data
 const skillData = {
   "Pre Game": ["Champion Select","Mouse Accuracy","Summoner Spells","Matchups","Communication","Build"],
@@ -261,6 +252,5 @@ skillList.style.display = 'none';
 
 </body>
 </html>
-
 
 
