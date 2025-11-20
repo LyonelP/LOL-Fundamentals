@@ -5,12 +5,6 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>LoL Fundamentals – Skills Hub</title>
 
-<script>
-  if (localStorage.getItem('lolfundamentals_logged_in') !== 'true') {
-    window.location.replace('login.html');
-  }
-</script>
-
 <style>
 body {
   margin: 0;
@@ -22,6 +16,7 @@ body {
   min-height: 100vh;
   display: flex;
   flex-direction: column;
+  align-items: center;
 }
 
 /* Overlay */
@@ -45,17 +40,17 @@ header {
   color: #c9aa71;
   letter-spacing: 1px;
   text-align: center;
+  width: 100%;
   position: fixed;
   top: 0;
   left: 0;
-  width: 100%;
   z-index: 100;
 }
 
 /* Back button */
 .back-button {
-  display: inline-block;
-  margin: 100px auto 20px;
+  display: block;
+  margin: 100px auto 20px; /* space from header */
   padding: 10px 20px;
   background: linear-gradient(135deg, #c9aa71, #e0c77b);
   color: #000;
@@ -63,8 +58,10 @@ header {
   border-radius: 8px;
   font-weight: bold;
   font-size: 16px;
-  transition: all 0.3s;
+  text-align: center;
   box-shadow: 0 0 10px rgba(201,170,113,0.5);
+  width: 220px;
+  max-width: 90%;
 }
 .back-button::before { content: "← "; }
 .back-button:hover {
@@ -74,7 +71,7 @@ header {
 
 /* Dropdown */
 #section-select-container {
-  margin: 20px auto;
+  margin-bottom: 30px;
 }
 #section-select {
   padding: 10px 15px;
@@ -89,6 +86,8 @@ header {
   -moz-appearance: none;
   width: 220px;
   max-width: 90%;
+  display: block;
+  margin: 0 auto;
   background-image: url("data:image/svg+xml;utf8,<svg fill='%23c9aa71' height='12' viewBox='0 0 24 24' width='12' xmlns='http://www.w3.org/2000/svg'><path d='M7 10l5 5 5-5z'/></svg>");
   background-repeat: no-repeat;
   background-position: right 12px center;
@@ -105,16 +104,14 @@ header {
   text-align: left;
   font-size: 18px;
   margin-bottom: 30px;
-  color: #fff; /* main text white */
+  color: #fff; /* all text white */
 }
-
-#intro-box strong, #intro-box li strong {
-  color: #c9aa71; /* only titles in gold */
+#intro-box .gold {
+  color: #c9aa71; /* only Welcome is gold */
 }
 
 /* Skills section */
 #skills-container {
-  margin-top: 20px;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -141,7 +138,6 @@ header {
   box-shadow: 0 4px 12px rgba(0,0,0,0.5);
   transition: transform 0.25s, box-shadow 0.3s;
 }
-
 .skill-list li a {
   text-decoration: none;
   color: #fff;
@@ -168,9 +164,10 @@ footer {
 /* Mobile adjustments */
 @media(max-width: 700px){
   header { font-size: 18px; padding: 10px 15px; }
-  #section-select { width: 90%; font-size: 14px; padding: 8px 10px; }
+  .back-button { width: 90%; font-size: 16px; }
+  #section-select { width: 90%; font-size: 16px; padding: 10px 15px; }
+  #intro-box { width: 90%; font-size: 16px; }
   .skill-list li { width: 85vw; font-size: 16px; padding: 14px; }
-  #intro-box { width: 85vw; font-size: 16px; }
 }
 </style>
 </head>
@@ -194,7 +191,7 @@ footer {
 
 <div id="skills-container">
   <div id="intro-box">
-    <p><strong>Welcome to the Skills Hub!</strong></p>
+    <p><span class="gold"><strong>Welcome to the Skills Hub!</strong></span></p>
     <p>Here’s what each section covers:</p>
     <ul>
       <li><strong>Pre Game:</strong> Champion select, summoner spells, communication, and build planning.</li>
@@ -244,13 +241,11 @@ sectionSelect.addEventListener('change', () => {
     ).join('');
   }
 });
-
-sectionSelect.value = "Select a section";
-introBox.style.display = 'block';
-skillList.style.display = 'none';
 </script>
 
 </body>
 </html>
+
+
 
 
