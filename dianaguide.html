@@ -188,93 +188,130 @@ const sections = {
   `,
 
   "Build": `
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Diana Build</title>
+<style>
+  body { font-family: Arial, sans-serif; color: #fff; background-color: #111; padding: 20px; }
+  .build-section { margin-bottom: 30px; }
+  .build-section h3 { margin-bottom: 10px; color: #ffd700; }
+  ul { list-style: none; padding-left: 0; }
+  li { margin-bottom: 10px; }
+  li img { vertical-align: middle; margin-right: 8px; }
+  .full-build-grid { display: grid; grid-template-columns: repeat(3, auto); gap: 4px; align-items: center; }
+  .full-build-grid img { width: 28px; height: 28px; }
+</style>
+</head>
+<body>
+
 <h2>Build</h2>
 
+<!-- Starting Items -->
 <div class="build-section">
   <h3>Starting Items</h3>
-  <ul style="list-style:none; padding-left:0;">
-    <li style="margin-bottom:1em;">
-      <img src="https://ddragon.leagueoflegends.com/cdn/25.23.1/img/item/1056.png" width="32" style="vertical-align:middle; margin-right:8px;" alt="Doran's Ring">
+  <ul>
+    <li>
+      <img src="https://ddragon.leagueoflegends.com/cdn/25.23.1/img/item/1056.png" alt="Doran's Ring" width="32">
       <strong>Doran’s Ring:</strong> The most efficient item in the game and it gives the perfect stats for laning.
     </li>
-    <li style="margin-bottom:1em;">
-      <img src="https://ddragon.leagueoflegends.com/cdn/25.23.1/img/item/1082.png" width="32" style="vertical-align:middle; margin-right:8px;" alt="Dark Seal">
+    <li>
+      <img src="https://ddragon.leagueoflegends.com/cdn/25.23.1/img/item/1082.png" alt="Dark Seal" width="32">
       <strong>Dark Seal:</strong> I always buy this unless I can build a full Stormsurge on my first buy. The health, AP, and snowball potential is exactly what Diana needs. It’s worth it even though I rarely upgrade it to Mejai’s Soulstealer.
     </li>
-    <li style="margin-bottom:1em;">
-      <img src="https://ddragon.leagueoflegends.com/cdn/25.23.1/img/item/1029.png" width="32" style="vertical-align:middle; margin-right:8px;" alt="Cloth Armor">
+    <li>
+      <img src="https://ddragon.leagueoflegends.com/cdn/25.23.1/img/item/1029.png" alt="Cloth Armor" width="32">
       <strong>Cloth Armor:</strong> I’ll purchase this after Dark Seal or if I only have 300 gold on the first back and I’m against an AD mid/jg combo like Qiyana/Graves.
     </li>
-    <li style="margin-bottom:1em;">
-      <img src="https://ddragon.leagueoflegends.com/cdn/25.23.1/img/item/1033.png" width="32" style="vertical-align:middle; margin-right:8px;" alt="Null Magic Mantle">
-      <strong>Null Magic Mantle:</strong> This is the most efficient item besides the Doran’s items. Always look to pick this up against an AP mid/jg combo or even against poke champions like Ezreal. Magic resistance is the strongest against poke champions because of their longer cooldowns/low execute damage and sustain damage and their need to land poke to be able to play up in lane.
+    <li>
+      <img src="https://ddragon.leagueoflegends.com/cdn/25.23.1/img/item/1033.png" alt="Null Magic Mantle" width="32">
+      <strong>Null Magic Mantle:</strong> This is the most efficient item besides the Doran’s items. Always look to pick this up against an AP mid/jg combo or even against poke champions like Ezreal.
     </li>
-    <li style="margin-bottom:1em;">
-      <img src="https://ddragon.leagueoflegends.com/cdn/25.23.1/img/item/3111.png" width="32" style="vertical-align:middle; margin-right:8px;" alt="Mercury's Treads">
-      <strong>Mercury Treads:</strong> If the Null Magic Mantle was purchased it’s often upgraded into Merc Treads unless it’s a low CC AP mid/jg combo of Azir/Nidalee for example. Tenacity is also a crucial stat for Diana. I’ll mostly wait for Elixir of Iron to gain tenacity since Magic Pen boots are often more important at the moment and MR can be gained through Banshee's Veil.
+    <li>
+      <img src="https://ddragon.leagueoflegends.com/cdn/25.23.1/img/item/3111.png" alt="Mercury's Treads" width="32">
+      <strong>Mercury Treads:</strong> Often upgraded from Null Magic Mantle; tenacity is crucial.
     </li>
-    <li style="margin-bottom:1em;">
-      <img src="https://ddragon.leagueoflegends.com/cdn/25.23.1/img/item/3020.png" width="32" style="vertical-align:middle; margin-right:8px;" alt="Sorcerer's Shoes">
-      <strong>Sorcerer's Shoes:</strong> Diana’s best boot option now. Diana’s ratios have been buffed but she still heavily relies on her base damages. Pen boots work well early, although magic penetration naturally falls off making additional pen after the first item like Stormsurge unnecessary.
+    <li>
+      <img src="https://ddragon.leagueoflegends.com/cdn/25.23.1/img/item/3020.png" alt="Sorcerer's Shoes" width="32">
+      <strong>Sorcerer's Shoes:</strong> Best boot option for Diana now.
     </li>
-    <li style="margin-bottom:1em;">
-      <img src="https://ddragon.leagueoflegends.com/cdn/25.23.1/img/item/3047.png" width="32" style="vertical-align:middle; margin-right:8px;" alt="Ninja Tabi">
-      <strong>Ninja Tabi:</strong> Always build Sorcerer Shoes instead of tank boots even against full AD team compositions. AD champions inherently have high DPS making defensive options worse. The combination of pen boots plus early Hourglass is significantly better.
+    <li>
+      <img src="https://ddragon.leagueoflegends.com/cdn/25.23.1/img/item/3047.png" alt="Ninja Tabi" width="32">
+      <strong>Ninja Tabi:</strong> Rarely used; pen boots + early Hourglass is better.
     </li>
   </ul>
 </div>
 
+<!-- Core Items -->
 <div class="build-section">
   <h3>Core Items</h3>
-  <ul style="list-style:none; padding-left:0;">
-    <li style="margin-bottom:1em;">
-      <img src="https://ddragon.leagueoflegends.com/cdn/25.23.1/img/item/4646.png" width="32" style="vertical-align:middle; margin-right:8px;" alt="Stormsurge">
-      <strong>Stormsurge:</strong> Diana’s best early damage spike and the most efficient first item for her new kit. The movement burst feels perfect for sticking to targets. :contentReference[oaicite:2]{index=2}
+  <ul>
+    <li>
+      <img src="https://ddragon.leagueoflegends.com/cdn/25.23.1/img/item/4646.png" alt="Stormsurge" width="32">
+      <strong>Stormsurge:</strong> Early damage spike, stickiness, Q→R setups.
     </li>
-    <li style="margin-bottom:1em;">
-      <img src="https://ddragon.leagueoflegends.com/cdn/25.23.1/img/item/3157.png" width="32" style="vertical-align:middle; margin-right:8px;" alt="Zhonya's Hourglass">
-      <strong>Hourglass:</strong> This is Diana's most core item now after her rework. I'll always buy this item second or even first against some AD Mid/JG combos.
+    <li>
+      <img src="https://ddragon.leagueoflegends.com/cdn/25.23.1/img/item/3157.png" alt="Zhonya's Hourglass" width="32">
+      <strong>Hourglass:</strong> Core defensive + engage item.
     </li>
-    <li style="margin-bottom:1em;">
-      <img src="https://ddragon.leagueoflegends.com/cdn/25.23.1/img/item/3102.png" width="32" style="vertical-align:middle; margin-right:8px;" alt="Banshee's Veil">
-      <strong>Banshee’s Veil:</strong> This is core part of Diana’s build now since she almost always opts for magic penetration boots. It’s the best way for Diana to gain MR, helps guarantee a combo/engage, and makes her harder to pick off.
+    <li>
+      <img src="https://ddragon.leagueoflegends.com/cdn/25.23.1/img/item/3102.png" alt="Banshee's Veil" width="32">
+      <strong>Banshee’s Veil:</strong> MR + combo guarantee.
     </li>
-    <li style="margin-bottom:1em;">
-      <img src="https://ddragon.leagueoflegends.com/cdn/25.23.1/img/item/3089.png" width="32" style="vertical-align:middle; margin-right:8px;" alt="Rabadon's Deathcap">
-      <strong>Death Cap:</strong> Diana’s ratios have been heavily nerfed but still a good late game option after Hourglass and Banshee’s.
+    <li>
+      <img src="https://ddragon.leagueoflegends.com/cdn/25.23.1/img/item/3089.png" alt="Rabadon's Deathcap" width="32">
+      <strong>Death Cap:</strong> Late-game AP spike.
     </li>
-    <li style="margin-bottom:1em;">
-      <img src="https://ddragon.leagueoflegends.com/cdn/25.23.1/img/item/3137.png" width="32" style="vertical-align:middle; margin-right:8px;" alt="Cryptbloom">
-      <strong>Cryptbloom:</strong> Gives AP, ability haste, penetration, and a healing nova passive. :contentReference[oaicite:3]{index=3}
+    <li>
+      <img src="https://ddragon.leagueoflegends.com/cdn/25.23.1/img/item/3137.png" alt="Cryptbloom" width="32">
+      <strong>Cryptbloom:</strong> AP, ability haste, healing.
     </li>
   </ul>
 </div>
 
+<!-- Elixirs -->
 <div class="build-section">
   <h3>Elixirs</h3>
-  <ul style="list-style:none; padding-left:0;">
-    <li style="margin-bottom:1em;">
-      <img src="https://ddragon.leagueoflegends.com/cdn/25.23.1/img/item/2138.png" width="32" style="vertical-align:middle; margin-right:8px;" alt="Elixir of Iron">
-      <strong>Elixir of Iron:</strong> I’ll almost always opt for this elixir instead of Sorcery for the tenacity and health.
+  <ul>
+    <li>
+      <img src="https://ddragon.leagueoflegends.com/cdn/25.23.1/img/item/2138.png" alt="Elixir of Iron" width="32">
+      <strong>Elixir of Iron:</strong> Tenacity + health.
     </li>
-    <li style="margin-bottom:1em;">
-      <img src="https://ddragon.leagueoflegends.com/cdn/25.23.1/img/item/2139.png" width="32" style="vertical-align:middle; margin-right:8px;" alt="Elixir of Sorcery">
-      <strong>Elixir of Sorcery:</strong> Helps Diana push towers even faster. I won’t start buying Elixirs on Diana until very late though because she has so many core items to complete.
+    <li>
+      <img src="https://ddragon.leagueoflegends.com/cdn/25.23.1/img/item/2139.png" alt="Elixir of Sorcery" width="32">
+      <strong>Elixir of Sorcery:</strong> Push towers faster.
     </li>
   </ul>
 </div>
 
+<!-- Example Full Build -->
 <div class="build-section">
   <h3>Example Standard Full Build</h3>
-  <div style="display: grid; grid-template-columns: repeat(3, auto); gap: 4px; align-items: center;">
-    <img src="https://ddragon.leagueoflegends.com/cdn/25.23.1/img/item/3020.png" width="28" alt="Sorcerer’s Shoes">
-    <img src="https://ddragon.leagueoflegends.com/cdn/25.23.1/img/item/4646.png" width="28" alt="Stormsurge">
-    <img src="https://ddragon.leagueoflegends.com/cdn/25.23.1/img/item/3157.png" width="28" alt="Zhonya’s Hourglass">
-    <img src="https://ddragon.leagueoflegends.com/cdn/25.23.1/img/item/3102.png" width="28" alt="Banshee’s Veil">
-    <img src="https://ddragon.leagueoflegends.com/cdn/25.23.1/img/item/3089.png" width="28" alt="Rabadon’s Deathcap">
-    <img src="https://ddragon.leagueoflegends.com/cdn/25.23.1/img/item/3137.png" width="28" alt="Cryptbloom">
+  <div class="full-build-grid">
+    <img src="https://ddragon.leagueoflegends.com/cdn/25.23.1/img/item/3020.png" alt="Sorcerer’s Shoes">
+    <img src="https://ddragon.leagueoflegends.com/cdn/25.23.1/img/item/4646.png" alt="Stormsurge">
+    <img src="https://ddragon.leagueoflegends.com/cdn/25.23.1/img/item/3157.png" alt="Zhonya’s Hourglass">
+    <img src="https://ddragon.leagueoflegends.com/cdn/25.23.1/img/item/3102.png" alt="Banshee’s Veil">
+    <img src="https://ddragon.leagueoflegends.com/cdn/25.23.1/img/item/3089.png" alt="Rabadon’s Deathcap">
+    <img src="https://ddragon.leagueoflegends.com/cdn/25.23.1/img/item/3137.png" alt="Cryptbloom">
   </div>
 </div>
+
+<!-- Example Gold Buys -->
+<div class="build-section">
+  <h3>Example Gold Buys</h3>
+  <ul>
+    <li>
+      <strong>500 Gold:</strong> Dark Seal + Refillable Potion. Early sustain and snowball potential.
+    </li>
+    <li>
+      <strong>1100 Gold:</strong> Alternator vs Pen Boots: If I have tier one boots and 800 gold, the choice depends on whether I died recently or need early penetration to trade effectively.
+    </li>
+  </ul>
+</div>
+
 
   `,
 
@@ -527,6 +564,7 @@ sectionSelect.addEventListener('change', () => {
 
 </body>
 </html>
+
 
 
 
