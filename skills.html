@@ -89,33 +89,22 @@ header {
   background-size: 12px;
 }
 
-/* Restored main content box */
-#skills-box {
-  width: 60vw;
-  max-width: 900px;
-  background: rgba(0,0,0,0.85);
-  border: 2px solid #c9aa71;
-  border-radius: 16px;
-  margin: 40px auto;
-  padding: 30px;
-  box-shadow: 0 8px 22px rgba(0,0,0,0.7);
-  text-align: left;
-}
-
 /* Search bar */
 #skill-search {
-  display: none;
-  width: 100%;
+  display: block;
+  width: 56vw;
+  max-width: 600px;
   padding: 10px 14px;
   border-radius: 8px;
   border: 2px solid #c9aa71;
   background: rgba(0,0,0,0.7);
   color: #fff;
   font-size: 16px;
-  margin-bottom: 20px;
+  margin: 20px auto;
+  text-align: center;
 }
 
-/* Skill list */
+/* Skill list + checkmarks */
 .skill-list {
   list-style: none;
   padding: 0;
@@ -132,6 +121,10 @@ header {
   padding: 18px 20px;
   margin-bottom: 20px;
   font-size: 18px;
+  width: 56vw;
+  max-width: 1400px;
+  margin-left: auto;
+  margin-right: auto;
   box-shadow: 0 4px 12px rgba(0,0,0,0.5);
   transition: transform 0.25s, box-shadow 0.3s;
 }
@@ -150,7 +143,6 @@ header {
   text-align: center;
 }
 
-/* Checkmarks */
 .checkmark {
   width: 26px;
   height: 26px;
@@ -177,6 +169,18 @@ footer {
   color: #fff;
   margin-top: auto;
 }
+
+@media(max-width: 700px){
+  header { font-size: 18px; padding: 10px 15px; }
+  #section-select { 
+    width: 95vw;
+    font-size: 14px;
+    padding: 8px 30px 8px 12px;
+  }
+  #skill-search { width: 90%; }
+  .skill-list li { width: 85vw; font-size: 16px; padding: 14px; }
+  #intro-box { width: 85vw; font-size: 16px; }
+}
 </style>
 </head>
 <body>
@@ -197,9 +201,7 @@ footer {
   </select>
 </div>
 
-<!-- NEW RESTORED CONTENT BOX -->
-<div id="skills-box">
-
+<div id="skills-container">
   <div id="intro-box">
     <p><strong>Welcome to the Skills Hub!</strong></p>
     <p>Here’s what each section covers:</p>
@@ -211,19 +213,19 @@ footer {
       <li><strong>Advanced:</strong> Animation cancelling, positioning, and high-level strategy.</li>
       <li><strong>Out of Game:</strong> Setup, mindset, and meta knowledge.</li>
     </ul>
+
+    <!-- Search bar ONLY on intro page -->
+    <input type="text" id="skill-search" placeholder="Search skills...">
+    
     <p>Select a section above to see the skill cards.</p>
   </div>
 
-  <input type="text" id="skill-search" placeholder="Search skills...">
-
   <ul class="skill-list" id="skill-list" style="display:none;"></ul>
-
 </div>
 
 <footer>© 2025 LoL Fundamentals · All rights reserved</footer>
 
 <script>
-// Skill data
 const skillData = {
   "Pre Game": ["Champion Select","Mouse Accuracy","Summoner Spells","Matchups","Communication","Build"],
   "Early Game": ["Level 1","Farming","Trading","Wave Control","Back Timings","Power Spikes","Pathing","Laning","Map Awareness","Ganking","Roaming"],
@@ -245,16 +247,17 @@ const introBox = document.getElementById('intro-box');
 const skillSearch = document.getElementById('skill-search');
 
 function renderSkills(section) {
+  // Show search bar only on intro page
+  skillSearch.style.display = section === "Select a section" ? "block" : "none";
+
   if (section === "Select a section") {
     introBox.style.display = 'block';
     skillList.style.display = 'none';
-    skillSearch.style.display = 'none';
     return;
   }
 
   introBox.style.display = 'none';
   skillList.style.display = 'block';
-  skillSearch.style.display = 'block';
   skillSearch.value = "";
 
   const skills = skillData[section];
@@ -310,5 +313,7 @@ document.querySelector('.back-button').addEventListener('click', () => {
 
 </body>
 </html>
+
+
 
 
