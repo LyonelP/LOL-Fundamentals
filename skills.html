@@ -139,7 +139,7 @@ header {
   margin-bottom: 20px;
   font-size: 18px;
   width: 56vw;
-  max-width: 1400px;
+  max-width: 900px;
   margin-left: auto;
   margin-right: auto;
   box-shadow: 0 4px 12px rgba(0,0,0,0.5);
@@ -222,13 +222,13 @@ footer {
     <input type="text" id="skill-search" placeholder="Search skills...">
 
     <p>Here’s what each section covers:</p>
-    <ul>
-      <li><strong>Pre Game:</strong> Champion select, summoner spells, communication, and build planning.</li>
-      <li><strong>Early Game:</strong> Laning, farming, trading, pathing, and first ganks.</li>
-      <li><strong>Mid Game:</strong> Team fights, objectives, roaming, and map control.</li>
-      <li><strong>Late Game:</strong> Damage prioritization, rotations, and closing out.</li>
-      <li><strong>Advanced:</strong> Animation cancelling, positioning, and high-level strategy.</li>
-      <li><strong>Out of Game:</strong> Setup, mindset, and meta knowledge.</li>
+    <ul id="intro-skills-list">
+      <li>Pre Game: Champion select, summoner spells, communication, and build planning.</li>
+      <li>Early Game: Laning, farming, trading, pathing, and first ganks.</li>
+      <li>Mid Game: Team fights, objectives, roaming, and map control.</li>
+      <li>Late Game: Damage prioritization, rotations, and closing out.</li>
+      <li>Advanced: Animation cancelling, positioning, and high-level strategy.</li>
+      <li>Out of Game: Setup, mindset, and meta knowledge.</li>
     </ul>
     <p>Select a section above to see the skill cards.</p>
   </div>
@@ -258,9 +258,9 @@ const sectionSelect = document.getElementById('section-select');
 const skillList = document.getElementById('skill-list');
 const introBox = document.getElementById('intro-box');
 const skillSearch = document.getElementById('skill-search');
+const introSkillsList = document.getElementById('intro-skills-list');
 
 function renderSkills(section) {
-  // Show search bar only on intro page
   skillSearch.style.display = section === "Select a section" ? "block" : "none";
 
   if (section === "Select a section") {
@@ -297,11 +297,11 @@ function toggleCheck(section, skill, element) {
   element.innerHTML = element.classList.contains("completed") ? "✔" : "";
 }
 
+// Search only filters the intro skills list on the intro page
 skillSearch.addEventListener("input", () => {
   const query = skillSearch.value.toLowerCase();
-  document.querySelectorAll("#skill-list li").forEach(li => {
-    const text = li.dataset.skill.toLowerCase();
-    li.style.display = text.includes(query) ? "flex" : "none";
+  introSkillsList.querySelectorAll("li").forEach(li => {
+    li.style.display = li.textContent.toLowerCase().includes(query) ? "list-item" : "none";
   });
 });
 
@@ -326,5 +326,4 @@ document.querySelector('.back-button').addEventListener('click', () => {
 
 </body>
 </html>
-
 
