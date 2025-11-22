@@ -87,12 +87,15 @@ header {
   background-repeat: no-repeat;
   background-position: right 10px center;
   background-size: 12px;
+  appearance: none;
+  -webkit-appearance: none;
+  -moz-appearance: none;
 }
 
-/* Search bar */
+/* Search bar inside intro box */
 #skill-search {
   display: block;
-  width: 56vw;
+  width: 95%;
   max-width: 600px;
   padding: 10px 14px;
   border-radius: 8px;
@@ -100,8 +103,22 @@ header {
   background: rgba(0,0,0,0.7);
   color: #fff;
   font-size: 16px;
-  margin: 20px auto;
+  margin: 10px auto 20px auto;
   text-align: center;
+}
+
+/* Intro box */
+#intro-box {
+  max-width: 900px;
+  background: rgba(0,0,0,0.7);
+  border: 2px solid #c9aa71;
+  border-radius: 12px;
+  padding: 20px;
+  text-align: left;
+  font-size: 18px;
+  margin-bottom: 30px;
+  margin-left: auto;
+  margin-right: auto;
 }
 
 /* Skill list + checkmarks */
@@ -172,11 +189,7 @@ footer {
 
 @media(max-width: 700px){
   header { font-size: 18px; padding: 10px 15px; }
-  #section-select { 
-    width: 95vw;
-    font-size: 14px;
-    padding: 8px 30px 8px 12px;
-  }
+  #section-select { width: 95vw; font-size: 14px; padding: 8px 30px 8px 12px; }
   #skill-search { width: 90%; }
   .skill-list li { width: 85vw; font-size: 16px; padding: 14px; }
   #intro-box { width: 85vw; font-size: 16px; }
@@ -204,6 +217,10 @@ footer {
 <div id="skills-container">
   <div id="intro-box">
     <p><strong>Welcome to the Skills Hub!</strong></p>
+
+    <!-- Search bar inside intro box -->
+    <input type="text" id="skill-search" placeholder="Search skills...">
+
     <p>Here’s what each section covers:</p>
     <ul>
       <li><strong>Pre Game:</strong> Champion select, summoner spells, communication, and build planning.</li>
@@ -213,10 +230,6 @@ footer {
       <li><strong>Advanced:</strong> Animation cancelling, positioning, and high-level strategy.</li>
       <li><strong>Out of Game:</strong> Setup, mindset, and meta knowledge.</li>
     </ul>
-
-    <!-- Search bar ONLY on intro page -->
-    <input type="text" id="skill-search" placeholder="Search skills...">
-    
     <p>Select a section above to see the skill cards.</p>
   </div>
 
@@ -313,7 +326,5 @@ document.querySelector('.back-button').addEventListener('click', () => {
 
 </body>
 </html>
-
-
 
 
