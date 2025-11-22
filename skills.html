@@ -89,11 +89,23 @@ header {
   background-size: 12px;
 }
 
-/* 🔍 Search bar */
+/* Restored main content box */
+#skills-box {
+  width: 60vw;
+  max-width: 900px;
+  background: rgba(0,0,0,0.85);
+  border: 2px solid #c9aa71;
+  border-radius: 16px;
+  margin: 40px auto;
+  padding: 30px;
+  box-shadow: 0 8px 22px rgba(0,0,0,0.7);
+  text-align: left;
+}
+
+/* Search bar */
 #skill-search {
   display: none;
-  width: 56vw;
-  max-width: 600px;
+  width: 100%;
   padding: 10px 14px;
   border-radius: 8px;
   border: 2px solid #c9aa71;
@@ -103,7 +115,7 @@ header {
   margin-bottom: 20px;
 }
 
-/* Skill list + checkmarks */
+/* Skill list */
 .skill-list {
   list-style: none;
   padding: 0;
@@ -120,10 +132,6 @@ header {
   padding: 18px 20px;
   margin-bottom: 20px;
   font-size: 18px;
-  width: 56vw;
-  max-width: 1400px;
-  margin-left: auto;
-  margin-right: auto;
   box-shadow: 0 4px 12px rgba(0,0,0,0.5);
   transition: transform 0.25s, box-shadow 0.3s;
 }
@@ -142,7 +150,7 @@ header {
   text-align: center;
 }
 
-/* ✔️ Checkmark button */
+/* Checkmarks */
 .checkmark {
   width: 26px;
   height: 26px;
@@ -189,7 +197,9 @@ footer {
   </select>
 </div>
 
-<div id="skills-container">
+<!-- NEW RESTORED CONTENT BOX -->
+<div id="skills-box">
+
   <div id="intro-box">
     <p><strong>Welcome to the Skills Hub!</strong></p>
     <p>Here’s what each section covers:</p>
@@ -204,10 +214,10 @@ footer {
     <p>Select a section above to see the skill cards.</p>
   </div>
 
-  <!-- Search Bar -->
   <input type="text" id="skill-search" placeholder="Search skills...">
 
   <ul class="skill-list" id="skill-list" style="display:none;"></ul>
+
 </div>
 
 <footer>© 2025 LoL Fundamentals · All rights reserved</footer>
@@ -223,7 +233,6 @@ const skillData = {
   "Out of Game": ["Setup","Mindset","Not Raging/Blaming","Reaction Time","Meta"]
 };
 
-// Load saved skill progress
 let skillProgress = JSON.parse(localStorage.getItem("skillProgress") || "{}");
 
 function saveProgress() {
@@ -235,7 +244,6 @@ const skillList = document.getElementById('skill-list');
 const introBox = document.getElementById('intro-box');
 const skillSearch = document.getElementById('skill-search');
 
-// Render skills
 function renderSkills(section) {
   if (section === "Select a section") {
     introBox.style.display = 'block';
@@ -251,13 +259,7 @@ function renderSkills(section) {
 
   const skills = skillData[section];
   skillList.innerHTML = skills.map(skill => {
-    const id = `${section}-${skill}`;
-
-    const completed =
-      skillProgress[section]?.[skill] === true
-        ? "completed"
-        : "";
-
+    const completed = skillProgress?.[section]?.[skill] ? "completed" : "";
     const link = skill.toLowerCase().replace(/[^a-z0-9]/g,'') + ".html";
 
     return `
@@ -270,7 +272,6 @@ function renderSkills(section) {
   }).join('');
 }
 
-// Toggle skill completion
 function toggleCheck(section, skill, element) {
   skillProgress[section] = skillProgress[section] || {};
   skillProgress[section][skill] = !skillProgress[section][skill];
@@ -280,7 +281,6 @@ function toggleCheck(section, skill, element) {
   element.innerHTML = element.classList.contains("completed") ? "✔" : "";
 }
 
-// Search bar functionality
 skillSearch.addEventListener("input", () => {
   const query = skillSearch.value.toLowerCase();
   document.querySelectorAll("#skill-list li").forEach(li => {
@@ -289,7 +289,6 @@ skillSearch.addEventListener("input", () => {
   });
 });
 
-// Restore last section
 const lastSection = localStorage.getItem('lastSection');
 if (lastSection && skillData[lastSection]) {
   sectionSelect.value = lastSection;
@@ -304,7 +303,6 @@ sectionSelect.addEventListener('change', () => {
   if (selected !== "Select a section") localStorage.setItem('lastSection', selected);
 });
 
-// Clear lastSection when leaving hub
 document.querySelector('.back-button').addEventListener('click', () => {
   localStorage.removeItem('lastSection');
 });
@@ -312,7 +310,5 @@ document.querySelector('.back-button').addEventListener('click', () => {
 
 </body>
 </html>
-
-
 
 
