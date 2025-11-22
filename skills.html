@@ -92,21 +92,6 @@ header {
   -moz-appearance: none;
 }
 
-/* Search bar inside intro box */
-#skill-search {
-  display: block;
-  width: 95%;
-  max-width: 600px;
-  padding: 10px 14px;
-  border-radius: 8px;
-  border: 2px solid #c9aa71;
-  background: rgba(0,0,0,0.7);
-  color: #fff;
-  font-size: 16px;
-  margin: 10px auto 20px auto;
-  text-align: center;
-}
-
 /* Intro box */
 #intro-box {
   max-width: 900px;
@@ -135,7 +120,7 @@ header {
   background: rgba(0,0,0,0.85);
   border: 2px solid #c9aa71;
   border-radius: 12px;
-  padding: 18px 20px;
+  padding: 14px 18px; /* reduced padding */
   margin-bottom: 20px;
   font-size: 18px;
   width: 56vw;
@@ -190,8 +175,7 @@ footer {
 @media(max-width: 700px){
   header { font-size: 18px; padding: 10px 15px; }
   #section-select { width: 95vw; font-size: 14px; padding: 8px 30px 8px 12px; }
-  #skill-search { width: 90%; }
-  .skill-list li { width: 85vw; font-size: 16px; padding: 14px; }
+  .skill-list li { width: 85vw; font-size: 16px; padding: 10px 14px; }
   #intro-box { width: 85vw; font-size: 16px; }
 }
 </style>
@@ -217,18 +201,14 @@ footer {
 <div id="skills-container">
   <div id="intro-box">
     <p><strong>Welcome to the Skills Hub!</strong></p>
-
-    <!-- Search bar inside intro box -->
-    <input type="text" id="skill-search" placeholder="Search skills...">
-
     <p>Here’s what each section covers:</p>
-    <ul id="intro-skills-list">
-      <li>Pre Game: Champion select, summoner spells, communication, and build planning.</li>
-      <li>Early Game: Laning, farming, trading, pathing, and first ganks.</li>
-      <li>Mid Game: Team fights, objectives, roaming, and map control.</li>
-      <li>Late Game: Damage prioritization, rotations, and closing out.</li>
-      <li>Advanced: Animation cancelling, positioning, and high-level strategy.</li>
-      <li>Out of Game: Setup, mindset, and meta knowledge.</li>
+    <ul>
+      <li><strong>Pre Game:</strong> Champion select, summoner spells, communication, and build planning.</li>
+      <li><strong>Early Game:</strong> Laning, farming, trading, pathing, and first ganks.</li>
+      <li><strong>Mid Game:</strong> Team fights, objectives, roaming, and map control.</li>
+      <li><strong>Late Game:</strong> Damage prioritization, rotations, and closing out.</li>
+      <li><strong>Advanced:</strong> Animation cancelling, positioning, and high-level strategy.</li>
+      <li><strong>Out of Game:</strong> Setup, mindset, and meta knowledge.</li>
     </ul>
     <p>Select a section above to see the skill cards.</p>
   </div>
@@ -257,12 +237,8 @@ function saveProgress() {
 const sectionSelect = document.getElementById('section-select');
 const skillList = document.getElementById('skill-list');
 const introBox = document.getElementById('intro-box');
-const skillSearch = document.getElementById('skill-search');
-const introSkillsList = document.getElementById('intro-skills-list');
 
 function renderSkills(section) {
-  skillSearch.style.display = section === "Select a section" ? "block" : "none";
-
   if (section === "Select a section") {
     introBox.style.display = 'block';
     skillList.style.display = 'none';
@@ -271,7 +247,6 @@ function renderSkills(section) {
 
   introBox.style.display = 'none';
   skillList.style.display = 'block';
-  skillSearch.value = "";
 
   const skills = skillData[section];
   skillList.innerHTML = skills.map(skill => {
@@ -296,14 +271,6 @@ function toggleCheck(section, skill, element) {
   element.classList.toggle("completed");
   element.innerHTML = element.classList.contains("completed") ? "✔" : "";
 }
-
-// Search only filters the intro skills list on the intro page
-skillSearch.addEventListener("input", () => {
-  const query = skillSearch.value.toLowerCase();
-  introSkillsList.querySelectorAll("li").forEach(li => {
-    li.style.display = li.textContent.toLowerCase().includes(query) ? "list-item" : "none";
-  });
-});
 
 const lastSection = localStorage.getItem('lastSection');
 if (lastSection && skillData[lastSection]) {
