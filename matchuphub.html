@@ -45,18 +45,18 @@ header {
   letter-spacing: 1px;
   text-align: center;
   line-height: 1.2;
+  box-sizing: border-box;
   width: 100%;
   position: fixed;
   top: 0;
   left: 0;
   z-index: 100;
-  box-sizing: border-box;
 }
 
 /* Back button */
 .back-button {
   display: block;
-  margin: 100px auto 20px; /* pushed below header */
+  margin: 100px auto 20px; /* pushed below fixed header */
   padding: 10px 20px;
   background: linear-gradient(135deg, #c9aa71, #e0c77b);
   color: #000;
@@ -92,11 +92,12 @@ header {
 /* Champion grid */
 .champion-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(100px, 1fr));
-  gap: 15px;
-  max-width: 1200px;
+  grid-template-columns: repeat(7, 1fr);
+  gap: 20px;
+  max-width: 1000px;
   margin: 0 auto 50px;
   padding: 0 20px;
+  margin-top: 0;
 }
 
 .champion-card {
@@ -115,10 +116,11 @@ header {
   box-shadow: 0 10px 25px rgba(0,0,0,0.5);
 }
 .champion-card img {
-  width: 100%;
-  max-width: 80px;
-  height: auto;
-  margin: 0 auto 10px;
+  width: 80px;
+  height: 80px;
+  border-radius: 8px;
+  margin-bottom: 10px;
+  object-fit: contain;
 }
 .champion-name {
   font-size: 16px;
@@ -134,18 +136,29 @@ footer {
   margin-top: auto;
 }
 
-/* Responsive adjustments */
+/* Responsive */
 @media (max-width: 1000px) {
-  .champion-grid { grid-template-columns: repeat(auto-fit, minmax(100px, 1fr)); }
+  .champion-grid {
+    grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+  }
 }
 @media (max-width: 700px) {
-  .back-button { margin: 80px auto 20px; padding: 8px 12px; font-size: 14px; }
-  #champion-search { width: 95%; font-size: 14px; }
-  .champion-card img { max-width: 60px; }
+  header {
+    font-size: 20px;
+    padding: 15px 10px;
+    letter-spacing: 0.5px;
+  }
+  .champion-card img { width: 60px; height: 60px; }
   .champion-name { font-size: 14px; }
+  .back-button { font-size: 14px; padding: 8px 12px; }
+  #champion-search { width: 90%; font-size: 14px; }
 }
 @media (max-width: 500px) {
-  .champion-grid { grid-template-columns: repeat(2, 1fr); gap: 12px; }
+  .champion-grid { grid-template-columns: repeat(2, 1fr); }
+  header {
+    font-size: 18px;
+    padding: 12px 10px;
+  }
 }
 </style>
 </head>
@@ -238,4 +251,3 @@ searchInput.addEventListener('input', () => {
 
 </body>
 </html>
-
