@@ -47,16 +47,12 @@ header {
   line-height: 1.2;
   box-sizing: border-box;
   width: 100%;
-  position: fixed; /* desktop stays fixed */
-  top: 0;
-  left: 0;
-  z-index: 100;
 }
 
 /* Back button */
 .back-button {
   display: block;
-  margin: 100px auto 20px; /* pushed below fixed header on desktop */
+  margin: 20px auto 20px; 
   padding: 10px 20px;
   background: linear-gradient(135deg, #c9aa71, #e0c77b);
   color: #000;
@@ -97,7 +93,6 @@ header {
   max-width: 1000px;
   margin: 0 auto 50px;
   padding: 0 20px;
-  margin-top: 0;
 }
 
 .champion-card {
@@ -136,34 +131,17 @@ footer {
   margin-top: auto;
 }
 
-/* Desktop responsive tweaks */
 @media (max-width: 1000px) {
   .champion-grid {
     grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
   }
 }
-
-/* Mobile tweaks */
 @media (max-width: 700px) {
-  header {
-    position: static; /* scrolls with page on mobile */
-    padding: 20px 10px;
-  }
-  .back-button {
-    margin: 10px auto 20px; /* right below header on mobile */
-    font-size: 16px;
-    padding: 10px 20px;
-  }
-  #champion-search {
-    margin-top: 10px; /* slightly higher */
-    width: 90%;
-    font-size: 14px;
-  }
-  .champion-card img { width: 70px; height: 70px; }
-  .champion-name { font-size: 14px; }
+  .champion-card img { width: 80px; height: 80px; }
+  .champion-name { font-size: 16px; }
+  .back-button { font-size: 16px; padding: 10px 20px; }
+  #champion-search { margin-top: 10px; width: 90%; font-size: 16px; }
 }
-
-/* Very small screens */
 @media (max-width: 500px) {
   .champion-grid { grid-template-columns: repeat(2, 1fr); }
 }
@@ -258,7 +236,6 @@ searchInput.addEventListener('input', () => {
 
 </body>
 </html>
-
 
 
 
