@@ -56,7 +56,7 @@ header {
 /* Back button */
 .back-button {
   display: block;
-  margin: 100px auto 20px; /* desktop default */
+  margin: 100px auto 20px; /* pushed below fixed header */
   padding: 10px 20px;
   background: linear-gradient(135deg, #c9aa71, #e0c77b);
   color: #000;
@@ -136,41 +136,39 @@ footer {
   margin-top: auto;
 }
 
+/* Responsive */
 @media (max-width: 1000px) {
   .champion-grid {
     grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
   }
 }
 
-/* MOBILE FIXES ONLY */
 @media (max-width: 700px) {
-  /* Restore button below header and desktop size */
+  header {
+    position: static; /* scrolls with page */
+    padding: 20px 10px;
+  }
   .back-button {
-    margin-top: 120px; /* below fixed header */
+    margin: 10px auto 20px; /* below header */
     font-size: 16px;
     padding: 10px 20px;
-    width: fit-content;
   }
-
-  /* Champion cards: restore desktop size */
+  #champion-search {
+    margin-top: 10px;
+  }
   .champion-card img {
-    width: 80px;
+    width: 80px; /* same as desktop */
     height: 80px;
   }
   .champion-name {
-    font-size: 16px;
-  }
-
-  /* Search bar slightly higher */
-  #champion-search {
-    margin: 10px auto 30px;
-    width: 90%;
-    font-size: 16px;
+    font-size: 16px; /* same as desktop */
   }
 }
 
 @media (max-width: 500px) {
-  .champion-grid { grid-template-columns: repeat(2, 1fr); }
+  .champion-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
 }
 </style>
 </head>
