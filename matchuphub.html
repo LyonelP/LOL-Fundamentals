@@ -37,7 +37,7 @@ body::before {
 header {
   background: rgba(13,17,23,0.9);
   border-bottom: 2px solid #c9aa71;
-  padding: 20px 0;
+  padding: 20px;
   font-weight: bold;
   font-size: 26px;
   text-transform: uppercase;
@@ -45,6 +45,7 @@ header {
   letter-spacing: 1px;
   text-align: center;
   line-height: 1.2;
+  box-sizing: border-box;
   width: 100%;
   position: fixed;
   top: 0;
@@ -55,7 +56,7 @@ header {
 /* Back button */
 .back-button {
   display: block;
-  margin: 100px auto 20px; /* pushed below fixed header */
+  margin: 70px auto 20px; /* default desktop spacing */
   padding: 10px 20px;
   background: linear-gradient(135deg, #c9aa71, #e0c77b);
   color: #000;
@@ -135,19 +136,34 @@ footer {
   margin-top: auto;
 }
 
-/* Responsive */
+/* Desktop responsive */
 @media (max-width: 1000px) {
   .champion-grid {
     grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
   }
 }
+
+/* Mobile responsive */
 @media (max-width: 700px) {
+  .back-button {
+    margin: 60px auto 12px; /* attached to header */
+    font-size: 14px; 
+    padding: 8px 12px; 
+  }
+  #champion-search { 
+    width: 90%; 
+    font-size: 14px; 
+    margin-top: 4px;
+  }
   .champion-card img { width: 70px; height: 70px; }
   .champion-name { font-size: 15px; }
-  .back-button { font-size: 14px; padding: 8px 12px; }
-  #champion-search { width: 90%; font-size: 14px; margin-top: 80px; }
 }
+
 @media (max-width: 500px) {
+  .back-button { 
+    margin: 50px auto 10px; /* even closer on small phones */
+  }
+  #champion-search { margin-top: 2px; }
   .champion-grid { grid-template-columns: repeat(2, 1fr); }
   .champion-card img { width: 90px; height: 90px; }
   .champion-name { font-size: 16px; }
@@ -243,5 +259,3 @@ searchInput.addEventListener('input', () => {
 
 </body>
 </html>
-
-
