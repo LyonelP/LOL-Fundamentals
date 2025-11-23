@@ -5,33 +5,50 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 <title>LoL Fundamentals – The Ultimate Diana & Ekko Guide</title>
 
+<!-- Favicon -->
+<link rel="icon" href="/favicon.ico">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+
 <style>
+/* -------------------------------- */
+/* GLOBAL STYLES */
+/* -------------------------------- */
 body {
   margin: 0;
   font-family: "Beaufort for LOL", Arial, Helvetica, sans-serif;
-  background: radial-gradient(circle at top, #0f1620, #0a0f14 70%);
+  background: radial-gradient(circle at top, #0d1117, #04070a 75%);
   color: #e6edf3;
   line-height: 1.6;
+  overflow-x: hidden;
 }
 
+/* -------------------------------- */
+/* HEADER */
+/* -------------------------------- */
 header {
-  background: linear-gradient(90deg, #0a0f14, #1b2838);
+  background: linear-gradient(135deg, #0a0f14, #151c24 40%, #0a0f14);
   border-bottom: 2px solid #c9aa71;
-  padding: 18px 20px;
+  padding: 20px 20px;
   text-align: center;
   font-weight: bold;
-  font-size: 24px;
-  letter-spacing: 1.5px;
+  font-size: 26px;
+  letter-spacing: 1.8px;
   text-transform: uppercase;
   color: #c9aa71;
-  text-shadow: 0 0 8px rgba(201,170,113,0.4);
+  text-shadow: 0 0 12px rgba(201, 170, 113, 0.55);
+  box-shadow: 0 2px 14px rgba(0, 0, 0, 0.4);
 }
 
+/* -------------------------------- */
+/* HERO */
+/* -------------------------------- */
 .hero {
   position: relative;
   text-align: center;
-  padding: 140px 20px;
-  background: url("https://ddragon.leagueoflegends.com/cdn/img/champion/splash/Diana_0.jpg") center/cover no-repeat;
+  padding: 150px 20px;
+  background: url("https://ddragon.leagueoflegends.com/cdn/img/champion/splash/Diana_0.jpg")
+    center/cover no-repeat;
   overflow: hidden;
   border-bottom: 1px solid #1f2937;
 }
@@ -40,18 +57,28 @@ header {
 .hero h1 {
   position: relative;
   z-index: 10;
-  font-size: 3em;
-  margin-bottom: 10px;
-  text-shadow: 0 0 12px #2f81f7;
+  font-size: 3.3em;
+  margin-bottom: 12px;
+  letter-spacing: 0.5px;
+  color: #dce6f0;
+  text-shadow: 0 0 18px #2f81f7;
+  animation: floatHeroText 6s ease-in-out infinite;
 }
+
+@keyframes floatHeroText {
+  0%,100% { transform: translateY(0); }
+  50% { transform: translateY(-8px); }
+}
+
 .hero p {
   position: relative;
   z-index: 10;
-  max-width: 650px;
-  margin: 0 auto 20px;
-  font-size: 1.15em;
-  color: #d0d8e0; /* slightly brighter for readability */
-  text-shadow: 0 0 14px rgba(0,0,0,0.7); /* stronger shadow for contrast */
+  max-width: 700px;
+  margin: 0 auto 25px;
+  font-size: 1.2em;
+  color: #d1d7e0;
+  line-height: 1.8;
+  text-shadow: 0 0 16px rgba(0, 0, 0, 0.75);
 }
 
 /* CTA BUTTON */
@@ -59,154 +86,181 @@ header {
   position: relative;
   z-index: 10;
   display: inline-block;
-  background: #2f81f7;
+  background: linear-gradient(135deg, #2f81f7, #3d8cff);
   color: white;
-  padding: 16px 35px;
-  border-radius: 6px;
+  padding: 18px 40px;
+  border-radius: 8px;
   text-decoration: none;
   font-weight: bold;
-  font-size: 1.1em;
-  transition: 0.3s;
+  font-size: 1.15em;
+  transition: 0.35s;
   border: 1px solid #c9aa71;
-  box-shadow: 0 0 18px rgba(47,129,247,0.4);
-}
-.btn:hover {
-  background: #4795ff;
-  box-shadow: 0 0 25px rgba(47,129,247,0.55);
+  box-shadow: 0 0 20px rgba(47, 129, 247, 0.55),
+              inset 0 0 15px rgba(255, 255, 255, 0.1);
 }
 
-/* HERO OVERLAYS */
+.btn:hover {
+  background: linear-gradient(135deg, #4795ff, #5aa0ff);
+  box-shadow: 0 0 30px rgba(47, 129, 247, 0.7);
+  transform: translateY(-2px);
+}
+
+/* Blue overlay for theme effect */
 .hero .blueOverlay {
   position: absolute;
   inset: 0;
-  background: rgba(47,129,247,0.08);
-  pointer-events: none;
+  background: rgba(47, 129, 247, 0.08);
   z-index: 1;
 }
+
+/* Particle effects */
 .hero .particles {
   position: absolute;
   inset: 0;
   pointer-events: none;
-  z-index: 2;
+  z-index: 3;
 }
+
 .particles span {
   position: absolute;
-  width: 4px;
-  height: 4px;
-  background: rgba(47,129,247,0.9);
+  width: 5px;
+  height: 5px;
+  background: rgba(47, 129, 247, 0.9);
   border-radius: 50%;
-  animation: floatParticles 6s infinite ease-in-out;
+  animation: floatParticles 7s infinite ease-in-out;
 }
+
 @keyframes floatParticles {
-  0% { transform: translateY(0px) translateX(0px) scale(1); opacity: 1; }
-  50% { transform: translateY(-80px) translateX(20px) scale(1.2); opacity: 0.6; }
-  100% { transform: translateY(0px) translateX(0px) scale(1); opacity: 1; }
+  0% { transform: translateY(0) scale(1); opacity: 1; }
+  50% { transform: translateY(-120px) scale(1.35); opacity: 0.55; }
+  100% { transform: translateY(0) scale(1); opacity: 1; }
 }
+
+/* Aura Pulse */
 .hero .aura {
   position: absolute;
   inset: 0;
-  background: radial-gradient(circle at 50% 20%, rgba(47,129,247,0.2), transparent 70%);
-  opacity: 0.3;
-  animation: auraPulse 7s infinite ease-in-out;
-  pointer-events: none;
-  z-index: 3;
-}
-@keyframes auraPulse {
-  0% { opacity: 0.25; transform: scale(1); }
-  50% { opacity: 0.45; transform: scale(1.1); }
-  100% { opacity: 0.25; transform: scale(1); }
+  background: radial-gradient(circle at 50% 20%, rgba(47,129,247,0.22), transparent 75%);
+  opacity: 0.35;
+  animation: auraPulse 8s ease-in-out infinite;
+  z-index: 2;
 }
 
-/* SECTIONS */
+@keyframes auraPulse {
+  0%,100% { opacity: 0.3; transform: scale(1); }
+  50% { opacity: 0.5; transform: scale(1.15); }
+}
+
+/* -------------------------------- */
+/* CONTENT SECTIONS */
+/* -------------------------------- */
 .section {
-  padding: 60px 20px;
+  padding: 70px 20px;
   max-width: 950px;
   margin: auto;
   text-align: center;
 }
+
 .section h2 {
   color: #c9aa71;
-  font-size: 2.1em;
+  font-size: 2.3em;
   display: inline-block;
-  padding-bottom: 12px;
+  padding-bottom: 14px;
   position: relative;
-  margin-bottom: 40px;
+  margin-bottom: 45px;
+  text-shadow: 0 0 10px rgba(201,170,113,0.4);
 }
+
 .section h2::after {
   content: "";
-  width: 60%;
-  height: 2px;
+  width: 65%;
+  height: 2.5px;
   background: linear-gradient(90deg, transparent, #c9aa71, transparent);
   position: absolute;
   bottom: 0;
-  left: 20%;
+  left: 17.5%;
 }
 
+/* -------------------------------- */
 /* CARDS */
+/* -------------------------------- */
 .cards {
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
-  gap: 25px;
-}
-.card {
-  background: #161b22;
-  padding: 22px;
-  border-radius: 10px;
-  width: 260px;
-  border: 1px solid rgba(47,129,247,0.4);
-  box-shadow: 0 0 12px rgba(47,129,247,0.18);
-  text-align: center;
-  transition: transform 0.25s ease, box-shadow 0.25s ease;
-}
-.card:hover {
-  transform: translateY(-6px);
-  box-shadow: 0 6px 18px rgba(47,129,247,0.35);
-}
-.card h3 {
-  color: #c9aa71;
+  gap: 28px;
 }
 
-/* LOGIN */
+.card {
+  background: rgba(22, 27, 34, 0.88);
+  padding: 25px;
+  border-radius: 12px;
+  width: 265px;
+  border: 1px solid rgba(47,129,247,0.45);
+  box-shadow: 0 0 14px rgba(47,129,247,0.22);
+  text-align: center;
+  transition: 0.28s;
+}
+
+.card:hover {
+  transform: translateY(-7px) scale(1.03);
+  box-shadow: 0 8px 22px rgba(47,129,247,0.55);
+}
+
+.card h3 {
+  color: #c9aa71;
+  text-shadow: 0 0 8px rgba(201,170,113,0.35);
+}
+
+/* -------------------------------- */
+/* LOGIN BOX */
+/* -------------------------------- */
 #loginSection {
   backdrop-filter: blur(6px);
-  background: rgba(22,27,34,0.75);
+  background: rgba(22, 27, 34, 0.8);
   border: 1px solid rgba(47,129,247,0.4);
-  box-shadow: 0 0 18px rgba(47,129,247,0.25);
-  padding: 30px;
-  border-radius: 10px;
+  box-shadow: 0 0 20px rgba(47,129,247,0.28);
+  padding: 32px;
+  border-radius: 12px;
   max-width: 420px;
-  margin: 40px auto;
+  margin: 45px auto;
   text-align: center;
 }
+
 input, button {
-  padding: 10px;
-  margin: 5px 0;
-  border-radius: 4px;
+  padding: 11px;
+  margin: 6px 0;
+  border-radius: 6px;
   border: none;
 }
+
 input {
   width: 80%;
   text-align: center;
+  background: #0e131a;
+  color: #e6edf3;
+  border: 1px solid #2f81f7;
 }
+
 button {
   background: #2f81f7;
   color: white;
   cursor: pointer;
   font-weight: bold;
+  transition: 0.25s;
 }
-button:disabled {
-  opacity: 0.5;
-  cursor: not-allowed;
-}
+
+button:disabled { opacity: 0.5; }
 button:hover:enabled {
   background: #4795ff;
 }
 
+/* -------------------------------- */
 /* FOOTER */
+/* -------------------------------- */
 footer {
   text-align: center;
-  padding: 30px;
+  padding: 35px;
   color: #8b949e;
   font-size: 14px;
   background: #0a0f14;
@@ -214,7 +268,6 @@ footer {
 }
 footer a {
   color: #c9aa71;
-  text-decoration: none;
 }
 footer a:hover {
   text-decoration: underline;
@@ -228,10 +281,10 @@ footer a:hover {
 
 <!-- LOGIN -->
 <section id="loginSection">
-<h2>Member Login</h2>
-<input type="email" id="email" placeholder="Enter your email" />
-<button id="loginBtn" disabled>Login</button>
-<p id="loginMsg"></p>
+  <h2>Member Login</h2>
+  <input type="email" id="email" placeholder="Enter your email" />
+  <button id="loginBtn" disabled>Login</button>
+  <p id="loginMsg"></p>
 </section>
 
 <!-- HERO -->
@@ -241,101 +294,114 @@ footer a:hover {
   <div class="aura"></div>
 
   <h1>The Ultimate Diana & Ekko Guide</h1>
-  <p>Master every aspect of League of Legends with champions like Diana and Ekko. Learn precise combos, matchup strategies, and advanced tips to elevate your gameplay. Written by Arcsecond, rank 1 Challenger Ekko and Diana player.</p>
+
+  <p>
+    Master every aspect of League of Legends with champions like Diana and Ekko.<br>
+    Learn precise combos, matchup strategies, and advanced techniques from
+    Arcsecond — Rank 1 Challenger.
+  </p>
+
   <button class="btn" id="accessBtn">Get Access</button>
 </section>
 
 <!-- CONTENT -->
 <section class="section">
-<h2>What You’ll Learn</h2>
-<div class="cards">
-  <div class="card">
-    <h3>Fundamentals</h3>
-    <p>Core skills including combos, wave management, positioning, and warding for consistent gameplay improvement.</p>
+  <h2>What You’ll Learn</h2>
+
+  <div class="cards">
+
+    <div class="card">
+      <h3>Fundamentals</h3>
+      <p>Wave control, warding, spacing, low-risk trading, and core mechanics.</p>
+    </div>
+
+    <div class="card">
+      <h3>Diana Guide</h3>
+      <p>In-depth breakdown of Diana’s kit, matchups, combos, and itemization.</p>
+    </div>
+
+    <div class="card">
+      <h3>Ekko Guide</h3>
+      <p>Advanced Ekko jungle & mid gameplay, including pathing & burst setups.</p>
+    </div>
+
+    <div class="card">
+      <h3>Diana Matchups</h3>
+      <p>Every mid matchup analyzed with exact trade timings and wave plans.</p>
+    </div>
+
+    <div class="card">
+      <h3>Tierlist</h3>
+      <p>Updated meta rankings and best picks for each role every patch.</p>
+    </div>
+
   </div>
-  <div class="card">
-    <h3>Diana Guide</h3>
-    <p>A comprehensive guide covering Diana's full kit, itemization, playstyle, and advanced strategies.</p>
-  </div>
-  <div class="card">
-    <h3>Ekko Guide</h3>
-    <p>Complete guide to playing Ekko Jungle, including combos, pathing, and advanced mechanics.</p>
-  </div>
-  <div class="card">
-    <h3>Diana Matchup Guide</h3>
-    <p>Detailed breakdowns for every mid lane champion, teaching optimal trades, wave control, and all-in timings.</p>
-  </div>
-  <div class="card">
-    <h3>Tierlist</h3>
-    <p>Rankings for each role in the current meta, highlighting strongest picks and counters.</p>
-  </div>
-</div>
 </section>
 
 <footer>
-© 2025 LoL Fundamentals · Contact:
-<a href="mailto:arcsecond@lolfundamentals.com">arcsecond@lolfundamentals.com</a>
+  © 2025 LoL Fundamentals · Contact:
+  <a href="mailto:arcsecond@lolfundamentals.com">arcsecond@lolfundamentals.com</a>
 </footer>
 
 <script>
-// Access button
+/* Access Button */
 document.getElementById("accessBtn").addEventListener("click", () => {
-  window.open("https://buy.stripe.com/3cI4gse2g20serQagqejK04", "_blank", "noopener,noreferrer");
+  window.open("https://buy.stripe.com/28EfZagaobB2dnMagqejK05", "_blank", "noopener,noreferrer");
 });
 
-// Members login
-const membersCSV = "https://docs.google.com/spreadsheets/d/e/2PACX-1vR-0OZki4X8kc33NfrLsGL47-7mFj3SzjyGx6hs4QcnvRXiE-cOaJfk4wgvyIf6XXpnuB8D-B4TqSrW/pub?output=csv";
+/* Membership Login */
+const membersCSV =
+  "https://docs.google.com/spreadsheets/d/e/2PACX-1vR-0OZki4X8kc33NfrLsGL47-7mFj3SzjyGx6hs4QcnvRXiE-cOaJfk4wgvyIf6XXpnuB8D-B4TqSrW/pub?output=csv";
+
 let validEmails = [];
-const loginBtn = document.getElementById('loginBtn');
-const msg = document.getElementById('loginMsg');
-const emailInput = document.getElementById('email');
+const loginBtn = document.getElementById("loginBtn");
+const msg = document.getElementById("loginMsg");
+const emailInput = document.getElementById("email");
 
 loginBtn.disabled = true;
 msg.textContent = "Loading membership list...";
 
 fetch(membersCSV)
-.then(res => res.ok ? res.text() : Promise.reject("Failed to fetch"))
-.then(data => {
-  const rows = data.split("\n").map(row => row.split(","));
-  validEmails = rows.map(r => r[0].trim().toLowerCase()).filter(e => e);
-  loginBtn.disabled = false;
-  msg.textContent = "";
-})
-.catch(err => {
-  console.error(err);
-  msg.textContent = "Error loading membership list. Try again later.";
-});
+  .then(res => res.ok ? res.text() : Promise.reject("Failed to fetch"))
+  .then(data => {
+    const rows = data.split("\n").map(row => row.split(","));
+    validEmails = rows.map(r => r[0].trim().toLowerCase()).filter(e => e);
+    loginBtn.disabled = false;
+    msg.textContent = "";
+  })
+  .catch(err => {
+    console.error(err);
+    msg.textContent = "Error loading membership list. Try again later.";
+  });
 
-loginBtn.addEventListener('click', () => {
+loginBtn.addEventListener("click", () => {
   const email = emailInput.value.trim().toLowerCase();
-  if(validEmails.includes(email)){
-    localStorage.setItem('lolfundamentals_logged_in', 'true');
-    window.location.href = 'membershub.html';
+  if (validEmails.includes(email)) {
+    localStorage.setItem("lolfundamentals_logged_in", "true");
+    window.location.href = "membershub.html";
   } else {
     msg.textContent = "Access denied. Please purchase membership.";
   }
 });
 
-if(localStorage.getItem('lolfundamentals_logged_in') === 'true'){
-  window.location.href = 'membershub.html';
+if (localStorage.getItem("lolfundamentals_logged_in") === "true") {
+  window.location.href = "membershub.html";
 }
 
-// Generate moving particles
-const particlesContainer = document.querySelector('.particles');
-for(let i=0;i<50;i++){
-  const span = document.createElement('span');
+/* Generate particles */
+const particlesContainer = document.querySelector(".particles");
+for (let i = 0; i < 60; i++) {
+  const span = document.createElement("span");
   span.style.left = Math.random() * 100 + "%";
   span.style.top = Math.random() * 100 + "%";
-  span.style.animationDuration = 4 + Math.random()*4 + "s";
-  span.style.animationDelay = Math.random()*4 + "s";
+  span.style.animationDuration = 4 + Math.random() * 5 + "s";
+  span.style.animationDelay = Math.random() * 5 + "s";
   particlesContainer.appendChild(span);
 }
 </script>
 
 </body>
 </html>
-
-
 
 
 
