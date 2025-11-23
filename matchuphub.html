@@ -19,7 +19,7 @@ body {
   color: #e6edf3;
 }
 
-/* Header from Skills Hub */
+/* Header with Skills Hub styling but static */
 header {
   background: rgba(13,17,23,0.9);
   border-bottom: 2px solid #c9aa71;
@@ -30,18 +30,14 @@ header {
   color: #c9aa71;
   letter-spacing: 1px;
   text-align: center;
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  z-index: 100;
   line-height: 1.2;
   box-sizing: border-box;
 }
 
+/* Back button with Skills Hub styling */
 .back-button {
   display: inline-block;
-  margin: 100px auto 20px;
+  margin: 20px auto;
   padding: 10px 20px;
   background: linear-gradient(135deg, #c9aa71, #e0c77b);
   color: #000;
@@ -51,6 +47,7 @@ header {
   font-size: 16px;
   transition: all 0.3s;
   box-shadow: 0 0 10px rgba(201,170,113,0.5);
+  text-align: center;
 }
 .back-button::before { content: "← "; }
 .back-button:hover {
@@ -58,12 +55,12 @@ header {
   box-shadow: 0 0 15px rgba(255,215,0,0.8);
 }
 
-/* Original Diana Mid page layout */
+/* Search bar and grid layout from Diana Mid */
 #champion-search {
   display: block;
   width: 400px;
   max-width: 90%;
-  margin: 160px auto 30px; /* adjust for fixed header and back button */
+  margin: 20px auto 30px;
   padding: 8px 12px;
   border-radius: 6px;
   border: 2px solid #c084fc;
@@ -124,7 +121,7 @@ footer {
 @media (max-width: 500px) {
   .champion-card img { width: 60px; height: 60px; }
   .champion-name { font-size: 14px; }
-  .back-button { font-size: 14px; padding: 8px 12px; margin-top: 80px; }
+  .back-button { font-size: 14px; padding: 8px 12px; }
   .champion-grid { grid-template-columns: repeat(2, 1fr); }
   #champion-search { width: 90%; font-size: 14px; }
 }
@@ -219,4 +216,3 @@ searchInput.addEventListener('input', () => {
 
 </body>
 </html>
-
