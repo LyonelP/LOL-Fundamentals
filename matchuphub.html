@@ -22,6 +22,7 @@ body {
   min-height: 100vh;
   display: flex;
   flex-direction: column;
+  align-items: center; /* ensures horizontal centering for header-related content */
 }
 
 body::before {
@@ -50,6 +51,9 @@ header {
   top: 0;
   left: 0;
   z-index: 100;
+  display: flex;
+  justify-content: center; /* centers text horizontally */
+  align-items: center;     /* centers text vertically */
 }
 
 /* Back button */
@@ -136,7 +140,7 @@ footer {
 
 /* Mobile adjustments only */
 @media (max-width: 700px) {
-  .back-button { margin-top: 120px; } /* only mobile */
+  .back-button { margin-top: 120px; } /* mobile only */
   #champion-search { margin-top: 15px; margin-bottom: 25px; width: 90%; font-size: 16px; }
   .champion-grid { grid-template-columns: repeat(3, 1fr); gap: 15px; }
 }
