@@ -45,7 +45,6 @@ header {
   letter-spacing: 1px;
   text-align: center;
   line-height: 1.2;
-  box-sizing: border-box;
   width: 100%;
   position: fixed;
   top: 0;
@@ -56,7 +55,7 @@ header {
 /* Back button */
 .back-button {
   display: block;
-  margin: 100px auto 20px; /* pushed below fixed header */
+  margin: 140px auto 10px; /* just below header */
   padding: 10px 20px;
   background: linear-gradient(135deg, #c9aa71, #e0c77b);
   color: #000;
@@ -80,7 +79,7 @@ header {
   display: block;
   width: 400px;
   max-width: 90%;
-  margin: 20px auto 30px;
+  margin: 20px auto 30px; /* desktop spacing */
   padding: 8px 12px;
   border-radius: 6px;
   border: 2px solid #c084fc;
@@ -97,7 +96,6 @@ header {
   max-width: 1000px;
   margin: 0 auto 50px;
   padding: 0 20px;
-  margin-top: 0;
 }
 
 .champion-card {
@@ -136,22 +134,26 @@ footer {
   margin-top: auto;
 }
 
-/* Responsive */
+/* Mobile adjustments */
 @media (max-width: 1000px) {
   .champion-grid {
     grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
   }
 }
+
 @media (max-width: 700px) {
-  .champion-card img { width: 70px; height: 70px; } /* slightly bigger than before */
-  .champion-name { font-size: 15px; } /* slightly bigger */
-  .back-button { font-size: 14px; padding: 8px 12px; }
-  #champion-search { width: 90%; font-size: 14px; margin-top: 25px; } /* slightly higher */
+  .back-button { margin-top: 120px; }
+  #champion-search { margin-top: 15px; margin-bottom: 25px; width: 90%; font-size: 16px; }
+  .champion-card img { width: 80px; height: 80px; }
+  .champion-name { font-size: 16px; }
 }
+
 @media (max-width: 500px) {
   .champion-grid { grid-template-columns: repeat(2, 1fr); }
-  .champion-card img { width: 60px; height: 60px; } /* bigger than before */
-  .champion-name { font-size: 14px; } /* bigger */
+  .back-button { margin-top: 120px; }
+  #champion-search { margin-top: 15px; margin-bottom: 25px; width: 90%; font-size: 16px; }
+  .champion-card img { width: 80px; height: 80px; }
+  .champion-name { font-size: 16px; }
 }
 </style>
 </head>
@@ -244,3 +246,4 @@ searchInput.addEventListener('input', () => {
 
 </body>
 </html>
+
