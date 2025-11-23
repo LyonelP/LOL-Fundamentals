@@ -136,23 +136,39 @@ footer {
   margin-top: auto;
 }
 
-/* Responsive */
 @media (max-width: 1000px) {
   .champion-grid {
     grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
   }
 }
-@media (max-width: 700px) {
-  .champion-card img { width: 60px; height: 60px; }
-  .champion-name { font-size: 14px; }
-  .back-button { font-size: 14px; padding: 8px 12px; }
-  #champion-search { width: 90%; font-size: 14px; }
 
-  /* Fix mobile back-button below header */
+/* MOBILE FIXES ONLY */
+@media (max-width: 700px) {
+  /* Restore button below header and desktop size */
   .back-button {
-    margin-top: 120px; /* ensures button sits below fixed header */
+    margin-top: 120px; /* below fixed header */
+    font-size: 16px;
+    padding: 10px 20px;
+    width: fit-content;
+  }
+
+  /* Champion cards: restore desktop size */
+  .champion-card img {
+    width: 80px;
+    height: 80px;
+  }
+  .champion-name {
+    font-size: 16px;
+  }
+
+  /* Search bar slightly higher */
+  #champion-search {
+    margin: 10px auto 30px;
+    width: 90%;
+    font-size: 16px;
   }
 }
+
 @media (max-width: 500px) {
   .champion-grid { grid-template-columns: repeat(2, 1fr); }
 }
@@ -229,9 +245,25 @@ footer {
   <a href="zyra.html" class="champion-card"><img src="https://ddragon.leagueoflegends.com/cdn/14.23.1/img/champion/Zyra.png" alt="Zyra"><div class="champion-name">Zyra</div></a>
 </div>
 
-<footer>© 2025 LoL Fundamentals</footer>
+<footer>© 2025 LoL Fundamentals · All rights reserved</footer>
+
+<script>
+const searchInput = document.getElementById('champion-search');
+const championGrid = document.querySelector('.champion-grid');
+const championCards = Array.from(championGrid.getElementsByClassName('champion-card'));
+
+searchInput.addEventListener('input', () => {
+  const query = searchInput.value.toLowerCase();
+  championCards.forEach(card => {
+    const name = card.querySelector('.champion-name').textContent.toLowerCase();
+    card.style.display = name.includes(query) ? 'block' : 'none';
+  });
+});
+</script>
 
 </body>
 </html>
+
+
 
 
