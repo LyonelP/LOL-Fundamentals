@@ -56,7 +56,7 @@ header {
 /* Back button */
 .back-button {
   display: block;
-  margin: 100px auto 20px; /* desktop spacing preserved */
+  margin: 100px auto 20px; /* desktop spacing */
   padding: 10px 20px;
   background: linear-gradient(135deg, #c9aa71, #e0c77b);
   color: #000;
@@ -68,6 +68,7 @@ header {
   box-shadow: 0 0 10px rgba(201,170,113,0.5);
   transition: all 0.3s;
   width: fit-content;
+  z-index: 101; /* above header background */
 }
 .back-button::before { content: "← "; }
 .back-button:hover {
@@ -146,14 +147,14 @@ footer {
 /* Mobile responsive */
 @media (max-width: 700px) {
   .back-button {
-    margin-top: 80px; /* spacing below header, not inside it */
+    margin: 80px auto 12px; /* always below header */
     font-size: 14px;
     padding: 8px 12px;
   }
   #champion-search { 
     width: 90%; 
     font-size: 14px; 
-    margin-top: 10px;
+    margin-top: 6px;
   }
   .champion-card img { width: 70px; height: 70px; }
   .champion-name { font-size: 15px; }
@@ -161,7 +162,7 @@ footer {
 
 @media (max-width: 500px) {
   .back-button { margin-top: 70px; }
-  #champion-search { margin-top: 8px; }
+  #champion-search { margin-top: 4px; }
   .champion-grid { grid-template-columns: repeat(2, 1fr); }
   .champion-card img { width: 90px; height: 90px; }
   .champion-name { font-size: 16px; }
@@ -257,5 +258,4 @@ searchInput.addEventListener('input', () => {
 
 </body>
 </html>
-
 
