@@ -21,8 +21,8 @@
   }
   .back-btn {
     display: block;
-    margin: 20px auto 10px;
-    padding: 10px 18px;
+    margin: 30px auto;
+    padding: 12px 20px;
     font-size: 16px;
     background: #c9aa71;
     color: #0d1117;
@@ -32,12 +32,11 @@
     text-align: center;
     width: max-content;
   }
-  /* Search bar */
   #champion-search {
     display: block;
     width: 400px;
     max-width: 90%;
-    margin: 10px auto 30px;
+    margin: 5px auto 30px;
     padding: 8px 12px;
     border-radius: 6px;
     border: 2px solid #c084fc;
@@ -45,14 +44,13 @@
     color: #e6edf3;
     font-size: 16px;
   }
-
   .champion-grid {
     display: grid;
     grid-template-columns: repeat(7, 1fr);
     gap: 20px;
-    max-width: 1200px;
+    max-width: 1000px;
     margin: 0 auto 50px;
-    padding: 0 10px;
+    padding: 0 20px;
   }
   .champion-card {
     background: linear-gradient(135deg, #161b22 0%, #21262d 100%);
@@ -87,17 +85,12 @@
     font-size: 14px;
     color: #8b949e;
   }
-
-  /* Responsive */
   @media (max-width: 1000px) {
     .champion-grid {
       grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
     }
   }
   @media (max-width: 500px) {
-    .champion-grid {
-      grid-template-columns: repeat(2, 1fr);
-    }
     .champion-card img {
       width: 60px;
       height: 60px;
@@ -108,6 +101,9 @@
     .back-btn {
       font-size: 14px;
       padding: 8px 12px;
+    }
+    .champion-grid {
+      grid-template-columns: repeat(2, 1fr);
     }
     #champion-search {
       width: 90%;
@@ -122,10 +118,9 @@
 
 <a href="membershub.html" class="back-btn">← Back to Members Hub</a>
 
-<!-- Search bar -->
 <input type="text" id="champion-search" placeholder="Search champions...">
 
-<div class="champion-grid" id="champion-grid">
+<div class="champion-grid">
   <a href="ahri.html" class="champion-card"><img src="https://ddragon.leagueoflegends.com/cdn/14.23.1/img/champion/Ahri.png" alt="Ahri"><div class="champion-name">Ahri</div></a>
   <a href="akali.html" class="champion-card"><img src="https://ddragon.leagueoflegends.com/cdn/14.23.1/img/champion/Akali.png" alt="Akali"><div class="champion-name">Akali</div></a>
   <a href="akshan.html" class="champion-card"><img src="https://ddragon.leagueoflegends.com/cdn/14.23.1/img/champion/Akshan.png" alt="Akshan"><div class="champion-name">Akshan</div></a>
@@ -192,7 +187,7 @@
 
 <script>
 const searchInput = document.getElementById('champion-search');
-const championGrid = document.getElementById('champion-grid');
+const championGrid = document.querySelector('.champion-grid');
 const championCards = Array.from(championGrid.getElementsByClassName('champion-card'));
 
 searchInput.addEventListener('input', () => {
@@ -206,6 +201,7 @@ searchInput.addEventListener('input', () => {
 
 </body>
 </html>
+
 
 
 
