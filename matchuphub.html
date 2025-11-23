@@ -19,7 +19,7 @@ body {
   color: #e6edf3;
 }
 
-/* Header with Skills Hub styling but static */
+/* Header (Skills Hub style but static) */
 header {
   background: rgba(13,17,23,0.9);
   border-bottom: 2px solid #c9aa71;
@@ -34,10 +34,10 @@ header {
   box-sizing: border-box;
 }
 
-/* Back button with Skills Hub styling */
+/* Back button (Skills Hub style, centered) */
 .back-button {
-  display: inline-block;
-  margin: 20px auto;
+  display: block;           /* block element so margin auto works */
+  margin: 20px auto;        /* centers button horizontally */
   padding: 10px 20px;
   background: linear-gradient(135deg, #c9aa71, #e0c77b);
   color: #000;
@@ -55,7 +55,7 @@ header {
   box-shadow: 0 0 15px rgba(255,215,0,0.8);
 }
 
-/* Search bar and grid layout from Diana Mid */
+/* Search bar */
 #champion-search {
   display: block;
   width: 400px;
@@ -69,6 +69,7 @@ header {
   font-size: 16px;
 }
 
+/* Champion grid */
 .champion-grid {
   display: grid;
   grid-template-columns: repeat(7, 1fr);
@@ -136,7 +137,7 @@ footer {
 <input type="text" id="champion-search" placeholder="Search champions...">
 
 <div class="champion-grid">
-   <a href="ahri.html" class="champion-card"><img src="https://ddragon.leagueoflegends.com/cdn/14.23.1/img/champion/Ahri.png" alt="Ahri"><div class="champion-name">Ahri</div></a>
+  <a href="ahri.html" class="champion-card"><img src="https://ddragon.leagueoflegends.com/cdn/14.23.1/img/champion/Ahri.png" alt="Ahri"><div class="champion-name">Ahri</div></a>
   <a href="akali.html" class="champion-card"><img src="https://ddragon.leagueoflegends.com/cdn/14.23.1/img/champion/Akali.png" alt="Akali"><div class="champion-name">Akali</div></a>
   <a href="akshan.html" class="champion-card"><img src="https://ddragon.leagueoflegends.com/cdn/14.23.1/img/champion/Akshan.png" alt="Akshan"><div class="champion-name">Akshan</div></a>
   <a href="anivia.html" class="champion-card"><img src="https://ddragon.leagueoflegends.com/cdn/14.23.1/img/champion/Anivia.png" alt="Anivia"><div class="champion-name">Anivia</div></a>
@@ -216,3 +217,4 @@ searchInput.addEventListener('input', () => {
 
 </body>
 </html>
+
