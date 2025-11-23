@@ -3,7 +3,13 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Diana Mid – Matchup Hub</title>
+<title>LoL Fundamentals – Diana Mid Matchups</title>
+
+<script>
+  if (localStorage.getItem('lolfundamentals_logged_in') !== 'true') {
+    window.location.replace('login.html');
+  }
+</script>
 
 <style>
 body {
@@ -46,7 +52,7 @@ header {
   box-sizing: border-box;
 }
 
-.back-btn {
+.back-button {
   display: inline-block;
   margin: 100px auto 20px;
   padding: 10px 20px;
@@ -59,54 +65,49 @@ header {
   transition: all 0.3s;
   box-shadow: 0 0 10px rgba(201,170,113,0.5);
 }
-.back-btn::before { content: "← "; }
-.back-btn:hover {
+.back-button::before { content: "← "; }
+.back-button:hover {
   background: linear-gradient(135deg, #e6c97f, #f0d88b);
   box-shadow: 0 0 15px rgba(255,215,0,0.8);
 }
 
-/* 🔍 Search bar */
 #champion-search {
   display: block;
-  width: 56vw;
-  max-width: 600px;
-  padding: 10px 14px;
-  border-radius: 8px;
-  border: 2px solid #c9aa71;
+  width: 400px;
+  max-width: 90%;
+  margin: 20px auto 30px;
+  padding: 8px 12px;
+  border-radius: 6px;
+  border: 2px solid #c084fc;
   background: rgba(0,0,0,0.7);
   color: #fff;
   font-size: 16px;
-  margin: 20px auto;
-  display: block;
 }
 
-/* Champion Grid */
 .champion-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(100px, 1fr));
+  grid-template-columns: repeat(7, 1fr);
   gap: 20px;
-  max-width: 1400px;
+  max-width: 1000px;
   margin: 0 auto 50px;
   padding: 0 20px;
 }
 
 .champion-card {
-  background: linear-gradient(135deg, #161b22 0%, #21262d 100%);
+  background: rgba(0,0,0,0.7);
   border-radius: 12px;
   border-left: 6px solid #c084fc;
   text-align: center;
-  padding: 12px;
+  padding: 15px;
   transition: transform 0.3s, box-shadow 0.3s;
   cursor: pointer;
   text-decoration: none;
   color: inherit;
 }
-
 .champion-card:hover {
   transform: translateY(-5px);
   box-shadow: 0 10px 25px rgba(0,0,0,0.5);
 }
-
 .champion-card img {
   width: 80px;
   height: 80px;
@@ -114,7 +115,6 @@ header {
   margin-bottom: 10px;
   object-fit: contain;
 }
-
 .champion-name {
   font-size: 16px;
   color: #c084fc;
@@ -125,31 +125,20 @@ footer {
   text-align: center;
   padding: 25px 10px;
   font-size: 14px;
-  color: #8b949e;
+  color: #fff;
 }
 
 @media (max-width: 1000px) {
   .champion-grid {
-    grid-template-columns: repeat(auto-fit, minmax(100px, 1fr));
+    grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
   }
 }
-
 @media (max-width: 500px) {
-  .champion-card img {
-    width: 60px;
-    height: 60px;
-  }
-  .champion-name {
-    font-size: 14px;
-  }
-  .back-btn {
-    font-size: 14px;
-    padding: 8px 12px;
-  }
-  #champion-search {
-    width: 90%;
-    font-size: 14px;
-  }
+  .champion-card img { width: 60px; height: 60px; }
+  .champion-name { font-size: 14px; }
+  .back-button { font-size: 14px; padding: 8px 12px; margin-top: 80px; }
+  .champion-grid { grid-template-columns: repeat(2, 1fr); }
+  #champion-search { width: 90%; font-size: 14px; }
 }
 </style>
 </head>
@@ -157,12 +146,11 @@ footer {
 
 <header>LoL Fundamentals – Diana Mid Matchups</header>
 
-<a href="membershub.html" class="back-btn">Back to Members Hub</a>
+<a href="membershub.html" class="back-button">Back to Members Hub</a>
 
-<!-- Search Bar -->
 <input type="text" id="champion-search" placeholder="Search champions...">
 
-<div class="champion-grid" id="champion-grid">
+<div class="champion-grid">
   <a href="ahri.html" class="champion-card"><img src="https://ddragon.leagueoflegends.com/cdn/14.23.1/img/champion/Ahri.png" alt="Ahri"><div class="champion-name">Ahri</div></a>
   <a href="akali.html" class="champion-card"><img src="https://ddragon.leagueoflegends.com/cdn/14.23.1/img/champion/Akali.png" alt="Akali"><div class="champion-name">Akali</div></a>
   <a href="akshan.html" class="champion-card"><img src="https://ddragon.leagueoflegends.com/cdn/14.23.1/img/champion/Akshan.png" alt="Akshan"><div class="champion-name">Akshan</div></a>
@@ -228,9 +216,8 @@ footer {
 <footer>© 2025 LoL Fundamentals · All rights reserved</footer>
 
 <script>
-// Search functionality
 const searchInput = document.getElementById('champion-search');
-const championGrid = document.getElementById('champion-grid');
+const championGrid = document.querySelector('.champion-grid');
 const championCards = Array.from(championGrid.getElementsByClassName('champion-card'));
 
 searchInput.addEventListener('input', () => {
