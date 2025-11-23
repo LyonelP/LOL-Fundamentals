@@ -8,23 +8,9 @@
 <style>
 body {
   margin: 0;
-  font-family: 'Beaufort for LOL', Arial, Helvetica, sans-serif;
-  color: #fff;
-  background: url('https://64.media.tumblr.com/594ac290bec6d5e9ad98b5f53404f00b/245c4c3ee469f81d-e4/s1280x1920/1cda4284320eb2031758a9859dfe14ff8bbc50ba.jpg') no-repeat center center fixed;
-  background-size: cover;
-  overflow-x: hidden;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-}
-
-body::before {
-  content: "";
-  position: fixed;
-  top:0; left:0;
-  width:100%; height:100%;
-  background: rgba(10,15,20,0.25);
-  z-index: -1;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  background: #0d1117;
+  color: #e6edf3;
 }
 
 header {
@@ -47,29 +33,24 @@ header {
 }
 
 .back-btn {
-  display: inline-block;
+  display: block;
   margin: 100px auto 20px;
-  padding: 10px 20px;
-  background: linear-gradient(135deg, #c9aa71, #e0c77b);
-  color: #000;
-  text-decoration: none;
-  border-radius: 8px;
-  font-weight: bold;
+  padding: 12px 20px;
   font-size: 16px;
-  transition: all 0.3s;
-  box-shadow: 0 0 10px rgba(201,170,113,0.5);
-}
-.back-btn::before { content: "← "; }
-.back-btn:hover {
-  background: linear-gradient(135deg, #e6c97f, #f0d88b);
-  box-shadow: 0 0 15px rgba(255,215,0,0.8);
+  background: #c9aa71;
+  color: #0d1117;
+  text-decoration: none;
+  border-radius: 6px;
+  font-weight: bold;
+  text-align: center;
+  width: max-content;
 }
 
-/* 🔍 Search bar */
+/* Search Bar */
 #champion-search {
   display: block;
-  width: 56vw;
-  max-width: 600px;
+  width: 600px;
+  max-width: 90%;
   padding: 10px 14px;
   border-radius: 8px;
   border: 2px solid #c9aa71;
@@ -77,15 +58,14 @@ header {
   color: #fff;
   font-size: 16px;
   margin: 20px auto;
-  display: block;
 }
 
 /* Champion Grid */
 .champion-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(100px, 1fr));
+  grid-template-columns: repeat(7, 1fr);
   gap: 20px;
-  max-width: 1400px;
+  max-width: 1000px;
   margin: 0 auto 50px;
   padding: 0 20px;
 }
@@ -95,7 +75,7 @@ header {
   border-radius: 12px;
   border-left: 6px solid #c084fc;
   text-align: center;
-  padding: 12px;
+  padding: 15px;
   transition: transform 0.3s, box-shadow 0.3s;
   cursor: pointer;
   text-decoration: none;
@@ -130,7 +110,7 @@ footer {
 
 @media (max-width: 1000px) {
   .champion-grid {
-    grid-template-columns: repeat(auto-fit, minmax(100px, 1fr));
+    grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
   }
 }
 
@@ -157,13 +137,13 @@ footer {
 
 <header>LoL Fundamentals – Diana Mid Matchups</header>
 
-<a href="membershub.html" class="back-btn">Back to Members Hub</a>
+<a href="membershub.html" class="back-btn">← Back to Members Hub</a>
 
 <!-- Search Bar -->
 <input type="text" id="champion-search" placeholder="Search champions...">
 
 <div class="champion-grid" id="champion-grid">
-  <a href="ahri.html" class="champion-card"><img src="https://ddragon.leagueoflegends.com/cdn/14.23.1/img/champion/Ahri.png" alt="Ahri"><div class="champion-name">Ahri</div></a>
+ <a href="ahri.html" class="champion-card"><img src="https://ddragon.leagueoflegends.com/cdn/14.23.1/img/champion/Ahri.png" alt="Ahri"><div class="champion-name">Ahri</div></a>
   <a href="akali.html" class="champion-card"><img src="https://ddragon.leagueoflegends.com/cdn/14.23.1/img/champion/Akali.png" alt="Akali"><div class="champion-name">Akali</div></a>
   <a href="akshan.html" class="champion-card"><img src="https://ddragon.leagueoflegends.com/cdn/14.23.1/img/champion/Akshan.png" alt="Akshan"><div class="champion-name">Akshan</div></a>
   <a href="anivia.html" class="champion-card"><img src="https://ddragon.leagueoflegends.com/cdn/14.23.1/img/champion/Anivia.png" alt="Anivia"><div class="champion-name">Anivia</div></a>
@@ -244,7 +224,6 @@ searchInput.addEventListener('input', () => {
 
 </body>
 </html>
-
 
 
 
