@@ -19,7 +19,7 @@ body {
   color: #e6edf3;
 }
 
-/* Header (Skills Hub style but static) */
+/* Header */
 header {
   background: rgba(13,17,23,0.9);
   border-bottom: 2px solid #c9aa71;
@@ -32,12 +32,15 @@ header {
   text-align: center;
   line-height: 1.2;
   box-sizing: border-box;
+  max-width: 1000px;      /* same width as champion grid */
+  margin: 0 auto 20px;    /* center horizontally and spacing below */
+  border-radius: 8px;
 }
 
-/* Back button (Skills Hub style, centered) */
+/* Back button */
 .back-button {
-  display: block;           /* block element so margin auto works */
-  margin: 20px auto;        /* centers button horizontally */
+  display: block;
+  margin: 20px auto;
   padding: 10px 20px;
   background: linear-gradient(135deg, #c9aa71, #e0c77b);
   color: #000;
