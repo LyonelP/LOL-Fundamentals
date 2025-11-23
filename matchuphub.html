@@ -22,7 +22,6 @@ body {
   min-height: 100vh;
   display: flex;
   flex-direction: column;
-  align-items: center; /* ensures horizontal centering for header-related content */
 }
 
 body::before {
@@ -38,7 +37,7 @@ body::before {
 header {
   background: rgba(13,17,23,0.9);
   border-bottom: 2px solid #c9aa71;
-  padding: 20px;
+  padding: 20px 0;
   font-weight: bold;
   font-size: 26px;
   text-transform: uppercase;
@@ -51,15 +50,12 @@ header {
   top: 0;
   left: 0;
   z-index: 100;
-  display: flex;
-  justify-content: center; /* centers text horizontally */
-  align-items: center;     /* centers text vertically */
 }
 
 /* Back button */
 .back-button {
   display: block;
-  margin: 100px auto 20px; /* desktop default */
+  margin: 100px auto 20px; /* pushed below fixed header */
   padding: 10px 20px;
   background: linear-gradient(135deg, #c9aa71, #e0c77b);
   color: #000;
@@ -100,6 +96,7 @@ header {
   max-width: 1000px;
   margin: 0 auto 50px;
   padding: 0 20px;
+  margin-top: 0;
 }
 
 .champion-card {
@@ -138,15 +135,22 @@ footer {
   margin-top: auto;
 }
 
-/* Mobile adjustments only */
-@media (max-width: 700px) {
-  .back-button { margin-top: 120px; } /* mobile only */
-  #champion-search { margin-top: 15px; margin-bottom: 25px; width: 90%; font-size: 16px; }
-  .champion-grid { grid-template-columns: repeat(3, 1fr); gap: 15px; }
+/* Responsive */
+@media (max-width: 1000px) {
+  .champion-grid {
+    grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+  }
 }
-
+@media (max-width: 700px) {
+  .champion-card img { width: 70px; height: 70px; }
+  .champion-name { font-size: 15px; }
+  .back-button { font-size: 14px; padding: 8px 12px; }
+  #champion-search { width: 90%; font-size: 14px; margin-top: 80px; }
+}
 @media (max-width: 500px) {
   .champion-grid { grid-template-columns: repeat(2, 1fr); }
+  .champion-card img { width: 90px; height: 90px; }
+  .champion-name { font-size: 16px; }
 }
 </style>
 </head>
@@ -239,4 +243,5 @@ searchInput.addEventListener('input', () => {
 
 </body>
 </html>
+
 
