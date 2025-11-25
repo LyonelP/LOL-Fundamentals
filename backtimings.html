@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Back Timings – LoL Fundamentals</title>
+
+<!-- Login check -->
+<script>
+  if (localStorage.getItem('lolfundamentals_logged_in') !== 'true') {
+    window.location.replace('login.html');
+  }
+</script>
+
+<style>
+body {
+  margin: 0;
+  font-family: 'Beaufort for LOL', Arial, Helvetica, sans-serif;
+  text-align: center;
+  color: #fff;
+  background: url('https://64.media.tumblr.com/594ac290bec6d5e9ad98b5f53404f00b/245c4c3ee469f81d-e4/s1280x1920/1cda4284320eb2031758a9859dfe14ff8bbc50ba.jpg') no-repeat center center fixed;
+  background-size: cover;
+  overflow-x: hidden;
+}
+
+/* Overlay for readability */
+body::before {
+  content: "";
+  position: fixed;
+  top: 0; left: 0;
+  width: 100%; height: 100%;
+  background: rgba(10,15,20,0.75);
+  z-index: -1;
+}
+
+/* Header */
+header {
+  background: rgba(13,17,23,0.9);
+  border-bottom: 2px solid #c9aa71;
+  padding: 20px 10px;
+  font-weight: bold;
+  font-size: 26px;
+  text-transform: uppercase;
+  color: #c9aa71;
+  letter-spacing: 1px;
+}
+
+/* Back button */
+.back-button {
+  display: inline-block;
+  margin: 20px auto 10px;
+  padding: 10px 20px;
+  background: linear-gradient(135deg, #c9aa71, #e0c77b);
+  color: #000;
+  text-decoration: none;
+  border-radius: 8px;
+  font-weight: bold;
+  transition: all 0.3s;
+  box-shadow: 0 0 10px rgba(201,170,113,0.5);
+}
+.back-button::before { content: "← "; }
+.back-button:hover {
+  background: linear-gradient(135deg, #e6c97f, #f0d88b);
+  box-shadow: 0 0 15px rgba(255,215,0,0.8);
+}
+
+/* Content container */
+.content-container {
+  margin: 20px auto 50px auto;
+  max-width: 900px;
+  background: rgba(13,17,23,0.95);
+  border: 1px solid #2f81f7;
+  border-radius: 10px;
+  padding: 20px;
+  text-align: left;
+  color: #fff;
+  font-size: 16px;
+  line-height: 1.6;
+  position: relative;
+}
+.content-container h2 {
+  color: #c9aa71;
+  margin-top: 0;
+}
+.content-container ul {
+  margin-left: 20px;
+}
+.content-container li {
+  margin-bottom: 10px;
+}
+
+/* Embedded video */
+.video-container {
+  margin-top: 30px;
+  text-align: center;
+  transition: all 0.3s;
+  border-radius: 10px;
+  overflow: hidden;
+}
+.video-container iframe {
+  width: 100%;
+  max-width: 800px;
+  height: 450px;
+  border: 2px solid transparent;
+  border-radius: 10px;
+  transition: all 0.3s;
+}
+
+/* Hover glow effect for video */
+.video-container:hover iframe {
+  border: 2px solid #c9aa71;
+  box-shadow: 0 0 20px rgba(201,170,113,0.8);
+}
+
+footer {
+  text-align: center;
+  padding: 15px 10px;
+  font-size: 14px;
+  color: #8b949e;
+}
+
+@media (max-width: 600px) {
+  header { font-size: 24px; padding: 15px; }
+  .content-container { margin: 15px 10px 30px 10px; padding: 15px; }
+  .video-container iframe { height: 250px; }
+}
+</style>
+</head>
+<body>
+
+<header>Back Timings</header>
+<a href="skills.html" class="back-button">Back to Skills Hub</a>
+
+<div class="content-container">
+  <h2>Back Timings</h2>
+  <p>Generally, you want to back when the difference in strength you’ll gain from backing is greater than the loss incurred during the time it took to reset. Before backing, always consider likely plays during that window. Think about what plays both junglers might make and how aggressively everyone is playing.</p>
+
+  <p>To minimize minions lost, back before a cannon minion wave. The faster you pushed in the wave, the better. When low on resources, less can be gained in lane, making it better to back. Similarly, if the enemy team has a lot to gain from you being weak, backing becomes safer. A general rule of thumb is to back every ~1000 gold. The farther ahead you are, the longer you can delay your recall.</p>
+
+  <p>If you can push waves to tower first after backing, it’s good to recall. Backing one minute before an objective can help secure it. Back when teammates are backing or stay out when teammates are positioned aggressively. Without teammates pressuring with you, fewer advantages are gained, and plays further up the map are less rewarding. If your opponent was able to get a back in and the strength difference would be too large, consider fast-pushing the wave to tower.</p>
+
+  <p>Reset quickly and efficiently: the faster you move across the map, the less is lost from backing. The greatest advantage comes when your opponent cannot push the wave to tower and you can keep them in lane afterward, which is easiest with teleport. Mid laners and melee champions will back more frequently due to lane length and positioning limitations. If your opponent cannot push the wave to tower during your reset, it’s a good time to recall. When ahead, greedy recalls can provide even larger item advantages. If roaming, sometimes it’s safer to recall and walk through lanes than risk traveling through the river. Always try to plan your next plays during the reset.</p>
+
+  <!-- Embedded Video -->
+  <div class="video-container">
+    <iframe src="https://www.youtube.com/embed/bF15tu_uMVA" title="Back Timings Video" allowfullscreen></iframe>
+  </div>
+</div>
+
+<footer>© 2025 LoL Fundamentals · All rights reserved</footer>
+
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+

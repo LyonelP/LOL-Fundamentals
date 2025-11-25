@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Diana Mid vs Galio</title>
+<style>
+  body { 
+    margin: 0; 
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; 
+    background: #0d1117; 
+    color: #e6edf3; 
+    line-height: 1.4; 
+    display: none; /* Prevent content flash */
+  }
+  header { background: #161b22; padding: 10px 20px; text-align: center; font-size: 28px; font-weight: bold; color: #58a6ff; }
+
+  /* Gold Back Button */
+  .back-link {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    background: #c9aa71;
+    color: #0d1117;
+    font-weight: bold;
+    text-decoration: none;
+    padding: 10px 20px;
+    border-radius: 25px;
+    border: 1px solid #c9aa71;
+    margin: 20px auto 30px auto;
+  }
+  .back-link:hover { background: #e6c17c; color: #0d1117; }
+
+  .matchup-container { display: flex; max-width: 900px; margin: -15px auto 0 auto; gap: 15px; padding: 0 20px 10px 20px; }
+  .matchup-left { display: flex; align-items: center; gap: 10px; flex: 0 0 auto; }
+  .matchup-left img { width: 80px; height: 80px; border-radius: 8px; }
+  .winrate-bubble { background: #f97316; color: #0d1117; font-weight: bold; padding: 8px 14px; border-radius: 25px; font-size: 16px; white-space: nowrap; }
+
+  .matchup-right { flex: 1; color: #e6edf3; display: flex; flex-direction: column; justify-content: flex-start; margin-top: 0px; }
+  .matchup-right h2 { margin: 0 0 15px 0; font-size: 22px; }
+  .matchup-right ul { padding-left: 20px; margin: 0; }
+  .matchup-right li { margin-bottom: 6px; }
+
+  footer { text-align: center; padding: 15px 10px; font-size: 14px; color: #8b949e; }
+
+  @media (max-width: 600px) {
+    .matchup-container { flex-direction: column; align-items: center; padding: 10px; margin-top: -15px; }
+    .matchup-left { justify-content: center; }
+    .matchup-right { text-align: center; margin-top: 0px; }
+  }
+</style>
+</head>
+<body>
+<header>Diana Mid Matchup – Galio</header>
+
+<!-- Centered Gold Back Button -->
+<div style="text-align: center;">
+  <a href="matchuphub.html" class="back-link">&larr; Back to Matchup Hub</a>
+</div>
+
+<div class="matchup-container">
+  <div class="matchup-left">
+    <img src="https://ddragon.leagueoflegends.com/cdn/14.23.1/img/champion/Galio.png" alt="Galio">
+    <div class="winrate-bubble">48%</div>
+  </div>
+  <div class="matchup-right">
+    <h2>Matchup Notes</h2>
+    <ul>
+      <li>Look for as many q's as possible lvl 1 before he levels up w and has the magic shield. He'll naturally push the wave back with his q and passive. Avoid his passive at all costs, especially level 1.</li>
+      <li>Position close but away from the ranged creeps since that's where he wants to throw his q.</li>
+      <li>Your ability to kill him depends a lot on whether or not they took aftershock.</li>
+      <li>If he goes for an e trade you almost always want to look for a long return trade. Just make sure the jungler isn't around. Since Galio naturally pushes you don't have to worry about him freezing the wave and can be patient waiting at tower for the wave instead of setting yourself up to be ganked.</li>
+    </ul>
+  </div>
+</div>
+
+<footer>© 2025 LoL Fundamentals · Contact: arcsecond@lolfundamentals.com</footer>
+
+<script>
+// Match Brand login requirement — prevent content flash
+document.addEventListener('DOMContentLoaded', () => {
+  if (localStorage.getItem('lolfundamentals_logged_in') === 'true') {
+    document.body.style.display = 'block';
+  } else {
+    window.location.replace('login.html');
+  }
+});
+</script>
+</body>
+</html>
+
+
+
+
+
+
+

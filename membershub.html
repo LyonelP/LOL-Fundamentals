@@ -1,0 +1,291 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>LoL Fundamentals – Members Hub</title>
+<style>
+body {
+  margin: 0;
+  font-family: "Beaufort for LOL", Arial, Helvetica, sans-serif;
+  background: #0a0f14;
+  color: #e6edf3;
+  line-height: 1.6;
+  text-align: center;
+}
+
+/* Header */
+header {
+  background: linear-gradient(90deg, #0a0f14, #1b2838);
+  border-bottom: 2px solid #c9aa71;
+  padding: 15px 20px;
+  font-weight: bold;
+  font-size: 24px;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  color: #c9aa71;
+  position: relative;
+}
+
+/* Subtle Settings Button */
+.settings-btn {
+  position: absolute;
+  top: 14px;
+  right: 20px;
+  opacity: 0.25;
+  transition: opacity 0.2s ease, transform 0.2s ease;
+  text-decoration: none;
+  color: #c9aa71;
+}
+.settings-btn:hover {
+  opacity: 1;
+  transform: scale(1.05);
+}
+.settings-btn svg {
+  width: 18px;
+  height: 18px;
+  fill: currentColor;
+}
+
+/* Section */
+.section {
+  padding: 40px 20px;
+  max-width: 1000px;
+  margin: 20px auto;
+}
+
+/* Section title */
+.section h2 {
+  color: #c9aa71;
+  margin-top: 0;
+  margin-bottom: 30px;
+}
+
+/* Card Grid */
+.card-grid {
+  display: grid;
+  gap: 25px;
+  justify-items: center;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+}
+
+/* Individual Card */
+.card {
+  background: #161b22;
+  border: 2px solid #c9aa71;
+  border-radius: 12px;
+  padding: 20px 15px;
+  min-height: 180px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  transition: transform 0.3s, box-shadow 0.3s;
+  text-decoration: none;
+  color: #e6edf3;
+  position: relative;
+  overflow: hidden;
+}
+
+/* Card hover effect */
+.card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 10px 20px rgba(47,129,247,0.3);
+}
+
+/* Card Header */
+.card h3 {
+  color: #c9aa71;
+  margin-bottom: 10px;
+  font-size: 1.2em;
+  z-index: 2;
+  position: relative;
+}
+
+/* Card Description */
+.card p {
+  font-size: 0.9em;
+  line-height: 1.3;
+  z-index: 2;
+  position: relative;
+}
+
+/* Card Background Image */
+.card::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-size: cover;
+  background-position: center;
+  opacity: 0.15;
+  z-index: 1;
+  border-radius: 10px;
+}
+
+/* Specific card backgrounds */
+.card.diana-matchups::before {
+  background-image: url('https://ddragon.leagueoflegends.com/cdn/img/champion/splash/Diana_0.jpg');
+}
+.card.diana-guide::before {
+  background-image: url('https://ddragon.leagueoflegends.com/cdn/img/champion/splash/Diana_1.jpg');
+}
+.card.ekko-guide::before {
+  background-image: url('https://ddragon.leagueoflegends.com/cdn/img/champion/splash/Ekko_0.jpg');
+}
+.card.tierlist::before {
+  background: linear-gradient(to bottom, #1b2838 0%, #161b22 100%);
+}
+.card.fundamentals::before {
+  background-image: url('https://cdn.wallpapersafari.com/92/79/MYTD9q.png');
+  background-size: cover;
+  background-position: center;
+}
+.card.coaching::before {
+  background-image: url('https://m.media-amazon.com/images/I/71GlK3kDLJL.jpg');
+  background-size: cover;
+  background-position: center;
+  opacity: 0.2;
+}
+
+/* Tierlist card visual */
+.card.tierlist .tier-bar {
+  margin-top: 10px;
+  width: 100%;
+  height: 60px;
+  border-radius: 6px;
+  display: flex;
+  overflow: hidden;
+  z-index: 2;
+  position: relative;
+}
+.tier-s { background: #f94144; flex: 1; }
+.tier-a { background: #f3722c; flex: 1; }
+.tier-b { background: #f8961e; flex: 1; }
+.tier-c { background: #f9c74f; flex: 1; }
+.tier-d { background: #90be6d; flex: 1; }
+
+/* Footer */
+footer {
+  text-align: center;
+  padding: 30px;
+  color: #8b949e;
+  font-size: 14px;
+  background: #0a0f14;
+  border-top: 1px solid #1f2937;
+}
+footer a {
+  color: #c9aa71;
+  text-decoration: none;
+}
+footer a:hover {
+  text-decoration: underline;
+}
+
+/* Logout Button */
+#logoutBtn {
+  display: block;
+  margin: 40px auto;
+  padding: 12px 25px;
+  background: #f94144;
+  color: #fff;
+  font-weight: bold;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: 0.3s;
+}
+#logoutBtn:hover {
+  background: #ff5959;
+}
+
+/* Desktop grid fix */
+@media(min-width: 900px){
+  .card-grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+  .tierlist, .fundamentals, .coaching { justify-self: center; }
+}
+</style>
+</head>
+<body>
+<header>
+  LoL Fundamentals – Members Hub
+  <a href="https://lolfundamentals.com/settings" class="settings-btn" aria-label="Settings">
+    <svg viewBox="0 0 24 24">
+      <path d="M12 15.5A3.5 3.5 0 1 0 12 8.5a3.5 3.5 0 0 0 0 7z" />
+      <path d="M19.4 15a7.9 7.9 0 0 0 .1-1 7.9 7.9 0 0 0-.1-1l2.1-1.6a.5.5 0 0 0 .12-.65l-2-3.46a.5.5 0 0 0-.6-.22l-2.49 1a7.7 7.7 0 0 0-1.73-.99L14.9 2.9a.5.5 0 0 0-.5-.4h-4a.5.5 0 0 0-.5.4L8.2 6.1a7.7 7.7 0 0 0-1.73.99l-2.49-1a.5.5 0 0 0-.6.22L1.7 9.78a.5.5 0 0 0 .12.65L3.9 12a7.9 7.9 0 0 0-.1 1c0 .34.03.67.1 1L1.7 15.6a.5.5 0 0 0-.12.65l2 3.46c.14.25.44.36.7.27l2.49-1c.54.4 1.12.73 1.73.99l.7 3.2c.06.28.3.49.58.49h4c.28 0 .52-.21.58-.49l.7-3.2c.6-.26 1.19-.59 1.73-.99l2.49 1c.26.09.56-.02.7-.27l2-3.46a.5.5 0 0 0-.12-.65L19.4 15z"/>
+    </svg>
+  </a>
+</header>
+
+<section class="section">
+<h2>Your Member Hub</h2>
+<p>Choose a section to explore:</p>
+<div class="card-grid">
+  <a href="dianaguide.html" class="card diana-guide">
+    <h3>Diana Guide</h3>
+    <p>Comprehensive guide for mastering Diana, including combos, mechanics, and advanced tips.</p>
+  </a>
+  <a href="matchuphub.html" class="card diana-matchups">
+    <h3>Diana Mid Matchups</h3>
+    <p>Detailed breakdowns for every mid lane matchup. Learn optimal trades, wave control, and positioning.</p>
+  </a>
+  <a href="ekkoguide.html" class="card ekko-guide">
+    <h3>Ekko Guide</h3>
+    <p>Complete guide to playing Ekko Jungle, including combos, pathing, and advanced mechanics.</p>
+  </a>
+  <a href="skills.html" class="card fundamentals">
+    <h3>Fundamentals</h3>
+    <p>Learn core League mechanics that every player should understand to improve faster.</p>
+  </a>
+  <a href="tierlist.html" class="card tierlist">
+    <h3>Tierlist</h3>
+    <p>Current champion tierlist showing which champions dominate the meta.</p>
+    <div class="tier-bar">
+      <div class="tier-s"></div>
+      <div class="tier-a"></div>
+      <div class="tier-b"></div>
+      <div class="tier-c"></div>
+      <div class="tier-d"></div>
+    </div>
+  </a>
+  <a href="https://buy.stripe.com/5kQeV6f6kgVmbfE88iejK03" class="card coaching">
+    <h3>Coaching</h3>
+    <p>Book a personalized 1-hour coaching session. Members receive 25% off!</p>
+  </a>
+</div>
+</section>
+
+<button id="logoutBtn" onclick="logout()">Logout</button>
+
+<footer>
+© 2025 LoL Fundamentals · Contact: 
+<a href="mailto:arcsecond@lolfundamentals.com">arcsecond@lolfundamentals.com</a>
+</footer>
+
+<script>
+// Require login
+if (localStorage.getItem('lolfundamentals_logged_in') !== 'true') {
+  window.location.href = 'index.html';
+}
+
+function logout() {
+  localStorage.removeItem('lolfundamentals_logged_in');
+  window.location.href = 'index.html';
+}
+</script>
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+

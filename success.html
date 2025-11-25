@@ -1,0 +1,22 @@
+<script type="module">
+import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
+import { getFirestore, doc, setDoc } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
+
+const firebaseConfig = {
+  apiKey: "AIzaSyCFRcEV7wdivqONnkjJubAZOjPMixrHMBI",
+  authDomain: "lol-fundamentals.firebaseapp.com",
+  projectId: "lol-fundamentals",
+};
+
+const app = initializeApp(firebaseConfig);
+const firestore = getFirestore(app);
+
+const params = new URLSearchParams(window.location.search);
+const email = params.get("email");
+
+if (email) {
+  await setDoc(doc(firestore, "paidUsers", email), { paid: true });
+  alert("Payment successful! You can now log in.");
+  window.location.href = "index.html";
+}
+</script>

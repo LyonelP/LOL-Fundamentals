@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Map Awareness – LoL Fundamentals</title>
+
+<!-- Login check -->
+<script>
+  if (localStorage.getItem('lolfundamentals_logged_in') !== 'true') {
+    window.location.replace('login.html');
+  }
+</script>
+
+<style>
+body {
+  margin: 0;
+  font-family: 'Beaufort for LOL', Arial, Helvetica, sans-serif;
+  text-align: center;
+  color: #fff;
+  background: url('https://64.media.tumblr.com/594ac290bec6d5e9ad98b5f53404f00b/245c4c3ee469f81d-e4/s1280x1920/1cda4284320eb2031758a9859dfe14ff8bbc50ba.jpg') no-repeat center center fixed;
+  background-size: cover;
+  overflow-x: hidden;
+}
+
+/* Overlay for readability */
+body::before {
+  content: "";
+  position: fixed;
+  top: 0; left: 0;
+  width: 100%; height: 100%;
+  background: rgba(10,15,20,0.75);
+  z-index: -1;
+}
+
+/* Header */
+header {
+  background: rgba(13,17,23,0.9);
+  border-bottom: 2px solid #c9aa71;
+  padding: 20px 10px;
+  font-weight: bold;
+  font-size: 26px;
+  text-transform: uppercase;
+  color: #c9aa71;
+  letter-spacing: 1px;
+}
+
+/* Back button */
+.back-button {
+  display: inline-block;
+  margin: 20px auto 10px;
+  padding: 10px 20px;
+  background: linear-gradient(135deg, #c9aa71, #e0c77b);
+  color: #000;
+  text-decoration: none;
+  border-radius: 8px;
+  font-weight: bold;
+  transition: all 0.3s;
+  box-shadow: 0 0 10px rgba(201,170,113,0.5);
+}
+.back-button::before { content: "← "; }
+.back-button:hover {
+  background: linear-gradient(135deg, #e6c97f, #f0d88b);
+  box-shadow: 0 0 15px rgba(255,215,0,0.8);
+}
+
+/* Layout container for text + minimap */
+.main-section {
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  flex-wrap: wrap;
+  margin: 20px auto 50px;
+  max-width: 1100px;
+  gap: 20px;
+}
+
+/* Content box */
+.content-container {
+  flex: 1 1 600px;
+  background: rgba(13,17,23,0.95);
+  border: 1px solid #2f81f7;
+  border-radius: 10px;
+  padding: 20px;
+  text-align: left;
+  color: #fff;
+  font-size: 16px;
+  line-height: 1.6;
+}
+.content-container h2 {
+  color: #c9aa71;
+  margin-top: 0;
+}
+.content-container ul {
+  margin-left: 20px;
+}
+.content-container li {
+  margin-bottom: 10px;
+}
+
+/* Minimap */
+.minimap {
+  flex: 0 1 350px;
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+}
+.minimap img {
+  width: 100%;
+  height: auto;
+  border-radius: 10px;
+  display: block;
+  border: 2px solid #c9aa71; /* Gold border added */
+}
+
+/* Footer */
+footer {
+  text-align: center;
+  padding: 15px 10px;
+  font-size: 14px;
+  color: #8b949e;
+}
+
+/* Mobile layout */
+@media (max-width: 800px) {
+  .main-section {
+    flex-direction: column;
+    align-items: center;
+  }
+  .minimap {
+    max-width: 90%;
+    margin-top: 15px;
+  }
+}
+</style>
+</head>
+<body>
+
+<header>Map Awareness</header>
+<a href="skills.html" class="back-button">Back to Skills Hub</a>
+
+<div class="main-section">
+  <div class="content-container">
+    <h2>Map Awareness</h2>
+    <p>Map Awareness is your ability to check the minimap frequently and quickly while gathering all of the information presented. Strong map awareness allows you to anticipate plays, avoid ganks, and make better macro decisions.</p>
+
+    <h2>Things to Look Out For</h2>
+    <ul>
+      <li><strong>Where your teammates are in lane:</strong> Did they just back, or are they playing up at the enemy tower? If they just recalled, playing aggressive is riskier. If they’re pushing up at tower, try to match their push. If you can’t, ping them back since you won't be able to capitalize off of them getting ganked.</li>
+      <li><strong>Flashes and abilities being used:</strong> Pay attention to sudden large icon movements on the minimap.</li>
+      <li><strong>Jungle camp respawn timers:</strong> Tracking these helps you track the enemy jungler.</li>
+      <li><strong>Teleport opportunities:</strong> Look for wards, minions and tower to TP to or enemy TPs being channeled.</li>
+      <li><strong>What’s warded:</strong> Check which areas have vision and when that vision will expire.</li>
+      <li><strong>What the enemy does after pushing in a wave:</strong> There is a short instance when you can usually tell what the enemy will do after they push the wave by their first movement. They'll either be looking to roam roam, ward, or reset.</li>
+      <li><strong>When the first tower falls bot lane:</strong> This usually means the enemy bot lane will rotate mid or top after resetting.</li>
+    </ul>
+  </div>
+
+  <div class="minimap">
+    <img src="https://ddragon.leagueoflegends.com/cdn/14.23.1/img/map/map11.png" 
+         alt="League of Legends Summoner's Rift Minimap">
+  </div>
+</div>
+
+<footer>© 2025 LoL Fundamentals · All rights reserved</footer>
+
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+

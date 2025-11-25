@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Summoner Spells – LoL Fundamentals</title>
+
+<!-- Login check -->
+<script>
+  if (localStorage.getItem('lolfundamentals_logged_in') !== 'true') {
+    window.location.replace('login.html');
+  }
+</script>
+
+<style>
+body {
+  margin: 0;
+  font-family: 'Beaufort for LOL', Arial, Helvetica, sans-serif;
+  text-align: center;
+  color: #fff;
+  background: url('https://64.media.tumblr.com/594ac290bec6d5e9ad98b5f53404f00b/245c4c3ee469f81d-e4/s1280x1920/1cda4284320eb2031758a9859dfe14ff8bbc50ba.jpg') no-repeat center center fixed;
+  background-size: cover;
+  overflow-x: hidden;
+}
+
+/* Overlay */
+body::before {
+  content: "";
+  position: fixed;
+  top: 0; left: 0;
+  width: 100%; height: 100%;
+  background: rgba(10,15,20,0.75);
+  z-index: -1;
+}
+
+/* Header */
+header {
+  background: rgba(13,17,23,0.9);
+  border-bottom: 2px solid #c9aa71;
+  padding: 20px 10px;
+  font-weight: bold;
+  font-size: 26px;
+  text-transform: uppercase;
+  color: #c9aa71;
+  letter-spacing: 1px;
+}
+
+/* Back button */
+.back-button {
+  display: inline-block;
+  margin: 20px auto 10px;
+  padding: 10px 20px;
+  background: linear-gradient(135deg, #c9aa71, #e0c77b);
+  color: #000;
+  text-decoration: none;
+  border-radius: 8px;
+  font-weight: bold;
+  transition: all 0.3s;
+  box-shadow: 0 0 10px rgba(201,170,113,0.5);
+}
+.back-button::before { content: "← "; }
+.back-button:hover {
+  background: linear-gradient(135deg, #e6c97f, #f0d88b);
+  box-shadow: 0 0 15px rgba(255,215,0,0.8);
+}
+
+/* Content */
+.content-container {
+  margin: 20px auto 50px auto;
+  max-width: 950px;
+  background: rgba(13,17,23,0.95);
+  border: 1px solid #2f81f7;
+  border-radius: 10px;
+  padding: 25px;
+  text-align: left;
+  color: #fff;
+  font-size: 16px;
+  line-height: 1.6;
+}
+.content-container h2 {
+  color: #c9aa71;
+  margin-top: 0;
+}
+.spell {
+  margin-bottom: 20px;
+}
+.spell img {
+  width: 28px;
+  height: 28px;
+  vertical-align: middle;
+  margin-right: 10px;
+  border-radius: 4px;
+  border: 1px solid #444;
+}
+
+/* Footer */
+footer {
+  text-align: center;
+  padding: 15px 10px;
+  font-size: 14px;
+  color: #8b949e;
+}
+</style>
+</head>
+<body>
+
+<header>Summoner Spells</header>
+<a href="skills.html" class="back-button">Back to Skills Hub</a>
+
+<div class="content-container">
+  <h2>Summoner Spell Usage</h2>
+  <p>Summoner spell usage is one of the most underrated skills in League. The most basic example is using Flash to dodge a play completely instead of flashing later after taking damage and still needing to use Flash anyway.</p>
+
+  <div class="spell">
+    <p><img src="https://ddragon.leagueoflegends.com/cdn/14.9.1/img/spell/SummonerFlash.png" alt="Flash"> <strong>Flash:</strong> Flash is the most used summoner spell in the game since the instant ability to move a substantial distance is extremely strong. Knowing which walls can be flashed and from where is also important, as well as which abilities can be extended or altered with Flash.</p>
+  </div>
+
+  <div class="spell">
+    <p><img src="https://ddragon.leagueoflegends.com/cdn/14.9.1/img/spell/SummonerHaste.png" alt="Ghost"> <strong>Ghost:</strong> How early this should be cast is the main distinguisher for skill with this spell. It increases one’s ability to kite by allowing more distance between each auto attack.</p>
+  </div>
+
+  <div class="spell">
+    <p><img src="https://ddragon.leagueoflegends.com/cdn/14.9.1/img/spell/SummonerHeal.png" alt="Heal"> <strong>Heal:</strong> Heal timing can be difficult since it can be reduced by healing reduction. You also want to maximize the burst of movement speed it gives. The hardest part is knowing when to sacrifice it for a teammate.</p>
+  </div>
+
+  <div class="spell">
+    <p><img src="https://ddragon.leagueoflegends.com/cdn/14.9.1/img/spell/SummonerDot.png" alt="Ignite"> <strong>Ignite:</strong> Knowing exactly how much damage it deals for an execute and only using it when you don’t have time to deal the damage yourself is key. It’s mostly used early or for applying healing reduction.</p>
+  </div>
+
+  <div class="spell">
+    <p><img src="https://ddragon.leagueoflegends.com/cdn/14.9.1/img/spell/SummonerExhaust.png" alt="Exhaust"> <strong>Exhaust:</strong> Great against champions like Yasuo, Zed, Diana, or Talon who have strong ultimates with a short delay. It’s even better on champions who struggle to exit fights. Mostly used bot lane on supports without hard CC.</p>
+  </div>
+
+  <div class="spell">
+    <p><img src="https://ddragon.leagueoflegends.com/cdn/14.9.1/img/spell/SummonerTeleport.png" alt="Teleport"> <strong>Teleport:</strong> The most complex summoner spell in the game. It’s now mostly used for a quick reset in lane a lane reset tool to gain tempo especially if you can make it back before your opponent finishes recalling.</p>
+  </div>
+
+  <div class="spell">
+    <p><img src="https://ddragon.leagueoflegends.com/cdn/14.9.1/img/spell/SummonerBoost.png" alt="Cleanse"> <strong>Cleanse:</strong> Sometimes taken mid against a champion like Lissandra, but more often on ADCs versus Ashe or other CC-heavy champs. Perfectly timing Cleanse after being CC’d always feels satisfying.</p>
+  </div>
+
+  <div class="spell">
+    <p><img src="https://ddragon.leagueoflegends.com/cdn/14.9.1/img/spell/SummonerSmite.png" alt="Smite"> <strong>Smite:</strong> Timing Smite to secure Baron or Dragon is crucial. Track whether your Smite deals 600, 900, or 1200 damage. Fully upgraded, it can also be used to clear minions or camps efficiently.</p>
+  </div>
+
+  <div class="spell">
+    <p><img src="https://ddragon.leagueoflegends.com/cdn/14.9.1/img/spell/SummonerBarrier.png" alt="Barrier"> <strong>Barrier:</strong> Typically taken by champions who can’t benefit from Ghost or Heal’s movement. Great on stationary champions like Xerath during his ultimate, and recently more common on ADCs after buffs.</p>
+  </div>
+</div>
+
+<footer>© 2025 LoL Fundamentals · All rights reserved</footer>
+
+</body>
+</html>
+
+
+
+
+
+
+

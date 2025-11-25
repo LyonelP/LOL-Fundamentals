@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Diana Mid vs Anivia</title>
+
+<!-- Early redirect before rendering -->
+<script>
+  if (localStorage.getItem('lolfundamentals_logged_in') !== 'true') {
+    window.location.replace('login.html');
+  }
+</script>
+
+<style>
+  body { margin: 0; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; background: #0d1117; color: #e6edf3; line-height: 1.4; }
+  header { background: #161b22; padding: 10px 20px; text-align: center; font-size: 28px; font-weight: bold; color: #58a6ff; }
+
+  /* Gold Back Button */
+  .back-button {
+    display: block;
+    width: max-content;
+    margin: 20px auto 30px auto;
+    padding: 10px 20px;
+    background: linear-gradient(135deg, #c9aa71, #e0c77b);
+    color: #000;
+    text-decoration: none;
+    border-radius: 8px;
+    font-weight: bold;
+    transition: all 0.3s;
+    box-shadow: 0 0 10px rgba(201,170,113,0.5);
+    text-align: center;
+  }
+  .back-button::before { content: "← "; }
+  .back-button:hover { background: linear-gradient(135deg, #e6c97f, #f0d88b); box-shadow: 0 0 15px rgba(255,215,0,0.8); }
+
+  .matchup-container { display: flex; max-width: 900px; margin: 0 auto; gap: 15px; padding: 0 20px 10px 20px; }
+  .matchup-left { display: flex; align-items: center; gap: 10px; flex: 0 0 auto; }
+  .matchup-left img { width: 80px; height: 80px; border-radius: 8px; }
+
+  /* Orange winrate bubble */
+  .winrate-bubble { color: #0d1117; font-weight: bold; padding: 8px 14px; border-radius: 25px; font-size: 16px; white-space: nowrap; }
+  .winrate-bubble.orange { background: #f97316; }
+
+  .matchup-right { flex: 1; color: #e6edf3; display: flex; flex-direction: column; justify-content: flex-start; margin-top: 0px; }
+  .matchup-right h2 { margin: 0 0 15px 0; font-size: 22px; }
+  .matchup-right ul { padding-left: 20px; margin: 0; }
+  .matchup-right li { margin-bottom: 6px; }
+
+  footer { text-align: center; padding: 15px 10px; font-size: 14px; color: #8b949e; }
+
+  @media (max-width: 600px) {
+    .matchup-container { flex-direction: column; align-items: center; padding: 10px; }
+    .matchup-left { justify-content: center; }
+    .matchup-right { text-align: center; margin-top: 0px; }
+  }
+</style>
+</head>
+<body>
+
+<header>Diana Mid Matchup – Anivia</header>
+
+<a href="matchuphub.html" class="back-button">Back to Matchup Hub</a>
+
+<div class="matchup-container">
+  <div class="matchup-left">
+    <img src="https://ddragon.leagueoflegends.com/cdn/14.23.1/img/champion/Anivia.png" alt="Anivia">
+    <div class="winrate-bubble orange">47%</div>
+  </div>
+  <div class="matchup-right">
+    <h2>Matchup Notes</h2>
+    <ul>
+      <li>Bait out Anivia’s Q level 1 by walking up as if to auto the wave, then sidestep toward the direction she casts from for an easy dodge.</li>
+      <li>After baiting her Q, thin out the wave so she can’t safely auto you. Her low base health makes minion aggro punishing.</li>
+      <li>Be careful committing to her egg early; even if you have sustain damage, nearby enemies may rotate before you secure the kill.</li>
+      <li>Best approach is to poke her with Q to get her to lethal but avoid proccing egg. She’ll struggle to clear waves, letting your jungler finish her off later.</li>
+    </ul>
+  </div>
+</div>
+
+<footer>© 2025 LoL Fundamentals · Contact: arcsecond@lolfundamentals.com</footer>
+
+</body>
+</html>
+
+
+
+
+

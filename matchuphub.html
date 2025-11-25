@@ -1,0 +1,241 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Diana Mid – Matchup Hub</title>
+
+<script>
+  if (localStorage.getItem('lolfundamentals_logged_in') !== 'true') {
+    window.location.replace('login.html');
+  }
+</script>
+
+<style>
+body {
+  margin: 0;
+  font-family: 'Beaufort for LOL', Arial, Helvetica, sans-serif;
+  color: #fff;
+  background: url('https://64.media.tumblr.com/594ac290bec6d5e9ad98b5f53404f00b/245c4c3ee469f81d-e4/s1280x1920/1cda4284320eb2031758a9859dfe14ff8bbc50ba.jpg') no-repeat center center fixed;
+  background-size: cover;
+  overflow-x: hidden;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+body::before {
+  content: "";
+  position: fixed;
+  top:0; left:0;
+  width:100%; height:100%;
+  background: rgba(10,15,20,0.25);
+  z-index: -1;
+}
+
+/* Header */
+header {
+  background: rgba(13,17,23,0.9);
+  border-bottom: 2px solid #c9aa71;
+  padding: 20px;
+  font-weight: bold;
+  font-size: 26px;
+  text-transform: uppercase;
+  color: #c9aa71;
+  letter-spacing: 1px;
+  text-align: center;
+  line-height: 1.2;
+  box-sizing: border-box;
+  width: 100%;
+}
+
+/* Back button */
+.back-button {
+  display: block;
+  margin: 20px auto 20px; 
+  padding: 10px 20px;
+  background: linear-gradient(135deg, #c9aa71, #e0c77b);
+  color: #000;
+  text-decoration: none;
+  border-radius: 8px;
+  font-weight: bold;
+  font-size: 16px;
+  text-align: center;
+  box-shadow: 0 0 10px rgba(201,170,113,0.5);
+  transition: all 0.3s;
+  width: fit-content;
+}
+.back-button::before { content: "← "; }
+.back-button:hover {
+  background: linear-gradient(135deg, #e6c97f, #f0d88b);
+  box-shadow: 0 0 15px rgba(255,215,0,0.8);
+}
+
+/* Search bar */
+#champion-search {
+  display: block;
+  width: 400px;
+  max-width: 90%;
+  margin: 20px auto 30px;
+  padding: 8px 12px;
+  border-radius: 6px;
+  border: 2px solid #c084fc;
+  background: #161b22;
+  color: #e6edf3;
+  font-size: 16px;
+}
+
+/* Champion grid */
+.champion-grid {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  gap: 20px;
+  max-width: 1000px;
+  margin: 0 auto 50px;
+  padding: 0 20px;
+}
+
+.champion-card {
+  background: linear-gradient(135deg, #161b22 0%, #21262d 100%);
+  border-radius: 12px;
+  border-left: 6px solid #c084fc;
+  text-align: center;
+  padding: 15px;
+  transition: transform 0.3s, box-shadow 0.3s;
+  cursor: pointer;
+  text-decoration: none;
+  color: inherit;
+}
+.champion-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 10px 25px rgba(0,0,0,0.5);
+}
+.champion-card img {
+  width: 80px;
+  height: 80px;
+  border-radius: 8px;
+  margin-bottom: 10px;
+  object-fit: contain;
+}
+.champion-name {
+  font-size: 16px;
+  color: #c084fc;
+  font-weight: bold;
+}
+
+footer {
+  text-align: center;
+  padding: 25px 10px;
+  font-size: 14px;
+  color: #fff;
+  margin-top: auto;
+}
+
+@media (max-width: 1000px) {
+  .champion-grid {
+    grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+  }
+}
+@media (max-width: 700px) {
+  .champion-card img { width: 80px; height: 80px; }
+  .champion-name { font-size: 16px; }
+  .back-button { font-size: 16px; padding: 10px 20px; }
+  #champion-search { margin-top: 10px; width: 90%; font-size: 16px; }
+}
+@media (max-width: 500px) {
+  .champion-grid { grid-template-columns: repeat(2, 1fr); }
+}
+</style>
+</head>
+<body>
+
+<header>LoL Fundamentals – Diana Mid Matchups</header>
+
+<a href="membershub.html" class="back-button">Back to Members Hub</a>
+
+<input type="text" id="champion-search" placeholder="Search champions...">
+
+<div class="champion-grid">
+  <a href="ahri.html" class="champion-card"><img src="https://ddragon.leagueoflegends.com/cdn/14.23.1/img/champion/Ahri.png" alt="Ahri"><div class="champion-name">Ahri</div></a>
+  <a href="akali.html" class="champion-card"><img src="https://ddragon.leagueoflegends.com/cdn/14.23.1/img/champion/Akali.png" alt="Akali"><div class="champion-name">Akali</div></a>
+  <a href="akshan.html" class="champion-card"><img src="https://ddragon.leagueoflegends.com/cdn/14.23.1/img/champion/Akshan.png" alt="Akshan"><div class="champion-name">Akshan</div></a>
+  <a href="anivia.html" class="champion-card"><img src="https://ddragon.leagueoflegends.com/cdn/14.23.1/img/champion/Anivia.png" alt="Anivia"><div class="champion-name">Anivia</div></a>
+  <a href="annie.html" class="champion-card"><img src="https://ddragon.leagueoflegends.com/cdn/14.23.1/img/champion/Annie.png" alt="Annie"><div class="champion-name">Annie</div></a>
+  <a href="aurelionsol.html" class="champion-card"><img src="https://ddragon.leagueoflegends.com/cdn/14.23.1/img/champion/AurelionSol.png" alt="Aurelion Sol"><div class="champion-name">Aurelion Sol</div></a>
+  <a href="azir.html" class="champion-card"><img src="https://ddragon.leagueoflegends.com/cdn/14.23.1/img/champion/Azir.png" alt="Azir"><div class="champion-name">Azir</div></a>
+  <a href="brand.html" class="champion-card"><img src="https://ddragon.leagueoflegends.com/cdn/14.23.1/img/champion/Brand.png" alt="Brand"><div class="champion-name">Brand</div></a>
+  <a href="cassiopeia.html" class="champion-card"><img src="https://ddragon.leagueoflegends.com/cdn/14.23.1/img/champion/Cassiopeia.png" alt="Cassiopeia"><div class="champion-name">Cassiopeia</div></a>
+  <a href="corki.html" class="champion-card"><img src="https://ddragon.leagueoflegends.com/cdn/14.23.1/img/champion/Corki.png" alt="Corki"><div class="champion-name">Corki</div></a>
+  <a href="ekko.html" class="champion-card"><img src="https://ddragon.leagueoflegends.com/cdn/14.23.1/img/champion/Ekko.png" alt="Ekko"><div class="champion-name">Ekko</div></a>
+  <a href="fizz.html" class="champion-card"><img src="https://ddragon.leagueoflegends.com/cdn/14.23.1/img/champion/Fizz.png" alt="Fizz"><div class="champion-name">Fizz</div></a>
+  <a href="galio.html" class="champion-card"><img src="https://ddragon.leagueoflegends.com/cdn/14.23.1/img/champion/Galio.png" alt="Galio"><div class="champion-name">Galio</div></a>
+  <a href="gragas.html" class="champion-card"><img src="https://ddragon.leagueoflegends.com/cdn/14.23.1/img/champion/Gragas.png" alt="Gragas"><div class="champion-name">Gragas</div></a>
+  <a href="heimerdinger.html" class="champion-card"><img src="https://ddragon.leagueoflegends.com/cdn/14.23.1/img/champion/Heimerdinger.png" alt="Heimerdinger"><div class="champion-name">Heimerdinger</div></a>
+  <a href="irelia.html" class="champion-card"><img src="https://ddragon.leagueoflegends.com/cdn/14.23.1/img/champion/Irelia.png" alt="Irelia"><div class="champion-name">Irelia</div></a>
+  <a href="jayce.html" class="champion-card"><img src="https://ddragon.leagueoflegends.com/cdn/14.23.1/img/champion/Jayce.png" alt="Jayce"><div class="champion-name">Jayce</div></a>
+  <a href="ksante.html" class="champion-card"><img src="https://ddragon.leagueoflegends.com/cdn/14.23.1/img/champion/KSante.png" alt="K'Sante"><div class="champion-name">K'Sante</div></a>
+  <a href="karma.html" class="champion-card"><img src="https://ddragon.leagueoflegends.com/cdn/14.23.1/img/champion/Karma.png" alt="Karma"><div class="champion-name">Karma</div></a>
+  <a href="karthus.html" class="champion-card"><img src="https://ddragon.leagueoflegends.com/cdn/14.23.1/img/champion/Karthus.png" alt="Karthus"><div class="champion-name">Karthus</div></a>
+  <a href="kassadin.html" class="champion-card"><img src="https://ddragon.leagueoflegends.com/cdn/14.23.1/img/champion/Kassadin.png" alt="Kassadin"><div class="champion-name">Kassadin</div></a>
+  <a href="katarina.html" class="champion-card"><img src="https://ddragon.leagueoflegends.com/cdn/14.23.1/img/champion/Katarina.png" alt="Katarina"><div class="champion-name">Katarina</div></a>
+  <a href="kayle.html" class="champion-card"><img src="https://ddragon.leagueoflegends.com/cdn/14.23.1/img/champion/Kayle.png" alt="Kayle"><div class="champion-name">Kayle</div></a>
+  <a href="kennen.html" class="champion-card"><img src="https://ddragon.leagueoflegends.com/cdn/14.23.1/img/champion/Kennen.png" alt="Kennen"><div class="champion-name">Kennen</div></a>
+  <a href="leblanc.html" class="champion-card"><img src="https://ddragon.leagueoflegends.com/cdn/14.23.1/img/champion/Leblanc.png" alt="LeBlanc"><div class="champion-name">LeBlanc</div></a>
+  <a href="lissandra.html" class="champion-card"><img src="https://ddragon.leagueoflegends.com/cdn/14.23.1/img/champion/Lissandra.png" alt="Lissandra"><div class="champion-name">Lissandra</div></a>
+  <a href="lucian.html" class="champion-card"><img src="https://ddragon.leagueoflegends.com/cdn/14.23.1/img/champion/Lucian.png" alt="Lucian"><div class="champion-name">Lucian</div></a>
+  <a href="lux.html" class="champion-card"><img src="https://ddragon.leagueoflegends.com/cdn/14.23.1/img/champion/Lux.png" alt="Lux"><div class="champion-name">Lux</div></a>
+  <a href="malphite.html" class="champion-card"><img src="https://ddragon.leagueoflegends.com/cdn/14.23.1/img/champion/Malphite.png" alt="Malphite"><div class="champion-name">Malphite</div></a>
+  <a href="malzahar.html" class="champion-card"><img src="https://ddragon.leagueoflegends.com/cdn/14.23.1/img/champion/Malzahar.png" alt="Malzahar"><div class="champion-name">Malzahar</div></a>
+  <a href="morgana.html" class="champion-card"><img src="https://ddragon.leagueoflegends.com/cdn/14.23.1/img/champion/Morgana.png" alt="Morgana"><div class="champion-name">Morgana</div></a>
+  <a href="nasus.html" class="champion-card"><img src="https://ddragon.leagueoflegends.com/cdn/14.23.1/img/champion/Nasus.png" alt="Nasus"><div class="champion-name">Nasus</div></a>
+  <a href="neeko.html" class="champion-card"><img src="https://ddragon.leagueoflegends.com/cdn/14.23.1/img/champion/Neeko.png" alt="Neeko"><div class="champion-name">Neeko</div></a>
+  <a href="orianna.html" class="champion-card"><img src="https://ddragon.leagueoflegends.com/cdn/14.23.1/img/champion/Orianna.png" alt="Orianna"><div class="champion-name">Orianna</div></a>
+  <a href="pantheon.html" class="champion-card"><img src="https://ddragon.leagueoflegends.com/cdn/14.23.1/img/champion/Pantheon.png" alt="Pantheon"><div class="champion-name">Pantheon</div></a>
+  <a href="qiyana.html" class="champion-card"><img src="https://ddragon.leagueoflegends.com/cdn/14.23.1/img/champion/Qiyana.png" alt="Qiyana"><div class="champion-name">Qiyana</div></a>
+  <a href="quinn.html" class="champion-card"><img src="https://ddragon.leagueoflegends.com/cdn/14.23.1/img/champion/Quinn.png" alt="Quinn"><div class="champion-name">Quinn</div></a>
+  <a href="renekton.html" class="champion-card"><img src="https://ddragon.leagueoflegends.com/cdn/14.23.1/img/champion/Renekton.png" alt="Renekton"><div class="champion-name">Renekton</div></a>
+  <a href="rumble.html" class="champion-card"><img src="https://ddragon.leagueoflegends.com/cdn/14.23.1/img/champion/Rumble.png" alt="Rumble"><div class="champion-name">Rumble</div></a>
+  <a href="ryze.html" class="champion-card"><img src="https://ddragon.leagueoflegends.com/cdn/14.23.1/img/champion/Ryze.png" alt="Ryze"><div class="champion-name">Ryze</div></a>
+  <a href="seraphine.html" class="champion-card"><img src="https://ddragon.leagueoflegends.com/cdn/14.23.1/img/champion/Seraphine.png" alt="Seraphine"><div class="champion-name">Seraphine</div></a>
+  <a href="swain.html" class="champion-card"><img src="https://ddragon.leagueoflegends.com/cdn/14.23.1/img/champion/Swain.png" alt="Swain"><div class="champion-name">Swain</div></a>
+  <a href="syndra.html" class="champion-card"><img src="https://ddragon.leagueoflegends.com/cdn/14.23.1/img/champion/Syndra.png" alt="Syndra"><div class="champion-name">Syndra</div></a>
+  <a href="sylas.html" class="champion-card"><img src="https://ddragon.leagueoflegends.com/cdn/14.23.1/img/champion/Sylas.png" alt="Sylas"><div class="champion-name">Sylas</div></a>
+  <a href="taliyah.html" class="champion-card"><img src="https://ddragon.leagueoflegends.com/cdn/14.23.1/img/champion/Taliyah.png" alt="Taliyah"><div class="champion-name">Taliyah</div></a>
+  <a href="talon.html" class="champion-card"><img src="https://ddragon.leagueoflegends.com/cdn/14.23.1/img/champion/Talon.png" alt="Talon"><div class="champion-name">Talon</div></a>
+  <a href="teemo.html" class="champion-card"><img src="https://ddragon.leagueoflegends.com/cdn/14.23.1/img/champion/Teemo.png" alt="Teemo"><div class="champion-name">Teemo</div></a>
+  <a href="tristana.html" class="champion-card"><img src="https://ddragon.leagueoflegends.com/cdn/14.23.1/img/champion/Tristana.png" alt="Tristana"><div class="champion-name">Tristana</div></a>
+  <a href="tryndamere.html" class="champion-card"><img src="https://ddragon.leagueoflegends.com/cdn/14.23.1/img/champion/Tryndamere.png" alt="Tryndamere"><div class="champion-name">Tryndamere</div></a>
+  <a href="twistedfate.html" class="champion-card"><img src="https://ddragon.leagueoflegends.com/cdn/14.23.1/img/champion/TwistedFate.png" alt="Twisted Fate"><div class="champion-name">Twisted Fate</div></a>
+  <a href="veigar.html" class="champion-card"><img src="https://ddragon.leagueoflegends.com/cdn/14.23.1/img/champion/Veigar.png" alt="Veigar"><div class="champion-name">Veigar</div></a>
+  <a href="vex.html" class="champion-card"><img src="https://ddragon.leagueoflegends.com/cdn/14.23.1/img/champion/Vex.png" alt="Vex"><div class="champion-name">Vex</div></a>
+  <a href="viktor.html" class="champion-card"><img src="https://ddragon.leagueoflegends.com/cdn/14.23.1/img/champion/Viktor.png" alt="Viktor"><div class="champion-name">Viktor</div></a>
+  <a href="vladimir.html" class="champion-card"><img src="https://ddragon.leagueoflegends.com/cdn/14.23.1/img/champion/Vladimir.png" alt="Vladimir"><div class="champion-name">Vladimir</div></a>
+  <a href="xerath.html" class="champion-card"><img src="https://ddragon.leagueoflegends.com/cdn/14.23.1/img/champion/Xerath.png" alt="Xerath"><div class="champion-name">Xerath</div></a>
+  <a href="yasuo.html" class="champion-card"><img src="https://ddragon.leagueoflegends.com/cdn/14.23.1/img/champion/Yasuo.png" alt="Yasuo"><div class="champion-name">Yasuo</div></a>
+  <a href="yone.html" class="champion-card"><img src="https://ddragon.leagueoflegends.com/cdn/14.23.1/img/champion/Yone.png" alt="Yone"><div class="champion-name">Yone</div></a>
+  <a href="zoe.html" class="champion-card"><img src="https://ddragon.leagueoflegends.com/cdn/14.23.1/img/champion/Zoe.png" alt="Zoe"><div class="champion-name">Zoe</div></a>
+  <a href="ziggs.html" class="champion-card"><img src="https://ddragon.leagueoflegends.com/cdn/14.23.1/img/champion/Ziggs.png" alt="Ziggs"><div class="champion-name">Ziggs</div></a>
+  <a href="zyra.html" class="champion-card"><img src="https://ddragon.leagueoflegends.com/cdn/14.23.1/img/champion/Zyra.png" alt="Zyra"><div class="champion-name">Zyra</div></a>
+</div>
+
+<footer>© 2025 LoL Fundamentals · All rights reserved</footer>
+
+<script>
+const searchInput = document.getElementById('champion-search');
+const championGrid = document.querySelector('.champion-grid');
+const championCards = Array.from(championGrid.getElementsByClassName('champion-card'));
+
+searchInput.addEventListener('input', () => {
+  const query = searchInput.value.toLowerCase();
+  championCards.forEach(card => {
+    const name = card.querySelector('.champion-name').textContent.toLowerCase();
+    card.style.display = name.includes(query) ? 'block' : 'none';
+  });
+});
+</script>
+
+</body>
+</html>
+
+
+
