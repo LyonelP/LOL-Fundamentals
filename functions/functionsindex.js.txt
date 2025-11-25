@@ -1,0 +1,36 @@
+import * as functions from "firebase-functions";
+import * as admin from "firebase-admin";
+import * as fs from "fs";
+import * as path from "path";
+
+admin.initializeApp();
+const firestore = admin.firestore();
+
+export const authCheck = functions.https.onRequest(async (req, res) => {
+  try {
+    // Get the Firebase Auth token from Authorization header
+    const authHeader = req.headers.authorization;
+    if (!authHeader || !authHeader.startsWith("Bearer ")) {
+      return res.status(401).send("Unauthorized: No token");
+    }
+
+    const idToken = authHeader.split("Bearer ")[1];
+    const decodedToken = await admin.auth().verifyIdToken(idToken);
+    const email = decodedToken.email;
+
+    // Check Firestore for paid status
+    const userDoc = await firestore.collection("paidUsers").doc(email).get();
+    if (!userDoc.exists || !userDoc.data()?.paid) {
+      return res.status(403).send("Forbidden: Payment not complete");
+    }
+
+    // Serve membershub.html
+    const filePath = path.join(__dirname, "../public/membershub.html");
+    const html = fs.readFileSync(filePath, "utf8");
+    res.status(200).send(html);
+
+  } catch (err) {
+    console.error(err);
+    res.status(401).send("Unauthorized");
+  }
+});
