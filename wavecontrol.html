@@ -1,0 +1,240 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Wave Control – LoL Fundamentals</title>
+
+<!-- Login check -->
+<script>
+  if (localStorage.getItem('lolfundamentals_logged_in') !== 'true') {
+    window.location.replace('login.html');
+  }
+</script>
+
+<style>
+body {
+  margin: 0;
+  font-family: 'Beaufort for LOL', Arial, Helvetica, sans-serif;
+  text-align: center;
+  color: #fff;
+  background: url('https://64.media.tumblr.com/594ac290bec6d5e9ad98b5f53404f00b/245c4c3ee469f81d-e4/s1280x1920/1cda4284320eb2031758a9859dfe14ff8bbc50ba.jpg') no-repeat center center fixed;
+  background-size: cover;
+  overflow-x: hidden;
+}
+
+/* Overlay for readability */
+body::before {
+  content: "";
+  position: fixed;
+  top: 0; left: 0;
+  width: 100%; height: 100%;
+  background: rgba(10,15,20,0.75);
+  z-index: -1;
+}
+
+/* Header */
+header {
+  background: rgba(13,17,23,0.9);
+  border-bottom: 2px solid #c9aa71;
+  padding: 20px 10px;
+  font-weight: bold;
+  font-size: 26px;
+  text-transform: uppercase;
+  color: #c9aa71;
+  letter-spacing: 1px;
+}
+
+/* Back button */
+.back-button {
+  display: inline-block;
+  margin: 20px auto 10px;
+  padding: 10px 20px;
+  background: linear-gradient(135deg, #c9aa71, #e0c77b);
+  color: #000;
+  text-decoration: none;
+  border-radius: 8px;
+  font-weight: bold;
+  transition: all 0.3s;
+  box-shadow: 0 0 10px rgba(201,170,113,0.5);
+}
+.back-button::before { content: "← "; }
+.back-button:hover {
+  background: linear-gradient(135deg, #e6c97f, #f0d88b);
+  box-shadow: 0 0 15px rgba(255,215,0,0.8);
+}
+
+/* Content container */
+.content-container {
+  margin: 20px auto 50px auto;
+  max-width: 900px;
+  background: rgba(13,17,23,0.95);
+  border: 1px solid #2f81f7;
+  border-radius: 10px;
+  padding: 20px;
+  text-align: left;
+  color: #fff;
+  font-size: 16px;
+  line-height: 1.6;
+  position: relative;
+}
+.content-container h2 {
+  color: #c9aa71;
+  margin-top: 0;
+}
+
+/* GOLD SUBHEADERS */
+.content-container h3 {
+  color: #c9aa71;
+  margin-top: 25px;
+  font-size: 20px;
+  font-weight: bold;
+}
+
+.content-container .video-container {
+  text-align: center;
+  margin: 20px 0;
+}
+.content-container .video-container iframe {
+  width: 100%;
+  max-width: 800px;
+  height: 450px;
+  border: none;
+  border-radius: 8px;
+}
+
+footer {
+  text-align: center;
+  padding: 15px 10px;
+  font-size: 14px;
+  color: #8b949e;
+}
+
+@media (max-width: 600px) {
+  header { font-size: 24px; padding: 15px; }
+  .content-container { margin: 15px 10px 30px 10px; padding: 15px; }
+}
+</style>
+</head>
+<body>
+
+<header>Wave Control</header>
+<a href="skills.html" class="back-button">Back to Skills Hub</a>
+
+<div class="content-container">
+  <h2>Wave Control</h2>
+
+  <p>
+    The goal of wave control is to crash your wave into the enemy tower with your minions as healthy as possible. 
+    It's actually almost always best to push, if you can do so safely, quickly, and without spending too many resources.
+  </p>
+
+  <p>
+    Cannon waves take much longer to clear and are harder to fast push.   
+    Pulling the wave before a cannon wave arrives is often the best strategy.
+  </p>
+
+  <h3>Early Game Wave Control</h3>
+  <p>
+    In the early game, pulling the wave and slow pushing is the most common because it allows you to trade, zone your opponent, 
+    and play with the safety of your tower. It's also the time when you’re most likely to be ganked since you have to stay in lane longer to last hit.
+  </p>
+
+  <p>
+    To pull the wave, the enemy wave must be larger. The number of extra enemy minions needed depends on where the wave currently is. 
+    The closer the wave is to your tower, the more enemy minions are needed because your minions arrive sooner.
+  </p>
+
+  <ul>
+    <li>Mid lane needs the least minions because it’s the shortest lane.</li>
+    <li>In the center of lane, around +1 enemy minion is enough to pull.</li>
+    <li>Near your tower, you need about +3 enemy minions.</li>
+  </ul>
+
+  <h3>Maintaining Wave Position</h3>
+  <p>
+    You can keep the wave close to your tower without needing a large enemy wave by killing all enemy minions except one and 
+    tanking that last minion just outside tower range.  
+    This prevents the wave from crashing and creates a controlled position to trade safely.
+  </p>
+
+  <h3>Mid Game Wave Control</h3>
+  <p>
+    In the mid game, pushing becomes the default pattern because it becomes easier for most champions to clear waves quickly while still trading.
+  </p>
+
+  <p>
+    When you push the enemy out of lane and want to recall or roam, always push the wave fully into the tower. 
+    A large wave can finish the last few minions on its own if needed. 
+  </p>
+
+  <p>
+    The faster you push, the more CS the enemy loses to tower because their minions reach the wave sooner when they return.
+  </p>
+
+  <h3>Freezing</h3>
+  <p>
+    Freezing isn’t very common in mid lane anymore due to faster game pace, large XP range, and difficulty tanking waves. 
+    Still, it's strong in some matchups:
+  </p>
+
+  <ul>
+    <li>Against melee champions who can’t walk up safely.</li>
+    <li>Against champions who struggle to roam or clear jungle camps.</li>
+  </ul>
+
+  <!-- Mid Lane Freeze -->
+  <p><strong>This is the amount of minions it takes to freeze the wave mid lane on the blue side:</strong></p>
+  <img 
+    src="https://i.imgur.com/kHu90dX.png"
+    alt="Mid Lane Freeze Minion Count"
+    style="width:100%; max-width:700px; display:block; margin:20px auto; border:2px solid #c9aa71; border-radius:10px;"
+  />
+
+  <!-- Bot Lane Freeze -->
+  <p><strong>This is the amount of minions it takes to freeze the wave bot lane on the red side:</strong></p>
+  <img 
+    src="https://i.imgur.com/W32sWIn.png"
+    alt="Bot Lane Freeze Minion Count"
+    style="width:100%; max-width:700px; display:block; margin:20px auto; border:2px solid #c9aa71; border-radius:10px;"
+  />
+
+  <!-- Top Lane Freeze -->
+  <p><strong>This is the amount of minions it takes to freeze the wave top lane on the blue side:</strong></p>
+  <img 
+    src="https://i.imgur.com/ETB9Oq4.png"
+    alt="Top Lane Freeze Minion Count"
+    style="width:100%; max-width:700px; display:block; margin:20px auto; border:2px solid #c9aa71; border-radius:10px;"
+  />
+
+  <!-- Freeze Tips -->
+  <h3>Tips</h3>
+  <ul>
+    <li>You can freeze behind the side bush wall to make last hitting easier.</li>
+    <li>In top and bot lane you can step into the side bushes to drop minion aggro, just don't let the minions move too far up.</li>
+  </ul>
+
+  <h3>Late Game Strategy</h3>
+  <p>
+    Late game wave control is simple: push mid as fast as possible.  
+    Fast pushing gives your team deep vision and lets you set up picks, objectives, and map control.
+  </p>
+
+  <div class="video-container">
+    <iframe src="https://www.youtube.com/embed/edDOUuxFaH8" title="Wave Control Guide Video" allowfullscreen></iframe>
+  </div>
+</div>
+
+<footer>© 2025 LoL Fundamentals · All rights reserved</footer>
+
+</body>
+</html>
+
+
+
+
+
+
+
+
+

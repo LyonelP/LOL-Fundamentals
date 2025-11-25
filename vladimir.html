@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Diana Mid vs Vladimir</title>
+<style>
+  body { 
+    margin: 0; 
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; 
+    background: #0d1117; 
+    color: #e6edf3; 
+    line-height: 1.4; 
+    display: none; /* hide until login verified */
+  }
+  header { background: #161b22; padding: 10px 20px; text-align: center; font-size: 28px; font-weight: bold; color: #58a6ff; }
+
+  .back-link {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    background: #c9aa71; 
+    color: #0d1117;
+    font-weight: bold;
+    text-decoration: none;
+    padding: 10px 20px;
+    border-radius: 25px;
+    border: 1px solid #c9aa71;
+    margin: 20px auto 30px auto;
+  }
+  .back-link:hover { background: #e6c17c; color: #0d1117; }
+
+  .matchup-container { display: flex; max-width: 900px; margin: -15px auto 0 auto; gap: 15px; padding: 0 20px 10px 20px; }
+  .matchup-left { display: flex; align-items: center; gap: 10px; flex: 0 0 auto; }
+  .matchup-left img { width: 80px; height: 80px; border-radius: 8px; }
+  .winrate-bubble { background: #b91c1c; color: #0d1117; font-weight: bold; padding: 8px 14px; border-radius: 25px; font-size: 16px; white-space: nowrap; }
+
+  .matchup-right { flex: 1; color: #e6edf3; display: flex; flex-direction: column; justify-content: flex-start; margin-top: 0px; }
+  .matchup-right h2 { margin: 0 0 15px 0; font-size: 22px; }
+  .matchup-right ul { padding-left: 20px; margin: 0; }
+  .matchup-right li { margin-bottom: 6px; }
+
+  footer { text-align: center; padding: 15px 10px; font-size: 14px; color: #8b949e; }
+
+  @media (max-width: 600px) {
+    .matchup-container { flex-direction: column; align-items: center; padding: 10px; margin-top: -15px; }
+    .matchup-left { justify-content: center; }
+    .matchup-right { text-align: center; margin-top: 0px; }
+  }
+</style>
+</head>
+<body>
+<header>Diana Mid Matchup – Vladimir</header>
+
+<div style="text-align: center;">
+  <a href="matchuphub.html" class="back-link">&larr; Back to Matchup Hub</a>
+</div>
+
+<div class="matchup-container">
+  <div class="matchup-left">
+    <img src="https://ddragon.leagueoflegends.com/cdn/14.23.1/img/champion/Vladimir.png" alt="Vladimir">
+    <div class="winrate-bubble">46%</div>
+  </div>
+  <div class="matchup-right">
+    <h2>Matchup Notes</h2>
+    <ul>
+      <li>The first q trade at the start of lane is pointless. This match up is really won at level 3. The strongest runes the vlad can run are aery ghost ignite. That set up gives him the best early game and a ton of kill pressure post 6.</li>
+      <li>His biggest weakness is that he can't push quickly.</li>
+      <li>If you run oom before you can kill him, you can often reset and try again since he'll likely still be in lane.</li>
+      <li> It's often best to use your ult very early in the trade or after a reset since he won't be as likely to W immediately. </li>
+    </ul>
+  </div>
+</div>
+
+<footer>© 2025 LoL Fundamentals · Contact: arcsecond@lolfundamentals.com</footer>
+
+<script>
+if (localStorage.getItem('lolfundamentals_logged_in') !== 'true') {
+  alert('You must be logged in to view this page.');
+  window.location.href = 'login.html';
+} else {
+  document.body.style.display = 'block';
+}
+</script>
+</body>
+</html>
+
+
