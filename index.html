@@ -208,6 +208,7 @@ const emailInput = document.getElementById('email');
 const passwordInput = document.getElementById('password');
 const loginMsg = document.getElementById('loginMsg');
 const resetLink = document.getElementById('resetLink');
+
 const planModal = document.getElementById('planModal');
 const signupEmail = document.getElementById('signupEmail');
 const signupPassword = document.getElementById('signupPassword');
@@ -228,18 +229,24 @@ const stripeLinks = {
   lifetime: "https://buy.stripe.com/fZu00c9M0awYgzYcoyejK06"
 };
 
-// --- SIGNUP ---
+// --- SIGNUP & REDIRECT ---
 async function redirectToStripe(plan) {
   const email = signupEmail.value.trim();
   const password = signupPassword.value.trim();
   if (!email || !password) { alert("Enter email and password"); return; }
+
   try {
-    const userCredential = await createUserWithEmailAndPassword(auth, email, password);
-    await setDoc(doc(firestore, "paidUsers", email), { paid: false, plan, timestamp: serverTimestamp() });
+    // create user in Firebase Auth
+    await createUserWithEmailAndPassword(auth, email, password);
+    // create user doc in Firestore
+    await setDoc(doc(firestore, "paidUsers", email), { paid: false, plan: plan, timestamp: serverTimestamp() });
     window.open(stripeLinks[plan], "_blank");
     closePlanModal();
-  } catch(err) { alert(err.message); }
+  } catch(err) {
+    alert(err.message);
+  }
 }
+
 yearlyBtn.addEventListener('click', () => redirectToStripe('yearly'));
 lifetimeBtn.addEventListener('click', () => redirectToStripe('lifetime'));
 
@@ -249,18 +256,11 @@ loginBtn.addEventListener('click', async () => {
   const password = passwordInput.value.trim();
   if (!email || !password) { loginMsg.textContent = "Enter email and password"; return; }
   try {
-    const userCredential = await signInWithEmailAndPassword(auth, email, password);
-    const token = await userCredential.user.getIdToken();
-
-    // check paid status via backend
-    const res = await fetch('https://us-central1-lol-fundamentals.cloudfunctions.net/api/checkPaid', {
-      method: 'GET',
-      headers: { 'Authorization': 'Bearer ' + token }
-    });
-    const data = await res.json();
-
-    if (data.paid) {
-      window.location.href = 'membershub.html?token=' + token;
+    await signInWithEmailAndPassword(auth, email, password);
+    const docSnap = await getDoc(doc(firestore, "paidUsers", email));
+    if (docSnap.exists() && docSnap.data().paid) {
+      localStorage.setItem('lolfundamentals_logged_in','true');
+      window.location.href='membershub.html';
     } else {
       loginMsg.textContent = "Payment not completed yet.";
     }
@@ -277,8 +277,9 @@ resetLink.addEventListener('click', async (e) => {
 });
 
 // --- AUTO REDIRECT ---
-const tokenInStorage = localStorage.getItem('lolfundamentals_logged_in_token');
-if (tokenInStorage) { window.location.href='membershub.html?token=' + tokenInStorage; }
+if (localStorage.getItem('lolfundamentals_logged_in')==='true') {
+  window.location.href='membershub.html';
+}
 
 // --- PARTICLES ---
 const particlesContainer = document.querySelector('.particles');
@@ -293,3 +294,4 @@ for (let i = 0; i < 50; i++) {
 </script>
 </body>
 </html>
+
