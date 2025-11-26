@@ -7,41 +7,61 @@
 <style>
   body { 
     margin: 0; 
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; 
-    background: #0d1117; 
-    color: #e6edf3; 
-    line-height: 1.4; 
+    font-family: 'Beaufort for LOL', Arial, Helvetica, sans-serif; 
+    color: #fff; 
+    background: url('https://64.media.tumblr.com/594ac290bec6d5e9ad98b5f53404f00b/245c4c3ee469f81d-e4/s1280x1920/1cda4284320eb2031758a9859dfe14ff8bbc50ba.jpg') no-repeat center center fixed; 
+    background-size: cover; 
+    overflow-x: hidden; 
+    min-height: 100vh; 
+    display: flex; 
+    flex-direction: column; 
     display: none; /* hide until login verified */
-    min-height: 100vh;
-    display: flex;
-    flex-direction: column;
+  }
+
+  body::before {
+    content: "";
+    position: fixed;
+    top:0; left:0;
+    width:100%; height:100%;
+    background: rgba(10,15,20,0.25);
+    z-index: -1;
   }
 
   header { 
-    background: #161b22; 
-    padding: 10px 20px; 
-    text-align: center; 
-    font-size: 28px; 
+    background: rgba(13,17,23,0.9); 
+    border-bottom: 2px solid #c9aa71; 
+    padding: 20px; 
     font-weight: bold; 
-    color: #58a6ff; 
+    font-size: 26px; 
+    text-transform: uppercase; 
+    color: #c9aa71; 
+    letter-spacing: 1px; 
+    text-align: center; 
+    line-height: 1.2; 
+    box-sizing: border-box; 
+    width: 100%;
   }
 
-  .back-link {
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    background: #c9aa71; 
-    color: #0d1117;
-    font-weight: bold;
-    text-decoration: none;
+  /* Back button */
+  .back-button {
+    display: block;
+    margin: 20px auto 30px; 
     padding: 10px 20px;
-    border-radius: 25px;
-    border: 1px solid #c9aa71;
-    margin: 20px auto 30px auto;
+    background: linear-gradient(135deg, #c9aa71, #e0c77b);
+    color: #000;
+    text-decoration: none;
+    border-radius: 8px;
+    font-weight: bold;
+    font-size: 16px;
+    text-align: center;
+    box-shadow: 0 0 10px rgba(201,170,113,0.5);
+    transition: all 0.3s;
+    width: fit-content;
   }
-  .back-link:hover { 
-    background: #e6c17c; 
-    color: #0d1117; 
+  .back-button::before { content: "← "; }
+  .back-button:hover {
+    background: linear-gradient(135deg, #e6c97f, #f0d88b);
+    box-shadow: 0 0 15px rgba(255,215,0,0.8);
   }
 
   .matchup-container { 
@@ -96,7 +116,7 @@
     text-align: center; 
     padding: 15px 10px; 
     font-size: 14px; 
-    color: #8b949e; 
+    color: #fff; 
     margin-top: auto; /* push footer to bottom */
   }
 
@@ -116,9 +136,7 @@
 
 <header>Diana Mid Matchup – Taliyah</header>
 
-<div style="text-align: center;">
-  <a href="matchuphub.html" class="back-link">&larr; Back to Matchup Hub</a>
-</div>
+<a href="membershub.html" class="back-button">Back to Members Hub</a>
 
 <div class="matchup-container">
   <div class="matchup-left">
