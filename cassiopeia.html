@@ -13,29 +13,24 @@
 </script>
 
 <style>
-  html, body { 
-    margin: 0; 
-    padding: 0; 
-    height: 100%; 
-  }
-
-  body { 
-    display: flex; 
-    flex-direction: column; 
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; 
-    background: #0d1117; 
-    color: #e6edf3; 
-    line-height: 1.4; 
+  body {
+    margin: 0;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background: #0d1117;
+    color: #e6edf3;
+    line-height: 1.4;
+    position: relative;
     min-height: 100vh;
+    padding-bottom: 50px; /* space for footer */
   }
 
-  header { 
-    background: #161b22; 
-    padding: 10px 20px; 
-    text-align: center; 
-    font-size: 28px; 
-    font-weight: bold; 
-    color: #58a6ff; 
+  header {
+    background: #161b22;
+    padding: 10px 20px;
+    text-align: center;
+    font-size: 28px;
+    font-weight: bold;
+    color: #58a6ff;
   }
 
   /* Gold bubble for Back to Matchup Hub */
@@ -56,50 +51,66 @@
     color: #0d1117;
   }
 
-  .matchup-container { 
-    display: flex; 
-    max-width: 900px; 
-    margin: -15px auto 0 auto; 
-    gap: 15px; 
-    padding: 0 20px 10px 20px; 
-    flex: 1; /* push footer to bottom */
+  .matchup-container {
+    display: flex;
+    max-width: 900px;
+    margin: -15px auto 0 auto;
+    gap: 15px;
+    padding: 0 20px 10px 20px;
   }
-  .matchup-left { display: flex; align-items: center; gap: 10px; flex: 0 0 auto; }
-  .matchup-left img { width: 80px; height: 80px; border-radius: 8px; }
+
+  .matchup-left {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    flex: 0 0 auto;
+  }
+  .matchup-left img {
+    width: 80px;
+    height: 80px;
+    border-radius: 8px;
+  }
 
   /* Winrate bubble */
-  .winrate-bubble { 
-    background: #f97316; 
-    color: #0d1117; 
-    font-weight: bold; 
-    padding: 8px 14px; 
-    border-radius: 25px; 
-    font-size: 16px; 
-    white-space: nowrap; 
+  .winrate-bubble {
+    background: #f97316;
+    color: #0d1117;
+    font-weight: bold;
+    padding: 8px 14px;
+    border-radius: 25px;
+    font-size: 16px;
+    white-space: nowrap;
   }
 
-  .matchup-right { 
-    flex: 1; 
-    color: #e6edf3; 
-    display: flex; 
-    flex-direction: column; 
-    justify-content: flex-start; 
-    margin-top: 0px; 
+  .matchup-right {
+    flex: 1;
+    color: #e6edf3;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    margin-top: 0px;
   }
   .matchup-right h2 { margin: 0 0 15px 0; font-size: 22px; }
   .matchup-right ul { padding-left: 20px; margin: 0; }
   .matchup-right li { margin-bottom: 6px; }
 
-  footer { 
-    text-align: center; 
-    padding: 15px 10px; 
-    font-size: 14px; 
-    color: #8b949e; 
-    margin-top: auto; /* pushes footer to bottom */
+  footer {
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    text-align: center;
+    padding: 15px 10px;
+    font-size: 14px;
+    color: #8b949e;
   }
 
   @media (max-width: 600px) {
-    .matchup-container { flex-direction: column; align-items: center; padding: 10px; margin-top: -15px; }
+    .matchup-container {
+      flex-direction: column;
+      align-items: center;
+      padding: 10px;
+      margin-top: -15px;
+    }
     .matchup-left { justify-content: center; }
     .matchup-right { text-align: center; margin-top: 0px; }
   }
@@ -123,7 +134,7 @@
     <ul>
       <li>Look for qs level 1 but be careful to not push the wave too hard so she can’t look for an extended all in level 2.</li>
       <li>They recently buffed her mana pool but each E costs 40 mana and Q 50 mana.</li>
-      <li>Watch out for Cassiopeias’ W later on as you won’t be able to E out of it and the slow scales to 80%.</li>
+      <li>Watch out for Cassiopeia’s W later on as you won’t be able to E out of it and the slow scales to 80%.</li>
     </ul>
   </div>
 </div>
