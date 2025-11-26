@@ -5,7 +5,6 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Diana Mid vs Cassiopeia</title>
 
-<!-- Early redirect before rendering -->
 <script>
   if (localStorage.getItem('lolfundamentals_logged_in') !== 'true') {
     window.location.replace('login.html');
@@ -19,9 +18,14 @@
     background: #0d1117;
     color: #e6edf3;
     line-height: 1.4;
-    position: relative;
-    min-height: 100vh;
-    padding-bottom: 50px; /* space for footer */
+
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh; /* make body full height */
+  }
+
+  main {
+    flex: 1; /* take all remaining space so footer goes to bottom */
   }
 
   header {
@@ -33,23 +37,20 @@
     color: #58a6ff;
   }
 
-  /* Gold bubble for Back to Matchup Hub */
   .back-link {
     display: inline-flex;
     align-items: center;
     justify-content: center;
-    background: #c9aa71; /* gold */
+    background: #c9aa71;
     color: #0d1117;
     font-weight: bold;
     text-decoration: none;
     padding: 10px 20px;
     border-radius: 25px;
     border: 1px solid #c9aa71;
+    margin: 20px 0 30px 0;
   }
-  .back-link:hover {
-    background: #e6c17c;
-    color: #0d1117;
-  }
+  .back-link:hover { background: #e6c17c; color: #0d1117; }
 
   .matchup-container {
     display: flex;
@@ -65,13 +66,8 @@
     gap: 10px;
     flex: 0 0 auto;
   }
-  .matchup-left img {
-    width: 80px;
-    height: 80px;
-    border-radius: 8px;
-  }
+  .matchup-left img { width: 80px; height: 80px; border-radius: 8px; }
 
-  /* Winrate bubble */
   .winrate-bubble {
     background: #f97316;
     color: #0d1117;
@@ -95,9 +91,6 @@
   .matchup-right li { margin-bottom: 6px; }
 
   footer {
-    position: absolute;
-    bottom: 0;
-    width: 100%;
     text-align: center;
     padding: 15px 10px;
     font-size: 14px;
@@ -117,30 +110,34 @@
 </style>
 </head>
 <body>
+
 <header>Diana Mid Matchup – Cassiopeia</header>
 
-<!-- Centered Gold Back Button -->
-<div style="text-align: center; margin: 20px 0 30px 0;">
-  <a href="matchuphub.html" class="back-link">&larr; Back to Matchup Hub</a>
-</div>
+<main>
+  <div style="text-align: center;">
+    <a href="matchuphub.html" class="back-link">&larr; Back to Matchup Hub</a>
+  </div>
 
-<div class="matchup-container">
-  <div class="matchup-left">
-    <img src="https://ddragon.leagueoflegends.com/cdn/14.23.1/img/champion/Cassiopeia.png" alt="Cassiopeia">
-    <div class="winrate-bubble">48%</div>
+  <div class="matchup-container">
+    <div class="matchup-left">
+      <img src="https://ddragon.leagueoflegends.com/cdn/14.23.1/img/champion/Cassiopeia.png" alt="Cassiopeia">
+      <div class="winrate-bubble">48%</div>
+    </div>
+    <div class="matchup-right">
+      <h2>Matchup Notes</h2>
+      <ul>
+        <li>Look for qs level 1 but be careful to not push the wave too hard so she can’t look for an extended all in level 2.</li>
+        <li>They recently buffed her mana pool but each E costs 40 mana and Q 50 mana.</li>
+        <li>Watch out for Cassiopeia’s W later on as you won’t be able to E out of it and the slow scales to 80%.</li>
+      </ul>
+    </div>
   </div>
-  <div class="matchup-right">
-    <h2>Matchup Notes</h2>
-    <ul>
-      <li>Look for qs level 1 but be careful to not push the wave too hard so she can’t look for an extended all in level 2.</li>
-      <li>They recently buffed her mana pool but each E costs 40 mana and Q 50 mana.</li>
-      <li>Watch out for Cassiopeia’s W later on as you won’t be able to E out of it and the slow scales to 80%.</li>
-    </ul>
-  </div>
-</div>
+</main>
 
 <footer>© 2025 LoL Fundamentals · Contact: arcsecond@lolfundamentals.com</footer>
+
 </body>
 </html>
+
 
 
