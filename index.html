@@ -86,16 +86,8 @@ header {
 .card:hover { transform: translateY(-6px); box-shadow: 0 6px 18px rgba(47,129,247,0.35); }
 .card h3 { color: #c9aa71; }
 
-#loginSection { backdrop-filter: blur(6px); background: rgba(22,27,34,0.75); border: 1px solid rgba(47,129,247,0.4); box-shadow: 0 0 18px rgba(47,129,247,0.25); padding: 30px; border-radius: 10px; max-width: 420px; margin: 40px auto; text-align: center; }
-#loginSection input { width: 80%; max-width: 350px; display: block; margin: 8px auto; padding: 10px; border-radius: 4px; border: none; text-align: center; }
-#loginSection .button-row { display: flex; justify-content: center; gap: 10px; margin-top: 10px; }
-#loginSection button { padding: 10px 25px; font-weight: bold; cursor: pointer; border-radius: 4px; border: none; background: #2f81f7; color: white; }
-#loginSection button:hover { background: #4795ff; }
-#loginSection a { color:#c9aa71; text-decoration: none; }
-#loginSection a:hover { text-decoration: underline; }
-
-/* PLAN MODAL */
-#planModal {
+/* PLAN MODAL & LOGIN MODAL */
+.modal {
   display: none;
   position: fixed;
   inset: 0;
@@ -104,7 +96,7 @@ header {
   justify-content: center;
   align-items: center;
 }
-#planModal .modalContent {
+.modal .modalContent {
   background:#161b22;
   padding:30px;
   border-radius:10px;
@@ -113,11 +105,11 @@ header {
   width:90%;
   border:1px solid #c9aa71;
 }
-#planModal .modalContent h2 { color:#c9aa71; margin-bottom:20px; }
-#planModal .modalContent input { width: 80%; max-width:300px; display:block; margin:8px auto; padding:8px; border-radius:4px; border:none; text-align:center; }
-#planModal .modalContent .plan-buttons { display:flex; justify-content:center; gap:12px; margin-top:10px; }
-#planModal .modalContent .plan-buttons .btn { padding:10px 18px; font-size:0.95em; }
-#planModal .modalContent #closeModal { background:none; border:none; color:#c9aa71; cursor:pointer; font-size:1em; margin-top:15px; }
+.modal .modalContent h2 { color:#c9aa71; margin-bottom:20px; }
+.modal .modalContent input { width: 80%; max-width:300px; display:block; margin:8px auto; padding:8px; border-radius:4px; border:none; text-align:center; }
+.modal .modalContent .plan-buttons { display:flex; justify-content:center; gap:12px; margin-top:10px; }
+.modal .modalContent .plan-buttons .btn { padding:10px 18px; font-size:0.95em; }
+.modal .modalContent #closeModal, .modal .modalContent #closeLoginModal { background:none; border:none; color:#c9aa71; cursor:pointer; font-size:1em; margin-top:15px; }
 
 footer { text-align:center; padding:30px; color:#8b949e; font-size:14px; background:#0a0f14; border-top:1px solid #1f2937; }
 footer a { color:#c9aa71; text-decoration:none; }
@@ -128,23 +120,21 @@ footer a:hover { text-decoration:underline; }
 
 <header>LoL Fundamentals</header>
 
-<!-- LOGIN -->
-<section id="loginSection">
-  <h2>Member Login</h2>
-  <input type="email" id="email" placeholder="Enter your email" />
-  <input type="password" id="password" placeholder="Enter your password" />
-  <div class="button-row">
-    <button id="signupBtn">Sign Up</button>
-    <button id="loginBtn">Login</button>
+<!-- HERO -->
+<section class="hero">
+  <div class="blueOverlay"></div>
+  <div class="particles"></div>
+  <div class="aura"></div>
+  <h1>The Ultimate Diana & Ekko Guide</h1>
+  <p>Master every aspect of League of Legends with champions like Diana and Ekko. Learn precise combos, matchup strategies, and advanced tips to elevate your gameplay.</p>
+  <div style="margin-top:20px;">
+    <button class="btn" id="signupHeroBtn">Sign Up</button>
+    <button class="btn" id="loginHeroBtn" style="margin-left:10px;">Login</button>
   </div>
-  <p style="margin-top:10px;">
-    <a href="#" id="resetLink">Forgot your password?</a>
-  </p>
-  <p id="loginMsg"></p>
 </section>
 
 <!-- PLAN MODAL -->
-<div id="planModal">
+<div id="planModal" class="modal">
   <div class="modalContent">
     <h2>Create Account & Choose Plan</h2>
     <input type="email" id="signupEmail" placeholder="Enter your email" />
@@ -157,15 +147,20 @@ footer a:hover { text-decoration:underline; }
   </div>
 </div>
 
-<!-- HERO -->
-<section class="hero">
-  <div class="blueOverlay"></div>
-  <div class="particles"></div>
-  <div class="aura"></div>
-  <h1>The Ultimate Diana & Ekko Guide</h1>
-  <p>Master every aspect of League of Legends with champions like Diana and Ekko. Learn precise combos, matchup strategies, and advanced tips to elevate your gameplay.</p>
-  <button class="btn" id="accessBtn">Get Access</button>
-</section>
+<!-- LOGIN MODAL -->
+<div id="loginModal" class="modal">
+  <div class="modalContent">
+    <h2>Member Login</h2>
+    <input type="email" id="loginEmail" placeholder="Enter your email" />
+    <input type="password" id="loginPassword" placeholder="Enter your password" />
+    <div class="plan-buttons">
+      <button class="btn" id="modalLoginBtn">Login</button>
+    </div>
+    <button id="closeLoginModal">Cancel</button>
+    <p><a href="#" id="resetLinkModal">Forgot your password?</a></p>
+    <p id="loginMsgModal"></p>
+  </div>
+</div>
 
 <!-- CONTENT -->
 <section class="section">
@@ -188,7 +183,6 @@ import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.2/fireba
 import { getAuth, signInWithEmailAndPassword, createUserWithEmailAndPassword, sendPasswordResetEmail } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-auth.js";
 import { getFirestore, doc, getDoc, setDoc, serverTimestamp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
 
-// --- FIREBASE CONFIG ---
 const firebaseConfig = {
   apiKey: "AIzaSyCFRcEV7wdivqONnkjJubAZOjPMixrHMBI",
   authDomain: "lol-fundamentals.firebaseapp.com",
@@ -202,12 +196,8 @@ const auth = getAuth(app);
 const firestore = getFirestore(app);
 
 // --- ELEMENTS ---
-const loginBtn = document.getElementById('loginBtn');
-const signupBtn = document.getElementById('signupBtn');
-const emailInput = document.getElementById('email');
-const passwordInput = document.getElementById('password');
-const loginMsg = document.getElementById('loginMsg');
-const resetLink = document.getElementById('resetLink');
+const signupHeroBtn = document.getElementById('signupHeroBtn');
+const loginHeroBtn = document.getElementById('loginHeroBtn');
 
 const planModal = document.getElementById('planModal');
 const signupEmail = document.getElementById('signupEmail');
@@ -216,12 +206,24 @@ const yearlyBtn = document.getElementById('yearlyBtn');
 const lifetimeBtn = document.getElementById('lifetimeBtn');
 const closeModal = document.getElementById('closeModal');
 
+const loginModal = document.getElementById('loginModal');
+const loginEmail = document.getElementById('loginEmail');
+const loginPassword = document.getElementById('loginPassword');
+const modalLoginBtn = document.getElementById('modalLoginBtn');
+const closeLoginModal = document.getElementById('closeLoginModal');
+const loginMsgModal = document.getElementById('loginMsgModal');
+const resetLinkModal = document.getElementById('resetLinkModal');
+
 // --- MODAL FUNCTIONS ---
 function openPlanModal() { planModal.style.display = 'flex'; }
 function closePlanModal() { planModal.style.display = 'none'; }
-signupBtn.addEventListener('click', openPlanModal);
-document.getElementById('accessBtn').addEventListener('click', openPlanModal);
+signupHeroBtn.addEventListener('click', openPlanModal);
 closeModal.addEventListener('click', closePlanModal);
+
+function openLoginModal() { loginModal.style.display = 'flex'; }
+function closeLogin() { loginModal.style.display = 'none'; }
+loginHeroBtn.addEventListener('click', openLoginModal);
+closeLoginModal.addEventListener('click', closeLogin);
 
 // Stripe links
 const stripeLinks = {
@@ -234,27 +236,21 @@ async function redirectToStripe(plan) {
   const email = signupEmail.value.trim();
   const password = signupPassword.value.trim();
   if (!email || !password) { alert("Enter email and password"); return; }
-
   try {
-    // create user in Firebase Auth
     await createUserWithEmailAndPassword(auth, email, password);
-    // create user doc in Firestore
     await setDoc(doc(firestore, "paidUsers", email), { paid: false, plan: plan, timestamp: serverTimestamp() });
     window.open(stripeLinks[plan], "_blank");
     closePlanModal();
-  } catch(err) {
-    alert(err.message);
-  }
+  } catch(err) { alert(err.message); }
 }
-
 yearlyBtn.addEventListener('click', () => redirectToStripe('yearly'));
 lifetimeBtn.addEventListener('click', () => redirectToStripe('lifetime'));
 
 // --- LOGIN ---
-loginBtn.addEventListener('click', async () => {
-  const email = emailInput.value.trim();
-  const password = passwordInput.value.trim();
-  if (!email || !password) { loginMsg.textContent = "Enter email and password"; return; }
+modalLoginBtn.addEventListener('click', async () => {
+  const email = loginEmail.value.trim();
+  const password = loginPassword.value.trim();
+  if (!email || !password) { loginMsgModal.textContent = "Enter email and password"; return; }
   try {
     await signInWithEmailAndPassword(auth, email, password);
     const docSnap = await getDoc(doc(firestore, "paidUsers", email));
@@ -262,18 +258,18 @@ loginBtn.addEventListener('click', async () => {
       localStorage.setItem('lolfundamentals_logged_in','true');
       window.location.href='membershub.html';
     } else {
-      loginMsg.textContent = "Payment not completed yet.";
+      loginMsgModal.textContent = "Payment not completed yet.";
     }
-  } catch(err) { loginMsg.textContent = err.message; }
+  } catch(err) { loginMsgModal.textContent = err.message; }
 });
 
 // --- PASSWORD RESET ---
-resetLink.addEventListener('click', async (e) => {
+resetLinkModal.addEventListener('click', async (e) => {
   e.preventDefault();
-  const email = emailInput.value.trim();
-  if (!email) { loginMsg.textContent = "Enter your email to reset password"; return; }
-  try { await sendPasswordResetEmail(auth, email); loginMsg.textContent = "Password reset email sent!"; } 
-  catch(err) { loginMsg.textContent = err.message; }
+  const email = loginEmail.value.trim();
+  if (!email) { loginMsgModal.textContent = "Enter your email to reset password"; return; }
+  try { await sendPasswordResetEmail(auth, email); loginMsgModal.textContent = "Password reset email sent!"; } 
+  catch(err) { loginMsgModal.textContent = err.message; }
 });
 
 // --- AUTO REDIRECT ---
@@ -294,6 +290,7 @@ for (let i = 0; i < 50; i++) {
 </script>
 </body>
 </html>
+
 
 
 
