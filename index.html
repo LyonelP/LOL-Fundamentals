@@ -78,13 +78,55 @@ header {
 @keyframes floatParticles { 0% { transform: translateY(0px) translateX(0px) scale(1); opacity: 1; } 50% { transform: translateY(-80px) translateX(20px) scale(1.2); opacity: 0.6; } 100% { transform: translateY(0px) translateX(0px) scale(1); opacity: 1; } }
 .hero .aura { position: absolute; inset: 0; background: radial-gradient(circle at 50% 20%, rgba(47,129,247,0.2), transparent 70%); opacity: 0.3; animation: auraPulse 7s infinite ease-in-out; pointer-events: none; z-index: 3; }
 @keyframes auraPulse { 0% { opacity: 0.25; transform: scale(1); } 50% { opacity: 0.45; transform: scale(1.1); } 100% { opacity: 0.25; transform: scale(1); } }
-.section { padding: 60px 20px; max-width: 950px; margin: auto; text-align: center; }
-.section h2 { color: #c9aa71; font-size: 2.1em; display: inline-block; padding-bottom: 12px; position: relative; margin-bottom: 40px; }
-.section h2::after { content: ""; width: 60%; height: 2px; background: linear-gradient(90deg, transparent, #c9aa71, transparent); position: absolute; bottom: 0; left: 20%; }
-.cards { display: flex; flex-wrap: wrap; justify-content: center; gap: 25px; }
-.card { background: #161b22; padding: 22px; border-radius: 10px; width: 260px; border: 1px solid rgba(47,129,247,0.4); box-shadow: 0 0 12px rgba(47,129,247,0.18); text-align: center; transition: transform 0.25s ease, box-shadow 0.25s ease; }
-.card:hover { transform: translateY(-6px); box-shadow: 0 6px 18px rgba(47,129,247,0.35); }
-.card h3 { color: #c9aa71; }
+
+/* MOVED UP SECTION */
+.section {
+  padding: 40px 20px; /* was 60px */
+  max-width: 950px;
+  margin: auto;
+  text-align: center;
+}
+
+.section h2 {
+  color: #c9aa71;
+  font-size: 2.1em;
+  display: inline-block;
+  padding-bottom: 12px;
+  position: relative;
+  margin-bottom: 40px;
+}
+.section h2::after {
+  content: "";
+  width: 60%;
+  height: 2px;
+  background: linear-gradient(90deg, transparent, #c9aa71, transparent);
+  position: absolute;
+  bottom: 0;
+  left: 20%;
+}
+.cards {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 25px;
+}
+.card {
+  background: #161b22;
+  padding: 22px;
+  border-radius: 10px;
+  width: 260px;
+  border: 1px solid rgba(47,129,247,0.4);
+  box-shadow: 0 0 12px rgba(47,129,247,0.18);
+  text-align: center;
+  transition: transform 0.25s ease, box-shadow 0.25s ease;
+}
+.card:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 6px 18px rgba(47,129,247,0.35);
+}
+.card h3 {
+  color: #c9aa71;
+}
 
 /* PLAN MODAL & LOGIN MODAL */
 .modal {
@@ -105,15 +147,66 @@ header {
   width:90%;
   border:1px solid #c9aa71;
 }
-.modal .modalContent h2 { color:#c9aa71; margin-bottom:20px; }
-.modal .modalContent input { width: 80%; max-width:300px; display:block; margin:8px auto; padding:8px; border-radius:4px; border:none; text-align:center; }
-.modal .modalContent .plan-buttons { display:flex; justify-content:center; gap:12px; margin-top:10px; }
-.modal .modalContent .plan-buttons .btn { padding:10px 18px; font-size:0.95em; }
-.modal .modalContent #closeModal, .modal .modalContent #closeLoginModal { background:none; border:none; color:#c9aa71; cursor:pointer; font-size:1em; margin-top:15px; }
+.modal .modalContent h2 {
+  color:#c9aa71;
+  margin-bottom:20px;
+}
+.modal .modalContent input {
+  width: 80%;
+  max-width:300px;
+  display:block;
+  margin:8px auto;
+  padding:8px;
+  border-radius:4px;
+  border:none;
+  text-align:center;
+}
+.modal .modalContent .plan-buttons {
+  display:flex;
+  justify-content:center;
+  gap:12px;
+  margin-top:10px;
+}
+.modal .modalContent .plan-buttons .btn {
+  padding:10px 18px;
+  font-size:0.95em;
+}
+.modal .modalContent #closeModal,
+.modal .modalContent #closeLoginModal {
+  background:none;
+  border:none;
+  color:#c9aa71;
+  cursor:pointer;
+  font-size:1em;
+  margin-top:15px;
+}
 
-footer { text-align:center; padding:30px; color:#8b949e; font-size:14px; background:#0a0f14; border-top:1px solid #1f2937; }
-footer a { color:#c9aa71; text-decoration:none; }
-footer a:hover { text-decoration:underline; }
+/* PASSWORD RESET LINK — MADE WHITE */
+.modal .modalContent a {
+  color: #ffffff !important; /* UPDATED */
+  text-decoration: none;
+  font-size: 0.9em;
+}
+
+.modal .modalContent a:hover {
+  text-decoration: underline;
+}
+
+footer {
+  text-align:center;
+  padding:30px;
+  color:#8b949e;
+  font-size:14px;
+  background:#0a0f14;
+  border-top:1px solid #1f2937;
+}
+footer a {
+  color:#c9aa71;
+  text-decoration:none;
+}
+footer a:hover {
+  text-decoration:underline;
+}
 </style>
 </head>
 <body>
@@ -290,6 +383,7 @@ for (let i = 0; i < 50; i++) {
 </script>
 </body>
 </html>
+
 
 
 
