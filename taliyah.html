@@ -7,8 +7,8 @@
 <style>
   body { 
     margin: 0; 
-    font-family: "Beaufort for LOL", Arial, Helvetica, sans-serif; 
-    background: radial-gradient(circle at top, #0f1620, #0a0f14 70%);
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; 
+    background: #0d1117; 
     color: #e6edf3; 
     line-height: 1.4; 
     display: none; /* hide until login verified */
@@ -17,48 +17,80 @@
     flex-direction: column;
   }
 
-  header {
-    background: linear-gradient(90deg, #0a0f14, #1b2838);
-    border-bottom: 2px solid #c9aa71;
-    padding: 18px 20px;
-    text-align: center;
-    font-weight: bold;
-    font-size: 24px;
-    letter-spacing: 1.5px;
-    text-transform: uppercase;
-    color: #c9aa71;
-    text-shadow: 0 0 8px rgba(201,170,113,0.4);
+  header { 
+    background: #161b22; 
+    padding: 10px 20px; 
+    text-align: center; 
+    font-size: 28px; 
+    font-weight: bold; 
+    color: #58a6ff; 
   }
 
-  .back-button {
-    display: inline-block;
-    margin: 20px auto;
-    padding: 10px 20px;
-    background: linear-gradient(135deg, #c9aa71, #e0c77b);
-    color: #000;
+  .back-link {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    background: #c9aa71; 
+    color: #0d1117;
+    font-weight: bold;
     text-decoration: none;
-    border-radius: 8px;
-    font-weight: bold;
-    font-size: 16px;
-    transition: all 0.3s;
-    box-shadow: 0 0 10px rgba(201,170,113,0.5);
-    text-align: center;
+    padding: 10px 20px;
+    border-radius: 25px;
+    border: 1px solid #c9aa71;
+    margin: 20px auto 30px auto;
   }
-  .back-button::before { content: "← "; }
-  .back-button:hover {
-    background: linear-gradient(135deg, #e6c97f, #f0d88b);
-    box-shadow: 0 0 15px rgba(255,215,0,0.8);
+  .back-link:hover { 
+    background: #e6c17c; 
+    color: #0d1117; 
   }
 
-  .matchup-container { display: flex; max-width: 900px; margin: -15px auto 0 auto; gap: 15px; padding: 0 20px 10px 20px; }
-  .matchup-left { display: flex; align-items: center; gap: 10px; flex: 0 0 auto; }
-  .matchup-left img { width: 80px; height: 80px; border-radius: 8px; }
-  .winrate-bubble { background: #F9D949; color: #0d1117; font-weight: bold; padding: 8px 14px; border-radius: 25px; font-size: 16px; white-space: nowrap; }
+  .matchup-container { 
+    display: flex; 
+    max-width: 900px; 
+    margin: -15px auto 0 auto; 
+    gap: 15px; 
+    padding: 0 20px 10px 20px; 
+  }
+  .matchup-left { 
+    display: flex; 
+    align-items: center; 
+    gap: 10px; 
+    flex: 0 0 auto; 
+  }
+  .matchup-left img { 
+    width: 80px; 
+    height: 80px; 
+    border-radius: 8px; 
+  }
+  .winrate-bubble { 
+    background: #F9D949; 
+    color: #0d1117; 
+    font-weight: bold; 
+    padding: 8px 14px; 
+    border-radius: 25px; 
+    font-size: 16px; 
+    white-space: nowrap; 
+  }
 
-  .matchup-right { flex: 1; color: #e6edf3; display: flex; flex-direction: column; justify-content: flex-start; margin-top: 0px; }
-  .matchup-right h2 { margin: 0 0 15px 0; font-size: 22px; }
-  .matchup-right ul { padding-left: 20px; margin: 0; }
-  .matchup-right li { margin-bottom: 6px; }
+  .matchup-right { 
+    flex: 1; 
+    color: #e6edf3; 
+    display: flex; 
+    flex-direction: column; 
+    justify-content: flex-start; 
+    margin-top: 0px; 
+  }
+  .matchup-right h2 { 
+    margin: 0 0 15px 0; 
+    font-size: 22px; 
+  }
+  .matchup-right ul { 
+    padding-left: 20px; 
+    margin: 0; 
+  }
+  .matchup-right li { 
+    margin-bottom: 6px; 
+  }
 
   footer { 
     text-align: center; 
@@ -69,7 +101,12 @@
   }
 
   @media (max-width: 600px) {
-    .matchup-container { flex-direction: column; align-items: center; padding: 10px; margin-top: -15px; }
+    .matchup-container { 
+      flex-direction: column; 
+      align-items: center; 
+      padding: 10px; 
+      margin-top: -15px; 
+    }
     .matchup-left { justify-content: center; }
     .matchup-right { text-align: center; margin-top: 0px; }
   }
@@ -79,7 +116,9 @@
 
 <header>Diana Mid Matchup – Taliyah</header>
 
-<a href="membershub.html" class="back-button">Back to Members Hub</a>
+<div style="text-align: center;">
+  <a href="matchuphub.html" class="back-link">&larr; Back to Matchup Hub</a>
+</div>
 
 <div class="matchup-container">
   <div class="matchup-left">
@@ -96,7 +135,7 @@
   </div>
 </div>
 
-<footer>© 2025 LoL Fundamentals · All rights reserved</footer>
+<footer>© 2025 LoL Fundamentals · Contact: arcsecond@lolfundamentals.com</footer>
 
 <script>
 if (localStorage.getItem('lolfundamentals_logged_in') !== 'true') {
@@ -108,7 +147,5 @@ if (localStorage.getItem('lolfundamentals_logged_in') !== 'true') {
 </script>
 </body>
 </html>
-
-
 
 
