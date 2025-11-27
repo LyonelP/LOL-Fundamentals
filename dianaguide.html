@@ -151,99 +151,107 @@ const sections = {
   `,
 
   "Runes": `
-<div style="margin-top:2em; padding:1em; border:1px solid #ccc; background:#f9f9f9;">
-  <h3>Diana Damage Calculator</h3>
+<h2>Runes</h2>
+<ul style="list-style:none; padding-left:0;">
+
+  <li style="margin-bottom:1em;">
+    <img src="https://raw.communitydragon.org/latest/plugins/rcp-be-lol-game-data/global/default/v1/perk-images/styles/resolve/graspoftheundying/graspoftheundying.png" width="32" style="vertical-align:middle; margin-right:8px;" alt="Grasp of the Undying">
+    <strong>Grasp Of The Undying:</strong> This is the only rune and tree that allows Diana to play the way she’s intended to be played. It’s the rune that gives her the potential to win every matchup while also not falling off nearly as hard as another option like Phase Rush which is her second best tree.
+  </li>
+
+  <li style="margin-bottom:1em;">
+    <img src="https://raw.communitydragon.org/latest/plugins/rcp-be-lol-game-data/global/default/v1/perk-images/styles/resolve/mirrorshell/mirrorshell.png" width="32" style="vertical-align:middle; margin-right:8px;" alt="Shield Bash">
+    <strong>Shield Bash:</strong> Will out damage most other runes, and Diana can proc it twice with W.
+  </li>
+
+  <li style="margin-bottom:1em;">
+    <img src="https://raw.communitydragon.org/latest/plugins/rcp-be-lol-game-data/global/default/v1/perk-images/styles/resolve/boneplating/boneplating.png" width="32" style="vertical-align:middle; margin-right:8px;" alt="Bone Plating">
+    <strong>Bone Plating:</strong> Best sustain tool in lane. Runes like Aery, Scorch, First Strike, and Comet all proc multiple plates. This also gives you the best chance of surviving a gank and winning a duel later on in the game.
+  </li>
+
+  <li style="margin-bottom:1em;">
+    <img src="https://raw.communitydragon.org/latest/plugins/rcp-be-lol-game-data/global/default/v1/perk-images/styles/resolve/overgrowth/overgrowth.png" width="32" style="vertical-align:middle; margin-right:8px;" alt="Overgrowth">
+    <strong>Overgrowth:</strong> Best way for Diana to gain health besides Grasp since the build doesn't include any health items. Diana requires health to engage melee champions and she has a 9% bonus health ratio on the shield strength that can be proc'd twice for a total ratio of 18%.
+  </li>
+
+  <li style="margin-bottom:1em;">
+    <img src="https://raw.communitydragon.org/latest/plugins/rcp-be-lol-game-data/global/default/v1/perk-images/styles/sorcery/manaflowband/manaflowband.png" width="32" style="vertical-align:middle; margin-right:8px;" alt="Manaflow Band">
+    <strong>Manaflow Band:</strong> This rune perfectly covers the amount of mana Diana requires to play the game. Without Manaflow Band you won’t be able to take full advantage of Diana’s side lane pressure. Diana should always be looking to take the enemy jungler’s camps especially now while her passive monster ratio is at 300%. Without Manaflow Band you won’t be able to deal with any champion that has resists since multiple damage rotations will be necessary to kill the enemy.
+  </li>
+
+  <li style="margin-bottom:1em;">
+    <img src="https://raw.communitydragon.org/latest/plugins/rcp-be-lol-game-data/global/default/v1/perk-images/styles/sorcery/transcendence/transcendence.png" width="32" style="vertical-align:middle; margin-right:8px;" alt="Transcendence">
+    <strong>Transcendence:</strong> This is the only way for Diana to gain haste besides Cryptobloom later on. It’s the perfect balance of having a little haste which is more efficient at lower values and gaining big cooldown reductions at crucial moments in team fights.
+  </li>
+
+  <!-- Rune Shards -->
+  <li style="margin-top:2em; margin-bottom:1em;">
+    <strong>Rune Shards:</strong>
+    <div style="margin-top:0.5em;">
+      <img src="https://raw.communitydragon.org/latest/plugins/rcp-be-lol-game-data/global/default/v1/perk-images/statmods/statmodsadaptiveforceicon.png" width="28" style="vertical-align:middle; margin-right:6px;" alt="Adaptive Force">
+      <span style="margin-right:12px;">Adaptive Force</span>
+      <img src="https://raw.communitydragon.org/latest/plugins/rcp-be-lol-game-data/global/default/v1/perk-images/statmods/statmodsadaptiveforceicon.png" width="28" style="vertical-align:middle; margin-right:6px;" alt="Adaptive Force">
+      <span style="margin-right:12px;">Adaptive Force</span>
+      <img src="https://raw.communitydragon.org/latest/plugins/rcp-be-lol-game-data/global/default/v1/perk-images/statmods/statmodshealthscalingicon.png" width="28" style="vertical-align:middle; margin-right:6px;" alt="Scaling Health">
+      <span>Scaling Health</span>
+    </div>
+  </li>
+
+</ul>
+</ul>
+
+<div style="margin-top:2em;">
+  <h3>Rune Comparison: Grasp + Shield Bash vs Electrocute + Sudden Impact</h3>
   <p style="font-size:0.95em;">
-    Experiment with Diana's runes, items, and level to see her ability and combo damage against an enemy with specific stats.
+    This table shows the realistic rune-only contribution for Diana at <strong>Level 4 against a 40 MR target</strong>. Shield Bash is assumed to proc every 8 seconds, Grasp every 4 seconds, Electrocute every 20 seconds, and Sudden Impact every 12 seconds.
   </p>
 
-  <label style="display:block; margin-top:0.5em;">
-    Champion Level:
-    <input type="number" id="level" value="18" min="1" max="18" style="width:80px; margin-left:5px;">
-  </label>
+  <table style="width:100%; border-collapse:collapse; margin-top:0.5em; font-size:0.9em;">
+    <thead>
+      <tr style="text-align:left; border-bottom:1px solid #ccc;">
+        <th style="padding:4px;">Trade #</th>
+        <th style="padding:4px;">Grasp + Shield Bash Cumulative Damage</th>
+        <th style="padding:4px;">Grasp Cumulative Heal</th>
+        <th style="padding:4px;">Grasp Cumulative HP Gain</th>
+        <th style="padding:4px;">Electrocute + Sudden Impact Cumulative Damage</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td style="padding:4px;">1</td>
+        <td style="padding:4px;">52</td>
+        <td style="padding:4px;">14</td>
+        <td style="padding:4px;">5</td>
+        <td style="padding:4px;">102</td>
+      </tr>
+      <tr>
+        <td style="padding:4px;">2</td>
+        <td style="padding:4px;">80</td>
+        <td style="padding:4px;">28</td>
+        <td style="padding:4px;">10</td>
+        <td style="padding:4px;">102</td>
+      </tr>
+      <tr>
+        <td style="padding:4px;">3</td>
+        <td style="padding:4px;">132</td>
+        <td style="padding:4px;">42</td>
+        <td style="padding:4px;">15</td>
+        <td style="padding:4px;">132</td>
+      </tr>
+      <tr>
+        <td style="padding:4px;">4</td>
+        <td style="padding:4px;">160</td>
+        <td style="padding:4px;">56</td>
+        <td style="padding:4px;">20</td>
+        <td style="padding:4px;">132</td>
+      </tr>
+    </tbody>
+  </table>
 
-  <label style="display:block; margin-top:0.5em;">
-    Keystone Rune:
-    <select id="keystone" style="margin-left:5px;">
-      <option value="electrocute">Electrocute</option>
-      <option value="phaseRush">Phase Rush</option>
-      <option value="conqueror">Conqueror</option>
-    </select>
-  </label>
-
-  <label style="display:block; margin-top:0.5em;">
-    Ability Power (AP):
-    <input type="number" id="ap" value="500" min="0" style="width:80px; margin-left:5px;">
-  </label>
-
-  <label style="display:block; margin-top:0.5em;">
-    Items (comma-separated AP values):
-    <input type="text" id="items" value="120,60" style="width:100%; margin-top:3px;">
-  </label>
-
-  <label style="display:block; margin-top:0.5em;">
-    Enemy HP:
-    <input type="number" id="enemyHP" value="2000" style="width:100px; margin-left:5px;">
-  </label>
-
-  <label style="display:block; margin-top:0.5em;">
-    Enemy Magic Resist (MR):
-    <input type="number" id="enemyMR" value="80" style="width:100px; margin-left:5px;">
-  </label>
-
-  <button onclick="calculateDamage()" style="margin-top:1em; padding:5px 10px; cursor:pointer;">Calculate Damage</button>
-
-  <div id="results" style="margin-top:1em; padding:0.5em; background:#fff; border:1px solid #ccc;"></div>
+  <p style="margin-top:0.5em; font-size:0.9em;">
+    <em>Note:</em> This table does <strong>not include Bone Plating and Overgrowth</strong>, which significantly outperform the 0's that the other two domination rows provide and are necessary for Diana's playstyle.
+  </p>
 </div>
-
-<script>
-function calculateDamage() {
-    const level = parseInt(document.getElementById("level").value);
-    const keystone = document.getElementById("keystone").value;
-    const ap = parseInt(document.getElementById("ap").value);
-    const items = document.getElementById("items").value.split(",").map(Number);
-    const enemyHP = parseFloat(document.getElementById("enemyHP").value);
-    const enemyMR = parseFloat(document.getElementById("enemyMR").value);
-
-    const totalAP = ap + items.reduce((a,b)=>a+b,0);
-
-    // Base damages at level (example scaling)
-    const Qbase = 60 + 40*level;
-    const Wbase = 70 + 45*level;
-    const Ebase = 60 + 30*level;
-    const Rbase = 150 + 100*level;
-
-    // Ability power scaling
-    const Qdamage = Qbase + 0.6 * totalAP;
-    const Wdamage = Wbase + 0.7 * totalAP;
-    const Edamage = Ebase + 0.5 * totalAP;
-    const Rdamage = Rbase + 0.75 * totalAP;
-
-    // Keystone bonus
-    let bonus = 0;
-    if(keystone === "electrocute") bonus = 0.3 * totalAP;
-    if(keystone === "conqueror") bonus = 0.1 * totalAP;
-
-    function applyMR(damage, mr) {
-        return damage * 100 / (100 + mr);
-    }
-
-    const Qfinal = Math.round(applyMR(Qdamage + bonus, enemyMR));
-    const Wfinal = Math.round(applyMR(Wdamage + bonus, enemyMR));
-    const Efinal = Math.round(applyMR(Edamage + bonus, enemyMR));
-    const Rfinal = Math.round(applyMR(Rdamage + bonus, enemyMR));
-    const combo = Qfinal + Wfinal + Efinal + Rfinal;
-
-    document.getElementById("results").innerHTML = `
-        <strong>Ability Damage:</strong><br>
-        Q: ${Qfinal}<br>
-        W: ${Wfinal}<br>
-        E: ${Efinal}<br>
-        R: ${Rfinal}<br>
-        <strong>Full Combo Damage:</strong> ${combo} (${((combo/enemyHP)*100).toFixed(1)}% of enemy HP)
-    `;
-}
-</script>
 
   `,
 
@@ -600,8 +608,6 @@ sectionSelect.addEventListener('change', () => {
 
 </body>
 </html>
-
-
 
 
 
