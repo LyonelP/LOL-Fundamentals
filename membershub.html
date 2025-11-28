@@ -27,7 +27,7 @@ header {
   position: relative;
 }
 
-/* Subtle Settings Button */
+/* Settings Button */
 .settings-btn {
   position: absolute;
   top: 14px;
@@ -84,6 +84,7 @@ header {
   color: #e6edf3;
   position: relative;
   overflow: hidden;
+  box-sizing: border-box;
 }
 
 /* Card hover effect */
@@ -110,7 +111,7 @@ header {
   text-align: center;
 }
 
-/* Card Background Image */
+/* Card Background Image using pseudo-element */
 .card::before {
   content: "";
   position: absolute;
@@ -150,7 +151,7 @@ header {
   opacity: 0.2;
 }
 
-/* New Cards */
+/* Bottom Row Cards */
 .card.rune-calculator::before {
   background-image: url('https://i.imgur.com/kcs90ta.jpeg');
 }
@@ -161,8 +162,8 @@ header {
   background: none;
 }
 .card.discord-card img {
-  width: 80px;
-  height: 80px;
+  width: 60px;
+  height: 60px;
   margin-bottom: 10px;
 }
 
@@ -222,7 +223,6 @@ footer a:hover {
   .card-grid {
     grid-template-columns: repeat(3, 1fr);
   }
-  .tierlist, .fundamentals, .coaching { justify-self: center; }
 }
 </style>
 </head>
@@ -273,7 +273,7 @@ footer a:hover {
     <p>Book a personalized 1-hour coaching session. Members receive 25% off!</p>
   </a>
 
-  <!-- New Row of Cards -->
+  <!-- Bottom Row -->
   <a href="dianarunes.html" class="card rune-calculator">
     <h3>Rune Calculator</h3>
     <p>Optimal rune setups for Diana to maximize damage and survivability.</p>
@@ -283,7 +283,7 @@ footer a:hover {
     <p>Recommended item builds for Diana in different stages of the game.</p>
   </a>
   <a href="https://discord.gg/MvQdZqKB" class="card discord-card" target="_blank">
-    <img src="https://upload.wikimedia.org/wikipedia/commons/9/98/Discord_logo.svg" alt="Discord Logo">
+    <img src="https://i.imgur.com/1RrJqFh.png" alt="Discord Logo">
     <h3>Join our Discord</h3>
     <p>Connect with other members, share tips, and stay updated on guides.</p>
   </a>
@@ -310,3 +310,4 @@ function logout() {
 </script>
 </body>
 </html>
+
