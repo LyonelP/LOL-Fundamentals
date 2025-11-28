@@ -4,7 +4,6 @@
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>Diana Rune Calculator</title>
-
 <style>
 body {
   margin: 0;
@@ -22,9 +21,25 @@ header {
   text-transform: uppercase;
   color: #c9aa71;
 }
+.back-button {
+  display: inline-block;
+  margin: 15px auto;
+  padding: 10px 20px;
+  background: linear-gradient(135deg, #c9aa71, #e0c77b);
+  color: #000;
+  text-decoration: none;
+  border-radius: 8px;
+  font-weight: bold;
+  box-shadow: 0 0 10px rgba(201,170,113,0.5);
+}
+.back-button::before { content: "← "; }
+.back-button:hover {
+  background: linear-gradient(135deg, #e6c97f, #f0d88b);
+  box-shadow: 0 0 15px rgba(255,215,0,0.8);
+}
 .calc-container {
   margin: 20px auto 50px auto;
-  max-width: 600px;
+  max-width: 650px;
   background: #0d1117;
   border: 2px solid #2f81f7;
   border-radius: 12px;
@@ -49,7 +64,7 @@ header {
   border-radius: 8px;
   padding: 12px;
 }
-.rune-column select, .enemy-box input {
+.rune-column select, .stats-box input {
   width: 100%;
   padding: 8px;
   border-radius: 6px;
@@ -58,7 +73,7 @@ header {
   color: #fff;
   margin-bottom: 8px;
 }
-.enemy-box {
+.stats-box {
   background: #141923;
   border: 1px solid #2f81f7;
   border-radius: 8px;
@@ -99,15 +114,20 @@ footer {
 </head>
 <body>
 <header>Diana Rune Calculator</header>
+<a href="membershub.html" class="back-button">Return to Members Hub</a>
 
 <div class="calc-container">
 
-  <div class="section-title">Diana Stats</div>
-  <div class="enemy-box">
-    <label>Diana Level<br><input type="number" id="diana-level" value="1" min="1" max="18"></label>
-    <label>Enemy HP<br><input type="number" id="enemy-hp" value="2000"></label>
-    <label>Enemy Armor<br><input type="number" id="enemy-armor" value="80"></label>
-    <label>Enemy Magic Resist<br><input type="number" id="enemy-mr" value="60"></label>
+  <div class="section-title">Diana Level</div>
+  <div class="stats-box">
+    <label>Level<br><input type="number" id="diana-level" value="1" min="1" max="18"></label>
+  </div>
+
+  <div class="section-title">Enemy Stats</div>
+  <div class="stats-box">
+    <label>HP<br><input type="number" id="enemy-hp" value="2000"></label>
+    <label>Armor<br><input type="number" id="enemy-armor" value="80"></label>
+    <label>Magic Resist<br><input type="number" id="enemy-mr" value="60"></label>
   </div>
 
   <div class="section-title">Runes</div>
@@ -128,19 +148,19 @@ footer {
     </div>
   </div>
 
-  <button class="calculate-btn" id="calculate-btn">Calculate Damage</button>
+  <button class="calculate-btn" id="calculate-btn">Calculate Rune Damage</button>
 
   <div class="results-box" id="results-box">
-    <h3>Runes & Damage</h3>
+    <h3>Rune Damage Breakdown</h3>
     <table>
       <thead>
-        <tr><th>Slot</th><th>Rune</th></tr>
+        <tr><th>Rune</th><th>Damage</th></tr>
       </thead>
       <tbody id="runes-table">
         <tr><td>—</td><td>—</td></tr>
       </tbody>
     </table>
-    <p id="damage-line" style="margin-top:12px; font-weight:bold;"></p>
+    <p id="damage-total" style="margin-top:12px; font-weight:bold;"></p>
   </div>
 </div>
 
@@ -205,64 +225,50 @@ function populateSlots(type) {
   }
 }
 
-function calculateDamage() {
+function calculateRuneDamage() {
   const slots=[
-    {slot:'Primary 1', id: document.getElementById('primary-slot-1').value},
-    {slot:'Primary 2', id: document.getElementById('primary-slot-2').value},
-    {slot:'Primary 3', id: document.getElementById('primary-slot-3').value},
-    {slot:'Primary 4', id: document.getElementById('primary-slot-4').value},
-    {slot:'Secondary 1', id: document.getElementById('secondary-slot-1').value},
-    {slot:'Secondary 2', id: document.getElementById('secondary-slot-2').value}
+    'primary-slot-1','primary-slot-2','primary-slot-3','primary-slot-4',
+    'secondary-slot-1','secondary-slot-2'
   ];
-
-  // Display selected runes
-  const tbody = document.getElementById('runes-table');
-  tbody.innerHTML = '';
-  slots.forEach(s=>{
-    let name='—';
-    if(s.id){
-      for(const tree of runeTrees){
-        for(const slot of tree.slots){
-          const r=(slot.runes||[]).find(x=>String(x.id)===String(s.id));
-          if(r){name=r.name; break;}
-        }
-        if(name!=='—') break;
-      }
-    }
-    const tr=document.createElement('tr');
-    tr.innerHTML=`<td>${s.slot}</td><td>${name}</td>`;
-    tbody.appendChild(tr);
-  });
-
-  // Example damage calculation based on runes (Adaptive Force + Level scaling)
-  let totalAP = 0;
-  slots.forEach(s=>{
-    // simple placeholder: each rune adds +9 AP if it is Adaptive Force
-    if(s.id){
-      const rObj = runeTrees.flatMap(t=>t.slots.flatMap(sl=>sl.runes||[])).find(r=>String(r.id)===String(s.id));
-      if(rObj && rObj.name.toLowerCase().includes('adaptive force')) totalAP+=9;
-    }
-  });
-
   const level = Number(document.getElementById('diana-level').value)||1;
   const enemyMR = Number(document.getElementById('enemy-mr').value)||0;
 
-  // simple Diana combo formula (AP scaling only)
-  const ratios = {Q:0.35, W:0.25, E:0.35, R:0.65};
-  let raw=0;
-  for(const key in ratios) raw+=ratios[key]*totalAP;
+  const tbody = document.getElementById('runes-table');
+  tbody.innerHTML = '';
+  let totalDamage = 0;
 
-  // MR reduction
-  const mrMultiplier = 100/(100+enemyMR);
-  const dmgAfterMR = Math.round(raw*mrMultiplier);
+  slots.forEach(id=>{
+    const sel = document.getElementById(id);
+    let runeName='—';
+    let dmg = 0;
+    if(sel.value){
+      for(const tree of runeTrees){
+        for(const slot of tree.slots){
+          const r=(slot.runes||[]).find(x=>String(x.id)===String(sel.value));
+          if(r){runeName=r.name; break;}
+        }
+        if(runeName!=='—') break;
+      }
+      // Placeholder: each Adaptive Force rune deals 0.5*level*10 AP magic damage
+      if(runeName.toLowerCase().includes('adaptive force')) dmg = 0.5*level*10;
+      // Apply MR
+      dmg = Math.round(dmg * 100 / (100 + enemyMR));
+      totalDamage += dmg;
+    }
+    const tr = document.createElement('tr');
+    tr.innerHTML = `<td>${runeName}</td><td>${dmg}</td>`;
+    tbody.appendChild(tr);
+  });
 
-  document.getElementById('damage-line').textContent=`Estimated Magic Damage: ${dmgAfterMR}`;
+  document.getElementById('damage-total').textContent = `Total Estimated Damage: ${totalDamage}`;
 }
 
-document.getElementById('calculate-btn').addEventListener('click', calculateDamage);
+document.getElementById('calculate-btn').addEventListener('click', calculateRuneDamage);
 loadRunes();
 </script>
 </body>
 </html>
+
+
 
 
