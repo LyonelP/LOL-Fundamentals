@@ -5,10 +5,13 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Diana Rune Calculator</title>
 <style>
+html,body{margin:0;padding:0;height:100%;}
 body {
-  margin:0;
-  font-family: 'Beaufort for LOL', Arial, sans-serif;
+  font-family:'Beaufort for LOL', Arial, sans-serif;
   color:#fff;
+  display:flex;
+  flex-direction:column;
+  min-height:100%;
   background:url('https://ddragon.leagueoflegends.com/cdn/img/champion/splash/Diana_0.jpg') center/cover fixed;
 }
 body::before {
@@ -27,9 +30,7 @@ header {
   text-align:center;
 }
 .button-container {
-  display:flex;
-  justify-content:center;
-  margin:10px 0;
+  display:flex; justify-content:center; margin:10px 0;
 }
 .back-button {
   padding:8px 20px;
@@ -40,12 +41,12 @@ header {
 .back-button:hover{background:linear-gradient(135deg,#e6c97f,#f0d88b);}
 .calc-container{
   max-width:1000px;
-  margin:20px auto 50px;
+  margin:20px auto 20px;
   background: rgba(13,17,23,0.95);
   border:2px solid #2f81f7;
   border-radius:12px;
   padding:20px;
-  text-align:left;
+  flex:1;
 }
 .section-title{
   color:#c9aa71;
@@ -69,7 +70,7 @@ header {
 .input-box label{
   display:block;margin-bottom:6px;font-size:14px;
 }
-.input-box select{
+.input-box input, .input-box select{
   width:90%;padding:5px;border-radius:5px;border:1px solid #222;
   background:#0f1722;color:#fff;
 }
@@ -90,7 +91,13 @@ header {
 .results-box table{width:100%;border-collapse:collapse;margin-bottom:10px;}
 .results-box th, .results-box td{padding:4px;text-align:left;border-bottom:1px solid rgba(255,255,255,0.05);}
 .results-box th{color:#c9aa71;font-weight:600;}
-footer{text-align:center;padding:12px;font-size:14px;color:#8b949e;}
+footer{
+  text-align:center;
+  padding:12px;
+  font-size:14px;
+  color:#8b949e;
+  background: rgba(13,17,23,0.9);
+}
 @media(max-width:780px){.input-grid{grid-template-columns:1fr;}}
 </style>
 </head>
@@ -117,17 +124,11 @@ footer{text-align:center;padding:12px;font-size:14px;color:#8b949e;}
   <div class="section-title">Enemy Stats</div>
   <div class="input-grid">
     <div class="input-box">
-      <label>HP
-        <select id="enemy-hp"></select>
-      </label>
+      <label>HP <input type="number" id="enemy-hp" value="2000" step="1"></label>
     </div>
     <div class="input-box">
-      <label>Armor
-        <select id="enemy-armor"></select>
-      </label>
-      <label>MR
-        <select id="enemy-mr"></select>
-      </label>
+      <label>Armor <input type="number" id="enemy-armor" value="80" step="1"></label>
+      <label>MR <input type="number" id="enemy-mr" value="40" step="1"></label>
     </div>
   </div>
 
@@ -163,8 +164,6 @@ const dianaBaseStats = [
   {hp:980, ap:0, ad:74, shield:110},{hp:1020, ap:0, ad:76, shield:115},{hp:1060, ap:0, ad:78, shield:120},
   {hp:1100, ap:0, ad:80, shield:125},{hp:1140, ap:0, ad:82, shield:130},{hp:1180, ap:0, ad:84, shield:135},
 ];
-
-// Populate Diana level dropdown
 const levelSelect=document.getElementById('diana-level');
 for(let i=1;i<=18;i++){const opt=document.createElement('option');opt.value=i;opt.textContent=i;levelSelect.appendChild(opt);}
 levelSelect.value=1;
@@ -176,23 +175,46 @@ function updateStats(){
 levelSelect.addEventListener('change',updateStats);
 updateStats();
 
-// Populate enemy stats dropdowns
-function populateEnemySelect(id,start,end,step,value){
-  const sel=document.getElementById(id);sel.innerHTML='';
-  for(let i=start;i<=end;i+=step){const opt=document.createElement('option');opt.value=i;opt.textContent=i;sel.appendChild(opt);}
-  sel.value=value;
+// Rune data
+const trees=['Domination','Precision','Sorcery','Resolve','Inspiration'];
+const runesByTree={
+  Domination:['Electrocute','Predator','Hail of Blades','Dark Harvest'],
+  Precision:['Press the Attack','Lethal Tempo','Fleet Footwork','Conqueror'],
+  Sorcery:['Summon Aery','Arcane Comet','Phase Rush','Manaflow Band'],
+  Resolve:['Grasp of the Undying','Aftershock','Guardian','Shield Bash'],
+  Inspiration:['Glacial Augment','Unsealed Spellbook','Prototype: Omnistone','Kleptomancy']
+};
+
+// Populate tree selectors
+function createTreeButtons(containerId,treeType){ 
+  const container=document.getElementById(containerId);
+  container.innerHTML='';
+  trees.forEach(t=>{
+    const btn=document.createElement('button');
+    btn.textContent=t; btn.style.padding='6px 12px';
+    btn.style.cursor='pointer'; btn.style.flex='1'; btn.style.borderRadius='6px';
+    btn.style.background='#2f81f7'; btn.style.color='#fff'; btn.style.border='none';
+    btn.addEventListener('click',()=>selectTree(treeType,t));
+    container.appendChild(btn);
+  });
 }
-populateEnemySelect('enemy-hp',1000,5000,100,2000);
-populateEnemySelect('enemy-armor',0,300,5,80);
-populateEnemySelect('enemy-mr',0,300,5,40);
-
-// Trees & runes same as previous snippet
-const trees = ['Domination','Precision','Sorcery','Resolve','Inspiration'];
-const runesByTree = { /* same runes as previous snippet */ };
-
-// TODO: implement tree buttons and rune selection (same as previous snippet)
+function selectTree(treeType,tree){
+  const slotContainer=document.getElementById(treeType==='primary'?'primary-runes':'secondary-runes');
+  slotContainer.innerHTML='';
+  const options = runesByTree[tree];
+  let numSlots = treeType==='primary'?4:2;
+  for(let i=0;i<numSlots;i++){
+    const sel=document.createElement('select');
+    options.forEach(r=>{const opt=document.createElement('option');opt.value=r;opt.textContent=r;sel.appendChild(opt);});
+    slotContainer.appendChild(sel);
+  }
+}
+createTreeButtons('primary-tree-select','primary');
+createTreeButtons('secondary-tree-select','secondary');
 
 </script>
 </body>
 </html>
+
+
 
