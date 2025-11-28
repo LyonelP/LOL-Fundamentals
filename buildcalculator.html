@@ -189,7 +189,7 @@ const runeData={
   'Electrocute': {base:[70,80,90,100,110,120,130,140,150,160,170,180,190,200,210,220,230,240], ap:0.5, type:'magic'},
   'Predator': {base:[0], ap:0, type:'magic'},
   'Hail of Blades': {base:[0], ap:0, type:'magic'},
-  'Dark Harvest': {base:[0], ap:0, type:'magic'},
+  'Dark Harvest': {base:[20,25,30,35,40,45,50,55,60,65,70,75,80,85,90,95,100,105], ap:0.25, type:'magic'},
   'Press the Attack': {base:[0], ap:0, type:'magic'},
   'Lethal Tempo': {base:[0], ap:0, type:'magic'},
   'Fleet Footwork': {base:[0], ap:0, type:'magic'},
@@ -220,7 +220,7 @@ const runesByTree={
   Inspiration:['Glacial Augment','Unsealed Spellbook','Prototype: Omnistone','Kleptomancy']
 };
 
-// Create tree selection buttons
+// Tree buttons
 function createTreeButtons(containerId,treeType){ 
   const container=document.getElementById(containerId);
   container.innerHTML='';
@@ -231,26 +231,25 @@ function createTreeButtons(containerId,treeType){
   });
 }
 
-// Populate rune slots ensuring no duplicates per tree
+// Proper selection logic
 function selectTree(treeType,tree){
   const slotContainer=document.getElementById(treeType==='primary'?'primary-runes':'secondary-runes');
   slotContainer.innerHTML='';
   const options=runesByTree[tree];
-  let numSlots=treeType==='primary'?4:2;
-  let used=[];
+  const numSlots=treeType==='primary'?4:2;
+  const slots=[];
   for(let i=0;i<numSlots;i++){
     const sel=document.createElement('select');
-    sel.addEventListener('change',()=>updateOptions(slotContainer,options));
+    sel.addEventListener('change',()=>updateOptions(slots,options));
     slotContainer.appendChild(sel);
+    slots.push(sel);
   }
-  updateOptions(slotContainer,options);
+  updateOptions(slots,options);
 }
 
-// Update options to prevent duplicates
-function updateOptions(container,options){
-  const selects=[...container.querySelectorAll('select')];
-  const used=selects.map(s=>s.value).filter(v=>v!=='');
-  selects.forEach(s=>{
+function updateOptions(slots,options){
+  const used=slots.map(s=>s.value).filter(v=>v!=='');
+  slots.forEach(s=>{
     const current=s.value;
     s.innerHTML='';
     options.forEach(o=>{
@@ -260,19 +259,19 @@ function updateOptions(container,options){
         s.appendChild(opt);
       }
     });
-    if(selects.includes(s) && used.includes(current)) s.value=current;
+    s.value=current;
   });
 }
 
 createTreeButtons('primary-tree-select','primary');
 createTreeButtons('secondary-tree-select','secondary');
 
-// Damage calculation
+// Damage calc
 function calcDamage(base,apScaling,ap,mr,type){
-  if(type==='physical') return Math.round(base + apScaling*ap)*100/(100+mr);
-  if(type==='magic') return Math.round(base + apScaling*ap)*100/(100+mr);
   if(type==='true') return Math.round(base + apScaling*ap);
+  return Math.round((base + apScaling*ap)*100/(100+mr));
 }
+
 document.getElementById('calculate-btn').addEventListener('click',()=>{
   const level=Number(document.getElementById('diana-level').value)-1;
   const enemyMR=Number(document.getElementById('enemy-mr').value)||0;
@@ -296,3 +295,5 @@ document.getElementById('calculate-btn').addEventListener('click',()=>{
 </script>
 </body>
 </html>
+
+
