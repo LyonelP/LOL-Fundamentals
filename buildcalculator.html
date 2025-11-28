@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8" />
+<meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Diana Build Calculator – LoL Fundamentals</title>
 <style>
@@ -11,10 +11,10 @@ body {
   background: url('https://ddragon.leagueoflegends.com/cdn/img/champion/splash/Diana_0.jpg') no-repeat center center fixed;
   background-size: cover;
   color: #fff;
+  text-align: center;
   display: flex;
   flex-direction: column;
   min-height: 100vh;
-  text-align: center;
 }
 body::before {
   content:"";
@@ -58,25 +58,49 @@ header {
   text-align: left;
 }
 h2 { color:#c9aa71; margin-top:0; }
-.item-grid {
+.item-slots {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
   gap: 10px;
-  margin-bottom: 20px;
+  margin-bottom: 15px;
 }
-.item-grid select {
-  width: 100%;
-  padding: 10px;
+.item-slot {
+  background: #2f81f7;
   border-radius: 6px;
-  border: 1px solid #2f81f7;
+  padding: 10px;
+  font-weight: bold;
+  color: #fff;
+  text-align: center;
+}
+.item-slot select {
+  width: 100%;
+  padding: 6px;
+  border-radius: 4px;
+  border:none;
   background:#0f1722;
   color:#fff;
 }
-.select-stats input {
+.rune-slots {
+  display: flex;
+  gap: 10px;
+  margin-bottom: 15px;
+}
+.rune-slot select {
+  flex:1;
+  padding: 6px;
+  border-radius: 4px;
+  border:none;
+  background:#0f1722;
+  color:#fff;
+}
+.enemy-stats {
+  margin-bottom: 20px;
+}
+.enemy-stats input {
   width:70px;
   margin-right:10px;
 }
-button#calculate-build {
+#calculate-build {
   padding:10px 20px;
   background:#2f81f7;
   color:#fff;
@@ -84,15 +108,15 @@ button#calculate-build {
   border-radius:6px;
   cursor:pointer;
   font-size:16px;
+  display:block;
+  margin:0 auto 20px auto;
 }
-button#calculate-build:hover {
-  background:#1e5ec0;
-}
+#calculate-build:hover { background:#1e5ec0; }
 #results {
-  margin-top:20px;
   background:#0f1722;
   padding:15px;
   border-radius:8px;
+  min-height:80px;
 }
 footer {
   text-align:center;
@@ -107,24 +131,24 @@ footer {
 <a href="membershub.html" class="back-button">Back to Members Hub</a>
 
 <div class="container">
-  <h2>Diana Items</h2>
-  <div class="item-grid">
-    <select id="item1"></select>
-    <select id="item2"></select>
-    <select id="item3"></select>
-    <select id="item4"></select>
-    <select id="item5"></select>
-    <select id="item6"></select>
+  <h2>Items</h2>
+  <div class="item-slots">
+    <div class="item-slot">1<br><select id="item1"></select></div>
+    <div class="item-slot">2<br><select id="item2"></select></div>
+    <div class="item-slot">3<br><select id="item3"></select></div>
+    <div class="item-slot">4<br><select id="item4"></select></div>
+    <div class="item-slot">5<br><select id="item5"></select></div>
+    <div class="item-slot">6<br><select id="item6"></select></div>
   </div>
 
-  <h2>Rune Tree</h2>
-  <div class="item-grid">
-    <select id="primary-rune"></select>
-    <select id="secondary-rune"></select>
+  <h2>Runes</h2>
+  <div class="rune-slots">
+    <div class="rune-slot"><select id="primary-rune"></select></div>
+    <div class="rune-slot"><select id="secondary-rune"></select></div>
   </div>
 
   <h2>Enemy Stats</h2>
-  <div class="select-stats">
+  <div class="enemy-stats">
     <label>HP: <input type="number" id="enemy-hp" value="1000"></label>
     <label>Armor: <input type="number" id="enemy-armor" value="30"></label>
     <label>Magic Resist: <input type="number" id="enemy-mr" value="30"></label>
@@ -143,39 +167,29 @@ footer {
 <footer>© 2025 LoL Fundamentals · All rights reserved</footer>
 
 <script>
-// Example: fetch all items/runes dynamically (placeholders)
+// Placeholder: populate items and runes
 const allItems = [{id:1,name:"Hextech Rocketbelt"},{id:2,name:"Nashor's Tooth"},{id:3,name:"Zhonya's Hourglass"},{id:4,name:"Liandry's Anguish"},{id:5,name:"Shadowflame"}];
 const allRunes = [{id:1,name:"Electrocute"},{id:2,name:"Phase Rush"},{id:3,name:"Arcane Comet"},{id:4,name:"Aftershock"}];
 
-function populateSelects() {
-  for(let i=1;i<=6;i++){
-    const sel = document.getElementById(`item${i}`);
-    allItems.forEach(item=>{
-      const opt=document.createElement('option'); opt.value=item.id; opt.text=item.name; sel.appendChild(opt);
-    });
-  }
-  ["primary-rune","secondary-rune"].forEach(id=>{
-    const sel=document.getElementById(id);
-    allRunes.forEach(r=>{
-      const opt=document.createElement('option'); opt.value=r.id; opt.text=r.name; sel.appendChild(opt);
-    });
-  });
+for(let i=1;i<=6;i++){
+  const sel=document.getElementById(`item${i}`);
+  allItems.forEach(it=>{const o=document.createElement('option'); o.value=it.id; o.text=it.name; sel.appendChild(o);});
 }
-populateSelects();
+["primary-rune","secondary-rune"].forEach(id=>{
+  const sel=document.getElementById(id);
+  allRunes.forEach(r=>{const o=document.createElement('option'); o.value=r.id; o.text=r.name; sel.appendChild(o);});
+});
 
 document.getElementById('calculate-build').addEventListener('click', ()=>{
   const hp = parseFloat(document.getElementById('enemy-hp').value);
   const armor = parseFloat(document.getElementById('enemy-armor').value);
   const mr = parseFloat(document.getElementById('enemy-mr').value);
-
-  // Placeholder calculation: total AP from items
-  const totalAP = 0; // integrate real stats later
-  const breakdown = `<p>Total AP from items: ${totalAP}</p>
+  // Placeholder calculation
+  const totalAP = 0; 
+  document.getElementById('damage-breakdown').innerHTML = `<p>Total AP from items: ${totalAP}</p>
 <p>Combo damage (placeholder) vs enemy MR ${mr}: ${totalAP*2}</p>`;
-  document.getElementById('damage-breakdown').innerHTML = breakdown;
 });
 </script>
-
 </body>
 </html>
 
