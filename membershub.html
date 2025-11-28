@@ -49,7 +49,7 @@ header {
 
 /* Section */
 .section {
-  padding: 10px 20px; /* Reduced to move "Your Member Hub" higher */
+  padding: 5px 20px; /* slightly higher "Your Member Hub" */
   max-width: 1000px;
   margin: 0 auto;
 }
@@ -151,20 +151,18 @@ header {
 }
 
 /* New Cards */
-.card.diana-runes::before {
+.card.rune-calculator::before {
   background-image: url('https://i.imgur.com/kcs90ta.jpeg');
 }
-.card.diana-build::before {
+.card.build-calculator::before {
   background-image: url('https://i.imgur.com/uhLq29j.jpeg');
 }
 .card.discord-card::before {
-  background: none; /* Remove pseudo background */
+  background: none;
 }
-
-/* Discord logo inside the card */
 .card.discord-card img {
-  width: 60px;
-  height: 60px;
+  width: 80px;
+  height: 80px;
   margin-bottom: 10px;
 }
 
@@ -274,18 +272,18 @@ footer a:hover {
     <h3>Coaching</h3>
     <p>Book a personalized 1-hour coaching session. Members receive 25% off!</p>
   </a>
-  
+
   <!-- New Row of Cards -->
-  <a href="dianarunes.html" class="card diana-runes">
-    <h3>Diana Runes</h3>
+  <a href="dianarunes.html" class="card rune-calculator">
+    <h3>Rune Calculator</h3>
     <p>Optimal rune setups for Diana to maximize damage and survivability.</p>
   </a>
-  <a href="dianabuild.html" class="card diana-build">
-    <h3>Diana Build</h3>
+  <a href="dianabuild.html" class="card build-calculator">
+    <h3>Build Calculator</h3>
     <p>Recommended item builds for Diana in different stages of the game.</p>
   </a>
   <a href="https://discord.gg/MvQdZqKB" class="card discord-card" target="_blank">
-    <img src="https://i.imgur.com/1RrJqFh.png" alt="Discord Logo">
+    <img src="https://upload.wikimedia.org/wikipedia/commons/9/98/Discord_logo.svg" alt="Discord Logo">
     <h3>Join our Discord</h3>
     <p>Connect with other members, share tips, and stay updated on guides.</p>
   </a>
@@ -312,5 +310,3 @@ function logout() {
 </script>
 </body>
 </html>
-
-
