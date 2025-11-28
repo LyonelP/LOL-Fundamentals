@@ -5,7 +5,6 @@
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>Diana Build Calculator</title>
 
-<!-- Font from reference HTML -->
 <link href="https://fonts.googleapis.com/css2?family=Beaufort+for+LOL&display=swap" rel="stylesheet">
 
 <style>
@@ -17,8 +16,6 @@ body {
   line-height: 1.6;
   text-align: center;
 }
-
-/* Header like reference */
 header {
   background: linear-gradient(90deg, #0a0f14, #1b2838);
   border-bottom: 2px solid #c9aa71;
@@ -29,8 +26,6 @@ header {
   text-transform: uppercase;
   color: #c9aa71;
 }
-
-/* Return Button */
 .return-btn {
   margin: 20px 0;
   display: inline-block;
@@ -44,16 +39,12 @@ header {
 .return-btn:hover {
   background: rgba(201,170,113,0.1);
 }
-
-/* Main container */
 .container {
   width: 85%;
   max-width: 900px;
   margin: 40px auto;
   text-align: left;
 }
-
-/* Section title */
 .section-title {
   font-size: 18px;
   font-weight: 700;
@@ -61,8 +52,6 @@ header {
   margin-top: 20px;
   margin-bottom: 8px;
 }
-
-/* Card styling */
 .card {
   background: #161b22;
   border: 2px solid #c9aa71;
@@ -70,15 +59,11 @@ header {
   padding: 20px;
   margin-bottom: 30px;
 }
-
-/* Flex for runes */
 .rune-pair {
   display: flex;
   gap: 20px;
   flex-wrap: wrap;
 }
-
-/* Rune selects */
 .rune-card select {
   width: 100%;
   padding: 8px;
@@ -88,20 +73,6 @@ header {
   background: #0a0f14;
   color: #e6edf3;
 }
-
-/* Footer */
-footer {
-  text-align: center;
-  padding: 30px;
-  color: #8b949e;
-  font-size: 14px;
-  background: #0a0f14;
-  border-top: 1px solid #1f2937;
-}
-footer a { color: #c9aa71; text-decoration: none; }
-footer a:hover { text-decoration: underline; }
-
-/* Table */
 .table-card table {
   width: 100%;
   border-collapse: collapse;
@@ -112,88 +83,88 @@ footer a:hover { text-decoration: underline; }
   border-bottom: 1px solid #1f2937;
 }
 .table-card th { color: #c9aa71; }
-
-/* Responsive */
-@media(max-width:700px){
-  .rune-pair { flex-direction: column; }
+footer {
+  text-align: center;
+  padding: 30px;
+  color: #8b949e;
+  font-size: 14px;
+  background: #0a0f14;
+  border-top: 1px solid #1f2937;
 }
+footer a { color: #c9aa71; text-decoration: none; }
+footer a:hover { text-decoration: underline; }
+@media(max-width:700px){ .rune-pair { flex-direction: column; } }
 </style>
 </head>
 
 <body>
 
 <header>DIANA BUILD CALCULATOR</header>
-
 <a class="return-btn" href="membershub.html">RETURN TO MEMBERS HUB</a>
 
 <div class="container">
 
-  <!-- Diana Level -->
-  <div class="section-title">DIANA'S LEVEL</div>
-  <div class="card">
-    <select id="diana-level"></select>
+<div class="section-title">DIANA'S LEVEL</div>
+<div class="card">
+  <select id="diana-level"></select>
+</div>
+
+<div class="section-title">RUNES</div>
+<div class="card rune-pair">
+
+  <div class="rune-card">
+    <label>Primary Tree</label>
+    <select id="primary-tree">
+      <option>Domination</option>
+      <option>Precision</option>
+      <option>Sorcery</option>
+      <option>Resolve</option>
+      <option>Inspiration</option>
+    </select>
+    <label>Rune 1</label><select id="primary-rune1"></select>
+    <label>Rune 2</label><select id="primary-rune2"></select>
+    <label>Rune 3</label><select id="primary-rune3"></select>
+    <label>Rune 4</label><select id="primary-rune4"></select>
   </div>
 
-  <!-- Runes -->
-  <div class="section-title">RUNES</div>
-  <div class="card rune-pair">
-
-    <!-- Primary runes -->
-    <div class="rune-card">
-      <label>Primary Tree</label>
-      <select id="primary-tree">
-        <option>Domination</option>
-        <option>Precision</option>
-        <option>Sorcery</option>
-        <option>Resolve</option>
-        <option>Inspiration</option>
-      </select>
-      <label>Rune 1</label><select id="primary-rune1"></select>
-      <label>Rune 2</label><select id="primary-rune2"></select>
-      <label>Rune 3</label><select id="primary-rune3"></select>
-      <label>Rune 4</label><select id="primary-rune4"></select>
-    </div>
-
-    <!-- Secondary runes -->
-    <div class="rune-card">
-      <label>Secondary Tree</label>
-      <select id="secondary-tree">
-        <option>Domination</option>
-        <option>Precision</option>
-        <option>Sorcery</option>
-        <option>Resolve</option>
-        <option>Inspiration</option>
-      </select>
-      <label>Rune 1</label><select id="secondary-rune1"></select>
-      <label>Rune 2</label><select id="secondary-rune2"></select>
-    </div>
-
+  <div class="rune-card">
+    <label>Secondary Tree</label>
+    <select id="secondary-tree">
+      <option>Domination</option>
+      <option>Precision</option>
+      <option>Sorcery</option>
+      <option>Resolve</option>
+      <option>Inspiration</option>
+    </select>
+    <label>Rune 1</label><select id="secondary-rune1"></select>
+    <label>Rune 2</label><select id="secondary-rune2"></select>
   </div>
 
-  <!-- Rune damage table -->
-  <div class="section-title">RUNE DAMAGE ESTIMATE</div>
-  <div class="card table-card">
-    <table>
-      <thead>
-        <tr><th>Rune</th><th>Estimated Damage</th><th>Damage Type</th></tr>
-      </thead>
-      <tbody>
-        <tr><td>Electrocute</td><td>57.5</td><td>True</td></tr>
-        <tr><td>Sudden Impact</td><td>30.2</td><td>Physical</td></tr>
-        <tr><td>Treasure Hunter</td><td>52.3</td><td>True</td></tr>
-        <tr><td>Presence of Mind</td><td>31.5</td><td>True</td></tr>
-        <tr><td>Manaflow Band</td><td>26.4</td><td>True</td></tr>
-        <tr><td>Scorch</td><td>22.8</td><td>Magic</td></tr>
-      </tbody>
-    </table>
-  </div>
+</div>
+
+<div class="section-title">RUNE DAMAGE ESTIMATE</div>
+<div class="card table-card">
+  <table>
+    <thead>
+      <tr><th>Rune</th><th>Estimated Damage</th><th>Damage Type</th></tr>
+    </thead>
+    <tbody>
+      <tr><td>Electrocute</td><td>57.5</td><td>True</td></tr>
+      <tr><td>Sudden Impact</td><td>30.2</td><td>Physical</td></tr>
+      <tr><td>Treasure Hunter</td><td>52.3</td><td>True</td></tr>
+      <tr><td>Presence of Mind</td><td>31.5</td><td>True</td></tr>
+      <tr><td>Manaflow Band</td><td>26.4</td><td>True</td></tr>
+      <tr><td>Scorch</td><td>22.8</td><td>Magic</td></tr>
+    </tbody>
+  </table>
+</div>
 
 </div>
 
 <footer>© 2025 LoL Fundamentals · Contact: <a href="mailto:arcsecond@lolfundamentals.com">arcsecond@lolfundamentals.com</a></footer>
 
 <script>
-// Populate Diana levels 1-18
+// Populate levels
 const levelSelect = document.getElementById('diana-level');
 for(let i=1;i<=18;i++){
   let opt = document.createElement('option');
@@ -201,20 +172,21 @@ for(let i=1;i<=18;i++){
   levelSelect.appendChild(opt);
 }
 
-// Rune options per tree
+// Full rune options for all trees
 const runeOptions = {
-  Domination: ["Electrocute","Predator","Dark Harvest","Hail of Blades"],
-  Precision: ["Press the Attack","Lethal Tempo","Fleet Footwork","Conqueror"],
-  Sorcery: ["Summon Aery","Arcane Comet","Phase Rush","Manaflow Band"],
-  Resolve: ["Grasp of the Undying","Aftershock","Guardian","Font of Life"],
-  Inspiration: ["Glacial Augment","Unsealed Spellbook","Prototype: Omnistone","Future's Market"]
+  Domination: ["Electrocute","Predator","Dark Harvest","Hail of Blades","Cheap Shot","Taste of Blood","Sudden Impact","Zombie Ward","Ghost Poro","Eyeball Collection","Ravenous Hunter","Ingenious Hunter"],
+  Precision: ["Press the Attack","Lethal Tempo","Fleet Footwork","Conqueror","Overheal","Triumph","Presence of Mind","Legend: Alacrity","Legend: Tenacity","Legend: Bloodline","Coup de Grace","Cut Down"],
+  Sorcery: ["Summon Aery","Arcane Comet","Phase Rush","Manaflow Band","Nimbus Cloak","Transcendence","Celerity","Absolute Focus","Scorch","Waterwalking","Gathering Storm"],
+  Resolve: ["Grasp of the Undying","Aftershock","Guardian","Font of Life","Shield Bash","Conditioning","Second Wind","Bone Plating","Overgrowth","Revitalize","Unflinching"],
+  Inspiration: ["Glacial Augment","Unsealed Spellbook","Prototype: Omnistone","Future's Market","Hextech Flashtraption","Magical Footwear","Perfect Timing","Biscuit Delivery","Time Warp Tonic","Cosmic Insight"]
 };
 
-// Populate primary runes
+// Populate runes dynamically
 function populateRunes(treeIdPrefix, treeSelectId, count){
   const treeSelect = document.getElementById(treeSelectId);
   const runeSelects = [];
-  for(let i=1;i<=count;i++){ runeSelects.push(document.getElementById(`${treeIdPrefix}-rune${i}`)); }
+  for(let i=1;i<=count;i++) runeSelects.push(document.getElementById(`${treeIdPrefix}-rune${i}`));
+
   function fill() {
     const tree = treeSelect.value;
     runeSelects.forEach(sel=>{
@@ -229,6 +201,7 @@ function populateRunes(treeIdPrefix, treeSelectId, count){
   treeSelect.addEventListener('change', fill);
   fill();
 }
+
 populateRunes('primary','primary-tree',4);
 populateRunes('secondary','secondary-tree',2);
 </script>
