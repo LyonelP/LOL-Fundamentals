@@ -54,6 +54,11 @@ header {
   margin: 20px auto;
 }
 
+/* Section title */
+.section p {
+  margin-bottom: 25px;
+}
+
 /* Card Grid */
 .card-grid {
   display: grid;
@@ -136,11 +141,11 @@ header {
   background-position: center;
 }
 .card.build-calculator::before {
-  background-image: url('https://static.wikia.nocookie.net/leagueoflegends/images/f/fc/Diana_OriginalSkin_HD.png'); /* New Diana image */
+  background-image: url('https://static.wikia.nocookie.net/leagueoflegends/images/3/3f/Diana_OriginalSkin_HD.png'); /* stable image */
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
-  opacity: 0.4;
+  opacity: 0.35;
 }
 .card.coaching::before {
   background-image: url('https://m.media-amazon.com/images/I/71GlK3kDLJL.jpg');
@@ -221,6 +226,7 @@ footer a:hover {
 </header>
 
 <section class="section">
+<p>Choose a section to explore:</p>
 <div class="card-grid">
   <a href="dianaguide.html" class="card diana-guide">
     <h3>Diana Guide</h3>
@@ -280,6 +286,4 @@ function logout() {
 </script>
 </body>
 </html>
-
-
 
