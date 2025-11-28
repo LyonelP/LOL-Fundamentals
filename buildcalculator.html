@@ -2,222 +2,128 @@
 <html lang="en">
 <head>
 <meta charset="utf-8" />
-<meta name="viewport" content="width=device-width,initial-scale=1" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>Diana Build Calculator</title>
 
-<!-- Require login -->
-<script>
-if (localStorage.getItem('lolfundamentals_logged_in') !== 'true') {
-window.location.replace('login.html');
-}
-</script>
-
 <style>
-/* PAGE + THEME (matches screenshot) */
+/* GLOBAL STYLING */
 body {
 margin: 0;
-font-family: 'Beaufort for LOL', Arial, Helvetica, sans-serif;
+padding: 0;
+font-family: "Beaufort for LOL", serif;
+background-color: #0a0f1a; /* dark blue theme */
+color: #d8c48a; /* gold text */
 text-align: center;
-color: #fff;
-
-/* ⭐ YOUR Diana image as the background ⭐ */
-background: url('IMG_1694.png') no-repeat center center fixed;
-background-size: cover;
-
-overflow-x: hidden;
 }
 
-/* Dark overlay to match screenshot look */
-body::before {
-content: "";
-position: fixed;
-inset: 0;
-background: rgba(5, 7, 12, 0.78);
-z-index: -1;
-}
-
-/* Header title */
+/* TITLE */
 header {
-margin-top: 40px;
-margin-bottom: 20px;
-font-size: 42px;
-letter-spacing: 2px;
+margin-top: 50px;
+font-size: 48px;
 font-weight: 700;
-color: #c9aa71;
-text-transform: uppercase;
+letter-spacing: 2px;
 }
 
-/* Return button */
-.back-button {
+/* RETURN BUTTON */
+.return-btn {
+margin-top: 30px;
 display: inline-block;
 padding: 12px 26px;
-background: linear-gradient(135deg, #c9aa71, #e0c77b);
-text-decoration: none;
-color: #000;
+border: 2px solid #d8c48a;
+color: #d8c48a;
 border-radius: 8px;
-font-weight: bold;
-box-shadow: 0 0 10px rgba(201,170,113,0.5);
+text-decoration: none;
+font-size: 18px;
 }
-.back-button:hover {
-background: linear-gradient(135deg, #e6c97f, #f0d88b);
-box-shadow: 0 0 15px rgba(255,215,0,0.8);
+.return-btn:hover {
+background: rgba(216,196,138,0.1);
 }
-.back-button::before { content: "← "; }
 
-/* Main container */
-.calc-container {
-width: 900px;
-max-width: 90%;
-margin: 40px auto;
-padding: 30px;
-background: rgba(13,17,23,0.95);
-border: 2px solid #2f81f7;
-border-radius: 12px;
+/* MAIN CONTENT WRAPPER */
+.container {
+width: 85%;
+max-width: 900px;
+margin: 60px auto;
+}
+
+/* SECTION TITLES */
+.section-title {
+text-align: left;
+font-size: 18px;
+font-weight: 700;
+margin: 40px 0 12px;
+}
+
+/* FORM GRID (2 COLUMNS) */
+.grid-2 {
+display: grid;
+grid-template-columns: 1fr 1fr;
+gap: 40px;
+}
+
+/* INPUT CARDS */
+.card {
+background: rgba(12,18,30,0.8);
+border: 1px solid rgba(255,255,255,0.08);
+padding: 16px 20px;
+border-radius: 10px;
 text-align: left;
 }
 
-/* Section titles */
-.section-title {
-color: #c9aa71;
-font-size: 20px;
-font-weight:700;
-margin: 25px 0 12px;
-text-transform: uppercase;
+/* INPUT LABELS */
+.card label {
+font-size: 16px;
+display: block;
+margin-bottom: 8px;
 }
 
-/* Items grid */
-.item-grid {
-display: grid;
-grid-template-columns: repeat(3, 1fr);
-gap: 12px;
-}
-.item-slot {
-background: rgba(20,25,35,0.85);
-border: 1px solid #2f81f7;
+/* INPUT STYLING */
+select,
+input[type="number"] {
+width: 100%;
 padding: 10px;
+background: rgba(15,22,35,0.9);
+border: 1px solid rgba(255,255,255,0.08);
+color: #ffffff;
 border-radius: 8px;
-text-align: center;
-}
-.item-slot select {
-width: 100%;
-padding: 8px;
-background: #0f1722;
-color: #fff;
-border-radius: 6px;
-border: 1px solid #222;
+font-size: 16px;
+margin-bottom: 20px;
 }
 
-/* Rune layout */
-.rune-tree {
-display: grid;
-grid-template-columns: 1fr 1fr;
-gap: 18px;
-}
-.rune-column {
-background: rgba(20,25,35,0.85);
-border: 1px solid #2f81f7;
-border-radius: 8px;
-padding: 12px;
-}
-.rune-row {
-margin-bottom: 10px;
-}
-.rune-column select {
-width: 100%;
-padding: 8px;
-border-radius: 6px;
-background: #0f1722;
-border: 1px solid #222;
-color: #fff;
+/* TABLE WRAPPER */
+.table-card {
+margin-top: 40px;
+background: rgba(12,18,30,0.8);
+border: 1px solid rgba(255,255,255,0.08);
+border-radius: 12px;
+padding: 20px;
 }
 
-/* Enemy stats block */
-.enemy-box {
-background: rgba(20,25,35,0.85);
-border: 1px solid #2f81f7;
-padding: 12px;
-border-radius: 8px;
-max-width: 320px;
-}
-.enemy-box label {
-font-size: 14px;
-display: block;
-margin-bottom: 10px;
-}
-.enemy-box input {
-width: 95%;
-padding: 8px;
-border-radius: 6px;
-border: 1px solid #222;
-background: #0f1722;
-color: white;
-}
-
-/* Calculate button */
-.calculate-btn {
-margin: 25px auto;
-display: block;
-padding: 14px 28px;
-background: #2f81f7;
-color: white;
-font-size: 18px;
-border: none;
-cursor: pointer;
-border-radius: 8px;
-font-weight: 700;
-}
-.calculate-btn:hover {
-background: #1b5fc7;
-}
-
-/* Results section */
-.results-box {
-margin-top: 20px;
-background: rgba(20,25,35,0.92);
-border: 1px solid #c9aa71;
-padding: 15px;
-border-radius: 10px;
-}
-.results-grid {
-display: grid;
-grid-template-columns: 1fr 1fr;
-gap: 18px;
-}
-
-/* Tables */
+/* TABLE */
 table {
 width: 100%;
 border-collapse: collapse;
+margin-top: 10px;
 }
-th, td {
-padding: 6px 4px;
-text-align: left;
-font-size: 14px;
-border-bottom: 1px solid rgba(255,255,255,0.04);
-}
+
 th {
-color: #c9aa71;
-font-weight: 600;
+padding: 14px 8px;
+font-size: 16px;
+color: #d8c48a;
+border-bottom: 1px solid rgba(255,255,255,0.05);
 }
 
-/* Footer */
-footer {
-margin-top: 40px;
-margin-bottom: 20px;
-color: #8b949e;
-font-size: 14px;
+td {
+padding: 14px 8px;
+color: white;
+font-size: 15px;
+border-bottom: 1px solid rgba(255,255,255,0.05);
 }
 
-/* Responsive */
-@media (max-width: 780px) {
-.results-grid {
+/* MOBILE */
+@media (max-width: 700px) {
+.grid-2 {
 grid-template-columns: 1fr;
-}
-.rune-tree {
-grid-template-columns: 1fr;
-}
-.item-grid {
-grid-template-columns: repeat(2, 1fr);
 }
 }
 </style>
@@ -225,117 +131,113 @@ grid-template-columns: repeat(2, 1fr);
 
 <body>
 
-<header>Diana Build Calculator</header>
-<a href="membershub.html" class="back-button">Return to Members Hub</a>
+<header>DIANA BUILD CALCULATOR</header>
 
-<div class="calc-container">
+<a class="return-btn" href="membershub.html">RETURN TO MEMBERS HUB</a>
 
-<!-- Items -->
-<div class="section-title">Items</div>
-<div class="item-grid" id="item-grid">
-<div class="item-slot"><select id="item-1"><option>Loading…</option></select></div>
-<div class="item-slot"><select id="item-2"><option>Loading…</option></select></div>
-<div class="item-slot"><select id="item-3"><option>Loading…</option></select></div>
-<div class="item-slot"><select id="item-4"><option>Loading…</option></select></div>
-<div class="item-slot"><select id="item-5"><option>Loading…</option></select></div>
-<div class="item-slot"><select id="item-6"><option>Loading…</option></select></div>
-</div>
+<div class="container">
 
-<!-- Runes -->
-<div class="section-title">Runes</div>
-<div class="rune-tree">
-<div class="rune-column">
-<div style="font-weight:700; margin-bottom:8px;">Primary Path</div>
-<label style="font-size:13px;">Choose path:
-<select id="primary-path"></select>
-</label>
-<div class="rune-row"><select id="primary-slot-1"></select></div>
-<div class="rune-row"><select id="primary-slot-2"></select></div>
-<div class="rune-row"><select id="primary-slot-3"></select></div>
-<div class="rune-row"><select id="primary-slot-4"></select></div>
-</div>
+<!-- LEVEL + ENEMY INFO -->
+<div class="grid-2">
 
-<div class="rune-column">
-<div style="font-weight:700; margin-bottom:8px;">Secondary Path</div>
-<label style="font-size:13px;">Choose path:
-<select id="secondary-path"></select>
-</label>
-<div class="rune-row"><select id="secondary-slot-1"></select></div>
-<div class="rune-row"><select id="secondary-slot-2"></select></div>
-</div>
-</div>
-
-<!-- Enemy -->
-<div class="section-title">Enemy Stats</div>
-<div class="enemy-box">
-<label>HP<br><input type="number" id="enemy-hp" value="2000"></label>
-<label>Armor<br><input type="number" id="enemy-armor" value="80"></label>
-<label>Magic Resist<br><input type="number" id="enemy-mr" value="60"></label>
-</div>
-
-<!-- Button -->
-<button class="calculate-btn" id="calculate-btn">Calculate Stats</button>
-
-<!-- Results -->
-<div class="results-box" id="results-box">
-<h3>Damage Breakdown</h3>
-<div class="results-grid">
+<!-- LEFT COLUMN -->
 <div>
-<h4 style="color:#c9aa71;">Selected Items (stats)</h4>
-<table id="items-table">
-<thead><tr><th>Item</th><th>AP</th><th>HP</th><th>Mana</th></tr></thead>
-<tbody><tr><td>—</td><td>0</td><td>0</td><td>0</td></tr></tbody>
+<div class="section-title">DIANA’S LEVEL</div>
+<div class="card">
+<label>Level</label>
+<select id="diana-level">
+<option>6</option>
+<option>7</option>
+<option>8</option>
+<option>9</option>
+<option>10</option>
+</select>
+</div>
+
+<div class="section-title">PRIMARY RUNES</div>
+<div class="card">
+<select id="primary-runes">
+<option>Domination</option>
+<option>Sorcery</option>
+<option>Precision</option>
+<option>Resolve</option>
+<option>Inspiration</option>
+</select>
+</div>
+</div>
+
+<!-- RIGHT COLUMN -->
+<div>
+<div class="section-title">ENEMY STATS</div>
+<div class="card">
+<label>HP</label>
+<input type="number" value="2000" id="enemy-hp">
+
+<label>Armor</label>
+<input type="number" value="80" id="enemy-armor">
+
+<label>MR</label>
+<input type="number" value="15" id="enemy-mr">
+</div>
+
+<div class="section-title">SECONDARY RUNES</div>
+<div class="card">
+<select id="secondary-runes">
+<option>Sorcery</option>
+<option>Domination</option>
+<option>Precision</option>
+<option>Resolve</option>
+<option>Inspiration</option>
+</select>
+</div>
+</div>
+
+</div>
+
+<!-- RUNE DAMAGE TABLE -->
+<div class="table-card">
+<table>
+<thead>
+<tr>
+<th>Rune</th>
+<th>Estimated Damage</th>
+<th>Damage Type</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Electrocute</td>
+<td>57.5</td>
+<td>True</td>
+</tr>
+<tr>
+<td>Sudden Impact</td>
+<td>30.2</td>
+<td>Physical</td>
+</tr>
+<tr>
+<td>Treasure Hunter</td>
+<td>52.3</td>
+<td>True</td>
+</tr>
+<tr>
+<td>Presence of Mind</td>
+<td>31.5</td>
+<td>True</td>
+</tr>
+<tr>
+<td>Manaflow Band</td>
+<td>26.4</td>
+<td>True</td>
+</tr>
+</tbody>
 </table>
 </div>
 
-<div>
-<h4 style="color:#c9aa71;">Runes Selected</h4>
-<table id="runes-table">
-<thead><tr><th>Slot</th><th>Rune</th></tr></thead>
-<tbody><tr><td>—</td><td>—</td></tr></tbody>
-</table>
 </div>
-</div>
-
-<h4 style="color:#c9aa71; margin-top:15px;">Totals</h4>
-<p id="totals-line">AP: 0 | HP: 0 | Mana: 0</p>
-
-<h4 style="color:#c9aa71; margin-top:15px;">Combo (placeholder)</h4>
-<p id="combo-line">Click "Calculate Stats" to produce combo breakdown.</p>
-</div>
-
-</div>
-
-<footer>© 2025 LoL Fundamentals · All rights reserved</footer>
-
-<script>
-/* ——— JAVASCRIPT UNCHANGED ——— */
-
-/* Endpoints */
-const ITEMS_URL =
-'https://raw.communitydragon.org/latest/plugins/rcp-be-lol-game-data/global/default/v1/items.json';
-const RUNES_URL =
-'https://ddragon.leagueoflegends.com/cdn/14.21.1/data/en_US/runesReforged.json';
-
-let allItems = [];
-let runeTrees = [];
-
-function itemStatsFromObj(item) {
-const stats =
-(item && (item.stats || item.basicStats || item.stats)) || {};
-return {
-ap: Number(stats.FlatMagicDamageMod || stats.AP || 0),
-hp: Number(stats.FlatHPPoolMod || stats.HP || 0),
-mana: Number(stats.FlatMPPoolMod || stats.Mana || 0),
-};
-}
-
-/* (rest of JS unchanged — same as your version) */
-/* ... */
-/* ... */
-</script>
 
 </body>
 </html>
+
 
 
