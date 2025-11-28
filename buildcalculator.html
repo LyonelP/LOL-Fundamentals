@@ -3,155 +3,115 @@
 <head>
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width,initial-scale=1" />
-<title>Diana Rune Damage Calculator</title>
-
-<!-- Require login -->
-<script>
-  if (localStorage.getItem('lolfundamentals_logged_in') !== 'true') {
-    window.location.replace('login.html');
-  }
-</script>
+<title>Diana Rune Calculator</title>
 
 <style>
 body {
-  margin: 0;
-  font-family: 'Beaufort for LOL', Arial, Helvetica, sans-serif;
-  text-align: center;
-  color: #fff;
-  background: url('https://64.media.tumblr.com/594ac290bec6d5e9ad98b5f53404f00b/245c4c3ee469f81d-e4/s1280x1920/1cda4284320eb2031758a9859dfe14ff8bbc50ba.jpg') no-repeat center center fixed;
-  background-size: cover;
-  overflow-x: hidden;
+  margin:0;
+  font-family: 'Beaufort for LOL', Arial, sans-serif;
+  color:#fff;
+  text-align:center;
+  background:url('https://64.media.tumblr.com/594ac290bec6d5e9ad98b5f53404f00b/245c4c3ee469f81d-e4/s1280x1920/1cda4284320eb2031758a9859dfe14ff8bbc50ba.jpg') center/cover fixed;
 }
 body::before {
-  content: "";
-  position: fixed;
-  top: 0; left: 0;
-  width: 100%; height: 100%;
-  background: rgba(10,15,20,0.75);
-  z-index: -1;
+  content:"";
+  position:fixed;top:0;left:0;width:100%;height:100%;
+  background:rgba(10,15,20,0.75);z-index:-1;
 }
 header {
   background: rgba(13,17,23,0.9);
-  border-bottom: 2px solid #c9aa71;
-  padding: 20px 10px;
-  font-weight: bold;
-  font-size: 26px;
-  text-transform: uppercase;
-  color: #c9aa71;
-  letter-spacing: 1px;
-  text-align: center;
+  border-bottom:2px solid #c9aa71;
+  padding:15px;
+  font-size:26px;
+  color:#c9aa71;
+  font-weight:bold;
+  text-transform:uppercase;
 }
 .back-button {
-  display: inline-block;
-  margin: 20px auto 10px;
-  padding: 10px 20px;
-  background: linear-gradient(135deg, #c9aa71, #e0c77b);
-  color: #000;
-  text-decoration: none;
-  border-radius: 8px;
-  font-weight: bold;
-  box-shadow: 0 0 10px rgba(201,170,113,0.5);
+  display:inline-block;
+  margin:10px auto;
+  padding:8px 16px;
+  background:linear-gradient(135deg,#c9aa71,#e0c77b);
+  color:#000;text-decoration:none;border-radius:6px;font-weight:bold;
 }
-.back-button::before { content: "← "; }
-.back-button:hover {
-  background: linear-gradient(135deg, #e6c97f, #f0d88b);
-  box-shadow: 0 0 15px rgba(255,215,0,0.8);
-}
+.back-button::before{content:"← ";}
+.back-button:hover{background:linear-gradient(135deg,#e6c97f,#f0d88b);}
 
-/* Main container */
-.calc-container {
-  margin: 20px auto 50px auto;
-  max-width: 900px;
+.calc-container{
+  max-width:900px;
+  margin:20px auto 50px;
   background: rgba(13,17,23,0.95);
-  border: 2px solid #2f81f7;
-  border-radius: 12px;
-  padding: 25px;
-  text-align: left;
+  border:2px solid #2f81f7;
+  border-radius:12px;
+  padding:20px;
+  text-align:left;
 }
 
-/* Sections */
-.section-title {
-  color: #c9aa71;
-  margin-bottom: 10px;
-  font-size: 20px;
-  text-transform: uppercase;
+.section-title{
+  color:#c9aa71;
+  font-size:20px;
+  margin-bottom:10px;
+  text-transform:uppercase;
 }
 
-/* Layout grids */
-.input-grid {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 18px;
-  margin-bottom: 18px;
-}
-.input-box {
-  background: rgba(20,25,35,0.8);
-  border: 1px solid #2f81f7;
-  border-radius: 8px;
-  padding: 12px;
-}
-.input-box label { display:block; margin-bottom:8px; font-size:14px; }
-.input-box input, .input-box select {
-  width: 90%;
-  padding: 8px;
-  border-radius: 6px;
-  border: 1px solid #222;
-  background: #0f1722;
-  color: #fff;
+.input-grid{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:15px;
+  margin-bottom:15px;
 }
 
-/* Calculate button */
-.calculate-btn {
-  margin: 22px auto 6px;
-  display: block;
-  padding: 12px 25px;
-  font-size: 18px;
-  font-weight: bold;
-  background: #2f81f7;
-  border: none;
-  color: #fff;
-  border-radius: 8px;
-  cursor: pointer;
-  transition: 0.2s;
+.input-box{
+  background:rgba(20,25,35,0.8);
+  border:1px solid #2f81f7;
+  border-radius:8px;
+  padding:12px;
 }
-.calculate-btn:hover { background: #1b5fc7; }
-
-/* Results */
-.results-box {
-  margin-top: 18px;
-  background: rgba(20,25,35,0.9);
-  border: 1px solid #c9aa71;
-  padding: 15px;
-  border-radius: 10px;
-  color: #fff;
-  font-size: 15px;
+.input-box label{
+  display:block;margin-bottom:6px;font-size:14px;
 }
-.results-box table { width: 100%; border-collapse: collapse; margin-bottom:12px; }
-.results-box th, .results-box td { padding:6px; text-align:left; border-bottom: 1px solid rgba(255,255,255,0.03); font-size:14px; }
-.results-box th { color:#c9aa71; font-weight:600; }
-
-/* Footer */
-footer {
-  text-align: center;
-  padding: 15px 10px;
-  font-size: 14px;
-  color: #8b949e;
+.input-box input, .input-box select{
+  width:80%;padding:5px;border-radius:5px;border:1px solid #222;
+  background:#0f1722;color:#fff;
 }
 
-/* Responsive */
-@media (max-width: 780px) {
-  .input-grid { grid-template-columns: 1fr; }
+.rune-tree{
+  display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:15px;
 }
+.rune-column{
+  background:rgba(20,25,35,0.8);border:1px solid #2f81f7;
+  border-radius:8px;padding:10px;
+}
+.rune-row{margin-bottom:6px;}
+.rune-column select{width:100%;padding:5px;border-radius:5px;border:1px solid #222;background:#0f1722;color:#fff;}
+
+.calculate-btn{
+  display:block;margin:10px auto;padding:10px 20px;font-size:16px;font-weight:bold;
+  border:none;border-radius:6px;background:#2f81f7;color:#fff;cursor:pointer;
+}
+.calculate-btn:hover{background:#1b5fc7;}
+
+.results-box{
+  margin-top:12px;
+  background:rgba(20,25,35,0.9);
+  border:1px solid #c9aa71;
+  border-radius:8px;
+  padding:12px;
+  font-size:14px;
+}
+.results-box table{width:100%;border-collapse:collapse;margin-bottom:10px;}
+.results-box th, .results-box td{padding:4px;text-align:left;border-bottom:1px solid rgba(255,255,255,0.05);}
+.results-box th{color:#c9aa71;font-weight:600;}
+footer{text-align:center;padding:12px;font-size:14px;color:#8b949e;}
+
+@media(max-width:780px){.input-grid{grid-template-columns:1fr;}.rune-tree{grid-template-columns:1fr;}}
 </style>
 </head>
-
 <body>
-<header>Diana Rune Damage Calculator</header>
+<header>Diana Rune Calculator</header>
 <a href="membershub.html" class="back-button">Return to Members Hub</a>
 
 <div class="calc-container">
-
-  <!-- Diana Level & Enemy Stats -->
   <div class="section-title">Stats</div>
   <div class="input-grid">
     <div class="input-box">
@@ -162,42 +122,33 @@ footer {
       </label>
     </div>
     <div class="input-box">
-      <label>Enemy HP<input type="number" id="enemy-hp" value="2000"></label>
-      <label>Enemy Armor<input type="number" id="enemy-armor" value="80"></label>
-      <label>Enemy MR<input type="number" id="enemy-mr" value="40"></label>
+      <label>Enemy HP<input type="number" id="enemy-hp" value="2000" step="1"></label>
+      <label>Enemy Armor<input type="number" id="enemy-armor" value="80" step="1"></label>
+      <label>Enemy MR<input type="number" id="enemy-mr" value="40" step="1"></label>
     </div>
   </div>
 
-  <!-- Runes -->
   <div class="section-title">Runes</div>
-  <div class="input-box">
-    <label>Primary Path
-      <select id="primary-runes">
-        <option value="shieldbash">Shield Bash</option>
-        <option value="electrocute">Electrocute</option>
-        <option value="tasteofblood">Taste of Blood</option>
-        <option value="ravenoushunter">Ravenous Hunter</option>
-        <option value="suddenimpact">Sudden Impact</option>
-      </select>
-    </label>
-    <label>Secondary Path
-      <select id="secondary-runes">
-        <option value="manaflow">Manaflow Band</option>
-        <option value="transcendence">Transcendence</option>
-        <option value="celerity">Celerity</option>
-        <option value="scorch">Scorch</option>
-        <option value="absolutefocus">Absolute Focus</option>
-      </select>
-    </label>
+  <div class="rune-tree">
+    <div class="rune-column">
+      <div style="font-weight:bold;margin-bottom:6px;">Primary Path</div>
+      <div class="rune-row"><select id="primary-slot-1"><option value="shieldbash">Shield Bash</option></select></div>
+      <div class="rune-row"><select id="primary-slot-2"><option value="electrocute">Electrocute</option></select></div>
+    </div>
+    <div class="rune-column">
+      <div style="font-weight:bold;margin-bottom:6px;">Secondary Path</div>
+      <div class="rune-row"><select id="secondary-slot-1"><option value="scorch">Scorch</option></select></div>
+      <div class="rune-row"><select id="secondary-slot-2"><option value="absolutefocus">Absolute Focus</option></select></div>
+    </div>
   </div>
 
-  <button class="calculate-btn" id="calculate-btn">Calculate Rune Damage</button>
+  <button class="calculate-btn" id="calculate-btn">Calculate Damage</button>
 
-  <div class="results-box" id="results-box">
-    <h3>Rune Damage Breakdown</h3>
+  <div class="results-box">
+    <h4>Damage per Rune</h4>
     <table id="rune-results">
       <thead><tr><th>Rune</th><th>Base Damage</th><th>AP Scaling</th><th>Enemy MR</th><th>Damage Done</th></tr></thead>
-      <tbody><tr><td colspan="5">Click "Calculate Rune Damage"</td></tr></tbody>
+      <tbody><tr><td colspan="5">Click Calculate</td></tr></tbody>
     </table>
     <p id="total-damage"></p>
   </div>
@@ -207,53 +158,45 @@ footer {
 
 <script>
 const runeData = {
-  shieldbash: { base:[8,14,20,26,32,38,44,50,56,62,68,74,80,86,92,98,104,110], ap:0.15 },
+  shieldbash: { base:[8,10,12,14,16,18,20,22,24,26,28,30,32,34,36,38,40,42], ap:0 },
   electrocute: { base:[50,80,110,140,170,200,230,260,290,320,350,380,410,440,470,500,530,560], ap:0.25 },
-  tasteofblood: { base:[20,30,40,50,60,70,80,90,100,110,120,130,140,150,160,170,180,190], ap:0.2 },
-  ravenoushunter: { base:[10,15,20,25,30,35,40,45,50,55,60,65,70,75,80,85,90,95,100], ap:0.1 },
-  suddenimpact: { base:[15,20,25,30,35,40,45,50,55,60,65,70,75,80,85,90,95,100], ap:0.2 },
-  manaflow: { base:[0], ap:0 },
-  transcendence: { base:[0], ap:0 },
-  celerity: { base:[0], ap:0 },
   scorch: { base:[15,20,25,30,35,40,45,50,55,60,65,70,75,80,85,90,95,100], ap:0.1 },
   absolutefocus: { base:[0], ap:0.1 }
 };
 
-function calculateDamage(base, apScaling, ap, mr) {
-  const raw = base + apScaling * ap;
-  return Math.round(raw * 100 / (100 + mr));
+function calcDamage(base, apScaling, ap, mr){
+  const raw = base + apScaling*ap;
+  return Math.round(raw*100/(100+mr));
 }
 
-document.getElementById('calculate-btn').addEventListener('click', () => {
-  const level = Number(document.getElementById('diana-level').value) - 1;
-  const enemyMR = Number(document.getElementById('enemy-mr').value) || 0;
-  const ap = 0; // placeholder: could include items later
+document.getElementById('calculate-btn').addEventListener('click',()=>{
+  const level = Number(document.getElementById('diana-level').value)-1;
+  const enemyMR = Number(document.getElementById('enemy-mr').value)||0;
+  const ap = 0; // placeholder, items could add later
 
-  const primary = document.getElementById('primary-runes').value;
-  const secondary = document.getElementById('secondary-runes').value;
-
-  const results = [
-    { name: primary, ...runeData[primary] },
-    { name: secondary, ...runeData[secondary] }
+  const slots = [
+    document.getElementById('primary-slot-1').value,
+    document.getElementById('primary-slot-2').value,
+    document.getElementById('secondary-slot-1').value,
+    document.getElementById('secondary-slot-2').value
   ];
 
   const tbody = document.querySelector('#rune-results tbody');
   tbody.innerHTML = '';
-  let total = 0;
+  let total=0;
 
-  results.forEach(r => {
-    const base = r.base[level] || r.base[0];
-    const dmg = calculateDamage(base, r.ap, ap, enemyMR);
-    total += dmg;
-    const tr = document.createElement('tr');
-    tr.innerHTML = `<td>${r.name}</td><td>${base}</td><td>${r.ap}</td><td>${enemyMR}</td><td>${dmg}</td>`;
+  slots.forEach(r=>{
+    const data = runeData[r];
+    const base = data.base[level]||data.base[0];
+    const dmg = calcDamage(base,data.ap,ap,enemyMR);
+    total+=dmg;
+    const tr=document.createElement('tr');
+    tr.innerHTML=`<td>${r}</td><td>${base}</td><td>${data.ap}</td><td>${enemyMR}</td><td>${dmg}</td>`;
     tbody.appendChild(tr);
   });
-
-  document.getElementById('total-damage').textContent = `Total Damage vs Enemy MR: ${total}`;
+  document.getElementById('total-damage').textContent=`Total Damage: ${total}`;
 });
 </script>
 </body>
 </html>
-
 
