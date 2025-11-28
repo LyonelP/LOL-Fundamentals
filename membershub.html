@@ -27,7 +27,7 @@ header {
   position: relative;
 }
 
-/* Subtle Settings Button */
+/* Settings Button */
 .settings-btn {
   position: absolute;
   top: 14px;
@@ -125,19 +125,31 @@ header {
 }
 
 /* Specific card backgrounds */
-.card.diana-matchups::before { background-image: url('https://ddragon.leagueoflegends.com/cdn/img/champion/splash/Diana_0.jpg'); }
-.card.diana-guide::before { background-image: url('https://ddragon.leagueoflegends.com/cdn/img/champion/splash/Diana_1.jpg'); }
-.card.ekko-guide::before { background-image: url('https://ddragon.leagueoflegends.com/cdn/img/champion/splash/Ekko_0.jpg'); }
-.card.tierlist::before { background: linear-gradient(to bottom, #1b2838 0%, #161b22 100%); }
-.card.fundamentals::before { background-image: url('https://cdn.wallpapersafari.com/92/79/MYTD9q.png'); background-size: cover; background-position: center; }
-
-/* Build Calculator card */
+.card.diana-matchups::before {
+  background-image: url('https://ddragon.leagueoflegends.com/cdn/img/champion/splash/Diana_0.jpg');
+}
+.card.diana-guide::before {
+  background-image: url('https://ddragon.leagueoflegends.com/cdn/img/champion/splash/Diana_1.jpg');
+}
+.card.ekko-guide::before {
+  background-image: url('https://ddragon.leagueoflegends.com/cdn/img/champion/splash/Ekko_0.jpg');
+}
+.card.tierlist::before {
+  background: linear-gradient(to bottom, #1b2838 0%, #161b22 100%);
+}
+.card.fundamentals::before {
+  background-image: url('https://cdn.wallpapersafari.com/92/79/MYTD9q.png');
+  background-size: cover;
+  background-position: center;
+}
 .card.build-calculator::before {
-  background: linear-gradient(135deg, #1b2838 0%, #161b22 100%);
+  background-image: url('https://example.com/calculator-background.jpg'); /* Replace with calculator image */
+  background-size: cover;
+  background-position: center;
   opacity: 0.2;
 }
 
-/* Tierlist card visual */
+/* Tierlist bar */
 .card.tierlist .tier-bar {
   margin-top: 10px;
   width: 100%;
@@ -195,37 +207,6 @@ footer a:hover {
   }
   .tierlist, .fundamentals, .build-calculator { justify-self: center; }
 }
-
-/* Build Calculator specific styling inside card */
-.build-calculator-content {
-  display: none;
-  text-align: left;
-  margin-top: 15px;
-}
-.build-calculator-content label {
-  display: block;
-  margin-bottom: 5px;
-  cursor: pointer;
-}
-.build-calculator-content input[type="checkbox"] {
-  margin-right: 6px;
-}
-.build-calculator-content button {
-  margin-top: 10px;
-  padding: 6px 12px;
-  background: #4b8cff;
-  color: #fff;
-  border: none;
-  border-radius: 6px;
-  cursor: pointer;
-}
-.build-calculator-content button:hover {
-  background: #3570d4;
-}
-.build-calculator-content #build-results {
-  margin-top: 10px;
-  font-size: 0.9em;
-}
 </style>
 </head>
 <body>
@@ -270,25 +251,10 @@ footer a:hover {
       <div class="tier-d"></div>
     </div>
   </a>
-
-  <!-- Build Calculator Card -->
-  <div class="card build-calculator" onclick="toggleCalculator()">
+  <a href="buildcalculator.html" class="card build-calculator">
     <h3>Build Calculator</h3>
     <p>Click to open Diana Build Calculator and calculate total stats from items.</p>
-    <div class="build-calculator-content" id="calculator">
-      <label><input type="checkbox" value="rocketbelt"> Hextech Rocketbelt</label>
-      <label><input type="checkbox" value="nashor"> Nashor's Tooth</label>
-      <label><input type="checkbox" value="zhonya"> Zhonya's Hourglass</label>
-      <label><input type="checkbox" value="liandry"> Liandry's Anguish</label>
-      <label><input type="checkbox" value="shadowflame"> Shadowflame</label>
-      <button id="calculate-build">Calculate Stats</button>
-      <div id="build-results">
-        <p>AP: <span id="total-ap">0</span></p>
-        <p>HP: <span id="total-hp">0</span></p>
-        <p>Mana: <span id="total-mana">0</span></p>
-      </div>
-    </div>
-  </div>
+  </a>
 </div>
 </section>
 
@@ -305,50 +271,12 @@ if (localStorage.getItem('lolfundamentals_logged_in') !== 'true') {
   window.location.href = 'index.html';
 }
 
-// Logout
 function logout() {
   localStorage.removeItem('lolfundamentals_logged_in');
   window.location.href = 'index.html';
 }
-
-// Toggle Build Calculator display
-function toggleCalculator() {
-  const calc = document.getElementById('calculator');
-  if(calc.style.display === 'block') {
-    calc.style.display = 'none';
-  } else {
-    calc.style.display = 'block';
-  }
-}
-
-// Calculator logic
-const itemStats = {
-  rocketbelt: { ap: 90, hp: 250, mana: 300 },
-  nashor: { ap: 80, hp: 0, mana: 0 },
-  zhonya: { ap: 0, hp: 200, mana: 0 },
-  liandry: { ap: 100, hp: 0, mana: 0 },
-  shadowflame: { ap: 85, hp: 0, mana: 0 },
-};
-
-document.getElementById('calculate-build').addEventListener('click', (e) => {
-  e.stopPropagation();
-  let totalAP = 0, totalHP = 0, totalMana = 0;
-  document.querySelectorAll('.build-calculator-content input[type="checkbox"]:checked').forEach(cb => {
-    const stats = itemStats[cb.value];
-    totalAP += stats.ap;
-    totalHP += stats.hp;
-    totalMana += stats.mana;
-  });
-  document.getElementById('total-ap').textContent = totalAP;
-  document.getElementById('total-hp').textContent = totalHP;
-  document.getElementById('total-mana').textContent = totalMana;
-});
 </script>
 </body>
 </html>
-
-
-
-
 
 
