@@ -13,280 +13,175 @@ body {
   background-size: cover;
   color: #e6edf3;
   text-align: center;
-  min-height: 100vh;
   display: flex;
   flex-direction: column;
-  overflow-x: hidden;
+  min-height: 100vh;
 }
 body::before {
   content: "";
   position: fixed;
-  top: 0; left: 0;
-  width: 100%; height: 100%;
+  top:0; left:0;
+  width:100%; height:100%;
   background: rgba(10,15,20,0.85);
-  z-index: -1;
+  z-index:-1;
 }
 header {
   background: rgba(13,17,23,0.9);
   border-bottom: 2px solid #c9aa71;
-  padding: 20px 10px;
-  font-weight: bold;
+  padding: 20px;
   font-size: 26px;
-  text-transform: uppercase;
-  color: #c9aa71;
-  letter-spacing: 1px;
-}
-.back-button {
-  display: inline-block;
-  margin: 15px auto;
-  padding: 10px 20px;
-  background: linear-gradient(135deg, #c9aa71, #e0c77b);
-  color: #000;
-  text-decoration: none;
-  border-radius: 8px;
   font-weight: bold;
-  transition: all 0.3s;
-  box-shadow: 0 0 10px rgba(201,170,113,0.5);
+  color: #c9aa71;
 }
-.back-button::before { content: "← "; }
-.back-button:hover {
-  background: linear-gradient(135deg, #e6c97f, #f0d88b);
-  box-shadow: 0 0 15px rgba(255,215,0,0.8);
-}
-.calculator-container {
-  background: #0f2d66;
-  border: 2px solid #c9aa71;
-  border-radius: 12px;
-  padding: 20px;
-  max-width: 1000px;
+.container {
+  flex:1;
+  max-width: 1100px;
   margin: 20px auto;
-  text-align: left;
-  color: #fff;
-}
-.calculator-container h2 {
-  text-align: center;
-  margin-top: 0;
-  color: #e0c77b;
-}
-.slot-row {
-  display: flex;
-  justify-content: center;
-  gap: 8px;
-  margin-bottom: 10px;
-}
-.slot-row select {
-  min-width: 140px;
-  padding: 6px;
-  font-size: 14px;
-  border-radius: 6px;
-  border: none;
-  background: #0b1f4a;
-  color: #c9aa71;
-}
-.level-container, .enemy-container {
-  display: flex;
-  justify-content: center;
-  gap: 12px;
-  margin: 15px 0;
-}
-.level-container input, .enemy-container input {
-  width: 60px;
-  font-size: 18px;
-  padding: 6px;
-  border-radius: 6px;
-  border: none;
-  text-align: center;
-}
-.rune-container {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
-  gap: 6px;
-  margin-bottom: 15px;
-}
-.rune-container select {
-  min-width: 130px;
-  padding: 6px;
-  border-radius: 6px;
-  border: none;
-  background: #0b1f4a;
-  color: #c9aa71;
-}
-#calculate-build {
-  display: block;
-  margin: 10px auto 20px auto;
-  padding: 10px 20px;
-  font-size: 16px;
-  font-weight: bold;
-  background: #4b8cff;
-  color: #fff;
-  border: none;
-  border-radius: 6px;
-  cursor: pointer;
-  box-shadow: 0 0 10px rgba(75,140,255,0.4);
-}
-#calculate-build:hover {
-  background: #3570d4;
-  box-shadow: 0 0 15px rgba(53,112,212,0.6);
-}
-#build-results {
-  background: #072154;
-  border: 2px solid #c9aa71;
+  background: rgba(20,25,35,0.85);
+  border: 1px solid #c9aa71;
   border-radius: 10px;
-  padding: 15px;
-  max-width: 800px;
-  margin: 0 auto 30px auto;
-  text-align: left;
-  color: #fff;
-}
-#build-results p {
-  margin: 6px 0;
-  font-size: 16px;
-}
-footer {
-  margin-top: auto;
   padding: 20px;
-  color: #8b949e;
-  font-size: 14px;
-  text-align: center;
+  text-align: left;
 }
-footer a { color:#c9aa71; text-decoration:none; }
-footer a:hover { text-decoration:underline; }
+h2 { color:#c9aa71; }
+.item-slot, .rune-slot {
+  display:inline-block;
+  width:150px;
+  margin:5px;
+}
+.select-stats input {
+  width:70px;
+  margin-right:10px;
+}
+button {
+  padding:10px 20px;
+  margin-top:10px;
+  background:#c9aa71;
+  border:none;
+  border-radius:6px;
+  cursor:pointer;
+}
+#results {
+  margin-top:20px;
+  background:#0f1722;
+  padding:15px;
+  border-radius:8px;
+}
 </style>
 </head>
 <body>
-
 <header>Diana Build Calculator</header>
-<a href="membershub.html" class="back-button">Back to Members Hub</a>
 
-<div class="calculator-container">
-  <h2>Diana Setup</h2>
-
-  <div class="level-container">
-    <label>Level: <input type="number" id="champ-level" min="1" max="18" value="1"></label>
+<div class="container">
+  <h2>Select Diana's Items</h2>
+  <div id="item-slots">
+    <select class="item-slot" id="item1"></select>
+    <select class="item-slot" id="item2"></select>
+    <select class="item-slot" id="item3"></select>
+    <select class="item-slot" id="item4"></select>
+    <select class="item-slot" id="item5"></select>
+    <select class="item-slot" id="item6"></select>
   </div>
 
-  <h3>Item Slots</h3>
-  <div class="slot-row">
-    <select class="item-slot" id="item1"><option>Select Item</option></select>
-    <select class="item-slot" id="item2"><option>Select Item</option></select>
-    <select class="item-slot" id="item3"><option>Select Item</option></select>
-  </div>
-  <div class="slot-row">
-    <select class="item-slot" id="item4"><option>Select Item</option></select>
-    <select class="item-slot" id="item5"><option>Select Item</option></select>
-    <select class="item-slot" id="item6"><option>Select Item</option></select>
+  <h2>Select Rune Tree</h2>
+  <div id="rune-slots">
+    <select class="rune-slot" id="primary-rune"></select>
+    <select class="rune-slot" id="secondary-rune"></select>
   </div>
 
-  <h3>Runes</h3>
-  <div class="rune-container">
-    <select id="rune-primary"><option>Primary Rune</option></select>
-    <select id="rune-secondary"><option>Secondary Rune</option></select>
-    <select id="rune-shard1"><option>Shard 1</option></select>
-    <select id="rune-shard2"><option>Shard 2</option></select>
-    <select id="rune-shard3"><option>Shard 3</option></select>
+  <h2>Enemy Stats</h2>
+  <div class="select-stats">
+    <label>HP: <input type="number" id="enemy-hp" value="1000"></label>
+    <label>Armor: <input type="number" id="enemy-armor" value="30"></label>
+    <label>Magic Resist: <input type="number" id="enemy-mr" value="30"></label>
   </div>
 
-  <h3>Enemy Stats</h3>
-  <div class="enemy-container">
-    <label>Level: <input type="number" id="enemy-level" min="1" max="18" value="1"></label>
-    <label>HP: <input type="number" id="enemy-hp" min="0" value="1000"></label>
-    <label>Armor: <input type="number" id="enemy-armor" min="0" value="30"></label>
-    <label>MR: <input type="number" id="enemy-mr" min="0" value="30"></label>
-  </div>
+  <button onclick="calculateBuild()">Calculate Combo Damage</button>
 
-  <button id="calculate-build">Calculate Build Damage</button>
-
-  <div id="build-results">
-    <p>AP: <span id="total-ap">0</span></p>
-    <p>HP: <span id="total-hp">0</span></p>
-    <p>Mana: <span id="total-mana">0</span></p>
-    <p>Total Combo Damage: <span id="combo-damage">0</span></p>
+  <div id="results">
+    <h3>Damage Breakdown</h3>
+    <div id="damage-breakdown">
+      <p>Select items, runes, and enemy stats then click calculate.</p>
+    </div>
   </div>
 </div>
 
-<footer>© 2025 LoL Fundamentals · All rights reserved</footer>
-
 <script>
-// Example item stats (simplified). In full version, include all items.
-const items = {
-  "Select Item": {ap:0, hp:0, mana:0},
-  "Hextech Rocketbelt": {ap:90, hp:250, mana:300},
-  "Nashor's Tooth": {ap:80, hp:0, mana:0},
-  "Zhonya's Hourglass": {ap:0, hp:200, mana:0},
-  "Liandry's Anguish": {ap:100, hp:0, mana:0},
-  "Shadowflame": {ap:85, hp:0, mana:0}
-};
+// Data Dragon / CommunityDragon endpoints
+const itemsURL = 'https://raw.communitydragon.org/latest/plugins/rcp-be-lol-game-data/global/default/v1/items.json';
+const runesURL = 'https://ddragon.leagueoflegends.com/cdn/14.21.1/data/en_US/runesReforged.json';
 
-// Example runes
-const runes = {
-  "Select Rune": {ap:0},
-  "Electrocute": {ap:15},
-  "Dark Harvest": {ap:20},
-  "Arcane Comet": {ap:18}
-};
+let allItems = [], allRunes = [];
 
-// Populate item dropdowns
-document.querySelectorAll('.item-slot').forEach(select => {
-  for(const key in items){
-    const option = document.createElement('option');
-    option.value = key;
-    option.textContent = key;
-    select.appendChild(option);
-  }
-});
+// Fetch all items
+fetch(itemsURL)
+  .then(res => res.json())
+  .then(data => {
+    allItems = data;
+    populateItems();
+  });
 
-// Populate rune dropdowns
-["rune-primary","rune-secondary","rune-shard1","rune-shard2","rune-shard3"].forEach(id=>{
-  const sel = document.getElementById(id);
-  for(const key in runes){
-    const option = document.createElement('option');
-    option.value = key;
-    option.textContent = key;
-    sel.appendChild(option);
-  }
-});
+// Fetch all runes
+fetch(runesURL)
+  .then(res => res.json())
+  .then(data => {
+    allRunes = data;
+    populateRunes();
+  });
 
-// Ability ratios (simplified)
-const dianaRatios = {
-  Q: 0.35,
-  W: 0.25,
-  E: 0.35,
-  R: 0.65
-};
-
-function calculateDamage(AP, enemyArmor, enemyMR){
-  // Basic combo: Q+W+E+R, ignoring resist types (magic)
-  let magicResist = enemyMR;
-  let dmg = (dianaRatios.Q + dianaRatios.W + dianaRatios.E + dianaRatios.R) * AP;
-  let reduced = dmg * (100/(100+magicResist));
-  return Math.round(reduced);
+function populateItems() {
+  const slots = document.querySelectorAll('.item-slot');
+  slots.forEach(slot => {
+    allItems.forEach(item => {
+      const opt = document.createElement('option');
+      opt.value = item.id;
+      opt.text = item.name;
+      slot.appendChild(opt);
+    });
+  });
 }
 
-document.getElementById('calculate-build').addEventListener('click', ()=>{
-  let totalAP=0,totalHP=0,totalMana=0;
-  document.querySelectorAll('.item-slot').forEach(s=>{
-    const val = s.value;
-    totalAP += items[val].ap;
-    totalHP += items[val].hp;
-    totalMana += items[val].mana;
+function populateRunes() {
+  const primary = document.getElementById('primary-rune');
+  const secondary = document.getElementById('secondary-rune');
+  allRunes.forEach(tree => {
+    const opt1 = document.createElement('option');
+    opt1.value = tree.id;
+    opt1.text = tree.name;
+    primary.appendChild(opt1);
+
+    const opt2 = document.createElement('option');
+    opt2.value = tree.id;
+    opt2.text = tree.name;
+    secondary.appendChild(opt2);
   });
-  // Add runes AP
-  ["rune-primary","rune-secondary","rune-shard1","rune-shard2","rune-shard3"].forEach(id=>{
-    totalAP += runes[document.getElementById(id).value].ap;
+}
+
+// Simple placeholder calculation (replace with Diana's ability formulas later)
+function calculateBuild() {
+  const enemyHP = parseFloat(document.getElementById('enemy-hp').value);
+  const enemyArmor = parseFloat(document.getElementById('enemy-armor').value);
+  const enemyMR = parseFloat(document.getElementById('enemy-mr').value);
+
+  // Example: sum AP from items
+  let totalAP = 0;
+  document.querySelectorAll('.item-slot').forEach(slot => {
+    const item = allItems.find(i => i.id == slot.value);
+    if(item) totalAP += item.stats.FlatMagicDamageMod || 0;
   });
 
-  const enemyMR = Number(document.getElementById('enemy-mr').value);
-  const comboDmg = calculateDamage(totalAP, 0, enemyMR);
-
-  document.getElementById('total-ap').textContent = totalAP;
-  document.getElementById('total-hp').textContent = totalHP;
-  document.getElementById('total-mana').textContent = totalMana;
-  document.getElementById('combo-damage').textContent = comboDmg;
-});
+  // Example breakdown
+  const breakdown = `
+    <p>Total AP from items: ${totalAP}</p>
+    <p>Assuming full combo damage: ${totalAP*2} magic damage to enemy with ${enemyMR} MR</p>
+  `;
+  document.getElementById('damage-breakdown').innerHTML = breakdown;
+}
 </script>
 
 </body>
 </html>
+
+
 
 
