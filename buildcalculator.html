@@ -27,11 +27,12 @@ header {
   text-align:center;
 }
 .back-button {
-  display:inline-block;
+  display:block;
   margin:10px auto;
   padding:8px 16px;
   background:linear-gradient(135deg,#c9aa71,#e0c77b);
   color:#000; text-decoration:none; border-radius:6px; font-weight:bold;
+  text-align:center;
 }
 .back-button::before{content:"← ";}
 .back-button:hover{background:linear-gradient(135deg,#e6c97f,#f0d88b);}
@@ -50,39 +51,24 @@ header {
   margin-bottom:10px;
   text-transform:uppercase;
 }
-.diana-stats{
-  margin:10px 0;
-  background:rgba(20,25,35,0.85);
-  border:1px solid #2f81f7;
-  border-radius:8px;
-  padding:10px;
-  font-size:14px;
-}
-.enemy-stats{
-  display:flex;
+.input-grid{
+  display:grid;
+  grid-template-columns:1fr 1fr;
   gap:15px;
   margin-bottom:15px;
 }
-.enemy-stats input{
-  width:80px; padding:5px; border-radius:5px; border:1px solid #222;
+.input-box{
+  background:rgba(20,25,35,0.8);
+  border:1px solid #2f81f7;
+  border-radius:8px;
+  padding:12px;
+}
+.input-box label{
+  display:block;margin-bottom:6px;font-size:14px;
+}
+.input-box input, .input-box select{
+  width:80%;padding:5px;border-radius:5px;border:1px solid #222;
   background:#0f1722;color:#fff;
-}
-.rune-tree{
-  display:grid; grid-template-columns:1fr 1fr; gap:12px; margin-bottom:15px;
-}
-.rune-column{
-  background:rgba(20,25,35,0.8); border:1px solid #2f81f7;
-  border-radius:8px; padding:10px;
-}
-.rune-row{
-  display:flex; gap:6px; margin-bottom:6px; flex-wrap:wrap;
-}
-.rune-row img{
-  width:48px; height:48px; border:2px solid transparent; border-radius:4px;
-  cursor:pointer;
-}
-.rune-row img.selected{
-  border-color:#c9aa71;
 }
 .calculate-btn{
   display:block; margin:10px auto; padding:10px 20px;
@@ -101,7 +87,7 @@ header {
 .results-box table{width:100%;border-collapse:collapse;margin-bottom:10px;}
 .results-box th, .results-box td{padding:4px;text-align:left;border-bottom:1px solid rgba(255,255,255,0.05);}
 .results-box th{color:#c9aa71;font-weight:600;}
-footer{text-align:center;padding:12px;font-size:14px;color:#8b949e;}
+@media(max-width:780px){.input-grid{grid-template-columns:1fr;}}
 </style>
 </head>
 <body>
@@ -109,29 +95,34 @@ footer{text-align:center;padding:12px;font-size:14px;color:#8b949e;}
 <a href="membershub.html" class="back-button">Return to Members Hub</a>
 
 <div class="calc-container">
-  <div class="section-title">Diana Stats</div>
-  <div class="diana-stats" id="diana-stats"></div>
+  <div class="section-title">Diana Level & Stats</div>
+  <div class="input-grid">
+    <div class="input-box">
+      <label>Level
+        <select id="diana-level"></select>
+      </label>
+    </div>
+    <div class="input-box">
+      <p id="diana-stats">HP: 0 | AP: 0 | AD: 0 | Shield: 0</p>
+    </div>
+  </div>
 
   <div class="section-title">Enemy Stats</div>
-  <div class="enemy-stats">
-    <label>HP: <input type="number" id="enemy-hp" value="2000"></label>
-    <label>Armor: <input type="number" id="enemy-armor" value="80"></label>
-    <label>MR: <input type="number" id="enemy-mr" value="40"></label>
+  <div class="input-grid">
+    <div class="input-box">
+      <label>HP<input type="number" id="enemy-hp" value="2000" step="1"></label>
+    </div>
+    <div class="input-box">
+      <label>Armor<input type="number" id="enemy-armor" value="80" step="1"></label>
+      <label>MR<input type="number" id="enemy-mr" value="40" step="1"></label>
+    </div>
   </div>
 
-  <div class="section-title">Primary Rune Path (Select 1 per row)</div>
-  <div class="rune-tree">
-    <div class="rune-column" id="primary-tree">
-      <div class="rune-row" id="primary-row-0"></div>
-      <div class="rune-row" id="primary-row-1"></div>
-      <div class="rune-row" id="primary-row-2"></div>
-      <div class="rune-row" id="primary-row-3"></div>
-    </div>
-    <div class="rune-column" id="secondary-tree">
-      <div class="rune-row" id="secondary-row-0"></div>
-      <div class="rune-row" id="secondary-row-1"></div>
-    </div>
-  </div>
+  <div class="section-title">Primary Rune Path</div>
+  <div class="input-grid" id="primary-tree"></div>
+
+  <div class="section-title">Secondary Rune Path</div>
+  <div class="input-grid" id="secondary-tree"></div>
 
   <button class="calculate-btn" id="calculate-btn">Calculate Damage</button>
 
@@ -148,101 +139,133 @@ footer{text-align:center;padding:12px;font-size:14px;color:#8b949e;}
 <footer>© 2025 LoL Fundamentals · All rights reserved</footer>
 
 <script>
-// --- Preset Diana stats per level (example Riot numbers for level 18) ---
-const dianaStats = {
-  hp: 1780,
-  ap: 120,
-  ad: 75,
-  shield: 300
-};
-document.getElementById('diana-stats').textContent = `HP: ${dianaStats.hp} | AP: ${dianaStats.ap} | AD: ${dianaStats.ad} | Shield: ${dianaStats.shield}`;
+// --- Diana stats per level
+const dianaBaseStats = [
+  {hp: 600, ap: 0, ad: 50, shield: 50},
+  {hp: 620, ap: 0, ad: 52, shield: 55},
+  {hp: 640, ap: 0, ad: 54, shield: 60},
+  {hp: 660, ap: 0, ad: 56, shield: 65},
+  {hp: 680, ap: 0, ad: 58, shield: 70},
+  {hp: 700, ap: 0, ad: 60, shield: 75},
+  {hp: 740, ap: 0, ad: 62, shield: 80},
+  {hp: 780, ap: 0, ad: 64, shield: 85},
+  {hp: 820, ap: 0, ad: 66, shield: 90},
+  {hp: 860, ap: 0, ad: 68, shield: 95},
+  {hp: 900, ap: 0, ad: 70, shield: 100},
+  {hp: 940, ap: 0, ad: 72, shield: 105},
+  {hp: 980, ap: 0, ad: 74, shield: 110},
+  {hp: 1020, ap: 0, ad: 76, shield: 115},
+  {hp: 1060, ap: 0, ad: 78, shield: 120},
+  {hp: 1100, ap: 0, ad: 80, shield: 125},
+  {hp: 1140, ap: 0, ad: 82, shield: 130},
+  {hp: 1180, ap: 0, ad: 84, shield: 135},
+];
 
-// --- Rune data ---
-const runes = [
-  // Primary keystones
-  {id:'electrocute', name:'Electrocute', row:0, type:'adaptive', base:70, scalingAP:0.5, scalingAD:0.1, notes:'Trigger 3 hits'},
+// --- All runes (example subset; can expand with every rune)
+const allPrimaryRunes = [
+  // Keystone row
+  {id:'electrocute', name:'Electrocute', row:0, type:'adaptive', base:70, scalingAP:0.5, scalingAD:0.1, notes:'3-hit proc'},
   {id:'phaseRush', name:'Phase Rush', row:0, type:'adaptive', base:0, scalingAP:0, scalingAD:0, notes:'Movement'},
   {id:'arcaneComet', name:'Arcane Comet', row:0, type:'magic', base:30, scalingAP:0.2, notes:'Spell hit'},
   {id:'predator', name:'Predator', row:0, type:'adaptive', base:60, scalingAP:0.3, scalingAD:0.1, notes:'Boot bonus'},
-
-  // Minor runes (example, expand as needed)
+  // Minor rows
   {id:'suddenImpact', name:'Sudden Impact', row:1, type:'adaptive', base:9, scalingAP:0.05, scalingAD:0.05, notes:'On dash'},
   {id:'tasteOfBlood', name:'Taste of Blood', row:2, type:'magic', base:15, scalingAP:0.1, notes:'Heal'},
   {id:'ravenousHunter', name:'Ravenous Hunter', row:3, type:'magic', base:0, scalingAP:0.05, notes:'Heal per damage'}
 ];
 
-// Secondary tree minor runes
-const secondaryRunes = [
+const allSecondaryRunes = [
   {id:'scorch', name:'Scorch', row:0, type:'magic', base:15, scalingAP:0.1, notes:'Spell hit'},
-  {id:'absoluteFocus', name:'Absolute Focus', row:1, type:'magic', base:0, scalingAP:0.1, notes:'AP buff'}
+  {id:'absoluteFocus', name:'Absolute Focus', row:1, type:'magic', base:0, scalingAP:0.1, notes:'AP buff'},
+  {id:'celerity', name:'Celerity', row:0, type:'magic', base:0, scalingAP:0.05, notes:'Movement'},
+  {id:'manaflow', name:'Manaflow Band', row:1, type:'magic', base:0, scalingAP:0.05, notes:'Mana gain'}
 ];
 
-// --- Populate rune icons ---
-function createRuneIcon(rune, containerId){
-  const container = document.getElementById(containerId);
-  const img = document.createElement('img');
-  img.src = `https://ddragon.leagueoflegends.com/cdn/13.4.1/img/rune/${rune.id}.png`;
-  img.title = rune.name;
-  img.dataset.id = rune.id;
-  img.addEventListener('click',()=>{
-    const siblings = img.parentNode.querySelectorAll('img');
-    siblings.forEach(s=>s.classList.remove('selected'));
-    img.classList.add('selected');
-  });
-  container.appendChild(img);
+// Populate Diana level dropdown
+const levelSelect = document.getElementById('diana-level');
+for(let i=1;i<=18;i++){
+  const opt = document.createElement('option');
+  opt.value=i; opt.textContent=i;
+  levelSelect.appendChild(opt);
 }
+levelSelect.value=1;
 
-// Primary
-runes.forEach(r=> createRuneIcon(r, `primary-row-${r.row}`));
+function updateDianaStats(){
+  const lvl = Number(levelSelect.value)-1;
+  const s = dianaBaseStats[lvl];
+  document.getElementById('diana-stats').textContent = `HP: ${s.hp} | AP: ${s.ap} | AD: ${s.ad} | Shield: ${s.shield}`;
+}
+levelSelect.addEventListener('change', updateDianaStats);
+updateDianaStats();
 
-// Secondary
-secondaryRunes.forEach((r, i)=> createRuneIcon(r, `secondary-row-${r.row}`));
+// Populate rune dropdowns
+function createRuneSelect(containerId, options){
+  const container = document.getElementById(containerId);
+  container.innerHTML='';
+  for(let r=0;r<Math.max(...options.map(o=>o.row))+1;r++){
+    const div = document.createElement('div');
+    const select = document.createElement('select');
+    select.dataset.row = r;
+    options.filter(o=>o.row===r).forEach(o=>{
+      const opt = document.createElement('option');
+      opt.value=o.id; opt.textContent=o.name;
+      select.appendChild(opt);
+    });
+    div.appendChild(select);
+    container.appendChild(div);
+  }
+}
+createRuneSelect('primary-tree', allPrimaryRunes);
+createRuneSelect('secondary-tree', allSecondaryRunes);
 
-// --- Damage calculation ---
+// Damage calculation
 function calcDamage(rune, stats, enemyArmor, enemyMR){
   let raw = rune.base;
   if(rune.scalingAP) raw += rune.scalingAP * stats.ap;
   if(rune.scalingAD) raw += rune.scalingAD * stats.ad;
-  if(rune.id==='shieldbash') raw += 0.15*stats.shield; // auto shield scaling
+  if(rune.id==='shieldbash') raw += 0.15*stats.shield;
   let afterRes = raw;
   if(rune.type==='magic') afterRes = Math.round(raw*100/(100+enemyMR));
   if(rune.type==='physical') afterRes = Math.round(raw*100/(100+enemyArmor));
   if(rune.type==='adaptive'){
     const magic = raw;
     const physical = raw;
-    afterRes = Math.round(Math.max(magic, physical)*100/(100+enemyMR)); // simplified adaptive
+    afterRes = Math.round(Math.max(magic, physical)*100/(100+enemyMR));
   }
   return {raw:Math.round(raw), afterRes, notes:rune.notes};
 }
 
-// --- Calculate button ---
+// Calculate button
 document.getElementById('calculate-btn').addEventListener('click',()=>{
-  const enemyHP = Number(document.getElementById('enemy-hp').value);
+  const lvl = Number(levelSelect.value)-1;
+  const stats = dianaBaseStats[lvl];
   const enemyArmor = Number(document.getElementById('enemy-armor').value);
   const enemyMR = Number(document.getElementById('enemy-mr').value);
 
   const selectedRunes = [];
-  document.querySelectorAll('.rune-tree img.selected').forEach(img=>{
-    const r = runes.find(r=>r.id===img.dataset.id) || secondaryRunes.find(r=>r.id===img.dataset.id);
+  document.querySelectorAll('#primary-tree select').forEach(s=>{
+    const r = allPrimaryRunes.find(r=>r.id===s.value);
+    if(r) selectedRunes.push(r);
+  });
+  document.querySelectorAll('#secondary-tree select').forEach(s=>{
+    const r = allSecondaryRunes.find(r=>r.id===s.value);
     if(r) selectedRunes.push(r);
   });
 
   const tbody = document.querySelector('#rune-results tbody');
-  tbody.innerHTML = '';
+  tbody.innerHTML='';
   let total=0;
   selectedRunes.forEach(r=>{
-    const dmg = calcDamage(r, dianaStats, enemyArmor, enemyMR);
+    const dmg = calcDamage(r, stats, enemyArmor, enemyMR);
     total += dmg.afterRes;
     const tr = document.createElement('tr');
-    tr.innerHTML = `<td>${r.name}</td><td>${dmg.raw}</td><td>${dmg.afterRes}</td><td>${dmg.notes}</td>`;
+    tr.innerHTML=`<td>${r.name}</td><td>${dmg.raw}</td><td>${dmg.afterRes}</td><td>${dmg.notes}</td>`;
     tbody.appendChild(tr);
   });
-  document.getElementById('total-damage').textContent = `Total Damage: ${total}`;
+  document.getElementById('total-damage').textContent=`Total Damage: ${total}`;
 });
 </script>
 </body>
 </html>
-
-
 
 
