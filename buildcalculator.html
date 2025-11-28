@@ -5,27 +5,117 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Diana Rune Calculator</title>
 <style>
-html, body {margin:0; padding:0; font-family:'Beaufort for LOL', Arial, sans-serif; background:#0a0f14;}
-body {display:flex; flex-direction:column; min-height:100vh; color:#fff; background:url('https://ddragon.leagueoflegends.com/cdn/img/champion/splash/Diana_0.jpg') center/cover fixed;}
-body::before {content:""; position:fixed; top:0; left:0; width:100%; height:100%; background:rgba(10,15,20,0.7); z-index:-1;}
-header {background:rgba(13,17,23,0.9); border-bottom:2px solid #c9aa71; padding:15px; font-size:26px; color:#c9aa71; font-weight:bold; text-transform:uppercase; text-align:center;}
+body {
+  margin:0;
+  font-family:'Beaufort for LOL', Arial, sans-serif;
+  color:#fff;
+  text-align:center;
+  background:url('https://ddragon.leagueoflegends.com/cdn/img/champion/splash/Diana_0.jpg') center/cover fixed;
+  display:flex;
+  flex-direction:column;
+  min-height:100vh;
+}
+body::before {
+  content:"";
+  position:fixed;top:0;left:0;width:100%;height:100%;
+  background:rgba(10,15,20,0.7);
+  z-index:-1;
+}
+header {
+  background: rgba(13,17,23,0.9);
+  border-bottom:2px solid #c9aa71;
+  padding:15px;
+  font-size:26px;
+  color:#c9aa71;
+  font-weight:bold;
+  text-transform:uppercase;
+}
 .button-container {display:flex; justify-content:center; margin:10px 0;}
-.back-button {padding:12px 24px; background:linear-gradient(135deg,#c9aa71,#e0c77b); color:#000; text-decoration:none; border-radius:6px; font-weight:bold; display:inline-block;}
+.back-button {
+  padding:12px 24px;
+  background:linear-gradient(135deg,#c9aa71,#e0c77b);
+  color:#000;
+  text-decoration:none;
+  border-radius:6px;
+  font-weight:bold;
+}
 .back-button::before {content:"← ";}
 .back-button:hover {background:linear-gradient(135deg,#e6c97f,#f0d88b);}
-.calc-container {max-width:1200px; width:95%; margin:0 auto 20px; background: rgba(13,17,23,0.95); border:2px solid #2f81f7; border-radius:12px; padding:20px; flex:1;}
-.section-title {color:#c9aa71; font-size:20px; margin-bottom:10px; text-transform:uppercase;}
-.input-grid {display:grid; grid-template-columns:repeat(auto-fit,minmax(200px,1fr)); gap:15px; margin-bottom:15px;}
-.input-box {background:rgba(20,25,35,0.8); border:1px solid #2f81f7; border-radius:8px; padding:12px; text-align:left;}
-.input-box label {display:block; margin-bottom:6px; font-size:14px;}
-.input-box select, .input-box input {width:100%; padding:8px; border-radius:5px; border:1px solid #222; background:#0f1722; color:#fff;}
-.calculate-btn {display:block; margin:20px auto; padding:12px 0; width:200px; font-size:16px; font-weight:bold; border:none; border-radius:6px; background:#2f81f7; color:#fff; cursor:pointer;}
-.calculate-btn:hover {background:#1b5fc7;}
-.results-box {margin-top:12px; background:rgba(20,25,35,0.9); border:1px solid #c9aa71; border-radius:8px; padding:12px; font-size:14px;}
-.results-box table {width:100%; border-collapse:collapse; margin-bottom:10px;}
-.results-box th, .results-box td {padding:4px; text-align:left; border-bottom:1px solid rgba(255,255,255,0.05);}
-.results-box th {color:#c9aa71; font-weight:600;}
-footer {text-align:center; padding:12px; font-size:14px; color:#8b949e; margin-top:auto;}
+.calc-container {
+  max-width:1200px;
+  width:95%;
+  margin:0 auto 20px;
+  background: rgba(13,17,23,0.95);
+  border:2px solid #2f81f7;
+  border-radius:12px;
+  padding:20px;
+  flex:1;
+  text-align:left;
+}
+.section-title{
+  color:#c9aa71;
+  font-size:20px;
+  margin-bottom:10px;
+  text-transform:uppercase;
+}
+.input-grid{
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(200px,1fr));
+  gap:15px;
+  margin-bottom:15px;
+}
+.input-box{
+  background:rgba(20,25,35,0.8);
+  border:1px solid #2f81f7;
+  border-radius:8px;
+  padding:12px;
+}
+.input-box label{
+  display:block;
+  margin-bottom:6px;
+  font-size:14px;
+}
+.input-box select, .input-box input{
+  width:100%;
+  padding:8px;
+  border-radius:5px;
+  border:1px solid #222;
+  background:#0f1722;
+  color:#fff;
+  appearance:none;
+  -webkit-appearance:none;
+  -moz-appearance:none;
+  background-image: url('data:image/svg+xml;utf8,<svg fill="white" height="12" viewBox="0 0 24 24" width="12" xmlns="http://www.w3.org/2000/svg"><path d="M7 10l5 5 5-5z"/></svg>');
+  background-repeat:no-repeat;
+  background-position:right 8px center;
+  background-size:12px;
+}
+.calculate-btn{
+  display:block;
+  margin:20px auto;
+  padding:12px 0;
+  width:200px;
+  font-size:16px;
+  font-weight:bold;
+  border:none;
+  border-radius:6px;
+  background:#2f81f7;
+  color:#fff;
+  cursor:pointer;
+}
+.calculate-btn:hover{background:#1b5fc7;}
+.results-box{
+  margin-top:12px;
+  background:rgba(20,25,35,0.9);
+  border:1px solid #c9aa71;
+  border-radius:8px;
+  padding:12px;
+  font-size:14px;
+}
+.results-box table{width:100%; border-collapse:collapse; margin-bottom:10px;}
+.results-box th, .results-box td{padding:4px; text-align:left; border-bottom:1px solid rgba(255,255,255,0.05);}
+.results-box th{color:#c9aa71; font-weight:600;}
+footer{text-align:center; padding:12px; font-size:14px; color:#8b949e; margin-top:auto;}
 @media(max-width:780px){.input-grid{grid-template-columns:1fr;}}
 .tree-buttons {display:flex; gap:10px; flex-wrap:wrap; margin-bottom:10px;}
 .tree-buttons button {padding:6px 12px; cursor:pointer; flex:1; border-radius:6px; background:#2f81f7; color:#fff; border:none;}
@@ -75,7 +165,7 @@ footer {text-align:center; padding:12px; font-size:14px; color:#8b949e; margin-t
   <div class="results-box">
     <h4>Damage per Rune</h4>
     <table id="rune-results">
-      <thead><tr><th>Rune</th><th>Base + Scaling</th><th>After Resistances</th><th>Notes</th></tr></thead>
+      <thead><tr><th>Rune</th><th>Base + Scaling</th><th>After Resistances</th><th>Type</th></tr></thead>
       <tbody><tr><td colspan="4">Click Calculate</td></tr></tbody>
     </table>
     <p id="total-damage"></p>
@@ -94,7 +184,7 @@ levelSelect.value=1;
 function updateStats(){const lvl=Number(levelSelect.value)-1; const s=dianaBaseStats[lvl]; document.getElementById('diana-stats').textContent=`HP: ${s.hp} | AP: ${s.ap} | AD: ${s.ad} | Shield: ${s.shield}`;}
 levelSelect.addEventListener('change',updateStats); updateStats();
 
-// Runes database (simplified damaging runes with correct numbers)
+// Runes database (simplified damaging runes)
 const runeData={
   'Electrocute': {base:[70,80,90,100,110,120,130,140,150,160,170,180,190,200,210,220,230,240], ap:0.5, type:'magic'},
   'Predator': {base:[0], ap:0, type:'magic'},
@@ -129,6 +219,8 @@ const runesByTree={
   Resolve:['Grasp of the Undying','Aftershock','Guardian','Shield Bash'],
   Inspiration:['Glacial Augment','Unsealed Spellbook','Prototype: Omnistone','Kleptomancy']
 };
+
+// Create tree selection buttons
 function createTreeButtons(containerId,treeType){ 
   const container=document.getElementById(containerId);
   container.innerHTML='';
@@ -138,17 +230,40 @@ function createTreeButtons(containerId,treeType){
     container.appendChild(btn);
   });
 }
+
+// Populate rune slots ensuring no duplicates per tree
 function selectTree(treeType,tree){
   const slotContainer=document.getElementById(treeType==='primary'?'primary-runes':'secondary-runes');
   slotContainer.innerHTML='';
   const options=runesByTree[tree];
   let numSlots=treeType==='primary'?4:2;
+  let used=[];
   for(let i=0;i<numSlots;i++){
     const sel=document.createElement('select');
-    options.forEach(r=>{const opt=document.createElement('option'); opt.value=r; opt.textContent=r; sel.appendChild(opt);});
+    sel.addEventListener('change',()=>updateOptions(slotContainer,options));
     slotContainer.appendChild(sel);
   }
+  updateOptions(slotContainer,options);
 }
+
+// Update options to prevent duplicates
+function updateOptions(container,options){
+  const selects=[...container.querySelectorAll('select')];
+  const used=selects.map(s=>s.value).filter(v=>v!=='');
+  selects.forEach(s=>{
+    const current=s.value;
+    s.innerHTML='';
+    options.forEach(o=>{
+      if(!used.includes(o) || o===current){
+        const opt=document.createElement('option');
+        opt.value=o; opt.textContent=o;
+        s.appendChild(opt);
+      }
+    });
+    if(selects.includes(s) && used.includes(current)) s.value=current;
+  });
+}
+
 createTreeButtons('primary-tree-select','primary');
 createTreeButtons('secondary-tree-select','secondary');
 
@@ -181,6 +296,3 @@ document.getElementById('calculate-btn').addEventListener('click',()=>{
 </script>
 </body>
 </html>
-
-
-
