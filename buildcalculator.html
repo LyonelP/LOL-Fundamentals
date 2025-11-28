@@ -3,187 +3,203 @@
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Diana Build Calculator – LoL Fundamentals</title>
-
+<title>Diana Build Calculator</title>
 <style>
-body {
-  margin: 0;
-  font-family: 'Beaufort for LOL', Arial, Helvetica, sans-serif;
-  background: #0a0f14;
-  color: #e6edf3;
-  text-align: center;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-}
-
-body::before {
-  content: "";
-  position: fixed;
-  top: 0; left: 0;
-  width: 100%; height: 100%;
-  background: rgba(10,15,20,0.85);
-  z-index: -1;
-}
-
-header {
-  background: linear-gradient(90deg, #0a0f14, #1b2838);
-  border-bottom: 2px solid #c9aa71;
-  padding: 20px;
-  font-weight: bold;
-  font-size: 26px;
-  text-transform: uppercase;
-  color: #c9aa71;
-  letter-spacing: 1px;
-}
-
-.back-button {
-  display: inline-block;
-  margin: 20px auto 30px;
-  padding: 10px 20px;
-  background: linear-gradient(135deg, #c9aa71, #e0c77b);
-  color: #000;
-  text-decoration: none;
-  border-radius: 8px;
-  font-weight: bold;
-  transition: all 0.3s;
-  box-shadow: 0 0 10px rgba(201,170,113,0.5);
-}
-.back-button::before { content: "← "; }
-.back-button:hover {
-  background: linear-gradient(135deg, #e6c97f, #f0d88b);
-  box-shadow: 0 0 15px rgba(255,215,0,0.8);
-}
-
-.calculator-container {
-  max-width: 500px;
-  margin: 20px auto 40px;
-  background: rgba(22,27,34,0.95);
-  border: 2px solid #c9aa71;
-  border-radius: 12px;
-  padding: 30px 25px;
-  box-shadow: 0 0 15px rgba(201,170,113,0.3);
-  text-align: center;
-}
-
-.calculator-container h2 {
-  color: #c9aa71;
-  margin-bottom: 20px;
-}
-
-#build-items {
-  display: flex;
-  flex-direction: column;
-  gap: 10px;
-  margin-bottom: 20px;
-}
-
-#build-items label {
-  display: flex;
-  align-items: center;
-  gap: 0.5em;
-  padding: 8px 12px;
-  background: #161b22;
-  border: 1px solid #2f81f7;
-  border-radius: 6px;
-  cursor: pointer;
-  transition: background 0.3s;
-}
-#build-items label:hover { background: #1b2330; }
-
-#build-items input[type="checkbox"] {
-  transform: scale(1.3);
-}
-
-#calculate-build {
-  padding: 12px 25px;
-  font-size: 1em;
-  cursor: pointer;
-  background: #2f81f7;
-  color: #fff;
-  border: none;
-  border-radius: 6px;
-  transition: background 0.3s;
-}
-#calculate-build:hover { background: #1a5ed0; }
-
-#build-results {
-  margin-top: 20px;
-  background: #161b22;
-  padding: 15px;
-  border-radius: 8px;
-  border: 1px solid #2f81f7;
-  width: fit-content;
-  margin-left: auto;
-  margin-right: auto;
-}
-#build-results p {
-  margin: 5px 0;
-  font-weight: bold;
-}
-
-footer {
-  margin-top: auto;
-  padding: 20px;
-  color: #8b949e;
-  font-size: 14px;
-  text-align: center;
-}
-footer a { color:#c9aa71; text-decoration:none; }
-footer a:hover { text-decoration:underline; }
+  body {
+    font-family: "Beaufort for LOL", Arial, Helvetica, sans-serif;
+    margin: 0;
+    background: #0a0f14;
+    color: #e6edf3;
+    text-align: center;
+  }
+  header {
+    background: linear-gradient(90deg, #0a0f14, #1b2838);
+    border-bottom: 2px solid #c9aa71;
+    padding: 20px;
+    font-weight: bold;
+    font-size: 24px;
+    color: #c9aa71;
+  }
+  .calculator-container {
+    max-width: 900px;
+    margin: 30px auto;
+    background: #161b22;
+    border: 2px solid #c9aa71;
+    border-radius: 12px;
+    padding: 25px;
+  }
+  h2 {
+    color: #c9aa71;
+    margin-bottom: 20px;
+  }
+  .items-grid, .runes-grid, .enemy-stats {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+    gap: 15px;
+    margin-bottom: 20px;
+  }
+  select {
+    width: 100%;
+    padding: 6px;
+    border-radius: 6px;
+    border: 1px solid #c9aa71;
+    background: #0a0f14;
+    color: #e6edf3;
+    font-weight: bold;
+  }
+  input[type="number"] {
+    width: 100%;
+    padding: 6px;
+    border-radius: 6px;
+    border: 1px solid #c9aa71;
+    background: #0a0f14;
+    color: #e6edf3;
+    font-weight: bold;
+  }
+  button {
+    padding: 12px 25px;
+    font-size: 1em;
+    font-weight: bold;
+    cursor: pointer;
+    border-radius: 8px;
+    border: none;
+    background: #2f81f7;
+    color: #fff;
+    transition: all 0.3s;
+    margin-top: 10px;
+  }
+  button:hover {
+    background: #1b5dc9;
+  }
+  #results {
+    background: #0a0f14;
+    border: 2px solid #c9aa71;
+    border-radius: 12px;
+    padding: 15px;
+    margin-top: 20px;
+    text-align: left;
+  }
+  #results p {
+    margin: 5px 0;
+  }
 </style>
 </head>
-
 <body>
+
 <header>Diana Build Calculator</header>
-<a href="membershub.html" class="back-button">Back to Members Hub</a>
 
 <div class="calculator-container">
-  <h2>Select Items to See Total Stats</h2>
 
-  <div id="build-items">
-    <label><input type="checkbox" value="rocketbelt"> Hextech Rocketbelt</label>
-    <label><input type="checkbox" value="nashor"> Nashor's Tooth</label>
-    <label><input type="checkbox" value="zhonya"> Zhonya's Hourglass</label>
-    <label><input type="checkbox" value="liandry"> Liandry's Anguish</label>
-    <label><input type="checkbox" value="shadowflame"> Shadowflame</label>
-  </div>
-
-  <button id="calculate-build">Calculate Stats</button>
-
-  <div id="build-results">
-    <p>AP: <span id="total-ap">0</span></p>
-    <p>HP: <span id="total-hp">0</span></p>
-    <p>Mana: <span id="total-mana">0</span></p>
-  </div>
+<h2>Select Your Items</h2>
+<div class="items-grid">
+  <select id="item1"><option value="">-- Item 1 --</option></select>
+  <select id="item2"><option value="">-- Item 2 --</option></select>
+  <select id="item3"><option value="">-- Item 3 --</option></select>
+  <select id="item4"><option value="">-- Item 4 --</option></select>
+  <select id="item5"><option value="">-- Item 5 --</option></select>
+  <select id="item6"><option value="">-- Item 6 --</option></select>
 </div>
 
-<footer>
-© 2025 LoL Fundamentals · Contact: <a href="mailto:arcsecond@lolfundamentals.com">arcsecond@lolfundamentals.com</a>
-</footer>
+<h2>Select Runes</h2>
+<div class="runes-grid">
+  <select id="primaryRune"><option value="">-- Primary Rune --</option></select>
+  <select id="secondaryRune"><option value="">-- Secondary Rune --</option></select>
+</div>
+
+<h2>Enemy Stats</h2>
+<div class="enemy-stats">
+  <input type="number" id="enemyHP" placeholder="Enemy HP" value="2000">
+  <input type="number" id="enemyMR" placeholder="Enemy MR" value="40">
+  <input type="number" id="enemyArmor" placeholder="Enemy Armor" value="30">
+</div>
+
+<button id="calculate">Calculate Stats</button>
+
+<div id="results">
+  <h2>Results</h2>
+  <p>AP: <span id="totalAP">0</span></p>
+  <p>HP: <span id="totalHP">0</span></p>
+  <p>Mana: <span id="totalMana">0</span></p>
+  <p>Damage vs Enemy: <span id="damageOutput">0</span></p>
+</div>
+
+</div>
 
 <script>
-const itemStats = {
-  rocketbelt: { ap: 90, hp: 250, mana: 300 },
-  nashor: { ap: 80, hp: 0, mana: 0 },
-  zhonya: { ap: 0, hp: 200, mana: 0 },
-  liandry: { ap: 100, hp: 0, mana: 0 },
-  shadowflame: { ap: 85, hp: 0, mana: 0 },
+const items = {
+  "Hextech Rocketbelt": {ap: 90, hp: 250, mana: 300},
+  "Nashor's Tooth": {ap: 80, hp: 0, mana: 0},
+  "Zhonya's Hourglass": {ap: 55, hp: 200, mana: 0},
+  "Liandry's Anguish": {ap: 100, hp: 0, mana: 0},
+  "Shadowflame": {ap: 85, hp: 0, mana: 0},
+  "Morellonomicon": {ap: 70, hp: 0, mana: 300},
+  "Rabadon's Deathcap": {ap: 120, hp: 0, mana: 0},
+  "Void Staff": {ap: 80, hp: 0, mana: 0}
 };
 
-document.getElementById('calculate-build').addEventListener('click', () => {
+const runes = {
+  "Grasp of the Undying": {ap:0, hp:9, mana:0},
+  "Electrocute": {ap:0, hp:0, mana:0},
+  "Phase Rush": {ap:0, hp:0, mana:0},
+  "Manaflow Band": {ap:0, hp:0, mana:50},
+  "Transcendence": {ap:0, hp:0, mana:0}
+};
+
+// Populate dropdowns
+['item1','item2','item3','item4','item5','item6'].forEach(id => {
+  const sel = document.getElementById(id);
+  for(const name in items){
+    const opt = document.createElement('option');
+    opt.value = name;
+    opt.textContent = name;
+    sel.appendChild(opt);
+  }
+});
+
+['primaryRune','secondaryRune'].forEach(id => {
+  const sel = document.getElementById(id);
+  for(const name in runes){
+    const opt = document.createElement('option');
+    opt.value = name;
+    opt.textContent = name;
+    sel.appendChild(opt);
+  }
+});
+
+document.getElementById('calculate').addEventListener('click', () => {
   let totalAP = 0, totalHP = 0, totalMana = 0;
-  document.querySelectorAll('#build-items input[type="checkbox"]:checked').forEach(cb => {
-    const stats = itemStats[cb.value];
-    totalAP += stats.ap;
-    totalHP += stats.hp;
-    totalMana += stats.mana;
+  // Items
+  for(let i=1;i<=6;i++){
+    const val = document.getElementById('item'+i).value;
+    if(val && items[val]){
+      totalAP += items[val].ap;
+      totalHP += items[val].hp;
+      totalMana += items[val].mana;
+    }
+  }
+  // Runes
+  ['primaryRune','secondaryRune'].forEach(id=>{
+    const val = document.getElementById(id).value;
+    if(val && runes[val]){
+      totalAP += runes[val].ap;
+      totalHP += runes[val].hp;
+      totalMana += runes[val].mana;
+    }
   });
 
-  document.getElementById('total-ap').textContent = totalAP;
-  document.getElementById('total-hp').textContent = totalHP;
-  document.getElementById('total-mana').textContent = totalMana;
+  document.getElementById('totalAP').textContent = totalAP;
+  document.getElementById('totalHP').textContent = totalHP;
+  document.getElementById('totalMana').textContent = totalMana;
+
+  // Enemy
+  const enemyHP = Number(document.getElementById('enemyHP').value);
+  const enemyMR = Number(document.getElementById('enemyMR').value);
+  const damage = Math.round(totalAP * 100 / (100 + enemyMR));
+  document.getElementById('damageOutput').textContent = damage + " (vs " + enemyHP + " HP, " + enemyMR + " MR)";
 });
 </script>
+
 </body>
 </html>
+
+
