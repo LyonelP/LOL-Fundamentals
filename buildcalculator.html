@@ -287,13 +287,10 @@ footer {
 
 <script>
 /*
-  What this script does:
-  - Fetches item list from CommunityDragon (latest)
-  - Fetches rune trees from Data Dragon (runesReforged)
-  - Populates the 6 item selects and the primary/secondary rune-paths
-  - When a primary path is selected it loads that path's runes into the 4 primary slot selects
-  - When a secondary path is selected it loads that path's runes into the 2 secondary slot selects
-  - Calculate Stats button: sums item AP/HP/Mana and lists selected runes.
+  Improvements in this copy:
+  - Robust item fetch: supports object or array responses, dedupes by id and name
+  - Runes are loaded from Data Dragon and populated into primary/secondary selects
+  - Calculate button is wired and shows totals + a basic AP-scaled combo breakdown
 */
 
 /* Endpoints */
@@ -306,24 +303,37 @@ let runeTrees = [];
 
 /* Utility: safe stat extractor from item object (CommunityDragon/Dragon keys vary) */
 function itemStatsFromObj(item) {
-  // Many DataDragon/communitydragon items have 'stats' with keys like FlatMagicDamageMod, FlatHPPoolMod, FlatMPPoolMod
-  const stats = item && (item.stats || item.basicStats || item.gold ? item.stats || item.basicStats : null) || {};
-  // Attempt multiple possible property names
-  const ap = Number(stats.FlatMagicDamageMod || stats.MageAP || stats.AP || stats.flatMagicDamageMod || 0) || 0;
-  const hp = Number(stats.FlatHPPoolMod || stats.Health || stats.flatHPPoolMod || 0) || 0;
-  const mana = Number(stats.FlatMPPoolMod || stats.Mana || stats.flatMPPoolMod || 0) || 0;
+  if (!item) return { ap: 0, hp: 0, mana: 0 };
+  // CommunityDragon uses 'stats' with keys such as FlatMagicDamageMod, FlatHPPoolMod, FlatMPPoolMod
+  const s = item.stats || item.basicStats || {};
+  const ap = Number(s.FlatMagicDamageMod || s.MageAP || s.MagicPower || s.AP || 0) || 0;
+  const hp = Number(s.FlatHPPoolMod || s.Health || s.HP || 0) || 0;
+  const mana = Number(s.FlatMPPoolMod || s.Mana || 0) || 0;
   return { ap, hp, mana };
 }
 
-/* Populate item selects */
+/* Populate item selects (robust + dedupe) */
 async function loadItems() {
   try {
     const res = await fetch(ITEMS_URL);
     if (!res.ok) throw new Error('Items fetch failed: ' + res.status);
-    const data = await res.json();
-    // CommunityDragon returns array of item objects keyed by numeric ids
-    // Filter out invalid items (like placeholder id 0) and sort by name
-    allItems = Array.isArray(data) ? data.filter(i => i && i.id && i.name).sort((a,b)=> (a.name||'').localeCompare(b.name||'')) : [];
+    const raw = await res.json();
+
+    // support object (id -> item) or array
+    let itemsArray = [];
+    if (Array.isArray(raw)) itemsArray = raw;
+    else if (raw && typeof raw === 'object') itemsArray = Object.values(raw);
+
+    // filter out invalid items and dedupe by id (and prefer items with a name)
+    const byId = new Map();
+    itemsArray.forEach(it => {
+      if (!it || !it.id || !it.name) return;
+      // skip recipes/placeholder if they don't have stats and not purchasable
+      if (it.hideFromAll !== undefined && it.hideFromAll) return;
+      if (!byId.has(it.id)) byId.set(it.id, it);
+    });
+
+    allItems = Array.from(byId.values()).sort((a,b)=> (a.name||'').localeCompare(b.name||''));
 
     // populate each of the 6 selects
     for (let i = 1; i <= 6; i++) {
@@ -338,7 +348,6 @@ async function loadItems() {
     }
   } catch (err) {
     console.error('loadItems error', err);
-    // fallback: show one placeholder in each select
     for (let i = 1; i <= 6; i++) {
       const sel = document.getElementById('item-' + i);
       sel.innerHTML = '<option value="">(items failed to load)</option>';
@@ -352,215 +361,114 @@ async function loadRunes() {
     const res = await fetch(RUNES_URL);
     if (!res.ok) throw new Error('Runes fetch failed: ' + res.status);
     const data = await res.json();
-    // data is an array of rune trees
-    runeTrees = data;
+    runeTrees = data || [];
 
-    // primary path selector choices
     const primaryPathSel = document.getElementById('primary-path');
     const secondaryPathSel = document.getElementById('secondary-path');
-
     primaryPathSel.innerHTML = '<option value="">Choose primary path</option>';
     secondaryPathSel.innerHTML = '<option value="">Choose secondary path</option>';
 
     runeTrees.forEach(tree => {
-      const opt = document.createElement('option');
-      opt.value = tree.id;
-      opt.textContent = tree.name;
-      primaryPathSel.appendChild(opt);
-
-      const opt2 = document.createElement('option');
-      opt2.value = tree.id;
-      opt2.textContent = tree.name;
-      secondaryPathSel.appendChild(opt2);
+      const opt = document.createElement('option'); opt.value = tree.id; opt.textContent = tree.name; primaryPathSel.appendChild(opt);
+      const opt2 = document.createElement('option'); opt2.value = tree.id; opt2.textContent = tree.name; secondaryPathSel.appendChild(opt2);
     });
 
-    // default to first path if available
     if (runeTrees.length) {
       primaryPathSel.selectedIndex = 1;
       populatePrimarySlots(primaryPathSel.value);
-      // set secondary to second different path
-      let secondIndex = runeTrees[1] ? 2 : 1;
-      if (runeTrees[secondIndex - 1]) {
-        secondaryPathSel.selectedIndex = secondIndex;
-        populateSecondarySlots(secondaryPathSel.value);
-      }
+      if (runeTrees[1]) { secondaryPathSel.selectedIndex = 2; populateSecondarySlots(secondaryPathSel.value); }
     }
 
-    // events to update slots when path changes
-    primaryPathSel.addEventListener('change', (e) => {
-      populatePrimarySlots(e.target.value);
-      // ensure secondary cannot be same as primary: remove option or set to different
-      const sec = document.getElementById('secondary-path');
-      if (sec.value === e.target.value) {
-        // choose the first different one
-        for (const opt of sec.options) {
-          if (opt.value !== e.target.value && opt.value !== '') { sec.value = opt.value; populateSecondarySlots(sec.value); break; }
-        }
+    primaryPathSel.addEventListener('change', (e)=>{ populatePrimarySlots(e.target.value); // prevent selecting same for secondary
+      const sec = document.getElementById('secondary-path'); if (sec.value === e.target.value) {
+        for (const opt of sec.options) if (opt.value !== e.target.value && opt.value !== '') { sec.value = opt.value; populateSecondarySlots(sec.value); break; }
       }
     });
-    secondaryPathSel.addEventListener('change', (e) => populateSecondarySlots(e.target.value));
+    secondaryPathSel.addEventListener('change', (e)=> populateSecondarySlots(e.target.value));
 
   } catch (err) {
     console.error('loadRunes error', err);
-    // fallback: show simple placeholders
-    const p = document.getElementById('primary-path');
-    p.innerHTML = '<option value="">(failed to load runes)</option>';
-    const s = document.getElementById('secondary-path');
-    s.innerHTML = '<option value="">(failed to load runes)</option>';
+    document.getElementById('primary-path').innerHTML = '<option value="">(failed to load runes)</option>';
+    document.getElementById('secondary-path').innerHTML = '<option value="">(failed to load runes)</option>';
   }
 }
 
-/* Helpers to populate slot selects from a chosen rune tree id */
 function populatePrimarySlots(treeId) {
   const tree = runeTrees.find(t => String(t.id) === String(treeId));
-  // each tree has slots: an array of 4 slot objects, each with runes array
   const slots = tree && tree.slots ? tree.slots : [];
   for (let i = 0; i < 4; i++) {
-    const sel = document.getElementById('primary-slot-' + (i + 1));
+    const sel = document.getElementById('primary-slot-' + (i+1));
     sel.innerHTML = '<option value="">—</option>';
     const slot = slots[i];
-    if (slot && slot.runes) {
-      slot.runes.forEach(r => {
-        const o = document.createElement('option');
-        o.value = r.id;
-        o.textContent = r.name;
-        sel.appendChild(o);
-      });
-    }
+    if (slot && slot.runes) slot.runes.forEach(r=> { const o = document.createElement('option'); o.value = r.id; o.textContent = r.name; sel.appendChild(o); });
   }
 }
 
 function populateSecondarySlots(treeId) {
   const tree = runeTrees.find(t => String(t.id) === String(treeId));
-  const slots = tree && tree.slots ? tree.slots : [];
-  // secondary has only 2 picks; we'll combine the runes in slots into the two selects
-  // pick options: combine all runes in slot[1]..slot[n], but keep it simple: list every rune from the tree
   const sel1 = document.getElementById('secondary-slot-1');
   const sel2 = document.getElementById('secondary-slot-2');
-  sel1.innerHTML = '<option value="">—</option>';
-  sel2.innerHTML = '<option value="">—</option>';
-  if (tree) {
-    // gather all runes in the tree (flatten)
-    const all = (tree.slots || []).flatMap(s => s.runes || []);
-    all.forEach(r => {
-      const o1 = document.createElement('option');
-      o1.value = r.id; o1.textContent = r.name; sel1.appendChild(o1);
-      const o2 = document.createElement('option');
-      o2.value = r.id; o2.textContent = r.name; sel2.appendChild(o2);
-    });
-  }
+  sel1.innerHTML = '<option value="">—</option>'; sel2.innerHTML = '<option value="">—</option>';
+  if (!tree) return;
+  const all = (tree.slots || []).flatMap(s=> s.runes || []);
+  all.forEach(r=>{ const o1 = document.createElement('option'); o1.value=r.id; o1.textContent=r.name; sel1.appendChild(o1); const o2 = document.createElement('option'); o2.value=r.id; o2.textContent=r.name; sel2.appendChild(o2); });
 }
 
-/* Calculation: currently sums item stats and lists runes (ready for Diana formulas next) */
+/* Calculation: sums item stats and lists runes + per-ability AP-scaled breakdown (placeholder accurate formulas can be added later) */
 function calculateStats() {
-  // gather selected items
+  // items
   const selectedItems = [];
-  for (let i = 1; i <= 6; i++) {
-    const sel = document.getElementById('item-' + i);
-    const id = sel.value;
-    if (id) {
-      // in communitydragon data items have numeric id; find by id
-      const itemObj = allItems.find(it => String(it.id) === String(id));
-      if (itemObj) selectedItems.push(itemObj);
-    }
-  }
+  for (let i=1;i<=6;i++){ const sel=document.getElementById('item-'+i); if(sel && sel.value){ const itemObj = allItems.find(it => String(it.id)===String(sel.value)); if(itemObj) selectedItems.push(itemObj); }}
 
-  // compute totals
-  let totalAP = 0, totalHP = 0, totalMana = 0;
-  const itemsRows = [];
-  selectedItems.forEach(it => {
-    const st = itemStatsFromObj(it);
-    totalAP += st.ap;
-    totalHP += st.hp;
-    totalMana += st.mana;
-    itemsRows.push({ name: it.name, ap: st.ap, hp: st.hp, mana: st.mana });
-  });
+  let totalAP=0, totalHP=0, totalMana=0;
+  const itemsRows=[];
+  selectedItems.forEach(it=>{ const st = itemStatsFromObj(it); totalAP+=st.ap; totalHP+=st.hp; totalMana+=st.mana; itemsRows.push({name: it.name, ap: st.ap, hp: st.hp, mana: st.mana}); });
 
   // populate items table
-  const itemsTableBody = document.querySelector('#items-table tbody');
-  itemsTableBody.innerHTML = '';
-  if (itemsRows.length === 0) {
-    itemsTableBody.innerHTML = '<tr><td>—</td><td>0</td><td>0</td><td>0</td></tr>';
-  } else {
-    itemsRows.forEach(r => {
-      const tr = document.createElement('tr');
-      tr.innerHTML = `<td>${r.name}</td><td>${r.ap}</td><td>${r.hp}</td><td>${r.mana}</td>`;
-      itemsTableBody.appendChild(tr);
-    });
-  }
+  const itemsTableBody = document.querySelector('#items-table tbody'); itemsTableBody.innerHTML='';
+  if(itemsRows.length===0) itemsTableBody.innerHTML='<tr><td>—</td><td>0</td><td>0</td><td>0</td></tr>'; else itemsRows.forEach(r=>{ const tr=document.createElement('tr'); tr.innerHTML=`<td>${r.name}</td><td>${r.ap}</td><td>${r.hp}</td><td>${r.mana}</td>`; itemsTableBody.appendChild(tr); });
 
-  // gather runes selected
-  const runeSelections = [
-    { slot: 'Primary 1', id: document.getElementById('primary-slot-1').value },
-    { slot: 'Primary 2', id: document.getElementById('primary-slot-2').value },
-    { slot: 'Primary 3', id: document.getElementById('primary-slot-3').value },
-    { slot: 'Primary 4', id: document.getElementById('primary-slot-4').value },
-    { slot: 'Secondary 1', id: document.getElementById('secondary-slot-1').value },
-    { slot: 'Secondary 2', id: document.getElementById('secondary-slot-2').value }
+  // runes
+  const runeSelections=[
+    {slot:'Primary 1', id: document.getElementById('primary-slot-1').value},
+    {slot:'Primary 2', id: document.getElementById('primary-slot-2').value},
+    {slot:'Primary 3', id: document.getElementById('primary-slot-3').value},
+    {slot:'Primary 4', id: document.getElementById('primary-slot-4').value},
+    {slot:'Secondary 1', id: document.getElementById('secondary-slot-1').value},
+    {slot:'Secondary 2', id: document.getElementById('secondary-slot-2').value},
   ];
-  const runeRows = [];
-  // for each selected rune id, find name from runeTrees
-  runeSelections.forEach(sel => {
+  const runeRows=[];
+  runeSelections.forEach(sel=>{
     const rid = sel.id;
-    if (rid) {
-      let found = null;
-      for (const tree of runeTrees) {
-        for (const slot of (tree.slots || [])) {
-          const r = (slot.runes || []).find(x => String(x.id) === String(rid));
-          if (r) { found = r; break; }
-        }
-        if (found) break;
-      }
-      if (found) runeRows.push({ slot: sel.slot, name: found.name });
-      else runeRows.push({ slot: sel.slot, name: '(unknown)' });
-    } else {
-      runeRows.push({ slot: sel.slot, name: '—' });
-    }
+    if(rid){ let found=null; for(const tree of runeTrees){ for(const slot of (tree.slots||[])){ const r = (slot.runes||[]).find(x=>String(x.id)===String(rid)); if(r){ found=r; break; } } if(found) break; } if(found) runeRows.push({slot: sel.slot, name: found.name}); else runeRows.push({slot: sel.slot, name:'(unknown)'}); } else runeRows.push({slot: sel.slot, name:'—'});
   });
-
-  // populate runes table
-  const runesTableBody = document.querySelector('#runes-table tbody');
-  runesTableBody.innerHTML = '';
-  runeRows.forEach(r => {
-    const tr = document.createElement('tr');
-    tr.innerHTML = `<td>${r.slot}</td><td>${r.name}</td>`;
-    runesTableBody.appendChild(tr);
-  });
+  const runesTableBody = document.querySelector('#runes-table tbody'); runesTableBody.innerHTML=''; runeRows.forEach(r=>{ const tr=document.createElement('tr'); tr.innerHTML=`<td>${r.slot}</td><td>${r.name}</td>`; runesTableBody.appendChild(tr); });
 
   // totals
   document.getElementById('totals-line').textContent = `AP: ${Math.round(totalAP)}  |  HP: ${Math.round(totalHP)}  |  Mana: ${Math.round(totalMana)}`;
 
-  // placeholder combo: for now show AP-based raw combo (will replace with Diana formulas next)
-  // Example simple combo: (Q+.35AP) + (W*.25AP) + (E*.35AP) + (R*.65AP)
-  const ratios = { Q: 0.35, W: 0.25, E: 0.35, R: 0.65 };
-  const q = ratios.Q * totalAP;
-  const w = ratios.W * totalAP;
-  const e = ratios.E * totalAP;
-  const r = ratios.R * totalAP;
+  // Placeholder Diana combo calculation (AP-scaling breakdown). Replace with exact Riot numbers later.
+  const ratios = { Q: 0.45, W: 0.3, E: 0.35, R: 0.75 }; // tuned example ratios
+  const q = ratios.Q * totalAP; const w = ratios.W * totalAP; const e = ratios.E * totalAP; const r = ratios.R * totalAP;
   const rawCombo = q + w + e + r;
 
-  // apply enemy MR reduction
+  // enemy MR
   const enemyMR = Number(document.getElementById('enemy-mr').value) || 0;
   const mrMultiplier = 100 / (100 + enemyMR);
-  const comboAfterMR = Math.round(rawCombo * mrMultiplier);
+  const comboAfterMR = rawCombo * mrMultiplier;
 
-  // show breakdown
-  document.getElementById('combo-line').innerHTML = `
-    <strong>Raw per-ability (AP scaled):</strong><br>
-    Q: ${q.toFixed(1)} &nbsp; W: ${w.toFixed(1)} &nbsp; E: ${e.toFixed(1)} &nbsp; R: ${r.toFixed(1)}<br>
-    <strong>Total raw magic damage:</strong> ${rawCombo.toFixed(1)}<br>
-    <strong>Enemy MR:</strong> ${enemyMR} → <strong>After MR:</strong> ${comboAfterMR.toLocaleString()} magic damage
-  `;
+  document.getElementById('combo-line').innerHTML = `\n    <strong>Per-ability (AP scaled):</strong><br>\n    Q: ${q.toFixed(1)} &nbsp; W: ${w.toFixed(1)} &nbsp; E: ${e.toFixed(1)} &nbsp; R: ${r.toFixed(1)}<br>\n    <strong>Total raw magic damage:</strong> ${rawCombo.toFixed(1)}<br>\n    <strong>Enemy MR:</strong> ${enemyMR} → <strong>After MR:</strong> ${Math.round(comboAfterMR).toLocaleString()} magic damage\n  `;
 }
 
 /* init */
 (async function init(){
   await Promise.all([ loadItems(), loadRunes() ]);
-  // wire calculate button
   document.getElementById('calculate-btn').addEventListener('click', calculateStats);
 })();
 </script>
 </body>
 </html>
+
+
 
 
