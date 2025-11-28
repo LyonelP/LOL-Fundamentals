@@ -11,7 +11,6 @@ body {
   background: url('https://ddragon.leagueoflegends.com/cdn/img/champion/splash/Diana_0.jpg') no-repeat center center fixed;
   background-size: cover;
   color: #fff;
-  text-align: center;
   display: flex;
   flex-direction: column;
   min-height: 100vh;
@@ -58,11 +57,13 @@ header {
   text-align: left;
 }
 h2 { color:#c9aa71; margin-top:0; }
+
+/* Item slots (blue boxes) */
 .item-slots {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
   gap: 10px;
-  margin-bottom: 15px;
+  margin-bottom: 20px;
 }
 .item-slot {
   background: #2f81f7;
@@ -80,26 +81,41 @@ h2 { color:#c9aa71; margin-top:0; }
   background:#0f1722;
   color:#fff;
 }
-.rune-slots {
+
+/* Rune tree */
+.rune-tree {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+  margin-bottom: 20px;
+}
+.rune-row {
   display: flex;
   gap: 10px;
-  margin-bottom: 15px;
+}
+.rune-slot {
+  flex:1;
+  background:#2f81f7;
+  padding:10px;
+  border-radius:6px;
+  text-align:center;
 }
 .rune-slot select {
-  flex:1;
+  width: 100%;
   padding: 6px;
-  border-radius: 4px;
+  border-radius:4px;
   border:none;
   background:#0f1722;
   color:#fff;
 }
-.enemy-stats {
-  margin-bottom: 20px;
-}
+
+/* Enemy stats */
 .enemy-stats input {
   width:70px;
   margin-right:10px;
 }
+
+/* Calculate button */
 #calculate-build {
   padding:10px 20px;
   background:#2f81f7;
@@ -112,12 +128,15 @@ h2 { color:#c9aa71; margin-top:0; }
   margin:0 auto 20px auto;
 }
 #calculate-build:hover { background:#1e5ec0; }
+
+/* Results box */
 #results {
   background:#0f1722;
   padding:15px;
   border-radius:8px;
   min-height:80px;
 }
+
 footer {
   text-align:center;
   padding:15px;
@@ -131,7 +150,7 @@ footer {
 <a href="membershub.html" class="back-button">Back to Members Hub</a>
 
 <div class="container">
-  <h2>Items</h2>
+  <h2>Item Slots</h2>
   <div class="item-slots">
     <div class="item-slot">1<br><select id="item1"></select></div>
     <div class="item-slot">2<br><select id="item2"></select></div>
@@ -142,9 +161,17 @@ footer {
   </div>
 
   <h2>Runes</h2>
-  <div class="rune-slots">
-    <div class="rune-slot"><select id="primary-rune"></select></div>
-    <div class="rune-slot"><select id="secondary-rune"></select></div>
+  <div class="rune-tree">
+    <div class="rune-row">
+      <div class="rune-slot"><select id="primary1"></select></div>
+      <div class="rune-slot"><select id="primary2"></select></div>
+      <div class="rune-slot"><select id="primary3"></select></div>
+      <div class="rune-slot"><select id="primary4"></select></div>
+    </div>
+    <div class="rune-row">
+      <div class="rune-slot"><select id="secondary1"></select></div>
+      <div class="rune-slot"><select id="secondary2"></select></div>
+    </div>
   </div>
 
   <h2>Enemy Stats</h2>
@@ -158,36 +185,33 @@ footer {
 
   <div id="results">
     <h3>Damage Breakdown</h3>
-    <div id="damage-breakdown">
-      <p>Select items, runes, and enemy stats then click calculate.</p>
-    </div>
+    <div id="damage-breakdown"><p>Select items, runes, and enemy stats then click calculate.</p></div>
   </div>
 </div>
 
 <footer>© 2025 LoL Fundamentals · All rights reserved</footer>
 
 <script>
-// Placeholder: populate items and runes
-const allItems = [{id:1,name:"Hextech Rocketbelt"},{id:2,name:"Nashor's Tooth"},{id:3,name:"Zhonya's Hourglass"},{id:4,name:"Liandry's Anguish"},{id:5,name:"Shadowflame"}];
-const allRunes = [{id:1,name:"Electrocute"},{id:2,name:"Phase Rush"},{id:3,name:"Arcane Comet"},{id:4,name:"Aftershock"}];
-
+// Populate item & rune dropdowns with Riot data placeholders
+const allItems = [
+  "Hextech Rocketbelt","Nashor's Tooth","Zhonya's Hourglass","Liandry's Anguish","Shadowflame"
+];
 for(let i=1;i<=6;i++){
   const sel=document.getElementById(`item${i}`);
-  allItems.forEach(it=>{const o=document.createElement('option'); o.value=it.id; o.text=it.name; sel.appendChild(o);});
+  allItems.forEach(it=>{ const o=document.createElement('option'); o.text=it; sel.appendChild(o); });
 }
-["primary-rune","secondary-rune"].forEach(id=>{
-  const sel=document.getElementById(id);
-  allRunes.forEach(r=>{const o=document.createElement('option'); o.value=r.id; o.text=r.name; sel.appendChild(o);});
-});
+
+// Full rune tree placeholders
+const primaryRunes=["Electrocute","Predator","Dark Harvest","Phase Rush"];
+const secondaryRunes=["Inspiration","Domination","Sorcery","Resolve"];
+primaryRunes.forEach((r,i)=>{document.getElementById(`primary${i+1}`).innerHTML=`<option>${r}</option>`;});
+secondaryRunes.forEach((r,i)=>{document.getElementById(`secondary${i+1}`).innerHTML=`<option>${r}</option>`;});
 
 document.getElementById('calculate-build').addEventListener('click', ()=>{
   const hp = parseFloat(document.getElementById('enemy-hp').value);
   const armor = parseFloat(document.getElementById('enemy-armor').value);
   const mr = parseFloat(document.getElementById('enemy-mr').value);
-  // Placeholder calculation
-  const totalAP = 0; 
-  document.getElementById('damage-breakdown').innerHTML = `<p>Total AP from items: ${totalAP}</p>
-<p>Combo damage (placeholder) vs enemy MR ${mr}: ${totalAP*2}</p>`;
+  document.getElementById('damage-breakdown').innerHTML = `<p>Placeholder combo damage vs enemy MR ${mr}</p>`;
 });
 </script>
 </body>
