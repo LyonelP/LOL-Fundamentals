@@ -253,100 +253,6 @@ const sections = {
   </p>
 </div>
 
-<div style="margin-top:2em; padding:1em; border:1px solid #ccc; background:#f9f9f9;">
-  <h3>Diana Damage Calculator</h3>
-  <p style="font-size:0.95em;">
-    Experiment with Diana's runes, items, and level to see her ability and combo damage against an enemy with specific stats.
-  </p>
-
-  <label style="display:block; margin-top:0.5em;">
-    Champion Level:
-    <input type="number" id="level" value="18" min="1" max="18" style="width:80px; margin-left:5px;">
-  </label>
-
-  <label style="display:block; margin-top:0.5em;">
-    Keystone Rune:
-    <select id="keystone" style="margin-left:5px;">
-      <option value="electrocute">Electrocute</option>
-      <option value="phaseRush">Phase Rush</option>
-      <option value="conqueror">Conqueror</option>
-    </select>
-  </label>
-
-  <label style="display:block; margin-top:0.5em;">
-    Ability Power (AP):
-    <input type="number" id="ap" value="500" min="0" style="width:80px; margin-left:5px;">
-  </label>
-
-  <label style="display:block; margin-top:0.5em;">
-    Items (comma-separated AP values):
-    <input type="text" id="items" value="120,60" style="width:100%; margin-top:3px;">
-  </label>
-
-  <label style="display:block; margin-top:0.5em;">
-    Enemy HP:
-    <input type="number" id="enemyHP" value="2000" style="width:100px; margin-left:5px;">
-  </label>
-
-  <label style="display:block; margin-top:0.5em;">
-    Enemy Magic Resist (MR):
-    <input type="number" id="enemyMR" value="80" style="width:100px; margin-left:5px;">
-  </label>
-
-  <button onclick="calculateDamage()" style="margin-top:1em; padding:5px 10px; cursor:pointer;">Calculate Damage</button>
-
-  <div id="results" style="margin-top:1em; padding:0.5em; background:#fff; border:1px solid #ccc;"></div>
-</div>
-
-<script>
-function calculateDamage() {
-    const level = parseInt(document.getElementById("level").value);
-    const keystone = document.getElementById("keystone").value;
-    const ap = parseInt(document.getElementById("ap").value);
-    const items = document.getElementById("items").value.split(",").map(Number);
-    const enemyHP = parseFloat(document.getElementById("enemyHP").value);
-    const enemyMR = parseFloat(document.getElementById("enemyMR").value);
-
-    const totalAP = ap + items.reduce((a,b)=>a+b,0);
-
-    // Base damages at level (example scaling)
-    const Qbase = 60 + 40*level;
-    const Wbase = 70 + 45*level;
-    const Ebase = 60 + 30*level;
-    const Rbase = 150 + 100*level;
-
-    // Ability power scaling
-    const Qdamage = Qbase + 0.6 * totalAP;
-    const Wdamage = Wbase + 0.7 * totalAP;
-    const Edamage = Ebase + 0.5 * totalAP;
-    const Rdamage = Rbase + 0.75 * totalAP;
-
-    // Keystone bonus
-    let bonus = 0;
-    if(keystone === "electrocute") bonus = 0.3 * totalAP;
-    if(keystone === "conqueror") bonus = 0.1 * totalAP;
-
-    function applyMR(damage, mr) {
-        return damage * 100 / (100 + mr);
-    }
-
-    const Qfinal = Math.round(applyMR(Qdamage + bonus, enemyMR));
-    const Wfinal = Math.round(applyMR(Wdamage + bonus, enemyMR));
-    const Efinal = Math.round(applyMR(Edamage + bonus, enemyMR));
-    const Rfinal = Math.round(applyMR(Rdamage + bonus, enemyMR));
-    const combo = Qfinal + Wfinal + Efinal + Rfinal;
-
-    document.getElementById("results").innerHTML = `
-        <strong>Ability Damage:</strong><br>
-        Q: ${Qfinal}<br>
-        W: ${Wfinal}<br>
-        E: ${Efinal}<br>
-        R: ${Rfinal}<br>
-        <strong>Full Combo Damage:</strong> ${combo} (${((combo/enemyHP)*100).toFixed(1)}% of enemy HP)
-    `;
-}
-</script>
-
   `,
 
   "Build": `
@@ -702,15 +608,6 @@ sectionSelect.addEventListener('change', () => {
 
 </body>
 </html>
-
-
-
-
-
-
-
-
-
 
 
 
