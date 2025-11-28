@@ -15,7 +15,6 @@ body {
   text-align: center;
 }
 
-/* HEADER */
 header {
   font-size: 30px;
   font-weight: 700;
@@ -28,10 +27,9 @@ header::after {
   width: 100%;
   height: 2px;
   background: #d8c48a;
-  margin-top: 5px;
+  margin-top: 10px; /* dropped slightly lower */
 }
 
-/* RETURN BUTTON */
 .return-btn {
   margin: 10px 0 30px;
   display: inline-block;
@@ -48,14 +46,12 @@ header::after {
   background: linear-gradient(135deg, #f0d88b, #ffd66f);
 }
 
-/* MAIN CONTENT WRAPPER */
 .container {
   width: 85%;
   max-width: 900px;
   margin: 0 auto 40px;
 }
 
-/* SECTION TITLES */
 .section-title {
   text-align: left;
   font-size: 18px;
@@ -63,7 +59,6 @@ header::after {
   margin: 30px 0 12px;
 }
 
-/* FORM GRID (2 COLUMNS) */
 .grid-2 {
   display: grid;
   grid-template-columns: 1fr 1fr;
@@ -71,7 +66,6 @@ header::after {
   align-items: start;
 }
 
-/* INPUT CARDS */
 .card {
   background: rgba(12,18,30,0.8);
   border: 1px solid rgba(255,255,255,0.08);
@@ -80,14 +74,12 @@ header::after {
   text-align: left;
 }
 
-/* INPUT LABELS */
 .card label {
   font-size: 16px;
   display: block;
   margin-bottom: 8px;
 }
 
-/* INPUT STYLING */
 select,
 input[type="number"] {
   width: 100%;
@@ -100,7 +92,6 @@ input[type="number"] {
   margin-bottom: 20px;
 }
 
-/* CALCULATE BUTTON */
 .calculate-btn {
   margin: 20px auto 10px;
   display: block;
@@ -117,7 +108,6 @@ input[type="number"] {
   background: #1b5fc7;
 }
 
-/* TABLE WRAPPER */
 .table-card {
   margin-top: 10px;
   background: rgba(12,18,30,0.8);
@@ -126,7 +116,6 @@ input[type="number"] {
   padding: 20px;
 }
 
-/* TABLE */
 table {
   width: 100%;
   table-layout: fixed;
@@ -148,7 +137,6 @@ td {
   word-wrap: break-word;
 }
 
-/* FOOTER */
 footer {
   text-align: center;
   margin-top: 40px;
@@ -157,7 +145,6 @@ footer {
   font-size: 14px;
 }
 
-/* MOBILE */
 @media (max-width: 700px) {
   .grid-2 {
     grid-template-columns: 1fr;
@@ -169,22 +156,17 @@ footer {
 <body>
 
 <header>DIANA RUNE CALCULATOR</header>
-
 <a class="return-btn" href="membershub.html">BACK TO MEMBERS HUB</a>
 
 <div class="container">
 <div class="grid-2">
-
-  <!-- LEFT COLUMN -->
   <div>
     <div class="section-title">DIANA’S LEVEL</div>
     <div class="card">
       <label>Level</label>
       <select id="diana-level">
         <script>
-          for (let i = 1; i <= 18; i++) {
-            document.write('<option>' + i + '</option>');
-          }
+          for (let i=1;i<=18;i++){document.write(`<option>${i}</option>`);}
         </script>
       </select>
     </div>
@@ -204,7 +186,6 @@ footer {
     </div>
   </div>
 
-  <!-- RIGHT COLUMN -->
   <div>
     <div class="section-title">ENEMY STATS</div>
     <div class="card">
@@ -230,110 +211,137 @@ footer {
 
 <button class="calculate-btn" id="calculate-btn">Calculate Damage</button>
 
-<!-- 6-Line Rune Damage Table -->
 <div class="table-card">
-  <table>
-    <thead>
-      <tr>
-        <th>Rune</th>
-        <th>Estimated Damage</th>
-        <th>Damage Type</th>
-      </tr>
-    </thead>
-    <tbody id="rune-damage-table">
-      <tr><td>—</td><td>—</td><td>—</td></tr>
-      <tr><td>—</td><td>—</td><td>—</td></tr>
-      <tr><td>—</td><td>—</td><td>—</td></tr>
-      <tr><td>—</td><td>—</td><td>—</td></tr>
-      <tr><td>—</td><td>—</td><td>—</td></tr>
-      <tr><td>—</td><td>—</td><td>—</td></tr>
-    </tbody>
-  </table>
+<table>
+  <thead>
+    <tr>
+      <th>Rune</th>
+      <th>Estimated Damage</th>
+      <th>Damage Type</th>
+    </tr>
+  </thead>
+  <tbody id="rune-damage-table">
+    <tr><td>—</td><td>—</td><td>—</td></tr>
+    <tr><td>—</td><td>—</td><td>—</td></tr>
+    <tr><td>—</td><td>—</td><td>—</td></tr>
+    <tr><td>—</td><td>—</td><td>—</td></tr>
+    <tr><td>—</td><td>—</td><td>—</td></tr>
+    <tr><td>—</td><td>—</td><td>—</td></tr>
+  </tbody>
+</table>
 </div>
 </div>
 
 <footer>© 2025 LoL Fundamentals · All rights reserved</footer>
 
 <script>
-// All runes hardcoded (latest version)
-const allRunes = {
-  Domination: ["Electrocute","Cheap Shot","Taste of Blood","Sudden Impact","Zombie Ward","Ghost Poro","Eyeball Collection","Ravenous Hunter","Ingenious Hunter","Relentless Hunter","Ultimate Hunter"],
-  Precision: ["Press the Attack","Lethal Tempo","Fleet Footwork","Conqueror","Overheal","Triumph","Presence of Mind","Legend: Alacrity","Legend: Tenacity","Legend: Bloodline","Coup de Grace"],
-  Sorcery: ["Summon Aery","Arcane Comet","Phase Rush","Nullifying Orb","Manaflow Band","Nimbus Cloak","Transcendence","Celerity","Scorch","Waterwalking","Gathering Storm"],
-  Resolve: ["Grasp of the Undying","Aftershock","Guardian","Demolish","Font of Life","Shield Bash","Conditioning","Second Wind","Overgrowth"],
-  Inspiration: ["Glacial Augment","Unsealed Spellbook","Prototype: Omnistone","Hextech Flashtraption","Magical Footwear","Future's Market","Minion Dematerializer","Biscuit Delivery","Cosmic Insight"]
+const runesByPath = {
+  Domination:[
+    ["Electrocute","Hail of Blades","Dark Harvest"],
+    ["Cheap Shot","Sudden Impact","Zombie Ward"],
+    ["Eyeball Collection","Ravenous Hunter","Ingenious Hunter"],
+    ["Ultimate Hunter","Ingenious Hunter","Relentless Hunter"]
+  ],
+  Precision:[
+    ["Press the Attack","Lethal Tempo","Fleet Footwork","Conqueror"],
+    ["Overheal","Triumph","Presence of Mind"],
+    ["Legend: Alacrity","Legend: Tenacity","Legend: Bloodline"],
+    ["Coup de Grace","Cut Down","Last Stand"]
+  ],
+  Sorcery:[
+    ["Summon Aery","Arcane Comet","Phase Rush"],
+    ["Nullifying Orb","Manaflow Band","Nimbus Cloak"],
+    ["Transcendence","Celerity","Scorch"],
+    ["Gathering Storm","Waterwalking","Scorch"]
+  ],
+  Resolve:[
+    ["Grasp of the Undying","Aftershock","Guardian"],
+    ["Demolish","Font of Life","Shield Bash"],
+    ["Conditioning","Second Wind","Overgrowth"]
+  ],
+  Inspiration:[
+    ["Glacial Augment","Unsealed Spellbook","Prototype: Omnistone"],
+    ["Hextech Flashtraption","Magical Footwear","Future's Market"],
+    ["Minion Dematerializer","Biscuit Delivery","Cosmic Insight"]
+  ]
 };
 
-// Only runes that deal damage
+// Only damaging runes with approximate min/max and type
 const damageRunes = {
-  "Electrocute": { min:50, max:220, type:"Magic" },
-  "Sudden Impact": { min:20, max:80, type:"True" },
-  "Cheap Shot": { min:10, max:45, type:"True" },
-  "Taste of Blood": { min:10, max:45, type:"Magic" },
-  "Dark Harvest": { min:50, max:200, type:"True" },
-  "Hail of Blades": { min:40, max:120, type:"True" },
-  "Conqueror": { min:10, max:40, type:"True" },
-  "Summon Aery": { min:20, max:60, type:"Magic" },
-  "Arcane Comet": { min:30, max:100, type:"Magic" },
-  "Phase Rush": { min:0, max:0, type:"Magic" },
-  "Grasp of the Undying": { min:5, max:15, type:"True" },
-  "Electrocute": { min:50, max:220, type:"Magic" }
+  "Electrocute": {min:50,max:220,type:"Magic"},
+  "Sudden Impact": {min:20,max:80,type:"True"},
+  "Cheap Shot": {min:10,max:45,type:"True"},
+  "Hail of Blades": {min:40,max:120,type:"True"},
+  "Dark Harvest": {min:50,max:200,type:"True"},
+  "Summon Aery": {min:20,max:60,type:"Magic"},
+  "Arcane Comet": {min:30,max:100,type:"Magic"},
+  "Grasp of the Undying": {min:5,max:15,type:"True"},
+  "Conqueror": {min:10,max:40,type:"True"}
 };
-
-const secondaryOptions = [].concat(...Object.values(allRunes));
 
 // Populate dropdowns
-function populateDropdowns() {
-  const primaryPath = document.getElementById("primary-path");
-  const secondaryPath = document.getElementById("secondary-path");
-  Object.keys(allRunes).forEach(path=>{
-    primaryPath.add(new Option(path,path));
-    secondaryPath.add(new Option(path,path));
-  });
+function populateSlots() {
+  const primaryPathSel = document.getElementById("primary-path");
+  const secondaryPathSel = document.getElementById("secondary-path");
 
-  for(let i=1;i<=4;i++){
-    const sel = document.getElementById(`primary-slot-${i}`);
+  Object.keys(runesByPath).forEach(path=>{
+    primaryPathSel.add(new Option(path,path));
+    secondaryPathSel.add(new Option(path,path));
+  });
+  primaryPathSel.selectedIndex = 0;
+  secondaryPathSel.selectedIndex = 1;
+
+  function fillSlot(slotId, runes){ 
+    const sel = document.getElementById(slotId);
     sel.innerHTML = "";
-    secondaryOptions.forEach(rune=>sel.add(new Option(rune,rune)));
+    runes.forEach(r=>sel.add(new Option(r,r)));
   }
-  for(let i=1;i<=2;i++){
-    const sel = document.getElementById(`secondary-slot-${i}`);
-    sel.innerHTML = "";
-    secondaryOptions.forEach(rune=>sel.add(new Option(rune,rune)));
+
+  function updatePrimary(){ 
+    const path = primaryPathSel.value;
+    runesByPath[path].forEach((row,i)=>fillSlot(`primary-slot-${i+1}`,row));
   }
+  function updateSecondary(){ 
+    const path = secondaryPathSel.value;
+    runesByPath[path].forEach((row,i)=>fillSlot(`secondary-slot-${i+1}`,row.slice(0,2)));
+  }
+
+  primaryPathSel.onchange = updatePrimary;
+  secondaryPathSel.onchange = updateSecondary;
+
+  updatePrimary();
+  updateSecondary();
 }
 
-function calculateDamage() {
-  const slots = [
-    document.getElementById('primary-slot-1').value,
-    document.getElementById('primary-slot-2').value,
-    document.getElementById('primary-slot-3').value,
-    document.getElementById('primary-slot-4').value,
-    document.getElementById('secondary-slot-1').value,
-    document.getElementById('secondary-slot-2').value
+function calculateDamage(){
+  const slots=[
+    document.getElementById("primary-slot-1").value,
+    document.getElementById("primary-slot-2").value,
+    document.getElementById("primary-slot-3").value,
+    document.getElementById("primary-slot-4").value,
+    document.getElementById("secondary-slot-1").value,
+    document.getElementById("secondary-slot-2").value
   ];
-  const enemyMR = parseFloat(document.getElementById("enemy-mr").value) || 30;
-  const tbody = document.getElementById("rune-damage-table");
-  tbody.innerHTML = "";
+  const enemyMR=parseFloat(document.getElementById("enemy-mr").value)||30;
+  const tbody=document.getElementById("rune-damage-table");
+  tbody.innerHTML="";
 
   slots.forEach(rune=>{
+    let dmg=0;
+    let type="—";
     if(damageRunes[rune]){
-      const dmg = Math.round((damageRunes[rune].min + damageRunes[rune].max)/2 * 100/(100+enemyMR));
-      const tr = document.createElement("tr");
-      tr.innerHTML = `<td>${rune}</td><td>${dmg}</td><td>${damageRunes[rune].type}</td>`;
-      tbody.appendChild(tr);
-    } else {
-      const tr = document.createElement("tr");
-      tr.innerHTML = `<td>${rune}</td><td>0</td><td>—</td>`;
-      tbody.appendChild(tr);
+      dmg=Math.round(((damageRunes[rune].min+damageRunes[rune].max)/2)*(100/(100+enemyMR)));
+      type=damageRunes[rune].type;
     }
+    const tr=document.createElement("tr");
+    tr.innerHTML=`<td>${rune}</td><td>${dmg}</td><td>${type}</td>`;
+    tbody.appendChild(tr);
   });
 }
 
-document.getElementById("calculate-btn").addEventListener("click", calculateDamage);
-populateDropdowns();
+document.getElementById("calculate-btn").addEventListener("click",calculateDamage);
+populateSlots();
 </script>
 
 </body>
 </html>
-
