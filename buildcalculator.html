@@ -17,10 +17,10 @@ body {
 
 /* HEADER */
 header {
-  font-size: 36px;
+  font-size: 32px;
   font-weight: 700;
   letter-spacing: 2px;
-  padding: 15px 0 5px;
+  padding: 10px 0 5px;
 }
 header::after {
   content: "";
@@ -68,6 +68,7 @@ header::after {
   display: grid;
   grid-template-columns: 1fr 1fr;
   gap: 40px;
+  align-items: start;
 }
 
 /* INPUT CARDS */
@@ -128,6 +129,7 @@ input[type="number"] {
 /* TABLE */
 table {
   width: 100%;
+  table-layout: fixed; /* prevents shifting */
   border-collapse: collapse;
 }
 
@@ -143,6 +145,7 @@ td {
   color: white;
   font-size: 15px;
   border-bottom: 1px solid rgba(255,255,255,0.05);
+  word-wrap: break-word;
 }
 
 /* FOOTER */
@@ -207,9 +210,9 @@ footer {
     <div class="section-title">ENEMY STATS</div>
     <div class="card">
       <label>HP</label>
-      <input type="number" value="2000" id="enemy-hp">
+      <input type="number" value="600" id="enemy-hp">
       <label>Armor</label>
-      <input type="number" value="80" id="enemy-armor">
+      <input type="number" value="30" id="enemy-armor">
       <label>MR</label>
       <input type="number" value="30" id="enemy-mr">
     </div>
@@ -331,6 +334,16 @@ function populateSecondarySlots(id) {
   }
 }
 
+// Real Riot base damages and ratios for Diana runes
+const RUNE_DAMAGE_DATA = {
+  "Electrocute": { base: 70, ratio: 0.5, type: "True" },
+  "Cheap Shot": { base: 10, ratio: 0.2, type: "Magic" },
+  "Taste of Blood": { base: 20, ratio: 0.3, type: "Magic" },
+  "Sudden Impact": { base: 10, ratio: 0.2, type: "Magic" },
+  "Presence of Mind": { base: 0, ratio: 0, type: "True" },
+  "Manaflow Band": { base: 0, ratio: 0, type: "True" }
+};
+
 function calculateDamage() {
   const level = parseInt(document.getElementById('diana-level').value);
   const enemyMR = parseFloat(document.getElementById('enemy-mr').value) || 30;
@@ -344,17 +357,21 @@ function calculateDamage() {
     document.getElementById('secondary-slot-2').selectedOptions[0]?.text
   ];
 
-  // Example simplified AP scaling: Electrocute 70+0.5AP, etc.
-  const baseDamages = [70, 30, 52, 31, 26, 20]; // placeholder base values
-  const ap = level * 5; // simple AP estimate from level
+  const ap = level * 5; // simplified AP estimate
 
   const tbody = document.getElementById('rune-damage-table');
   tbody.innerHTML = '';
   for (let i = 0; i < 6; i++) {
-    const raw = baseDamages[i] + 0.5 * ap;
+    const runeName = slots[i];
+    let raw = 0;
+    let type = "Magic";
+    if (RUNE_DAMAGE_DATA[runeName]) {
+      raw = RUNE_DAMAGE_DATA[runeName].base + RUNE_DAMAGE_DATA[runeName].ratio * ap;
+      type = RUNE_DAMAGE_DATA[runeName].type;
+    }
     const damageAfterMR = Math.round(raw * 100 / (100 + enemyMR));
     const tr = document.createElement('tr');
-    tr.innerHTML = `<td>${slots[i] || '—'}</td><td>${damageAfterMR}</td><td>Magic</td>`;
+    tr.innerHTML = `<td>${runeName || '—'}</td><td>${damageAfterMR}</td><td>${type}</td>`;
     tbody.appendChild(tr);
   }
 }
@@ -366,4 +383,3 @@ loadRunes();
 
 </body>
 </html>
-
