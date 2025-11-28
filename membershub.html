@@ -27,7 +27,7 @@ header {
   position: relative;
 }
 
-/* Settings Button */
+/* Subtle Settings Button */
 .settings-btn {
   position: absolute;
   top: 14px;
@@ -49,15 +49,16 @@ header {
 
 /* Section */
 .section {
-  padding: 5px 20px; /* slightly higher "Your Member Hub" */
+  padding: 30px 20px; /* slightly higher */
   max-width: 1000px;
-  margin: 0 auto;
+  margin: 5px auto; /* slightly higher */
 }
 
 /* Section title */
 .section h2 {
   color: #c9aa71;
-  margin: 10px 0 20px 0;
+  margin-top: 0;
+  margin-bottom: 25px;
 }
 
 /* Card Grid */
@@ -78,13 +79,11 @@ header {
   display: flex;
   flex-direction: column;
   justify-content: center;
-  align-items: center;
   transition: transform 0.3s, box-shadow 0.3s;
   text-decoration: none;
   color: #e6edf3;
   position: relative;
   overflow: hidden;
-  box-sizing: border-box;
 }
 
 /* Card hover effect */
@@ -108,10 +107,9 @@ header {
   line-height: 1.3;
   z-index: 2;
   position: relative;
-  text-align: center;
 }
 
-/* Card Background Image using pseudo-element */
+/* Card Background Image */
 .card::before {
   content: "";
   position: absolute;
@@ -151,19 +149,18 @@ header {
   opacity: 0.2;
 }
 
-/* Bottom Row Cards */
+/* New bottom row backgrounds */
 .card.rune-calculator::before {
   background-image: url('https://i.imgur.com/kcs90ta.jpeg');
 }
 .card.build-calculator::before {
   background-image: url('https://i.imgur.com/uhLq29j.jpeg');
 }
+
+/* ★ Discord card background — grayscale, faded, same size as others */
 .card.discord-card::before {
   background-image: url('https://i.imgur.com/fS2OKHV.jpeg');
-  background-size: cover;
-  background-position: center;
-  opacity: 0.15; /* faded dark look */
-  z-index: 1;
+  filter: grayscale(100%);
 }
 
 /* Tierlist card visual */
@@ -222,6 +219,7 @@ footer a:hover {
   .card-grid {
     grid-template-columns: repeat(3, 1fr);
   }
+  .tierlist, .fundamentals, .coaching { justify-self: center; }
 }
 </style>
 </head>
@@ -239,23 +237,29 @@ footer a:hover {
 <section class="section">
 <h2>Your Member Hub</h2>
 <p>Choose a section to explore:</p>
+
 <div class="card-grid">
+
   <a href="dianaguide.html" class="card diana-guide">
     <h3>Diana Guide</h3>
     <p>Comprehensive guide for mastering Diana, including combos, macro, and advanced tips.</p>
   </a>
+
   <a href="matchuphub.html" class="card diana-matchups">
     <h3>Diana Mid Matchups</h3>
     <p>Detailed breakdowns for every mid lane matchup.</p>
   </a>
+
   <a href="ekkoguide.html" class="card ekko-guide">
     <h3>Ekko Guide</h3>
     <p>Complete guide to playing Ekko Jungle, including combos, pathing, and advanced mechanics.</p>
   </a>
+
   <a href="skills.html" class="card fundamentals">
     <h3>Fundamentals</h3>
     <p>Learn core League skills to help climb at any elo.</p>
   </a>
+
   <a href="tierlist.html" class="card tierlist">
     <h3>Tierlist</h3>
     <p>Current champion tierlist showing which champions dominate the meta.</p>
@@ -267,24 +271,28 @@ footer a:hover {
       <div class="tier-d"></div>
     </div>
   </a>
+
   <a href="https://buy.stripe.com/5kQeV6f6kgVmbfE88iejK03" class="card coaching">
     <h3>Coaching</h3>
     <p>Book a personalized 1-hour coaching session. Members receive 25% off!</p>
   </a>
 
-  <!-- Bottom Row -->
+  <!-- New Row -->
   <a href="dianarunes.html" class="card rune-calculator">
     <h3>Rune Calculator</h3>
     <p>Optimal rune setups for Diana to maximize damage and survivability.</p>
   </a>
+
   <a href="dianabuild.html" class="card build-calculator">
     <h3>Build Calculator</h3>
     <p>Recommended item builds for Diana in different stages of the game.</p>
   </a>
+
   <a href="https://discord.gg/MvQdZqKB" class="card discord-card" target="_blank">
     <h3>Join our Discord</h3>
     <p>Connect with other members, share tips, and stay updated on guides.</p>
   </a>
+
 </div>
 </section>
 
@@ -306,5 +314,8 @@ function logout() {
   window.location.href = 'index.html';
 }
 </script>
+
 </body>
 </html>
+
+
