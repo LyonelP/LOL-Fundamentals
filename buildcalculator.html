@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Diana Build Calculator</title>
+<style>
+  body {
+    font-family: 'Beaufort for LOL', Arial, Helvetica, sans-serif;
+    margin: 20px;
+    line-height: 1.6;
+    background: #f5f5f5;
+    color: #222;
+  }
+  h2 {
+    margin-bottom: 0.5em;
+    color: #4b4b4b;
+  }
+  #build-items label {
+    display: flex;
+    align-items: center;
+    gap: 0.5em;
+    padding: 0.3em 0.5em;
+    background: #fff;
+    border: 1px solid #ccc;
+    border-radius: 6px;
+    cursor: pointer;
+  }
+  #build-items input[type="checkbox"] {
+    transform: scale(1.2);
+  }
+  #calculate-build {
+    padding: 0.6em 1.2em;
+    font-size: 1em;
+    cursor: pointer;
+    background: #4b8cff;
+    color: #fff;
+    border: none;
+    border-radius: 6px;
+    margin-top: 1em;
+  }
+  #calculate-build:hover {
+    background: #3570d4;
+  }
+  #build-results {
+    margin-top: 1.5em;
+    background: #fff;
+    padding: 1em;
+    border-radius: 8px;
+    border: 1px solid #ccc;
+    width: fit-content;
+  }
+  #build-results p {
+    margin: 0.3em 0;
+  }
+</style>
+</head>
+<body>
+
+<h1>Diana Build Calculator</h1>
+<p>Select items to see total stats:</p>
+
+<div id="build-items">
+  <label><input type="checkbox" value="rocketbelt"> Hextech Rocketbelt</label>
+  <label><input type="checkbox" value="nashor"> Nashor's Tooth</label>
+  <label><input type="checkbox" value="zhonya"> Zhonya's Hourglass</label>
+  <label><input type="checkbox" value="liandry"> Liandry's Anguish</label>
+  <label><input type="checkbox" value="shadowflame"> Shadowflame</label>
+</div>
+
+<button id="calculate-build">Calculate Stats</button>
+
+<div id="build-results">
+  <p>AP: <span id="total-ap">0</span></p>
+  <p>HP: <span id="total-hp">0</span></p>
+  <p>Mana: <span id="total-mana">0</span></p>
+</div>
+
+<script>
+  const itemStats = {
+    rocketbelt: { ap: 90, hp: 250, mana: 300 },
+    nashor: { ap: 80, hp: 0, mana: 0 },
+    zhonya: { ap: 0, hp: 200, mana: 0 },
+    liandry: { ap: 100, hp: 0, mana: 0 },
+    shadowflame: { ap: 85, hp: 0, mana: 0 },
+  };
+
+  document.getElementById('calculate-build').addEventListener('click', () => {
+    let totalAP = 0, totalHP = 0, totalMana = 0;
+    document.querySelectorAll('#build-items input[type="checkbox"]:checked').forEach(cb => {
+      const stats = itemStats[cb.value];
+      totalAP += stats.ap;
+      totalHP += stats.hp;
+      totalMana += stats.mana;
+    });
+
+    document.getElementById('total-ap').textContent = totalAP;
+    document.getElementById('total-hp').textContent = totalHP;
+    document.getElementById('total-mana').textContent = totalMana;
+  });
+</script>
+
+</body>
+</html>
