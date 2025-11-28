@@ -6,7 +6,6 @@
 <title>Diana Rune Calculator</title>
 
 <style>
-/* GLOBAL STYLING */
 body {
   margin: 0;
   padding: 0;
@@ -18,10 +17,10 @@ body {
 
 /* HEADER */
 header {
-  font-size: 54px;
+  font-size: 48px;
   font-weight: 700;
   letter-spacing: 2px;
-  padding: 50px 0 15px;
+  padding: 20px 0 10px;
 }
 header::after {
   content: "";
@@ -34,7 +33,7 @@ header::after {
 
 /* RETURN BUTTON */
 .return-btn {
-  margin: 20px 0;
+  margin: 10px 0 30px;
   display: inline-block;
   padding: 12px 26px;
   border: none;
@@ -53,7 +52,7 @@ header::after {
 .container {
   width: 85%;
   max-width: 900px;
-  margin: 40px auto;
+  margin: 0 auto 40px;
 }
 
 /* SECTION TITLES */
@@ -100,9 +99,26 @@ input[type="number"] {
   margin-bottom: 20px;
 }
 
+/* CALCULATE BUTTON */
+.calculate-btn {
+  margin: 20px 0;
+  display: inline-block;
+  padding: 12px 26px;
+  font-size: 16px;
+  font-weight: bold;
+  background: #2f81f7;
+  color: #fff;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+}
+.calculate-btn:hover {
+  background: #1b5fc7;
+}
+
 /* TABLE WRAPPER */
 .table-card {
-  margin-top: 40px;
+  margin-top: 20px;
   background: rgba(12,18,30,0.8);
   border: 1px solid rgba(255,255,255,0.08);
   border-radius: 12px;
@@ -152,7 +168,7 @@ footer {
 
 <header>DIANA RUNE CALCULATOR</header>
 
-<a class="return-btn" href="membershub.html">RETURN TO MEMBERS HUB</a>
+<a class="return-btn" href="membershub.html">BACK TO MEMBERS HUB</a>
 
 <div class="container">
 
@@ -165,7 +181,12 @@ footer {
     <div class="card">
       <label>Level</label>
       <select id="diana-level">
-        ${Array.from({length:18},(_,i)=>`<option>${i+1}</option>`).join('')}
+        <!-- Options 1–18 -->
+        <script>
+          for (let i = 1; i <= 18; i++) {
+            document.write('<option>' + i + '</option>');
+          }
+        </script>
       </select>
     </div>
 
@@ -208,6 +229,9 @@ footer {
   </div>
 </div>
 
+<!-- CALCULATE BUTTON -->
+<button class="calculate-btn" id="calculate-btn">Calculate Damage</button>
+
 <!-- RUNES DAMAGE TABLE -->
 <div class="table-card">
   <table>
@@ -237,7 +261,6 @@ footer {
 const RUNES_URL = 'https://ddragon.leagueoflegends.com/cdn/14.21.1/data/en_US/runesReforged.json';
 let runeTrees = [];
 
-// Fetch runes and populate primary/secondary paths
 async function loadRunes() {
   const res = await fetch(RUNES_URL);
   runeTrees = await res.json();
@@ -280,7 +303,6 @@ async function loadRunes() {
   secondarySel.addEventListener('change', e => populateSecondarySlots(e.target.value));
 }
 
-// Populate only valid runes per slot
 function populatePrimarySlots(id) {
   const tree = runeTrees.find(t => t.id == id);
   for (let i = 0; i < 4; i++) {
