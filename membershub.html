@@ -27,7 +27,7 @@ header {
   position: relative;
 }
 
-/* Settings Button */
+/* Subtle Settings Button */
 .settings-btn {
   position: absolute;
   top: 14px;
@@ -49,7 +49,7 @@ header {
 
 /* Section */
 .section {
-  padding: 10px 20px;
+  padding: 40px 20px;
   max-width: 1000px;
   margin: 20px auto;
 }
@@ -58,7 +58,7 @@ header {
 .section h2 {
   color: #c9aa71;
   margin-top: 0;
-  margin-bottom: 15px; /* smaller gap so higher */
+  margin-bottom: 30px;
 }
 
 /* Card Grid */
@@ -96,7 +96,7 @@ header {
 .card h3 {
   color: #c9aa71;
   margin-bottom: 10px;
-  font-size: 1.1em;
+  font-size: 1.2em;
   z-index: 2;
   position: relative;
 }
@@ -141,13 +141,6 @@ header {
   background-image: url('https://cdn.wallpapersafari.com/92/79/MYTD9q.png');
   background-size: cover;
   background-position: center;
-  opacity: 0.15;
-}
-.card.build-calculator::before {
-  background-image: url('img/wb-diana.jpg'); /* Local Winterblessed Diana */
-  background-size: cover;
-  background-position: center;
-  opacity: 0.3;
 }
 .card.coaching::before {
   background-image: url('https://m.media-amazon.com/images/I/71GlK3kDLJL.jpg');
@@ -155,12 +148,8 @@ header {
   background-position: center;
   opacity: 0.2;
 }
-.card.discord::before {
-  background: linear-gradient(to bottom right, #7289da 0%, #99aab5 100%);
-  opacity: 0.3;
-}
 
-/* Tierlist bar */
+/* Tierlist card visual */
 .card.tierlist .tier-bar {
   margin-top: 10px;
   width: 100%;
@@ -197,7 +186,7 @@ footer a:hover {
 /* Logout Button */
 #logoutBtn {
   display: block;
-  margin: 20px auto;
+  margin: 40px auto;
   padding: 12px 25px;
   background: #f94144;
   color: #fff;
@@ -216,6 +205,7 @@ footer a:hover {
   .card-grid {
     grid-template-columns: repeat(3, 1fr);
   }
+  .tierlist, .fundamentals, .coaching { justify-self: center; }
 }
 </style>
 </head>
@@ -231,28 +221,28 @@ footer a:hover {
 </header>
 
 <section class="section">
-<h2>Choose a section to explore:</h2>
-
+<h2>Your Member Hub</h2>
+<p>Choose a section to explore:</p>
 <div class="card-grid">
   <a href="dianaguide.html" class="card diana-guide">
     <h3>Diana Guide</h3>
-    <p>Master Diana's combos, mechanics, and tips for every matchup.</p>
+    <p>Comprehensive guide for mastering Diana, including combos, mechanics, and advanced tips.</p>
   </a>
   <a href="matchuphub.html" class="card diana-matchups">
     <h3>Diana Mid Matchups</h3>
-    <p>Optimal trades, wave control, and positioning for every mid lane matchup.</p>
+    <p>Detailed breakdowns for every mid lane matchup. Learn optimal trades, wave control, and positioning.</p>
   </a>
   <a href="ekkoguide.html" class="card ekko-guide">
     <h3>Ekko Guide</h3>
-    <p>Complete guide for Ekko Jungle with combos and pathing tips.</p>
+    <p>Complete guide to playing Ekko Jungle, including combos, pathing, and advanced mechanics.</p>
   </a>
   <a href="skills.html" class="card fundamentals">
     <h3>Fundamentals</h3>
-    <p>Learn essential League mechanics to improve faster.</p>
+    <p>Learn core League mechanics that every player should understand to improve faster.</p>
   </a>
   <a href="tierlist.html" class="card tierlist">
     <h3>Tierlist</h3>
-    <p>Current champion tierlist showing meta dominance.</p>
+    <p>Current champion tierlist showing which champions dominate the meta.</p>
     <div class="tier-bar">
       <div class="tier-s"></div>
       <div class="tier-a"></div>
@@ -263,15 +253,7 @@ footer a:hover {
   </a>
   <a href="https://buy.stripe.com/5kQeV6f6kgVmbfE88iejK03" class="card coaching">
     <h3>Coaching</h3>
-    <p>Book a 1-hour coaching session. Members get 25% off!</p>
-  </a>
-  <a href="buildcalculator.html" class="card build-calculator">
-    <h3>Build Calculator</h3>
-    <p>Simulate all of Diana's potential builds in real-time.</p>
-  </a>
-  <a href="https://discord.gg/MvQdZqKB" class="card discord">
-    <h3>Discord</h3>
-    <p>Join our community for tips, news, and member discussion.</p>
+    <p>Book a personalized 1-hour coaching session. Members receive 25% off!</p>
   </a>
 </div>
 </section>
@@ -296,6 +278,10 @@ function logout() {
 </script>
 </body>
 </html>
+
+
+
+
 
 
 
