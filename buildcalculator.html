@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>Diana Rune Calculator</title>
+<title>Diana Build Calculator</title>
 
 <style>
 body {
@@ -15,63 +15,41 @@ body {
   text-align: center;
 }
 
-/* HEADER */
 header {
-  font-size: 32px;
+  margin: 0;
+  padding: 20px 0;
+  font-size: 36px;
   font-weight: 700;
   letter-spacing: 2px;
-  padding: 10px 0 5px;
-}
-header::after {
-  content: "";
-  display: block;
-  width: 100%;
-  height: 2px;
-  background: #d8c48a;
-  margin-top: 5px;
+  border-bottom: 2px solid #d8c48a;
 }
 
-/* RETURN BUTTON */
-.return-btn {
-  margin: 10px 0 30px;
+.back-button {
   display: inline-block;
-  padding: 12px 26px;
-  border: none;
-  background: linear-gradient(135deg, #d8c48a, #f0d88b);
-  color: #000;
-  border-radius: 6px;
-  text-decoration: none;
-  font-size: 16px;
+  margin: 15px 0 30px;
+  padding: 10px 20px;
   font-weight: bold;
-}
-.return-btn:hover {
-  background: linear-gradient(135deg, #f0d88b, #ffd66f);
+  border-radius: 6px;
+  background: #d8c48a;
+  color: #0a0f1a;
+  text-decoration: none;
 }
 
-/* MAIN CONTENT WRAPPER */
 .container {
   width: 85%;
   max-width: 900px;
-  margin: 0 auto 40px;
+  margin: 0 auto 50px;
 }
 
-/* SECTION TITLES */
-.section-title {
-  text-align: left;
-  font-size: 18px;
-  font-weight: 700;
-  margin: 30px 0 12px;
-}
-
-/* FORM GRID (2 COLUMNS) */
+/* Grid for level + enemy */
 .grid-2 {
   display: grid;
   grid-template-columns: 1fr 1fr;
   gap: 40px;
-  align-items: start;
+  margin-bottom: 30px;
 }
 
-/* INPUT CARDS */
+/* Cards */
 .card {
   background: rgba(12,18,30,0.8);
   border: 1px solid rgba(255,255,255,0.08);
@@ -80,16 +58,13 @@ header::after {
   text-align: left;
 }
 
-/* INPUT LABELS */
 .card label {
   font-size: 16px;
   display: block;
   margin-bottom: 8px;
 }
 
-/* INPUT STYLING */
-select,
-input[type="number"] {
+select, input[type="number"] {
   width: 100%;
   padding: 10px;
   background: rgba(15,22,35,0.9);
@@ -100,37 +75,32 @@ input[type="number"] {
   margin-bottom: 20px;
 }
 
-/* CALCULATE BUTTON */
+/* Calculate button */
 .calculate-btn {
-  margin: 20px 0 10px;
-  display: inline-block;
-  padding: 12px 26px;
-  font-size: 16px;
+  margin: 10px auto 10px;
+  padding: 12px 25px;
+  font-size: 18px;
   font-weight: bold;
-  background: #2f81f7;
-  color: #fff;
+  background: #d8c48a;
+  color: #0a0f1a;
   border: none;
   border-radius: 8px;
   cursor: pointer;
 }
-.calculate-btn:hover {
-  background: #1b5fc7;
-}
 
-/* TABLE WRAPPER */
+/* Table */
 .table-card {
-  margin-top: 10px;
+  margin-top: 20px;
   background: rgba(12,18,30,0.8);
   border: 1px solid rgba(255,255,255,0.08);
   border-radius: 12px;
   padding: 20px;
 }
 
-/* TABLE */
 table {
   width: 100%;
-  table-layout: fixed; /* prevents shifting */
   border-collapse: collapse;
+  margin-top: 10px;
 }
 
 th {
@@ -145,20 +115,19 @@ td {
   color: white;
   font-size: 15px;
   border-bottom: 1px solid rgba(255,255,255,0.05);
-  word-wrap: break-word;
 }
 
-/* FOOTER */
+/* Footer */
 footer {
   text-align: center;
-  margin-top: 40px;
-  padding: 15px 0;
-  color: #8b949e;
+  padding: 20px;
   font-size: 14px;
+  color: #d8c48a;
+  border-top: 1px solid rgba(255,255,255,0.08);
 }
 
-/* MOBILE */
-@media (max-width: 700px) {
+/* Mobile */
+@media (max-width:700px) {
   .grid-2 {
     grid-template-columns: 1fr;
   }
@@ -168,88 +137,87 @@ footer {
 
 <body>
 
-<header>DIANA RUNE CALCULATOR</header>
-
-<a class="return-btn" href="membershub.html">BACK TO MEMBERS HUB</a>
+<header>Diana Build Calculator</header>
+<a class="back-button" href="membershub.html">Back to Members Hub</a>
 
 <div class="container">
 
 <div class="grid-2">
 
-  <!-- LEFT COLUMN -->
-  <div>
-    <div class="section-title">DIANA’S LEVEL</div>
-    <div class="card">
-      <label>Level</label>
-      <select id="diana-level">
-        <script>
-          for (let i = 1; i <= 18; i++) {
-            document.write('<option>' + i + '</option>');
-          }
-        </script>
-      </select>
-    </div>
-
-    <div class="section-title">PRIMARY RUNES</div>
-    <div class="card">
-      <label>Primary Path</label>
-      <select id="primary-path"></select>
-      <label>Slot 1</label>
-      <select id="primary-slot-1"></select>
-      <label>Slot 2</label>
-      <select id="primary-slot-2"></select>
-      <label>Slot 3</label>
-      <select id="primary-slot-3"></select>
-      <label>Slot 4</label>
-      <select id="primary-slot-4"></select>
-    </div>
-  </div>
-
-  <!-- RIGHT COLUMN -->
-  <div>
-    <div class="section-title">ENEMY STATS</div>
-    <div class="card">
-      <label>HP</label>
-      <input type="number" value="600" id="enemy-hp">
-      <label>Armor</label>
-      <input type="number" value="30" id="enemy-armor">
-      <label>MR</label>
-      <input type="number" value="30" id="enemy-mr">
-    </div>
-
-    <div class="section-title">SECONDARY RUNES</div>
-    <div class="card">
-      <label>Secondary Path</label>
-      <select id="secondary-path"></select>
-      <label>Slot 1</label>
-      <select id="secondary-slot-1"></select>
-      <label>Slot 2</label>
-      <select id="secondary-slot-2"></select>
-    </div>
-  </div>
+<!-- Left column: Diana level + primary runes -->
+<div>
+<div class="card">
+<label>Diana Level</label>
+<select id="diana-level"></select>
 </div>
 
-<button class="calculate-btn" id="calculate-btn">Calculate Damage</button>
+<div class="card">
+<label>Primary Keystone</label>
+<select id="primary-keystone"></select>
+</div>
 
-<!-- 6-Line Rune Damage Table -->
+<div class="card">
+<label>Primary Rune 2</label>
+<select id="primary-rune2"></select>
+</div>
+
+<div class="card">
+<label>Primary Rune 3</label>
+<select id="primary-rune3"></select>
+</div>
+
+<div class="card">
+<label>Primary Rune 4</label>
+<select id="primary-rune4"></select>
+</div>
+
+<div class="card">
+<label>Primary Rune 5</label>
+<select id="primary-rune5"></select>
+</div>
+</div>
+
+<!-- Right column: enemy + secondary runes -->
+<div>
+<div class="card">
+<label>Enemy Base HP</label>
+<input type="number" id="enemy-hp" value="600">
+
+<label>Enemy Base Armor</label>
+<input type="number" id="enemy-armor" value="30">
+
+<label>Enemy Base MR</label>
+<input type="number" id="enemy-mr" value="30">
+</div>
+
+<div class="card">
+<label>Secondary Rune 1</label>
+<select id="secondary-rune1"></select>
+</div>
+
+<div class="card">
+<label>Secondary Rune 2</label>
+<select id="secondary-rune2"></select>
+</div>
+</div>
+</div>
+
+<button class="calculate-btn" onclick="calculateDamage()">Calculate Damage</button>
+
 <div class="table-card">
-  <table>
-    <thead>
-      <tr>
-        <th>Rune</th>
-        <th>Estimated Damage</th>
-        <th>Damage Type</th>
-      </tr>
-    </thead>
-    <tbody id="rune-damage-table">
-      <tr><td>—</td><td>—</td><td>—</td></tr>
-      <tr><td>—</td><td>—</td><td>—</td></tr>
-      <tr><td>—</td><td>—</td><td>—</td></tr>
-      <tr><td>—</td><td>—</td><td>—</td></tr>
-      <tr><td>—</td><td>—</td><td>—</td></tr>
-      <tr><td>—</td><td>—</td><td>—</td></tr>
-    </tbody>
-  </table>
+<table>
+<thead>
+<tr><th>Rune</th><th>Estimated Damage</th><th>Damage Type</th></tr>
+</thead>
+<tbody>
+<tr><td id="rune1-name">—</td><td id="rune1-dmg">0</td><td id="rune1-type">—</td></tr>
+<tr><td id="rune2-name">—</td><td id="rune2-dmg">0</td><td id="rune2-type">—</td></tr>
+<tr><td id="rune3-name">—</td><td id="rune3-dmg">0</td><td id="rune3-type">—</td></tr>
+<tr><td id="rune4-name">—</td><td id="rune4-dmg">0</td><td id="rune4-type">—</td></tr>
+<tr><td id="rune5-name">—</td><td id="rune5-dmg">0</td><td id="rune5-type">—</td></tr>
+<tr><td id="rune6-name">—</td><td id="rune6-dmg">0</td><td id="rune6-type">—</td></tr>
+</tbody>
+</table>
 </div>
 
 </div>
@@ -257,129 +225,94 @@ footer {
 <footer>© 2025 LoL Fundamentals · All rights reserved</footer>
 
 <script>
-const RUNES_URL = 'https://ddragon.leagueoflegends.com/cdn/14.21.1/data/en_US/runesReforged.json';
-let runeTrees = [];
+// Populate Diana levels
+const levelSelect = document.getElementById('diana-level');
+for(let i=1;i<=18;i++){
+  let opt = document.createElement('option');
+  opt.value = i;
+  opt.textContent = i;
+  levelSelect.appendChild(opt);
+}
 
-async function loadRunes() {
-  const res = await fetch(RUNES_URL);
-  runeTrees = await res.json();
+// Rune options
+const keystoneRunes = ["Electrocute","Predator","Dark Harvest","Hail of Blades"];
+const primary2Options = ["Cheap Shot","Taste of Blood","Sudden Impact"];
+const primary3Options = ["Eyeball Collection","Zombie Ward","Ghost Poro"];
+const primary4Options = ["Ravenous Hunter","Ingenious Hunter","Relentless Hunter","Ultimate Hunter"];
+const primary5Options = ["Adaptive Force","Adaptive Force","Armor","Magic Resist"];
+const secondaryOptions = ["Manaflow Band","Nimbus Cloak","Transcendence","Celerity","Scorch","Conditioning","Overgrowth"];
 
-  const primarySel = document.getElementById('primary-path');
-  const secondarySel = document.getElementById('secondary-path');
-  primarySel.innerHTML = '<option value="">Select Path</option>';
-  secondarySel.innerHTML = '<option value="">Select Path</option>';
-
-  runeTrees.forEach(tree => {
-    const opt1 = document.createElement('option');
-    opt1.value = tree.id;
-    opt1.textContent = tree.name;
-    primarySel.appendChild(opt1);
-
-    const opt2 = document.createElement('option');
-    opt2.value = tree.id;
-    opt2.textContent = tree.name;
-    secondarySel.appendChild(opt2);
+// Populate selects
+function fillSelect(id, arr){
+  const sel = document.getElementById(id);
+  sel.innerHTML = '';
+  arr.forEach(r=>{
+    const o = document.createElement('option');
+    o.value = r; o.textContent = r;
+    sel.appendChild(o);
   });
-
-  primarySel.selectedIndex = 1;
-  secondarySel.selectedIndex = 2;
-
-  populatePrimarySlots(primarySel.value);
-  populateSecondarySlots(secondarySel.value);
-
-  primarySel.addEventListener('change', e => {
-    populatePrimarySlots(e.target.value);
-    if (secondarySel.value === e.target.value) {
-      for (const opt of secondarySel.options) {
-        if (opt.value !== e.target.value && opt.value !== '') { 
-          secondarySel.value = opt.value; 
-          populateSecondarySlots(opt.value); 
-          break; 
-        }
-      }
-    }
-  });
-  secondarySel.addEventListener('change', e => populateSecondarySlots(e.target.value));
 }
 
-function populatePrimarySlots(id) {
-  const tree = runeTrees.find(t => t.id == id);
-  for (let i = 0; i < 4; i++) {
-    const sel = document.getElementById(`primary-slot-${i+1}`);
-    sel.innerHTML = '<option value="">—</option>';
-    if (tree && tree.slots[i]) {
-      tree.slots[i].runes.forEach(r => {
-        const o = document.createElement('option');
-        o.value = r.id;
-        o.textContent = r.name;
-        sel.appendChild(o);
-      });
-    }
-  }
-}
+fillSelect('primary-keystone', keystoneRunes);
+fillSelect('primary-rune2', primary2Options);
+fillSelect('primary-rune3', primary3Options);
+fillSelect('primary-rune4', primary4Options);
+fillSelect('primary-rune5', primary5Options);
+fillSelect('secondary-rune1', secondaryOptions);
+fillSelect('secondary-rune2', secondaryOptions);
 
-function populateSecondarySlots(id) {
-  const tree = runeTrees.find(t => t.id == id);
-  for (let i = 0; i < 2; i++) {
-    const sel = document.getElementById(`secondary-slot-${i+1}`);
-    sel.innerHTML = '<option value="">—</option>';
-    if (tree && tree.slots[i]) {
-      tree.slots[i].runes.forEach(r => {
-        const o = document.createElement('option');
-        o.value = r.id;
-        o.textContent = r.name;
-        sel.appendChild(o);
-      });
-    }
-  }
-}
-
-// Real Riot base damages and ratios for Diana runes
-const RUNE_DAMAGE_DATA = {
-  "Electrocute": { base: 70, ratio: 0.5, type: "True" },
-  "Cheap Shot": { base: 10, ratio: 0.2, type: "Magic" },
-  "Taste of Blood": { base: 20, ratio: 0.3, type: "Magic" },
-  "Sudden Impact": { base: 10, ratio: 0.2, type: "Magic" },
-  "Presence of Mind": { base: 0, ratio: 0, type: "True" },
-  "Manaflow Band": { base: 0, ratio: 0, type: "True" }
+// Rune damage values (magic, true, or 0 for resource)
+const runeDamageData = {
+  "Electrocute": {dmg:57.5, type:"Magic"},
+  "Predator": {dmg:0, type:"Resource"},
+  "Dark Harvest": {dmg:60, type:"Magic"},
+  "Hail of Blades": {dmg:0, type:"Resource"},
+  "Cheap Shot": {dmg:30.2, type:"True"},
+  "Taste of Blood": {dmg:25.0, type:"Magic"},
+  "Sudden Impact": {dmg:28.5, type:"True"},
+  "Eyeball Collection": {dmg:10, type:"Magic"},
+  "Zombie Ward": {dmg:10, type:"Magic"},
+  "Ghost Poro": {dmg:0, type:"Resource"},
+  "Ravenous Hunter": {dmg:12.5, type:"Magic"},
+  "Ingenious Hunter": {dmg:0, type:"Resource"},
+  "Relentless Hunter": {dmg:0, type:"Resource"},
+  "Ultimate Hunter": {dmg:0, type:"Resource"},
+  "Adaptive Force": {dmg:0, type:"Stat"},
+  "Armor": {dmg:0, type:"Stat"},
+  "Magic Resist": {dmg:0, type:"Stat"},
+  "Manaflow Band": {dmg:0, type:"Resource"},
+  "Nimbus Cloak": {dmg:0, type:"Resource"},
+  "Transcendence": {dmg:0, type:"Resource"},
+  "Celerity": {dmg:0, type:"Resource"},
+  "Scorch": {dmg:22.8, type:"Magic"},
+  "Conditioning": {dmg:0, type:"Resource"},
+  "Overgrowth": {dmg:0, type:"Resource"}
 };
 
-function calculateDamage() {
-  const level = parseInt(document.getElementById('diana-level').value);
-  const enemyMR = parseFloat(document.getElementById('enemy-mr').value) || 30;
-
-  const slots = [
-    document.getElementById('primary-slot-1').selectedOptions[0]?.text,
-    document.getElementById('primary-slot-2').selectedOptions[0]?.text,
-    document.getElementById('primary-slot-3').selectedOptions[0]?.text,
-    document.getElementById('primary-slot-4').selectedOptions[0]?.text,
-    document.getElementById('secondary-slot-1').selectedOptions[0]?.text,
-    document.getElementById('secondary-slot-2').selectedOptions[0]?.text
+function calculateDamage(){
+  const runes = [
+    document.getElementById('primary-keystone').value,
+    document.getElementById('primary-rune2').value,
+    document.getElementById('primary-rune3').value,
+    document.getElementById('primary-rune4').value,
+    document.getElementById('primary-rune5').value,
+    document.getElementById('secondary-rune1').value
   ];
-
-  const ap = level * 5; // simplified AP estimate
-
-  const tbody = document.getElementById('rune-damage-table');
-  tbody.innerHTML = '';
-  for (let i = 0; i < 6; i++) {
-    const runeName = slots[i];
-    let raw = 0;
-    let type = "Magic";
-    if (RUNE_DAMAGE_DATA[runeName]) {
-      raw = RUNE_DAMAGE_DATA[runeName].base + RUNE_DAMAGE_DATA[runeName].ratio * ap;
-      type = RUNE_DAMAGE_DATA[runeName].type;
+  const enemyMR = Number(document.getElementById('enemy-mr').value)||30;
+  
+  runes.forEach((rune,i)=>{
+    const data = runeDamageData[rune]||{dmg:0,type:"—"};
+    let dmg = data.dmg;
+    if(data.type==="Magic"){
+      dmg = Math.round(dmg * (100/(100+enemyMR)));
     }
-    const damageAfterMR = Math.round(raw * 100 / (100 + enemyMR));
-    const tr = document.createElement('tr');
-    tr.innerHTML = `<td>${runeName || '—'}</td><td>${damageAfterMR}</td><td>${type}</td>`;
-    tbody.appendChild(tr);
-  }
+    document.getElementById(`rune${i+1}-name`).textContent = rune;
+    document.getElementById(`rune${i+1}-dmg`).textContent = dmg;
+    document.getElementById(`rune${i+1}-type`).textContent = data.type;
+  });
 }
-
-document.getElementById('calculate-btn').addEventListener('click', calculateDamage);
-
-loadRunes();
 </script>
 
 </body>
 </html>
+
