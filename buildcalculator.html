@@ -94,6 +94,14 @@ header {
 .results-box table{width:100%;border-collapse:collapse;margin-bottom:10px;}
 .results-box th, .results-box td{padding:4px;text-align:left;border-bottom:1px solid rgba(255,255,255,0.05);}
 .results-box th{color:#c9aa71;font-weight:600;}
+.diana-stats{
+  margin-top:6px;
+  background:rgba(20,25,35,0.85);
+  border:1px solid #2f81f7;
+  border-radius:8px;
+  padding:10px;
+  font-size:14px;
+}
 footer{text-align:center;padding:12px;font-size:14px;color:#8b949e;}
 @media(max-width:780px){.input-grid{grid-template-columns:1fr;}.rune-tree{grid-template-columns:1fr;}}
 </style>
@@ -103,37 +111,46 @@ footer{text-align:center;padding:12px;font-size:14px;color:#8b949e;}
 <a href="membershub.html" class="back-button">Return to Members Hub</a>
 
 <div class="calc-container">
-  <div class="section-title">Stats</div>
-  <div class="input-grid">
-    <div class="input-box">
-      <label>Diana Level
-        <select id="diana-level">
-          ${Array.from({length:18}, (_,i)=>`<option value="${i+1}">${i+1}</option>`).join('')}
-        </select>
-      </label>
-      <label>Ability Power (AP)<input type="number" id="diana-ap" value="0" step="1"></label>
-      <label>Bonus AD<input type="number" id="diana-ad" value="0" step="1"></label>
+  <div class="section-title">Diana</div>
+  <div class="input-box">
+    <label>Diana Level
+      <select id="diana-level">
+        ${Array.from({length:18}, (_,i)=>`<option value="${i+1}">${i+1}</option>`).join('')}
+      </select>
+    </label>
+    <div class="diana-stats" id="diana-stats">
+      <!-- Stats will populate here based on level -->
     </div>
+  </div>
+
+  <div class="section-title">Enemy Stats</div>
+  <div class="input-grid">
     <div class="input-box">
       <label>Enemy HP<input type="number" id="enemy-hp" value="2000" step="1"></label>
       <label>Enemy Armor<input type="number" id="enemy-armor" value="80" step="1"></label>
       <label>Enemy MR<input type="number" id="enemy-mr" value="40" step="1"></label>
-      <label>Shield Amount (for Shield Bash)<input type="number" id="shield-amount" value="0" step="1"></label>
-      <label>Bonus Health<input type="number" id="bonus-hp" value="0" step="1"></label>
     </div>
   </div>
 
   <div class="section-title">Runes</div>
   <div class="rune-tree">
     <div class="rune-column">
-      <div style="font-weight:bold;margin-bottom:6px;">Primary Path</div>
+      <div style="font-weight:bold;margin-bottom:6px;">Primary Keystone</div>
       <div class="rune-row"><select id="primary-slot-1">
         <option value="electrocute">Electrocute</option>
         <option value="arcanecomet">Arcane Comet</option>
         <option value="shieldbash">Shield Bash</option>
-        <option value="scorch">Scorch</option>
+        <option value="phaseRush">Phase Rush</option>
       </select></div>
       <div class="rune-row"><select id="primary-slot-2">
+        <option value="scorch">Scorch</option>
+        <option value="absolutefocus">Absolute Focus</option>
+      </select></div>
+      <div class="rune-row"><select id="primary-slot-3">
+        <option value="scorch">Scorch</option>
+        <option value="absolutefocus">Absolute Focus</option>
+      </select></div>
+      <div class="rune-row"><select id="primary-slot-4">
         <option value="scorch">Scorch</option>
         <option value="absolutefocus">Absolute Focus</option>
       </select></div>
@@ -156,8 +173,8 @@ footer{text-align:center;padding:12px;font-size:14px;color:#8b949e;}
   <div class="results-box">
     <h4>Damage per Rune</h4>
     <table id="rune-results">
-      <thead><tr><th>Rune</th><th>Base Damage</th><th>Scaling</th><th>After Resistances</th><th>Notes</th></tr></thead>
-      <tbody><tr><td colspan="5">Click Calculate</td></tr></tbody>
+      <thead><tr><th>Rune</th><th>Base + Scaling</th><th>After Resistances</th><th>Notes</th></tr></thead>
+      <tbody><tr><td colspan="4">Click Calculate</td></tr></tbody>
     </table>
     <p id="total-damage"></p>
   </div>
@@ -166,51 +183,71 @@ footer{text-align:center;padding:12px;font-size:14px;color:#8b949e;}
 <footer>© 2025 LoL Fundamentals · All rights reserved</footer>
 
 <script>
-// Accurate rune data (base damage per level and AP/AD scaling)
+// Diana stats per level (example base stats)
+const dianaStatsPerLevel = Array.from({length:18}, (_,i)=>({
+  level:i+1,
+  ap:50 + i*10,   // example AP scaling
+  ad:60 + i*3,    // example AD scaling
+  shield:80 + i*10, // example shield value
+  hp:600 + i*80
+}));
+
+// Show stats for selected level
+function updateDianaStats(level){
+  const stats = dianaStatsPerLevel[level-1];
+  const statsDiv = document.getElementById('diana-stats');
+  statsDiv.innerHTML=`HP: ${stats.hp} | AP: ${stats.ap} | AD: ${stats.ad} | Shield: ${stats.shield}`;
+}
+
+// Rune data
 const runeData = {
-  electrocute: { type:'adaptive', base:[70,90,110,130,150,170,190,210,230,240,240,240,240,240,240,240,240,240], ap:0.05, ad:0.1, notes:"Triggers on 3 separate attacks/abilities within 3s" },
+  electrocute: { type:'adaptive', base:[70,90,110,130,150,170,190,210,230,240,240,240,240,240,240,240,240,240], ap:0.05, ad:0.1, notes:"Triggers on 3 attacks/abilities in 3s" },
   arcanecomet: { type:'adaptive', base:[30,40,50,60,70,80,90,100,110,120,120,120,120,120,120,120,120,120], ap:0.05, ad:0.1, notes:"Projectile on ability hit" },
   shieldbash: { type:'adaptive', base:[5,6,8,10,12,14,16,18,20,22,24,26,28,30,30,30,30,30], ap:0, ad:0, notes:"Plus 15% shield amount + 2.5% bonus HP" },
   scorch: { type:'magic', base:[15,20,25,30,35,40,45,50,55,60,65,70,75,80,85,90,95,100], ap:0.1, notes:"Magic damage on spell hit" },
-  absolutefocus:{ type:'magic', base:[0], ap:0.1, notes:"Stat rune, no direct damage" }
+  absolutefocus:{ type:'magic', base:[0], ap:0.1, notes:"Stat rune, no direct damage" },
+  phaseRush:{ type:'adaptive', base:[0], ap:0, ad:0, notes:"Movement / utility rune, no direct damage"}
 };
 
 // Damage formula
-function calcDamage(rune, level, ap, ad, shieldAmount=0, bonusHP=0, enemyArmor=0, enemyMR=0){
+function calcDamage(rune, level, stats, enemyArmor=0, enemyMR=0){
   const data = runeData[rune];
   let base = data.base[level-1]||0;
-  let scaling = data.ap*ap + (data.ad||0)*ad;
-  if(rune==='shieldbash'){
-    scaling += 0.15*shieldAmount + 0.025*bonusHP;
-  }
+  let scaling = data.ap*stats.ap + (data.ad||0)*stats.ad;
+  if(rune==='shieldbash') scaling += 0.15*stats.shield + 0.025*stats.hp;
   let raw = base + scaling;
   let afterRes=raw;
   if(data.type==='magic') afterRes = Math.round(raw*100/(100+enemyMR));
   if(data.type==='physical') afterRes = Math.round(raw*100/(100+enemyArmor));
   if(data.type==='adaptive'){
-    // Determine dominant damage type
-    const magic = base + data.ap*ap;
-    const physical = base + (data.ad||0)*ad;
+    const magic = base + data.ap*stats.ap;
+    const physical = base + (data.ad||0)*stats.ad;
     const dominant = magic>physical ? 'magic' : 'physical';
-    if(dominant==='magic') afterRes = Math.round(raw*100/(100+enemyMR));
-    else afterRes = Math.round(raw*100/(100+enemyArmor));
+    afterRes = dominant==='magic' ? Math.round(raw*100/(100+enemyMR)) : Math.round(raw*100/(100+enemyArmor));
   }
   return { raw:Math.round(raw), afterRes, notes:data.notes };
 }
 
-// Event listener
-document.getElementById('calculate-btn').addEventListener('click',()=>{
+// Update stats on level change
+document.getElementById('diana-level').addEventListener('change', e=>{
+  updateDianaStats(Number(e.target.value));
+});
+
+// Initial display
+updateDianaStats(1);
+
+// Calculate button
+document.getElementById('calculate-btn').addEventListener('click', ()=>{
   const level = Number(document.getElementById('diana-level').value);
-  const ap = Number(document.getElementById('diana-ap').value)||0;
-  const ad = Number(document.getElementById('diana-ad').value)||0;
-  const shieldAmount = Number(document.getElementById('shield-amount').value)||0;
-  const bonusHP = Number(document.getElementById('bonus-hp').value)||0;
+  const stats = dianaStatsPerLevel[level-1];
   const enemyArmor = Number(document.getElementById('enemy-armor').value)||0;
   const enemyMR = Number(document.getElementById('enemy-mr').value)||0;
 
   const slots = [
     document.getElementById('primary-slot-1').value,
     document.getElementById('primary-slot-2').value,
+    document.getElementById('primary-slot-3').value,
+    document.getElementById('primary-slot-4').value,
     document.getElementById('secondary-slot-1').value,
     document.getElementById('secondary-slot-2').value
   ];
@@ -219,10 +256,10 @@ document.getElementById('calculate-btn').addEventListener('click',()=>{
   tbody.innerHTML='';
   let total=0;
   slots.forEach(r=>{
-    const dmg = calcDamage(r,level,ap,ad,shieldAmount,bonusHP,enemyArmor,enemyMR);
+    const dmg = calcDamage(r, level, stats, enemyArmor, enemyMR);
     total += dmg.afterRes;
     const tr=document.createElement('tr');
-    tr.innerHTML=`<td>${r}</td><td>${dmg.raw}</td><td>${(runeData[r].ap||0)}AP ${(runeData[r].ad||0)?`+${runeData[r].ad}AD`:''}</td><td>${dmg.afterRes}</td><td>${dmg.notes}</td>`;
+    tr.innerHTML=`<td>${r}</td><td>${dmg.raw}</td><td>${dmg.afterRes}</td><td>${dmg.notes}</td>`;
     tbody.appendChild(tr);
   });
   document.getElementById('total-damage').textContent=`Total Damage (after resistances): ${total}`;
@@ -230,5 +267,6 @@ document.getElementById('calculate-btn').addEventListener('click',()=>{
 </script>
 </body>
 </html>
+
 
 
