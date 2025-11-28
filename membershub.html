@@ -49,17 +49,16 @@ header {
 
 /* Section */
 .section {
-  padding: 10px 20px 20px;
+  padding: 10px 20px;
   max-width: 1000px;
-  margin: 0 auto;
+  margin: 20px auto;
 }
 
 /* Section title */
 .section h2 {
   color: #c9aa71;
-  margin-top: 15px;
-  margin-bottom: 25px;
-  font-size: 18px;
+  margin-top: 0;
+  margin-bottom: 15px; /* smaller gap so higher */
 }
 
 /* Card Grid */
@@ -68,7 +67,6 @@ header {
   gap: 25px;
   justify-items: center;
   grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-  margin-top: 0;
 }
 
 /* Individual Card */
@@ -98,7 +96,7 @@ header {
 .card h3 {
   color: #c9aa71;
   margin-bottom: 10px;
-  font-size: 1.2em;
+  font-size: 1.1em;
   z-index: 2;
   position: relative;
 }
@@ -143,14 +141,12 @@ header {
   background-image: url('https://cdn.wallpapersafari.com/92/79/MYTD9q.png');
   background-size: cover;
   background-position: center;
-  background-repeat: no-repeat;
+  opacity: 0.15;
 }
 .card.build-calculator::before {
-  /* Reliable image from League assets */
-  background-image: url('https://static.wikia.nocookie.net/leagueoflegends/images/7/77/Diana_OriginalSkin_HD_Square.png');
-  background-size: contain;
+  background-image: url('img/wb-diana.jpg'); /* Local Winterblessed Diana */
+  background-size: cover;
   background-position: center;
-  background-repeat: no-repeat;
   opacity: 0.3;
 }
 .card.coaching::before {
@@ -160,14 +156,11 @@ header {
   opacity: 0.2;
 }
 .card.discord::before {
-  background-image: url('https://cdn-icons-png.flaticon.com/512/2111/2111370.png');
-  background-size: 50%;
-  background-position: center;
-  background-repeat: no-repeat;
+  background: linear-gradient(to bottom right, #7289da 0%, #99aab5 100%);
   opacity: 0.3;
 }
 
-/* Tierlist card visual */
+/* Tierlist bar */
 .card.tierlist .tier-bar {
   margin-top: 10px;
   width: 100%;
@@ -184,23 +177,6 @@ header {
 .tier-c { background: #f9c74f; flex: 1; }
 .tier-d { background: #90be6d; flex: 1; }
 
-/* Logout Button */
-#logoutBtn {
-  display: block;
-  margin: 10px auto 20px;
-  padding: 12px 25px;
-  background: #f94144;
-  color: #fff;
-  font-weight: bold;
-  border: none;
-  border-radius: 6px;
-  cursor: pointer;
-  transition: 0.3s;
-}
-#logoutBtn:hover {
-  background: #ff5959;
-}
-
 /* Footer */
 footer {
   text-align: center;
@@ -216,6 +192,23 @@ footer a {
 }
 footer a:hover {
   text-decoration: underline;
+}
+
+/* Logout Button */
+#logoutBtn {
+  display: block;
+  margin: 20px auto;
+  padding: 12px 25px;
+  background: #f94144;
+  color: #fff;
+  font-weight: bold;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: 0.3s;
+}
+#logoutBtn:hover {
+  background: #ff5959;
 }
 
 /* Desktop grid fix */
@@ -239,26 +232,27 @@ footer a:hover {
 
 <section class="section">
 <h2>Choose a section to explore:</h2>
+
 <div class="card-grid">
   <a href="dianaguide.html" class="card diana-guide">
     <h3>Diana Guide</h3>
-    <p>Comprehensive guide for mastering Diana, including combos, mechanics, and advanced tips.</p>
+    <p>Master Diana's combos, mechanics, and tips for every matchup.</p>
   </a>
   <a href="matchuphub.html" class="card diana-matchups">
     <h3>Diana Mid Matchups</h3>
-    <p>Detailed breakdowns for every mid lane matchup. Learn optimal trades, wave control, and positioning.</p>
+    <p>Optimal trades, wave control, and positioning for every mid lane matchup.</p>
   </a>
   <a href="ekkoguide.html" class="card ekko-guide">
     <h3>Ekko Guide</h3>
-    <p>Complete guide to playing Ekko Jungle, including combos, pathing, and advanced mechanics.</p>
+    <p>Complete guide for Ekko Jungle with combos and pathing tips.</p>
   </a>
   <a href="skills.html" class="card fundamentals">
     <h3>Fundamentals</h3>
-    <p>Learn core League mechanics that every player should understand to improve faster.</p>
+    <p>Learn essential League mechanics to improve faster.</p>
   </a>
   <a href="tierlist.html" class="card tierlist">
     <h3>Tierlist</h3>
-    <p>Current champion tierlist showing which champions dominate the meta.</p>
+    <p>Current champion tierlist showing meta dominance.</p>
     <div class="tier-bar">
       <div class="tier-s"></div>
       <div class="tier-a"></div>
@@ -269,15 +263,15 @@ footer a:hover {
   </a>
   <a href="https://buy.stripe.com/5kQeV6f6kgVmbfE88iejK03" class="card coaching">
     <h3>Coaching</h3>
-    <p>Book a personalized 1-hour coaching session. Members receive 25% off!</p>
+    <p>Book a 1-hour coaching session. Members get 25% off!</p>
   </a>
   <a href="buildcalculator.html" class="card build-calculator">
     <h3>Build Calculator</h3>
-    <p>Simulate all of Diana's potential builds and see her stats in real-time.</p>
+    <p>Simulate all of Diana's potential builds in real-time.</p>
   </a>
   <a href="https://discord.gg/MvQdZqKB" class="card discord">
     <h3>Discord</h3>
-    <p>Join our Discord community to discuss strategies, tips, and connect with other players.</p>
+    <p>Join our community for tips, news, and member discussion.</p>
   </a>
 </div>
 </section>
@@ -302,3 +296,5 @@ function logout() {
 </script>
 </body>
 </html>
+
+
