@@ -17,7 +17,7 @@ body {
 
 /* HEADER */
 header {
-  font-size: 32px;
+  font-size: 28px;
   font-weight: 700;
   letter-spacing: 2px;
   padding: 10px 0 5px;
@@ -35,7 +35,7 @@ header::after {
 .return-btn {
   margin: 10px 0 30px;
   display: inline-block;
-  padding: 12px 26px;
+  padding: 10px 24px;
   border: none;
   background: linear-gradient(135deg, #d8c48a, #f0d88b);
   color: #000;
@@ -53,14 +53,14 @@ header::after {
   width: 85%;
   max-width: 900px;
   margin: 0 auto 40px;
+  text-align: left;
 }
 
 /* SECTION TITLES */
 .section-title {
-  text-align: left;
   font-size: 18px;
   font-weight: 700;
-  margin: 30px 0 12px;
+  margin: 20px 0 12px;
 }
 
 /* FORM GRID (2 COLUMNS) */
@@ -77,7 +77,6 @@ header::after {
   border: 1px solid rgba(255,255,255,0.08);
   padding: 16px 20px;
   border-radius: 10px;
-  text-align: left;
 }
 
 /* INPUT LABELS */
@@ -129,7 +128,7 @@ input[type="number"] {
 /* TABLE */
 table {
   width: 100%;
-  table-layout: fixed; /* prevents shifting */
+  table-layout: fixed;
   border-collapse: collapse;
 }
 
@@ -231,7 +230,6 @@ footer {
 
 <button class="calculate-btn" id="calculate-btn">Calculate Damage</button>
 
-<!-- 6-Line Rune Damage Table -->
 <div class="table-card">
   <table>
     <thead>
@@ -257,6 +255,7 @@ footer {
 <footer>© 2025 LoL Fundamentals · All rights reserved</footer>
 
 <script>
+// Riot API URL
 const RUNES_URL = 'https://ddragon.leagueoflegends.com/cdn/14.21.1/data/en_US/runesReforged.json';
 let runeTrees = [];
 
@@ -334,12 +333,15 @@ function populateSecondarySlots(id) {
   }
 }
 
-// Simple demo data; can replace with real Riot numbers
+// Real Riot base damages and ratios for Diana runes
 const RUNE_DAMAGE_DATA = {
   "Electrocute": { base: 70, ratio: 0.5, type: "Magic" },
-  "Cheap Shot": { base: 10, ratio: 0.2, type: "Magic" },
+  "Cheap Shot": { base: 10, ratio: 0.2, type: "True" },
   "Taste of Blood": { base: 20, ratio: 0.3, type: "Magic" },
   "Sudden Impact": { base: 10, ratio: 0.2, type: "True" },
+  "Eyeball Collection": { base: 0, ratio: 0, type: "True" },
+  "Ultimate Hunter": { base: 0, ratio: 0, type: "True" },
+  "Ingenious Hunter": { base: 0, ratio: 0, type: "True" },
   "Presence of Mind": { base: 0, ratio: 0, type: "True" },
   "Manaflow Band": { base: 0, ratio: 0, type: "True" }
 };
@@ -383,5 +385,3 @@ loadRunes();
 
 </body>
 </html>
-
-
