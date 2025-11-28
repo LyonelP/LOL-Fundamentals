@@ -252,62 +252,6 @@ const sections = {
     <em>Note:</em> This table does <strong>not include Bone Plating and Overgrowth</strong>, which significantly outperform the 0's that the other two domination rows provide and are necessary for Diana's playstyle.
   </p>
 </div>
-<div style="margin-top:2em;">
-  <h3>Diana Build Calculator</h3>
-  <p style="font-size:0.95em;">Select items to see total stats:</p>
-
-  <div id="build-items" style="display:flex; flex-wrap:wrap; gap:1em; margin-bottom:1em;">
-    <label>
-      <input type="checkbox" value="rocketbelt"> Hextech Rocketbelt
-    </label>
-    <label>
-      <input type="checkbox" value="nashor"> Nashor's Tooth
-    </label>
-    <label>
-      <input type="checkbox" value="zhonya"> Zhonya's Hourglass
-    </label>
-    <label>
-      <input type="checkbox" value="liandry"> Liandry's Anguish
-    </label>
-    <label>
-      <input type="checkbox" value="shadowflame"> Shadowflame
-    </label>
-  </div>
-
-  <button id="calculate-build" style="padding:0.5em 1em;">Calculate Stats</button>
-
-  <div id="build-results" style="margin-top:1em; font-size:0.9em;">
-    <p>AP: <span id="total-ap">0</span></p>
-    <p>HP: <span id="total-hp">0</span></p>
-    <p>Mana: <span id="total-mana">0</span></p>
-  </div>
-</div>
-
-<script>
-  const itemStats = {
-    rocketbelt: { ap: 90, hp: 250, mana: 300 },
-    nashor: { ap: 80, hp: 0, mana: 0 },
-    zhonya: { ap: 0, hp: 200, mana: 0 },
-    liandry: { ap: 100, hp: 0, mana: 0 },
-    shadowflame: { ap: 85, hp: 0, mana: 0 },
-  };
-
-  document.getElementById('calculate-build').addEventListener('click', () => {
-    let totalAP = 0, totalHP = 0, totalMana = 0;
-
-    document.querySelectorAll('#build-items input[type="checkbox"]:checked').forEach(cb => {
-      const stats = itemStats[cb.value];
-      totalAP += stats.ap;
-      totalHP += stats.hp;
-      totalMana += stats.mana;
-    });
-
-    document.getElementById('total-ap').textContent = totalAP;
-    document.getElementById('total-hp').textContent = totalHP;
-    document.getElementById('total-mana').textContent = totalMana;
-  });
-</script>
-
 
   `,
 
@@ -664,25 +608,6 @@ sectionSelect.addEventListener('change', () => {
 
 </body>
 </html>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 
