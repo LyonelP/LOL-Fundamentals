@@ -56,9 +56,8 @@ header {
 
 /* Section title */
 .section p {
-  margin-top: 5px;
+  margin-top: 0;
   margin-bottom: 25px;
-  font-size: 1.2em;
   font-weight: bold;
 }
 
@@ -155,6 +154,13 @@ header {
   background-position: center;
   opacity: 0.2;
 }
+.card.discord::before {
+  background-image: url('https://cdn-icons-png.flaticon.com/512/2111/2111370.png');
+  background-size: 60%;
+  background-position: center;
+  background-repeat: no-repeat;
+  opacity: 0.35;
+}
 
 /* Tierlist bar */
 .card.tierlist .tier-bar {
@@ -212,7 +218,7 @@ footer a:hover {
   .card-grid {
     grid-template-columns: repeat(3, 1fr);
   }
-  .tierlist, .fundamentals, .coaching, .build-calculator { justify-self: center; }
+  .tierlist, .fundamentals, .coaching, .build-calculator, .discord { justify-self: center; }
 }
 </style>
 </head>
@@ -228,7 +234,7 @@ footer a:hover {
 </header>
 
 <section class="section">
-<p style="margin-top:0; font-size:1.25em; font-weight:bold;">Choose a section to explore:</p>
+<p>Choose a section to explore:</p>
 <div class="card-grid">
   <a href="dianaguide.html" class="card diana-guide">
     <h3>Diana Guide</h3>
@@ -265,6 +271,10 @@ footer a:hover {
     <h3>Build Calculator</h3>
     <p>Calculate Diana's item stats in real-time to optimize your build.</p>
   </a>
+  <a href="https://discord.gg/MvQdZqKB" class="card discord">
+    <h3>Discord</h3>
+    <p>Join our community Discord to chat, learn, and improve together.</p>
+  </a>
 </div>
 </section>
 
@@ -288,7 +298,4 @@ function logout() {
 </script>
 </body>
 </html>
-
-
-
 
