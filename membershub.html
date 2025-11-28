@@ -159,13 +159,11 @@ header {
   background-image: url('https://i.imgur.com/uhLq29j.jpeg');
 }
 .card.discord-card::before {
-  background: none;
-}
-.card.discord-card img {
-  width: 60px;
-  height: 60px;
-  margin-bottom: 10px;
-  filter: brightness(40%) saturate(50%) contrast(80%); /* faded dark blue */
+  background-image: url('https://i.imgur.com/fS2OKHV.jpeg');
+  background-size: cover;
+  background-position: center;
+  opacity: 0.15; /* faded dark look */
+  z-index: 1;
 }
 
 /* Tierlist card visual */
@@ -284,7 +282,6 @@ footer a:hover {
     <p>Recommended item builds for Diana in different stages of the game.</p>
   </a>
   <a href="https://discord.gg/MvQdZqKB" class="card discord-card" target="_blank">
-    <img src="https://i.imgur.com/fS2OKHV.jpeg" alt="Discord Logo">
     <h3>Join our Discord</h3>
     <p>Connect with other members, share tips, and stay updated on guides.</p>
   </a>
