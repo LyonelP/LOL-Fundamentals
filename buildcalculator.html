@@ -17,10 +17,10 @@ body {
 
 /* HEADER */
 header {
-  font-size: 36px;
+  font-size: 30px;
   font-weight: 700;
   letter-spacing: 2px;
-  padding: 20px 0 10px;
+  padding: 8px 0 10px;
 }
 header::after {
   content: "";
@@ -102,7 +102,7 @@ input[type="number"] {
 
 /* CALCULATE BUTTON */
 .calculate-btn {
-  margin: 20px 0 10px;
+  margin: 20px auto 10px;
   display: block;
   padding: 12px 26px;
   font-size: 16px;
@@ -255,55 +255,55 @@ footer {
 <footer>© 2025 LoL Fundamentals · All rights reserved</footer>
 
 <script>
-// Damaging runes (hardcoded) — add all 9+ trees as needed
-const damageRunes = {
-  "Electrocute": { min:70, max:210, ratio:0.05, type:"Magic" },
-  "Sudden Impact": { min:20, max:80, ratio:0, type:"True" },
-  "Cheap Shot": { min:10, max:45, ratio:0, type:"True" },
-  "Taste of Blood": { min:10, max:45, ratio:0, type:"Magic" },
-  "Dark Harvest": { min:50, max:200, ratio:0.05, type:"True" },
-  "Hail of Blades": { min:40, max:120, ratio:0.05, type:"True" },
-  "Conqueror": { min:10, max:40, ratio:0.05, type:"True" }
+// All runes hardcoded (latest version)
+const allRunes = {
+  Domination: ["Electrocute","Cheap Shot","Taste of Blood","Sudden Impact","Zombie Ward","Ghost Poro","Eyeball Collection","Ravenous Hunter","Ingenious Hunter","Relentless Hunter","Ultimate Hunter"],
+  Precision: ["Press the Attack","Lethal Tempo","Fleet Footwork","Conqueror","Overheal","Triumph","Presence of Mind","Legend: Alacrity","Legend: Tenacity","Legend: Bloodline","Coup de Grace"],
+  Sorcery: ["Summon Aery","Arcane Comet","Phase Rush","Nullifying Orb","Manaflow Band","Nimbus Cloak","Transcendence","Celerity","Scorch","Waterwalking","Gathering Storm"],
+  Resolve: ["Grasp of the Undying","Aftershock","Guardian","Demolish","Font of Life","Shield Bash","Conditioning","Second Wind","Overgrowth"],
+  Inspiration: ["Glacial Augment","Unsealed Spellbook","Prototype: Omnistone","Hextech Flashtraption","Magical Footwear","Future's Market","Minion Dematerializer","Biscuit Delivery","Cosmic Insight"]
 };
 
-// Secondary runes valid options
-const secondaryRunesOptions = [
-  "Nimbus Cloak","Celerity","Absolute Focus","Scorch","Waterwalking",
-  "Gathering Storm","Bone Plating","Conditioning","Overgrowth"
-];
+// Only runes that deal damage
+const damageRunes = {
+  "Electrocute": { min:50, max:220, type:"Magic" },
+  "Sudden Impact": { min:20, max:80, type:"True" },
+  "Cheap Shot": { min:10, max:45, type:"True" },
+  "Taste of Blood": { min:10, max:45, type:"Magic" },
+  "Dark Harvest": { min:50, max:200, type:"True" },
+  "Hail of Blades": { min:40, max:120, type:"True" },
+  "Conqueror": { min:10, max:40, type:"True" },
+  "Summon Aery": { min:20, max:60, type:"Magic" },
+  "Arcane Comet": { min:30, max:100, type:"Magic" },
+  "Phase Rush": { min:0, max:0, type:"Magic" },
+  "Grasp of the Undying": { min:5, max:15, type:"True" },
+  "Electrocute": { min:50, max:220, type:"Magic" }
+};
 
-// Hardcode rune tree paths for simplicity
-const runePaths = ["Domination","Precision","Sorcery","Resolve","Inspiration"];
+const secondaryOptions = [].concat(...Object.values(allRunes));
 
 // Populate dropdowns
 function populateDropdowns() {
   const primaryPath = document.getElementById("primary-path");
   const secondaryPath = document.getElementById("secondary-path");
-  runePaths.forEach(path => {
-    primaryPath.add(new Option(path, path));
-    secondaryPath.add(new Option(path, path));
+  Object.keys(allRunes).forEach(path=>{
+    primaryPath.add(new Option(path,path));
+    secondaryPath.add(new Option(path,path));
   });
 
-  // Primary slots hardcode damaging runes per path
   for(let i=1;i<=4;i++){
     const sel = document.getElementById(`primary-slot-${i}`);
     sel.innerHTML = "";
-    Object.keys(damageRunes).forEach(r=>sel.add(new Option(r,r)));
+    secondaryOptions.forEach(rune=>sel.add(new Option(rune,rune)));
   }
-
-  // Secondary slots hardcode all secondary runes
   for(let i=1;i<=2;i++){
     const sel = document.getElementById(`secondary-slot-${i}`);
     sel.innerHTML = "";
-    secondaryRunesOptions.forEach(r=>sel.add(new Option(r,r)));
+    secondaryOptions.forEach(rune=>sel.add(new Option(rune,rune)));
   }
 }
 
-// Calculate damage
 function calculateDamage() {
-  const level = parseInt(document.getElementById("diana-level").value);
-  const enemyMR = parseFloat(document.getElementById("enemy-mr").value) || 30;
-
   const slots = [
     document.getElementById('primary-slot-1').value,
     document.getElementById('primary-slot-2').value,
@@ -312,23 +312,19 @@ function calculateDamage() {
     document.getElementById('secondary-slot-1').value,
     document.getElementById('secondary-slot-2').value
   ];
-
-  const ap = level * 5; // simplified AP estimate
+  const enemyMR = parseFloat(document.getElementById("enemy-mr").value) || 30;
   const tbody = document.getElementById("rune-damage-table");
   tbody.innerHTML = "";
 
   slots.forEach(rune=>{
     if(damageRunes[rune]){
-      const data = damageRunes[rune];
-      const avgBase = (data.min + data.max)/2;
-      const raw = avgBase + (data.ratio * ap * avgBase);
-      const damageAfterMR = Math.round(raw * 100 / (100 + enemyMR));
+      const dmg = Math.round((damageRunes[rune].min + damageRunes[rune].max)/2 * 100/(100+enemyMR));
       const tr = document.createElement("tr");
-      tr.innerHTML = `<td>${rune}</td><td>${damageAfterMR}</td><td>${data.type}</td>`;
+      tr.innerHTML = `<td>${rune}</td><td>${dmg}</td><td>${damageRunes[rune].type}</td>`;
       tbody.appendChild(tr);
     } else {
       const tr = document.createElement("tr");
-      tr.innerHTML = `<td>${rune || '—'}</td><td>—</td><td>—</td>`;
+      tr.innerHTML = `<td>${rune}</td><td>0</td><td>—</td>`;
       tbody.appendChild(tr);
     }
   });
@@ -340,5 +336,4 @@ populateDropdowns();
 
 </body>
 </html>
-
 
