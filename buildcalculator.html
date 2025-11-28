@@ -5,18 +5,14 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Diana Rune Calculator</title>
 <style>
-html,body{margin:0;padding:0;height:100%;}
+html, body {margin:0; padding:0; height:100%; font-family:'Beaufort for LOL', Arial, sans-serif;}
 body {
-  font-family:'Beaufort for LOL', Arial, sans-serif;
   color:#fff;
-  display:flex;
-  flex-direction:column;
-  min-height:100%;
   background:url('https://ddragon.leagueoflegends.com/cdn/img/champion/splash/Diana_0.jpg') center/cover fixed;
+  display:flex; flex-direction:column; min-height:100%;
 }
 body::before {
-  content:"";
-  position:fixed; top:0; left:0; width:100%; height:100%;
+  content:""; position:fixed; top:0; left:0; width:100%; height:100%;
   background:rgba(10,15,20,0.7); z-index:-1;
 }
 header {
@@ -33,7 +29,9 @@ header {
   display:flex; justify-content:center; margin:10px 0;
 }
 .back-button {
-  padding:8px 20px;
+  width:100%; max-width:400px;
+  text-align:center;
+  padding:12px 0;
   background:linear-gradient(135deg,#c9aa71,#e0c77b);
   color:#000; text-decoration:none; border-radius:6px; font-weight:bold;
 }
@@ -70,12 +68,16 @@ header {
 .input-box label{
   display:block;margin-bottom:6px;font-size:14px;
 }
-.input-box input, .input-box select{
-  width:90%;padding:5px;border-radius:5px;border:1px solid #222;
+.input-box select, .input-box input{
+  width:100%;
+  padding:8px;
+  border-radius:5px;
+  border:1px solid #222;
   background:#0f1722;color:#fff;
 }
 .calculate-btn{
-  display:block; margin:10px auto; padding:10px 20px;
+  display:block; margin:20px auto; padding:12px 0;
+  width:100%; max-width:300px;
   font-size:16px;font-weight:bold;
   border:none; border-radius:6px; background:#2f81f7;color:#fff; cursor:pointer;
 }
@@ -96,7 +98,6 @@ footer{
   padding:12px;
   font-size:14px;
   color:#8b949e;
-  background: rgba(13,17,23,0.9);
 }
 @media(max-width:780px){.input-grid{grid-template-columns:1fr;}}
 </style>
@@ -124,11 +125,11 @@ footer{
   <div class="section-title">Enemy Stats</div>
   <div class="input-grid">
     <div class="input-box">
-      <label>HP <input type="number" id="enemy-hp" value="2000" step="1"></label>
+      <label>HP <input type="number" id="enemy-hp" value="2000"></label>
     </div>
     <div class="input-box">
-      <label>Armor <input type="number" id="enemy-armor" value="80" step="1"></label>
-      <label>MR <input type="number" id="enemy-mr" value="40" step="1"></label>
+      <label>Armor <input type="number" id="enemy-armor" value="80"></label>
+      <label>MR <input type="number" id="enemy-mr" value="40"></label>
     </div>
   </div>
 
@@ -184,8 +185,6 @@ const runesByTree={
   Resolve:['Grasp of the Undying','Aftershock','Guardian','Shield Bash'],
   Inspiration:['Glacial Augment','Unsealed Spellbook','Prototype: Omnistone','Kleptomancy']
 };
-
-// Populate tree selectors
 function createTreeButtons(containerId,treeType){ 
   const container=document.getElementById(containerId);
   container.innerHTML='';
@@ -211,10 +210,8 @@ function selectTree(treeType,tree){
 }
 createTreeButtons('primary-tree-select','primary');
 createTreeButtons('secondary-tree-select','secondary');
-
 </script>
 </body>
 </html>
-
 
 
