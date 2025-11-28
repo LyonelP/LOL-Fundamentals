@@ -49,7 +49,7 @@ header {
 
 /* Section */
 .section {
-  padding: 20px 20px; /* Reduced top padding to move heading up */
+  padding: 20px 20px; /* Reduced top padding */
   max-width: 1000px;
   margin: 20px auto;
 }
@@ -142,18 +142,18 @@ header {
   background-size: cover;
   background-position: center;
 }
+.card.build-calculator::before {
+  background-image: url('https://cdn-icons-png.flaticon.com/512/2933/2933899.png'); /* New calculator image */
+  background-size: contain;
+  background-position: center;
+  background-repeat: no-repeat;
+  opacity: 0.5;
+}
 .card.coaching::before {
   background-image: url('https://m.media-amazon.com/images/I/71GlK3kDLJL.jpg');
   background-size: cover;
   background-position: center;
   opacity: 0.2;
-}
-.card.build-calculator::before {
-  background-image: url('https://cdn-icons-png.flaticon.com/512/2910/2910762.png'); /* New modern calculator icon */
-  background-size: contain;
-  background-position: center;
-  background-repeat: no-repeat;
-  opacity: 0.5;
 }
 
 /* Tierlist card visual */
@@ -258,13 +258,13 @@ footer a:hover {
       <div class="tier-d"></div>
     </div>
   </a>
-  <a href="buildcalculator.html" class="card build-calculator">
-    <h3>Build Calculator</h3>
-    <p>Calculate Diana's item stats in real-time to optimize your build.</p>
-  </a>
   <a href="https://buy.stripe.com/5kQeV6f6kgVmbfE88iejK03" class="card coaching">
     <h3>Coaching</h3>
     <p>Book a personalized 1-hour coaching session. Members receive 25% off!</p>
+  </a>
+  <a href="buildcalculator.html" class="card build-calculator">
+    <h3>Build Calculator</h3>
+    <p>Calculate Diana's item stats in real-time to optimize your build.</p>
   </a>
 </div>
 </section>
@@ -289,4 +289,5 @@ function logout() {
 </script>
 </body>
 </html>
+
 
