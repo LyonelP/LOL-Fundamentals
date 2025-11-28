@@ -22,7 +22,6 @@
     text-align:center;
   }
 
-  /* Header */
   header{
     background: linear-gradient(90deg, #0a0f14, #1b2838);
     border-bottom:2px solid var(--gold);
@@ -46,7 +45,6 @@
   .settings-btn:hover{opacity:1; transform:scale(1.05);}
   .settings-btn svg{width:18px;height:18px;fill:currentColor;}
 
-  /* Section */
   .section{
     padding:12px 20px;
     max-width:1000px;
@@ -55,7 +53,6 @@
   .section h2{ color:var(--gold); margin:8px 0 18px;}
   .section p{ margin:0 0 18px; color:#cfe1ee; opacity:0.9; }
 
-  /* Grid */
   .card-grid{
     display:grid;
     gap:22px;
@@ -64,7 +61,6 @@
     align-items:start;
   }
 
-  /* Card */
   .card{
     position:relative;
     background:var(--card);
@@ -75,7 +71,7 @@
     color: #e6edf3;
     overflow:hidden;
     box-sizing:border-box;
-    height:260px;   /* ← UPDATED: uniform taller cards */
+    height:230px;   /* ← UPDATED to 230px */
     display:flex;
     flex-direction:column;
     justify-content:center;
@@ -89,7 +85,6 @@
   .card h3{ color:var(--gold); margin:0 0 8px; z-index:2; font-size:1.25rem; }
   .card p{ margin:0; font-size:0.95rem; line-height:1.3; z-index:2; color:#e6edf3; opacity:0.95; text-align:center; }
 
-  /* card background pseudo */
   .card::before{
     content:"";
     position:absolute;
@@ -103,7 +98,6 @@
     border-radius:10px;
   }
 
-  /* Specific backgrounds */
   .diana-guide::before{ background-image:url('https://ddragon.leagueoflegends.com/cdn/img/champion/splash/Diana_1.jpg'); }
   .diana-matchups::before{ background-image:url('https://ddragon.leagueoflegends.com/cdn/img/champion/splash/Diana_0.jpg'); }
   .ekko-guide::before{ background-image:url('https://ddragon.leagueoflegends.com/cdn/img/champion/splash/Ekko_0.jpg'); }
@@ -120,12 +114,10 @@
     opacity:0.15;
   }
 
-  /* Tier bar inside card */
   .tier-bar{ margin-top:12px; width:100%; height:60px; border-radius:6px; display:flex; overflow:hidden; position:relative; z-index:2; }
   .tier-s{ background:#f94144; flex:1; } .tier-a{ background:#f3722c; flex:1; } .tier-b{ background:#f8961e; flex:1; }
   .tier-c{ background:#f9c74f; flex:1; } .tier-d{ background:#90be6d; flex:1; }
 
-  /* Logout button */
   #logoutBtn{
     display:block;
     margin:26px auto;
@@ -139,17 +131,15 @@
   }
   #logoutBtn:hover{ background:#ff5959; }
 
-  /* Footer */
   footer{ text-align:center; padding:26px 10px 40px; color:var(--muted); font-size:14px; background:var(--bg); border-top:1px solid #1f2937;}
   footer a{ color:var(--gold); text-decoration:none;}
   footer a:hover{text-decoration:underline;}
 
-  /* responsive tweaks */
   @media(min-width:900px){
     .card-grid{ grid-template-columns: repeat(3, 1fr); }
   }
   @media(max-width:420px){
-    .card{ height:240px; padding:16px; }
+    .card{ height:220px; padding:16px; }
   }
 </style>
 </head>
@@ -238,4 +228,5 @@
 
 </body>
 </html>
+
 
