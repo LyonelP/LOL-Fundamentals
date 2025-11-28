@@ -49,7 +49,7 @@ header {
 
 /* Section */
 .section {
-  padding: 10px 20px;
+  padding: 5px 20px 20px 20px; /* moved top padding up */
   max-width: 1000px;
   margin: 20px auto;
 }
@@ -57,6 +57,7 @@ header {
 /* Section title */
 .section p {
   margin-bottom: 25px;
+  font-size: 1.1em;
 }
 
 /* Card Grid */
@@ -141,8 +142,8 @@ header {
   background-position: center;
 }
 .card.build-calculator::before {
-  background-image: url('https://static.wikia.nocookie.net/leagueoflegends/images/3/3f/Diana_OriginalSkin_HD.png'); /* stable image */
-  background-size: cover;
+  background-image: url('https://cdn-icons-png.flaticon.com/512/2910/2910762.png'); /* generic calculator image */
+  background-size: contain;
   background-position: center;
   background-repeat: no-repeat;
   opacity: 0.35;
@@ -226,7 +227,7 @@ footer a:hover {
 </header>
 
 <section class="section">
-<p>Choose a section to explore:</p>
+<p style="margin-top:10px;">Choose a section to explore:</p>
 <div class="card-grid">
   <a href="dianaguide.html" class="card diana-guide">
     <h3>Diana Guide</h3>
