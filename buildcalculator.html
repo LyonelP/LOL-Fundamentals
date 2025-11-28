@@ -11,8 +11,8 @@ body {
   margin: 0;
   padding: 0;
   font-family: "Beaufort for LOL", serif;
-  background-color: #0a0f1a; /* dark blue theme */
-  color: #d8c48a; /* gold text */
+  background-color: #0a0f1a;
+  color: #d8c48a;
   text-align: center;
 }
 
@@ -37,13 +37,13 @@ header::after {
 .return-btn {
   margin: 20px 0;
   display: inline-block;
-  padding: 8px 18px;
+  padding: 10px 22px;
   border: none;
   background: linear-gradient(135deg, #d8c48a, #f0d88b);
   color: #000;
   border-radius: 6px;
   text-decoration: none;
-  font-size: 14px;
+  font-size: 16px;
   font-weight: bold;
 }
 .return-btn:hover {
@@ -131,6 +131,15 @@ td {
   border-bottom: 1px solid rgba(255,255,255,0.05);
 }
 
+/* FOOTER */
+footer {
+  text-align: center;
+  margin-top: 40px;
+  padding: 15px 0;
+  color: #8b949e;
+  font-size: 14px;
+}
+
 /* MOBILE */
 @media (max-width: 700px) {
   .grid-2 {
@@ -148,9 +157,23 @@ td {
 
 <div class="container">
 
+<!-- LEVEL + ENEMY INFO -->
 <div class="grid-2">
+
   <!-- LEFT COLUMN -->
   <div>
+    <div class="section-title">DIANA’S LEVEL</div>
+    <div class="card">
+      <label>Level</label>
+      <select id="diana-level">
+        <option>6</option>
+        <option>7</option>
+        <option>8</option>
+        <option>9</option>
+        <option>10</option>
+      </select>
+    </div>
+
     <div class="section-title">PRIMARY RUNES</div>
     <div class="card">
       <label>Primary Path</label>
@@ -209,6 +232,8 @@ td {
 </div>
 
 </div>
+
+<footer>© 2025 LoL Fundamentals · All rights reserved</footer>
 
 <script>
 const RUNES_URL = 'https://ddragon.leagueoflegends.com/cdn/14.21.1/data/en_US/runesReforged.json';
@@ -296,3 +321,5 @@ loadRunes();
 
 </body>
 </html>
+
+
