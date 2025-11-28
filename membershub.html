@@ -48,7 +48,7 @@
 
   /* Section */
   .section{
-    padding:12px 20px; /* slight higher */
+    padding:12px 20px;
     max-width:1000px;
     margin:8px auto;
   }
@@ -75,7 +75,7 @@
     color: #e6edf3;
     overflow:hidden;
     box-sizing:border-box;
-    height:220px;            /* fixed height so all cards match */
+    height:260px;   /* ← UPDATED: uniform taller cards */
     display:flex;
     flex-direction:column;
     justify-content:center;
@@ -107,18 +107,17 @@
   .diana-guide::before{ background-image:url('https://ddragon.leagueoflegends.com/cdn/img/champion/splash/Diana_1.jpg'); }
   .diana-matchups::before{ background-image:url('https://ddragon.leagueoflegends.com/cdn/img/champion/splash/Diana_0.jpg'); }
   .ekko-guide::before{ background-image:url('https://ddragon.leagueoflegends.com/cdn/img/champion/splash/Ekko_0.jpg'); }
-  .fundamentals::before{ background-image:url('https://cdn.wallpapersafari.com/92/79/MYTD9q.png'); background-size:cover; background-position:center; }
+  .fundamentals::before{ background-image:url('https://cdn.wallpapersafari.com/92/79/MYTD9q.png'); }
   .tierlist::before{ background: linear-gradient(to bottom, #1b2838 0%, #161b22 100%); }
-  .coaching::before{ background-image:url('https://m.media-amazon.com/images/I/71GlK3kDLJL.jpg'); background-size:cover; background-position:center; opacity:0.20; }
+  .coaching::before{ background-image:url('https://m.media-amazon.com/images/I/71GlK3kDLJL.jpg'); opacity:0.20; }
 
-  /* bottom row images */
   .rune-calculator::before{ background-image:url('https://i.imgur.com/kcs90ta.jpeg'); }
   .build-calculator::before{ background-image:url('https://i.imgur.com/uhLq29j.jpeg'); }
   .discord-card::before{
     background-image:url('https://i.imgur.com/fS2OKHV.jpeg');
     background-size:cover;
     background-position:center;
-    opacity:0.15; /* faint like other cards */
+    opacity:0.15;
   }
 
   /* Tier bar inside card */
@@ -150,7 +149,7 @@
     .card-grid{ grid-template-columns: repeat(3, 1fr); }
   }
   @media(max-width:420px){
-    .card{ height:200px; padding:16px; }
+    .card{ height:240px; padding:16px; }
   }
 </style>
 </head>
@@ -159,7 +158,7 @@
 <header>
   LoL Fundamentals – Members Hub
   <a href="https://lolfundamentals.com/settings" class="settings-btn" aria-label="Settings">
-    <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 15.5A3.5 3.5 0 1 0 12 8.5a3.5 3.5 0 0 0 0 7z"/><path d="M19.4 15a7.9 7.9 0 0 0 .1-1 7.9 7.9 0 0 0-.1-1l2.1-1.6a.5.5 0 0 0 .12-.65l-2-3.46a.5.5 0 0 0-.6-.22l-2.49 1a7.7 7.7 0 0 0-1.73-.99L14.9 2.9a.5.5 0 0 0-.5-.4h-4a.5.5 0 0 0-.5.4L8.2 6.1a7.7 7.7 0 0 0-1.73.99l-2.49-1a.5.5 0 0 0-.6.22L1.7 9.78a.5.5 0 0 0 .12.65L3.9 12a7.9 7.9 0 0 0-.1 1c0 .34.03.67.1 1L1.7 15.6a.5.5 0 0 0-.12.65l2 3.46c.14.25.44.36.7.27l2.49-1c.54.4 1.12.73 1.73.99l.7 3.2c.06.28.3.49.58.49h4c.28 0 .52-.21.58-.49l.7-3.2c.6-.26 1.19-.59 1.73-.99l2.49 1c.26.09.56-.02.7-.27l2-3.46a.5.5 0 0 0-.12-.65L19.4 15z"/></svg>
+    <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 15.5A3.5 3.5 0 1 0 12 8.5a3.5 3.5 0 0 0 0 7z"/><path d="M19.4 15a7.9 7.9 0 0 0 .1-1 7.9 7.9 0 0 0-.1-1l2.1-1.6a.5.5 0 0 0 .12-.65l-2-3.46a.5.5 0 0 0-.6-.22l-2.49 1a7.7 7.7 0 0 0-1.73-.99L14.9 2.9a.5.5 0 0 0-.5-.4h-4a.5.5 0 0 0-.5.4L8.2 6.1a7.7 7.7 0 0 0-1.73.99l-2.49-1a.5.5 0 0 0-.6.22L1.7 9.78a.5.5 0 0 0 .12.65L3.9 12a7.9 7.9 0 0 0-.1 1c0 .34.03.67.1 1L1.7 15.6a.5.5 0 0 0-.12.65l2 3.46c.14.25.44.36.7.27l2.49-1c.54.4 1.12.73 1.73.99l.7 3.2c.06.28.3.49.58.49h4c.28 0 .52-.21.58-.49l.7-3.2c.6-.26 1.19-.59 1.73-.99l2.49 1c.26.09.56-.02.7-.27l2-3.46a.5.5 0 0 0-.12-.65l-2.3-1.6z"/></svg>
   </a>
 </header>
 
@@ -202,7 +201,6 @@
       <p>Book a personalized 1-hour coaching session. Members receive 25% off!</p>
     </a>
 
-    <!-- Bottom row -->
     <a href="dianarunes.html" class="card rune-calculator" aria-label="Rune Calculator">
       <h3>Rune Calculator</h3>
       <p>Optimal rune setups for Diana to maximize damage and survivability.</p>
@@ -229,7 +227,6 @@
 </footer>
 
 <script>
-  // Require login (keeps existing behavior)
   if (localStorage.getItem('lolfundamentals_logged_in') !== 'true') {
     window.location.href = 'index.html';
   }
@@ -241,3 +238,4 @@
 
 </body>
 </html>
+
