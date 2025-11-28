@@ -64,7 +64,7 @@ header {
   gap: 20px;
   flex-wrap: wrap;
 }
-.rune-card select {
+.rune-card select, .card input[type="number"] {
   width: 100%;
   padding: 8px;
   margin-bottom: 10px;
@@ -104,14 +104,28 @@ footer a:hover { text-decoration: underline; }
 
 <div class="container">
 
+<!-- Diana Level -->
 <div class="section-title">DIANA'S LEVEL</div>
 <div class="card">
   <select id="diana-level"></select>
 </div>
 
+<!-- Enemy Stats -->
+<div class="section-title">ENEMY STATS</div>
+<div class="card">
+  <label>HP</label>
+  <input type="number" value="2000" id="enemy-hp">
+  <label>Armor</label>
+  <input type="number" value="80" id="enemy-armor">
+  <label>MR</label>
+  <input type="number" value="30" id="enemy-mr">
+</div>
+
+<!-- Runes -->
 <div class="section-title">RUNES</div>
 <div class="card rune-pair">
 
+  <!-- Primary runes -->
   <div class="rune-card">
     <label>Primary Tree</label>
     <select id="primary-tree">
@@ -121,12 +135,13 @@ footer a:hover { text-decoration: underline; }
       <option>Resolve</option>
       <option>Inspiration</option>
     </select>
-    <label>Rune 1</label><select id="primary-rune1"></select>
-    <label>Rune 2</label><select id="primary-rune2"></select>
-    <label>Rune 3</label><select id="primary-rune3"></select>
-    <label>Rune 4</label><select id="primary-rune4"></select>
+    <label>Keystone</label><select id="primary-rune1"></select>
+    <label>Secondary Rune 1</label><select id="primary-rune2"></select>
+    <label>Secondary Rune 2</label><select id="primary-rune3"></select>
+    <label>Secondary Rune 3</label><select id="primary-rune4"></select>
   </div>
 
+  <!-- Secondary runes -->
   <div class="rune-card">
     <label>Secondary Tree</label>
     <select id="secondary-tree">
@@ -136,12 +151,13 @@ footer a:hover { text-decoration: underline; }
       <option>Resolve</option>
       <option>Inspiration</option>
     </select>
-    <label>Rune 1</label><select id="secondary-rune1"></select>
-    <label>Rune 2</label><select id="secondary-rune2"></select>
+    <label>Secondary Rune 1</label><select id="secondary-rune1"></select>
+    <label>Secondary Rune 2</label><select id="secondary-rune2"></select>
   </div>
 
 </div>
 
+<!-- Rune damage table -->
 <div class="section-title">RUNE DAMAGE ESTIMATE</div>
 <div class="card table-card">
   <table>
@@ -164,7 +180,7 @@ footer a:hover { text-decoration: underline; }
 <footer>© 2025 LoL Fundamentals · Contact: <a href="mailto:arcsecond@lolfundamentals.com">arcsecond@lolfundamentals.com</a></footer>
 
 <script>
-// Populate levels
+// Populate Diana levels
 const levelSelect = document.getElementById('diana-level');
 for(let i=1;i<=18;i++){
   let opt = document.createElement('option');
@@ -172,40 +188,50 @@ for(let i=1;i<=18;i++){
   levelSelect.appendChild(opt);
 }
 
-// Full rune options for all trees
-const runeOptions = {
-  Domination: ["Electrocute","Predator","Dark Harvest","Hail of Blades","Cheap Shot","Taste of Blood","Sudden Impact","Zombie Ward","Ghost Poro","Eyeball Collection","Ravenous Hunter","Ingenious Hunter"],
-  Precision: ["Press the Attack","Lethal Tempo","Fleet Footwork","Conqueror","Overheal","Triumph","Presence of Mind","Legend: Alacrity","Legend: Tenacity","Legend: Bloodline","Coup de Grace","Cut Down"],
-  Sorcery: ["Summon Aery","Arcane Comet","Phase Rush","Manaflow Band","Nimbus Cloak","Transcendence","Celerity","Absolute Focus","Scorch","Waterwalking","Gathering Storm"],
-  Resolve: ["Grasp of the Undying","Aftershock","Guardian","Font of Life","Shield Bash","Conditioning","Second Wind","Bone Plating","Overgrowth","Revitalize","Unflinching"],
-  Inspiration: ["Glacial Augment","Unsealed Spellbook","Prototype: Omnistone","Future's Market","Hextech Flashtraption","Magical Footwear","Perfect Timing","Biscuit Delivery","Time Warp Tonic","Cosmic Insight"]
+// Keystone runes (first slot) and secondary runes (other slots)
+const keystoneRunes = {
+  Domination: ["Electrocute","Predator","Dark Harvest","Hail of Blades"],
+  Precision: ["Press the Attack","Lethal Tempo","Fleet Footwork","Conqueror"],
+  Sorcery: ["Summon Aery","Arcane Comet","Phase Rush","Glacial Augment"],
+  Resolve: ["Grasp of the Undying","Aftershock","Guardian"],
+  Inspiration: ["Unsealed Spellbook","Prototype: Omnistone","Glacial Augment"]
 };
 
-// Populate runes dynamically
-function populateRunes(treeIdPrefix, treeSelectId, count){
-  const treeSelect = document.getElementById(treeSelectId);
-  const runeSelects = [];
-  for(let i=1;i<=count;i++) runeSelects.push(document.getElementById(`${treeIdPrefix}-rune${i}`));
+const secondaryRunes = {
+  Domination: ["Cheap Shot","Taste of Blood","Sudden Impact","Zombie Ward","Eyeball Collection","Ravenous Hunter","Ingenious Hunter"],
+  Precision: ["Overheal","Triumph","Presence of Mind","Legend: Alacrity","Legend: Tenacity","Legend: Bloodline","Coup de Grace","Cut Down"],
+  Sorcery: ["Manaflow Band","Nimbus Cloak","Transcendence","Celerity","Absolute Focus","Scorch","Waterwalking","Gathering Storm"],
+  Resolve: ["Font of Life","Shield Bash","Conditioning","Second Wind","Bone Plating","Overgrowth","Revitalize","Unflinching"],
+  Inspiration: ["Future's Market","Hextech Flashtraption","Magical Footwear","Perfect Timing","Biscuit Delivery","Time Warp Tonic","Cosmic Insight"]
+};
 
-  function fill() {
-    const tree = treeSelect.value;
-    runeSelects.forEach(sel=>{
-      sel.innerHTML = '';
-      runeOptions[tree].forEach(r=>{
-        const opt = document.createElement('option');
-        opt.value = r; opt.textContent = r;
-        sel.appendChild(opt);
-      });
-    });
+// Populate runes
+function populatePrimary() {
+  const tree = document.getElementById('primary-tree').value;
+  document.getElementById('primary-rune1').innerHTML = '';
+  keystoneRunes[tree].forEach(r=>{ let o = new Option(r,r); document.getElementById('primary-rune1').add(o); });
+  for(let i=2;i<=4;i++){
+    const sel = document.getElementById('primary-rune'+i);
+    sel.innerHTML=''; secondaryRunes[tree].forEach(r=>{ sel.add(new Option(r,r)); });
   }
-  treeSelect.addEventListener('change', fill);
-  fill();
+}
+function populateSecondary() {
+  const tree = document.getElementById('secondary-tree').value;
+  for(let i=1;i<=2;i++){
+    const sel = document.getElementById('secondary-rune'+i);
+    sel.innerHTML=''; secondaryRunes[tree].forEach(r=>{ sel.add(new Option(r,r)); });
+  }
 }
 
-populateRunes('primary','primary-tree',4);
-populateRunes('secondary','secondary-tree',2);
+document.getElementById('primary-tree').addEventListener('change', populatePrimary);
+document.getElementById('secondary-tree').addEventListener('change', populateSecondary);
+
+// initial populate
+populatePrimary();
+populateSecondary();
 </script>
 
 </body>
 </html>
+
 
