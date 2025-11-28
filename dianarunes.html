@@ -4,279 +4,230 @@
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>Diana Rune Calculator</title>
-
 <style>
-body {
-  margin: 0;
-  padding: 0;
-  font-family: "Beaufort for LOL", serif;
-  background-color: #0a0f1a;
-  color: #d8c48a;
-  text-align: center;
-}
-
-header {
-  font-size: 36px;
-  font-weight: 700;
-  letter-spacing: 2px;
-  padding: 5px 0 5px;
-}
-header::after {
-  content: "";
-  display: block;
-  width: 100%;
-  height: 2px;
-  background: #d8c48a;
-  margin-top: 10px;
-}
-
-.return-btn {
-  margin: 10px 0 20px;
-  display: inline-block;
-  padding: 10px 24px;
-  border: none;
-  background: linear-gradient(135deg, #d8c48a, #f0d88b);
-  color: #000;
-  border-radius: 6px;
-  text-decoration: none;
-  font-size: 15px;
-  font-weight: bold;
-}
-.return-btn:hover {
-  background: linear-gradient(135deg, #f0d88b, #ffd66f);
-}
-
-.container {
-  width: 85%;
-  max-width: 900px;
-  margin: 0 auto 40px;
-}
-
-.section-title {
-  text-align: left;
-  font-size: 18px;
-  font-weight: 700;
-  margin: 25px 0 12px;
-}
-
-.grid-2 {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 40px;
-  align-items: start;
-}
-
-.card {
-  background: rgba(12,18,30,0.8);
-  border: 1px solid rgba(255,255,255,0.08);
-  padding: 16px 20px;
-  border-radius: 10px;
-  text-align: left;
-}
-
-.card label {
-  font-size: 16px;
-  display: block;
-  margin-bottom: 8px;
-}
-
-select,
-input[type="number"] {
-  width: 100%;
-  padding: 10px;
-  background: rgba(15,22,35,0.9);
-  border: 1px solid rgba(255,255,255,0.08);
-  color: #ffffff;
-  border-radius: 8px;
-  font-size: 16px;
-  margin-bottom: 20px;
-}
-
-.calculate-btn {
-  margin: 20px auto 10px;
-  display: block;
-  padding: 12px 26px;
-  font-size: 16px;
-  font-weight: bold;
-  background: #2f81f7;
-  color: #fff;
-  border: none;
-  border-radius: 8px;
-  cursor: pointer;
-}
-.calculate-btn:hover {
-  background: #1b5fc7;
-}
-
-.table-card {
-  margin-top: 10px;
-  background: rgba(12,18,30,0.8);
-  border: 1px solid rgba(255,255,255,0.08);
-  border-radius: 12px;
-  padding: 20px;
-}
-
-table {
-  width: 100%;
-  table-layout: fixed;
-  border-collapse: collapse;
-}
-
-th {
-  padding: 14px 8px;
-  font-size: 16px;
-  color: #d8c48a;
-  border-bottom: 1px solid rgba(255,255,255,0.05);
-}
-
-td {
-  padding: 14px 8px;
-  color: white;
-  font-size: 15px;
-  border-bottom: 1px solid rgba(255,255,255,0.05);
-  word-wrap: break-word;
-}
-
-footer {
-  text-align: center;
-  margin-top: 40px;
-  padding: 15px 0;
-  color: #8b949e;
-  font-size: 14px;
-}
-
-@media (max-width: 700px) {
-  .grid-2 {
-    grid-template-columns: 1fr;
-  }
-}
+/* (styles unchanged from your version) */
+body { margin: 0; padding: 0; font-family: "Beaufort for LOL", serif; background-color: #0a0f1a; color: #d8c48a; text-align: center; }
+header { font-size: 36px; font-weight: 700; letter-spacing: 2px; padding: 5px 0 5px; }
+header::after { content: ""; display: block; width: 100%; height: 2px; background: #d8c48a; margin-top: 10px; }
+.return-btn { margin: 10px 0 20px; display: inline-block; padding: 10px 24px; border: none; background: linear-gradient(135deg, #d8c48a, #f0d88b); color: #000; border-radius: 6px; text-decoration: none; font-size: 15px; font-weight: bold; }
+.return-btn:hover { background: linear-gradient(135deg, #f0d88b, #ffd66f); }
+.container { width: 85%; max-width: 900px; margin: 0 auto 40px; }
+.section-title { text-align: left; font-size: 18px; font-weight: 700; margin: 25px 0 12px; }
+.grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 40px; align-items: start; }
+.card { background: rgba(12,18,30,0.8); border: 1px solid rgba(255,255,255,0.08); padding: 16px 20px; border-radius: 10px; text-align: left; }
+.card label { font-size: 16px; display: block; margin-bottom: 8px; }
+select, input[type="number"] { width: 100%; padding: 10px; background: rgba(15,22,35,0.9); border: 1px solid rgba(255,255,255,0.08); color: #ffffff; border-radius: 8px; font-size: 16px; margin-bottom: 20px; }
+.calculate-btn { margin: 20px auto 10px; display: block; padding: 12px 26px; font-size: 16px; font-weight: bold; background: #2f81f7; color: #fff; border: none; border-radius: 8px; cursor: pointer; }
+.calculate-btn:hover { background: #1b5fc7; }
+.table-card { margin-top: 10px; background: rgba(12,18,30,0.8); border: 1px solid rgba(255,255,255,0.08); border-radius: 12px; padding: 20px; }
+table { width: 100%; table-layout: fixed; border-collapse: collapse; }
+th { padding: 14px 8px; font-size: 16px; color: #d8c48a; border-bottom: 1px solid rgba(255,255,255,0.05); }
+td { padding: 14px 8px; color: white; font-size: 15px; border-bottom: 1px solid rgba(255,255,255,0.05); word-wrap: break-word; }
+footer { text-align: center; margin-top: 40px; padding: 15px 0; color: #8b949e; font-size: 14px; }
+@media (max-width: 700px) { .grid-2 { grid-template-columns: 1fr; } }
 </style>
 </head>
 
 <body>
 
 <header>DIANA RUNE CALCULATOR</header>
-
 <a class="return-btn" href="membershub.html">BACK TO MEMBERS HUB</a>
 
 <div class="container">
+  <div class="grid-2">
 
-<div class="grid-2">
+    <!-- LEFT COLUMN -->
+    <div>
+      <div class="section-title">DIANA’S LEVEL</div>
+      <div class="card">
+        <label>Level</label>
+        <select id="diana-level"></select>
+      </div>
 
-  <!-- LEFT COLUMN -->
-  <div>
-    <div class="section-title">DIANA’S LEVEL</div>
-    <div class="card">
-      <label>Level</label>
-      <select id="diana-level"></select>
+      <div class="section-title">PRIMARY RUNES</div>
+      <div class="card">
+        <label>Primary Path</label>
+        <select id="primary-path">
+          <option value="domination">Domination</option>
+          <option value="sorcery">Sorcery</option>
+          <option value="precision">Precision</option>
+          <option value="resolve">Resolve</option>
+          <option value="inspiration">Inspiration</option>
+        </select>
+
+        <label>Slot 1 (Keystone)</label>
+        <select id="primary-slot-1"></select>
+        <label>Slot 2</label>
+        <select id="primary-slot-2"></select>
+        <label>Slot 3</label>
+        <select id="primary-slot-3"></select>
+        <label>Slot 4</label>
+        <select id="primary-slot-4"></select>
+      </div>
     </div>
 
-    <div class="section-title">PRIMARY RUNES</div>
-    <div class="card">
-      <label>Primary Path</label>
-      <select id="primary-path">
-        <option value="domination">Domination</option>
-        <option value="sorcery">Sorcery</option>
-        <option value="precision">Precision</option>
-        <option value="resolve">Resolve</option>
-        <option value="inspiration">Inspiration</option>
-      </select>
+    <!-- RIGHT COLUMN -->
+    <div>
+      <div class="section-title">ENEMY STATS</div>
+      <div class="card">
+        <label>HP</label>
+        <input type="number" value="600" id="enemy-hp">
+        <label>Armor</label>
+        <input type="number" value="30" id="enemy-armor">
+        <label>MR</label>
+        <input type="number" value="30" id="enemy-mr">
+      </div>
 
-      <label>Slot 1 (Keystone)</label>
-      <select id="primary-slot-1"></select>
-      <label>Slot 2</label>
-      <select id="primary-slot-2"></select>
-      <label>Slot 3</label>
-      <select id="primary-slot-3"></select>
-      <label>Slot 4</label>
-      <select id="primary-slot-4"></select>
+      <div class="section-title">SECONDARY RUNES</div>
+      <div class="card">
+        <label>Secondary Path (pick a different path)</label>
+        <select id="secondary-path">
+          <option value="sorcery">Sorcery</option>
+          <option value="precision">Precision</option>
+          <option value="resolve">Resolve</option>
+          <option value="inspiration">Inspiration</option>
+        </select>
+
+        <label>Slot 1</label>
+        <select id="secondary-slot-1"></select>
+        <label>Slot 2</label>
+        <select id="secondary-slot-2"></select>
+      </div>
     </div>
   </div>
 
-  <!-- RIGHT COLUMN -->
-  <div>
-    <div class="section-title">ENEMY STATS</div>
-    <div class="card">
-      <label>HP</label>
-      <input type="number" value="600" id="enemy-hp">
-      <label>Armor</label>
-      <input type="number" value="30" id="enemy-armor">
-      <label>MR</label>
-      <input type="number" value="30" id="enemy-mr">
-    </div>
+  <button class="calculate-btn" id="calculate-btn">Calculate Damage</button>
 
-    <div class="section-title">SECONDARY RUNES</div>
-    <div class="card">
-      <label>Secondary Path (pick a different path)</label>
-      <select id="secondary-path">
-        <option value="sorcery">Sorcery</option>
-        <option value="precision">Precision</option>
-        <option value="resolve">Resolve</option>
-        <option value="inspiration">Inspiration</option>
-      </select>
-
-      <label>Slot 1</label>
-      <select id="secondary-slot-1"></select>
-      <label>Slot 2</label>
-      <select id="secondary-slot-2"></select>
-    </div>
+  <!-- 6-Line Rune Damage Table -->
+  <div class="table-card">
+    <table>
+      <thead>
+        <tr>
+          <th>Rune</th>
+          <th>Estimated Damage</th>
+          <th>Damage Type</th>
+        </tr>
+      </thead>
+      <tbody id="rune-damage-table">
+        <tr><td>—</td><td>—</td><td>—</td></tr>
+        <tr><td>—</td><td>—</td><td>—</td></tr>
+        <tr><td>—</td><td>—</td><td>—</td></tr>
+        <tr><td>—</td><td>—</td><td>—</td></tr>
+        <tr><td>—</td><td>—</td><td>—</td></tr>
+        <tr><td>—</td><td>—</td><td>—</td></tr>
+      </tbody>
+    </table>
   </div>
-</div>
-
-<button class="calculate-btn" id="calculate-btn">Calculate Damage</button>
-
-<!-- 6-Line Rune Damage Table -->
-<div class="table-card">
-  <table>
-    <thead>
-      <tr>
-        <th>Rune</th>
-        <th>Estimated Damage</th>
-        <th>Damage Type</th>
-      </tr>
-    </thead>
-    <tbody id="rune-damage-table">
-      <tr><td>—</td><td>—</td><td>—</td></tr>
-      <tr><td>—</td><td>—</td><td>—</td></tr>
-      <tr><td>—</td><td>—</td><td>—</td></tr>
-      <tr><td>—</td><td>—</td><td>—</td></tr>
-      <tr><td>—</td><td>—</td><td>—</td></tr>
-      <tr><td>—</td><td>—</td><td>—</td></tr>
-    </tbody>
-  </table>
-</div>
-
 </div>
 
 <footer>© 2025 LoL Fundamentals · All rights reserved</footer>
 
 <script>
 /*
-  Notes on choices:
-  - Sightstone was removed as requested.
-  - This file uses your internal/preview rune names (Sixth Sense = eyeball, Grisly Memories = ghost poro,
-    Treasure Hunter replaces Ingenious etc.)
-  - Cheap Shot: true damage scaling 10 -> 45 across levels 1 -> 18 (linear).
-  - Electrocute: example magic damage with AP ratio (kept from your earlier values).
-  - Only a small set of damaging runes are given numeric formulas — everything else shows 0 damage.
+  Updates in this file:
+  - default Level = 1
+  - secondary runes cannot be identical
+  - Resolve row 2 includes Shield Bash (replaced Conditioning)
+  - Conditioning moved to Resolve row 3 (with Bone Plating and Second Wind)
+  - Sightstone removed
+  - Damage & type provided for known damaging runes; non-damaging runes show 0 and a type describing their behavior.
+  - Where a rune's damage depends on stacks/time (e.g. Dark Harvest, Gathering Storm), the code shows a sensible default and notes the scaling in comments.
 */
 
-/* ----- RUNE DATA & PATH DEFINITIONS ----- */
+/* ---------- RUNE DAMAGE METADATA ---------- */
+/* For runes with flat/direct damage we compute something sensible.
+   Sources: community & fandom (patch notes). Numbers vary across patches;
+   where possible we use level-based linear scaling (min..max at lvl 1..18).
+*/
 
-/* Damage map for runes that do damage (others will show 0) */
 const RUNE_DAMAGE = {
-  "Electrocute": { type: "Magic", base: 50, ratio: 0.05 },   // magic damage; AP ratio applied then MR reduction
-  "Cheap Shot":  { type: "True",  special: "cheapshot" },     // true damage 10-45 by level
-  "Sudden Impact":{ type: "True", base: 20, ratio: 0 },       // example true damage (kept from prior)
-  // keep any other damage runes here if you want them to show numeric values
+  // Direct damaging runes
+  "Electrocute": {
+    type: "Magic",
+    // base scales 50 -> 220 from level 1 -> 18 (linear)
+    baseMin: 50,
+    baseMax: 220,
+    apRatio: 0.05,
+    note: "Base damage scales with level (50–220)."
+  },
+  "Cheap Shot": {
+    type: "True",
+    special: "cheapshot", // handled by special function (10 -> 45)
+    note: "True damage: 10–45 based on level."
+  },
+  "Sudden Impact": {
+    type: "True",
+    baseMin: 20,
+    baseMax: 80,
+    note: "True damage after dash/blink; scales with level (20–80)."
+  },
+  "Scorch": {
+    type: "Magic",
+    baseMin: 20,
+    baseMax: 40,
+    note: "Minor magic burn on hit; scales with level (20–40)."
+  },
+  "Dark Harvest": {
+    type: "Adaptive",
+    // requires souls/stacks to compute precisely; default 0 souls
+    basePerSoul: 11,
+    base: 30,
+    note: "Damage = 30 + 11 × souls (souls not tracked here, default 0)."
+  },
+  "Gathering Storm": {
+    type: "Scaling",
+    // Grants adaptive AP/AD stacks every 10 minutes — not a flat proc damage.
+    note: "Scaling adaptive stat over time (gives AP/AD, not flat damage)."
+  },
+
+  // Example: Sudden Impact / others already included above
+  // All other runes default to non-damaging (Buff/Shield/Utility)
 };
 
-/* Primary path options per slot (no Sightstone) */
+/* Helper: returns damage for runes that use baseMin..baseMax range by level */
+function linearByLevel(level, min, max) {
+  if (min === undefined || max === undefined) return 0;
+  return min + (max - min) * ( (level - 1) / 17 );
+}
+
+/* Cheap Shot formula (10 -> 45 from level 1 to 18) */
+function cheapShotDamage(level) {
+  return Math.round(10 + (level - 1) * (35 / 17));
+}
+
+/* Electrocute computation */
+function electrocuteDamage(level, ap, enemyMR) {
+  const base = linearByLevel(level, RUNE_DAMAGE.Electrocute.baseMin, RUNE_DAMAGE.Electrocute.baseMax);
+  const raw = base + (RUNE_DAMAGE.Electrocute.apRatio || 0) * ap;
+  // apply MR reduction for magic damage
+  return {
+    damage: Math.round(raw * 100 / (100 + (enemyMR || 30))),
+    raw: Math.round(raw)
+  };
+}
+
+/* Sudden Impact similarly */
+function suddenImpactDamage(level) {
+  return Math.round(linearByLevel(level, 20, 80));
+}
+
+/* Scorch */
+function scorchDamage(level, enemyMR, ap=0) {
+  const raw = linearByLevel(level, 20, 40) + 0 * ap;
+  return Math.round(raw * 100 / (100 + (enemyMR || 30)));
+}
+
+/* Dark Harvest (shows base for 0 souls and note) */
+function darkHarvestDamage(souls=0) {
+  return Math.round(RUNE_DAMAGE.DarkHarvest.base + RUNE_DAMAGE.DarkHarvest.basePerSoul * souls);
+}
+
+/* ---------- TREE DEFINITIONS (no Sightstone, resolve rows adjusted) ---------- */
 const PRIMARY_PATHS = {
   domination: {
     slot1: ["Electrocute","Predator","Dark Harvest"],
     slot2: ["Cheap Shot","Taste of Blood","Sudden Impact"],
-    slot3: ["Sixth Sense","Grisly Memories","Null"],     // removed Sightstone
+    slot3: ["Sixth Sense","Grisly Memories","Null"],
     slot4: ["Treasure Hunter","Relentless Hunter","Ultimate Hunter"]
   },
   sorcery: {
@@ -293,8 +244,10 @@ const PRIMARY_PATHS = {
   },
   resolve: {
     slot1: ["Grasp of the Undying","Aftershock","Guardian"],
-    slot2: ["Demolish","Font of Life","Conditioning"],
-    slot3: ["Second Wind","Bone Plating","Overgrowth"],
+    // Row 2: Shield Bash replaces Conditioning
+    slot2: ["Demolish","Shield Bash","Font of Life"],
+    // Row 3: Conditioning moved here with Bone Plating and Second Wind
+    slot3: ["Second Wind","Bone Plating","Conditioning"],
     slot4: ["Revitalize","Null","Null"]
   },
   inspiration: {
@@ -305,16 +258,16 @@ const PRIMARY_PATHS = {
   }
 };
 
-/* Secondary (non-keystone) options per path (9 items max) */
+/* Secondary (non-keystone) options per path (9 items) - Resolve updated to include Shield Bash & Conditioning */
 const SECONDARY_NONKEY = {
   sorcery: ["Manaflow Band","Transcendence","Celerity","Scorch","Waterwalking","Gathering Storm","Axiom Arcanist","Nullifying Orb","Null"],
   precision: ["Presence of Mind","Triumph","Coup de Grace","Legend: Alacrity","Legend: Tenacity","Cut Down","Last Stand","Null","Null"],
-  resolve: ["Demolish","Font of Life","Conditioning","Second Wind","Bone Plating","Overgrowth","Revitalize","Null","Null"],
+  resolve: ["Demolish","Font of Life","Shield Bash","Second Wind","Bone Plating","Overgrowth","Revitalize","Conditioning","Null"],
   inspiration: ["Hextech Flashtraption","Magical Footwear","Future's Market","Minion Dematerializer","Biscuit Delivery","Cosmic Insight","Approach Velocity","Time Warp Tonic","Unsealed Spellbook"]
 };
 
-/* Utility to fill selects */
-function populateSelect(selectEl, options, keepValue) {
+/* ---------- SELECT POPULATION UTILITIES ---------- */
+function populateSelect(selectEl, options, keepValue=false) {
   const prev = keepValue ? selectEl.value : null;
   selectEl.innerHTML = '';
   options.forEach(opt => {
@@ -324,14 +277,13 @@ function populateSelect(selectEl, options, keepValue) {
     selectEl.appendChild(o);
   });
   if (keepValue && prev) {
-    // restore if still available
     for (let i=0;i<selectEl.options.length;i++){
       if (selectEl.options[i].value === prev){ selectEl.selectedIndex = i; break; }
     }
   }
 }
 
-/* Populate level dropdown 1..18 */
+/* ---------- INITIALIZATION ---------- */
 function initLevelSelect(){
   const lvl = document.getElementById('diana-level');
   for(let i=1;i<=18;i++){
@@ -339,10 +291,11 @@ function initLevelSelect(){
     o.value = i; o.textContent = i;
     lvl.appendChild(o);
   }
-  lvl.value = 18;
+  // default to level 1 as requested
+  lvl.value = 1;
 }
 
-/* Populate primary slots based on chosen primary path */
+/* Populate primary slots for a path */
 function populatePrimary(path){
   const data = PRIMARY_PATHS[path];
   populateSelect(document.getElementById('primary-slot-1'), data.slot1);
@@ -351,29 +304,91 @@ function populatePrimary(path){
   populateSelect(document.getElementById('primary-slot-4'), data.slot4);
 }
 
-/* Populate secondary slots with 9 non-keystone options for the chosen secondary path */
+/* Populate secondary slots with non-keystone list AND ensure they default to two different runes */
 function populateSecondary(path){
   const data = SECONDARY_NONKEY[path] || [];
-  populateSelect(document.getElementById('secondary-slot-1'), data);
-  populateSelect(document.getElementById('secondary-slot-2'), data);
+  const s1 = document.getElementById('secondary-slot-1');
+  const s2 = document.getElementById('secondary-slot-2');
+  populateSelect(s1, data);
+  // choose default for s1 as first non-null
+  let firstIndex = 0;
+  while(firstIndex < data.length && (data[firstIndex]==='Null')) firstIndex++;
+  if (firstIndex >= data.length) firstIndex = 0;
+  s1.selectedIndex = firstIndex;
+
+  // choose s2 as the next different option (if available)
+  let secondIndex = firstIndex + 1;
+  while(secondIndex < data.length && (data[secondIndex]==='Null')) secondIndex++;
+  if (secondIndex >= data.length) {
+    // fallback: find any different
+    for (let i=0;i<data.length;i++){
+      if (data[i] !== s1.value) { secondIndex = i; break; }
+    }
+    if (secondIndex >= data.length) secondIndex = firstIndex; // degenerate fallback
+  }
+  s2.selectedIndex = secondIndex;
+
+  enforceSecondaryUnique(); // disable duplicates
 }
 
-/* Cheap Shot scaling 10 -> 45 from level 1 -> 18 */
-function cheapShotDamage(level){
-  // linear interpolation: 10 + (level-1) * (35/17)
-  return Math.round(10 + (level - 1) * (35 / 17));
+/* Prevent same path for primary & secondary (disable option in secondary select) */
+function enforceDifferentPaths(){
+  const primary = document.getElementById('primary-path').value;
+  const secondarySelect = document.getElementById('secondary-path');
+
+  for (let i=0;i<secondarySelect.options.length;i++){
+    const opt = secondarySelect.options[i];
+    opt.disabled = (opt.value === primary);
+  }
+  if (secondarySelect.value === primary) {
+    for (let i=0;i<secondarySelect.options.length;i++){
+      if (!secondarySelect.options[i].disabled){ secondarySelect.selectedIndex = i; break; }
+    }
+  }
 }
 
-/* Magic damage reduced by enemy MR using standard formula */
-function magicAfterMR(rawMagic, mr){
-  return Math.round(rawMagic * 100 / (100 + mr));
+/* Ensure the two secondary-slot selects never have the same rune selected.
+   Implementation: when one select value changes, disable that value in the other select.
+   If the other was set to that value, auto-change it to the first allowed option.
+*/
+function enforceSecondaryUnique(){
+  const s1 = document.getElementById('secondary-slot-1');
+  const s2 = document.getElementById('secondary-slot-2');
+  const v1 = s1.value;
+  const v2 = s2.value;
+
+  // enable all first
+  for (let i=0;i<s1.options.length;i++){ s1.options[i].disabled = false; s2.options[i].disabled = false; }
+
+  // disable s1's choice in s2
+  for (let i=0;i<s2.options.length;i++){
+    if (s2.options[i].value === v1) s2.options[i].disabled = true;
+  }
+  // disable s2's choice in s1
+  for (let i=0;i<s1.options.length;i++){
+    if (s1.options[i].value === v2) s1.options[i].disabled = true;
+  }
+
+  // if they ended up equal (because of rebuild), force change the second to first available non-disabled
+  if (s1.value === s2.value) {
+    // try to change s2
+    for (let i=0;i<s2.options.length;i++){
+      if (!s2.options[i].disabled){ s2.selectedIndex = i; break; }
+    }
+    // if still equal, try to change s1
+    if (s1.value === s2.value) {
+      for (let i=0;i<s1.options.length;i++){
+        if (!s1.options[i].disabled){ s1.selectedIndex = i; break; }
+      }
+    }
+  }
 }
 
-/* Main calculate function */
+/* ---------- DAMAGE CALC ---------- */
 function calculateDamage(){
   const level = parseInt(document.getElementById('diana-level').value, 10);
   const enemyMR = parseFloat(document.getElementById('enemy-mr').value) || 30;
-  const ap = Math.round(level * 5); // simplified AP estimate (kept from previous approach)
+  const ap = parseFloat(document.getElementById('ap-input')?.value) || Math.round(level * 5); // if user later adds AP input, this will use it; default level*5
 
   const slots = [
     document.getElementById('primary-slot-1').value,
@@ -390,52 +405,56 @@ function calculateDamage(){
   slots.forEach(rune => {
     let displayDamage = 0;
     let dtype = '';
+
     if (!rune || rune === "Null") {
       displayDamage = 0; dtype = '';
     } else if (rune === "Cheap Shot") {
       displayDamage = cheapShotDamage(level);
       dtype = "True";
-    } else if (RUNE_DAMAGE[rune]) {
-      const meta = RUNE_DAMAGE[rune];
-      if (meta.type === "Magic") {
-        const raw = meta.base + (meta.ratio || 0) * ap;
-        displayDamage = magicAfterMR(raw, enemyMR);
-        dtype = "Magic";
-      } else if (meta.type === "True") {
-        const raw = (meta.base || 0) + (meta.ratio || 0) * ap;
-        displayDamage = Math.round(raw);
-        dtype = "True";
-      } else {
-        displayDamage = 0; dtype = "";
-      }
+    } else if (rune === "Electrocute") {
+      const res = electrocuteDamage(level, ap, enemyMR);
+      displayDamage = res.damage;
+      dtype = "Magic";
+    } else if (rune === "Sudden Impact") {
+      displayDamage = suddenImpactDamage(level);
+      dtype = "True";
+    } else if (rune === "Scorch") {
+      displayDamage = scorchDamage(level, enemyMR, ap);
+      dtype = "Magic";
+    } else if (rune === "Dark Harvest") {
+      // by default we show 0 souls (display note in tooltip would be ideal)
+      displayDamage = darkHarvestDamage(0);
+      dtype = "Adaptive/Stack";
+    } else if (rune === "Gathering Storm") {
+      displayDamage = 0;
+      dtype = "Scaling";
     } else {
-      displayDamage = 0; dtype = "";
+      // Non-damaging runes: mark type where appropriate (Buff/Shield/etc). You can extend this map if you'd like exact behaviors.
+      // We'll provide some common labels:
+      const buffMap = {
+        "Predator":"Buff","Taste of Blood":"Heal","Sixth Sense":"Utility","Grisly Memories":"Utility",
+        "Treasure Hunter":"Utility","Relentless Hunter":"Utility","Ultimate Hunter":"Utility",
+        "Axiom Arcanist":"Shield","Nullifying Orb":"Shield","Summon Aery":"Buff","Manaflow Band":"Mana",
+        "Transcendence":"Mana","Celerity":"Movement","Waterwalking":"Movement","Presence of Mind":"Mana",
+        "Triumph":"Heal","Coup de Grace":"DamageBuff","Legend: Alacrity":"Stat","Legend: Tenacity":"Stat",
+        "Cut Down":"DamageBuff","Last Stand":"DamageBuff","Grasp of the Undying":"Adaptive","Aftershock":"Shield",
+        "Guardian":"Shield","Demolish":"Structure","Font of Life":"Heal","Second Wind":"Heal",
+        "Bone Plating":"Defense","Overgrowth":"Health","Revitalize":"Shield","Glacial Augment":"Utility",
+        "Unsealed Spellbook":"Utility","First Strike":"Gold","Hextech Flashtraption":"Utility","Magical Footwear":"Gold",
+        "Future's Market":"Gold","Minion Dematerializer":"WaveControl","Biscuit Delivery":"Sustain","Cosmic Insight":"CDR",
+        "Approach Velocity":"Movement","Time Warp Tonic":"Sustain"
+      };
+      dtype = buffMap[rune] || "";
+      displayDamage = 0;
     }
 
     const tr = document.createElement('tr');
-    tr.innerHTML = `<td>${rune}</td><td>${displayDamage}</td><td>${dtype}</td>`;
+    tr.innerHTML = `<td>${rune}</td><td>${displayDamage}${(rune==="Dark Harvest" ? " (souls scale)" : "")}</td><td>${dtype}</td>`;
     tbody.appendChild(tr);
   });
 }
 
-/* Prevent selecting the same path for primary & secondary */
-function enforceDifferentPaths(){
-  const primary = document.getElementById('primary-path').value;
-  const secondarySelect = document.getElementById('secondary-path');
-
-  for (let i=0;i<secondarySelect.options.length;i++){
-    const opt = secondarySelect.options[i];
-    opt.disabled = (opt.value === primary);
-  }
-  // if user's current secondary equals primary, auto-switch to the first allowed option
-  if (secondarySelect.value === primary) {
-    for (let i=0;i<secondarySelect.options.length;i++){
-      if (!secondarySelect.options[i].disabled){ secondarySelect.selectedIndex = i; break; }
-    }
-  }
-}
-
-/* Init on load */
+/* ---------- EVENT HOOKS & INIT ---------- */
 document.addEventListener('DOMContentLoaded', () => {
   initLevelSelect();
 
@@ -454,9 +473,18 @@ document.addEventListener('DOMContentLoaded', () => {
     enforceDifferentPaths();
   });
 
+  // secondary uniqueness enforcement when user changes one of them
+  document.getElementById('secondary-slot-1').addEventListener('change', (e) => {
+    enforceSecondaryUnique();
+  });
+  document.getElementById('secondary-slot-2').addEventListener('change', (e) => {
+    enforceSecondaryUnique();
+  });
+
   document.getElementById('calculate-btn').addEventListener('click', calculateDamage);
 });
 </script>
-
 </body>
 </html>
+
+
