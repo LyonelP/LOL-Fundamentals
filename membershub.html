@@ -144,10 +144,11 @@ header {
   background-position: center;
 }
 .card.build-calculator::before {
-  background-image: url('https://static.wikia.nocookie.net/leagueoflegends/images/0/09/Diana_DeathSpearSkin_HD.png');
-  background-size: cover;
+  background-image: url('https://static.wikia.nocookie.net/leagueoflegends/images/e/ed/Build_Calculator_icon.png');
+  background-size: contain;
   background-position: center;
-  opacity: 0.35;
+  background-repeat: no-repeat;
+  opacity: 0.4;
 }
 .card.coaching::before {
   background-image: url('https://m.media-amazon.com/images/I/71GlK3kDLJL.jpg');
@@ -200,7 +201,7 @@ footer a:hover {
 /* Logout Button */
 #logoutBtn {
   display: block;
-  margin: 40px auto;
+  margin: 20px auto 40px auto; /* moved higher */
   padding: 12px 25px;
   background: #f94144;
   color: #fff;
@@ -277,9 +278,9 @@ footer a:hover {
     <p>Join our community Discord to discuss strategies, share tips, and improve together.</p>
   </a>
 </div>
-</section>
 
 <button id="logoutBtn" onclick="logout()">Logout</button>
+</section>
 
 <footer>
 © 2025 LoL Fundamentals · Contact: 
