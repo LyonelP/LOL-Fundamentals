@@ -90,6 +90,14 @@ header {
   background-position:right 8px center;
   background-size:12px;
 }
+.input-box input[type=number]{
+  -moz-appearance: textfield;
+}
+.input-box input::-webkit-outer-spin-button,
+.input-box input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
 .calculate-btn{
   display:block;
   margin:20px auto;
@@ -125,7 +133,7 @@ footer{text-align:center; padding:12px; font-size:14px; color:#8b949e; margin-to
 <body>
 <header>Diana Rune Calculator</header>
 <div class="button-container">
-  <a href="membershub.html" class="back-button">Return to Members Hub</a>
+  <a href="membershub.html" class="back-button">Back to Members Hub</a>
 </div>
 <div class="calc-container">
 
@@ -184,7 +192,7 @@ levelSelect.value=1;
 function updateStats(){const lvl=Number(levelSelect.value)-1; const s=dianaBaseStats[lvl]; document.getElementById('diana-stats').textContent=`HP: ${s.hp} | AP: ${s.ap} | AD: ${s.ad} | Shield: ${s.shield}`;}
 levelSelect.addEventListener('change',updateStats); updateStats();
 
-// Runes database (simplified damaging runes)
+// Rune data
 const runeData={
   'Electrocute': {base:[70,80,90,100,110,120,130,140,150,160,170,180,190,200,210,220,230,240], ap:0.5, type:'magic'},
   'Predator': {base:[0], ap:0, type:'magic'},
@@ -210,7 +218,6 @@ const runeData={
   'Absolute Focus': {base:[0], ap:0, type:'magic'}
 };
 
-// Rune trees
 const trees=['Domination','Precision','Sorcery','Resolve','Inspiration'];
 const runesByTree={
   Domination:['Electrocute','Predator','Hail of Blades','Dark Harvest'],
@@ -220,7 +227,6 @@ const runesByTree={
   Inspiration:['Glacial Augment','Unsealed Spellbook','Prototype: Omnistone','Kleptomancy']
 };
 
-// Tree buttons
 function createTreeButtons(containerId,treeType){ 
   const container=document.getElementById(containerId);
   container.innerHTML='';
@@ -231,20 +237,32 @@ function createTreeButtons(containerId,treeType){
   });
 }
 
-// Proper selection logic
 function selectTree(treeType,tree){
   const slotContainer=document.getElementById(treeType==='primary'?'primary-runes':'secondary-runes');
   slotContainer.innerHTML='';
   const options=runesByTree[tree];
   const numSlots=treeType==='primary'?4:2;
   const slots=[];
-  for(let i=0;i<numSlots;i++){
+  // First slot (keystone) for primary
+  if(treeType==='primary'){
     const sel=document.createElement('select');
-    sel.addEventListener('change',()=>updateOptions(slots,options));
+    options.forEach(o=>{
+      const opt=document.createElement('option'); opt.value=o; opt.textContent=o; sel.appendChild(opt);
+    });
     slotContainer.appendChild(sel);
     slots.push(sel);
+    // Remaining 3 slots
+    for(let i=1;i<4;i++){
+      const s=document.createElement('select');
+      slotContainer.appendChild(s); slots.push(s);
+    }
+    updateOptions(slots,options);
+  } else {
+    for(let i=0;i<2;i++){
+      const s=document.createElement('select'); slotContainer.appendChild(s); slots.push(s);
+    }
+    updateOptions(slots,options);
   }
-  updateOptions(slots,options);
 }
 
 function updateOptions(slots,options){
@@ -254,9 +272,7 @@ function updateOptions(slots,options){
     s.innerHTML='';
     options.forEach(o=>{
       if(!used.includes(o) || o===current){
-        const opt=document.createElement('option');
-        opt.value=o; opt.textContent=o;
-        s.appendChild(opt);
+        const opt=document.createElement('option'); opt.value=o; opt.textContent=o; s.appendChild(opt);
       }
     });
     s.value=current;
@@ -266,7 +282,6 @@ function updateOptions(slots,options){
 createTreeButtons('primary-tree-select','primary');
 createTreeButtons('secondary-tree-select','secondary');
 
-// Damage calc
 function calcDamage(base,apScaling,ap,mr,type){
   if(type==='true') return Math.round(base + apScaling*ap);
   return Math.round((base + apScaling*ap)*100/(100+mr));
@@ -295,5 +310,4 @@ document.getElementById('calculate-btn').addEventListener('click',()=>{
 </script>
 </body>
 </html>
-
 
