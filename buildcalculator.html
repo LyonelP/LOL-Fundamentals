@@ -23,7 +23,7 @@ header {
   color: #c9aa71;
 }
 .calc-container {
-  margin: 20px auto;
+  margin: 20px auto 50px auto;
   max-width: 600px;
   background: #0d1117;
   border: 2px solid #2f81f7;
@@ -49,7 +49,7 @@ header {
   border-radius: 8px;
   padding: 12px;
 }
-.rune-column select {
+.rune-column select, .enemy-box input {
   width: 100%;
   padding: 8px;
   border-radius: 6px;
@@ -57,6 +57,13 @@ header {
   background: #0f1722;
   color: #fff;
   margin-bottom: 8px;
+}
+.enemy-box {
+  background: #141923;
+  border: 1px solid #2f81f7;
+  border-radius: 8px;
+  padding: 12px;
+  margin-bottom: 12px;
 }
 .calculate-btn {
   display: block;
@@ -81,13 +88,28 @@ header {
 .results-box table { width: 100%; border-collapse: collapse; }
 .results-box th, .results-box td { padding:6px; text-align:left; border-bottom: 1px solid rgba(255,255,255,0.03); font-size:14px; }
 .results-box th { color:#c9aa71; font-weight:600; }
-footer { text-align:center; padding:12px; color:#8b949e; margin-top:20px; }
+footer {
+  text-align:center;
+  padding:15px 10px;
+  font-size:14px;
+  color:#8b949e;
+  margin-top:20px;
+}
 </style>
 </head>
 <body>
 <header>Diana Rune Calculator</header>
 
 <div class="calc-container">
+
+  <div class="section-title">Diana Stats</div>
+  <div class="enemy-box">
+    <label>Diana Level<br><input type="number" id="diana-level" value="1" min="1" max="18"></label>
+    <label>Enemy HP<br><input type="number" id="enemy-hp" value="2000"></label>
+    <label>Enemy Armor<br><input type="number" id="enemy-armor" value="80"></label>
+    <label>Enemy Magic Resist<br><input type="number" id="enemy-mr" value="60"></label>
+  </div>
+
   <div class="section-title">Runes</div>
   <div class="rune-tree">
     <div class="rune-column">
@@ -106,10 +128,10 @@ footer { text-align:center; padding:12px; color:#8b949e; margin-top:20px; }
     </div>
   </div>
 
-  <button class="calculate-btn" id="calculate-btn">Show Selected Runes</button>
+  <button class="calculate-btn" id="calculate-btn">Calculate Damage</button>
 
   <div class="results-box" id="results-box">
-    <h3>Runes Selected</h3>
+    <h3>Runes & Damage</h3>
     <table>
       <thead>
         <tr><th>Slot</th><th>Rune</th></tr>
@@ -118,6 +140,7 @@ footer { text-align:center; padding:12px; color:#8b949e; margin-top:20px; }
         <tr><td>—</td><td>—</td></tr>
       </tbody>
     </table>
+    <p id="damage-line" style="margin-top:12px; font-weight:bold;"></p>
   </div>
 </div>
 
@@ -127,7 +150,6 @@ footer { text-align:center; padding:12px; color:#8b949e; margin-top:20px; }
 const RUNES_URL = 'https://ddragon.leagueoflegends.com/cdn/14.21.1/data/en_US/runesReforged.json';
 let runeTrees = [];
 
-// Load runes and populate selects
 async function loadRunes() {
   const res = await fetch(RUNES_URL);
   runeTrees = await res.json();
@@ -142,7 +164,6 @@ async function loadRunes() {
     const opt1 = document.createElement('option');
     opt1.value = tree.id; opt1.textContent = tree.name;
     primary.appendChild(opt1);
-
     const opt2 = document.createElement('option');
     opt2.value = tree.id; opt2.textContent = tree.name;
     secondary.appendChild(opt2);
@@ -151,7 +172,6 @@ async function loadRunes() {
   primary.addEventListener('change', () => populateSlots('primary'));
   secondary.addEventListener('change', () => populateSlots('secondary'));
 
-  // default selections
   if (runeTrees.length) {
     primary.selectedIndex = 1;
     populateSlots('primary');
@@ -161,36 +181,32 @@ async function loadRunes() {
 }
 
 function populateSlots(type) {
-  const pathId = document.getElementById(type + '-path').value;
+  const pathId = document.getElementById(type+'-path').value;
   const tree = runeTrees.find(t => String(t.id) === pathId);
   if (!tree) return;
 
   if (type === 'primary') {
-    for (let i=0; i<4; i++){
-      const sel = document.getElementById('primary-slot-' + (i+1));
+    for (let i=0;i<4;i++){
+      const sel = document.getElementById('primary-slot-'+(i+1));
       sel.innerHTML = '<option value="">—</option>';
-      (tree.slots[i]?.runes || []).forEach(r => {
-        const o = document.createElement('option');
-        o.value = r.id; o.textContent = r.name;
-        sel.appendChild(o);
+      (tree.slots[i]?.runes||[]).forEach(r=>{
+        const o=document.createElement('option'); o.value=r.id; o.textContent=r.name; sel.appendChild(o);
       });
     }
   } else {
-    const allRunes = tree.slots.flatMap(s => s.runes || []);
-    for (let i=0; i<2; i++){
-      const sel = document.getElementById('secondary-slot-' + (i+1));
+    const allRunes = tree.slots.flatMap(s=>s.runes||[]);
+    for(let i=0;i<2;i++){
+      const sel = document.getElementById('secondary-slot-'+(i+1));
       sel.innerHTML = '<option value="">—</option>';
-      allRunes.forEach(r => {
-        const o = document.createElement('option');
-        o.value = r.id; o.textContent = r.name;
-        sel.appendChild(o);
+      allRunes.forEach(r=>{
+        const o=document.createElement('option'); o.value=r.id; o.textContent=r.name; sel.appendChild(o);
       });
     }
   }
 }
 
-function showSelectedRunes() {
-  const slots = [
+function calculateDamage() {
+  const slots=[
     {slot:'Primary 1', id: document.getElementById('primary-slot-1').value},
     {slot:'Primary 2', id: document.getElementById('primary-slot-2').value},
     {slot:'Primary 3', id: document.getElementById('primary-slot-3').value},
@@ -199,31 +215,54 @@ function showSelectedRunes() {
     {slot:'Secondary 2', id: document.getElementById('secondary-slot-2').value}
   ];
 
+  // Display selected runes
   const tbody = document.getElementById('runes-table');
   tbody.innerHTML = '';
-  slots.forEach(s => {
-    let name = '—';
-    if (s.id) {
-      for (const tree of runeTrees) {
-        for (const slot of tree.slots) {
-          const r = (slot.runes || []).find(x => String(x.id) === String(s.id));
-          if (r) { name = r.name; break; }
+  slots.forEach(s=>{
+    let name='—';
+    if(s.id){
+      for(const tree of runeTrees){
+        for(const slot of tree.slots){
+          const r=(slot.runes||[]).find(x=>String(x.id)===String(s.id));
+          if(r){name=r.name; break;}
         }
-        if (name !== '—') break;
+        if(name!=='—') break;
       }
     }
-    const tr = document.createElement('tr');
-    tr.innerHTML = `<td>${s.slot}</td><td>${name}</td>`;
+    const tr=document.createElement('tr');
+    tr.innerHTML=`<td>${s.slot}</td><td>${name}</td>`;
     tbody.appendChild(tr);
   });
+
+  // Example damage calculation based on runes (Adaptive Force + Level scaling)
+  let totalAP = 0;
+  slots.forEach(s=>{
+    // simple placeholder: each rune adds +9 AP if it is Adaptive Force
+    if(s.id){
+      const rObj = runeTrees.flatMap(t=>t.slots.flatMap(sl=>sl.runes||[])).find(r=>String(r.id)===String(s.id));
+      if(rObj && rObj.name.toLowerCase().includes('adaptive force')) totalAP+=9;
+    }
+  });
+
+  const level = Number(document.getElementById('diana-level').value)||1;
+  const enemyMR = Number(document.getElementById('enemy-mr').value)||0;
+
+  // simple Diana combo formula (AP scaling only)
+  const ratios = {Q:0.35, W:0.25, E:0.35, R:0.65};
+  let raw=0;
+  for(const key in ratios) raw+=ratios[key]*totalAP;
+
+  // MR reduction
+  const mrMultiplier = 100/(100+enemyMR);
+  const dmgAfterMR = Math.round(raw*mrMultiplier);
+
+  document.getElementById('damage-line').textContent=`Estimated Magic Damage: ${dmgAfterMR}`;
 }
 
-document.getElementById('calculate-btn').addEventListener('click', showSelectedRunes);
+document.getElementById('calculate-btn').addEventListener('click', calculateDamage);
 loadRunes();
 </script>
 </body>
 </html>
-
-
 
 
