@@ -4,6 +4,60 @@
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Settings – LoL Fundamentals</title>
+
+<!-- Firebase -->
+<script type="module">
+import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
+import { getAuth, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-auth.js";
+import { getFirestore, collection, addDoc, serverTimestamp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
+
+// --- FIREBASE CONFIG ---
+const firebaseConfig = {
+  apiKey: "AIzaSyCFRcEV7wdivqONnkjJubAZOjPMixrHMBI",
+  authDomain: "lol-fundamentals.firebaseapp.com",
+  projectId: "lol-fundamentals",
+  storageBucket: "lol-fundamentals.firebasestorage.app",
+  messagingSenderId: "1038440427584",
+  appId: "1:1038440427584:web:a82207151fd370dbedefa5",
+};
+
+// Initialize Firebase
+const app = initializeApp(firebaseConfig);
+const auth = getAuth(app);
+const firestore = getFirestore(app);
+
+// Redirect if not logged in
+onAuthStateChanged(auth, (user) => {
+  if (!user) {
+    window.location.replace('login.html');
+  }
+});
+
+// Logout button
+window.logout = function() {
+  localStorage.removeItem('lolfundamentals_logged_in');
+  window.location.href = 'index.html';
+};
+
+// Cancel subscription logic
+window.cancelSubscription = async function() {
+  const user = auth.currentUser;
+  const userEmail = user?.email || 'Unknown email';
+
+  try {
+    await addDoc(collection(firestore, "cancellationRequests"), {
+      email: userEmail,
+      timestamp: serverTimestamp(),
+      status: "pending"
+    });
+    document.getElementById('confirmDialog').style.display = 'none';
+    document.getElementById('confirmMessage').style.display = 'block';
+  } catch (err) {
+    alert('Error submitting request: ' + err.message);
+  }
+};
+</script>
+
 <style>
 body {
   margin: 0;
@@ -39,7 +93,7 @@ header {
 
 .back-button {
   display: inline-block;
-  margin: 25px auto 40px;
+  margin: 20px auto 30px;
   padding: 10px 20px;
   background: linear-gradient(135deg, #c9aa71, #e0c77b);
   color: #000;
@@ -57,7 +111,7 @@ header {
 
 .settings-container {
   max-width: 500px;
-  margin: 40px auto;
+  margin: 20px auto 40px;
   background: rgba(13,17,23,0.95);
   border: 1px solid #2f81f7;
   border-radius: 12px;
@@ -72,70 +126,58 @@ header {
 }
 .settings-container p {
   color: #e6edf3;
-  margin-bottom: 25px;
+  margin-bottom: 20px;
   font-size: 16px;
   line-height: 1.5;
 }
 
-.button-group {
-  display: flex;
-  justify-content: center;
-  gap: 20px;
-  flex-wrap: wrap;
-}
-
-.cancel-btn, #logoutBtn {
-  display: inline-block;
-  padding: 14px 30px;
-  background: #f94144;
-  color: #fff;
+button {
   border: none;
   border-radius: 8px;
   font-weight: bold;
   font-size: 16px;
   cursor: pointer;
   transition: all 0.3s;
-  box-shadow: 0 0 10px rgba(249,65,68,0.4);
 }
-.cancel-btn:hover, #logoutBtn:hover {
+
+#logoutBtn {
+  display: inline-block;
+  padding: 14px 30px;
+  background: #1f6feb;
+  color: #fff;
+  margin-bottom: 10px;
+}
+#logoutBtn:hover {
+  background: #4a8fff;
+  transform: translateY(-2px);
+}
+
+#cancelBtn {
+  display: inline-block;
+  padding: 14px 30px;
+  background: #f94144;
+  color: #fff;
+  margin-left: 10px;
+}
+#cancelBtn:hover {
   background: #ff5959;
-  box-shadow: 0 0 18px rgba(255,90,90,0.6);
   transform: translateY(-2px);
 }
 
 #confirmDialog {
   display: none;
-  margin-top: 20px;
-  background: #161b22;
-  border: 1px solid #c9aa71;
-  border-radius: 8px;
-  padding: 20px;
-  max-width: 400px;
-  margin-left: auto;
-  margin-right: auto;
-  text-align: center;
+  margin-top: 15px;
 }
-
 #confirmDialog button {
-  margin: 10px;
+  margin: 5px;
   padding: 10px 25px;
-  border-radius: 6px;
-  border: none;
+}
+#confirmMessage {
+  display: none;
+  margin-top: 15px;
+  color: #c9aa71;
   font-weight: bold;
-  cursor: pointer;
 }
-
-#confirmYes {
-  background: #f94144;
-  color: #fff;
-}
-#confirmYes:hover { background: #ff5959; }
-
-#confirmNo {
-  background: #c9aa71;
-  color: #000;
-}
-#confirmNo:hover { background: #e6c97f; }
 
 footer {
   margin-top: auto;
@@ -146,100 +188,32 @@ footer {
 }
 footer a { color:#c9aa71; text-decoration:none; }
 footer a:hover { text-decoration:underline; }
-
 </style>
 </head>
-<body>
 
+<body>
 <header>Settings</header>
 <a href="membershub.html" class="back-button">Back to Members Hub</a>
 
 <div class="settings-container">
-  <h2>Manage Subscription</h2>
-  <p>If you wish to cancel your subscription, click the button below. A notification will be sent to the site admin.</p>
+  <h2>Manage Account</h2>
+  <p>Use the buttons below to log out or cancel your subscription.</p>
 
-  <div class="button-group">
-    <button class="cancel-btn" onclick="showConfirm()">Cancel Subscription</button>
-    <button id="logoutBtn" onclick="logout()">Logout</button>
-  </div>
+  <button id="logoutBtn" onclick="logout()">Logout</button>
+  <button id="cancelBtn" onclick="document.getElementById('confirmDialog').style.display='block'">Cancel Subscription</button>
 
   <div id="confirmDialog">
     <p>Are you sure you want to cancel your subscription?</p>
     <button id="confirmYes" onclick="cancelSubscription()">Yes</button>
-    <button id="confirmNo" onclick="hideConfirm()">No</button>
+    <button id="confirmNo" onclick="document.getElementById('confirmDialog').style.display='none'">No</button>
   </div>
-
-  <div id="confirmMessage" style="display:none; color:#c9aa71; font-weight:bold; margin-top:20px;">
-    Your cancellation request has been sent.
-  </div>
+  <div id="confirmMessage">Your cancellation request has been sent.</div>
 </div>
 
 <footer>
-© 2025 LoL Fundamentals · Contact:
-<a href="mailto:arcsecond@lolfundamentals.com">arcsecond@lolfundamentals.com</a>
+© 2025 LoL Fundamentals · Contact: <a href="mailto:arcsecond@lolfundamentals.com">arcsecond@lolfundamentals.com</a>
 </footer>
-
-<script type="module">
-import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
-import { getAuth, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-auth.js";
-import { getFirestore, collection, addDoc, serverTimestamp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
-
-// --- FIREBASE CONFIG ---
-const firebaseConfig = {
-  apiKey: "AIzaSyCFRcEV7wdivqONnkjJubAZOjPMixrHMBI",
-  authDomain: "lol-fundamentals.firebaseapp.com",
-  projectId: "lol-fundamentals",
-  storageBucket: "lol-fundamentals.firebasestorage.app",
-  messagingSenderId: "1038440427584",
-  appId: "1:1038440427584:web:a82207151fd370dbedefa5",
-};
-const app = initializeApp(firebaseConfig);
-const auth = getAuth(app);
-const firestore = getFirestore(app);
-
-// Require login (mirrors Members Hub)
-if (localStorage.getItem('lolfundamentals_logged_in') !== 'true') {
-  window.location.href = 'index.html';
-}
-
-// Logout function (mirrors Members Hub)
-function logout() {
-  localStorage.removeItem('lolfundamentals_logged_in');
-  window.location.href = 'index.html';
-}
-
-// Show confirmation dialog
-function showConfirm() {
-  document.getElementById('confirmDialog').style.display = 'block';
-}
-
-// Hide confirmation dialog
-function hideConfirm() {
-  document.getElementById('confirmDialog').style.display = 'none';
-}
-
-// Cancel subscription request
-async function cancelSubscription() {
-  const user = auth.currentUser;
-  const userEmail = user?.email || 'Unknown email';
-  const confirmMsg = document.getElementById('confirmMessage');
-
-  try {
-    await addDoc(collection(firestore, "cancellationRequests"), {
-      email: userEmail,
-      timestamp: serverTimestamp(),
-      status: "pending"
-    });
-    confirmMsg.style.display = 'block';
-    hideConfirm();
-  } catch (err) {
-    alert('Error submitting request: ' + err.message);
-  }
-}
-</script>
-
 </body>
 </html>
-
 
 
