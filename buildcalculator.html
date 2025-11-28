@@ -3,218 +3,249 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Diana Build Calculator – LoL Fundamentals</title>
+<title>Diana Build Calculator</title>
+
+<!-- Login check -->
+<script>
+  if (localStorage.getItem('lolfundamentals_logged_in') !== 'true') {
+    window.location.replace('login.html');
+  }
+</script>
+
 <style>
+/* UNIVERSAL PAGE STYLE ===================================================== */
 body {
   margin: 0;
   font-family: 'Beaufort for LOL', Arial, Helvetica, sans-serif;
-  background: url('https://ddragon.leagueoflegends.com/cdn/img/champion/splash/Diana_0.jpg') no-repeat center center fixed;
-  background-size: cover;
+  text-align: center;
   color: #fff;
-  display: flex;
-  flex-direction: column;
-  min-height: 100vh;
+  background: url('https://64.media.tumblr.com/594ac290bec6d5e9ad98b5f53404f00b/245c4c3ee469f81d-e4/s1280x1920/1cda4284320eb2031758a9859dfe14ff8bbc50ba.jpg')
+    no-repeat center center fixed;
+  background-size: cover;
+  overflow-x: hidden;
 }
+
+/* DARK OVERLAY FOR READABILITY */
 body::before {
-  content:"";
-  position: fixed; top:0; left:0;
-  width:100%; height:100%;
+  content: "";
+  position: fixed;
+  top: 0; left: 0;
+  width: 100%; height: 100%;
   background: rgba(10,15,20,0.75);
-  z-index:-1;
+  z-index: -1;
 }
+
+/* HEADER =================================================================== */
 header {
   background: rgba(13,17,23,0.9);
-  border-bottom: 2px solid #2f81f7;
-  padding: 20px;
-  font-size: 26px;
+  border-bottom: 2px solid #c9aa71;
+  padding: 20px 10px;
   font-weight: bold;
+  font-size: 26px;
+  text-transform: uppercase;
   color: #c9aa71;
+  letter-spacing: 1px;
+  text-align: center;
 }
+
+/* BACK BUTTON */
 .back-button {
   display: inline-block;
-  margin: 15px auto;
+  margin: 20px auto 10px;
   padding: 10px 20px;
-  background: linear-gradient(135deg,#c9aa71,#e0c77b);
+  background: linear-gradient(135deg, #c9aa71, #e0c77b);
   color: #000;
   text-decoration: none;
   border-radius: 8px;
   font-weight: bold;
+  transition: all 0.3s;
   box-shadow: 0 0 10px rgba(201,170,113,0.5);
 }
-.back-button::before { content:"← "; }
+.back-button::before { content: "← "; }
 .back-button:hover {
-  background: linear-gradient(135deg,#e6c97f,#f0d88b);
+  background: linear-gradient(135deg, #e6c97f, #f0d88b);
   box-shadow: 0 0 15px rgba(255,215,0,0.8);
 }
-.container {
-  flex:1;
-  max-width: 1000px;
-  margin: 20px auto;
-  background: rgba(20,25,35,0.85);
+
+/* MAIN CALCULATOR CONTAINER =============================================== */
+.calc-container {
+  margin: 20px auto 50px auto;
+  max-width: 1100px;
+  background: rgba(13,17,23,0.95);
   border: 2px solid #2f81f7;
-  border-radius: 10px;
-  padding: 20px;
+  border-radius: 12px;
+  padding: 25px;
   text-align: left;
 }
-h2 { color:#c9aa71; margin-top:0; }
 
-/* Item slots (blue boxes) */
-.item-slots {
+/* SECTION TITLES */
+.section-title {
+  color: #c9aa71;
+  margin-bottom: 10px;
+  font-size: 20px;
+  text-transform: uppercase;
+}
+
+/* ITEM GRID ================================================================ */
+.item-grid {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
-  gap: 10px;
-  margin-bottom: 20px;
+  gap: 12px;
+  margin-bottom: 25px;
 }
+
 .item-slot {
-  background: #2f81f7;
-  border-radius: 6px;
+  background: rgba(20,25,35,0.8);
+  border: 1px solid #2f81f7;
   padding: 10px;
-  font-weight: bold;
-  color: #fff;
+  border-radius: 8px;
   text-align: center;
 }
-.item-slot select {
-  width: 100%;
-  padding: 6px;
-  border-radius: 4px;
-  border:none;
-  background:#0f1722;
-  color:#fff;
-}
 
-/* Rune tree */
+/* Rune Tree Layout ========================================================= */
 .rune-tree {
-  display: flex;
-  flex-direction: column;
-  gap: 15px;
-  margin-bottom: 20px;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 25px;
+  margin-bottom: 25px;
 }
+
+.rune-column {
+  background: rgba(20,25,35,0.8);
+  border: 1px solid #2f81f7;
+  border-radius: 8px;
+  padding: 12px;
+}
+
 .rune-row {
-  display: flex;
-  gap: 10px;
-}
-.rune-slot {
-  flex:1;
-  background:#2f81f7;
-  padding:10px;
-  border-radius:6px;
-  text-align:center;
-}
-.rune-slot select {
-  width: 100%;
-  padding: 6px;
-  border-radius:4px;
-  border:none;
-  background:#0f1722;
-  color:#fff;
+  margin-bottom: 10px;
 }
 
-/* Enemy stats */
-.enemy-stats input {
-  width:70px;
-  margin-right:10px;
+/* Enemy Stat Inputs ======================================================== */
+.enemy-box {
+  background: rgba(20,25,35,0.8);
+  border: 1px solid #2f81f7;
+  padding: 12px;
+  border-radius: 8px;
+  max-width: 300px;
+  margin-top: 20px;
 }
 
-/* Calculate button */
-#calculate-build {
-  padding:10px 20px;
-  background:#2f81f7;
-  color:#fff;
-  border:none;
-  border-radius:6px;
-  cursor:pointer;
-  font-size:16px;
-  display:block;
-  margin:0 auto 20px auto;
-}
-#calculate-build:hover { background:#1e5ec0; }
-
-/* Results box */
-#results {
-  background:#0f1722;
-  padding:15px;
-  border-radius:8px;
-  min-height:80px;
+.enemy-box input {
+  width: 90%;
+  padding: 5px;
+  border-radius: 6px;
+  border: 1px solid #555;
+  background: #111;
+  color: #fff;
 }
 
+/* CALCULATE BUTTON ========================================================= */
+.calculate-btn {
+  margin: 25px auto 10px;
+  display: block;
+  padding: 12px 25px;
+  font-size: 18px;
+  font-weight: bold;
+  background: #2f81f7;
+  border: none;
+  color: #fff;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: 0.3s;
+}
+.calculate-btn:hover {
+  background: #1b5fc7;
+}
+
+/* RESULTS BOX ============================================================== */
+.results-box {
+  margin-top: 25px;
+  background: rgba(20,25,35,0.9);
+  border: 1px solid #c9aa71;
+  padding: 15px;
+  border-radius: 10px;
+  color: #fff;
+}
+
+/* FOOTER =================================================================== */
 footer {
-  text-align:center;
-  padding:15px;
-  font-size:14px;
-  color:#8b949e;
+  text-align: center;
+  padding: 15px 10px;
+  font-size: 14px;
+  color: #8b949e;
 }
 </style>
 </head>
+
+
 <body>
-<header>Build Calculator</header>
-<a href="membershub.html" class="back-button">Back to Members Hub</a>
 
-<div class="container">
-  <h2>Item Slots</h2>
-  <div class="item-slots">
-    <div class="item-slot">1<br><select id="item1"></select></div>
-    <div class="item-slot">2<br><select id="item2"></select></div>
-    <div class="item-slot">3<br><select id="item3"></select></div>
-    <div class="item-slot">4<br><select id="item4"></select></div>
-    <div class="item-slot">5<br><select id="item5"></select></div>
-    <div class="item-slot">6<br><select id="item6"></select></div>
+<header>Diana Build Calculator</header>
+<a href="membershub.html" class="back-button">Return to Members Hub</a>
+
+<div class="calc-container">
+
+  <!-- ITEM SECTION -------------------------------------------------------- -->
+  <div class="section-title">Items</div>
+
+  <div class="item-grid">
+    <div class="item-slot"><select></select></div>
+    <div class="item-slot"><select></select></div>
+    <div class="item-slot"><select></select></div>
+    <div class="item-slot"><select></select></div>
+    <div class="item-slot"><select></select></div>
+    <div class="item-slot"><select></select></div>
   </div>
 
-  <h2>Runes</h2>
+  <!-- RUNE TREE ----------------------------------------------------------- -->
+  <div class="section-title">Runes</div>
+
   <div class="rune-tree">
-    <div class="rune-row">
-      <div class="rune-slot"><select id="primary1"></select></div>
-      <div class="rune-slot"><select id="primary2"></select></div>
-      <div class="rune-slot"><select id="primary3"></select></div>
-      <div class="rune-slot"><select id="primary4"></select></div>
+
+    <!-- PRIMARY RUNES -->
+    <div class="rune-column">
+      <div class="section-title">Primary Path</div>
+      <div class="rune-row"><select></select></div>
+      <div class="rune-row"><select></select></div>
+      <div class="rune-row"><select></select></div>
+      <div class="rune-row"><select></select></div>
     </div>
-    <div class="rune-row">
-      <div class="rune-slot"><select id="secondary1"></select></div>
-      <div class="rune-slot"><select id="secondary2"></select></div>
+
+    <!-- SECONDARY RUNES -->
+    <div class="rune-column">
+      <div class="section-title">Secondary Path</div>
+      <div class="rune-row"><select></select></div>
+      <div class="rune-row"><select></select></div>
     </div>
+
   </div>
 
-  <h2>Enemy Stats</h2>
-  <div class="enemy-stats">
-    <label>HP: <input type="number" id="enemy-hp" value="1000"></label>
-    <label>Armor: <input type="number" id="enemy-armor" value="30"></label>
-    <label>Magic Resist: <input type="number" id="enemy-mr" value="30"></label>
+  <!-- ENEMY STATS --------------------------------------------------------- -->
+  <div class="section-title">Enemy Stats</div>
+
+  <div class="enemy-box">
+    <label>HP<br><input type="number" id="enemy-hp" value="2000"></label>
+    <label>Armor<br><input type="number" id="enemy-armor" value="80"></label>
+    <label>Magic Resist<br><input type="number" id="enemy-mr" value="60"></label>
   </div>
 
-  <button id="calculate-build">Calculate Stats</button>
+  <!-- BUTTON -------------------------------------------------------------- -->
+  <button class="calculate-btn">Calculate Stats</button>
 
-  <div id="results">
+  <!-- RESULTS ------------------------------------------------------------- -->
+  <div class="results-box">
     <h3>Damage Breakdown</h3>
-    <div id="damage-breakdown"><p>Select items, runes, and enemy stats then click calculate.</p></div>
+    <p>Waiting for calculation…</p>
   </div>
+
 </div>
 
 <footer>© 2025 LoL Fundamentals · All rights reserved</footer>
 
-<script>
-// Populate item & rune dropdowns with Riot data placeholders
-const allItems = [
-  "Hextech Rocketbelt","Nashor's Tooth","Zhonya's Hourglass","Liandry's Anguish","Shadowflame"
-];
-for(let i=1;i<=6;i++){
-  const sel=document.getElementById(`item${i}`);
-  allItems.forEach(it=>{ const o=document.createElement('option'); o.text=it; sel.appendChild(o); });
-}
-
-// Full rune tree placeholders
-const primaryRunes=["Electrocute","Predator","Dark Harvest","Phase Rush"];
-const secondaryRunes=["Inspiration","Domination","Sorcery","Resolve"];
-primaryRunes.forEach((r,i)=>{document.getElementById(`primary${i+1}`).innerHTML=`<option>${r}</option>`;});
-secondaryRunes.forEach((r,i)=>{document.getElementById(`secondary${i+1}`).innerHTML=`<option>${r}</option>`;});
-
-document.getElementById('calculate-build').addEventListener('click', ()=>{
-  const hp = parseFloat(document.getElementById('enemy-hp').value);
-  const armor = parseFloat(document.getElementById('enemy-armor').value);
-  const mr = parseFloat(document.getElementById('enemy-mr').value);
-  document.getElementById('damage-breakdown').innerHTML = `<p>Placeholder combo damage vs enemy MR ${mr}</p>`;
-});
-</script>
 </body>
 </html>
+
+
 
 
