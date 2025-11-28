@@ -49,15 +49,16 @@ header {
 
 /* Section */
 .section {
-  padding: 5px 20px 20px 20px;
+  padding: 10px 20px 20px 20px;
   max-width: 1000px;
   margin: 10px auto;
 }
 
 /* Section title */
 .section p {
+  margin-top: 5px;
   margin-bottom: 25px;
-  font-size: 1.1em;
+  font-size: 1.2em;
   font-weight: bold;
 }
 
@@ -143,10 +144,9 @@ header {
   background-position: center;
 }
 .card.build-calculator::before {
-  background-image: url('https://cdn.pixabay.com/photo/2017/03/21/13/05/calculator-2167902_1280.png'); /* nicer calculator image */
-  background-size: contain;
+  background-image: url('https://static.wikia.nocookie.net/leagueoflegends/images/3/3b/Diana_OriginalSkin_HD.png');
+  background-size: cover;
   background-position: center;
-  background-repeat: no-repeat;
   opacity: 0.35;
 }
 .card.coaching::before {
@@ -228,7 +228,7 @@ footer a:hover {
 </header>
 
 <section class="section">
-<p style="margin-top:5px;">Choose a section to explore:</p>
+<p style="margin-top:0; font-size:1.25em; font-weight:bold;">Choose a section to explore:</p>
 <div class="card-grid">
   <a href="dianaguide.html" class="card diana-guide">
     <h3>Diana Guide</h3>
@@ -288,5 +288,7 @@ function logout() {
 </script>
 </body>
 </html>
+
+
 
 
