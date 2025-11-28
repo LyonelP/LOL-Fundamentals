@@ -15,7 +15,6 @@ body {
   text-align: center;
 }
 
-/* HEADER */
 header {
   font-size: 36px;
   font-weight: 700;
@@ -31,7 +30,6 @@ header::after {
   margin-top: 10px;
 }
 
-/* RETURN BUTTON */
 .return-btn {
   margin: 10px 0 20px;
   display: inline-block;
@@ -48,14 +46,12 @@ header::after {
   background: linear-gradient(135deg, #f0d88b, #ffd66f);
 }
 
-/* MAIN CONTENT WRAPPER */
 .container {
   width: 85%;
   max-width: 900px;
   margin: 0 auto 40px;
 }
 
-/* SECTION TITLES */
 .section-title {
   text-align: left;
   font-size: 18px;
@@ -63,7 +59,6 @@ header::after {
   margin: 25px 0 12px;
 }
 
-/* FORM GRID (2 COLUMNS) */
 .grid-2 {
   display: grid;
   grid-template-columns: 1fr 1fr;
@@ -71,7 +66,6 @@ header::after {
   align-items: start;
 }
 
-/* INPUT CARDS */
 .card {
   background: rgba(12,18,30,0.8);
   border: 1px solid rgba(255,255,255,0.08);
@@ -80,14 +74,12 @@ header::after {
   text-align: left;
 }
 
-/* INPUT LABELS */
 .card label {
   font-size: 16px;
   display: block;
   margin-bottom: 8px;
 }
 
-/* INPUT STYLING */
 select,
 input[type="number"] {
   width: 100%;
@@ -100,7 +92,6 @@ input[type="number"] {
   margin-bottom: 20px;
 }
 
-/* CALCULATE BUTTON */
 .calculate-btn {
   margin: 20px auto 10px;
   display: block;
@@ -117,7 +108,6 @@ input[type="number"] {
   background: #1b5fc7;
 }
 
-/* TABLE WRAPPER */
 .table-card {
   margin-top: 10px;
   background: rgba(12,18,30,0.8);
@@ -126,7 +116,6 @@ input[type="number"] {
   padding: 20px;
 }
 
-/* TABLE */
 table {
   width: 100%;
   table-layout: fixed;
@@ -148,7 +137,6 @@ td {
   word-wrap: break-word;
 }
 
-/* FOOTER */
 footer {
   text-align: center;
   margin-top: 40px;
@@ -157,7 +145,6 @@ footer {
   font-size: 14px;
 }
 
-/* MOBILE */
 @media (max-width: 700px) {
   .grid-2 {
     grid-template-columns: 1fr;
@@ -181,11 +168,7 @@ footer {
     <div class="section-title">DIANA’S LEVEL</div>
     <div class="card">
       <label>Level</label>
-      <select id="diana-level">
-        <script>
-          for (let i = 1; i <= 18; i++) document.write('<option>' + i + '</option>');
-        </script>
-      </select>
+      <select id="diana-level"></select>
     </div>
 
     <div class="section-title">PRIMARY RUNES</div>
@@ -199,30 +182,14 @@ footer {
         <option value="inspiration">Inspiration</option>
       </select>
 
-      <label>Slot 1</label>
-      <select id="primary-slot-1">
-        <option>Electrocute</option>
-        <option>Predator</option>
-        <option>Dark Harvest</option>
-      </select>
+      <label>Slot 1 (Keystone)</label>
+      <select id="primary-slot-1"></select>
       <label>Slot 2</label>
-      <select id="primary-slot-2">
-        <option>Cheap Shot</option>
-        <option>Taste of Blood</option>
-        <option>Sudden Impact</option>
-      </select>
+      <select id="primary-slot-2"></select>
       <label>Slot 3</label>
-      <select id="primary-slot-3">
-        <option>Sightstone</option>
-        <option>Sixth Sense</option>
-        <option>Grisly Memories</option>
-      </select>
+      <select id="primary-slot-3"></select>
       <label>Slot 4</label>
-      <select id="primary-slot-4">
-        <option>Treasure Hunter</option>
-        <option>Relentless Hunter</option>
-        <option>Ultimate Hunter</option>
-      </select>
+      <select id="primary-slot-4"></select>
     </div>
   </div>
 
@@ -240,7 +207,7 @@ footer {
 
     <div class="section-title">SECONDARY RUNES</div>
     <div class="card">
-      <label>Secondary Path</label>
+      <label>Secondary Path (pick a different path)</label>
       <select id="secondary-path">
         <option value="sorcery">Sorcery</option>
         <option value="precision">Precision</option>
@@ -249,29 +216,9 @@ footer {
       </select>
 
       <label>Slot 1</label>
-      <select id="secondary-slot-1">
-        <option>Null</option>
-        <option>Manaflow Band</option>
-        <option>Transcendence</option>
-        <option>Scorch</option>
-        <option>Waterwalking</option>
-        <option>Gathering Storm</option>
-        <option>Presence of Mind</option>
-        <option>Overheal</option>
-        <option>Legend: Tenacity</option>
-      </select>
+      <select id="secondary-slot-1"></select>
       <label>Slot 2</label>
-      <select id="secondary-slot-2">
-        <option>Null</option>
-        <option>Manaflow Band</option>
-        <option>Transcendence</option>
-        <option>Scorch</option>
-        <option>Waterwalking</option>
-        <option>Gathering Storm</option>
-        <option>Presence of Mind</option>
-        <option>Overheal</option>
-        <option>Legend: Tenacity</option>
-      </select>
+      <select id="secondary-slot-2"></select>
     </div>
   </div>
 </div>
@@ -304,34 +251,129 @@ footer {
 <footer>© 2025 LoL Fundamentals · All rights reserved</footer>
 
 <script>
-// Hardcoded damage values for runes (latest 2025)
+/*
+  Notes on choices:
+  - Sightstone was removed as requested.
+  - This file uses your internal/preview rune names (Sixth Sense = eyeball, Grisly Memories = ghost poro,
+    Treasure Hunter replaces Ingenious etc.)
+  - Cheap Shot: true damage scaling 10 -> 45 across levels 1 -> 18 (linear).
+  - Electrocute: example magic damage with AP ratio (kept from your earlier values).
+  - Only a small set of damaging runes are given numeric formulas — everything else shows 0 damage.
+*/
+
+/* ----- RUNE DATA & PATH DEFINITIONS ----- */
+
+/* Damage map for runes that do damage (others will show 0) */
 const RUNE_DAMAGE = {
-  "Electrocute": { base: 50, ratio: 0.05, type: "Magic" },
-  "Cheap Shot": { base: 10, ratio: 0, type: "True" },
-  "Sudden Impact": { base: 20, ratio: 0, type: "True" },
-  "Predator": { base: 0, ratio: 0, type: "" },
-  "Dark Harvest": { base: 0, ratio: 0, type: "" },
-  "Treasure Hunter": { base: 0, ratio: 0, type: "" },
-  "Relentless Hunter": { base: 0, ratio: 0, type: "" },
-  "Ultimate Hunter": { base: 0, ratio: 0, type: "" },
-  "Sightstone": { base: 0, ratio: 0, type: "" },
-  "Sixth Sense": { base: 0, ratio: 0, type: "" },
-  "Grisly Memories": { base: 0, ratio: 0, type: "" },
-  "Manaflow Band": { base: 0, ratio: 0, type: "" },
-  "Transcendence": { base: 0, ratio: 0, type: "" },
-  "Scorch": { base: 0, ratio: 0, type: "" },
-  "Waterwalking": { base: 0, ratio: 0, type: "" },
-  "Gathering Storm": { base: 0, ratio: 0, type: "" },
-  "Presence of Mind": { base: 0, ratio: 0, type: "" },
-  "Overheal": { base: 0, ratio: 0, type: "" },
-  "Legend: Tenacity": { base: 0, ratio: 0, type: "" },
-  "Null": { base: 0, ratio: 0, type: "" }
+  "Electrocute": { type: "Magic", base: 50, ratio: 0.05 },   // magic damage; AP ratio applied then MR reduction
+  "Cheap Shot":  { type: "True",  special: "cheapshot" },     // true damage 10-45 by level
+  "Sudden Impact":{ type: "True", base: 20, ratio: 0 },       // example true damage (kept from prior)
+  // keep any other damage runes here if you want them to show numeric values
 };
 
-function calculateDamage() {
-  const level = parseInt(document.getElementById('diana-level').value);
+/* Primary path options per slot (no Sightstone) */
+const PRIMARY_PATHS = {
+  domination: {
+    slot1: ["Electrocute","Predator","Dark Harvest"],
+    slot2: ["Cheap Shot","Taste of Blood","Sudden Impact"],
+    slot3: ["Sixth Sense","Grisly Memories","Null"],     // removed Sightstone
+    slot4: ["Treasure Hunter","Relentless Hunter","Ultimate Hunter"]
+  },
+  sorcery: {
+    slot1: ["Axiom Arcanist","Nullifying Orb","Summon Aery"],
+    slot2: ["Manaflow Band","Transcendence","Celerity"],
+    slot3: ["Scorch","Waterwalking","Gathering Storm"],
+    slot4: ["Null","Null","Null"]
+  },
+  precision: {
+    slot1: ["Press the Attack","Lethal Tempo","Fleet Footwork"],
+    slot2: ["Presence of Mind","Triumph","Coup de Grace"],
+    slot3: ["Legend: Alacrity","Legend: Tenacity","Cut Down"],
+    slot4: ["Last Stand","Null","Null"]
+  },
+  resolve: {
+    slot1: ["Grasp of the Undying","Aftershock","Guardian"],
+    slot2: ["Demolish","Font of Life","Conditioning"],
+    slot3: ["Second Wind","Bone Plating","Overgrowth"],
+    slot4: ["Revitalize","Null","Null"]
+  },
+  inspiration: {
+    slot1: ["Glacial Augment","Unsealed Spellbook","First Strike"],
+    slot2: ["Hextech Flashtraption","Magical Footwear","Future's Market"],
+    slot3: ["Minion Dematerializer","Biscuit Delivery","Cosmic Insight"],
+    slot4: ["Approach Velocity","Time Warp Tonic","Null"]
+  }
+};
+
+/* Secondary (non-keystone) options per path (9 items max) */
+const SECONDARY_NONKEY = {
+  sorcery: ["Manaflow Band","Transcendence","Celerity","Scorch","Waterwalking","Gathering Storm","Axiom Arcanist","Nullifying Orb","Null"],
+  precision: ["Presence of Mind","Triumph","Coup de Grace","Legend: Alacrity","Legend: Tenacity","Cut Down","Last Stand","Null","Null"],
+  resolve: ["Demolish","Font of Life","Conditioning","Second Wind","Bone Plating","Overgrowth","Revitalize","Null","Null"],
+  inspiration: ["Hextech Flashtraption","Magical Footwear","Future's Market","Minion Dematerializer","Biscuit Delivery","Cosmic Insight","Approach Velocity","Time Warp Tonic","Unsealed Spellbook"]
+};
+
+/* Utility to fill selects */
+function populateSelect(selectEl, options, keepValue) {
+  const prev = keepValue ? selectEl.value : null;
+  selectEl.innerHTML = '';
+  options.forEach(opt => {
+    const o = document.createElement('option');
+    o.value = opt;
+    o.textContent = opt;
+    selectEl.appendChild(o);
+  });
+  if (keepValue && prev) {
+    // restore if still available
+    for (let i=0;i<selectEl.options.length;i++){
+      if (selectEl.options[i].value === prev){ selectEl.selectedIndex = i; break; }
+    }
+  }
+}
+
+/* Populate level dropdown 1..18 */
+function initLevelSelect(){
+  const lvl = document.getElementById('diana-level');
+  for(let i=1;i<=18;i++){
+    const o = document.createElement('option');
+    o.value = i; o.textContent = i;
+    lvl.appendChild(o);
+  }
+  lvl.value = 18;
+}
+
+/* Populate primary slots based on chosen primary path */
+function populatePrimary(path){
+  const data = PRIMARY_PATHS[path];
+  populateSelect(document.getElementById('primary-slot-1'), data.slot1);
+  populateSelect(document.getElementById('primary-slot-2'), data.slot2);
+  populateSelect(document.getElementById('primary-slot-3'), data.slot3);
+  populateSelect(document.getElementById('primary-slot-4'), data.slot4);
+}
+
+/* Populate secondary slots with 9 non-keystone options for the chosen secondary path */
+function populateSecondary(path){
+  const data = SECONDARY_NONKEY[path] || [];
+  populateSelect(document.getElementById('secondary-slot-1'), data);
+  populateSelect(document.getElementById('secondary-slot-2'), data);
+}
+
+/* Cheap Shot scaling 10 -> 45 from level 1 -> 18 */
+function cheapShotDamage(level){
+  // linear interpolation: 10 + (level-1) * (35/17)
+  return Math.round(10 + (level - 1) * (35 / 17));
+}
+
+/* Magic damage reduced by enemy MR using standard formula */
+function magicAfterMR(rawMagic, mr){
+  return Math.round(rawMagic * 100 / (100 + mr));
+}
+
+/* Main calculate function */
+function calculateDamage(){
+  const level = parseInt(document.getElementById('diana-level').value, 10);
   const enemyMR = parseFloat(document.getElementById('enemy-mr').value) || 30;
-  const ap = level * 5; // simplified AP
+  const ap = Math.round(level * 5); // simplified AP estimate (kept from previous approach)
 
   const slots = [
     document.getElementById('primary-slot-1').value,
@@ -344,21 +386,77 @@ function calculateDamage() {
 
   const tbody = document.getElementById('rune-damage-table');
   tbody.innerHTML = '';
+
   slots.forEach(rune => {
-    const data = RUNE_DAMAGE[rune] || { base: 0, ratio: 0, type: "" };
-    let raw = data.base + data.ratio * ap;
-    let damage = raw;
-    if (data.type === "Magic") damage = Math.round(raw * 100 / (100 + enemyMR));
-    if (data.type === "True") damage = Math.round(raw);
+    let displayDamage = 0;
+    let dtype = '';
+    if (!rune || rune === "Null") {
+      displayDamage = 0; dtype = '';
+    } else if (rune === "Cheap Shot") {
+      displayDamage = cheapShotDamage(level);
+      dtype = "True";
+    } else if (RUNE_DAMAGE[rune]) {
+      const meta = RUNE_DAMAGE[rune];
+      if (meta.type === "Magic") {
+        const raw = meta.base + (meta.ratio || 0) * ap;
+        displayDamage = magicAfterMR(raw, enemyMR);
+        dtype = "Magic";
+      } else if (meta.type === "True") {
+        const raw = (meta.base || 0) + (meta.ratio || 0) * ap;
+        displayDamage = Math.round(raw);
+        dtype = "True";
+      } else {
+        displayDamage = 0; dtype = "";
+      }
+    } else {
+      displayDamage = 0; dtype = "";
+    }
+
     const tr = document.createElement('tr');
-    tr.innerHTML = `<td>${rune}</td><td>${damage}</td><td>${data.type}</td>`;
+    tr.innerHTML = `<td>${rune}</td><td>${displayDamage}</td><td>${dtype}</td>`;
     tbody.appendChild(tr);
   });
 }
 
-document.getElementById('calculate-btn').addEventListener('click', calculateDamage);
+/* Prevent selecting the same path for primary & secondary */
+function enforceDifferentPaths(){
+  const primary = document.getElementById('primary-path').value;
+  const secondarySelect = document.getElementById('secondary-path');
+
+  for (let i=0;i<secondarySelect.options.length;i++){
+    const opt = secondarySelect.options[i];
+    opt.disabled = (opt.value === primary);
+  }
+  // if user's current secondary equals primary, auto-switch to the first allowed option
+  if (secondarySelect.value === primary) {
+    for (let i=0;i<secondarySelect.options.length;i++){
+      if (!secondarySelect.options[i].disabled){ secondarySelect.selectedIndex = i; break; }
+    }
+  }
+}
+
+/* Init on load */
+document.addEventListener('DOMContentLoaded', () => {
+  initLevelSelect();
+
+  // initial population
+  populatePrimary(document.getElementById('primary-path').value);
+  populateSecondary(document.getElementById('secondary-path').value);
+  enforceDifferentPaths();
+
+  // listeners
+  document.getElementById('primary-path').addEventListener('change', (e)=>{
+    populatePrimary(e.target.value);
+    enforceDifferentPaths();
+  });
+  document.getElementById('secondary-path').addEventListener('change', (e)=>{
+    populateSecondary(e.target.value);
+    enforceDifferentPaths();
+  });
+
+  document.getElementById('calculate-btn').addEventListener('click', calculateDamage);
+});
 </script>
 
 </body>
 </html>
-
