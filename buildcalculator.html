@@ -8,123 +8,133 @@
 <style>
 /* GLOBAL STYLING */
 body {
-margin: 0;
-padding: 0;
-font-family: "Beaufort for LOL", serif;
-background-color: #0a0f1a; /* dark blue theme */
-color: #d8c48a; /* gold text */
-text-align: center;
+  margin: 0;
+  padding: 0;
+  font-family: "Beaufort for LOL", serif;
+  background-color: #0a0f1a;
+  color: #d8c48a;
+  text-align: center;
 }
 
 /* TITLE */
 header {
-margin-top: 50px;
-font-size: 48px;
-font-weight: 700;
-letter-spacing: 2px;
+  margin-top: 50px;
+  font-size: 48px;
+  font-weight: 700;
+  letter-spacing: 2px;
 }
 
 /* RETURN BUTTON */
 .return-btn {
-margin-top: 30px;
-display: inline-block;
-padding: 12px 26px;
-border: 2px solid #d8c48a;
-color: #d8c48a;
-border-radius: 8px;
-text-decoration: none;
-font-size: 18px;
+  margin-top: 30px;
+  display: inline-block;
+  padding: 12px 26px;
+  border: 2px solid #d8c48a;
+  color: #d8c48a;
+  border-radius: 8px;
+  text-decoration: none;
+  font-size: 18px;
 }
 .return-btn:hover {
-background: rgba(216,196,138,0.1);
+  background: rgba(216,196,138,0.1);
 }
 
 /* MAIN CONTENT WRAPPER */
 .container {
-width: 85%;
-max-width: 900px;
-margin: 60px auto;
+  width: 85%;
+  max-width: 900px;
+  margin: 60px auto;
 }
 
 /* SECTION TITLES */
 .section-title {
-text-align: left;
-font-size: 18px;
-font-weight: 700;
-margin: 40px 0 12px;
+  text-align: left;
+  font-size: 18px;
+  font-weight: 700;
+  margin: 20px 0 8px;
 }
 
 /* FORM GRID (2 COLUMNS) */
 .grid-2 {
-display: grid;
-grid-template-columns: 1fr 1fr;
-gap: 40px;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 40px;
 }
 
 /* INPUT CARDS */
 .card {
-background: rgba(12,18,30,0.8);
-border: 1px solid rgba(255,255,255,0.08);
-padding: 16px 20px;
-border-radius: 10px;
-text-align: left;
+  background: rgba(12,18,30,0.8);
+  border: 1px solid rgba(255,255,255,0.08);
+  padding: 16px 20px;
+  border-radius: 10px;
+  text-align: left;
 }
 
 /* INPUT LABELS */
 .card label {
-font-size: 16px;
-display: block;
-margin-bottom: 8px;
+  font-size: 16px;
+  display: block;
+  margin-bottom: 8px;
 }
 
 /* INPUT STYLING */
 select,
 input[type="number"] {
-width: 100%;
-padding: 10px;
-background: rgba(15,22,35,0.9);
-border: 1px solid rgba(255,255,255,0.08);
-color: #ffffff;
-border-radius: 8px;
-font-size: 16px;
-margin-bottom: 20px;
+  width: 100%;
+  padding: 10px;
+  background: rgba(15,22,35,0.9);
+  border: 1px solid rgba(255,255,255,0.08);
+  color: #ffffff;
+  border-radius: 8px;
+  font-size: 16px;
+  margin-bottom: 20px;
+}
+
+/* RUNE PAIR WRAPPER */
+.rune-pair {
+  display: flex;
+  gap: 20px;
+  flex-wrap: wrap;
 }
 
 /* TABLE WRAPPER */
 .table-card {
-margin-top: 40px;
-background: rgba(12,18,30,0.8);
-border: 1px solid rgba(255,255,255,0.08);
-border-radius: 12px;
-padding: 20px;
+  margin-top: 40px;
+  background: rgba(12,18,30,0.8);
+  border: 1px solid rgba(255,255,255,0.08);
+  border-radius: 12px;
+  padding: 20px;
 }
 
 /* TABLE */
 table {
-width: 100%;
-border-collapse: collapse;
-margin-top: 10px;
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 10px;
 }
 
 th {
-padding: 14px 8px;
-font-size: 16px;
-color: #d8c48a;
-border-bottom: 1px solid rgba(255,255,255,0.05);
+  padding: 14px 8px;
+  font-size: 16px;
+  color: #d8c48a;
+  border-bottom: 1px solid rgba(255,255,255,0.05);
 }
 
 td {
-padding: 14px 8px;
-color: white;
-font-size: 15px;
-border-bottom: 1px solid rgba(255,255,255,0.05);
+  padding: 14px 8px;
+  color: white;
+  font-size: 15px;
+  border-bottom: 1px solid rgba(255,255,255,0.05);
 }
 
 /* MOBILE */
 @media (max-width: 700px) {
-.grid-2 {
-grid-template-columns: 1fr;
-}
+  .grid-2 {
+    grid-template-columns: 1fr;
+  }
+  .rune-pair {
+    flex-direction: column;
+  }
 }
 </style>
 </head>
@@ -140,57 +150,56 @@ grid-template-columns: 1fr;
 <!-- LEVEL + ENEMY INFO -->
 <div class="grid-2">
 
-<!-- LEFT COLUMN -->
-<div>
-<div class="section-title">DIANA’S LEVEL</div>
-<div class="card">
-<label>Level</label>
-<select id="diana-level">
-<option>6</option>
-<option>7</option>
-<option>8</option>
-<option>9</option>
-<option>10</option>
-</select>
-</div>
+  <!-- LEFT COLUMN -->
+  <div>
+    <div class="section-title">DIANA’S LEVEL</div>
+    <div class="card">
+      <label>Level</label>
+      <select id="diana-level">
+        <!-- Levels 1–18 -->
+        ${Array.from({length: 18}, (_, i) => `<option>${i+1}</option>`).join('')}
+      </select>
+    </div>
 
-<div class="section-title">PRIMARY RUNES</div>
-<div class="card">
-<select id="primary-runes">
-<option>Domination</option>
-<option>Sorcery</option>
-<option>Precision</option>
-<option>Resolve</option>
-<option>Inspiration</option>
-</select>
-</div>
-</div>
+    <div class="section-title">RUNES</div>
+    <div class="card rune-pair">
+      <div>
+        <label>Primary</label>
+        <select id="primary-runes">
+          <option>Domination</option>
+          <option>Sorcery</option>
+          <option>Precision</option>
+          <option>Resolve</option>
+          <option>Inspiration</option>
+        </select>
+      </div>
+      <div>
+        <label>Secondary</label>
+        <select id="secondary-runes">
+          <option>Domination</option>
+          <option>Sorcery</option>
+          <option>Precision</option>
+          <option>Resolve</option>
+          <option>Inspiration</option>
+        </select>
+      </div>
+    </div>
+  </div>
 
-<!-- RIGHT COLUMN -->
-<div>
-<div class="section-title">ENEMY STATS</div>
-<div class="card">
-<label>HP</label>
-<input type="number" value="2000" id="enemy-hp">
+  <!-- RIGHT COLUMN -->
+  <div>
+    <div class="section-title">ENEMY STATS</div>
+    <div class="card">
+      <label>HP</label>
+      <input type="number" value="2000" id="enemy-hp">
 
-<label>Armor</label>
-<input type="number" value="80" id="enemy-armor">
+      <label>Armor</label>
+      <input type="number" value="80" id="enemy-armor">
 
-<label>MR</label>
-<input type="number" value="15" id="enemy-mr">
-</div>
-
-<div class="section-title">SECONDARY RUNES</div>
-<div class="card">
-<select id="secondary-runes">
-<option>Sorcery</option>
-<option>Domination</option>
-<option>Precision</option>
-<option>Resolve</option>
-<option>Inspiration</option>
-</select>
-</div>
-</div>
+      <label>MR</label>
+      <input type="number" value="15" id="enemy-mr">
+    </div>
+  </div>
 
 </div>
 
@@ -205,39 +214,29 @@ grid-template-columns: 1fr;
 </tr>
 </thead>
 <tbody>
-<tr>
-<td>Electrocute</td>
-<td>57.5</td>
-<td>True</td>
-</tr>
-<tr>
-<td>Sudden Impact</td>
-<td>30.2</td>
-<td>Physical</td>
-</tr>
-<tr>
-<td>Treasure Hunter</td>
-<td>52.3</td>
-<td>True</td>
-</tr>
-<tr>
-<td>Presence of Mind</td>
-<td>31.5</td>
-<td>True</td>
-</tr>
-<tr>
-<td>Manaflow Band</td>
-<td>26.4</td>
-<td>True</td>
-</tr>
+<tr><td>Electrocute</td><td>57.5</td><td>True</td></tr>
+<tr><td>Sudden Impact</td><td>30.2</td><td>Physical</td></tr>
+<tr><td>Treasure Hunter</td><td>52.3</td><td>True</td></tr>
+<tr><td>Presence of Mind</td><td>31.5</td><td>True</td></tr>
+<tr><td>Manaflow Band</td><td>26.4</td><td>True</td></tr>
+<tr><td>Scorch</td><td>22.8</td><td>Magic</td></tr>
 </tbody>
 </table>
 </div>
 
 </div>
 
+<script>
+// Populate Diana levels dynamically
+const levelSelect = document.getElementById('diana-level');
+levelSelect.innerHTML = '';
+for (let i=1;i<=18;i++){
+  const opt = document.createElement('option');
+  opt.value = i;
+  opt.textContent = i;
+  levelSelect.appendChild(opt);
+}
+</script>
+
 </body>
 </html>
-
-
-
