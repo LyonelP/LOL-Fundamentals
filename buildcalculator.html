@@ -35,7 +35,6 @@ header {
   color:#000;text-decoration:none;border-radius:6px;font-weight:bold;
 }
 .back-button::before{content:"← ";}
-.back-button:hover{background:linear-gradient(135deg,#e6c97f,#f0d88b);}
 
 .calc-container{
   max-width:900px;
@@ -131,14 +130,46 @@ footer{text-align:center;padding:12px;font-size:14px;color:#8b949e;}
   <div class="section-title">Runes</div>
   <div class="rune-tree">
     <div class="rune-column">
-      <div style="font-weight:bold;margin-bottom:6px;">Primary Path</div>
-      <div class="rune-row"><select id="primary-slot-1"><option value="shieldbash">Shield Bash</option></select></div>
-      <div class="rune-row"><select id="primary-slot-2"><option value="electrocute">Electrocute</option></select></div>
+      <div style="font-weight:bold;margin-bottom:6px;">Primary Path (Keystone)</div>
+      <div class="rune-row"><select id="primary-slot-1">
+        <option value="electrocute">Electrocute</option>
+        <option value="arcanecomet">Arcane Comet</option>
+        <option value="predator">Predator</option>
+        <option value="phaserush">Phase Rush</option>
+      </select></div>
+      <div class="rune-row"><select id="primary-slot-2">
+        <option value="suddenimpact">Sudden Impact</option>
+        <option value="cheapshot">Cheap Shot</option>
+        <option value="tasteofblood">Taste of Blood</option>
+        <option value="eyeballcollection">Eyeball Collection</option>
+      </select></div>
+      <div class="rune-row"><select id="primary-slot-3">
+        <option value="ghostporo">Ghost Poro</option>
+        <option value="zombieward">Zombie Ward</option>
+        <option value="relentlesshunter">Relentless Hunter</option>
+        <option value="ingenioushunter">Ingenious Hunter</option>
+      </select></div>
+      <div class="rune-row"><select id="primary-slot-4">
+        <option value="ultimatehunter">Ultimate Hunter</option>
+        <option value="ravenoushunter">Ravenous Hunter</option>
+        <option value="celerity">Celerity</option>
+        <option value="manaflowband">Manaflow Band</option>
+      </select></div>
     </div>
     <div class="rune-column">
       <div style="font-weight:bold;margin-bottom:6px;">Secondary Path</div>
-      <div class="rune-row"><select id="secondary-slot-1"><option value="scorch">Scorch</option></select></div>
-      <div class="rune-row"><select id="secondary-slot-2"><option value="absolutefocus">Absolute Focus</option></select></div>
+      <div class="rune-row"><select id="secondary-slot-1">
+        <option value="scorch">Scorch</option>
+        <option value="nullifyingorb">Nullifying Orb</option>
+        <option value="boneplating">Bone Plating</option>
+        <option value="magicalfootwear">Magical Footwear</option>
+      </select></div>
+      <div class="rune-row"><select id="secondary-slot-2">
+        <option value="absolutefocus">Absolute Focus</option>
+        <option value="overheal">Overheal</option>
+        <option value="revitalize">Revitalize</option>
+        <option value="conditioning">Conditioning</option>
+      </select></div>
     </div>
   </div>
 
@@ -147,8 +178,8 @@ footer{text-align:center;padding:12px;font-size:14px;color:#8b949e;}
   <div class="results-box">
     <h4>Damage per Rune</h4>
     <table id="rune-results">
-      <thead><tr><th>Rune</th><th>Base Damage</th><th>AP Scaling</th><th>Enemy MR</th><th>Damage Done</th></tr></thead>
-      <tbody><tr><td colspan="5">Click Calculate</td></tr></tbody>
+      <thead><tr><th>Rune</th><th>Base Damage</th><th>Scaling</th><th>Type</th><th>Enemy MR/Armor</th><th>Damage Done</th></tr></thead>
+      <tbody><tr><td colspan="6">Click Calculate</td></tr></tbody>
     </table>
     <p id="total-damage"></p>
   </div>
@@ -158,25 +189,52 @@ footer{text-align:center;padding:12px;font-size:14px;color:#8b949e;}
 
 <script>
 const runeData = {
-  shieldbash: { base:[8,10,12,14,16,18,20,22,24,26,28,30,32,34,36,38,40,42], ap:0 },
-  electrocute: { base:[50,80,110,140,170,200,230,260,290,320,350,380,410,440,470,500,530,560], ap:0.25 },
-  scorch: { base:[15,20,25,30,35,40,45,50,55,60,65,70,75,80,85,90,95,100], ap:0.1 },
-  absolutefocus: { base:[0], ap:0.1 }
+  electrocute: { type:'magic', base:[70,90,110,130,150,170,190,210,230,250,270,290,310,330,350,370,390,410], scaling:0.5 },
+  scorch: { type:'magic', base:[15,20,25,30,35,40,45,50,55,60,65,70,75,80,85,90,95,100], scaling:0.1 },
+  shieldbash: { type:'physical', base:[8,10,12,14,16,18,20,22,24,26,28,30,32,34,36,38,40,42], scaling:0 },
+  arcanecomet: { type:'magic', base:[30,45,60,75,90,105,120,135,150,165,180,195,210,225,240,255,270,285], scaling:0.2 },
+  predator: { type:'true', base:[125,175,225,275,325,375,425,475,525,575,625,675,725,775,825,875,925,975], scaling:0.1 },
+  phaserush: { type:'magic', base:[20,35,50,65,80,95,110,125,140,155,170,185,200,215,230,245,260,275], scaling:0.1 },
+  suddenimpact: { type:'magic', base:[10,15,20,25,30,35,40,45,50,55,60,65,70,75,80,85,90,95,100], scaling:0.1 },
+  cheapshot: { type:'true', base:[12,15,18,21,24,27,30,33,36,39,42,45,48,51,54,57,60,63,66], scaling:0 },
+  tasteofblood: { type:'magic', base:[20,25,30,35,40,45,50,55,60,65,70,75,80,85,90,95,100], scaling:0.2 },
+  eyeballcollection: { type:'magic', base:[15,20,25,30,35,40,45,50,55,60,65,70,75,80,85,90,95,100], scaling:0.2 },
+  ghostporo: { type:'magic', base:[10,15,20,25,30,35,40,45,50,55,60,65,70,75,80,85,90,95,100], scaling:0 },
+  zombieward: { type:'magic', base:[8,10,12,14,16,18,20,22,24,26,28,30,32,34,36,38,40,42], scaling:0 },
+  relentlesshunter: { type:'magic', base:[5,10,15,20,25,30,35,40,45,50,55,60,65,70,75,80,85,90,95,100], scaling:0 },
+  ingenioushunter: { type:'magic', base:[10,15,20,25,30,35,40,45,50,55,60,65,70,75,80,85,90,95,100], scaling:0 },
+  ultimatehunter: { type:'magic', base:[20,25,30,35,40,45,50,55,60,65,70,75,80,85,90,95,100], scaling:0 },
+  ravenoushunter: { type:'magic', base:[25,30,35,40,45,50,55,60,65,70,75,80,85,90,95,100], scaling:0 },
+  celerity: { type:'magic', base:[10,15,20,25,30,35,40,45,50,55,60,65,70,75,80,85,90,95,100], scaling:0 },
+  manaflowband: { type:'magic', base:[15,20,25,30,35,40,45,50,55,60,65,70,75,80,85,90,95,100], scaling:0 },
+  nullifyingorb: { type:'magic', base:[15,20,25,30,35,40,45,50,55,60,65,70,75,80,85,90,95,100], scaling:0 },
+  boneplating: { type:'physical', base:[20,25,30,35,40,45,50,55,60,65,70,75,80,85,90,95,100], scaling:0 },
+  magicalfootwear: { type:'magic', base:[10,15,20,25,30,35,40,45,50,55,60,65,70,75,80,85,90,95,100], scaling:0 },
+  absolutfocus: { type:'magic', base:[0], scaling:0.1 },
+  overheal: { type:'magic', base:[0], scaling:0 },
+  revitalize: { type:'magic', base:[0], scaling:0 },
+  conditioning: { type:'magic', base:[0], scaling:0 }
 };
 
-function calcDamage(base, apScaling, ap, mr){
-  const raw = base + apScaling*ap;
-  return Math.round(raw*100/(100+mr));
+function calcDamage(base, scaling, ap, type, enemyMR, enemyArmor){
+  let raw = base + scaling*ap;
+  if(type==='magic') return Math.round(raw*100/(100+enemyMR));
+  if(type==='physical') return Math.round(raw*100/(100+enemyArmor));
+  if(type==='true') return Math.round(raw);
+  return Math.round(raw);
 }
 
 document.getElementById('calculate-btn').addEventListener('click',()=>{
   const level = Number(document.getElementById('diana-level').value)-1;
   const enemyMR = Number(document.getElementById('enemy-mr').value)||0;
-  const ap = 0; // placeholder, items could add later
+  const enemyArmor = Number(document.getElementById('enemy-armor').value)||0;
+  const ap = 0; // can add items later
 
   const slots = [
     document.getElementById('primary-slot-1').value,
     document.getElementById('primary-slot-2').value,
+    document.getElementById('primary-slot-3').value,
+    document.getElementById('primary-slot-4').value,
     document.getElementById('secondary-slot-1').value,
     document.getElementById('secondary-slot-2').value
   ];
@@ -187,11 +245,11 @@ document.getElementById('calculate-btn').addEventListener('click',()=>{
 
   slots.forEach(r=>{
     const data = runeData[r];
-    const base = data.base[level]||data.base[0];
-    const dmg = calcDamage(base,data.ap,ap,enemyMR);
+    const base = data.base[level]!==undefined ? data.base[level] : data.base[0];
+    const dmg = calcDamage(base,data.scaling,ap,data.type,enemyMR,enemyArmor);
     total+=dmg;
     const tr=document.createElement('tr');
-    tr.innerHTML=`<td>${r}</td><td>${base}</td><td>${data.ap}</td><td>${enemyMR}</td><td>${dmg}</td>`;
+    tr.innerHTML=`<td>${r}</td><td>${base}</td><td>${data.scaling}</td><td>${data.type}</td><td>${data.type==='magic'?enemyMR:enemyArmor}</td><td>${dmg}</td>`;
     tbody.appendChild(tr);
   });
   document.getElementById('total-damage').textContent=`Total Damage: ${total}`;
@@ -199,4 +257,6 @@ document.getElementById('calculate-btn').addEventListener('click',()=>{
 </script>
 </body>
 </html>
+
+
 
