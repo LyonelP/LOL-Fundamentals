@@ -150,6 +150,12 @@ footer {
   .grid-2 {
     grid-template-columns: 1fr;
   }
+  .grid-2 > div:first-child {
+    margin-bottom: 20px;
+  }
+  .grid-2 > div:nth-child(2) {
+    margin-bottom: 30px; /* Extra spacing for enemy stats */
+  }
 }
 </style>
 </head>
@@ -298,7 +304,7 @@ const PRIMARY_PATHS = {
 
 const SECONDARY_NONKEY = {
   domination:["Cheap Shot","Taste of Blood","Sudden Impact","Sixth Sense","Grisly Memories","Treasure Hunter","Relentless Hunter","Ultimate Hunter","Hail of Blades"],
-  sorcery:["Nimbus Cloak","Transcendence","Celerity","Scorch","Waterwalking","Gathering Storm","Aery","Comet","Phase Rush"],
+  sorcery:["Manaflow Band","Transcendence","Celerity","Scorch","Waterwalking","Gathering Storm","Aery","Comet","Phase Rush"],
   precision:["Presence of Mind","Triumph","Coup de Grace","Legend: Alacrity","Legend: Tenacity","Cut Down","Last Stand","Null","Null"],
   resolve:["Demolish","Font of Life","Shield Bash","Conditioning","Second Wind","Bone Plating","Revitalize","Null","Null"],
   inspiration:["Hextech Flashtraption","Magical Footwear","Future's Market","Minion Dematerializer","Biscuit Delivery","Cosmic Insight","Approach Velocity","Time Warp Tonic","Unsealed Spellbook"]
@@ -402,6 +408,7 @@ document.addEventListener("DOMContentLoaded",()=>{
   document.getElementById("calculate-btn").addEventListener("click",calculateDamage);
   
   // Set default secondary runes (Sorcery)
+  document.getElementById("secondary-path").value="sorcery";
   document.getElementById("secondary-slot-1").value="Manaflow Band";
   document.getElementById("secondary-slot-2").value="Transcendence";
 });
@@ -409,3 +416,5 @@ document.addEventListener("DOMContentLoaded",()=>{
 
 </body>
 </html>
+
+
