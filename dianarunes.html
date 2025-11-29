@@ -52,6 +52,13 @@ header::after {
   margin: 0 auto 40px;
 }
 
+.section-title {
+  text-align: left;
+  font-size: 18px;
+  font-weight: 700;
+  margin: 25px 0 12px;
+}
+
 .grid-2 {
   display: grid;
   grid-template-columns: 1fr 1fr;
@@ -86,6 +93,14 @@ input[type="number"] {
   -webkit-appearance: none;
   -moz-appearance: none;
   appearance: none;
+}
+
+/* Single white dropdown arrow */
+select {
+  background-image: url('data:image/svg+xml;utf8,<svg fill="white" height="12" viewBox="0 0 24 24" width="12" xmlns="http://www.w3.org/2000/svg"><path d="M7 10l5 5 5-5z"/></svg>');
+  background-repeat: no-repeat;
+  background-position: right 10px center;
+  background-size: 12px;
 }
 
 .calculate-btn {
@@ -141,14 +156,6 @@ footer {
   font-size: 14px;
 }
 
-/* Single white arrow for all dropdowns */
-select {
-  background-image: url('data:image/svg+xml;utf8,<svg fill="white" height="12" viewBox="0 0 24 24" width="12" xmlns="http://www.w3.org/2000/svg"><path d="M7 10l5 5 5-5z"/></svg>');
-  background-repeat: no-repeat;
-  background-position: right 10px center;
-  background-size: 12px;
-}
-
 /* --- MOBILE ONLY --- */
 @media (max-width: 700px) {
   .grid-2 {
@@ -157,22 +164,17 @@ select {
     gap: 20px; /* consistent spacing */
   }
 
-  /* Correct mobile stacking order */
-  #diana-level-card-wrapper { order: 1; }
-  #enemy-stats-card-wrapper { order: 2; }
-  #primary-runes-card-wrapper { order: 3; }
-  #secondary-runes-card-wrapper { order: 4; }
-
-  /* Slightly wider cards for mobile */
+  /* Adjust card width */
   .card {
     width: 95%;
     margin: 0 auto;
   }
 
-  /* Increase enemy stats spacing */
-  #enemy-stats-card {
-    margin-top: 10px;
-  }
+  /* Mobile stacking order */
+  .container > .grid-2 > div:nth-child(1) { order: 1; } /* Diana Level */
+  .container > .grid-2 > div:nth-child(2) { order: 2; } /* Enemy Stats */
+  .container > .grid-2 > div:nth-child(3) { order: 3; } /* Primary Runes */
+  .container > .grid-2 > div:nth-child(4) { order: 4; } /* Secondary Runes */
 }
 </style>
 </head>
@@ -180,28 +182,26 @@ select {
 <body>
 
 <header>DIANA RUNE CALCULATOR</header>
+
 <a class="return-btn" href="membershub.html">BACK TO MEMBERS HUB</a>
 
 <div class="container">
 
 <div class="grid-2">
 
-  <!-- Diana Level -->
+  <!-- LEFT COLUMN -->
   <div id="diana-level-card-wrapper">
-    <div class="card" id="diana-level-card">
-      <div class="section-title">DIANA’S LEVEL</div>
+    <div class="section-title">DIANA’S LEVEL</div>
+    <div class="card">
       <label>Level</label>
       <select id="diana-level"></select>
     </div>
-  </div>
 
-  <!-- Primary Runes -->
-  <div id="primary-runes-card-wrapper">
+    <div class="section-title">PRIMARY RUNES</div>
     <div class="card">
-      <div class="section-title">PRIMARY RUNES</div>
       <label>Primary Path</label>
       <select id="primary-path">
-        <option value="domination" selected>Domination</option>
+        <option value="domination">Domination</option>
         <option value="sorcery">Sorcery</option>
         <option value="precision">Precision</option>
         <option value="resolve">Resolve</option>
@@ -219,10 +219,10 @@ select {
     </div>
   </div>
 
-  <!-- Enemy Stats -->
+  <!-- RIGHT COLUMN -->
   <div id="enemy-stats-card-wrapper">
-    <div class="card" id="enemy-stats-card">
-      <div class="section-title">ENEMY STATS</div>
+    <div class="section-title">ENEMY STATS</div>
+    <div class="card">
       <label>HP</label>
       <input type="number" value="600" id="enemy-hp">
       <label>Armor</label>
@@ -230,16 +230,13 @@ select {
       <label>MR</label>
       <input type="number" value="30" id="enemy-mr">
     </div>
-  </div>
 
-  <!-- Secondary Runes -->
-  <div id="secondary-runes-card-wrapper">
+    <div class="section-title">SECONDARY RUNES</div>
     <div class="card">
-      <div class="section-title">SECONDARY RUNES</div>
       <label>Secondary Path (pick a different path)</label>
       <select id="secondary-path">
         <option value="domination">Domination</option>
-        <option value="sorcery" selected>Sorcery</option>
+        <option value="sorcery">Sorcery</option>
         <option value="precision">Precision</option>
         <option value="resolve">Resolve</option>
         <option value="inspiration">Inspiration</option>
@@ -251,7 +248,6 @@ select {
       <select id="secondary-slot-2"></select>
     </div>
   </div>
-
 </div>
 
 <button class="calculate-btn" id="calculate-btn">Calculate Damage</button>
@@ -276,10 +272,12 @@ select {
   </table>
 </div>
 
+</div>
+
 <footer>© 2025 LoL Fundamentals · All rights reserved</footer>
 
 <script>
-// --- Rune Data ---
+/* --- JS same as desktop version --- */
 const RUNE_DAMAGE = {
   "Electrocute": { type:"Magic", min:70, max:240, ratio:0 },
   "Cheap Shot": { type:"True", min:10, max:45, ratio:0 },
@@ -394,13 +392,11 @@ function enforcePaths(){
   }
 }
 
-// --- Init ---
 document.addEventListener("DOMContentLoaded",()=>{
   initLevel();
   populatePrimary(document.getElementById("primary-path").value);
   populateSecondary(document.getElementById("secondary-path").value);
   enforcePaths();
-
   document.getElementById("primary-path").addEventListener("change",e=>{
     populatePrimary(e.target.value); enforcePaths();
   });
@@ -413,5 +409,7 @@ document.addEventListener("DOMContentLoaded",()=>{
 
 </body>
 </html>
+
+
 
 
