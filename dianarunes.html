@@ -145,6 +145,7 @@ footer {
   font-size: 14px;
 }
 
+/* Mobile */
 @media (max-width: 700px) {
   .grid-2 {
     grid-template-columns: 1fr;
@@ -251,114 +252,166 @@ footer {
 <footer>© 2025 LoL Fundamentals · All rights reserved</footer>
 
 <script>
-// ----- DAMAGE DATA -----
+/* --- Rune Data --- */
 const RUNE_DAMAGE = {
-  "Electrocute": {type:"Magic", base:70, max:240, ratio:0.05},
-  "Cheap Shot": {type:"True", base:10, max:45}, 
-  "Sudden Impact": {type:"True", base:20, max:20},
-  "Aery": {type:"Magic", min:10, max:50, ratio:0.005},
-  "Comet": {type:"Magic", min:10, max:50, ratio:0.005},
-  "Scorch": {type:"Magic", min:20, max:40, ratio:0}
+  "Electrocute": { type:"Magic", min:70, max:240, ratio:0 },
+  "Cheap Shot": { type:"True", min:10, max:45, ratio:0 },
+  "Sudden Impact": { type:"True", min:20, max:20, ratio:0 },
+  "Aery": { type:"Magic", min:10, max:50, ratio:0.005 },
+  "Comet": { type:"Magic", min:10, max:50, ratio:0.005 },
+  "Scorch": { type:"Magic", min:20, max:40, ratio:0 },
 };
 
-// ----- PATH DATA -----
+/* Primary path slots */
 const PRIMARY_PATHS = {
-  domination:{slot1:["Electrocute","Predator","Dark Harvest"], slot2:["Cheap Shot","Taste of Blood","Sudden Impact"], slot3:["Sixth Sense","Grisly Memories","Null"], slot4:["Treasure Hunter","Relentless Hunter","Ultimate Hunter"]},
-  sorcery:{slot1:["Aery","Comet","Phase Rush"], slot2:["Nimbus Cloak","Manaflow Band","Transcendence"], slot3:["Scorch","Waterwalking","Gathering Storm"], slot4:["Null","Null","Null"]},
-  precision:{slot1:["Press the Attack","Lethal Tempo","Fleet Footwork"], slot2:["Presence of Mind","Triumph","Coup de Grace"], slot3:["Legend: Alacrity","Legend: Tenacity","Cut Down"], slot4:["Last Stand","Null","Null"]},
-  resolve:{slot1:["Grasp of the Undying","Aftershock","Guardian"], slot2:["Demolish","Font of Life","Shield Bash"], slot3:["Conditioning","Second Wind","Bone Plating"], slot4:["Revitalize","Null","Null"]},
-  inspiration:{slot1:["Glacial Augment","Unsealed Spellbook","First Strike"], slot2:["Hextech Flashtraption","Magical Footwear","Future's Market"], slot3:["Minion Dematerializer","Biscuit Delivery","Cosmic Insight"], slot4:["Approach Velocity","Time Warp Tonic","Null"]}
+  domination: {
+    slot1:["Electrocute","Hail of Blades","Dark Harvest"],
+    slot2:["Cheap Shot","Taste of Blood","Sudden Impact"],
+    slot3:["Sixth Sense","Grisly Memories","Null"],
+    slot4:["Treasure Hunter","Relentless Hunter","Ultimate Hunter"]
+  },
+  sorcery: {
+    slot1:["Aery","Comet","Phase Rush"],
+    slot2:["Nimbus Cloak","Transcendence","Celerity"],
+    slot3:["Scorch","Waterwalking","Null"],
+    slot4:["Null","Null","Gathering Storm"]
+  },
+  precision: {
+    slot1:["Press the Attack","Lethal Tempo","Fleet Footwork"],
+    slot2:["Presence of Mind","Triumph","Coup de Grace"],
+    slot3:["Legend: Alacrity","Legend: Tenacity","Cut Down"],
+    slot4:["Last Stand","Null","Null"]
+  },
+  resolve: {
+    slot1:["Grasp of the Undying","Aftershock","Guardian"],
+    slot2:["Demolish","Font of Life","Shield Bash"],
+    slot3:["Conditioning","Second Wind","Bone Plating"],
+    slot4:["Revitalize","Null","Null"]
+  },
+  inspiration: {
+    slot1:["Glacial Augment","Unsealed Spellbook","First Strike"],
+    slot2:["Hextech Flashtraption","Magical Footwear","Future's Market"],
+    slot3:["Minion Dematerializer","Biscuit Delivery","Cosmic Insight"],
+    slot4:["Approach Velocity","Time Warp Tonic","Null"]
+  }
 };
 
+/* Secondary options (no keystones) */
 const SECONDARY_NONKEY = {
-  domination:["Electrocute","Predator","Dark Harvest","Cheap Shot","Taste of Blood","Sudden Impact","Sixth Sense","Grisly Memories","Treasure Hunter"],
-  sorcery:["Aery","Comet","Nimbus Cloak","Manaflow Band","Transcendence","Scorch","Waterwalking","Gathering Storm","Phase Rush"],
-  precision:["Press the Attack","Lethal Tempo","Fleet Footwork","Presence of Mind","Triumph","Coup de Grace","Legend: Alacrity","Legend: Tenacity","Cut Down"],
-  resolve:["Grasp of the Undying","Aftershock","Guardian","Demolish","Font of Life","Shield Bash","Conditioning","Second Wind","Bone Plating"],
-  inspiration:["Glacial Augment","Unsealed Spellbook","First Strike","Hextech Flashtraption","Magical Footwear","Future's Market","Minion Dematerializer","Biscuit Delivery","Cosmic Insight"]
+  domination:["Cheap Shot","Taste of Blood","Sudden Impact","Sixth Sense","Grisly Memories","Treasure Hunter","Relentless Hunter","Ultimate Hunter","Hail of Blades"],
+  sorcery:["Nimbus Cloak","Transcendence","Celerity","Scorch","Waterwalking","Gathering Storm","Aery","Comet","Phase Rush"],
+  precision:["Presence of Mind","Triumph","Coup de Grace","Legend: Alacrity","Legend: Tenacity","Cut Down","Last Stand","Null","Null"],
+  resolve:["Demolish","Font of Life","Shield Bash","Conditioning","Second Wind","Bone Plating","Revitalize","Null","Null"],
+  inspiration:["Hextech Flashtraption","Magical Footwear","Future's Market","Minion Dematerializer","Biscuit Delivery","Cosmic Insight","Approach Velocity","Time Warp Tonic","Unsealed Spellbook"]
 };
 
-// ----- UTILITY FUNCTIONS -----
-function populateSelect(selectEl, options, keepValue){
-  const prev = keepValue ? selectEl.value : null;
-  selectEl.innerHTML = '';
+/* Populate select helper */
+function populateSelect(el, options, keepVal){
+  const prev = keepVal?el.value:null;
+  el.innerHTML="";
   options.forEach(opt=>{
-    const o=document.createElement('option'); o.value=opt; o.textContent=opt; selectEl.appendChild(o);
+    const o=document.createElement("option");
+    o.value=o.textContent=opt;
+    el.appendChild(o);
   });
-  if(keepValue && prev){
-    for(let i=0;i<selectEl.options.length;i++){if(selectEl.options[i].value===prev){selectEl.selectedIndex=i;break;}}
+  if(keepVal && prev){
+    for(let i=0;i<el.options.length;i++){
+      if(el.options[i].value===prev){ el.selectedIndex=i; break; }
+    }
   }
 }
 
-function initLevelSelect(){
-  const lvl=document.getElementById('diana-level');
+/* Level dropdown */
+function initLevel(){
+  const lvl=document.getElementById("diana-level");
   for(let i=1;i<=18;i++){
-    const o=document.createElement('option'); o.value=i; o.textContent=i; lvl.appendChild(o);
+    const o=document.createElement("option"); o.value=i; o.textContent=i;
+    lvl.appendChild(o);
   }
   lvl.value=1;
 }
 
+/* Populate primary & secondary */
 function populatePrimary(path){
   const data=PRIMARY_PATHS[path];
-  populateSelect(document.getElementById('primary-slot-1'),data.slot1);
-  populateSelect(document.getElementById('primary-slot-2'),data.slot2);
-  populateSelect(document.getElementById('primary-slot-3'),data.slot3);
-  populateSelect(document.getElementById('primary-slot-4'),data.slot4);
+  populateSelect(document.getElementById("primary-slot-1"),data.slot1);
+  populateSelect(document.getElementById("primary-slot-2"),data.slot2);
+  populateSelect(document.getElementById("primary-slot-3"),data.slot3);
+  populateSelect(document.getElementById("primary-slot-4"),data.slot4);
 }
-
 function populateSecondary(path){
   const data=SECONDARY_NONKEY[path]||[];
-  populateSelect(document.getElementById('secondary-slot-1'),data);
-  populateSelect(document.getElementById('secondary-slot-2'),data);
+  populateSelect(document.getElementById("secondary-slot-1"),data);
+  populateSelect(document.getElementById("secondary-slot-2"),data);
 }
 
-function linearScale(min,max,level){
+/* Damage scaling */
+function scaleDamage(min,max,level){
   return Math.round(min + (max-min)*(level-1)/17);
 }
+function calcDamage(rune,level,ap,mr){
+  if(!rune || rune==="Null") return {damage:0,type:""};
+  if(rune==="Cheap Shot") return {damage:scaleDamage(10,45,level),type:"True"};
+  const meta=RUNE_DAMAGE[rune];
+  if(!meta) return {damage:0,type:""};
+  let dmg=scaleDamage(meta.min,meta.max,level)+Math.round((meta.ratio||0)*ap);
+  if(meta.type==="Magic") dmg=Math.round(dmg*100/(100+mr));
+  return {damage:dmg,type:meta.type};
+}
 
+/* Calculate */
 function calculateDamage(){
-  const level=parseInt(document.getElementById('diana-level').value,10);
-  const enemyMR=parseFloat(document.getElementById('enemy-mr').value)||30;
-  const ap=level*5; 
+  const level=parseInt(document.getElementById("diana-level").value,10);
+  const enemyMR=parseFloat(document.getElementById("enemy-mr").value)||30;
+  const ap=Math.round(level*5);
+
   const slots=[
-    document.getElementById('primary-slot-1').value,
-    document.getElementById('primary-slot-2').value,
-    document.getElementById('primary-slot-3').value,
-    document.getElementById('primary-slot-4').value,
-    document.getElementById('secondary-slot-1').value,
-    document.getElementById('secondary-slot-2').value
+    document.getElementById("primary-slot-1").value,
+    document.getElementById("primary-slot-2").value,
+    document.getElementById("primary-slot-3").value,
+    document.getElementById("primary-slot-4").value,
+    document.getElementById("secondary-slot-1").value,
+    document.getElementById("secondary-slot-2").value
   ];
-  const tbody=document.getElementById('rune-damage-table'); tbody.innerHTML='';
+
+  const tbody=document.getElementById("rune-damage-table");
+  tbody.innerHTML="";
   slots.forEach(rune=>{
-    let displayDamage=0; let dtype='';
-    if(!rune||rune==="Null"){displayDamage=0; dtype='';}
-    else if(RUNE_DAMAGE[rune]){
-      const r=RUNE_DAMAGE[rune];
-      if(rune==="Cheap Shot"){displayDamage=linearScale(r.base,r.max,level); dtype="True";}
-      else if(rune==="Aery"||rune==="Comet"){displayDamage=linearScale(r.min,r.max,level)+Math.round(ratio=ap*r.ratio); dtype="Magic";}
-      else if(rune==="Scorch"){displayDamage=linearScale(r.min,r.max,level); dtype="Magic";}
-      else if(r.type==="Magic"){const raw=(r.base||0)+(r.ratio||0)*ap; displayDamage=Math.round(raw*100/(100+enemyMR)); dtype="Magic";}
-      else if(r.type==="True"){displayDamage=Math.round(r.base||0); dtype="True";}
-    } else {displayDamage=0; dtype='';}
-    const tr=document.createElement('tr'); tr.innerHTML=`<td>${rune}</td><td>${displayDamage}</td><td>${dtype}</td>`; tbody.appendChild(tr);
+    const {damage,type}=calcDamage(rune,level,ap,enemyMR);
+    const tr=document.createElement("tr");
+    tr.innerHTML=`<td>${rune}</td><td>${damage}</td><td>${type}</td>`;
+    tbody.appendChild(tr);
   });
 }
 
-function enforceDifferentPaths(){
-  const primary=document.getElementById('primary-path').value;
-  const secondarySelect=document.getElementById('secondary-path');
-  for(let i=0;i<secondarySelect.options.length;i++){secondarySelect.options[i].disabled=(secondarySelect.options[i].value===primary);}
-  if(secondarySelect.value===primary){for(let i=0;i<secondarySelect.options.length;i++){if(!secondarySelect.options[i].disabled){secondarySelect.selectedIndex=i;break;}}}
+/* Prevent same path in secondary */
+function enforcePaths(){
+  const primary=document.getElementById("primary-path").value;
+  const secondary=document.getElementById("secondary-path");
+  for(let i=0;i<secondary.options.length;i++){
+    secondary.options[i].disabled=(secondary.options[i].value===primary);
+  }
+  if(secondary.value===primary){
+    for(let i=0;i<secondary.options.length;i++){
+      if(!secondary.options[i].disabled){ secondary.selectedIndex=i; break; }
+    }
+  }
 }
 
-document.addEventListener('DOMContentLoaded',()=>{
-  initLevelSelect();
-  populatePrimary(document.getElementById('primary-path').value);
-  populateSecondary(document.getElementById('secondary-path').value);
-  enforceDifferentPaths();
-  document.getElementById('primary-path').addEventListener('change',(e)=>{populatePrimary(e.target.value); enforceDifferentPaths();});
-  document.getElementById('secondary-path').addEventListener('change',(e)=>{populateSecondary(e.target.value); enforceDifferentPaths();});
-  document.getElementById('calculate-btn').addEventListener('click',calculateDamage);
+/* Init */
+document.addEventListener("DOMContentLoaded",()=>{
+  initLevel();
+  populatePrimary(document.getElementById("primary-path").value);
+  populateSecondary(document.getElementById("secondary-path").value);
+  enforcePaths();
+
+  document.getElementById("primary-path").addEventListener("change",e=>{
+    populatePrimary(e.target.value); enforcePaths();
+  });
+  document.getElementById("secondary-path").addEventListener("change",e=>{
+    populateSecondary(e.target.value); enforcePaths();
+  });
+  document.getElementById("calculate-btn").addEventListener("click",calculateDamage);
 });
 </script>
 
