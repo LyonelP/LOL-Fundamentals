@@ -141,6 +141,14 @@ footer {
   font-size: 14px;
 }
 
+/* Single white arrow for all dropdowns */
+select {
+  background-image: url('data:image/svg+xml;utf8,<svg fill="white" height="12" viewBox="0 0 24 24" width="12" xmlns="http://www.w3.org/2000/svg"><path d="M7 10l5 5 5-5z"/></svg>');
+  background-repeat: no-repeat;
+  background-position: right 10px center;
+  background-size: 12px;
+}
+
 /* --- MOBILE ONLY --- */
 @media (max-width: 700px) {
   .grid-2 {
@@ -161,18 +169,10 @@ footer {
     margin: 0 auto;
   }
 
-  /* Slightly increase enemy stats card height to match spacing */
+  /* Increase enemy stats spacing */
   #enemy-stats-card {
     margin-top: 10px;
   }
-}
-
-/* Single white arrow for all dropdowns */
-select {
-  background-image: url('data:image/svg+xml;utf8,<svg fill="white" height="12" viewBox="0 0 24 24" width="12" xmlns="http://www.w3.org/2000/svg"><path d="M7 10l5 5 5-5z"/></svg>');
-  background-repeat: no-repeat;
-  background-position: right 10px center;
-  background-size: 12px;
 }
 </style>
 </head>
@@ -289,7 +289,6 @@ const RUNE_DAMAGE = {
   "Scorch": { type:"Magic", min:20, max:40, ratio:0 },
 };
 
-// --- Primary & Secondary Slots ---
 const PRIMARY_PATHS = {
   domination: { slot1:["Electrocute","Hail of Blades","Dark Harvest"], slot2:["Cheap Shot","Taste of Blood","Sudden Impact"], slot3:["Sixth Sense","Grisly Memories","Null"], slot4:["Treasure Hunter","Relentless Hunter","Ultimate Hunter"] },
   sorcery: { slot1:["Aery","Comet","Phase Rush"], slot2:["Nimbus Cloak","Transcendence","Celerity"], slot3:["Scorch","Waterwalking","Null"], slot4:["Null","Null","Gathering Storm"] },
@@ -306,7 +305,6 @@ const SECONDARY_NONKEY = {
   inspiration:["Hextech Flashtraption","Magical Footwear","Future's Market","Minion Dematerializer","Biscuit Delivery","Cosmic Insight","Approach Velocity","Time Warp Tonic","Unsealed Spellbook"]
 };
 
-// --- Helpers ---
 function populateSelect(el, options, keepVal){
   const prev = keepVal?el.value:null;
   el.innerHTML="";
@@ -415,4 +413,5 @@ document.addEventListener("DOMContentLoaded",()=>{
 
 </body>
 </html>
+
 
