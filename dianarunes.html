@@ -90,7 +90,7 @@ input[type="number"] {
   border-radius: 8px;
   font-size: 16px;
   margin-bottom: 20px;
-  appearance: none; /* keep white arrow consistent */
+  appearance: none;
   -moz-appearance: none;
   -webkit-appearance: none;
 }
@@ -154,7 +154,7 @@ footer {
     grid-template-columns: 1fr;
   }
   .grid-2 > div {
-    width: 95%;
+    width: 90%;  /* keep previous mobile width */
     margin: 0 auto 20px;
   }
   .section-title {
@@ -172,10 +172,10 @@ footer {
 
 <div class="container">
 
-<div class="grid-2">
+<div class="grid-2" id="mobile-order">
 
   <!-- LEFT COLUMN -->
-  <div id="mobile-left">
+  <div id="left-column">
     <div class="section-title">DIANA’S LEVEL</div>
     <div class="card">
       <label>Level</label>
@@ -205,7 +205,7 @@ footer {
   </div>
 
   <!-- RIGHT COLUMN -->
-  <div id="mobile-right">
+  <div id="right-column">
     <div class="section-title">ENEMY STATS</div>
     <div class="card">
       <label>HP</label>
@@ -269,44 +269,20 @@ const RUNE_DAMAGE = {
   "Scorch": { type:"Magic", min:20, max:40, ratio:0 },
   "Comet": { type:"Magic", min:10, max:50, ratio:0.005 },
   "Aery": { type:"Magic", min:10, max:50, ratio:0.005 },
+  "Manaflow Band": { type:"Magic", min:0, max:0, ratio:0 }
 };
 
 const PRIMARY_PATHS = {
-  domination: {
-    slot1:["Electrocute","Hail of Blades","Dark Harvest"],
-    slot2:["Cheap Shot","Taste of Blood","Sudden Impact"],
-    slot3:["Sixth Sense","Grisly Memories","Null"],
-    slot4:["Treasure Hunter","Relentless Hunter","Ultimate Hunter"]
-  },
-  sorcery: {
-    slot1:["Aery","Comet","Phase Rush"],
-    slot2:["Nimbus Cloak","Transcendence","Celerity"],
-    slot3:["Scorch","Waterwalking","Null"],
-    slot4:["Null","Null","Gathering Storm"]
-  },
-  precision: {
-    slot1:["Press the Attack","Lethal Tempo","Fleet Footwork"],
-    slot2:["Presence of Mind","Triumph","Coup de Grace"],
-    slot3:["Legend: Alacrity","Legend: Tenacity","Cut Down"],
-    slot4:["Last Stand","Null","Null"]
-  },
-  resolve: {
-    slot1:["Grasp of the Undying","Aftershock","Guardian"],
-    slot2:["Demolish","Font of Life","Shield Bash"],
-    slot3:["Conditioning","Second Wind","Bone Plating"],
-    slot4:["Revitalize","Null","Null"]
-  },
-  inspiration: {
-    slot1:["Glacial Augment","Unsealed Spellbook","First Strike"],
-    slot2:["Hextech Flashtraption","Magical Footwear","Future's Market"],
-    slot3:["Minion Dematerializer","Biscuit Delivery","Cosmic Insight"],
-    slot4:["Approach Velocity","Time Warp Tonic","Null"]
-  }
+  domination: { slot1:["Electrocute","Hail of Blades","Dark Harvest"], slot2:["Cheap Shot","Taste of Blood","Sudden Impact"], slot3:["Sixth Sense","Grisly Memories","Null"], slot4:["Treasure Hunter","Relentless Hunter","Ultimate Hunter"] },
+  sorcery: { slot1:["Aery","Comet","Phase Rush"], slot2:["Nimbus Cloak","Transcendence","Celerity"], slot3:["Scorch","Waterwalking","Null"], slot4:["Null","Null","Gathering Storm"] },
+  precision: { slot1:["Press the Attack","Lethal Tempo","Fleet Footwork"], slot2:["Presence of Mind","Triumph","Coup de Grace"], slot3:["Legend: Alacrity","Legend: Tenacity","Cut Down"], slot4:["Last Stand","Null","Null"] },
+  resolve: { slot1:["Grasp of the Undying","Aftershock","Guardian"], slot2:["Demolish","Font of Life","Shield Bash"], slot3:["Conditioning","Second Wind","Bone Plating"], slot4:["Revitalize","Null","Null"] },
+  inspiration: { slot1:["Glacial Augment","Unsealed Spellbook","First Strike"], slot2:["Hextech Flashtraption","Magical Footwear","Future's Market"], slot3:["Minion Dematerializer","Biscuit Delivery","Cosmic Insight"], slot4:["Approach Velocity","Time Warp Tonic","Null"] }
 };
 
 const SECONDARY_NONKEY = {
   domination:["Cheap Shot","Taste of Blood","Sudden Impact","Sixth Sense","Grisly Memories","Treasure Hunter","Relentless Hunter","Ultimate Hunter","Hail of Blades"],
-  sorcery:["Nimbus Cloak","Transcendence","Celerity","Scorch","Waterwalking","Gathering Storm","Manaflow Band"],
+  sorcery:["Manaflow Band","Transcendence","Celerity","Nimbus Cloak","Scorch","Waterwalking","Gathering Storm"],
   precision:["Presence of Mind","Triumph","Coup de Grace","Legend: Alacrity","Legend: Tenacity","Cut Down","Last Stand"],
   resolve:["Demolish","Font of Life","Shield Bash","Conditioning","Second Wind","Bone Plating","Revitalize"],
   inspiration:["Hextech Flashtraption","Magical Footwear","Future's Market","Minion Dematerializer","Biscuit Delivery","Cosmic Insight","Approach Velocity","Time Warp Tonic"]
@@ -349,11 +325,10 @@ function populateSecondary(path){
   populateSelect(document.getElementById("secondary-slot-1"),data);
   populateSelect(document.getElementById("secondary-slot-2"),data);
   document.getElementById("secondary-slot-1").value = data[0] || "";
+  document.getElementById("secondary-slot-2").value = data[1] || "";
 }
 
-function scaleDamage(min,max,level){
-  return Math.round(min + (max-min)*(level-1)/17);
-}
+function scaleDamage(min,max,level){ return Math.round(min + (max-min)*(level-1)/17); }
 
 function calcDamage(rune,level,ap,mr){
   if(!rune || rune==="Null") return {damage:0,type:""};
@@ -369,7 +344,6 @@ function calculateDamage(){
   const level=parseInt(document.getElementById("diana-level").value,10);
   const enemyMR=parseFloat(document.getElementById("enemy-mr").value)||30;
   const ap=Math.round(level*5);
-
   const slots=[
     document.getElementById("primary-slot-1").value,
     document.getElementById("primary-slot-2").value,
@@ -378,7 +352,6 @@ function calculateDamage(){
     document.getElementById("secondary-slot-1").value,
     document.getElementById("secondary-slot-2").value
   ];
-
   const tbody=document.getElementById("rune-damage-table");
   tbody.innerHTML="";
   slots.forEach(rune=>{
@@ -409,7 +382,6 @@ document.addEventListener("DOMContentLoaded",()=>{
   populatePrimary("domination");
   populateSecondary("sorcery");
   enforcePaths();
-
   document.getElementById("primary-path").addEventListener("change",e=>{
     populatePrimary(e.target.value); enforcePaths();
   });
