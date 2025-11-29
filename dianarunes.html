@@ -86,21 +86,17 @@ input[type="number"] {
   padding: 10px;
   background: rgba(15,22,35,0.9);
   border: 1px solid rgba(255,255,255,0.08);
-  color: #ffffff;
+  color: #fff;
   border-radius: 8px;
   font-size: 16px;
   margin-bottom: 20px;
-  appearance: none;
   -webkit-appearance: none;
   -moz-appearance: none;
-  background-image: url("data:image/svg+xml;utf8,<svg fill='white' height='24' viewBox='0 0 24 24' width='24' xmlns='http://www.w3.org/2000/svg'><path d='M7 10l5 5 5-5z'/></svg>");
-  background-repeat: no-repeat;
-  background-position: right 10px center;
-  background-size: 16px;
+  appearance: none;
 }
 
 .calculate-btn {
-  margin: 25px auto 20px;
+  margin: 20px auto 20px;
   display: block;
   padding: 12px 26px;
   font-size: 16px;
@@ -116,7 +112,7 @@ input[type="number"] {
 }
 
 .table-card {
-  margin-top: 10px;
+  margin-top: 20px;
   background: rgba(12,18,30,0.8);
   border: 1px solid rgba(255,255,255,0.08);
   border-radius: 12px;
@@ -157,12 +153,10 @@ footer {
   .grid-2 {
     grid-template-columns: 1fr;
   }
-  .container {
-    width: 95%;
-    margin: 0 auto 20px;
-  }
   .card {
-    padding: 14px;
+    width: calc(100% - 30px);
+    margin: 0 auto 20px;
+    padding: 16px;
   }
 }
 </style>
@@ -184,8 +178,6 @@ footer {
     <div class="card">
       <label>Level</label>
       <select id="diana-level"></select>
-      <!-- Hidden Diana HP for calculations -->
-      <input type="hidden" id="diana-hp" value="650">
     </div>
 
     <div class="section-title">PRIMARY RUNES</div>
@@ -268,7 +260,10 @@ footer {
 <footer>© 2025 LoL Fundamentals · All rights reserved</footer>
 
 <script>
-/* --- Rune Data --- */
+// Diana HP by level (for Grasp calculation)
+const DIANA_HP = [0,650,710,770,830,890,950,1010,1070,1130,1190,1250,1310,1370,1430,1490,1550,1610,1670];
+
+// Rune damage
 const RUNE_DAMAGE = {
   "Electrocute": { type:"Magic", min:70, max:240, ratio:0 },
   "Cheap Shot": { type:"True", min:10, max:45, ratio:0 },
@@ -276,11 +271,11 @@ const RUNE_DAMAGE = {
   "Aery": { type:"Magic", min:10, max:50, ratio:0.005 },
   "Comet": { type:"Magic", min:10, max:50, ratio:0.005 },
   "Scorch": { type:"Magic", min:20, max:40, ratio:0 },
-  "Manaflow Band": { type:"Magic", min:10, max:30, ratio:0 },
-  "Transcendence": { type:"Magic", min:0, max:0, ratio:0 }
+  "Grasp of the Undying": { type:"Magic" },
+  "Shield Bash": { type:"Physical" }
 };
 
-/* Primary path slots */
+// Primary path slots
 const PRIMARY_PATHS = {
   domination: {
     slot1:["Electrocute","Hail of Blades","Dark Harvest"],
@@ -314,16 +309,12 @@ const PRIMARY_PATHS = {
   }
 };
 
-/* Secondary options (no keystones) */
+// Secondary non-keystone
 const SECONDARY_NONKEY = {
-  domination:["Cheap Shot","Taste of Blood","Sudden Impact","Sixth Sense","Grisly Memories","Treasure Hunter","Relentless Hunter","Ultimate Hunter","Hail of Blades"],
-  sorcery:["Manaflow Band","Transcendence","Nimbus Cloak","Celerity","Scorch","Waterwalking","Gathering Storm"],
-  precision:["Presence of Mind","Triumph","Coup de Grace","Legend: Alacrity","Legend: Tenacity","Cut Down","Last Stand","Null","Null"],
-  resolve:["Demolish","Font of Life","Shield Bash","Conditioning","Second Wind","Bone Plating","Revitalize","Null","Null"],
-  inspiration:["Hextech Flashtraption","Magical Footwear","Future's Market","Minion Dematerializer","Biscuit Delivery","Cosmic Insight","Approach Velocity","Time Warp Tonic","Unsealed Spellbook"]
+  sorcery:["Manaflow Band","Transcendence","Celerity","Scorch","Waterwalking","Gathering Storm"]
 };
 
-/* Populate select helper */
+// Populate helper
 function populateSelect(el, options, keepVal){
   const prev = keepVal?el.value:null;
   el.innerHTML="";
@@ -339,7 +330,7 @@ function populateSelect(el, options, keepVal){
   }
 }
 
-/* Level dropdown */
+// Level dropdown
 function initLevel(){
   const lvl=document.getElementById("diana-level");
   for(let i=1;i<=18;i++){
@@ -349,7 +340,7 @@ function initLevel(){
   lvl.value=1;
 }
 
-/* Populate primary & secondary */
+// Primary & secondary
 function populatePrimary(path){
   const data=PRIMARY_PATHS[path];
   populateSelect(document.getElementById("primary-slot-1"),data.slot1);
@@ -360,15 +351,25 @@ function populatePrimary(path){
 function populateSecondary(path){
   const data=SECONDARY_NONKEY[path]||[];
   populateSelect(document.getElementById("secondary-slot-1"),data);
-  populateSelect(document.getElementById("secondary-slot-2"),data);
+  populateSelect(document.getElementById("secondary-slot-2"),data[1]?data[1]:data[0]);
 }
 
-/* Damage scaling */
+// Damage scaling
 function scaleDamage(min,max,level){
   return Math.round(min + (max-min)*(level-1)/17);
 }
 function calcDamage(rune,level,ap,mr){
   if(!rune || rune==="Null") return {damage:0,type:""};
+  if(rune==="Cheap Shot" || rune==="Taste of Blood" || rune==="Manaflow Band" || rune==="Transcendence") return {damage:0,type:""};
+  if(rune==="Grasp of the Undying"){
+      let hp = DIANA_HP[level];
+      return {damage: Math.round(hp*0.035), type:"Magic"};
+  }
+  if(rune==="Shield Bash"){
+      let shield = scaleDamage(45,255,level);
+      let base = scaleDamage(5,30,level);
+      return {damage: Math.round(base + 0 + shield*0.15), type:"Physical"};
+  }
   const meta=RUNE_DAMAGE[rune];
   if(!meta) return {damage:0,type:""};
   let dmg=scaleDamage(meta.min,meta.max,level)+Math.round((meta.ratio||0)*ap);
@@ -376,7 +377,7 @@ function calcDamage(rune,level,ap,mr){
   return {damage:dmg,type:meta.type};
 }
 
-/* Calculate */
+// Calculate
 function calculateDamage(){
   const level=parseInt(document.getElementById("diana-level").value,10);
   const enemyMR=parseFloat(document.getElementById("enemy-mr").value)||30;
@@ -401,7 +402,7 @@ function calculateDamage(){
   });
 }
 
-/* Prevent same path in secondary */
+// Prevent same path
 function enforcePaths(){
   const primary=document.getElementById("primary-path").value;
   const secondary=document.getElementById("secondary-path");
@@ -415,13 +416,11 @@ function enforcePaths(){
   }
 }
 
-/* Init */
+// Init
 document.addEventListener("DOMContentLoaded",()=>{
   initLevel();
   populatePrimary(document.getElementById("primary-path").value);
-  populateSecondary("sorcery"); // default secondary
-  document.getElementById("secondary-slot-1").value="Manaflow Band";
-  document.getElementById("secondary-slot-2").value="Transcendence";
+  populateSecondary("sorcery");
   enforcePaths();
 
   document.getElementById("primary-path").addEventListener("change",e=>{
@@ -429,8 +428,6 @@ document.addEventListener("DOMContentLoaded",()=>{
   });
   document.getElementById("secondary-path").addEventListener("change",e=>{
     populateSecondary(e.target.value); enforcePaths();
-    document.getElementById("secondary-slot-1").value="Manaflow Band";
-    document.getElementById("secondary-slot-2").value="Transcendence";
   });
   document.getElementById("calculate-btn").addEventListener("click",calculateDamage);
 });
@@ -438,5 +435,3 @@ document.addEventListener("DOMContentLoaded",()=>{
 
 </body>
 </html>
-
-
