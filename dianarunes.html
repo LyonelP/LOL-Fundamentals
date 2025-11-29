@@ -165,7 +165,7 @@ footer {
     margin: 0 auto;
   }
 
-  /* Order on mobile */
+  /* Mobile order */
   .diana-level { order: 1; }
   .enemy-stats { order: 2; }
   .primary-runes { order: 3; }
@@ -231,7 +231,7 @@ footer {
       <label>Secondary Path (pick a different path)</label>
       <select id="secondary-path">
         <option value="domination">Domination</option>
-        <option value="sorcery">Sorcery</option>
+        <option value="sorcery" selected>Sorcery</option>
         <option value="precision">Precision</option>
         <option value="resolve">Resolve</option>
         <option value="inspiration">Inspiration</option>
@@ -289,8 +289,9 @@ const PRIMARY_PATHS = {
   inspiration: { slot1:["Glacial Augment","Unsealed Spellbook","First Strike"], slot2:["Hextech Flashtraption","Magical Footwear","Future's Market"], slot3:["Minion Dematerializer","Biscuit Delivery","Cosmic Insight"], slot4:["Approach Velocity","Time Warp Tonic","Null"] }
 };
 
+// Only non-keystone for secondary
 const SECONDARY_NONKEY = {
-  domination:["Cheap Shot","Taste of Blood","Sudden Impact","Sixth Sense","Grisly Memories","Treasure Hunter","Relentless Hunter","Ultimate Hunter","Hail of Blades"],
+  domination:["Sixth Sense","Grisly Memories","Treasure Hunter","Relentless Hunter","Ultimate Hunter","Hail of Blades"],
   sorcery:["Nimbus Cloak","Transcendence","Celerity","Scorch","Waterwalking","Gathering Storm","Manaflow Band"],
   precision:["Presence of Mind","Triumph","Coup de Grace","Legend: Alacrity","Legend: Tenacity","Cut Down","Last Stand"],
   resolve:["Demolish","Font of Life","Shield Bash","Conditioning","Second Wind","Bone Plating","Revitalize"],
@@ -330,7 +331,6 @@ function populateSecondary(path){
   const data=SECONDARY_NONKEY[path]||[];
   populateSelect(document.getElementById("secondary-slot-1"),data);
   populateSelect(document.getElementById("secondary-slot-2"),data);
-  // default Manaflow Band & Transcendence
   if(data.includes("Manaflow Band")) document.getElementById("secondary-slot-1").value="Manaflow Band";
   if(data.includes("Transcendence")) document.getElementById("secondary-slot-2").value="Transcendence";
 }
@@ -398,6 +398,4 @@ document.addEventListener("DOMContentLoaded",()=>{
 
 </body>
 </html>
-
-
 
