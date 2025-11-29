@@ -90,9 +90,9 @@ input[type="number"] {
   border-radius: 8px;
   font-size: 16px;
   margin-bottom: 20px;
-  -webkit-appearance: none;
+  appearance: none; /* ensures single white arrow */
   -moz-appearance: none;
-  appearance: none;
+  -webkit-appearance: none;
 }
 
 .calculate-btn {
@@ -148,17 +148,20 @@ footer {
   font-size: 14px;
 }
 
-/* --- Mobile fixes --- */
+/* --- Mobile --- */
 @media (max-width: 700px) {
   .grid-2 {
-    display: flex;
-    flex-direction: column;
-    gap: 15px;
+    grid-template-columns: 1fr;
   }
   .grid-2 > div {
-    width: 98%;
-    margin: 0 auto;
+    width: 95%;  /* wider cards */
+    margin: 0 auto 20px;
   }
+  /* Reorder sections on mobile */
+  .left-column { order: 1; }      /* Diana level */
+  .enemy-column { order: 2; }     /* Enemy stats */
+  .primary-column { order: 3; }   /* Primary runes */
+  .secondary-column { order: 4; } /* Secondary runes */
 }
 </style>
 </head>
@@ -173,32 +176,16 @@ footer {
 
 <div class="grid-2">
 
-  <!-- Diana Level -->
-  <div id="mobile-level">
+  <!-- LEFT COLUMN -->
+  <div class="left-column">
     <div class="section-title">DIANA’S LEVEL</div>
     <div class="card">
       <label>Level</label>
       <select id="diana-level"></select>
     </div>
-  </div>
 
-  <!-- Enemy Stats -->
-  <div id="mobile-enemy">
-    <div class="section-title">ENEMY STATS</div>
-    <div class="card">
-      <label>HP</label>
-      <input type="number" value="600" id="enemy-hp">
-      <label>Armor</label>
-      <input type="number" value="30" id="enemy-armor">
-      <label>MR</label>
-      <input type="number" value="30" id="enemy-mr">
-    </div>
-  </div>
-
-  <!-- Primary Runes -->
-  <div id="mobile-primary">
     <div class="section-title">PRIMARY RUNES</div>
-    <div class="card">
+    <div class="card primary-column">
       <label>Primary Path</label>
       <select id="primary-path">
         <option value="domination">Domination</option>
@@ -219,10 +206,20 @@ footer {
     </div>
   </div>
 
-  <!-- Secondary Runes -->
-  <div id="mobile-secondary">
-    <div class="section-title">SECONDARY RUNES</div>
+  <!-- RIGHT COLUMN -->
+  <div class="enemy-column">
+    <div class="section-title">ENEMY STATS</div>
     <div class="card">
+      <label>HP</label>
+      <input type="number" value="600" id="enemy-hp">
+      <label>Armor</label>
+      <input type="number" value="30" id="enemy-armor">
+      <label>MR</label>
+      <input type="number" value="30" id="enemy-mr">
+    </div>
+
+    <div class="section-title">SECONDARY RUNES</div>
+    <div class="card secondary-column">
       <label>Secondary Path (pick a different path)</label>
       <select id="secondary-path">
         <option value="domination">Domination</option>
@@ -238,7 +235,6 @@ footer {
       <select id="secondary-slot-2"></select>
     </div>
   </div>
-
 </div>
 
 <button class="calculate-btn" id="calculate-btn">Calculate Damage</button>
@@ -312,7 +308,7 @@ const PRIMARY_PATHS = {
   }
 };
 
-/* Secondary options (no keystones) */
+/* Secondary options (no keystones, sorcery defaults) */
 const SECONDARY_NONKEY = {
   domination:["Cheap Shot","Taste of Blood","Sudden Impact","Sixth Sense","Grisly Memories","Treasure Hunter","Relentless Hunter","Ultimate Hunter","Hail of Blades"],
   sorcery:["Manaflow Band","Transcendence","Nimbus Cloak","Celerity","Scorch","Waterwalking","Gathering Storm"],
@@ -359,6 +355,11 @@ function populateSecondary(path){
   const data=SECONDARY_NONKEY[path]||[];
   populateSelect(document.getElementById("secondary-slot-1"),data);
   populateSelect(document.getElementById("secondary-slot-2"),data);
+  // default to Manaflow Band + Transcendence if sorcery
+  if(path==="sorcery"){
+    document.getElementById("secondary-slot-1").value="Manaflow Band";
+    document.getElementById("secondary-slot-2").value="Transcendence";
+  }
 }
 
 /* Damage scaling */
@@ -433,3 +434,4 @@ document.addEventListener("DOMContentLoaded",()=>{
 
 </body>
 </html>
+
