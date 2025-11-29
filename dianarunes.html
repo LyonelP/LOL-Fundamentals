@@ -160,13 +160,9 @@ footer {
   #enemy-stats-card {
     margin-top: 15px; /* slightly higher for spacing */
   }
-  /* reorder on mobile: level → enemy → primary → secondary */
-  .grid-2 > div:first-child {
-    order: 1;
-  }
-  .grid-2 > div:last-child {
-    order: 2;
-  }
+  /* Reorder: level → enemy → primary → secondary */
+  .grid-2 > div:nth-child(1) { order: 1; } /* Level + Primary */
+  .grid-2 > div:nth-child(2) { order: 2; } /* Enemy + Secondary */
 }
 </style>
 </head>
@@ -273,7 +269,6 @@ const RUNE_DAMAGE = {
   "Sudden Impact": { type:"True", min:20, max:20 },
   "Aery": { type:"Magic", min:10, max:50, ratio:0.005 },
   "Comet": { type:"Magic", min:10, max:50, ratio:0.005 },
-  "Phase Rush": { type:"Magic", min:0, max:0 },
   "Scorch": { type:"Magic", min:20, max:40, ratio:0 },
   "Grasp of the Undying": { type:"Magic", min:0, max:0 },
   "Shield Bash": { type:"Magic", min:5, max:30, ratio:0 }
@@ -288,9 +283,9 @@ const PRIMARY_PATHS = {
   inspiration:{ slot1:["Glacial Augment","Unsealed Spellbook","First Strike"], slot2:["Hextech Flashtraption","Magical Footwear","Future's Market"], slot3:["Minion Dematerializer","Biscuit Delivery","Cosmic Insight"], slot4:["Approach Velocity","Time Warp Tonic","Null"] }
 };
 
-// Secondary options: always sorcery
+// Secondary options (remove keystones, default Manaflow Band)
 const SECONDARY_NONKEY = {
-  sorcery:["Nimbus Cloak","Transcendence","Celerity","Scorch","Waterwalking","Gathering Storm","Aery","Comet","Phase Rush"]
+  sorcery:["Manaflow Band","Transcendence","Celerity","Scorch","Waterwalking","Gathering Storm","Comet"]
 };
 
 // Populate helper
@@ -317,7 +312,7 @@ function populatePrimary(path){
   populateSelect(document.getElementById("primary-slot-4"),data.slot4);
 }
 
-// Populate Secondary (always sorcery)
+// Populate Secondary
 function populateSecondary(){
   const data=SECONDARY_NONKEY["sorcery"];
   populateSelect(document.getElementById("secondary-slot-1"),data);
@@ -372,4 +367,5 @@ document.addEventListener("DOMContentLoaded",()=>{
 
 </body>
 </html>
+
 
