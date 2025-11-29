@@ -152,7 +152,7 @@ footer {
   font-size: 14px;
 }
 
-/* Mobile */
+/* Mobile adjustments */
 @media (max-width: 700px) {
   .grid-2 {
     grid-template-columns: 1fr;
@@ -162,10 +162,21 @@ footer {
     width: 95%;
     margin: 0 auto;
   }
+  /* Correct mobile order */
   .grid-2 > div:nth-child(1) { order: 1; } /* Diana level */
   .grid-2 > div:nth-child(2) { order: 2; } /* Enemy stats */
   .grid-2 > div:nth-child(3) { order: 3; } /* Primary runes */
   .grid-2 > div:nth-child(4) { order: 4; } /* Secondary runes */
+
+  /* Make cards bigger on mobile */
+  .card select, .card input[type="number"] {
+    font-size: 18px;
+    padding: 14px;
+  }
+  .calculate-btn {
+    font-size: 18px;
+    padding: 14px 28px;
+  }
 }
 </style>
 </head>
@@ -275,7 +286,6 @@ footer {
 <footer>© 2025 LoL Fundamentals · All rights reserved</footer>
 
 <script>
-// Rune and slot data (same as before)
 const PRIMARY_PATHS = {
   domination: { slot1:["Electrocute","Hail of Blades","Dark Harvest"], slot2:["Cheap Shot","Taste of Blood","Sudden Impact"], slot3:["Sixth Sense","Grisly Memories","Null"], slot4:["Treasure Hunter","Relentless Hunter","Ultimate Hunter"] },
   sorcery: { slot1:["Aery","Comet","Phase Rush"], slot2:["Nimbus Cloak","Transcendence","Celerity"], slot3:["Scorch","Waterwalking","Null"], slot4:["Null","Null","Gathering Storm"] },
@@ -342,5 +352,4 @@ document.addEventListener("DOMContentLoaded",()=>{
 
 </body>
 </html>
-
 
