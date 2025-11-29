@@ -56,7 +56,7 @@ header::after {
   text-align: left;
   font-size: 18px;
   font-weight: 700;
-  margin: 25px 0 12px;
+  margin: 20px 0 10px;
 }
 
 .grid-2 {
@@ -82,13 +82,16 @@ header::after {
   margin-bottom: 8px;
 }
 
+.card input[type="number"] {
+  color: #fff;
+}
+
 select,
 input[type="number"] {
   width: 100%;
   padding: 10px;
   background: rgba(15,22,35,0.9);
   border: 1px solid rgba(255,255,255,0.08);
-  color: #fff;
   border-radius: 8px;
   font-size: 16px;
   margin-bottom: 20px;
@@ -156,13 +159,11 @@ footer {
     grid-template-columns: 1fr;
   }
 
-  /* Center the cards and stretch width */
   .card {
-    margin: 0 auto 20px;
+    margin: 0 auto 15px;
     width: 95%;
   }
 
-  /* Adjust section order on mobile */
   .mobile-order-diana-level { order: 1; }
   .mobile-order-enemy-stats { order: 2; }
   .mobile-order-primary { order: 3; }
@@ -170,7 +171,13 @@ footer {
 
   /* Reduce vertical spacing */
   .section-title {
-    margin: 15px 0 8px;
+    margin: 15px 0 5px;
+  }
+
+  /* Adjust HP label color for Diana */
+  #diana-hp {
+    color: #d8c48a;
+    font-weight: bold;
   }
 }
 </style>
@@ -186,18 +193,18 @@ footer {
 
 <div class="grid-2">
 
-  <!-- LEFT COLUMN -->
+  <!-- Diana Level -->
   <div class="mobile-order-diana-level">
     <div class="section-title">DIANA’S LEVEL</div>
     <div class="card">
       <label>Level</label>
       <select id="diana-level"></select>
-      <label style="color:white;">HP</label>
+      <label style="color:#d8c48a;">HP</label>
       <input type="number" id="diana-hp" readonly value="650" />
     </div>
   </div>
 
-  <!-- RIGHT COLUMN -->
+  <!-- Enemy Stats -->
   <div class="mobile-order-enemy-stats">
     <div class="section-title">ENEMY STATS</div>
     <div class="card">
@@ -210,6 +217,7 @@ footer {
     </div>
   </div>
 
+  <!-- Primary Runes -->
   <div class="mobile-order-primary">
     <div class="section-title">PRIMARY RUNES</div>
     <div class="card">
@@ -233,6 +241,7 @@ footer {
     </div>
   </div>
 
+  <!-- Secondary Runes -->
   <div class="mobile-order-secondary">
     <div class="section-title">SECONDARY RUNES</div>
     <div class="card">
@@ -290,7 +299,6 @@ const RUNE_DAMAGE = {
   "Scorch": { type:"Magic", min:20, max:40, ratio:0 },
 };
 
-/* Primary path slots */
 const PRIMARY_PATHS = {
   domination: { slot1:["Electrocute","Hail of Blades","Dark Harvest"], slot2:["Cheap Shot","Taste of Blood","Sudden Impact"], slot3:["Sixth Sense","Grisly Memories","Null"], slot4:["Treasure Hunter","Relentless Hunter","Ultimate Hunter"] },
   sorcery: { slot1:["Aery","Comet","Phase Rush"], slot2:["Nimbus Cloak","Transcendence","Celerity"], slot3:["Scorch","Waterwalking","Null"], slot4:["Null","Null","Gathering Storm"] },
@@ -299,10 +307,9 @@ const PRIMARY_PATHS = {
   inspiration: { slot1:["Glacial Augment","Unsealed Spellbook","First Strike"], slot2:["Hextech Flashtraption","Magical Footwear","Future's Market"], slot3:["Minion Dematerializer","Biscuit Delivery","Cosmic Insight"], slot4:["Approach Velocity","Time Warp Tonic","Null"] }
 };
 
-/* Secondary non-keystones */
 const SECONDARY_NONKEY = {
   domination:["Cheap Shot","Taste of Blood","Sudden Impact","Sixth Sense","Grisly Memories","Treasure Hunter","Relentless Hunter","Ultimate Hunter","Hail of Blades"],
-  sorcery:["Transcendence","Manaflow Band","Nimbus Cloak","Celerity","Scorch","Waterwalking","Gathering Storm"],
+  sorcery:["Manaflow Band","Transcendence","Nimbus Cloak","Celerity","Scorch","Waterwalking","Gathering Storm"],
   precision:["Presence of Mind","Triumph","Coup de Grace","Legend: Alacrity","Legend: Tenacity","Cut Down","Last Stand","Null","Null"],
   resolve:["Demolish","Font of Life","Shield Bash","Conditioning","Second Wind","Bone Plating","Revitalize","Null","Null"],
   inspiration:["Hextech Flashtraption","Magical Footwear","Future's Market","Minion Dematerializer","Biscuit Delivery","Cosmic Insight","Approach Velocity","Time Warp Tonic","Unsealed Spellbook"]
@@ -331,9 +338,9 @@ function initLevel(){
     lvl.appendChild(o);
   }
   lvl.value=1;
-  hpInput.value = 650; // starting HP
+  const hpValues=[650,720,790,860,940,1020,1100,1180,1270,1360,1450,1550,1650,1760,1870,1990,2330,2674];
+  hpInput.value = hpValues[0];
   lvl.addEventListener("change",()=>{
-    const hpValues=[650,720,790,860,940,1020,1100,1180,1270,1360,1450,1550,1650,1760,1870,1990,2330,2674];
     hpInput.value = hpValues[lvl.value-1];
   });
 }
@@ -417,3 +424,4 @@ document.addEventListener("DOMContentLoaded",()=>{
 
 </body>
 </html>
+
