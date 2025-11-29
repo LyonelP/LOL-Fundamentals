@@ -168,7 +168,6 @@ footer {
 }
 </style>
 </head>
-
 <body>
 
 <header>DIANA RUNE CALCULATOR</header>
@@ -176,7 +175,6 @@ footer {
 <a class="return-btn" href="membershub.html">BACK TO MEMBERS HUB</a>
 
 <div class="container">
-
 <div class="grid-2">
 
   <!-- LEFT COLUMN -->
@@ -261,13 +259,12 @@ footer {
     </tbody>
   </table>
 </div>
-
 </div>
 
 <footer>© 2025 LoL Fundamentals · All rights reserved</footer>
 
 <script>
-// Rune and path data
+// Data
 const RUNE_DAMAGE = {
   "Electrocute": { type:"Magic", min:70, max:240, ratio:0 },
   "Cheap Shot": { type:"True", min:10, max:45, ratio:0 },
@@ -339,12 +336,12 @@ function scaleDamage(min,max,level){ return Math.round(min + (max-min)*(level-1)
 function calcDamage(rune,level,ap,mr){
   if(!rune || rune==="Null") return {damage:0,type:""};
   let dmg=0, type="Magic";
+  const hp = 650 + (2674-650)*(level-1)/17;
   if(rune==="Grasp of the Undying"){
-    const hp = 650 + (2674-650)*(level-1)/17;
-    dmg = Math.round(0.035*hp);
+    dmg=Math.round(0.035*hp);
   } else if(rune==="Shield Bash"){
     const shield = 45 + (255-45)*(level-1)/17;
-    dmg = Math.round(5 + 25*((level-1)/17) + 0.15*shield);
+    dmg=Math.round(5 + (30-5)*(level-1)/17 + 0.15*shield); 
   } else if(rune==="Cheap Shot"){
     dmg=scaleDamage(10,45,level); type="True";
   } else {
@@ -370,13 +367,12 @@ function calculateDamage(){
   ];
 
   const tbody=document.getElementById("rune-damage-table");
-  tbody.innerHTML="";
-  slots.forEach(rune=>{
-    const {damage,type}=calcDamage(rune,level,ap,enemyMR);
-    const tr=document.createElement("tr");
-    tr.innerHTML=`<td>${rune}</td><td>${damage}</td><td>${type}</td>`;
-    tbody.appendChild(tr);
-  });
+  const rows = tbody.querySelectorAll("tr");
+  for(let i=0;i<rows.length;i++){
+    const rune = slots[i]||"—";
+    const {damage,type} = calcDamage(rune,level,ap,enemyMR);
+    rows[i].innerHTML=`<td>${rune}</td><td>${damage||"—"}</td><td>${type||"—"}</td>`;
+  }
 }
 
 function enforcePaths(){
