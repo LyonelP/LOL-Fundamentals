@@ -91,8 +91,12 @@ input[type="number"] {
   font-size: 16px;
   margin-bottom: 20px;
   appearance: none;
-  -moz-appearance: none;
   -webkit-appearance: none;
+  -moz-appearance: none;
+  background-image: url('data:image/svg+xml;utf8,<svg fill="white" height="16" viewBox="0 0 24 24" width="16" xmlns="http://www.w3.org/2000/svg"><path d="M7 10l5 5 5-5z"/></svg>');
+  background-repeat: no-repeat;
+  background-position: right 10px center;
+  background-size: 16px;
 }
 
 .calculate-btn {
@@ -151,14 +155,30 @@ footer {
 /* Mobile */
 @media (max-width: 700px) {
   .grid-2 {
-    grid-template-columns: 1fr;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 20px; /* uniform spacing */
   }
+
   .grid-2 > div {
-    width: 90%;  /* keep previous mobile width */
-    margin: 0 auto 20px;
+    width: 95%;
+    margin: 0;
   }
+
+  /* reorder on mobile */
+  #diana-level-card { order: 1; }
+  #enemy-stats-card { order: 2; }
+  #primary-runes-card { order: 3; }
+  #secondary-runes-card { order: 4; }
+
+  /* spacing inside cards */
+  .card {
+    padding: 16px;
+  }
+
   .section-title {
-    margin-top: 20px;
+    margin: 15px 0 8px;
   }
 }
 </style>
@@ -172,18 +192,18 @@ footer {
 
 <div class="container">
 
-<div class="grid-2" id="mobile-order">
+<div class="grid-2">
 
   <!-- LEFT COLUMN -->
   <div id="left-column">
-    <div class="section-title">DIANA’S LEVEL</div>
-    <div class="card">
+    <div id="diana-level-card" class="section-title">DIANA’S LEVEL</div>
+    <div class="card" id="diana-level-card">
       <label>Level</label>
       <select id="diana-level"></select>
     </div>
 
-    <div class="section-title">PRIMARY RUNES</div>
-    <div class="card">
+    <div id="primary-runes-card" class="section-title">PRIMARY RUNES</div>
+    <div class="card" id="primary-runes-card">
       <label>Primary Path</label>
       <select id="primary-path">
         <option value="domination">Domination</option>
@@ -206,8 +226,8 @@ footer {
 
   <!-- RIGHT COLUMN -->
   <div id="right-column">
-    <div class="section-title">ENEMY STATS</div>
-    <div class="card">
+    <div id="enemy-stats-card" class="section-title">ENEMY STATS</div>
+    <div class="card" id="enemy-stats-card">
       <label>HP</label>
       <input type="number" value="600" id="enemy-hp">
       <label>Armor</label>
@@ -216,12 +236,12 @@ footer {
       <input type="number" value="30" id="enemy-mr">
     </div>
 
-    <div class="section-title">SECONDARY RUNES</div>
-    <div class="card">
+    <div id="secondary-runes-card" class="section-title">SECONDARY RUNES</div>
+    <div class="card" id="secondary-runes-card">
       <label>Secondary Path (pick a different path)</label>
       <select id="secondary-path">
         <option value="domination">Domination</option>
-        <option value="sorcery">Sorcery</option>
+        <option value="sorcery" selected>Sorcery</option>
         <option value="precision">Precision</option>
         <option value="resolve">Resolve</option>
         <option value="inspiration">Inspiration</option>
@@ -266,12 +286,12 @@ const RUNE_DAMAGE = {
   "Electrocute": { type:"Magic", min:70, max:240, ratio:0 },
   "Cheap Shot": { type:"True", min:10, max:45, ratio:0 },
   "Sudden Impact": { type:"True", min:20, max:20, ratio:0 },
-  "Scorch": { type:"Magic", min:20, max:40, ratio:0 },
-  "Comet": { type:"Magic", min:10, max:50, ratio:0.005 },
   "Aery": { type:"Magic", min:10, max:50, ratio:0.005 },
-  "Manaflow Band": { type:"Magic", min:0, max:0, ratio:0 }
+  "Comet": { type:"Magic", min:10, max:50, ratio:0.005 },
+  "Scorch": { type:"Magic", min:20, max:40, ratio:0 },
 };
 
+/* Primary path slots */
 const PRIMARY_PATHS = {
   domination: { slot1:["Electrocute","Hail of Blades","Dark Harvest"], slot2:["Cheap Shot","Taste of Blood","Sudden Impact"], slot3:["Sixth Sense","Grisly Memories","Null"], slot4:["Treasure Hunter","Relentless Hunter","Ultimate Hunter"] },
   sorcery: { slot1:["Aery","Comet","Phase Rush"], slot2:["Nimbus Cloak","Transcendence","Celerity"], slot3:["Scorch","Waterwalking","Null"], slot4:["Null","Null","Gathering Storm"] },
@@ -282,10 +302,10 @@ const PRIMARY_PATHS = {
 
 const SECONDARY_NONKEY = {
   domination:["Cheap Shot","Taste of Blood","Sudden Impact","Sixth Sense","Grisly Memories","Treasure Hunter","Relentless Hunter","Ultimate Hunter","Hail of Blades"],
-  sorcery:["Manaflow Band","Transcendence","Celerity","Nimbus Cloak","Scorch","Waterwalking","Gathering Storm"],
-  precision:["Presence of Mind","Triumph","Coup de Grace","Legend: Alacrity","Legend: Tenacity","Cut Down","Last Stand"],
-  resolve:["Demolish","Font of Life","Shield Bash","Conditioning","Second Wind","Bone Plating","Revitalize"],
-  inspiration:["Hextech Flashtraption","Magical Footwear","Future's Market","Minion Dematerializer","Biscuit Delivery","Cosmic Insight","Approach Velocity","Time Warp Tonic"]
+  sorcery:["Nimbus Cloak","Transcendence","Celerity","Scorch","Waterwalking","Gathering Storm","Manaflow Band"],
+  precision:["Presence of Mind","Triumph","Coup de Grace","Legend: Alacrity","Legend: Tenacity","Cut Down","Last Stand","Null","Null"],
+  resolve:["Demolish","Font of Life","Shield Bash","Conditioning","Second Wind","Bone Plating","Revitalize","Null","Null"],
+  inspiration:["Hextech Flashtraption","Magical Footwear","Future's Market","Minion Dematerializer","Biscuit Delivery","Cosmic Insight","Approach Velocity","Time Warp Tonic","Unsealed Spellbook"]
 };
 
 function populateSelect(el, options, keepVal){
@@ -324,8 +344,6 @@ function populateSecondary(path){
   const data=SECONDARY_NONKEY[path]||[];
   populateSelect(document.getElementById("secondary-slot-1"),data);
   populateSelect(document.getElementById("secondary-slot-2"),data);
-  document.getElementById("secondary-slot-1").value = data[0] || "";
-  document.getElementById("secondary-slot-2").value = data[1] || "";
 }
 
 function scaleDamage(min,max,level){ return Math.round(min + (max-min)*(level-1)/17); }
@@ -344,6 +362,7 @@ function calculateDamage(){
   const level=parseInt(document.getElementById("diana-level").value,10);
   const enemyMR=parseFloat(document.getElementById("enemy-mr").value)||30;
   const ap=Math.round(level*5);
+
   const slots=[
     document.getElementById("primary-slot-1").value,
     document.getElementById("primary-slot-2").value,
@@ -352,6 +371,7 @@ function calculateDamage(){
     document.getElementById("secondary-slot-1").value,
     document.getElementById("secondary-slot-2").value
   ];
+
   const tbody=document.getElementById("rune-damage-table");
   tbody.innerHTML="";
   slots.forEach(rune=>{
@@ -377,16 +397,24 @@ function enforcePaths(){
 
 document.addEventListener("DOMContentLoaded",()=>{
   initLevel();
-  document.getElementById("primary-path").value="domination";
-  document.getElementById("secondary-path").value="sorcery";
-  populatePrimary("domination");
-  populateSecondary("sorcery");
+  populatePrimary(document.getElementById("primary-path").value);
+  populateSecondary(document.getElementById("secondary-path").value);
   enforcePaths();
+
+  // default secondary slots to Manaflow Band & Transcendence
+  document.getElementById("secondary-slot-1").value="Manaflow Band";
+  document.getElementById("secondary-slot-2").value="Transcendence";
+
   document.getElementById("primary-path").addEventListener("change",e=>{
     populatePrimary(e.target.value); enforcePaths();
   });
   document.getElementById("secondary-path").addEventListener("change",e=>{
     populateSecondary(e.target.value); enforcePaths();
+    // reset defaults if sorcery
+    if(e.target.value==="sorcery"){
+      document.getElementById("secondary-slot-1").value="Manaflow Band";
+      document.getElementById("secondary-slot-2").value="Transcendence";
+    }
   });
   document.getElementById("calculate-btn").addEventListener("click",calculateDamage);
 });
@@ -394,6 +422,4 @@ document.addEventListener("DOMContentLoaded",()=>{
 
 </body>
 </html>
-
-
 
