@@ -158,7 +158,7 @@ footer {
     grid-template-columns: 1fr;
   }
   .container {
-    width: 95%;
+    width: 94%;
     margin: 0 auto 20px;
   }
   .card {
@@ -340,8 +340,8 @@ function calcDamage(rune,level,ap,mr){
   if(rune==="Grasp of the Undying"){
     dmg=Math.round(0.035*hp);
   } else if(rune==="Shield Bash"){
-    const shield = 45 + (255-45)*(level-1)/17;
-    dmg=Math.round(5 + (30-5)*(level-1)/17 + 0.15*shield); 
+    const shield = 95 + (300-95)*(level-1)/17;
+    dmg=Math.round(5 + (30-5)*(level-1)/17 + 0.15*shield);
   } else if(rune==="Cheap Shot"){
     dmg=scaleDamage(10,45,level); type="True";
   } else {
@@ -406,5 +406,3 @@ document.addEventListener("DOMContentLoaded",()=>{
 </script>
 </body>
 </html>
-
-
