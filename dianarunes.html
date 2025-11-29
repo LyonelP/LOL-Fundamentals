@@ -4,7 +4,6 @@
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>Diana Rune Calculator</title>
-
 <style>
 body {
   margin: 0;
@@ -78,6 +77,7 @@ header::after {
   font-size: 16px;
   display: block;
   margin-bottom: 8px;
+  color: #d8c48a;
 }
 
 select,
@@ -93,7 +93,7 @@ input[type="number"] {
   -webkit-appearance: none;
   -moz-appearance: none;
   appearance: none;
-  background-image: url('data:image/svg+xml;utf8,<svg fill="white" height="16" viewBox="0 0 24 24" width="16" xmlns="http://www.w3.org/2000/svg"><path d="M7 10l5 5 5-5z"/></svg>');
+  background-image: url("data:image/svg+xml;charset=US-ASCII,<svg xmlns='http://www.w3.org/2000/svg' width='20' height='20'><polygon points='0,0 20,0 10,10' style='fill:white'/></svg>");
   background-repeat: no-repeat;
   background-position: right 10px center;
   background-size: 16px;
@@ -155,19 +155,18 @@ footer {
 /* Mobile */
 @media (max-width: 700px) {
   .grid-2 {
-    display: flex;
-    flex-direction: column;
-    gap: 20px;
+    grid-template-columns: 1fr;
+  }
+  .container {
+    width: 95%;
+    margin: 0 auto 20px;
   }
   .card {
-    width: calc(100% - 30px);
-    margin: 0 auto;
-    padding: 14px;
+    padding: 14px 16px;
   }
 }
 </style>
 </head>
-
 <body>
 
 <header>DIANA RUNE CALCULATOR</header>
@@ -184,6 +183,7 @@ footer {
     <div class="card">
       <label>Level</label>
       <select id="diana-level"></select>
+      <div id="diana-hp" style="display:none;"></div>
     </div>
 
     <div class="section-title">PRIMARY RUNES</div>
@@ -196,7 +196,6 @@ footer {
         <option value="resolve">Resolve</option>
         <option value="inspiration">Inspiration</option>
       </select>
-
       <label>Slot 1 (Keystone)</label>
       <select id="primary-slot-1"></select>
       <label>Slot 2</label>
@@ -230,7 +229,6 @@ footer {
         <option value="resolve">Resolve</option>
         <option value="inspiration">Inspiration</option>
       </select>
-
       <label>Slot 1</label>
       <select id="secondary-slot-1"></select>
       <label>Slot 2</label>
@@ -274,8 +272,8 @@ const RUNE_DAMAGE = {
   "Aery": { type:"Magic", min:10, max:50, ratio:0.005 },
   "Comet": { type:"Magic", min:10, max:50, ratio:0.005 },
   "Scorch": { type:"Magic", min:20, max:40, ratio:0 },
-  "Grasp of the Undying": { type:"Magic" }, 
-  "Shield Bash": { type:"Magic" }
+  "Grasp of the Undying": { type:"Magic", min:0, max:0, ratio:0 },
+  "Shield Bash": { type:"Magic", min:0, max:0, ratio:0 },
 };
 
 /* Primary path slots */
@@ -314,7 +312,11 @@ const PRIMARY_PATHS = {
 
 /* Secondary options (no keystones) */
 const SECONDARY_NONKEY = {
-  sorcery:["Manaflow Band","Transcendence","Nimbus Cloak","Celerity","Scorch","Waterwalking","Gathering Storm"]
+  domination:["Cheap Shot","Taste of Blood","Sudden Impact","Sixth Sense","Grisly Memories","Treasure Hunter","Relentless Hunter","Ultimate Hunter","Hail of Blades"],
+  sorcery:["Manaflow Band","Transcendence","Celerity","Nimbus Cloak","Scorch","Waterwalking","Gathering Storm"],
+  precision:["Presence of Mind","Triumph","Coup de Grace","Legend: Alacrity","Legend: Tenacity","Cut Down","Last Stand","Null","Null"],
+  resolve:["Demolish","Font of Life","Shield Bash","Conditioning","Second Wind","Bone Plating","Revitalize","Null","Null"],
+  inspiration:["Hextech Flashtraption","Magical Footwear","Future's Market","Minion Dematerializer","Biscuit Delivery","Cosmic Insight","Approach Velocity","Time Warp Tonic","Unsealed Spellbook"]
 };
 
 /* Populate select helper */
@@ -343,6 +345,9 @@ function initLevel(){
   lvl.value=1;
 }
 
+/* Diana HP hidden */
+const DIANA_HP_LEVELS=[650,720,790,860,930,1000,1070,1140,1210,1280,1350,1420,1490,1560,1630,1760,2150,2674];
+
 /* Populate primary & secondary */
 function populatePrimary(path){
   const data=PRIMARY_PATHS[path];
@@ -354,7 +359,7 @@ function populatePrimary(path){
 function populateSecondary(path){
   const data=SECONDARY_NONKEY[path]||[];
   populateSelect(document.getElementById("secondary-slot-1"),data);
-  populateSelect(document.getElementById("secondary-slot-2"),data.slice(1,2));
+  populateSelect(document.getElementById("secondary-slot-2"),data);
 }
 
 /* Damage scaling */
@@ -363,21 +368,24 @@ function scaleDamage(min,max,level){
 }
 function calcDamage(rune,level,ap,mr){
   if(!rune || rune==="Null") return {damage:0,type:""};
-  const graspValues = [650, 727, 804, 881, 958, 1035, 1112, 1189, 1266, 1343, 1420, 1497, 1574, 1651, 1728, 1805, 1882, 1959];
-  if(rune==="Grasp of the Undying") {
-    const dmg=Math.round(graspValues[level-1]*0.035);
+  let dmg=0;
+  if(rune==="Cheap Shot" || rune==="Taste of Blood" || rune==="Sudden Impact") {
+    return {damage:0,type:""}; // not used in sorcery secondary
+  }
+  if(rune==="Grasp of the Undying"){
+    let dianaHP=DIANA_HP_LEVELS[level-1];
+    dmg=Math.round(dianaHP*0.035);
     return {damage:dmg,type:"Magic"};
   }
-  if(rune==="Shield Bash") {
-    const base=Math.round(scaleDamage(5,30,level));
-    const shield=45; // placeholder
-    const dmg=Math.round(base + shield*0.15);
+  if(rune==="Shield Bash"){
+    let dianaHP=DIANA_HP_LEVELS[level-1];
+    let shield=150; // default shield for calc
+    dmg=Math.round(5 + ((30-5)*(level-1)/17) + 0.025*0 + 0.15*shield);
     return {damage:dmg,type:"Magic"};
   }
-  if(rune==="Cheap Shot") return {damage:scaleDamage(10,45,level),type:"True"};
   const meta=RUNE_DAMAGE[rune];
   if(!meta) return {damage:0,type:""};
-  let dmg=scaleDamage(meta.min,meta.max,level)+Math.round((meta.ratio||0)*ap);
+  dmg=scaleDamage(meta.min,meta.max,level)+Math.round((meta.ratio||0)*ap);
   if(meta.type==="Magic") dmg=Math.round(dmg*100/(100+mr));
   return {damage:dmg,type:meta.type};
 }
@@ -440,3 +448,5 @@ document.addEventListener("DOMContentLoaded",()=>{
 
 </body>
 </html>
+
+
