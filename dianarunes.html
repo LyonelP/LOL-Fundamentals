@@ -160,6 +160,13 @@ footer {
   #enemy-stats-card {
     margin-top: 15px; /* slightly higher for spacing */
   }
+  /* reorder on mobile: level → enemy → primary → secondary */
+  .grid-2 > div:first-child {
+    order: 1;
+  }
+  .grid-2 > div:last-child {
+    order: 2;
+  }
 }
 </style>
 </head>
@@ -217,13 +224,9 @@ footer {
 
       <div class="section-title">SECONDARY RUNES</div>
       <div class="card" id="secondary-runes-card">
-        <label>Secondary Path (pick a different path)</label>
+        <label>Secondary Path (Sorcery)</label>
         <select id="secondary-path">
-          <option value="domination">Domination</option>
-          <option value="sorcery">Sorcery</option>
-          <option value="precision">Precision</option>
-          <option value="resolve">Resolve</option>
-          <option value="inspiration">Inspiration</option>
+          <option value="sorcery" selected>Sorcery</option>
         </select>
 
         <label>Slot 1</label>
@@ -279,19 +282,15 @@ const RUNE_DAMAGE = {
 // Primary Path Slots
 const PRIMARY_PATHS = {
   domination:{ slot1:["Electrocute","Hail of Blades","Dark Harvest"], slot2:["Cheap Shot","Taste of Blood","Sudden Impact"], slot3:["Sixth Sense","Grisly Memories","Null"], slot4:["Treasure Hunter","Relentless Hunter","Ultimate Hunter"] },
-  sorcery:{ slot1:["Aery","Comet","Phase Rush"], slot2:["Nimbus Cloak","Transcendence","Celerity"], slot3:["Scorch","Waterwalking","Null"], slot4:["Null","Null","Gathering Storm"] },
+  sorcery:{ slot1:["Aery","Comet","Phase Rush"], slot2:["Manaflow Band","Transcendence","Celerity"], slot3:["Scorch","Waterwalking","Null"], slot4:["Null","Null","Gathering Storm"] },
   precision:{ slot1:["Press the Attack","Lethal Tempo","Fleet Footwork"], slot2:["Presence of Mind","Triumph","Coup de Grace"], slot3:["Legend: Alacrity","Legend: Tenacity","Cut Down"], slot4:["Last Stand","Null","Null"] },
   resolve:{ slot1:["Grasp of the Undying","Aftershock","Guardian"], slot2:["Demolish","Font of Life","Shield Bash"], slot3:["Conditioning","Second Wind","Bone Plating"], slot4:["Revitalize","Null","Null"] },
   inspiration:{ slot1:["Glacial Augment","Unsealed Spellbook","First Strike"], slot2:["Hextech Flashtraption","Magical Footwear","Future's Market"], slot3:["Minion Dematerializer","Biscuit Delivery","Cosmic Insight"], slot4:["Approach Velocity","Time Warp Tonic","Null"] }
 };
 
-// Secondary options
+// Secondary options: always sorcery
 const SECONDARY_NONKEY = {
-  domination:["Sixth Sense","Grisly Memories","Treasure Hunter","Relentless Hunter","Ultimate Hunter","Hail of Blades"],
-  sorcery:["Nimbus Cloak","Transcendence","Celerity","Scorch","Waterwalking","Gathering Storm","Aery","Comet","Phase Rush"],
-  precision:["Presence of Mind","Triumph","Coup de Grace","Legend: Alacrity","Legend: Tenacity","Cut Down","Last Stand","Null","Null"],
-  resolve:["Demolish","Font of Life","Shield Bash","Conditioning","Second Wind","Bone Plating","Revitalize","Null","Null"],
-  inspiration:["Hextech Flashtraption","Magical Footwear","Future's Market","Minion Dematerializer","Biscuit Delivery","Cosmic Insight","Approach Velocity","Time Warp Tonic","Unsealed Spellbook"]
+  sorcery:["Nimbus Cloak","Transcendence","Celerity","Scorch","Waterwalking","Gathering Storm","Aery","Comet","Phase Rush"]
 };
 
 // Populate helper
@@ -318,9 +317,9 @@ function populatePrimary(path){
   populateSelect(document.getElementById("primary-slot-4"),data.slot4);
 }
 
-// Populate Secondary
-function populateSecondary(path){
-  const data=SECONDARY_NONKEY[path]||[];
+// Populate Secondary (always sorcery)
+function populateSecondary(){
+  const data=SECONDARY_NONKEY["sorcery"];
   populateSelect(document.getElementById("secondary-slot-1"),data);
   populateSelect(document.getElementById("secondary-slot-2"),data);
   document.getElementById("secondary-slot-1").value="Manaflow Band";
@@ -361,28 +360,16 @@ function calculateDamage(){
   });
 }
 
-// Prevent same path
-function enforcePaths(){
-  const primary=document.getElementById("primary-path").value;
-  const secondary=document.getElementById("secondary-path");
-  for(let i=0;i<secondary.options.length;i++){ secondary.options[i].disabled=(secondary.options[i].value===primary); }
-  if(secondary.value===primary){ for(let i=0;i<secondary.options.length;i++){ if(!secondary.options[i].disabled){ secondary.selectedIndex=i; break; } } }
-}
-
 // Init
 document.addEventListener("DOMContentLoaded",()=>{
   initLevel();
   populatePrimary(document.getElementById("primary-path").value);
-  populateSecondary(document.getElementById("secondary-path").value);
-  enforcePaths();
-  document.getElementById("primary-path").addEventListener("change",e=>{ populatePrimary(e.target.value); enforcePaths(); });
-  document.getElementById("secondary-path").addEventListener("change",e=>{ populateSecondary(e.target.value); enforcePaths(); });
+  populateSecondary();
+  document.getElementById("primary-path").addEventListener("change",e=>{ populatePrimary(e.target.value); });
   document.getElementById("calculate-btn").addEventListener("click",calculateDamage);
 });
 </script>
 
 </body>
 </html>
-
-
 
