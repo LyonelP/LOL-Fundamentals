@@ -56,22 +56,23 @@ header::after {
   text-align: left;
   font-size: 18px;
   font-weight: 700;
-  margin: 25px 0 12px;
+  margin: 15px 0 8px; /* tighter spacing for mobile/overall */
 }
 
 .grid-2 {
   display: grid;
   grid-template-columns: 1fr 1fr;
-  gap: 40px;
+  gap: 20px; /* slightly smaller for consistency */
   align-items: start;
 }
 
 .card {
   background: rgba(12,18,30,0.8);
   border: 1px solid rgba(255,255,255,0.08);
-  padding: 16px 20px;
+  padding: 12px 16px;
   border-radius: 10px;
   text-align: left;
+  font-size: 16px; /* same as enemy stats */
 }
 
 .card label {
@@ -80,8 +81,8 @@ header::after {
   margin-bottom: 8px;
 }
 
-select,
-input[type="number"] {
+.card select,
+.card input[type="number"] {
   width: 100%;
   padding: 10px;
   background: rgba(15,22,35,0.9);
@@ -89,7 +90,7 @@ input[type="number"] {
   color: #ffffff;
   border-radius: 8px;
   font-size: 16px;
-  margin-bottom: 20px;
+  margin-bottom: 15px;
   -webkit-appearance: none;
   -moz-appearance: none;
   appearance: none;
@@ -117,6 +118,7 @@ input[type="number"] {
   border: 1px solid rgba(255,255,255,0.08);
   border-radius: 12px;
   padding: 20px;
+  font-size: 16px;
 }
 
 table {
@@ -135,7 +137,7 @@ th {
 td {
   padding: 14px 8px;
   color: white;
-  font-size: 15px;
+  font-size: 16px;
   border-bottom: 1px solid rgba(255,255,255,0.05);
   word-wrap: break-word;
 }
@@ -155,11 +157,23 @@ footer {
   }
   .grid-2 > div {
     width: 95%;
-    margin: 0 auto 15px;
+    margin: 0 auto 12px; /* smaller vertical spacing */
+  }
+  .card {
+    padding: 10px 12px;
+    font-size: 16px;
   }
   .card select,
   .card input[type="number"] {
-    width: 100%;
+    font-size: 16px;
+  }
+  .section-title {
+    font-size: 16px;
+    margin: 10px 0 6px;
+  }
+  #diana-stats {
+    font-size: 16px;
+    margin-top: 5px;
   }
 }
 </style>
@@ -181,9 +195,7 @@ footer {
     <div class="card">
       <label>Level</label>
       <select id="diana-level"></select>
-      <div id="diana-stats" style="margin-top:10px; font-size:14px; color:#fff;">
-        HP: 0
-      </div>
+      <div id="diana-stats">HP: 0</div>
     </div>
 
     <div class="section-title">PRIMARY RUNES</div>
