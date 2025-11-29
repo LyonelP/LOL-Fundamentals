@@ -90,7 +90,7 @@ input[type="number"] {
   border-radius: 8px;
   font-size: 16px;
   margin-bottom: 20px;
-  appearance: none; /* restores single white dropdown arrow */
+  appearance: none;
   -webkit-appearance: none;
   -moz-appearance: none;
   background-image: url("data:image/svg+xml;utf8,<svg fill='white' height='24' viewBox='0 0 24 24' width='24' xmlns='http://www.w3.org/2000/svg'><path d='M7 10l5 5 5-5z'/></svg>");
@@ -100,7 +100,7 @@ input[type="number"] {
 }
 
 .calculate-btn {
-  margin: 20px auto 10px;
+  margin: 25px auto 20px;
   display: block;
   padding: 12px 26px;
   font-size: 16px;
@@ -347,13 +347,6 @@ function initLevel(){
     lvl.appendChild(o);
   }
   lvl.value=1;
-  updateDianaHP(lvl.value);
-}
-
-/* Hidden Diana HP calculation */
-function updateDianaHP(level){
-  const hp=Math.round(650 + (2674-650)*(level-1)/17);
-  document.getElementById("diana-hp").value = hp;
 }
 
 /* Populate primary & secondary */
@@ -388,7 +381,6 @@ function calculateDamage(){
   const level=parseInt(document.getElementById("diana-level").value,10);
   const enemyMR=parseFloat(document.getElementById("enemy-mr").value)||30;
   const ap=Math.round(level*5);
-  updateDianaHP(level);
 
   const slots=[
     document.getElementById("primary-slot-1").value,
@@ -428,6 +420,8 @@ document.addEventListener("DOMContentLoaded",()=>{
   initLevel();
   populatePrimary(document.getElementById("primary-path").value);
   populateSecondary("sorcery"); // default secondary
+  document.getElementById("secondary-slot-1").value="Manaflow Band";
+  document.getElementById("secondary-slot-2").value="Transcendence";
   enforcePaths();
 
   document.getElementById("primary-path").addEventListener("change",e=>{
@@ -435,6 +429,8 @@ document.addEventListener("DOMContentLoaded",()=>{
   });
   document.getElementById("secondary-path").addEventListener("change",e=>{
     populateSecondary(e.target.value); enforcePaths();
+    document.getElementById("secondary-slot-1").value="Manaflow Band";
+    document.getElementById("secondary-slot-2").value="Transcendence";
   });
   document.getElementById("calculate-btn").addEventListener("click",calculateDamage);
 });
@@ -442,4 +438,5 @@ document.addEventListener("DOMContentLoaded",()=>{
 
 </body>
 </html>
+
 
