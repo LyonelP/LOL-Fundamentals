@@ -182,7 +182,7 @@ footer {
       <label>Level</label>
       <select id="diana-level"></select>
       <div id="diana-stats" style="margin-top:10px; font-size:14px; color:#fff;">
-        HP: 0 | AP: 0
+        HP: 0
       </div>
     </div>
 
@@ -270,7 +270,6 @@ footer {
 /* --- Rune Data --- */
 const RUNE_DAMAGE = {
   "Electrocute": { type:"Magic", min:70, max:240, ratio:0 },
-  "Cheap Shot": { type:"True", min:10, max:45, ratio:0 },
   "Sudden Impact": { type:"True", min:20, max:20, ratio:0 },
   "Aery": { type:"Magic", min:10, max:50, ratio:0.005 },
   "Comet": { type:"Magic", min:10, max:50, ratio:0.005 },
@@ -379,7 +378,7 @@ function calcDamage(rune,level,ap,mr){
 function calculateDamage(){
   const level=parseInt(document.getElementById("diana-level").value,10);
   const enemyMR=parseFloat(document.getElementById("enemy-mr").value)||30;
-  const ap=Math.round(level*5);
+  const ap=0;
 
   const slots=[
     document.getElementById("primary-slot-1").value,
@@ -414,12 +413,11 @@ function enforcePaths(){
   }
 }
 
-/* Diana stats display */
+/* Diana HP display */
 function updateDianaStats(){
   const lvl = parseInt(document.getElementById("diana-level").value,10);
-  const hp = 580 + (lvl-1)*85;
-  const ap = 0 + (lvl-1)*5;
-  document.getElementById("diana-stats").textContent = `HP: ${hp} | AP: ${ap}`;
+  const hp = Math.round(650 + (2674-650)*(lvl-1)/17);
+  document.getElementById("diana-stats").textContent = `HP: ${hp}`;
 }
 
 /* Init */
@@ -443,5 +441,6 @@ document.addEventListener("DOMContentLoaded",()=>{
 
 </body>
 </html>
+
 
 
