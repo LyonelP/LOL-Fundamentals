@@ -136,6 +136,7 @@
       color: #8b949e;
       font-size: 14px;
     }
+    /* Mobile */
     @media (max-width: 700px) {
       .grid-2 {
         grid-template-columns: 1fr;
@@ -247,8 +248,9 @@
 <footer>© 2025 LoL Fundamentals · All rights reserved</footer>
 
 <script>
+  // Data
   const RUNE_DAMAGE = {
-    "Electrocute": { type:"Magic", min:70, max:240, ratio:0 },
+    "Electrocute": { type:"Magic", min:70, max:240, ratio:0.05 },
     "Cheap Shot": { type:"True", min:10, max:45, ratio:0 },
     "Sudden Impact": { type:"True", min:20, max:20, ratio:0 },
     "Grasp of the Undying": { type:"Magic" },
@@ -315,8 +317,10 @@
 
   function scaleDamage(min,max,level){ return Math.round(min + (max-min)*(level-1)/17); }
 
-  // HP curve (Doran's Ring shift included)
+  // ENTIRE HP curve shifted by +90 (Doran's Ring applied to whole curve)
   function getDianaHP(level){
+    // original curve: 650 -> 2674
+    // shift whole curve by +90 (so level1 = 740, level18 = 2764)
     return Math.round(740 + (2674 - 740) * (level - 1) / 17);
   }
 
@@ -397,3 +401,4 @@
 </script>
 </body>
 </html>
+
