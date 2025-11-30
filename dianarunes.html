@@ -136,7 +136,6 @@
       color: #8b949e;
       font-size: 14px;
     }
-    /* Mobile */
     @media (max-width: 700px) {
       .grid-2 {
         grid-template-columns: 1fr;
@@ -160,8 +159,6 @@
 
 <div class="container">
   <div class="grid-2">
-
-    <!-- LEFT COLUMN -->
     <div id="mobile-left-column">
       <div class="section-title">DIANA’S LEVEL</div>
       <div class="card">
@@ -191,7 +188,6 @@
       </div>
     </div>
 
-    <!-- RIGHT COLUMN -->
     <div id="mobile-right-column">
       <div class="section-title">ENEMY STATS</div>
       <div class="card">
@@ -248,13 +244,10 @@
 <footer>© 2025 LoL Fundamentals · All rights reserved</footer>
 
 <script>
-  // Data
   const RUNE_DAMAGE = {
     "Electrocute": { type:"Magic", min:70, max:240, ratio:0.05 },
     "Cheap Shot": { type:"True", min:10, max:45, ratio:0 },
-    "Sudden Impact": { type:"True", min:20, max:80, ratio:0 },
-    "Grasp of the Undying": { type:"Magic" },
-    "Shield Bash": { type:"Magic" }
+    "Sudden Impact": { type:"True", min:20, max:80, ratio:0 }
   };
 
   const PRIMARY_PATHS = {
@@ -328,9 +321,13 @@
 
     if(rune==="Grasp of the Undying"){
       dmg=Math.round(0.035*hp);
+      dmg=Math.round(dmg*100/(100+mr));
+      type="Magic";
     } else if(rune==="Shield Bash"){
       const shield = 95 + (300-95)*(level-1)/17;
       dmg=Math.round(5 + (30-5)*(level-1)/17 + 0.15*shield);
+      dmg=Math.round(dmg*100/(100+mr));
+      type="Magic";
     } else if(rune==="Cheap Shot"){
       dmg=scaleDamage(10,45,level); type="True";
     } else if(rune==="Sudden Impact"){
@@ -340,6 +337,7 @@
       if(!meta) return {damage:0,type:""};
       dmg=scaleDamage(meta.min,meta.max,level)+Math.round((meta.ratio||0)*ap);
       if(meta.type==="Magic") dmg=Math.round(dmg*100/(100+mr));
+      type=meta.type;
     }
     return {damage:dmg,type:type};
   }
@@ -398,10 +396,3 @@
 </script>
 </body>
 </html>
-
-
-
-
-
-
-
