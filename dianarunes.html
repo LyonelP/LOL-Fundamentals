@@ -398,7 +398,24 @@
     });
     document.getElementById("calculate-btn").addEventListener("click",calculateDamage);
   });
+  // Grasp of the Undying: 3.5% max HP magic damage
+  if (rune === "grasp") {
+    const maxHP = 2000; // placeholder unless you want input
+    const graspDmg = maxHP * 0.035;
+    damage = graspDmg;
+    details += `Grasp Damage: ${graspDmg.toFixed(1)} (3.5% of ${maxHP} Max HP)<br>`;
+  }
+
+  // Sudden Impact true damage handling placeholder
+  if (rune === "sudden_impact") {
+    const siDamage = 8; // true damage example
+    damage = siDamage;
+    details += `Sudden Impact: ${siDamage} true damage<br>`;
+  }
+
 </script>
 </body>
 </html>
+
+
 
