@@ -252,7 +252,7 @@
   const RUNE_DAMAGE = {
     "Electrocute": { type:"Magic", min:70, max:240, ratio:0.05 },
     "Cheap Shot": { type:"True", min:10, max:45, ratio:0 },
-    "Sudden Impact": { type:"True", min:20, max:20, ratio:0 },
+    "Sudden Impact": { type:"True", min:20, max:80, ratio:0 },
     "Grasp of the Undying": { type:"Magic" },
     "Shield Bash": { type:"Magic" }
   };
@@ -317,10 +317,7 @@
 
   function scaleDamage(min,max,level){ return Math.round(min + (max-min)*(level-1)/17); }
 
-  // ENTIRE HP curve shifted by +90 (Doran's Ring applied to whole curve)
   function getDianaHP(level){
-    // original curve: 650 -> 2674
-    // shift whole curve by +90 (so level1 = 740, level18 = 2764)
     return Math.round(740 + (2674 - 740) * (level - 1) / 17);
   }
 
@@ -336,6 +333,8 @@
       dmg=Math.round(5 + (30-5)*(level-1)/17 + 0.15*shield);
     } else if(rune==="Cheap Shot"){
       dmg=scaleDamage(10,45,level); type="True";
+    } else if(rune==="Sudden Impact"){
+      dmg=scaleDamage(20,80,level); type="True";
     } else {
       const meta=RUNE_DAMAGE[rune];
       if(!meta) return {damage:0,type:""};
@@ -348,9 +347,7 @@
   function calculateDamage(){
     const level = parseInt(document.getElementById("diana-level").value, 10);
     const enemyMR = parseFloat(document.getElementById("enemy-mr").value)||30;
-
-    // FIXED AP = 18
-    const ap = 18;
+    const ap = 18; // Fixed AP
 
     const slots = [
       document.getElementById("primary-slot-1").value,
@@ -398,24 +395,13 @@
     });
     document.getElementById("calculate-btn").addEventListener("click",calculateDamage);
   });
-  // Grasp of the Undying: 3.5% max HP magic damage
-  if (rune === "grasp") {
-    const maxHP = 2000; // placeholder unless you want input
-    const graspDmg = maxHP * 0.035;
-    damage = graspDmg;
-    details += `Grasp Damage: ${graspDmg.toFixed(1)} (3.5% of ${maxHP} Max HP)<br>`;
-  }
-
-  // Sudden Impact true damage handling placeholder
-  if (rune === "sudden_impact") {
-    const siDamage = 8; // true damage example
-    damage = siDamage;
-    details += `Sudden Impact: ${siDamage} true damage<br>`;
-  }
-
 </script>
 </body>
 </html>
+
+
+
+
 
 
 
