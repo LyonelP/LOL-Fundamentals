@@ -148,6 +148,7 @@ header {
 .modalContent .plan-buttons { display:flex; justify-content:center; gap: 20px; margin-bottom: 20px; position: relative; }
 .modalContent .bestValueTag { position: absolute; top: -20px; left: 50%; transform: translateX(-50%); background: #f2b96d; color: #161b22; font-size: 0.8em; font-weight: bold; padding: 2px 6px; border-radius: 4px; box-shadow: 0 0 6px rgba(0,0,0,0.4); }
 .modalContent #closePlanModal, .modalContent #closeSignupModal, .modalContent #closeLoginModal { margin-top: 15px; background: none; border: none; color: #c9aa71; cursor:pointer; }
+.coachingOffer { color:#f2b96d; font-size:0.85em; margin-top:6px; font-weight:bold; }
 
 footer { text-align:center; padding:30px; color:#8b949e; font-size:14px; background:#0a0f14; border-top:1px solid #1f2937; }
 footer a { color:#c9aa71; text-decoration:none; }
@@ -194,8 +195,9 @@ footer a:hover { text-decoration:underline; }
     <div class="plan-buttons">
       <button class="btn" id="monthlyBtn">$14 / Month</button>
       <div style="position: relative; display: inline-block;">
-        <div class="bestValueTag">Limited Time Free Coaching!</div>
+        <div class="bestValueTag">Best Value</div>
         <button class="btn orangeBtn" id="yearlyBtn">$99 / Year</button>
+        <div class="coachingOffer">Includes a coaching session for a limited time!</div>
       </div>
     </div>
     <button id="closePlanModal">Cancel</button>
@@ -360,6 +362,7 @@ for(let i=0;i<50;i++){
 </script>
 </body>
 </html>
+
 
 
 
