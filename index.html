@@ -75,6 +75,8 @@ header {
   position: relative;
 }
 .orangeBtn:hover { background: #ffb04d; box-shadow: 0 0 25px rgba(242,153,74,0.55); }
+
+/* visual overlays */
 .hero .blueOverlay { position: absolute; inset: 0; background: rgba(47,129,247,0.08); pointer-events: none; z-index: 1; }
 .hero .particles { position: absolute; inset: 0; pointer-events: none; z-index: 2; }
 .particles span { position: absolute; width: 4px; height: 4px; background: rgba(47,129,247,0.9); border-radius: 50%; animation: floatParticles 6s infinite ease-in-out; }
@@ -184,14 +186,7 @@ header {
 /* modal action buttons */
 .modalContent #closePlanModal, .modalContent #closeSignupModal, .modalContent #closeLoginModal { margin-top: 15px; background: none; border: none; color: #c9aa71; cursor:pointer; }
 
-.coachingOffer {
-  color: #f2b96d;
-  font-size: 0.85em;
-  margin-top: 6px;
-  font-weight: bold;
-  text-align: center;
-  max-width: 140px;
-}
+.coachingOffer { display:none; } /* intentionally hidden: no coaching for $49 plan */
 
 footer { text-align:center; padding:30px; color:#8b949e; font-size:14px; background:#0a0f14; border-top:1px solid #1f2937; }
 footer a { color:#c9aa71; text-decoration:none; }
@@ -238,8 +233,8 @@ footer a:hover { text-decoration:underline; }
 
 <section class="hero">
   <div class="blueOverlay"></div>
-  <div class="particles"></div>
-  <div class="aura"></div>
+  <div class="particles" aria-hidden="true"></div>
+  <div class="aura" aria-hidden="true"></div>
   <h1>The Ultimate Diana & Ekko Guide</h1>
   <p>Master every aspect of League of Legends with champions like Diana and Ekko. Learn precise combos, matchup strategies, and advanced tips to elevate your gameplay.</p>
   <div style="margin-top:20px;">
@@ -249,7 +244,7 @@ footer a:hover { text-decoration:underline; }
 </section>
 
 <!-- SIGNUP MODAL -->
-<div id="signupModal" class="modal">
+<div id="signupModal" class="modal" aria-hidden="true">
   <div class="modalContent">
     <h2>Create Account</h2>
     <input type="email" id="signupEmail" placeholder="Enter your email" />
@@ -276,7 +271,6 @@ footer a:hover { text-decoration:underline; }
       <div class="plan-option" style="position: relative;">
         <div class="bestValueTag">Best Value</div>
         <button class="btn orangeBtn" id="yearlyBtn">$49 / Year</button>
-        <div class="coachingOffer">Includes a coaching session for a limited time!</div>
       </div>
     </div>
 
@@ -285,7 +279,7 @@ footer a:hover { text-decoration:underline; }
 </div>
 
 <!-- LOGIN MODAL -->
-<div id="loginModal" class="modal">
+<div id="loginModal" class="modal" aria-hidden="true">
   <div class="modalContent">
     <h2>Member Login</h2>
     <input type="email" id="loginEmail" placeholder="Enter your email" />
@@ -293,7 +287,7 @@ footer a:hover { text-decoration:underline; }
     <button class="btn" id="modalLoginBtn">Login</button>
     <button id="closeLoginModal">Cancel</button>
     <p><a href="#" id="resetLinkModal" style="color:white;">Forgot your password?</a></p>
-    <p id="loginMsgModal"></p>
+    <p id="loginMsgModal" aria-live="polite"></p>
   </div>
 </div>
 
@@ -442,6 +436,4 @@ for(let i=0;i<50;i++){
 </script>
 </body>
 </html>
-
-
 
