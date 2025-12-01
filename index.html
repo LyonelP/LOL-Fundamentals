@@ -58,11 +58,11 @@ header {
   display: inline-block;
   background: #2f81f7;
   color: white;
-  padding: 12px 22px; /* default button size */
+  padding: 14px 26px; /* slightly bigger buttons */
   border-radius: 6px;
   text-decoration: none;
   font-weight: bold;
-  font-size: 1em;
+  font-size: 1.05em; /* slightly bigger text */
   transition: 0.3s;
   border: 1px solid #c9aa71;
   box-shadow: 0 0 15px rgba(47,129,247,0.4);
@@ -167,9 +167,8 @@ footer a:hover { text-decoration:underline; }
   <h1>The Ultimate Diana & Ekko Guide</h1>
   <p>Master every aspect of League of Legends with champions like Diana and Ekko. Learn precise combos, matchup strategies, and advanced tips to elevate your gameplay.</p>
   <div style="margin-top:20px;">
-    <!-- Homepage buttons slightly bigger -->
-    <button class="btn" id="signupHeroBtn" style="padding:14px 26px; font-size:1.05em;">Sign Up</button>
-    <button class="btn" id="loginHeroBtn" style="margin-left:10px; padding:14px 26px; font-size:1.05em;">Login</button>
+    <button class="btn" id="signupHeroBtn">Sign Up</button>
+    <button class="btn" id="loginHeroBtn" style="margin-left:10px;">Login</button>
   </div>
 </section>
 
@@ -234,7 +233,7 @@ footer a:hover { text-decoration:underline; }
 <script type="module">
 import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
 import { getAuth, signInWithEmailAndPassword, createUserWithEmailAndPassword, sendPasswordResetEmail } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-auth.js";
-import { getFirestore, doc, setDoc, serverTimestamp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
+import { getFirestore, doc, setDoc, serverTimestamp, getDoc } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
 
 const firebaseConfig = {
   apiKey: "AIzaSyCFRcEV7wdivqONnkjJubAZOjPMixrHMBI",
@@ -283,7 +282,7 @@ closeSignupModal.addEventListener('click',()=>signupModal.style.display='none');
 closePlanModal.addEventListener('click',()=>planModal.style.display='none');
 closeLoginModal.addEventListener('click',()=>loginModal.style.display='none');
 
-// Signup + confirm password
+// Signup
 continueSignupBtn.addEventListener('click', async ()=>{
   const email = signupEmail.value.trim();
   const password = signupPassword.value.trim();
@@ -304,19 +303,36 @@ seePlansBtn.addEventListener('click',()=>{
   planModal.style.display='flex';
 });
 
-// Plan selection
+// Plan selection opens Stripe
 document.getElementById('monthlyBtn').addEventListener('click',()=>{ window.open(stripeLinks.monthly,"_blank"); planModal.style.display='none'; });
 document.getElementById('yearlyBtn').addEventListener('click',()=>{ window.open(stripeLinks.yearly,"_blank"); planModal.style.display='none'; });
 
-// Login
+// Login with paid check
 modalLoginBtn.addEventListener('click', async ()=>{
   const email = loginEmail.value.trim();
   const password = loginPassword.value.trim();
   if(!email||!password){ loginMsgModal.textContent="Enter email and password"; return; }
   try{
     await signInWithEmailAndPassword(auth,email,password);
-    localStorage.setItem('lolfundamentals_logged_in','true');
-    window.location.href='membershub.html';
+    // check payment status
+    const docRef = doc(firestore,"paidUsers",email);
+    const docSnap = await getDoc(docRef);
+    if(docSnap.exists()){
+      const paid = docSnap.data().paid;
+      localStorage.setItem('lolfundamentals_logged_in','true');
+      localStorage.setItem('lolfundamentals_paid',paid);
+      // redirect or show plan modal if unpaid
+      if(paid){
+        window.location.href='membershub.html';
+      } else {
+        planModal.style.display='flex';
+      }
+    } else {
+      // fallback: create doc if missing
+      await setDoc(docRef,{paid:false,timestamp:serverTimestamp()});
+      planModal.style.display='flex';
+    }
+    loginModal.style.display='none';
   } catch(err){ loginMsgModal.textContent = err.message; }
 });
 
@@ -330,7 +346,13 @@ resetLinkModal.addEventListener('click', async(e)=>{
 });
 
 // Auto redirect if logged in
-if(localStorage.getItem('lolfundamentals_logged_in')==='true'){ window.location.href='membershub.html'; }
+if(localStorage.getItem('lolfundamentals_logged_in')==='true'){
+  if(localStorage.getItem('lolfundamentals_paid')==='true'){
+    window.location.href='membershub.html';
+  } else {
+    planModal.style.display='flex';
+  }
+}
 
 // Particle effect
 const particlesContainer = document.querySelector('.particles');
@@ -345,5 +367,3 @@ for(let i=0;i<50;i++){
 </script>
 </body>
 </html>
-
-
