@@ -12,66 +12,69 @@
 
 <style>
 body {
-  margin: 0;
-  font-family: "Beaufort for LOL", Arial, Helvetica, sans-serif;
-  background: radial-gradient(circle at top, #0f1620, #0a0f14 70%);
-  color: #e6edf3;
-  line-height: 1.6;
+    margin: 0;
+    font-family: "Beaufort for LOL", Arial, Helvetica, sans-serif;
+    background: radial-gradient(circle at top, #0f1620, #0a0f14 70%);
+    color: #e6edf3;
+    line-height: 1.6;
 }
 header {
-  background: linear-gradient(90deg, #0a0f14, #1b2838);
-  border-bottom: 2px solid #c9aa71;
-  padding: 18px 20px;
-  text-align: center;
-  font-weight: bold;
-  font-size: 24px;
-  letter-spacing: 1.5px;
-  text-transform: uppercase;
-  color: #c9aa71;
-  text-shadow: 0 0 8px rgba(201,170,113,0.4);
+    background: linear-gradient(90deg, #0a0f14, #1b2838);
+    border-bottom: 2px solid #c9aa71;
+    padding: 18px 20px;
+    text-align: center;
+    font-weight: bold;
+    font-size: 24px;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    color: #c9aa71;
+    text-shadow: 0 0 8px rgba(201,170,113,0.4);
 }
 .hero {
-  position: relative;
-  text-align: center;
-  padding: 140px 20px;
-  background: url("https://ddragon.leagueoflegends.com/cdn/img/champion/splash/Diana_0.jpg") center/cover no-repeat;
-  overflow: hidden;
-  border-bottom: 1px solid #1f2937;
+    position: relative;
+    text-align: center;
+    padding: 140px 20px;
+    background: url("https://ddragon.leagueoflegends.com/cdn/img/champion/splash/Diana_0.jpg") center/cover no-repeat;
+    overflow: hidden;
+    border-bottom: 1px solid #1f2937;
 }
 .hero h1 {
-  position: relative;
-  z-index: 10;
-  font-size: 3em;
-  margin-bottom: 10px;
-  text-shadow: 0 0 12px #2f81f7;
+    position: relative;
+    z-index: 10;
+    font-size: 3em;
+    margin-bottom: 10px;
+    text-shadow: 0 0 12px #2f81f7;
 }
 .hero p {
-  position: relative;
-  z-index: 10;
-  max-width: 650px;
-  margin: 0 auto 20px;
-  font-size: 1.15em;
-  color: #d0d8e0;
-  text-shadow: 0 0 14px rgba(0,0,0,0.7);
+    position: relative;
+    z-index: 10;
+    max-width: 650px;
+    margin: 0 auto 20px;
+    font-size: 1.15em;
+    color: #d0d8e0;
+    text-shadow: 0 0 14px rgba(0,0,0,0.7);
 }
 .btn {
-  display: inline-block;
-  background: #2f81f7;
-  color: white;
-  padding: 14px 28px;
-  border-radius: 6px;
-  text-decoration: none;
-  font-weight: bold;
-  font-size: 1em;
-  transition: 0.3s;
-  border: 1px solid #c9aa71;
-  box-shadow: 0 0 18px rgba(47,129,247,0.4);
-  cursor: pointer;
+    display: inline-block;
+    background: #2f81f7;
+    color: white;
+    padding: 12px 22px; /* slightly bigger */
+    border-radius: 6px;
+    text-decoration: none;
+    font-weight: bold;
+    font-size: 1.05em; /* slightly bigger */
+    transition: 0.3s;
+    border: 1px solid #c9aa71;
+    box-shadow: 0 0 15px rgba(47,129,247,0.4);
+    cursor: pointer;
 }
-.btn:hover {
-  background: #4795ff;
-  box-shadow: 0 0 25px rgba(47,129,247,0.55);
+.btn:hover { background: #4795ff; box-shadow: 0 0 25px rgba(47,129,247,0.55); }
+.orangeBtn {
+    background: #f2994a;
+    border-color: #f2b96d;
+    position: relative;
 }
+.orangeBtn:hover { background: #ffb04d; box-shadow: 0 0 25px rgba(242,153,74,0.55); }
 .hero .blueOverlay { position: absolute; inset: 0; background: rgba(47,129,247,0.08); pointer-events: none; z-index: 1; }
 .hero .particles { position: absolute; inset: 0; pointer-events: none; z-index: 2; }
 .particles span { position: absolute; width: 4px; height: 4px; background: rgba(47,129,247,0.9); border-radius: 50%; animation: floatParticles 6s infinite ease-in-out; }
@@ -79,198 +82,153 @@ header {
 .hero .aura { position: absolute; inset: 0; background: radial-gradient(circle at 50% 20%, rgba(47,129,247,0.2), transparent 70%); opacity: 0.3; animation: auraPulse 7s infinite ease-in-out; pointer-events: none; z-index: 3; }
 @keyframes auraPulse { 0% { opacity: 0.25; transform: scale(1); } 50% { opacity: 0.45; transform: scale(1.1); } 100% { opacity: 0.25; transform: scale(1); } }
 
-/* MOVED UP SECTION */
 .section {
-  padding: 40px 20px; /* was 60px */
-  max-width: 950px;
-  margin: auto;
-  text-align: center;
+    padding: 40px 20px;
+    max-width: 950px;
+    margin: auto;
+    text-align: center;
 }
-
 .section h2 {
-  color: #c9aa71;
-  font-size: 2.1em;
-  display: inline-block;
-  padding-bottom: 12px;
-  position: relative;
-  margin-bottom: 40px;
+    color: #c9aa71;
+    font-size: 2.1em;
+    display: inline-block;
+    padding-bottom: 12px;
+    position: relative;
+    margin-bottom: 40px;
 }
 .section h2::after {
-  content: "";
-  width: 60%;
-  height: 2px;
-  background: linear-gradient(90deg, transparent, #c9aa71, transparent);
-  position: absolute;
-  bottom: 0;
-  left: 20%;
+    content: "";
+    width: 60%;
+    height: 2px;
+    background: linear-gradient(90deg, transparent, #c9aa71, transparent);
+    position: absolute;
+    bottom: 0;
+    left: 20%;
 }
 .cards {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
-  gap: 25px;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 25px;
 }
 .card {
-  background: #161b22;
-  padding: 22px;
-  border-radius: 10px;
-  width: 260px;
-  border: 1px solid rgba(47,129,247,0.4);
-  box-shadow: 0 0 12px rgba(47,129,247,0.18);
-  text-align: center;
-  transition: transform 0.25s ease, box-shadow 0.25s ease;
+    background: #161b22;
+    padding: 22px;
+    border-radius: 10px;
+    width: 260px;
+    border: 1px solid rgba(47,129,247,0.4);
+    box-shadow: 0 0 12px rgba(47,129,247,0.18);
+    text-align: center;
+    transition: transform 0.25s ease, box-shadow 0.25s ease;
 }
-.card:hover {
-  transform: translateY(-6px);
-  box-shadow: 0 6px 18px rgba(47,129,247,0.35);
-}
-.card h3 {
-  color: #c9aa71;
-}
+.card:hover { transform: translateY(-6px); box-shadow: 0 6px 18px rgba(47,129,247,0.35); }
+.card h3 { color: #c9aa71; }
 
-/* PLAN MODAL & LOGIN MODAL */
+/* MODALS */
 .modal {
-  display: none;
-  position: fixed;
-  inset: 0;
-  background: rgba(0,0,0,0.75);
-  z-index: 9999;
-  justify-content: center;
-  align-items: center;
+    display: none;
+    position: fixed;
+    inset: 0;
+    background: rgba(0,0,0,0.75);
+    z-index: 9999;
+    justify-content: center;
+    align-items: center;
 }
-.modal .modalContent {
-  background:#161b22;
-  padding:30px;
-  border-radius:10px;
-  text-align:center;
-  max-width:360px;
-  width:90%;
-  border:1px solid #c9aa71;
+.modalContent {
+    background:#161b22;
+    padding:30px;
+    border-radius:10px;
+    text-align:center;
+    max-width:400px;
+    width:90%;
+    border:1px solid #c9aa71;
 }
-.modal .modalContent h2 {
-  color:#c9aa71;
-  margin-bottom:20px;
+.modalContent h2 { color:#c9aa71; margin-bottom:20px; }
+.modalContent input { width:80%; max-width:300px; display:block; margin:8px auto; padding:8px; border-radius:4px; border:none; text-align:center; }
+.modalContent .plan-buttons { display:flex; justify-content:center; gap: 20px; margin-bottom: 20px; position: relative; }
+.modalContent .bestValueTag { position: absolute; top: -20px; left: 50%; transform: translateX(-50%); background: #f2b96d; color: #161b22; font-size: 0.8em; font-weight: bold; padding: 2px 6px; border-radius: 4px; box-shadow: 0 0 6px rgba(0,0,0,0.4); }
+.modalContent #closePlanModal, .modalContent #closeSignupModal, .modalContent #closeLoginModal { margin-top: 15px; background: none; border: none; color: #c9aa71; cursor:pointer; }
+
+/* Fix "Forgot your password?" color */
+#loginModal a {
+    color: white;
+    text-decoration: none;
 }
-.modal .modalContent input {
-  width: 80%;
-  max-width:300px;
-  display:block;
-  margin:8px auto;
-  padding:8px;
-  border-radius:4px;
-  border:none;
-  text-align:center;
-}
-.modal .modalContent .plan-buttons {
-  display:flex;
-  justify-content:center;
-  gap:12px;
-  margin-top:10px;
-}
-.modal .modalContent .plan-buttons .btn {
-  padding:10px 18px;
-  font-size:0.95em;
-}
-.modal .modalContent #closeModal,
-.modal .modalContent #closeLoginModal {
-  background:none;
-  border:none;
-  color:#c9aa71;
-  cursor:pointer;
-  font-size:1em;
-  margin-top:15px;
+#loginModal a:hover {
+    text-decoration: underline;
 }
 
-/* PASSWORD RESET LINK — MADE WHITE */
-.modal .modalContent a {
-  color: #ffffff !important; /* UPDATED */
-  text-decoration: none;
-  font-size: 0.9em;
-}
+footer { text-align:center; padding:30px; color:#8b949e; font-size:14px; background:#0a0f14; border-top:1px solid #1f2937; }
+footer a { color:#c9aa71; text-decoration:none; }
+footer a:hover { text-decoration:underline; }
 
-.modal .modalContent a:hover {
-  text-decoration: underline;
-}
-
-footer {
-  text-align:center;
-  padding:30px;
-  color:#8b949e;
-  font-size:14px;
-  background:#0a0f14;
-  border-top:1px solid #1f2937;
-}
-footer a {
-  color:#c9aa71;
-  text-decoration:none;
-}
-footer a:hover {
-  text-decoration:underline;
-}
-
-/* MOBILE HERO SPACING FIX */
-@media (max-width: 600px) {
-  .hero {
-    padding-top: 40px; /* reduced from 140px */
-  }
-}
+@media (max-width: 600px) { .hero { padding-top: 40px; } .modalContent .plan-buttons { flex-direction: column; } }
 </style>
 </head>
 <body>
 
 <header>LoL Fundamentals</header>
 
-<!-- HERO -->
 <section class="hero">
-  <div class="blueOverlay"></div>
-  <div class="particles"></div>
-  <div class="aura"></div>
-  <h1>The Ultimate Diana & Ekko Guide</h1>
-  <p>Master every aspect of League of Legends with champions like Diana and Ekko. Learn precise combos, matchup strategies, and advanced tips to elevate your gameplay.</p>
-  <div style="margin-top:20px;">
-    <button class="btn" id="signupHeroBtn">Sign Up</button>
-    <button class="btn" id="loginHeroBtn" style="margin-left:10px;">Login</button>
-  </div>
+<div class="blueOverlay"></div>
+<div class="particles"></div>
+<div class="aura"></div>
+<h1>The Ultimate Diana & Ekko Guide</h1>
+<p>Master every aspect of League of Legends with champions like Diana and Ekko. Learn precise combos, matchup strategies, and advanced tips to elevate your gameplay.</p>
+<div style="margin-top:20px;">
+<button class="btn" id="signupHeroBtn">Sign Up</button>
+<button class="btn" id="loginHeroBtn" style="margin-left:10px;">Login</button>
+</div>
 </section>
 
-<!-- PLAN MODAL -->
+<!-- SIGNUP MODAL -->
+<div id="signupModal" class="modal">
+<div class="modalContent">
+<h2>Create Account</h2>
+<input type="email" id="signupEmail" placeholder="Enter your email" />
+<input type="password" id="signupPassword" placeholder="Enter your password" />
+<input type="password" id="signupPasswordConfirm" placeholder="Confirm your password" />
+<button class="btn" id="continueSignupBtn">Continue</button>
+<button id="closeSignupModal">Cancel</button>
+</div>
+</div>
+
+<!-- PAYMENT MODAL -->
 <div id="planModal" class="modal">
-  <div class="modalContent">
-    <h2>Create Account & Choose Plan</h2>
-    <input type="email" id="signupEmail" placeholder="Enter your email" />
-    <input type="password" id="signupPassword" placeholder="Enter your password" />
-    <div class="plan-buttons">
-      <button class="btn" id="yearlyBtn">$49 / Year</button>
-      <button class="btn" id="lifetimeBtn">$99 / Lifetime</button>
-    </div>
-    <button id="closeModal">Cancel</button>
-  </div>
+<div class="modalContent">
+<h2>Choose Your Plan</h2>
+<div class="plan-buttons">
+<button class="btn" id="monthlyBtn">$9 / Month</button>
+<div style="position: relative; display: inline-block;">
+<div class="bestValueTag">Best Value</div>
+<button class="btn orangeBtn" id="yearlyBtn">$49 / Year</button>
+</div>
+</div>
+<button id="closePlanModal">Cancel</button>
+</div>
 </div>
 
 <!-- LOGIN MODAL -->
 <div id="loginModal" class="modal">
-  <div class="modalContent">
-    <h2>Member Login</h2>
-    <input type="email" id="loginEmail" placeholder="Enter your email" />
-    <input type="password" id="loginPassword" placeholder="Enter your password" />
-    <div class="plan-buttons">
-      <button class="btn" id="modalLoginBtn">Login</button>
-    </div>
-    <button id="closeLoginModal">Cancel</button>
-    <p><a href="#" id="resetLinkModal">Forgot your password?</a></p>
-    <p id="loginMsgModal"></p>
-  </div>
+<div class="modalContent">
+<h2>Member Login</h2>
+<input type="email" id="loginEmail" placeholder="Enter your email" />
+<input type="password" id="loginPassword" placeholder="Enter your password" />
+<button class="btn" id="modalLoginBtn">Login</button>
+<button id="closeLoginModal">Cancel</button>
+<p><a href="#" id="resetLinkModal">Forgot your password?</a></p>
+<p id="loginMsgModal"></p>
+</div>
 </div>
 
-<!-- CONTENT -->
 <section class="section">
 <h2>What You’ll Learn</h2>
 <div class="cards">
-  <div class="card"><h3>Fundamentals</h3><p>Core skills including combos, wave management, positioning, and warding for consistent gameplay improvement.</p></div>
-  <div class="card"><h3>Diana Guide</h3><p>A comprehensive guide covering Diana's full kit, itemization, playstyle, and advanced strategies.</p></div>
-  <div class="card"><h3>Ekko Guide</h3><p>Complete guide to playing Ekko Jungle, including combos, pathing, and advanced mechanics.</p></div>
-  <div class="card"><h3>Diana Matchup Guide</h3><p>Detailed breakdowns for every mid lane champion, teaching optimal trades, wave control, and all-in timings.</p></div>
-  <div class="card"><h3>Tierlist</h3><p>Rankings for each role in the current meta, highlighting strongest picks and counters.</p></div>
+<div class="card"><h3>Fundamentals</h3><p>Core skills including combos, wave management, positioning, and warding for consistent gameplay improvement.</p></div>
+<div class="card"><h3>Diana Guide</h3><p>A comprehensive guide covering Diana's full kit, itemization, playstyle, and advanced strategies.</p></div>
+<div class="card"><h3>Ekko Guide</h3><p>Complete guide to playing Ekko Jungle, including combos, pathing, and advanced mechanics.</p></div>
+<div class="card"><h3>Diana Matchup Guide</h3><p>Detailed breakdowns for every mid lane champion, teaching optimal trades, wave control, and all-in timings.</p></div>
+<div class="card"><h3>Tierlist</h3><p>Rankings for each role in the current meta, highlighting strongest picks and counters.</p></div>
 </div>
 </section>
 
@@ -281,32 +239,34 @@ footer a:hover {
 <script type="module">
 import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
 import { getAuth, signInWithEmailAndPassword, createUserWithEmailAndPassword, sendPasswordResetEmail } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-auth.js";
-import { getFirestore, doc, getDoc, setDoc, serverTimestamp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
+import { getFirestore, doc, setDoc, serverTimestamp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
 
 const firebaseConfig = {
-  apiKey: "AIzaSyCFRcEV7wdivqONnkjJubAZOjPMixrHMBI",
-  authDomain: "lol-fundamentals.firebaseapp.com",
-  projectId: "lol-fundamentals",
-  storageBucket: "lol-fundamentals.firebasestorage.app",
-  messagingSenderId: "1038440427584",
-  appId: "1:1038440427584:web:a82207151fd370dbedefa5",
+apiKey: "AIzaSyCFRcEV7wdivqONnkjJubAZOjPMixrHMBI",
+authDomain: "lol-fundamentals.firebaseapp.com",
+projectId: "lol-fundamentals",
+storageBucket: "lol-fundamentals.firebasestorage.app",
+messagingSenderId: "1038440427584",
+appId: "1:1038440427584:web:a82207151fd370dbedefa5",
 };
 const app = initializeApp(firebaseConfig);
 const auth = getAuth(app);
 const firestore = getFirestore(app);
 
-// --- ELEMENTS ---
+// Elements
 const signupHeroBtn = document.getElementById('signupHeroBtn');
 const loginHeroBtn = document.getElementById('loginHeroBtn');
-
+const signupModal = document.getElementById('signupModal');
 const planModal = document.getElementById('planModal');
+const loginModal = document.getElementById('loginModal');
+
 const signupEmail = document.getElementById('signupEmail');
 const signupPassword = document.getElementById('signupPassword');
-const yearlyBtn = document.getElementById('yearlyBtn');
-const lifetimeBtn = document.getElementById('lifetimeBtn');
-const closeModal = document.getElementById('closeModal');
+const signupPasswordConfirm = document.getElementById('signupPasswordConfirm');
+const continueSignupBtn = document.getElementById('continueSignupBtn');
+const closeSignupModal = document.getElementById('closeSignupModal');
+const closePlanModal = document.getElementById('closePlanModal');
 
-const loginModal = document.getElementById('loginModal');
 const loginEmail = document.getElementById('loginEmail');
 const loginPassword = document.getElementById('loginPassword');
 const modalLoginBtn = document.getElementById('modalLoginBtn');
@@ -314,83 +274,69 @@ const closeLoginModal = document.getElementById('closeLoginModal');
 const loginMsgModal = document.getElementById('loginMsgModal');
 const resetLinkModal = document.getElementById('resetLinkModal');
 
-// --- MODAL FUNCTIONS ---
-function openPlanModal() { planModal.style.display = 'flex'; }
-function closePlanModal() { planModal.style.display = 'none'; }
-signupHeroBtn.addEventListener('click', openPlanModal);
-closeModal.addEventListener('click', closePlanModal);
-
-function openLoginModal() { loginModal.style.display = 'flex'; }
-function closeLogin() { loginModal.style.display = 'none'; }
-loginHeroBtn.addEventListener('click', openLoginModal);
-closeLoginModal.addEventListener('click', closeLogin);
-
 // Stripe links
-const stripeLinks = {
-  yearly: "https://buy.stripe.com/cNi14g3nC48AerQ9cmejK07",
-  lifetime: "https://buy.stripe.com/fZu00c9M0awYgzYcoyejK06"
-};
+const stripeLinks = { monthly: "https://buy.stripe.com/9AQg3nD4q6zX0u0cMR", yearly: "https://buy.stripe.com/9AQg3nD4q6zX0u0cMR" };
 
-// --- SIGNUP & REDIRECT ---
-async function redirectToStripe(plan) {
-  const email = signupEmail.value.trim();
-  const password = signupPassword.value.trim();
-  if (!email || !password) { alert("Enter email and password"); return; }
-  try {
-    await createUserWithEmailAndPassword(auth, email, password);
-    await setDoc(doc(firestore, "paidUsers", email), { paid: false, plan: plan, timestamp: serverTimestamp() });
-    window.open(stripeLinks[plan], "_blank");
-    closePlanModal();
-  } catch(err) { alert(err.message); }
-}
-yearlyBtn.addEventListener('click', () => redirectToStripe('yearly'));
-lifetimeBtn.addEventListener('click', () => redirectToStripe('lifetime'));
+// Show/hide modals
+signupHeroBtn.addEventListener('click',()=>signupModal.style.display='flex');
+loginHeroBtn.addEventListener('click',()=>loginModal.style.display='flex');
+closeSignupModal.addEventListener('click',()=>signupModal.style.display='none');
+closePlanModal.addEventListener('click',()=>planModal.style.display='none');
+closeLoginModal.addEventListener('click',()=>loginModal.style.display='none');
 
-// --- LOGIN ---
-modalLoginBtn.addEventListener('click', async () => {
-  const email = loginEmail.value.trim();
-  const password = loginPassword.value.trim();
-  if (!email || !password) { loginMsgModal.textContent = "Enter email and password"; return; }
-  try {
-    await signInWithEmailAndPassword(auth, email, password);
-    const docSnap = await getDoc(doc(firestore, "paidUsers", email));
-    if (docSnap.exists() && docSnap.data().paid) {
-      localStorage.setItem('lolfundamentals_logged_in','true');
-      window.location.href='membershub.html';
-    } else {
-      loginMsgModal.textContent = "Payment not completed yet.";
-    }
-  } catch(err) { loginMsgModal.textContent = err.message; }
+// Signup + confirm password
+continueSignupBtn.addEventListener('click', async ()=>{
+const email = signupEmail.value.trim();
+const password = signupPassword.value.trim();
+const confirm = signupPasswordConfirm.value.trim();
+if(!email || !password || !confirm){ alert("Fill all fields"); return; }
+if(password !== confirm){ alert("Passwords do not match"); return; }
+try {
+await createUserWithEmailAndPassword(auth,email,password);
+await setDoc(doc(firestore,"paidUsers",email),{paid:false,timestamp:serverTimestamp()});
+signupModal.style.display='none';
+planModal.style.display='flex';
+} catch(err){ alert(err.message); }
 });
 
-// --- PASSWORD RESET ---
-resetLinkModal.addEventListener('click', async (e) => {
-  e.preventDefault();
-  const email = loginEmail.value.trim();
-  if (!email) { loginMsgModal.textContent = "Enter your email to reset password"; return; }
-  try { await sendPasswordResetEmail(auth, email); loginMsgModal.textContent = "Password reset email sent!"; } 
-  catch(err) { loginMsgModal.textContent = err.message; }
+// Plan selection
+document.getElementById('monthlyBtn').addEventListener('click',()=>{ window.open(stripeLinks.monthly,"_blank"); planModal.style.display='none'; });
+document.getElementById('yearlyBtn').addEventListener('click',()=>{ window.open(stripeLinks.yearly,"_blank"); planModal.style.display='none'; });
+
+// Login
+modalLoginBtn.addEventListener('click', async ()=>{
+const email = loginEmail.value.trim();
+const password = loginPassword.value.trim();
+if(!email||!password){ loginMsgModal.textContent="Enter email and password"; return; }
+try{
+await signInWithEmailAndPassword(auth,email,password);
+localStorage.setItem('lolfundamentals_logged_in','true');
+window.location.href='membershub.html';
+} catch(err){ loginMsgModal.textContent = err.message; }
 });
 
-// --- AUTO REDIRECT ---
-if (localStorage.getItem('lolfundamentals_logged_in')==='true') {
-  window.location.href='membershub.html';
-}
+// Password reset
+resetLinkModal.addEventListener('click', async(e)=>{
+e.preventDefault();
+const email = loginEmail.value.trim();
+if(!email){ loginMsgModal.textContent="Enter email to reset"; return; }
+try{ await sendPasswordResetEmail(auth,email); loginMsgModal.textContent="Password reset email sent!"; }
+catch(err){ loginMsgModal.textContent=err.message; }
+});
 
-// --- PARTICLES ---
+// Auto redirect if logged in
+if(localStorage.getItem('lolfundamentals_logged_in')==='true'){ window.location.href='membershub.html'; }
+
+// Particle effect
 const particlesContainer = document.querySelector('.particles');
-for (let i = 0; i < 50; i++) {
-  const span = document.createElement('span');
-  span.style.left = Math.random() * 100 + "%";
-  span.style.top = Math.random() * 100 + "%";
-  span.style.animationDuration = 4 + Math.random() * 4 + "s";
-  span.style.animationDelay = Math.random() * 4 + "s";
-  particlesContainer.appendChild(span);
+for(let i=0;i<50;i++){
+const span = document.createElement('span');
+span.style.left = Math.random()*100+"%";
+span.style.top = Math.random()*100+"%";
+span.style.animationDuration = (4+Math.random()*4)+"s";
+span.style.animationDelay = Math.random()*4+"s";
+particlesContainer.appendChild(span);
 }
 </script>
 </body>
 </html>
-
-
-
-
