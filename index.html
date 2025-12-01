@@ -145,15 +145,91 @@ header {
 }
 .modalContent h2 { color:#c9aa71; margin-bottom:20px; }
 .modalContent input { width:80%; max-width:300px; display:block; margin:8px auto; padding:8px; border-radius:4px; border:none; text-align:center; }
-.modalContent .plan-buttons { display:flex; justify-content:center; gap: 20px; margin-bottom: 20px; position: relative; }
-.modalContent .bestValueTag { position: absolute; top: -20px; left: 50%; transform: translateX(-50%); background: #f2b96d; color: #161b22; font-size: 0.8em; font-weight: bold; padding: 2px 6px; border-radius: 4px; box-shadow: 0 0 6px rgba(0,0,0,0.4); }
+
+/* Plan buttons container (desktop) */
+.modalContent .plan-buttons {
+  display:flex;
+  justify-content:center;
+  gap: 20px;
+  margin-bottom: 20px;
+  position: relative;
+  align-items: flex-start;
+}
+
+/* Plan option wrapper */
+.modalContent .plan-option {
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  justify-content:center; /* center vertically */
+  min-height:130px;
+  position:relative;
+}
+
+/* Best value tag (positioned above yearly) */
+.modalContent .bestValueTag {
+  position: absolute;
+  top: -20px;
+  left: 50%;
+  transform: translateX(-50%);
+  background: #f2b96d;
+  color: #161b22;
+  font-size: 0.8em;
+  font-weight: bold;
+  padding: 2px 6px;
+  border-radius: 4px;
+  box-shadow: 0 0 6px rgba(0,0,0,0.4);
+}
+
+/* modal action buttons */
 .modalContent #closePlanModal, .modalContent #closeSignupModal, .modalContent #closeLoginModal { margin-top: 15px; background: none; border: none; color: #c9aa71; cursor:pointer; }
+
+.coachingOffer {
+  color: #f2b96d;
+  font-size: 0.85em;
+  margin-top: 6px;
+  font-weight: bold;
+  text-align: center;
+  max-width: 140px;
+}
 
 footer { text-align:center; padding:30px; color:#8b949e; font-size:14px; background:#0a0f14; border-top:1px solid #1f2937; }
 footer a { color:#c9aa71; text-decoration:none; }
 footer a:hover { text-decoration:underline; }
 
-@media (max-width: 600px) { .hero { padding-top: 40px; } .modalContent .plan-buttons { flex-direction: column; } }
+/* MOBILE FIX — stack and center properly */
+@media (max-width: 600px) {
+  .hero { padding-top: 40px; }
+
+  .modalContent .plan-buttons {
+    flex-direction: column;
+    align-items: center;
+    gap: 12px;
+    width: 100%;
+  }
+
+  .modalContent .plan-option {
+    width: 100%;
+    max-width: 320px;
+    box-sizing: border-box;
+    padding-top: 10px;
+    padding-bottom: 10px;
+  }
+
+  .modalContent .plan-option button, .modalContent .plan-option .btn {
+    width: 85%;
+    max-width: 260px;
+    text-align: center;
+  }
+
+  .modalContent .bestValueTag {
+    left: 50%;
+    transform: translateX(-50%);
+    top: -18px;
+  }
+
+  .coachingOffer { max-width: 100%; }
+}
 </style>
 </head>
 <body>
@@ -188,16 +264,22 @@ footer a:hover { text-decoration:underline; }
 </div>
 
 <!-- PAYMENT MODAL -->
-<div id="planModal" class="modal">
+<div id="planModal" class="modal" aria-hidden="true">
   <div class="modalContent">
     <h2>Choose Your Plan</h2>
+
     <div class="plan-buttons">
-      <button class="btn" id="monthlyBtn">$9 / Month</button>
-      <div style="position: relative; display: inline-block;">
+      <div class="plan-option">
+        <button class="btn" id="monthlyBtn">$9 / Month</button>
+      </div>
+
+      <div class="plan-option" style="position: relative;">
         <div class="bestValueTag">Best Value</div>
         <button class="btn orangeBtn" id="yearlyBtn">$49 / Year</button>
+        <div class="coachingOffer">Includes a coaching session for a limited time!</div>
       </div>
     </div>
+
     <button id="closePlanModal">Cancel</button>
   </div>
 </div>
@@ -360,3 +442,6 @@ for(let i=0;i<50;i++){
 </script>
 </body>
 </html>
+
+
+
