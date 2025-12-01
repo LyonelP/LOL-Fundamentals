@@ -11,7 +11,6 @@
 <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
 
 <style>
-/* --- same CSS as before --- */
 body {
   margin: 0;
   font-family: "Beaufort for LOL", Arial, Helvetica, sans-serif;
@@ -193,13 +192,12 @@ footer a:hover { text-decoration:underline; }
   <div class="modalContent">
     <h2>Choose Your Plan</h2>
     <div class="plan-buttons">
-      <button class="btn" id="monthlyBtn">$14 / Month</button>
+      <button class="btn" id="monthlyBtn">$14 / Month!</button>
       <div style="position: relative; display: inline-block;">
-        <div class="bestValueTag">Best Value + Coaching</div>
-        <button class="btn orangeBtn" id="yearlyBtn">$99 / Year</button>
+        <div class="bestValueTag">Best Value</div>
+        <button class="btn orangeBtn" id="yearlyBtn">$99 / Year! (Limited-time coaching!)</button>
       </div>
     </div>
-    <p style="font-size:0.9em; color:#d0d8e0; margin-top:8px;">Limited-time free coaching session included with yearly plan</p>
     <button id="closePlanModal">Cancel</button>
   </div>
 </div>
@@ -249,6 +247,7 @@ const app = initializeApp(firebaseConfig);
 const auth = getAuth(app);
 const firestore = getFirestore(app);
 
+// Elements
 const signupHeroBtn = document.getElementById('signupHeroBtn');
 const loginHeroBtn = document.getElementById('loginHeroBtn');
 const signupModal = document.getElementById('signupModal');
@@ -270,18 +269,20 @@ const closeLoginModal = document.getElementById('closeLoginModal');
 const loginMsgModal = document.getElementById('loginMsgModal');
 const resetLinkModal = document.getElementById('resetLinkModal');
 
-// Updated Stripe links
+// Stripe checkout links
 const stripeLinks = { 
   monthly: "https://buy.stripe.com/5kQ28k7DSawYfvUagqejK09", 
-  yearly: "https://buy.stripe.com/5kQ5kw8HW9sU1F4gEOejK0a" 
+  yearly: "https://buy.stripe.com/5kQ5kw8HW9sU1F4gEOejK0a"
 };
 
+// Show/hide modals
 signupHeroBtn.addEventListener('click',()=>signupModal.style.display='flex');
 loginHeroBtn.addEventListener('click',()=>loginModal.style.display='flex');
 closeSignupModal.addEventListener('click',()=>signupModal.style.display='none');
 closePlanModal.addEventListener('click',()=>planModal.style.display='none');
 closeLoginModal.addEventListener('click',()=>loginModal.style.display='none');
 
+// Signup
 continueSignupBtn.addEventListener('click', async ()=>{
   const email = signupEmail.value.trim();
   const password = signupPassword.value.trim();
@@ -296,14 +297,17 @@ continueSignupBtn.addEventListener('click', async ()=>{
   } catch(err){ alert(err.message); }
 });
 
+// See Plans button
 seePlansBtn.addEventListener('click',()=>{
   signupModal.style.display='none';
   planModal.style.display='flex';
 });
 
+// Plan selection opens Stripe
 document.getElementById('monthlyBtn').addEventListener('click',()=>{ window.open(stripeLinks.monthly,"_blank"); planModal.style.display='none'; });
 document.getElementById('yearlyBtn').addEventListener('click',()=>{ window.open(stripeLinks.yearly,"_blank"); planModal.style.display='none'; });
 
+// Login with paid check
 modalLoginBtn.addEventListener('click', async ()=>{
   const email = loginEmail.value.trim();
   const password = loginPassword.value.trim();
@@ -329,6 +333,7 @@ modalLoginBtn.addEventListener('click', async ()=>{
   } catch(err){ loginMsgModal.textContent = err.message; }
 });
 
+// Password reset
 resetLinkModal.addEventListener('click', async(e)=>{
   e.preventDefault();
   const email = loginEmail.value.trim();
@@ -337,21 +342,15 @@ resetLinkModal.addEventListener('click', async(e)=>{
   catch(err){ loginMsgModal.textContent=err.message; }
 });
 
+// Auto redirect if logged in and paid only
 if(localStorage.getItem('lolfundamentals_logged_in')==='true' && localStorage.getItem('lolfundamentals_paid')==='true'){
   window.location.href='membershub.html';
 }
-
-const particlesContainer = document.querySelector('.particles');
-for(let i=0;i<50;i++){
-  const span = document.createElement('span');
-  span.style.left = Math.random()*100+"%";
-  span.style.top = Math.random()*100+"%";
-  span.style.animationDuration = (4+Math.random()*4)+"s";
-  span.style.animationDelay = Math.random()*4+"s";
-  particlesContainer.appendChild(span);
-}
 </script>
+
 </body>
 </html>
+
+
 
 
