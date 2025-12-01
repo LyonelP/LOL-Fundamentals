@@ -58,11 +58,11 @@ header {
   display: inline-block;
   background: #2f81f7;
   color: white;
-  padding: 14px 26px; /* slightly bigger buttons */
+  padding: 14px 26px;
   border-radius: 6px;
   text-decoration: none;
   font-weight: bold;
-  font-size: 1.05em; /* slightly bigger text */
+  font-size: 1.05em;
   transition: 0.3s;
   border: 1px solid #c9aa71;
   box-shadow: 0 0 15px rgba(47,129,247,0.4);
@@ -314,21 +314,18 @@ modalLoginBtn.addEventListener('click', async ()=>{
   if(!email||!password){ loginMsgModal.textContent="Enter email and password"; return; }
   try{
     await signInWithEmailAndPassword(auth,email,password);
-    // check payment status
     const docRef = doc(firestore,"paidUsers",email);
     const docSnap = await getDoc(docRef);
     if(docSnap.exists()){
       const paid = docSnap.data().paid;
       localStorage.setItem('lolfundamentals_logged_in','true');
       localStorage.setItem('lolfundamentals_paid',paid);
-      // redirect or show plan modal if unpaid
       if(paid){
         window.location.href='membershub.html';
       } else {
         planModal.style.display='flex';
       }
     } else {
-      // fallback: create doc if missing
       await setDoc(docRef,{paid:false,timestamp:serverTimestamp()});
       planModal.style.display='flex';
     }
@@ -345,13 +342,9 @@ resetLinkModal.addEventListener('click', async(e)=>{
   catch(err){ loginMsgModal.textContent=err.message; }
 });
 
-// Auto redirect if logged in
-if(localStorage.getItem('lolfundamentals_logged_in')==='true'){
-  if(localStorage.getItem('lolfundamentals_paid')==='true'){
-    window.location.href='membershub.html';
-  } else {
-    planModal.style.display='flex';
-  }
+// Auto redirect if logged in and paid only
+if(localStorage.getItem('lolfundamentals_logged_in')==='true' && localStorage.getItem('lolfundamentals_paid')==='true'){
+  window.location.href='membershub.html';
 }
 
 // Particle effect
@@ -367,3 +360,4 @@ for(let i=0;i<50;i++){
 </script>
 </body>
 </html>
+
