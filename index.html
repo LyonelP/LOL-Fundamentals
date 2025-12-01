@@ -161,22 +161,22 @@ footer a:hover { text-decoration:underline; }
     flex-direction: column !important;
     justify-content: center !important;
     align-items: center !important;
-    gap: 14px !important;
+    gap: 20px !important; /* more vertical space */
   }
 
   .modalContent .plan-buttons > div {
-    width: 100% !important;
+    width: auto !important;
     display: block !important;
     text-align: center;
   }
 
   .modalContent .plan-buttons button {
-    width: 100% !important;
-    max-width: 260px;
+    width: 220px !important; /* slightly narrower */
+    max-width: 220px;
   }
 
   .modalContent .bestValueTag {
-    top: -14px;
+    top: -16px;
   }
 }
 </style>
@@ -345,7 +345,11 @@ modalLoginBtn.addEventListener('click', async ()=>{
       const paid = docSnap.data().paid;
       localStorage.setItem('lolfundamentals_logged_in','true');
       localStorage.setItem('lolfundamentals_paid',paid);
-      if(paid){ window.location.href='membershub.html'; } else { planModal.style.display='flex'; }
+      if(paid){
+        window.location.href='membershub.html';
+      } else {
+        planModal.style.display='flex';
+      }
     } else {
       await setDoc(docRef,{paid:false,timestamp:serverTimestamp()});
       planModal.style.display='flex';
@@ -381,6 +385,8 @@ for(let i=0;i<50;i++){
 </script>
 </body>
 </html>
+
+
 
 
 
