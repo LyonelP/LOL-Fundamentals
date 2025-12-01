@@ -145,24 +145,50 @@ header {
 }
 .modalContent h2 { color:#c9aa71; margin-bottom:20px; }
 .modalContent input { width:80%; max-width:300px; display:block; margin:8px auto; padding:8px; border-radius:4px; border:none; text-align:center; }
-.modalContent .plan-buttons { display:flex; justify-content:center; gap: 20px; margin-bottom: 20px; align-items:flex-start; }
-.modalContent .plan-option { display:flex; flex-direction:column; align-items:center; min-height:100px; }
-.modalContent .bestValueTag { position: absolute; top: -20px; left: 50%; transform: translateX(-50%); background: #f2b96d; color: #161b22; font-size: 0.8em; font-weight: bold; padding: 2px 6px; border-radius: 4px; box-shadow: 0 0 6px rgba(0,0,0,0.4); }
-.modalContent #closePlanModal, .modalContent #closeSignupModal, .modalContent #closeLoginModal { margin-top: 15px; background: none; border: none; color: #c9aa71; cursor:pointer; }
-.coachingOffer {
-  color: #f2b96d;
-  font-size: 0.85em;
-  margin-top: 6px;
-  font-weight: bold;
-  text-align: center;
-  max-width: 140px;
+
+.modalContent .plan-buttons {
+  display: flex;
+  justify-content: center;
+  gap: 20px;
+  margin-bottom: 20px;
+  position: relative;
 }
+
+.modalContent .plan-option {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center; /* vertically center */
+  min-height: 130px;
+  position: relative;
+}
+
+.modalContent .bestValueTag {
+  position: absolute;
+  top: -20px;
+  left: 50%;
+  transform: translateX(-50%);
+  background: #f2b96d;
+  color: #161b22;
+  font-size: 0.8em;
+  font-weight: bold;
+  padding: 2px 6px;
+  border-radius: 4px;
+  box-shadow: 0 0 6px rgba(0,0,0,0.4);
+}
+
+.modalContent #closePlanModal,
+.modalContent #closeSignupModal,
+.modalContent #closeLoginModal { margin-top: 15px; background: none; border: none; color: #c9aa71; cursor:pointer; }
 
 footer { text-align:center; padding:30px; color:#8b949e; font-size:14px; background:#0a0f14; border-top:1px solid #1f2937; }
 footer a { color:#c9aa71; text-decoration:none; }
 footer a:hover { text-decoration:underline; }
 
-@media (max-width: 600px) { .hero { padding-top: 40px; } .modalContent .plan-buttons { flex-direction: column; } }
+@media (max-width: 600px) {
+  .hero { padding-top: 40px; }
+  .modalContent .plan-buttons { flex-direction: column; gap:15px; }
+}
 </style>
 </head>
 <body>
@@ -192,7 +218,7 @@ footer a:hover { text-decoration:underline; }
       <button class="btn" id="continueSignupBtn">Continue</button>
       <button class="btn" id="seePlansBtn">See Plans</button>
     </div>
-    <button id="closeSignupModal" style="margin-top:15px;">Cancel</button>
+    <button id="closeSignupModal">Cancel</button>
   </div>
 </div>
 
@@ -204,10 +230,10 @@ footer a:hover { text-decoration:underline; }
       <div class="plan-option">
         <button class="btn" id="monthlyBtn">$14 / Month</button>
       </div>
-      <div class="plan-option" style="position: relative;">
+      <div class="plan-option">
         <div class="bestValueTag">Best Value</div>
         <button class="btn orangeBtn" id="yearlyBtn">$99 / Year</button>
-        <div class="coachingOffer">Includes a coaching session for a limited time!</div>
+        <p style="margin-top:8px; font-size:0.9em; color:#d0d8e0;">Comes with a limited-time coaching session!</p>
       </div>
     </div>
     <button id="closePlanModal">Cancel</button>
@@ -349,13 +375,29 @@ modalLoginBtn.addEventListener('click', async ()=>{
 resetLinkModal.addEventListener('click', async(e)=>{
   e.preventDefault();
   const email = loginEmail.value.trim();
-  if(!email){ alert("Enter your email"); return; }
-  try{ await sendPasswordResetEmail(auth,email); alert("Reset email sent!"); }
-  catch(err){ alert(err.message); }
+  if(!email){ loginMsgModal.textContent="Enter email to reset"; return; }
+  try{ await sendPasswordResetEmail(auth,email); loginMsgModal.textContent="Password reset email sent!"; }
+  catch(err){ loginMsgModal.textContent=err.message; }
 });
-</script>
 
+// Auto redirect if logged in and paid only
+if(localStorage.getItem('lolfundamentals_logged_in')==='true' && localStorage.getItem('lolfundamentals_paid')==='true'){
+  window.location.href='membershub.html';
+}
+
+// Particle effect
+const particlesContainer = document.querySelector('.particles');
+for(let i=0;i<50;i++){
+  const span = document.createElement('span');
+  span.style.left = Math.random()*100+"%";
+  span.style.top = Math.random()*100+"%";
+  span.style.animationDuration = (4+Math.random()*4)+"s";
+  span.style.animationDelay = Math.random()*4+"s";
+  particlesContainer.appendChild(span);
+}
+</script>
 </body>
 </html>
+
 
 
