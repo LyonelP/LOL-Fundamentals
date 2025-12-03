@@ -16,7 +16,7 @@ header::after { content:""; display:block; width:100%; height:2px; background:#d
 select,input[type=number] { width:100%; padding:10px; margin-bottom:16px; border-radius:8px; border:1px solid rgba(255,255,255,0.08); background:rgba(15,22,35,0.9); color:white; font-size:16px; -webkit-appearance:none; -moz-appearance:none; appearance:none; background-image: url("data:image/svg+xml,%3Csvg fill='white' height='32' viewBox='0 0 24 24' width='32' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M7 10l5 5 5-5z'/%3E%3C/svg%3E"); background-repeat: no-repeat; background-position: right 12px center; background-size: 24px; }
 .item-row { display:flex; gap:10px; margin-bottom:10px; flex-wrap:wrap; }
 .item-row select, .item-row input { flex:1; min-width:80px; }
-button { padding:12px 26px; font-size:16px; font-weight:bold; background:#2f81f7; color:#fff; border:none; border-radius:8px; cursor:pointer; margin:10px auto; display:block; }
+button { padding:12px 26px; font-size:16px; font-weight:bold; background:#2f81f7; color:#fff; border:none; border-radius:8px; cursor:pointer; margin:20px auto 40px; display:block; }
 button:hover { background:#1b5fc7; }
 table { width:100%; border-collapse:collapse; margin-top:10px; }
 th,td { padding:12px; border-bottom:1px solid rgba(255,255,255,0.05); }
@@ -111,10 +111,10 @@ select::-ms-expand { display:block; }
 <script>
 // --- Item Data ---
 const AP_ITEMS = [
-  {name:"Doran's Ring", ap:15, flatPen:0, percPen:0},
+  {name:"Doran's Ring", ap:18, flatPen:0, percPen:0},
   {name:"Amplifying Tome", ap:20, flatPen:0, percPen:0},
   {name:"Lost Chapter", ap:40, flatPen:0, percPen:0},
-  {name:"Needlessly Large Rod", ap:60, flatPen:0, percPen:0},
+  {name:"Needlessly Large Rod", ap:65, flatPen:0, percPen:0},
   {name:"Fiendish Codex", ap:30, flatPen:0, percPen:0},
   {name:"Blasting Wand", ap:40, flatPen:0, percPen:0},
   {name:"Hextech Rocketbelt", ap:90, flatPen:0, percPen:0},
@@ -254,7 +254,6 @@ document.addEventListener("DOMContentLoaded",()=>{
 
 </body>
 </html>
-
 
 
 
