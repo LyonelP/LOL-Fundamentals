@@ -6,152 +6,164 @@
 <title>Diana Combo Calculator</title>
 <style>
 body {
-margin: 0;
-padding: 0;
-font-family: "Beaufort for LOL", serif;
-background: #0a0f1a;
-color: #d8c48a;
-text-align: center;
+  margin: 0;
+  padding: 0;
+  font-family: "Beaufort for LOL", serif;
+  background: #0a0f1a;
+  color: #d8c48a;
+  text-align: center;
 }
 header {
-font-size: 36px;
-font-weight: 700;
-padding: 5px 0;
-letter-spacing: 2px;
+  font-size: 36px;
+  font-weight: 700;
+  padding: 5px 0;
+  letter-spacing: 2px;
 }
 header::after {
-content: "";
-display: block;
-width: 100%;
-height: 2px;
-background: #d8c48a;
-margin-top: 10px;
+  content: "";
+  display: block;
+  width: 100%;
+  height: 2px;
+  background: #d8c48a;
+  margin-top: 10px;
 }
 .return-btn {
-display: inline-block;
-margin: 10px auto 20px;
-padding: 10px 24px;
-background: linear-gradient(135deg, #d8c48a, #f0d88b);
-color: #000;
-border-radius: 6px;
-text-decoration: none;
-font-weight: bold;
+  display: inline-block;
+  margin: 10px auto 20px;
+  padding: 10px 24px;
+  background: linear-gradient(135deg, #d8c48a, #f0d88b);
+  color: #000;
+  border-radius: 6px;
+  text-decoration: none;
+  font-weight: bold;
 }
 .return-btn:hover {
-background: linear-gradient(135deg, #f0d88b, #ffd66f);
+  background: linear-gradient(135deg, #f0d88b, #ffd66f);
 }
 .container {
-width: 90%;
-max-width: 900px;
-margin: 0 auto 20px;
+  width: 90%;
+  max-width: 900px;
+  margin: 0 auto 20px;
 }
 .card {
-background: rgba(12,18,30,0.8);
-border: 1px solid rgba(255,255,255,0.08);
-padding: 16px 20px;
-border-radius: 10px;
-text-align: left;
-margin-bottom: 20px;
+  background: rgba(12,18,30,0.8);
+  border: 1px solid rgba(255,255,255,0.08);
+  padding: 16px 20px;
+  border-radius: 10px;
+  text-align: left;
+  margin-bottom: 20px;
 }
 .card label {
-display: block;
-margin-bottom: 6px;
-font-size: 16px;
+  display: block;
+  margin-bottom: 6px;
+  font-size: 16px;
 }
 input[type=number], select {
-padding: 10px;
-border-radius: 8px;
-border: 1px solid rgba(255,255,255,0.08);
-background: rgba(15,22,35,0.9);
-color: white;
-font-size: 16px;
--webkit-appearance: none;
--moz-appearance: none;
-appearance: none;
-text-indent: 0.01px;
-text-overflow: '';
-background-image: url("data:image/svg+xml,%3Csvg fill='white' height='32' viewBox='0 0 24 24' width='32' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M7 10l5 5 5-5z'/%3E%3C/svg%3E");
-background-repeat: no-repeat;
-background-position: right 12px center;
-background-size: 24px;
-width: 100%;
-box-sizing: border-box;
+  padding: 10px;
+  border-radius: 8px;
+  border: 1px solid rgba(255,255,255,0.08);
+  background: rgba(15,22,35,0.9);
+  color: white;
+  font-size: 16px;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+  text-indent: 0.01px;
+  text-overflow: '';
+  background-image: url("data:image/svg+xml,%3Csvg fill='white' height='32' viewBox='0 0 24 24' width='32' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M7 10l5 5 5-5z'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right 12px center;
+  background-size: 24px;
+  width: 100%;
+  box-sizing: border-box;
 }
 .top-row {
-display: flex;
-gap: 10px;
-margin-bottom: 10px;
-flex-wrap: wrap;
+  display: flex;
+  gap: 10px;
+  margin-bottom: 10px;
+  flex-wrap: wrap;
 }
 .top-row .top-item {
-flex: 1 1 30%;
-min-width: 120px;
+  flex: 1 1 30%;
+  min-width: 120px;
 }
+
+/* Ability section */
 .ability-card {
-margin-bottom: 20px;
+  margin-bottom: 20px;
 }
 .ability-row {
-display: flex;
-flex-direction: column;
-margin-bottom: 12px;
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 12px;
 }
 .ability-row .first-line {
-display: flex;
-justify-content: space-between;
-align-items: center;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
 }
 .ability-row .first-line span {
-font-weight: bold;
+  font-weight: bold;
 }
 .ability-row select.rank-select {
-width: 60px;
+  width: 60px;
 }
 .ability-row input.uses-input {
-width: 100%;
-margin-top: 6px;
+  width: 100%;
+  margin-top: 6px;
 }
 button#calculate-btn {
-padding: 12px 26px;
-font-size: 16px;
-font-weight: bold;
-background: #2f81f7;
-color: #fff;
-border: none;
-border-radius: 8px;
-cursor: pointer;
-margin-bottom: 20px;
+  padding: 12px 26px;
+  font-size: 16px;
+  font-weight: bold;
+  background: #2f81f7;
+  color: #fff;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  margin-bottom: 20px;
 }
 button#calculate-btn:hover {
-background: #1b5fc7;
+  background: #1b5fc7;
 }
 table {
-width: 100%;
-border-collapse: collapse;
+  width: 100%;
+  border-collapse: collapse;
 }
 th, td {
-padding: 12px;
-border-bottom: 1px solid rgba(255,255,255,0.05);
+  padding: 12px;
+  border-bottom: 1px solid rgba(255,255,255,0.05);
 }
 th { color: #d8c48a; font-size: 16px; }
 td { color: white; font-size: 15px; }
 footer { text-align: center; margin-top: 20px; padding: 15px 0; color: #8b949e; font-size: 14px; }
 
+/* Items grid */
 .items-grid {
-display: flex;
-gap: 10px;
-flex-wrap: wrap;
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
 }
 .items-grid select {
-flex: 1 1 30%;
-min-width: 100px;
+  flex: 1 1 30%;
+  min-width: 100px;
 }
 
+/* Item stats in white */
 #item-stats p span { color: white; }
 
+/* Responsive */
 @media(max-width:600px){
-.top-row .top-item { flex: 1 1 100%; }
-.ability-row .first-line { flex-direction: row; justify-content: space-between; }
-.ability-row input.uses-input { width: 100%; }
+  .top-row .top-item {
+    flex: 1 1 100%;
+  }
+  .ability-row .first-line {
+    flex-direction: row;
+    justify-content: space-between;
+  }
+  .ability-row input.uses-input {
+    width: 100%;
+  }
 }
 </style>
 </head>
@@ -162,32 +174,34 @@ min-width: 100px;
 
 <div class="container">
 
+<!-- Top Inputs (Enemy stats) -->
 <div class="card">
 <div class="top-row">
-<div class="top-item">
-<label>Enemy HP</label>
-<input type="number" id="enemy-hp" value="1000">
-</div>
-<div class="top-item">
-<label>Enemy Armor</label>
-<input type="number" id="enemy-armor" value="30">
-</div>
-<div class="top-item">
-<label>Enemy MR</label>
-<input type="number" id="enemy-mr" value="30">
-</div>
+  <div class="top-item">
+    <label>Enemy HP</label>
+    <input type="number" id="enemy-hp" value="1000">
+  </div>
+  <div class="top-item">
+    <label>Enemy Armor</label>
+    <input type="number" id="enemy-armor" value="30">
+  </div>
+  <div class="top-item">
+    <label>Enemy MR</label>
+    <input type="number" id="enemy-mr" value="30">
+  </div>
 </div>
 </div>
 
+<!-- Items -->
 <div class="card">
 <label>AP Items (6 slots)</label>
 <div class="items-grid">
-<select id="item-1"></select>
-<select id="item-2"></select>
-<select id="item-3"></select>
-<select id="item-4"></select>
-<select id="item-5"></select>
-<select id="item-6"></select>
+  <select id="item-1"></select>
+  <select id="item-2"></select>
+  <select id="item-3"></select>
+  <select id="item-4"></select>
+  <select id="item-5"></select>
+  <select id="item-6"></select>
 </div>
 </div>
 
@@ -198,11 +212,13 @@ min-width: 100px;
 <p>% Pen: <span id="total-perc-pen">0%</span></p>
 </div>
 
+<!-- Diana Level -->
 <div class="card">
 <label>Diana Level</label>
 <select id="diana-level"></select>
 </div>
 
+<!-- Ability Section -->
 <div class="card ability-card">
 <label>Ability Usage</label>
 
@@ -263,10 +279,11 @@ min-width: 100px;
 
 <button id="calculate-btn">Calculate Combo Damage</button>
 
+<!-- Damage Table -->
 <div class="card">
 <table>
 <thead>
-<tr><th>Ability</th><th>Total Damage</th><th>Damage Type</th></tr>
+<tr><th>Ability</th><th>Damage</th><th>Damage Type</th></tr>
 </thead>
 <tbody id="damage-table">
 <tr><td>Auto Attack</td><td>—</td><td>Physical</td></tr>
@@ -275,7 +292,7 @@ min-width: 100px;
 <tr><td>W</td><td>—</td><td>Magic</td></tr>
 <tr><td>E</td><td>—</td><td>Magic</td></tr>
 <tr><td>R</td><td>—</td><td>Magic</td></tr>
-<tr><td><strong>Total Combo Damage (Gold)</strong></td><td id="total-damage">—</td><td>—</td></tr>
+<tr><td><strong>Total Damage</strong></td><td id="total-damage" style="color:#FFD700">—</td><td>—</td></tr>
 </tbody>
 </table>
 </div>
@@ -310,7 +327,7 @@ const AP_ITEMS = [
 {name:"Lich Bane", ap:75, flatPen:0, percPen:0}
 ];
 
-function populateItems(){
+function populateItems() {
 for(let i=1;i<=6;i++){
 const select=document.getElementById(`item-${i}`);
 select.innerHTML="";
@@ -318,18 +335,20 @@ const emptyOpt=document.createElement("option");
 emptyOpt.value="";
 emptyOpt.textContent="";
 select.appendChild(emptyOpt);
+
 AP_ITEMS.forEach((it,idx)=>{
 const o=document.createElement("option");
 o.value=idx;
 o.textContent=it.name;
 select.appendChild(o);
 });
+
 if(i===1) select.value=0;
 select.addEventListener("change",updateItemStats);
 }
 }
 
-function populateLevels(){
+function populateLevels() {
 const lvl=document.getElementById("diana-level");
 for(let i=1;i<=18;i++){
 const o=document.createElement("option");
@@ -352,7 +371,6 @@ percPen+=item.percPen;
 }
 return {totalAP, flatPen, percPen};
 }
-
 function updateItemStats(){
 const {totalAP, flatPen, percPen}=getItemStats();
 document.getElementById("total-ap").textContent=totalAP;
@@ -384,6 +402,7 @@ function calculateCombo(){
 const level=parseInt(document.getElementById("diana-level").value);
 const mr=parseFloat(document.getElementById("enemy-mr").value)||30;
 const armor=parseFloat(document.getElementById("enemy-armor").value)||30;
+
 const {totalAP,flatPen,percPen}=getItemStats();
 updateItemStats();
 
@@ -396,8 +415,9 @@ const abilities=[
 {name:"R", base:R_BASE[parseInt(document.getElementById("r-rank").value)-1], ratio:R_RATIO, count:parseInt(document.getElementById("r-count").value)||1, type:"Magic"}
 ];
 
-let totalComboDamage=0;
 const rows=document.querySelectorAll("#damage-table tr");
+let totalComboDamage = 0;
+
 abilities.forEach((ab,i)=>{
 let dmg;
 if(ab.type==="Magic"){
@@ -406,9 +426,11 @@ dmg = calcMagicDamage(ab.base, ab.ratio, totalAP, mr, ab.count, flatPen, percPen
 dmg = calcPhysicalDamage(ab.base, ab.count, armor);
 }
 rows[i].cells[1].textContent=dmg;
-totalComboDamage+=dmg;
+totalComboDamage += dmg;
 });
-document.getElementById("total-damage").textContent=totalComboDamage;
+
+// Update total damage in gold
+document.getElementById("total-damage").textContent = totalComboDamage;
 }
 
 document.addEventListener("DOMContentLoaded",()=>{
@@ -420,6 +442,8 @@ document.getElementById("calculate-btn").addEventListener("click",calculateCombo
 </script>
 </body>
 </html>
+
+
 
 
 
