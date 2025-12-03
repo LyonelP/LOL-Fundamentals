@@ -11,7 +11,7 @@ header::after { content:""; display:block; width:100%; height:2px; background:#d
 .container { width:85%; max-width:900px; margin:20px auto; }
 .card { background:rgba(12,18,30,0.8); border:1px solid rgba(255,255,255,0.08); padding:16px 20px; border-radius:10px; text-align:left; margin-bottom:20px; }
 .card label { display:block; margin-bottom:8px; font-size:16px; }
-select,input[type=number] { width:100%; padding:10px; margin-bottom:16px; border-radius:8px; border:1px solid rgba(255,255,255,0.08); background:rgba(15,22,35,0.9); color:white; font-size:16px; }
+select,input[type=number] { width:100%; padding:10px; margin-bottom:16px; border-radius:8px; border:1px solid rgba(255,255,255,0.08); background:rgba(15,22,35,0.9); color:white; font-size:16px; -webkit-appearance:none; -moz-appearance:none; appearance:none; text-indent:0.01px; text-overflow:''; }
 .item-row { display:flex; gap:10px; margin-bottom:10px; }
 .item-row select { flex:1; }
 button { padding:12px 26px; font-size:16px; font-weight:bold; background:#2f81f7; color:#fff; border:none; border-radius:8px; cursor:pointer; }
@@ -21,6 +21,9 @@ th,td { padding:12px; border-bottom:1px solid rgba(255,255,255,0.05); }
 th { color:#d8c48a; font-size:16px; }
 td { color:white; font-size:15px; }
 footer { text-align:center; margin-top:40px; padding:15px 0; color:#8b949e; font-size:14px; }
+
+/* Ensure all selects have visible arrow */
+select::-ms-expand { display:block; }
 </style>
 </head>
 <body>
@@ -97,6 +100,7 @@ footer { text-align:center; margin-top:40px; padding:15px 0; color:#8b949e; font
 <script>
 // Items list with AP, flat pen, percent pen
 const AP_ITEMS = [
+  {name:"Doran's Ring", ap:15, flatPen:0, percPen:0},
   {name:"Amplifying Tome", ap:20, flatPen:0, percPen:0},
   {name:"Lost Chapter", ap:40, flatPen:0, percPen:0},
   {name:"Needlessly Large Rod", ap:60, flatPen:0, percPen:0},
@@ -122,12 +126,22 @@ const AP_ITEMS = [
 function populateItems() {
   for(let i=1;i<=6;i++){
     const select=document.getElementById(`item-${i}`);
+    const emptyOption = document.createElement("option");
+    emptyOption.value = "";
+    emptyOption.textContent = i===1 ? "" : ""; // first slot will be overwritten
+    select.appendChild(emptyOption);
+
     AP_ITEMS.forEach((it, idx)=>{
       const o=document.createElement("option");
       o.value=idx;
       o.textContent=it.name;
       select.appendChild(o);
     });
+
+    if(i===1) select.value=0; // Doran's Ring default
+    else select.value="";
+    
+    select.addEventListener("change",updateItemStats);
   }
 }
 
@@ -145,13 +159,22 @@ function populateLevels(){
 function getItemStats(){
   let totalAP=0, flatPen=0, percPen=0;
   for(let i=1;i<=6;i++){
-    const idx = parseInt(document.getElementById(`item-${i}`).value);
-    const item = AP_ITEMS[idx] || {ap:0, flatPen:0, percPen:0};
+    const idx = document.getElementById(`item-${i}`).value;
+    if(idx === "") continue;
+    const item = AP_ITEMS[parseInt(idx)] || {ap:0, flatPen:0, percPen:0};
     totalAP += item.ap;
     flatPen += item.flatPen;
     percPen += item.percPen;
   }
   return {totalAP, flatPen, percPen};
+}
+
+// Update item stats display
+function updateItemStats(){
+  const {totalAP, flatPen, percPen} = getItemStats();
+  document.getElementById("total-ap").textContent = totalAP;
+  document.getElementById("total-flat-pen").textContent = flatPen;
+  document.getElementById("total-perc-pen").textContent = Math.round(percPen*100) + "%";
 }
 
 // Diana ability bases
@@ -184,9 +207,7 @@ function calculateCombo(){
   const {totalAP, flatPen, percPen} = getItemStats();
 
   // Update item stats display
-  document.getElementById("total-ap").textContent = totalAP;
-  document.getElementById("total-flat-pen").textContent = flatPen;
-  document.getElementById("total-perc-pen").textContent = Math.round(percPen*100) + "%";
+  updateItemStats();
 
   const abilities = [
     {name:"Passive", base:getPassiveBase(level), ratio:0.5, count:passiveCount},
@@ -209,12 +230,15 @@ function calculateCombo(){
 document.addEventListener("DOMContentLoaded",()=>{
   populateItems();
   populateLevels();
+  updateItemStats();
   document.getElementById("calculate-btn").addEventListener("click",calculateCombo);
 });
 </script>
 
 </body>
 </html>
+
+
 
 
 
