@@ -94,23 +94,24 @@ margin-bottom: 20px;
 }
 .ability-row {
 display: flex;
-flex-direction: column;
+align-items: center;
+justify-content: space-between;
 margin-bottom: 12px;
 }
 .ability-row .first-line {
 display: flex;
-justify-content: space-between;
 align-items: center;
+gap: 10px;
 }
 .ability-row .first-line span {
 font-weight: bold;
+min-width: 80px;
 }
 .ability-row select.rank-select {
 width: 60px;
 }
-.ability-row input.uses-input {
-width: 100%;
-margin-top: 6px;
+.ability-row select.uses-input {
+width: 60px;
 }
 button#calculate-btn {
 padding: 12px 26px;
@@ -136,6 +137,7 @@ border-bottom: 1px solid rgba(255,255,255,0.05);
 }
 th { color: #d8c48a; font-size: 16px; }
 td { color: white; font-size: 15px; }
+td.total-damage { color: gold; font-weight: bold; }
 footer { text-align: center; margin-top: 20px; padding: 15px 0; color: #8b949e; font-size: 14px; }
 
 /* Items grid */
@@ -157,12 +159,14 @@ min-width: 100px;
 .top-row .top-item {
 flex: 1 1 100%;
 }
-.ability-row .first-line {
-flex-direction: row;
-justify-content: space-between;
+.ability-row {
+flex-direction: column;
+align-items: flex-start;
 }
-.ability-row input.uses-input {
+.ability-row select.rank-select,
+.ability-row select.uses-input {
 width: 100%;
+margin-top: 6px;
 }
 }
 </style>
@@ -223,56 +227,75 @@ width: 100%;
 <label>Ability Usage</label>
 
 <div class="ability-row">
-<div class="first-line"><span>Auto Attack</span></div>
-<input type="number" class="uses-input" id="aa-count" value="1" min="1">
+<div class="first-line">
+<span>Auto Attack</span>
+</div>
+<select class="uses-input" id="aa-count">
+<option>1</option><option>2</option><option>3</option><option>4</option><option>5</option>
+<option>6</option><option>7</option><option>8</option><option>9</option><option>10</option>
+</select>
 </div>
 
 <div class="ability-row">
-<div class="first-line"><span>Passive</span></div>
-<input type="number" class="uses-input" id="passive-count" value="1" min="1">
+<div class="first-line">
+<span>Passive</span>
+</div>
+<select class="uses-input" id="passive-count">
+<option>1</option><option>2</option><option>3</option><option>4</option><option>5</option>
+<option>6</option><option>7</option><option>8</option><option>9</option><option>10</option>
+</select>
 </div>
 
 <div class="ability-row">
-<div class="first-line"><span>Q Rank</span>
+<div class="first-line">
+<span>Q</span>
 <select class="rank-select" id="q-rank">
-<option value="1">1</option><option value="2">2</option>
-<option value="3">3</option><option value="4">4</option>
-<option value="5">5</option>
+<option>1</option><option>2</option><option>3</option><option>4</option><option>5</option>
 </select>
 </div>
-<input type="number" class="uses-input" id="q-count" value="1" min="1">
+<select class="uses-input" id="q-count">
+<option>1</option><option>2</option><option>3</option><option>4</option><option>5</option>
+<option>6</option><option>7</option><option>8</option><option>9</option><option>10</option>
+</select>
 </div>
 
 <div class="ability-row">
-<div class="first-line"><span>W Rank</span>
+<div class="first-line">
+<span>W</span>
 <select class="rank-select" id="w-rank">
-<option value="1">1</option><option value="2">2</option>
-<option value="3">3</option><option value="4">4</option>
-<option value="5">5</option>
+<option>1</option><option>2</option><option>3</option><option>4</option><option>5</option>
 </select>
 </div>
-<input type="number" class="uses-input" id="w-count" value="1" min="1">
+<select class="uses-input" id="w-count">
+<option>1</option><option>2</option><option>3</option><option>4</option><option>5</option>
+<option>6</option><option>7</option><option>8</option><option>9</option><option>10</option>
+</select>
 </div>
 
 <div class="ability-row">
-<div class="first-line"><span>E Rank</span>
+<div class="first-line">
+<span>E</span>
 <select class="rank-select" id="e-rank">
-<option value="1">1</option><option value="2">2</option>
-<option value="3">3</option><option value="4">4</option>
-<option value="5">5</option>
+<option>1</option><option>2</option><option>3</option><option>4</option><option>5</option>
 </select>
 </div>
-<input type="number" class="uses-input" id="e-count" value="1" min="1">
+<select class="uses-input" id="e-count">
+<option>1</option><option>2</option><option>3</option><option>4</option><option>5</option>
+<option>6</option><option>7</option><option>8</option><option>9</option><option>10</option>
+</select>
 </div>
 
 <div class="ability-row">
-<div class="first-line"><span>R Rank</span>
+<div class="first-line">
+<span>R</span>
 <select class="rank-select" id="r-rank">
-<option value="1">1</option><option value="2">2</option>
-<option value="3">3</option>
+<option>1</option><option>2</option><option>3</option>
 </select>
 </div>
-<input type="number" class="uses-input" id="r-count" value="1" min="1">
+<select class="uses-input" id="r-count">
+<option>1</option><option>2</option><option>3</option><option>4</option><option>5</option>
+<option>6</option><option>7</option><option>8</option><option>9</option><option>10</option>
+</select>
 </div>
 
 </div>
@@ -291,6 +314,7 @@ width: 100%;
 <tr><td>W</td><td>—</td><td>Magic</td></tr>
 <tr><td>E</td><td>—</td><td>Magic</td></tr>
 <tr><td>R</td><td>—</td><td>Magic</td></tr>
+<tr><td>Total</td><td class="total-damage" id="total-damage">—</td><td></td></tr>
 </tbody>
 </table>
 </div>
@@ -300,7 +324,7 @@ width: 100%;
 <footer>© 2025 LoL Fundamentals · All rights reserved</footer>
 
 <script>
-// (Script remains unchanged, uses new Diana Level placement)
+// Script remains mostly the same
 const AP_ITEMS = [
 {name:"Doran's Ring", ap:18, flatPen:0, percPen:0},
 {name:"Amplifying Tome", ap:20, flatPen:0, percPen:0},
@@ -415,6 +439,7 @@ const abilities=[
 ];
 
 const rows=document.querySelectorAll("#damage-table tr");
+let total=0;
 
 abilities.forEach((ab,i)=>{
 let dmg;
@@ -424,7 +449,10 @@ dmg = calcMagicDamage(ab.base, ab.ratio, totalAP, mr, ab.count, flatPen, percPen
 dmg = calcPhysicalDamage(ab.base, ab.count, armor);
 }
 rows[i].cells[1].textContent=dmg;
+total += dmg;
 });
+
+document.getElementById("total-damage").textContent = total;
 }
 
 document.addEventListener("DOMContentLoaded",()=>{
@@ -436,6 +464,7 @@ document.getElementById("calculate-btn").addEventListener("click",calculateCombo
 </script>
 </body>
 </html>
+
 
 
 
