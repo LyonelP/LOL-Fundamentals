@@ -2,268 +2,213 @@
 <html lang="en">
 <head>
 <meta charset="utf-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title>Diana Combo Calculator with Pen</title>
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Diana Rune + Ability Calculator</title>
 <style>
 body { margin:0; padding:0; font-family:"Beaufort for LOL", serif; background:#0a0f1a; color:#d8c48a; text-align:center; }
-header { font-size:36px; font-weight:700; padding:5px 0; letter-spacing:2px; }
+header { font-size:36px; font-weight:700; letter-spacing:2px; padding:5px 0 5px; }
 header::after { content:""; display:block; width:100%; height:2px; background:#d8c48a; margin-top:10px; }
-.container { width:85%; max-width:900px; margin:20px auto; }
-.card { background:rgba(12,18,30,0.8); border:1px solid rgba(255,255,255,0.08); padding:16px 20px; border-radius:10px; text-align:left; margin-bottom:20px; }
+.return-btn { position:fixed; top:20px; left:20px; background:#d8c48a; color:#0a0f1a; padding:10px 16px; font-weight:bold; border-radius:8px; text-decoration:none; z-index:1000; }
+.container { width:85%; max-width:900px; margin:80px auto 40px; text-align:left; }
+.section-title { font-size:18px; font-weight:700; margin:20px 0 12px; }
+.grid-2 { display:grid; grid-template-columns:1fr 1fr; gap:30px; }
+.card { background: rgba(12,18,30,0.8); border:1px solid rgba(255,255,255,0.08); padding:16px 20px; border-radius:10px; margin-bottom:20px; }
 .card label { display:block; margin-bottom:8px; font-size:16px; }
-select,input[type=number] { width:100%; padding:10px; margin-bottom:16px; border-radius:8px; border:1px solid rgba(255,255,255,0.08); background:rgba(15,22,35,0.9); color:white; font-size:16px; -webkit-appearance:none; -moz-appearance:none; appearance:none; text-indent:0.01px; text-overflow:''; }
-.item-row { display:flex; gap:10px; margin-bottom:10px; }
-.item-row select { flex:1; }
+select,input[type=number] { width:100%; padding:10px; border-radius:8px; border:1px solid rgba(255,255,255,0.08); background:rgba(15,22,35,0.9); color:white; font-size:16px; margin-bottom:16px; }
 .ability-row { display:flex; gap:10px; align-items:center; margin-bottom:10px; }
 .ability-row label { flex:1; margin-bottom:0; }
 .ability-row select, .ability-row input { flex:1; }
-button { padding:12px 26px; font-size:16px; font-weight:bold; background:#2f81f7; color:#fff; border:none; border-radius:8px; cursor:pointer; }
-button:hover { background:#1b5fc7; }
-#return-btn { position:fixed; top:20px; left:20px; background:#8b949e; color:#0a0f1a; padding:10px 16px; font-weight:bold; border-radius:8px; text-decoration:none; z-index:1000; }
-table { width:100%; border-collapse:collapse; margin-top:10px; }
-th,td { padding:12px; border-bottom:1px solid rgba(255,255,255,0.05); }
-th { color:#d8c48a; font-size:16px; }
-td { color:white; font-size:15px; }
+.calculate-btn { display:block; margin:20px auto; padding:12px 26px; font-size:16px; font-weight:bold; background:#2f81f7; color:#fff; border:none; border-radius:8px; cursor:pointer; }
+.calculate-btn:hover { background:#1b5fc7; }
+.table-card { margin-top:10px; background: rgba(12,18,30,0.8); border:1px solid rgba(255,255,255,0.08); border-radius:12px; padding:20px; }
+table { width:100%; border-collapse:collapse; }
+th, td { padding:12px; border-bottom:1px solid rgba(255,255,255,0.05); text-align:center; }
+th { color:#d8c48a; }
+td { color:white; }
 footer { text-align:center; margin-top:40px; padding:15px 0; color:#8b949e; font-size:14px; }
-select::-ms-expand { display:block; }
+@media(max-width:700px){.grid-2{grid-template-columns:1fr;}.container{width:94%;}}
 </style>
 </head>
 <body>
 
-<a id="return-btn" href="/membershub">Return to MembersHub</a>
-
-<header>DIANA COMBO CALCULATOR</header>
+<header>DIANA RUNES & ABILITY CALCULATOR</header>
+<a class="return-btn" href="membershub.html">RETURN TO MEMBERSHUB</a>
 
 <div class="container">
 
-<div class="card">
-  <label>Diana Level</label>
-  <select id="diana-level"></select>
-  <label>Enemy HP</label>
-  <input type="number" id="enemy-hp" value="1000">
-  <label>Enemy MR</label>
-  <input type="number" id="enemy-mr" value="30">
-</div>
+  <!-- LEVEL & ENEMY STATS -->
+  <div class="grid-2">
+    <div>
+      <div class="section-title">DIANA LEVEL</div>
+      <div class="card">
+        <label>Level</label>
+        <select id="diana-level"></select>
+      </div>
 
-<div class="card">
-  <label>AP Items (6 slots)</label>
-  <div class="item-row">
-    <select id="item-1"></select>
-    <select id="item-2"></select>
-    <select id="item-3"></select>
-  </div>
-  <div class="item-row">
-    <select id="item-4"></select>
-    <select id="item-5"></select>
-    <select id="item-6"></select>
-  </div>
-</div>
+      <div class="section-title">ABILITY USAGE & RANK</div>
+      <div class="card">
+        <div class="ability-row"><label>Passive uses</label><input type="number" id="passive-count" value="1" min="0"></div>
+        <div class="ability-row"><label>Q uses & rank</label><input type="number" id="q-count" value="1" min="1" max="5"><select id="q-rank"><option>1</option><option>2</option><option>3</option><option>4</option><option>5</option></select></div>
+        <div class="ability-row"><label>W uses & rank</label><input type="number" id="w-count" value="1" min="1" max="5"><select id="w-rank"><option>1</option><option>2</option><option>3</option><option>4</option><option>5</option></select></div>
+        <div class="ability-row"><label>E uses & rank</label><input type="number" id="e-count" value="1" min="1" max="5"><select id="e-rank"><option>1</option><option>2</option><option>3</option><option>4</option><option>5</option></select></div>
+        <div class="ability-row"><label>R uses & rank</label><input type="number" id="r-count" value="1" min="1" max="3"><select id="r-rank"><option>1</option><option>2</option><option>3</option></select></div>
+      </div>
+    </div>
 
-<div class="card" id="item-stats">
-  <strong>Item Stats:</strong>
-  <p>Total AP: <span id="total-ap">0</span></p>
-  <p>Flat Pen: <span id="total-flat-pen">0</span></p>
-  <p>% Pen: <span id="total-perc-pen">0%</span></p>
-</div>
-
-<div class="card">
-  <label>Ability Usage & Rank</label>
-
-  <div class="ability-row">
-    <label>Passive uses</label>
-    <input type="number" id="passive-count" value="1" min="0">
+    <div>
+      <div class="section-title">ENEMY STATS</div>
+      <div class="card">
+        <label>HP</label><input type="number" value="600" id="enemy-hp">
+        <label>Armor</label><input type="number" value="30" id="enemy-armor">
+        <label>MR</label><input type="number" value="30" id="enemy-mr">
+      </div>
+    </div>
   </div>
 
-  <div class="ability-row">
-    <label>Q uses & rank</label>
-    <input type="number" id="q-count" value="1" min="1" max="5">
-    <select id="q-rank"><option>1</option><option>2</option><option>3</option><option>4</option><option>5</option></select>
+  <!-- RUNES -->
+  <div class="section-title">PRIMARY RUNES</div>
+  <div class="card">
+    <label>Primary Path</label>
+    <select id="primary-path">
+      <option value="domination">Domination</option>
+      <option value="sorcery">Sorcery</option>
+      <option value="precision">Precision</option>
+      <option value="resolve">Resolve</option>
+      <option value="inspiration">Inspiration</option>
+    </select>
+    <label>Slot 1 (Keystone)</label><select id="primary-slot-1"></select>
+    <label>Slot 2</label><select id="primary-slot-2"></select>
+    <label>Slot 3</label><select id="primary-slot-3"></select>
+    <label>Slot 4</label><select id="primary-slot-4"></select>
   </div>
 
-  <div class="ability-row">
-    <label>W uses & rank</label>
-    <input type="number" id="w-count" value="1" min="1" max="5">
-    <select id="w-rank"><option>1</option><option>2</option><option>3</option><option>4</option><option>5</option></select>
+  <div class="section-title">SECONDARY RUNES</div>
+  <div class="card">
+    <label>Secondary Path</label>
+    <select id="secondary-path">
+      <option value="domination">Domination</option>
+      <option value="sorcery">Sorcery</option>
+      <option value="precision">Precision</option>
+      <option value="resolve">Resolve</option>
+      <option value="inspiration">Inspiration</option>
+    </select>
+    <label>Slot 1</label><select id="secondary-slot-1"></select>
+    <label>Slot 2</label><select id="secondary-slot-2"></select>
   </div>
 
-  <div class="ability-row">
-    <label>E uses & rank</label>
-    <input type="number" id="e-count" value="1" min="1" max="5">
-    <select id="e-rank"><option>1</option><option>2</option><option>3</option><option>4</option><option>5</option></select>
+  <button class="calculate-btn" id="calculate-btn">Calculate Damage</button>
+
+  <div class="table-card">
+    <table>
+      <thead><tr><th>Rune / Ability</th><th>Damage</th><th>Type</th></tr></thead>
+      <tbody id="damage-table">
+        <tr><td>—</td><td>—</td><td>—</td></tr>
+        <tr><td>—</td><td>—</td><td>—</td></tr>
+        <tr><td>—</td><td>—</td><td>—</td></tr>
+        <tr><td>—</td><td>—</td><td>—</td></tr>
+        <tr><td>—</td><td>—</td><td>—</td></tr>
+        <tr><td>—</td><td>—</td><td>—</td></tr>
+      </tbody>
+    </table>
   </div>
-
-  <div class="ability-row">
-    <label>R uses & rank</label>
-    <input type="number" id="r-count" value="1" min="1" max="3">
-    <select id="r-rank"><option>1</option><option>2</option><option>3</option></select>
-  </div>
-</div>
-
-<button id="calculate-btn">Calculate Combo Damage</button>
-
-<div class="card">
-  <table>
-    <thead>
-      <tr><th>Ability</th><th>Total Damage</th><th>Damage Type</th></tr>
-    </thead>
-    <tbody id="damage-table">
-      <tr><td>—</td><td>—</td><td>—</td></tr>
-      <tr><td>—</td><td>—</td><td>—</td></tr>
-      <tr><td>—</td><td>—</td><td>—</td></tr>
-      <tr><td>—</td><td>—</td><td>—</td></tr>
-      <tr><td>—</td><td>—</td><td>—</td></tr>
-    </tbody>
-  </table>
-</div>
-
 </div>
 
 <footer>© 2025 LoL Fundamentals · All rights reserved</footer>
 
 <script>
-// Corrected AP items + new items
-const AP_ITEMS = [
-  {name:"Doran's Ring", ap:18, flatPen:0, percPen:0},
-  {name:"Amplifying Tome", ap:20, flatPen:0, percPen:0},
-  {name:"Lost Chapter", ap:40, flatPen:0, percPen:0},
-  {name:"Needlessly Large Rod", ap:65, flatPen:0, percPen:0},
-  {name:"Fiendish Codex", ap:30, flatPen:0, percPen:0},
-  {name:"Blasting Wand", ap:40, flatPen:0, percPen:0},
-  {name:"Hextech Rocketbelt", ap:90, flatPen:0, percPen:0},
-  {name:"Luden's Tempest", ap:120, flatPen:0, percPen:0},
-  {name:"Shadowflame", ap:100, flatPen:15, percPen:0},
-  {name:"Rabadon's Deathcap", ap:130, flatPen:0, percPen:0},
-  {name:"Void Staff", ap:90, flatPen:0, percPen:0.4},
-  {name:"Horizon Focus", ap:100, flatPen:0, percPen:0},
-  {name:"Liandry's Anguish", ap:90, flatPen:0, percPen:0},
-  {name:"Demonic Embrace", ap:80, flatPen:0, percPen:0},
-  {name:"Morellonomicon", ap:70, flatPen:0, percPen:0},
-  {name:"Cryptbloom", ap:80, flatPen:0, percPen:0.3},
-  {name:"Stormsurge", ap:80, flatPen:15, percPen:0},
-  {name:"Bloodletter's Curse", ap:60, flatPen:10, percPen:0.1},
-  {name:"Dark Seal", ap:15, flatPen:0, percPen:0},
-  {name:"Mejai's Soulstealer", ap:20, flatPen:0, percPen:0},
-  {name:"Nashor's Tooth", ap:80, flatPen:0, percPen:0},
-  {name:"Lich Bane", ap:90, flatPen:0, percPen:0}
-];
+// --- Level ---
+const lvlSelect=document.getElementById("diana-level");
+for(let i=1;i<=18;i++){ const o=document.createElement("option"); o.value=i;o.textContent=i;lvlSelect.appendChild(o);}
+lvlSelect.value=1;
 
-// Populate item slots
-function populateItems() {
-  for(let i=1;i<=6;i++){
-    const select=document.getElementById(`item-${i}`);
-    const emptyOption = document.createElement("option");
-    emptyOption.value = "";
-    emptyOption.textContent = "";
-    select.appendChild(emptyOption);
+// --- Runes ---
+const PRIMARY_PATHS={domination:{slot1:["Electrocute","Hail of Blades","Dark Harvest"],slot2:["Cheap Shot","Taste of Blood","Sudden Impact"],slot3:["Sixth Sense","Grisly Memories","Null"],slot4:["Treasure Hunter","Relentless Hunter","Ultimate Hunter"]},sorcery:{slot1:["Aery","Comet","Phase Rush"],slot2:["Nimbus Cloak","Transcendence","Celerity"],slot3:["Scorch","Waterwalking","Null"],slot4:["Null","Null","Gathering Storm"]},precision:{slot1:["Press the Attack","Lethal Tempo","Fleet Footwork"],slot2:["Presence of Mind","Triumph","Coup de Grace"],slot3:["Legend: Alacrity","Legend: Tenacity","Cut Down"],slot4:["Last Stand","Null","Null"]},resolve:{slot1:["Grasp of the Undying","Aftershock","Guardian"],slot2:["Demolish","Font of Life","Shield Bash"],slot3:["Conditioning","Second Wind","Bone Plating"],slot4:["Revitalize","Null","Null"]},inspiration:{slot1:["Glacial Augment","Unsealed Spellbook","First Strike"],slot2:["Hextech Flashtraption","Magical Footwear","Future's Market"],slot3:["Minion Dematerializer","Biscuit Delivery","Cosmic Insight"],slot4:["Approach Velocity","Time Warp Tonic","Null"]}};
+const SECONDARY_NONKEY={domination:["Cheap Shot","Taste of Blood","Sudden Impact","Sixth Sense","Grisly Memories","Treasure Hunter","Relentless Hunter","Ultimate Hunter","Hail of Blades"],sorcery:["Manaflow Band","Transcendence","Celerity","Scorch","Waterwalking","Gathering Storm"],precision:["Presence of Mind","Triumph","Coup de Grace","Legend: Alacrity","Legend: Tenacity","Cut Down","Last Stand","Null","Null"],resolve:["Demolish","Font of Life","Shield Bash","Conditioning","Second Wind","Bone Plating","Revitalize","Null","Null"],inspiration:["Hextech Flashtraption","Magical Footwear","Future's Market","Minion Dematerializer","Biscuit Delivery","Cosmic Insight","Approach Velocity","Time Warp Tonic","Unsealed Spellbook"]};
 
-    AP_ITEMS.forEach((it, idx)=>{
-      const o=document.createElement("option");
-      o.value=idx;
-      o.textContent=it.name;
-      select.appendChild(o);
-    });
+function populateSelect(el,options){ el.innerHTML=""; options.forEach(opt=>{const o=document.createElement("option"); o.value=o.textContent=opt; el.appendChild(o); }); }
+function populatePrimary(path){ const data=PRIMARY_PATHS[path]; populateSelect(document.getElementById("primary-slot-1"),data.slot1); populateSelect(document.getElementById("primary-slot-2"),data.slot2); populateSelect(document.getElementById("primary-slot-3"),data.slot3); populateSelect(document.getElementById("primary-slot-4"),data.slot4);}
+function populateSecondary(path){ const data=SECONDARY_NONKEY[path]||[]; populateSelect(document.getElementById("secondary-slot-1"),data); populateSelect(document.getElementById("secondary-slot-2"),data); }
 
-    if(i===1) select.value=0;
-    else select.value="";
+function enforcePaths(){ const primary=document.getElementById("primary-path").value; const secondary=document.getElementById("secondary-path"); for(let i=0;i<secondary.options.length;i++){ secondary.options[i].disabled=(secondary.options[i].value===primary); if(secondary.value===primary){ for(let j=0;j<secondary.options.length;j++){ if(!secondary.options[j].disabled){ secondary.selectedIndex=j; break; }}}}}
 
-    select.addEventListener("change",updateItemStats);
-  }
+document.addEventListener("DOMContentLoaded",()=>{
+  populatePrimary("domination");
+  populateSecondary("sorcery");
+  enforcePaths();
+  document.getElementById("primary-path").addEventListener("change",e=>{ populatePrimary(e.target.value); enforcePaths(); });
+  document.getElementById("secondary-path").addEventListener("change",e=>{ populateSecondary(e.target.value); enforcePaths(); });
+});
+
+// --- Calculate Damage ---
+const RUNE_DAMAGE={"Electrocute":{type:"Magic",min:70,max:240,ratio:0.05},"Cheap Shot":{type:"True",min:10,max:45,ratio:0},"Sudden Impact":{type:"True",min:20,max:80,ratio:0},"Grasp of the Undying":{type:"Magic"},"Shield Bash":{type:"Magic"},"Scorch":{type:"Magic",min:20,max:40},"Comet":{type:"Magic",min:30,max:130,ratio:0.1}};
+
+function scaleDamage(min,max,level){ return Math.round(min + (max-min)*(level-1)/17);}
+function getDianaHP(level){ return Math.round(740 + (2674 - 740) * (level - 1) / 17); }
+
+function calcDamage(rune,level,ap,mr){
+  if(!rune || rune==="Null") return {damage:0,type:""};
+  let dmg=0,type="Magic";
+  const hp=getDianaHP(level);
+  if(rune==="Grasp of the Undying"){ dmg=Math.round(0.035*hp); dmg=Math.round(dmg*100/(100+mr)); }
+  else if(rune==="Shield Bash"){ dmg=Math.round(30 + (78-30)*(level-1)/17); dmg=Math.round(dmg*100/(100+mr)); }
+  else if(rune==="Cheap Shot"){ dmg=scaleDamage(10,45,level); type="True"; }
+  else if(rune==="Sudden Impact"){ dmg=scaleDamage(20,80,level); type="True"; }
+  else if(rune==="Scorch"){ dmg=scaleDamage(20,40,level); dmg=Math.round(dmg*100/(100+mr)); }
+  else if(rune==="Comet"){ dmg=scaleDamage(30,130,level)+Math.round(0.1*ap); dmg=Math.round(dmg*100/(100+mr)); }
+  else { const meta=RUNE_DAMAGE[rune]; if(!meta) return {damage:0,type:""}; dmg=scaleDamage(meta.min,meta.max,level)+Math.round((meta.ratio||0)*ap); if(meta.type==="Magic") dmg=Math.round(dmg*100/(100+mr)); type=meta.type;}
+  return {damage:dmg,type:type};
 }
 
-// Populate Diana levels
-function populateLevels(){
-  const lvl=document.getElementById("diana-level");
-  for(let i=1;i<=18;i++){
-    const o=document.createElement("option"); o.value=i; o.textContent=i;
-    lvl.appendChild(o);
-  }
-  lvl.value=1;
-}
+function calculateDamage(){
+  const level=parseInt(document.getElementById("diana-level").value,10);
+  const mr=parseFloat(document.getElementById("enemy-mr").value)||30;
+  const ap=18;
 
-// Get total AP, flat pen, percent pen
-function getItemStats(){
-  let totalAP=0, flatPen=0, percPen=0;
-  for(let i=1;i<=6;i++){
-    const idx = document.getElementById(`item-${i}`).value;
-    if(idx === "") continue;
-    const item = AP_ITEMS[parseInt(idx)] || {ap:0, flatPen:0, percPen:0};
-    totalAP += item.ap;
-    flatPen += item.flatPen;
-    percPen += item.percPen;
-  }
-  return {totalAP, flatPen, percPen};
-}
-
-// Update item stats display
-function updateItemStats(){
-  const {totalAP, flatPen, percPen} = getItemStats();
-  document.getElementById("total-ap").textContent = totalAP;
-  document.getElementById("total-flat-pen").textContent = flatPen;
-  document.getElementById("total-perc-pen").textContent = Math.round(percPen*100) + "%";
-}
-
-// Diana ability bases
-function getPassiveBase(level){ return Math.round(20 + (220-20)*(level-1)/17); }
-const Q_BASE=[70,105,140,175,210], Q_RATIO=0.7;
-const W_BASE=[60,96,132,168,204], W_RATIO=0.54;
-const E_BASE=[50,70,90,110,130], E_RATIO=0.6;
-const R_BASE=[200,300,400], R_RATIO=0.6;
-
-// Damage calculation applying flat + % pen
-function calcDamage(base, ratio, ap, mr, count, flatPen, percPen){
-  let raw = (base + ratio*ap) * count;
-  let effectiveMR = mr - flatPen;
-  if(effectiveMR < 0) effectiveMR = 0;
-  effectiveMR = effectiveMR * (1 - percPen);
-  return Math.round(raw * 100 / (100 + effectiveMR));
-}
-
-function calculateCombo(){
-  const level = parseInt(document.getElementById("diana-level").value);
-  const mr = parseFloat(document.getElementById("enemy-mr").value)||30;
-
-  const passiveCount = parseInt(document.getElementById("passive-count").value)||0;
-  const qCount = parseInt(document.getElementById("q-count").value)||1;
-  const wCount = parseInt(document.getElementById("w-count").value)||1;
-  const eCount = parseInt(document.getElementById("e-count").value)||1;
-  const rCount = parseInt(document.getElementById("r-count").value)||1;
-
-  const qRank = parseInt(document.getElementById("q-rank").value)||1;
-  const wRank = parseInt(document.getElementById("w-rank").value)||1;
-  const eRank = parseInt(document.getElementById("e-rank").value)||1;
-  const rRank = parseInt(document.getElementById("r-rank").value)||1;
-
-  const {totalAP, flatPen, percPen} = getItemStats();
-  updateItemStats();
-
-  const abilities = [
-    {name:"Passive", base:getPassiveBase(level), ratio:0.5, count:passiveCount},
-    {name:"Q", base:Q_BASE[qRank-1]||Q_BASE[0], ratio:Q_RATIO, count:qCount},
-    {name:"W", base:W_BASE[wRank-1]||W_BASE[0], ratio:W_RATIO, count:wCount},
-    {name:"E", base:E_BASE[eRank-1]||E_BASE[0], ratio:E_RATIO, count:eCount},
-    {name:"R", base:R_BASE[rRank-1]||R_BASE[0], ratio:R_RATIO, count:rCount}
+  const slots=[
+    document.getElementById("primary-slot-1").value,
+    document.getElementById("primary-slot-2").value,
+    document.getElementById("primary-slot-3").value,
+    document.getElementById("primary-slot-4").value,
+    document.getElementById("secondary-slot-1").value,
+    document.getElementById("secondary-slot-2").value
   ];
 
-  const tbody = document.getElementById("damage-table");
-  tbody.innerHTML="";
+  const tbody=document.getElementById("damage-table");
+  const rows=tbody.querySelectorAll("tr");
+
+  // Runes
+  for(let i=0;i<slots.length;i++){
+    const rune=slots[i]||"—";
+    const {damage,type}=calcDamage(rune,level,ap,mr);
+    rows[i].innerHTML=`<td>${rune}</td><td>${damage||"—"}</td><td>${type||"—"}</td>`;
+  }
+
+  // Abilities
+  const abilities=[
+    {name:"Passive",base:20,ratio:0.5,count:parseInt(document.getElementById("passive-count").value)||0},
+    {name:"Q",base:[70,105,140,175,210][parseInt(document.getElementById("q-rank").value)-1],ratio:0.7,count:parseInt(document.getElementById("q-count").value)||1},
+    {name:"W",base:[60,96,132,168,204][parseInt(document.getElementById("w-rank").value)-1],ratio:0.54,count:parseInt(document.getElementById("w-count").value)||1},
+    {name:"E",base:[50,70,90,110,130][parseInt(document.getElementById("e-rank").value)-1],ratio:0.6,count:parseInt(document.getElementById("e-count").value)||1},
+    {name:"R",base:[200,300,400][parseInt(document.getElementById("r-rank").value)-1],ratio:0.6,count:parseInt(document.getElementById("r-count").value)||1}
+  ];
+
+  const flatPen=0,percPen=0; // simplified
+  let rowIndex=slots.length;
   abilities.forEach(ab=>{
-    const dmg = calcDamage(ab.base, ab.ratio, totalAP, mr, ab.count, flatPen, percPen);
-    const row = document.createElement("tr");
-    row.innerHTML=`<td>${ab.name}</td><td>${dmg}</td><td>Magic</td>`;
-    tbody.appendChild(row);
+    let dmg=Math.round((ab.base+ab.ratio*ap)*ab.count);
+    dmg=Math.round(dmg*100/(100+mr));
+    if(rowIndex<tbody.rows.length){
+      tbody.rows[rowIndex].innerHTML=`<td>${ab.name}</td><td>${dmg}</td><td>Magic</td>`;
+      rowIndex++;
+    }
   });
 }
 
-document.addEventListener("DOMContentLoaded",()=>{
-  populateItems();
-  populateLevels();
-  updateItemStats();
-  document.getElementById("calculate-btn").addEventListener("click",calculateCombo);
-});
+document.getElementById("calculate-btn").addEventListener("click",calculateDamage);
 </script>
-
 </body>
 </html>
+
 
 
 
