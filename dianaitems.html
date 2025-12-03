@@ -5,25 +5,44 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 <title>Diana Combo Calculator with Pen</title>
 <style>
-body { margin:0; padding:0; font-family:"Beaufort for LOL", serif; background:#0a0f1a; color:#d8c48a; text-align:center; }
-header { font-size:36px; font-weight:700; padding:5px 0; letter-spacing:2px; }
-header::after { content:""; display:block; width:100%; height:2px; background:#d8c48a; margin-top:10px; }
+body {
+  margin:0; padding:0;
+  font-family:"Beaufort for LOL", serif;
+  background:#0a0f1a; color:#d8c48a; text-align:center;
+}
+header {
+  font-size:36px; font-weight:700; padding:5px 0; letter-spacing:2px;
+}
+header::after {
+  content:""; display:block; width:100%; height:2px; background:#d8c48a; margin-top:10px;
+}
 .container { width:85%; max-width:900px; margin:20px auto; }
-.card { background:rgba(12,18,30,0.8); border:1px solid rgba(255,255,255,0.08); padding:16px 20px; border-radius:10px; text-align:left; margin-bottom:20px; }
+.card {
+  background:rgba(12,18,30,0.8);
+  border:1px solid rgba(255,255,255,0.08);
+  padding:16px 20px; border-radius:10px; text-align:left; margin-bottom:20px;
+}
 .card label { display:block; margin-bottom:8px; font-size:16px; }
-select,input[type=number] { width:100%; padding:10px; margin-bottom:16px; border-radius:8px; border:1px solid rgba(255,255,255,0.08); background:rgba(15,22,35,0.9); color:white; font-size:16px; -webkit-appearance:none; -moz-appearance:none; appearance:none; text-indent:0.01px; text-overflow:''; }
-.item-row { display:flex; gap:10px; margin-bottom:10px; }
-.item-row select { flex:1; }
-button { padding:12px 26px; font-size:16px; font-weight:bold; background:#2f81f7; color:#fff; border:none; border-radius:8px; cursor:pointer; }
+select,input[type=number] {
+  width:100%; max-width:150px; padding:10px; margin-bottom:16px;
+  border-radius:8px; border:1px solid rgba(255,255,255,0.08);
+  background:rgba(15,22,35,0.9); color:white; font-size:16px;
+  box-sizing:border-box;
+  -webkit-appearance: menulist; -moz-appearance: menulist; appearance: menulist;
+}
+.flex-row { display:flex; flex-wrap:wrap; gap:10px; }
+.flex-row select, .flex-row input { flex:1; min-width:100px; }
+button {
+  padding:12px 26px; font-size:16px; font-weight:bold; background:#2f81f7;
+  color:#fff; border:none; border-radius:8px; cursor:pointer;
+}
 button:hover { background:#1b5fc7; }
 table { width:100%; border-collapse:collapse; margin-top:10px; }
 th,td { padding:12px; border-bottom:1px solid rgba(255,255,255,0.05); }
 th { color:#d8c48a; font-size:16px; }
 td { color:white; font-size:15px; }
 footer { text-align:center; margin-top:40px; padding:15px 0; color:#8b949e; font-size:14px; }
-
-/* Ensure all selects have visible arrow */
-select::-ms-expand { display:block; }
+.total-stats { margin-top:10px; font-weight:bold; color:#fff; }
 </style>
 </head>
 <body>
@@ -32,52 +51,76 @@ select::-ms-expand { display:block; }
 
 <div class="container">
 
-<div class="card">
-  <label>Diana Level</label>
-  <select id="diana-level"></select>
-  <label>Enemy HP</label>
-  <input type="number" id="enemy-hp" value="1000">
-  <label>Enemy MR</label>
-  <input type="number" id="enemy-mr" value="30">
+<!-- Diana Level & Enemy Stats -->
+<div class="card flex-row">
+  <div>
+    <label>Diana Level</label>
+    <select id="diana-level"></select>
+  </div>
+  <div>
+    <label>Enemy HP</label>
+    <input type="number" id="enemy-hp" value="1000">
+  </div>
+  <div>
+    <label>Enemy MR</label>
+    <input type="number" id="enemy-mr" value="30">
+  </div>
 </div>
 
+<!-- Items -->
 <div class="card">
   <label>AP Items (6 slots)</label>
-  <div class="item-row">
+  <div class="flex-row">
     <select id="item-1"></select>
     <select id="item-2"></select>
     <select id="item-3"></select>
   </div>
-  <div class="item-row">
+  <div class="flex-row">
     <select id="item-4"></select>
     <select id="item-5"></select>
     <select id="item-6"></select>
   </div>
+  <div class="total-stats" id="total-stats">Total AP: 0 | Flat Pen: 0 | % Pen: 0%</div>
 </div>
 
-<div class="card" id="item-stats">
-  <strong>Item Stats:</strong>
-  <p>Total AP: <span id="total-ap">0</span></p>
-  <p>Flat Pen: <span id="total-flat-pen">0</span></p>
-  <p>% Pen: <span id="total-perc-pen">0%</span></p>
-</div>
-
+<!-- Ability usage -->
 <div class="card">
-  <label>Ability Usage</label>
-  <label>Passive uses</label>
-  <input type="number" id="passive-count" value="1">
-  <label>Q uses (1-5 rank)</label>
-  <input type="number" id="q-count" value="1" min="1" max="5">
-  <label>W uses (1-5 rank)</label>
-  <input type="number" id="w-count" value="1" min="1" max="5">
-  <label>E uses (1-5 rank)</label>
-  <input type="number" id="e-count" value="1" min="1" max="5">
-  <label>R uses (1-3 rank)</label>
-  <input type="number" id="r-count" value="1" min="1" max="3">
+  <label>Ability Usage & Rank</label>
+  <div class="flex-row">
+    <div>
+      <label>Passive uses</label>
+      <input type="number" id="passive-count" value="1" min="0">
+    </div>
+    <div>
+      <label>Q uses</label>
+      <input type="number" id="q-count" value="1" min="1">
+      <label>Q rank</label>
+      <select id="q-rank"><option>1</option><option>2</option><option>3</option><option>4</option><option>5</option></select>
+    </div>
+    <div>
+      <label>W uses</label>
+      <input type="number" id="w-count" value="1" min="1">
+      <label>W rank</label>
+      <select id="w-rank"><option>1</option><option>2</option><option>3</option><option>4</option><option>5</option></select>
+    </div>
+    <div>
+      <label>E uses</label>
+      <input type="number" id="e-count" value="1" min="1">
+      <label>E rank</label>
+      <select id="e-rank"><option>1</option><option>2</option><option>3</option><option>4</option><option>5</option></select>
+    </div>
+    <div>
+      <label>R uses</label>
+      <input type="number" id="r-count" value="1" min="1">
+      <label>R rank</label>
+      <select id="r-rank"><option>1</option><option>2</option><option>3</option></select>
+    </div>
+  </div>
 </div>
 
 <button id="calculate-btn">Calculate Combo Damage</button>
 
+<!-- Damage Table -->
 <div class="card">
   <table>
     <thead>
@@ -126,23 +169,16 @@ const AP_ITEMS = [
 function populateItems() {
   for(let i=1;i<=6;i++){
     const select=document.getElementById(`item-${i}`);
-    const emptyOption = document.createElement("option");
-    emptyOption.value = "";
-    emptyOption.textContent = i===1 ? "" : ""; // first slot will be overwritten
-    select.appendChild(emptyOption);
-
     AP_ITEMS.forEach((it, idx)=>{
       const o=document.createElement("option");
       o.value=idx;
       o.textContent=it.name;
       select.appendChild(o);
     });
-
-    if(i===1) select.value=0; // Doran's Ring default
-    else select.value="";
-    
-    select.addEventListener("change",updateItemStats);
   }
+  document.getElementById("item-1").value = 0; // Doran's Ring default
+  for(let i=2;i<=6;i++) document.getElementById(`item-${i}`).selectedIndex = -1;
+  updateTotalStats();
 }
 
 // Populate Diana levels
@@ -159,9 +195,8 @@ function populateLevels(){
 function getItemStats(){
   let totalAP=0, flatPen=0, percPen=0;
   for(let i=1;i<=6;i++){
-    const idx = document.getElementById(`item-${i}`).value;
-    if(idx === "") continue;
-    const item = AP_ITEMS[parseInt(idx)] || {ap:0, flatPen:0, percPen:0};
+    const idx = parseInt(document.getElementById(`item-${i}`).value);
+    const item = AP_ITEMS[idx] || {ap:0, flatPen:0, percPen:0};
     totalAP += item.ap;
     flatPen += item.flatPen;
     percPen += item.percPen;
@@ -169,12 +204,11 @@ function getItemStats(){
   return {totalAP, flatPen, percPen};
 }
 
-// Update item stats display
-function updateItemStats(){
+// Update total stats display
+function updateTotalStats(){
   const {totalAP, flatPen, percPen} = getItemStats();
-  document.getElementById("total-ap").textContent = totalAP;
-  document.getElementById("total-flat-pen").textContent = flatPen;
-  document.getElementById("total-perc-pen").textContent = Math.round(percPen*100) + "%";
+  document.getElementById("total-stats").textContent = 
+    `Total AP: ${totalAP} | Flat Pen: ${flatPen} | % Pen: ${Math.round(percPen*100)}%`;
 }
 
 // Diana ability bases
@@ -190,8 +224,7 @@ function calcDamage(base, ratio, ap, mr, count, flatPen, percPen){
   let effectiveMR = mr - flatPen;
   if(effectiveMR < 0) effectiveMR = 0;
   effectiveMR = effectiveMR * (1 - percPen);
-  const dmg = Math.round(raw * 100 / (100 + effectiveMR));
-  return dmg;
+  return Math.round(raw * 100 / (100 + effectiveMR));
 }
 
 function calculateCombo(){
@@ -199,22 +232,24 @@ function calculateCombo(){
   const mr = parseFloat(document.getElementById("enemy-mr").value)||30;
 
   const passiveCount = parseInt(document.getElementById("passive-count").value)||0;
-  const qRank = parseInt(document.getElementById("q-count").value)||1;
-  const wRank = parseInt(document.getElementById("w-count").value)||1;
-  const eRank = parseInt(document.getElementById("e-count").value)||1;
-  const rRank = parseInt(document.getElementById("r-count").value)||1;
+  const qCount = parseInt(document.getElementById("q-count").value)||1;
+  const wCount = parseInt(document.getElementById("w-count").value)||1;
+  const eCount = parseInt(document.getElementById("e-count").value)||1;
+  const rCount = parseInt(document.getElementById("r-count").value)||1;
+
+  const qRank = parseInt(document.getElementById("q-rank").value)||1;
+  const wRank = parseInt(document.getElementById("w-rank").value)||1;
+  const eRank = parseInt(document.getElementById("e-rank").value)||1;
+  const rRank = parseInt(document.getElementById("r-rank").value)||1;
 
   const {totalAP, flatPen, percPen} = getItemStats();
 
-  // Update item stats display
-  updateItemStats();
-
   const abilities = [
     {name:"Passive", base:getPassiveBase(level), ratio:0.5, count:passiveCount},
-    {name:"Q", base:Q_BASE[qRank-1]||Q_BASE[0], ratio:Q_RATIO, count:1},
-    {name:"W", base:W_BASE[wRank-1]||W_BASE[0], ratio:W_RATIO, count:1},
-    {name:"E", base:E_BASE[eRank-1]||E_BASE[0], ratio:E_RATIO, count:1},
-    {name:"R", base:R_BASE[rRank-1]||R_BASE[0], ratio:R_RATIO, count:1}
+    {name:"Q", base:Q_BASE[qRank-1], ratio:Q_RATIO, count:qCount},
+    {name:"W", base:W_BASE[wRank-1], ratio:W_RATIO, count:wCount},
+    {name:"E", base:E_BASE[eRank-1], ratio:E_RATIO, count:eCount},
+    {name:"R", base:R_BASE[rRank-1], ratio:R_RATIO, count:rCount}
   ];
 
   const tbody = document.getElementById("damage-table");
@@ -230,13 +265,14 @@ function calculateCombo(){
 document.addEventListener("DOMContentLoaded",()=>{
   populateItems();
   populateLevels();
-  updateItemStats();
+  document.querySelectorAll('select').forEach(s=>s.addEventListener('change',updateTotalStats));
   document.getElementById("calculate-btn").addEventListener("click",calculateCombo);
 });
 </script>
 
 </body>
 </html>
+
 
 
 
