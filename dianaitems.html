@@ -58,7 +58,7 @@ display: block;
 margin-bottom: 6px;
 font-size: 16px;
 }
-input[type=number], select {
+select {
 padding: 10px;
 border-radius: 8px;
 border: 1px solid rgba(255,255,255,0.08);
@@ -87,8 +87,6 @@ flex-wrap: wrap;
 flex: 1 1 30%;
 min-width: 120px;
 }
-
-/* Ability section */
 .ability-card {
 margin-bottom: 20px;
 }
@@ -108,7 +106,7 @@ font-weight: bold;
 .ability-row select.rank-select {
 width: 60px;
 }
-.ability-row input.uses-input {
+.ability-row select.uses-select {
 width: 100%;
 margin-top: 6px;
 }
@@ -138,7 +136,6 @@ th { color: #d8c48a; font-size: 16px; }
 td { color: white; font-size: 15px; }
 footer { text-align: center; margin-top: 20px; padding: 15px 0; color: #8b949e; font-size: 14px; }
 
-/* Items grid */
 .items-grid {
 display: flex;
 gap: 10px;
@@ -149,21 +146,12 @@ flex: 1 1 30%;
 min-width: 100px;
 }
 
-/* Item stats in white */
 #item-stats p span { color: white; }
 
-/* Responsive */
 @media(max-width:600px){
-.top-row .top-item {
-flex: 1 1 100%;
-}
-.ability-row .first-line {
-flex-direction: row;
-justify-content: space-between;
-}
-.ability-row input.uses-input {
-width: 100%;
-}
+.top-row .top-item { flex: 1 1 100%; }
+.ability-row .first-line { flex-direction: row; justify-content: space-between; }
+.ability-row select.uses-select { width: 100%; }
 }
 </style>
 </head>
@@ -174,7 +162,6 @@ width: 100%;
 
 <div class="container">
 
-<!-- Top Inputs (Enemy stats only) -->
 <div class="card">
 <div class="top-row">
 <div class="top-item">
@@ -192,7 +179,6 @@ width: 100%;
 </div>
 </div>
 
-<!-- Items -->
 <div class="card">
 <label>AP Items (6 slots)</label>
 <div class="items-grid">
@@ -212,24 +198,22 @@ width: 100%;
 <p>% Pen: <span id="total-perc-pen">0%</span></p>
 </div>
 
-<!-- Diana Level above abilities -->
 <div class="card">
 <label>Diana Level</label>
 <select id="diana-level"></select>
 </div>
 
-<!-- Ability Section -->
 <div class="card ability-card">
 <label>Ability Usage</label>
 
 <div class="ability-row">
 <div class="first-line"><span>Auto Attack</span></div>
-<input type="number" class="uses-input" id="aa-count" value="1" min="1">
+<select class="uses-select" id="aa-count"></select>
 </div>
 
 <div class="ability-row">
 <div class="first-line"><span>Passive</span></div>
-<input type="number" class="uses-input" id="passive-count" value="1" min="1">
+<select class="uses-select" id="passive-count"></select>
 </div>
 
 <div class="ability-row">
@@ -240,7 +224,7 @@ width: 100%;
 <option value="5">5</option>
 </select>
 </div>
-<input type="number" class="uses-input" id="q-count" value="1" min="1">
+<select class="uses-select" id="q-count"></select>
 </div>
 
 <div class="ability-row">
@@ -251,18 +235,19 @@ width: 100%;
 <option value="5">5</option>
 </select>
 </div>
-<input type="number" class="uses-input" id="w-count" value="1" min="1">
+<select class="uses-select" id="w-count"></select>
 </div>
 
 <div class="ability-row">
 <div class="first-line"><span>E Rank</span>
 <select class="rank-select" id="e-rank">
 <option value="1">1</option><option value="2">2</option>
-<option value="3">3</option><option value="4">4</option>
+<option value="3">3</option>
+<option value="4">4</option>
 <option value="5">5</option>
 </select>
 </div>
-<input type="number" class="uses-input" id="e-count" value="1" min="1">
+<select class="uses-select" id="e-count"></select>
 </div>
 
 <div class="ability-row">
@@ -272,7 +257,7 @@ width: 100%;
 <option value="3">3</option>
 </select>
 </div>
-<input type="number" class="uses-input" id="r-count" value="1" min="1">
+<select class="uses-select" id="r-count"></select>
 </div>
 
 </div>
@@ -291,6 +276,7 @@ width: 100%;
 <tr><td>W</td><td>—</td><td>Magic</td></tr>
 <tr><td>E</td><td>—</td><td>Magic</td></tr>
 <tr><td>R</td><td>—</td><td>Magic</td></tr>
+<tr><td><strong>Total Combo Damage (Gold Value)</strong></td><td id="total-damage">—</td><td>—</td></tr>
 </tbody>
 </table>
 </div>
@@ -300,7 +286,6 @@ width: 100%;
 <footer>© 2025 LoL Fundamentals · All rights reserved</footer>
 
 <script>
-// (Script remains unchanged, uses new Diana Level placement)
 const AP_ITEMS = [
 {name:"Doran's Ring", ap:18, flatPen:0, percPen:0},
 {name:"Amplifying Tome", ap:20, flatPen:0, percPen:0},
@@ -326,7 +311,7 @@ const AP_ITEMS = [
 {name:"Lich Bane", ap:75, flatPen:0, percPen:0}
 ];
 
-function populateItems() {
+function populateItems(){
 for(let i=1;i<=6;i++){
 const select=document.getElementById(`item-${i}`);
 select.innerHTML="";
@@ -334,20 +319,18 @@ const emptyOpt=document.createElement("option");
 emptyOpt.value="";
 emptyOpt.textContent="";
 select.appendChild(emptyOpt);
-
 AP_ITEMS.forEach((it,idx)=>{
 const o=document.createElement("option");
 o.value=idx;
 o.textContent=it.name;
 select.appendChild(o);
 });
-
 if(i===1) select.value=0;
 select.addEventListener("change",updateItemStats);
 }
 }
 
-function populateLevels() {
+function populateLevels(){
 const lvl=document.getElementById("diana-level");
 for(let i=1;i<=18;i++){
 const o=document.createElement("option");
@@ -356,6 +339,20 @@ o.textContent=i;
 lvl.appendChild(o);
 }
 lvl.value=1;
+}
+
+function populateUses(){
+const uses = Array.from({length:10},(_,i)=>i+1);
+["aa-count","passive-count","q-count","w-count","e-count","r-count"].forEach(id=>{
+const sel=document.getElementById(id);
+uses.forEach(u=>{
+const o=document.createElement("option");
+o.value=u;
+o.textContent=u;
+sel.appendChild(o);
+});
+sel.value=1;
+});
 }
 
 function getItemStats(){
@@ -401,7 +398,6 @@ function calculateCombo(){
 const level=parseInt(document.getElementById("diana-level").value);
 const mr=parseFloat(document.getElementById("enemy-mr").value)||30;
 const armor=parseFloat(document.getElementById("enemy-armor").value)||30;
-
 const {totalAP,flatPen,percPen}=getItemStats();
 updateItemStats();
 
@@ -414,8 +410,8 @@ const abilities=[
 {name:"R", base:R_BASE[parseInt(document.getElementById("r-rank").value)-1], ratio:R_RATIO, count:parseInt(document.getElementById("r-count").value)||1, type:"Magic"}
 ];
 
+let totalComboDamage=0;
 const rows=document.querySelectorAll("#damage-table tr");
-
 abilities.forEach((ab,i)=>{
 let dmg;
 if(ab.type==="Magic"){
@@ -424,12 +420,15 @@ dmg = calcMagicDamage(ab.base, ab.ratio, totalAP, mr, ab.count, flatPen, percPen
 dmg = calcPhysicalDamage(ab.base, ab.count, armor);
 }
 rows[i].cells[1].textContent=dmg;
+totalComboDamage+=dmg;
 });
+document.getElementById("total-damage").textContent=totalComboDamage;
 }
 
 document.addEventListener("DOMContentLoaded",()=>{
 populateItems();
 populateLevels();
+populateUses();
 updateItemStats();
 document.getElementById("calculate-btn").addEventListener("click",calculateCombo);
 });
