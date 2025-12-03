@@ -58,7 +58,7 @@ display: block;
 margin-bottom: 6px;
 font-size: 16px;
 }
-select {
+input[type=number], select {
 padding: 10px;
 border-radius: 8px;
 border: 1px solid rgba(255,255,255,0.08);
@@ -106,7 +106,7 @@ font-weight: bold;
 .ability-row select.rank-select {
 width: 60px;
 }
-.ability-row select.uses-select {
+.ability-row input.uses-input {
 width: 100%;
 margin-top: 6px;
 }
@@ -151,7 +151,7 @@ min-width: 100px;
 @media(max-width:600px){
 .top-row .top-item { flex: 1 1 100%; }
 .ability-row .first-line { flex-direction: row; justify-content: space-between; }
-.ability-row select.uses-select { width: 100%; }
+.ability-row input.uses-input { width: 100%; }
 }
 </style>
 </head>
@@ -208,12 +208,12 @@ min-width: 100px;
 
 <div class="ability-row">
 <div class="first-line"><span>Auto Attack</span></div>
-<select class="uses-select" id="aa-count"></select>
+<input type="number" class="uses-input" id="aa-count" value="1" min="1">
 </div>
 
 <div class="ability-row">
 <div class="first-line"><span>Passive</span></div>
-<select class="uses-select" id="passive-count"></select>
+<input type="number" class="uses-input" id="passive-count" value="1" min="1">
 </div>
 
 <div class="ability-row">
@@ -224,7 +224,7 @@ min-width: 100px;
 <option value="5">5</option>
 </select>
 </div>
-<select class="uses-select" id="q-count"></select>
+<input type="number" class="uses-input" id="q-count" value="1" min="1">
 </div>
 
 <div class="ability-row">
@@ -235,19 +235,18 @@ min-width: 100px;
 <option value="5">5</option>
 </select>
 </div>
-<select class="uses-select" id="w-count"></select>
+<input type="number" class="uses-input" id="w-count" value="1" min="1">
 </div>
 
 <div class="ability-row">
 <div class="first-line"><span>E Rank</span>
 <select class="rank-select" id="e-rank">
 <option value="1">1</option><option value="2">2</option>
-<option value="3">3</option>
-<option value="4">4</option>
+<option value="3">3</option><option value="4">4</option>
 <option value="5">5</option>
 </select>
 </div>
-<select class="uses-select" id="e-count"></select>
+<input type="number" class="uses-input" id="e-count" value="1" min="1">
 </div>
 
 <div class="ability-row">
@@ -257,7 +256,7 @@ min-width: 100px;
 <option value="3">3</option>
 </select>
 </div>
-<select class="uses-select" id="r-count"></select>
+<input type="number" class="uses-input" id="r-count" value="1" min="1">
 </div>
 
 </div>
@@ -276,7 +275,7 @@ min-width: 100px;
 <tr><td>W</td><td>—</td><td>Magic</td></tr>
 <tr><td>E</td><td>—</td><td>Magic</td></tr>
 <tr><td>R</td><td>—</td><td>Magic</td></tr>
-<tr><td><strong>Total Combo Damage (Gold Value)</strong></td><td id="total-damage">—</td><td>—</td></tr>
+<tr><td><strong>Total Combo Damage (Gold)</strong></td><td id="total-damage">—</td><td>—</td></tr>
 </tbody>
 </table>
 </div>
@@ -341,20 +340,6 @@ lvl.appendChild(o);
 lvl.value=1;
 }
 
-function populateUses(){
-const uses = Array.from({length:10},(_,i)=>i+1);
-["aa-count","passive-count","q-count","w-count","e-count","r-count"].forEach(id=>{
-const sel=document.getElementById(id);
-uses.forEach(u=>{
-const o=document.createElement("option");
-o.value=u;
-o.textContent=u;
-sel.appendChild(o);
-});
-sel.value=1;
-});
-}
-
 function getItemStats(){
 let totalAP=0, flatPen=0, percPen=0;
 for(let i=1;i<=6;i++){
@@ -367,6 +352,7 @@ percPen+=item.percPen;
 }
 return {totalAP, flatPen, percPen};
 }
+
 function updateItemStats(){
 const {totalAP, flatPen, percPen}=getItemStats();
 document.getElementById("total-ap").textContent=totalAP;
@@ -428,13 +414,14 @@ document.getElementById("total-damage").textContent=totalComboDamage;
 document.addEventListener("DOMContentLoaded",()=>{
 populateItems();
 populateLevels();
-populateUses();
 updateItemStats();
 document.getElementById("calculate-btn").addEventListener("click",calculateCombo);
 });
 </script>
 </body>
 </html>
+
+
 
 
 
