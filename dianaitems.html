@@ -12,6 +12,8 @@ header::after { content:""; display:block; width:100%; height:2px; background:#d
 .card { background:rgba(12,18,30,0.8); border:1px solid rgba(255,255,255,0.08); padding:16px 20px; border-radius:10px; text-align:left; margin-bottom:20px; }
 .card label { display:block; margin-bottom:8px; font-size:16px; }
 select,input[type=number] { width:100%; padding:10px; margin-bottom:16px; border-radius:8px; border:1px solid rgba(255,255,255,0.08); background:rgba(15,22,35,0.9); color:white; font-size:16px; }
+.item-row { display:flex; gap:10px; margin-bottom:10px; }
+.item-row select { flex:1; }
 button { padding:12px 26px; font-size:16px; font-weight:bold; background:#2f81f7; color:#fff; border:none; border-radius:8px; cursor:pointer; }
 button:hover { background:#1b5fc7; }
 table { width:100%; border-collapse:collapse; margin-top:10px; }
@@ -38,12 +40,23 @@ footer { text-align:center; margin-top:40px; padding:15px 0; color:#8b949e; font
 
 <div class="card">
   <label>AP Items (6 slots)</label>
-  <select id="item-1"></select>
-  <select id="item-2"></select>
-  <select id="item-3"></select>
-  <select id="item-4"></select>
-  <select id="item-5"></select>
-  <select id="item-6"></select>
+  <div class="item-row">
+    <select id="item-1"></select>
+    <select id="item-2"></select>
+    <select id="item-3"></select>
+  </div>
+  <div class="item-row">
+    <select id="item-4"></select>
+    <select id="item-5"></select>
+    <select id="item-6"></select>
+  </div>
+</div>
+
+<div class="card" id="item-stats">
+  <strong>Item Stats:</strong>
+  <p>Total AP: <span id="total-ap">0</span></p>
+  <p>Flat Pen: <span id="total-flat-pen">0</span></p>
+  <p>% Pen: <span id="total-perc-pen">0%</span></p>
 </div>
 
 <div class="card">
@@ -170,6 +183,11 @@ function calculateCombo(){
 
   const {totalAP, flatPen, percPen} = getItemStats();
 
+  // Update item stats display
+  document.getElementById("total-ap").textContent = totalAP;
+  document.getElementById("total-flat-pen").textContent = flatPen;
+  document.getElementById("total-perc-pen").textContent = Math.round(percPen*100) + "%";
+
   const abilities = [
     {name:"Passive", base:getPassiveBase(level), ratio:0.5, count:passiveCount},
     {name:"Q", base:Q_BASE[qRank-1]||Q_BASE[0], ratio:Q_RATIO, count:1},
@@ -197,6 +215,7 @@ document.addEventListener("DOMContentLoaded",()=>{
 
 </body>
 </html>
+
 
 
 
