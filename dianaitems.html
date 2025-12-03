@@ -5,13 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 <title>Diana Combo Calculator</title>
 <style>
-body {
-  margin:0; padding:0;
-  font-family:"Beaufort for LOL", serif;
-  background:#0a0f1a;
-  color:#d8c48a;
-  text-align:center;
-}
+body { margin:0; padding:0; font-family:"Beaufort for LOL", serif; background:#0a0f1a; color:#d8c48a; text-align:center; }
 header { font-size:36px; font-weight:700; padding:5px 0; letter-spacing:2px; }
 header::after { content:""; display:block; width:100%; height:2px; background:#d8c48a; margin-top:10px; }
 .container { width:85%; max-width:900px; margin:20px auto; }
@@ -33,6 +27,8 @@ td { color:white; font-size:15px; }
 <div class="container">
 
 <div class="card">
+  <label>Diana Level</label>
+  <select id="diana-level"></select>
   <label>Enemy HP</label>
   <input type="number" id="enemy-hp" value="1000">
   <label>Enemy MR</label>
@@ -51,16 +47,16 @@ td { color:white; font-size:15px; }
 
 <div class="card">
   <label>Ability Usage</label>
-  <label>Passive (Crescent Strike) uses</label>
+  <label>Passive uses</label>
   <input type="number" id="passive-count" value="1">
-  <label>Q uses</label>
-  <input type="number" id="q-count" value="1">
-  <label>W uses</label>
-  <input type="number" id="w-count" value="1">
-  <label>E uses</label>
-  <input type="number" id="e-count" value="1">
-  <label>R uses</label>
-  <input type="number" id="r-count" value="1">
+  <label>Q uses (1-5 rank)</label>
+  <input type="number" id="q-count" value="1" min="1" max="5">
+  <label>W uses (1-5 rank)</label>
+  <input type="number" id="w-count" value="1" min="1" max="5">
+  <label>E uses (1-5 rank)</label>
+  <input type="number" id="e-count" value="1" min="1" max="5">
+  <label>R uses (1-3 rank)</label>
+  <input type="number" id="r-count" value="1" min="1" max="3">
 </div>
 
 <button id="calculate-btn">Calculate Combo Damage</button>
@@ -83,7 +79,7 @@ td { color:white; font-size:15px; }
 </div>
 
 <script>
-// List of AP items with their AP stats
+// AP items
 const AP_ITEMS = [
   {name:"Amplifying Tome", ap:20}, {name:"Lost Chapter", ap:40},
   {name:"Needlessly Large Rod", ap:60}, {name:"Fiendish Codex", ap:30},
@@ -95,6 +91,7 @@ const AP_ITEMS = [
   {name:"Morellonomicon", ap:70}
 ];
 
+// Populate item slots
 function populateItems() {
   for(let i=1;i<=6;i++){
     const select=document.getElementById(`item-${i}`);
@@ -106,6 +103,17 @@ function populateItems() {
   }
 }
 
+// Populate Diana levels
+function populateLevels(){
+  const lvl=document.getElementById("diana-level");
+  for(let i=1;i<=18;i++){
+    const o=document.createElement("option"); o.value=i; o.textContent=i;
+    lvl.appendChild(o);
+  }
+  lvl.value=1;
+}
+
+// Get total AP from items
 function getTotalAP(){
   let total=0;
   for(let i=1;i<=6;i++){
@@ -114,29 +122,44 @@ function getTotalAP(){
   return total;
 }
 
-function calcAbilityDamage(base, ratio, ap, mr){
-  let dmg = base + ratio*ap;
+// Diana ability bases
+function getPassiveBase(level){ return Math.round(20 + (220-20)*(level-1)/17); }
+
+const Q_BASE=[70,105,140,175,210], Q_RATIO=0.7;
+const W_BASE=[60,96,132,168,204], W_RATIO=0.54;
+const E_BASE=[50,70,90,110,130], E_RATIO=0.6;
+const R_BASE=[200,300,400], R_RATIO=0.6;
+
+// Damage calculation
+function calcDamage(base, ratio, ap, mr, count){
+  let dmg = (base + ratio*ap) * count;
   dmg = Math.round(dmg * 100/(100+mr));
   return dmg;
 }
 
 function calculateCombo(){
+  const level = parseInt(document.getElementById("diana-level").value);
   const ap = getTotalAP();
   const mr = parseFloat(document.getElementById("enemy-mr").value)||30;
 
-  // Base damage values for Diana (example scaling, adjust as needed)
+  const passiveCount = parseInt(document.getElementById("passive-count").value)||0;
+  const qCount = parseInt(document.getElementById("q-count").value)||0;
+  const wCount = parseInt(document.getElementById("w-count").value)||0;
+  const eCount = parseInt(document.getElementById("e-count").value)||0;
+  const rCount = parseInt(document.getElementById("r-count").value)||0;
+
   const abilities = [
-    {name:"Passive", base:10, ratio:0.25, count:parseInt(document.getElementById("passive-count").value)||0},
-    {name:"Q", base:60, ratio:0.7, count:parseInt(document.getElementById("q-count").value)||0},
-    {name:"W", base:40, ratio:0.6, count:parseInt(document.getElementById("w-count").value)||0},
-    {name:"E", base:70, ratio:0.8, count:parseInt(document.getElementById("e-count").value)||0},
-    {name:"R", base:150, ratio:0.9, count:parseInt(document.getElementById("r-count").value)||0}
+    {name:"Passive", base:getPassiveBase(level), ratio:0.5, count:passiveCount},
+    {name:"Q", base:Q_BASE[qCount-1]||Q_BASE[0], ratio:Q_RATIO, count:1},
+    {name:"W", base:W_BASE[wCount-1]||W_BASE[0], ratio:W_RATIO, count:1},
+    {name:"E", base:E_BASE[eCount-1]||E_BASE[0], ratio:E_RATIO, count:1},
+    {name:"R", base:R_BASE[rCount-1]||R_BASE[0], ratio:R_RATIO, count:1},
   ];
 
   const tbody = document.getElementById("damage-table");
   tbody.innerHTML="";
   abilities.forEach(ab=>{
-    const dmg = calcAbilityDamage(ab.base, ab.ratio, ap, mr) * ab.count;
+    const dmg = calcDamage(ab.base, ab.ratio, ap, mr, ab.count);
     const row=document.createElement("tr");
     row.innerHTML=`<td>${ab.name}</td><td>${dmg}</td><td>Magic</td>`;
     tbody.appendChild(row);
@@ -145,10 +168,10 @@ function calculateCombo(){
 
 document.addEventListener("DOMContentLoaded",()=>{
   populateItems();
+  populateLevels();
   document.getElementById("calculate-btn").addEventListener("click",calculateCombo);
 });
 </script>
 
 </body>
 </html>
-
