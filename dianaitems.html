@@ -18,6 +18,7 @@ table { width:100%; border-collapse:collapse; margin-top:10px; }
 th,td { padding:12px; border-bottom:1px solid rgba(255,255,255,0.05); }
 th { color:#d8c48a; font-size:16px; }
 td { color:white; font-size:15px; }
+footer { text-align:center; margin-top:40px; padding:15px 0; color:#8b949e; font-size:14px; }
 </style>
 </head>
 <body>
@@ -78,6 +79,8 @@ td { color:white; font-size:15px; }
 
 </div>
 
+<footer>© 2025 LoL Fundamentals · All rights reserved</footer>
+
 <script>
 // Items list with AP, flat pen, percent pen
 const AP_ITEMS = [
@@ -98,16 +101,16 @@ const AP_ITEMS = [
   {name:"Morellonomicon", ap:70, flatPen:0, percPen:0},
   {name:"Cryptbloom", ap:80, flatPen:0, percPen:0.3},
   {name:"Stormsurge", ap:80, flatPen:15, percPen:0},
-  {name:"Bloodletter's Curse", ap:60, flatPen:10, percPen:0.1} // simplified
+  {name:"Bloodletter's Curse", ap:60, flatPen:10, percPen:0.1}
 ];
 
 // Populate item slots
 function populateItems() {
   for(let i=1;i<=6;i++){
     const select=document.getElementById(`item-${i}`);
-    AP_ITEMS.forEach(it=>{
+    AP_ITEMS.forEach((it, idx)=>{
       const o=document.createElement("option");
-      o.value=i; // index for later lookup
+      o.value=idx;
       o.textContent=it.name;
       select.appendChild(o);
     });
@@ -193,3 +196,5 @@ document.addEventListener("DOMContentLoaded",()=>{
 
 </body>
 </html>
+
+
