@@ -1,129 +1,257 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="utf-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Diana Combo Calculator</title>
 <style>
-body { margin:0; padding:0; font-family:"Beaufort for LOL", serif; background:#0a0f1a; color:#d8c48a; text-align:center; }
-header { font-size:36px; font-weight:700; padding:5px 0; letter-spacing:2px; }
-header::after { content:""; display:block; width:100%; height:2px; background:#d8c48a; margin-top:10px; }
-.return-btn { display:inline-block; margin:15px auto; padding:10px 24px; background:linear-gradient(135deg,#d8c48a,#f0d88b); color:#000; border-radius:6px; text-decoration:none; font-weight:bold; }
-.return-btn:hover { background:linear-gradient(135deg,#f0d88b,#ffd66f); }
-.container { width:85%; max-width:900px; margin:20px auto; text-align:left; }
-.card { background:rgba(12,18,30,0.8); border:1px solid rgba(255,255,255,0.08); padding:16px 20px; border-radius:10px; margin-bottom:20px; }
-.card label { display:block; margin-bottom:4px; font-size:16px; }
-select,input[type=number] { width:100%; padding:10px; margin-bottom:12px; border-radius:8px; border:1px solid rgba(255,255,255,0.08); background:rgba(15,22,35,0.9); color:white; font-size:16px; -webkit-appearance:none; -moz-appearance:none; appearance:none; background-image: url("data:image/svg+xml,%3Csvg fill='white' height='32' viewBox='0 0 24 24' width='32' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M7 10l5 5 5-5z'/%3E%3C/svg%3E"); background-repeat: no-repeat; background-position: right 12px center; background-size: 24px; }
-.flex-row { display:flex; gap:10px; flex-wrap:wrap; }
-.flex-row select, .flex-row input { flex:1; min-width:80px; }
-button { padding:12px 26px; font-size:16px; font-weight:bold; background:#2f81f7; color:#fff; border:none; border-radius:8px; cursor:pointer; margin:20px auto 15px; display:block; }
-button:hover { background:#1b5fc7; }
-table { width:100%; border-collapse:collapse; margin-top:10px; }
-th,td { padding:12px; border-bottom:1px solid rgba(255,255,255,0.05); }
-th { color:#d8c48a; font-size:16px; }
-td { color:white; font-size:15px; }
-footer { text-align:center; margin-top:20px; padding:15px 0; color:#8b949e; font-size:14px; }
-
-/* Equal widths for top inputs */
-.top-inputs select, .top-inputs input { width:calc(33.333% - 6.66px); }
-.top-inputs { display:flex; gap:10px; margin-bottom:16px; }
-.ability-grid { display:flex; gap:10px; flex-wrap:wrap; }
-.ability-card { flex:1; min-width:120px; }
-
-/* Fix dropdown arrows for all */
-select::-ms-expand { display:block; }
-@media(max-width:700px){ .top-inputs, .ability-grid { flex-direction:column; } }
+body {
+    margin: 0;
+    padding: 0;
+    font-family: "Beaufort for LOL", serif;
+    background: #0a0f1a;
+    color: #d8c48a;
+    text-align: center;
+}
+header {
+    font-size: 36px;
+    font-weight: 700;
+    padding: 5px 0;
+    letter-spacing: 2px;
+}
+header::after {
+    content: "";
+    display: block;
+    width: 100%;
+    height: 2px;
+    background: #d8c48a;
+    margin-top: 10px;
+}
+.return-btn {
+    display: inline-block;
+    margin: 10px auto 20px;
+    padding: 10px 24px;
+    background: linear-gradient(135deg, #d8c48a, #f0d88b);
+    color: #000;
+    border-radius: 6px;
+    text-decoration: none;
+    font-weight: bold;
+}
+.return-btn:hover {
+    background: linear-gradient(135deg, #f0d88b, #ffd66f);
+}
+.container {
+    width: 85%;
+    max-width: 900px;
+    margin: 0 auto 20px;
+}
+.card {
+    background: rgba(12,18,30,0.8);
+    border: 1px solid rgba(255,255,255,0.08);
+    padding: 16px 20px;
+    border-radius: 10px;
+    text-align: left;
+    margin-bottom: 20px;
+}
+.card label {
+    display: block;
+    margin-bottom: 8px;
+    font-size: 16px;
+}
+select, input[type=number] {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 16px;
+    border-radius: 8px;
+    border: 1px solid rgba(255,255,255,0.08);
+    background: rgba(15,22,35,0.9);
+    color: white;
+    font-size: 16px;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+    text-indent: 0.01px;
+    text-overflow: '';
+    background-image: url("data:image/svg+xml,%3Csvg fill='white' height='32' viewBox='0 0 24 24' width='32' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M7 10l5 5 5-5z'/%3E%3C/svg%3E");
+    background-repeat: no-repeat;
+    background-position: right 12px center;
+    background-size: 24px;
+}
+.top-row {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 10px;
+}
+.top-row .top-item {
+    flex: 1;
+}
+.ability-row {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 10px;
+}
+.ability-row select.rank-select {
+    width: 60px;
+    margin-left: 10px;
+    font-size: 14px;
+}
+.ability-row input.uses-input {
+    width: 80px;
+    margin-left: 10px;
+}
+button#calculate-btn {
+    padding: 12px 26px;
+    font-size: 16px;
+    font-weight: bold;
+    background: #2f81f7;
+    color: #fff;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    margin-bottom: 16px;
+}
+button#calculate-btn:hover {
+    background: #1b5fc7;
+}
+table {
+    width: 100%;
+    border-collapse: collapse;
+}
+th, td {
+    padding: 12px;
+    border-bottom: 1px solid rgba(255,255,255,0.05);
+}
+th { color: #d8c48a; font-size: 16px; }
+td { color: white; font-size: 15px; }
+footer { text-align: center; margin-top: 20px; padding: 15px 0; color: #8b949e; font-size: 14px; }
 </style>
 </head>
 <body>
 
 <header>DIANA COMBO CALCULATOR</header>
-
 <a class="return-btn" href="membershub.html">BACK TO MEMBERS HUB</a>
 
 <div class="container">
 
-<!-- Diana & Enemy Info -->
-<div class="card top-inputs">
-  <select id="diana-level"></select>
-  <input type="number" id="enemy-hp" value="1000" placeholder="Enemy HP">
-  <input type="number" id="enemy-mr" value="30" placeholder="Enemy MR">
+<!-- Top Inputs -->
+<div class="card">
+    <div class="top-row">
+        <div class="top-item">
+            <label>Diana Level</label>
+            <select id="diana-level"></select>
+        </div>
+    </div>
+    <div class="top-row">
+        <div class="top-item">
+            <label>Enemy HP</label>
+            <input type="number" id="enemy-hp" value="1000">
+        </div>
+    </div>
+    <div class="top-row">
+        <div class="top-item">
+            <label>Enemy MR</label>
+            <input type="number" id="enemy-mr" value="30">
+        </div>
+    </div>
 </div>
 
 <!-- Items -->
 <div class="card">
-  <label>AP Items (6 slots)</label>
-  <div class="flex-row">
-    <select id="item-1"></select>
-    <select id="item-2"></select>
-    <select id="item-3"></select>
-  </div>
-  <div class="flex-row">
-    <select id="item-4"></select>
-    <select id="item-5"></select>
-    <select id="item-6"></select>
-  </div>
+    <label>AP Items (6 slots)</label>
+    <div class="top-row">
+        <select id="item-1"></select>
+        <select id="item-2"></select>
+        <select id="item-3"></select>
+    </div>
+    <div class="top-row">
+        <select id="item-4"></select>
+        <select id="item-5"></select>
+        <select id="item-6"></select>
+    </div>
 </div>
 
-<!-- Item Stats -->
 <div class="card" id="item-stats">
-  <strong>Item Stats:</strong>
-  <p>Total AP: <span id="total-ap">0</span></p>
-  <p>Flat Pen: <span id="total-flat-pen">0</span></p>
-  <p>% Pen: <span id="total-perc-pen">0%</span></p>
+    <strong>Item Stats:</strong>
+    <p>Total AP: <span id="total-ap">0</span></p>
+    <p>Flat Pen: <span id="total-flat-pen">0</span></p>
+    <p>% Pen: <span id="total-perc-pen">0%</span></p>
 </div>
 
-<!-- Ability Grid -->
+<!-- Ability Section -->
 <div class="card">
-  <label>Ability Rank & Uses</label>
-  <div class="ability-grid">
-    <div class="ability-card">
-      <label>Q Rank</label>
-      <select id="q-rank"></select>
-      <label>Uses</label>
-      <input type="number" id="q-count" value="1" min="1">
+    <label>Ability Usage</label>
+
+    <div class="ability-row">
+        <span>Passive</span>
+        <select class="rank-select" id="passive-rank">
+            <option value="1">1</option>
+        </select>
+        <input type="number" class="uses-input" id="passive-count" value="1" min="1">
     </div>
-    <div class="ability-card">
-      <label>W Rank</label>
-      <select id="w-rank"></select>
-      <label>Uses</label>
-      <input type="number" id="w-count" value="1" min="1">
+
+    <div class="ability-row">
+        <span>Q</span>
+        <select class="rank-select" id="q-rank">
+            <option value="1">1</option>
+            <option value="2">2</option>
+            <option value="3">3</option>
+            <option value="4">4</option>
+            <option value="5">5</option>
+        </select>
+        <input type="number" class="uses-input" id="q-count" value="1" min="1">
     </div>
-    <div class="ability-card">
-      <label>E Rank</label>
-      <select id="e-rank"></select>
-      <label>Uses</label>
-      <input type="number" id="e-count" value="1" min="1">
+
+    <div class="ability-row">
+        <span>W</span>
+        <select class="rank-select" id="w-rank">
+            <option value="1">1</option>
+            <option value="2">2</option>
+            <option value="3">3</option>
+            <option value="4">4</option>
+            <option value="5">5</option>
+        </select>
+        <input type="number" class="uses-input" id="w-count" value="1" min="1">
     </div>
-    <div class="ability-card">
-      <label>R Rank</label>
-      <select id="r-rank"></select>
-      <label>Uses</label>
-      <input type="number" id="r-count" value="1" min="1">
+
+    <div class="ability-row">
+        <span>E</span>
+        <select class="rank-select" id="e-rank">
+            <option value="1">1</option>
+            <option value="2">2</option>
+            <option value="3">3</option>
+            <option value="4">4</option>
+            <option value="5">5</option>
+        </select>
+        <input type="number" class="uses-input" id="e-count" value="1" min="1">
     </div>
-    <div class="ability-card">
-      <label>Passive Uses</label>
-      <input type="number" id="passive-count" value="1" min="1">
+
+    <div class="ability-row">
+        <span>R</span>
+        <select class="rank-select" id="r-rank">
+            <option value="1">1</option>
+            <option value="2">2</option>
+            <option value="3">3</option>
+        </select>
+        <input type="number" class="uses-input" id="r-count" value="1" min="1">
     </div>
-  </div>
 </div>
 
 <button id="calculate-btn">Calculate Combo Damage</button>
 
-<!-- Damage Table -->
 <div class="card">
-  <table>
-    <thead>
-      <tr><th>Ability</th><th>Total Damage</th><th>Damage Type</th></tr>
-    </thead>
-    <tbody id="damage-table">
-      <tr><td>—</td><td>—</td><td>—</td></tr>
-      <tr><td>—</td><td>—</td><td>—</td></tr>
-      <tr><td>—</td><td>—</td><td>—</td></tr>
-      <tr><td>—</td><td>—</td><td>—</td></tr>
-      <tr><td>—</td><td>—</td><td>—</td></tr>
-    </tbody>
-  </table>
+    <table>
+        <thead>
+            <tr><th>Ability</th><th>Total Damage</th><th>Damage Type</th></tr>
+        </thead>
+        <tbody id="damage-table">
+            <tr><td>—</td><td>—</td><td>—</td></tr>
+            <tr><td>—</td><td>—</td><td>—</td></tr>
+            <tr><td>—</td><td>—</td><td>—</td></tr>
+            <tr><td>—</td><td>—</td><td>—</td></tr>
+            <tr><td>—</td><td>—</td><td>—</td></tr>
+        </tbody>
+    </table>
 </div>
 
 </div>
@@ -131,7 +259,7 @@ select::-ms-expand { display:block; }
 <footer>© 2025 LoL Fundamentals · All rights reserved</footer>
 
 <script>
-// --- Item & Ability Data ---
+// Items list with correct AP
 const AP_ITEMS = [
   {name:"Doran's Ring", ap:18, flatPen:0, percPen:0},
   {name:"Amplifying Tome", ap:20, flatPen:0, percPen:0},
@@ -142,7 +270,7 @@ const AP_ITEMS = [
   {name:"Hextech Rocketbelt", ap:90, flatPen:0, percPen:0},
   {name:"Luden's Tempest", ap:120, flatPen:0, percPen:0},
   {name:"Shadowflame", ap:100, flatPen:15, percPen:0},
-  {name:"Rabadon's Deathcap", ap:150, flatPen:0, percPen:0},
+  {name:"Rabadon's Deathcap", ap:130, flatPen:0, percPen:0},
   {name:"Void Staff", ap:90, flatPen:0, percPen:0.4},
   {name:"Horizon Focus", ap:100, flatPen:0, percPen:0},
   {name:"Liandry's Anguish", ap:90, flatPen:0, percPen:0},
@@ -152,61 +280,64 @@ const AP_ITEMS = [
   {name:"Stormsurge", ap:80, flatPen:15, percPen:0},
   {name:"Bloodletter's Curse", ap:60, flatPen:10, percPen:0.1},
   {name:"Dark Seal", ap:15, flatPen:0, percPen:0},
-  {name:"Mejai's Soulstealer", ap:20, flatPen:0, percPen:0}
+  {name:"Mejai's Soulstealer", ap:20, flatPen:0, percPen:0},
+  {name:"Nashor's Tooth", ap:80, flatPen:0, percPen:0},
+  {name:"Lich Bane", ap:75, flatPen:0, percPen:0}
 ];
 
-const Q_BASE=[70,105,140,175,210], Q_RATIO=0.7;
-const W_BASE=[60,96,132,168,204], W_RATIO=0.54;
-const E_BASE=[50,70,90,110,130], E_RATIO=0.6;
-const R_BASE=[200,300,400], R_RATIO=0.6;
-
+// Populate items
 function populateItems() {
   for(let i=1;i<=6;i++){
     const select=document.getElementById(`item-${i}`);
     select.innerHTML="";
-    const emptyOption = document.createElement("option"); emptyOption.value=""; emptyOption.textContent=""; select.appendChild(emptyOption);
-    AP_ITEMS.forEach((it, idx)=>{ const o=document.createElement("option"); o.value=idx; o.textContent=it.name; select.appendChild(o); });
-    if(i===1) select.value=0; else select.value="";
+    const emptyOpt=document.createElement("option"); emptyOpt.value=""; emptyOpt.textContent=""; select.appendChild(emptyOpt);
+    AP_ITEMS.forEach((it,idx)=>{
+      const o=document.createElement("option"); o.value=idx; o.textContent=it.name; select.appendChild(o);
+    });
+    if(i===1) select.value=0;
     select.addEventListener("change",updateItemStats);
   }
 }
 
-function populateLevels(){
+// Levels
+function populateLevels() {
   const lvl=document.getElementById("diana-level");
-  for(let i=1;i<=18;i++){ const o=document.createElement("option"); o.value=i; o.textContent=i; lvl.appendChild(o); }
+  for(let i=1;i<=18;i++){ const o=document.createElement("option"); o.value=i; o.textContent=i; lvl.appendChild(o);}
   lvl.value=1;
 }
 
-// Populate ability ranks
-function populateAbilityRanks(){
-  const q=document.getElementById("q-rank"); const w=document.getElementById("w-rank");
-  const e=document.getElementById("e-rank"); const r=document.getElementById("r-rank");
-  for(let i=1;i<=5;i++){ q.appendChild(new Option(i,i)); w.appendChild(new Option(i,i)); e.appendChild(new Option(i,i)); }
-  for(let i=1;i<=3;i++){ r.appendChild(new Option(i,i)); }
-}
-
+// Item stats
 function getItemStats(){
   let totalAP=0, flatPen=0, percPen=0;
   for(let i=1;i<=6;i++){
-    const idx = document.getElementById(`item-${i}`).value;
+    const idx=document.getElementById(`item-${i}`).value;
     if(idx==="") continue;
-    const item = AP_ITEMS[parseInt(idx)] || {ap:0, flatPen:0, percPen:0};
-    totalAP+=item.ap; flatPen+=item.flatPen; percPen+=item.percPen;
+    const item=AP_ITEMS[parseInt(idx)]||{ap:0,flatPen:0,percPen:0};
+    totalAP+=item.ap;
+    flatPen+=item.flatPen;
+    percPen+=item.percPen;
   }
   return {totalAP, flatPen, percPen};
 }
 function updateItemStats(){
-  const {totalAP, flatPen, percPen} = getItemStats();
+  const {totalAP, flatPen, percPen}=getItemStats();
   document.getElementById("total-ap").textContent=totalAP;
   document.getElementById("total-flat-pen").textContent=flatPen;
   document.getElementById("total-perc-pen").textContent=Math.round(percPen*100)+"%";
 }
 
+// Ability bases
 function getPassiveBase(level){ return Math.round(20 + (220-20)*(level-1)/17); }
+const Q_BASE=[70,105,140,175,210], Q_RATIO=0.7;
+const W_BASE=[60,96,132,168,204], W_RATIO=0.54;
+const E_BASE=[50,70,90,110,130], E_RATIO=0.6;
+const R_BASE=[200,300,400], R_RATIO=0.6;
 
+// Damage calculation
 function calcDamage(base, ratio, ap, mr, count, flatPen, percPen){
   let raw=(base+ratio*ap)*count;
-  let effectiveMR=mr-flatPen; if(effectiveMR<0) effectiveMR=0;
+  let effectiveMR=mr-flatPen;
+  if(effectiveMR<0) effectiveMR=0;
   effectiveMR*=1-percPen;
   return Math.round(raw*100/(100+effectiveMR));
 }
@@ -214,33 +345,21 @@ function calcDamage(base, ratio, ap, mr, count, flatPen, percPen){
 function calculateCombo(){
   const level=parseInt(document.getElementById("diana-level").value);
   const mr=parseFloat(document.getElementById("enemy-mr").value)||30;
-
-  const passiveCount=parseInt(document.getElementById("passive-count").value)||0;
-  const qRank=parseInt(document.getElementById("q-rank").value)||1;
-  const wRank=parseInt(document.getElementById("w-rank").value)||1;
-  const eRank=parseInt(document.getElementById("e-rank").value)||1;
-  const rRank=parseInt(document.getElementById("r-rank").value)||1;
-
-  const qCount=parseInt(document.getElementById("q-count").value)||1;
-  const wCount=parseInt(document.getElementById("w-count").value)||1;
-  const eCount=parseInt(document.getElementById("e-count").value)||1;
-  const rCount=parseInt(document.getElementById("r-count").value)||1;
-
-  const {totalAP, flatPen, percPen}=getItemStats();
+  const {totalAP,flatPen,percPen}=getItemStats();
   updateItemStats();
 
   const abilities=[
-    {name:"Passive", base:getPassiveBase(level), ratio:0.5, count:passiveCount},
-    {name:"Q", base:Q_BASE[qRank-1]||Q_BASE[0], ratio:Q_RATIO, count:qCount},
-    {name:"W", base:W_BASE[wRank-1]||W_BASE[0], ratio:W_RATIO, count:wCount},
-    {name:"E", base:E_BASE[eRank-1]||E_BASE[0], ratio:E_RATIO, count:eCount},
-    {name:"R", base:R_BASE[rRank-1]||R_BASE[0], ratio:R_RATIO, count:rCount}
+    {name:"Passive", base:getPassiveBase(level), ratio:0.5, count:parseInt(document.getElementById("passive-count").value)||1},
+    {name:"Q", base:Q_BASE[parseInt(document.getElementById("q-rank").value)-1], ratio:Q_RATIO, count:parseInt(document.getElementById("q-count").value)||1},
+    {name:"W", base:W_BASE[parseInt(document.getElementById("w-rank").value)-1], ratio:W_RATIO, count:parseInt(document.getElementById("w-count").value)||1},
+    {name:"E", base:E_BASE[parseInt(document.getElementById("e-rank").value)-1], ratio:E_RATIO, count:parseInt(document.getElementById("e-count").value)||1},
+    {name:"R", base:R_BASE[parseInt(document.getElementById("r-rank").value)-1], ratio:R_RATIO, count:parseInt(document.getElementById("r-count").value)||1}
   ];
 
   const tbody=document.getElementById("damage-table");
   tbody.innerHTML="";
   abilities.forEach(ab=>{
-    const dmg=calcDamage(ab.base, ab.ratio, totalAP, mr, ab.count, flatPen, percPen);
+    const dmg=calcDamage(ab.base,ab.ratio,totalAP,mr,ab.count,flatPen,percPen);
     const row=document.createElement("tr");
     row.innerHTML=`<td>${ab.name}</td><td>${dmg}</td><td>Magic</td>`;
     tbody.appendChild(row);
@@ -250,13 +369,13 @@ function calculateCombo(){
 document.addEventListener("DOMContentLoaded",()=>{
   populateItems();
   populateLevels();
-  populateAbilityRanks();
   updateItemStats();
   document.getElementById("calculate-btn").addEventListener("click",calculateCombo);
 });
 </script>
 </body>
 </html>
+
 
 
 
