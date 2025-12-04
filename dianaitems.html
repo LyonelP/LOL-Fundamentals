@@ -108,8 +108,8 @@ input[type=number], select {
 .ability-row select.rank-select {
   width: 60px;
 }
-.ability-row input.uses-input {
-  width: 100%;
+.ability-row select.uses-select {
+  width: 60px;
   margin-top: 6px;
 }
 button#calculate-btn {
@@ -168,8 +168,9 @@ footer { text-align: center; margin-top: 20px; padding: 15px 0; color: #8b949e; 
     flex-direction: row;
     justify-content: space-between;
   }
-  .ability-row input.uses-input {
+  .ability-row select.uses-select {
     width: 100%;
+    margin-top: 6px;
   }
 }
 </style>
@@ -227,40 +228,40 @@ footer { text-align: center; margin-top: 20px; padding: 15px 0; color: #8b949e; 
 
 <div class="ability-row">
   <div class="first-line"><span>Auto Attack</span></div>
-  <input type="number" class="uses-input" id="aa-count" value="0" min="0">
+  <select class="uses-select" id="aa-count"></select>
 </div>
 
 <div class="ability-row">
   <div class="first-line"><span>Passive</span></div>
-  <input type="number" class="uses-input" id="passive-count" value="0" min="0">
+  <select class="uses-select" id="passive-count"></select>
 </div>
 
 <div class="ability-row">
   <div class="first-line"><span>Q Rank</span>
     <select class="rank-select" id="q-rank"></select>
   </div>
-  <input type="number" class="uses-input" id="q-count" value="0" min="0">
+  <select class="uses-select" id="q-count"></select>
 </div>
 
 <div class="ability-row">
   <div class="first-line"><span>W Rank</span>
     <select class="rank-select" id="w-rank"></select>
   </div>
-  <input type="number" class="uses-input" id="w-count" value="0" min="0">
+  <select class="uses-select" id="w-count"></select>
 </div>
 
 <div class="ability-row">
   <div class="first-line"><span>E Rank</span>
     <select class="rank-select" id="e-rank"></select>
   </div>
-  <input type="number" class="uses-input" id="e-count" value="0" min="0">
+  <select class="uses-select" id="e-count"></select>
 </div>
 
 <div class="ability-row">
   <div class="first-line"><span>R Rank</span>
     <select class="rank-select" id="r-rank"></select>
   </div>
-  <input type="number" class="uses-input" id="r-count" value="0" min="0">
+  <select class="uses-select" id="r-count"></select>
 </div>
 
 </div>
@@ -289,7 +290,6 @@ footer { text-align: center; margin-top: 20px; padding: 15px 0; color: #8b949e; 
 <footer>© 2025 LoL Fundamentals · All rights reserved</footer>
 
 <script>
-// --- Items and stats ---
 const AP_ITEMS = [
 {name:"Doran's Ring", ap:18, flatPen:0, percPen:0},
 {name:"Amplifying Tome", ap:20, flatPen:0, percPen:0},
@@ -312,7 +312,7 @@ const AP_ITEMS = [
 {name:"Dark Seal", ap:15, flatPen:0, percPen:0},
 {name:"Mejai's Soulstealer", ap:20, flatPen:0, percPen:0},
 {name:"Nashor's Tooth", ap:80, flatPen:0, percPen:0},
-{name:"Lich Bane", ap:75, flatPen:0, percPen:0}
+{name:"Lich Bane", ap:100, flatPen:0, percPen:0}
 ];
 
 function populateItems() {
@@ -346,6 +346,18 @@ function populateRanks(){
     });
     sel.value=0;
   });
+
+  // Uses dropdown 0-10
+  document.querySelectorAll(".uses-select").forEach(sel=>{
+    sel.innerHTML="";
+    ranks.forEach(r=>{
+      const o = document.createElement("option");
+      o.value=r;
+      o.textContent=r;
+      sel.appendChild(o);
+    });
+    sel.value=0;
+  });
 }
 
 function populateLevels() {
@@ -361,16 +373,30 @@ function populateLevels() {
 
 function getItemStats(){
   let totalAP=0, flatPen=0, percPen=0;
+  let deathcapMultiplier=0;
+
   for(let i=1;i<=6;i++){
     const idx=document.getElementById(`item-${i}`).value;
     if(idx==="") continue;
     const item=AP_ITEMS[parseInt(idx)];
+    if(item.name==="Rabadon's Deathcap"){deathcapMultiplier=0.3; continue;}
     totalAP+=item.ap;
     flatPen+=item.flatPen;
     percPen+=item.percPen;
   }
+
+  for(let i=1;i<=6;i++){
+    const idx=document.getElementById(`item-${i}`).value;
+    if(idx==="") continue;
+    const item=AP_ITEMS[parseInt(idx)];
+    if(item.name==="Rabadon's Deathcap"){
+      totalAP += item.ap + Math.round(totalAP*deathcapMultiplier);
+    }
+  }
+
   return {totalAP, flatPen, percPen};
 }
+
 function updateItemStats(){
   const {totalAP, flatPen, percPen}=getItemStats();
   document.getElementById("total-ap").textContent=totalAP;
@@ -440,7 +466,6 @@ function calculateCombo(){
   document.getElementById("total-damage-type").textContent = `Magic: ${totalMagic} | Physical: ${totalPhysical}`;
 }
 
-// --- Init ---
 document.addEventListener("DOMContentLoaded",()=>{
   populateItems();
   populateLevels();
@@ -451,9 +476,6 @@ document.addEventListener("DOMContentLoaded",()=>{
 </script>
 </body>
 </html>
-
-
-
 
 
 
