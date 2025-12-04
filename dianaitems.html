@@ -94,23 +94,21 @@ input[type=number], select {
 }
 .ability-row {
   display: flex;
-  flex-direction: column;
+  align-items: center;
   margin-bottom: 12px;
+  gap: 10px;
 }
 .ability-row .first-line {
   display: flex;
   justify-content: space-between;
   align-items: center;
+  flex: 2;
 }
 .ability-row .first-line span {
   font-weight: bold;
 }
-.ability-row select.rank-select {
+.ability-row select.rank-select, .ability-row select.uses-select {
   width: 60px;
-}
-.ability-row input.uses-input {
-  width: 100%;
-  margin-top: 6px;
 }
 button#calculate-btn {
   padding: 12px 26px;
@@ -136,7 +134,8 @@ th, td {
 }
 th { color: #d8c48a; font-size: 16px; }
 td { color: white; font-size: 15px; }
-#total-damage { font-size: 18px; font-weight: bold; color: gold; }
+#total-damage { font-size: 18px; font-weight: bold; color: #ffd700; }
+#total-damage-type { font-size: 15px; }
 footer { text-align: center; margin-top: 20px; padding: 15px 0; color: #8b949e; font-size: 14px; }
 
 /* Items grid */
@@ -158,11 +157,11 @@ footer { text-align: center; margin-top: 20px; padding: 15px 0; color: #8b949e; 
   .top-row .top-item {
     flex: 1 1 100%;
   }
-  .ability-row .first-line {
-    flex-direction: row;
-    justify-content: space-between;
+  .ability-row {
+    flex-direction: column;
+    align-items: flex-start;
   }
-  .ability-row input.uses-input {
+  .ability-row select.rank-select, .ability-row select.uses-select {
     width: 100%;
   }
 }
@@ -225,12 +224,12 @@ footer { text-align: center; margin-top: 20px; padding: 15px 0; color: #8b949e; 
 
 <div class="ability-row">
   <div class="first-line"><span>Auto Attack</span></div>
-  <input type="number" class="uses-input" id="aa-count" value="0" min="0">
+  <select class="uses-select" id="aa-count"></select>
 </div>
 
 <div class="ability-row">
   <div class="first-line"><span>Passive</span></div>
-  <input type="number" class="uses-input" id="passive-count" value="0" min="0">
+  <select class="uses-select" id="passive-count"></select>
 </div>
 
 <div class="ability-row">
@@ -241,7 +240,7 @@ footer { text-align: center; margin-top: 20px; padding: 15px 0; color: #8b949e; 
       <option value="3">3</option><option value="4">4</option><option value="5">5</option>
     </select>
   </div>
-  <input type="number" class="uses-input" id="q-count" value="0" min="0">
+  <select class="uses-select" id="q-count"></select>
 </div>
 
 <div class="ability-row">
@@ -252,7 +251,7 @@ footer { text-align: center; margin-top: 20px; padding: 15px 0; color: #8b949e; 
       <option value="3">3</option><option value="4">4</option><option value="5">5</option>
     </select>
   </div>
-  <input type="number" class="uses-input" id="w-count" value="0" min="0">
+  <select class="uses-select" id="w-count"></select>
 </div>
 
 <div class="ability-row">
@@ -263,7 +262,7 @@ footer { text-align: center; margin-top: 20px; padding: 15px 0; color: #8b949e; 
       <option value="3">3</option><option value="4">4</option><option value="5">5</option>
     </select>
   </div>
-  <input type="number" class="uses-input" id="e-count" value="0" min="0">
+  <select class="uses-select" id="e-count"></select>
 </div>
 
 <div class="ability-row">
@@ -274,7 +273,7 @@ footer { text-align: center; margin-top: 20px; padding: 15px 0; color: #8b949e; 
       <option value="3">3</option>
     </select>
   </div>
-  <input type="number" class="uses-input" id="r-count" value="0" min="0">
+  <select class="uses-select" id="r-count"></select>
 </div>
 
 </div>
@@ -313,7 +312,7 @@ const AP_ITEMS = [
 {name:"Hextech Rocketbelt", ap:90, flatPen:0, percPen:0},
 {name:"Luden's Tempest", ap:120, flatPen:0, percPen:0},
 {name:"Shadowflame", ap:100, flatPen:15, percPen:0},
-{name:"Rabadon's Deathcap", ap:130, flatPen:0, percPen:0},
+{name:"Rabadon's Deathcap", ap:130, flatPen:0, percPen:0, multiplier:0.3},
 {name:"Void Staff", ap:90, flatPen:0, percPen:0.4},
 {name:"Horizon Focus", ap:100, flatPen:0, percPen:0},
 {name:"Liandry's Anguish", ap:90, flatPen:0, percPen:0},
@@ -325,7 +324,7 @@ const AP_ITEMS = [
 {name:"Dark Seal", ap:15, flatPen:0, percPen:0},
 {name:"Mejai's Soulstealer", ap:20, flatPen:0, percPen:0},
 {name:"Nashor's Tooth", ap:80, flatPen:0, percPen:0},
-{name:"Lich Bane", ap:75, flatPen:0, percPen:0}
+{name:"Lich Bane", ap:100, flatPen:0, percPen:0}
 ];
 
 function populateItems() {
@@ -358,8 +357,23 @@ function populateLevels() {
   lvl.value=1;
 }
 
+function populateUses() {
+  const uses = Array.from({length:11},(_,i)=>i);
+  const elements = document.querySelectorAll(".uses-select");
+  elements.forEach(sel=>{
+    sel.innerHTML="";
+    uses.forEach(u=>{
+      const o=document.createElement("option");
+      o.value=u;
+      o.textContent=u;
+      sel.appendChild(o);
+    });
+    sel.value = 0;
+  });
+}
+
 function getItemStats(){
-  let totalAP=0, flatPen=0, percPen=0;
+  let totalAP=0, flatPen=0, percPen=0, multiplier=0;
   for(let i=1;i<=6;i++){
     const idx=document.getElementById(`item-${i}`).value;
     if(idx==="") continue;
@@ -367,9 +381,12 @@ function getItemStats(){
     totalAP+=item.ap;
     flatPen+=item.flatPen;
     percPen+=item.percPen;
+    if(item.multiplier) multiplier += item.multiplier;
   }
+  totalAP = Math.round(totalAP*(1+multiplier));
   return {totalAP, flatPen, percPen};
 }
+
 function updateItemStats(){
   const {totalAP, flatPen, percPen}=getItemStats();
   document.getElementById("total-ap").textContent=totalAP;
@@ -417,9 +434,7 @@ function calculateCombo(){
   ];
 
   const rows=document.querySelectorAll("#damage-table tr");
-  let total=0;
-  let totalMagic=0;
-  let totalPhysical=0;
+  let totalMagic = 0, totalPhysical = 0;
 
   abilities.forEach((ab,i)=>{
     let dmg;
@@ -433,7 +448,7 @@ function calculateCombo(){
     rows[i].cells[1].textContent=dmg;
   });
 
-  total = totalMagic + totalPhysical;
+  const total = totalMagic + totalPhysical;
   document.getElementById("total-damage").textContent = total;
   document.getElementById("total-damage-type").textContent = `Magic: ${totalMagic} | Physical: ${totalPhysical}`;
 }
@@ -441,14 +456,13 @@ function calculateCombo(){
 document.addEventListener("DOMContentLoaded",()=>{
   populateItems();
   populateLevels();
+  populateUses();
   updateItemStats();
   document.getElementById("calculate-btn").addEventListener("click",calculateCombo);
 });
 </script>
 </body>
 </html>
-
-
 
 
 
