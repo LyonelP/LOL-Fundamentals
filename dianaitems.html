@@ -137,9 +137,9 @@ th, td {
 th { color: #d8c48a; font-size: 16px; }
 td { color: white; font-size: 15px; }
 #total-damage { 
-  font-size: 22px;      /* bigger size for emphasis */
-  font-weight: bold;
-  color: gold;          /* gold color */
+  font-size: 18px; 
+  font-weight: bold; 
+  color: #d8c48a; /* MATCH HEADER GOLD */ 
 }
 footer { text-align: center; margin-top: 20px; padding: 15px 0; color: #8b949e; font-size: 14px; }
 
@@ -237,12 +237,11 @@ footer { text-align: center; margin-top: 20px; padding: 15px 0; color: #8b949e; 
   <input type="number" class="uses-input" id="passive-count" value="0" min="0">
 </div>
 
+<!-- Q/W/E/R rank dropdowns 0-10 -->
 <div class="ability-row">
   <div class="first-line"><span>Q Rank</span>
     <select class="rank-select" id="q-rank">
-      <option value="0">0</option>
-      <option value="1">1</option><option value="2">2</option>
-      <option value="3">3</option><option value="4">4</option><option value="5">5</option>
+      ${[...Array(11).keys()].map(i=>`<option value="${i}">${i}</option>`).join('')}
     </select>
   </div>
   <input type="number" class="uses-input" id="q-count" value="0" min="0">
@@ -251,9 +250,7 @@ footer { text-align: center; margin-top: 20px; padding: 15px 0; color: #8b949e; 
 <div class="ability-row">
   <div class="first-line"><span>W Rank</span>
     <select class="rank-select" id="w-rank">
-      <option value="0">0</option>
-      <option value="1">1</option><option value="2">2</option>
-      <option value="3">3</option><option value="4">4</option><option value="5">5</option>
+      ${[...Array(11).keys()].map(i=>`<option value="${i}">${i}</option>`).join('')}
     </select>
   </div>
   <input type="number" class="uses-input" id="w-count" value="0" min="0">
@@ -262,9 +259,7 @@ footer { text-align: center; margin-top: 20px; padding: 15px 0; color: #8b949e; 
 <div class="ability-row">
   <div class="first-line"><span>E Rank</span>
     <select class="rank-select" id="e-rank">
-      <option value="0">0</option>
-      <option value="1">1</option><option value="2">2</option>
-      <option value="3">3</option><option value="4">4</option><option value="5">5</option>
+      ${[...Array(11).keys()].map(i=>`<option value="${i}">${i}</option>`).join('')}
     </select>
   </div>
   <input type="number" class="uses-input" id="e-count" value="0" min="0">
@@ -273,9 +268,7 @@ footer { text-align: center; margin-top: 20px; padding: 15px 0; color: #8b949e; 
 <div class="ability-row">
   <div class="first-line"><span>R Rank</span>
     <select class="rank-select" id="r-rank">
-      <option value="0">0</option>
-      <option value="1">1</option><option value="2">2</option>
-      <option value="3">3</option>
+      ${[...Array(11).keys()].map(i=>`<option value="${i}">${i}</option>`).join('')}
     </select>
   </div>
   <input type="number" class="uses-input" id="r-count" value="0" min="0">
@@ -307,6 +300,7 @@ footer { text-align: center; margin-top: 20px; padding: 15px 0; color: #8b949e; 
 <footer>© 2025 LoL Fundamentals · All rights reserved</footer>
 
 <script>
+// --- Items and stats ---
 const AP_ITEMS = [
 {name:"Doran's Ring", ap:18, flatPen:0, percPen:0},
 {name:"Amplifying Tome", ap:20, flatPen:0, percPen:0},
@@ -381,14 +375,16 @@ function updateItemStats(){
   document.getElementById("total-perc-pen").textContent=Math.round(percPen*100)+"%";
 }
 
+// --- Ability base values ---
 function getPassiveBase(level){ return Math.round(20 + (220-20)*(level-1)/17); }
 function getAutoAttackBase(level){ return Math.round(57 + (108-57)*(level-1)/17); }
 
-const Q_BASE=[0,70,105,140,175,210], Q_RATIO=0.7;
-const W_BASE=[0,60,96,132,168,204], W_RATIO=0.54;
-const E_BASE=[0,50,70,90,110,130], E_RATIO=0.6;
-const R_BASE=[0,200,300,400], R_RATIO=0.6;
+const Q_BASE=[0,70,105,140,175,210,210,210,210,210,210], Q_RATIO=0.7;
+const W_BASE=[0,60,96,132,168,204,204,204,204,204,204], W_RATIO=0.54;
+const E_BASE=[0,50,70,90,110,130,130,130,130,130,130], E_RATIO=0.6;
+const R_BASE=[0,200,300,400,400,400,400,400,400,400,400], R_RATIO=0.6;
 
+// --- Damage calculation ---
 function calcMagicDamage(base, ratio, ap, mr, count, flatPen, percPen){
   if(base===0 || count===0) return 0;
   let raw=(base+ratio*ap)*count;
@@ -403,6 +399,7 @@ function calcPhysicalDamage(base, count, armor){
   return Math.round(base * count * 100 / (100 + armor));
 }
 
+// --- Main calculation ---
 function calculateCombo(){
   const level=parseInt(document.getElementById("diana-level").value);
   const mr=parseFloat(document.getElementById("enemy-mr").value)||30;
@@ -442,6 +439,7 @@ function calculateCombo(){
   document.getElementById("total-damage-type").textContent = `Magic: ${totalMagic} | Physical: ${totalPhysical}`;
 }
 
+// --- Init ---
 document.addEventListener("DOMContentLoaded",()=>{
   populateItems();
   populateLevels();
@@ -451,6 +449,7 @@ document.addEventListener("DOMContentLoaded",()=>{
 </script>
 </body>
 </html>
+
 
 
 
