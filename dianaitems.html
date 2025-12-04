@@ -5,6 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Diana Combo Calculator</title>
 <style>
+/* (unchanged styles) */
 body {
   margin: 0;
   padding: 0;
@@ -65,11 +66,7 @@ input[type=number], select {
   background: rgba(15,22,35,0.9);
   color: white;
   font-size: 16px;
-  -webkit-appearance: none;
-  -moz-appearance: none;
   appearance: none;
-  text-indent: 0.01px;
-  text-overflow: '';
   background-image: url("data:image/svg+xml,%3Csvg fill='white' height='32' viewBox='0 0 24 24' width='32' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M7 10l5 5 5-5z'/%3E%3C/svg%3E");
   background-repeat: no-repeat;
   background-position: right 12px center;
@@ -89,29 +86,13 @@ input[type=number], select {
 }
 
 /* Ability section */
-.ability-card {
-  margin-bottom: 20px;
-}
-.ability-row {
-  display: flex;
-  flex-direction: column;
-  margin-bottom: 12px;
-}
-.ability-row .first-line {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-}
-.ability-row .first-line span {
-  font-weight: bold;
-}
-.ability-row select.rank-select {
-  width: 60px;
-}
-.ability-row select.uses-select {
-  width: 100%;
-  margin-top: 6px;
-}
+.ability-card { margin-bottom: 20px; }
+.ability-row { display: flex; flex-direction: column; margin-bottom: 12px; }
+.ability-row .first-line { display: flex; justify-content: space-between; align-items: center; }
+.ability-row .first-line span { font-weight: bold; }
+.ability-row select.rank-select { width: 60px; }
+.ability-row select.uses-select { width: 100%; margin-top: 6px; }
+
 button#calculate-btn {
   padding: 12px 26px;
   font-size: 16px;
@@ -123,9 +104,8 @@ button#calculate-btn {
   cursor: pointer;
   margin-bottom: 20px;
 }
-button#calculate-btn:hover {
-  background: #1b5fc7;
-}
+button#calculate-btn:hover { background: #1b5fc7; }
+
 table {
   width: 100%;
   border-collapse: collapse;
@@ -138,28 +118,22 @@ th, td {
 }
 th { color: #d8c48a; font-size: 16px; }
 td { color: white; font-size: 15px; text-align: center; }
-#total-damage { 
-  font-size: 18px; 
-  font-weight: bold; 
+#total-damage {
+  font-size: 18px;
+  font-weight: bold;
   color: #d8c48a;
 }
 footer { text-align: center; margin-top: 20px; padding: 15px 0; color: #8b949e; font-size: 14px; }
 
-/* Items grid */
 .items-grid {
   display: flex;
   gap: 10px;
   flex-wrap: wrap;
 }
-.items-grid select {
-  flex: 1 1 30%;
-  min-width: 100px;
-}
+.items-grid select { flex: 1 1 30%; min-width: 100px; }
 
-/* Item stats in white */
 #item-stats p span { color: white; }
 
-/* Responsive */
 @media(max-width:600px){
   .top-row .top-item { flex: 1 1 100%; }
   .ability-row .first-line { flex-direction: row; justify-content: space-between; }
@@ -326,7 +300,6 @@ function populateItems() {
   }
 }
 
-// Populate ability ranks and uses
 function populateRanksAndUses(){
   const abilityRanks = { "q-rank":5, "w-rank":5, "e-rank":5, "r-rank":3 };
   Object.keys(abilityRanks).forEach(id=>{
@@ -342,7 +315,6 @@ function populateRanksAndUses(){
     sel.value=0;
   });
 
-  // Uses 0-10
   document.querySelectorAll(".uses-select").forEach(sel=>{
     sel.innerHTML="";
     for(let i=0;i<=10;i++){
@@ -368,28 +340,28 @@ function populateLevels() {
 
 function getItemStats(){
   let totalAP=0, flatPen=0, percPen=0;
-  let deathcapMultiplier=0;
+  let hasDeathcap=false;
 
   for(let i=1;i<=6;i++){
     const idx=document.getElementById(`item-${i}`).value;
     if(idx==="") continue;
     const item=AP_ITEMS[parseInt(idx)];
-    if(item.name==="Rabadon's Deathcap"){deathcapMultiplier=0.3; continue;}
+
+    if(item.name==="Rabadon's Deathcap"){
+      hasDeathcap=true;
+      continue;
+    }
+
     totalAP+=item.ap;
     flatPen+=item.flatPen;
     percPen+=item.percPen;
   }
 
-  for(let i=1;i<=6;i++){
-    const idx=document.getElementById(`item-${i}`).value;
-    if(idx==="") continue;
-    const item=AP_ITEMS[parseInt(idx)];
-    if(item.name==="Rabadon's Deathcap"){
-      totalAP += item.ap + Math.round(totalAP*deathcapMultiplier);
-    }
+  if(hasDeathcap){
+    totalAP = (totalAP + 130) * 1.30;  // ★ Correct League formula
   }
 
-  return {totalAP, flatPen, percPen};
+  return {totalAP:Math.round(totalAP), flatPen, percPen};
 }
 
 function updateItemStats(){
@@ -399,7 +371,6 @@ function updateItemStats(){
   document.getElementById("total-perc-pen").textContent=Math.round(percPen*100)+"%";
 }
 
-// Ability base values
 function getPassiveBase(level){ return Math.round(20 + (220-20)*(level-1)/17); }
 function getAutoAttackBase(level){ return Math.round(57 + (108-57)*(level-1)/17); }
 
@@ -461,7 +432,6 @@ function calculateCombo(){
   document.getElementById("total-damage-type").textContent = `Magic: ${totalMagic} | Physical: ${totalPhysical}`;
 }
 
-// Init
 document.addEventListener("DOMContentLoaded",()=>{
   populateItems();
   populateLevels();
@@ -472,7 +442,5 @@ document.addEventListener("DOMContentLoaded",()=>{
 </script>
 </body>
 </html>
-
-
 
 
