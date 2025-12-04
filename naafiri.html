@@ -5,7 +5,6 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Diana Mid vs Naafiri</title>
 
-<!-- Early redirect before rendering -->
 <script>
   if (localStorage.getItem('lolfundamentals_logged_in') !== 'true') {
     window.location.replace('login.html');
@@ -13,15 +12,31 @@
 </script>
 
 <style>
-  body { margin: 0; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; background: #0d1117; color: #e6edf3; line-height: 1.4; }
-  header { background: #161b22; padding: 10px 20px; text-align: center; font-size: 28px; font-weight: bold; color: #58a6ff; }
+  /* Only changes needed to stick footer at bottom */
+  html, body {
+    margin: 0;
+    padding: 0;
+    height: 100%;
+  }
+  body {
+    display: flex;
+    flex-direction: column;
+  }
 
-  /* Gold bubble for Back to Matchup Hub */
+  header {
+    background: #161b22;
+    padding: 10px 20px;
+    text-align: center;
+    font-size: 28px;
+    font-weight: bold;
+    color: #58a6ff;
+  }
+
   .back-link {
     display: inline-flex;
     align-items: center;
     justify-content: center;
-    background: #c9aa71; /* gold */
+    background: #c9aa71;
     color: #0d1117;
     font-weight: bold;
     text-decoration: none;
@@ -29,18 +44,21 @@
     border-radius: 25px;
     border: 1px solid #c9aa71;
   }
-  .back-link:hover {
-    background: #e6c17c;
-    color: #0d1117;
-  }
+  .back-link:hover { background: #e6c17c; color: #0d1117; }
 
-  .matchup-container { display: flex; max-width: 900px; margin: -15px auto 0 auto; gap: 15px; padding: 0 20px 10px 20px; }
+  .matchup-container {
+    display: flex;
+    max-width: 900px;
+    margin: -15px auto 0 auto;
+    gap: 15px;
+    padding: 0 20px 10px 20px;
+    flex: 1; /* This ensures footer sticks at bottom */
+  }
   .matchup-left { display: flex; align-items: center; gap: 10px; flex: 0 0 auto; }
   .matchup-left img { width: 80px; height: 80px; border-radius: 8px; }
 
-  /* Winrate bubble */
   .winrate-bubble {
-    background: #facc15; /* bright yellow */
+    background: #facc15;
     color: #0d1117;
     font-weight: bold;
     padding: 8px 14px;
@@ -49,12 +67,24 @@
     white-space: nowrap;
   }
 
-  .matchup-right { flex: 1; color: #e6edf3; display: flex; flex-direction: column; justify-content: flex-start; margin-top: 0px; }
+  .matchup-right {
+    flex: 1;
+    color: #e6edf3;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    margin-top: 0px;
+  }
   .matchup-right h2 { margin: 0 0 15px 0; font-size: 22px; }
   .matchup-right ul { padding-left: 20px; margin: 0; }
   .matchup-right li { margin-bottom: 6px; }
 
-  footer { text-align: center; padding: 15px 10px; font-size: 14px; color: #8b949e; }
+  footer {
+    text-align: center;
+    padding: 15px 10px;
+    font-size: 14px;
+    color: #8b949e;
+  }
 
   @media (max-width: 600px) { 
     .matchup-container { flex-direction: column; align-items: center; padding: 10px; margin-top: -15px; } 
@@ -64,9 +94,9 @@
 </style>
 </head>
 <body>
+
 <header>Diana Mid Matchup – Naafiri</header>
 
-<!-- Centered Back Button -->
 <div style="text-align: center; margin: 20px 0 30px 0;">
   <a href="matchuphub.html" id="backLink" class="back-link">&larr; Back to Matchup Hub</a>
 </div>
@@ -82,6 +112,7 @@
       <li>Naafiri's dodgs die to one auto attack from a melee champion. This also stacks Diana's passive and Grasp so look to trade after killing one or two off.</li>
       <li>Naafiri only has 4 seconds to cast her second Q. If you're hit by the first Q try to kill one dog immediatly with an auto and then play back to dodge the second one.</li>
       <li>Naafiri can actually dodge Diana R with her E as well as her W. It's important to wait for both to be down or at least the W, if you can land the Q first to follow her E with your E.</li>
+      <li>Diana can interrupt Naafiri's R with her R which can catch her off guard when looking at another target during a teamfight.</li>
     </ul>
   </div>
 </div>
@@ -89,4 +120,6 @@
 <footer>© 2025 LoL Fundamentals · All rights reserved</footer>
 </body>
 </html>
+
+
 
