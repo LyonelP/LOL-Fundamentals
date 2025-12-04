@@ -224,55 +224,55 @@ footer { text-align: center; margin-top: 20px; padding: 15px 0; color: #8b949e; 
 
 <div class="ability-row">
 <div class="first-line"><span>Auto Attack</span></div>
-<input type="number" class="uses-input" id="aa-count" value="1" min="1">
+<input type="number" class="uses-input" id="aa-count" value="0" min="0">
 </div>
 
 <div class="ability-row">
 <div class="first-line"><span>Passive</span></div>
-<input type="number" class="uses-input" id="passive-count" value="1" min="1">
+<input type="number" class="uses-input" id="passive-count" value="0" min="0">
 </div>
 
 <div class="ability-row">
 <div class="first-line"><span>Q Rank</span>
 <select class="rank-select" id="q-rank">
-<option value="1">1</option><option value="2">2</option>
-<option value="3">3</option><option value="4">4</option>
-<option value="5">5</option>
+<option value="0">0</option><option value="1">1</option>
+<option value="2">2</option><option value="3">3</option>
+<option value="4">4</option><option value="5">5</option>
 </select>
 </div>
-<input type="number" class="uses-input" id="q-count" value="1" min="1">
+<input type="number" class="uses-input" id="q-count" value="0" min="0">
 </div>
 
 <div class="ability-row">
 <div class="first-line"><span>W Rank</span>
 <select class="rank-select" id="w-rank">
-<option value="1">1</option><option value="2">2</option>
-<option value="3">3</option><option value="4">4</option>
-<option value="5">5</option>
+<option value="0">0</option><option value="1">1</option>
+<option value="2">2</option><option value="3">3</option>
+<option value="4">4</option><option value="5">5</option>
 </select>
 </div>
-<input type="number" class="uses-input" id="w-count" value="1" min="1">
+<input type="number" class="uses-input" id="w-count" value="0" min="0">
 </div>
 
 <div class="ability-row">
 <div class="first-line"><span>E Rank</span>
 <select class="rank-select" id="e-rank">
-<option value="1">1</option><option value="2">2</option>
-<option value="3">3</option><option value="4">4</option>
-<option value="5">5</option>
+<option value="0">0</option><option value="1">1</option>
+<option value="2">2</option><option value="3">3</option>
+<option value="4">4</option><option value="5">5</option>
 </select>
 </div>
-<input type="number" class="uses-input" id="e-count" value="1" min="1">
+<input type="number" class="uses-input" id="e-count" value="0" min="0">
 </div>
 
 <div class="ability-row">
 <div class="first-line"><span>R Rank</span>
 <select class="rank-select" id="r-rank">
-<option value="1">1</option><option value="2">2</option>
-<option value="3">3</option>
+<option value="0">0</option><option value="1">1</option>
+<option value="2">2</option><option value="3">3</option>
 </select>
 </div>
-<input type="number" class="uses-input" id="r-count" value="1" min="1">
+<input type="number" class="uses-input" id="r-count" value="0" min="0">
 </div>
 
 </div>
@@ -381,10 +381,10 @@ document.getElementById("total-perc-pen").textContent=Math.round(percPen*100)+"%
 function getPassiveBase(level){ return Math.round(20 + (220-20)*(level-1)/17); }
 function getAutoAttackBase(level){ return Math.round(57 + (108-57)*(level-1)/17); }
 
-const Q_BASE=[70,105,140,175,210], Q_RATIO=0.7;
-const W_BASE=[60,96,132,168,204], W_RATIO=0.54;
-const E_BASE=[50,70,90,110,130], E_RATIO=0.6;
-const R_BASE=[200,300,400], R_RATIO=0.6;
+const Q_BASE=[0,70,105,140,175,210], Q_RATIO=0.7;
+const W_BASE=[0,60,96,132,168,204], W_RATIO=0.54;
+const E_BASE=[0,50,70,90,110,130], E_RATIO=0.6;
+const R_BASE=[0,200,300,400], R_RATIO=0.6;
 
 function calcMagicDamage(base, ratio, ap, mr, count, flatPen, percPen){
 let raw=(base+ratio*ap)*count;
@@ -407,12 +407,12 @@ const {totalAP,flatPen,percPen}=getItemStats();
 updateItemStats();
 
 const abilities=[
-{name:"Auto Attack", base:getAutoAttackBase(level), ratio:0, count:parseInt(document.getElementById("aa-count").value)||1, type:"Physical"},
-{name:"Passive", base:getPassiveBase(level), ratio:0.5, count:parseInt(document.getElementById("passive-count").value)||1, type:"Magic"},
-{name:"Q", base:Q_BASE[parseInt(document.getElementById("q-rank").value)-1], ratio:Q_RATIO, count:parseInt(document.getElementById("q-count").value)||1, type:"Magic"},
-{name:"W", base:W_BASE[parseInt(document.getElementById("w-rank").value)-1], ratio:W_RATIO, count:parseInt(document.getElementById("w-count").value)||1, type:"Magic"},
-{name:"E", base:E_BASE[parseInt(document.getElementById("e-rank").value)-1], ratio:E_RATIO, count:parseInt(document.getElementById("e-count").value)||1, type:"Magic"},
-{name:"R", base:R_BASE[parseInt(document.getElementById("r-rank").value)-1], ratio:R_RATIO, count:parseInt(document.getElementById("r-count").value)||1, type:"Magic"}
+{name:"Auto Attack", base:getAutoAttackBase(level), ratio:0, count:parseInt(document.getElementById("aa-count").value)||0, type:"Physical"},
+{name:"Passive", base:getPassiveBase(level), ratio:0.5, count:parseInt(document.getElementById("passive-count").value)||0, type:"Magic"},
+{name:"Q", base:Q_BASE[parseInt(document.getElementById("q-rank").value)], ratio:Q_RATIO, count:parseInt(document.getElementById("q-count").value)||0, type:"Magic"},
+{name:"W", base:W_BASE[parseInt(document.getElementById("w-rank").value)], ratio:W_RATIO, count:parseInt(document.getElementById("w-count").value)||0, type:"Magic"},
+{name:"E", base:E_BASE[parseInt(document.getElementById("e-rank").value)], ratio:E_RATIO, count:parseInt(document.getElementById("e-count").value)||0, type:"Magic"},
+{name:"R", base:R_BASE[parseInt(document.getElementById("r-rank").value)], ratio:R_RATIO, count:parseInt(document.getElementById("r-count").value)||0, type:"Magic"}
 ];
 
 const rows=document.querySelectorAll("#damage-table tr");
@@ -442,6 +442,8 @@ document.getElementById("calculate-btn").addEventListener("click",calculateCombo
 </script>
 </body>
 </html>
+
+
 
 
 
