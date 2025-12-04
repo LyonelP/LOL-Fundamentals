@@ -103,9 +103,7 @@ input[type=number], select {
   justify-content: space-between;
   align-items: center;
   flex: 2;
-}
-.ability-row .first-line span {
-  font-weight: bold;
+  margin-right: 8px; /* mobile spacing fix */
 }
 .ability-row select.rank-select, .ability-row select.uses-select {
   width: 60px;
@@ -135,7 +133,6 @@ th, td {
 th { color: #d8c48a; font-size: 16px; }
 td { color: white; font-size: 15px; }
 #total-damage { font-size: 18px; font-weight: bold; color: #ffd700; }
-#total-damage-type { font-size: 15px; }
 footer { text-align: center; margin-top: 20px; padding: 15px 0; color: #8b949e; font-size: 14px; }
 
 /* Items grid */
@@ -163,6 +160,7 @@ footer { text-align: center; margin-top: 20px; padding: 15px 0; color: #8b949e; 
   }
   .ability-row select.rank-select, .ability-row select.uses-select {
     width: 100%;
+    margin-top: 4px;
   }
 }
 </style>
@@ -234,44 +232,28 @@ footer { text-align: center; margin-top: 20px; padding: 15px 0; color: #8b949e; 
 
 <div class="ability-row">
   <div class="first-line"><span>Q Rank</span>
-    <select class="rank-select" id="q-rank">
-      <option value="0">0</option>
-      <option value="1">1</option><option value="2">2</option>
-      <option value="3">3</option><option value="4">4</option><option value="5">5</option>
-    </select>
+    <select class="rank-select" id="q-rank"></select>
   </div>
   <select class="uses-select" id="q-count"></select>
 </div>
 
 <div class="ability-row">
   <div class="first-line"><span>W Rank</span>
-    <select class="rank-select" id="w-rank">
-      <option value="0">0</option>
-      <option value="1">1</option><option value="2">2</option>
-      <option value="3">3</option><option value="4">4</option><option value="5">5</option>
-    </select>
+    <select class="rank-select" id="w-rank"></select>
   </div>
   <select class="uses-select" id="w-count"></select>
 </div>
 
 <div class="ability-row">
   <div class="first-line"><span>E Rank</span>
-    <select class="rank-select" id="e-rank">
-      <option value="0">0</option>
-      <option value="1">1</option><option value="2">2</option>
-      <option value="3">3</option><option value="4">4</option><option value="5">5</option>
-    </select>
+    <select class="rank-select" id="e-rank"></select>
   </div>
   <select class="uses-select" id="e-count"></select>
 </div>
 
 <div class="ability-row">
   <div class="first-line"><span>R Rank</span>
-    <select class="rank-select" id="r-rank">
-      <option value="0">0</option>
-      <option value="1">1</option><option value="2">2</option>
-      <option value="3">3</option>
-    </select>
+    <select class="rank-select" id="r-rank"></select>
   </div>
   <select class="uses-select" id="r-count"></select>
 </div>
@@ -286,13 +268,13 @@ footer { text-align: center; margin-top: 20px; padding: 15px 0; color: #8b949e; 
 <tr><th>Ability</th><th>Damage</th><th>Damage Type</th></tr>
 </thead>
 <tbody id="damage-table">
-<tr><td>Auto Attack</td><td>—</td><td>Physical</td></tr>
-<tr><td>Passive</td><td>—</td><td>Magic</td></tr>
-<tr><td>Q</td><td>—</td><td>Magic</td></tr>
-<tr><td>W</td><td>—</td><td>Magic</td></tr>
-<tr><td>E</td><td>—</td><td>Magic</td></tr>
-<tr><td>R</td><td>—</td><td>Magic</td></tr>
-<tr><td><strong>Total Damage</strong></td><td id="total-damage">—</td><td id="total-damage-type">—</td></tr>
+<tr><td>Auto Attack</td><td>—</td><td id="aa-type">Physical</td></tr>
+<tr><td>Passive</td><td>—</td><td id="passive-type">Magic</td></tr>
+<tr><td>Q</td><td>—</td><td id="q-type">Magic</td></tr>
+<tr><td>W</td><td>—</td><td id="w-type">Magic</td></tr>
+<tr><td>E</td><td>—</td><td id="e-type">Magic</td></tr>
+<tr><td>R</td><td>—</td><td id="r-type">Magic</td></tr>
+<tr><td><strong>Total Damage</strong></td><td id="total-damage">—</td><td id="total-types">Physical/Magic</td></tr>
 </tbody>
 </table>
 </div>
@@ -314,12 +296,12 @@ const AP_ITEMS = [
 {name:"Shadowflame", ap:100, flatPen:15, percPen:0},
 {name:"Rabadon's Deathcap", ap:130, flatPen:0, percPen:0, multiplier:0.3},
 {name:"Void Staff", ap:90, flatPen:0, percPen:0.4},
-{name:"Horizon Focus", ap:100, flatPen:0, percPen:0},
+{name:"Horizon Focus", ap:125, flatPen:0, percPen:0},
 {name:"Liandry's Anguish", ap:90, flatPen:0, percPen:0},
 {name:"Demonic Embrace", ap:80, flatPen:0, percPen:0},
 {name:"Morellonomicon", ap:70, flatPen:0, percPen:0},
 {name:"Cryptbloom", ap:80, flatPen:0, percPen:0.3},
-{name:"Stormsurge", ap:80, flatPen:15, percPen:0},
+{name:"Stormsurge", ap:90, flatPen:15, percPen:0},
 {name:"Bloodletter's Curse", ap:60, flatPen:10, percPen:0.1},
 {name:"Dark Seal", ap:15, flatPen:0, percPen:0},
 {name:"Mejai's Soulstealer", ap:20, flatPen:0, percPen:0},
@@ -335,12 +317,14 @@ function populateItems() {
     emptyOpt.value="";
     emptyOpt.textContent="";
     select.appendChild(emptyOpt);
+
     AP_ITEMS.forEach((it,idx)=>{
       const o=document.createElement("option");
       o.value=idx;
       o.textContent=it.name;
       select.appendChild(o);
     });
+
     if(i===1) select.value=0;
     select.addEventListener("change",updateItemStats);
   }
@@ -357,23 +341,39 @@ function populateLevels() {
   lvl.value=1;
 }
 
-function populateUses() {
-  const uses = Array.from({length:11},(_,i)=>i);
-  const elements = document.querySelectorAll(".uses-select");
-  elements.forEach(sel=>{
-    sel.innerHTML="";
-    uses.forEach(u=>{
+function populateUsesDropdowns() {
+  const ids = ["aa-count","passive-count","q-count","w-count","e-count","r-count"];
+  ids.forEach(id=>{
+    const sel=document.getElementById(id);
+    for(let i=0;i<=10;i++){
       const o=document.createElement("option");
-      o.value=u;
-      o.textContent=u;
+      o.value=i; o.textContent=i;
       sel.appendChild(o);
-    });
-    sel.value = 0;
+    }
+    sel.value=0;
   });
 }
 
+function populateRanksDropdowns() {
+  const rankMap = {
+    "q-rank":5, "w-rank":5, "e-rank":5, "r-rank":3
+  };
+  for(const id in rankMap){
+    const max=rankMap[id];
+    const sel=document.getElementById(id);
+    sel.innerHTML="";
+    for(let i=0;i<=max;i++){
+      const o=document.createElement("option");
+      o.value=i; o.textContent=i;
+      sel.appendChild(o);
+    }
+    sel.value=0;
+  }
+}
+
 function getItemStats(){
-  let totalAP=0, flatPen=0, percPen=0, multiplier=0;
+  let totalAP=0, flatPen=0, percPen=0;
+  let multiplier=0;
   for(let i=1;i<=6;i++){
     const idx=document.getElementById(`item-${i}`).value;
     if(idx==="") continue;
@@ -381,12 +381,11 @@ function getItemStats(){
     totalAP+=item.ap;
     flatPen+=item.flatPen;
     percPen+=item.percPen;
-    if(item.multiplier) multiplier += item.multiplier;
+    if(item.multiplier) multiplier+=item.multiplier;
   }
   totalAP = Math.round(totalAP*(1+multiplier));
   return {totalAP, flatPen, percPen};
 }
-
 function updateItemStats(){
   const {totalAP, flatPen, percPen}=getItemStats();
   document.getElementById("total-ap").textContent=totalAP;
@@ -434,39 +433,36 @@ function calculateCombo(){
   ];
 
   const rows=document.querySelectorAll("#damage-table tr");
-  let totalMagic = 0, totalPhysical = 0;
+  let totalPhysical=0;
+  let totalMagic=0;
 
   abilities.forEach((ab,i)=>{
     let dmg;
     if(ab.type==="Magic"){
       dmg = calcMagicDamage(ab.base, ab.ratio, totalAP, mr, ab.count, flatPen, percPen);
-      totalMagic += dmg;
+      totalMagic+=dmg;
     } else {
       dmg = calcPhysicalDamage(ab.base, ab.count, armor);
-      totalPhysical += dmg;
+      totalPhysical+=dmg;
     }
     rows[i].cells[1].textContent=dmg;
   });
 
-  const total = totalMagic + totalPhysical;
-  document.getElementById("total-damage").textContent = total;
-  document.getElementById("total-damage-type").textContent = `Magic: ${totalMagic} | Physical: ${totalPhysical}`;
+  document.getElementById("total-damage").textContent = totalPhysical + totalMagic;
+  document.getElementById("total-types").textContent = `Physical: ${totalPhysical} / Magic: ${totalMagic}`;
 }
 
 document.addEventListener("DOMContentLoaded",()=>{
   populateItems();
   populateLevels();
-  populateUses();
+  populateUsesDropdowns();
+  populateRanksDropdowns();
   updateItemStats();
   document.getElementById("calculate-btn").addEventListener("click",calculateCombo);
 });
 </script>
 </body>
 </html>
-
-
-
-
 
 
 
