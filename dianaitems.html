@@ -87,7 +87,11 @@ input[type=number], select {
   flex: 1 1 30%;
   min-width: 120px;
 }
-.ability-card { margin-bottom: 20px; }
+
+/* Ability section */
+.ability-card {
+  margin-bottom: 20px;
+}
 .ability-row {
   display: flex;
   flex-direction: column;
@@ -97,11 +101,17 @@ input[type=number], select {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  gap: 8px;
 }
-.ability-row .first-line span { font-weight: bold; }
-.ability-row select.rank-select { width: 70px; }
-.ability-row input.uses-input { width: 60px; margin-top: 6px; }
+.ability-row .first-line span {
+  font-weight: bold;
+}
+.ability-row select.rank-select {
+  width: 60px;
+}
+.ability-row input.uses-input {
+  width: 100%;
+  margin-top: 6px;
+}
 button#calculate-btn {
   padding: 12px 26px;
   font-size: 16px;
@@ -113,20 +123,52 @@ button#calculate-btn {
   cursor: pointer;
   margin-bottom: 20px;
 }
-button#calculate-btn:hover { background: #1b5fc7; }
-table { width: 100%; border-collapse: collapse; }
-th, td { padding: 12px; border-bottom: 1px solid rgba(255,255,255,0.05); }
+button#calculate-btn:hover {
+  background: #1b5fc7;
+}
+table {
+  width: 100%;
+  border-collapse: collapse;
+}
+th, td {
+  padding: 12px;
+  border-bottom: 1px solid rgba(255,255,255,0.05);
+}
 th { color: #d8c48a; font-size: 16px; }
 td { color: white; font-size: 15px; }
-#total-damage { font-size: 22px; font-weight: bold; color: gold; }
+#total-damage { 
+  font-size: 22px;      /* bigger size for emphasis */
+  font-weight: bold;
+  color: gold;          /* gold color */
+}
 footer { text-align: center; margin-top: 20px; padding: 15px 0; color: #8b949e; font-size: 14px; }
-.items-grid { display: flex; gap: 10px; flex-wrap: wrap; }
-.items-grid select { flex: 1 1 30%; min-width: 100px; }
+
+/* Items grid */
+.items-grid {
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+.items-grid select {
+  flex: 1 1 30%;
+  min-width: 100px;
+}
+
+/* Item stats in white */
 #item-stats p span { color: white; }
+
+/* Responsive */
 @media(max-width:600px){
-  .top-row .top-item { flex: 1 1 100%; }
-  .ability-row .first-line { flex-direction: row; justify-content: space-between; }
-  .ability-row input.uses-input { width: 100%; }
+  .top-row .top-item {
+    flex: 1 1 100%;
+  }
+  .ability-row .first-line {
+    flex-direction: row;
+    justify-content: space-between;
+  }
+  .ability-row input.uses-input {
+    width: 100%;
+  }
 }
 </style>
 </head>
@@ -137,6 +179,7 @@ footer { text-align: center; margin-top: 20px; padding: 15px 0; color: #8b949e; 
 
 <div class="container">
 
+<!-- Top Inputs (Enemy stats) -->
 <div class="card">
 <div class="top-row">
   <div class="top-item">
@@ -154,6 +197,7 @@ footer { text-align: center; margin-top: 20px; padding: 15px 0; color: #8b949e; 
 </div>
 </div>
 
+<!-- Items -->
 <div class="card">
 <label>AP Items (6 slots)</label>
 <div class="items-grid">
@@ -173,50 +217,68 @@ footer { text-align: center; margin-top: 20px; padding: 15px 0; color: #8b949e; 
 <p>% Pen: <span id="total-perc-pen">0%</span></p>
 </div>
 
+<!-- Diana Level -->
 <div class="card">
 <label>Diana Level</label>
 <select id="diana-level"></select>
 </div>
 
+<!-- Ability Section -->
 <div class="card ability-card">
 <label>Ability Usage</label>
 
 <div class="ability-row">
   <div class="first-line"><span>Auto Attack</span></div>
-  <input type="number" class="uses-input" id="aa-count" value="0">
+  <input type="number" class="uses-input" id="aa-count" value="0" min="0">
 </div>
 
 <div class="ability-row">
   <div class="first-line"><span>Passive</span></div>
-  <input type="number" class="uses-input" id="passive-count" value="0">
+  <input type="number" class="uses-input" id="passive-count" value="0" min="0">
 </div>
 
 <div class="ability-row">
   <div class="first-line"><span>Q Rank</span>
-    <select class="rank-select" id="q-rank"></select>
-    <input type="number" class="uses-input" id="q-count" value="0">
+    <select class="rank-select" id="q-rank">
+      <option value="0">0</option>
+      <option value="1">1</option><option value="2">2</option>
+      <option value="3">3</option><option value="4">4</option><option value="5">5</option>
+    </select>
   </div>
+  <input type="number" class="uses-input" id="q-count" value="0" min="0">
 </div>
 
 <div class="ability-row">
   <div class="first-line"><span>W Rank</span>
-    <select class="rank-select" id="w-rank"></select>
-    <input type="number" class="uses-input" id="w-count" value="0">
+    <select class="rank-select" id="w-rank">
+      <option value="0">0</option>
+      <option value="1">1</option><option value="2">2</option>
+      <option value="3">3</option><option value="4">4</option><option value="5">5</option>
+    </select>
   </div>
+  <input type="number" class="uses-input" id="w-count" value="0" min="0">
 </div>
 
 <div class="ability-row">
   <div class="first-line"><span>E Rank</span>
-    <select class="rank-select" id="e-rank"></select>
-    <input type="number" class="uses-input" id="e-count" value="0">
+    <select class="rank-select" id="e-rank">
+      <option value="0">0</option>
+      <option value="1">1</option><option value="2">2</option>
+      <option value="3">3</option><option value="4">4</option><option value="5">5</option>
+    </select>
   </div>
+  <input type="number" class="uses-input" id="e-count" value="0" min="0">
 </div>
 
 <div class="ability-row">
   <div class="first-line"><span>R Rank</span>
-    <select class="rank-select" id="r-rank"></select>
-    <input type="number" class="uses-input" id="r-count" value="0">
+    <select class="rank-select" id="r-rank">
+      <option value="0">0</option>
+      <option value="1">1</option><option value="2">2</option>
+      <option value="3">3</option>
+    </select>
   </div>
+  <input type="number" class="uses-input" id="r-count" value="0" min="0">
 </div>
 
 </div>
@@ -255,19 +317,19 @@ const AP_ITEMS = [
 {name:"Hextech Rocketbelt", ap:90, flatPen:0, percPen:0},
 {name:"Luden's Tempest", ap:120, flatPen:0, percPen:0},
 {name:"Shadowflame", ap:100, flatPen:15, percPen:0},
-{name:"Rabadon's Deathcap", ap:130, flatPen:0, percPen:0, isMultiplier:true},
+{name:"Rabadon's Deathcap", ap:130, flatPen:0, percPen:0},
 {name:"Void Staff", ap:90, flatPen:0, percPen:0.4},
-{name:"Horizon Focus", ap:125, flatPen:0, percPen:0},
+{name:"Horizon Focus", ap:100, flatPen:0, percPen:0},
 {name:"Liandry's Anguish", ap:90, flatPen:0, percPen:0},
 {name:"Demonic Embrace", ap:80, flatPen:0, percPen:0},
 {name:"Morellonomicon", ap:70, flatPen:0, percPen:0},
 {name:"Cryptbloom", ap:80, flatPen:0, percPen:0.3},
-{name:"Stormsurge", ap:90, flatPen:15, percPen:0},
+{name:"Stormsurge", ap:80, flatPen:15, percPen:0},
 {name:"Bloodletter's Curse", ap:60, flatPen:10, percPen:0.1},
 {name:"Dark Seal", ap:15, flatPen:0, percPen:0},
 {name:"Mejai's Soulstealer", ap:20, flatPen:0, percPen:0},
 {name:"Nashor's Tooth", ap:80, flatPen:0, percPen:0},
-{name:"Lich Bane", ap:100, flatPen:0, percPen:0}
+{name:"Lich Bane", ap:75, flatPen:0, percPen:0}
 ];
 
 function populateItems() {
@@ -302,7 +364,6 @@ function populateLevels() {
 
 function getItemStats(){
   let totalAP=0, flatPen=0, percPen=0;
-  let mult=1;
   for(let i=1;i<=6;i++){
     const idx=document.getElementById(`item-${i}`).value;
     if(idx==="") continue;
@@ -310,9 +371,7 @@ function getItemStats(){
     totalAP+=item.ap;
     flatPen+=item.flatPen;
     percPen+=item.percPen;
-    if(item.isMultiplier) mult *=1.3;
   }
-  totalAP=Math.round(totalAP*mult);
   return {totalAP, flatPen, percPen};
 }
 function updateItemStats(){
@@ -387,18 +446,13 @@ document.addEventListener("DOMContentLoaded",()=>{
   populateItems();
   populateLevels();
   updateItemStats();
-
-  const useInputs = document.querySelectorAll('.uses-input');
-  useInputs.forEach(input => { input.setAttribute('min','0'); input.setAttribute('max','10'); });
-
-  const rankSelects = document.querySelectorAll('.rank-select');
-  rankSelects.forEach(select => { select.setAttribute('size','1'); });
-
   document.getElementById("calculate-btn").addEventListener("click",calculateCombo);
 });
 </script>
 </body>
 </html>
+
+
 
 
 
