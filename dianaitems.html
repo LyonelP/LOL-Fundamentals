@@ -87,27 +87,21 @@ input[type=number], select {
   flex: 1 1 30%;
   min-width: 120px;
 }
-
-/* Ability section */
-.ability-card {
-  margin-bottom: 20px;
-}
+.ability-card { margin-bottom: 20px; }
 .ability-row {
   display: flex;
-  align-items: center;
+  flex-direction: column;
   margin-bottom: 12px;
-  gap: 10px;
 }
 .ability-row .first-line {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  flex: 2;
-  margin-right: 8px; /* mobile spacing fix */
+  gap: 8px;
 }
-.ability-row select.rank-select, .ability-row select.uses-select {
-  width: 60px;
-}
+.ability-row .first-line span { font-weight: bold; }
+.ability-row select.rank-select { width: 70px; }
+.ability-row input.uses-input { width: 60px; margin-top: 6px; }
 button#calculate-btn {
   padding: 12px 26px;
   font-size: 16px;
@@ -119,49 +113,20 @@ button#calculate-btn {
   cursor: pointer;
   margin-bottom: 20px;
 }
-button#calculate-btn:hover {
-  background: #1b5fc7;
-}
-table {
-  width: 100%;
-  border-collapse: collapse;
-}
-th, td {
-  padding: 12px;
-  border-bottom: 1px solid rgba(255,255,255,0.05);
-}
+button#calculate-btn:hover { background: #1b5fc7; }
+table { width: 100%; border-collapse: collapse; }
+th, td { padding: 12px; border-bottom: 1px solid rgba(255,255,255,0.05); }
 th { color: #d8c48a; font-size: 16px; }
 td { color: white; font-size: 15px; }
-#total-damage { font-size: 18px; font-weight: bold; color: #ffd700; }
+#total-damage { font-size: 22px; font-weight: bold; color: gold; }
 footer { text-align: center; margin-top: 20px; padding: 15px 0; color: #8b949e; font-size: 14px; }
-
-/* Items grid */
-.items-grid {
-  display: flex;
-  gap: 10px;
-  flex-wrap: wrap;
-}
-.items-grid select {
-  flex: 1 1 30%;
-  min-width: 100px;
-}
-
-/* Item stats in white */
+.items-grid { display: flex; gap: 10px; flex-wrap: wrap; }
+.items-grid select { flex: 1 1 30%; min-width: 100px; }
 #item-stats p span { color: white; }
-
-/* Responsive */
 @media(max-width:600px){
-  .top-row .top-item {
-    flex: 1 1 100%;
-  }
-  .ability-row {
-    flex-direction: column;
-    align-items: flex-start;
-  }
-  .ability-row select.rank-select, .ability-row select.uses-select {
-    width: 100%;
-    margin-top: 4px;
-  }
+  .top-row .top-item { flex: 1 1 100%; }
+  .ability-row .first-line { flex-direction: row; justify-content: space-between; }
+  .ability-row input.uses-input { width: 100%; }
 }
 </style>
 </head>
@@ -172,7 +137,6 @@ footer { text-align: center; margin-top: 20px; padding: 15px 0; color: #8b949e; 
 
 <div class="container">
 
-<!-- Top Inputs (Enemy stats) -->
 <div class="card">
 <div class="top-row">
   <div class="top-item">
@@ -190,7 +154,6 @@ footer { text-align: center; margin-top: 20px; padding: 15px 0; color: #8b949e; 
 </div>
 </div>
 
-<!-- Items -->
 <div class="card">
 <label>AP Items (6 slots)</label>
 <div class="items-grid">
@@ -210,52 +173,50 @@ footer { text-align: center; margin-top: 20px; padding: 15px 0; color: #8b949e; 
 <p>% Pen: <span id="total-perc-pen">0%</span></p>
 </div>
 
-<!-- Diana Level -->
 <div class="card">
 <label>Diana Level</label>
 <select id="diana-level"></select>
 </div>
 
-<!-- Ability Section -->
 <div class="card ability-card">
 <label>Ability Usage</label>
 
 <div class="ability-row">
   <div class="first-line"><span>Auto Attack</span></div>
-  <select class="uses-select" id="aa-count"></select>
+  <input type="number" class="uses-input" id="aa-count" value="0">
 </div>
 
 <div class="ability-row">
   <div class="first-line"><span>Passive</span></div>
-  <select class="uses-select" id="passive-count"></select>
+  <input type="number" class="uses-input" id="passive-count" value="0">
 </div>
 
 <div class="ability-row">
   <div class="first-line"><span>Q Rank</span>
     <select class="rank-select" id="q-rank"></select>
+    <input type="number" class="uses-input" id="q-count" value="0">
   </div>
-  <select class="uses-select" id="q-count"></select>
 </div>
 
 <div class="ability-row">
   <div class="first-line"><span>W Rank</span>
     <select class="rank-select" id="w-rank"></select>
+    <input type="number" class="uses-input" id="w-count" value="0">
   </div>
-  <select class="uses-select" id="w-count"></select>
 </div>
 
 <div class="ability-row">
   <div class="first-line"><span>E Rank</span>
     <select class="rank-select" id="e-rank"></select>
+    <input type="number" class="uses-input" id="e-count" value="0">
   </div>
-  <select class="uses-select" id="e-count"></select>
 </div>
 
 <div class="ability-row">
   <div class="first-line"><span>R Rank</span>
     <select class="rank-select" id="r-rank"></select>
+    <input type="number" class="uses-input" id="r-count" value="0">
   </div>
-  <select class="uses-select" id="r-count"></select>
 </div>
 
 </div>
@@ -268,13 +229,13 @@ footer { text-align: center; margin-top: 20px; padding: 15px 0; color: #8b949e; 
 <tr><th>Ability</th><th>Damage</th><th>Damage Type</th></tr>
 </thead>
 <tbody id="damage-table">
-<tr><td>Auto Attack</td><td>—</td><td id="aa-type">Physical</td></tr>
-<tr><td>Passive</td><td>—</td><td id="passive-type">Magic</td></tr>
-<tr><td>Q</td><td>—</td><td id="q-type">Magic</td></tr>
-<tr><td>W</td><td>—</td><td id="w-type">Magic</td></tr>
-<tr><td>E</td><td>—</td><td id="e-type">Magic</td></tr>
-<tr><td>R</td><td>—</td><td id="r-type">Magic</td></tr>
-<tr><td><strong>Total Damage</strong></td><td id="total-damage">—</td><td id="total-types">Physical/Magic</td></tr>
+<tr><td>Auto Attack</td><td>—</td><td>Physical</td></tr>
+<tr><td>Passive</td><td>—</td><td>Magic</td></tr>
+<tr><td>Q</td><td>—</td><td>Magic</td></tr>
+<tr><td>W</td><td>—</td><td>Magic</td></tr>
+<tr><td>E</td><td>—</td><td>Magic</td></tr>
+<tr><td>R</td><td>—</td><td>Magic</td></tr>
+<tr><td><strong>Total Damage</strong></td><td id="total-damage">—</td><td id="total-damage-type">—</td></tr>
 </tbody>
 </table>
 </div>
@@ -294,7 +255,7 @@ const AP_ITEMS = [
 {name:"Hextech Rocketbelt", ap:90, flatPen:0, percPen:0},
 {name:"Luden's Tempest", ap:120, flatPen:0, percPen:0},
 {name:"Shadowflame", ap:100, flatPen:15, percPen:0},
-{name:"Rabadon's Deathcap", ap:130, flatPen:0, percPen:0, multiplier:0.3},
+{name:"Rabadon's Deathcap", ap:130, flatPen:0, percPen:0, isMultiplier:true},
 {name:"Void Staff", ap:90, flatPen:0, percPen:0.4},
 {name:"Horizon Focus", ap:125, flatPen:0, percPen:0},
 {name:"Liandry's Anguish", ap:90, flatPen:0, percPen:0},
@@ -317,14 +278,12 @@ function populateItems() {
     emptyOpt.value="";
     emptyOpt.textContent="";
     select.appendChild(emptyOpt);
-
     AP_ITEMS.forEach((it,idx)=>{
       const o=document.createElement("option");
       o.value=idx;
       o.textContent=it.name;
       select.appendChild(o);
     });
-
     if(i===1) select.value=0;
     select.addEventListener("change",updateItemStats);
   }
@@ -341,39 +300,9 @@ function populateLevels() {
   lvl.value=1;
 }
 
-function populateUsesDropdowns() {
-  const ids = ["aa-count","passive-count","q-count","w-count","e-count","r-count"];
-  ids.forEach(id=>{
-    const sel=document.getElementById(id);
-    for(let i=0;i<=10;i++){
-      const o=document.createElement("option");
-      o.value=i; o.textContent=i;
-      sel.appendChild(o);
-    }
-    sel.value=0;
-  });
-}
-
-function populateRanksDropdowns() {
-  const rankMap = {
-    "q-rank":5, "w-rank":5, "e-rank":5, "r-rank":3
-  };
-  for(const id in rankMap){
-    const max=rankMap[id];
-    const sel=document.getElementById(id);
-    sel.innerHTML="";
-    for(let i=0;i<=max;i++){
-      const o=document.createElement("option");
-      o.value=i; o.textContent=i;
-      sel.appendChild(o);
-    }
-    sel.value=0;
-  }
-}
-
 function getItemStats(){
   let totalAP=0, flatPen=0, percPen=0;
-  let multiplier=0;
+  let mult=1;
   for(let i=1;i<=6;i++){
     const idx=document.getElementById(`item-${i}`).value;
     if(idx==="") continue;
@@ -381,9 +310,9 @@ function getItemStats(){
     totalAP+=item.ap;
     flatPen+=item.flatPen;
     percPen+=item.percPen;
-    if(item.multiplier) multiplier+=item.multiplier;
+    if(item.isMultiplier) mult *=1.3;
   }
-  totalAP = Math.round(totalAP*(1+multiplier));
+  totalAP=Math.round(totalAP*mult);
   return {totalAP, flatPen, percPen};
 }
 function updateItemStats(){
@@ -433,37 +362,43 @@ function calculateCombo(){
   ];
 
   const rows=document.querySelectorAll("#damage-table tr");
-  let totalPhysical=0;
+  let total=0;
   let totalMagic=0;
+  let totalPhysical=0;
 
   abilities.forEach((ab,i)=>{
     let dmg;
     if(ab.type==="Magic"){
       dmg = calcMagicDamage(ab.base, ab.ratio, totalAP, mr, ab.count, flatPen, percPen);
-      totalMagic+=dmg;
+      totalMagic += dmg;
     } else {
       dmg = calcPhysicalDamage(ab.base, ab.count, armor);
-      totalPhysical+=dmg;
+      totalPhysical += dmg;
     }
     rows[i].cells[1].textContent=dmg;
   });
 
-  document.getElementById("total-damage").textContent = totalPhysical + totalMagic;
-  document.getElementById("total-types").textContent = `Physical: ${totalPhysical} / Magic: ${totalMagic}`;
+  total = totalMagic + totalPhysical;
+  document.getElementById("total-damage").textContent = total;
+  document.getElementById("total-damage-type").textContent = `Magic: ${totalMagic} | Physical: ${totalPhysical}`;
 }
 
 document.addEventListener("DOMContentLoaded",()=>{
   populateItems();
   populateLevels();
-  populateUsesDropdowns();
-  populateRanksDropdowns();
   updateItemStats();
+
+  const useInputs = document.querySelectorAll('.uses-input');
+  useInputs.forEach(input => { input.setAttribute('min','0'); input.setAttribute('max','10'); });
+
+  const rankSelects = document.querySelectorAll('.rank-select');
+  rankSelects.forEach(select => { select.setAttribute('size','1'); });
+
   document.getElementById("calculate-btn").addEventListener("click",calculateCombo);
 });
 </script>
 </body>
 </html>
-
 
 
 
