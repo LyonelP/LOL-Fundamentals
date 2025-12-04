@@ -109,7 +109,7 @@ input[type=number], select {
   width: 60px;
 }
 .ability-row select.uses-select {
-  width: 60px;
+  width: 100%;
   margin-top: 6px;
 }
 button#calculate-btn {
@@ -141,7 +141,7 @@ td { color: white; font-size: 15px; text-align: center; }
 #total-damage { 
   font-size: 18px; 
   font-weight: bold; 
-  color: #d8c48a; /* MATCH HEADER GOLD */ 
+  color: #d8c48a;
 }
 footer { text-align: center; margin-top: 20px; padding: 15px 0; color: #8b949e; font-size: 14px; }
 
@@ -161,17 +161,9 @@ footer { text-align: center; margin-top: 20px; padding: 15px 0; color: #8b949e; 
 
 /* Responsive */
 @media(max-width:600px){
-  .top-row .top-item {
-    flex: 1 1 100%;
-  }
-  .ability-row .first-line {
-    flex-direction: row;
-    justify-content: space-between;
-  }
-  .ability-row select.uses-select {
-    width: 100%;
-    margin-top: 6px;
-  }
+  .top-row .top-item { flex: 1 1 100%; }
+  .ability-row .first-line { flex-direction: row; justify-content: space-between; }
+  .ability-row select.uses-select { width: 100%; margin-top: 6px; }
 }
 </style>
 </head>
@@ -334,28 +326,31 @@ function populateItems() {
   }
 }
 
-function populateRanks(){
-  const ranks = Array.from({length:11},(_,i)=>i);
-  ["q-rank","w-rank","e-rank","r-rank"].forEach(id=>{
+// Populate ability ranks and uses
+function populateRanksAndUses(){
+  const abilityRanks = { "q-rank":5, "w-rank":5, "e-rank":5, "r-rank":3 };
+  Object.keys(abilityRanks).forEach(id=>{
+    const max = abilityRanks[id];
     const sel = document.getElementById(id);
-    ranks.forEach(r=>{
+    sel.innerHTML="";
+    for(let i=0;i<=max;i++){
       const o = document.createElement("option");
-      o.value=r;
-      o.textContent=r;
+      o.value=i;
+      o.textContent=i;
       sel.appendChild(o);
-    });
+    }
     sel.value=0;
   });
 
-  // Uses dropdown 0-10
+  // Uses 0-10
   document.querySelectorAll(".uses-select").forEach(sel=>{
     sel.innerHTML="";
-    ranks.forEach(r=>{
+    for(let i=0;i<=10;i++){
       const o = document.createElement("option");
-      o.value=r;
-      o.textContent=r;
+      o.value=i;
+      o.textContent=i;
       sel.appendChild(o);
-    });
+    }
     sel.value=0;
   });
 }
@@ -408,10 +403,10 @@ function updateItemStats(){
 function getPassiveBase(level){ return Math.round(20 + (220-20)*(level-1)/17); }
 function getAutoAttackBase(level){ return Math.round(57 + (108-57)*(level-1)/17); }
 
-const Q_BASE=[0,70,105,140,175,210,210,210,210,210,210], Q_RATIO=0.7;
-const W_BASE=[0,60,96,132,168,204,204,204,204,204,204], W_RATIO=0.54;
-const E_BASE=[0,50,70,90,110,130,130,130,130,130,130], E_RATIO=0.6;
-const R_BASE=[0,200,300,400,400,400,400,400,400,400,400], R_RATIO=0.6;
+const Q_BASE=[0,70,105,140,175,210], Q_RATIO=0.7;
+const W_BASE=[0,60,96,132,168,204], W_RATIO=0.54;
+const E_BASE=[0,50,70,90,110,130], E_RATIO=0.6;
+const R_BASE=[0,200,300,400], R_RATIO=0.6;
 
 function calcMagicDamage(base, ratio, ap, mr, count, flatPen, percPen){
   if(base===0 || count===0) return 0;
@@ -466,18 +461,17 @@ function calculateCombo(){
   document.getElementById("total-damage-type").textContent = `Magic: ${totalMagic} | Physical: ${totalPhysical}`;
 }
 
+// Init
 document.addEventListener("DOMContentLoaded",()=>{
   populateItems();
   populateLevels();
-  populateRanks();
+  populateRanksAndUses();
   updateItemStats();
   document.getElementById("calculate-btn").addEventListener("click",calculateCombo);
 });
 </script>
 </body>
 </html>
-
-
 
 
 
