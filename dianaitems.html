@@ -223,63 +223,63 @@ footer { text-align: center; margin-top: 20px; padding: 15px 0; color: #8b949e; 
 <label>Ability Usage</label>
 
 <div class="ability-row">
-<div class="first-line"><span>Auto Attack</span></div>
-<input type="number" class="uses-input" id="aa-count" value="0" min="0">
+  <div class="first-line"><span>Auto Attack</span></div>
+  <input type="number" class="uses-input" id="aa-count" value="0" min="0">
 </div>
 
 <div class="ability-row">
-<div class="first-line"><span>Passive</span></div>
-<input type="number" class="uses-input" id="passive-count" value="0" min="0">
+  <div class="first-line"><span>Passive</span></div>
+  <input type="number" class="uses-input" id="passive-count" value="0" min="0">
 </div>
 
 <div class="ability-row">
-<div class="first-line"><span>Q Rank</span>
-<select class="rank-select" id="q-rank">
-<option value="0">0</option><option value="1">1</option>
-<option value="2">2</option><option value="3">3</option>
-<option value="4">4</option><option value="5">5</option>
-</select>
-</div>
-<input type="number" class="uses-input" id="q-count" value="0" min="0">
-</div>
-
-<div class="ability-row">
-<div class="first-line"><span>W Rank</span>
-<select class="rank-select" id="w-rank">
-<option value="0">0</option><option value="1">1</option>
-<option value="2">2</option><option value="3">3</option>
-<option value="4">4</option><option value="5">5</option>
-</select>
-</div>
-<input type="number" class="uses-input" id="w-count" value="0" min="0">
+  <div class="first-line"><span>Q Rank</span>
+    <select class="rank-select" id="q-rank">
+      <option value="0">0</option>
+      <option value="1">1</option><option value="2">2</option>
+      <option value="3">3</option><option value="4">4</option><option value="5">5</option>
+    </select>
+  </div>
+  <input type="number" class="uses-input" id="q-count" value="0" min="0">
 </div>
 
 <div class="ability-row">
-<div class="first-line"><span>E Rank</span>
-<select class="rank-select" id="e-rank">
-<option value="0">0</option><option value="1">1</option>
-<option value="2">2</option><option value="3">3</option>
-<option value="4">4</option><option value="5">5</option>
-</select>
-</div>
-<input type="number" class="uses-input" id="e-count" value="0" min="0">
+  <div class="first-line"><span>W Rank</span>
+    <select class="rank-select" id="w-rank">
+      <option value="0">0</option>
+      <option value="1">1</option><option value="2">2</option>
+      <option value="3">3</option><option value="4">4</option><option value="5">5</option>
+    </select>
+  </div>
+  <input type="number" class="uses-input" id="w-count" value="0" min="0">
 </div>
 
 <div class="ability-row">
-<div class="first-line"><span>R Rank</span>
-<select class="rank-select" id="r-rank">
-<option value="0">0</option><option value="1">1</option>
-<option value="2">2</option><option value="3">3</option>
-</select>
+  <div class="first-line"><span>E Rank</span>
+    <select class="rank-select" id="e-rank">
+      <option value="0">0</option>
+      <option value="1">1</option><option value="2">2</option>
+      <option value="3">3</option><option value="4">4</option><option value="5">5</option>
+    </select>
+  </div>
+  <input type="number" class="uses-input" id="e-count" value="0" min="0">
 </div>
-<input type="number" class="uses-input" id="r-count" value="0" min="0">
+
+<div class="ability-row">
+  <div class="first-line"><span>R Rank</span>
+    <select class="rank-select" id="r-rank">
+      <option value="0">0</option>
+      <option value="1">1</option><option value="2">2</option>
+      <option value="3">3</option>
+    </select>
+  </div>
+  <input type="number" class="uses-input" id="r-count" value="0" min="0">
 </div>
 
 </div>
 
 <button id="calculate-btn">Calculate Combo Damage</button>
 
-<!-- Damage Table -->
 <div class="card">
 <table>
 <thead>
@@ -292,7 +292,7 @@ footer { text-align: center; margin-top: 20px; padding: 15px 0; color: #8b949e; 
 <tr><td>W</td><td>—</td><td>Magic</td></tr>
 <tr><td>E</td><td>—</td><td>Magic</td></tr>
 <tr><td>R</td><td>—</td><td>Magic</td></tr>
-<tr><td><strong>Total Damage</strong></td><td id="total-damage" style="color:#FFD700">—</td><td>—</td></tr>
+<tr><td><strong>Total Damage</strong></td><td id="total-damage">—</td><td>Gold</td></tr>
 </tbody>
 </table>
 </div>
@@ -328,54 +328,54 @@ const AP_ITEMS = [
 ];
 
 function populateItems() {
-for(let i=1;i<=6;i++){
-const select=document.getElementById(`item-${i}`);
-select.innerHTML="";
-const emptyOpt=document.createElement("option");
-emptyOpt.value="";
-emptyOpt.textContent="";
-select.appendChild(emptyOpt);
+  for(let i=1;i<=6;i++){
+    const select=document.getElementById(`item-${i}`);
+    select.innerHTML="";
+    const emptyOpt=document.createElement("option");
+    emptyOpt.value="";
+    emptyOpt.textContent="";
+    select.appendChild(emptyOpt);
 
-AP_ITEMS.forEach((it,idx)=>{
-const o=document.createElement("option");
-o.value=idx;
-o.textContent=it.name;
-select.appendChild(o);
-});
+    AP_ITEMS.forEach((it,idx)=>{
+      const o=document.createElement("option");
+      o.value=idx;
+      o.textContent=it.name;
+      select.appendChild(o);
+    });
 
-if(i===1) select.value=0;
-select.addEventListener("change",updateItemStats);
-}
+    if(i===1) select.value=0;
+    select.addEventListener("change",updateItemStats);
+  }
 }
 
 function populateLevels() {
-const lvl=document.getElementById("diana-level");
-for(let i=1;i<=18;i++){
-const o=document.createElement("option");
-o.value=i;
-o.textContent=i;
-lvl.appendChild(o);
-}
-lvl.value=1;
+  const lvl=document.getElementById("diana-level");
+  for(let i=1;i<=18;i++){
+    const o=document.createElement("option");
+    o.value=i;
+    o.textContent=i;
+    lvl.appendChild(o);
+  }
+  lvl.value=1;
 }
 
 function getItemStats(){
-let totalAP=0, flatPen=0, percPen=0;
-for(let i=1;i<=6;i++){
-const idx=document.getElementById(`item-${i}`).value;
-if(idx==="") continue;
-const item=AP_ITEMS[parseInt(idx)];
-totalAP+=item.ap;
-flatPen+=item.flatPen;
-percPen+=item.percPen;
-}
-return {totalAP, flatPen, percPen};
+  let totalAP=0, flatPen=0, percPen=0;
+  for(let i=1;i<=6;i++){
+    const idx=document.getElementById(`item-${i}`).value;
+    if(idx==="") continue;
+    const item=AP_ITEMS[parseInt(idx)];
+    totalAP+=item.ap;
+    flatPen+=item.flatPen;
+    percPen+=item.percPen;
+  }
+  return {totalAP, flatPen, percPen};
 }
 function updateItemStats(){
-const {totalAP, flatPen, percPen}=getItemStats();
-document.getElementById("total-ap").textContent=totalAP;
-document.getElementById("total-flat-pen").textContent=flatPen;
-document.getElementById("total-perc-pen").textContent=Math.round(percPen*100)+"%";
+  const {totalAP, flatPen, percPen}=getItemStats();
+  document.getElementById("total-ap").textContent=totalAP;
+  document.getElementById("total-flat-pen").textContent=flatPen;
+  document.getElementById("total-perc-pen").textContent=Math.round(percPen*100)+"%";
 }
 
 function getPassiveBase(level){ return Math.round(20 + (220-20)*(level-1)/17); }
@@ -387,61 +387,63 @@ const E_BASE=[0,50,70,90,110,130], E_RATIO=0.6;
 const R_BASE=[0,200,300,400], R_RATIO=0.6;
 
 function calcMagicDamage(base, ratio, ap, mr, count, flatPen, percPen){
-let raw=(base+ratio*ap)*count;
-let effectiveMR=mr-flatPen;
-if(effectiveMR<0) effectiveMR=0;
-effectiveMR*=1-percPen;
-return Math.round(raw*100/(100+effectiveMR));
+  if(base===0 || count===0) return 0;
+  let raw=(base+ratio*ap)*count;
+  let effectiveMR=mr-flatPen;
+  if(effectiveMR<0) effectiveMR=0;
+  effectiveMR*=1-percPen;
+  return Math.round(raw*100/(100+effectiveMR));
 }
 
 function calcPhysicalDamage(base, count, armor){
-return Math.round(base * count * 100 / (100 + armor));
+  if(base===0 || count===0) return 0;
+  return Math.round(base * count * 100 / (100 + armor));
 }
 
 function calculateCombo(){
-const level=parseInt(document.getElementById("diana-level").value);
-const mr=parseFloat(document.getElementById("enemy-mr").value)||30;
-const armor=parseFloat(document.getElementById("enemy-armor").value)||30;
+  const level=parseInt(document.getElementById("diana-level").value);
+  const mr=parseFloat(document.getElementById("enemy-mr").value)||30;
+  const armor=parseFloat(document.getElementById("enemy-armor").value)||30;
 
-const {totalAP,flatPen,percPen}=getItemStats();
-updateItemStats();
+  const {totalAP,flatPen,percPen}=getItemStats();
+  updateItemStats();
 
-const abilities=[
-{name:"Auto Attack", base:getAutoAttackBase(level), ratio:0, count:parseInt(document.getElementById("aa-count").value)||0, type:"Physical"},
-{name:"Passive", base:getPassiveBase(level), ratio:0.5, count:parseInt(document.getElementById("passive-count").value)||0, type:"Magic"},
-{name:"Q", base:Q_BASE[parseInt(document.getElementById("q-rank").value)], ratio:Q_RATIO, count:parseInt(document.getElementById("q-count").value)||0, type:"Magic"},
-{name:"W", base:W_BASE[parseInt(document.getElementById("w-rank").value)], ratio:W_RATIO, count:parseInt(document.getElementById("w-count").value)||0, type:"Magic"},
-{name:"E", base:E_BASE[parseInt(document.getElementById("e-rank").value)], ratio:E_RATIO, count:parseInt(document.getElementById("e-count").value)||0, type:"Magic"},
-{name:"R", base:R_BASE[parseInt(document.getElementById("r-rank").value)], ratio:R_RATIO, count:parseInt(document.getElementById("r-count").value)||0, type:"Magic"}
-];
+  const abilities=[
+    {name:"Auto Attack", base:getAutoAttackBase(level), ratio:0, count:parseInt(document.getElementById("aa-count").value)||0, type:"Physical"},
+    {name:"Passive", base:getPassiveBase(level), ratio:0.5, count:parseInt(document.getElementById("passive-count").value)||0, type:"Magic"},
+    {name:"Q", base:Q_BASE[parseInt(document.getElementById("q-rank").value)], ratio:Q_RATIO, count:parseInt(document.getElementById("q-count").value)||0, type:"Magic"},
+    {name:"W", base:W_BASE[parseInt(document.getElementById("w-rank").value)], ratio:W_RATIO, count:parseInt(document.getElementById("w-count").value)||0, type:"Magic"},
+    {name:"E", base:E_BASE[parseInt(document.getElementById("e-rank").value)], ratio:E_RATIO, count:parseInt(document.getElementById("e-count").value)||0, type:"Magic"},
+    {name:"R", base:R_BASE[parseInt(document.getElementById("r-rank").value)], ratio:R_RATIO, count:parseInt(document.getElementById("r-count").value)||0, type:"Magic"}
+  ];
 
-const rows=document.querySelectorAll("#damage-table tr");
-let totalComboDamage = 0;
+  const rows=document.querySelectorAll("#damage-table tr");
+  let total=0;
 
-abilities.forEach((ab,i)=>{
-let dmg;
-if(ab.type==="Magic"){
-dmg = calcMagicDamage(ab.base, ab.ratio, totalAP, mr, ab.count, flatPen, percPen);
-} else {
-dmg = calcPhysicalDamage(ab.base, ab.count, armor);
-}
-rows[i].cells[1].textContent=dmg;
-totalComboDamage += dmg;
-});
+  abilities.forEach((ab,i)=>{
+    let dmg;
+    if(ab.type==="Magic"){
+      dmg = calcMagicDamage(ab.base, ab.ratio, totalAP, mr, ab.count, flatPen, percPen);
+    } else {
+      dmg = calcPhysicalDamage(ab.base, ab.count, armor);
+    }
+    rows[i].cells[1].textContent=dmg;
+    total+=dmg;
+  });
 
-// Update total damage in gold
-document.getElementById("total-damage").textContent = totalComboDamage;
+  document.getElementById("total-damage").textContent = total;
 }
 
 document.addEventListener("DOMContentLoaded",()=>{
-populateItems();
-populateLevels();
-updateItemStats();
-document.getElementById("calculate-btn").addEventListener("click",calculateCombo);
+  populateItems();
+  populateLevels();
+  updateItemStats();
+  document.getElementById("calculate-btn").addEventListener("click",calculateCombo);
 });
 </script>
 </body>
 </html>
+
 
 
 
