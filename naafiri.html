@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Diana Mid vs Naafiri</title>
+
+<!-- Early redirect before rendering -->
+<script>
+  if (localStorage.getItem('lolfundamentals_logged_in') !== 'true') {
+    window.location.replace('login.html');
+  }
+</script>
+
+<style>
+  body { margin: 0; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; background: #0d1117; color: #e6edf3; line-height: 1.4; }
+  header { background: #161b22; padding: 10px 20px; text-align: center; font-size: 28px; font-weight: bold; color: #58a6ff; }
+
+  /* Gold bubble for Back to Matchup Hub */
+  .back-link {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    background: #c9aa71; /* gold */
+    color: #0d1117;
+    font-weight: bold;
+    text-decoration: none;
+    padding: 10px 20px;
+    border-radius: 25px;
+    border: 1px solid #c9aa71;
+  }
+  .back-link:hover {
+    background: #e6c17c;
+    color: #0d1117;
+  }
+
+  .matchup-container { display: flex; max-width: 900px; margin: -15px auto 0 auto; gap: 15px; padding: 0 20px 10px 20px; }
+  .matchup-left { display: flex; align-items: center; gap: 10px; flex: 0 0 auto; }
+  .matchup-left img { width: 80px; height: 80px; border-radius: 8px; }
+
+  /* Winrate bubble */
+  .winrate-bubble {
+    background: #facc15; /* bright yellow */
+    color: #0d1117;
+    font-weight: bold;
+    padding: 8px 14px;
+    border-radius: 25px;
+    font-size: 16px;
+    white-space: nowrap;
+  }
+
+  .matchup-right { flex: 1; color: #e6edf3; display: flex; flex-direction: column; justify-content: flex-start; margin-top: 0px; }
+  .matchup-right h2 { margin: 0 0 15px 0; font-size: 22px; }
+  .matchup-right ul { padding-left: 20px; margin: 0; }
+  .matchup-right li { margin-bottom: 6px; }
+
+  footer { text-align: center; padding: 15px 10px; font-size: 14px; color: #8b949e; }
+
+  @media (max-width: 600px) { 
+    .matchup-container { flex-direction: column; align-items: center; padding: 10px; margin-top: -15px; } 
+    .matchup-left { justify-content: center; } 
+    .matchup-right { text-align: center; margin-top: 0px; } 
+  }
+</style>
+</head>
+<body>
+<header>Diana Mid Matchup – Naafiri</header>
+
+<!-- Centered Back Button -->
+<div style="text-align: center; margin: 20px 0 30px 0;">
+  <a href="matchuphub.html" id="backLink" class="back-link">&larr; Back to Matchup Hub</a>
+</div>
+
+<div class="matchup-container">
+  <div class="matchup-left">
+    <img src="https://ddragon.leagueoflegends.com/cdn/14.23.1/img/champion/Naafiri.png" alt="Naafiri">
+    <div class="winrate-bubble">51%</div>
+  </div>
+  <div class="matchup-right">
+    <h2>Matchup Notes</h2>
+    <ul>
+      <li>Naafiri has very weak early pushing. Diana can take full wave control from levels 1–3 with Q last-hits and passive AoE.</li>
+      <li>Her Q poke is annoying but predictable—sidestep the return path and she loses most of her trading power.</li>
+      <li>When Naafiri uses W aggressively, you can E her instantly to deny most of the burst. Her entire early trade pattern is front-loaded.</li>
+      <li>At level 6 Naafiri all-in is strong, but Diana wins if she saves W to absorb the initial burst then re-engages with R.</li>
+      <li>Naafiri struggles to farm under tower. Slow-pushing 2 waves and stacking a third can force her into losing HP or missing CS.</li>
+      <li>In sidelane Diana always wins extended fights—Naafiri’s kit heavily relies on one rotation, while Diana’s sustained DPS outscales her.</li>
+    </ul>
+  </div>
+</div>
+
+<footer>© 2025 LoL Fundamentals · All rights reserved</footer>
+</body>
+</html>
