@@ -94,6 +94,7 @@ input[type=number], select {
 .ability-row .first-line span { font-weight: bold; }
 .ability-row select.rank-select { width: 60px; }
 .ability-row select.uses-select { width: 100%; margin-top: 6px; }
+
 button#calculate-btn {
   padding: 12px 26px;
   font-size: 16px;
@@ -106,6 +107,7 @@ button#calculate-btn {
   margin-bottom: 20px;
 }
 button#calculate-btn:hover { background: #1b5fc7; }
+
 table {
   width: 100%;
   border-collapse: collapse;
@@ -124,13 +126,16 @@ td { color: white; font-size: 15px; text-align: center; }
   color: #d8c48a;
 }
 footer { text-align: center; margin-top: 20px; padding: 15px 0; color: #8b949e; font-size: 14px; }
+
 .items-grid {
   display: flex;
   gap: 10px;
   flex-wrap: wrap;
 }
 .items-grid select { flex: 1 1 30%; min-width: 100px; }
+
 #item-stats p span { color: white; }
+
 @media(max-width:600px){
   .top-row .top-item { flex: 1 1 100%; }
   .ability-row .first-line { flex-direction: row; justify-content: space-between; }
@@ -243,7 +248,7 @@ footer { text-align: center; margin-top: 20px; padding: 15px 0; color: #8b949e; 
 <tr><td>W</td><td>—</td><td>Magic</td></tr>
 <tr><td>E</td><td>—</td><td>Magic</td></tr>
 <tr><td>R</td><td>—</td><td>Magic</td></tr>
-<tr><td>Stormsurge</td><td id="stormsurge-dmg">—</td><td>Magic</td></tr>
+<tr><td>Item Damage</td><td id="item-damage">—</td><td>Magic</td></tr>
 <tr><td><strong>Total Damage</strong></td><td id="total-damage">—</td><td id="total-damage-type">—</td></tr>
 </tbody>
 </table>
@@ -272,7 +277,7 @@ const AP_ITEMS = [
 {name:"Demonic Embrace", ap:80, flatPen:0, percPen:0},
 {name:"Morellonomicon", ap:70, flatPen:0, percPen:0},
 {name:"Cryptbloom", ap:80, flatPen:0, percPen:0.3},
-{name:"Stormsurge", ap:90, flatPen:15, percPen:0, bonus:"stormsurge"},
+{name:"Stormsurge", ap:90, flatPen:15, percPen:0, bonusBase:125, bonusRatio:0.10},
 {name:"Bloodletter's Curse", ap:65, flatPen:10, percPen:0.1},
 {name:"Dark Seal", ap:15, flatPen:0, percPen:0},
 {name:"Mejai's Soulstealer", ap:20, flatPen:0, percPen:0},
@@ -342,27 +347,25 @@ function populateLevels() {
 function getItemStats(){
   let totalAP=0, flatPen=0, percPen=0;
   let hasDeathcap=false;
+  let stormsurgeItem=null;
 
   for(let i=1;i<=6;i++){
     const idx=document.getElementById(`item-${i}`).value;
     if(idx==="") continue;
     const item=AP_ITEMS[parseInt(idx)];
 
-    if(item.name==="Rabadon's Deathcap"){
-      hasDeathcap=true;
-      continue;
-    }
+    if(item.name==="Rabadon's Deathcap") hasDeathcap=true;
+    else totalAP+=item.ap;
 
-    totalAP+=item.ap;
-    flatPen+=item.flatPen;
-    percPen+=item.percPen;
+    flatPen += item.flatPen;
+    percPen += item.percPen;
+
+    if(item.bonusBase) stormsurgeItem = item;
   }
 
-  if(hasDeathcap){
-    totalAP = (totalAP + 130) * 1.30;
-  }
+  if(hasDeathcap) totalAP = (totalAP + 130) * 1.30;
 
-  return {totalAP:Math.round(totalAP), flatPen, percPen};
+  return {totalAP:Math.round(totalAP), flatPen, percPen, stormsurgeItem};
 }
 
 function updateItemStats(){
@@ -391,25 +394,16 @@ function calcMagicDamage(base, ratio, ap, mr, count, flatPen, percPen){
 
 function calcPhysicalDamage(base, count, armor){
   if(base===0 || count===0) return 0;
-  return Math.round(base * count * 100 / (100 + armor));
+  return Math.round(base*count*100/(100+armor));
 }
 
-// New: Stormsurge bonus
-function calcBonusItemDamage(totalAP, mr, flatPen, percPen) {
-  let bonusMagic = 0;
-  for (let i = 1; i <= 6; i++) {
-    const idx = document.getElementById(`item-${i}`).value;
-    if (idx === "") continue;
-    const item = AP_ITEMS[parseInt(idx)];
-    if (item.bonus === "stormsurge") {
-      let raw = 125 + 0.10 * totalAP;
-      let effectiveMR = mr - flatPen;
-      if (effectiveMR < 0) effectiveMR = 0;
-      effectiveMR *= 1 - percPen;
-      bonusMagic += Math.round(raw * 100 / (100 + effectiveMR));
-    }
-  }
-  return { stormsurge: bonusMagic };
+function calcBonusItemDamage(ap, mr, flatPen, percPen, item){
+  if(!item) return 0;
+  let raw = item.bonusBase + item.bonusRatio*ap;
+  let effMR = mr - item.flatPen;
+  if(effMR<0) effMR=0;
+  effMR *= 1 - item.percPen;
+  return Math.round(raw*100/(100+effMR));
 }
 
 function calculateCombo(){
@@ -417,7 +411,7 @@ function calculateCombo(){
   const mr=parseFloat(document.getElementById("enemy-mr").value)||30;
   const armor=parseFloat(document.getElementById("enemy-armor").value)||30;
 
-  const {totalAP,flatPen,percPen}=getItemStats();
+  const {totalAP, flatPen, percPen, stormsurgeItem}=getItemStats();
   updateItemStats();
 
   const abilities=[
@@ -426,46 +420,36 @@ function calculateCombo(){
     {name:"Q", base:Q_BASE[parseInt(document.getElementById("q-rank").value)], ratio:Q_RATIO, count:parseInt(document.getElementById("q-count").value)||0, type:"Magic"},
     {name:"W", base:W_BASE[parseInt(document.getElementById("w-rank").value)], ratio:W_RATIO, count:parseInt(document.getElementById("w-count").value)||0, type:"Magic"},
     {name:"E", base:E_BASE[parseInt(document.getElementById("e-rank").value)], ratio:E_RATIO, count:parseInt(document.getElementById("e-count").value)||0, type:"Magic"},
-    {name:"R", base:R_BASE[parseInt(document.getElementById("r-rank").value)], ratio:R_RATIO, count:parseInt(document.getElementById("r-count").value)||0, type:"Magic"}
+    {name:"R", base:R_BASE[parseInt(document.getElementById("r-rank").value)], ratio:R_RATIO, count:parseInt(document.getElementById("r-count").value)||0, type:"Magic"},
   ];
 
-  const rows=document.querySelectorAll("#damage-table tr");
-  let totalMagic=0;
-  let totalPhysical=0;
-
-  abilities.forEach((ab,i)=>{
-    let dmg;
-    if(ab.type==="Magic"){
-      dmg = calcMagicDamage(ab.base, ab.ratio, totalAP, mr, ab.count, flatPen, percPen);
-      totalMagic += dmg;
-    } else {
-      dmg = calcPhysicalDamage(ab.base, ab.count, armor);
-      totalPhysical += dmg;
-    }
-    rows[i].cells[1].textContent=dmg;
+  let totalDamage=0;
+  abilities.forEach(ab=>{
+    let dmg=ab.type==="Magic" ? calcMagicDamage(ab.base, ab.ratio, totalAP, mr, ab.count, flatPen, percPen) : calcPhysicalDamage(ab.base, ab.count, armor);
+    document.querySelector(`#damage-table tr:nth-child(${abilities.indexOf(ab)+1}) td:nth-child(2)`).textContent=dmg;
+    totalDamage+=dmg;
   });
 
-  // Stormsurge bonus
-  const bonus = calcBonusItemDamage(totalAP, mr, flatPen, percPen);
-  document.getElementById("stormsurge-dmg").textContent = bonus.stormsurge;
-  totalMagic += bonus.stormsurge;
+  const itemDmg = calcBonusItemDamage(totalAP, mr, flatPen, percPen, stormsurgeItem);
+  document.getElementById("item-damage").textContent = itemDmg;
+  totalDamage += itemDmg;
 
-  const total = totalMagic + totalPhysical;
-  document.getElementById("total-damage").textContent = total;
-  document.getElementById("total-damage-type").textContent = `Magic: ${totalMagic} | Physical: ${totalPhysical}`;
+  document.getElementById("total-damage").textContent = totalDamage;
+  document.getElementById("total-damage-type").textContent = "Mixed";
 }
 
-document.addEventListener("DOMContentLoaded",()=>{
-  populateItems();
-  populateLevels();
-  populateRanksAndUses();
-  updateItemStats();
-  document.getElementById("calculate-btn").addEventListener("click",calculateCombo);
-});
+document.getElementById("calculate-btn").addEventListener("click", calculateCombo);
+
+populateItems();
+populateRanksAndUses();
+populateLevels();
+updateItemStats();
 </script>
 
 </body>
 </html>
+
+
 
 
 
