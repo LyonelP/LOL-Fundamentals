@@ -11,11 +11,17 @@
     background: #0d1117; 
     color: #e6edf3; 
     line-height: 1.4; 
-    display: none; /* hide until login verified */
     min-height: 100vh;
     display: flex;
     flex-direction: column;
   }
+
+  /* THIS is the part we hide until logged in */
+  #page-content {
+    display: none;
+    flex: 1 0 auto;
+  }
+
   header { background: #161b22; padding: 10px 20px; text-align: center; font-size: 28px; font-weight: bold; color: #58a6ff; }
 
   .back-link {
@@ -48,7 +54,7 @@
     padding: 15px 10px; 
     font-size: 14px; 
     color: #8b949e;
-    margin-top: auto;
+    margin-top: auto; /* forces footer to bottom */
   }
 
   @media (max-width: 600px) {
@@ -59,6 +65,8 @@
 </style>
 </head>
 <body>
+
+<div id="page-content">
 <header>Diana Mid Matchup – Vladimir</header>
 
 <div style="text-align: center;">
@@ -73,26 +81,30 @@
   <div class="matchup-right">
     <h2>Matchup Notes</h2>
     <ul>
-      <li>The first Q trade at the start of lane is pointless. This matchup is really won at level 3. The strongest runes Vladimir can run are Aery + Ghost + Ignite, giving him the best early game and tons of kill pressure post-6.</li>
-      <li>His biggest weakness is that he can't push quickly.</li>
-      <li>If you run OOM before you can kill him, you can often reset and try again since he'll likely still be in lane.</li>
-      <li>It's often best to use your ult very early in the trade or after a reset since he won’t be as likely to W immediately.</li>
+      <li>The first Q trade at the start of lane is pointless. The matchup is really decided at level 3. His strongest rune page is Aery + Ghost + Ignite.</li>
+      <li>His biggest weakness is he cannot push quickly.</li>
+      <li>If you run OOM before you can kill him, you can often reset — he'll usually stay in lane.</li>
+      <li>Use your ult early in the trade or right after a reset so he's less likely to instantly W it.</li>
     </ul>
   </div>
 </div>
+</div>
 
-<footer>© 2025 LoL Fundamentals · All right reserved</footer>
+<footer>© 2025 LoL Fundamentals · All rights reserved</footer>
 
 <script>
 if (localStorage.getItem('lolfundamentals_logged_in') !== 'true') {
   alert('You must be logged in to view this page.');
   window.location.href = 'login.html';
 } else {
-  document.body.style.display = 'block';
+  document.getElementById('page-content').style.display = 'block';
 }
 </script>
+
 </body>
 </html>
+
+
 
 
 
