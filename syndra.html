@@ -11,9 +11,20 @@
     background: #0d1117; 
     color: #e6edf3; 
     line-height: 1.4; 
-    display: none; /* hide until login verified */
+    min-height: 100vh;
+    display: none; /* hidden until login check */
+    flex-direction: column;
+    display: flex; 
   }
-  header { background: #161b22; padding: 10px 20px; text-align: center; font-size: 28px; font-weight: bold; color: #58a6ff; }
+
+  header { 
+    background: #161b22; 
+    padding: 10px 20px; 
+    text-align: center; 
+    font-size: 28px; 
+    font-weight: bold; 
+    color: #58a6ff; 
+  }
 
   .back-link {
     display: inline-flex;
@@ -30,21 +41,66 @@
   }
   .back-link:hover { background: #e6c17c; color: #0d1117; }
 
-  .matchup-container { display: flex; max-width: 900px; margin: -15px auto 0 auto; gap: 15px; padding: 0 20px 10px 20px; }
-  .matchup-left { display: flex; align-items: center; gap: 10px; flex: 0 0 auto; }
-  .matchup-left img { width: 80px; height: 80px; border-radius: 8px; }
-  .winrate-bubble { background: #F9D949; color: #0d1117; font-weight: bold; padding: 8px 14px; border-radius: 25px; font-size: 16px; white-space: nowrap; }
+  .matchup-container { 
+    display: flex; 
+    max-width: 900px; 
+    margin: -15px auto 0 auto; 
+    gap: 15px; 
+    padding: 0 20px 10px 20px; 
+  }
 
-  .matchup-right { flex: 1; color: #e6edf3; display: flex; flex-direction: column; justify-content: flex-start; margin-top: 0px; }
-  .matchup-right h2 { margin: 0 0 15px 0; font-size: 22px; }
-  .matchup-right ul { padding-left: 20px; margin: 0; }
-  .matchup-right li { margin-bottom: 6px; }
+  .matchup-left { 
+    display: flex; 
+    align-items: center; 
+    gap: 10px; 
+    flex: 0 0 auto; 
+  }
+
+  .matchup-left img { 
+    width: 80px; 
+    height: 80px; 
+    border-radius: 8px; 
+  }
+
+  .winrate-bubble { 
+    background: #F9D949; 
+    color: #0d1117; 
+    font-weight: bold; 
+    padding: 8px 14px; 
+    border-radius: 25px; 
+    font-size: 16px; 
+    white-space: nowrap; 
+  }
+
+  .matchup-right { 
+    flex: 1; 
+    color: #e6edf3; 
+    display: flex; 
+    flex-direction: column; 
+    justify-content: flex-start; 
+    margin-top: 0px; 
+  }
+
+  .matchup-right h2 { 
+    margin: 0 0 15px 0; 
+    font-size: 22px; 
+  }
+
+  .matchup-right ul { 
+    padding-left: 20px; 
+    margin: 0; 
+  }
+
+  .matchup-right li { 
+    margin-bottom: 6px; 
+  }
 
   .video-container {
     display: flex;
     justify-content: center;
     margin: 30px 0;
   }
+
   .video-container iframe {
     width: 100%;
     max-width: 800px;
@@ -53,17 +109,35 @@
     border-radius: 10px;
   }
 
-  footer { text-align: center; padding: 15px 10px; font-size: 14px; color: #8b949e; }
+  footer { 
+    text-align: center; 
+    padding: 15px 10px; 
+    font-size: 14px; 
+    color: #8b949e;
+    margin-top: auto; /* pushes footer to bottom */
+  }
 
   @media (max-width: 600px) {
-    .matchup-container { flex-direction: column; align-items: center; padding: 10px; margin-top: -15px; }
+    .matchup-container { 
+      flex-direction: column; 
+      align-items: center; 
+      padding: 10px; 
+      margin-top: -15px; 
+    }
+
     .matchup-left { justify-content: center; }
-    .matchup-right { text-align: center; margin-top: 0px; }
+
+    .matchup-right { 
+      text-align: center; 
+      margin-top: 0px; 
+    }
+
     .video-container iframe { height: 250px; }
   }
 </style>
 </head>
 <body>
+
 <header>Diana Mid Matchup – Syndra</header>
 
 <div style="text-align: center;">
@@ -97,11 +171,13 @@ if (localStorage.getItem('lolfundamentals_logged_in') !== 'true') {
   alert('You must be logged in to view this page.');
   window.location.href = 'login.html';
 } else {
-  document.body.style.display = 'block';
+  document.body.style.display = 'flex';
 }
 </script>
+
 </body>
 </html>
+
 
 
 
