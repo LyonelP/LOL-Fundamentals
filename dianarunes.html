@@ -401,5 +401,12 @@ document.addEventListener("DOMContentLoaded",()=>{
   document.getElementById("calculate-btn").addEventListener("click",calculateDamage);
 });
 </script>
+  <script>
+  if (localStorage.getItem('lolfundamentals_logged_in') !== 'true') {
+    window.location.href = 'index.html';
+  }
+</script>
+
 </body>
 </html>
+
