@@ -40,12 +40,26 @@
   .matchup-right ul { padding-left: 20px; margin: 0; }
   .matchup-right li { margin-bottom: 6px; }
 
+  .video-container {
+    display: flex;
+    justify-content: center;
+    margin: 30px 0;
+  }
+  .video-container iframe {
+    width: 100%;
+    max-width: 800px;
+    height: 450px;
+    border: none;
+    border-radius: 10px;
+  }
+
   footer { text-align: center; padding: 15px 10px; font-size: 14px; color: #8b949e; }
 
   @media (max-width: 600px) {
     .matchup-container { flex-direction: column; align-items: center; padding: 10px; margin-top: -15px; }
     .matchup-left { justify-content: center; }
     .matchup-right { text-align: center; margin-top: 0px; }
+    .video-container iframe { height: 250px; }
   }
 </style>
 </head>
@@ -71,6 +85,11 @@
   </div>
 </div>
 
+<!-- YouTube Video Embed -->
+<div class="video-container">
+  <iframe src="https://www.youtube.com/embed/08Bz64niYng" title="Diana vs Syndra Guide" allowfullscreen></iframe>
+</div>
+
 <footer>© 2025 LoL Fundamentals · Contact: arcsecond@lolfundamentals.com</footer>
 
 <script>
@@ -84,7 +103,5 @@ if (localStorage.getItem('lolfundamentals_logged_in') !== 'true') {
 </script>
 </body>
 </html>
-
-
 
 
