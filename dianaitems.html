@@ -10,7 +10,6 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Diana Combo Calculator</title>
 <style>
-/* (unchanged styles) */
 body {
   margin: 0;
   padding: 0;
@@ -89,15 +88,12 @@ input[type=number], select {
   flex: 1 1 30%;
   min-width: 120px;
 }
-
-/* Ability section */
 .ability-card { margin-bottom: 20px; }
 .ability-row { display: flex; flex-direction: column; margin-bottom: 12px; }
 .ability-row .first-line { display: flex; justify-content: space-between; align-items: center; }
 .ability-row .first-line span { font-weight: bold; }
 .ability-row select.rank-select { width: 60px; }
 .ability-row select.uses-select { width: 100%; margin-top: 6px; }
-
 button#calculate-btn {
   padding: 12px 26px;
   font-size: 16px;
@@ -110,7 +106,6 @@ button#calculate-btn {
   margin-bottom: 20px;
 }
 button#calculate-btn:hover { background: #1b5fc7; }
-
 table {
   width: 100%;
   border-collapse: collapse;
@@ -129,16 +124,13 @@ td { color: white; font-size: 15px; text-align: center; }
   color: #d8c48a;
 }
 footer { text-align: center; margin-top: 20px; padding: 15px 0; color: #8b949e; font-size: 14px; }
-
 .items-grid {
   display: flex;
   gap: 10px;
   flex-wrap: wrap;
 }
 .items-grid select { flex: 1 1 30%; min-width: 100px; }
-
 #item-stats p span { color: white; }
-
 @media(max-width:600px){
   .top-row .top-item { flex: 1 1 100%; }
   .ability-row .first-line { flex-direction: row; justify-content: space-between; }
@@ -251,6 +243,7 @@ footer { text-align: center; margin-top: 20px; padding: 15px 0; color: #8b949e; 
 <tr><td>W</td><td>—</td><td>Magic</td></tr>
 <tr><td>E</td><td>—</td><td>Magic</td></tr>
 <tr><td>R</td><td>—</td><td>Magic</td></tr>
+<tr><td>Stormsurge</td><td id="stormsurge-dmg">—</td><td>Magic</td></tr>
 <tr><td><strong>Total Damage</strong></td><td id="total-damage">—</td><td id="total-damage-type">—</td></tr>
 </tbody>
 </table>
@@ -279,7 +272,7 @@ const AP_ITEMS = [
 {name:"Demonic Embrace", ap:80, flatPen:0, percPen:0},
 {name:"Morellonomicon", ap:70, flatPen:0, percPen:0},
 {name:"Cryptbloom", ap:80, flatPen:0, percPen:0.3},
-{name:"Stormsurge", ap:90, flatPen:15, percPen:0},
+{name:"Stormsurge", ap:90, flatPen:15, percPen:0, bonus:"stormsurge"},
 {name:"Bloodletter's Curse", ap:65, flatPen:10, percPen:0.1},
 {name:"Dark Seal", ap:15, flatPen:0, percPen:0},
 {name:"Mejai's Soulstealer", ap:20, flatPen:0, percPen:0},
@@ -366,7 +359,7 @@ function getItemStats(){
   }
 
   if(hasDeathcap){
-    totalAP = (totalAP + 130) * 1.30;  // ★ Correct League formula
+    totalAP = (totalAP + 130) * 1.30;
   }
 
   return {totalAP:Math.round(totalAP), flatPen, percPen};
@@ -401,6 +394,24 @@ function calcPhysicalDamage(base, count, armor){
   return Math.round(base * count * 100 / (100 + armor));
 }
 
+// New: Stormsurge bonus
+function calcBonusItemDamage(totalAP, mr, flatPen, percPen) {
+  let bonusMagic = 0;
+  for (let i = 1; i <= 6; i++) {
+    const idx = document.getElementById(`item-${i}`).value;
+    if (idx === "") continue;
+    const item = AP_ITEMS[parseInt(idx)];
+    if (item.bonus === "stormsurge") {
+      let raw = 125 + 0.10 * totalAP;
+      let effectiveMR = mr - flatPen;
+      if (effectiveMR < 0) effectiveMR = 0;
+      effectiveMR *= 1 - percPen;
+      bonusMagic += Math.round(raw * 100 / (100 + effectiveMR));
+    }
+  }
+  return { stormsurge: bonusMagic };
+}
+
 function calculateCombo(){
   const level=parseInt(document.getElementById("diana-level").value);
   const mr=parseFloat(document.getElementById("enemy-mr").value)||30;
@@ -419,7 +430,6 @@ function calculateCombo(){
   ];
 
   const rows=document.querySelectorAll("#damage-table tr");
-  let total=0;
   let totalMagic=0;
   let totalPhysical=0;
 
@@ -435,7 +445,12 @@ function calculateCombo(){
     rows[i].cells[1].textContent=dmg;
   });
 
-  total = totalMagic + totalPhysical;
+  // Stormsurge bonus
+  const bonus = calcBonusItemDamage(totalAP, mr, flatPen, percPen);
+  document.getElementById("stormsurge-dmg").textContent = bonus.stormsurge;
+  totalMagic += bonus.stormsurge;
+
+  const total = totalMagic + totalPhysical;
   document.getElementById("total-damage").textContent = total;
   document.getElementById("total-damage-type").textContent = `Magic: ${totalMagic} | Physical: ${totalPhysical}`;
 }
