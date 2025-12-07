@@ -12,6 +12,9 @@
     color: #e6edf3; 
     line-height: 1.4; 
     display: none; /* hide until login verified */
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
   }
   header { background: #161b22; padding: 10px 20px; text-align: center; font-size: 28px; font-weight: bold; color: #58a6ff; }
 
@@ -40,7 +43,13 @@
   .matchup-right ul { padding-left: 20px; margin: 0; }
   .matchup-right li { margin-bottom: 6px; }
 
-  footer { text-align: center; padding: 15px 10px; font-size: 14px; color: #8b949e; }
+  footer { 
+    text-align: center; 
+    padding: 15px 10px; 
+    font-size: 14px; 
+    color: #8b949e;
+    margin-top: auto; /* forces footer to bottom */
+  }
 
   @media (max-width: 600px) {
     .matchup-container { flex-direction: column; align-items: center; padding: 10px; margin-top: -15px; }
@@ -64,24 +73,25 @@
   <div class="matchup-right">
     <h2>Matchup Notes</h2>
     <ul>
-      <li>If you get hit by a Q from him, you can also move into the wave to force a push from him.</li>
-      <li>Look to push him in since he'll struggle to last hit under tower early and his Q will ruin his ability to last hit under tower. </li>
+      <li>If you get hit by a Q from him, you can move into the wave to force a push from him.</li>
+      <li>Look to push him in early since his Q will ruin his ability to last hit under tower. </li>
       <li>After 6 it's all about baiting his ult out. This can be done by forcing an all in and leaving him with low health. Then he'll have to watch out for every potential combo.</li>
     </ul>
   </div>
 </div>
 
-<footer>© 2025 LoL Fundamentals · Contact: arcsecond@lolfundamentals.com</footer>
+<footer>© 2025 LoL Fundamentals · All rights reserved</footer>
 
 <script>
 if (localStorage.getItem('lolfundamentals_logged_in') !== 'true') {
   alert('You must be logged in to view this page.');
   window.location.href = 'login.html';
 } else {
-  document.body.style.display = 'block';
+  document.body.style.display = 'flex';
 }
 </script>
 </body>
 </html>
+
 
 
