@@ -11,13 +11,9 @@
     background: #0d1117;
     color: #e6edf3;
     line-height: 1.4;
+    min-height: 100vh;
     display: flex;
     flex-direction: column;
-    min-height: 100vh;
-  }
-
-  main {
-    flex: 1;
   }
 
   header {
@@ -30,41 +26,19 @@
   }
 
   .back-button {
-    display: block;
-    width: max-content;
-    margin: 20px auto 30px auto;
-    padding: 10px 20px;
-    background: linear-gradient(135deg, #c9aa71, #e0c77b);
-    color: #000;
-    text-decoration: none;
-    border-radius: 8px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    background: #c9aa71;
+    color: #0d1117;
     font-weight: bold;
-    transition: all 0.3s;
-    box-shadow: 0 0 10px rgba(201,170,113,0.5);
-    text-align: center;
+    text-decoration: none;
+    padding: 10px 20px;
+    border-radius: 25px;
+    border: 1px solid #c9aa71;
+    margin: 20px auto 30px auto;
   }
-  .back-button::before {
-    content: "← ";
-  }
-  .back-button:hover {
-    background: linear-gradient(135deg, #e6c97f, #f0d88b);
-    box-shadow: 0 0 15px rgba(255,215,0,0.8);
-  }
-
-  /* NORMAL video embed (clean + not tall) */
-  .video-wrapper {
-    max-width: 900px;
-    margin: 20px auto 35px auto;
-    padding: 0 20px;
-    text-align: center;
-  }
-  .video-wrapper iframe {
-    width: 100%;
-    max-width: 700px;
-    height: 315px; /* NORMAL YouTube height */
-    border: none;
-    border-radius: 10px;
-  }
+  .back-button:hover { background: #e6c17c; }
 
   .matchup-container {
     display: flex;
@@ -73,17 +47,20 @@
     gap: 15px;
     padding: 0 20px 10px 20px;
   }
+
   .matchup-left {
     display: flex;
     align-items: center;
     gap: 10px;
     flex: 0 0 auto;
   }
+
   .matchup-left img {
     width: 80px;
     height: 80px;
     border-radius: 8px;
   }
+
   .winrate-bubble {
     background: #f97316;
     color: #0d1117;
@@ -99,16 +76,33 @@
     display: flex;
     flex-direction: column;
   }
+
   .matchup-right h2 {
     margin: 0 0 15px 0;
     font-size: 22px;
   }
+
   .matchup-right ul {
     padding-left: 20px;
     margin: 0;
   }
+
   .matchup-right li {
     margin-bottom: 6px;
+  }
+
+  .video-container {
+    display: flex;
+    justify-content: center;
+    margin: 30px 0;
+  }
+
+  .video-container iframe {
+    width: 100%;
+    max-width: 800px;
+    height: 450px;
+    border: none;
+    border-radius: 10px;
   }
 
   footer {
@@ -125,14 +119,11 @@
       align-items: center;
       padding: 10px;
     }
-    .matchup-left {
-      justify-content: center;
-    }
     .matchup-right {
       text-align: center;
     }
-    .video-wrapper iframe {
-      height: 220px;
+    .video-container iframe {
+      height: 250px;
     }
   }
 </style>
@@ -141,9 +132,7 @@
 
 <header>Diana Mid Matchup – Akali</header>
 
-<main>
-
-<a href="matchuphub.html" class="back-button">Back to Matchup Hub</a>
+<a href="matchuphub.html" class="back-button">← Back to Matchup Hub</a>
 
 <div class="matchup-container">
   <div class="matchup-left">
@@ -155,28 +144,24 @@
     <h2>Matchup Notes</h2>
     <ul>
       <li>Akali wins this matchup lvl 1 and 2. You can trade q for q lvl 1 but her second q needs to be dodged. This often leads to a reset level 3 unless the Akali didn't play aggressively early.</li>
-      <li>Post reset is your best chance to win the matchup. Look for full q e combos or e auto trades with passive if shes not denying you from auto attacking the wave.</li>
-      <li>At 6 your ideal all in is interrupting her e with your ult but be careful of her casting r at the same time to dodge your ult.</li>
-      <li>Look to trade with akali immediately after she autos a minion so she cant use her passive immediately.</li>
-      <li>Akali's biggest weakness is her waveclear. Try to fast push all non canon waves if the Akali isn’t contesting your push. This also gives you an opportunity to land easy q’s on her while she's farming under tower since she has to step up close to farm. If she’s contesting, throw a q at her while she’s approaching but don’t immediately take the e. You can try to bait out a q or e and let your grasp start stacking.</li>
-      <li>Be careful playing up in lane as Akali can chase you down the lane and space her abilities well without taking tower damage.</li>
+      <li>Post reset is your best chance to win. Look for full Q→E combos or E auto trades with passive if she isn’t denying you from hitting the wave.</li>
+      <li>At 6 your ideal all-in is interrupting her E with your R, but be careful of her using R to dodge your ult.</li>
+      <li>Trade with Akali immediately after she autos a minion so she can't use her passive immediately.</li>
+      <li>Akali's biggest weakness is waveclear. Fast push all non-cannon waves if she’s not contesting. Look for easy Qs when she farms under tower.</li>
+      <li>Be careful playing up as Akali can chase you down the lane and space her abilities well without taking tower damage.</li>
     </ul>
   </div>
 </div>
 
-<!-- Normal video size BELOW the tips -->
-<div class="video-wrapper">
-  <iframe 
-    src="https://www.youtube.com/embed/sd7DuyRakh8"
-    allowfullscreen>
-  </iframe>
+<div class="video-container">
+  <iframe src="https://www.youtube.com/embed/sd7DuyRakh8" allowfullscreen></iframe>
 </div>
-
-</main>
 
 <footer>© 2025 LoL Fundamentals · All rights reserved</footer>
 
 </body>
 </html>
+
+
 
 
