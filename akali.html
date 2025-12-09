@@ -11,7 +11,16 @@
     background: #0d1117;
     color: #e6edf3;
     line-height: 1.4;
+
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
   }
+
+  main {
+    flex: 1;
+  }
+
   header {
     background: #161b22;
     padding: 10px 20px;
@@ -21,7 +30,6 @@
     color: #58a6ff;
   }
 
-  /* Gold Back Button */
   .back-button {
     display: block;
     width: max-content;
@@ -44,6 +52,18 @@
     box-shadow: 0 0 15px rgba(255,215,0,0.8);
   }
 
+  .video-wrapper {
+    max-width: 900px;
+    margin: 30px auto 25px auto;
+    padding: 0 20px;
+  }
+  .video-wrapper iframe {
+    width: 100%;
+    height: 400px;
+    border: none;
+    border-radius: 10px;
+  }
+
   .matchup-container {
     display: flex;
     max-width: 900px;
@@ -63,7 +83,7 @@
     border-radius: 8px;
   }
   .winrate-bubble {
-    background: #f97316; /* orange for 47%-48% */
+    background: #f97316;
     color: #0d1117;
     font-weight: bold;
     padding: 8px 14px;
@@ -73,11 +93,8 @@
   }
   .matchup-right {
     flex: 1;
-    color: #e6edf3;
     display: flex;
     flex-direction: column;
-    justify-content: flex-start;
-    margin-top: 0px;
   }
   .matchup-right h2 {
     margin: 0 0 15px 0;
@@ -90,12 +107,15 @@
   .matchup-right li {
     margin-bottom: 6px;
   }
+
   footer {
     text-align: center;
     padding: 15px 10px;
     font-size: 14px;
     color: #8b949e;
+    margin-top: auto;
   }
+
   @media (max-width: 600px) {
     .matchup-container {
       flex-direction: column;
@@ -107,13 +127,18 @@
     }
     .matchup-right {
       text-align: center;
-      margin-top: 0px;
+    }
+    .video-wrapper iframe {
+      height: 250px;
     }
   }
 </style>
 </head>
 <body>
+
 <header>Diana Mid Matchup – Akali</header>
+
+<main>
 
 <a href="matchuphub.html" class="back-button">Back to Matchup Hub</a>
 
@@ -122,24 +147,32 @@
     <img src="https://ddragon.leagueoflegends.com/cdn/14.23.1/img/champion/Akali.png" alt="Akali">
     <div class="winrate-bubble">48%</div>
   </div>
+
   <div class="matchup-right">
     <h2>Matchup Notes</h2>
     <ul>
-      <li>Akali wins this matchup lvl 1 and 2. You can trade q for q lvl 1 but her second q needs to be dodged. This often leads to a reset level 3 unless the Akali didn't play aggressively early.  
-</li>
-      <li>Post reset is your best chance to win the matchup. Look for full q e combos or e auto trades with passive if shes not denying you from auto attacking the wave. </li>
+      <li>Akali wins this matchup lvl 1 and 2. You can trade q for q lvl 1 but her second q needs to be dodged. This often leads to a reset level 3 unless the Akali didn't play aggressively early.</li>
+      <li>Post reset is your best chance to win the matchup. Look for full q e combos or e auto trades with passive if shes not denying you from auto attacking the wave.</li>
       <li>At 6 your ideal all in is interrupting her e with your ult but be careful of her casting r at the same time to dodge your ult.</li>
-      <li>Look to trade with akali immediately after she autos a minion so she cant use her passive immediately. 
-</li>
-      <li>Akali's biggest weakness is her waveclear. Try to fast push all non canon waves if the Akali isn’t contesting your push. This also gives you an opportunity to land easy q’s on her while she's farming under tower since she has to step up close to farm. If she’s contesting, throw a q at her while she’s approaching but don’t immediately take the e. You can try to bait out a q or e and let your grasp start stacking. </li>
+      <li>Look to trade with akali immediately after she autos a minion so she cant use her passive immediately.</li>
+      <li>Akali's biggest weakness is her waveclear. Try to fast push all non canon waves if the Akali isn’t contesting your push. This also gives you an opportunity to land easy q’s on her while she's farming under tower since she has to step up close to farm. If she’s contesting, throw a q at her while she’s approaching but don’t immediately take the e. You can try to bait out a q or e and let your grasp start stacking.</li>
       <li>Be careful playing up in lane as Akali can chase you down the lane and space her abilities well without taking tower damage.</li>
     </ul>
   </div>
 </div>
 
+<!-- VIDEO BELOW TIPS -->
+<div class="video-wrapper">
+  <iframe 
+    src="https://www.youtube.com/embed/sd7DuyRakh8" 
+    allowfullscreen>
+  </iframe>
+</div>
+
+</main>
+
 <footer>© 2025 LoL Fundamentals · All rights reserved</footer>
+
 </body>
 </html>
-
-
 
