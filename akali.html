@@ -5,10 +5,17 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Diana Mid vs Akali</title>
 <style>
+  :root {
+    --gold:#c9aa71;
+    --bg:#0a0f14;
+    --card:#161b22;
+    --muted:#8b949e;
+  }
+
   body {
     margin: 0;
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    background: #0d1117;
+    font-family: "Beaufort for LOL", Arial, Helvetica, sans-serif;
+    background: #0a0f14;
     color: #e6edf3;
     line-height: 1.4;
     min-height: 100vh;
@@ -16,26 +23,44 @@
     flex-direction: column;
   }
 
+  /* ===== HEADER (MATCHES MEMBERS HUB EXACTLY) ===== */
   header {
-    background: #161b22;
-    padding: 10px 20px;
-    text-align: center;
-    font-size: 28px;
+    background: linear-gradient(90deg, #0a0f14, #1b2838);
+    border-bottom: 2px solid var(--gold);
+    padding: 14px 20px;
+    color: var(--gold);
     font-weight: bold;
-    color: #58a6ff;
+    font-size: 20px;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    position: relative;
+    text-align: center;
   }
 
+  .settings-btn {
+    position: absolute;
+    top: 12px;
+    right: 16px;
+    opacity: 0.25;
+    color: var(--gold);
+    text-decoration: none;
+    transition: opacity .15s, transform .15s;
+  }
+  .settings-btn:hover { opacity: 1; transform: scale(1.05); }
+  .settings-btn svg { width: 18px; height: 18px; fill: currentColor; }
+
+  /* ===== Content Layout ===== */
   .back-button {
     display: inline-flex;
     align-items: center;
     justify-content: center;
-    background: #c9aa71;
+    background: var(--gold);
     color: #0d1117;
     font-weight: bold;
     text-decoration: none;
     padding: 10px 20px;
     border-radius: 25px;
-    border: 1px solid #c9aa71;
+    border: 1px solid var(--gold);
     margin: 20px auto 30px auto;
   }
   .back-button:hover { background: #e6c17c; }
@@ -52,7 +77,6 @@
     display: flex;
     align-items: center;
     gap: 10px;
-    flex: 0 0 auto;
   }
 
   .matchup-left img {
@@ -80,6 +104,7 @@
   .matchup-right h2 {
     margin: 0 0 15px 0;
     font-size: 22px;
+    color: var(--gold);
   }
 
   .matchup-right ul {
@@ -109,8 +134,9 @@
     text-align: center;
     padding: 15px 10px;
     font-size: 14px;
-    color: #8b949e;
+    color: var(--muted);
     margin-top: auto;
+    border-top: 1px solid #1f2937;
   }
 
   @media (max-width: 600px) {
@@ -119,18 +145,19 @@
       align-items: center;
       padding: 10px;
     }
-    .matchup-right {
-      text-align: center;
-    }
-    .video-container iframe {
-      height: 250px;
-    }
+    .matchup-right { text-align: center; }
+    .video-container iframe { height: 250px; }
   }
 </style>
 </head>
 <body>
 
-<header>Diana Mid Matchup – Akali</header>
+<header>
+  Diana Mid – Akali Matchup
+  <a href="settings.html" class="settings-btn" aria-label="Settings">
+    <svg viewBox="0 0 24 24"><path d="M12 15.5A3.5 3.5 0 1 0 12 8.5a3.5 3.5 0 0 0 0 7z"/><path d="M19.4 15a7.9 7.9 0 0 0 .1-1 7.9 7.9 0 0 0-.1-1l2.1-1.6a.5.5 0 0 0 .12-.65l-2-3.46a.5.5 0 0 0-.6-.22l-2.49 1a7.7 7.7 0 0 0-1.73-.99L14.9 2.9a.5.5 0 0 0-.5-.4h-4a.5.5 0 0 0-.5.4L8.2 6.1a7.7 7.7 0 0 0-1.73.99l-2.49-1a.5.5 0 0 0-.6.22L1.7 9.78a.5.5 0 0 0 .12.65L3.9 12a7.9 7.9 0 0 0-.1 1c0 .34.03.67.1 1L1.7 15.6a.5.5 0 0 0-.12.65l2 3.46c.14.25.44.36.7.27l2.49-1c.54.4 1.12.73 1.73.99l.7 3.2c.06.28.3.49.58.49h4c.28 0 .52-.21.58-.49l.7-3.2c.6-.26 1.19-.59 1.73-.99l2.49 1c.26.09.56-.02.7-.27l2-3.46a.5.5 0 0 0-.12-.65l-2.3-1.6z"/></svg>
+  </a>
+</header>
 
 <a href="matchuphub.html" class="back-button">← Back to Matchup Hub</a>
 
@@ -143,12 +170,12 @@
   <div class="matchup-right">
     <h2>Matchup Notes</h2>
     <ul>
-      <li>Akali wins this matchup lvl 1 and 2. You can trade q for q lvl 1 but her second q needs to be dodged. This often leads to a reset level 3 unless the Akali didn't play aggressively early.</li>
-      <li>Post reset is your best chance to win. Look for full Q→E combos or E auto trades with passive if she isn’t denying you from hitting the wave.</li>
-      <li>At 6 your ideal all-in is interrupting her E with your R, but be careful of her using R to dodge your ult.</li>
-      <li>Trade with Akali immediately after she autos a minion so she can't use her passive immediately.</li>
-      <li>Akali's biggest weakness is waveclear. Fast push all non-cannon waves if she’s not contesting. Look for easy Qs when she farms under tower.</li>
-      <li>Be careful playing up as Akali can chase you down the lane and space her abilities well without taking tower damage.</li>
+      <li>Akali wins the first two levels — avoid extended trades, trade Q for Q then dodge her second Q.</li>
+      <li>Your best window is post-reset. Look for Q → E trades or passive autos if she isn’t controlling the wave.</li>
+      <li>At 6, you win if you interrupt her E with your R — but be careful of her dodging your ult with her own.</li>
+      <li>Trade after she autos a minion so she can’t use her passive immediately.</li>
+      <li>Fast push non-cannon waves — she struggles to last-hit under tower.</li>
+      <li>Don’t walk too far up mid lane; Akali can chase with spacing while avoiding tower aggro.</li>
     </ul>
   </div>
 </div>
