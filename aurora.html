@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Diana Mid vs Aurora</title>
+<style>
+  :root {
+    --gold:#c9aa71;
+    --bg:#0a0f14;
+    --card:#161b22;
+    --muted:#8b949e;
+  }
+
+  body {
+    margin: 0;
+    font-family: "Beaufort for LOL", Arial, Helvetica, sans-serif;
+    background: #0a0f14;
+    color: #e6edf3;
+    line-height: 1.4;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+  }
+
+  /* ===== HEADER (Members Hub Style) ===== */
+  header{
+    background: linear-gradient(90deg, #0a0f14, #1b2838);
+    border-bottom:2px solid var(--gold);
+    padding:14px 20px;
+    color:var(--gold);
+    font-weight:bold;
+    font-size:20px;
+    letter-spacing:1px;
+    text-transform:uppercase;
+    position:relative;
+    text-align:center;
+  }
+
+  .settings-btn{
+    position:absolute;
+    top:12px;
+    right:16px;
+    opacity:0.25;
+    color:var(--gold);
+    text-decoration:none;
+    transition:opacity .15s, transform .15s;
+  }
+  .settings-btn:hover{
+    opacity:1;
+    transform:scale(1.05);
+  }
+  .settings-btn svg{
+    width:18px;
+    height:18px;
+    fill:currentColor;
+  }
+
+  /* ===== Back Button ===== */
+  .back-button {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    background: var(--gold);
+    color: #0d1117;
+    font-weight: bold;
+    text-decoration: none;
+    padding: 10px 20px;
+    border-radius: 25px;
+    border: 1px solid var(--gold);
+    margin: 20px auto 30px auto;
+  }
+  .back-button:hover { background: #e6c17c; }
+
+  /* ===== Matchup Layout ===== */
+  .matchup-container {
+    display: flex;
+    max-width: 900px;
+    margin: 0 auto;
+    gap: 15px;
+    padding: 0 20px 10px 20px;
+  }
+
+  .matchup-left {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+
+  .matchup-left img {
+    width: 80px;
+    height: 80px;
+    border-radius: 8px;
+  }
+
+  .winrate-bubble {
+    background: #f97316;
+    color: #0d1117;
+    font-weight: bold;
+    padding: 8px 14px;
+    border-radius: 25px;
+    font-size: 16px;
+    white-space: nowrap;
+  }
+
+  .matchup-right {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+  }
+
+  .matchup-right h2 {
+    margin: 0 0 15px 0;
+    font-size: 22px;
+    color: var(--gold);
+  }
+
+  .matchup-right ul {
+    padding-left: 20px;
+    margin: 0;
+  }
+
+  .matchup-right li {
+    margin-bottom: 6px;
+  }
+
+  /* ===== Video ===== */
+  .video-container {
+    display: flex;
+    justify-content: center;
+    margin: 30px 0;
+  }
+
+  .video-container iframe {
+    width: 100%;
+    max-width: 800px;
+    height: 450px;
+    border: none;
+    border-radius: 10px;
+  }
+
+  /* ===== FOOTER ===== */
+  footer {
+    text-align: center;
+    padding: 15px 10px;
+    font-size: 14px;
+    color: #8b949e;
+    margin-top: auto;
+  }
+
+  @media (max-width: 600px) {
+    .matchup-container {
+      flex-direction: column;
+      align-items: center;
+      padding: 10px;
+    }
+    .matchup-right { text-align: center; }
+    .video-container iframe { height: 250px; }
+  }
+</style>
+</head>
+<body>
+
+<header>
+  Diana Mid Matchup – Aurora
+  <a href="settings.html" class="settings-btn" aria-label="Settings">
+    <svg viewBox="0 0 24 24" aria-hidden="true">
+      <path d="M12 15.5A3.5 3.5 0 1 0 12 8.5a3.5 3.5 0 0 0 0 7z"/>
+      <path d="M19.4 15a7.9 7.9 0 0 0 .1-1 7.9 7.9 0 0 0-.1-1l2.1-1.6a.5.5 0 0 0 .12-.65l-2-3.46a.5.5 0 0 0-.6-.22l-2.49 1a7.7 7.7 0 0 0-1.73-.99L14.9 2.9a.5.5 0 0 0-.5-.4h-4a.5.5 0 0 0-.5.4L8.2 6.1a7.7 7.7 0 0 0-1.73.99l-2.49-1a.5.5 0 0 0-.6.22L1.7 9.78a.5.5 0 0 0 .12.65L3.9 12a7.9 7.9 0 0 0-.1 1c0 .34.03.67.1 1L1.7 15.6a.5.5 0 0 0-.12.65l2 3.46c.14.25.44.36.7.27l2.49-1c.54.4 1.12.73 1.73.99l.7 3.2c.06.28.3.49.58.49h4c.28 0 .52-.21.58-.49l.7-3.2c.6-.26 1.19-.59 1.73-.99l2.49 1c.26.09.56-.02.7-.27l2-3.46a.5.5 0 0 0-.12-.65l-2.3-1.6z"/>
+    </svg>
+  </a>
+</header>
+
+<a href="matchuphub.html" class="back-button">← Back to Matchup Hub</a>
+
+<div class="matchup-container">
+  <div class="matchup-left">
+    <img src="https://ddragon.leagueoflegends.com/cdn/14.23.1/img/champion/Aurora.png" alt="Aurora">
+    <div class="winrate-bubble">50%</div>
+  </div>
+
+  <div class="matchup-right">
+    <h2>Matchup Notes</h2>
+    <ul>
+      <li>Aurora wins very early levels because she outranges you and her Q poke is hard to avoid if you walk up for last hits.</li>
+      <li>Your first real opportunity to trade is level 3 once you have Q + E access. Try to dodge her empowered Q when she has W stacks active.</li>
+      <li>At 6 you can win all-ins if you force her W early. Her untargetability does not break your R pull unless she times it perfectly.</li>
+      <li>Identify if she’s playing for lane or roam. If she pushes, match tempo by pushing with your Q on the wave.</li>
+      <li>Aurora’s biggest weakness is getting shoved in. Fast push non-cannon waves to force her to farm under tower where she struggles to hit Q on you reliably.</li>
+      <li>Be careful of her extended trades—Aurora’s sustained DPS with procs wins long evenly timed trades. Take short Q>E autos and disengage.</li>
+    </ul>
+  </div>
+</div>
+
+<div class="video-container">
+  <iframe src="https://www.youtube.com/embed/XXXXXXXX" allowfullscreen></iframe>
+</div>
+
+<footer>© 2025 LoL Fundamentals · All rights reserved</footer>
+
+</body>
+</html>
