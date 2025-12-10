@@ -241,6 +241,7 @@
         <tr><td>—</td><td>—</td><td>—</td></tr>
         <tr><td>—</td><td>—</td><td>—</td></tr>
         <tr><td>—</td><td>—</td><td>—</td></tr>
+        <tr><td><strong>Total</strong></td><td>—</td><td>—</td></tr>
       </tbody>
     </table>
   </div>
@@ -263,20 +264,25 @@ const PRIMARY_PATHS = {
   domination:{ slot1:["Electrocute","Hail of Blades","Dark Harvest"], slot2:["Cheap Shot","Taste of Blood","Sudden Impact"], slot3:["Sixth Sense","Grisly Memories","Null"], slot4:["Treasure Hunter","Relentless Hunter","Ultimate Hunter"] },
   sorcery:{ slot1:["Aery","Comet","Phase Rush"], slot2:["Nimbus Cloak","Transcendence","Celerity"], slot3:["Scorch","Waterwalking","Null"], slot4:["Null","Null","Gathering Storm"] },
   precision:{ slot1:["Press the Attack","Lethal Tempo","Fleet Footwork"], slot2:["Presence of Mind","Triumph","Coup de Grace"], slot3:["Legend: Alacrity","Legend: Tenacity","Cut Down"], slot4:["Last Stand","Null","Null"] },
-  resolve:{ slot1:["Grasp of the Undying","Aftershock","Guardian"], slot2:["Demolish","Font of Life","Shield Bash"], slot3:["Conditioning","Second Wind","Bone Plating"], slot4:["Revitalize","Null","Null"] },
+  resolve:{ 
+    slot1:["Grasp of the Undying","Aftershock","Guardian"], 
+    slot2:["Demolish","Font of Life","Shield Bash"], 
+    slot3:["Conditioning","Second Wind","Bone Plating"], 
+    slot4:["Overgrowth","Revitalize","Unflinching"] 
+  },
   inspiration:{ slot1:["Glacial Augment","Unsealed Spellbook","First Strike"], slot2:["Hextech Flashtraption","Magical Footwear","Future's Market"], slot3:["Minion Dematerializer","Biscuit Delivery","Cosmic Insight"], slot4:["Approach Velocity","Time Warp Tonic","Null"] }
 };
 
 const SECONDARY_NONKEY = {
   domination:["Cheap Shot","Taste of Blood","Sudden Impact","Sixth Sense","Grisly Memories","Treasure Hunter","Relentless Hunter","Ultimate Hunter","Hail of Blades"],
   sorcery:["Manaflow Band","Transcendence","Celerity","Scorch","Waterwalking","Gathering Storm"],
-  precision:["Presence of Mind","Triumph","Coup de Grace","Legend: Alacrity","Legend: Tenacity","Cut Down","Last Stand","Null","Null"],
-  resolve:["Demolish","Font of Life","Shield Bash","Conditioning","Second Wind","Bone Plating","Revitalize","Null","Null"],
+  precision:["Presence of Mind","Triumph","Coup de Grace","Legend: Alacrity","Legend: Tenacity","Cut Down","Last Stand"],
+  resolve:["Demolish","Font of Life","Shield Bash","Conditioning","Second Wind","Bone Plating","Overgrowth","Revitalize","Unflinching"],
   inspiration:["Hextech Flashtraption","Magical Footwear","Future's Market","Minion Dematerializer","Biscuit Delivery","Cosmic Insight","Approach Velocity","Time Warp Tonic","Unsealed Spellbook"]
 };
 
 function populateSelect(el, options, keepVal){
-  const prev = keepVal?el.value:null;
+  const prev = keepVal ? el.value : null;
   el.innerHTML="";
   options.forEach(opt=>{
     const o=document.createElement("option");
@@ -322,7 +328,7 @@ function scaleDamage(min,max,level){ return Math.round(min + (max-min)*(level-1)
 function getDianaHP(level){ return Math.round(740 + (2674 - 740) * (level - 1) / 17); }
 
 function calcDamage(rune,level,ap,mr){
-  if(!rune || rune==="Null") return {damage:0,type:""};
+  if(!rune || rune==="Null" || rune==="—") return {damage:0,type:""};
   let dmg=0, type="Magic";
   const hp = getDianaHP(level);
 
@@ -370,11 +376,29 @@ function calculateDamage(){
 
   const tbody=document.getElementById("rune-damage-table");
   const rows = tbody.querySelectorAll("tr");
-  for(let i=0;i<rows.length;i++){
+
+  let totalMagic = 0;
+  let totalPhysical = 0;
+  let totalTrue = 0;
+
+  for(let i=0;i<6;i++){
     const rune = slots[i]||"—";
     const {damage,type} = calcDamage(rune,level,ap,enemyMR);
+
+    if(type==="Magic") totalMagic += damage;
+    else if(type==="Physical") totalPhysical += damage;
+    else if(type==="True") totalTrue += damage;
+
     rows[i].innerHTML = `<td>${rune}</td><td>${damage||"—"}</td><td>${type||"—"}</td>`;
   }
+
+  const total = totalMagic + totalPhysical + totalTrue;
+
+  rows[6].innerHTML = `
+    <td><strong>Total</strong></td>
+    <td><strong>${total}</strong></td>
+    <td>Magic: ${totalMagic} • Physical: ${totalPhysical} • True: ${totalTrue}</td>
+  `;
 }
 
 function enforcePaths(){
@@ -397,22 +421,29 @@ document.addEventListener("DOMContentLoaded",()=>{
   enforcePaths();
 
   document.getElementById("primary-path").addEventListener("change",e=>{
-    populatePrimary(e.target.value); enforcePaths();
+    populatePrimary(e.target.value); enforcePaths(); calculateDamage();
   });
   document.getElementById("secondary-path").addEventListener("change",e=>{
-    populateSecondary(e.target.value);
-    enforcePaths();
+    populateSecondary(e.target.value); enforcePaths(); calculateDamage();
   });
+
   document.getElementById("calculate-btn").addEventListener("click",calculateDamage);
+
+  document.querySelectorAll("select").forEach(el=>{
+    el.addEventListener("change", calculateDamage);
+  });
 });
 </script>
-  <script>
-  if (localStorage.getItem('lolfundamentals_logged_in') !== 'true') {
-    window.location.href = 'index.html';
-  }
+
+<script>
+if (localStorage.getItem('lolfundamentals_logged_in') !== 'true') {
+  window.location.href = 'index.html';
+}
 </script>
 
 </body>
 </html>
+
+
 
 
