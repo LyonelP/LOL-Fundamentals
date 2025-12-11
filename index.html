@@ -155,7 +155,12 @@ footer a:hover { text-decoration:underline; }
 
 /* MOBILE FIX */
 @media (max-width: 600px) {
-  .hero { padding-top: 65px; }
+  .hero { 
+    padding-top: 65px; 
+    background-size: 110%;       /* slightly smaller than desktop */
+    background-position: center 30%; /* adjust which part of the image shows */
+  }
+}
 
   .modalContent .plan-buttons {
     flex-direction: column !important;
@@ -411,6 +416,7 @@ for(let i=0;i<50;i++){
 </script>
 </body>
 </html>
+
 
 
 
