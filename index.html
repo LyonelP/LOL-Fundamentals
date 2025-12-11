@@ -155,21 +155,22 @@ footer a:hover { text-decoration:underline; }
 
 /* MOBILE FIX */
 @media (max-width: 600px) {
-  /* Zoom out background image slightly */
+  /* Keep background image exactly like desktop */
   .hero {
-    background-size: 110% auto; /* slightly zoomed out, more of the image visible */
-    padding-top: 100px; /* keep some spacing at the top */
+    background-size: cover; /* same as desktop */
+    background-position: center; /* same as desktop */
+    padding-top: 100px; /* slightly more space for the text */
   }
 
-  /* Raise the text and buttons */
+  /* Raise the text and buttons slightly */
   .hero h1 {
-    margin-top: 20px; /* a bit higher */
+    margin-top: 10px; /* slightly higher */
   }
   .hero p {
-    margin-top: 10px; /* a bit higher */
+    margin-top: 5px; /* slightly higher */
   }
   .hero .btn {
-    margin-top: 15px; /* slightly higher */
+    margin-top: 10px; /* slightly higher */
   }
 }
 
@@ -428,6 +429,7 @@ for(let i=0;i<50;i++){
 </script>
 </body>
 </html>
+
 
 
 
