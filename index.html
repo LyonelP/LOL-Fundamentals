@@ -155,12 +155,18 @@ footer a:hover { text-decoration:underline; }
 
 /* MOBILE FIX */
 @media (max-width: 600px) {
-  /* Only adjust hero text/buttons position */
+  /* Zoom out background image slightly */
+  .hero {
+    background-size: 110% auto; /* slightly zoomed out, more of the image visible */
+    padding-top: 100px; /* keep some spacing at the top */
+  }
+
+  /* Raise the text and buttons */
   .hero h1 {
-    margin-top: 40px; /* slightly higher than before */
+    margin-top: 20px; /* a bit higher */
   }
   .hero p {
-    margin-top: 20px; /* slightly higher */
+    margin-top: 10px; /* a bit higher */
   }
   .hero .btn {
     margin-top: 15px; /* slightly higher */
@@ -422,6 +428,7 @@ for(let i=0;i<50;i++){
 </script>
 </body>
 </html>
+
 
 
 
