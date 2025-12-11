@@ -155,18 +155,7 @@ footer a:hover { text-decoration:underline; }
 
 /* MOBILE FIX */
 @media (max-width: 600px) {
-  .hero {
-    padding: 80px 15px; /* reduced padding so text sits lower on mobile */
-  }
-  .hero h1 {
-    font-size: 1.8em;
-    margin-bottom: 8px;
-  }
-  .hero p {
-    font-size: 1em;
-    max-width: 90%;
-    margin-bottom: 15px;
-  }
+  .hero { padding-top: 40px; }
 
   .modalContent .plan-buttons {
     flex-direction: column !important;
@@ -381,24 +370,45 @@ modalLoginBtn.addEventListener('click', async ()=>{
     if(docSnap.exists()){
       const paid = docSnap.data().paid;
       localStorage.setItem('lolfundamentals_logged_in','true');
-      loginModal.style.display='none';
-      location.href = paid? "dashboard.html" : "payment.html";
-    } else { alert("User record not found"); }
+      localStorage.setItem('lolfundamentals_paid',paid);
+      if(paid){
+        window.location.href='membershub.html';
+      } else {
+        planModal.style.display='flex';
+      }
+    } else {
+      await setDoc(docRef,{paid:false,timestamp:serverTimestamp()});
+      planModal.style.display='flex';
+    }
+    loginModal.style.display='none';
   } catch(err){ loginMsgModal.textContent = err.message; }
 });
 
-// Reset password
-resetLinkModal.addEventListener('click', async ()=>{
+// Password reset
+resetLinkModal.addEventListener('click', async(e)=>{
+  e.preventDefault();
   const email = loginEmail.value.trim();
-  if(!email){ alert("Enter your email to reset"); return; }
-  try { await sendPasswordResetEmail(auth,email); alert("Password reset sent"); } catch(err){ alert(err.message); }
+  if(!email){ loginMsgModal.textContent="Enter email to reset"; return; }
+  try{ await sendPasswordResetEmail(auth,email); loginMsgModal.textContent="Password reset email sent!"; }
+  catch(err){ loginMsgModal.textContent=err.message; }
 });
 
-// Particle animation
-const particleContainer = document.querySelector('.particles');
-for(let i=0;i<50;i++){ const span=document.createElement('span'); span.style.left=`${Math.random()*100}%`; span.style.top=`${Math.random()*100}%`; particleContainer.appendChild(span);}
-</script>
+// Auto redirect if logged in and paid only
+if(localStorage.getItem('lolfundamentals_logged_in')==='true' && localStorage.getItem('lolfundamentals_paid')==='true'){
+  window.location.href='membershub.html';
+}
 
+// Particle effect
+const particlesContainer = document.querySelector('.particles');
+for(let i=0;i<50;i++){
+  const span = document.createElement('span');
+  span.style.left = Math.random()*100+"%";
+  span.style.top = Math.random()*100+"%";
+  span.style.animationDuration = (4+Math.random()*4)+"s";
+  span.style.animationDelay = Math.random()*4+"s";
+  particlesContainer.appendChild(span);
+}
+</script>
 </body>
 </html>
 
