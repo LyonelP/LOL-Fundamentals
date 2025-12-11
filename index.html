@@ -42,7 +42,7 @@ header {
   position: relative;
   z-index: 10;
   font-size: 3em;
-  margin-bottom: 6px;
+  margin-bottom: 10px;
   text-shadow: 0 0 12px #2f81f7;
 }
 .hero p {
@@ -155,11 +155,7 @@ footer a:hover { text-decoration:underline; }
 
 /* MOBILE FIX */
 @media (max-width: 600px) {
-  .hero { padding-top: 65px; }
-
-  /* Bring hero text closer together on mobile */
-  .hero h1 { margin-bottom: 4px; font-size:2.2em; }
-  .hero p { margin-top: 0; font-size:1em; }
+  .hero { padding-top: 40px; }
 
   .modalContent .plan-buttons {
     flex-direction: column !important;
@@ -247,12 +243,37 @@ footer a:hover { text-decoration:underline; }
 <section class="section">
   <h2>What You’ll Learn</h2>
   <div class="cards">
-    <div class="card"><h3>Fundamentals</h3><p>Core skills including combos, wave management, positioning, and warding for consistent gameplay improvement.</p></div>
-    <div class="card"><h3>Diana Guide</h3><p>A comprehensive guide covering Diana's full kit, itemization, playstyle, and advanced strategies.</p></div>
-    <div class="card"><h3>Ekko Guide</h3><p>Complete guide to playing Ekko Jungle, including combos, pathing, and advanced mechanics.</p></div>
-    <div class="card"><h3>Diana Matchup Guide</h3><p>Detailed breakdowns for every mid lane champion, teaching optimal trades, wave control, and all-in timings.</p></div>
-    <div class="card"><h3>Diana Rune & Build Calculator</h3><p>Compare rune pages and build paths against enemies with different stats to create your perfect Diana setup.</p></div>
-    <div class="card"><h3>Tierlist</h3><p>Rankings for each role in the current meta, highlighting strongest picks and counters.</p></div>
+
+    <div class="card">
+      <h3>Fundamentals</h3>
+      <p>Core skills including combos, wave management, positioning, and warding for consistent gameplay improvement.</p>
+    </div>
+
+    <div class="card">
+      <h3>Diana Guide</h3>
+      <p>A comprehensive guide covering Diana's full kit, itemization, playstyle, and advanced strategies.</p>
+    </div>
+
+    <div class="card">
+      <h3>Ekko Guide</h3>
+      <p>Complete guide to playing Ekko Jungle, including combos, pathing, and advanced mechanics.</p>
+    </div>
+
+    <div class="card">
+      <h3>Diana Matchup Guide</h3>
+      <p>Detailed breakdowns for every mid lane champion, teaching optimal trades, wave control, and all-in timings.</p>
+    </div>
+
+    <div class="card">
+      <h3>Diana Rune & Build Calculator</h3>
+      <p>Compare rune pages and build paths against enemies with different stats to create your perfect Diana setup.</p>
+    </div>
+
+    <div class="card">
+      <h3>Tierlist</h3>
+      <p>Rankings for each role in the current meta, highlighting strongest picks and counters.</p>
+    </div>
+
   </div>
 </section>
 
@@ -390,8 +411,6 @@ for(let i=0;i<50;i++){
 </script>
 </body>
 </html>
-
-
 
 
 
