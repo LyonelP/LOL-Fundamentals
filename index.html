@@ -155,10 +155,21 @@ footer a:hover { text-decoration:underline; }
 
 /* MOBILE FIX */
 @media (max-width: 600px) {
-  .hero { 
-    padding-top: 65px; 
-    background-size: 110%;       /* slightly smaller than desktop */
-    background-position: center 30%; /* adjust which part of the image shows */
+  /* Make hero section shorter */
+  .hero {
+    padding-top: 100px;  /* less than 140px */
+    padding-bottom: 40px; /* optional */
+  }
+
+  /* Push the hero text and buttons slightly lower */
+  .hero h1 {
+    margin-top: 20px;  /* adds space above the title */
+  }
+  .hero p {
+    margin-top: 10px;  /* space between title and description */
+  }
+  .hero .btn {
+    margin-top: 20px; /* pushes the buttons down */
   }
 }
 
@@ -416,6 +427,7 @@ for(let i=0;i<50;i++){
 </script>
 </body>
 </html>
+
 
 
 
