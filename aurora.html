@@ -56,21 +56,27 @@
     fill:currentColor;
   }
 
-  /* ===== Back Button ===== */
+   /* ===== Back Button ===== */
   .back-button {
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    background: var(--gold);
-    color: #0d1117;
-    font-weight: bold;
-    text-decoration: none;
+    display: block;
+    margin: 20px auto 20px; 
     padding: 10px 20px;
-    border-radius: 25px;
-    border: 1px solid var(--gold);
-    margin: 20px auto 30px auto;
+    background: linear-gradient(135deg, #c9aa71, #e0c77b);
+    color: #000;
+    text-decoration: none;
+    border-radius: 8px;
+    font-weight: bold;
+    font-size: 16px;
+    text-align: center;
+    box-shadow: 0 0 10px rgba(201,170,113,0.5);
+    transition: all 0.3s;
+    width: fit-content;
   }
-  .back-button:hover { background: #e6c17c; }
+  .back-button::before { content: "← "; }
+  .back-button:hover {
+    background: linear-gradient(135deg, #e6c97f, #f0d88b);
+    box-shadow: 0 0 15px rgba(255,215,0,0.8);
+  }
 
   /* ===== Matchup Layout ===== */
   .matchup-container {
@@ -198,6 +204,7 @@
 
 </body>
 </html>
+
 
 
 
