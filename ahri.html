@@ -3,9 +3,9 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Diana Mid Matchup – Ahri</title>
+<title>Diana Mid vs Ahri</title>
 
-<!-- Login requirement -->
+<!-- Early redirect before rendering -->
 <script>
   if (localStorage.getItem('lolfundamentals_logged_in') !== 'true') {
     window.location.replace('login.html');
@@ -13,76 +13,66 @@
 </script>
 
 <style>
-  :root {
-    --gold:#c9aa71;
-    --bg:#0a0f14;
-    --muted:#8b949e;
-  }
-
   body {
     margin: 0;
-    font-family: "Beaufort for LOL", Arial, Helvetica, sans-serif;
-    background: var(--bg);
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background: #0d1117;
     color: #e6edf3;
     line-height: 1.4;
-    min-height: 100vh;
-    display: flex;
-    flex-direction: column;
   }
-
-  /* ===== HEADER ===== */
   header {
-    background: linear-gradient(90deg, #0a0f14, #1b2838);
-    border-bottom: 2px solid var(--gold);
-    padding: 18px 20px;
-    font-weight: bold;
-    font-size: 26px;
-    letter-spacing: 1.5px;
-    text-transform: uppercase;
-    text-align: center;
-    color: var(--gold);
-    text-shadow: 0 0 8px rgba(201,170,113,0.4);
-    box-sizing: border-box;
-  }
-
-  /* ===== Back Button ===== */
-  .back-button {
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    background: var(--gold);
-    color: #0d1117;
-    font-weight: bold;
-    text-decoration: none;
+    background: #161b22;
     padding: 10px 20px;
-    border-radius: 25px;
-    border: 1px solid var(--gold);
-    margin: 20px auto 30px auto;
+    text-align: center;
+    font-size: 28px;
+    font-weight: bold;
+    color: #58a6ff;
   }
-  .back-button:hover { background: #e6c17c; }
-  .back-button::before { content: "← "; }
 
-  /* ===== Matchup Container ===== */
+  /* Gold Back Button */
+  .back-button {
+    display: block;
+    width: max-content;
+    margin: 20px auto 30px auto;
+    padding: 10px 20px;
+    background: linear-gradient(135deg, #c9aa71, #e0c77b);
+    color: #000;
+    text-decoration: none;
+    border-radius: 8px;
+    font-weight: bold;
+    transition: all 0.3s;
+    box-shadow: 0 0 10px rgba(201,170,113,0.5);
+    text-align: center;
+  }
+  .back-button::before {
+    content: "← ";
+  }
+  .back-button:hover {
+    background: linear-gradient(135deg, #e6c97f, #f0d88b);
+    box-shadow: 0 0 15px rgba(255,215,0,0.8);
+  }
+
   .matchup-container {
     display: flex;
     max-width: 900px;
-    margin: 0 auto;
+    margin: -15px auto 0 auto;
     gap: 15px;
-    padding: 0 20px 20px 20px;
+    padding: 0 20px 10px 20px;
   }
   .matchup-left {
     display: flex;
     align-items: center;
     gap: 10px;
+    flex: 0 0 auto;
   }
   .matchup-left img {
-    width: 100px;
-    height: 100px;
+    width: 80px;
+    height: 80px;
     border-radius: 8px;
   }
   .winrate-bubble {
-    background: #f94144; /* match Akali style */
-    color: #fff;
+    background: #F9D949; /* yellow for 49-51% */
+    color: #0d1117;
     font-weight: bold;
     padding: 8px 14px;
     border-radius: 25px;
@@ -91,13 +81,15 @@
   }
   .matchup-right {
     flex: 1;
+    color: #e6edf3;
     display: flex;
     flex-direction: column;
+    justify-content: flex-start;
+    margin-top: 0px;
   }
   .matchup-right h2 {
     margin: 0 0 15px 0;
     font-size: 22px;
-    color: var(--gold);
   }
   .matchup-right ul {
     padding-left: 20px;
@@ -106,23 +98,26 @@
   .matchup-right li {
     margin-bottom: 6px;
   }
-
   footer {
     text-align: center;
     padding: 15px 10px;
     font-size: 14px;
-    color: var(--muted);
-    margin-top: auto;
+    color: #8b949e;
   }
-
   @media (max-width: 600px) {
     .matchup-container {
       flex-direction: column;
       align-items: center;
       padding: 10px;
+      margin-top: -15px;
     }
-    .matchup-right { text-align: center; }
-    .matchup-left img { width: 80px; height: 80px; }
+    .matchup-left {
+      justify-content: center;
+    }
+    .matchup-right {
+      text-align: center;
+      margin-top: 0px;
+    }
   }
 </style>
 </head>
@@ -140,17 +135,29 @@
   <div class="matchup-right">
     <h2>Matchup Notes</h2>
     <ul>
-      <li>Ahri’s best trade lvl 1 is to auto W auto towards but river bush on blue side and top river side on red side moving towards Diana with the movement speed from W and often dodging the Q by moving inside the Q arc. Counter this by only throwing max range Q’s and waiting for her to start autoing the wave.</li>
+      <li>Ahri’s best trade lvl 1 is to auto w auto towards but river bush on blue side and top river side on red side moving towards Diana with the movement speed from w and often dodging the q by moving inside the q arc. Counter this by only throwing max range Q’s and waiting for her to start autoing the wave.</li>
       <li>It's crucial to thin out the wave against Ahri to prevent her from trading well with autos and finding easy charms on you.</li>
-      <li>Build Verdant Barrier/Banshee's Veil earlier in the matchup. Ahri doesn’t have high sustain damage and the spell shield will allow you to bypass the Ahri E.</li>
+      <li>Build Verdant Barrier/Banshees Veil earlier in the matchup. Ahri doesn’t have high sustain damage and the spell shield will allow you to bypass the Ahri E.
+</li>
     </ul>
   </div>
 </div>
 
-<footer>© 2025 LoL Fundamentals · All rights reserved</footer>
-
+<footer>© 2025 LoL Fundamentals · Contact: arcsecond@lolfundamentals.com</footer>
 </body>
 </html>
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
