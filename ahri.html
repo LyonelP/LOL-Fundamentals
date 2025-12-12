@@ -4,74 +4,85 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Diana Mid vs Ahri</title>
-
-<!-- Early redirect before rendering -->
-<script>
-  if (localStorage.getItem('lolfundamentals_logged_in') !== 'true') {
-    window.location.replace('login.html');
-  }
-</script>
-
 <style>
+  :root {
+    --gold:#c9aa71;
+    --bg:#0a0f14;
+    --card:#161b22;
+    --muted:#8b949e;
+  }
+
   body {
     margin: 0;
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    background: #0d1117;
+    font-family: "Beaufort for LOL", Arial, Helvetica, sans-serif;
+    background: var(--bg);
     color: #e6edf3;
     line-height: 1.4;
-  }
-  header {
-    background: #161b22;
-    padding: 10px 20px;
-    text-align: center;
-    font-size: 28px;
-    font-weight: bold;
-    color: #58a6ff;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
   }
 
-  /* Gold Back Button */
+  /* ===== HEADER ===== */
+  header {
+    background: rgba(13,17,23,0.9);
+    border-bottom: 2px solid var(--gold);
+    padding: 20px;
+    font-weight: bold;
+    font-size: 26px;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    text-align: center;
+    line-height: 1.2;
+    color: var(--gold);
+    box-sizing: border-box;
+  }
+
+  /* ===== Back Button ===== */
   .back-button {
     display: block;
-    width: max-content;
-    margin: 20px auto 30px auto;
+    margin: 20px auto 20px; 
     padding: 10px 20px;
     background: linear-gradient(135deg, #c9aa71, #e0c77b);
     color: #000;
     text-decoration: none;
     border-radius: 8px;
     font-weight: bold;
-    transition: all 0.3s;
-    box-shadow: 0 0 10px rgba(201,170,113,0.5);
+    font-size: 16px;
     text-align: center;
+    box-shadow: 0 0 10px rgba(201,170,113,0.5);
+    transition: all 0.3s;
+    width: fit-content;
   }
-  .back-button::before {
-    content: "← ";
-  }
+  .back-button::before { content: "← "; }
   .back-button:hover {
     background: linear-gradient(135deg, #e6c97f, #f0d88b);
     box-shadow: 0 0 15px rgba(255,215,0,0.8);
   }
 
+  /* ===== Matchup Container ===== */
   .matchup-container {
     display: flex;
     max-width: 900px;
-    margin: -15px auto 0 auto;
+    margin: 0 auto;
     gap: 15px;
     padding: 0 20px 10px 20px;
   }
+
   .matchup-left {
     display: flex;
     align-items: center;
     gap: 10px;
-    flex: 0 0 auto;
   }
+
   .matchup-left img {
     width: 80px;
     height: 80px;
     border-radius: 8px;
   }
+
   .winrate-bubble {
-    background: #F9D949; /* yellow for 49-51% */
+    background: #f97316; /* can adjust per matchup if needed */
     color: #0d1117;
     font-weight: bold;
     padding: 8px 14px;
@@ -79,47 +90,54 @@
     font-size: 16px;
     white-space: nowrap;
   }
+
   .matchup-right {
     flex: 1;
-    color: #e6edf3;
     display: flex;
     flex-direction: column;
-    justify-content: flex-start;
-    margin-top: 0px;
   }
+
   .matchup-right h2 {
     margin: 0 0 15px 0;
     font-size: 22px;
+    color: var(--gold);
   }
+
   .matchup-right ul {
     padding-left: 20px;
     margin: 0;
   }
+
   .matchup-right li {
     margin-bottom: 6px;
   }
+
+  /* ===== FOOTER ===== */
   footer {
     text-align: center;
     padding: 15px 10px;
     font-size: 14px;
     color: #8b949e;
+    margin-top: auto;
   }
+
   @media (max-width: 600px) {
     .matchup-container {
       flex-direction: column;
       align-items: center;
       padding: 10px;
-      margin-top: -15px;
     }
-    .matchup-left {
-      justify-content: center;
-    }
-    .matchup-right {
-      text-align: center;
-      margin-top: 0px;
-    }
+    .matchup-right { text-align: center; }
   }
 </style>
+
+<!-- ===== LOGIN CHECK ===== -->
+<script>
+  if (localStorage.getItem('lolfundamentals_logged_in') !== 'true') {
+    window.location.href = 'login.html';
+  }
+</script>
+
 </head>
 <body>
 
@@ -132,18 +150,19 @@
     <img src="https://ddragon.leagueoflegends.com/cdn/14.23.1/img/champion/Ahri.png" alt="Ahri">
     <div class="winrate-bubble">49%</div>
   </div>
+
   <div class="matchup-right">
     <h2>Matchup Notes</h2>
     <ul>
-      <li>Ahri’s best trade lvl 1 is to auto w auto towards but river bush on blue side and top river side on red side moving towards Diana with the movement speed from w and often dodging the q by moving inside the q arc. Counter this by only throwing max range Q’s and waiting for her to start autoing the wave.</li>
-      <li>It's crucial to thin out the wave against Ahri to prevent her from trading well with autos and finding easy charms on you.</li>
-      <li>Build Verdant Barrier/Banshees Veil earlier in the matchup. Ahri doesn’t have high sustain damage and the spell shield will allow you to bypass the Ahri E.
-</li>
+      <li>Ahri’s best trade lvl 1 is to auto W auto towards the river bush (blue side) or top river side (red side) moving towards Diana with the movement speed from W. She often dodges Q by moving inside the Q arc. Counter this by throwing only max range Q’s and waiting for her to start autoing the wave.</li>
+      <li>It's crucial to thin out the wave against Ahri to prevent her from trading effectively with autos and landing easy charms.</li>
+      <li>Build Verdant Barrier or Banshee's Veil early in the matchup. Ahri doesn’t have high sustain damage, and the spell shield allows you to bypass Ahri’s E.</li>
     </ul>
   </div>
 </div>
 
 <footer>© 2025 LoL Fundamentals · All rights reserved</footer>
+
 </body>
 </html>
 
