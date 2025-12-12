@@ -23,14 +23,14 @@
     margin: 0;
     padding: 0;
     height: 100%;
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    font-family: "Beaufort for LOL", Arial, Helvetica, sans-serif;
     background: var(--bg);
     color: #e6edf3;
     display: flex;
     flex-direction: column;
   }
 
-  /* Header from index page */
+  /* Members Hub header styling */
   header {
     background: linear-gradient(90deg, #0a0f14, #1b2838);
     border-bottom: 2px solid var(--gold);
@@ -71,19 +71,21 @@
     max-width: 900px;
     margin: 0 auto;
     gap: 15px;
-    padding: 0 20px 10px 20px;
+    padding: 0 20px 20px 20px;
     flex: 1; /* pushes footer to bottom */
+    align-items: flex-start;
   }
   .matchup-left {
     display: flex;
+    flex-direction: column;
     align-items: center;
     gap: 10px;
     flex: 0 0 auto;
   }
   .matchup-left img {
-    width: 80px;
-    height: 80px;
-    border-radius: 8px;
+    width: 120px; /* same proportion as Members Hub cards */
+    height: 120px;
+    border-radius: 12px;
   }
   .winrate-bubble {
     background: #F9D949;
@@ -113,13 +115,13 @@
     margin-bottom: 6px;
   }
 
+  /* Footer stays at bottom */
   footer {
     text-align: center;
     padding: 15px 10px;
     font-size: 14px;
-    color: var(--muted);
-    border-top: 1px solid #1f2937;
-    background: var(--bg);
+    color: #8b949e;
+    margin-top: auto;
   }
 
   @media (max-width: 600px) {
@@ -139,7 +141,7 @@
 </head>
 <body>
 
-<header>LoL Fundamentals – Members Hub</header>
+<header>Diana Mid Matchup – Ahri</header>
 
 <a href="matchuphub.html" class="back-button">Back to Matchup Hub</a>
 
@@ -162,6 +164,7 @@
 
 </body>
 </html>
+
 
 
 
