@@ -39,27 +39,27 @@
   }
 
   /* ===== Content ===== */
-/* Back button */
-.back-button {
-  display: block;
-  margin: 20px auto 20px; 
-  padding: 10px 20px;
-  background: linear-gradient(135deg, #c9aa71, #e0c77b);
-  color: #000;
-  text-decoration: none;
-  border-radius: 8px;
-  font-weight: bold;
-  font-size: 16px;
-  text-align: center;
-  box-shadow: 0 0 10px rgba(201,170,113,0.5);
-  transition: all 0.3s;
-  width: fit-content;
-}
-.back-button::before { content: "← "; }
-.back-button:hover {
-  background: linear-gradient(135deg, #e6c97f, #f0d88b);
-  box-shadow: 0 0 15px rgba(255,215,0,0.8);
-}
+  /* Back button */
+  .back-button {
+    display: block;
+    margin: 20px auto 20px; 
+    padding: 10px 20px;
+    background: linear-gradient(135deg, #c9aa71, #e0c77b);
+    color: #000;
+    text-decoration: none;
+    border-radius: 8px;
+    font-weight: bold;
+    font-size: 16px;
+    text-align: center;
+    box-shadow: 0 0 10px rgba(201,170,113,0.5);
+    transition: all 0.3s;
+    width: fit-content;
+  }
+  .back-button::before { content: "←← "; }
+  .back-button:hover {
+    background: linear-gradient(135deg, #e6c97f, #f0d88b);
+    box-shadow: 0 0 15px rgba(255,215,0,0.8);
+  }
 
   .matchup-container {
     display: flex;
@@ -146,12 +146,20 @@
     .video-container iframe { height: 250px; }
   }
 </style>
+
+<!-- ===== LOGIN CHECK ===== -->
+<script>
+  if (localStorage.getItem('lolfundamentals_logged_in') !== 'true') {
+    window.location.href = 'login.html';
+  }
+</script>
+
 </head>
 <body>
 
 <header>Diana Mid Matchup – Akali</header>
 
-<a href="matchuphub.html" class="back-button">← Back to Matchup Hub</a>
+<a href="matchuphub.html" class="back-button">Back to Matchup Hub</a>
 
 <div class="matchup-container">
   <div class="matchup-left">
@@ -180,6 +188,7 @@
 
 </body>
 </html>
+
 
 
 
