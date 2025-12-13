@@ -4,33 +4,86 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Diana Mid vs Katarina</title>
+
 <style>
-  body { margin: 0; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; background: #0d1117; color: #e6edf3; line-height: 1.4; }
-  header { background: #161b22; padding: 10px 20px; text-align: center; font-size: 28px; font-weight: bold; color: #58a6ff; }
-
-  /* Gold Back Button */
-  .back-link {
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    background: #c9aa71; /* gold */
-    color: #0d1117;
-    font-weight: bold;
-    text-decoration: none;
-    padding: 10px 20px;
-    border-radius: 25px;
-    border: 1px solid #c9aa71;
-    margin: 20px auto 30px auto;
+  :root {
+    --gold:#c9aa71;
+    --bg:#0a0f14;
+    --card:#161b22;
+    --muted:#8b949e;
   }
-  .back-link:hover { background: #e6c17c; color: #0d1117; }
 
-  .matchup-container { display: flex; max-width: 900px; margin: -15px auto 0 auto; gap: 15px; padding: 0 20px 10px 20px; }
-  .matchup-left { display: flex; align-items: center; gap: 10px; flex: 0 0 auto; }
-  .matchup-left img { width: 80px; height: 80px; border-radius: 8px; }
+  body {
+    margin: 0;
+    font-family: "Beaufort for LOL", Arial, Helvetica, sans-serif;
+    background: var(--bg);
+    color: #e6edf3;
+    line-height: 1.4;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+  }
 
-  /* Gold Winrate Bubble */
+  /* ===== HEADER ===== */
+  header {
+    background: rgba(13,17,23,0.9);
+    border-bottom: 2px solid var(--gold);
+    padding: 20px;
+    font-weight: bold;
+    font-size: 26px;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    text-align: center;
+    line-height: 1.2;
+    color: var(--gold);
+    box-sizing: border-box;
+  }
+
+  /* ===== Back Button ===== */
+  .back-button {
+    display: block;
+    margin: 20px auto 20px; 
+    padding: 10px 20px;
+    background: linear-gradient(135deg, #c9aa71, #e0c77b);
+    color: #000;
+    text-decoration: none;
+    border-radius: 8px;
+    font-weight: bold;
+    font-size: 16px;
+    text-align: center;
+    box-shadow: 0 0 10px rgba(201,170,113,0.5);
+    transition: all 0.3s;
+    width: fit-content;
+  }
+  .back-button::before { content: "← "; }
+  .back-button:hover {
+    background: linear-gradient(135deg, #e6c97f, #f0d88b);
+    box-shadow: 0 0 15px rgba(255,215,0,0.8);
+  }
+
+  /* ===== Matchup Container ===== */
+  .matchup-container {
+    display: flex;
+    max-width: 900px;
+    margin: 0 auto;
+    gap: 15px;
+    padding: 0 20px 10px 20px;
+  }
+
+  .matchup-left {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+
+  .matchup-left img {
+    width: 80px;
+    height: 80px;
+    border-radius: 8px;
+  }
+
   .winrate-bubble {
-    background: #facc15; /* gold to match Annie matchup */
+    background: #F9D949;
     color: #0d1117;
     font-weight: bold;
     padding: 8px 14px;
@@ -39,56 +92,83 @@
     white-space: nowrap;
   }
 
-  .matchup-right { flex: 1; color: #e6edf3; display: flex; flex-direction: column; justify-content: flex-start; margin-top: 0px; }
-  .matchup-right h2 { margin: 0 0 15px 0; font-size: 22px; }
-  .matchup-right ul { padding-left: 20px; margin: 0; }
-  .matchup-right li { margin-bottom: 6px; }
+  .matchup-right {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+  }
 
-  footer { text-align: center; padding: 15px 10px; font-size: 14px; color: #8b949e; }
+  .matchup-right h2 {
+    margin: 0 0 15px 0;
+    font-size: 22px;
+    color: var(--gold);
+  }
+
+  .matchup-right ul {
+    padding-left: 20px;
+    margin: 0;
+  }
+
+  .matchup-right li {
+    margin-bottom: 6px;
+  }
+
+  /* ===== FOOTER ===== */
+  footer {
+    text-align: center;
+    padding: 15px 10px;
+    font-size: 14px;
+    color: var(--muted);
+    margin-top: auto;
+  }
 
   @media (max-width: 600px) {
-    .matchup-container { flex-direction: column; align-items: center; padding: 10px; margin-top: -15px; }
-    .matchup-left { justify-content: center; }
-    .matchup-right { text-align: center; margin-top: 0px; }
+    .matchup-container {
+      flex-direction: column;
+      align-items: center;
+      padding: 10px;
+    }
+    .matchup-right { text-align: center; }
   }
 </style>
+
+<!-- ===== LOGIN CHECK ===== -->
+<script>
+  if (localStorage.getItem('lolfundamentals_logged_in') !== 'true') {
+    window.location.href = 'login.html';
+  }
+</script>
+
 </head>
 <body>
 
-<script>
-// Require login to view page
-if (localStorage.getItem('lolfundamentals_logged_in') !== 'true') {
-  window.location.href = 'login.html';
-}
-</script>
-
 <header>Diana Mid Matchup – Katarina</header>
 
-<div style="text-align: center;">
-  <a href="matchuphub.html" class="back-link">&larr; Back to Matchup Hub</a>
-</div>
+<a href="matchuphub.html" class="back-button">Back to Matchup Hub</a>
 
 <div class="matchup-container">
   <div class="matchup-left">
     <img src="https://ddragon.leagueoflegends.com/cdn/14.23.1/img/champion/Katarina.png" alt="Katarina">
     <div class="winrate-bubble">49%</div>
   </div>
+
   <div class="matchup-right">
     <h2>Matchup Notes</h2>
     <ul>
-      <li>Auto two separate melee creeps 1 time after the first wave settles. This will mess up her ability to Q the first three melee minions.</li>
-      <li>Crash the second wave. She'll hit lvl 3 first which is her only chance to win the matchup. Be careful of ganks here.</li>
-      <li>Watch out for incoming minion waves as Katarina can E to minions to cancel your engage.</li>
-      <li>If you're winning a trade, save your E to follow Katarina's E away.</li>
-      <li>Diana R can cancel Katarina R, though Death Lotus makes up a small portion of Katarina's overall damage.</li>
+      <li>Auto two different melee minions once after the first wave settles to disrupt Katarina’s ability to Q all three melees.</li>
+      <li>Crash the second wave. Katarina will hit level 3 first, which is her main early kill window—be mindful of jungle pressure.</li>
+      <li>Track incoming minion waves, as Katarina can Shunpo to minions to disengage or dodge your E.</li>
+      <li>If you win a trade, hold E to match Katarina’s Shunpo and continue the chase.</li>
+      <li>Diana R can interrupt Katarina R, but Death Lotus contributes very little to Katarina’s overall damage compared to her passive and resets.</li>
     </ul>
   </div>
 </div>
 
-<footer>© 2025 LoL Fundamentals · Contact: arcsecond@lolfundamentals.com</footer>
+<footer>© 2025 LoL Fundamentals · All rights reserved</footer>
 
 </body>
 </html>
+
 
 
 
