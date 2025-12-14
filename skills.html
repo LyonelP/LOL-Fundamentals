@@ -41,11 +41,11 @@ body::before {
 
 /* HEADER */
 header {
-  background: linear-gradient(90deg, #0a0f14, #1b2838);
+  background: rgba(13,17,23,0.9);
   border-bottom: 2px solid var(--gold);
-  padding: 14px 20px;
+  padding: 20px 10px;
   font-weight: bold;
-  font-size: 20px; /* same as Members Hub */
+  font-size: 26px; /* match Members Hub */
   text-transform: uppercase;
   color: var(--gold);
   letter-spacing: 1px;
@@ -88,7 +88,7 @@ header {
   color: var(--gold);
   cursor: pointer;
   width: 220px;
-  max-width: 95%;
+  max-width: 90vw; /* fits mobile */
   background-image: url("data:image/svg+xml;utf8,<svg fill='%23c9aa71' height='12' viewBox='0 0 24 24' width='12' xmlns='http://www.w3.org/2000/svg'><path d='M7 10l5 5 5-5z'/></svg>");
   background-repeat: no-repeat;
   background-position: right 10px center;
@@ -155,20 +155,21 @@ header {
   color: #000;
 }
 
-/* FOOTER */
+/* FOOTER BAR */
 footer {
+  width: 100%;
   text-align: center;
-  padding: 30px;
-  color: #fff; /* white text */
+  padding: 12px 0;
+  background: var(--bg);
+  color: #fff;
   font-size: 14px;
-  background: rgba(0,0,0,0.3);
-  border-top: 1px solid #1f2937;
+  border-top: 1px solid var(--gold);
 }
 
 /* MEDIA QUERIES */
 @media(max-width: 700px){
-  header { font-size: 20px; padding: 14px 10px; } /* match Members Hub */
-  #section-select { width: 90vw; font-size: 14px; padding: 8px 30px 8px 12px; }
+  header { font-size: 26px; padding: 20px 10px; } /* match Members Hub */
+  #section-select { width: 90vw; font-size: 14px; padding: 8px 12px; }
   .skill-list li { width: 85vw; font-size: 16px; padding: 10px 14px; }
 }
 </style>
@@ -193,7 +194,7 @@ footer {
 <ul class="skill-list" id="skill-list"></ul>
 
 <footer>
-  © 2025 LoL Fundamentals · All rights reserved
+  © 2025 LoL Fundamentals
 </footer>
 
 <script>
@@ -251,6 +252,5 @@ sectionSelect.addEventListener('change', () => {
 
 </body>
 </html>
-
 
 
