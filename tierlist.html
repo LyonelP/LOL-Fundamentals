@@ -5,10 +5,17 @@
 <meta name="viewport" content="width=device-width,initial-scale=1" />
 <title>LoL Fundamentals – Tierlist</title>
 <style>
+  :root {
+    --gold: #c9aa71;
+    --bg: #0a0f14;
+    --card: #161b22;
+    --muted: #8b949e;
+  }
+
   body {
     margin: 0;
     font-family: "Beaufort for LOL", Arial, Helvetica, sans-serif;
-    background: #0a0f14;
+    background: var(--bg);
     color: #e6edf3;
     line-height: 1.6;
     text-align: center;
@@ -16,50 +23,46 @@
 
   header {
     background: linear-gradient(90deg, #0a0f14, #1b2838);
-    border-bottom: 2px solid #c9aa71;
-    padding: 15px 20px;
+    border-bottom: 2px solid var(--gold);
+    padding: 14px 20px;
+    color: var(--gold);
     font-weight: bold;
-    font-size: 24px;
+    font-size: 20px;
     letter-spacing: 1px;
     text-transform: uppercase;
-    color: #c9aa71;
+    position: relative;
   }
 
   .back-button {
     display: inline-block;
     margin: 20px auto 8px auto;
     padding: 10px 20px;
-    background: linear-gradient(135deg, #c9aa71, #e0c77b);
+    background: linear-gradient(135deg, var(--gold), #e0c77b);
     color: #000;
     text-decoration: none;
     border-radius: 8px;
     font-weight: bold;
     box-shadow: 0 0 10px rgba(201, 170, 113, 0.5);
+    font-size: 16px;
   }
-
-  .back-button::before {
-    content: "← ";
-  }
-
+  .back-button::before { content: "← "; }
   .back-button:hover {
     background: linear-gradient(135deg, #e6c97f, #f0d88b);
     box-shadow: 0 0 15px rgba(255, 215, 0, 0.8);
   }
 
-  /* Role selector properly spaced below the back button */
   #roleSelect {
     display: block;
     margin: 20px auto 40px auto;
     padding: 10px 18px;
     font-size: 16px;
     border-radius: 6px;
-    border: 1px solid #c9aa71;
+    border: 1px solid var(--gold);
     background: #161b22;
     color: #e6edf3;
     box-shadow: 0 0 8px rgba(201, 170, 113, 0.2);
   }
 
-  /* Tier + cards layout */
   #championCards {
     max-width: 1100px;
     margin: 0 auto 60px auto;
@@ -78,7 +81,7 @@
     font-weight: 700;
     font-size: 20px;
     margin-bottom: 14px;
-    color: #c9aa71;
+    color: var(--gold);
   }
 
   .tier-cards {
@@ -89,8 +92,8 @@
   }
 
   .card {
-    background: #161b22;
-    border: 2px solid #c9aa71;
+    background: var(--card);
+    border: 2px solid var(--gold);
     border-radius: 10px;
     width: 124px;
     padding: 10px;
@@ -122,20 +125,20 @@
 
   .champ-rank {
     font-size: 12px;
-    color: #c9aa71;
+    color: var(--gold);
   }
 
   footer {
     text-align: center;
     padding: 30px;
-    color: #8b949e;
+    color: var(--muted);
     font-size: 14px;
-    background: #0a0f14;
+    background: var(--bg);
     border-top: 1px solid #1f2937;
   }
 
   footer a {
-    color: #c9aa71;
+    color: var(--gold);
     text-decoration: none;
   }
 
@@ -162,10 +165,8 @@
 
 <header>Solo Queue Tierlist</header>
 
-<!-- Back button -->
 <a href="membershub.html" class="back-button">Back to Members Hub</a>
 
-<!-- Dropdown directly below -->
 <select id="roleSelect" aria-label="Select role">
   <option value="Top">Top</option>
   <option value="Jungle">Jungle</option>
@@ -174,7 +175,6 @@
   <option value="Support">Support</option>
 </select>
 
-<!-- Champions section -->
 <div id="championCards" aria-live="polite"></div>
 
 <footer>
@@ -188,10 +188,8 @@ if (localStorage.getItem('lolfundamentals_logged_in') !== 'true') {
   window.location.href = 'index.html';
 }
 
-/* CSV URL (your sheet) */
 const CSV_URL = 'https://docs.google.com/spreadsheets/d/e/2PACX-1vRtIJeggpJ6cjGJt0OOds4OZDuHMMUxHCWzMiU1Bd4gJ8EvfZMXPE9p0X1K3yyeZs7bpFyQZHhHpnsu/pub?output=csv';
 
-/* Map of special/exception champion filenames on Riot CDN */
 const IMG_NAME_OVERRIDES = {
   "Bel'Veth": "Belveth",
   "Cho'Gath": "Chogath",
@@ -215,29 +213,26 @@ const IMG_NAME_OVERRIDES = {
   "Bel'Beth": "Belveth",
   "Renata Glasc": "Renata",
   "Mel": "Mel"
+  "Zaahen": "Zaahen" 
 };
 
-/* normalize champion names */
 function getImageName(champName) {
   if (!champName) return null;
   if (IMG_NAME_OVERRIDES[champName]) return IMG_NAME_OVERRIDES[champName];
   const normalized = champName.normalize('NFD').replace(/[\u0300-\u036f]/g, '');
-  const cleaned = normalized.replace(/[\s'’&\.\-]/g, '');
-  return cleaned;
+  return normalized.replace(/[\s'’&\.\-]/g, '');
 }
 
-/* fallback placeholder */
 const PLACEHOLDER =
   'data:image/svg+xml;charset=UTF-8,' +
   encodeURIComponent(
     `<svg xmlns="http://www.w3.org/2000/svg" width="240" height="240"><rect width="100%" height="100%" fill="#0f1722"/><text x="50%" y="50%" fill="#c9aa71" font-size="20" font-family="Arial" dominant-baseline="middle" text-anchor="middle">No Image</text></svg>`
   );
 
-/* parse CSV */
 async function loadCSV(url) {
-  const txt = await fetch(url).then((r) => r.text());
-  const lines = txt.trim().split('\n').map((l) => l.replace(/\r/g, ''));
-  const header = lines[0].split(',').map((h) => h.trim());
+  const txt = await fetch(url).then(r => r.text());
+  const lines = txt.trim().split('\n').map(l => l.replace(/\r/g, ''));
+  const header = lines[0].split(',').map(h => h.trim());
   const champions = {};
   for (let i = 1; i < lines.length; i++) {
     if (!lines[i].trim()) continue;
@@ -246,25 +241,22 @@ async function loadCSV(url) {
     if (!champRaw) continue;
     champions[champRaw] = {};
     for (let j = 1; j < header.length && j < cols.length; j++) {
-      const colName = header[j].trim();
-      champions[champRaw][colName] = (cols[j] || '').trim();
+      champions[champRaw][header[j]] = (cols[j] || '').trim();
     }
   }
   return champions;
 }
 
-/* render champions grouped by tier */
 function renderTierGroups(champRanks, role) {
   const container = document.getElementById('championCards');
   container.innerHTML = '';
   const rankOrder = ['OP', 'S', 'A', 'B', 'C', 'D'];
 
-  rankOrder.forEach((rank) => {
-    const champsInRank = Object.keys(champRanks).filter((name) => {
+  rankOrder.forEach(rank => {
+    const champsInRank = Object.keys(champRanks).filter(name => {
       const val = champRanks[name]?.[role]?.trim();
       return val && val.toUpperCase() === rank && val.toUpperCase() !== 'X';
     });
-
     if (champsInRank.length === 0) return;
 
     const tierGroup = document.createElement('div');
@@ -278,7 +270,7 @@ function renderTierGroups(champRanks, role) {
     const tierCards = document.createElement('div');
     tierCards.className = 'tier-cards';
 
-    champsInRank.forEach((champName) => {
+    champsInRank.forEach(champName => {
       const imgName = getImageName(champName);
       const imgURL = imgName
         ? `https://ddragon.leagueoflegends.com/cdn/14.23.1/img/champion/${imgName}.png`
@@ -298,7 +290,6 @@ function renderTierGroups(champRanks, role) {
   });
 }
 
-/* Initialize page */
 (async function init() {
   try {
     const champRanks = await loadCSV(CSV_URL);
@@ -316,4 +307,6 @@ function renderTierGroups(champRanks, role) {
 </script>
 </body>
 </html>
+
+
 
