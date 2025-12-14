@@ -38,7 +38,7 @@ header {
   border-bottom: 2px solid #c9aa71;
   padding: 20px;
   font-weight: bold;
-  font-size: 26px;
+  font-size: 26px; /* same as Members Hub */
   text-transform: uppercase;
   color: #c9aa71;
   letter-spacing: 1px;
@@ -66,42 +66,6 @@ header {
   box-shadow: 0 0 15px rgba(255,215,0,0.8);
 }
 
-#section-select-container {
-  margin: 20px auto;
-}
-#section-select {
-  padding: 8px 12px;
-  font-size: 16px;
-  border-radius: 6px;
-  border: none;
-  background: #0f1722;
-  color: #c9aa71;
-  cursor: pointer;
-  width: 220px;
-  background-image: url("data:image/svg+xml;utf8,<svg fill='%23c9aa71' height='12' viewBox='0 0 24 24' width='12' xmlns='http://www.w3.org/2000/svg'><path d='M7 10l5 5 5-5z'/></svg>");
-  background-repeat: no-repeat;
-  background-position: right 10px center;
-  background-size: 12px;
-  appearance: none;
-  -webkit-appearance: none;
-  -moz-appearance: none;
-}
-
-/* Intro box */
-#intro-box {
-  max-width: 900px;
-  background: rgba(0,0,0,0.7);
-  border: 2px solid #c9aa71;
-  border-radius: 12px;
-  padding: 20px;
-  text-align: left;
-  font-size: 18px;
-  margin-bottom: 30px;
-  margin-left: auto;
-  margin-right: auto;
-}
-
-/* Skill list + checkmarks */
 .skill-list {
   list-style: none;
   padding: 0;
@@ -168,10 +132,8 @@ footer {
 }
 
 @media(max-width: 700px){
-  header { font-size: 18px; padding: 10px 15px; }
-  #section-select { width: 95vw; font-size: 14px; padding: 8px 30px 8px 12px; }
+  header { font-size: 22px; padding: 15px 10px; }
   .skill-list li { width: 85vw; font-size: 16px; padding: 10px 14px; }
-  #intro-box { width: 85vw; font-size: 16px; }
 }
 </style>
 </head>
@@ -181,37 +143,7 @@ footer {
 
 <a href="membershub.html" class="back-button">Back to Members Hub</a>
 
-<div id="section-select-container">
-  <select id="section-select">
-    <option selected>Select a section</option>
-    <option>Pre Game</option>
-    <option>Early Game</option>
-    <option>Mid Game</option>
-    <option>Late Game</option>
-    <option>Advanced</option>
-    <option>Out of Game</option>
-  </select>
-</div>
-
-<div id="skills-container">
-  <div id="intro-box">
-    <p><strong>Welcome to the Skills Hub!</strong></p>
-    <p>Here’s what each section covers:</p>
-    <ul>
-      <li><strong>Pre Game:</strong> Champion select, summoner spells, communication, and build planning.</li>
-      <li><strong>Early Game:</strong> Laning, farming, trading, pathing, and first ganks.</li>
-      <li><strong>Mid Game:</strong> Team fights, objectives, roaming, and map control.</li>
-      <li><strong>Late Game:</strong> Damage prioritization, rotations, and closing out.</li>
-      <li><strong>Advanced:</strong> Animation cancelling, positioning, and high-level strategy.</li>
-      <li><strong>Out of Game:</strong> Setup, mindset, and meta knowledge.</li>
-    </ul>
-    <p>Select a section above to see the skill cards.</p>
-  </div>
-
-  <ul class="skill-list" id="skill-list" style="display:none;"></ul>
-</div>
-
-<footer>© 2025 LoL Fundamentals · All rights reserved</footer>
+<ul class="skill-list" id="skill-list"></ul>
 
 <script>
 const skillData = {
@@ -229,20 +161,9 @@ function saveProgress() {
   localStorage.setItem("skillProgress", JSON.stringify(skillProgress));
 }
 
-const sectionSelect = document.getElementById('section-select');
 const skillList = document.getElementById('skill-list');
-const introBox = document.getElementById('intro-box');
 
 function renderSkills(section) {
-  if (section === "Select a section") {
-    introBox.style.display = 'block';
-    skillList.style.display = 'none';
-    return;
-  }
-
-  introBox.style.display = 'none';
-  skillList.style.display = 'block';
-
   const skills = skillData[section];
   skillList.innerHTML = skills.map(skill => {
     const completed = skillProgress?.[section]?.[skill] ? "completed" : "";
@@ -250,7 +171,7 @@ function renderSkills(section) {
 
     return `
       <li data-skill="${skill}">
-        <a href="${link}" onclick="localStorage.setItem('lastSection','${section}')">${skill}</a>
+        <a href="${link}">${skill}</a>
         <div class="checkmark ${completed}" onclick="toggleCheck('${section}','${skill}', this)">
           ${completed ? "✔" : ""}
         </div>
@@ -267,23 +188,8 @@ function toggleCheck(section, skill, element) {
   element.innerHTML = element.classList.contains("completed") ? "✔" : "";
 }
 
-const lastSection = localStorage.getItem('lastSection');
-if (lastSection && skillData[lastSection]) {
-  sectionSelect.value = lastSection;
-  renderSkills(lastSection);
-} else {
-  renderSkills("Select a section");
-}
-
-sectionSelect.addEventListener('change', () => {
-  const selected = sectionSelect.value;
-  renderSkills(selected);
-  if (selected !== "Select a section") localStorage.setItem('lastSection', selected);
-});
-
-document.querySelector('.back-button').addEventListener('click', () => {
-  localStorage.removeItem('lastSection');
-});
+// Render Pre Game directly on load
+renderSkills("Pre Game");
 </script>
 
 </body>
