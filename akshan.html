@@ -4,41 +4,54 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Diana Mid vs Akshan</title>
+
 <style>
-  body {
-    margin: 0;
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    background: #0d1117;
-    color: #e6edf3;
-    line-height: 1.4;
-  }
-  header {
-    background: #161b22;
-    padding: 10px 20px;
-    text-align: center;
-    font-size: 28px;
-    font-weight: bold;
-    color: #58a6ff;
+  :root {
+    --gold:#c9aa71;
+    --bg:#0a0f14;
+    --card:#161b22;
+    --muted:#8b949e;
+    --orange:#f97316;
   }
 
-  /* Gold Back Button */
+  body {
+    margin: 0;
+    font-family: "Beaufort for LOL", Arial, Helvetica, sans-serif;
+    background: var(--bg);
+    color: #e6edf3;
+    line-height: 1.4;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+  }
+
+  header {
+    background: rgba(13,17,23,0.9);
+    border-bottom: 2px solid var(--gold);
+    padding: 20px;
+    font-weight: bold;
+    font-size: 26px;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    text-align: center;
+    color: var(--gold);
+  }
+
   .back-button {
     display: block;
-    width: max-content;
-    margin: 20px auto 30px auto;
+    margin: 20px auto;
     padding: 10px 20px;
     background: linear-gradient(135deg, #c9aa71, #e0c77b);
     color: #000;
     text-decoration: none;
     border-radius: 8px;
     font-weight: bold;
-    transition: all 0.3s;
+    font-size: 16px;
     box-shadow: 0 0 10px rgba(201,170,113,0.5);
-    text-align: center;
+    transition: all 0.3s;
+    width: fit-content;
   }
-  .back-button::before {
-    content: "← ";
-  }
+  .back-button::before { content: "← "; }
   .back-button:hover {
     background: linear-gradient(135deg, #e6c97f, #f0d88b);
     box-shadow: 0 0 15px rgba(255,215,0,0.8);
@@ -51,18 +64,21 @@
     gap: 15px;
     padding: 0 20px 10px 20px;
   }
+
   .matchup-left {
     display: flex;
     align-items: center;
     gap: 10px;
-    flex: 0 0 auto;
   }
+
   .matchup-left img {
     width: 80px;
     height: 80px;
     border-radius: 8px;
   }
+
   .winrate-bubble {
+    background: var(--orange);
     color: #0d1117;
     font-weight: bold;
     padding: 8px 14px;
@@ -70,49 +86,55 @@
     font-size: 16px;
     white-space: nowrap;
   }
-  .winrate-bubble.orange {
-    background: #f97316; /* orange for 48% */
-  }
+
   .matchup-right {
     flex: 1;
-    color: #e6edf3;
     display: flex;
     flex-direction: column;
-    justify-content: flex-start;
-    margin-top: 0px;
   }
+
   .matchup-right h2 {
     margin: 0 0 15px 0;
     font-size: 22px;
+    color: var(--gold);
   }
+
   .matchup-right ul {
     padding-left: 20px;
     margin: 0;
   }
+
   .matchup-right li {
     margin-bottom: 6px;
   }
+
   footer {
     text-align: center;
     padding: 15px 10px;
     font-size: 14px;
-    color: #8b949e;
+    color: var(--muted);
+    margin-top: auto;
   }
+
   @media (max-width: 600px) {
     .matchup-container {
       flex-direction: column;
       align-items: center;
       padding: 10px;
     }
-    .matchup-left {
-      justify-content: center;
-    }
     .matchup-right {
       text-align: center;
-      margin-top: 0px;
     }
   }
 </style>
+
+<!-- LOGIN CHECK -->
+<script>
+  if (localStorage.getItem('lolfundamentals_logged_in') !== 'true') {
+    window.location.href = 'login.html';
+  }
+</script>
+
 </head>
 <body>
 
@@ -123,16 +145,17 @@
 <div class="matchup-container">
   <div class="matchup-left">
     <img src="https://ddragon.leagueoflegends.com/cdn/14.23.1/img/champion/Akshan.png" alt="Akshan">
-    <div class="winrate-bubble orange">48%</div>
+    <div class="winrate-bubble">48%</div>
   </div>
+
   <div class="matchup-right">
     <h2>Matchup Notes</h2>
     <ul>
-      <li>Move up with the ranged creeps level one and stay center in the lane as Akshan can look for an E trade and autos level 1 with his passive. </li>
-      <li> Level 2 is just as difficult as he can combo E with Q and potentially the movement speed from q. Wait to move up until he uses Q so he can’t chase down and proc press the attack.</li>
+      <li>Move up with the ranged creeps level one and stay center in the lane as Akshan can look for an E trade and autos level 1 with his passive.</li>
+      <li>Level 2 is just as difficult as he can combo E with Q and potentially the movement speed from q. Wait to move up until he uses Q so he can’t chase down and proc press the attack.</li>
       <li>Don’t be afraid of giving up a lot early in this matchup because it completely switches after level 6.</li>
-      <li>Once you’re level 6 you can look for ult trades. This is one of the few matchups where you can hold R a second and still interrupt his E. </li>
-      <li>Akshan is a great target throughout the game. Don’t be afraid to look for solo ults to lock him down and take him out of the fight. </li>
+      <li>Once you’re level 6 you can look for ult trades. This is one of the few matchups where you can hold R a second and still interrupt his E.</li>
+      <li>Akshan is a great target throughout the game. Don’t be afraid to look for solo ults to lock him down and take him out of the fight.</li>
       <li>Don’t get caught off by invisible Akshan returning to the lane especially if you’re pushing the mid tower since he can use it to E off of it.</li>
       <li>Continually check for MR buys from Akshan</li>
     </ul>
@@ -143,7 +166,6 @@
 
 </body>
 </html>
-
 
 
 
