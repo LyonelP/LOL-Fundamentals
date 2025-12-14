@@ -53,9 +53,9 @@
   }
 
   .section p{
-    margin:8px 0 18px;
-    color:var(--muted);
-    font-size:.95rem;
+    margin:0 0 18px;
+    color:#cfe1ee;
+    opacity:0.9;
   }
 
   .card-grid{
@@ -101,6 +101,7 @@
     font-size:.95rem;
     line-height:1.3;
     z-index:2;
+    color:#e6edf3;
     opacity:.95;
   }
 
@@ -143,7 +144,7 @@
 
   #logoutBtn{
     display:block;
-    margin:26px auto 40px;
+    margin:26px auto;
     padding:12px 26px;
     background:#f94144;
     color:#fff;
@@ -153,6 +154,17 @@
     cursor:pointer;
   }
   #logoutBtn:hover{background:#ff5959;}
+
+  footer{
+    text-align:center;
+    padding:26px 10px 40px;
+    color:var(--muted);
+    font-size:14px;
+    background:var(--bg);
+    border-top:1px solid #1f2937;
+  }
+  footer a{color:var(--gold);text-decoration:none;}
+  footer a:hover{text-decoration:underline;}
 
   @media(min-width:900px){
     .card-grid{grid-template-columns:repeat(3,1fr);}
@@ -179,62 +191,63 @@
 
   <div class="card-grid">
 
-    <a href="dianaguide.html" class="card diana-guide">
+    <a href="dianaguide.html" class="card diana-guide" aria-label="Diana Guide">
       <h3>Diana Guide</h3>
       <p>Comprehensive guide for mastering Diana, including combos, macro, and advanced tips.</p>
     </a>
 
-    <a href="matchuphub.html" class="card diana-matchups">
+    <a href="matchuphub.html" class="card diana-matchups" aria-label="Diana Matchups">
       <h3>Diana Mid Matchups</h3>
       <p>Detailed breakdowns for every mid lane matchup.</p>
     </a>
 
-    <a href="ekkoguide.html" class="card ekko-guide">
+    <a href="ekkoguide.html" class="card ekko-guide" aria-label="Ekko Guide">
       <h3>Ekko Guide</h3>
       <p>Complete guide to playing Ekko Jungle, including combos, pathing, and advanced mechanics.</p>
     </a>
 
-    <a href="skills.html" class="card fundamentals">
+    <a href="skills.html" class="card fundamentals" aria-label="Fundamentals">
       <h3>Fundamentals</h3>
       <p>Learn core League skills to help climb at any elo.</p>
     </a>
 
-    <a href="tierlist.html" class="card tierlist">
+    <a href="tierlist.html" class="card tierlist" aria-label="Tierlist">
       <h3>Tierlist</h3>
       <p>Current champion tierlist showing which champions dominate the meta.</p>
-      <div class="tier-bar">
-        <div class="tier-s"></div>
-        <div class="tier-a"></div>
-        <div class="tier-b"></div>
-        <div class="tier-c"></div>
-        <div class="tier-d"></div>
+      <div class="tier-bar" aria-hidden="true">
+        <div class="tier-s"></div><div class="tier-a"></div><div class="tier-b"></div><div class="tier-c"></div><div class="tier-d"></div>
       </div>
     </a>
 
-    <a href="https://buy.stripe.com/5kQeV6f6kgVmbfE88iejK03" class="card coaching">
+    <a href="https://buy.stripe.com/5kQeV6f6kgVmbfE88iejK03" class="card coaching" aria-label="Coaching">
       <h3>Coaching</h3>
       <p>Book a personalized 1-hour coaching session. Members receive 25% off!</p>
     </a>
 
-    <a href="dianarunes.html" class="card rune-calculator">
+    <a href="dianarunes.html" class="card rune-calculator" aria-label="Rune Calculator">
       <h3>Rune Calculator</h3>
       <p>Compare rune setups for Diana that enhance her playstyle.</p>
     </a>
 
-    <a href="dianaitems.html" class="card build-calculator">
+    <a href="dianaitems.html" class="card build-calculator" aria-label="Combo Calculator">
       <h3>Combo Calculator</h3>
-      <p>Compare item builds and ability combos for Diana.</p>
+      <p>Compare different item builds and ability combos for Diana at different stages of the game.</p>
     </a>
 
-    <a href="https://discord.gg/MvQdZqKB" class="card discord-card" target="_blank">
+    <a href="https://discord.gg/MvQdZqKB" class="card discord-card" target="_blank" rel="noopener noreferrer" aria-label="Discord">
       <h3>Join our Discord</h3>
-      <p>Connect with other members, share tips, and stay updated.</p>
+      <p>Connect with other members, share tips, and stay updated on guides.</p>
     </a>
 
   </div>
 </section>
 
 <button id="logoutBtn" onclick="logout()">Logout</button>
+
+<footer>
+  © 2025 LoL Fundamentals · Contact:
+  <a href="mailto:arcsecond@lolfundamentals.com">arcsecond@lolfundamentals.com</a>
+</footer>
 
 <script>
   if (localStorage.getItem('lolfundamentals_logged_in') !== 'true') {
@@ -248,6 +261,7 @@
 
 </body>
 </html>
+
 
 
 
