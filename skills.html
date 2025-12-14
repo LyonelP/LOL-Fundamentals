@@ -66,10 +66,33 @@ header {
   box-shadow: 0 0 15px rgba(255,215,0,0.8);
 }
 
+#section-select-container {
+  margin: 20px auto;
+  text-align: center;
+}
+#section-select {
+  padding: 8px 12px;
+  font-size: 16px;
+  border-radius: 6px;
+  border: none;
+  background: #0f1722;
+  color: #c9aa71;
+  cursor: pointer;
+  width: 220px;
+  background-image: url("data:image/svg+xml;utf8,<svg fill='%23c9aa71' height='12' viewBox='0 0 24 24' width='12' xmlns='http://www.w3.org/2000/svg'><path d='M7 10l5 5 5-5z'/></svg>");
+  background-repeat: no-repeat;
+  background-position: right 10px center;
+  background-size: 12px;
+  appearance: none;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+}
+
 .skill-list {
   list-style: none;
   padding: 0;
   width: 100%;
+  margin-bottom: 40px;
 }
 
 .skill-list li {
@@ -80,12 +103,10 @@ header {
   border: 2px solid #c9aa71;
   border-radius: 12px;
   padding: 14px 18px;
-  margin-bottom: 20px;
+  margin: 0 auto 20px auto;
   font-size: 18px;
   width: 56vw;
   max-width: 900px;
-  margin-left: auto;
-  margin-right: auto;
   box-shadow: 0 4px 12px rgba(0,0,0,0.5);
   transition: transform 0.25s, box-shadow 0.3s;
 }
@@ -123,16 +144,9 @@ header {
   color: #000;
 }
 
-footer {
-  text-align: center;
-  padding: 15px;
-  font-size: 14px;
-  color: #fff;
-  margin-top: auto;
-}
-
 @media(max-width: 700px){
   header { font-size: 22px; padding: 15px 10px; }
+  #section-select { width: 95vw; font-size: 14px; padding: 8px 30px 8px 12px; }
   .skill-list li { width: 85vw; font-size: 16px; padding: 10px 14px; }
 }
 </style>
@@ -142,6 +156,17 @@ footer {
 <header>Skills Hub</header>
 
 <a href="membershub.html" class="back-button">Back to Members Hub</a>
+
+<div id="section-select-container">
+  <select id="section-select">
+    <option value="Pre Game" selected>Pre Game</option>
+    <option value="Early Game">Early Game</option>
+    <option value="Mid Game">Mid Game</option>
+    <option value="Late Game">Late Game</option>
+    <option value="Advanced">Advanced</option>
+    <option value="Out of Game">Out of Game</option>
+  </select>
+</div>
 
 <ul class="skill-list" id="skill-list"></ul>
 
@@ -161,6 +186,7 @@ function saveProgress() {
   localStorage.setItem("skillProgress", JSON.stringify(skillProgress));
 }
 
+const sectionSelect = document.getElementById('section-select');
 const skillList = document.getElementById('skill-list');
 
 function renderSkills(section) {
@@ -188,8 +214,13 @@ function toggleCheck(section, skill, element) {
   element.innerHTML = element.classList.contains("completed") ? "✔" : "";
 }
 
-// Render Pre Game directly on load
+// Render Pre Game by default
 renderSkills("Pre Game");
+
+sectionSelect.addEventListener('change', () => {
+  const selected = sectionSelect.value;
+  renderSkills(selected);
+});
 </script>
 
 </body>
