@@ -1,152 +1,158 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="utf-8" />
-<meta name="viewport" content="width=device-width,initial-scale=1" />
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>LoL Fundamentals – Skills Hub</title>
 <style>
-  :root{
-    --gold:#c9aa71;
-    --bg:#0a0f14;
-    --muted:#8b949e;
-  }
+:root{
+  --gold:#c9aa71;
+  --bg:#0a0f14;
+  --muted:#ffffff;
+}
 
-  body {
-    margin: 0;
-    font-family: "Beaufort for LOL", Arial, Helvetica, sans-serif;
-    background: url('https://64.media.tumblr.com/594ac290bec6d5e9ad98b5f53404f00b/245c4c3ee469f81d-e4/s1280x1920/1cda4284320eb2031758a9859dfe14ff8bbc50ba.jpg') no-repeat center center fixed;
-    background-size: cover;
-    color: #fff;
-    overflow-x: hidden;
-    display: flex;
-    flex-direction: column;
-    min-height: 100vh;
-  }
+body {
+  margin: 0;
+  font-family: "Beaufort for LOL", Arial, Helvetica, sans-serif;
+  background: url('https://64.media.tumblr.com/594ac290bec6d5e9ad98b5f53404f00b/245c4c3ee469f81d-e4/s1280x1920/1cda4284320eb2031758a9859dfe14ff8bbc50ba.jpg') no-repeat center center fixed;
+  background-size: cover;
+  color: #fff;
+  overflow-x: hidden;
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
 
-  body::before {
-    content: "";
-    position: fixed;
-    top:0; left:0;
-    width:100%; height:100%;
-    background: rgba(10,15,20,0.25);
-    z-index: -1;
-  }
+body::before {
+  content: "";
+  position: fixed;
+  top:0; left:0;
+  width:100%; height:100%;
+  background: rgba(10,15,20,0.25);
+  z-index: -1;
+}
 
-  header {
-    background: linear-gradient(90deg, #0a0f14, #1b2838);
-    border-bottom: 2px solid var(--gold);
-    padding: 14px 20px;
-    font-weight: bold;
-    font-size: 20px; /* match Members Hub */
-    text-transform: uppercase;
-    color: var(--gold);
-    letter-spacing: 1px;
-    text-align: center;
-  }
+/* HEADER - same as Tierlist */
+header {
+  background: linear-gradient(90deg, #0a0f14, #1b2838);
+  border-bottom: 2px solid var(--gold);
+  padding: 14px 20px;
+  font-weight: bold;
+  font-size: 20px; /* matches Tierlist header */
+  text-transform: uppercase;
+  color: var(--gold);
+  letter-spacing: 1px;
+  text-align: center;
+}
 
-  .back-button {
-    display: inline-block;
-    margin: 20px auto 8px auto;
-    padding: 10px 20px;
-    background: linear-gradient(135deg, #c9aa71, #e0c77b);
-    color: #000;
-    text-decoration: none;
-    border-radius: 8px;
-    font-weight: bold;
-    box-shadow: 0 0 10px rgba(201, 170, 113, 0.5);
-  }
-  .back-button::before {
-    content: "← ";
-  }
-  .back-button:hover {
-    background: linear-gradient(135deg, #e6c97f, #f0d88b);
-    box-shadow: 0 0 15px rgba(255, 215, 0, 0.8);
-  }
+/* BACK BUTTON */
+.back-button {
+  display: inline-block;
+  margin: 20px auto 10px auto;
+  padding: 10px 20px;
+  background: linear-gradient(135deg, #c9aa71, #e0c77b);
+  color: #000;
+  text-decoration: none;
+  border-radius: 8px;
+  font-weight: bold;
+  box-shadow: 0 0 10px rgba(201, 170, 113, 0.5);
+}
+.back-button::before { content: "← "; }
+.back-button:hover {
+  background: linear-gradient(135deg, #e6c97f, #f0d88b);
+  box-shadow: 0 0 15px rgba(255, 215, 0, 0.8);
+}
 
-  /* DROPDOWN */
-  #section-select-container {
-    margin: 20px auto 40px auto;
-    text-align: center;
-  }
-  #section-select {
-    padding: 8px 12px;
-    font-size: 16px;
-    border-radius: 6px;
-    border: 1px solid var(--gold);
-    background: #161b22;
-    color: var(--gold);
-    cursor: pointer;
-    width: 220px;
-    max-width: 90vw; /* fits mobile properly */
-    background-image: url("data:image/svg+xml;utf8,<svg fill='%23c9aa71' height='12' viewBox='0 0 24 24' width='12' xmlns='http://www.w3.org/2000/svg'><path d='M7 10l5 5 5-5z'/></svg>");
-    background-repeat: no-repeat;
-    background-position: right 10px center;
-    background-size: 12px;
-    appearance: none;
-    -webkit-appearance: none;
-    -moz-appearance: none;
-  }
+/* DROPDOWN */
+#section-select-container {
+  margin: 20px auto 30px auto;
+  text-align: center;
+}
+#section-select {
+  padding: 8px 12px;
+  font-size: 16px;
+  border-radius: 6px;
+  border: 1px solid var(--gold);
+  background: #161b22;
+  color: var(--gold);
+  cursor: pointer;
+  width: 220px;
+  max-width: 100%; /* fits mobile */
+  background-image: url("data:image/svg+xml;utf8,<svg fill='%23c9aa71' height='12' viewBox='0 0 24 24' width='12' xmlns='http://www.w3.org/2000/svg'><path d='M7 10l5 5 5-5z'/></svg>");
+  background-repeat: no-repeat;
+  background-position: right 10px center;
+  background-size: 12px;
+  appearance: none;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+}
 
-  .skill-list {
-    list-style: none;
-    padding: 0;
-    width: 100%;
-    margin-bottom: 40px;
-  }
+/* SKILL LIST */
+.skill-list {
+  list-style: none;
+  padding: 0;
+  width: 100%;
+  margin-bottom: 40px;
+}
+.skill-list li {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background: rgba(0,0,0,0.85);
+  border: 2px solid var(--gold);
+  border-radius: 12px;
+  padding: 14px 18px;
+  margin: 0 auto 20px auto;
+  font-size: 18px;
+  width: 56vw;
+  max-width: 900px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.5);
+  transition: transform 0.25s, box-shadow 0.3s;
+}
+.skill-list li:hover {
+  background: rgba(0,0,0,0.95);
+  transform: scale(1.03);
+  box-shadow: 0 8px 20px rgba(0,0,0,0.7);
+  color: var(--gold);
+}
+.skill-list li a {
+  text-decoration: none;
+  color: #fff;
+  flex-grow: 1;
+  text-align: center;
+}
+.checkmark {
+  width: 26px;
+  height: 26px;
+  border-radius: 50%;
+  border: 2px solid var(--gold);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: var(--gold);
+  font-size: 18px;
+  cursor: pointer;
+  flex-shrink: 0;
+}
+.checkmark.completed {
+  background: var(--gold);
+  color: #000;
+}
 
-  .skill-list li {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    background: rgba(0,0,0,0.85);
-    border: 2px solid var(--gold);
-    border-radius: 12px;
-    padding: 14px 18px;
-    margin: 0 auto 20px auto;
-    font-size: 18px;
-    width: 56vw;
-    max-width: 900px;
-    box-shadow: 0 4px 12px rgba(0,0,0,0.5);
-    transition: transform 0.25s, box-shadow 0.3s;
-  }
+/* SIMPLE FOOTER TEXT */
+footer {
+  text-align: center;
+  padding: 12px 0;
+  color: #fff;
+  font-size: 14px;
+}
 
-  .skill-list li:hover {
-    background: rgba(0,0,0,0.95);
-    transform: scale(1.03);
-    box-shadow: 0 8px 20px rgba(0,0,0,0.7);
-    color: var(--gold);
-  }
-
-  .skill-list li a {
-    text-decoration: none;
-    color: #fff;
-    flex-grow: 1;
-    text-align: center;
-  }
-
-  .checkmark {
-    width: 26px;
-    height: 26px;
-    border-radius: 50%;
-    border: 2px solid var(--gold);
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    color: var(--gold);
-    font-size: 18px;
-    cursor: pointer;
-    flex-shrink: 0;
-  }
-
-  .checkmark.completed {
-    background: var(--gold);
-    color: #000;
-  }
-
-  @media(max-width: 700px){
-    #section-select { width: 90vw; font-size: 14px; padding: 8px 12px; }
-    .skill-list li { width: 85vw; font-size: 16px; padding: 10px 14px; }
-  }
+/* MOBILE */
+@media(max-width: 700px){
+  #section-select { width: 75vw; font-size: 14px; padding: 8px 10px; } /* less wide on mobile */
+  .skill-list li { width: 85vw; font-size: 16px; padding: 10px 14px; }
+  header { font-size: 20px; padding: 14px 20px; } /* matches Tierlist header */
+}
 </style>
 </head>
 <body>
@@ -167,6 +173,8 @@
 </div>
 
 <ul class="skill-list" id="skill-list"></ul>
+
+<footer>© 2025 LoL Fundamentals · All rights reserved</footer>
 
 <script>
 const skillData = {
@@ -212,15 +220,14 @@ function toggleCheck(section, skill, element) {
   element.innerHTML = element.classList.contains("completed") ? "✔" : "";
 }
 
-// Render Pre Game by default
 renderSkills("Pre Game");
 
 sectionSelect.addEventListener('change', () => {
-  const selected = sectionSelect.value;
-  renderSkills(selected);
+  renderSkills(sectionSelect.value);
 });
 </script>
 
 </body>
 </html>
+
 
