@@ -15,6 +15,7 @@
 :root{
   --gold:#c9aa71;
   --bg:#0a0f14;
+  --muted:#ffffff;
 }
 
 body {
@@ -38,12 +39,13 @@ body::before {
   z-index: -1;
 }
 
+/* HEADER */
 header {
   background: linear-gradient(90deg, #0a0f14, #1b2838);
   border-bottom: 2px solid var(--gold);
   padding: 14px 20px;
   font-weight: bold;
-  font-size: 20px; /* Members Hub size */
+  font-size: 20px; /* same as Members Hub */
   text-transform: uppercase;
   color: var(--gold);
   letter-spacing: 1px;
@@ -52,6 +54,7 @@ header {
   box-sizing: border-box;
 }
 
+/* BACK BUTTON */
 .back-button {
   display: inline-block;
   margin: 20px auto;
@@ -71,6 +74,7 @@ header {
   box-shadow: 0 0 15px rgba(255,215,0,0.8);
 }
 
+/* DROPDOWN */
 #section-select-container {
   margin: 20px auto;
   text-align: center;
@@ -94,6 +98,7 @@ header {
   -moz-appearance: none;
 }
 
+/* SKILL LIST */
 .skill-list {
   list-style: none;
   padding: 0;
@@ -150,8 +155,19 @@ header {
   color: #000;
 }
 
+/* FOOTER */
+footer {
+  text-align: center;
+  padding: 30px;
+  color: #fff; /* white text */
+  font-size: 14px;
+  background: rgba(0,0,0,0.3);
+  border-top: 1px solid #1f2937;
+}
+
+/* MEDIA QUERIES */
 @media(max-width: 700px){
-  header { font-size: 20px; padding: 14px 10px; }
+  header { font-size: 20px; padding: 14px 10px; } /* match Members Hub */
   #section-select { width: 90vw; font-size: 14px; padding: 8px 30px 8px 12px; }
   .skill-list li { width: 85vw; font-size: 16px; padding: 10px 14px; }
 }
@@ -175,6 +191,10 @@ header {
 </div>
 
 <ul class="skill-list" id="skill-list"></ul>
+
+<footer>
+  © 2025 LoL Fundamentals · All rights reserved
+</footer>
 
 <script>
 const skillData = {
@@ -231,5 +251,6 @@ sectionSelect.addEventListener('change', () => {
 
 </body>
 </html>
+
 
 
