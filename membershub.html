@@ -10,20 +10,20 @@
     --bg:#0a0f14;
     --card:#161b22;
     --muted:#8b949e;
-    --accent: #2f81f7;
+    --accent:#2f81f7;
   }
 
   html,body{height:100%;margin:0;}
-  body {
-    font-family: "Beaufort for LOL", Arial, Helvetica, sans-serif;
-    background: var(--bg);
-    color: #e6edf3;
+  body{
+    font-family:"Beaufort for LOL", Arial, Helvetica, sans-serif;
+    background:var(--bg);
+    color:#e6edf3;
     line-height:1.6;
     text-align:center;
   }
 
   header{
-    background: linear-gradient(90deg, #0a0f14, #1b2838);
+    background:linear-gradient(90deg,#0a0f14,#1b2838);
     border-bottom:2px solid var(--gold);
     padding:14px 20px;
     color:var(--gold);
@@ -33,16 +33,17 @@
     text-transform:uppercase;
     position:relative;
   }
+
   .settings-btn{
     position:absolute;
     top:12px;
     right:16px;
-    opacity:0.25;
+    opacity:.25;
     color:var(--gold);
     text-decoration:none;
-    transition:opacity .15s, transform .15s;
+    transition:opacity .15s,transform .15s;
   }
-  .settings-btn:hover{opacity:1; transform:scale(1.05);}
+  .settings-btn:hover{opacity:1;transform:scale(1.05);}
   .settings-btn svg{width:18px;height:18px;fill:currentColor;}
 
   .section{
@@ -51,11 +52,17 @@
     margin:8px auto;
   }
 
+  .section p{
+    margin:8px 0 18px;
+    color:var(--muted);
+    font-size:.95rem;
+  }
+
   .card-grid{
     display:grid;
     gap:22px;
     padding:0 4px;
-    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+    grid-template-columns:repeat(auto-fit,minmax(260px,1fr));
     align-items:start;
   }
 
@@ -66,7 +73,7 @@
     border-radius:12px;
     padding:20px;
     text-decoration:none;
-    color: #e6edf3;
+    color:#e6edf3;
     overflow:hidden;
     box-sizing:border-box;
     height:230px;
@@ -74,51 +81,69 @@
     flex-direction:column;
     justify-content:center;
     align-items:center;
-    transition: transform .25s, box-shadow .25s;
+    transition:transform .25s,box-shadow .25s;
   }
+
   .card:hover{
     transform:translateY(-6px);
-    box-shadow:0 12px 26px rgba(47,129,247,0.22);
+    box-shadow:0 12px 26px rgba(47,129,247,.22);
   }
-  .card h3{ color:var(--gold); margin:0 0 8px; z-index:2; font-size:1.25rem; }
-  .card p{ margin:0; font-size:0.95rem; line-height:1.3; z-index:2; color:#e6edf3; opacity:0.95; text-align:center; }
+
+  .card h3{
+    color:var(--gold);
+    margin:0 0 8px;
+    z-index:2;
+    font-size:1.25rem;
+  }
+
+  .card p{
+    margin:0;
+    font-size:.95rem;
+    line-height:1.3;
+    z-index:2;
+    opacity:.95;
+  }
 
   .card::before{
     content:"";
     position:absolute;
     inset:0;
-    width:100%;
-    height:100%;
     background-size:cover;
     background-position:center;
-    opacity:0.15;
+    opacity:.15;
     z-index:1;
     border-radius:10px;
   }
 
-  .diana-guide::before{ background-image:url('https://ddragon.leagueoflegends.com/cdn/img/champion/splash/Diana_1.jpg'); }
-  .diana-matchups::before{ background-image:url('https://ddragon.leagueoflegends.com/cdn/img/champion/splash/Diana_0.jpg'); }
-  .ekko-guide::before{ background-image:url('https://ddragon.leagueoflegends.com/cdn/img/champion/splash/Ekko_0.jpg'); }
-  .fundamentals::before{ background-image:url('https://cdn.wallpapersafari.com/92/79/MYTD9q.png'); }
-  .tierlist::before{ background: linear-gradient(to bottom, #1b2838 0%, #161b22 100%); }
-  .coaching::before{ background-image:url('https://m.media-amazon.com/images/I/71GlK3kDLJL.jpg'); opacity:0.20; }
+  .diana-guide::before{background-image:url('https://ddragon.leagueoflegends.com/cdn/img/champion/splash/Diana_1.jpg');}
+  .diana-matchups::before{background-image:url('https://ddragon.leagueoflegends.com/cdn/img/champion/splash/Diana_0.jpg');}
+  .ekko-guide::before{background-image:url('https://ddragon.leagueoflegends.com/cdn/img/champion/splash/Ekko_0.jpg');}
+  .fundamentals::before{background-image:url('https://cdn.wallpapersafari.com/92/79/MYTD9q.png');}
+  .tierlist::before{background:linear-gradient(to bottom,#1b2838,#161b22);}
+  .coaching::before{background-image:url('https://m.media-amazon.com/images/I/71GlK3kDLJL.jpg');opacity:.2;}
+  .rune-calculator::before{background-image:url('https://i.imgur.com/kcs90ta.jpeg');}
+  .build-calculator::before{background-image:url('https://i.imgur.com/uhLq29j.jpeg');}
+  .discord-card::before{background-image:url('https://i.imgur.com/fS2OKHV.jpeg');}
 
-  .rune-calculator::before{ background-image:url('https://i.imgur.com/kcs90ta.jpeg'); }
-  .build-calculator::before{ background-image:url('https://i.imgur.com/uhLq29j.jpeg'); }
-  .discord-card::before{
-    background-image:url('https://i.imgur.com/fS2OKHV.jpeg');
-    background-size:cover;
-    background-position:center;
-    opacity:0.15;
+  .tier-bar{
+    margin-top:12px;
+    width:100%;
+    height:60px;
+    border-radius:6px;
+    display:flex;
+    overflow:hidden;
+    position:relative;
+    z-index:2;
   }
-
-  .tier-bar{ margin-top:12px; width:100%; height:60px; border-radius:6px; display:flex; overflow:hidden; position:relative; z-index:2; }
-  .tier-s{ background:#f94144; flex:1; } .tier-a{ background:#f3722c; flex:1; } .tier-b{ background:#f8961e; flex:1; }
-  .tier-c{ background:#f9c74f; flex:1; } .tier-d{ background:#90be6d; flex:1; }
+  .tier-s{background:#f94144;flex:1;}
+  .tier-a{background:#f3722c;flex:1;}
+  .tier-b{background:#f8961e;flex:1;}
+  .tier-c{background:#f9c74f;flex:1;}
+  .tier-d{background:#90be6d;flex:1;}
 
   #logoutBtn{
     display:block;
-    margin:26px auto;
+    margin:26px auto 40px;
     padding:12px 26px;
     background:#f94144;
     color:#fff;
@@ -127,17 +152,13 @@
     font-weight:700;
     cursor:pointer;
   }
-  #logoutBtn:hover{ background:#ff5959; }
-
-  footer{ text-align:center; padding:26px 10px 40px; color:var(--muted); font-size:14px; background:var(--bg); border-top:1px solid #1f2937;}
-  footer a{ color:var(--gold); text-decoration:none;}
-  footer a:hover{text-decoration:underline;}
+  #logoutBtn:hover{background:#ff5959;}
 
   @media(min-width:900px){
-    .card-grid{ grid-template-columns: repeat(3, 1fr); }
+    .card-grid{grid-template-columns:repeat(3,1fr);}
   }
   @media(max-width:420px){
-    .card{ height:220px; padding:16px; }
+    .card{height:220px;padding:16px;}
   }
 </style>
 </head>
@@ -148,12 +169,14 @@
   <a href="https://lolfundamentals.com/settings" class="settings-btn" aria-label="Settings">
     <svg viewBox="0 0 24 24" aria-hidden="true">
       <path d="M12 15.5A3.5 3.5 0 1 0 12 8.5a3.5 3.5 0 0 0 0 7z"/>
-      <path d="M19.4 15a7.9 7.9 0 0 0 .1-1 7.9 7.9 0 0 0-.1-1l2.1-1.6a.5.5 0 0 0 .12-.65l-2-3.46a.5.5 0 0 0-.6-.22l-2.49 1a7.7 7.7 0 0 0-1.73-.99L14.9 2.9a.5.5 0 0 0-.5-.4h-4a.5.5 0 0 0-.5.4L8.2 6.1a7.7 7.7 0 0 0-1.73.99l-2.49-1a.5.5 0 0 0-.6.22L1.7 9.78a.5.5 0 0 0 .12.65L3.9 12a7.9 7.9 0 0 0-.1 1c0 .34.03.67.1 1L1.7 15.6a.5.5 0 0 0-.12.65l2 3.46c.14.25.44.36.7.27l2.49-1c.54.4 1.12.73 1.73.99l.7 3.2c.06.28.3.49.58.49h4c.28 0 .52-.21.58-.49l.7-3.2c.6-.26 1.19-.59 1.73-.99l2.49 1c.26.09.56-.02.7-.27l2-3.46a.5.5 0 0 0-.12-.65l-2.3-1.6z"/>
+      <path d="M19.4 15a7.9 7.9 0 0 0 .1-1 7.9 7.9 0 0 0-.1-1l2.1-1.6a.5.5 0 0 0 .12-.65l-2-3.46a.5.5 0 0 0-.6-.22l-2.49 1a7.7 7.7 0 0 0-1.73-.99L14.9 2.9a.5.5 0 0 0-.5-.4h-4a.5.5 0 0 0-.5.4L8.2 6.1a7.7 7.7 0 0 0-1.73.99l-2.49-1a.5.5 0 0 0-.6.22L1.7 9.78a.5.5 0 0 0 .12.65L3.9 12a7.9 7.9 0 0 0-.1 1c0 .34.03.67.1 1L1.7 15.6a.5.5 0 0 0-.12.65l2 3.46c.14.25.44.36.7.27l2.49-1c.54.4 1.12.73 1.73.99l.7 3.2c.06.28.3.49.58.49h4c.28 0 .52-.21.58-.49l.7-3.2c.6-.26 1.19-.59 1.73-.99l2.49 1c.26.09.56-.02.7-.27l2-3.46a.5.5 0 0 0-.12-.65L19.4 15z"/>
     </svg>
   </a>
 </header>
 
 <section class="section">
+  <p>Choose a section to explore:</p>
+
   <div class="card-grid">
 
     <a href="dianaguide.html" class="card diana-guide">
@@ -180,7 +203,11 @@
       <h3>Tierlist</h3>
       <p>Current champion tierlist showing which champions dominate the meta.</p>
       <div class="tier-bar">
-        <div class="tier-s"></div><div class="tier-a"></div><div class="tier-b"></div><div class="tier-c"></div><div class="tier-d"></div>
+        <div class="tier-s"></div>
+        <div class="tier-a"></div>
+        <div class="tier-b"></div>
+        <div class="tier-c"></div>
+        <div class="tier-d"></div>
       </div>
     </a>
 
@@ -196,23 +223,18 @@
 
     <a href="dianaitems.html" class="card build-calculator">
       <h3>Combo Calculator</h3>
-      <p>Compare different item builds and ability combos for Diana at different stages of the game.</p>
+      <p>Compare item builds and ability combos for Diana.</p>
     </a>
 
-    <a href="https://discord.gg/MvQdZqKB" class="card discord-card" target="_blank" rel="noopener noreferrer">
+    <a href="https://discord.gg/MvQdZqKB" class="card discord-card" target="_blank">
       <h3>Join our Discord</h3>
-      <p>Connect with other members, share tips, and stay updated on guides.</p>
+      <p>Connect with other members, share tips, and stay updated.</p>
     </a>
 
   </div>
 </section>
 
 <button id="logoutBtn" onclick="logout()">Logout</button>
-
-<footer>
-  © 2025 LoL Fundamentals · Contact:
-  <a href="mailto:arcsecond@lolfundamentals.com">arcsecond@lolfundamentals.com</a>
-</footer>
 
 <script>
   if (localStorage.getItem('lolfundamentals_logged_in') !== 'true') {
@@ -226,6 +248,7 @@
 
 </body>
 </html>
+
 
 
 
