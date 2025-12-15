@@ -133,13 +133,16 @@ header {
   width: 56vw;
   max-width: 900px;
   box-shadow: 0 4px 12px rgba(0,0,0,0.5);
-  transition: transform 0.25s, box-shadow 0.3s, background 0.25s;
+  transition: transform 0.25s, box-shadow 0.3s, background 0.25s, color 0.25s;
 }
 
 .skill-list li:hover {
   background: rgba(0,0,0,0.95);
   transform: scale(1.03);
   box-shadow: 0 8px 20px rgba(0,0,0,0.7);
+}
+
+.skill-list li:hover a {
   color: var(--gold);
 }
 
@@ -222,7 +225,14 @@ const skillData = {
   "Out of Game": ["Setup","Mindset","Not Raging/Blaming","Reaction Time","Meta"]
 };
 
+// Initialize progress for all skills
 let skillProgress = JSON.parse(localStorage.getItem("skillProgress") || "{}");
+for (const section in skillData) {
+  skillProgress[section] = skillProgress[section] || {};
+  skillData[section].forEach(skill => {
+    skillProgress[section][skill] = skillProgress[section][skill] || false;
+  });
+}
 
 function saveProgress() {
   localStorage.setItem("skillProgress", JSON.stringify(skillProgress));
@@ -245,7 +255,7 @@ function renderSkills(section) {
   const skills = skillData[section];
   skillList.innerHTML = skills.map(skill => {
     const completed = skillProgress?.[section]?.[skill] ? "completed" : "";
-    const link = `skills/${skill.toLowerCase().replace(/[^a-z0-9]/g,'')}.html`;
+    const link = `skills/${section.toLowerCase().replace(/[^a-z0-9]/g,'')}/${skill.toLowerCase().replace(/[^a-z0-9]/g,'')}.html`;
     return `
       <li data-skill="${skill}">
         <a href="${link}">${skill}</a>
@@ -258,10 +268,8 @@ function renderSkills(section) {
 }
 
 function toggleCheck(section, skill, element) {
-  skillProgress[section] = skillProgress[section] || {};
   skillProgress[section][skill] = !skillProgress[section][skill];
   saveProgress();
-
   element.classList.toggle("completed");
   element.innerHTML = element.classList.contains("completed") ? "✔" : "";
   updateProgress();
@@ -277,6 +285,7 @@ sectionSelect.addEventListener('change', () => {
 
 </body>
 </html>
+
 
 
 
