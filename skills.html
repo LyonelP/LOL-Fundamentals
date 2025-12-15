@@ -220,10 +220,6 @@ const skillData = {
 
 let skillProgress = JSON.parse(localStorage.getItem("skillProgress") || "{}");
 
-function saveProgress() {
-  localStorage.setItem("skillProgress", JSON.stringify(skillProgress));
-}
-
 const sectionSelect = document.getElementById('section-select');
 const skillList = document.getElementById('skill-list');
 const progressFill = document.getElementById('progressFill');
@@ -231,7 +227,7 @@ const progressLabel = document.getElementById('progressLabel');
 
 function updateProgress() {
   let total = 0, done = 0;
-  Object.values(skillProgress).forEach(sec => {
+  Object.values(skillProgress).forEach(sec=>{
     Object.values(sec).forEach(v => { total++; if(v) done++; });
   });
   const pct = total ? Math.round(done/total*100) : 0;
@@ -241,7 +237,7 @@ function updateProgress() {
 
 function renderSkills(section) {
   const skills = skillData[section];
-  skillList.innerHTML = skills.map(skill => {
+  skillList.innerHTML = skills.map(skill=>{
     const completed = skillProgress?.[section]?.[skill] ? "completed" : "";
     const link = `skills/${encodeURIComponent(section)}/${encodeURIComponent(skill)}.html`;
     return `
@@ -255,25 +251,21 @@ function renderSkills(section) {
   updateProgress();
 }
 
-function toggleCheck(section, skill, element) {
+function toggleCheck(section, skill, el) {
   skillProgress[section] = skillProgress[section] || {};
   skillProgress[section][skill] = !skillProgress[section][skill];
-  saveProgress();
-  element.classList.toggle("completed");
-  element.innerHTML = element.classList.contains("completed") ? "✔" : "";
+  localStorage.setItem("skillProgress", JSON.stringify(skillProgress));
+  el.classList.toggle("completed");
+  el.innerHTML = el.classList.contains("completed") ? "✔" : "";
   updateProgress();
 }
 
 renderSkills("Pre Game");
 
-sectionSelect.addEventListener('change', () => {
-  renderSkills(sectionSelect.value);
-});
+sectionSelect.addEventListener('change', () => renderSkills(sectionSelect.value));
 </script>
 
 </body>
 </html>
-
-
 
 
