@@ -232,6 +232,15 @@ const skillData = {
 
 let skillProgress = JSON.parse(localStorage.getItem("skillProgress") || "{}");
 
+// Initialize all sections and skills so progress bar counts everything
+Object.keys(skillData).forEach(section => {
+  skillProgress[section] = skillProgress[section] || {};
+  skillData[section].forEach(skill => {
+    skillProgress[section][skill] ??= false;
+  });
+});
+localStorage.setItem("skillProgress", JSON.stringify(skillProgress));
+
 const sectionSelect = document.getElementById('section-select');
 const skillList = document.getElementById('skill-list');
 const progressFill = document.getElementById('progressFill');
@@ -253,7 +262,6 @@ function updateProgress() {
 }
 
 function toggleCheck(section, skill, element) {
-  skillProgress[section] = skillProgress[section] || {};
   skillProgress[section][skill] = !skillProgress[section][skill];
   saveProgress();
   element.classList.toggle("completed");
@@ -263,11 +271,6 @@ function toggleCheck(section, skill, element) {
 
 function renderSkills(section) {
   const skills = skillData[section];
-  skillProgress[section] = skillProgress[section] || {};
-  skills.forEach(skill => skillProgress[section][skill] ??= false);
-  saveProgress();
-  updateProgress();
-
   skillList.innerHTML = skills.map(skill => {
     const completed = skillProgress[section][skill] ? "completed" : "";
     const link = skill.toLowerCase().replace(/[^a-z0-9]/g,'') + ".html";
@@ -289,12 +292,15 @@ renderSkills("Pre Game");
 // Section change
 sectionSelect.addEventListener('change', () => {
   renderSkills(sectionSelect.value);
+  updateProgress(); // ensure progress bar updates after rendering new section
 });
+
+// Initial progress calculation
+updateProgress();
 </script>
 
 </body>
 </html>
-
 
 
 
