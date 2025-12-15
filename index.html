@@ -155,47 +155,14 @@ footer a:hover { text-decoration:underline; }
 
 /* MOBILE FIX */
 @media (max-width: 600px) {
-  /* Keep background image exactly like desktop */
-  .hero {
-    background-size: cover; /* same as desktop */
-    background-position: center; /* same as desktop */
-    padding-top: 100px; /* slightly more space for the text */
-  }
-
-  /* Raise the text and buttons slightly */
-  .hero h1 {
-    margin-top: 10px; /* slightly higher */
-  }
-  .hero p {
-    margin-top: 5px; /* slightly higher */
-  }
-  .hero .btn {
-    margin-top: 10px; /* slightly higher */
-  }
-}
-
-
-  .modalContent .plan-buttons {
-    flex-direction: column !important;
-    justify-content: center !important;
-    align-items: center !important;
-    gap: 20px !important;
-  }
-
-  .modalContent .plan-buttons > div {
-    width: auto !important;
-    display: block !important;
-    text-align: center;
-  }
-
-  .modalContent .plan-buttons button {
-    width: 220px !important;
-    max-width: 220px;
-  }
-
-  .modalContent .bestValueTag {
-    top: -16px;
-  }
+  .hero { background-size: cover; background-position: center; padding-top: 100px; }
+  .hero h1 { margin-top: 10px; }
+  .hero p { margin-top: 5px; }
+  .hero .btn { margin-top: 10px; }
+  .modalContent .plan-buttons { flex-direction: column !important; justify-content: center !important; align-items: center !important; gap: 20px !important; }
+  .modalContent .plan-buttons > div { width: auto !important; display: block !important; text-align: center; }
+  .modalContent .plan-buttons button { width: 220px !important; max-width: 220px; }
+  .modalContent .bestValueTag { top: -16px; }
 }
 </style>
 </head>
@@ -235,10 +202,10 @@ footer a:hover { text-decoration:underline; }
   <div class="modalContent">
     <h2>Choose Your Plan</h2>
     <div class="plan-buttons">
-      <button class="btn" id="monthlyBtn">$9 / Month</button>
+      <button class="btn" id="yearlyBtn">$59 / Year</button>
       <div style="position: relative; display: inline-block;">
         <div class="bestValueTag">Best Value</div>
-        <button class="btn orangeBtn" id="yearlyBtn">$49 / Year</button>
+        <button class="btn orangeBtn" id="lifetimeBtn">$199 / Lifetime</button>
       </div>
     </div>
     <button id="closePlanModal">Cancel</button>
@@ -340,8 +307,8 @@ const resetLinkModal = document.getElementById('resetLinkModal');
 
 // Stripe links
 const stripeLinks = {
-  monthly: "https://buy.stripe.com/4gM00cf6kgVm1F460aejK0c",
-  yearly: "https://buy.stripe.com/4gMbIU6zOeNe4Rg3S2ejK0b"
+  yearly: "https://buy.stripe.com/4gM00cf6kgVm1F460aejK0c",      // $59/year
+  lifetime: "https://buy.stripe.com/4gMbIU6zOeNe4Rg3S2ejK0b"     // $199 Lifetime
 };
 
 // Show/hide modals
@@ -373,8 +340,14 @@ seePlansBtn.addEventListener('click',()=>{
 });
 
 // Plan selection opens Stripe
-document.getElementById('monthlyBtn').addEventListener('click',()=>{ window.open(stripeLinks.monthly,"_blank"); planModal.style.display='none'; });
-document.getElementById('yearlyBtn').addEventListener('click',()=>{ window.open(stripeLinks.yearly,"_blank"); planModal.style.display='none'; });
+document.getElementById('yearlyBtn').addEventListener('click',()=>{
+  window.open(stripeLinks.yearly,"_blank"); 
+  planModal.style.display='none'; 
+});
+document.getElementById('lifetimeBtn').addEventListener('click',()=>{
+  window.open(stripeLinks.lifetime,"_blank"); 
+  planModal.style.display='none'; 
+});
 
 // Login with paid check
 modalLoginBtn.addEventListener('click', async ()=>{
