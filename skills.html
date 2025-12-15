@@ -16,7 +16,6 @@
   --gold:#c9aa71;
   --bg:#0a0f14;
   --card:#161b22;
-  --muted:#8b949e;
 }
 
 * { box-sizing: border-box; }
@@ -41,7 +40,7 @@ body::before {
   z-index: -1;
 }
 
-/* HEADER — MATCHES TIERLIST EXACTLY */
+/* HEADER — EXACT MATCH */
 header {
   background: linear-gradient(90deg, #0a0f14, #1b2838);
   border-bottom: 2px solid var(--gold);
@@ -72,17 +71,23 @@ header {
 #section-select {
   display: block;
   margin: 12px auto 22px;
-  padding: 10px 18px;
+  padding: 10px 36px 10px 16px;
   font-size: 16px;
   border-radius: 6px;
   border: 1px solid var(--gold);
   background: var(--card);
-  color: #e6edf3;
+  color: var(--gold);
   appearance: none;
   width: 220px;
+
+  background-image:
+    url("data:image/svg+xml;utf8,<svg fill='%23c9aa71' height='12' viewBox='0 0 24 24' width='12' xmlns='http://www.w3.org/2000/svg'><path d='M7 10l5 5 5-5z'/></svg>");
+  background-repeat: no-repeat;
+  background-position: right 12px center;
+  background-size: 12px;
 }
 
-/* PROGRESS BAR */
+/* PROGRESS */
 .progress-wrap {
   width: 260px;
   margin: 0 auto 30px;
@@ -90,8 +95,8 @@ header {
 }
 
 .progress-label {
-  font-size: 13px;
-  color: var(--muted);
+  font-size: 14px;
+  color: var(--gold);
   margin-bottom: 6px;
 }
 
@@ -110,7 +115,7 @@ header {
   transition: width 0.45s ease;
 }
 
-/* SKILL LIST */
+/* SKILLS */
 .skill-list {
   list-style: none;
   padding: 0;
@@ -130,12 +135,6 @@ header {
   width: 56vw;
   max-width: 900px;
   font-size: 18px;
-  transition: transform .2s, box-shadow .2s;
-}
-
-.skill-list li:hover {
-  transform: scale(1.03);
-  box-shadow: 0 6px 18px rgba(0,0,0,.6);
 }
 
 .skill-list a {
@@ -169,7 +168,7 @@ footer {
   text-align: center;
   padding: 18px 10px;
   font-size: 14px;
-  color: var(--muted);
+  color: var(--gold);
 }
 
 /* MOBILE */
@@ -216,10 +215,9 @@ const skillData = {
   "Out of Game": ["Setup","Mindset","Not Raging/Blaming","Reaction Time","Meta"]
 };
 
-/* PRELOAD PROGRESS */
 let progress = JSON.parse(localStorage.getItem("skillProgress") || "{}");
 Object.keys(skillData).forEach(sec => {
-  progress[sec] = progress[sec] || {};
+  progress[sec] ??= {};
   skillData[sec].forEach(s => progress[sec][s] ??= false);
 });
 localStorage.setItem("skillProgress", JSON.stringify(progress));
@@ -271,6 +269,8 @@ updateProgress();
 
 </body>
 </html>
+
+
 
 
 
