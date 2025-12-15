@@ -12,20 +12,16 @@
 </script>
 
 <style>
-:root{
-  --gold:#c9aa71;
-}
-
 body {
   margin: 0;
   font-family: 'Beaufort for LOL', Arial, Helvetica, sans-serif;
   color: #fff;
   background: url('https://64.media.tumblr.com/594ac290bec6d5e9ad98b5f53404f00b/245c4c3ee469f81d-e4/s1280x1920/1cda4284320eb2031758a9859dfe14ff8bbc50ba.jpg') no-repeat center center fixed;
   background-size: cover;
+  overflow-x: hidden;
   min-height: 100vh;
   display: flex;
   flex-direction: column;
-  overflow-x: hidden;
 }
 
 body::before {
@@ -39,22 +35,23 @@ body::before {
 
 header {
   background: rgba(13,17,23,0.9);
-  border-bottom: 2px solid var(--gold);
+  border-bottom: 2px solid #c9aa71;
   padding: 20px;
   font-weight: bold;
   font-size: 26px;
   text-transform: uppercase;
-  color: var(--gold);
+  color: #c9aa71;
   letter-spacing: 1px;
   text-align: center;
   line-height: 1.1;
+  box-sizing: border-box;
 }
 
 .back-button {
   display: inline-block;
   margin: 20px auto;
   padding: 10px 20px;
-  background: linear-gradient(135deg, var(--gold), #e0c77b);
+  background: linear-gradient(135deg, #c9aa71, #e0c77b);
   color: #000;
   text-decoration: none;
   border-radius: 8px;
@@ -79,7 +76,7 @@ header {
   border-radius: 6px;
   border: none;
   background: #0f1722;
-  color: var(--gold);
+  color: #c9aa71;
   cursor: pointer;
   width: 220px;
   background-image: url("data:image/svg+xml;utf8,<svg fill='%23c9aa71' height='12' viewBox='0 0 24 24' width='12' xmlns='http://www.w3.org/2000/svg'><path d='M7 10l5 5 5-5z'/></svg>");
@@ -87,30 +84,32 @@ header {
   background-position: right 10px center;
   background-size: 12px;
   appearance: none;
+  -webkit-appearance: none;
+  -moz-appearance: none;
 }
 
-.progress-wrap{
-  width:260px;
+.progress-wrap {
+  width: 260px;
   margin: 10px auto 30px;
-  text-align:center;
+  text-align: center;
 }
-.progress-label{
-  font-size:14px;
-  color:#fff;
-  margin-bottom:6px;
+.progress-label {
+  font-size: 14px;
+  color: #fff;
+  margin-bottom: 6px;
 }
-.progress-bar{
-  width:100%;
-  height:10px;
-  background:#0f1722;
-  border-radius:20px;
-  overflow:hidden;
+.progress-bar {
+  width: 100%;
+  height: 10px;
+  background: #0f1722;
+  border-radius: 20px;
+  overflow: hidden;
 }
-.progress-fill{
-  height:100%;
-  width:0%;
-  background:linear-gradient(90deg,var(--gold),#e6c97f);
-  transition: width .45s ease;
+.progress-fill {
+  height: 100%;
+  width: 0%;
+  background: linear-gradient(90deg,#c9aa71,#e6c97f);
+  transition: width 0.45s ease;
 }
 
 .skill-list {
@@ -119,13 +118,12 @@ header {
   width: 100%;
   margin-bottom: 40px;
 }
-
 .skill-list li {
   display: flex;
   justify-content: space-between;
   align-items: center;
   background: rgba(0,0,0,0.85);
-  border: 2px solid var(--gold);
+  border: 2px solid #c9aa71;
   border-radius: 12px;
   padding: 14px 18px;
   margin: 0 auto 20px auto;
@@ -133,17 +131,13 @@ header {
   width: 56vw;
   max-width: 900px;
   box-shadow: 0 4px 12px rgba(0,0,0,0.5);
-  transition: transform 0.25s, box-shadow 0.3s, background 0.25s, color 0.25s;
+  transition: transform 0.25s, box-shadow 0.3s, color 0.3s;
 }
-
 .skill-list li:hover {
   background: rgba(0,0,0,0.95);
   transform: scale(1.03);
   box-shadow: 0 8px 20px rgba(0,0,0,0.7);
-}
-
-.skill-list li:hover a {
-  color: var(--gold);
+  color: #c9aa71;
 }
 
 .skill-list li a {
@@ -152,32 +146,26 @@ header {
   flex-grow: 1;
   text-align: center;
 }
+.skill-list li:hover a {
+  color: #c9aa71;
+}
 
 .checkmark {
   width: 26px;
   height: 26px;
   border-radius: 50%;
-  border: 2px solid var(--gold);
+  border: 2px solid #c9aa71;
   display: flex;
   justify-content: center;
   align-items: center;
-  color: var(--gold);
+  color: #c9aa71;
   font-size: 18px;
   cursor: pointer;
   flex-shrink: 0;
 }
-
 .checkmark.completed {
-  background: var(--gold);
+  background: #c9aa71;
   color: #000;
-}
-
-footer {
-  margin-top: auto;
-  text-align: center;
-  padding: 18px 10px;
-  font-size: 14px;
-  color: #fff;
 }
 
 @media(max-width: 700px){
@@ -205,15 +193,13 @@ footer {
 </div>
 
 <div class="progress-wrap">
-  <div class="progress-label" id="progressLabel">0% Complete</div>
+  <div class="progress-label" id="progress-label">0% Complete</div>
   <div class="progress-bar">
-    <div class="progress-fill" id="progressFill"></div>
+    <div class="progress-fill" id="progress-fill"></div>
   </div>
 </div>
 
 <ul class="skill-list" id="skill-list"></ul>
-
-<footer>© 2025 LoL Fundamentals · All rights reserved</footer>
 
 <script>
 const skillData = {
@@ -225,37 +211,31 @@ const skillData = {
   "Out of Game": ["Setup","Mindset","Not Raging/Blaming","Reaction Time","Meta"]
 };
 
-// Initialize progress for all skills
 let skillProgress = JSON.parse(localStorage.getItem("skillProgress") || "{}");
-for (const section in skillData) {
-  skillProgress[section] = skillProgress[section] || {};
-  skillData[section].forEach(skill => {
-    skillProgress[section][skill] = skillProgress[section][skill] || false;
-  });
-}
 
 function saveProgress() {
   localStorage.setItem("skillProgress", JSON.stringify(skillProgress));
 }
 
-const sectionSelect = document.getElementById('section-select');
-const skillList = document.getElementById('skill-list');
-
-function updateProgress() {
+function updateProgressBar() {
   let total = 0, done = 0;
   Object.values(skillProgress).forEach(sec => {
     Object.values(sec).forEach(v => { total++; if(v) done++; });
   });
-  const pct = total ? Math.round(done / total * 100) : 0;
-  document.getElementById("progressFill").style.width = pct + "%";
-  document.getElementById("progressLabel").textContent = pct + "% Complete";
+  const pct = total === 0 ? 0 : Math.round(done / total * 100);
+  document.getElementById('progress-fill').style.width = pct + "%";
+  document.getElementById('progress-label').textContent = `${pct}% Complete`;
 }
+
+const sectionSelect = document.getElementById('section-select');
+const skillList = document.getElementById('skill-list');
 
 function renderSkills(section) {
   const skills = skillData[section];
   skillList.innerHTML = skills.map(skill => {
     const completed = skillProgress?.[section]?.[skill] ? "completed" : "";
     const link = `skills/${section.toLowerCase().replace(/[^a-z0-9]/g,'')}/${skill.toLowerCase().replace(/[^a-z0-9]/g,'')}.html`;
+
     return `
       <li data-skill="${skill}">
         <a href="${link}">${skill}</a>
@@ -264,27 +244,33 @@ function renderSkills(section) {
         </div>
       </li>`;
   }).join('');
-  updateProgress();
 }
 
+// Toggle completed status
 function toggleCheck(section, skill, element) {
+  skillProgress[section] = skillProgress[section] || {};
   skillProgress[section][skill] = !skillProgress[section][skill];
   saveProgress();
   element.classList.toggle("completed");
   element.innerHTML = element.classList.contains("completed") ? "✔" : "";
-  updateProgress();
+  updateProgressBar();
 }
 
-// Render default
+// Initial render
 renderSkills("Pre Game");
+updateProgressBar();
 
+// Change section
 sectionSelect.addEventListener('change', () => {
   renderSkills(sectionSelect.value);
+  updateProgressBar();
 });
 </script>
 
 </body>
 </html>
+
+
 
 
 
