@@ -18,13 +18,13 @@ body {
   font-family: 'Beaufort for LOL', Arial, Helvetica, sans-serif;
   text-align: center;
   color: #fff;
-  background: url('https://64.media.tumblr.com/594ac290bec6d5e9ad98b5f53404f00b/245c4c3ee469f81d-e4/s1280x1920/1cda4284320eb2031758bbc50ba.jpg') no-repeat center center fixed;
+  background: url('https://64.media.tumblr.com/594ac290bec6d5e9ad98b5f53404f00b/245c4c3ee469f81d-e4/s1280x1920/1cda4284320eb2031758a9859dfe14ff8bbc50ba.jpg')
+    no-repeat center center fixed;
   background-size: cover;
   overflow-x: hidden;
-  position: relative;
 }
 
-/* Dark overlay */
+/* Overlay for readability (EXACT SAME AS WORKING PAGE) */
 body::before {
   content: "";
   position: fixed;
@@ -56,97 +56,71 @@ header {
   text-decoration: none;
   border-radius: 8px;
   font-weight: bold;
-  transition: all 0.3s;
   box-shadow: 0 0 10px rgba(201,170,113,0.5);
 }
 .back-button::before { content: "← "; }
-.back-button:hover {
-  background: linear-gradient(135deg, #e6c97f, #f0d88b);
-  box-shadow: 0 0 15px rgba(255,215,0,0.8);
-}
 
 /* Content container */
 .content-container {
-  margin: 20px auto 60px auto;
+  margin: 20px auto 50px auto;
   max-width: 900px;
   background: rgba(13,17,23,0.95);
   border: 1px solid #2f81f7;
   border-radius: 10px;
-  padding: 24px;
+  padding: 22px;
   text-align: left;
-  color: #fff;
   font-size: 16px;
-  line-height: 1.6;
-  position: relative;
+  line-height: 1.65;
 }
 .content-container h2 {
   color: #c9aa71;
   margin-top: 0;
 }
 
-/* Mental checklist styling */
+/* Checklist */
 .checklist {
   list-style: none;
-  padding: 0;
-  margin: 20px 0;
+  padding-left: 0;
 }
 .checklist li {
-  margin: 8px 0;
-  padding-left: 20px;
+  margin-bottom: 8px;
+  padding-left: 18px;
   position: relative;
   font-weight: bold;
-  color: #fff;
 }
 .checklist li::before {
   content: "•";
   position: absolute;
   left: 0;
   color: #c9aa71;
-  font-weight: bold;
 }
 
-/* Video wrapper */
+/* Video */
 .video-wrap {
   position: relative;
   padding-bottom: 56.25%;
   height: 0;
-  overflow: hidden;
-  max-width: 100%;
+  margin-top: 30px;
   border-radius: 10px;
-  margin: 25px auto 50px auto;
-  box-shadow: 0 0 25px rgba(0,0,0,0.6);
-  transition: transform 0.3s, box-shadow 0.3s, border 0.3s;
-  z-index: 1;
+  overflow: hidden;
 }
 .video-wrap iframe {
   position: absolute;
-  top: 0;
-  left: 0;
+  inset: 0;
   width: 100%;
   height: 100%;
   border: 0;
-  border-radius: 10px;
-}
-.video-wrap:hover {
-  transform: scale(1.02);
-  box-shadow: 0 0 25px rgba(201,170,113,0.8);
-  border: 2px solid #c9aa71;
 }
 
-/* Footer */
 footer {
   text-align: center;
   padding: 15px 10px;
   font-size: 14px;
   color: #8b949e;
 }
-
-@media (max-width: 600px) {
-  header { font-size: 24px; padding: 15px; }
-  .content-container { margin: 15px 10px 40px 10px; padding: 15px; }
-}
 </style>
 </head>
+
 <body>
 
 <header>Laning Checklist</header>
@@ -154,19 +128,37 @@ footer {
 
 <div class="content-container">
   <h2>Laning Fundamentals</h2>
-  
-  <p>In LoL you always want to focus on what you can control. The three most important actions are your movement clicks on the map, your auto attacks, and your abilities. These inputs make up the largest majority of your laning but also your general skill level. The difference between an Iron player and a Challenger player comes down to the timings and placement of these clicks.</p>
-  
-  <p>Now let’s apply that to lane:</p>
-  
-  <p><strong>Level 1:</strong> Your initial movement is the most important as you’re limited to ~1 ability. It’s crucial you move with the wave and specifically the ranged creeps. Then this is when you’ll look to make your first action with an auto attack or ability. Abilities should always be prioritized and only be used on minions as a last resort. An exception is when you can use an ability to last hit like Annie Q and trade with auto attacks. Abilities can also be used to bait out enemy spells if they expect you to auto attack to last hit. This will at least trade abilities evenly.</p>
-  
-  <h2>Mental Checklist</h2>
+
+  <p>
+    In LoL you always want to focus on what you can control.
+    The three most important actions are your movement clicks on the map,
+    your auto attacks, and your abilities.
+    These inputs make up the majority of your laning and overall skill level.
+    The difference between an Iron player and a Challenger player comes down
+    to the timing and placement of these clicks.
+  </p>
+
+  <h2>Lane Levels</h2>
+
+  <p><strong>Level 1:</strong> Your initial movement is the most important as you’re limited to ~1 ability. It’s crucial you move with the wave and specifically the ranged creeps. Then this is when you’ll look to make your first action with an auto attack or ability. Abilities should always be prioritized and only be used on minions as a last resort. An exception is when you can use an ability to last hit like Annie Q and trade with Auto Attacks. Abilities can be used to bait out enemy spells as well if they expect you to Auto Attack to last hit. This will at least trade abilities evenly. 
+</p>
+
+  <p><strong>Level 2:</strong> Track who hits level 2 first.</p>
+
+  <p><strong>Level 3:</strong> Coming Soon</p>
+
+  <p><strong>Level 4:</strong> Coming Soon</p>
+
+  <p><strong>Level 5:</strong> Coming soon</p>
+
+  <p><strong>Level 6:</strong> Coming Soon</p>
+
+  <h2>Laning Checklist</h2>
   <ul class="checklist">
     <li>Runes</li>
     <li>Items</li>
     <li>Enemy Positioning</li>
-    <li>Minion Positioning and Health (yours and opponent’s)</li>
+    <li>Minion Positioning and Health</li>
     <li>Cooldowns</li>
     <li>Enemy Auto Attacks</li>
     <li>Both Jungler Positioning</li>
@@ -175,7 +167,6 @@ footer {
   <div class="video-wrap">
     <iframe src="https://www.youtube.com/embed/WUi9pOT6wYc"
       title="Laning Phase Fundamentals"
-      allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
       allowfullscreen></iframe>
   </div>
 </div>
@@ -184,10 +175,6 @@ footer {
 
 </body>
 </html>
-
-
-
-
 
 
 
