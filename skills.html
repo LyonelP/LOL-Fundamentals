@@ -6,6 +6,7 @@
 <title>LoL Fundamentals – Skills Hub</title>
 
 <script>
+  // Redirect if not logged in
   if (localStorage.getItem('lolfundamentals_logged_in') !== 'true') {
     window.location.replace('login.html');
   }
@@ -135,6 +136,7 @@ header {
   max-width: 900px;
   box-shadow: 0 4px 12px rgba(0,0,0,0.5);
   transition: transform 0.25s, box-shadow 0.3s;
+  cursor: pointer;
 }
 
 .skill-list li:hover {
@@ -161,7 +163,6 @@ header {
   align-items: center;
   color: #c9aa71;
   font-size: 18px;
-  cursor: pointer;
   flex-shrink: 0;
 }
 
@@ -226,14 +227,14 @@ const skillData = {
 
 let skillProgress = JSON.parse(localStorage.getItem("skillProgress") || "{}");
 
-function saveProgress() {
-  localStorage.setItem("skillProgress", JSON.stringify(skillProgress));
-}
-
 const sectionSelect = document.getElementById('section-select');
 const skillList = document.getElementById('skill-list');
 const progressFill = document.getElementById('progressFill');
 const progressLabel = document.getElementById('progressLabel');
+
+function saveProgress() {
+  localStorage.setItem("skillProgress", JSON.stringify(skillProgress));
+}
 
 function updateProgress() {
   let total = 0, done = 0;
@@ -245,6 +246,15 @@ function updateProgress() {
   progressLabel.textContent = `${pct}% Complete`;
 }
 
+function toggleCheck(section, skill, element) {
+  skillProgress[section] = skillProgress[section] || {};
+  skillProgress[section][skill] = !skillProgress[section][skill];
+  saveProgress();
+  element.classList.toggle("completed");
+  element.innerHTML = element.classList.contains("completed") ? "✔" : "";
+  updateProgress();
+}
+
 function renderSkills(section) {
   const skills = skillData[section];
   skillProgress[section] = skillProgress[section] || {};
@@ -254,29 +264,23 @@ function renderSkills(section) {
 
   skillList.innerHTML = skills.map(skill => {
     const completed = skillProgress[section][skill] ? "completed" : "";
-    const link = "#"; // Prevent redirect for now
+    const link = skill.toLowerCase().replace(/[^a-z0-9]/g,'') + ".html"; // links to page
 
     return `
-      <li data-skill="${skill}">
+      <li data-skill="${skill}" onclick="toggleCheck('${section}','${skill}', this.querySelector('.checkmark'))">
         <a href="${link}">${skill}</a>
-        <div class="checkmark ${completed}" onclick="toggleCheck('${section}','${skill}', this)">
+        <div class="checkmark ${completed}">
           ${completed ? "✔" : ""}
         </div>
-      </li>`;
+      </li>
+    `;
   }).join('');
 }
 
-function toggleCheck(section, skill, element) {
-  skillProgress[section][skill] = !skillProgress[section][skill];
-  saveProgress();
-  element.classList.toggle("completed");
-  element.innerHTML = element.classList.contains("completed") ? "✔" : "";
-  updateProgress();
-}
-
-// Render default
+// Render default section
 renderSkills("Pre Game");
 
+// Change section
 sectionSelect.addEventListener('change', () => {
   renderSkills(sectionSelect.value);
 });
