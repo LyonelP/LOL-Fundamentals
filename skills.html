@@ -38,7 +38,7 @@ header {
   border-bottom: 2px solid #c9aa71;
   padding: 20px;
   font-weight: bold;
-  font-size: 26px; /* same as Members Hub */
+  font-size: 26px;
   text-transform: uppercase;
   color: #c9aa71;
   letter-spacing: 1px;
@@ -88,6 +88,32 @@ header {
   -moz-appearance: none;
 }
 
+/* Progress Bar */
+.progress-wrap {
+  width: 260px;
+  margin: 0 auto 30px;
+  text-align: center;
+}
+.progress-label {
+  font-size: 14px;
+  color: #fff;
+  margin-bottom: 6px;
+}
+.progress-bar {
+  width: 100%;
+  height: 10px;
+  background: #0f1722;
+  border-radius: 20px;
+  overflow: hidden;
+}
+.progress-fill {
+  height: 100%;
+  width: 0%;
+  background: linear-gradient(90deg, #c9aa71, #e6c97f);
+  transition: width 0.45s ease;
+}
+
+/* Skills */
 .skill-list {
   list-style: none;
   padding: 0;
@@ -144,6 +170,14 @@ header {
   color: #000;
 }
 
+footer {
+  margin-top: auto;
+  text-align: center;
+  padding: 18px 10px;
+  font-size: 14px;
+  color: #fff;
+}
+
 @media(max-width: 700px){
   header { font-size: 22px; padding: 15px 10px; }
   #section-select { width: 95vw; font-size: 14px; padding: 8px 30px 8px 12px; }
@@ -168,7 +202,17 @@ header {
   </select>
 </div>
 
+<!-- Progress Bar -->
+<div class="progress-wrap">
+  <div class="progress-label" id="progressLabel">0% Complete</div>
+  <div class="progress-bar">
+    <div class="progress-fill" id="progressFill"></div>
+  </div>
+</div>
+
 <ul class="skill-list" id="skill-list"></ul>
+
+<footer>© 2025 LoL Fundamentals · All rights reserved</footer>
 
 <script>
 const skillData = {
@@ -188,12 +232,29 @@ function saveProgress() {
 
 const sectionSelect = document.getElementById('section-select');
 const skillList = document.getElementById('skill-list');
+const progressFill = document.getElementById('progressFill');
+const progressLabel = document.getElementById('progressLabel');
+
+function updateProgress() {
+  let total = 0, done = 0;
+  Object.values(skillProgress).forEach(section => {
+    Object.values(section).forEach(val => { total++; if(val) done++; });
+  });
+  const pct = total === 0 ? 0 : Math.round(done / total * 100);
+  progressFill.style.width = pct + "%";
+  progressLabel.textContent = `${pct}% Complete`;
+}
 
 function renderSkills(section) {
   const skills = skillData[section];
+  skillProgress[section] = skillProgress[section] || {};
+  skills.forEach(skill => skillProgress[section][skill] ??= false);
+  saveProgress();
+  updateProgress();
+
   skillList.innerHTML = skills.map(skill => {
-    const completed = skillProgress?.[section]?.[skill] ? "completed" : "";
-    const link = skill.toLowerCase().replace(/[^a-z0-9]/g,'') + ".html";
+    const completed = skillProgress[section][skill] ? "completed" : "";
+    const link = `skills/${section.toLowerCase().replace(/[^a-z0-9]/g,'')}/${skill.toLowerCase().replace(/[^a-z0-9]/g,'')}.html`;
 
     return `
       <li data-skill="${skill}">
@@ -206,26 +267,23 @@ function renderSkills(section) {
 }
 
 function toggleCheck(section, skill, element) {
-  skillProgress[section] = skillProgress[section] || {};
   skillProgress[section][skill] = !skillProgress[section][skill];
   saveProgress();
-
   element.classList.toggle("completed");
   element.innerHTML = element.classList.contains("completed") ? "✔" : "";
+  updateProgress();
 }
 
-// Render Pre Game by default
+// Render default
 renderSkills("Pre Game");
 
 sectionSelect.addEventListener('change', () => {
-  const selected = sectionSelect.value;
-  renderSkills(selected);
+  renderSkills(sectionSelect.value);
 });
 </script>
 
 </body>
 </html>
-
 
 
 
