@@ -44,7 +44,6 @@ header {
   letter-spacing: 1px;
   text-align: center;
   line-height: 1.1;
-  box-sizing: border-box;
 }
 
 .back-button {
@@ -57,7 +56,6 @@ header {
   border-radius: 8px;
   font-weight: bold;
   font-size: 16px;
-  transition: all 0.3s;
   box-shadow: 0 0 10px rgba(201,170,113,0.5);
 }
 .back-button::before { content: "← "; }
@@ -84,8 +82,6 @@ header {
   background-position: right 10px center;
   background-size: 12px;
   appearance: none;
-  -webkit-appearance: none;
-  -moz-appearance: none;
 }
 
 .progress-wrap {
@@ -168,6 +164,14 @@ header {
   color: #000;
 }
 
+footer {
+  margin-top: auto;
+  text-align: center;
+  padding: 18px 10px;
+  font-size: 14px;
+  color: #fff;
+}
+
 @media(max-width: 700px){
   header { font-size: 22px; padding: 15px 10px; }
   #section-select { width: 95vw; font-size: 14px; padding: 8px 30px 8px 12px; }
@@ -200,6 +204,8 @@ header {
 </div>
 
 <ul class="skill-list" id="skill-list"></ul>
+
+<footer>© 2025 LoL Fundamentals · All rights reserved</footer>
 
 <script>
 const skillData = {
@@ -234,7 +240,8 @@ function renderSkills(section) {
   const skills = skillData[section];
   skillList.innerHTML = skills.map(skill => {
     const completed = skillProgress?.[section]?.[skill] ? "completed" : "";
-    const link = `skills/${section.toLowerCase().replace(/[^a-z0-9]/g,'')}/${skill.toLowerCase().replace(/[^a-z0-9]/g,'')}.html`;
+    // Preserve folder & file name exactly
+    const link = `skills/${section}/${skill}.html`;
 
     return `
       <li data-skill="${skill}">
@@ -246,7 +253,6 @@ function renderSkills(section) {
   }).join('');
 }
 
-// Toggle completed status
 function toggleCheck(section, skill, element) {
   skillProgress[section] = skillProgress[section] || {};
   skillProgress[section][skill] = !skillProgress[section][skill];
@@ -269,8 +275,6 @@ sectionSelect.addEventListener('change', () => {
 
 </body>
 </html>
-
-
 
 
 
