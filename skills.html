@@ -17,13 +17,13 @@
   --bg:#0a0f14;
 }
 
+/* PAGE */
 body {
   margin: 0;
   font-family: "Beaufort for LOL", Arial, Helvetica, sans-serif;
   background: url('https://64.media.tumblr.com/594ac290bec6d5e9ad98b5f53404f00b/245c4c3ee469f81d-e4/s1280x1920/1cda4284320eb2031758a9859dfe14ff8bbc50ba.jpg') no-repeat center center fixed;
   background-size: cover;
   color: #fff;
-  overflow-x: hidden;
   min-height: 100vh;
   display: flex;
   flex-direction: column;
@@ -37,24 +37,23 @@ body::before {
   z-index: -1;
 }
 
-/* HEADER — MATCHES TIERLIST */
+/* HEADER — MATCHES TIERLIST EXACTLY */
 header {
   background: linear-gradient(90deg, #0a0f14, #1b2838);
   border-bottom: 2px solid var(--gold);
-  padding: 16px 20px;
+  padding: 14px 20px;
   font-weight: bold;
-  font-size: 22px;
+  font-size: 20px;
+  letter-spacing: 1px;
   text-transform: uppercase;
   color: var(--gold);
-  letter-spacing: 1px;
   text-align: center;
-  line-height: 1.05;
 }
 
 /* BACK BUTTON */
 .back-button {
   display: inline-block;
-  margin: 20px auto 10px;
+  margin: 20px auto 8px;
   padding: 10px 20px;
   background: linear-gradient(135deg, #c9aa71, #e0c77b);
   color: #000;
@@ -65,17 +64,16 @@ header {
 }
 .back-button::before { content: "← "; }
 
-/* DROPDOWN + SEARCH */
+/* CONTROLS */
 #controls {
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 12px;
-  margin: 20px 0 30px;
+  margin: 18px 0 30px;
+  gap: 10px;
 }
 
-select,
-input[type="text"] {
+#section-select {
   padding: 8px 12px;
   font-size: 16px;
   border-radius: 6px;
@@ -83,10 +81,7 @@ input[type="text"] {
   background: #161b22;
   color: var(--gold);
   width: 220px;
-  max-width: 90vw;
-}
-
-select {
+  max-width: 85vw;
   appearance: none;
   background-image: url("data:image/svg+xml;utf8,<svg fill='%23c9aa71' height='12' viewBox='0 0 24 24' width='12' xmlns='http://www.w3.org/2000/svg'><path d='M7 10l5 5 5-5z'/></svg>");
   background-repeat: no-repeat;
@@ -94,11 +89,14 @@ select {
   background-size: 12px;
 }
 
-input::placeholder {
-  color: #aaa;
+/* COMPLETION */
+#completion {
+  font-size: 14px;
+  color: var(--gold);
+  opacity: 0.9;
 }
 
-/* SKILL LIST */
+/* SKILLS */
 .skill-list {
   list-style: none;
   padding: 0;
@@ -144,7 +142,7 @@ input::placeholder {
   color: #000;
 }
 
-/* FOOTER — STAYS AT BOTTOM */
+/* FOOTER */
 footer {
   margin-top: auto;
   text-align: center;
@@ -155,9 +153,8 @@ footer {
 
 /* MOBILE */
 @media (max-width: 700px){
-  header { font-size: 22px; padding: 16px 20px; }
   .skill-list li { width: 85vw; font-size: 16px; }
-  select, input[type="text"] { width: 70vw; }
+  #section-select { width: 70vw; }
 }
 </style>
 </head>
@@ -178,7 +175,7 @@ footer {
     <option value="Out of Game">Out of Game</option>
   </select>
 
-  <input type="text" id="search" placeholder="Search all skills..." />
+  <div id="completion">0% Complete</div>
 </div>
 
 <ul class="skill-list" id="skill-list"></ul>
@@ -198,14 +195,22 @@ const skillData = {
 let skillProgress = JSON.parse(localStorage.getItem("skillProgress") || {});
 const sectionSelect = document.getElementById("section-select");
 const skillList = document.getElementById("skill-list");
-const searchInput = document.getElementById("search");
+const completionEl = document.getElementById("completion");
 
 function saveProgress(){
   localStorage.setItem("skillProgress", JSON.stringify(skillProgress));
 }
 
-function renderSkills(skills, section){
-  skillList.innerHTML = skills.map(skill => {
+function updateCompletion(section){
+  const total = skillData[section].length;
+  const completed = Object.values(skillProgress[section] || {}).filter(Boolean).length;
+  const percent = Math.round((completed / total) * 100) || 0;
+  completionEl.textContent = `${percent}% Complete`;
+}
+
+function renderSection(){
+  const section = sectionSelect.value;
+  skillList.innerHTML = skillData[section].map(skill => {
     const completed = skillProgress?.[section]?.[skill] ? "completed" : "";
     const link = skill.toLowerCase().replace(/[^a-z0-9]/g,'') + ".html";
     return `
@@ -216,6 +221,7 @@ function renderSkills(skills, section){
         </div>
       </li>`;
   }).join("");
+  updateCompletion(section);
 }
 
 function toggleCheck(section, skill, el){
@@ -224,46 +230,16 @@ function toggleCheck(section, skill, el){
   saveProgress();
   el.classList.toggle("completed");
   el.innerHTML = el.classList.contains("completed") ? "✔" : "";
+  updateCompletion(section);
 }
 
-function renderSection(){
-  const section = sectionSelect.value;
-  renderSkills(skillData[section], section);
-}
-
-searchInput.addEventListener("input", () => {
-  const q = searchInput.value.toLowerCase().trim();
-  if (!q) return renderSection();
-
-  const results = [];
-  Object.entries(skillData).forEach(([section, skills]) => {
-    skills.forEach(skill => {
-      if (skill.toLowerCase().includes(q)) {
-        results.push({ skill, section });
-      }
-    });
-  });
-
-  skillList.innerHTML = results.map(({skill, section}) => {
-    const link = skill.toLowerCase().replace(/[^a-z0-9]/g,'') + ".html";
-    return `
-      <li>
-        <a href="${link}">${skill} <span style="opacity:.6">(${section})</span></a>
-        <div class="checkmark"></div>
-      </li>`;
-  }).join("");
-});
-
-sectionSelect.addEventListener("change", () => {
-  searchInput.value = "";
-  renderSection();
-});
-
+sectionSelect.addEventListener("change", renderSection);
 renderSection();
 </script>
 
 </body>
 </html>
+
 
 
 
