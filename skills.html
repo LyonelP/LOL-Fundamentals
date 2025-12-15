@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
+<meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>LoL Fundamentals – Skills Hub</title>
 
@@ -40,9 +40,9 @@ body::before{
   z-index:-1;
 }
 
-/* HEADER — Ekko/Diana guide style */
+/* HEADER — MATCHES MEMBERS HUB */
 header{
-  background: rgba(13,17,23,0.9);
+  background:rgba(13,17,23,0.9);
   border-bottom:2px solid var(--gold);
   padding:20px 10px;
   font-weight:bold;
@@ -123,21 +123,15 @@ header{
   width:56vw;
   max-width:900px;
   font-size:18px;
-  position:relative;
 }
-
 .skill-list a{
   color:#fff;
   text-decoration:none;
   flex:1;
   text-align:center;
-  padding:6px 0;
-  z-index:1;
-  position:relative;
 }
 .skill-list a:hover{
-  text-decoration:none;
-  color:#e6c97f;
+  text-decoration:underline;
 }
 
 .checkmark{
@@ -151,8 +145,6 @@ header{
   color:var(--gold);
   font-size:18px;
   cursor:pointer;
-  flex-shrink:0;
-  z-index:2;
 }
 .checkmark.completed{
   background:var(--gold);
@@ -245,16 +237,15 @@ function render(section){
     return `
       <li>
         <a href="${url}">${skill}</a>
-        <div class="checkmark ${c?"completed":""}" onclick="toggle(event,'${section}','${skill}',this)">
+        <div class="checkmark ${c?"completed":""}"
+          onclick="toggle('${section}','${skill}',this)">
           ${c?"✔":""}
         </div>
       </li>`;
   }).join("");
 }
 
-// Prevent checkmark click from triggering link
-function toggle(e, section, skill, el){
-  if(e) e.stopPropagation();
+function toggle(section,skill,el){
   progress[section][skill]=!progress[section][skill];
   localStorage.setItem("skillProgress",JSON.stringify(progress));
   el.classList.toggle("completed");
@@ -270,7 +261,6 @@ updateProgress();
 
 </body>
 </html>
-
 
 
 
