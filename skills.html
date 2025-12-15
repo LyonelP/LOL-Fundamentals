@@ -92,6 +92,7 @@ header {
 /* Progress Bar */
 .progress-wrap {
   width: 260px;
+  max-width: 90vw; /* responsive for mobile */
   margin: 0 auto 30px;
   text-align: center;
 }
@@ -240,6 +241,7 @@ function saveProgress() {
   localStorage.setItem("skillProgress", JSON.stringify(skillProgress));
 }
 
+// Update progress across ALL sections
 function updateProgress() {
   let total = 0, done = 0;
   Object.values(skillProgress).forEach(section => {
@@ -268,7 +270,7 @@ function renderSkills(section) {
 
   skillList.innerHTML = skills.map(skill => {
     const completed = skillProgress[section][skill] ? "completed" : "";
-    const link = skill.toLowerCase().replace(/[^a-z0-9]/g,'') + ".html"; // links to page
+    const link = skill.toLowerCase().replace(/[^a-z0-9]/g,'') + ".html";
 
     return `
       <li data-skill="${skill}">
@@ -284,7 +286,7 @@ function renderSkills(section) {
 // Render default section
 renderSkills("Pre Game");
 
-// Change section
+// Section change
 sectionSelect.addEventListener('change', () => {
   renderSkills(sectionSelect.value);
 });
