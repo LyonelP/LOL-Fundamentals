@@ -197,15 +197,16 @@ footer a:hover { text-decoration:underline; }
   </div>
 </div>
 
+<!-- PAYMENT MODAL -->
 <div id="planModal" class="modal">
   <div class="modalContent">
     <h2>Choose Your Plan</h2>
     <div class="plan-buttons">
       <button class="btn" id="yearlyBtn">$59 / Year</button>
-      <button class="btn orangeBtn" id="lifetimeBtn" style="position: relative;">
-        $199 / Lifetime
-        <div class="bestValueTag">Most Popular</div>
-      </button>
+      <div style="position: relative; display: inline-block;">
+        <div class="bestValueTag">Best Value</div>
+        <button class="btn orangeBtn" id="lifetimeBtn">$199 / Lifetime</button>
+      </div>
     </div>
     <button id="closePlanModal">Cancel</button>
   </div>
@@ -401,6 +402,12 @@ for(let i=0;i<50;i++){
 </script>
 </body>
 </html>
+
+
+
+
+
+
 
 
 
