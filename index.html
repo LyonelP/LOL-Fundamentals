@@ -203,10 +203,10 @@ footer a:hover { text-decoration:underline; }
     <h2>Choose Your Plan</h2>
     <div class="plan-buttons">
       <button class="btn" id="yearlyBtn">$59 / Year</button>
-      <div style="position: relative; display: inline-block;">
-        <div class="bestValueTag">Best Value</div>
-        <button class="btn orangeBtn" id="lifetimeBtn">$199 / Lifetime</button>
-      </div>
+      <button class="btn orangeBtn" id="lifetimeBtn" style="position: relative;">
+        $179 / Lifetime
+        <div class="bestValueTag">Most Popular</div>
+      </button>
     </div>
     <button id="closePlanModal">Cancel</button>
   </div>
@@ -307,8 +307,8 @@ const resetLinkModal = document.getElementById('resetLinkModal');
 
 // Stripe links
 const stripeLinks = {
-  yearly: "https://buy.stripe.com/4gM00cf6kgVm1F460aejK0c",      // $59/year
-  lifetime: "https://buy.stripe.com/4gMbIU6zOeNe4Rg3S2ejK0b"     // $199 Lifetime
+  yearly: "https://buy.stripe.com/4gM00cf6kgVm1F460aejK0c",  // $59/year
+  lifetime: "https://buy.stripe.com/dRm6oAgaodJa83sdsCejK0d"  // $179 Lifetime
 };
 
 // Show/hide modals
@@ -402,6 +402,7 @@ for(let i=0;i<50;i++){
 </script>
 </body>
 </html>
+
 
 
 
