@@ -254,7 +254,7 @@ function renderSkills(section) {
 
   skillList.innerHTML = skills.map(skill => {
     const completed = skillProgress[section][skill] ? "completed" : "";
-    const link = `skills/${section.toLowerCase().replace(/[^a-z0-9]/g,'')}/${skill.toLowerCase().replace(/[^a-z0-9]/g,'')}.html`;
+    const link = "#"; // Prevent redirect for now
 
     return `
       <li data-skill="${skill}">
@@ -284,6 +284,7 @@ sectionSelect.addEventListener('change', () => {
 
 </body>
 </html>
+
 
 
 
