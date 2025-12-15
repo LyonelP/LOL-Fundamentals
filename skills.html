@@ -136,14 +136,12 @@ header {
   max-width: 900px;
   box-shadow: 0 4px 12px rgba(0,0,0,0.5);
   transition: transform 0.25s, box-shadow 0.3s;
-  cursor: pointer;
 }
 
 .skill-list li:hover {
   background: rgba(0,0,0,0.95);
   transform: scale(1.03);
   box-shadow: 0 8px 20px rgba(0,0,0,0.7);
-  color: #c9aa71;
 }
 
 .skill-list li a {
@@ -151,6 +149,11 @@ header {
   color: #fff;
   flex-grow: 1;
   text-align: center;
+  transition: color 0.3s;
+}
+
+.skill-list li a:hover {
+  color: #c9aa71; /* gold on hover */
 }
 
 .checkmark {
@@ -164,6 +167,7 @@ header {
   color: #c9aa71;
   font-size: 18px;
   flex-shrink: 0;
+  cursor: pointer;
 }
 
 .checkmark.completed {
@@ -267,9 +271,9 @@ function renderSkills(section) {
     const link = skill.toLowerCase().replace(/[^a-z0-9]/g,'') + ".html"; // links to page
 
     return `
-      <li data-skill="${skill}" onclick="toggleCheck('${section}','${skill}', this.querySelector('.checkmark'))">
+      <li data-skill="${skill}">
         <a href="${link}">${skill}</a>
-        <div class="checkmark ${completed}">
+        <div class="checkmark ${completed}" onclick="toggleCheck('${section}','${skill}', this)">
           ${completed ? "✔" : ""}
         </div>
       </li>
