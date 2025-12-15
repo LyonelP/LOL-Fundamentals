@@ -23,7 +23,7 @@ body {
   overflow-x: hidden;
 }
 
-/* Overlay */
+/* Overlay for readability */
 body::before {
   content: "";
   position: fixed;
@@ -67,7 +67,7 @@ header {
 /* Content container */
 .content-container {
   margin: 20px auto 60px auto;
-  max-width: 800px;
+  max-width: 900px;
   background: rgba(13,17,23,0.95);
   border: 1px solid #2f81f7;
   border-radius: 10px;
@@ -83,7 +83,7 @@ header {
   margin-top: 0;
 }
 
-/* Checklist styling */
+/* Mental checklist styling */
 .checklist {
   list-style: none;
   padding: 0;
@@ -93,6 +93,8 @@ header {
   margin: 8px 0;
   padding-left: 20px;
   position: relative;
+  font-weight: bold;
+  color: #fff;
 }
 .checklist li::before {
   content: "•";
@@ -149,6 +151,7 @@ footer {
 <a href="skills.html" class="back-button">Back to Skills Hub</a>
 
 <div class="content-container">
+  <h2>Laning Fundamentals</h2>
   
   <p>In LoL you always want to focus on what you can control. The three most important actions are your movement clicks on the map, your auto attacks, and your abilities. These inputs make up the largest majority of your laning but also your general skill level. The difference between an Iron player and a Challenger player comes down to the timings and placement of these clicks.</p>
   
@@ -173,7 +176,6 @@ footer {
       allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
       allowfullscreen></iframe>
   </div>
-
 </div>
 
 <footer>© 2025 LoL Fundamentals · All rights reserved</footer>
