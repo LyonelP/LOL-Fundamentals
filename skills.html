@@ -6,50 +6,41 @@
 <title>LoL Fundamentals – Skills Hub</title>
 
 <script>
-  // Only run login check on hub pages
-  if (!window.location.pathname.includes('/skills/')) {
-    if (localStorage.getItem('lolfundamentals_logged_in') !== 'true') {
-      window.location.replace('login.html');
-    }
+  if (localStorage.getItem('lolfundamentals_logged_in') !== 'true') {
+    window.location.replace('login.html');
   }
 </script>
 
 <style>
-:root {
-  --gold: #c9aa71;
-  --bg: #0a0f14;
-  --card: #161b22;
-}
-
-* { box-sizing: border-box; }
-
 body {
   margin: 0;
   font-family: 'Beaufort for LOL', Arial, Helvetica, sans-serif;
   color: #fff;
   background: url('https://64.media.tumblr.com/594ac290bec6d5e9ad98b5f53404f00b/245c4c3ee469f81d-e4/s1280x1920/1cda4284320eb2031758a9859dfe14ff8bbc50ba.jpg') no-repeat center center fixed;
   background-size: cover;
+  overflow-x: hidden;
   min-height: 100vh;
   display: flex;
   flex-direction: column;
 }
 
 body::before {
-  content:"";
+  content: "";
   position: fixed;
-  inset:0;
+  top:0; left:0;
+  width:100%; height:100%;
   background: rgba(10,15,20,0.25);
   z-index: -1;
 }
 
 header {
   background: rgba(13,17,23,0.9);
-  border-bottom: 2px solid var(--gold);
+  border-bottom: 2px solid #c9aa71;
   padding: 20px;
   font-weight: bold;
   font-size: 26px;
   text-transform: uppercase;
-  color: var(--gold);
+  color: #c9aa71;
   letter-spacing: 1px;
   text-align: center;
   line-height: 1.1;
@@ -59,7 +50,7 @@ header {
   display: inline-block;
   margin: 20px auto;
   padding: 10px 20px;
-  background: linear-gradient(135deg,#c9aa71,#e0c77b);
+  background: linear-gradient(135deg, #c9aa71, #e0c77b);
   color: #000;
   text-decoration: none;
   border-radius: 8px;
@@ -84,7 +75,7 @@ header {
   border-radius: 6px;
   border: none;
   background: #0f1722;
-  color: var(--gold);
+  color: #c9aa71;
   cursor: pointer;
   width: 220px;
   background-image: url("data:image/svg+xml;utf8,<svg fill='%23c9aa71' height='12' viewBox='0 0 24 24' width='12' xmlns='http://www.w3.org/2000/svg'><path d='M7 10l5 5 5-5z'/></svg>");
@@ -114,7 +105,7 @@ header {
 .progress-fill {
   height: 100%;
   width: 0%;
-  background: linear-gradient(90deg, var(--gold), #e6c97f);
+  background: linear-gradient(90deg,#c9aa71,#e6c97f);
   transition: width 0.45s ease;
 }
 
@@ -129,7 +120,7 @@ header {
   justify-content: space-between;
   align-items: center;
   background: rgba(0,0,0,0.85);
-  border: 2px solid var(--gold);
+  border: 2px solid #c9aa71;
   border-radius: 12px;
   padding: 14px 18px;
   margin: 0 auto 20px auto;
@@ -139,38 +130,38 @@ header {
   box-shadow: 0 4px 12px rgba(0,0,0,0.5);
   transition: transform 0.25s, box-shadow 0.3s, color 0.25s;
 }
+
 .skill-list li:hover {
   background: rgba(0,0,0,0.95);
   transform: scale(1.03);
   box-shadow: 0 8px 20px rgba(0,0,0,0.7);
 }
-.skill-list li a:hover {
-  color: var(--gold);
-  text-decoration: underline;
-}
-
 .skill-list li a {
   text-decoration: none;
   color: #fff;
   flex-grow: 1;
   text-align: center;
 }
+.skill-list li a:hover {
+  color: #c9aa71;
+  text-decoration: underline;
+}
 
 .checkmark {
   width: 26px;
   height: 26px;
   border-radius: 50%;
-  border: 2px solid var(--gold);
+  border: 2px solid #c9aa71;
   display: flex;
   justify-content: center;
   align-items: center;
-  color: var(--gold);
+  color: #c9aa71;
   font-size: 18px;
   cursor: pointer;
   flex-shrink: 0;
 }
 .checkmark.completed {
-  background: var(--gold);
+  background: #c9aa71;
   color: #000;
 }
 
@@ -229,12 +220,10 @@ const skillData = {
 
 let skillProgress = JSON.parse(localStorage.getItem("skillProgress") || "{}");
 
-// Save progress to localStorage
 function saveProgress() {
   localStorage.setItem("skillProgress", JSON.stringify(skillProgress));
 }
 
-// Render skills
 const sectionSelect = document.getElementById('section-select');
 const skillList = document.getElementById('skill-list');
 const progressFill = document.getElementById('progressFill');
@@ -254,11 +243,10 @@ function renderSkills(section) {
   const skills = skillData[section];
   skillList.innerHTML = skills.map(skill => {
     const completed = skillProgress?.[section]?.[skill] ? "completed" : "";
-    const url = `skills/${encodeURIComponent(section)}/${encodeURIComponent(skill)}.html`;
-
+    const link = `skills/${encodeURIComponent(section)}/${encodeURIComponent(skill)}.html`;
     return `
       <li data-skill="${skill}">
-        <a href="${url}">${skill}</a>
+        <a href="${link}">${skill}</a>
         <div class="checkmark ${completed}" onclick="toggleCheck('${section}','${skill}', this)">
           ${completed ? "✔" : ""}
         </div>
@@ -267,7 +255,6 @@ function renderSkills(section) {
   updateProgress();
 }
 
-// Toggle checkmark
 function toggleCheck(section, skill, element) {
   skillProgress[section] = skillProgress[section] || {};
   skillProgress[section][skill] = !skillProgress[section][skill];
@@ -277,7 +264,6 @@ function toggleCheck(section, skill, element) {
   updateProgress();
 }
 
-// Initial render
 renderSkills("Pre Game");
 
 sectionSelect.addEventListener('change', () => {
@@ -287,7 +273,6 @@ sectionSelect.addEventListener('change', () => {
 
 </body>
 </html>
-
 
 
 
