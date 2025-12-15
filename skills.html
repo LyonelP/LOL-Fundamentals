@@ -6,9 +6,10 @@
 <title>LoL Fundamentals – Skills Hub</title>
 
 <script>
-if (localStorage.getItem('lolfundamentals_logged_in') !== 'true') {
-  window.location.replace('login.html');
-}
+  // Only redirect if truly not logged in
+  if (localStorage.getItem('lolfundamentals_logged_in') !== 'true') {
+    window.location.replace('login.html');
+  }
 </script>
 
 <style>
@@ -40,7 +41,7 @@ body::before{
   z-index:-1;
 }
 
-/* HEADER */
+/* HEADER — Tierlist style */
 header{
   background: linear-gradient(90deg, #0a0f14, #1b2838);
   border-bottom: 2px solid var(--gold);
@@ -88,7 +89,7 @@ header{
 }
 .progress-label{
   font-size:14px;
-  color:var(--gold);
+  color:#fff; /* white */
   margin-bottom:6px;
 }
 .progress-bar{
@@ -126,13 +127,13 @@ header{
 }
 .skill-list a{
   color:#fff;
-  text-decoration:none; /* no underline */
+  text-decoration:none;
   flex:1;
   text-align:center;
   padding:6px 0;
 }
 .skill-list a:hover{
-  text-decoration:none; /* no underline on hover */
+  text-decoration:none;
   color:#e6c97f;
 }
 
@@ -160,7 +161,7 @@ footer{
   text-align:center;
   padding:18px 10px;
   font-size:14px;
-  color:var(--gold);
+  color:#fff; /* white */
 }
 
 /* MOBILE */
