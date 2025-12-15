@@ -6,6 +6,7 @@
 <title>LoL Fundamentals – Skills Hub</title>
 
 <script>
+  // Login check
   if (localStorage.getItem('lolfundamentals_logged_in') !== 'true') {
     window.location.replace('login.html');
   }
@@ -43,7 +44,6 @@ header {
   color: #c9aa71;
   letter-spacing: 1px;
   text-align: center;
-  line-height: 1.1;
 }
 
 .back-button {
@@ -56,6 +56,7 @@ header {
   border-radius: 8px;
   font-weight: bold;
   font-size: 16px;
+  transition: all 0.3s;
   box-shadow: 0 0 10px rgba(201,170,113,0.5);
 }
 .back-button::before { content: "← "; }
@@ -82,38 +83,43 @@ header {
   background-position: right 10px center;
   background-size: 12px;
   appearance: none;
+  -webkit-appearance: none;
+  -moz-appearance: none;
 }
 
-.progress-wrap {
-  width: 260px;
-  margin: 10px auto 30px;
-  text-align: center;
+/* Progress bar */
+.progress-wrap{
+  width:260px;
+  margin:10px auto 30px;
+  text-align:center;
 }
-.progress-label {
-  font-size: 14px;
-  color: #fff;
-  margin-bottom: 6px;
+.progress-label{
+  font-size:14px;
+  color:#fff;
+  margin-bottom:6px;
 }
-.progress-bar {
-  width: 100%;
-  height: 10px;
-  background: #0f1722;
-  border-radius: 20px;
-  overflow: hidden;
+.progress-bar{
+  width:100%;
+  height:10px;
+  background:#0f1722;
+  border-radius:20px;
+  overflow:hidden;
 }
-.progress-fill {
-  height: 100%;
-  width: 0%;
-  background: linear-gradient(90deg,#c9aa71,#e6c97f);
-  transition: width 0.45s ease;
+.progress-fill{
+  height:100%;
+  width:0%;
+  background:linear-gradient(90deg,#c9aa71,#e6c97f);
+  transition:width .45s ease;
 }
 
+/* Skill cards */
 .skill-list {
   list-style: none;
   padding: 0;
   width: 100%;
   margin-bottom: 40px;
 }
+
 .skill-list li {
   display: flex;
   justify-content: space-between;
@@ -127,8 +133,9 @@ header {
   width: 56vw;
   max-width: 900px;
   box-shadow: 0 4px 12px rgba(0,0,0,0.5);
-  transition: transform 0.25s, box-shadow 0.3s, color 0.3s;
+  transition: transform 0.25s, box-shadow 0.3s, color 0.25s;
 }
+
 .skill-list li:hover {
   background: rgba(0,0,0,0.95);
   transform: scale(1.03);
@@ -142,6 +149,7 @@ header {
   flex-grow: 1;
   text-align: center;
 }
+
 .skill-list li:hover a {
   color: #c9aa71;
 }
@@ -159,17 +167,18 @@ header {
   cursor: pointer;
   flex-shrink: 0;
 }
+
 .checkmark.completed {
   background: #c9aa71;
   color: #000;
 }
 
-footer {
-  margin-top: auto;
-  text-align: center;
-  padding: 18px 10px;
-  font-size: 14px;
-  color: #fff;
+footer{
+  margin-top:auto;
+  text-align:center;
+  padding:18px 10px;
+  font-size:14px;
+  color:#fff;
 }
 
 @media(max-width: 700px){
@@ -197,9 +206,9 @@ footer {
 </div>
 
 <div class="progress-wrap">
-  <div class="progress-label" id="progress-label">0% Complete</div>
+  <div class="progress-label" id="progressLabel">0% Complete</div>
   <div class="progress-bar">
-    <div class="progress-fill" id="progress-fill"></div>
+    <div class="progress-fill" id="progressFill"></div>
   </div>
 </div>
 
@@ -223,25 +232,26 @@ function saveProgress() {
   localStorage.setItem("skillProgress", JSON.stringify(skillProgress));
 }
 
-function updateProgressBar() {
+const sectionSelect = document.getElementById('section-select');
+const skillList = document.getElementById('skill-list');
+const progressFill = document.getElementById('progressFill');
+const progressLabel = document.getElementById('progressLabel');
+
+function updateProgress() {
   let total = 0, done = 0;
   Object.values(skillProgress).forEach(sec => {
     Object.values(sec).forEach(v => { total++; if(v) done++; });
   });
-  const pct = total === 0 ? 0 : Math.round(done / total * 100);
-  document.getElementById('progress-fill').style.width = pct + "%";
-  document.getElementById('progress-label').textContent = `${pct}% Complete`;
+  const pct = total ? Math.round(done / total * 100) : 0;
+  progressFill.style.width = pct + '%';
+  progressLabel.textContent = pct + '% Complete';
 }
-
-const sectionSelect = document.getElementById('section-select');
-const skillList = document.getElementById('skill-list');
 
 function renderSkills(section) {
   const skills = skillData[section];
   skillList.innerHTML = skills.map(skill => {
     const completed = skillProgress?.[section]?.[skill] ? "completed" : "";
-    // Preserve folder & file name exactly
-    const link = `skills/${section}/${skill}.html`;
+    const link = `skills/${encodeURIComponent(section)}/${encodeURIComponent(skill)}.html`;
 
     return `
       <li data-skill="${skill}">
@@ -251,30 +261,30 @@ function renderSkills(section) {
         </div>
       </li>`;
   }).join('');
+  updateProgress();
 }
 
 function toggleCheck(section, skill, element) {
   skillProgress[section] = skillProgress[section] || {};
   skillProgress[section][skill] = !skillProgress[section][skill];
   saveProgress();
+
   element.classList.toggle("completed");
   element.innerHTML = element.classList.contains("completed") ? "✔" : "";
-  updateProgressBar();
+  updateProgress();
 }
 
 // Initial render
 renderSkills("Pre Game");
-updateProgressBar();
 
-// Change section
 sectionSelect.addEventListener('change', () => {
   renderSkills(sectionSelect.value);
-  updateProgressBar();
 });
 </script>
 
 </body>
 </html>
+
 
 
 
