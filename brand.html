@@ -83,7 +83,7 @@
 
   /* Winrate bubble */
   .winrate-bubble {
-    background: #4ade80; /* green for favorable */
+    background: #4ade80;
     color: #0d1117;
     font-weight: bold;
     padding: 8px 14px;
@@ -128,8 +128,12 @@
       align-items: center;
       padding: 10px;
     }
-    .matchup-left { justify-content: center; }
-    .matchup-right { text-align: left; width: 100%; }
+    .matchup-left {
+      justify-content: center;
+    }
+    .matchup-right {
+      text-align: center; /* reverted to original behavior */
+    }
   }
 </style>
 
@@ -142,7 +146,7 @@
 </head>
 <body>
 
-<header>Diana Mid Matchup – Brand</header>
+<header>Brand Mid Matchup</header>
 
 <a href="matchuphub.html" class="back-button">Back to Matchup Hub</a>
 
@@ -151,11 +155,12 @@
     <img src="https://ddragon.leagueoflegends.com/cdn/14.23.1/img/champion/Brand.png" alt="Brand">
     <div class="winrate-bubble">52%</div>
   </div>
+
   <div class="matchup-right">
     <h2>Matchup Notes</h2>
     <ul>
       <li>Bait out Brand’s W. His W has a delay which gives you room to dodge the ability. You can also use E to dodge it on him or even a minion if necessary.</li>
-      <li>You can almost always use the combo of Qing the wave and waiting to E to the ranged creeps to go for the ultimate. Once Brand is pulled in, he has a harder time landing the stun since he'll have to E or W first. Your Q will also be back up to follow up with a full combo.</li>
+      <li>You can almost always Q the wave and wait to E to the ranged creeps to go for the ultimate. Once Brand is pulled in, he has a much harder time landing the stun since he’ll need to E or W first. Your Q will be back up to finish a full combo.</li>
     </ul>
   </div>
 </div>
@@ -164,6 +169,7 @@
 
 </body>
 </html>
+
 
 
 
