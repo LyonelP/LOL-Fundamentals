@@ -4,64 +4,147 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Diana Mid vs Brand</title>
-
-<!-- Early redirect before rendering -->
-<script>
-  if (localStorage.getItem('lolfundamentals_logged_in') !== 'true') {
-    window.location.replace('login.html');
-  }
-</script>
-
 <style>
-  body { margin: 0; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; background: #0d1117; color: #e6edf3; line-height: 1.4; }
-  header { background: #161b22; padding: 10px 20px; text-align: center; font-size: 28px; font-weight: bold; color: #58a6ff; }
+  :root {
+    --gold: #c9aa71;
+    --bg: #0a0f14;
+    --card: #161b22;
+    --muted: #8b949e;
+  }
 
-  /* Gold bubble for Back to Matchup Hub */
-  .back-link {
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    background: #c9aa71; /* gold */
-    color: #0d1117;
+  body {
+    margin: 0;
+    font-family: "Beaufort for LOL", Arial, Helvetica, sans-serif;
+    background: var(--bg);
+    color: #e6edf3;
+    line-height: 1.4;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+  }
+
+  /* ===== HEADER ===== */
+  header {
+    background: rgba(13,17,23,0.9);
+    border-bottom: 2px solid var(--gold);
+    padding: 20px;
     font-weight: bold;
-    text-decoration: none;
-    padding: 10px 20px;
-    border-radius: 25px;
-    border: 1px solid #c9aa71;
-  }
-  .back-link:hover {
-    background: #e6c17c;
-    color: #0d1117;
+    font-size: 26px;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    text-align: center;
+    line-height: 1.2;
+    color: var(--gold);
+    box-sizing: border-box;
   }
 
-  .matchup-container { display: flex; max-width: 900px; margin: -15px auto 0 auto; gap: 15px; padding: 0 20px 10px 20px; }
-  .matchup-left { display: flex; align-items: center; gap: 10px; flex: 0 0 auto; }
-  .matchup-left img { width: 80px; height: 80px; border-radius: 8px; }
+  /* ===== Back Button ===== */
+  .back-button {
+    display: block;
+    margin: 20px auto 20px; 
+    padding: 10px 20px;
+    background: linear-gradient(135deg, #c9aa71, #e0c77b);
+    color: #000;
+    text-decoration: none;
+    border-radius: 8px;
+    font-weight: bold;
+    font-size: 16px;
+    text-align: center;
+    box-shadow: 0 0 10px rgba(201,170,113,0.5);
+    transition: all 0.3s;
+    width: fit-content;
+  }
+  .back-button::before { content: "← "; }
+  .back-button:hover {
+    background: linear-gradient(135deg, #e6c97f, #f0d88b);
+    box-shadow: 0 0 15px rgba(255,215,0,0.8);
+  }
+
+  /* ===== Matchup Container ===== */
+  .matchup-container {
+    display: flex;
+    max-width: 900px;
+    margin: 0 auto;
+    gap: 15px;
+    padding: 0 20px 10px 20px;
+  }
+
+  .matchup-left {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+
+  .matchup-left img {
+    width: 80px;
+    height: 80px;
+    border-radius: 8px;
+  }
 
   /* Winrate bubble */
-  .winrate-bubble { background: #4ade80; color: #0d1117; font-weight: bold; padding: 8px 14px; border-radius: 25px; font-size: 16px; white-space: nowrap; }
+  .winrate-bubble {
+    background: #4ade80; /* green for favorable */
+    color: #0d1117;
+    font-weight: bold;
+    padding: 8px 14px;
+    border-radius: 25px;
+    font-size: 16px;
+    white-space: nowrap;
+  }
 
-  .matchup-right { flex: 1; color: #e6edf3; display: flex; flex-direction: column; justify-content: flex-start; margin-top: 0px; }
-  .matchup-right h2 { margin: 0 0 15px 0; font-size: 22px; }
-  .matchup-right ul { padding-left: 20px; margin: 0; }
-  .matchup-right li { margin-bottom: 6px; }
+  .matchup-right {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+  }
 
-  footer { text-align: center; padding: 15px 10px; font-size: 14px; color: #8b949e; }
+  .matchup-right h2 {
+    margin: 0 0 15px 0;
+    font-size: 22px;
+    color: var(--gold);
+  }
+
+  .matchup-right ul {
+    padding-left: 20px;
+    margin: 0;
+  }
+
+  .matchup-right li {
+    margin-bottom: 6px;
+  }
+
+  /* ===== FOOTER ===== */
+  footer {
+    text-align: center;
+    padding: 15px 10px;
+    font-size: 14px;
+    color: var(--muted);
+    margin-top: auto;
+  }
 
   @media (max-width: 600px) {
-    .matchup-container { flex-direction: column; align-items: center; padding: 10px; margin-top: -15px; }
+    .matchup-container {
+      flex-direction: column;
+      align-items: center;
+      padding: 10px;
+    }
     .matchup-left { justify-content: center; }
-    .matchup-right { text-align: center; margin-top: 0px; }
+    .matchup-right { text-align: left; width: 100%; }
   }
 </style>
+
+<!-- ===== LOGIN CHECK ===== -->
+<script>
+  if (localStorage.getItem('lolfundamentals_logged_in') !== 'true') {
+    window.location.href = 'login.html';
+  }
+</script>
 </head>
 <body>
+
 <header>Diana Mid Matchup – Brand</header>
 
-<!-- Centered Back Button -->
-<div style="text-align: center; margin: 20px 0 30px 0;">
-  <a href="matchuphub.html" id="backLink" class="back-link">&larr; Back to Matchup Hub</a>
-</div>
+<a href="matchuphub.html" class="back-button">Back to Matchup Hub</a>
 
 <div class="matchup-container">
   <div class="matchup-left">
@@ -71,18 +154,16 @@
   <div class="matchup-right">
     <h2>Matchup Notes</h2>
     <ul>
-      <li>Bait out Brand’s W. His w has a delay which gives you room to dodge the ability. You can also use E to dodge it on him or even a minion if necessary especially if they have moonlight on them. </li>
-      <li>You can almost always use the combo of Qing the wave and waiting to E to the ranged creeps to go for the ultimate. Once brand is pulled in he has a significantly harder time landing the stun since he'll have to e or w first. If he goes for the w you can often use e to dodge it. If he goes for the e first then you can use e to also dodge the q or to soak some of the stun duration. Your q will also be back up after that point and you can go for a full combo.</li>
+      <li>Bait out Brand’s W. His W has a delay which gives you room to dodge the ability. You can also use E to dodge it on him or even a minion if necessary.</li>
+      <li>You can almost always use the combo of Qing the wave and waiting to E to the ranged creeps to go for the ultimate. Once Brand is pulled in, he has a harder time landing the stun since he'll have to E or W first. Your Q will also be back up to follow up with a full combo.</li>
     </ul>
   </div>
 </div>
 
-<footer>© 2025 LoL Fundamentals · Contact: arcsecond@lolfundamentals.com</footer>
+<footer>© 2025 LoL Fundamentals · All rights reserved</footer>
+
 </body>
 </html>
-
-
-
 
 
 
