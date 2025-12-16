@@ -123,13 +123,6 @@ header {
 }
 .card:hover { transform: translateY(-6px); box-shadow: 0 6px 18px rgba(47,129,247,0.35); }
 .card h3 { color: #c9aa71; }
-.plan-subtext {
-  font-size: 0.85em;
-  color: #d0d8e0;
-  margin-top: 6px;
-  line-height: 1.2;
-  font-style: italic;
-}
 
 /* MODALS */
 .modal {
@@ -209,16 +202,12 @@ footer a:hover { text-decoration:underline; }
   <div class="modalContent">
     <h2>Choose Your Plan</h2>
     <div class="plan-buttons">
-      <div style="text-align:center;">
-        <button class="btn" id="yearlyBtn">$49 / Year</button>
-        <p class="plan-subtext">Stay updated with all new content</p>
-      </div>
+      <button class="btn" id="yearlyBtn">$59 / Year</button>
 
       <!-- Lifetime wrapper with floating Best Value label -->
       <div style="position: relative; display: inline-block; text-align: center;">
         <div class="bestValueTag" style="top: -20px;">Best Value</div>
-        <button class="btn orangeBtn" id="lifetimeBtn">$139 / Lifetime</button>
-        <p class="plan-subtext">Early supporter — limited time</p>
+        <button class="btn orangeBtn" id="lifetimeBtn">$179 / Lifetime</button>
       </div>
     </div>
     <button id="closePlanModal">Cancel</button>
@@ -320,8 +309,8 @@ const resetLinkModal = document.getElementById('resetLinkModal');
 
 // Stripe links
 const stripeLinks = {
-  yearly: "https://buy.stripe.com/cNi14g3nC48AerQ9cmejK07",      // $49/year
-  lifetime: "https://buy.stripe.com/14AeV61fubB2dnMfAKejK0e"     // $139 Lifetime
+  yearly: "https://buy.stripe.com/4gM00cf6kgVm1F460aejK0c",      // $59/year
+  lifetime: "https://buy.stripe.com/dRm6oAgaodJa83sdsCejK0d"     // $179 Lifetime
 };
 
 // Show/hide modals
@@ -352,12 +341,14 @@ seePlansBtn.addEventListener('click',()=>{
   planModal.style.display='flex';
 });
 
-// Plan selection opens Stripe in same tab
+// Plan selection opens Stripe
 document.getElementById('yearlyBtn').addEventListener('click',()=>{
-  window.location.href = stripeLinks.yearly;
+  window.open(stripeLinks.yearly,"_blank"); 
+  planModal.style.display='none'; 
 });
 document.getElementById('lifetimeBtn').addEventListener('click',()=>{
-  window.location.href = stripeLinks.lifetime;
+  window.open(stripeLinks.lifetime,"_blank"); 
+  planModal.style.display='none'; 
 });
 
 // Login with paid check
@@ -413,6 +404,9 @@ for(let i=0;i<50;i++){
 </script>
 </body>
 </html>
+
+
+
 
 
 
