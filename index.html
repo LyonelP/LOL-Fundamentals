@@ -123,6 +123,13 @@ header {
 }
 .card:hover { transform: translateY(-6px); box-shadow: 0 6px 18px rgba(47,129,247,0.35); }
 .card h3 { color: #c9aa71; }
+.plan-subtext {
+  font-size: 0.85em;
+  color: #d0d8e0;
+  margin-top: 6px;
+  line-height: 1.2;
+  font-style: italic;
+}
 
 /* MODALS */
 .modal {
@@ -202,12 +209,16 @@ footer a:hover { text-decoration:underline; }
   <div class="modalContent">
     <h2>Choose Your Plan</h2>
     <div class="plan-buttons">
-      <button class="btn" id="yearlyBtn">$49 / Year</button>
+      <div style="text-align:center;">
+        <button class="btn" id="yearlyBtn">$49 / Year</button>
+        <p class="plan-subtext">Stay updated with all new content</p>
+      </div>
 
       <!-- Lifetime wrapper with floating Best Value label -->
       <div style="position: relative; display: inline-block; text-align: center;">
         <div class="bestValueTag" style="top: -20px;">Best Value</div>
         <button class="btn orangeBtn" id="lifetimeBtn">$139 / Lifetime</button>
+        <p class="plan-subtext">Early supporter — limited time</p>
       </div>
     </div>
     <button id="closePlanModal">Cancel</button>
@@ -341,14 +352,12 @@ seePlansBtn.addEventListener('click',()=>{
   planModal.style.display='flex';
 });
 
-// Plan selection opens Stripe
+// Plan selection opens Stripe in same tab
 document.getElementById('yearlyBtn').addEventListener('click',()=>{
-  window.open(stripeLinks.yearly,"_blank"); 
-  planModal.style.display='none'; 
+  window.location.href = stripeLinks.yearly;
 });
 document.getElementById('lifetimeBtn').addEventListener('click',()=>{
-  window.open(stripeLinks.lifetime,"_blank"); 
-  planModal.style.display='none'; 
+  window.location.href = stripeLinks.lifetime;
 });
 
 // Login with paid check
@@ -404,7 +413,6 @@ for(let i=0;i<50;i++){
 </script>
 </body>
 </html>
-
 
 
 
