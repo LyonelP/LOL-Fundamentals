@@ -4,58 +4,67 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Diana Mid vs Cassiopeia</title>
-
-<script>
-  if (localStorage.getItem('lolfundamentals_logged_in') !== 'true') {
-    window.location.replace('login.html');
-  }
-</script>
-
 <style>
+  :root {
+    --gold: #c9aa71;
+    --bg: #0a0f14;
+    --card: #161b22;
+    --muted: #8b949e;
+  }
+
   body {
     margin: 0;
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    background: #0d1117;
+    font-family: "Beaufort for LOL", Arial, Helvetica, sans-serif;
+    background: var(--bg);
     color: #e6edf3;
     line-height: 1.4;
-
+    min-height: 100vh;
     display: flex;
     flex-direction: column;
-    min-height: 100vh; /* make body full height */
   }
 
-  main {
-    flex: 1; /* take all remaining space so footer goes to bottom */
-  }
-
+  /* ===== HEADER ===== */
   header {
-    background: #161b22;
-    padding: 10px 20px;
+    background: rgba(13,17,23,0.9);
+    border-bottom: 2px solid var(--gold);
+    padding: 20px;
+    font-weight: bold;
+    font-size: 26px;
+    letter-spacing: 1px;
+    text-transform: uppercase;
     text-align: center;
-    font-size: 28px;
-    font-weight: bold;
-    color: #58a6ff;
+    line-height: 1.2;
+    color: var(--gold);
+    box-sizing: border-box;
   }
 
-  .back-link {
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    background: #c9aa71;
-    color: #0d1117;
-    font-weight: bold;
-    text-decoration: none;
+  /* ===== Back Button ===== */
+  .back-button {
+    display: block;
+    margin: 20px auto 20px; 
     padding: 10px 20px;
-    border-radius: 25px;
-    border: 1px solid #c9aa71;
-    margin: 20px 0 30px 0;
+    background: linear-gradient(135deg, #c9aa71, #e0c77b);
+    color: #000;
+    text-decoration: none;
+    border-radius: 8px;
+    font-weight: bold;
+    font-size: 16px;
+    text-align: center;
+    box-shadow: 0 0 10px rgba(201,170,113,0.5);
+    transition: all 0.3s;
+    width: fit-content;
   }
-  .back-link:hover { background: #e6c17c; color: #0d1117; }
+  .back-button::before { content: "← "; }
+  .back-button:hover {
+    background: linear-gradient(135deg, #e6c97f, #f0d88b);
+    box-shadow: 0 0 15px rgba(255,215,0,0.8);
+  }
 
+  /* ===== Matchup Container ===== */
   .matchup-container {
     display: flex;
     max-width: 900px;
-    margin: -15px auto 0 auto;
+    margin: 0 auto;
     gap: 15px;
     padding: 0 20px 10px 20px;
   }
@@ -64,12 +73,17 @@
     display: flex;
     align-items: center;
     gap: 10px;
-    flex: 0 0 auto;
   }
-  .matchup-left img { width: 80px; height: 80px; border-radius: 8px; }
 
+  .matchup-left img {
+    width: 80px;
+    height: 80px;
+    border-radius: 8px;
+  }
+
+  /* Winrate bubble */
   .winrate-bubble {
-    background: #f97316;
+    background: #f97316; /* unfavorable */
     color: #0d1117;
     font-weight: bold;
     padding: 8px 14px;
@@ -80,21 +94,32 @@
 
   .matchup-right {
     flex: 1;
-    color: #e6edf3;
     display: flex;
     flex-direction: column;
-    justify-content: flex-start;
-    margin-top: 0px;
   }
-  .matchup-right h2 { margin: 0 0 15px 0; font-size: 22px; }
-  .matchup-right ul { padding-left: 20px; margin: 0; }
-  .matchup-right li { margin-bottom: 6px; }
 
+  .matchup-right h2 {
+    margin: 0 0 15px 0;
+    font-size: 22px;
+    color: var(--gold);
+  }
+
+  .matchup-right ul {
+    padding-left: 20px;
+    margin: 0;
+  }
+
+  .matchup-right li {
+    margin-bottom: 6px;
+  }
+
+  /* ===== FOOTER ===== */
   footer {
     text-align: center;
     padding: 15px 10px;
     font-size: 14px;
-    color: #8b949e;
+    color: var(--muted);
+    margin-top: auto;
   }
 
   @media (max-width: 600px) {
@@ -102,47 +127,53 @@
       flex-direction: column;
       align-items: center;
       padding: 10px;
-      margin-top: -15px;
     }
-    .matchup-left { justify-content: center; }
-    .matchup-right { text-align: center; margin-top: 0px; }
+    .matchup-left {
+      justify-content: center;
+    }
+    .matchup-right {
+      text-align: center;
+    }
   }
 </style>
+
+<!-- ===== LOGIN CHECK ===== -->
+<script>
+  if (localStorage.getItem('lolfundamentals_logged_in') !== 'true') {
+    window.location.href = 'login.html';
+  }
+</script>
 </head>
 <body>
 
-<header>Diana Mid Matchup – Cassiopeia</header>
+<header>Cassiopeia Mid Matchup</header>
 
-<main>
-  <div style="text-align: center;">
-    <a href="matchuphub.html" class="back-link">&larr; Back to Matchup Hub</a>
+<a href="matchuphub.html" class="back-button">Back to Matchup Hub</a>
+
+<div class="matchup-container">
+  <div class="matchup-left">
+    <img src="https://ddragon.leagueoflegends.com/cdn/14.23.1/img/champion/Cassiopeia.png" alt="Cassiopeia">
+    <div class="winrate-bubble">48%</div>
   </div>
 
-  <div class="matchup-container">
-    <div class="matchup-left">
-      <img src="https://ddragon.leagueoflegends.com/cdn/14.23.1/img/champion/Cassiopeia.png" alt="Cassiopeia">
-      <div class="winrate-bubble">48%</div>
-    </div>
-    <div class="matchup-right">
-      <h2>Matchup Notes</h2>
-      <ul>
-        <li>Look for qs level 1 but be careful to not push the wave too hard so she can’t look for an extended all in level 2.</li>
-        <li>They recently buffed her mana pool but each E costs 40 mana and Q 50 mana.</li>
-        <li>Try to bait out Cassio's Q when approaching the wave to then safely step up.</li>
-        <li>You have to be extra careful when looking for trades in this matchup because of her sustained dps and healing. She can easily turn the trade if you go in without lethal. E trades without the reset should only be taken when she’s very low mana and even the ranged minion ult trade isn’t enough damage a lot of the time. </li>
-        <li>The best trade to take against Cassio is when she tries to play aggressively at your tower because she won’t be able to retaliate for long and her upfront damage isn’t very high..</li>
-        <li>Cassio’s E draws minions aggro so adjust the wave accordingly.</li>
-        <li>Watch out for Cassiopeia’s W later on as you won’t be able to E out of it and the slow scales to 80%.</li>
-      </ul>
-    </div>
+  <div class="matchup-right">
+    <h2>Matchup Notes</h2>
+    <ul>
+      <li>Look for Qs level 1 but avoid pushing the wave too hard so she can’t force an extended level 2 all-in.</li>
+      <li>Cassiopeia’s mana pool was buffed, but her E still costs 40 mana and Q costs 50 mana.</li>
+      <li>Bait out Cassio’s Q when approaching the wave, then safely step up afterward.</li>
+      <li>Be very cautious with trades due to her sustained DPS and healing. E trades without a reset should only be taken when she’s extremely low mana.</li>
+      <li>The best trades are when Cassio plays aggressively under your tower, where she can’t fully leverage her sustained damage.</li>
+      <li>Cassio’s E draws minion aggro, so adjust wave positioning accordingly.</li>
+      <li>Watch out for Cassiopeia’s W later — you won’t be able to E out of it, and the slow scales up to 80%.</li>
+    </ul>
   </div>
-</main>
+</div>
 
-<footer>© 2025 LoL Fundamentals · Contact: arcsecond@lolfundamentals.com</footer>
+<footer>© 2025 LoL Fundamentals · All rights reserved</footer>
 
 </body>
 </html>
-
 
 
 
