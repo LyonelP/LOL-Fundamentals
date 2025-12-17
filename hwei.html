@@ -3,105 +3,73 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Diana Mid vs Hwei</title>
+<title>Hwei Mid Matchup</title>
+
+<!-- Prevent content flash before login check -->
 <style>
-  body {
-    margin: 0;
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    background: #0d1117;
-    color: #e6edf3;
-    line-height: 1.4;
+  body { 
+    margin: 0; 
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; 
+    background: #0d1117; 
+    color: #e6edf3; 
+    line-height: 1.4; 
+    display: none; /* hide until login check */
   }
   header {
-    background: #161b22;
-    padding: 10px 20px;
-    text-align: center;
-    font-size: 28px;
-    font-weight: bold;
-    color: #58a6ff;
+    background: #161b22; 
+    padding: 10px 20px; 
+    text-align: center; 
+    font-size: 28px; 
+    font-weight: bold; 
+    color: #58a6ff; 
   }
   .back-link {
-    display: block;
-    margin: 20px auto 30px auto;
-    text-align: center;
-    color: #F9D949;
-    text-decoration: none;
-    font-weight: bold;
+    display: block; 
+    margin: 20px auto 30px auto; 
+    text-align: center; 
+    color: #F9D949; 
+    text-decoration: none; 
+    font-weight: bold; 
   }
-  .back-link:hover {
-    text-decoration: underline;
-  }
+  .back-link:hover { text-decoration: underline; }
+
   .matchup-container {
-    display: flex;
-    max-width: 900px;
-    margin: -15px auto 0 auto;
-    gap: 15px;
-    padding: 0 20px 10px 20px;
+    display: flex; 
+    max-width: 900px; 
+    margin: -15px auto 0 auto; 
+    gap: 15px; 
+    padding: 0 20px 10px 20px; 
   }
-  .matchup-left {
-    display: flex;
-    align-items: center;
-    gap: 10px;
-    flex: 0 0 auto;
+  .matchup-left { display: flex; align-items: center; gap: 10px; flex: 0 0 auto; }
+  .matchup-left img { width: 80px; height: 80px; border-radius: 8px; }
+
+  .winrate-bubble { 
+    background: #F9D949; /* yellow for 50% */ 
+    color: #0d1117; 
+    font-weight: bold; 
+    padding: 8px 14px; 
+    border-radius: 25px; 
+    font-size: 16px; 
+    white-space: nowrap; 
   }
-  .matchup-left img {
-    width: 80px;
-    height: 80px;
-    border-radius: 8px;
-  }
-  .winrate-bubble {
-    background: #F9D949; /* yellow for 50% */
-    color: #0d1117;
-    font-weight: bold;
-    padding: 8px 14px;
-    border-radius: 25px;
-    font-size: 16px;
-    white-space: nowrap;
-  }
-  .matchup-right {
-    flex: 1;
-    color: #e6edf3;
-    display: flex;
-    flex-direction: column;
-    justify-content: flex-start;
-    margin-top: 0px;
-  }
-  .matchup-right h2 {
-    margin: 0 0 15px 0;
-    font-size: 22px;
-  }
-  .matchup-right ul {
-    padding-left: 20px;
-    margin: 0;
-  }
-  .matchup-right li {
-    margin-bottom: 6px;
-  }
-  footer {
-    text-align: center;
-    padding: 15px 10px;
-    font-size: 14px;
-    color: #8b949e;
-  }
+
+  .matchup-right { flex: 1; color: #e6edf3; display: flex; flex-direction: column; justify-content: flex-start; margin-top: 0px; }
+  .matchup-right h2 { margin: 0 0 15px 0; font-size: 22px; }
+  .matchup-right ul { padding-left: 20px; margin: 0; }
+  .matchup-right li { margin-bottom: 6px; }
+
+  footer { text-align: center; padding: 15px 10px; font-size: 14px; color: #8b949e; }
+
   @media (max-width: 600px) {
-    .matchup-container {
-      flex-direction: column;
-      align-items: center;
-      padding: 10px;
-      margin-top: -15px;
-    }
-    .matchup-left {
-      justify-content: center;
-    }
-    .matchup-right {
-      text-align: center;
-      margin-top: 0px;
-    }
+    .matchup-container { flex-direction: column; align-items: center; padding: 10px; margin-top: -15px; }
+    .matchup-left { justify-content: center; }
+    .matchup-right { text-align: center; margin-top: 0px; }
   }
 </style>
 </head>
 <body>
-<header>Diana Mid Matchup – Hwei</header>
+
+<header>Hwei Mid Matchup</header>
 
 <a href="matchuphub.html" class="back-link">&larr; Back to Matchup Hub</a>
 
@@ -113,7 +81,7 @@
   <div class="matchup-right">
     <h2>Matchup Notes</h2>
     <ul>
-      <li>Hwei has moderate poke; trade when her abilities are on cooldown.</li>
+      <li>Don't step up early in this matchup. Whei's fireball is mcuh quicker than Diana's Q.</li>
       <li>Focus on dodging her skillshots to maintain lane control.</li>
       <li>Post-level 6, she can be punished if her ultimate is used poorly.</li>
       <li>Wave management is key; freeze or slow push to bait overextensions.</li>
@@ -122,6 +90,19 @@
   </div>
 </div>
 
-<footer>© 2025 LoL Fundamentals · Contact: arcsecond@lolfundamentals.com</footer>
+<footer>© 2025 LoL Fundamentals · All rights reserved</footer>
+
+<script>
+// Show content only if logged in
+document.addEventListener('DOMContentLoaded', () => {
+  if (localStorage.getItem('lolfundamentals_logged_in') === 'true') {
+    document.body.style.display = 'block';
+  } else {
+    window.location.replace('login.html');
+  }
+});
+</script>
+
 </body>
 </html>
+
