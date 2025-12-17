@@ -5,61 +5,109 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Heimerdinger Mid Matchup</title>
 
-<!-- Prevent content flash before login check -->
+<!-- Prevent page flash before login check -->
+<script>
+  if (localStorage.getItem('lolfundamentals_logged_in') !== 'true') {
+    window.location.replace('login.html');
+  }
+</script>
+
 <style>
-  body { 
-    margin: 0; 
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; 
-    background: #0d1117; 
-    color: #e6edf3; 
-    line-height: 1.4; 
-    display: none; /* hide until login check */
+  body {
+    margin: 0;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background: #0d1117;
+    color: #e6edf3;
+    line-height: 1.4;
   }
-  header { 
-    background: #161b22; 
-    padding: 10px 20px; 
-    text-align: center; 
-    font-size: 28px; 
-    font-weight: bold; 
-    color: #58a6ff; 
+
+  header {
+    background: #161b22;
+    padding: 10px 20px;
+    text-align: center;
+    font-size: 28px;
+    font-weight: bold;
+    color: #58a6ff;
   }
+
+  /* Gold Back Button */
   .back-link {
-    display: inline-flex; 
-    align-items: center; 
-    justify-content: center; 
-    background: #c9aa71; 
-    color: #0d1117; 
-    font-weight: bold; 
-    text-decoration: none; 
-    padding: 10px 20px; 
-    border-radius: 25px; 
-    border: 1px solid #c9aa71; 
-    margin: 20px auto 30px auto;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    background: #c9aa71;
+    color: #0d1117;
+    font-weight: bold;
+    text-decoration: none;
+    padding: 10px 20px;
+    border-radius: 25px;
+    border: 1px solid #c9aa71;
+    margin: 20px 0 30px 0;
   }
   .back-link:hover { background: #e6c17c; color: #0d1117; }
 
-  .matchup-container { display: flex; max-width: 900px; margin: -15px auto 0 auto; gap: 15px; padding: 0 20px 10px 20px; }
-  .matchup-left { display: flex; align-items: center; gap: 10px; flex: 0 0 auto; }
-  .matchup-left img { width: 80px; height: 80px; border-radius: 8px; }
-  .winrate-bubble { background: #86efac; color: #0d1117; font-weight: bold; padding: 8px 14px; border-radius: 25px; font-size: 16px; white-space: nowrap; }
+  .matchup-container {
+    display: flex;
+    max-width: 900px;
+    margin: -15px auto 0 auto;
+    gap: 15px;
+    padding: 0 20px 10px 20px;
+  }
 
-  .matchup-right { flex: 1; color: #e6edf3; display: flex; flex-direction: column; justify-content: flex-start; margin-top: 0px; }
+  .matchup-left {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    flex: 0 0 auto;
+  }
+  .matchup-left img { width: 80px; height: 80px; border-radius: 8px; }
+
+  /* Winrate bubble */
+  .winrate-bubble {
+    background: #86efac;
+    color: #0d1117;
+    font-weight: bold;
+    padding: 8px 14px;
+    border-radius: 25px;
+    font-size: 16px;
+    white-space: nowrap;
+  }
+
+  .matchup-right {
+    flex: 1;
+    color: #e6edf3;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    margin-top: 0px;
+  }
   .matchup-right h2 { margin: 0 0 15px 0; font-size: 22px; }
   .matchup-right ul { padding-left: 20px; margin: 0; }
   .matchup-right li { margin-bottom: 6px; }
 
-  footer { text-align: center; padding: 15px 10px; font-size: 14px; color: #8b949e; }
+  footer {
+    text-align: center;
+    padding: 15px 10px;
+    font-size: 14px;
+    color: #8b949e;
+  }
 
   @media (max-width: 600px) {
-    .matchup-container { flex-direction: column; align-items: center; padding: 10px; margin-top: -15px; }
+    .matchup-container {
+      flex-direction: column;
+      align-items: center;
+      padding: 10px;
+      margin-top: -15px;
+    }
     .matchup-left { justify-content: center; }
-    .matchup-right { text-align: center; margin-top: 0px; }
+    .matchup-right { text-align: left; margin-top: 0px; }
   }
 </style>
 </head>
 <body>
 <header>Heimerdinger Mid Matchup</header>
 
+<!-- Centered Gold Back Button -->
 <div style="text-align: center;">
   <a href="matchuphub.html" class="back-link">&larr; Back to Matchup Hub</a>
 </div>
@@ -72,27 +120,17 @@
   <div class="matchup-right">
     <h2>Matchup Notes</h2>
     <ul>
-      <li>Let Heimer push in early. He's an easy target for ganks and eventually runs oom giving you an opportunity to kill him.</li>
-      <li>Heimer's turrets can be used to close the gap, setting yourself up for easy chases and good ults.</li>
-      <li>Later on in the game his main way of killing you is with an ult turret into stun.</li>
+      <li>Let Heimer push in early. He's an easy target for ganks and eventually runs out of mana, giving you an opportunity to kill him.</li>
+      <li>Heimer's turrets can be used to close the gap, setting yourself up for easy chases and good ult usage.</li>
+      <li>Later in the game, his main way of killing you is with an ult turret into stun, so be aware of positioning.</li>
     </ul>
   </div>
 </div>
 
 <footer>© 2025 LoL Fundamentals · All rights reserved</footer>
-
-<script>
-// Show content only if logged in
-document.addEventListener('DOMContentLoaded', () => {
-  if (localStorage.getItem('lolfundamentals_logged_in') === 'true') {
-    document.body.style.display = 'block';
-  } else {
-    window.location.replace('login.html');
-  }
-});
-</script>
 </body>
 </html>
+
 
 
 
