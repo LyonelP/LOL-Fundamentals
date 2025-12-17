@@ -5,71 +5,112 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Irelia Mid Matchup</title>
 
+<!-- Prevent page flash before login check -->
+<script>
+  if (localStorage.getItem('lolfundamentals_logged_in') !== 'true') {
+    window.location.replace('login.html');
+  }
+</script>
+
 <style>
-  body { 
-    margin: 0; 
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; 
-    background: #0d1117; 
-    color: #e6edf3; 
-    line-height: 1.4; 
-    display: none; /* hide until login check */
+  body {
+    margin: 0;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background: #0d1117;
+    color: #e6edf3;
+    line-height: 1.4;
   }
+
   header {
-    background: #161b22; 
-    padding: 10px 20px; 
-    text-align: center; 
-    font-size: 28px; 
-    font-weight: bold; 
-    color: #58a6ff; 
+    background: #161b22;
+    padding: 10px 20px;
+    text-align: center;
+    font-size: 28px;
+    font-weight: bold;
+    color: #58a6ff;
   }
+
+  /* Gold Back Button */
   .back-link {
     display: inline-flex;
     align-items: center;
     justify-content: center;
-    background: #c9aa71; 
+    background: #c9aa71;
     color: #0d1117;
     font-weight: bold;
     text-decoration: none;
     padding: 10px 20px;
     border-radius: 25px;
     border: 1px solid #c9aa71;
-    margin: 20px auto 30px auto;
+    margin: 20px 0 30px 0;
   }
   .back-link:hover { background: #e6c17c; color: #0d1117; }
 
-  .matchup-container { display: flex; max-width: 900px; margin: -15px auto 0 auto; gap: 15px; padding: 0 20px 10px 20px; }
-  .matchup-left { display: flex; align-items: center; gap: 10px; flex: 0 0 auto; }
-  .matchup-left img { width: 80px; height: 80px; border-radius: 8px; }
-
-  .winrate-bubble { 
-    background: #B91C1C; /* red for low winrate */ 
-    color: #0d1117; 
-    font-weight: bold; 
-    padding: 8px 14px; 
-    border-radius: 25px; 
-    font-size: 16px; 
-    white-space: nowrap; 
+  .matchup-container {
+    display: flex;
+    max-width: 900px;
+    margin: -15px auto 0 auto;
+    gap: 15px;
+    padding: 0 20px 10px 20px;
   }
 
-  .matchup-right { flex: 1; color: #e6edf3; display: flex; flex-direction: column; justify-content: flex-start; margin-top: 0px; }
+  .matchup-left {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    flex: 0 0 auto;
+  }
+  .matchup-left img { width: 80px; height: 80px; border-radius: 8px; }
+
+  /* Winrate bubble */
+  .winrate-bubble {
+    background: #B91C1C;
+    color: #0d1117;
+    font-weight: bold;
+    padding: 8px 14px;
+    border-radius: 25px;
+    font-size: 16px;
+    white-space: nowrap;
+  }
+
+  .matchup-right {
+    flex: 1;
+    color: #e6edf3;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    margin-top: 0px;
+  }
   .matchup-right h2 { margin: 0 0 15px 0; font-size: 22px; }
   .matchup-right ul { padding-left: 20px; margin: 0; }
   .matchup-right li { margin-bottom: 6px; }
 
-  footer { text-align: center; padding: 15px 10px; font-size: 14px; color: #8b949e; }
+  footer {
+    text-align: center;
+    padding: 15px 10px;
+    font-size: 14px;
+    color: #8b949e;
+  }
 
   @media (max-width: 600px) {
-    .matchup-container { flex-direction: column; align-items: center; padding: 10px; margin-top: -15px; }
+    .matchup-container {
+      flex-direction: column;
+      align-items: center;
+      padding: 10px;
+      margin-top: -15px;
+    }
     .matchup-left { justify-content: center; }
-    .matchup-right { text-align: center; margin-top: 0px; }
+    .matchup-right { text-align: left; margin-top: 0px; }
   }
 </style>
 </head>
 <body>
-
 <header>Irelia Mid Matchup</header>
 
-<a href="matchuphub.html" class="back-link">&larr; Back to Matchup Hub</a>
+<!-- Centered Gold Back Button -->
+<div style="text-align: center;">
+  <a href="matchuphub.html" class="back-link">&larr; Back to Matchup Hub</a>
+</div>
 
 <div class="matchup-container">
   <div class="matchup-left">
@@ -79,27 +120,18 @@
   <div class="matchup-right">
     <h2>Matchup Notes</h2>
     <ul>
-      <li>Dodge this matchup if possible; it’s very difficult after she builds Null-Mantle and Lifesteal.</li>
-      <li>Merc Treads, Blade of the Ruined King, and Wit's End make her extremely hard to beat as Diana.</li>
-      <li>She excels at freezing waves due to sustain, passive stacking on minions, and limited AoE spells.</li>
+      <li>Dodge this matchup if possible. Irelia becomes extremely oppressive after building sustain items and lifesteal.</li>
+      <li>The combination of Merc Treads, Blade of the Ruined King, and Wit's End is very difficult to handle as Diana.</li>
+      <li>She excels at freezing waves with sustain, stacking her passive from minions, and punishing lack of AOE from Diana.</li>
     </ul>
   </div>
 </div>
 
 <footer>© 2025 LoL Fundamentals · All rights reserved</footer>
-
-<script>
-document.addEventListener('DOMContentLoaded', () => {
-  if (localStorage.getItem('lolfundamentals_logged_in') === 'true') {
-    document.body.style.display = 'block';
-  } else {
-    window.location.replace('login.html');
-  }
-});
-</script>
-
 </body>
 </html>
+
+
 
 
 
