@@ -3,63 +3,143 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Diana Mid vs Kassadin</title>
+<title>KASSADIN MID MATCHUP</title>
 
 <script>
-// Require login BEFORE showing anything
-if (localStorage.getItem('lolfundamentals_logged_in') !== 'true') {
-  alert('You must be logged in to view this page.');
-  window.location.href = 'login.html';
-}
+  // Require login BEFORE showing anything
+  if (localStorage.getItem('lolfundamentals_logged_in') !== 'true') {
+    alert('You must be logged in to view this page.');
+    window.location.href = 'login.html';
+  }
 </script>
 
 <style>
-  body { margin: 0; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; background: #0d1117; color: #e6edf3; line-height: 1.4; }
-  header { background: #161b22; padding: 10px 20px; text-align: center; font-size: 28px; font-weight: bold; color: #58a6ff; }
+  :root {
+    --gold: #c9aa71;
+    --bg: #0a0f14;
+    --card: #161b22;
+    --muted: #8b949e;
+  }
 
-  /* Gold Back Button */
-  .back-link {
-    display: inline-flex;
+  body {
+    margin: 0;
+    font-family: "Beaufort for LOL", Arial, Helvetica, sans-serif;
+    background: var(--bg);
+    color: #e6edf3;
+    line-height: 1.4;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+  }
+
+  header {
+    background: var(--card);
+    border-bottom: 2px solid var(--gold);
+    padding: 20px;
+    font-weight: bold;
+    font-size: 26px;
+    text-align: center;
+    line-height: 1.2;
+    color: var(--gold);
+    text-transform: uppercase;
+  }
+
+  .back-button {
+    display: block;
+    margin: 20px auto 20px;
+    padding: 10px 20px;
+    background: linear-gradient(135deg, #c9aa71, #e0c77b);
+    color: #000;
+    text-decoration: none;
+    border-radius: 8px;
+    font-weight: bold;
+    font-size: 16px;
+    text-align: center;
+    box-shadow: 0 0 10px rgba(201,170,113,0.5);
+    transition: all 0.3s;
+    width: fit-content;
+  }
+  .back-button::before { content: "← "; }
+  .back-button:hover {
+    background: linear-gradient(135deg, #e6c97f, #f0d88b);
+    box-shadow: 0 0 15px rgba(255,215,0,0.8);
+  }
+
+  .matchup-container {
+    display: flex;
+    max-width: 900px;
+    margin: 0 auto;
+    gap: 15px;
+    padding: 0 20px 10px 20px;
+  }
+
+  .matchup-left {
+    display: flex;
     align-items: center;
-    justify-content: center;
-    background: #c9aa71; /* gold */
+    gap: 10px;
+  }
+
+  .matchup-left img {
+    width: 80px;
+    height: 80px;
+    border-radius: 8px;
+  }
+
+  .winrate-bubble {
+    background: #F9D949; /* yellow */
     color: #0d1117;
     font-weight: bold;
-    text-decoration: none;
-    padding: 10px 20px;
+    padding: 8px 14px;
     border-radius: 25px;
-    border: 1px solid #c9aa71;
-    margin: 20px auto 30px auto;
+    font-size: 16px;
+    white-space: nowrap;
   }
-  .back-link:hover { background: #e6c17c; color: #0d1117; }
 
-  .matchup-container { display: flex; max-width: 900px; margin: -15px auto 0 auto; gap: 15px; padding: 0 20px 10px 20px; }
-  .matchup-left { display: flex; align-items: center; gap: 10px; flex: 0 0 auto; }
-  .matchup-left img { width: 80px; height: 80px; border-radius: 8px; }
+  .matchup-right {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+  }
 
-  /* Winrate bubble in same yellow as Neeko page */
-  .winrate-bubble { background: #F9D949; color: #0d1117; font-weight: bold; padding: 8px 14px; border-radius: 25px; font-size: 16px; white-space: nowrap; }
+  .matchup-right h2 {
+    margin: 0 0 15px 0;
+    font-size: 22px;
+    color: var(--gold);
+  }
 
-  .matchup-right { flex: 1; color: #e6edf3; display: flex; flex-direction: column; justify-content: flex-start; margin-top: 0px; }
-  .matchup-right h2 { margin: 0 0 15px 0; font-size: 22px; }
-  .matchup-right ul { padding-left: 20px; margin: 0; }
-  .matchup-right li { margin-bottom: 6px; }
+  .matchup-right ul {
+    padding-left: 20px;
+    margin: 0;
+  }
 
-  footer { text-align: center; padding: 15px 10px; font-size: 14px; color: #8b949e; }
+  .matchup-right li {
+    margin-bottom: 6px;
+  }
+
+  footer {
+    text-align: center;
+    padding: 15px 10px;
+    font-size: 14px;
+    color: var(--muted);
+    margin-top: auto;
+  }
 
   @media (max-width: 600px) {
-    .matchup-container { flex-direction: column; align-items: center; padding: 10px; margin-top: -15px; }
+    .matchup-container {
+      flex-direction: column;
+      align-items: center;
+      padding: 10px;
+    }
     .matchup-left { justify-content: center; }
-    .matchup-right { text-align: center; margin-top: 0px; }
+    .matchup-right { text-align: center; }
   }
 </style>
 </head>
 <body>
-<header>Diana Mid Matchup – Kassadin</header>
 
-<div style="text-align: center;">
-  <a href="matchuphub.html" class="back-link">&larr; Back to Matchup Hub</a>
-</div>
+<header>KASSADIN MID MATCHUP</header>
+
+<a href="matchuphub.html" class="back-button">Back to Matchup Hub</a>
 
 <div class="matchup-container">
   <div class="matchup-left">
@@ -69,18 +149,21 @@ if (localStorage.getItem('lolfundamentals_logged_in') !== 'true') {
   <div class="matchup-right">
     <h2>Matchup Notes</h2>
     <ul>
-      <li>Don't trade qs at the very start of the lane as he’ll gain the shield and draw minion aggro from having target you with q pulling the wave his way.</li>
-      <li>Instead wait to move up until you need to last hit. He’ll likely be standing right on the melee creeps and your Q will kill all three ranged creeps and hit him.</li>
-      <li>If the wave was pushed, it's very easy to crash the second wave and let it reset on the third wave. Ideally you have the wave coming your way on the second if he's pushing for some reason. </li>
-      <li>Post 6 you have to wait for him to r on you. You pretty much always take that opportunity to go for an ult trade. </li>
-      <li>You should also always have the push in this matchup and will be able to 1v1 for most of the game.</li>
+      <li>Don't trade Qs at the very start of the lane as he’ll gain the shield and draw minion aggro.</li>
+      <li>Wait to move up until you need to last hit. Use your Q to hit him and the ranged creeps together.</li>
+      <li>If the wave is pushed, crash the second wave and let it reset on the third wave. Keep control if he pushes unexpectedly.</li>
+      <li>Post 6, wait for him to use R, then go for an ult trade.</li>
+      <li>You should generally have the push advantage and can 1v1 most of the game.</li>
     </ul>
   </div>
 </div>
 
-<footer>© 2025 LoL Fundamentals · Contact: arcsecond@lolfundamentals.com</footer>
+<footer>© 2025 LoL Fundamentals · All rights reserved</footer>
+
 </body>
 </html>
+
+
 
 
 
