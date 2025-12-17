@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>LEBLANC MID MATCHUP</title>
+<title>Diana Mid Matchup – LeBlanc</title>
 
 <script>
   // Require login BEFORE showing anything
@@ -14,133 +14,59 @@
 </script>
 
 <style>
-  :root {
-    --gold: #c9aa71;
-    --bg: #0a0f14;
-    --card: #161b22;
-    --muted: #8b949e;
+  body { 
+    margin: 0; 
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; 
+    background: #0d1117; 
+    color: #e6edf3; 
+    line-height: 1.4; 
+    display: none; /* hide until login verified */
   }
+  header { background: #161b22; padding: 10px 20px; text-align: center; font-size: 28px; font-weight: bold; color: #58a6ff; text-transform: uppercase; }
 
-  body {
-    margin: 0;
-    font-family: "Beaufort for LOL", Arial, Helvetica, sans-serif;
-    background: var(--bg);
-    color: #e6edf3;
-    line-height: 1.4;
-    min-height: 100vh;
-    display: flex;
-    flex-direction: column;
-  }
-
-  header {
-    background: var(--card);
-    border-bottom: 2px solid var(--gold);
-    padding: 20px;
-    font-weight: bold;
-    font-size: 26px;
-    text-align: center;
-    line-height: 1.2;
-    color: var(--gold);
-    text-transform: uppercase;
-  }
-
-  .back-button {
-    display: block;
-    margin: 20px auto 20px;
-    padding: 10px 20px;
-    background: linear-gradient(135deg, #c9aa71, #e0c77b);
-    color: #000;
-    text-decoration: none;
-    border-radius: 8px;
-    font-weight: bold;
-    font-size: 16px;
-    text-align: center;
-    box-shadow: 0 0 10px rgba(201,170,113,0.5);
-    transition: all 0.3s;
-    width: fit-content;
-  }
-  .back-button::before { content: "← "; }
-  .back-button:hover {
-    background: linear-gradient(135deg, #e6c97f, #f0d88b);
-    box-shadow: 0 0 15px rgba(255,215,0,0.8);
-  }
-
-  .matchup-container {
-    display: flex;
-    max-width: 900px;
-    margin: 0 auto;
-    gap: 15px;
-    padding: 0 20px 10px 20px;
-  }
-
-  .matchup-left {
-    display: flex;
+  /* Gold Back Button */
+  .back-link {
+    display: inline-flex;
     align-items: center;
-    gap: 10px;
+    justify-content: center;
+    background: #c9aa71; 
+    color: #0d1117;
+    font-weight: bold;
+    text-decoration: none;
+    padding: 10px 20px;
+    border-radius: 25px;
+    border: 1px solid #c9aa71;
+    margin: 20px auto 30px auto;
   }
+  .back-link:hover { background: #e6c17c; color: #0d1117; }
 
-  .matchup-left img {
-    width: 80px;
-    height: 80px;
-    border-radius: 8px;
-  }
+  .matchup-container { display: flex; max-width: 900px; margin: -15px auto 0 auto; gap: 15px; padding: 0 20px 10px 20px; }
+  .matchup-left { display: flex; align-items: center; gap: 10px; flex: 0 0 auto; }
+  .matchup-left img { width: 80px; height: 80px; border-radius: 8px; }
 
-  /* Dark green winrate bubble like Karma/K’Sante */
-  .winrate-bubble { 
-    background: #16a34a; 
-    color: #0d1117; 
-    font-weight: bold; 
-    padding: 8px 14px; 
-    border-radius: 25px; 
-    font-size: 16px; 
-    white-space: nowrap; 
-  }
+  /* Dark green winrate bubble */
+  .winrate-bubble { background: #16a34a; color: #0d1117; font-weight: bold; padding: 8px 14px; border-radius: 25px; font-size: 16px; white-space: nowrap; }
 
-  .matchup-right {
-    flex: 1;
-    display: flex;
-    flex-direction: column;
-  }
+  .matchup-right { flex: 1; color: #e6edf3; display: flex; flex-direction: column; justify-content: flex-start; margin-top: 0px; }
+  .matchup-right h2 { margin: 0 0 15px 0; font-size: 22px; }
+  .matchup-right ul { padding-left: 20px; margin: 0; }
+  .matchup-right li { margin-bottom: 6px; }
 
-  .matchup-right h2 {
-    margin: 0 0 15px 0;
-    font-size: 22px;
-    color: var(--gold);
-  }
-
-  .matchup-right ul {
-    padding-left: 20px;
-    margin: 0;
-  }
-
-  .matchup-right li {
-    margin-bottom: 6px;
-  }
-
-  footer {
-    text-align: center;
-    padding: 15px 10px;
-    font-size: 14px;
-    color: var(--muted);
-    margin-top: auto;
-  }
+  footer { text-align: center; padding: 15px 10px; font-size: 14px; color: #8b949e; }
 
   @media (max-width: 600px) {
-    .matchup-container {
-      flex-direction: column;
-      align-items: center;
-      padding: 10px;
-    }
+    .matchup-container { flex-direction: column; align-items: center; padding: 10px; margin-top: -15px; }
     .matchup-left { justify-content: center; }
-    .matchup-right { text-align: center; }
+    .matchup-right { text-align: center; margin-top: 0px; }
   }
 </style>
 </head>
 <body>
+<header>Diana Mid Matchup – LeBlanc</header>
 
-<header>LEBLANC MID MATCHUP</header>
-
-<a href="matchuphub.html" class="back-button">Back to Matchup Hub</a>
+<div style="text-align: center;">
+  <a href="matchuphub.html" class="back-link">&larr; Back to Matchup Hub</a>
+</div>
 
 <div class="matchup-container">
   <div class="matchup-left">
@@ -150,15 +76,24 @@
   <div class="matchup-right">
     <h2>Matchup Notes</h2>
     <ul>
-      <li>Always try to get the auto on LeBlanc if you’re going to be hit by her W.</li>
-      <li>Your R can be used to cancel her first W, but not the second, so only use on engage.</li>
-      <li>Don’t panic if you die to an all-in or gank. You still outscale and can 1v1 her at all stages.</li>
+      <li>Always try to get the auto on LeBlanc, if you’re going to be hit by her W.</li>
+      <li>Your R can be used to cancel her first W but not the second one, so it's only good on the engage.</li>
+      <li>Don’t panic if you die to an all-in or gank in this matchup. You'll still outscale and will be able to 1v1 her throughout the game.</li>
     </ul>
   </div>
 </div>
 
-<footer>© 2025 LoL Fundamentals · All rights reserved</footer>
+<footer>© 2025 LoL Fundamentals · Contact: arcsecond@lolfundamentals.com</footer>
 
+<script>
+// Require login before showing page
+if (localStorage.getItem('lolfundamentals_logged_in') !== 'true') {
+  alert('You must be logged in to view this page.');
+  window.location.href = 'login.html';
+} else {
+  document.body.style.display = 'block';
+}
+</script>
 </body>
 </html>
 
