@@ -3,17 +3,30 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Diana Mid vs Irelia</title>
-<style>
-  body { margin: 0; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; background: #0d1117; color: #e6edf3; line-height: 1.4; }
-  header { background: #161b22; padding: 10px 20px; text-align: center; font-size: 28px; font-weight: bold; color: #58a6ff; }
+<title>Irelia Mid Matchup</title>
 
-  /* Gold Back Button */
+<style>
+  body { 
+    margin: 0; 
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; 
+    background: #0d1117; 
+    color: #e6edf3; 
+    line-height: 1.4; 
+    display: none; /* hide until login check */
+  }
+  header {
+    background: #161b22; 
+    padding: 10px 20px; 
+    text-align: center; 
+    font-size: 28px; 
+    font-weight: bold; 
+    color: #58a6ff; 
+  }
   .back-link {
     display: inline-flex;
     align-items: center;
     justify-content: center;
-    background: #c9aa71; /* gold */
+    background: #c9aa71; 
     color: #0d1117;
     font-weight: bold;
     text-decoration: none;
@@ -27,7 +40,16 @@
   .matchup-container { display: flex; max-width: 900px; margin: -15px auto 0 auto; gap: 15px; padding: 0 20px 10px 20px; }
   .matchup-left { display: flex; align-items: center; gap: 10px; flex: 0 0 auto; }
   .matchup-left img { width: 80px; height: 80px; border-radius: 8px; }
-  .winrate-bubble { color: #0d1117; font-weight: bold; padding: 8px 14px; border-radius: 25px; font-size: 16px; white-space: nowrap; }
+
+  .winrate-bubble { 
+    background: #B91C1C; /* red for low winrate */ 
+    color: #0d1117; 
+    font-weight: bold; 
+    padding: 8px 14px; 
+    border-radius: 25px; 
+    font-size: 16px; 
+    white-space: nowrap; 
+  }
 
   .matchup-right { flex: 1; color: #e6edf3; display: flex; flex-direction: column; justify-content: flex-start; margin-top: 0px; }
   .matchup-right h2 { margin: 0 0 15px 0; font-size: 22px; }
@@ -44,39 +66,41 @@
 </style>
 </head>
 <body>
-<header>Diana Mid Matchup – Irelia</header>
 
-<!-- Centered Gold Back Button -->
-<div style="text-align: center;">
-  <a href="matchuphub.html" class="back-link">&larr; Back to Matchup Hub</a>
-</div>
+<header>Irelia Mid Matchup</header>
+
+<a href="matchuphub.html" class="back-link">&larr; Back to Matchup Hub</a>
 
 <div class="matchup-container">
   <div class="matchup-left">
     <img src="https://ddragon.leagueoflegends.com/cdn/14.23.1/img/champion/Irelia.png" alt="Irelia">
-    <div class="winrate-bubble" style="background: #B91C1C;">45%</div>
+    <div class="winrate-bubble">45%</div>
   </div>
   <div class="matchup-right">
     <h2>Matchup Notes</h2>
     <ul>
-      <li>Dodge this matchup if you can. This matchup is unplayable after she builds a null mantle and lifesteal. .</li>
-      <li>The combination of merc treads, blade of the ruined king and wits end is unbeatable with Diana.</li>
-      <li>She also excels at freezings with waves with her sustain, ability to stack her passive from minions, and her lack of aoe spells.</li>
+      <li>Dodge this matchup if possible; it’s very difficult after she builds Null-Mantle and Lifesteal.</li>
+      <li>Merc Treads, Blade of the Ruined King, and Wit's End make her extremely hard to beat as Diana.</li>
+      <li>She excels at freezing waves due to sustain, passive stacking on minions, and limited AoE spells.</li>
     </ul>
   </div>
 </div>
 
-<footer>© 2025 LoL Fundamentals · Contact: arcsecond@lolfundamentals.com</footer>
+<footer>© 2025 LoL Fundamentals · All rights reserved</footer>
 
 <script>
-// Require login to view page
-if (localStorage.getItem('lolfundamentals_logged_in') !== 'true') {
-  alert('You must be logged in to view this page.');
-  window.location.href = 'login.html';
-}
+document.addEventListener('DOMContentLoaded', () => {
+  if (localStorage.getItem('lolfundamentals_logged_in') === 'true') {
+    document.body.style.display = 'block';
+  } else {
+    window.location.replace('login.html');
+  }
+});
 </script>
+
 </body>
 </html>
+
 
 
 
