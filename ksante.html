@@ -3,22 +3,15 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>K'SANTE MID MATCHUP</title>
-
-<script>
-  // Require login BEFORE showing anything
-  if (localStorage.getItem('lolfundamentals_logged_in') !== 'true') {
-    alert('You must be logged in to view this page.');
-    window.location.href = 'login.html';
-  }
-</script>
+<title>Diana Mid vs K'Sante</title>
 
 <style>
   :root {
-    --gold: #c9aa71;
-    --bg: #0a0f14;
-    --card: #161b22;
-    --muted: #8b949e;
+    --gold:#c9aa71;
+    --bg:#0a0f14;
+    --card:#161b22;
+    --muted:#8b949e;
+    --orange:#f97316;
   }
 
   body {
@@ -33,20 +26,20 @@
   }
 
   header {
-    background: var(--card);
+    background: rgba(13,17,23,0.9);
     border-bottom: 2px solid var(--gold);
     padding: 20px;
     font-weight: bold;
     font-size: 26px;
-    text-align: center;
-    line-height: 1.2;
-    color: var(--gold);
+    letter-spacing: 1px;
     text-transform: uppercase;
+    text-align: center;
+    color: var(--gold);
   }
 
   .back-button {
     display: block;
-    margin: 20px auto 20px;
+    margin: 20px auto;
     padding: 10px 20px;
     background: linear-gradient(135deg, #c9aa71, #e0c77b);
     color: #000;
@@ -54,7 +47,6 @@
     border-radius: 8px;
     font-weight: bold;
     font-size: 16px;
-    text-align: center;
     box-shadow: 0 0 10px rgba(201,170,113,0.5);
     transition: all 0.3s;
     width: fit-content;
@@ -85,15 +77,14 @@
     border-radius: 8px;
   }
 
-  /* Dark green winrate bubble like Karma */
-  .winrate-bubble { 
-    background: #16a34a; 
-    color: #0d1117; 
-    font-weight: bold; 
-    padding: 8px 14px; 
-    border-radius: 25px; 
-    font-size: 16px; 
-    white-space: nowrap; 
+  .winrate-bubble {
+    background: var(--orange);
+    color: #0d1117;
+    font-weight: bold;
+    padding: 8px 14px;
+    border-radius: 25px;
+    font-size: 16px;
+    white-space: nowrap;
   }
 
   .matchup-right {
@@ -131,14 +122,23 @@
       align-items: center;
       padding: 10px;
     }
-    .matchup-left { justify-content: center; }
-    .matchup-right { text-align: center; }
+    .matchup-right {
+      text-align: center;
+    }
   }
 </style>
+
+<!-- LOGIN CHECK -->
+<script>
+  if (localStorage.getItem('lolfundamentals_logged_in') !== 'true') {
+    window.location.href = 'login.html';
+  }
+</script>
+
 </head>
 <body>
 
-<header>K'SANTE MID MATCHUP</header>
+<header>Diana Mid Matchup – K'Sante</header>
 
 <a href="matchuphub.html" class="back-button">Back to Matchup Hub</a>
 
@@ -147,13 +147,14 @@
     <img src="https://ddragon.leagueoflegends.com/cdn/14.23.1/img/champion/KSante.png" alt="K'Sante">
     <div class="winrate-bubble">48%</div>
   </div>
+
   <div class="matchup-right">
     <h2>Matchup Notes</h2>
     <ul>
-      <li>Mainly look for Q poke and avoid letting him proc Grasp on you.</li>
-      <li>Time your E trades when his Grasp and Q3 are down.</li>
-      <li>His Q3 can interrupt your E, and his W can absorb a lot of your burst. It can often be baited by moving up slightly after landing a Q.</li>
-      <li>Usually, it's not worth extended trades; by the time you're in lethal range, he'll often have backup.</li>
+      <li>Mainly look for Q poke in this matchup and avoid letting him proc Grasp on you.</li>
+      <li>Time your E trades on him when his Grasp and Q3 are down.</li>
+      <li>His Q3 can interrupt your E and his W can absorb a lot of your burst, but it can be baited out by walking up slightly after landing a Q.</li>
+      <li>Most of the time it's not worth trading with him, since by the time you’re in lethal range, he'll have backup.</li>
     </ul>
   </div>
 </div>
@@ -162,6 +163,7 @@
 
 </body>
 </html>
+
 
 
 
