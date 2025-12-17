@@ -3,13 +3,14 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Irelia Mid Matchup</title>
+<title>IRELIA MID MATCHUP</title>
+
 <style>
   :root {
-    --gold: #c9aa71;
-    --bg: #0a0f14;
-    --card: #161b22;
-    --muted: #8b949e;
+    --gold:#c9aa71;
+    --bg:#0a0f14;
+    --card:#161b22;
+    --muted:#8b949e;
   }
 
   body {
@@ -29,6 +30,7 @@
     padding: 20px;
     font-weight: bold;
     font-size: 26px;
+    text-transform: uppercase;
     text-align: center;
     line-height: 1.2;
     color: var(--gold);
@@ -36,7 +38,7 @@
 
   .back-button {
     display: block;
-    margin: 20px auto 20px;
+    margin: 20px auto;
     padding: 10px 20px;
     background: linear-gradient(135deg, #c9aa71, #e0c77b);
     color: #000;
@@ -76,7 +78,7 @@
   }
 
   .winrate-bubble {
-    background: #B91C1C;
+    background: #B91C1C; /* red for losing matchup */
     color: #0d1117;
     font-weight: bold;
     padding: 8px 14px;
@@ -106,6 +108,20 @@
     margin-bottom: 6px;
   }
 
+  .video-container {
+    display: flex;
+    justify-content: center;
+    margin: 30px 0;
+  }
+
+  .video-container iframe {
+    width: 100%;
+    max-width: 800px;
+    height: 450px;
+    border: none;
+    border-radius: 10px;
+  }
+
   footer {
     text-align: center;
     padding: 15px 10px;
@@ -122,6 +138,7 @@
     }
     .matchup-left { justify-content: center; }
     .matchup-right { text-align: center; }
+    .video-container iframe { height: 250px; }
   }
 </style>
 
@@ -137,7 +154,7 @@
 </head>
 <body>
 
-<header>Irelia Mid Matchup</header>
+<header>IRELIA MID MATCHUP</header>
 
 <a href="matchuphub.html" class="back-button">Back to Matchup Hub</a>
 
@@ -146,6 +163,7 @@
     <img src="https://ddragon.leagueoflegends.com/cdn/14.23.1/img/champion/Irelia.png" alt="Irelia">
     <div class="winrate-bubble">45%</div>
   </div>
+
   <div class="matchup-right">
     <h2>Matchup Notes</h2>
     <ul>
@@ -160,6 +178,8 @@
 
 </body>
 </html>
+
+
 
 
 
