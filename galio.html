@@ -5,58 +5,146 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Diana Mid vs Galio</title>
 <style>
-  body { 
-    margin: 0; 
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; 
-    background: #0d1117; 
-    color: #e6edf3; 
-    line-height: 1.4; 
-    display: none; /* Prevent content flash */
+  :root {
+    --gold: #c9aa71;
+    --bg: #0a0f14;
+    --card: #161b22;
+    --muted: #8b949e;
   }
-  header { background: #161b22; padding: 10px 20px; text-align: center; font-size: 28px; font-weight: bold; color: #58a6ff; }
 
-  /* Gold Back Button */
-  .back-link {
-    display: inline-flex;
+  body {
+    margin: 0;
+    font-family: "Beaufort for LOL", Arial, Helvetica, sans-serif;
+    background: var(--bg);
+    color: #e6edf3;
+    line-height: 1.4;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+  }
+
+  /* ===== HEADER ===== */
+  header {
+    background: var(--card);
+    border-bottom: 2px solid var(--gold);
+    padding: 20px;
+    font-weight: bold;
+    font-size: 26px;
+    text-align: center;
+    line-height: 1.2;
+    color: var(--gold);
+  }
+
+  /* ===== Back Button ===== */
+  .back-button {
+    display: block;
+    margin: 20px auto 20px; 
+    padding: 10px 20px;
+    background: linear-gradient(135deg, #c9aa71, #e0c77b);
+    color: #000;
+    text-decoration: none;
+    border-radius: 8px;
+    font-weight: bold;
+    font-size: 16px;
+    text-align: center;
+    box-shadow: 0 0 10px rgba(201,170,113,0.5);
+    transition: all 0.3s;
+    width: fit-content;
+  }
+  .back-button::before { content: "← "; }
+  .back-button:hover {
+    background: linear-gradient(135deg, #e6c97f, #f0d88b);
+    box-shadow: 0 0 15px rgba(255,215,0,0.8);
+  }
+
+  /* ===== Matchup Container ===== */
+  .matchup-container {
+    display: flex;
+    max-width: 900px;
+    margin: 0 auto;
+    gap: 15px;
+    padding: 0 20px 10px 20px;
+  }
+
+  .matchup-left {
+    display: flex;
     align-items: center;
-    justify-content: center;
-    background: #c9aa71;
+    gap: 10px;
+  }
+
+  .matchup-left img {
+    width: 80px;
+    height: 80px;
+    border-radius: 8px;
+  }
+
+  .winrate-bubble {
+    background: #f97316;
     color: #0d1117;
     font-weight: bold;
-    text-decoration: none;
-    padding: 10px 20px;
+    padding: 8px 14px;
     border-radius: 25px;
-    border: 1px solid #c9aa71;
-    margin: 20px auto 30px auto;
+    font-size: 16px;
+    white-space: nowrap;
   }
-  .back-link:hover { background: #e6c17c; color: #0d1117; }
 
-  .matchup-container { display: flex; max-width: 900px; margin: -15px auto 0 auto; gap: 15px; padding: 0 20px 10px 20px; }
-  .matchup-left { display: flex; align-items: center; gap: 10px; flex: 0 0 auto; }
-  .matchup-left img { width: 80px; height: 80px; border-radius: 8px; }
-  .winrate-bubble { background: #f97316; color: #0d1117; font-weight: bold; padding: 8px 14px; border-radius: 25px; font-size: 16px; white-space: nowrap; }
+  .matchup-right {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+  }
 
-  .matchup-right { flex: 1; color: #e6edf3; display: flex; flex-direction: column; justify-content: flex-start; margin-top: 0px; }
-  .matchup-right h2 { margin: 0 0 15px 0; font-size: 22px; }
-  .matchup-right ul { padding-left: 20px; margin: 0; }
-  .matchup-right li { margin-bottom: 6px; }
+  .matchup-right h2 {
+    margin: 0 0 15px 0;
+    font-size: 22px;
+    color: var(--gold);
+  }
 
-  footer { text-align: center; padding: 15px 10px; font-size: 14px; color: #8b949e; }
+  .matchup-right ul {
+    padding-left: 20px;
+    margin: 0;
+  }
+
+  .matchup-right li {
+    margin-bottom: 6px;
+  }
+
+  /* ===== FOOTER ===== */
+  footer {
+    text-align: center;
+    padding: 15px 10px;
+    font-size: 14px;
+    color: var(--muted);
+    margin-top: auto;
+  }
 
   @media (max-width: 600px) {
-    .matchup-container { flex-direction: column; align-items: center; padding: 10px; margin-top: -15px; }
+    .matchup-container {
+      flex-direction: column;
+      align-items: center;
+      padding: 10px;
+    }
     .matchup-left { justify-content: center; }
-    .matchup-right { text-align: center; margin-top: 0px; }
+    .matchup-right { text-align: center; }
   }
 </style>
+
+<!-- ===== LOGIN CHECK ===== -->
+<script>
+  document.addEventListener('DOMContentLoaded', () => {
+    if (localStorage.getItem('lolfundamentals_logged_in') === 'true') {
+      document.body.style.display = 'flex';
+    } else {
+      window.location.replace('login.html');
+    }
+  });
+</script>
 </head>
 <body>
-<header>Diana Mid Matchup – Galio</header>
 
-<!-- Centered Gold Back Button -->
-<div style="text-align: center;">
-  <a href="matchuphub.html" class="back-link">&larr; Back to Matchup Hub</a>
-</div>
+<header>Galio Mid Matchup</header>
+
+<a href="matchuphub.html" class="back-button">Back to Matchup Hub</a>
 
 <div class="matchup-container">
   <div class="matchup-left">
@@ -66,26 +154,16 @@
   <div class="matchup-right">
     <h2>Matchup Notes</h2>
     <ul>
-      <li>Look for as many q's as possible lvl 1 before he levels up w and has the magic shield. He'll naturally push the wave back with his q and passive. Avoid his passive at all costs, especially level 1.</li>
-      <li>Position close but away from the ranged creeps since that's where he wants to throw his q.</li>
-      <li>Your ability to kill him depends a lot on whether or not they took aftershock.</li>
-      <li>If he goes for an e trade you almost always want to look for a long return trade. Just make sure the jungler isn't around. Since Galio naturally pushes you don't have to worry about him freezing the wave and can be patient waiting at tower for the wave instead of setting yourself up to be ganked.</li>
+      <li>Look for as many Qs as possible level 1 before he levels W to gain the magic shield. Avoid his passive at all costs.</li>
+      <li>Position close but away from ranged creeps to avoid getting hit by his Q.</li>
+      <li>Your ability to trade depends heavily on whether he took Aftershock.</li>
+      <li>If he uses E to trade, wait for a long return trade while monitoring for jungler presence. Galio naturally pushes the wave, so you can play patiently at tower.</li>
     </ul>
   </div>
 </div>
 
-<footer>© 2025 LoL Fundamentals · Contact: arcsecond@lolfundamentals.com</footer>
+<footer>© 2025 LoL Fundamentals · All rights reserved</footer>
 
-<script>
-// Match Brand login requirement — prevent content flash
-document.addEventListener('DOMContentLoaded', () => {
-  if (localStorage.getItem('lolfundamentals_logged_in') === 'true') {
-    document.body.style.display = 'block';
-  } else {
-    window.location.replace('login.html');
-  }
-});
-</script>
 </body>
 </html>
 
