@@ -76,7 +76,7 @@ header {
 
 @media (max-width: 600px) {
   .champion-grid {
-    grid-template-columns: repeat(2, 1fr); /* 2 columns on mobile */
+    grid-template-columns: repeat(2, 1fr);
   }
 }
 
@@ -144,7 +144,7 @@ footer {
 
 <div class="champion-grid" id="champion-grid">
 
- <a href="ahri.html" class="champion-card"><img src="https://ddragon.leagueoflegends.com/cdn/14.23.1/img/champion/Ahri.png" alt="Ahri"><div class="champion-name">Ahri</div></a>
+  <a href="ahri.html" class="champion-card"><img src="https://ddragon.leagueoflegends.com/cdn/14.23.1/img/champion/Ahri.png" alt="Ahri"><div class="champion-name">Ahri</div></a>
   <a href="akali.html" class="champion-card"><img src="https://ddragon.leagueoflegends.com/cdn/14.23.1/img/champion/Akali.png" alt="Akali"><div class="champion-name">Akali</div></a>
   <a href="akshan.html" class="champion-card"><img src="https://ddragon.leagueoflegends.com/cdn/14.23.1/img/champion/Akshan.png" alt="Akshan"><div class="champion-name">Akshan</div></a>
   <a href="anivia.html" class="champion-card"><img src="https://ddragon.leagueoflegends.com/cdn/14.23.1/img/champion/Anivia.png" alt="Anivia"><div class="champion-name">Anivia</div></a>
@@ -220,23 +220,21 @@ const cards = [...grid.getElementsByClassName('champion-card')];
 input.addEventListener('input', () => {
   const q = input.value.toLowerCase().trim();
 
+  // Filter matching cards
   const matching = [];
-  const nonMatching = [];
-
   cards.forEach(card => {
     const name = card.querySelector('.champion-name').textContent.toLowerCase();
     const isNew = card.dataset.new === 'true';
-
     if ((q === 'new' && isNew) || (q !== 'new' && name.includes(q))) {
+      card.style.display = 'flex'; // show
       matching.push(card);
     } else {
-      nonMatching.push(card);
+      card.style.display = 'none'; // hide non-matching
     }
   });
 
-  // Remove all cards and re-append in order
-  grid.innerHTML = '';
-  [...matching, ...nonMatching].forEach(card => grid.appendChild(card));
+  // Reorder matching cards to top
+  matching.forEach(card => grid.appendChild(card));
 });
 </script>
 
