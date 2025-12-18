@@ -125,6 +125,13 @@ footer {
   pointer-events: none;
   transform: scale(0.95);
 }
+
+/* Mobile fix: always 2 columns */
+@media (max-width: 500px) {
+  .champion-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
 </style>
 </head>
 
@@ -134,8 +141,8 @@ footer {
 <a href="membershub.html" class="back-button">Back to Members Hub</a>
 <input id="champion-search" placeholder="Search champions or type 'new'...">
 
-<div class="champion-grid">
-  <a href="ahri.html" class="champion-card"><img src="https://ddragon.leagueoflegends.com/cdn/14.23.1/img/champion/Ahri.png" alt="Ahri"><div class="champion-name">Ahri</div></a>
+<div class="champion-grid" id="champion-grid">
+   <a href="ahri.html" class="champion-card"><img src="https://ddragon.leagueoflegends.com/cdn/14.23.1/img/champion/Ahri.png" alt="Ahri"><div class="champion-name">Ahri</div></a>
   <a href="akali.html" class="champion-card"><img src="https://ddragon.leagueoflegends.com/cdn/14.23.1/img/champion/Akali.png" alt="Akali"><div class="champion-name">Akali</div></a>
   <a href="akshan.html" class="champion-card"><img src="https://ddragon.leagueoflegends.com/cdn/14.23.1/img/champion/Akshan.png" alt="Akshan"><div class="champion-name">Akshan</div></a>
   <a href="anivia.html" class="champion-card"><img src="https://ddragon.leagueoflegends.com/cdn/14.23.1/img/champion/Anivia.png" alt="Anivia"><div class="champion-name">Anivia</div></a>
@@ -205,21 +212,30 @@ footer {
 
 <script>
 const input = document.getElementById('champion-search');
-const cards = [...document.getElementsByClassName('champion-card')];
+const grid = document.getElementById('champion-grid');
 
 input.addEventListener('input', () => {
   const q = input.value.toLowerCase().trim();
-  cards.forEach(card => {
-    const name = card.querySelector('.champion-name').textContent.toLowerCase();
-    const isNew = card.dataset.new === 'true';
-    if (q === 'new') {
-      card.classList.toggle('hidden', !isNew);
-    } else if (q === '') {
-      card.classList.remove('hidden');
-    } else {
+  const cards = [...grid.getElementsByClassName('champion-card')];
+
+  if (q === 'new') {
+    // Move new cards to top and hide others
+    cards.sort((a, b) => {
+      const aNew = a.dataset.new === 'true' ? 0 : 1;
+      const bNew = b.dataset.new === 'true' ? 0 : 1;
+      return aNew - bNew;
+    }).forEach(card => {
+      card.classList.toggle('hidden', card.dataset.new !== 'true');
+      grid.appendChild(card);
+    });
+  } else if (q === '') {
+    cards.forEach(card => card.classList.remove('hidden'));
+  } else {
+    cards.forEach(card => {
+      const name = card.querySelector('.champion-name').textContent.toLowerCase();
       card.classList.toggle('hidden', !name.includes(q));
-    }
-  });
+    });
+  }
 });
 </script>
 
