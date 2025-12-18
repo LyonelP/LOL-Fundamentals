@@ -63,11 +63,12 @@ header {
   border: 2px solid #c084fc;
   background: #161b22;
   color: #e6edf3;
+  font-size: 16px;
 }
 
 .champion-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+  grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
   gap: 20px;
   max-width: 1000px;
   margin: 0 auto 50px;
@@ -83,6 +84,9 @@ header {
   text-decoration: none;
   color: inherit;
   transition: transform .25s, box-shadow .25s;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 
 .champion-card:hover {
@@ -124,15 +128,17 @@ footer {
   font-size: 14px;
 }
 
-/* Mobile Tweaks */
+/* Mobile tweaks */
+@media (max-width: 700px) {
+  .champion-grid {
+    grid-template-columns: repeat(3, 1fr);
+    gap: 15px;
+  }
+}
+
 @media (max-width: 500px) {
   .champion-grid {
     grid-template-columns: repeat(2, 1fr);
-    gap: 15px;
-  }
-  .champion-card img {
-    width: 70px;
-    height: 70px;
   }
 }
 </style>
@@ -210,8 +216,6 @@ footer {
   <a href="zoe.html" class="champion-card"><img src="https://ddragon.leagueoflegends.com/cdn/14.23.1/img/champion/Zoe.png" alt="Zoe"><div class="champion-name">Zoe</div></a>
   <a href="zyra.html" class="champion-card"><img src="https://ddragon.leagueoflegends.com/cdn/14.23.1/img/champion/Zyra.png" alt="Zyra"><div class="champion-name">Zyra</div></a>
 
-
-
 </div>
 
 <footer>© 2025 LoL Fundamentals · All rights reserved</footer>
@@ -226,17 +230,14 @@ input.addEventListener('input', () => {
     const name = card.querySelector('.champion-name').textContent.toLowerCase();
     const isNew = card.dataset.new === 'true';
     card.style.display =
-      q === 'new' ? (isNew ? 'block' : 'none')
-      : name.includes(q) ? 'block' : 'none';
+      q === 'new' ? (isNew ? 'flex' : 'none')
+      : name.includes(q) ? 'flex' : 'none';
   });
 });
 </script>
 
 </body>
 </html>
-
-
-
 
 
 
