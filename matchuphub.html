@@ -6,9 +6,9 @@
 <title>Diana Mid – Matchup Hub</title>
 
 <script>
-  if (localStorage.getItem('lolfundamentals_logged_in') !== 'true') {
-    window.location.replace('login.html');
-  }
+if (localStorage.getItem('lolfundamentals_logged_in') !== 'true') {
+  window.location.replace('login.html');
+}
 </script>
 
 <style>
@@ -18,7 +18,6 @@ body {
   color: #fff;
   background: url('https://64.media.tumblr.com/594ac290bec6d5e9ad98b5f53404f00b/245c4c3ee469f81d-e4/s1280x1920/1cda4284320eb2031758a9859dfe14ff8bbc50ba.jpg') no-repeat center center fixed;
   background-size: cover;
-  overflow-x: hidden;
   min-height: 100vh;
   display: flex;
   flex-direction: column;
@@ -27,8 +26,7 @@ body {
 body::before {
   content: "";
   position: fixed;
-  top:0; left:0;
-  width:100%; height:100%;
+  inset: 0;
   background: rgba(10,15,20,0.25);
   z-index: -1;
 }
@@ -37,36 +35,26 @@ header {
   background: rgba(13,17,23,0.9);
   border-bottom: 2px solid #c9aa71;
   padding: 20px;
-  font-weight: bold;
   font-size: 26px;
+  font-weight: bold;
   text-transform: uppercase;
   color: #c9aa71;
-  letter-spacing: 1px;
   text-align: center;
 }
 
 .back-button {
-  display: block;
-  margin: 20px auto; 
+  margin: 20px auto;
   padding: 10px 20px;
   background: linear-gradient(135deg, #c9aa71, #e0c77b);
   color: #000;
   text-decoration: none;
   border-radius: 8px;
   font-weight: bold;
-  font-size: 16px;
-  text-align: center;
   box-shadow: 0 0 10px rgba(201,170,113,0.5);
-  transition: all 0.3s;
-  width: fit-content;
 }
 .back-button::before { content: "← "; }
-.back-button:hover {
-  box-shadow: 0 0 15px rgba(255,215,0,0.8);
-}
 
 #champion-search {
-  display: block;
   width: 400px;
   max-width: 90%;
   margin: 20px auto 30px;
@@ -75,12 +63,11 @@ header {
   border: 2px solid #c084fc;
   background: #161b22;
   color: #e6edf3;
-  font-size: 16px;
 }
 
 .champion-grid {
   display: grid;
-  grid-template-columns: repeat(7, 1fr);
+  grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
   gap: 20px;
   max-width: 1000px;
   margin: 0 auto 50px;
@@ -88,28 +75,29 @@ header {
 }
 
 .champion-card {
-  background: linear-gradient(135deg, #161b22 0%, #21262d 100%);
+  background: linear-gradient(135deg, #161b22, #21262d);
   border-radius: 12px;
   border-left: 6px solid #c084fc;
-  text-align: center;
   padding: 15px;
-  transition: transform 0.3s, box-shadow 0.3s;
-  cursor: pointer;
+  text-align: center;
   text-decoration: none;
   color: inherit;
+  transition: transform .25s, box-shadow .25s;
 }
+
 .champion-card:hover {
-  transform: translateY(-5px);
-  box-shadow: 0 10px 25px rgba(0,0,0,0.5);
+  transform: translateY(-4px);
+  box-shadow: 0 10px 25px rgba(0,0,0,.45);
 }
+
 .champion-card img {
   width: 80px;
   height: 80px;
   border-radius: 8px;
-  margin-bottom: 10px;
 }
 
 .champion-name {
+  margin-top: 8px;
   font-size: 16px;
   color: #c084fc;
   font-weight: bold;
@@ -117,50 +105,36 @@ header {
 
 .champion-tag {
   margin-top: 6px;
-  font-size: 12px;
-  font-weight: bold;
-  letter-spacing: 0.5px;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.6px;
   text-transform: uppercase;
   color: #000;
-  background: linear-gradient(135deg, #ffd700, #ffb700);
-  border-radius: 6px;
-  padding: 3px 8px;
-  display: inline-block;
-  box-shadow: 0 0 10px rgba(255,215,0,0.6);
-}
-
-.champion-tag:not(.new) {
-  display: none;
+  background: linear-gradient(135deg, #c9aa71, #e0c77b);
+  border-radius: 999px;
+  padding: 4px 10px;
+  display: inline-flex;
+  box-shadow: 0 0 8px rgba(201,170,113,0.55);
 }
 
 footer {
-  text-align: center;
-  padding: 25px 10px;
-  font-size: 14px;
   margin-top: auto;
-}
-
-@media (max-width: 1000px) {
-  .champion-grid {
-    grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
-  }
-}
-@media (max-width: 500px) {
-  .champion-grid { grid-template-columns: repeat(2, 1fr); }
+  padding: 25px;
+  text-align: center;
+  font-size: 14px;
 }
 </style>
 </head>
+
 <body>
 
 <header>Diana Mid Matchups</header>
-
 <a href="membershub.html" class="back-button">Back to Members Hub</a>
-
-<input type="text" id="champion-search" placeholder="Search champions or type 'new'...">
+<input id="champion-search" placeholder="Search champions or type 'new'...">
 
 <div class="champion-grid">
-  <!-- ALL CHAMPIONS MARKED AS NEW -->
-    <a href="ahri.html" class="champion-card"><img src="https://ddragon.leagueoflegends.com/cdn/14.23.1/img/champion/Ahri.png" alt="Ahri"><div class="champion-name">Ahri</div></a>
+
+  <a href="ahri.html" class="champion-card"><img src="https://ddragon.leagueoflegends.com/cdn/14.23.1/img/champion/Ahri.png" alt="Ahri"><div class="champion-name">Ahri</div></a>
   <a href="akali.html" class="champion-card"><img src="https://ddragon.leagueoflegends.com/cdn/14.23.1/img/champion/Akali.png" alt="Akali"><div class="champion-name">Akali</div></a>
   <a href="akshan.html" class="champion-card"><img src="https://ddragon.leagueoflegends.com/cdn/14.23.1/img/champion/Akshan.png" alt="Akshan"><div class="champion-name">Akshan</div></a>
   <a href="anivia.html" class="champion-card"><img src="https://ddragon.leagueoflegends.com/cdn/14.23.1/img/champion/Anivia.png" alt="Anivia"><div class="champion-name">Anivia</div></a>
@@ -190,7 +164,8 @@ footer {
   <a href="lucian.html" class="champion-card"><img src="https://ddragon.leagueoflegends.com/cdn/14.23.1/img/champion/Lucian.png" alt="Lucian"><div class="champion-name">Lucian</div></a>
   <a href="lux.html" class="champion-card"><img src="https://ddragon.leagueoflegends.com/cdn/14.23.1/img/champion/Lux.png" alt="Lux"><div class="champion-name">Lux</div></a>
   <a href="malphite.html" class="champion-card"><img src="https://ddragon.leagueoflegends.com/cdn/14.23.1/img/champion/Malphite.png" alt="Malphite"><div class="champion-name">Malphite</div></a>
-  <a href="malzahar.html" class="champion-card" data-new="true"><img src="https://ddragon.leagueoflegends.com/cdn/14.23.1/img/champion/Malzahar.png" alt="Malzahar"><div class="champion-name">Malzahar</div><div class="champion-tag new">NEW</div></a>
+
+  <a href="malzahar.html" class="champion-card" data-new="true"><img src="https://ddragon.leagueoflegends.com/cdn/14.23.1/img/champion/Malzahar.png"><div class="champion-name">Malzahar</div><div class="champion-tag new">NEW</div></a>
   <a href="morgana.html" class="champion-card"><img src="https://ddragon.leagueoflegends.com/cdn/14.23.1/img/champion/Morgana.png" alt="Morgana"><div class="champion-name">Morgana</div></a>
   <a href="nasus.html" class="champion-card"><img src="https://ddragon.leagueoflegends.com/cdn/14.23.1/img/champion/Nasus.png" alt="Nasus"><div class="champion-name">Nasus</div></a>
   <a href="naafiri.html" class="champion-card"><img src="https://ddragon.leagueoflegends.com/cdn/14.23.1/img/champion/Naafiri.png" alt="Naafiri"><div class="champion-name">Naafiri</div></a>
@@ -223,50 +198,29 @@ footer {
   <a href="zilean.html" class="champion-card"><img src="https://ddragon.leagueoflegends.com/cdn/14.23.1/img/champion/Zilean.png" alt="Zilean"><div class="champion-name">Zilean</div></a>
   <a href="zoe.html" class="champion-card"><img src="https://ddragon.leagueoflegends.com/cdn/14.23.1/img/champion/Zoe.png" alt="Zoe"><div class="champion-name">Zoe</div></a>
   <a href="zyra.html" class="champion-card"><img src="https://ddragon.leagueoflegends.com/cdn/14.23.1/img/champion/Zyra.png" alt="Zyra"><div class="champion-name">Zyra</div></a>
-  
-</div>
-    <div class="champion-tag new">NEW</div>
-  </a>
-
-  <a href="ahri.html" class="champion-card">
-    <img src="https://ddragon.leagueoflegends.com/cdn/14.23.1/img/champion/Ahri.png" alt="Ahri">
-    <div class="champion-name">Ahri</div>
-    <div class="champion-tag"></div>
-  </a>
 
 </div>
 
 <footer>© 2025 LoL Fundamentals · All rights reserved</footer>
 
 <script>
-const searchInput = document.getElementById('champion-search');
-const championCards = Array.from(document.getElementsByClassName('champion-card'));
+const input = document.getElementById('champion-search');
+const cards = [...document.getElementsByClassName('champion-card')];
 
-searchInput.addEventListener('input', () => {
-  const query = searchInput.value.toLowerCase().trim();
-
-  championCards.forEach(card => {
+input.addEventListener('input', () => {
+  const q = input.value.toLowerCase().trim();
+  cards.forEach(card => {
     const name = card.querySelector('.champion-name').textContent.toLowerCase();
     const isNew = card.dataset.new === 'true';
-
-    if (query === 'new') {
-      card.style.display = isNew ? 'block' : 'none';
-      return;
-    }
-
-    card.style.display = name.includes(query) ? 'block' : 'none';
+    card.style.display =
+      q === 'new' ? (isNew ? 'block' : 'none')
+      : name.includes(q) ? 'block' : 'none';
   });
 });
 </script>
 
 </body>
 </html>
-
-
-
-
-
-
 
 
 
