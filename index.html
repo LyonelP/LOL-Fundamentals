@@ -42,11 +42,29 @@ header{background:linear-gradient(90deg,#0a0f14,#1b2838);border-bottom:2px solid
 footer{text-align:center;padding:30px;color:#8b949e;font-size:14px;background:#0a0f14;border-top:1px solid #1f2937}
 footer a{color:#c9aa71;text-decoration:none}
 footer a:hover{text-decoration:underline}
-@media(max-width:600px){.hero{background-size:cover;background-position:center;padding-top:100px}.hero h1{margin-top:10px}.hero p{margin-top:5px}.hero .btn{margin-top:10px}.modalContent .plan-buttons{flex-direction:column!important;justify-content:center!important;align-items:center!important;gap:20px!important}.modalContent .plan-buttons>div{width:auto!important;display:block!important;text-align:center}.modalContent .plan-buttons button{width:220px!important;max-width:220px}.modalContent .bestValueTag{top:-16px}}
+
+/* Desktop adjustments for Lifetime plan */
+@media(min-width:601px){
+  .modalContent .plan-buttons > div { margin-top:10px; } /* push lifetime box slightly lower */
+  .modalContent .bestValueTag { top:-24px; } /* adjust tag above lifetime button */
+}
+
+/* Mobile adjustments */
+@media(max-width:600px){
+  .hero{background-size:cover;background-position:center;padding-top:100px}
+  .hero h1{margin-top:10px}
+  .hero p{margin-top:5px}
+  .hero .btn{margin-top:10px}
+  .modalContent .plan-buttons{flex-direction:column!important;justify-content:center!important;align-items:center!important;gap:20px!important}
+  .modalContent .plan-buttons>div{width:auto!important;display:block!important;text-align:center}
+  .modalContent .plan-buttons button{width:220px!important;max-width:220px}
+  .modalContent .bestValueTag{top:-16px}
+}
 </style>
 </head>
 <body>
 <header>LoL Fundamentals</header>
+
 <section class="hero">
 <div class="blueOverlay"></div>
 <div class="particles"></div>
@@ -124,7 +142,7 @@ const app=initializeApp(firebaseConfig),auth=getAuth(app),firestore=getFirestore
 const $=(id)=>document.getElementById(id);
 
 const stripe={
-  monthly:"https://buy.stripe.com/8x28wIaQ4dJa4Rg88iejK0f", 
+  monthly:"https://buy.stripe.com/monthly-link",
   yearly:"https://buy.stripe.com/cNi14g3nC48AerQ9cmejK07",
   lifetime:"https://buy.stripe.com/14AeV61fubB2dnMfAKejK0e"
 };
@@ -188,6 +206,7 @@ for(let i=0;i<50;i++){
 </script>
 </body>
 </html>
+
 
 
 
