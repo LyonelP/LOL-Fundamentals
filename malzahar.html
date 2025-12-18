@@ -119,7 +119,8 @@
     margin: 20px auto;
     position: relative;
     padding-bottom: 56.25%; /* 16:9 ratio */
-    height: 0;
+    height: auto; /* ensures it shows on desktop */
+    min-height: 300px; /* prevents disappearing */
     overflow: hidden;
     border-radius: 10px;
   }
@@ -190,6 +191,8 @@
 
 </body>
 </html>
+
+
 
 
 
