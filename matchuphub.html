@@ -67,16 +67,22 @@ header {
 
 .champion-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+  grid-template-columns: repeat(9, 1fr); /* Desktop: 9 per row */
   gap: 20px;
-  max-width: 1000px;
+  max-width: 1440px;
   margin: 0 auto 50px;
   padding: 0 20px;
 }
 
+@media (max-width: 1024px) {
+  .champion-grid {
+    grid-template-columns: repeat(7, 1fr); /* Tablet */
+  }
+}
+
 @media (max-width: 600px) {
   .champion-grid {
-    grid-template-columns: repeat(2, 1fr);
+    grid-template-columns: repeat(2, 1fr); /* Mobile */
   }
 }
 
@@ -144,7 +150,7 @@ footer {
 
 <div class="champion-grid" id="champion-grid">
 
-  <a href="ahri.html" class="champion-card"><img src="https://ddragon.leagueoflegends.com/cdn/14.23.1/img/champion/Ahri.png" alt="Ahri"><div class="champion-name">Ahri</div></a>
+   <a href="ahri.html" class="champion-card"><img src="https://ddragon.leagueoflegends.com/cdn/14.23.1/img/champion/Ahri.png" alt="Ahri"><div class="champion-name">Ahri</div></a>
   <a href="akali.html" class="champion-card"><img src="https://ddragon.leagueoflegends.com/cdn/14.23.1/img/champion/Akali.png" alt="Akali"><div class="champion-name">Akali</div></a>
   <a href="akshan.html" class="champion-card"><img src="https://ddragon.leagueoflegends.com/cdn/14.23.1/img/champion/Akshan.png" alt="Akshan"><div class="champion-name">Akshan</div></a>
   <a href="anivia.html" class="champion-card"><img src="https://ddragon.leagueoflegends.com/cdn/14.23.1/img/champion/Anivia.png" alt="Anivia"><div class="champion-name">Anivia</div></a>
@@ -240,6 +246,7 @@ input.addEventListener('input', () => {
 
 </body>
 </html>
+
 
 
 
