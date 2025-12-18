@@ -67,22 +67,16 @@ header {
 
 .champion-grid {
   display: grid;
-  grid-template-columns: repeat(9, 1fr); /* Desktop: 9 per row */
+  grid-template-columns: repeat(2, 1fr); /* default mobile */
   gap: 20px;
-  max-width: 1440px;
+  max-width: 1200px;
   margin: 0 auto 50px;
   padding: 0 20px;
 }
 
-@media (max-width: 1024px) {
+@media screen and (min-width: 1024px) {
   .champion-grid {
-    grid-template-columns: repeat(7, 1fr); /* Tablet */
-  }
-}
-
-@media (max-width: 600px) {
-  .champion-grid {
-    grid-template-columns: repeat(2, 1fr); /* Mobile */
+    grid-template-columns: repeat(8, 1fr); /* desktop */
   }
 }
 
@@ -95,9 +89,6 @@ header {
   text-decoration: none;
   color: inherit;
   transition: transform .25s, box-shadow .25s;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
 }
 
 .champion-card:hover {
@@ -116,7 +107,6 @@ header {
   font-size: 16px;
   color: #c084fc;
   font-weight: bold;
-  text-align: center;
 }
 
 .champion-tag {
@@ -150,7 +140,7 @@ footer {
 
 <div class="champion-grid" id="champion-grid">
 
-   <a href="ahri.html" class="champion-card"><img src="https://ddragon.leagueoflegends.com/cdn/14.23.1/img/champion/Ahri.png" alt="Ahri"><div class="champion-name">Ahri</div></a>
+ <a href="ahri.html" class="champion-card"><img src="https://ddragon.leagueoflegends.com/cdn/14.23.1/img/champion/Ahri.png" alt="Ahri"><div class="champion-name">Ahri</div></a>
   <a href="akali.html" class="champion-card"><img src="https://ddragon.leagueoflegends.com/cdn/14.23.1/img/champion/Akali.png" alt="Akali"><div class="champion-name">Akali</div></a>
   <a href="akshan.html" class="champion-card"><img src="https://ddragon.leagueoflegends.com/cdn/14.23.1/img/champion/Akshan.png" alt="Akshan"><div class="champion-name">Akshan</div></a>
   <a href="anivia.html" class="champion-card"><img src="https://ddragon.leagueoflegends.com/cdn/14.23.1/img/champion/Anivia.png" alt="Anivia"><div class="champion-name">Anivia</div></a>
@@ -221,26 +211,22 @@ footer {
 <script>
 const input = document.getElementById('champion-search');
 const grid = document.getElementById('champion-grid');
-const cards = [...grid.getElementsByClassName('champion-card')];
+const cards = [...document.getElementsByClassName('champion-card')];
 
 input.addEventListener('input', () => {
   const q = input.value.toLowerCase().trim();
-
-  // Filter matching cards
-  const matching = [];
-  cards.forEach(card => {
+  
+  const matched = cards.filter(card => {
     const name = card.querySelector('.champion-name').textContent.toLowerCase();
     const isNew = card.dataset.new === 'true';
-    if ((q === 'new' && isNew) || (q !== 'new' && name.includes(q))) {
-      card.style.display = 'flex'; // show
-      matching.push(card);
-    } else {
-      card.style.display = 'none'; // hide non-matching
-    }
+    return q === 'new' ? isNew : name.includes(q);
   });
 
-  // Reorder matching cards to top
-  matching.forEach(card => grid.appendChild(card));
+  // hide all first
+  cards.forEach(card => card.style.display = 'none');
+  
+  // show matched in order: new first if searching 'new', else normal
+  matched.forEach(card => card.style.display = 'block');
 });
 </script>
 
