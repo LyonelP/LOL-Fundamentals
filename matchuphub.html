@@ -123,6 +123,18 @@ footer {
   text-align: center;
   font-size: 14px;
 }
+
+/* Mobile Tweaks */
+@media (max-width: 500px) {
+  .champion-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 15px;
+  }
+  .champion-card img {
+    width: 70px;
+    height: 70px;
+  }
+}
 </style>
 </head>
 
@@ -198,6 +210,8 @@ footer {
   <a href="zoe.html" class="champion-card"><img src="https://ddragon.leagueoflegends.com/cdn/14.23.1/img/champion/Zoe.png" alt="Zoe"><div class="champion-name">Zoe</div></a>
   <a href="zyra.html" class="champion-card"><img src="https://ddragon.leagueoflegends.com/cdn/14.23.1/img/champion/Zyra.png" alt="Zyra"><div class="champion-name">Zyra</div></a>
 
+
+
 </div>
 
 <footer>© 2025 LoL Fundamentals · All rights reserved</footer>
@@ -220,6 +234,8 @@ input.addEventListener('input', () => {
 
 </body>
 </html>
+
+
 
 
 
