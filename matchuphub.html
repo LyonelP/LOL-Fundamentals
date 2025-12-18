@@ -33,7 +33,6 @@ body::before {
   z-index: -1;
 }
 
-/* Header */
 header {
   background: rgba(13,17,23,0.9);
   border-bottom: 2px solid #c9aa71;
@@ -44,15 +43,11 @@ header {
   color: #c9aa71;
   letter-spacing: 1px;
   text-align: center;
-  line-height: 1.1;
-  box-sizing: border-box;
-  width: 100%;
 }
 
-/* Back button */
 .back-button {
   display: block;
-  margin: 20px auto 20px; 
+  margin: 20px auto; 
   padding: 10px 20px;
   background: linear-gradient(135deg, #c9aa71, #e0c77b);
   color: #000;
@@ -67,11 +62,9 @@ header {
 }
 .back-button::before { content: "← "; }
 .back-button:hover {
-  background: linear-gradient(135deg, #e6c97f, #f0d88b);
   box-shadow: 0 0 15px rgba(255,215,0,0.8);
 }
 
-/* Search bar */
 #champion-search {
   display: block;
   width: 400px;
@@ -85,7 +78,6 @@ header {
   font-size: 16px;
 }
 
-/* Champion grid */
 .champion-grid {
   display: grid;
   grid-template-columns: repeat(7, 1fr);
@@ -115,19 +107,36 @@ header {
   height: 80px;
   border-radius: 8px;
   margin-bottom: 10px;
-  object-fit: contain;
 }
+
 .champion-name {
   font-size: 16px;
   color: #c084fc;
   font-weight: bold;
 }
 
+.champion-tag {
+  margin-top: 6px;
+  font-size: 12px;
+  font-weight: bold;
+  letter-spacing: 0.5px;
+  text-transform: uppercase;
+  color: #000;
+  background: linear-gradient(135deg, #ffd700, #ffb700);
+  border-radius: 6px;
+  padding: 3px 8px;
+  display: inline-block;
+  box-shadow: 0 0 10px rgba(255,215,0,0.6);
+}
+
+.champion-tag:not(.new) {
+  display: none;
+}
+
 footer {
   text-align: center;
   padding: 25px 10px;
   font-size: 14px;
-  color: #fff;
   margin-top: auto;
 }
 
@@ -135,12 +144,6 @@ footer {
   .champion-grid {
     grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
   }
-}
-@media (max-width: 700px) {
-  .champion-card img { width: 80px; height: 80px; }
-  .champion-name { font-size: 16px; }
-  .back-button { font-size: 16px; padding: 10px 20px; }
-  #champion-search { margin-top: 10px; width: 90%; font-size: 16px; }
 }
 @media (max-width: 500px) {
   .champion-grid { grid-template-columns: repeat(2, 1fr); }
@@ -153,10 +156,11 @@ footer {
 
 <a href="membershub.html" class="back-button">Back to Members Hub</a>
 
-<input type="text" id="champion-search" placeholder="Search champions...">
+<input type="text" id="champion-search" placeholder="Search champions or type 'new'...">
 
 <div class="champion-grid">
-  <a href="ahri.html" class="champion-card"><img src="https://ddragon.leagueoflegends.com/cdn/14.23.1/img/champion/Ahri.png" alt="Ahri"><div class="champion-name">Ahri</div></a>
+  <!-- ALL CHAMPIONS MARKED AS NEW -->
+    <a href="ahri.html" class="champion-card"><img src="https://ddragon.leagueoflegends.com/cdn/14.23.1/img/champion/Ahri.png" alt="Ahri"><div class="champion-name">Ahri</div></a>
   <a href="akali.html" class="champion-card"><img src="https://ddragon.leagueoflegends.com/cdn/14.23.1/img/champion/Akali.png" alt="Akali"><div class="champion-name">Akali</div></a>
   <a href="akshan.html" class="champion-card"><img src="https://ddragon.leagueoflegends.com/cdn/14.23.1/img/champion/Akshan.png" alt="Akshan"><div class="champion-name">Akshan</div></a>
   <a href="anivia.html" class="champion-card"><img src="https://ddragon.leagueoflegends.com/cdn/14.23.1/img/champion/Anivia.png" alt="Anivia"><div class="champion-name">Anivia</div></a>
@@ -186,7 +190,7 @@ footer {
   <a href="lucian.html" class="champion-card"><img src="https://ddragon.leagueoflegends.com/cdn/14.23.1/img/champion/Lucian.png" alt="Lucian"><div class="champion-name">Lucian</div></a>
   <a href="lux.html" class="champion-card"><img src="https://ddragon.leagueoflegends.com/cdn/14.23.1/img/champion/Lux.png" alt="Lux"><div class="champion-name">Lux</div></a>
   <a href="malphite.html" class="champion-card"><img src="https://ddragon.leagueoflegends.com/cdn/14.23.1/img/champion/Malphite.png" alt="Malphite"><div class="champion-name">Malphite</div></a>
-  <a href="malzahar.html" class="champion-card"><img src="https://ddragon.leagueoflegends.com/cdn/14.23.1/img/champion/Malzahar.png" alt="Malzahar"><div class="champion-name">Malzahar</div></a>
+  <a href="malzahar.html" class="champion-card" data-new="true"><img src="https://ddragon.leagueoflegends.com/cdn/14.23.1/img/champion/Malzahar.png" alt="Malzahar"><div class="champion-name">Malzahar</div><div class="champion-tag new">NEW</div></a>
   <a href="morgana.html" class="champion-card"><img src="https://ddragon.leagueoflegends.com/cdn/14.23.1/img/champion/Morgana.png" alt="Morgana"><div class="champion-name">Morgana</div></a>
   <a href="nasus.html" class="champion-card"><img src="https://ddragon.leagueoflegends.com/cdn/14.23.1/img/champion/Nasus.png" alt="Nasus"><div class="champion-name">Nasus</div></a>
   <a href="naafiri.html" class="champion-card"><img src="https://ddragon.leagueoflegends.com/cdn/14.23.1/img/champion/Naafiri.png" alt="Naafiri"><div class="champion-name">Naafiri</div></a>
@@ -219,19 +223,37 @@ footer {
   <a href="zilean.html" class="champion-card"><img src="https://ddragon.leagueoflegends.com/cdn/14.23.1/img/champion/Zilean.png" alt="Zilean"><div class="champion-name">Zilean</div></a>
   <a href="zoe.html" class="champion-card"><img src="https://ddragon.leagueoflegends.com/cdn/14.23.1/img/champion/Zoe.png" alt="Zoe"><div class="champion-name">Zoe</div></a>
   <a href="zyra.html" class="champion-card"><img src="https://ddragon.leagueoflegends.com/cdn/14.23.1/img/champion/Zyra.png" alt="Zyra"><div class="champion-name">Zyra</div></a>
+  
+</div>
+    <div class="champion-tag new">NEW</div>
+  </a>
+
+  <a href="ahri.html" class="champion-card">
+    <img src="https://ddragon.leagueoflegends.com/cdn/14.23.1/img/champion/Ahri.png" alt="Ahri">
+    <div class="champion-name">Ahri</div>
+    <div class="champion-tag"></div>
+  </a>
+
 </div>
 
 <footer>© 2025 LoL Fundamentals · All rights reserved</footer>
 
 <script>
 const searchInput = document.getElementById('champion-search');
-const championGrid = document.querySelector('.champion-grid');
-const championCards = Array.from(championGrid.getElementsByClassName('champion-card'));
+const championCards = Array.from(document.getElementsByClassName('champion-card'));
 
 searchInput.addEventListener('input', () => {
-  const query = searchInput.value.toLowerCase();
+  const query = searchInput.value.toLowerCase().trim();
+
   championCards.forEach(card => {
     const name = card.querySelector('.champion-name').textContent.toLowerCase();
+    const isNew = card.dataset.new === 'true';
+
+    if (query === 'new') {
+      card.style.display = isNew ? 'block' : 'none';
+      return;
+    }
+
     card.style.display = name.includes(query) ? 'block' : 'none';
   });
 });
@@ -239,6 +261,7 @@ searchInput.addEventListener('input', () => {
 
 </body>
 </html>
+
 
 
 
