@@ -8,7 +8,6 @@
   :root {
     --gold: #c9aa71;
     --bg: #0a0f14;
-    --card: #161b22;
     --muted: #8b949e;
   }
 
@@ -18,12 +17,15 @@
     background: var(--bg);
     color: #e6edf3;
     line-height: 1.4;
-    min-height: 100vh;
     display: flex;
     flex-direction: column;
+    min-height: 100vh;
   }
 
-  /* ===== HEADER ===== */
+  main {
+    flex: 1;
+  }
+
   header {
     background: rgba(13,17,23,0.9);
     border-bottom: 2px solid var(--gold);
@@ -33,15 +35,12 @@
     letter-spacing: 1px;
     text-transform: uppercase;
     text-align: center;
-    line-height: 1.2;
     color: var(--gold);
-    box-sizing: border-box;
   }
 
-  /* ===== Back Button ===== */
   .back-button {
     display: block;
-    margin: 20px auto 20px; 
+    margin: 20px auto;
     padding: 10px 20px;
     background: linear-gradient(135deg, #c9aa71, #e0c77b);
     color: #000;
@@ -60,13 +59,13 @@
     box-shadow: 0 0 15px rgba(255,215,0,0.8);
   }
 
-  /* ===== Matchup Container ===== */
   .matchup-container {
     display: flex;
+    flex-direction: row;
     max-width: 900px;
-    margin: 0 auto;
+    margin: 20px auto;
     gap: 15px;
-    padding: 0 20px 10px 20px;
+    padding: 0 20px;
   }
 
   .matchup-left {
@@ -81,7 +80,6 @@
     border-radius: 8px;
   }
 
-  /* Winrate bubble */
   .winrate-bubble {
     background: #4ade80;
     color: #0d1117;
@@ -113,14 +111,12 @@
     margin-bottom: 6px;
   }
 
-  /* ===== Video ===== */
   .video-container {
     max-width: 900px;
     margin: 20px auto;
     position: relative;
     padding-bottom: 56.25%; /* 16:9 ratio */
-    height: auto; /* ensures it shows on desktop */
-    min-height: 300px; /* prevents disappearing */
+    height: 0;
     overflow: hidden;
     border-radius: 10px;
   }
@@ -134,7 +130,6 @@
     border: none;
   }
 
-  /* ===== FOOTER ===== */
   footer {
     text-align: center;
     padding: 15px 10px;
@@ -154,7 +149,6 @@
   }
 </style>
 
-<!-- ===== LOGIN CHECK ===== -->
 <script>
   if (localStorage.getItem('lolfundamentals_logged_in') !== 'true') {
     window.location.href = 'login.html';
@@ -165,32 +159,36 @@
 
 <header>Diana Mid Matchup – Malzahar</header>
 
-<a href="matchuphub.html" class="back-button">Back to Matchup Hub</a>
+<main>
+  <a href="matchuphub.html" class="back-button">Back to Matchup Hub</a>
 
-<div class="matchup-container">
-  <div class="matchup-left">
-    <img src="https://ddragon.leagueoflegends.com/cdn/14.23.1/img/champion/Malzahar.png" alt="Malzahar">
-    <div class="winrate-bubble">52%</div>
+  <div class="matchup-container">
+    <div class="matchup-left">
+      <img src="https://ddragon.leagueoflegends.com/cdn/14.23.1/img/champion/Malzahar.png" alt="Malzahar">
+      <div class="winrate-bubble">52%</div>
+    </div>
+    <div class="matchup-right">
+      <h2>Matchup Notes</h2>
+      <ul>
+        <li>Malzahar’s passive shield prevents the damage from your Q but the moonlight will still be applied.</li>
+        <li>Since his E is a tick you have time to proc the second part of your W to absorb the damage.</li>
+        <li>Use Diana’s AOE to clear out his voidlings.</li>
+        <li>Malzahar R can interrupt your dash mid E.</li>
+      </ul>
+    </div>
   </div>
-  <div class="matchup-right">
-    <h2>Matchup Notes</h2>
-    <ul>
-      <li>Malzahar’s passive shield prevents the damage from your Q but the moonlight will still be applied.</li>
-      <li>Since his E is a tick you have time to proc the second part of your W to absorb the damage.</li>
-      <li>Use Diana’s AOE to clear out his voidlings.</li>
-      <li>Malzahar R can interrupt your dash mid E.</li>
-    </ul>
-  </div>
-</div>
 
-<div class="video-container">
-  <iframe src="https://www.youtube.com/embed/ht6k0W8J68Y" allowfullscreen></iframe>
-</div>
+  <div class="video-container">
+    <iframe src="https://www.youtube.com/embed/ht6k0W8J68Y" allowfullscreen></iframe>
+  </div>
+</main>
 
 <footer>© 2025 LoL Fundamentals · Contact: arcsecond@lolfundamentals.com</footer>
 
 </body>
 </html>
+
+
 
 
 
