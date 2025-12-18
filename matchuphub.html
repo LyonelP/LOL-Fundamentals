@@ -82,22 +82,7 @@ header {
   text-align: center;
   text-decoration: none;
   color: inherit;
-  transition: transform .25s, box-shadow .25s, opacity .25s, height .25s, margin .25s, padding .25s;
-  display: block;
-  overflow: hidden;
-}
-
-.champion-card.hidden {
-  opacity: 0;
-  height: 0;
-  padding: 0;
-  margin: 0;
-  pointer-events: none;
-}
-
-.champion-card:hover {
-  transform: translateY(-4px);
-  box-shadow: 0 10px 25px rgba(0,0,0,.45);
+  transition: transform .25s, box-shadow .25s, opacity .25s;
 }
 
 .champion-card img {
@@ -133,6 +118,13 @@ footer {
   text-align: center;
   font-size: 14px;
 }
+
+/* Hiding cards without layout collapse */
+.champion-card.hidden {
+  opacity: 0;
+  pointer-events: none;
+  transform: scale(0.95);
+}
 </style>
 </head>
 
@@ -143,8 +135,7 @@ footer {
 <input id="champion-search" placeholder="Search champions or type 'new'...">
 
 <div class="champion-grid">
-
- <a href="ahri.html" class="champion-card"><img src="https://ddragon.leagueoflegends.com/cdn/14.23.1/img/champion/Ahri.png" alt="Ahri"><div class="champion-name">Ahri</div></a>
+  <a href="ahri.html" class="champion-card"><img src="https://ddragon.leagueoflegends.com/cdn/14.23.1/img/champion/Ahri.png" alt="Ahri"><div class="champion-name">Ahri</div></a>
   <a href="akali.html" class="champion-card"><img src="https://ddragon.leagueoflegends.com/cdn/14.23.1/img/champion/Akali.png" alt="Akali"><div class="champion-name">Akali</div></a>
   <a href="akshan.html" class="champion-card"><img src="https://ddragon.leagueoflegends.com/cdn/14.23.1/img/champion/Akshan.png" alt="Akshan"><div class="champion-name">Akshan</div></a>
   <a href="anivia.html" class="champion-card"><img src="https://ddragon.leagueoflegends.com/cdn/14.23.1/img/champion/Anivia.png" alt="Anivia"><div class="champion-name">Anivia</div></a>
@@ -223,6 +214,8 @@ input.addEventListener('input', () => {
     const isNew = card.dataset.new === 'true';
     if (q === 'new') {
       card.classList.toggle('hidden', !isNew);
+    } else if (q === '') {
+      card.classList.remove('hidden');
     } else {
       card.classList.toggle('hidden', !name.includes(q));
     }
@@ -232,7 +225,6 @@ input.addEventListener('input', () => {
 
 </body>
 </html>
-
 
 
 
