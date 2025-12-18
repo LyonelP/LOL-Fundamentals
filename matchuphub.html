@@ -6,9 +6,9 @@
 <title>Diana Mid – Matchup Hub</title>
 
 <script>
-  if (localStorage.getItem('lolfundamentals_logged_in') !== 'true') {
-    window.location.replace('login.html');
-  }
+if (localStorage.getItem('lolfundamentals_logged_in') !== 'true') {
+  window.location.replace('login.html');
+}
 </script>
 
 <style>
@@ -18,7 +18,6 @@ body {
   color: #fff;
   background: url('https://64.media.tumblr.com/594ac290bec6d5e9ad98b5f53404f00b/245c4c3ee469f81d-e4/s1280x1920/1cda4284320eb2031758a9859dfe14ff8bbc50ba.jpg') no-repeat center center fixed;
   background-size: cover;
-  overflow-x: hidden;
   min-height: 100vh;
   display: flex;
   flex-direction: column;
@@ -27,31 +26,23 @@ body {
 body::before {
   content: "";
   position: fixed;
-  top:0; left:0;
-  width:100%; height:100%;
+  inset: 0;
   background: rgba(10,15,20,0.25);
   z-index: -1;
 }
 
-/* Header */
 header {
   background: rgba(13,17,23,0.9);
   border-bottom: 2px solid #c9aa71;
   padding: 20px;
-  font-weight: bold;
   font-size: 26px;
+  font-weight: bold;
   text-transform: uppercase;
   color: #c9aa71;
-  letter-spacing: 1px;
   text-align: center;
-  line-height: 1.1;
-  box-sizing: border-box;
-  width: 100%;
 }
 
-/* Back button */
 .back-button {
-  display: block;
   margin: 20px auto;
   padding: 10px 20px;
   background: linear-gradient(135deg, #c9aa71, #e0c77b);
@@ -59,21 +50,11 @@ header {
   text-decoration: none;
   border-radius: 8px;
   font-weight: bold;
-  font-size: 16px;
-  text-align: center;
   box-shadow: 0 0 10px rgba(201,170,113,0.5);
-  transition: all 0.3s;
-  width: fit-content;
 }
 .back-button::before { content: "← "; }
-.back-button:hover {
-  background: linear-gradient(135deg, #e6c97f, #f0d88b);
-  box-shadow: 0 0 15px rgba(255,215,0,0.8);
-}
 
-/* Search bar */
 #champion-search {
-  display: block;
   width: 400px;
   max-width: 90%;
   margin: 20px auto 30px;
@@ -82,13 +63,11 @@ header {
   border: 2px solid #c084fc;
   background: #161b22;
   color: #e6edf3;
-  font-size: 16px;
 }
 
-/* Champion grid */
 .champion-grid {
   display: grid;
-  grid-template-columns: repeat(7, 1fr);
+  grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
   gap: 20px;
   max-width: 1000px;
   margin: 0 auto 50px;
@@ -96,68 +75,75 @@ header {
 }
 
 .champion-card {
-  background: linear-gradient(135deg, #161b22 0%, #21262d 100%);
+  background: linear-gradient(135deg, #161b22, #21262d);
   border-radius: 12px;
   border-left: 6px solid #c084fc;
-  text-align: center;
   padding: 15px;
-  transition: transform 0.3s, box-shadow 0.3s;
-  cursor: pointer;
+  text-align: center;
   text-decoration: none;
   color: inherit;
+  transition: transform .25s, box-shadow .25s, opacity .25s;
+  position: relative; /* keep layout stable */
 }
+
+.champion-card.hidden {
+  opacity: 0;
+  pointer-events: none;
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+
 .champion-card:hover {
-  transform: translateY(-5px);
-  box-shadow: 0 10px 25px rgba(0,0,0,0.5);
+  transform: translateY(-4px);
+  box-shadow: 0 10px 25px rgba(0,0,0,.45);
 }
+
 .champion-card img {
   width: 80px;
   height: 80px;
   border-radius: 8px;
-  margin-bottom: 10px;
-  object-fit: contain;
 }
+
 .champion-name {
+  margin-top: 8px;
   font-size: 16px;
   color: #c084fc;
   font-weight: bold;
 }
 
-footer {
-  text-align: center;
-  padding: 25px 10px;
-  font-size: 14px;
-  color: #fff;
-  margin-top: auto;
+.champion-tag {
+  margin-top: 6px;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.6px;
+  text-transform: uppercase;
+  color: #000;
+  background: linear-gradient(135deg, #c9aa71, #e0c77b);
+  border-radius: 999px;
+  padding: 4px 10px;
+  display: inline-flex;
+  box-shadow: 0 0 8px rgba(201,170,113,0.55);
 }
 
-/* Responsive */
-@media (max-width: 1000px) {
-  .champion-grid {
-    grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
-  }
-}
-@media (max-width: 700px) {
-  .champion-card img { width: 80px; height: 80px; }
-  .champion-name { font-size: 16px; }
-  .back-button { font-size: 16px; padding: 10px 20px; }
-  #champion-search { margin-top: 10px; width: 90%; font-size: 16px; }
-}
-@media (max-width: 500px) {
-  .champion-grid { grid-template-columns: repeat(2, 1fr); }
+footer {
+  margin-top: auto;
+  padding: 25px;
+  text-align: center;
+  font-size: 14px;
 }
 </style>
 </head>
+
 <body>
 
 <header>Diana Mid Matchups</header>
-
 <a href="membershub.html" class="back-button">Back to Members Hub</a>
-
-<input type="text" id="champion-search" placeholder="Search champions...">
+<input id="champion-search" placeholder="Search champions or type 'new'...">
 
 <div class="champion-grid">
-   <a href="ahri.html" class="champion-card"><img src="https://ddragon.leagueoflegends.com/cdn/14.23.1/img/champion/Ahri.png" alt="Ahri"><div class="champion-name">Ahri</div></a>
+
+  <a href="ahri.html" class="champion-card"><img src="https://ddragon.leagueoflegends.com/cdn/14.23.1/img/champion/Ahri.png" alt="Ahri"><div class="champion-name">Ahri</div></a>
   <a href="akali.html" class="champion-card"><img src="https://ddragon.leagueoflegends.com/cdn/14.23.1/img/champion/Akali.png" alt="Akali"><div class="champion-name">Akali</div></a>
   <a href="akshan.html" class="champion-card"><img src="https://ddragon.leagueoflegends.com/cdn/14.23.1/img/champion/Akshan.png" alt="Akshan"><div class="champion-name">Akshan</div></a>
   <a href="anivia.html" class="champion-card"><img src="https://ddragon.leagueoflegends.com/cdn/14.23.1/img/champion/Anivia.png" alt="Anivia"><div class="champion-name">Anivia</div></a>
@@ -226,23 +212,25 @@ footer {
 <footer>© 2025 LoL Fundamentals · All rights reserved</footer>
 
 <script>
-const searchInput = document.getElementById('champion-search');
-const championGrid = document.querySelector('.champion-grid');
-const championCards = Array.from(championGrid.getElementsByClassName('champion-card'));
+const input = document.getElementById('champion-search');
+const cards = [...document.getElementsByClassName('champion-card')];
 
-searchInput.addEventListener('input', () => {
-  const query = searchInput.value.toLowerCase();
-  championCards.forEach(card => {
+input.addEventListener('input', () => {
+  const q = input.value.toLowerCase().trim();
+  cards.forEach(card => {
     const name = card.querySelector('.champion-name').textContent.toLowerCase();
-    card.style.display = name.includes(query) ? 'block' : 'none';
+    const isNew = card.dataset.new === 'true';
+    if (q === 'new') {
+      card.classList.toggle('hidden', !isNew);
+    } else {
+      card.classList.toggle('hidden', !name.includes(q));
+    }
   });
 });
 </script>
 
 </body>
 </html>
-
-
 
 
 
