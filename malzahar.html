@@ -22,10 +22,6 @@
     min-height: 100vh;
   }
 
-  main {
-    flex: 1;
-  }
-
   header {
     background: rgba(13,17,23,0.9);
     border-bottom: 2px solid var(--gold);
@@ -61,7 +57,6 @@
 
   .matchup-container {
     display: flex;
-    flex-direction: row;
     max-width: 900px;
     margin: 20px auto;
     gap: 15px;
@@ -111,20 +106,17 @@
     margin-bottom: 6px;
   }
 
+  /* ===== Responsive 16:9 Video ===== */
   .video-container {
     max-width: 900px;
+    width: 100%;
     margin: 20px auto;
-    position: relative;
-    padding-bottom: 56.25%; /* 16:9 ratio */
-    height: 0;
-    overflow: hidden;
+    aspect-ratio: 16 / 9;
     border-radius: 10px;
+    overflow: hidden;
   }
 
   .video-container iframe {
-    position: absolute;
-    top: 0;
-    left: 0;
     width: 100%;
     height: 100%;
     border: none;
@@ -159,34 +151,34 @@
 
 <header>Diana Mid Matchup – Malzahar</header>
 
-<main>
-  <a href="matchuphub.html" class="back-button">Back to Matchup Hub</a>
+<a href="matchuphub.html" class="back-button">Back to Matchup Hub</a>
 
-  <div class="matchup-container">
-    <div class="matchup-left">
-      <img src="https://ddragon.leagueoflegends.com/cdn/14.23.1/img/champion/Malzahar.png" alt="Malzahar">
-      <div class="winrate-bubble">52%</div>
-    </div>
-    <div class="matchup-right">
-      <h2>Matchup Notes</h2>
-      <ul>
-        <li>Malzahar’s passive shield prevents the damage from your Q but the moonlight will still be applied.</li>
-        <li>Since his E is a tick you have time to proc the second part of your W to absorb the damage.</li>
-        <li>Use Diana’s AOE to clear out his voidlings.</li>
-        <li>Malzahar R can interrupt your dash mid E.</li>
-      </ul>
-    </div>
+<div class="matchup-container">
+  <div class="matchup-left">
+    <img src="https://ddragon.leagueoflegends.com/cdn/14.23.1/img/champion/Malzahar.png" alt="Malzahar">
+    <div class="winrate-bubble">52%</div>
   </div>
+  <div class="matchup-right">
+    <h2>Matchup Notes</h2>
+    <ul>
+      <li>Malzahar’s passive shield prevents the damage from your Q but the moonlight will still be applied.</li>
+      <li>Since his E is a tick you have time to proc the second part of your W to absorb the damage.</li>
+      <li>Use Diana’s AOE to clear out his voidlings.</li>
+      <li>Malzahar R can interrupt your dash mid E.</li>
+    </ul>
+  </div>
+</div>
 
-  <div class="video-container">
-    <iframe src="https://www.youtube.com/embed/ht6k0W8J68Y" allowfullscreen></iframe>
-  </div>
-</main>
+<div class="video-container">
+  <iframe src="https://www.youtube.com/embed/ht6k0W8J68Y" allowfullscreen></iframe>
+</div>
 
 <footer>© 2025 LoL Fundamentals · Contact: arcsecond@lolfundamentals.com</footer>
 
 </body>
 </html>
+
+
 
 
 
