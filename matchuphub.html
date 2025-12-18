@@ -82,16 +82,17 @@ header {
   text-align: center;
   text-decoration: none;
   color: inherit;
-  transition: transform .25s, box-shadow .25s, opacity .25s;
-  position: relative; /* keep layout stable */
+  transition: transform .25s, box-shadow .25s, opacity .25s, height .25s, margin .25s, padding .25s;
+  display: block;
+  overflow: hidden;
 }
 
 .champion-card.hidden {
   opacity: 0;
+  height: 0;
+  padding: 0;
+  margin: 0;
   pointer-events: none;
-  position: absolute;
-  top: 0;
-  left: 0;
 }
 
 .champion-card:hover {
@@ -143,7 +144,7 @@ footer {
 
 <div class="champion-grid">
 
-  <a href="ahri.html" class="champion-card"><img src="https://ddragon.leagueoflegends.com/cdn/14.23.1/img/champion/Ahri.png" alt="Ahri"><div class="champion-name">Ahri</div></a>
+ <a href="ahri.html" class="champion-card"><img src="https://ddragon.leagueoflegends.com/cdn/14.23.1/img/champion/Ahri.png" alt="Ahri"><div class="champion-name">Ahri</div></a>
   <a href="akali.html" class="champion-card"><img src="https://ddragon.leagueoflegends.com/cdn/14.23.1/img/champion/Akali.png" alt="Akali"><div class="champion-name">Akali</div></a>
   <a href="akshan.html" class="champion-card"><img src="https://ddragon.leagueoflegends.com/cdn/14.23.1/img/champion/Akshan.png" alt="Akshan"><div class="champion-name">Akshan</div></a>
   <a href="anivia.html" class="champion-card"><img src="https://ddragon.leagueoflegends.com/cdn/14.23.1/img/champion/Anivia.png" alt="Anivia"><div class="champion-name">Anivia</div></a>
@@ -231,6 +232,8 @@ input.addEventListener('input', () => {
 
 </body>
 </html>
+
+
 
 
 
