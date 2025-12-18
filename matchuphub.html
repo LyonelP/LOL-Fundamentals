@@ -63,6 +63,7 @@ header {
   border: 2px solid #c084fc;
   background: #161b22;
   color: #e6edf3;
+  font-size: 16px;
 }
 
 .champion-grid {
@@ -82,7 +83,7 @@ header {
   text-align: center;
   text-decoration: none;
   color: inherit;
-  transition: transform .25s, box-shadow .25s;
+  transition: transform .25s, box-shadow .25s, opacity .25s;
 }
 
 .champion-card:hover {
@@ -123,6 +124,18 @@ footer {
   text-align: center;
   font-size: 14px;
 }
+
+/* Mobile Tweaks */
+@media (max-width: 500px) {
+  .champion-card img { width: 60px; height: 60px; }
+  .champion-name { font-size: 14px; }
+  .champion-tag { font-size: 10px; padding: 2px 8px; }
+}
+
+@media (max-width: 400px) {
+  .back-button { padding: 8px 14px; font-size: 14px; }
+  #champion-search { width: 95%; padding: 6px 10px; }
+}
 </style>
 </head>
 
@@ -133,8 +146,7 @@ footer {
 <input id="champion-search" placeholder="Search champions or type 'new'...">
 
 <div class="champion-grid">
-
-  <a href="ahri.html" class="champion-card"><img src="https://ddragon.leagueoflegends.com/cdn/14.23.1/img/champion/Ahri.png" alt="Ahri"><div class="champion-name">Ahri</div></a>
+   <a href="ahri.html" class="champion-card"><img src="https://ddragon.leagueoflegends.com/cdn/14.23.1/img/champion/Ahri.png" alt="Ahri"><div class="champion-name">Ahri</div></a>
   <a href="akali.html" class="champion-card"><img src="https://ddragon.leagueoflegends.com/cdn/14.23.1/img/champion/Akali.png" alt="Akali"><div class="champion-name">Akali</div></a>
   <a href="akshan.html" class="champion-card"><img src="https://ddragon.leagueoflegends.com/cdn/14.23.1/img/champion/Akshan.png" alt="Akshan"><div class="champion-name">Akshan</div></a>
   <a href="anivia.html" class="champion-card"><img src="https://ddragon.leagueoflegends.com/cdn/14.23.1/img/champion/Anivia.png" alt="Anivia"><div class="champion-name">Anivia</div></a>
@@ -164,7 +176,6 @@ footer {
   <a href="lucian.html" class="champion-card"><img src="https://ddragon.leagueoflegends.com/cdn/14.23.1/img/champion/Lucian.png" alt="Lucian"><div class="champion-name">Lucian</div></a>
   <a href="lux.html" class="champion-card"><img src="https://ddragon.leagueoflegends.com/cdn/14.23.1/img/champion/Lux.png" alt="Lux"><div class="champion-name">Lux</div></a>
   <a href="malphite.html" class="champion-card"><img src="https://ddragon.leagueoflegends.com/cdn/14.23.1/img/champion/Malphite.png" alt="Malphite"><div class="champion-name">Malphite</div></a>
-
   <a href="malzahar.html" class="champion-card" data-new="true"><img src="https://ddragon.leagueoflegends.com/cdn/14.23.1/img/champion/Malzahar.png"><div class="champion-name">Malzahar</div><div class="champion-tag new">NEW</div></a>
   <a href="morgana.html" class="champion-card"><img src="https://ddragon.leagueoflegends.com/cdn/14.23.1/img/champion/Morgana.png" alt="Morgana"><div class="champion-name">Morgana</div></a>
   <a href="nasus.html" class="champion-card"><img src="https://ddragon.leagueoflegends.com/cdn/14.23.1/img/champion/Nasus.png" alt="Nasus"><div class="champion-name">Nasus</div></a>
@@ -212,15 +223,21 @@ input.addEventListener('input', () => {
   cards.forEach(card => {
     const name = card.querySelector('.champion-name').textContent.toLowerCase();
     const isNew = card.dataset.new === 'true';
-    card.style.display =
-      q === 'new' ? (isNew ? 'block' : 'none')
-      : name.includes(q) ? 'block' : 'none';
+    if(q === 'new') {
+      card.style.opacity = isNew ? '1' : '0';
+      card.style.pointerEvents = isNew ? 'auto' : 'none';
+    } else {
+      const match = name.includes(q);
+      card.style.opacity = match ? '1' : '0';
+      card.style.pointerEvents = match ? 'auto' : 'none';
+    }
   });
 });
 </script>
 
 </body>
 </html>
+
 
 
 
