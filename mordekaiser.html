@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Modekaiser Mid vs Akali</title>
+
+<style>
+:root {
+  --gold:#c9aa71;
+  --bg:#0a0f14;
+  --card:#161b22;
+  --muted:#8b949e;
+}
+
+body {
+  margin: 0;
+  font-family: "Beaufort for LOL", Arial, Helvetica, sans-serif;
+  background: var(--bg);
+  color: #e6edf3;
+  line-height: 1.5;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+/* ===== HEADER (MATCHES HUB SCALE) ===== */
+header {
+  background: rgba(13,17,23,0.9);
+  border-bottom: 2px solid var(--gold);
+  padding: 16px 20px;
+  font-size: 26px;
+  font-weight: 700;
+  text-transform: uppercase;
+  color: var(--gold);
+  text-align: center;
+  letter-spacing: 0.8px;
+}
+
+/* ===== BACK BUTTON ===== */
+.back-button {
+  display: block;
+  margin: 18px auto;
+  padding: 9px 18px;
+  background: linear-gradient(135deg, #c9aa71, #e0c77b);
+  color: #000;
+  text-decoration: none;
+  border-radius: 8px;
+  font-weight: bold;
+  box-shadow: 0 0 10px rgba(201,170,113,0.5);
+  width: fit-content;
+}
+.back-button::before { content: "← "; }
+
+/* ===== SHARED WIDTH ===== */
+.content-width {
+  max-width: 920px;
+  margin: 0 auto;
+  padding: 0 20px;
+}
+
+/* ===== MATCHUP CARD ===== */
+.matchup-container {
+  display: flex;
+  gap: 28px;
+  padding: 26px;
+  background: linear-gradient(180deg, #161b22, #12161d);
+  border-radius: 18px;
+  border: 1px solid rgba(201,170,113,0.18);
+  box-shadow:
+    0 15px 40px rgba(0,0,0,0.7),
+    inset 0 0 0 1px rgba(255,255,255,0.02);
+}
+
+/* ===== LEFT ===== */
+.matchup-left {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 14px;
+}
+
+.matchup-left img {
+  width: 96px;
+  height: 96px;
+  border-radius: 14px;
+  border: 2px solid var(--gold);
+  box-shadow: 0 0 28px rgba(201,170,113,0.45);
+}
+
+/* ===== WINRATE ===== */
+.winrate-bubble {
+  background: rgba(249,115,22,0.15);
+  color: #f97316;
+  border: 1px solid rgba(249,115,22,0.45);
+  font-weight: 600;
+  padding: 6px 16px;
+  border-radius: 999px;
+  font-size: 14px;
+  letter-spacing: 0.5px;
+}
+
+/* ===== RIGHT ===== */
+.matchup-right {
+  flex: 1;
+}
+
+.matchup-right h2 {
+  margin: 0 0 14px 0;
+  font-size: 22px;
+  color: var(--gold);
+  padding-bottom: 8px;
+  border-bottom: 1px solid rgba(201,170,113,0.25);
+}
+
+.matchup-right ul {
+  padding-left: 18px;
+  margin: 0;
+}
+
+.matchup-right li {
+  margin-bottom: 12px;
+  line-height: 1.65;
+}
+
+/* ===== VIDEO CARD ===== */
+.video-card {
+  margin: 36px auto 40px;
+  padding: 26px;
+  background: linear-gradient(180deg, #161b22, #12161d);
+  border-radius: 18px;
+  border: 1px solid rgba(201,170,113,0.18);
+  box-shadow:
+    0 15px 40px rgba(0,0,0,0.7),
+    inset 0 0 0 1px rgba(255,255,255,0.02);
+}
+
+/* VODs header (matches Matchup Notes) */
+.video-card h2 {
+  margin: 0 0 16px 0;
+  font-size: 22px;
+  color: var(--gold);
+  padding-bottom: 8px;
+  border-bottom: 1px solid rgba(201,170,113,0.25);
+}
+
+.video-card iframe {
+  width: 100%;
+  height: 480px;
+  border: none;
+  border-radius: 12px;
+}
+
+/* ===== FOOTER ===== */
+footer {
+  text-align: center;
+  padding: 18px 10px;
+  font-size: 14px;
+  color: var(--muted);
+  margin-top: auto;
+}
+
+/* ===== MOBILE ===== */
+@media (max-width: 600px) {
+  .matchup-container {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .matchup-right {
+    text-align: center;
+  }
+
+  .video-card iframe {
+    height: 240px;
+  }
+}
+</style>
+
+<script>
+if (localStorage.getItem('lolfundamentals_logged_in') !== 'true') {
+  window.location.href = 'login.html';
+}
+</script>
+
+</head>
+<body>
+
+<header>Akali Mid vs Modekaiser</header>
+
+<a href="matchuphub.html" class="back-button">Back to Matchup Hub</a>
+
+<div class="content-width">
+  <div class="matchup-container">
+    <div class="matchup-left">
+      <img src="https://ddragon.leagueoflegends.com/cdn/14.23.1/img/champion/Modekaiser.png" alt="Modekaiser">
+      <div class="winrate-bubble">47%</div>
+    </div>
+
+    <div class="matchup-right">
+      <h2>Matchup Notes</h2>
+      <ul>
+        <li>Modekaiser wins this matchup lvl 1 and 2 because of his durable health pool and Q trades. You can win early trades by forcing his shield down before extended fights.</li>
+        <li>Look to manage wave control carefully against Akali’s mobility — avoid overextending without vision.</li>
+        <li>At level 6, his ultimate timing vs her shroud is crucial; respect her R timing and look for short trades afterward.</li>
+        <li>Use movement speed advantages post-level 3 to sidestep her Q patterns.</li>
+        <li>Modekaiser’s biggest weakness in this lane is his ranged poke — avoid unnecessary short trades where Akali can punish you from distance.</li>
+        <li>Always watch for Akali’s level 3 reset timing and engage only when you have wave advantage.</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="video-card">
+    <h2>VODs</h2>
+    <iframe src="https://www.youtube.com/embed/2ybQi_Gu0WQ" allowfullscreen></iframe>
+  </div>
+</div>
+
+<footer>© 2025 LoL Fundamentals · All rights reserved</footer>
+
+</body>
+</html>
