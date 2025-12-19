@@ -28,19 +28,20 @@ body {
 header {
   background: rgba(13,17,23,0.9);
   border-bottom: 2px solid var(--gold);
-  padding: 20px;
-  font-size: 26px;
-  font-weight: bold;
+  padding: 14px 20px;
+  font-size: 22px;
+  font-weight: 700;
   text-transform: uppercase;
   color: var(--gold);
   text-align: center;
+  letter-spacing: 0.8px;
 }
 
 /* ===== BACK BUTTON ===== */
 .back-button {
   display: block;
-  margin: 20px auto;
-  padding: 10px 20px;
+  margin: 18px auto;
+  padding: 9px 18px;
   background: linear-gradient(135deg, #c9aa71, #e0c77b);
   color: #000;
   text-decoration: none;
@@ -51,11 +52,16 @@ header {
 }
 .back-button::before { content: "← "; }
 
+/* ===== SHARED WIDTH ===== */
+.content-width {
+  max-width: 920px;
+  margin: 0 auto;
+  padding: 0 20px;
+}
+
 /* ===== MATCHUP CARD ===== */
 .matchup-container {
   display: flex;
-  max-width: 920px;
-  margin: 0 auto;
   gap: 28px;
   padding: 26px;
   background: linear-gradient(180deg, #161b22, #12161d);
@@ -117,34 +123,23 @@ header {
   line-height: 1.65;
 }
 
-/* ===== DIVIDER ===== */
-.gold-divider {
-  border: none;
-  height: 1px;
-  margin: 36px auto;
-  max-width: 920px; /* match card width */
-  background: linear-gradient(
-    90deg,
-    transparent,
-    rgba(201,170,113,0.5),
-    transparent
-  );
+/* ===== VIDEO CARD (MATCHES NOTES WIDTH) ===== */
+.video-card {
+  margin: 36px auto 40px;
+  padding: 26px;
+  background: linear-gradient(180deg, #161b22, #12161d);
+  border-radius: 18px;
+  border: 1px solid rgba(201,170,113,0.18);
+  box-shadow:
+    0 15px 40px rgba(0,0,0,0.7),
+    inset 0 0 0 1px rgba(255,255,255,0.02);
 }
 
-/* ===== VIDEO (MATCHES CARD WIDTH) ===== */
-.video-container {
-  max-width: 920px;
-  margin: 0 auto 40px;
-}
-
-.video-container iframe {
+.video-card iframe {
   width: 100%;
   height: 480px;
   border: none;
-  border-radius: 18px;
-  box-shadow:
-    0 0 0 1px rgba(201,170,113,0.18),
-    0 22px 55px rgba(0,0,0,0.85);
+  border-radius: 12px;
 }
 
 /* ===== FOOTER ===== */
@@ -161,14 +156,13 @@ footer {
   .matchup-container {
     flex-direction: column;
     align-items: center;
-    gap: 20px;
   }
 
   .matchup-right {
     text-align: center;
   }
 
-  .video-container iframe {
+  .video-card iframe {
     height: 240px;
   }
 }
@@ -188,29 +182,29 @@ if (localStorage.getItem('lolfundamentals_logged_in') !== 'true') {
 
 <a href="matchuphub.html" class="back-button">Back to Matchup Hub</a>
 
-<div class="matchup-container">
-  <div class="matchup-left">
-    <img src="https://ddragon.leagueoflegends.com/cdn/14.23.1/img/champion/Akali.png" alt="Akali">
-    <div class="winrate-bubble">48%</div>
+<div class="content-width">
+  <div class="matchup-container">
+    <div class="matchup-left">
+      <img src="https://ddragon.leagueoflegends.com/cdn/14.23.1/img/champion/Akali.png" alt="Akali">
+      <div class="winrate-bubble">48%</div>
+    </div>
+
+    <div class="matchup-right">
+      <h2>Matchup Notes</h2>
+      <ul>
+        <li>Akali wins this matchup lvl 1 and 2. You can trade Q for Q lvl 1 but her second Q needs to be dodged. This often leads to a reset level 3 unless the Akali didn't play aggressively early.</li>
+        <li>Post reset is your best chance to win the matchup. Look for full Q E combos or E Auto trades with passive, if she's not denying you from auto attacking the wave.</li>
+        <li>At 6 your ideal all in is interrupting her E with your ult but be careful of her casting R at the same time to dodge your ult.</li>
+        <li>Look to trade with akali immediately after she autos a minion so she cant use her passive immediately.</li>
+        <li>Akali's biggest weakness is her waveclear. Try to fast push all non canon waves if the Akali isn’t contesting your push. This also gives you an opportunity to land easy Q’s on her while she's farming under tower since she has to step up close to farm. If she’s contesting, throw a q at her while she’s approaching but don’t immediately take the e. You can try to bait out a q or e and let your grasp start stacking.</li>
+        <li>Be careful playing up in lane as Akali can chase you down the lane and space her abilities well without taking tower damage.</li>
+      </ul>
+    </div>
   </div>
 
-  <div class="matchup-right">
-    <h2>Matchup Notes</h2>
-    <ul>
-      <li>Akali wins this matchup lvl 1 and 2. You can trade Q for Q lvl 1 but her second Q needs to be dodged.</li>
-      <li>Post reset is your best chance to win the matchup. Look for full Q E combos or E Auto trades with passive.</li>
-      <li>At 6 your ideal all in is interrupting her E with your ult but be careful of her R timing.</li>
-      <li>Look to trade with Akali immediately after she autos a minion.</li>
-      <li>Akali's biggest weakness is her waveclear. Fast push non-cannon waves if uncontested.</li>
-      <li>Be careful playing up in lane as Akali can chase you down long lanes.</li>
-    </ul>
+  <div class="video-card">
+    <iframe src="https://www.youtube.com/embed/sd7DuyRakh8" allowfullscreen></iframe>
   </div>
-</div>
-
-<hr class="gold-divider">
-
-<div class="video-container">
-  <iframe src="https://www.youtube.com/embed/sd7DuyRakh8" allowfullscreen></iframe>
 </div>
 
 <footer>© 2025 LoL Fundamentals · All rights reserved</footer>
