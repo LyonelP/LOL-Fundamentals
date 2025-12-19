@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Modekaiser Mid vs Akali</title>
+<title>Mordekaiser Mid vs Akali</title>
 
 <style>
 :root {
@@ -24,7 +24,6 @@ body {
   flex-direction: column;
 }
 
-/* ===== HEADER (MATCHES HUB SCALE) ===== */
 header {
   background: rgba(13,17,23,0.9);
   border-bottom: 2px solid var(--gold);
@@ -37,7 +36,6 @@ header {
   letter-spacing: 0.8px;
 }
 
-/* ===== BACK BUTTON ===== */
 .back-button {
   display: block;
   margin: 18px auto;
@@ -52,14 +50,12 @@ header {
 }
 .back-button::before { content: "← "; }
 
-/* ===== SHARED WIDTH ===== */
 .content-width {
   max-width: 920px;
   margin: 0 auto;
   padding: 0 20px;
 }
 
-/* ===== MATCHUP CARD ===== */
 .matchup-container {
   display: flex;
   gap: 28px;
@@ -67,12 +63,9 @@ header {
   background: linear-gradient(180deg, #161b22, #12161d);
   border-radius: 18px;
   border: 1px solid rgba(201,170,113,0.18);
-  box-shadow:
-    0 15px 40px rgba(0,0,0,0.7),
-    inset 0 0 0 1px rgba(255,255,255,0.02);
+  box-shadow: 0 15px 40px rgba(0,0,0,0.7), inset 0 0 0 1px rgba(255,255,255,0.02);
 }
 
-/* ===== LEFT ===== */
 .matchup-left {
   display: flex;
   flex-direction: column;
@@ -88,7 +81,6 @@ header {
   box-shadow: 0 0 28px rgba(201,170,113,0.45);
 }
 
-/* ===== WINRATE ===== */
 .winrate-bubble {
   background: rgba(249,115,22,0.15);
   color: #f97316;
@@ -100,7 +92,6 @@ header {
   letter-spacing: 0.5px;
 }
 
-/* ===== RIGHT ===== */
 .matchup-right {
   flex: 1;
 }
@@ -123,19 +114,15 @@ header {
   line-height: 1.65;
 }
 
-/* ===== VIDEO CARD ===== */
 .video-card {
   margin: 36px auto 40px;
   padding: 26px;
   background: linear-gradient(180deg, #161b22, #12161d);
   border-radius: 18px;
   border: 1px solid rgba(201,170,113,0.18);
-  box-shadow:
-    0 15px 40px rgba(0,0,0,0.7),
-    inset 0 0 0 1px rgba(255,255,255,0.02);
+  box-shadow: 0 15px 40px rgba(0,0,0,0.7), inset 0 0 0 1px rgba(255,255,255,0.02);
 }
 
-/* VODs header (matches Matchup Notes) */
 .video-card h2 {
   margin: 0 0 16px 0;
   font-size: 22px;
@@ -151,7 +138,6 @@ header {
   border-radius: 12px;
 }
 
-/* ===== FOOTER ===== */
 footer {
   text-align: center;
   padding: 18px 10px;
@@ -160,7 +146,6 @@ footer {
   margin-top: auto;
 }
 
-/* ===== MOBILE ===== */
 @media (max-width: 600px) {
   .matchup-container {
     flex-direction: column;
@@ -186,25 +171,25 @@ if (localStorage.getItem('lolfundamentals_logged_in') !== 'true') {
 </head>
 <body>
 
-<header>Akali Mid vs Modekaiser</header>
+<header>Mordekaiser Mid vs Akali</header>
 
 <a href="matchuphub.html" class="back-button">Back to Matchup Hub</a>
 
 <div class="content-width">
   <div class="matchup-container">
     <div class="matchup-left">
-      <img src="https://ddragon.leagueoflegends.com/cdn/14.23.1/img/champion/Modekaiser.png" alt="Modekaiser">
+      <img src="https://ddragon.leagueoflegends.com/cdn/14.23.1/img/champion/Mordekaiser.png" alt="Mordekaiser">
       <div class="winrate-bubble">47%</div>
     </div>
 
     <div class="matchup-right">
       <h2>Matchup Notes</h2>
       <ul>
-        <li>Modekaiser wins this matchup lvl 1 and 2 because of his durable health pool and Q trades. You can win early trades by forcing his shield down before extended fights.</li>
-        <li>Look to manage wave control carefully against Akali’s mobility — avoid overextending without vision.</li>
-        <li>At level 6, his ultimate timing vs her shroud is crucial; respect her R timing and look for short trades afterward.</li>
+        <li>Mordekaiser wins this matchup lvl 1 and 2 due to his durable health pool and Q trades. Force his shield down before extended fights.</li>
+        <li>Manage wave control carefully against Akali’s mobility — avoid overextending without vision.</li>
+        <li>At level 6, his ultimate vs her shroud timing is crucial; respect her R timing and look for short trades afterward.</li>
         <li>Use movement speed advantages post-level 3 to sidestep her Q patterns.</li>
-        <li>Modekaiser’s biggest weakness in this lane is his ranged poke — avoid unnecessary short trades where Akali can punish you from distance.</li>
+        <li>Mordekaiser’s biggest weakness in this lane is his ranged poke — avoid unnecessary short trades where Akali can punish you from distance.</li>
         <li>Always watch for Akali’s level 3 reset timing and engage only when you have wave advantage.</li>
       </ul>
     </div>
@@ -220,3 +205,5 @@ if (localStorage.getItem('lolfundamentals_logged_in') !== 'true') {
 
 </body>
 </html>
+
+
