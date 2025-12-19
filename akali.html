@@ -24,11 +24,11 @@ body {
   flex-direction: column;
 }
 
-/* ===== HEADER (slightly higher line) ===== */
+/* ===== HEADER (slightly raised line) ===== */
 header {
   background: rgba(13,17,23,0.9);
-  border-bottom: 4px solid var(--gold); /* +1px more */
-  padding: 18px 20px;
+  border-bottom: 3px solid var(--gold);
+  padding: 18px 20px 17px 20px; /* bottom padding reduced 1px */
   font-size: 26px;
   font-weight: 700;
   text-transform: uppercase;
@@ -151,10 +151,10 @@ header {
   border-radius: 12px;
 }
 
-/* ===== FOOTER (slightly higher) ===== */
+/* ===== FOOTER (slightly raised) ===== */
 footer {
   text-align: center;
-  padding: 20px 10px; /* +2px higher */
+  padding: 18px 10px; /* moved 2px up */
   font-size: 14px;
   color: var(--muted);
   margin-top: auto;
@@ -220,7 +220,6 @@ if (localStorage.getItem('lolfundamentals_logged_in') !== 'true') {
 
 </body>
 </html>
-
 
 
 
