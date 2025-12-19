@@ -121,6 +121,33 @@ header {
   line-height: 1.65;
 }
 
+/* ===== VIDEO CARD ===== */
+.video-card {
+  margin: 36px auto 40px;
+  padding: 26px;
+  background: linear-gradient(180deg, #161b22, #12161d);
+  border-radius: 18px;
+  border: 1px solid rgba(201,170,113,0.18);
+  box-shadow:
+    0 15px 40px rgba(0,0,0,0.7),
+    inset 0 0 0 1px rgba(255,255,255,0.02);
+}
+
+.video-card h2 {
+  margin: 0 0 16px 0;
+  font-size: 22px;
+  color: var(--gold);
+  padding-bottom: 8px;
+  border-bottom: 1px solid rgba(201,170,113,0.25);
+}
+
+.video-card iframe {
+  width: 100%;
+  height: 480px;
+  border: none;
+  border-radius: 12px;
+}
+
 /* ===== FOOTER ===== */
 footer {
   text-align: center;
@@ -139,6 +166,10 @@ footer {
 
   .matchup-right {
     text-align: center;
+  }
+
+  .video-card iframe {
+    height: 240px;
   }
 }
 </style>
@@ -172,12 +203,18 @@ if (localStorage.getItem('lolfundamentals_logged_in') !== 'true') {
       </ul>
     </div>
   </div>
+
+  <div class="video-card">
+    <h2>VODs</h2>
+    <iframe src="https://www.youtube.com/embed/08Bz64niYng" allowfullscreen></iframe>
+  </div>
 </div>
 
 <footer>© 2025 LoL Fundamentals · All rights reserved</footer>
 
 </body>
 </html>
+
 
 
 
