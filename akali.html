@@ -24,12 +24,12 @@ body {
   flex-direction: column;
 }
 
-/* ===== HEADER (MATCHES HUB) ===== */
+/* ===== HEADER (MATCHES HUB SCALE) ===== */
 header {
   background: rgba(13,17,23,0.9);
   border-bottom: 2px solid var(--gold);
-  padding: 14px 20px;
-  font-size: 22px;
+  padding: 18px 20px;
+  font-size: 26px; /* restored to hub size */
   font-weight: 700;
   text-transform: uppercase;
   color: var(--gold);
@@ -123,7 +123,7 @@ header {
   line-height: 1.65;
 }
 
-/* ===== VIDEO CARD (MATCHES NOTES WIDTH) ===== */
+/* ===== VIDEO CARD ===== */
 .video-card {
   margin: 36px auto 40px;
   padding: 26px;
@@ -133,6 +133,15 @@ header {
   box-shadow:
     0 15px 40px rgba(0,0,0,0.7),
     inset 0 0 0 1px rgba(255,255,255,0.02);
+}
+
+/* VODs header (matches Matchup Notes) */
+.video-card h2 {
+  margin: 0 0 16px 0;
+  font-size: 22px;
+  color: var(--gold);
+  padding-bottom: 8px;
+  border-bottom: 1px solid rgba(201,170,113,0.25);
 }
 
 .video-card iframe {
@@ -168,7 +177,6 @@ footer {
 }
 </style>
 
-<!-- ===== LOGIN CHECK ===== -->
 <script>
 if (localStorage.getItem('lolfundamentals_logged_in') !== 'true') {
   window.location.href = 'login.html';
@@ -203,6 +211,7 @@ if (localStorage.getItem('lolfundamentals_logged_in') !== 'true') {
   </div>
 
   <div class="video-card">
+    <h2>VODs</h2>
     <iframe src="https://www.youtube.com/embed/sd7DuyRakh8" allowfullscreen></iframe>
   </div>
 </div>
@@ -211,8 +220,6 @@ if (localStorage.getItem('lolfundamentals_logged_in') !== 'true') {
 
 </body>
 </html>
-
-
 
 
 
