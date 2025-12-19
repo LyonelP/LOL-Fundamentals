@@ -11,7 +11,7 @@
   --bg:#0a0f14;
   --card:#161b22;
   --muted:#8b949e;
-  --orange:#f97316;
+  --yellow:#F9D949;
 }
 
 body {
@@ -73,6 +73,7 @@ header {
     inset 0 0 0 1px rgba(255,255,255,0.02);
 }
 
+/* ===== LEFT ===== */
 .matchup-left {
   display: flex;
   flex-direction: column;
@@ -88,10 +89,10 @@ header {
   box-shadow: 0 0 28px rgba(201,170,113,0.45);
 }
 
+/* ===== WINRATE ===== */
 .winrate-bubble {
-  background: rgba(249,115,22,0.15);
-  color: #f97316;
-  border: 1px solid rgba(249,115,22,0.45);
+  background: var(--yellow);
+  color: #0d1117;
   font-weight: 600;
   padding: 6px 16px;
   border-radius: 999px;
@@ -99,6 +100,7 @@ header {
   letter-spacing: 0.5px;
 }
 
+/* ===== RIGHT ===== */
 .matchup-right {
   flex: 1;
 }
@@ -183,7 +185,7 @@ if (localStorage.getItem('lolfundamentals_logged_in') !== 'true') {
 </head>
 <body>
 
-<header>Diana Mid Matchup – Syndra</header>
+<header>Syndra Mid Matchup</header>
 
 <a href="matchuphub.html" class="back-button">Back to Matchup Hub</a>
 
@@ -197,9 +199,9 @@ if (localStorage.getItem('lolfundamentals_logged_in') !== 'true') {
     <div class="matchup-right">
       <h2>Matchup Notes</h2>
       <ul>
-        <li>Baiting out her Qs and learning her cooldowns is key for the first levels.</li>
-        <li>Syndra’s best play at the start of a wave is to combo Q + E, then W. Wait out this combo before moving too far up.</li>
-        <li>After level 6, look for ult trades once she uses her Q + E combo.</li>
+        <li>Baiting out her Qs and becoming familiar with her Q cooldown is key for the first couple of levels.</li>
+        <li>Syndra’s best play at the start of a new wave is looking for a Q→E immediately on you and throwing W afterwards. Wait out this combo before moving too far up.</li>
+        <li>Post 6 you always want to look for an ult trade after she goes for her Q→E.</li>
       </ul>
     </div>
   </div>
@@ -214,7 +216,6 @@ if (localStorage.getItem('lolfundamentals_logged_in') !== 'true') {
 
 </body>
 </html>
-
 
 
 
