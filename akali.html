@@ -4,154 +4,194 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Diana Mid vs Akali</title>
+
 <style>
-  :root {
-    --gold:#c9aa71;
-    --bg:#0a0f14;
-    --card:#161b22;
-    --muted:#8b949e;
-  }
+:root {
+  --gold:#c9aa71;
+  --bg:#0a0f14;
+  --card:#161b22;
+  --muted:#8b949e;
+}
 
-  body {
-    margin: 0;
-    font-family: "Beaufort for LOL", Arial, Helvetica, sans-serif;
-    background: #0a0f14;
-    color: #e6edf3;
-    line-height: 1.4;
-    min-height: 100vh;
-    display: flex;
-    flex-direction: column;
-  }
+body {
+  margin: 0;
+  font-family: "Beaufort for LOL", Arial, Helvetica, sans-serif;
+  background: var(--bg);
+  color: #e6edf3;
+  line-height: 1.5;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
 
-  /* ===== HEADER ===== */
-  header {
-    background: rgba(13,17,23,0.9);
-    border-bottom: 2px solid var(--gold);
-    padding: 20px;
-    font-weight: bold;
-    font-size: 26px;
-    letter-spacing: 1px;
-    text-transform: uppercase;
-    text-align: center;
-    line-height: 1.2;
-    color: var(--gold);
-    box-sizing: border-box;
-  }
+/* ===== HEADER ===== */
+header {
+  background: linear-gradient(
+    180deg,
+    rgba(13,17,23,0.95),
+    rgba(10,15,20,0.95)
+  );
+  border-bottom: 2px solid var(--gold);
+  padding: 22px 16px;
+  font-weight: bold;
+  font-size: 26px;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  text-align: center;
+  color: var(--gold);
+}
 
-  /* ===== Content ===== */
-  /* Back button */
-  .back-button {
-    display: block;
-    margin: 20px auto 20px; 
-    padding: 10px 20px;
-    background: linear-gradient(135deg, #c9aa71, #e0c77b);
-    color: #000;
-    text-decoration: none;
-    border-radius: 8px;
-    font-weight: bold;
-    font-size: 16px;
-    text-align: center;
-    box-shadow: 0 0 10px rgba(201,170,113,0.5);
-    transition: all 0.3s;
-    width: fit-content;
-  }
-  .back-button::before { content: "← "; }
-  .back-button:hover {
-    background: linear-gradient(135deg, #e6c97f, #f0d88b);
-    box-shadow: 0 0 15px rgba(255,215,0,0.8);
-  }
+/* ===== BACK BUTTON ===== */
+.back-button {
+  display: block;
+  margin: 22px auto;
+  padding: 10px 22px;
+  background: linear-gradient(135deg, #c9aa71, #e0c77b);
+  color: #000;
+  text-decoration: none;
+  border-radius: 10px;
+  font-weight: bold;
+  font-size: 16px;
+  box-shadow: 0 0 12px rgba(201,170,113,0.45);
+  transition: all 0.25s ease;
+  width: fit-content;
+}
+.back-button::before { content: "← "; }
+.back-button:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 0 18px rgba(255,215,0,0.7);
+}
 
+/* ===== MATCHUP CARD ===== */
+.matchup-container {
+  display: flex;
+  max-width: 920px;
+  margin: 0 auto;
+  gap: 28px;
+  padding: 26px;
+  background: linear-gradient(180deg, #161b22, #12161d);
+  border-radius: 18px;
+  border: 1px solid rgba(201,170,113,0.18);
+  box-shadow:
+    0 15px 40px rgba(0,0,0,0.7),
+    inset 0 0 0 1px rgba(255,255,255,0.02);
+}
+
+/* ===== LEFT ===== */
+.matchup-left {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 14px;
+}
+
+.matchup-left img {
+  width: 96px;
+  height: 96px;
+  border-radius: 14px;
+  border: 2px solid var(--gold);
+  box-shadow: 0 0 28px rgba(201,170,113,0.45);
+}
+
+/* ===== WINRATE ===== */
+.winrate-bubble {
+  background: rgba(249,115,22,0.15);
+  color: #f97316;
+  border: 1px solid rgba(249,115,22,0.45);
+  font-weight: 600;
+  padding: 6px 16px;
+  border-radius: 999px;
+  font-size: 14px;
+  letter-spacing: 0.5px;
+}
+
+/* ===== RIGHT ===== */
+.matchup-right {
+  flex: 1;
+}
+
+.matchup-right h2 {
+  margin: 0 0 14px 0;
+  font-size: 22px;
+  color: var(--gold);
+  padding-bottom: 8px;
+  border-bottom: 1px solid rgba(201,170,113,0.25);
+}
+
+.matchup-right ul {
+  padding-left: 18px;
+  margin: 0;
+}
+
+.matchup-right li {
+  margin-bottom: 12px;
+  line-height: 1.65;
+}
+
+/* ===== DIVIDER ===== */
+.gold-divider {
+  border: none;
+  height: 1px;
+  margin: 36px auto;
+  max-width: 720px;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    rgba(201,170,113,0.5),
+    transparent
+  );
+}
+
+/* ===== VIDEO ===== */
+.video-container {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 40px;
+}
+
+.video-container iframe {
+  width: 100%;
+  max-width: 860px;
+  height: 480px;
+  border: none;
+  border-radius: 18px;
+  box-shadow:
+    0 0 0 1px rgba(201,170,113,0.18),
+    0 22px 55px rgba(0,0,0,0.85);
+}
+
+/* ===== FOOTER ===== */
+footer {
+  text-align: center;
+  padding: 18px 10px;
+  font-size: 14px;
+  color: var(--muted);
+  margin-top: auto;
+}
+
+/* ===== MOBILE ===== */
+@media (max-width: 600px) {
   .matchup-container {
-    display: flex;
-    max-width: 900px;
-    margin: 0 auto;
-    gap: 15px;
-    padding: 0 20px 10px 20px;
-  }
-
-  .matchup-left {
-    display: flex;
+    flex-direction: column;
     align-items: center;
-    gap: 10px;
-  }
-
-  .matchup-left img {
-    width: 80px;
-    height: 80px;
-    border-radius: 8px;
-  }
-
-  .winrate-bubble {
-    background: #f97316;
-    color: #0d1117;
-    font-weight: bold;
-    padding: 8px 14px;
-    border-radius: 25px;
-    font-size: 16px;
-    white-space: nowrap;
+    gap: 20px;
   }
 
   .matchup-right {
-    flex: 1;
-    display: flex;
-    flex-direction: column;
-  }
-
-  .matchup-right h2 {
-    margin: 0 0 15px 0;
-    font-size: 22px;
-    color: var(--gold);
-  }
-
-  .matchup-right ul {
-    padding-left: 20px;
-    margin: 0;
-  }
-
-  .matchup-right li {
-    margin-bottom: 6px;
-  }
-
-  /* ===== Video ===== */
-  .video-container {
-    display: flex;
-    justify-content: center;
-    margin: 30px 0;
+    text-align: center;
   }
 
   .video-container iframe {
-    width: 100%;
-    max-width: 800px;
-    height: 450px;
-    border: none;
-    border-radius: 10px;
+    height: 240px;
   }
-
-  /* ===== FOOTER ===== */
-  footer {
-    text-align: center;
-    padding: 15px 10px;
-    font-size: 14px;
-    color: #8b949e;
-    margin-top: auto;
-  }
-
-  @media (max-width: 600px) {
-    .matchup-container {
-      flex-direction: column;
-      align-items: center;
-      padding: 10px;
-    }
-    .matchup-right { text-align: center; }
-    .video-container iframe { height: 250px; }
-  }
+}
 </style>
 
 <!-- ===== LOGIN CHECK ===== -->
 <script>
-  if (localStorage.getItem('lolfundamentals_logged_in') !== 'true') {
-    window.location.href = 'login.html';
-  }
+if (localStorage.getItem('lolfundamentals_logged_in') !== 'true') {
+  window.location.href = 'login.html';
+}
 </script>
 
 </head>
@@ -170,15 +210,17 @@
   <div class="matchup-right">
     <h2>Matchup Notes</h2>
     <ul>
-      <li>Akali wins this matchup lvl 1 and 2 because of her Q's + passive. You can trade Q for Q lvl 1 but her second Q needs to be dodged. This often leads to a reset level 3 unless the Akali didn't play aggressively early.</li>
+      <li>Akali wins this matchup lvl 1 and 2. You can trade Q for Q lvl 1 but her second Q needs to be dodged. This often leads to a reset level 3 unless the Akali didn't play aggressively early.</li>
       <li>Post reset is your best chance to win the matchup. Look for full Q E combos or E Auto trades with passive, if she's not denying you from auto attacking the wave.</li>
       <li>At 6 your ideal all in is interrupting her E with your ult but be careful of her casting R at the same time to dodge your ult.</li>
       <li>Look to trade with akali immediately after she autos a minion so she cant use her passive immediately.</li>
-      <li>Akali's biggest weakness is her waveclear. Try to fast push all non canon waves if the Akali isn’t contesting your push. This also gives you an opportunity to land easy Q’s on her while she's farming under tower since she has to step up close to farm. If she’s contesting, throw a q at her while she’s approaching but don’t immediately take the e. You can try to bait out a q or e and let your grasp start stacking.</li>
+      <li>Akali's biggest weakness is her waveclear. Try to fast push all non canon waves if the Akali isn’t contesting your push.</li>
       <li>Be careful playing up in lane as Akali can chase you down the lane and space her abilities well without taking tower damage.</li>
     </ul>
   </div>
 </div>
+
+<hr class="gold-divider">
 
 <div class="video-container">
   <iframe src="https://www.youtube.com/embed/sd7DuyRakh8" allowfullscreen></iframe>
@@ -188,7 +230,6 @@
 
 </body>
 </html>
-
 
 
 
