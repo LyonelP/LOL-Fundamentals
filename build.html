@@ -13,28 +13,35 @@
 </script>
 
 <style>
-body {
+html, body {
   margin: 0;
+  padding: 0;
+  height: 100%;
+}
+body {
   font-family: 'Beaufort for LOL', Arial, Helvetica, sans-serif;
-  text-align: center;
   color: #fff;
   background: url('https://64.media.tumblr.com/594ac290bec6d5e9ad98b5f53404f00b/245c4c3ee469f81d-e4/s1280x1920/1cda4284320eb2031758a9859dfe14ff8bbc50ba.jpg') no-repeat center center fixed;
   background-size: cover;
-  overflow-x: hidden;
+  display: flex;
+  flex-direction: column;
+  text-align: center;
+  min-height: 100vh;
 }
 
-/* Overlay for readability */
+/* Slight overlay */
 body::before {
   content: "";
   position: fixed;
-  top: 0; left: 0;
-  width: 100%; height: 100%;
-  background: rgba(10,15,20,0.75);
+  top:0; left:0;
+  width:100%; height:100%;
+  background: rgba(10,15,20,0.2);
   z-index: -1;
 }
 
+/* Header */
 header {
-  background: rgba(13,17,23,0.9);
+  background: rgba(13,17,23,0.85);
   border-bottom: 2px solid #c9aa71;
   padding: 20px 10px;
   font-weight: bold;
@@ -44,6 +51,7 @@ header {
   letter-spacing: 1px;
 }
 
+/* Back button */
 .back-button {
   display: inline-block;
   margin: 20px auto 10px;
@@ -59,38 +67,81 @@ header {
 .back-button::before { content: "← "; }
 .back-button:hover {
   background: linear-gradient(135deg, #e6c97f, #f0d88b);
-  box-shadow: 0 0 15px rgba(201,170,113,0.8);
+  box-shadow: 0 0 15px rgba(255,215,0,0.8);
 }
 
-.content-container {
-  margin: 20px auto 50px auto;
-  max-width: 900px;
-  background: rgba(13,17,23,0.95);
-  border: 1px solid #2f81f7;
+/* Main content */
+.main-content {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 20px 10px;
+}
+
+/* First card */
+.build-card {
+  background: rgba(13,17,23,0.9);
+  border: 1px solid #c9aa71;
   border-radius: 10px;
-  padding: 20px;
+  padding: 18px 22px;
+  margin: 12px 0;
+  max-width: 950px;
+  width: 90%;
   text-align: left;
-  color: #fff;
   font-size: 16px;
   line-height: 1.6;
-  position: relative;
+  opacity: 0;
+  transform: translateY(10px);
+  animation: fadeInUp 0.4s forwards;
 }
 
-.content-container h2, .content-container h3 {
+/* Sub cards / sections */
+.sub-card {
+  background: rgba(13,17,23,0.85);
+  border: 1px solid #c9aa71;
+  border-radius: 10px;
+  padding: 14px 18px;
+  margin: 10px 0;
+  max-width: 950px;
+  width: 90%;
+  text-align: left;
+  font-size: 16px;
+  line-height: 1.6;
+  opacity: 0;
+  transform: translateY(10px);
+  animation: fadeInUp 0.4s forwards;
+}
+
+.build-card h2, .sub-card h3 {
   color: #c9aa71;
   margin-top: 0;
+  margin-bottom: 10px;
+  border-bottom: 1px solid #c9aa71;
+  padding-bottom: 4px;
 }
 
+/* Fade-in animation */
+@keyframes fadeInUp {
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Footer */
 footer {
   text-align: center;
+  margin-top: auto;
   padding: 15px 10px;
   font-size: 14px;
-  color: #8b949e;
+  color: #fff;
 }
 
+/* Responsive */
 @media (max-width: 600px) {
   header { font-size: 24px; padding: 15px; }
-  .content-container { margin: 15px 10px 30px 10px; padding: 15px; }
+  .build-card, .sub-card { padding: 14px 16px; font-size: 15px; }
 }
 </style>
 </head>
@@ -99,17 +150,22 @@ footer {
 <header>Build</header>
 <a href="skills.html" class="back-button">Back to Skills Hub</a>
 
-<div class="content-container">
-  <h2>Build</h2>
-  <p>Figure out your core build before you queue up. Follow champion guides from high elo players who specialize in your champion. Having your item build pre-planned increases your buy speed and reduces unnecessary time spent in the fountain. It’s also important to know which component items are optimal at different gold thresholds in each situation.</p>
-  
-  <h3>Adjusting Your Build in Champion Select</h3>
-  <p>Once in champion select, you may need to tweak your core build depending on the enemy team composition. Consider the amount of magic damage, physical damage, healing, assassins, and tanks. For example:</p>
-  <ul>
-    <li>If your lane opponent deals mostly magic damage and the enemy jungler does as well, an early Null-Mantle is almost always a good choice for top, mid, or jungle. This can later be built into Mercury's Treads for additional utility.</li>
-    <li>AP champions often have more crowd control than AD champions, so adjust your build for tenacity or sustain as needed.</li>
-  </ul>
-  
+<div class="main-content">
+
+  <div class="build-card" style="animation-delay:0.1s;">
+    <h2>Build</h2>
+    <p>Figure out your core build before you queue up. Follow champion guides from high elo players who specialize in your champion. Having your item build pre-planned increases your buy speed and reduces unnecessary time spent in the fountain. It’s also important to know which component items are optimal at different gold thresholds in each situation.</p>
+  </div>
+
+  <div class="sub-card" style="animation-delay:0.2s;">
+    <h3>Adjusting Your Build in Champion Select</h3>
+    <p>Once in champion select, you may need to tweak your core build depending on the enemy team composition. Consider the amount of magic damage, physical damage, healing, assassins, and tanks.</p>
+    <ul>
+      <li>If your lane opponent deals mostly magic damage and the enemy jungler does as well, an early Null-Mantle is almost always a good choice for top, mid, or jungle. This can later be built into Mercury's Treads for additional utility.</li>
+      <li>AP champions often have more crowd control than AD champions, so adjust your build for tenacity or sustain as needed.</li>
+    </ul>
+  </div>
+
 </div>
 
 <footer>© 2025 LoL Fundamentals · All rights reserved</footer>
