@@ -13,7 +13,6 @@
 </script>
 
 <style>
-/* Base styles */
 html, body {
   margin: 0;
   padding: 0;
@@ -24,25 +23,25 @@ body {
   color: #fff;
   background: url('https://64.media.tumblr.com/594ac290bec6d5e9ad98b5f53404f00b/245c4c3ee469f81d-e4/s1280x1920/1cda4284320eb2031758a9859dfe14ff8bbc50ba.jpg') no-repeat center center fixed;
   background-size: cover;
-  overflow-x: hidden;
   display: flex;
   flex-direction: column;
   text-align: center;
+  min-height: 100vh;
 }
 
-/* Overlay */
+/* Slight overlay for readability */
 body::before {
   content: "";
   position: fixed;
   top: 0; left: 0;
   width: 100%; height: 100%;
-  background: rgba(10,15,20,0.75);
+  background: rgba(10,15,20,0.2);
   z-index: -1;
 }
 
 /* Header */
 header {
-  background: rgba(13,17,23,0.9);
+  background: rgba(13,17,23,0.85);
   border-bottom: 2px solid #c9aa71;
   padding: 20px 10px;
   font-weight: bold;
@@ -71,7 +70,7 @@ header {
   box-shadow: 0 0 15px rgba(255,215,0,0.8);
 }
 
-/* Content wrapper */
+/* Main content */
 .main-content {
   flex: 1;
   display: flex;
@@ -82,9 +81,9 @@ header {
 
 /* Tip cards */
 .tip-card {
-  background: rgba(13,17,23,0.95);
-  border: 2px solid #c9aa71;
-  border-radius: 12px;
+  background: rgba(13,17,23,0.9);
+  border: 1px solid #c9aa71;
+  border-radius: 10px;
   padding: 18px 22px;
   margin: 15px 0;
   max-width: 900px;
@@ -92,10 +91,9 @@ header {
   text-align: left;
   font-size: 16px;
   line-height: 1.6;
-  position: relative;
   opacity: 0;
-  transform: translateY(20px);
-  animation: fadeInUp 0.5s forwards;
+  transform: translateY(10px);
+  animation: fadeInUp 0.4s forwards;
 }
 .tip-card:nth-child(1) { animation-delay: 0.1s; }
 .tip-card:nth-child(2) { animation-delay: 0.3s; }
@@ -107,7 +105,7 @@ header {
   margin-bottom: 10px;
   font-size: 20px;
   border-bottom: 1px solid #c9aa71;
-  padding-bottom: 6px;
+  padding-bottom: 4px;
 }
 
 /* Tooltip */
@@ -121,7 +119,7 @@ header {
   position: absolute;
   left: 0;
   bottom: 125%;
-  background: rgba(0,0,0,0.9);
+  background: rgba(0,0,0,0.85);
   color: #fff;
   padding: 6px 10px;
   border-radius: 6px;
@@ -130,7 +128,7 @@ header {
   z-index: 10;
 }
 
-/* Animations */
+/* Fade-in animation */
 @keyframes fadeInUp {
   to {
     opacity: 1;
@@ -138,14 +136,13 @@ header {
   }
 }
 
-/* Footer */
+/* Footer at bottom of page */
 footer {
   text-align: center;
+  margin-top: auto;
   padding: 15px 10px;
   font-size: 14px;
-  color: #8b949e;
-  background: rgba(13,17,23,0.95);
-  border-top: 1px solid #c9aa71;
+  color: #fff;
 }
 
 /* Responsive */
@@ -162,18 +159,18 @@ footer {
 
 <div class="main-content">
   <div class="tip-card">
-    <h2>Know Your Bans</h2>
-    <p>Have up to 5 bans ready in case your team removes other top-tier champions. <span class="tooltip" data-tooltip="Check tierlists or high-priority bans for your champion’s lane.">Why this matters</span>.</p>
+    <h2>Champion Select</h2>
+    <p>The game starts in champion select. You should have up to 5 bans ready in case your team happens to ban all of the other 4 most ban-worthy champions.</p>
   </div>
 
   <div class="tip-card">
-    <h2>Check Side & First Pick</h2>
-    <p>Always check which team is blue or red side. <strong>Blue side</strong> gets first pick advantage, which can influence your counter choice.</p>
+    <h2>Check Side</h2>
+    <p>Check which team is on which side. First pick is always blue side. This helps you anticipate lane matchups and strategy.</p>
   </div>
 
   <div class="tip-card">
-    <h2>Visualize Matchups</h2>
-    <p>As each champion is picked, think about how it interacts with your champion. <a href="matchuphub.html">View matchup guides</a> to anticipate how the game might play out.</p>
+    <h2>Visualize the Game</h2>
+    <p>As each pick is locked in, think about how that champion interacts with your champion and others. Visualize how the game will play out before it starts. <a href="matchuphub.html" style="color:#c9aa71; text-decoration:underline;">View matchup guides</a> for reference.</p>
   </div>
 </div>
 
@@ -181,13 +178,6 @@ footer {
 
 </body>
 </html>
-
-
-
-
-
-
-
 
 
 
