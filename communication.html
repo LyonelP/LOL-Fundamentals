@@ -78,12 +78,12 @@ header {
   margin-top: 0;
 }
 
-/* Ping lines using flex for perfect alignment */
+/* Ping lines using flex for proper alignment */
 .ping-line {
   display: flex;
-  align-items: flex-start; /* top aligns text with icon properly */
-  gap: 12px;
-  margin: 12px 0;
+  align-items: center; /* center icon vertically with first line of text */
+  gap: 16px; /* more space between icon and text */
+  margin: 16px 0; /* more space between ping lines */
 }
 
 .ping-line p {
@@ -125,7 +125,6 @@ footer {
 
   <h2>Common Pings</h2>
 
-  <!-- Generic Ping -->
   <div class="ping-line">
     <svg class="ping-icon" viewBox="0 0 50 50">
       <circle cx="25" cy="25" r="22" fill="dodgerblue" stroke="black" stroke-width="3"/>
@@ -134,7 +133,6 @@ footer {
     <p><strong>Generic Ping:</strong> Used to ping everything in the tab window like summoner spells, ults, and upcoming objectives. Also great for marking enemy objectives.</p>
   </div>
 
-  <!-- Danger -->
   <div class="ping-line">
     <svg class="ping-icon" viewBox="0 0 50 50">
       <circle cx="25" cy="25" r="22" fill="red" stroke="black" stroke-width="3"/>
@@ -143,7 +141,6 @@ footer {
     <p><strong>Danger:</strong> Warns teammates of enemy roams, ganks, possible engages, flanks, TPs, and incoming abilities.</p>
   </div>
 
-  <!-- Assist Me -->
   <div class="ping-line">
     <svg class="ping-icon" viewBox="0 0 50 50">
       <circle cx="25" cy="25" r="22" fill="lightblue" stroke="black" stroke-width="3"/>
@@ -152,7 +149,6 @@ footer {
     <p><strong>Assist Me:</strong> I need help securing an objective or winning/surviving a fight.</p>
   </div>
 
-  <!-- On My Way -->
   <div class="ping-line">
     <svg class="ping-icon" viewBox="0 0 50 50">
       <circle cx="25" cy="25" r="22" fill="#4CAF50" stroke="black" stroke-width="3"/>
@@ -161,7 +157,6 @@ footer {
     <p><strong>On My Way:</strong> Only ping when you’re close to joining the fight.</p>
   </div>
 
-  <!-- Enemy Missing -->
   <div class="ping-line">
     <svg class="ping-icon" viewBox="0 0 50 50">
       <circle cx="25" cy="25" r="22" fill="gold" stroke="black" stroke-width="3"/>
@@ -170,7 +165,6 @@ footer {
     <p><strong>Enemy Missing (MIA):</strong> Alerts teammates to play safe because an enemy is no longer in vision. Ping once if the enemy is unlikely to commit to the roam and twice or more when it is likely.</p>
   </div>
 
-  <!-- Warded -->
   <div class="ping-line">
     <svg class="ping-icon" viewBox="0 0 50 50">
       <circle cx="25" cy="25" r="22" fill="purple" stroke="black" stroke-width="3"/>
@@ -179,7 +173,6 @@ footer {
     <p><strong>Warded:</strong> Area needs vision for your team or the enemy team has warded that area.</p>
   </div>
 
-  <!-- Push -->
   <div class="ping-line">
     <svg class="ping-icon" viewBox="0 0 50 50">
       <circle cx="25" cy="25" r="22" fill="#FF69B4" stroke="black" stroke-width="3"/>
