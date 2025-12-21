@@ -29,7 +29,7 @@ body {
   min-height: 100vh;
 }
 
-/* Slight overlay */
+/* Overlay */
 body::before {
   content: "";
   position: fixed;
@@ -102,6 +102,11 @@ header {
   margin-bottom: 10px;
 }
 
+.wave-card h2 {
+  border-bottom: 2px solid #c9aa71;
+  padding-bottom: 4px;
+}
+
 /* Video container */
 .video-container {
   text-align: center;
@@ -156,7 +161,7 @@ footer {
 
 <div class="main-content">
 
-  <!-- Overview -->
+  <!-- Wave Control Overview -->
   <div class="wave-card" style="animation-delay:0.1s;">
     <h2>Wave Control Overview</h2>
     <p>The goal of wave control is to crash your wave into the enemy tower with your minions as healthy as possible. Pushing safely and efficiently is almost always the best choice.</p>
@@ -166,42 +171,51 @@ footer {
   <!-- Early Game -->
   <div class="wave-card" style="animation-delay:0.2s;">
     <h3>Early Game Wave Control</h3>
-    <p>Pulling and slow pushing allows trades, zoning, and safer positioning. The number of extra enemy minions needed depends on wave location:</p>
+    <p>Pulling and slow pushing allows trades, zoning, and safer positioning.</p>
     <ul>
+      <li>Pulling the wave requires more enemy minions the closer you are to your tower.</li>
       <li>Mid lane: least minions needed.</li>
       <li>Center lane: +1 enemy minion sufficient.</li>
       <li>Near tower: +3 enemy minions needed.</li>
     </ul>
-    <h4>Maintaining Wave Position</h4>
-    <p>Keep the wave near your tower by leaving one enemy minion alive and tanking it outside tower range.</p>
+  </div>
+
+  <!-- Maintaining Wave Position -->
+  <div class="wave-card" style="animation-delay:0.3s;">
+    <h3>Maintaining Wave Position</h3>
+    <p>Keep the wave near your tower by leaving one enemy minion alive and tanking it just outside tower range. This prevents the wave from crashing and allows safe trades.</p>
   </div>
 
   <!-- Mid Game -->
-  <div class="wave-card" style="animation-delay:0.3s;">
+  <div class="wave-card" style="animation-delay:0.4s;">
     <h3>Mid Game Wave Control</h3>
-    <p>Pushing becomes standard. Large waves can crash towers, deny CS, and allow recalls or roams. The faster you push, the more CS the enemy loses.</p>
+    <p>Pushing becomes standard. Large waves crash towers faster and allow you to recall or roam without losing resources.</p>
+    <p>The faster you push, the more CS the enemy loses when returning to lane.</p>
   </div>
 
   <!-- Freezing -->
-  <div class="wave-card" style="animation-delay:0.4s;">
+  <div class="wave-card" style="animation-delay:0.5s;">
     <h3>Freezing</h3>
-    <p>Freezing is situational, mainly effective against melee champions or champions who struggle to roam. Tips:</p>
+    <p>Freezing is situational and effective against melee champions or champions who struggle to roam. Tips:</p>
     <ul>
-      <li>Freeze behind side bushes for easier last hitting.</li>
+      <li>Freeze behind side bushes to make last hitting easier.</li>
       <li>Step into bushes to drop minion aggro, but don’t let the wave push too far.</li>
     </ul>
+
     <p><strong>Mid Lane Freeze (Blue Side)</strong></p>
     <img src="https://i.imgur.com/kHu90dX.png" alt="Mid Lane Freeze">
+    
     <p><strong>Bot Lane Freeze (Red Side)</strong></p>
     <img src="https://i.imgur.com/W32sWIn.png" alt="Bot Lane Freeze">
+    
     <p><strong>Top Lane Freeze (Blue Side)</strong></p>
     <img src="https://i.imgur.com/ETB9Oq4.png" alt="Top Lane Freeze">
   </div>
 
   <!-- Late Game -->
-  <div class="wave-card" style="animation-delay:0.5s;">
+  <div class="wave-card" style="animation-delay:0.6s;">
     <h3>Late Game Strategy</h3>
-    <p>Push mid as fast as possible to provide vision and map control. Fast waves allow better setup for picks, objectives, and team pressure.</p>
+    <p>Push mid as fast as possible to provide deep vision and map control. Fast waves allow better setup for picks, objectives, and team pressure.</p>
     <div class="video-container">
       <iframe src="https://www.youtube.com/embed/edDOUuxFaH8" title="Wave Control Guide Video" allowfullscreen></iframe>
     </div>
@@ -213,6 +227,7 @@ footer {
 
 </body>
 </html>
+
 
 
 
