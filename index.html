@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8"/>
-<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>LoL Fundamentals – The Ultimate Diana & Ekko Guide</title>
 <link rel="icon" href="/favicon.ico">
 <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
@@ -18,6 +18,7 @@ header{background:linear-gradient(90deg,#0a0f14,#1b2838);border-bottom:2px solid
 .hero h1,.hero p,.hero .btn{position:relative;z-index:5}
 .hero h1{font-size:3em;margin-bottom:10px;text-shadow:0 0 12px #2f81f7}
 .hero p{max-width:650px;margin:0 auto 20px;font-size:1.15em;color:#d0d8e0;text-shadow:0 0 14px rgba(0,0,0,.7)}
+.hero .subText{color:#f2b96d;font-weight:bold;margin-top:8px;text-shadow:0 0 8px rgba(0,0,0,.5)}
 .btn{display:inline-block;background:#2f81f7;color:#fff;padding:14px 26px;border-radius:6px;text-decoration:none;font-weight:bold;font-size:1.05em;transition:.3s;border:1px solid #c9aa71;box-shadow:0 0 15px rgba(47,129,247,.4);cursor:pointer}
 .btn:hover{background:#4795ff;box-shadow:0 0 25px rgba(47,129,247,.55)}
 .orangeBtn{background:#f2994a;border-color:#f2b96d;position:relative}
@@ -42,24 +43,8 @@ header{background:linear-gradient(90deg,#0a0f14,#1b2838);border-bottom:2px solid
 footer{text-align:center;padding:30px;color:#8b949e;font-size:14px;background:#0a0f14;border-top:1px solid #1f2937}
 footer a{color:#c9aa71;text-decoration:none}
 footer a:hover{text-decoration:underline}
-
-/* Desktop adjustments for Lifetime plan */
-@media(min-width:601px){
-  .modalContent .plan-buttons > div { margin-top:10px; } /* pushes lifetime button slightly lower */
-  .modalContent .bestValueTag { top:-22px; } /* balanced position for tag above button */
-}
-
-/* Mobile adjustments */
-@media(max-width:600px){
-  .hero{background-size:cover;background-position:center;padding-top:100px}
-  .hero h1{margin-top:10px}
-  .hero p{margin-top:5px}
-  .hero .btn{margin-top:10px}
-  .modalContent .plan-buttons{flex-direction:column!important;justify-content:center!important;align-items:center!important;gap:20px!important}
-  .modalContent .plan-buttons>div{width:auto!important;display:block!important;text-align:center}
-  .modalContent .plan-buttons button{width:220px!important;max-width:220px}
-  .modalContent .bestValueTag{top:-16px}
-}
+@media(min-width:601px){.modalContent .plan-buttons > div { margin-top:10px; } .modalContent .bestValueTag { top:-22px; }}
+@media(max-width:600px){.hero{background-size:cover;background-position:center;padding-top:100px}.hero h1{margin-top:10px}.hero p{margin-top:5px}.hero .btn{margin-top:10px}.modalContent .plan-buttons{flex-direction:column!important;justify-content:center!important;align-items:center!important;gap:20px!important}.modalContent .plan-buttons>div{width:auto!important;display:block!important;text-align:center}.modalContent .bestValueTag{top:-16px}}
 </style>
 </head>
 <body>
@@ -71,6 +56,7 @@ footer a:hover{text-decoration:underline}
 <div class="aura"></div>
 <h1>The Ultimate League Guide</h1>
 <p>Master every aspect of League of Legends with champions like Diana and Ekko. Learn precise combos, matchup strategies, and advanced tips to elevate your gameplay.</p>
+<div class="subText">Updated every patch • Challenger-level insights</div>
 <div style="margin-top:20px;">
 <button class="btn" id="signupHeroBtn">Sign Up</button>
 <button class="btn" id="loginHeroBtn" style="margin-left:10px;">Login</button>
@@ -97,10 +83,6 @@ footer a:hover{text-decoration:underline}
 <div class="plan-buttons">
 <button class="btn" id="monthlyBtn">$8.99 / Month</button>
 <button class="btn" id="yearlyBtn">$49 / Year</button>
-<div style="position:relative;display:inline-block;text-align:center">
-<div class="bestValueTag">Best Value</div>
-<button class="btn orangeBtn" id="lifetimeBtn">$139 / Lifetime</button>
-</div>
 </div>
 <button id="closePlanModal">Cancel</button>
 </div>
@@ -126,7 +108,7 @@ footer a:hover{text-decoration:underline}
 <div class="card"><h3>Ekko Guide</h3><p>Complete guide to playing Ekko Jungle, including combos, pathing, and advanced mechanics.</p></div>
 <div class="card"><h3>Diana Matchup Guide</h3><p>Detailed breakdowns for every mid lane champion, teaching optimal trades, wave control, and all-in timings.</p></div>
 <div class="card"><h3>Diana Rune & Build Calculator</h3><p>Compare rune pages and build paths against enemies with different stats to create your perfect Diana setup.</p></div>
-<div class="card"><h3>Tierlist</h3><p>Rankings for each role in the current meta.</p></div>
+<div class="card"><h3>Tierlist</h3><p>Rankings for each role in the current meta, updated every patch.</p></div>
 </div>
 </section>
 
@@ -143,8 +125,7 @@ const $=(id)=>document.getElementById(id);
 
 const stripe={
   monthly:"https://buy.stripe.com/8x28wIaQ4dJa4Rg88iejK0f",
-  yearly:"https://buy.stripe.com/cNi14g3nC48AerQ9cmejK07",
-  lifetime:"https://buy.stripe.com/14AeV61fubB2dnMfAKejK0e"
+  yearly:"https://buy.stripe.com/cNi14g3nC48AerQ9cmejK07"
 };
 
 signupHeroBtn.onclick=()=>signupModal.style.display="flex";
@@ -167,7 +148,6 @@ continueSignupBtn.onclick=async()=>{
 
 monthlyBtn.onclick=()=>{window.open(stripe.monthly,"_blank");planModal.style.display="none";}
 yearlyBtn.onclick=()=>{window.open(stripe.yearly,"_blank");planModal.style.display="none";}
-lifetimeBtn.onclick=()=>{window.open(stripe.lifetime,"_blank");planModal.style.display="none";}
 
 modalLoginBtn.onclick=async()=>{
   const e=loginEmail.value.trim(),p=loginPassword.value.trim();
