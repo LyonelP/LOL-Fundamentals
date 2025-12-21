@@ -79,7 +79,16 @@ header {
   padding: 20px 10px;
 }
 
-/* Section cards */
+/* Section title with underline (only for Communication) */
+.main-content h1 {
+  color: #c9aa71;
+  font-size: 24px;
+  border-bottom: 2px solid #c9aa71;
+  padding-bottom: 6px;
+  margin-bottom: 20px;
+}
+
+/* Ping cards */
 .spell-card {
   background: rgba(13,17,23,0.9);
   border: 1px solid #c9aa71;
@@ -95,27 +104,20 @@ header {
   transform: translateY(10px);
   animation: fadeInUp 0.4s forwards;
 }
-.spell-card h2 {
-  color: #c9aa71;
-  margin-top: 0;
-  margin-bottom: 10px;
-  font-size: 20px;
-  border-bottom: 1px solid #c9aa71;
-  padding-bottom: 4px;
-}
 
-/* Ping cards with icons aligned */
 .ping-card {
   display: flex;
   align-items: flex-start;
   gap: 12px;
   margin-top: 12px;
 }
+
 .ping-card svg {
-  width: 28px;
-  height: 28px;
+  width: 35px;
+  height: 35px;
   flex-shrink: 0;
 }
+
 .ping-card div {
   flex: 1;
 }
@@ -141,6 +143,7 @@ footer {
 @media (max-width: 600px) {
   header { font-size: 24px; padding: 15px; }
   .spell-card { padding: 14px 16px; font-size: 15px; }
+  .ping-card svg { width: 28px; height: 28px; }
 }
 </style>
 </head>
@@ -152,10 +155,10 @@ footer {
 <div class="main-content">
 
   <!-- Intro section -->
+  <h1>Communication</h1>
   <div class="spell-card" style="animation-delay:0.1s;">
-    <h2>Team Communication</h2>
-    <p>The best way to communicate with your team is through pings. Ping twice, check if it was received, then ping again if needed. Chat is best for morale. Time spent typing is time not playing.</p>
-    <p>Use <strong>“gj”</strong> after good plays, <strong>“ty”</strong> if a buff is handed over. Behind or enemy makes a good play? Use <strong>“np we’re fine”</strong> or <strong>“we’ll win”</strong>. Thumbs-up emote works too.</p>
+    <p>The best way to communicate with your team is through pings. I’ve found that pinging twice and checking to see if the communication was received before pinging again works best. Chat is best used for keeping your team morale high. Time spent typing is time not spent playing, so it’s best to minimize it.</p>
+    <p>Typing <strong>“gj”</strong> after someone makes a good play is great, and <strong>“ty”</strong> if someone hands over a buff to you. When you’re behind or the enemy makes a good play, typing <strong>“np we’re fine”</strong> or <strong>“we’ll win”</strong> works wonders. Using the thumbs-up emote instead of typing “gj” is also effective and faster.</p>
   </div>
 
   <!-- Pings -->
@@ -167,7 +170,7 @@ footer {
       </svg>
       <div>
         <h2>Generic Ping</h2>
-        <p>Used to ping everything in the tab window: summoner spells, ultimates, and upcoming objectives. Great for marking enemy objectives too.</p>
+        <p>Used to ping everything in the tab window like summoner spells, ults, and upcoming objectives. Also great for marking enemy objectives.</p>
       </div>
     </div>
   </div>
@@ -180,7 +183,7 @@ footer {
       </svg>
       <div>
         <h2>Danger</h2>
-        <p>Warn teammates of enemy roams, ganks, engages, flanks, TPs, and incoming abilities.</p>
+        <p>Warns teammates of enemy roams, ganks, possible engages, flanks, TPs, and incoming abilities.</p>
       </div>
     </div>
   </div>
@@ -219,7 +222,7 @@ footer {
       </svg>
       <div>
         <h2>Enemy Missing (MIA)</h2>
-        <p>Alerts teammates to play safe because an enemy is no longer in vision. Ping once if unlikely to roam, twice or more if likely.</p>
+        <p>Alerts teammates to play safe because an enemy is no longer in vision. Ping once if the enemy is unlikely to commit to the roam and twice or more when it is likely.</p>
       </div>
     </div>
   </div>
@@ -232,7 +235,7 @@ footer {
       </svg>
       <div>
         <h2>Warded</h2>
-        <p>Area needs vision for your team or enemy has warded that area.</p>
+        <p>Area needs vision for your team or the enemy team has warded that area.</p>
       </div>
     </div>
   </div>
@@ -245,7 +248,7 @@ footer {
       </svg>
       <div>
         <h2>Push</h2>
-        <p>Push the lane to crash the wave, mostly after a gank and when low on resources.</p>
+        <p>Push the lane to crash the wave. Mostly used after a gank and when low on resources.</p>
       </div>
     </div>
   </div>
@@ -256,6 +259,8 @@ footer {
 
 </body>
 </html>
+
+
 
 
 
