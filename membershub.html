@@ -7,10 +7,10 @@
 <style>
   :root{
     --gold:#c9aa71;
-    --bg:#111827; /* lighter background */
-    --card:#1a1f2c; /* lighter card background */
-    --muted:#b0b8c0; /* brighter muted text */
-    --accent: #2f81f7;
+    --bg:#0a0f14;        /* deep, rich background */
+    --card:#161b22;      /* dark card background */
+    --muted:#8b949e;     /* muted footer text */
+    --accent:#2f81f7;
   }
 
   html,body{height:100%;margin:0;}
@@ -23,7 +23,7 @@
   }
 
   header{
-    background: linear-gradient(90deg, #111827, #1f2937);
+    background: linear-gradient(90deg, #0a0f14, #161b22);
     border-bottom:2px solid var(--gold);
     padding:14px 20px;
     color:var(--gold);
@@ -76,12 +76,11 @@
     flex-direction:column;
     justify-content:center;
     align-items:center;
-    transition: transform .25s, box-shadow .25s, background 0.3s;
+    transition: transform .25s, box-shadow .25s;
   }
   .card:hover{
     transform:translateY(-6px);
-    box-shadow:0 12px 26px rgba(255,215,0,0.25);
-    background: #242a3c;
+    box-shadow:0 12px 26px rgba(201,170,113,0.35); /* subtle gold glow */
   }
 
   .card h3, .card p{
@@ -96,24 +95,25 @@
     height:100%;
     background-size:cover;
     background-position:center;
-    opacity:0.07; /* brighter overlay */
+    opacity:0.12; /* slightly brighter overlay than before */
     z-index:1;
     border-radius:10px;
     transition: opacity 0.3s ease;
   }
   .card:hover::before{
-    opacity:0.12;
+    opacity:0.18; /* subtle increase on hover for depth */
   }
 
+  /* Card images */
   .diana-guide::before{ background-image:url('https://ddragon.leagueoflegends.com/cdn/img/champion/splash/Diana_1.jpg'); }
   .diana-matchups::before{ background-image:url('https://ddragon.leagueoflegends.com/cdn/img/champion/splash/Diana_0.jpg'); }
   .ekko-guide::before{ background-image:url('https://ddragon.leagueoflegends.com/cdn/img/champion/splash/Ekko_0.jpg'); }
   .fundamentals::before{ background-image:url('https://cdn.wallpapersafari.com/92/79/MYTD9q.png'); }
-  .tierlist::before{ background: linear-gradient(to bottom, #1f2937 0%, #1a1f2c 100%); }
-  .coaching::before{ background-image:url('https://m.media-amazon.com/images/I/71GlK3kDLJL.jpg'); opacity:0.12; }
+  .tierlist::before{ background: linear-gradient(to bottom, #161b22 0%, #0a0f14 100%); }
+  .coaching::before{ background-image:url('https://m.media-amazon.com/images/I/71GlK3kDLJL.jpg'); opacity:0.18; }
   .rune-calculator::before{ background-image:url('https://i.imgur.com/kcs90ta.jpeg'); }
   .build-calculator::before{ background-image:url('https://i.imgur.com/uhLq29j.jpeg'); }
-  .discord-card::before{ background-image:url('https://i.imgur.com/fS2OKHV.jpeg'); opacity:0.07; }
+  .discord-card::before{ background-image:url('https://i.imgur.com/fS2OKHV.jpeg'); opacity:0.12; }
 
   .tier-bar{ margin-top:12px; width:100%; height:60px; border-radius:6px; display:flex; overflow:hidden; position:relative; z-index:2; }
   .tier-s{ background:#f94144; flex:1; } .tier-a{ background:#f3722c; flex:1; } .tier-b{ background:#f8961e; flex:1; }
