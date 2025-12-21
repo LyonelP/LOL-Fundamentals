@@ -79,17 +79,8 @@ header {
   padding: 20px 10px;
 }
 
-/* Section title with underline (only for Communication) */
-.main-content h1 {
-  color: #c9aa71;
-  font-size: 24px;
-  border-bottom: 2px solid #c9aa71;
-  padding-bottom: 6px;
-  margin-bottom: 20px;
-}
-
-/* Ping cards */
-.spell-card {
+/* Communication card */
+.comm-card {
   background: rgba(13,17,23,0.9);
   border: 1px solid #c9aa71;
   border-radius: 10px;
@@ -105,11 +96,21 @@ header {
   animation: fadeInUp 0.4s forwards;
 }
 
+/* Ping cards */
 .ping-card {
   display: flex;
   align-items: flex-start;
   gap: 12px;
-  margin-top: 12px;
+  background: rgba(13,17,23,0.85);
+  border: 1px solid #c9aa71;
+  border-radius: 10px;
+  padding: 12px 16px;
+  margin: 8px 0;
+  max-width: 950px;
+  width: 90%;
+  opacity: 0;
+  transform: translateY(10px);
+  animation: fadeInUp 0.4s forwards;
 }
 
 .ping-card svg {
@@ -118,8 +119,13 @@ header {
   flex-shrink: 0;
 }
 
-.ping-card div {
-  flex: 1;
+.comm-card h2, .ping-card h2 {
+  color: #c9aa71;
+  margin-top: 0;
+  margin-bottom: 10px;
+  font-size: 20px;
+  border-bottom: 1px solid #c9aa71;
+  padding-bottom: 4px;
 }
 
 /* Fade-in animation */
@@ -142,8 +148,7 @@ footer {
 /* Responsive */
 @media (max-width: 600px) {
   header { font-size: 24px; padding: 15px; }
-  .spell-card { padding: 14px 16px; font-size: 15px; }
-  .ping-card svg { width: 28px; height: 28px; }
+  .comm-card, .ping-card { padding: 14px 16px; font-size: 15px; }
 }
 </style>
 </head>
@@ -154,111 +159,81 @@ footer {
 
 <div class="main-content">
 
-  <!-- Intro section -->
-  <h1>Communication</h1>
-  <div class="spell-card" style="animation-delay:0.1s;">
+  <div class="comm-card" style="animation-delay:0.1s;">
+    <h2>Communication</h2>
     <p>The best way to communicate with your team is through pings. I’ve found that pinging twice and checking to see if the communication was received before pinging again works best. Chat is best used for keeping your team morale high. Time spent typing is time not spent playing, so it’s best to minimize it.</p>
     <p>Typing <strong>“gj”</strong> after someone makes a good play is great, and <strong>“ty”</strong> if someone hands over a buff to you. When you’re behind or the enemy makes a good play, typing <strong>“np we’re fine”</strong> or <strong>“we’ll win”</strong> works wonders. Using the thumbs-up emote instead of typing “gj” is also effective and faster.</p>
   </div>
 
-  <!-- Pings -->
-  <div class="spell-card" style="animation-delay:0.2s;">
-    <div class="ping-card">
-      <svg viewBox="0 0 50 50">
-        <circle cx="25" cy="25" r="22" fill="dodgerblue" stroke="black" stroke-width="3"/>
-        <circle cx="25" cy="25" r="12" fill="white"/>
-      </svg>
-      <div>
-        <h2>Generic Ping</h2>
-        <p>Used to ping everything in the tab window like summoner spells, ults, and upcoming objectives. Also great for marking enemy objectives.</p>
-      </div>
-    </div>
+  <!-- Generic Ping -->
+  <div class="ping-card" style="animation-delay:0.2s;">
+    <svg viewBox="0 0 50 50" preserveAspectRatio="xMidYMid meet">
+      <circle cx="25" cy="25" r="22" fill="dodgerblue" stroke="black" stroke-width="3"/>
+      <circle cx="25" cy="25" r="12" fill="white"/>
+    </svg>
+    <p><strong>Generic Ping:</strong> Used to ping everything in the tab window like summoner spells, ults, and upcoming objectives. Also great for marking enemy objectives.</p>
   </div>
 
-  <div class="spell-card" style="animation-delay:0.3s;">
-    <div class="ping-card">
-      <svg viewBox="0 0 50 50">
-        <circle cx="25" cy="25" r="22" fill="red" stroke="black" stroke-width="3"/>
-        <polygon points="25,8 35,35 15,35" fill="white"/>
-      </svg>
-      <div>
-        <h2>Danger</h2>
-        <p>Warns teammates of enemy roams, ganks, possible engages, flanks, TPs, and incoming abilities.</p>
-      </div>
-    </div>
+  <!-- Danger -->
+  <div class="ping-card" style="animation-delay:0.3s;">
+    <svg viewBox="0 0 50 50" preserveAspectRatio="xMidYMid meet">
+      <circle cx="25" cy="25" r="22" fill="red" stroke="black" stroke-width="3"/>
+      <polygon points="25,8 35,35 15,35" fill="white"/>
+    </svg>
+    <p><strong>Danger:</strong> Warns teammates of enemy roams, ganks, possible engages, flanks, TPs, and incoming abilities.</p>
   </div>
 
-  <div class="spell-card" style="animation-delay:0.4s;">
-    <div class="ping-card">
-      <svg viewBox="0 0 50 50">
-        <circle cx="25" cy="25" r="22" fill="lightblue" stroke="black" stroke-width="3"/>
-        <polygon points="25,12 32,25 25,38 18,25" fill="white"/>
-      </svg>
-      <div>
-        <h2>Assist Me</h2>
-        <p>I need help securing an objective or winning/surviving a fight.</p>
-      </div>
-    </div>
+  <!-- Assist Me -->
+  <div class="ping-card" style="animation-delay:0.4s;">
+    <svg viewBox="0 0 50 50" preserveAspectRatio="xMidYMid meet">
+      <circle cx="25" cy="25" r="22" fill="lightblue" stroke="black" stroke-width="3"/>
+      <polygon points="25,12 32,25 25,38 18,25" fill="white"/>
+    </svg>
+    <p><strong>Assist Me:</strong> I need help securing an objective or winning/surviving a fight.</p>
   </div>
 
-  <div class="spell-card" style="animation-delay:0.5s;">
-    <div class="ping-card">
-      <svg viewBox="0 0 50 50">
-        <circle cx="25" cy="25" r="22" fill="#4CAF50" stroke="black" stroke-width="3"/>
-        <polygon points="20,15 35,25 20,35" fill="white"/>
-      </svg>
-      <div>
-        <h2>On My Way</h2>
-        <p>Only ping when you’re close to joining the fight.</p>
-      </div>
-    </div>
+  <!-- On My Way -->
+  <div class="ping-card" style="animation-delay:0.5s;">
+    <svg viewBox="0 0 50 50" preserveAspectRatio="xMidYMid meet">
+      <circle cx="25" cy="25" r="22" fill="#4CAF50" stroke="black" stroke-width="3"/>
+      <polygon points="20,15 35,25 20,35" fill="white"/>
+    </svg>
+    <p><strong>On My Way:</strong> Only ping when you’re close to joining the fight.</p>
   </div>
 
-  <div class="spell-card" style="animation-delay:0.6s;">
-    <div class="ping-card">
-      <svg viewBox="0 0 50 50">
-        <circle cx="25" cy="25" r="22" fill="gold" stroke="black" stroke-width="3"/>
-        <text x="25" y="33" font-size="28" font-weight="bold" text-anchor="middle" fill="black">?</text>
-      </svg>
-      <div>
-        <h2>Enemy Missing (MIA)</h2>
-        <p>Alerts teammates to play safe because an enemy is no longer in vision. Ping once if the enemy is unlikely to commit to the roam and twice or more when it is likely.</p>
-      </div>
-    </div>
+  <!-- Enemy Missing -->
+  <div class="ping-card" style="animation-delay:0.6s;">
+    <svg viewBox="0 0 50 50" preserveAspectRatio="xMidYMid meet">
+      <circle cx="25" cy="25" r="22" fill="gold" stroke="black" stroke-width="3"/>
+      <text x="25" y="33" font-size="28" font-weight="bold" text-anchor="middle" fill="black">?</text>
+    </svg>
+    <p><strong>Enemy Missing (MIA):</strong> Alerts teammates to play safe because an enemy is no longer in vision. Ping once if the enemy is unlikely to commit to the roam and twice or more when it is likely.</p>
   </div>
 
-  <div class="spell-card" style="animation-delay:0.7s;">
-    <div class="ping-card">
-      <svg viewBox="0 0 50 50">
-        <circle cx="25" cy="25" r="22" fill="purple" stroke="black" stroke-width="3"/>
-        <polygon points="25,10 35,35 15,35" fill="yellow"/>
-      </svg>
-      <div>
-        <h2>Warded</h2>
-        <p>Area needs vision for your team or the enemy team has warded that area.</p>
-      </div>
-    </div>
+  <!-- Warded -->
+  <div class="ping-card" style="animation-delay:0.7s;">
+    <svg viewBox="0 0 50 50" preserveAspectRatio="xMidYMid meet">
+      <circle cx="25" cy="25" r="22" fill="purple" stroke="black" stroke-width="3"/>
+      <polygon points="25,10 35,35 15,35" fill="yellow"/>
+    </svg>
+    <p><strong>Warded:</strong> Area needs vision for your team or the enemy team has warded that area.</p>
   </div>
 
-  <div class="spell-card" style="animation-delay:0.8s;">
-    <div class="ping-card">
-      <svg viewBox="0 0 50 50">
-        <circle cx="25" cy="25" r="22" fill="#FF69B4" stroke="black" stroke-width="3"/>
-        <polygon points="25,10 30,25 25,40 20,25" fill="white"/>
-      </svg>
-      <div>
-        <h2>Push</h2>
-        <p>Push the lane to crash the wave. Mostly used after a gank and when low on resources.</p>
-      </div>
-    </div>
+  <!-- Push -->
+  <div class="ping-card" style="animation-delay:0.8s;">
+    <svg viewBox="0 0 50 50" preserveAspectRatio="xMidYMid meet">
+      <circle cx="25" cy="25" r="22" fill="#FF69B4" stroke="black" stroke-width="3"/>
+      <polygon points="25,10 30,25 25,40 20,25" fill="white"/>
+    </svg>
+    <p><strong>Push:</strong> Push the lane to crash the wave. Mostly used after a gank and when low on resources.</p>
   </div>
 
 </div>
 
 <footer>© 2025 LoL Fundamentals · All rights reserved</footer>
-
 </body>
 </html>
+
 
 
 
