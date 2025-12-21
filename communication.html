@@ -12,14 +12,20 @@ if (localStorage.getItem('lolfundamentals_logged_in') !== 'true') {
 </script>
 
 <style>
-body {
+html, body {
   margin: 0;
+  padding: 0;
+  height: 100%;
+}
+body {
   font-family: 'Beaufort for LOL', Arial, Helvetica, sans-serif;
-  text-align: center;
   color: #fff;
   background: url('https://64.media.tumblr.com/594ac290bec6d5e9ad98b5f53404f00b/245c4c3ee469f81d-e4/s1280x1920/1cda4284320eb2031758a9859dfe14ff8bbc50ba.jpg') no-repeat center center fixed;
   background-size: cover;
-  overflow-x: hidden;
+  display: flex;
+  flex-direction: column;
+  text-align: center;
+  min-height: 100vh;
 }
 
 body::before {
@@ -27,12 +33,12 @@ body::before {
   position: fixed;
   top: 0; left: 0;
   width: 100%; height: 100%;
-  background: rgba(10,15,20,0.5);
+  background: rgba(10,15,20,0.2);
   z-index: -1;
 }
 
 header {
-  background: rgba(13,17,23,0.9);
+  background: rgba(13,17,23,0.85);
   border-bottom: 2px solid #c9aa71;
   padding: 20px 10px;
   font-weight: bold;
@@ -60,132 +66,170 @@ header {
   box-shadow: 0 0 15px rgba(255,215,0,0.8);
 }
 
-.content-container {
-  margin: 20px auto 50px auto;
-  max-width: 900px;
-  background: rgba(13,17,23,0.95);
+.main-content {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 20px 10px;
+}
+
+/* Tip cards for pings */
+.tip-card {
+  display: flex;
+  align-items: flex-start; /* icon at top aligns with first line of text */
+  background: rgba(13,17,23,0.9);
+  border: 1px solid #c9aa71;
   border-radius: 10px;
-  border: 2px solid #2f81f7;
-  padding: 20px;
+  padding: 18px 22px;
+  margin: 12px 0;
+  max-width: 900px;
+  width: 90%;
   text-align: left;
-  color: #fff;
   font-size: 16px;
   line-height: 1.6;
+  opacity: 0;
+  transform: translateY(10px);
+  animation: fadeInUp 0.4s forwards;
 }
-
-.content-container h2 {
-  color: #c9aa71;
-  margin-top: 0;
-}
-
-/* Ping lines using flex for proper alignment */
-.ping-line {
-  display: flex;
-  align-items: center; /* center icon vertically with first line of text */
-  gap: 16px; /* more space between icon and text */
-  margin: 16px 0; /* more space between ping lines */
-}
-
-.ping-line p {
-  margin: 0;
-}
-
-.ping-icon {
-  width: 35px;
-  height: 35px;
+.tip-card svg {
+  width: 40px;
+  height: 40px;
+  margin-right: 16px;
   flex-shrink: 0;
 }
 
-footer {
-  text-align: center;
-  padding: 15px 10px;
-  font-size: 14px;
-  color: #8b949e;
+.tip-card:nth-child(1) { animation-delay: 0.1s; }
+.tip-card:nth-child(2) { animation-delay: 0.2s; }
+.tip-card:nth-child(3) { animation-delay: 0.3s; }
+.tip-card:nth-child(4) { animation-delay: 0.4s; }
+.tip-card:nth-child(5) { animation-delay: 0.5s; }
+.tip-card:nth-child(6) { animation-delay: 0.6s; }
+.tip-card:nth-child(7) { animation-delay: 0.7s; }
+.tip-card:nth-child(8) { animation-delay: 0.8s; }
+
+.tip-card h2 {
+  color: #c9aa71;
+  margin: 0 0 6px 0;
+  font-size: 18px;
 }
 
+/* Fade-in animation */
+@keyframes fadeInUp {
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Footer pinned to bottom */
+footer {
+  text-align: center;
+  margin-top: auto;
+  padding: 15px 10px;
+  font-size: 14px;
+  color: #fff;
+}
+
+/* Responsive */
 @media (max-width: 600px) {
   header { font-size: 24px; padding: 15px; }
-  .content-container { margin: 15px 10px 30px 10px; padding: 15px; }
-  .ping-icon { width: 30px; height: 30px; }
+  .tip-card { padding: 14px 16px; font-size: 15px; }
+  .tip-card svg { width: 35px; height: 35px; margin-right: 12px; }
 }
 </style>
 </head>
-
 <body>
 
 <header>Communication</header>
 <a href="skills.html" class="back-button">Back to Skills Hub</a>
 
-<div class="content-container">
-  <h2>Communication</h2>
+<div class="main-content">
 
-  <p>The best way to communicate with your team is through pings. I’ve found that pinging twice and checking to see if the communication was received before pinging again works best. Chat is best used for keeping your team morale high. Time spent typing is time not spent playing, so it’s best to minimize it.</p>
-
-  <p>Typing <strong>“gj”</strong> after someone makes a good play is great, and <strong>“ty”</strong> if someone hands over a buff to you. When you’re behind or the enemy makes a good play, typing <strong>“np we’re fine”</strong> or <strong>“we’ll win”</strong> works wonders. Using the thumbs-up emote instead of typing “gj” is also effective and faster.</p>
-
-  <h2>Common Pings</h2>
-
-  <div class="ping-line">
-    <svg class="ping-icon" viewBox="0 0 50 50">
+  <div class="tip-card">
+    <svg viewBox="0 0 50 50">
       <circle cx="25" cy="25" r="22" fill="dodgerblue" stroke="black" stroke-width="3"/>
       <circle cx="25" cy="25" r="12" fill="white"/>
     </svg>
-    <p><strong>Generic Ping:</strong> Used to ping everything in the tab window like summoner spells, ults, and upcoming objectives. Also great for marking enemy objectives.</p>
+    <div>
+      <h2>Generic Ping</h2>
+      <p>Used to ping everything in the tab window like summoner spells, ults, and upcoming objectives. Also great for marking enemy objectives.</p>
+    </div>
   </div>
 
-  <div class="ping-line">
-    <svg class="ping-icon" viewBox="0 0 50 50">
+  <div class="tip-card">
+    <svg viewBox="0 0 50 50">
       <circle cx="25" cy="25" r="22" fill="red" stroke="black" stroke-width="3"/>
       <polygon points="25,8 35,35 15,35" fill="white"/>
     </svg>
-    <p><strong>Danger:</strong> Warns teammates of enemy roams, ganks, possible engages, flanks, TPs, and incoming abilities.</p>
+    <div>
+      <h2>Danger</h2>
+      <p>Warns teammates of enemy roams, ganks, possible engages, flanks, TPs, and incoming abilities.</p>
+    </div>
   </div>
 
-  <div class="ping-line">
-    <svg class="ping-icon" viewBox="0 0 50 50">
+  <div class="tip-card">
+    <svg viewBox="0 0 50 50">
       <circle cx="25" cy="25" r="22" fill="lightblue" stroke="black" stroke-width="3"/>
       <polygon points="25,12 32,25 25,38 18,25" fill="white"/>
     </svg>
-    <p><strong>Assist Me:</strong> I need help securing an objective or winning/surviving a fight.</p>
+    <div>
+      <h2>Assist Me</h2>
+      <p>I need help securing an objective or winning/surviving a fight.</p>
+    </div>
   </div>
 
-  <div class="ping-line">
-    <svg class="ping-icon" viewBox="0 0 50 50">
+  <div class="tip-card">
+    <svg viewBox="0 0 50 50">
       <circle cx="25" cy="25" r="22" fill="#4CAF50" stroke="black" stroke-width="3"/>
       <polygon points="20,15 35,25 20,35" fill="white"/>
     </svg>
-    <p><strong>On My Way:</strong> Only ping when you’re close to joining the fight.</p>
+    <div>
+      <h2>On My Way</h2>
+      <p>Only ping when you’re close to joining the fight.</p>
+    </div>
   </div>
 
-  <div class="ping-line">
-    <svg class="ping-icon" viewBox="0 0 50 50">
+  <div class="tip-card">
+    <svg viewBox="0 0 50 50">
       <circle cx="25" cy="25" r="22" fill="gold" stroke="black" stroke-width="3"/>
       <text x="25" y="33" font-size="28" font-weight="bold" text-anchor="middle" fill="black">?</text>
     </svg>
-    <p><strong>Enemy Missing (MIA):</strong> Alerts teammates to play safe because an enemy is no longer in vision. Ping once if the enemy is unlikely to commit to the roam and twice or more when it is likely.</p>
+    <div>
+      <h2>Enemy Missing (MIA)</h2>
+      <p>Alerts teammates to play safe because an enemy is no longer in vision. Ping once if the enemy is unlikely to commit to the roam and twice or more when it is likely.</p>
+    </div>
   </div>
 
-  <div class="ping-line">
-    <svg class="ping-icon" viewBox="0 0 50 50">
+  <div class="tip-card">
+    <svg viewBox="0 0 50 50">
       <circle cx="25" cy="25" r="22" fill="purple" stroke="black" stroke-width="3"/>
       <polygon points="25,10 35,35 15,35" fill="yellow"/>
     </svg>
-    <p><strong>Warded:</strong> Area needs vision for your team or the enemy team has warded that area.</p>
+    <div>
+      <h2>Warded</h2>
+      <p>Area needs vision for your team or the enemy team has warded that area.</p>
+    </div>
   </div>
 
-  <div class="ping-line">
-    <svg class="ping-icon" viewBox="0 0 50 50">
+  <div class="tip-card">
+    <svg viewBox="0 0 50 50">
       <circle cx="25" cy="25" r="22" fill="#FF69B4" stroke="black" stroke-width="3"/>
       <polygon points="25,10 30,25 25,40 20,25" fill="white"/>
     </svg>
-    <p><strong>Push:</strong> Push the lane to crash the wave. Mostly used after a gank and when low on resources.</p>
+    <div>
+      <h2>Push</h2>
+      <p>Push the lane to crash the wave. Mostly used after a gank and when low on resources.</p>
+    </div>
   </div>
 
 </div>
 
 <footer>© 2025 LoL Fundamentals · All rights reserved</footer>
+
 </body>
 </html>
+
 
 
 
