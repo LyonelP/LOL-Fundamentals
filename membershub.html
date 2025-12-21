@@ -7,9 +7,9 @@
 <style>
   :root{
     --gold:#c9aa71;
-    --bg:#0a0f14;
-    --card:#161b22;
-    --muted:#8b949e;
+    --bg:#111827; /* lighter background */
+    --card:#1a1f2c; /* lighter card background */
+    --muted:#b0b8c0; /* brighter muted text */
     --accent: #2f81f7;
   }
 
@@ -23,7 +23,7 @@
   }
 
   header{
-    background: linear-gradient(90deg, #0a0f14, #1b2838);
+    background: linear-gradient(90deg, #111827, #1f2937);
     border-bottom:2px solid var(--gold);
     padding:14px 20px;
     color:var(--gold);
@@ -33,6 +33,7 @@
     text-transform:uppercase;
     position:relative;
   }
+
   .settings-btn{
     position:absolute;
     top:12px;
@@ -75,14 +76,17 @@
     flex-direction:column;
     justify-content:center;
     align-items:center;
-    transition: transform .25s, box-shadow .25s;
+    transition: transform .25s, box-shadow .25s, background 0.3s;
   }
   .card:hover{
     transform:translateY(-6px);
-    box-shadow:0 12px 26px rgba(47,129,247,0.22);
+    box-shadow:0 12px 26px rgba(255,215,0,0.25);
+    background: #242a3c;
   }
-  .card h3{ color:var(--gold); margin:0 0 8px; z-index:2; font-size:1.25rem; }
-  .card p{ margin:0; font-size:0.95rem; line-height:1.3; z-index:2; color:#e6edf3; opacity:0.95; text-align:center; }
+
+  .card h3, .card p{
+    z-index:2;
+  }
 
   .card::before{
     content:"";
@@ -92,26 +96,24 @@
     height:100%;
     background-size:cover;
     background-position:center;
-    opacity:0.15;
+    opacity:0.07; /* brighter overlay */
     z-index:1;
     border-radius:10px;
+    transition: opacity 0.3s ease;
+  }
+  .card:hover::before{
+    opacity:0.12;
   }
 
   .diana-guide::before{ background-image:url('https://ddragon.leagueoflegends.com/cdn/img/champion/splash/Diana_1.jpg'); }
   .diana-matchups::before{ background-image:url('https://ddragon.leagueoflegends.com/cdn/img/champion/splash/Diana_0.jpg'); }
   .ekko-guide::before{ background-image:url('https://ddragon.leagueoflegends.com/cdn/img/champion/splash/Ekko_0.jpg'); }
   .fundamentals::before{ background-image:url('https://cdn.wallpapersafari.com/92/79/MYTD9q.png'); }
-  .tierlist::before{ background: linear-gradient(to bottom, #1b2838 0%, #161b22 100%); }
-  .coaching::before{ background-image:url('https://m.media-amazon.com/images/I/71GlK3kDLJL.jpg'); opacity:0.20; }
-
+  .tierlist::before{ background: linear-gradient(to bottom, #1f2937 0%, #1a1f2c 100%); }
+  .coaching::before{ background-image:url('https://m.media-amazon.com/images/I/71GlK3kDLJL.jpg'); opacity:0.12; }
   .rune-calculator::before{ background-image:url('https://i.imgur.com/kcs90ta.jpeg'); }
   .build-calculator::before{ background-image:url('https://i.imgur.com/uhLq29j.jpeg'); }
-  .discord-card::before{
-    background-image:url('https://i.imgur.com/fS2OKHV.jpeg');
-    background-size:cover;
-    background-position:center;
-    opacity:0.15;
-  }
+  .discord-card::before{ background-image:url('https://i.imgur.com/fS2OKHV.jpeg'); opacity:0.07; }
 
   .tier-bar{ margin-top:12px; width:100%; height:60px; border-radius:6px; display:flex; overflow:hidden; position:relative; z-index:2; }
   .tier-s{ background:#f94144; flex:1; } .tier-a{ background:#f3722c; flex:1; } .tier-b{ background:#f8961e; flex:1; }
@@ -119,7 +121,7 @@
 
   #logoutBtn{
     display:block;
-    margin:18px auto; /* matches spacing above cards */
+    margin:18px auto;
     padding:12px 26px;
     background:#f94144;
     color:#fff;
@@ -134,12 +136,8 @@
   footer a{ color:var(--gold); text-decoration:none;}
   footer a:hover{text-decoration:underline;}
 
-  @media(min-width:900px){
-    .card-grid{ grid-template-columns: repeat(3, 1fr); }
-  }
-  @media(max-width:420px){
-    .card{ height:220px; padding:16px; }
-  }
+  @media(min-width:900px){ .card-grid{ grid-template-columns: repeat(3, 1fr); } }
+  @media(max-width:420px){ .card{ height:220px; padding:16px; } }
 </style>
 </head>
 <body>
@@ -153,7 +151,6 @@
 
 <section class="section">
   <p>Choose a section to explore:</p>
-
   <div class="card-grid">
 
     <a href="dianaguide.html" class="card diana-guide" aria-label="Diana Guide">
@@ -226,4 +223,6 @@
 
 </body>
 </html>
+
+
 
