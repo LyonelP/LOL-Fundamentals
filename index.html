@@ -78,8 +78,11 @@ footer a:hover{text-decoration:underline}
 <div class="modalContent">
 <h2>Choose Your Plan</h2>
 <div class="plan-buttons">
-<button class="btn" id="monthlyBtn">$8.99 / Month</button>
-<button class="btn" id="yearlyBtn">$49 / Year</button>
+  <button class="btn" id="monthlyBtn">$8.99 / Month</button>
+  <div style="position:relative;display:inline-block;text-align:center">
+    <div class="bestValueTag">Best Value</div>
+    <button class="btn orangeBtn" id="yearlyBtn">$49 / Year</button>
+  </div>
 </div>
 <button id="closePlanModal">Cancel</button>
 </div>
@@ -183,6 +186,8 @@ for(let i=0;i<50;i++){
 </script>
 </body>
 </html>
+
+
 
 
 
