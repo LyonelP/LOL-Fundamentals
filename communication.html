@@ -12,27 +12,35 @@ if (localStorage.getItem('lolfundamentals_logged_in') !== 'true') {
 </script>
 
 <style>
-body {
+html, body {
   margin: 0;
+  padding: 0;
+  height: 100%;
+}
+body {
   font-family: 'Beaufort for LOL', Arial, Helvetica, sans-serif;
   text-align: center;
   color: #fff;
   background: url('https://64.media.tumblr.com/594ac290bec6d5e9ad98b5f53404f00b/245c4c3ee469f81d-e4/s1280x1920/1cda4284320eb2031758a9859dfe14ff8bbc50ba.jpg') no-repeat center center fixed;
   background-size: cover;
-  overflow-x: hidden;
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
 }
 
+/* Overlay */
 body::before {
   content: "";
   position: fixed;
-  top: 0; left: 0;
-  width: 100%; height: 100%;
-  background: rgba(10,15,20,0.75);
+  top:0; left:0;
+  width:100%; height:100%;
+  background: rgba(10,15,20,0.2);
   z-index: -1;
 }
 
+/* Header */
 header {
-  background: rgba(13,17,23,0.9);
+  background: rgba(13,17,23,0.85);
   border-bottom: 2px solid #c9aa71;
   padding: 20px 10px;
   font-weight: bold;
@@ -42,6 +50,7 @@ header {
   letter-spacing: 1px;
 }
 
+/* Back button */
 .back-button {
   display: inline-block;
   margin: 20px auto 10px;
@@ -60,47 +69,50 @@ header {
   box-shadow: 0 0 15px rgba(255,215,0,0.8);
 }
 
+/* Content container */
 .content-container {
   margin: 20px auto 50px auto;
   max-width: 900px;
-  background: rgba(13,17,23,0.95);
+  width: 90%;
+  background: rgba(13,17,23,0.9);
   border-radius: 10px;
-  border: 2px solid #2f81f7;
-  padding: 20px;
+  border: 2px solid #c9aa71;
+  padding: 20px 25px;
   text-align: left;
-  color: #fff;
   font-size: 16px;
   line-height: 1.6;
-  position: relative;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.3);
 }
-
 .content-container h2 {
   color: #c9aa71;
   margin-top: 0;
 }
-
 .ping-line {
   display: flex;
-  align-items: center;
+  align-items: flex-start;
   gap: 12px;
   margin: 12px 0;
 }
-
 .ping-icon {
   width: 35px;
   height: 35px;
+  flex-shrink: 0;
 }
 
+/* Footer */
 footer {
   text-align: center;
+  margin-top: auto;
   padding: 15px 10px;
   font-size: 14px;
-  color: #8b949e;
+  color: #fff;
 }
 
+/* Responsive */
 @media (max-width: 600px) {
   header { font-size: 24px; padding: 15px; }
-  .content-container { margin: 15px 10px 30px 10px; padding: 15px; }
+  .content-container { margin: 15px 10px 30px 10px; padding: 15px; font-size: 15px; }
+  .ping-line { flex-direction: column; align-items: flex-start; }
 }
 </style>
 </head>
@@ -119,63 +131,57 @@ footer {
 
   <h2>Common Pings</h2>
 
-  <!-- Generic Ping -->
+  <!-- Ping examples -->
   <div class="ping-line">
-    <svg class="ping-icon" viewBox="0 0 50 50" preserveAspectRatio="xMidYMid meet">
+    <svg class="ping-icon" viewBox="0 0 50 50">
       <circle cx="25" cy="25" r="22" fill="dodgerblue" stroke="black" stroke-width="3"/>
       <circle cx="25" cy="25" r="12" fill="white"/>
     </svg>
     <p><strong>Generic Ping:</strong> Used to ping everything in the tab window like summoner spells, ults, and upcoming objectives. Also great for marking enemy objectives.</p>
   </div>
 
-  <!-- Danger -->
   <div class="ping-line">
-    <svg class="ping-icon" viewBox="0 0 50 50" preserveAspectRatio="xMidYMid meet">
+    <svg class="ping-icon" viewBox="0 0 50 50">
       <circle cx="25" cy="25" r="22" fill="red" stroke="black" stroke-width="3"/>
       <polygon points="25,8 35,35 15,35" fill="white"/>
     </svg>
     <p><strong>Danger:</strong> Warns teammates of enemy roams, ganks, possible engages, flanks, TPs, and incoming abilities.</p>
   </div>
 
-  <!-- Assist Me -->
   <div class="ping-line">
-    <svg class="ping-icon" viewBox="0 0 50 50" preserveAspectRatio="xMidYMid meet">
+    <svg class="ping-icon" viewBox="0 0 50 50">
       <circle cx="25" cy="25" r="22" fill="lightblue" stroke="black" stroke-width="3"/>
       <polygon points="25,12 32,25 25,38 18,25" fill="white"/>
     </svg>
     <p><strong>Assist Me:</strong> I need help securing an objective or winning/surviving a fight.</p>
   </div>
 
-  <!-- On My Way -->
   <div class="ping-line">
-    <svg class="ping-icon" viewBox="0 0 50 50" preserveAspectRatio="xMidYMid meet">
+    <svg class="ping-icon" viewBox="0 0 50 50">
       <circle cx="25" cy="25" r="22" fill="#4CAF50" stroke="black" stroke-width="3"/>
       <polygon points="20,15 35,25 20,35" fill="white"/>
     </svg>
     <p><strong>On My Way:</strong> Only ping when you’re close to joining the fight.</p>
   </div>
 
-  <!-- Enemy Missing -->
   <div class="ping-line">
-    <svg class="ping-icon" viewBox="0 0 50 50" preserveAspectRatio="xMidYMid meet">
+    <svg class="ping-icon" viewBox="0 0 50 50">
       <circle cx="25" cy="25" r="22" fill="gold" stroke="black" stroke-width="3"/>
       <text x="25" y="33" font-size="28" font-weight="bold" text-anchor="middle" fill="black">?</text>
     </svg>
     <p><strong>Enemy Missing (MIA):</strong> Alerts teammates to play safe because an enemy is no longer in vision. Ping once if the enemy is unlikely to commit to the roam and twice or more when it is likely.</p>
   </div>
 
-  <!-- Warded -->
   <div class="ping-line">
-    <svg class="ping-icon" viewBox="0 0 50 50" preserveAspectRatio="xMidYMid meet">
+    <svg class="ping-icon" viewBox="0 0 50 50">
       <circle cx="25" cy="25" r="22" fill="purple" stroke="black" stroke-width="3"/>
       <polygon points="25,10 35,35 15,35" fill="yellow"/>
     </svg>
     <p><strong>Warded:</strong> Area needs vision for your team or the enemy team has warded that area.</p>
   </div>
 
-  <!-- Push -->
   <div class="ping-line">
-    <svg class="ping-icon" viewBox="0 0 50 50" preserveAspectRatio="xMidYMid meet">
+    <svg class="ping-icon" viewBox="0 0 50 50">
       <circle cx="25" cy="25" r="22" fill="#FF69B4" stroke="black" stroke-width="3"/>
       <polygon points="25,10 30,25 25,40 20,25" fill="white"/>
     </svg>
@@ -185,7 +191,9 @@ footer {
 </div>
 
 <footer>© 2025 LoL Fundamentals · All rights reserved</footer>
+
 </body>
 </html>
+
 
 
