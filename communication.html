@@ -74,10 +74,9 @@ header {
   padding: 20px 10px;
 }
 
-/* Tip cards for pings */
 .tip-card {
   display: flex;
-  align-items: flex-start; /* icon at top aligns with first line of text */
+  align-items: flex-start;
   background: rgba(13,17,23,0.9);
   border: 1px solid #c9aa71;
   border-radius: 10px;
@@ -107,6 +106,7 @@ header {
 .tip-card:nth-child(6) { animation-delay: 0.6s; }
 .tip-card:nth-child(7) { animation-delay: 0.7s; }
 .tip-card:nth-child(8) { animation-delay: 0.8s; }
+.tip-card:nth-child(9) { animation-delay: 0.9s; }
 
 .tip-card h2 {
   color: #c9aa71;
@@ -114,7 +114,6 @@ header {
   font-size: 18px;
 }
 
-/* Fade-in animation */
 @keyframes fadeInUp {
   to {
     opacity: 1;
@@ -122,7 +121,6 @@ header {
   }
 }
 
-/* Footer pinned to bottom */
 footer {
   text-align: center;
   margin-top: auto;
@@ -131,7 +129,6 @@ footer {
   color: #fff;
 }
 
-/* Responsive */
 @media (max-width: 600px) {
   header { font-size: 24px; padding: 15px; }
   .tip-card { padding: 14px 16px; font-size: 15px; }
@@ -146,6 +143,16 @@ footer {
 
 <div class="main-content">
 
+  <!-- Intro section -->
+  <div class="tip-card" style="align-items: flex-start;">
+    <div>
+      <h2>Team Communication</h2>
+      <p>The best way to communicate with your team is through pings. I’ve found that pinging twice and checking to see if the communication was received before pinging again works best. Chat is best used for keeping your team morale high. Time spent typing is time not spent playing, so it’s best to minimize it.</p>
+      <p>Typing <strong>“gj”</strong> after someone makes a good play is great, and <strong>“ty”</strong> if someone hands over a buff to you. When you’re behind or the enemy makes a good play, typing <strong>“np we’re fine”</strong> or <strong>“we’ll win”</strong> works wonders. Using the thumbs-up emote instead of typing “gj” is also effective and faster.</p>
+    </div>
+  </div>
+
+  <!-- Pings -->
   <div class="tip-card">
     <svg viewBox="0 0 50 50">
       <circle cx="25" cy="25" r="22" fill="dodgerblue" stroke="black" stroke-width="3"/>
@@ -226,7 +233,6 @@ footer {
 </div>
 
 <footer>© 2025 LoL Fundamentals · All rights reserved</footer>
-
 </body>
 </html>
 
