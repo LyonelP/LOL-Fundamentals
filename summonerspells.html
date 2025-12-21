@@ -13,29 +13,35 @@
 </script>
 
 <style>
-body {
+html, body {
   margin: 0;
+  padding: 0;
+  height: 100%;
+}
+body {
   font-family: 'Beaufort for LOL', Arial, Helvetica, sans-serif;
-  text-align: center;
   color: #fff;
   background: url('https://64.media.tumblr.com/594ac290bec6d5e9ad98b5f53404f00b/245c4c3ee469f81d-e4/s1280x1920/1cda4284320eb2031758a9859dfe14ff8bbc50ba.jpg') no-repeat center center fixed;
   background-size: cover;
-  overflow-x: hidden;
+  display: flex;
+  flex-direction: column;
+  text-align: center;
+  min-height: 100vh;
 }
 
-/* Overlay */
+/* Slight overlay */
 body::before {
   content: "";
   position: fixed;
-  top: 0; left: 0;
-  width: 100%; height: 100%;
-  background: rgba(10,15,20,0.75);
+  top:0; left:0;
+  width:100%; height:100%;
+  background: rgba(10,15,20,0.2);
   z-index: -1;
 }
 
 /* Header */
 header {
-  background: rgba(13,17,23,0.9);
+  background: rgba(13,17,23,0.85);
   border-bottom: 2px solid #c9aa71;
   padding: 20px 10px;
   font-weight: bold;
@@ -64,27 +70,32 @@ header {
   box-shadow: 0 0 15px rgba(255,215,0,0.8);
 }
 
-/* Content */
-.content-container {
-  margin: 20px auto 50px auto;
-  max-width: 950px;
-  background: rgba(13,17,23,0.95);
-  border: 1px solid #2f81f7;
+/* Main content */
+.main-content {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 20px 10px;
+}
+
+/* Spell card */
+.spell-card {
+  background: rgba(13,17,23,0.9);
+  border: 1px solid #c9aa71;
   border-radius: 10px;
-  padding: 25px;
+  padding: 18px 22px;
+  margin: 12px 0;
+  max-width: 950px;
+  width: 90%;
   text-align: left;
-  color: #fff;
   font-size: 16px;
   line-height: 1.6;
+  opacity: 0;
+  transform: translateY(10px);
+  animation: fadeInUp 0.4s forwards;
 }
-.content-container h2 {
-  color: #c9aa71;
-  margin-top: 0;
-}
-.spell {
-  margin-bottom: 20px;
-}
-.spell img {
+.spell-card img {
   width: 28px;
   height: 28px;
   vertical-align: middle;
@@ -92,13 +103,36 @@ header {
   border-radius: 4px;
   border: 1px solid #444;
 }
+.spell-card h2 {
+  color: #c9aa71;
+  margin-top: 0;
+  margin-bottom: 10px;
+  font-size: 20px;
+  border-bottom: 1px solid #c9aa71;
+  padding-bottom: 4px;
+}
+
+/* Fade-in animation */
+@keyframes fadeInUp {
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
 
 /* Footer */
 footer {
   text-align: center;
+  margin-top: auto;
   padding: 15px 10px;
   font-size: 14px;
-  color: #8b949e;
+  color: #fff;
+}
+
+/* Responsive */
+@media (max-width: 600px) {
+  header { font-size: 24px; padding: 15px; }
+  .spell-card { padding: 14px 16px; font-size: 15px; }
 }
 </style>
 </head>
@@ -107,43 +141,45 @@ footer {
 <header>Summoner Spells</header>
 <a href="skills.html" class="back-button">Back to Skills Hub</a>
 
-<div class="content-container">
-  <h2>Summoner Spell Usage</h2>
-  <p>Summoner spell usage is one of the most underrated skills in League. The most basic example is using Flash to dodge a play completely instead of flashing later after taking damage and still needing to use Flash anyway.</p>
+<div class="main-content">
+  <div class="spell-card" style="animation-delay:0.1s;">
+    <h2>Summoner Spell Usage</h2>
+    <p>Summoner spell usage is one of the most underrated skills in League. The most basic example is using Flash to dodge a play completely instead of flashing later after taking damage and still needing to use Flash anyway.</p>
+  </div>
 
-  <div class="spell">
+  <div class="spell-card" style="animation-delay:0.2s;">
     <p><img src="https://ddragon.leagueoflegends.com/cdn/14.9.1/img/spell/SummonerFlash.png" alt="Flash"> <strong>Flash:</strong> Flash is the most used summoner spell in the game since the instant ability to move a substantial distance is extremely strong. Knowing which walls can be flashed and from where is also important, as well as which abilities can be extended or altered with Flash.</p>
   </div>
 
-  <div class="spell">
+  <div class="spell-card" style="animation-delay:0.3s;">
     <p><img src="https://ddragon.leagueoflegends.com/cdn/14.9.1/img/spell/SummonerHaste.png" alt="Ghost"> <strong>Ghost:</strong> How early this should be cast is the main distinguisher for skill with this spell. It increases one’s ability to kite by allowing more distance between each auto attack.</p>
   </div>
 
-  <div class="spell">
+  <div class="spell-card" style="animation-delay:0.4s;">
     <p><img src="https://ddragon.leagueoflegends.com/cdn/14.9.1/img/spell/SummonerHeal.png" alt="Heal"> <strong>Heal:</strong> Heal timing can be difficult since it can be reduced by healing reduction. You also want to maximize the burst of movement speed it gives. The hardest part is knowing when to sacrifice it for a teammate.</p>
   </div>
 
-  <div class="spell">
+  <div class="spell-card" style="animation-delay:0.5s;">
     <p><img src="https://ddragon.leagueoflegends.com/cdn/14.9.1/img/spell/SummonerDot.png" alt="Ignite"> <strong>Ignite:</strong> Knowing exactly how much damage it deals for an execute and only using it when you don’t have time to deal the damage yourself is key. It’s mostly used early or for applying healing reduction.</p>
   </div>
 
-  <div class="spell">
+  <div class="spell-card" style="animation-delay:0.6s;">
     <p><img src="https://ddragon.leagueoflegends.com/cdn/14.9.1/img/spell/SummonerExhaust.png" alt="Exhaust"> <strong>Exhaust:</strong> Great against champions like Yasuo, Zed, Diana, or Talon who have strong ultimates with a short delay. It’s even better on champions who struggle to exit fights. Mostly used bot lane on supports without hard CC.</p>
   </div>
 
-  <div class="spell">
+  <div class="spell-card" style="animation-delay:0.7s;">
     <p><img src="https://ddragon.leagueoflegends.com/cdn/14.9.1/img/spell/SummonerTeleport.png" alt="Teleport"> <strong>Teleport:</strong> The most complex summoner spell in the game. It’s now mostly used for a quick reset in lane a lane reset tool to gain tempo especially if you can make it back before your opponent finishes recalling.</p>
   </div>
 
-  <div class="spell">
+  <div class="spell-card" style="animation-delay:0.8s;">
     <p><img src="https://ddragon.leagueoflegends.com/cdn/14.9.1/img/spell/SummonerBoost.png" alt="Cleanse"> <strong>Cleanse:</strong> Sometimes taken mid against a champion like Lissandra, but more often on ADCs versus Ashe or other CC-heavy champs. Perfectly timing Cleanse after being CC’d always feels satisfying.</p>
   </div>
 
-  <div class="spell">
+  <div class="spell-card" style="animation-delay:0.9s;">
     <p><img src="https://ddragon.leagueoflegends.com/cdn/14.9.1/img/spell/SummonerSmite.png" alt="Smite"> <strong>Smite:</strong> Timing Smite to secure Baron or Dragon is crucial. Track whether your Smite deals 600, 900, or 1200 damage. Fully upgraded, it can also be used to clear minions or camps efficiently.</p>
   </div>
 
-  <div class="spell">
+  <div class="spell-card" style="animation-delay:1s;">
     <p><img src="https://ddragon.leagueoflegends.com/cdn/14.9.1/img/spell/SummonerBarrier.png" alt="Barrier"> <strong>Barrier:</strong> Typically taken by champions who can’t benefit from Ghost or Heal’s movement. Great on stationary champions like Xerath during his ultimate, and recently more common on ADCs after buffs.</p>
   </div>
 </div>
