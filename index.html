@@ -37,18 +37,19 @@ header{background:linear-gradient(90deg,#0a0f14,#1b2838);border-bottom:2px solid
 .modalContent h2{color:#c9aa71;margin-bottom:20px}
 .modalContent input{width:80%;max-width:300px;display:block;margin:8px auto;padding:8px;border-radius:4px;border:none;text-align:center}
 .modalContent .plan-buttons{display:flex;justify-content:center;gap:20px;margin-bottom:20px;position:relative;flex-wrap:wrap}
-.modalContent .bestValueTag{position:absolute;top:-18px;left:50%;transform:translateX(-50%);background:#f2b96d;color:#161b22;font-size:.8em;font-weight:bold;padding:2px 6px;border-radius:4px;box-shadow:0 0 6px rgba(0,0,0,.4)}
+.modalContent .bestValueTag{position:absolute;top:-20px;left:50%;transform:translateX(-50%);background:#f2b96d;color:#161b22;font-size:.8em;font-weight:bold;padding:2px 6px;border-radius:4px;box-shadow:0 0 6px rgba(0,0,0,.4)}
 .modalContent #closePlanModal,.modalContent #closeSignupModal,.modalContent #closeLoginModal{margin-top:15px;background:none;border:none;color:#c9aa71;cursor:pointer}
 footer{text-align:center;padding:30px;color:#8b949e;font-size:14px;background:#0a0f14;border-top:1px solid #1f2937}
 footer a{color:#c9aa71;text-decoration:none}
 footer a:hover{text-decoration:underline}
 
-/* Plan button sizing - consistent desktop & mobile */
+/* Desktop adjustments for Lifetime plan */
 @media(min-width:601px){
-  .modalContent .plan-buttons>button{width:140px}
-  .modalContent .plan-buttons>div button{width:140px}
+  .modalContent .plan-buttons > div { margin-top:10px; } /* pushes lifetime button slightly lower */
+  .modalContent .bestValueTag { top:-22px; } /* balanced position for tag above button */
 }
 
+/* Mobile adjustments */
 @media(max-width:600px){
   .hero{background-size:cover;background-position:center;padding-top:100px}
   .hero h1{margin-top:10px}
@@ -56,7 +57,8 @@ footer a:hover{text-decoration:underline}
   .hero .btn{margin-top:10px}
   .modalContent .plan-buttons{flex-direction:column!important;justify-content:center!important;align-items:center!important;gap:20px!important}
   .modalContent .plan-buttons>div{width:auto!important;display:block!important;text-align:center}
-  .modalContent .plan-buttons>button{width:140px!important}
+  .modalContent .plan-buttons button{width:220px!important;max-width:220px}
+  .modalContent .bestValueTag{top:-16px}
 }
 </style>
 </head>
@@ -64,15 +66,15 @@ footer a:hover{text-decoration:underline}
 <header>LoL Fundamentals</header>
 
 <section class="hero">
-  <div class="blueOverlay"></div>
-  <div class="particles"></div>
-  <div class="aura"></div>
-  <h1>The Ultimate League Guide</h1>
-  <p>Master every aspect of League of Legends with champions like Diana and Ekko. Learn precise combos, matchup strategies, and advanced tips to elevate your gameplay.</p>
-  <div style="margin-top:20px;">
-    <button class="btn" id="signupHeroBtn">Sign Up</button>
-    <button class="btn" id="loginHeroBtn" style="margin-left:10px;">Login</button>
-  </div>
+<div class="blueOverlay"></div>
+<div class="particles"></div>
+<div class="aura"></div>
+<h1>The Ultimate League Guide</h1>
+<p>Master every aspect of League of Legends with champions like Diana and Ekko. Learn precise combos, matchup strategies, and advanced tips to elevate your gameplay.</p>
+<div style="margin-top:20px;">
+<button class="btn" id="signupHeroBtn">Sign Up</button>
+<button class="btn" id="loginHeroBtn" style="margin-left:10px;">Login</button>
+</div>
 </section>
 
 <div id="signupModal" class="modal">
@@ -93,11 +95,12 @@ footer a:hover{text-decoration:underline}
 <div class="modalContent">
 <h2>Choose Your Plan</h2>
 <div class="plan-buttons">
-  <div style="position:relative;display:inline-block;text-align:center">
-    <div class="bestValueTag">Best Value</div>
-    <button class="btn orangeBtn" id="yearlyBtn">$49 / Year</button>
-  </div>
-  <button class="btn" id="monthlyBtn">$8.99 / Month</button>
+<button class="btn" id="monthlyBtn">$8.99 / Month</button>
+<button class="btn" id="yearlyBtn">$49 / Year</button>
+<div style="position:relative;display:inline-block;text-align:center">
+<div class="bestValueTag">Best Value</div>
+<button class="btn orangeBtn" id="lifetimeBtn">$139 / Lifetime</button>
+</div>
 </div>
 <button id="closePlanModal">Cancel</button>
 </div>
@@ -138,7 +141,11 @@ const firebaseConfig={apiKey:"AIzaSyCFRcEV7wdivqONnkjJubAZOjPMixrHMBI",authDomai
 const app=initializeApp(firebaseConfig),auth=getAuth(app),firestore=getFirestore(app);
 const $=(id)=>document.getElementById(id);
 
-const stripe={monthly:"https://buy.stripe.com/8x28wIaQ4dJa4Rg88iejK0f",yearly:"https://buy.stripe.com/cNi14g3nC48AerQ9cmejK07"};
+const stripe={
+  monthly:"https://buy.stripe.com/8x28wIaQ4dJa4Rg88iejK0f",
+  yearly:"https://buy.stripe.com/cNi14g3nC48AerQ9cmejK07",
+  lifetime:"https://buy.stripe.com/14AeV61fubB2dnMfAKejK0e"
+};
 
 signupHeroBtn.onclick=()=>signupModal.style.display="flex";
 loginHeroBtn.onclick=()=>loginModal.style.display="flex";
@@ -160,6 +167,7 @@ continueSignupBtn.onclick=async()=>{
 
 monthlyBtn.onclick=()=>{window.open(stripe.monthly,"_blank");planModal.style.display="none";}
 yearlyBtn.onclick=()=>{window.open(stripe.yearly,"_blank");planModal.style.display="none";}
+lifetimeBtn.onclick=()=>{window.open(stripe.lifetime,"_blank");planModal.style.display="none";}
 
 modalLoginBtn.onclick=async()=>{
   const e=loginEmail.value.trim(),p=loginPassword.value.trim();
@@ -198,6 +206,7 @@ for(let i=0;i<50;i++){
 </script>
 </body>
 </html>
+
 
 
 
