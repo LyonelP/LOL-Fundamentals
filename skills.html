@@ -89,11 +89,11 @@ header {
   -moz-appearance: none;
 }
 
-/* Progress Bar */
+/* Progress Bars */
 .progress-wrap {
   width: 260px;
-  max-width: 90vw; /* responsive for mobile */
-  margin: 0 auto 30px;
+  max-width: 90vw;
+  margin: 0 auto 20px;
   text-align: center;
 }
 .progress-label {
@@ -208,13 +208,8 @@ footer {
   </select>
 </div>
 
-<!-- Progress Bar -->
-<div class="progress-wrap">
-  <div class="progress-label" id="progressLabel">0% Complete</div>
-  <div class="progress-bar">
-    <div class="progress-fill" id="progressFill"></div>
-  </div>
-</div>
+<!-- Container for all section progress bars -->
+<div id="progress-container"></div>
 
 <ul class="skill-list" id="skill-list"></ul>
 
@@ -232,7 +227,7 @@ const skillData = {
 
 let skillProgress = JSON.parse(localStorage.getItem("skillProgress") || "{}");
 
-// Initialize all sections and skills so progress bar counts everything
+// Initialize all sections and skills
 Object.keys(skillData).forEach(section => {
   skillProgress[section] = skillProgress[section] || {};
   skillData[section].forEach(skill => {
@@ -243,30 +238,10 @@ localStorage.setItem("skillProgress", JSON.stringify(skillProgress));
 
 const sectionSelect = document.getElementById('section-select');
 const skillList = document.getElementById('skill-list');
-const progressFill = document.getElementById('progressFill');
-const progressLabel = document.getElementById('progressLabel');
+const progressContainer = document.getElementById('progress-container');
 
 function saveProgress() {
   localStorage.setItem("skillProgress", JSON.stringify(skillProgress));
-}
-
-// Update progress across ALL sections
-function updateProgress() {
-  let total = 0, done = 0;
-  Object.values(skillProgress).forEach(section => {
-    Object.values(section).forEach(val => { total++; if(val) done++; });
-  });
-  const pct = total === 0 ? 0 : Math.round(done / total * 100);
-  progressFill.style.width = pct + "%";
-  progressLabel.textContent = `${pct}% Complete`;
-}
-
-function toggleCheck(section, skill, element) {
-  skillProgress[section][skill] = !skillProgress[section][skill];
-  saveProgress();
-  element.classList.toggle("completed");
-  element.innerHTML = element.classList.contains("completed") ? "✔" : "";
-  updateProgress();
 }
 
 function renderSkills(section) {
@@ -274,7 +249,6 @@ function renderSkills(section) {
   skillList.innerHTML = skills.map(skill => {
     const completed = skillProgress[section][skill] ? "completed" : "";
     const link = skill.toLowerCase().replace(/[^a-z0-9]/g,'') + ".html";
-
     return `
       <li data-skill="${skill}">
         <a href="${link}">${skill}</a>
@@ -286,21 +260,62 @@ function renderSkills(section) {
   }).join('');
 }
 
-// Render default section
-renderSkills("Pre Game");
+function toggleCheck(section, skill, element) {
+  skillProgress[section][skill] = !skillProgress[section][skill];
+  saveProgress();
+  element.classList.toggle("completed");
+  element.innerHTML = element.classList.contains("completed") ? "✔" : "";
+  updateAllProgress();
+}
 
-// Section change
+// Render progress bars for each section
+function renderProgressBars() {
+  progressContainer.innerHTML = Object.keys(skillData).map(section => `
+    <div class="progress-wrap" data-section="${section}">
+      <div class="progress-label" id="label-${section}">${section}: 0% Complete</div>
+      <div class="progress-bar">
+        <div class="progress-fill" id="fill-${section}"></div>
+      </div>
+    </div>
+  `).join('');
+}
+
+// Update progress for all sections
+function updateAllProgress() {
+  Object.keys(skillData).forEach(section => {
+    const skills = skillProgress[section];
+    const total = Object.keys(skills).length;
+    const done = Object.values(skills).filter(v => v).length;
+    const pct = total === 0 ? 0 : Math.round(done / total * 100);
+
+    const fill = document.getElementById(`fill-${section}`);
+    const label = document.getElementById(`label-${section}`);
+    fill.style.width = pct + "%";
+    label.textContent = `${section}: ${pct}% Complete`;
+  });
+}
+
+// Section select change
 sectionSelect.addEventListener('change', () => {
-  renderSkills(sectionSelect.value);
-  updateProgress(); // ensure progress bar updates after rendering new section
+  const selected = sectionSelect.value;
+  localStorage.setItem("lastSection", selected); // remember last section
+  renderSkills(selected);
+  updateAllProgress();
 });
 
-// Initial progress calculation
-updateProgress();
+// Initial render
+renderProgressBars();
+
+// Render last visited section or default
+const lastSection = localStorage.getItem("lastSection") || "Pre Game";
+sectionSelect.value = lastSection;
+renderSkills(lastSection);
+updateAllProgress();
 </script>
 
 </body>
 </html>
+
 
 
 
