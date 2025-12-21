@@ -18,7 +18,6 @@ html, body {
   padding: 0;
   height: 100%;
 }
-
 body {
   font-family: 'Beaufort for LOL', Arial, Helvetica, sans-serif;
   color: #fff;
@@ -36,13 +35,13 @@ body::before {
   position: fixed;
   top:0; left:0;
   width:100%; height:100%;
-  background: rgba(10,15,20,0.75);
+  background: rgba(10,15,20,0.2);
   z-index: -1;
 }
 
 /* Header */
 header {
-  background: rgba(13,17,23,0.9);
+  background: rgba(13,17,23,0.85);
   border-bottom: 2px solid #c9aa71;
   padding: 20px 10px;
   font-weight: bold;
@@ -80,15 +79,13 @@ header {
   padding: 20px 10px;
 }
 
-/* Ping card */
-.ping-card {
-  display: flex;
-  gap: 12px;
-  background: rgba(13,17,23,0.85);
+/* Communication card */
+.comm-card {
+  background: rgba(13,17,23,0.9);
   border: 1px solid #c9aa71;
   border-radius: 10px;
-  padding: 12px 16px;
-  margin: 8px 0;
+  padding: 18px 22px;
+  margin: 12px 0;
   max-width: 950px;
   width: 90%;
   text-align: left;
@@ -97,25 +94,36 @@ header {
   opacity: 0;
   transform: translateY(10px);
   animation: fadeInUp 0.4s forwards;
+}
+
+/* Ping cards */
+.ping-card {
+  display: flex;
   align-items: flex-start;
+  gap: 12px;
+  background: rgba(13,17,23,0.85);
+  border: 1px solid #c9aa71;
+  border-radius: 10px;
+  padding: 12px 16px;
+  margin: 8px 0;
+  max-width: 950px;
+  width: 90%;
+  opacity: 0;
+  transform: translateY(10px);
+  animation: fadeInUp 0.4s forwards;
 }
 
 .ping-card svg {
   width: 35px;
   height: 35px;
   flex-shrink: 0;
-  margin-top: 4px;
 }
 
-.ping-card p {
-  margin: 0;
-}
-
-.ping-card h2 {
+.comm-card h2, .ping-card h2 {
   color: #c9aa71;
   margin-top: 0;
-  margin-bottom: 8px;
-  font-size: 18px;
+  margin-bottom: 10px;
+  font-size: 20px;
   border-bottom: 1px solid #c9aa71;
   padding-bottom: 4px;
 }
@@ -140,11 +148,10 @@ footer {
 /* Responsive */
 @media (max-width: 600px) {
   header { font-size: 24px; padding: 15px; }
-  .ping-card { padding: 10px 12px; font-size: 15px; }
+  .comm-card, .ping-card { padding: 14px 16px; font-size: 15px; }
 }
 </style>
 </head>
-
 <body>
 
 <header>Communication</header>
@@ -152,12 +159,13 @@ footer {
 
 <div class="main-content">
 
-  <div class="ping-card" style="animation-delay:0.1s;">
+  <div class="comm-card" style="animation-delay:0.1s;">
     <h2>Communication</h2>
-    <p>The best way to communicate with your team is through pings. Pinging twice and checking if your communication was received before pinging again works best. Chat is best used for keeping your team morale high. Time spent typing is time not spent playing, so minimize it.</p>
-    <p>Typing <strong>“gj”</strong> after a good play is great, and <strong>“ty”</strong> if someone hands over a buff. When behind or the enemy makes a good play, typing <strong>“np we’re fine”</strong> or <strong>“we’ll win”</strong> works wonders. Using the thumbs-up emote instead of typing “gj” is also faster and effective.</p>
+    <p>The best way to communicate with your team is through pings. I’ve found that pinging twice and checking to see if the communication was received before pinging again works best. Chat is best used for keeping your team morale high. Time spent typing is time not spent playing, so it’s best to minimize it.</p>
+    <p>Typing <strong>“gj”</strong> after someone makes a good play is great, and <strong>“ty”</strong> if someone hands over a buff to you. When you’re behind or the enemy makes a good play, typing <strong>“np we’re fine”</strong> or <strong>“we’ll win”</strong> works wonders. Using the thumbs-up emote instead of typing “gj” is also effective and faster.</p>
   </div>
 
+  <!-- Generic Ping -->
   <div class="ping-card" style="animation-delay:0.2s;">
     <svg viewBox="0 0 50 50" preserveAspectRatio="xMidYMid meet">
       <circle cx="25" cy="25" r="22" fill="dodgerblue" stroke="black" stroke-width="3"/>
@@ -166,6 +174,7 @@ footer {
     <p><strong>Generic Ping:</strong> Used to ping everything in the tab window like summoner spells, ults, and upcoming objectives. Also great for marking enemy objectives.</p>
   </div>
 
+  <!-- Danger -->
   <div class="ping-card" style="animation-delay:0.3s;">
     <svg viewBox="0 0 50 50" preserveAspectRatio="xMidYMid meet">
       <circle cx="25" cy="25" r="22" fill="red" stroke="black" stroke-width="3"/>
@@ -174,6 +183,7 @@ footer {
     <p><strong>Danger:</strong> Warns teammates of enemy roams, ganks, possible engages, flanks, TPs, and incoming abilities.</p>
   </div>
 
+  <!-- Assist Me -->
   <div class="ping-card" style="animation-delay:0.4s;">
     <svg viewBox="0 0 50 50" preserveAspectRatio="xMidYMid meet">
       <circle cx="25" cy="25" r="22" fill="lightblue" stroke="black" stroke-width="3"/>
@@ -182,6 +192,7 @@ footer {
     <p><strong>Assist Me:</strong> I need help securing an objective or winning/surviving a fight.</p>
   </div>
 
+  <!-- On My Way -->
   <div class="ping-card" style="animation-delay:0.5s;">
     <svg viewBox="0 0 50 50" preserveAspectRatio="xMidYMid meet">
       <circle cx="25" cy="25" r="22" fill="#4CAF50" stroke="black" stroke-width="3"/>
@@ -190,14 +201,16 @@ footer {
     <p><strong>On My Way:</strong> Only ping when you’re close to joining the fight.</p>
   </div>
 
+  <!-- Enemy Missing -->
   <div class="ping-card" style="animation-delay:0.6s;">
     <svg viewBox="0 0 50 50" preserveAspectRatio="xMidYMid meet">
       <circle cx="25" cy="25" r="22" fill="gold" stroke="black" stroke-width="3"/>
       <text x="25" y="33" font-size="28" font-weight="bold" text-anchor="middle" fill="black">?</text>
     </svg>
-    <p><strong>Enemy Missing (MIA):</strong> Alerts teammates to play safe because an enemy is no longer in vision. Ping once if unlikely to commit to roam and twice or more if likely.</p>
+    <p><strong>Enemy Missing (MIA):</strong> Alerts teammates to play safe because an enemy is no longer in vision. Ping once if the enemy is unlikely to commit to the roam and twice or more when it is likely.</p>
   </div>
 
+  <!-- Warded -->
   <div class="ping-card" style="animation-delay:0.7s;">
     <svg viewBox="0 0 50 50" preserveAspectRatio="xMidYMid meet">
       <circle cx="25" cy="25" r="22" fill="purple" stroke="black" stroke-width="3"/>
@@ -206,6 +219,7 @@ footer {
     <p><strong>Warded:</strong> Area needs vision for your team or the enemy team has warded that area.</p>
   </div>
 
+  <!-- Push -->
   <div class="ping-card" style="animation-delay:0.8s;">
     <svg viewBox="0 0 50 50" preserveAspectRatio="xMidYMid meet">
       <circle cx="25" cy="25" r="22" fill="#FF69B4" stroke="black" stroke-width="3"/>
@@ -217,9 +231,11 @@ footer {
 </div>
 
 <footer>© 2025 LoL Fundamentals · All rights reserved</footer>
-
 </body>
 </html>
+
+
+
 
 
 
