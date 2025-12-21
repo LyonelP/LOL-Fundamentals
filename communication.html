@@ -27,7 +27,7 @@ body::before {
   position: fixed;
   top: 0; left: 0;
   width: 100%; height: 100%;
-  background: rgba(10,15,20,0.5); /* slightly lighter overlay for readability */
+  background: rgba(10,15,20,0.5);
   z-index: -1;
 }
 
@@ -78,13 +78,16 @@ header {
   margin-top: 0;
 }
 
-/* Ping lines with grid for perfect alignment */
+/* Ping lines using flex for perfect alignment */
 .ping-line {
-  display: grid;
-  grid-template-columns: 40px 1fr;
-  align-items: start;
+  display: flex;
+  align-items: flex-start; /* top aligns text with icon properly */
   gap: 12px;
   margin: 12px 0;
+}
+
+.ping-line p {
+  margin: 0;
 }
 
 .ping-icon {
@@ -103,7 +106,6 @@ footer {
 @media (max-width: 600px) {
   header { font-size: 24px; padding: 15px; }
   .content-container { margin: 15px 10px 30px 10px; padding: 15px; }
-  .ping-line { grid-template-columns: 35px 1fr; gap: 10px; }
   .ping-icon { width: 30px; height: 30px; }
 }
 </style>
@@ -125,7 +127,7 @@ footer {
 
   <!-- Generic Ping -->
   <div class="ping-line">
-    <svg class="ping-icon" viewBox="0 0 50 50" preserveAspectRatio="xMidYMid meet">
+    <svg class="ping-icon" viewBox="0 0 50 50">
       <circle cx="25" cy="25" r="22" fill="dodgerblue" stroke="black" stroke-width="3"/>
       <circle cx="25" cy="25" r="12" fill="white"/>
     </svg>
@@ -134,7 +136,7 @@ footer {
 
   <!-- Danger -->
   <div class="ping-line">
-    <svg class="ping-icon" viewBox="0 0 50 50" preserveAspectRatio="xMidYMid meet">
+    <svg class="ping-icon" viewBox="0 0 50 50">
       <circle cx="25" cy="25" r="22" fill="red" stroke="black" stroke-width="3"/>
       <polygon points="25,8 35,35 15,35" fill="white"/>
     </svg>
@@ -143,7 +145,7 @@ footer {
 
   <!-- Assist Me -->
   <div class="ping-line">
-    <svg class="ping-icon" viewBox="0 0 50 50" preserveAspectRatio="xMidYMid meet">
+    <svg class="ping-icon" viewBox="0 0 50 50">
       <circle cx="25" cy="25" r="22" fill="lightblue" stroke="black" stroke-width="3"/>
       <polygon points="25,12 32,25 25,38 18,25" fill="white"/>
     </svg>
@@ -152,7 +154,7 @@ footer {
 
   <!-- On My Way -->
   <div class="ping-line">
-    <svg class="ping-icon" viewBox="0 0 50 50" preserveAspectRatio="xMidYMid meet">
+    <svg class="ping-icon" viewBox="0 0 50 50">
       <circle cx="25" cy="25" r="22" fill="#4CAF50" stroke="black" stroke-width="3"/>
       <polygon points="20,15 35,25 20,35" fill="white"/>
     </svg>
@@ -161,7 +163,7 @@ footer {
 
   <!-- Enemy Missing -->
   <div class="ping-line">
-    <svg class="ping-icon" viewBox="0 0 50 50" preserveAspectRatio="xMidYMid meet">
+    <svg class="ping-icon" viewBox="0 0 50 50">
       <circle cx="25" cy="25" r="22" fill="gold" stroke="black" stroke-width="3"/>
       <text x="25" y="33" font-size="28" font-weight="bold" text-anchor="middle" fill="black">?</text>
     </svg>
@@ -170,7 +172,7 @@ footer {
 
   <!-- Warded -->
   <div class="ping-line">
-    <svg class="ping-icon" viewBox="0 0 50 50" preserveAspectRatio="xMidYMid meet">
+    <svg class="ping-icon" viewBox="0 0 50 50">
       <circle cx="25" cy="25" r="22" fill="purple" stroke="black" stroke-width="3"/>
       <polygon points="25,10 35,35 15,35" fill="yellow"/>
     </svg>
@@ -179,7 +181,7 @@ footer {
 
   <!-- Push -->
   <div class="ping-line">
-    <svg class="ping-icon" viewBox="0 0 50 50" preserveAspectRatio="xMidYMid meet">
+    <svg class="ping-icon" viewBox="0 0 50 50">
       <circle cx="25" cy="25" r="22" fill="#FF69B4" stroke="black" stroke-width="3"/>
       <polygon points="25,10 30,25 25,40 20,25" fill="white"/>
     </svg>
@@ -191,6 +193,7 @@ footer {
 <footer>© 2025 LoL Fundamentals · All rights reserved</footer>
 </body>
 </html>
+
 
 
 
