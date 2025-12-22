@@ -13,29 +13,35 @@
 </script>
 
 <style>
-body {
+html, body {
   margin: 0;
+  padding: 0;
+  height: 100%;
+}
+body {
   font-family: 'Beaufort for LOL', Arial, Helvetica, sans-serif;
-  text-align: center;
   color: #fff;
   background: url('https://64.media.tumblr.com/594ac290bec6d5e9ad98b5f53404f00b/245c4c3ee469f81d-e4/s1280x1920/1cda4284320eb2031758a9859dfe14ff8bbc50ba.jpg') no-repeat center center fixed;
   background-size: cover;
-  overflow-x: hidden;
+  display: flex;
+  flex-direction: column;
+  text-align: center;
+  min-height: 100vh;
 }
 
-/* Overlay for readability */
+/* Slight overlay for readability */
 body::before {
   content: "";
   position: fixed;
   top: 0; left: 0;
   width: 100%; height: 100%;
-  background: rgba(10,15,20,0.75);
+  background: rgba(10,15,20,0.2);
   z-index: -1;
 }
 
 /* Header */
 header {
-  background: rgba(13,17,23,0.9);
+  background: rgba(13,17,23,0.85);
   border-bottom: 2px solid #c9aa71;
   padding: 20px 10px;
   font-weight: bold;
@@ -64,26 +70,43 @@ header {
   box-shadow: 0 0 15px rgba(255,215,0,0.8);
 }
 
-/* Content container */
-.content-container {
-  margin: 20px auto 50px auto;
-  max-width: 900px;
-  background: rgba(13,17,23,0.95);
-  border: 1px solid #2f81f7;
-  border-radius: 10px;
-  padding: 20px;
-  text-align: left;
-  color: #fff;
-  font-size: 16px;
-  line-height: 1.6;
-  position: relative;
-}
-.content-container h2 {
-  color: #c9aa71;
-  margin-top: 0;
+/* Main content */
+.main-content {
+  flex: 1;
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  flex-wrap: wrap;
+  padding: 20px 10px;
+  gap: 20px;
 }
 
-/* Video container with golden hover */
+/* Tip card */
+.tip-card {
+  background: rgba(13,17,23,0.9);
+  border: 1px solid #c9aa71;
+  border-radius: 10px;
+  padding: 18px 22px;
+  max-width: 600px;
+  flex: 1 1 600px;
+  text-align: left;
+  font-size: 16px;
+  line-height: 1.6;
+  opacity: 0;
+  transform: translateY(10px);
+  animation: fadeInUp 0.4s forwards;
+}
+.tip-card:nth-child(1) { animation-delay: 0.1s; }
+.tip-card h2 {
+  color: #c9aa71;
+  margin-top: 0;
+  margin-bottom: 10px;
+  font-size: 20px;
+  border-bottom: 1px solid #c9aa71;
+  padding-bottom: 4px;
+}
+
+/* Video container */
 .video-container {
   text-align: center;
   margin: 20px 0;
@@ -104,16 +127,33 @@ header {
   border: 2px solid #c9aa71;
 }
 
-footer {
-  text-align: center;
-  padding: 15px 10px;
-  font-size: 14px;
-  color: #8b949e;
+/* Fade-in animation */
+@keyframes fadeInUp {
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
 
+/* Footer */
+footer {
+  text-align: center;
+  margin-top: auto;
+  padding: 15px 10px;
+  font-size: 14px;
+  color: #fff;
+}
+
+/* Responsive */
+@media (max-width: 800px) {
+  .main-content {
+    flex-direction: column;
+    align-items: center;
+  }
+}
 @media (max-width: 600px) {
   header { font-size: 24px; padding: 15px; }
-  .content-container { margin: 15px 10px 30px 10px; padding: 15px; }
+  .tip-card { padding: 14px 16px; font-size: 15px; }
 }
 </style>
 </head>
@@ -122,8 +162,18 @@ footer {
 <header>Ganking</header>
 <a href="skills.html" class="back-button">Back to Skills Hub</a>
 
-<div class="content-container">
-  <h2>Ganking</h2>
+<div class="main-content">
+  <div class="tip-card">
+    <h2>Ganking Tips</h2>
+    <ul>
+      <li>Coordinate with your laners before attempting a gank.</li>
+      <li>Approach from the fog of war or from angles where the enemy can't see you.</li>
+      <li>Track enemy summoner spells and cooldowns for safer ganks.</li>
+      <li>Prioritize lanes that are overextended or have low health/mana.</li>
+      <li>Use vision control to ensure a successful gank.</li>
+    </ul>
+  </div>
+
   <div class="video-container">
     <iframe src="https://www.youtube.com/embed/J6f0mOCtqJY" title="10 Tips for Ganking – LoL Fundamentals" allowfullscreen></iframe>
   </div>
@@ -133,6 +183,7 @@ footer {
 
 </body>
 </html>
+
 
 
 
