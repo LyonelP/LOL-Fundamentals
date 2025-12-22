@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Laning – LoL Fundamentals</title>
+<title>Trading – LoL Fundamentals</title>
 
 <!-- Login check -->
 <script>
@@ -96,10 +96,6 @@ header {
   animation: fadeInUp 0.4s forwards;
 }
 .tip-card:nth-child(1) { animation-delay: 0.1s; }
-.tip-card:nth-child(2) { animation-delay: 0.3s; }
-.tip-card:nth-child(3) { animation-delay: 0.5s; }
-.tip-card:nth-child(4) { animation-delay: 0.7s; }
-
 .tip-card h2 {
   color: #c9aa71;
   margin-top: 0;
@@ -109,23 +105,22 @@ header {
   padding-bottom: 4px;
 }
 
-/* Video */
-.video-wrap {
-  position: relative;
-  padding-bottom: 56.25%;
-  height: 0;
-  overflow: hidden;
-  border-radius: 10px;
-  margin: 20px 0;
-  box-shadow: 0 0 25px rgba(0,0,0,0.6);
+/* Video embed inside tip card */
+.tip-card .video-container {
+  text-align: center;
+  margin-top: 15px;
 }
-
-.video-wrap iframe {
-  position: absolute;
+.tip-card .video-container iframe {
   width: 100%;
-  height: 100%;
-  border: 0;
-  border-radius: 10px;
+  max-width: 800px;
+  height: 450px;
+  border: none;
+  border-radius: 8px;
+  transition: all 0.3s;
+}
+.tip-card .video-container:hover {
+  box-shadow: 0 0 20px rgba(201,170,113,0.8);
+  border-radius: 8px;
 }
 
 /* Fade-in animation */
@@ -136,7 +131,7 @@ header {
   }
 }
 
-/* Footer */
+/* Footer at bottom of page */
 footer {
   text-align: center;
   margin-top: auto;
@@ -149,52 +144,21 @@ footer {
 @media (max-width: 600px) {
   header { font-size: 24px; padding: 15px; }
   .tip-card { padding: 14px 16px; font-size: 15px; }
+  .tip-card .video-container iframe { height: 250px; }
 }
 </style>
 </head>
 <body>
 
-<header>Laning</header>
+<header>Trading</header>
 <a href="skills.html" class="back-button">Back to Skills Hub</a>
 
 <div class="main-content">
   <div class="tip-card">
-    <h2>Goals of Laning</h2>
-    <p>The goal of League is to destroy the enemy Nexus. In laning, this translates to destroying the tier 1 tower by forcing your opponent out of lane via resets or kills. More gold from minions and denying your opponent helps you maintain pressure and reach the tower faster.</p>
-  </div>
-
-  <div class="tip-card">
-    <h2>General Rules of Laning</h2>
-    <ul>
-      <li><strong>The stronger you are in lane, the less you want to roam.</strong> Keep the enemy coming to you to maintain tower pressure.</li>
-      <li><strong>Melee champions</strong> should wait for the wave to settle before stepping forward to avoid minion aggro.</li>
-      <li><strong>Build resists</strong> based on your lane opponent and enemy jungler.</li>
-      <li><strong>Tower plate or tempo?</strong> If taking a tower plate, ensure you can stay for at least one extra wave to avoid losing tempo.</li>
-      <li><strong>Recalls</strong> – Keep your opponent in lane by managing wave control and cancelling their recalls.</li>
-    </ul>
-  </div>
-
-  <div class="tip-card">
-    <h2>Mental Stack</h2>
-    <ul>
-      <li><strong>Enemy Position</strong> – Where are they relative to the lane, minions, and players?</li>
-      <li><strong>Wave State</strong> – How fast is it pushing or pulling? When is the next cannon wave?</li>
-      <li><strong>Minions</strong> – Which minions need last-hitting by you and your opponent?</li>
-      <li><strong>Enemy & Teammate Position</strong> – Jungle pathing and potential roams from other lanes.</li>
-      <li><strong>Cooldowns</strong> – Available abilities and timers.</li>
-      <li><strong>Resources</strong> – Health, mana, potions, sustain.</li>
-      <li><strong>Vision</strong> – Your and enemy warding.</li>
-      <li><strong>Runes</strong> – Proc windows like Electrocute, Conqueror, Bone Plating.</li>
-      <li><strong>Items</strong> – Power spikes and component advantages.</li>
-      <li><strong>Gold</strong> – When to recall and with how much gold.</li>
-    </ul>
-    <p><em>If unsure, start at the top of the stack and work down.</em></p>
-  </div>
-
-  <div class="tip-card">
-    <h2>Laning Video Guide</h2>
-    <div class="video-wrap">
-      <iframe src="https://www.youtube.com/embed/WUi9pOT6wYc" title="Laning Phase Fundamentals" allowfullscreen></iframe>
+    <h2>Trading Overview</h2>
+    <p>Trading in lane is about picking moments where you deal damage while limiting what your opponent can deal back. It's about pressing your advantage without over‑committing and knowing when to trade based on minion waves, cooldowns, and vision.</p>
+    <div class="video-container">
+      <iframe src="https://www.youtube.com/embed/WUi9pOT6wYc" title="Trading Guide Video" allowfullscreen></iframe>
     </div>
   </div>
 </div>
@@ -203,8 +167,6 @@ footer {
 
 </body>
 </html>
-
-
 
 
 
