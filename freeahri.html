@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Diana Mid vs Ahri</title>
+
+<style>
+:root {
+  --gold:#c9aa71;
+  --bg:#0a0f14;
+  --card:#161b22;
+  --muted:#8b949e;
+  --yellow:#F9D949;
+}
+
+body {
+  margin: 0;
+  font-family: "Beaufort for LOL", Arial, Helvetica, sans-serif;
+  background: var(--bg);
+  color: #e6edf3;
+  line-height: 1.5;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+/* ===== HEADER ===== */
+header {
+  background: rgba(13,17,23,0.9);
+  border-bottom: 2px solid var(--gold);
+  padding: 16px 20px;
+  font-size: 26px;
+  font-weight: 700;
+  text-transform: uppercase;
+  color: var(--gold);
+  text-align: center;
+  letter-spacing: 0.8px;
+}
+
+/* ===== BACK BUTTON ===== */
+.back-button {
+  display: block;
+  margin: 18px auto;
+  padding: 9px 18px;
+  background: linear-gradient(135deg, #c9aa71, #e0c77b);
+  color: #000;
+  text-decoration: none;
+  border-radius: 8px;
+  font-weight: bold;
+  box-shadow: 0 0 10px rgba(201,170,113,0.5);
+  width: fit-content;
+}
+.back-button::before { content: "← "; }
+
+/* ===== CONTENT WIDTH ===== */
+.content-width {
+  max-width: 920px;
+  margin: 0 auto;
+  padding: 0 20px;
+}
+
+/* ===== MATCHUP CARD ===== */
+.matchup-container {
+  display: flex;
+  gap: 28px;
+  padding: 26px;
+  background: linear-gradient(180deg, #161b22, #12161d);
+  border-radius: 18px;
+  border: 1px solid rgba(201,170,113,0.18);
+  box-shadow:
+    0 15px 40px rgba(0,0,0,0.7),
+    inset 0 0 0 1px rgba(255,255,255,0.02);
+}
+
+/* ===== LEFT ===== */
+.matchup-left {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 14px;
+}
+
+.matchup-left img {
+  width: 96px;
+  height: 96px;
+  border-radius: 14px;
+  border: 2px solid var(--gold);
+  box-shadow: 0 0 28px rgba(201,170,113,0.45);
+}
+
+/* ===== WINRATE ===== */
+.winrate-bubble {
+  background: rgba(249,217,73,0.15);
+  color: var(--yellow);
+  border: 1px solid rgba(249,217,73,0.45);
+  font-weight: 600;
+  padding: 6px 16px;
+  border-radius: 999px;
+  font-size: 14px;
+  letter-spacing: 0.5px;
+}
+
+/* ===== RIGHT ===== */
+.matchup-right {
+  flex: 1;
+}
+
+.matchup-right h2 {
+  margin: 0 0 14px 0;
+  font-size: 22px;
+  color: var(--gold);
+  padding-bottom: 8px;
+  border-bottom: 1px solid rgba(201,170,113,0.25);
+}
+
+.matchup-right ul {
+  padding-left: 18px;
+  margin: 0;
+}
+
+.matchup-right li {
+  margin-bottom: 12px;
+  line-height: 1.65;
+}
+
+/* ===== FOOTER ===== */
+footer {
+  text-align: center;
+  padding: 18px 10px;
+  font-size: 14px;
+  color: var(--muted);
+  margin-top: auto;
+}
+
+/* ===== MOBILE ===== */
+@media (max-width: 600px) {
+  .matchup-container {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .matchup-right {
+    text-align: center;
+  }
+}
+</style>
+
+</head>
+<body>
+
+<header>Diana Mid Matchup – Ahri</header>
+
+<a href="matchuphub.html" class="back-button">Back to Matchup Hub</a>
+
+<div class="content-width">
+  <div class="matchup-container">
+    <div class="matchup-left">
+      <img src="https://ddragon.leagueoflegends.com/cdn/14.23.1/img/champion/Ahri.png" alt="Ahri">
+      <div class="winrate-bubble">49%</div>
+    </div>
+
+    <div class="matchup-right">
+      <h2>Matchup Notes</h2>
+      <ul>
+        <li>Ahri’s best trade lvl 1 is to auto W auto towards the river bush (blue side) or top river side (red side) moving towards Diana with the movement speed from W. She often dodges Q by moving inside the Q arc. Counter this by throwing only max range Q’s and waiting for her to start autoing the wave.</li>
+        <li>It's crucial to thin out the wave against Ahri to prevent her from trading effectively with autos and landing easy charms.</li>
+        <li>Build Verdant Barrier or Banshee's Veil early in the matchup. Ahri doesn’t have high sustain damage, and the spell shield allows you to bypass Ahri’s E.</li>
+      </ul>
+    </div>
+  </div>
+</div>
+
+<footer>© 2025 LoL Fundamentals · All rights reserved</footer>
+
+</body>
+</html>
+
+
+
