@@ -81,7 +81,7 @@ header {
   gap: 20px;
 }
 
-/* Video container */
+/* Video container with subheader */
 .video-container {
   background: rgba(13,17,23,0.9);
   border: 1px solid #c9aa71;
@@ -91,6 +91,11 @@ header {
   width: 100%;
   text-align: center;
   transition: box-shadow 0.3s, transform 0.3s, border 0.3s;
+}
+.video-container h2 {
+  color: #c9aa71;
+  margin-top: 0;
+  margin-bottom: 15px;
 }
 .video-container iframe {
   width: 100%;
@@ -129,6 +134,7 @@ footer {
 
 <div class="main-content">
   <div class="video-container">
+    <h2>Ganking</h2>
     <iframe src="https://www.youtube.com/embed/J6f0mOCtqJY" 
             title="10 Tips for Ganking – LoL Fundamentals" 
             allowfullscreen>
@@ -140,7 +146,6 @@ footer {
 
 </body>
 </html>
-
 
 
 
