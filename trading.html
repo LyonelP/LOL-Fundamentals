@@ -13,29 +13,35 @@
 </script>
 
 <style>
-body {
+html, body {
   margin: 0;
+  padding: 0;
+  height: 100%;
+}
+body {
   font-family: 'Beaufort for LOL', Arial, Helvetica, sans-serif;
-  text-align: center;
   color: #fff;
   background: url('https://64.media.tumblr.com/594ac290bec6d5e9ad98b5f53404f00b/245c4c3ee469f81d-e4/s1280x1920/1cda4284320eb2031758a9859dfe14ff8bbc50ba.jpg') no-repeat center center fixed;
   background-size: cover;
-  overflow-x: hidden;
+  display: flex;
+  flex-direction: column;
+  text-align: center;
+  min-height: 100vh;
 }
 
-/* Overlay */
+/* Slight overlay for readability */
 body::before {
   content: "";
   position: fixed;
   top: 0; left: 0;
   width: 100%; height: 100%;
-  background: rgba(10,15,20,0.75);
+  background: rgba(10,15,20,0.2);
   z-index: -1;
 }
 
 /* Header */
 header {
-  background: rgba(13,17,23,0.9);
+  background: rgba(13,17,23,0.85);
   border-bottom: 2px solid #c9aa71;
   padding: 20px 10px;
   font-weight: bold;
@@ -64,83 +70,102 @@ header {
   box-shadow: 0 0 15px rgba(255,215,0,0.8);
 }
 
-/* Content container */
-.content-container {
-  margin: 20px auto 50px auto;
-  max-width: 900px;
-  background: rgba(13,17,23,0.95);
-  border: 1px solid #2f81f7;
+/* Main content */
+.main-content {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 20px 10px;
+}
+
+/* Tip card */
+.tip-card {
+  background: rgba(13,17,23,0.9);
+  border: 1px solid #c9aa71;
   border-radius: 10px;
-  padding: 24px;
+  padding: 18px 22px;
+  margin: 15px 0;
+  max-width: 900px;
+  width: 90%;
   text-align: left;
   font-size: 16px;
   line-height: 1.6;
+  opacity: 0;
+  transform: translateY(10px);
+  animation: fadeInUp 0.4s forwards;
 }
+.tip-card:nth-child(1) { animation-delay: 0.1s; }
 
-.content-container h2 {
+.tip-card h2 {
   color: #c9aa71;
   margin-top: 0;
-}
-
-.content-container ul {
-  margin-left: 20px;
-}
-
-.content-container li {
   margin-bottom: 10px;
+  font-size: 20px;
+  border-bottom: 1px solid #c9aa71;
+  padding-bottom: 4px;
 }
 
-/* Video */
-.video-wrap {
-  position: relative;
-  padding-bottom: 56.25%;
-  height: 0;
-  overflow: hidden;
-  border-radius: 10px;
-  margin: 30px 0 10px 0;
-  box-shadow: 0 0 25px rgba(0,0,0,0.6);
+/* Video container inside tip card */
+.tip-card .video-container {
+  text-align: center;
+  margin-top: 15px;
 }
-
-.video-wrap iframe {
-  position: absolute;
+.tip-card .video-container iframe {
   width: 100%;
-  height: 100%;
-  border: 0;
-  border-radius: 10px;
+  max-width: 800px;
+  height: 450px;
+  border: none;
+  border-radius: 8px;
+  transition: all 0.3s;
+}
+.tip-card .video-container:hover {
+  box-shadow: 0 0 20px rgba(201,170,113,0.8);
+  border-radius: 8px;
 }
 
+/* Fade-in animation */
+@keyframes fadeInUp {
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Footer at bottom of page */
 footer {
   text-align: center;
+  margin-top: auto;
   padding: 15px 10px;
   font-size: 14px;
-  color: #8b949e;
+  color: #fff;
 }
 
+/* Responsive */
 @media (max-width: 600px) {
-  header { font-size: 24px; }
-  .content-container { margin: 15px 10px; padding: 16px; }
+  header { font-size: 24px; padding: 15px; }
+  .tip-card { padding: 14px 16px; font-size: 15px; }
+  .tip-card .video-container iframe { height: 250px; }
 }
 </style>
 </head>
-
 <body>
 
 <header>Trading</header>
 <a href="skills.html" class="back-button">Back to Skills Hub</a>
 
-<div class="content-container">
-
-  <h2>Trading Overview</h2>
-  <p>Trading in lane is about picking moments where you deal damage while limiting what your opponent can deal back. It's about pressing your advantage without over‑committing and knowing when to trade based on minion waves, cooldowns, and vision.</p>
-
-  <div class="video-wrap">
-    <iframe
-      src="https://www.youtube.com/embed/WUi9pOT6wYc"
-      title="Trading Guide Video"
-      allowfullscreen>
-    </iframe>
+<div class="main-content">
+  <div class="tip-card">
+    <h2>Trading Overview</h2>
+    <p>Trading in lane is about picking moments where you deal damage while limiting what your opponent can deal back. It's about pressing your advantage without over‑committing and knowing when to trade based on minion waves, cooldowns, and vision.</p>
   </div>
 
+  <div class="tip-card">
+    <h2>Video Guide</h2>
+    <div class="video-container">
+      <iframe src="https://www.youtube.com/embed/WUi9pOT6wYc" title="Trading Guide Video" allowfullscreen></iframe>
+    </div>
+  </div>
 </div>
 
 <footer>© 2025 LoL Fundamentals · All rights reserved</footer>
