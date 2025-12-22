@@ -64,29 +64,33 @@ header {
   box-shadow: 0 0 15px rgba(255,215,0,0.8);
 }
 
-/* Content container - MATCHES OTHER PAGES */
-.content-container {
+/* Card-style content container */
+.card {
   background: rgba(13,17,23,0.95);
   border: 1px solid #2f81f7;
   border-radius: 10px;
   max-width: 900px;
-  margin: 20px auto 50px auto;
+  margin: 20px auto;
   padding: 20px;
   text-align: left;
-  color: #fff;
   font-size: 16px;
   line-height: 1.6;
   position: relative;
+  transition: all 0.3s;
 }
-.content-container h2 {
+.card h2 {
   color: #c9aa71;
   margin-top: 0;
 }
-.content-container ul {
+.card ul {
   margin-left: 20px;
 }
-.content-container li {
+.card li {
   margin-bottom: 10px;
+}
+.card:hover {
+  box-shadow: 0 0 20px rgba(201,170,113,0.8);
+  border-color: #c9aa71;
 }
 
 /* Footer */
@@ -99,7 +103,7 @@ footer {
 
 @media (max-width: 600px) {
   header { font-size: 24px; padding: 15px; }
-  .content-container { margin: 15px 10px 30px 10px; padding: 15px; }
+  .card { margin: 15px 10px 30px 10px; padding: 15px; }
 }
 </style>
 </head>
@@ -108,7 +112,8 @@ footer {
 <header>Tab Screen</header>
 <a href="skills.html" class="back-button">Back to Skills Hub</a>
 
-<div class="content-container">
+<!-- Card -->
+<div class="card">
   <h2>Tab Screen</h2>
   <p>Things to look out for on the tab screen:</p>
   <ul>
@@ -124,7 +129,6 @@ footer {
 
 </body>
 </html>
-
 
 
 
