@@ -165,7 +165,7 @@ let skillProgress = JSON.parse(localStorage.getItem("skillProgressFree") || "{}"
 Object.keys(skillData).forEach(section => {
   skillProgress[section] = skillProgress[section] || {};
   skillData[section].forEach(skill => {
-    skillProgress[section][skill] = skill === "Champion Select";
+    skillProgress[section][skill] = skill === "Champion Select"; // Only Champion Select unlocked
   });
 });
 localStorage.setItem("skillProgressFree", JSON.stringify(skillProgress));
@@ -202,9 +202,10 @@ function renderSkills(section) {
   skillList.innerHTML = skills.map(skill => {
     const completed = skillProgress[section][skill] ? "completed" : "";
     const isLocked = skill !== "Champion Select";
+    const href = skill === "Champion Select" ? "championselect.html" : "#";
     return `
       <li data-skill="${skill}">
-        <a href="#" class="${isLocked ? "locked" : ""}" onclick="${isLocked ? 'document.querySelector(\'#signup-modal\').classList.add(\'active\'); return false;' : ''}">
+        <a href="${href}" class="${isLocked ? "locked" : ""}" ${isLocked ? "onclick='document.querySelector(\"#signup-modal\").style.display=\"flex\"; return false;'" : ""}>
           ${skill}
         </a>
         <div class="checkmark ${completed}" onclick="toggleCheck('${section}','${skill}', this)">
@@ -231,8 +232,10 @@ renderSkills(lastSection);
 
 <!-- Optional modal placeholder -->
 <div id="signup-modal" style="display:none;">
-  <!-- Your homepage signup modal content -->
+  <!-- Your homepage signup modal content can be inserted here -->
 </div>
 
 </body>
 </html>
+
+
