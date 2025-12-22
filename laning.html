@@ -98,6 +98,7 @@ header {
 .tip-card:nth-child(1) { animation-delay: 0.1s; }
 .tip-card:nth-child(2) { animation-delay: 0.3s; }
 .tip-card:nth-child(3) { animation-delay: 0.5s; }
+.tip-card:nth-child(4) { animation-delay: 0.7s; }
 
 .tip-card h2 {
   color: #c9aa71;
@@ -114,6 +115,24 @@ header {
 
 .tip-card li {
   margin-bottom: 10px;
+}
+
+/* Video embed inside tip card */
+.tip-card .video-container {
+  text-align: center;
+  margin-top: 15px;
+}
+.tip-card .video-container iframe {
+  width: 100%;
+  max-width: 800px;
+  height: 450px;
+  border: none;
+  border-radius: 8px;
+  transition: all 0.3s;
+}
+.tip-card .video-container:hover {
+  box-shadow: 0 0 20px rgba(201,170,113,0.8);
+  border-radius: 8px;
 }
 
 /* Fade-in animation */
@@ -137,6 +156,7 @@ footer {
 @media (max-width: 600px) {
   header { font-size: 24px; padding: 15px; }
   .tip-card { padding: 14px 16px; font-size: 15px; }
+  .tip-card .video-container iframe { height: 250px; }
 }
 </style>
 </head>
@@ -146,6 +166,7 @@ footer {
 <a href="skills.html" class="back-button">Back to Skills Hub</a>
 
 <div class="main-content">
+
   <div class="tip-card">
     <h2>Laning Fundamentals</h2>
     <p>The goal of League is to destroy the enemy Nexus and therefore the goal of laning is to destroy the tier 1 tower. This is achieved by forcing your opponent out of lane by a reset or a kill. This allows you and your minions to reach the enemy tower. The more gold you gain from minions and the more you deny from your opponent, the easier it is to reach and stay at the enemy tower.</p>
@@ -178,9 +199,19 @@ footer {
     </ul>
     <p><em>If you are unsure what to do, start at the top of the stack and work down.</em></p>
   </div>
+
+  <div class="tip-card">
+    <h2>Laning Video</h2>
+    <div class="video-container">
+      <iframe src="https://www.youtube.com/embed/YOUR_VIDEO_ID_HERE" title="Laning Guide Video" allowfullscreen></iframe>
+    </div>
+  </div>
+
 </div>
 
 <footer>© 2025 LoL Fundamentals · All rights reserved</footer>
 
 </body>
 </html>
+
+
