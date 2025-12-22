@@ -32,14 +32,14 @@ header{background:linear-gradient(90deg,#0a0f14,#1b2838);border-bottom:2px solid
 .card p{margin:0;font-size:0.95rem;line-height:1.3;z-index:2;color:#e6edf3;opacity:0.95;text-align:center}
 .card::before{content:"";position:absolute;inset:0;width:100%;height:100%;background-size:cover;background-position:center;opacity:.15;z-index:0;border-radius:10px}
 
-.fundamentals::before{background-image:url('https://cdn.wallpapersafari.com/92/79/MYTD9q.png')}
-.diana-guide::before{background-image:url('https://ddragon.leagueoflegends.com/cdn/img/champion/splash/Diana_1.jpg')}
-.ekko-guide::before{background-image:url('https://ddragon.leagueoflegends.com/cdn/img/champion/splash/Ekko_0.jpg')}
-.diana-matchups::before{background-image:url('https://ddragon.leagueoflegends.com/cdn/img/champion/splash/Diana_0.jpg')}
-.build-calculator::before{background-image:url('https://i.imgur.com/uhLq29j.jpeg')}
-.rune-calculator::before{background-image:url('https://i.imgur.com/kcs90ta.jpeg')}
+.fundamentals::before{background-image:url('https://cdn.wallpapersafari.com/92/79/MYTD9q.png'); background-size: cover; background-position: center;}
+.diana-guide::before{background-image:url('https://ddragon.leagueoflegends.com/cdn/img/champion/splash/Diana_1.jpg'); background-size: cover; background-position: center;}
+.ekko-guide::before{background-image:url('https://ddragon.leagueoflegends.com/cdn/img/champion/splash/Ekko_0.jpg'); background-size: cover; background-position: center;}
+.diana-matchups::before{background-image:url('https://ddragon.leagueoflegends.com/cdn/img/champion/splash/Diana_0.jpg'); background-size: cover; background-position: center;}
+.build-calculator::before{background-image:url('https://i.imgur.com/uhLq29j.jpeg'); background-size: cover; background-position: center;}
+.rune-calculator::before{background-image:url('https://i.imgur.com/kcs90ta.jpeg'); background-size: cover; background-position: center;}
 .tierlist::before{ background: linear-gradient(to bottom, #1b2838 0%, #161b22 100%); }
-.coaching::before{background-image:url('https://m.media-amazon.com/images/I/71GlK3kDLJL.jpg'); opacity:0.20}
+.coaching::before{background-image:url('https://m.media-amazon.com/images/I/71GlK3kDLJL.jpg'); opacity:0.20; background-size: cover; background-position: center;}
 .discord-card::before{background-image:url('https://i.imgur.com/fS2OKHV.jpeg');background-size:cover;background-position:center;opacity:0.15}
 
 .tier-bar{ margin-top:12px; width:100%; height:60px; border-radius:6px; display:flex; overflow:hidden; position:relative; z-index:2; }
@@ -82,15 +82,17 @@ footer a:hover{text-decoration:underline}
 <h2>Explore the Hub</h2>
 <div class="card-grid">
 
-<!-- Top row free cards -->
-<a href="https://lolfundamentals.com/dianaitems.html" class="card build-calculator">
+<!-- Locked cards -->
+<a href="#" class="card build-calculator locked">
   <h3>Diana Combo Calculator</h3>
   <p>Compare different item builds and ability combos for Diana at different stages of the game.</p>
+  <div class="unlock-icon">🔒</div>
 </a>
 
-<a href="https://lolfundamentals.com/dianarunes.html" class="card rune-calculator">
+<a href="#" class="card rune-calculator locked">
   <h3>Diana Rune Calculator</h3>
   <p>Compare rune pages against enemies to create your perfect Diana setup.</p>
+  <div class="unlock-icon">🔒</div>
 </a>
 
 <a href="https://lolfundamentals.com/tierlist.html" class="card tierlist">
@@ -101,7 +103,6 @@ footer a:hover{text-decoration:underline}
   </div>
 </a>
 
-<!-- Paid / locked cards -->
 <a href="#" class="card fundamentals locked">
   <h3>Fundamentals</h3>
   <p>Core skills including combos, wave management, positioning, and warding for consistent gameplay improvement.</p>
@@ -261,4 +262,5 @@ document.querySelectorAll('.locked').forEach(card=>{
 
 </body>
 </html>
+
 
