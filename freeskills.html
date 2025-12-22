@@ -6,13 +6,13 @@
 <title>LoL Fundamentals – Skills Hub (Free)</title>
 
 <style>
-body {
-  margin: 0;
-  font-family: 'Beaufort for LOL', Arial, Helvetica, sans-serif;
-  color: #fff;
-  background: url('https://64.media.tumblr.com/594ac290bec6d5e9ad98b5f53404f00b/245c4c3ee469f81d-e4/s1280x1920/1cda4284320eb2031758a9859dfe14ff8bbc50ba.jpg') no-repeat center center fixed;
-  background-size: cover;
-  min-height: 100vh;
+body{
+  margin:0;
+  font-family:'Beaufort for LOL',Arial,Helvetica,sans-serif;
+  color:#fff;
+  background:url('https://64.media.tumblr.com/594ac290bec6d5e9ad98b5f53404f00b/245c4c3ee469f81d-e4/s1280x1920/1cda4284320eb2031758a9859dfe14ff8bbc50ba.jpg') no-repeat center center fixed;
+  background-size:cover;
+  min-height:100vh;
 }
 body::before{
   content:"";
@@ -44,6 +44,37 @@ header{
   font-weight:bold;
 }
 
+#section-select{
+  display:block;
+  margin:20px auto;
+  padding:8px 12px;
+  font-size:16px;
+  border-radius:6px;
+  border:none;
+  background:#0f1722;
+  color:#c9aa71;
+}
+
+.progress-wrap{
+  width:260px;
+  margin:0 auto 20px;
+  text-align:center;
+}
+.progress-label{font-size:14px;margin-bottom:6px}
+.progress-bar{
+  width:100%;
+  height:10px;
+  background:#0f1722;
+  border-radius:20px;
+  overflow:hidden;
+}
+.progress-fill{
+  height:100%;
+  width:0%;
+  background:linear-gradient(90deg,#c9aa71,#e6c77f);
+  transition:width .4s ease;
+}
+
 .skill-list{
   list-style:none;
   padding:0;
@@ -51,7 +82,6 @@ header{
   width:90%;
   max-width:900px;
 }
-
 .skill-list li{
   background:rgba(0,0,0,.85);
   border:2px solid #c9aa71;
@@ -63,7 +93,6 @@ header{
   align-items:center;
   transition:.25s;
 }
-
 .skill-list li:hover{
   transform:scale(1.03);
   background:rgba(0,0,0,.95);
@@ -76,14 +105,32 @@ header{
   text-align:center;
   font-size:18px;
 }
-
 .skill-list a:hover{color:#c9aa71}
 
-.lock{
-  font-size:18px;
-  color:#c9aa71;
+.lock{color:#c9aa71;font-size:18px}
+
+.checkmark{
+  width:26px;height:26px;
+  border-radius:50%;
+  border:2px solid #c9aa71;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  color:#000;
+  cursor:pointer;
+}
+.checkmark.completed{
+  background:#c9aa71;
 }
 
+footer{
+  text-align:center;
+  padding:20px;
+  font-size:14px;
+  color:#ccc;
+}
+
+/* MODAL */
 .modal{
   display:none;
   position:fixed;
@@ -93,7 +140,6 @@ header{
   justify-content:center;
   align-items:center;
 }
-
 .modalContent{
   background:#161b22;
   padding:30px;
@@ -103,9 +149,16 @@ header{
   max-width:400px;
   border:1px solid #c9aa71;
 }
-
 .modalContent h2{color:#c9aa71;margin-bottom:10px}
 .modalContent p{margin-bottom:20px}
+
+input{
+  width:90%;
+  margin:8px 0;
+  padding:8px;
+  border-radius:4px;
+  border:none;
+}
 
 .btn{
   background:#2f81f7;
@@ -117,27 +170,7 @@ header{
   cursor:pointer;
   margin:5px;
 }
-
-.btn.orange{
-  background:#f2994a;
-}
-
-.btn:hover{opacity:.9}
-
-input{
-  width:90%;
-  margin:8px 0;
-  padding:8px;
-  border-radius:4px;
-  border:none;
-}
-
-footer{
-  text-align:center;
-  padding:20px;
-  font-size:14px;
-  color:#ccc;
-}
+.btn.orange{background:#f2994a}
 </style>
 </head>
 
@@ -149,14 +182,23 @@ footer{
   <a href="https://lolfundamentals.com" class="back-button">← Back to Hub</a>
 </div>
 
-<ul class="skill-list">
-  <li><a href="#">Champion Select</a><span class="lock">🔒</span></li>
-  <li><a href="#">Wave Control</a><span class="lock">🔒</span></li>
-  <li><a href="#">Trading</a><span class="lock">🔒</span></li>
-  <li><a href="#">Map Awareness</a><span class="lock">🔒</span></li>
-  <li><a href="#">Positioning</a><span class="lock">🔒</span></li>
-  <li><a href="#">Vision</a><span class="lock">🔒</span></li>
-</ul>
+<select id="section-select">
+  <option>Pre Game</option>
+  <option>Early Game</option>
+  <option>Mid Game</option>
+  <option>Late Game</option>
+  <option>Advanced</option>
+  <option>Out of Game</option>
+</select>
+
+<div class="progress-wrap">
+  <div class="progress-label" id="progressLabel">0% Complete</div>
+  <div class="progress-bar">
+    <div class="progress-fill" id="progressFill"></div>
+  </div>
+</div>
+
+<ul class="skill-list" id="skillList"></ul>
 
 <footer>© 2025 LoL Fundamentals</footer>
 
@@ -164,76 +206,88 @@ footer{
 <div id="signupModal" class="modal">
   <div class="modalContent">
     <h2>Unlock All Fundamentals</h2>
-    <p>Sign up to access every skill, guide, and progression tracker.</p>
-
-    <input type="email" id="signupEmail" placeholder="Email">
-    <input type="password" id="signupPassword" placeholder="Password">
-    <input type="password" id="signupConfirm" placeholder="Confirm Password">
-
+    <p>Sign up to access every skill, guide, and tracker.</p>
+    <input id="signupEmail" placeholder="Email">
+    <input id="signupPassword" type="password" placeholder="Password">
+    <input id="signupConfirm" type="password" placeholder="Confirm Password">
     <button class="btn" id="signupBtn">Continue</button>
-    <button class="btn orange" id="plansBtn">See Plans</button>
-    <br><br>
+    <button class="btn orange" id="plansBtn">See Plans</button><br><br>
     <button class="btn" onclick="signupModal.style.display='none'">Cancel</button>
   </div>
 </div>
 
-<!-- PLAN MODAL -->
-<div id="planModal" class="modal">
-  <div class="modalContent">
-    <h2>Choose a Plan</h2>
-    <button class="btn" id="monthlyBtn">$8.99 / Month</button>
-    <button class="btn orange" id="yearlyBtn">$49 / Year</button>
-    <br><br>
-    <button class="btn" onclick="planModal.style.display='none'">Cancel</button>
-  </div>
-</div>
-
-<script type="module">
-import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
-import { getAuth, createUserWithEmailAndPassword } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-auth.js";
-import { getFirestore, doc, setDoc, serverTimestamp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
-
-const firebaseConfig={
-  apiKey:"AIzaSyCFRcEV7wdivqONnkjJubAZOjPMixrHMBI",
-  authDomain:"lol-fundamentals.firebaseapp.com",
-  projectId:"lol-fundamentals",
-  storageBucket:"lol-fundamentals.firebasestorage.app",
-  messagingSenderId:"1038440427584",
-  appId:"1:1038440427584:web:a82207151fd370dbedefa5"
+<script>
+const skillData={
+  "Pre Game":["Champion Select","Mouse Accuracy","Summoner Spells","Matchups","Communication","Build"],
+  "Early Game":["Level 1","Farming","Trading","Wave Control","Map Awareness"],
+  "Mid Game":["Vision","Teamfighting","Lane Assignments"],
+  "Late Game":["Win Conditions","Target Selection"],
+  "Advanced":["Positioning","Kiting"],
+  "Out of Game":["Mindset","Meta"]
 };
 
-const app=initializeApp(firebaseConfig);
-const auth=getAuth(app);
-const db=getFirestore(app);
+const progress=JSON.parse(localStorage.getItem("freeSkillProgress")||"{}");
 
-const stripe={
-  monthly:"https://buy.stripe.com/8x28wIaQ4dJa4Rg88iejK0f",
-  yearly:"https://buy.stripe.com/cNi14g3nC48AerQ9cmejK07"
-};
+const sectionSelect=document.getElementById("section-select");
+const skillList=document.getElementById("skillList");
+const progressFill=document.getElementById("progressFill");
+const progressLabel=document.getElementById("progressLabel");
 
-document.querySelectorAll('.skill-list li').forEach(li=>{
-  li.onclick=()=>signupModal.style.display="flex";
-});
+function render(){
+  const section=sectionSelect.value;
+  progress[section]=progress[section]||{};
+  const skills=skillData[section];
 
-signupBtn.onclick=async()=>{
-  const e=signupEmail.value.trim();
-  const p=signupPassword.value.trim();
-  const c=signupConfirm.value.trim();
-  if(!e||!p||p!==c) return alert("Check your fields");
-  await createUserWithEmailAndPassword(auth,e,p);
-  await setDoc(doc(db,"paidUsers",e),{paid:false,created:serverTimestamp()});
-  signupModal.style.display="none";
-  planModal.style.display="flex";
-};
+  skillList.innerHTML=skills.map(skill=>{
+    const isFree=skill==="Champion Select";
+    const done=progress[section][skill];
+    return `
+      <li>
+        <a href="${isFree?'championselect.html':'#'}"
+           onclick="${isFree?'':'openSignup();return false;'}">
+          ${skill}
+        </a>
+        ${
+          isFree
+          ? `<div class="checkmark ${done?'completed':''}"
+               onclick="toggle('${section}','${skill}',this)">
+               ${done?'✔':''}
+             </div>`
+          : `<span class="lock" onclick="openSignup()">🔒</span>`
+        }
+      </li>`;
+  }).join("");
 
-plansBtn.onclick=()=>{signupModal.style.display="none";planModal.style.display="flex"};
-monthlyBtn.onclick=()=>window.open(stripe.monthly,"_blank");
-yearlyBtn.onclick=()=>window.open(stripe.yearly,"_blank");
+  updateProgress(section);
+}
+
+function toggle(section,skill,el){
+  progress[section][skill]=!progress[section][skill];
+  localStorage.setItem("freeSkillProgress",JSON.stringify(progress));
+  el.classList.toggle("completed");
+  el.textContent=el.classList.contains("completed")?"✔":"";
+  updateProgress(section);
+}
+
+function updateProgress(section){
+  const vals=Object.values(progress[section]||{});
+  const total=skillData[section].length;
+  const done=vals.filter(Boolean).length;
+  const pct=Math.round(done/total*100);
+  progressFill.style.width=pct+"%";
+  progressLabel.textContent=`${section}: ${pct}% Complete`;
+}
+
+function openSignup(){
+  signupModal.style.display="flex";
+}
+
+sectionSelect.onchange=render;
+render();
 </script>
 
 </body>
 </html>
-
 
 
 
