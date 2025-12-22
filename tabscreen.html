@@ -16,28 +16,26 @@
 body {
   margin: 0;
   font-family: 'Beaufort for LOL', Arial, Helvetica, sans-serif;
+  text-align: center;
   color: #fff;
   background: url('https://64.media.tumblr.com/594ac290bec6d5e9ad98b5f53404f00b/245c4c3ee469f81d-e4/s1280x1920/1cda4284320eb2031758a9859dfe14ff8bbc50ba.jpg') no-repeat center center fixed;
   background-size: cover;
-  display: flex;
-  flex-direction: column;
-  min-height: 100vh;
-  text-align: center;
+  overflow-x: hidden;
 }
 
-/* Overlay */
+/* Overlay for readability */
 body::before {
   content: "";
   position: fixed;
   top: 0; left: 0;
   width: 100%; height: 100%;
-  background: rgba(10,15,20,0.2);
+  background: rgba(10,15,20,0.75);
   z-index: -1;
 }
 
 /* Header */
 header {
-  background: rgba(13,17,23,0.85);
+  background: rgba(13,17,23,0.9);
   border-bottom: 2px solid #c9aa71;
   padding: 20px 10px;
   font-weight: bold;
@@ -66,30 +64,24 @@ header {
   box-shadow: 0 0 15px rgba(255,215,0,0.8);
 }
 
-/* Single card container */
+/* Content container - MATCHES OTHER PAGES */
 .content-container {
-  background: rgba(13,17,23,0.9);
-  border: 1px solid #c9aa71;
+  background: rgba(13,17,23,0.95);
+  border: 1px solid #2f81f7;
   border-radius: 10px;
   max-width: 900px;
-  margin: 30px auto;
-  padding: 20px 25px;
+  margin: 20px auto 50px auto;
+  padding: 20px;
   text-align: left;
+  color: #fff;
   font-size: 16px;
   line-height: 1.6;
+  position: relative;
 }
-
-/* Card heading */
 .content-container h2 {
   color: #c9aa71;
   margin-top: 0;
-  margin-bottom: 15px;
-  font-size: 20px;
-  border-bottom: 1px solid #c9aa71;
-  padding-bottom: 5px;
 }
-
-/* List spacing */
 .content-container ul {
   margin-left: 20px;
 }
@@ -100,16 +92,14 @@ header {
 /* Footer */
 footer {
   text-align: center;
-  margin-top: auto;
   padding: 15px 10px;
   font-size: 14px;
-  color: #fff;
+  color: #8b949e;
 }
 
-/* Responsive */
 @media (max-width: 600px) {
   header { font-size: 24px; padding: 15px; }
-  .content-container { padding: 15px 16px; font-size: 15px; }
+  .content-container { margin: 15px 10px 30px 10px; padding: 15px; }
 }
 </style>
 </head>
@@ -134,6 +124,7 @@ footer {
 
 </body>
 </html>
+
 
 
 
