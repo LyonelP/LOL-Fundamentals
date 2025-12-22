@@ -79,7 +79,7 @@ header {
   padding: 20px 10px;
 }
 
-/* Tip cards */
+/* Tip card */
 .tip-card {
   background: rgba(13,17,23,0.9);
   border: 1px solid #c9aa71;
@@ -108,22 +108,12 @@ header {
   padding-bottom: 4px;
 }
 
-/* Video embed inside tip card */
-.tip-card .video-container {
-  text-align: center;
-  margin-top: 15px;
+.tip-card ul {
+  margin-left: 20px;
 }
-.tip-card .video-container iframe {
-  width: 100%;
-  max-width: 800px;
-  height: 450px;
-  border: none;
-  border-radius: 8px;
-  transition: all 0.3s;
-}
-.tip-card .video-container:hover {
-  box-shadow: 0 0 20px rgba(201,170,113,0.8);
-  border-radius: 8px;
+
+.tip-card li {
+  margin-bottom: 10px;
 }
 
 /* Fade-in animation */
@@ -147,7 +137,6 @@ footer {
 @media (max-width: 600px) {
   header { font-size: 24px; padding: 15px; }
   .tip-card { padding: 14px 16px; font-size: 15px; }
-  .tip-card .video-container iframe { height: 250px; }
 }
 </style>
 </head>
@@ -159,42 +148,35 @@ footer {
 <div class="main-content">
   <div class="tip-card">
     <h2>Laning Fundamentals</h2>
-    <p>The goal of League is to destroy the enemy Nexus, and laning is about destroying the tier 1 tower. You force your opponent out of lane by a reset or a kill, allowing you and your minions to reach the enemy tower. Gain gold, deny your opponent, and pressure the tower effectively.</p>
+    <p>The goal of League is to destroy the enemy Nexus and therefore the goal of laning is to destroy the tier 1 tower. This is achieved by forcing your opponent out of lane by a reset or a kill. This allows you and your minions to reach the enemy tower. The more gold you gain from minions and the more you deny from your opponent, the easier it is to reach and stay at the enemy tower.</p>
   </div>
 
   <div class="tip-card">
     <h2>General Rules of Laning</h2>
     <ul>
-      <li>The stronger you are in lane, the less you want to roam.</li>
-      <li>As a melee champion, wait for the wave to settle before stepping up.</li>
-      <li>Build resists based on both your lane opponent and the enemy jungler.</li>
-      <li>Tower plate or tempo? Stay long enough to justify taking a plate.</li>
-      <li>Recalls: Keep your opponent in lane by pulling/pushing the wave.</li>
+      <li>The stronger you are in lane, the less you want to roam. The enemy team needs to come to you to stop you from pressuring the tower and laner.</li>
+      <li>As a melee champion, wait for the wave to settle before stepping up. The enemy won't draw minion aggro until the wave settles.</li>
+      <li>Build resists based on both your lane opponent and the enemy jungler. A null mantle against an AP Mid/Jungle combo and a cloth armor against AD (less important against AD).</li>
+      <li>Tower plate or tempo? If you went for a tower plate, then you have to be able to stay for at least one additional wave since you’ll lose too much tempo otherwise.</li>
+      <li>Recalls – Keep your opponent in lane when you have the advantage by pulling or pushing the wave and cancelling their recalls.</li>
     </ul>
   </div>
 
   <div class="tip-card">
     <h2>Mental Stack</h2>
     <ul>
-      <li>Enemy Position</li>
-      <li>Wave State</li>
-      <li>Minions</li>
-      <li>Enemy & Teammate Position</li>
-      <li>Cooldowns</li>
-      <li>Resources</li>
-      <li>Vision</li>
-      <li>Runes</li>
-      <li>Items</li>
-      <li>Gold</li>
+      <li>Enemy Position – Where are they positioned relative to the lane, minions, and players? Are they stepping forward or backward?</li>
+      <li>Wave State – How fast is the wave pushing or pulling? Has it settled, is it a canon wave, and when does the next wave arrive?</li>
+      <li>Minions – Which minions do you and your opponent need to last hit and how will you and them go about it.</li>
+      <li>Enemy & Teammate Position – Jungle pathing and potential roams from top and bot lane.</li>
+      <li>Cooldowns – What abilities are available? Which ones are down, and for how long?</li>
+      <li>Resources – Health, mana, potions, and sustain.</li>
+      <li>Vision – What vision do you and your enemy have around the lane.</li>
+      <li>Runes – Proc windows like Electrocute, Conqueror, and Bone Plating.</li>
+      <li>Items – Item spikes and component advantages.</li>
+      <li>Gold – When do you and your opponent want to recall, and with how much gold?</li>
     </ul>
-    <p><em>If unsure, start at the top of the stack and work down.</em></p>
-  </div>
-
-  <div class="tip-card">
-    <h2>Video Overview</h2>
-    <div class="video-container">
-      <iframe src="https://www.youtube.com/embed/WUi9pOT6wYc" title="Laning Phase Fundamentals" allowfullscreen></iframe>
-    </div>
+    <p><em>If you are unsure what to do, start at the top of the stack and work down.</em></p>
   </div>
 </div>
 
@@ -202,4 +184,3 @@ footer {
 
 </body>
 </html>
-
