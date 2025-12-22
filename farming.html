@@ -13,27 +13,35 @@
 </script>
 
 <style>
-body {
+html, body {
   margin: 0;
+  padding: 0;
+  height: 100%;
+}
+body {
   font-family: 'Beaufort for LOL', Arial, Helvetica, sans-serif;
-  text-align: center;
   color: #fff;
   background: url('https://64.media.tumblr.com/594ac290bec6d5e9ad98b5f53404f00b/245c4c3ee469f81d-e4/s1280x1920/1cda4284320eb2031758a9859dfe14ff8bbc50ba.jpg') no-repeat center center fixed;
   background-size: cover;
-  overflow-x: hidden;
+  display: flex;
+  flex-direction: column;
+  text-align: center;
+  min-height: 100vh;
 }
 
+/* Slight overlay for readability */
 body::before {
   content: "";
   position: fixed;
   top: 0; left: 0;
   width: 100%; height: 100%;
-  background: rgba(10,15,20,0.75);
+  background: rgba(10,15,20,0.2);
   z-index: -1;
 }
 
+/* Header */
 header {
-  background: rgba(13,17,23,0.9);
+  background: rgba(13,17,23,0.85);
   border-bottom: 2px solid #c9aa71;
   padding: 20px 10px;
   font-weight: bold;
@@ -43,6 +51,7 @@ header {
   letter-spacing: 1px;
 }
 
+/* Back button */
 .back-button {
   display: inline-block;
   margin: 20px auto 10px;
@@ -61,31 +70,49 @@ header {
   box-shadow: 0 0 15px rgba(255,215,0,0.8);
 }
 
-.content-container {
-  margin: 20px auto 50px auto;
-  max-width: 900px;
-  background: rgba(13,17,23,0.95);
-  border: 1px solid #2f81f7;
+/* Main content */
+.main-content {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 20px 10px;
+}
+
+/* Tip cards */
+.tip-card {
+  background: rgba(13,17,23,0.9);
+  border: 1px solid #c9aa71;
   border-radius: 10px;
-  padding: 20px;
+  padding: 18px 22px;
+  margin: 15px 0;
+  max-width: 900px;
+  width: 90%;
   text-align: left;
   font-size: 16px;
   line-height: 1.6;
-  color: #fff;
-  position: relative;
+  opacity: 0;
+  transform: translateY(10px);
+  animation: fadeInUp 0.4s forwards;
 }
+.tip-card:nth-child(1) { animation-delay: 0.1s; }
+.tip-card:nth-child(2) { animation-delay: 0.3s; }
 
-.content-container h2 {
+.tip-card h2 {
   color: #c9aa71;
   margin-top: 0;
+  margin-bottom: 10px;
+  font-size: 20px;
+  border-bottom: 1px solid #c9aa71;
+  padding-bottom: 4px;
 }
 
-.video-container {
+/* Video embed inside tip card */
+.tip-card .video-container {
   text-align: center;
-  margin: 20px 0;
+  margin-top: 15px;
 }
-
-.video-container iframe {
+.tip-card .video-container iframe {
   width: 100%;
   max-width: 800px;
   height: 450px;
@@ -93,16 +120,28 @@ header {
   border-radius: 8px;
 }
 
-footer {
-  text-align: center;
-  padding: 15px 10px;
-  font-size: 14px;
-  color: #8b949e;
+/* Fade-in animation */
+@keyframes fadeInUp {
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
 
+/* Footer at bottom of page */
+footer {
+  text-align: center;
+  margin-top: auto;
+  padding: 15px 10px;
+  font-size: 14px;
+  color: #fff;
+}
+
+/* Responsive */
 @media (max-width: 600px) {
   header { font-size: 24px; padding: 15px; }
-  .content-container { margin: 15px 10px 30px 10px; padding: 15px; }
+  .tip-card { padding: 14px 16px; font-size: 15px; }
+  .tip-card .video-container iframe { height: 250px; }
 }
 </style>
 </head>
@@ -111,12 +150,13 @@ footer {
 <header>Farming</header>
 <a href="skills.html" class="back-button">Back to Skills Hub</a>
 
-<div class="content-container">
-  <h2>Farming</h2>
-  <p>The key to farming is a combination of last hitting mechanics, strong pressure in lane to farm freely, reset timings, lane assignment, and catching waves.</p>
-
-  <div class="video-container">
-    <iframe src="https://www.youtube.com/embed/BhTvcMmCY_o" title="Farming Guide Video" allowfullscreen></iframe>
+<div class="main-content">
+  <div class="tip-card">
+    <h2>Farming Overview</h2>
+    <p>The key to farming is a combination of last hitting mechanics, strong pressure in lane to farm freely, reset timings, lane assignment, and catching waves.</p>
+    <div class="video-container">
+      <iframe src="https://www.youtube.com/embed/BhTvcMmCY_o" title="Farming Guide Video" allowfullscreen></iframe>
+    </div>
   </div>
 </div>
 
@@ -124,8 +164,6 @@ footer {
 
 </body>
 </html>
-
-
 
 
 
