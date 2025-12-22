@@ -10,7 +10,7 @@ body {
   margin: 0;
   font-family: 'Beaufort for LOL', Arial, Helvetica, sans-serif;
   color: #fff;
-  background: url('https://64.media.tumblr.com/594ac290bec6d5e9ad98b5f53404f00b/245c4c3ee469f81d-e4/s1280x1920/1cda4284320eb2031758a9859dfe14ff8bbc50ba.jpg') no-repeat center center fixed;
+  background: url('https://64.media.tumblr.com/594ac290bec6d5e9ad98b5f53404f00b/245c4c3ee469f81d-e4/s1280x1920/1cda4284320eb2031758dfe14ff8bbc50ba.jpg') no-repeat center center fixed;
   background-size: cover;
   overflow-x: hidden;
   min-height: 100vh;
@@ -94,7 +94,7 @@ header {
 }
 .skill-list li:hover { background: rgba(0,0,0,0.95); transform: scale(1.03); box-shadow: 0 8px 20px rgba(0,0,0,0.7); }
 .skill-list li a { text-decoration: none; color: #fff; flex-grow: 1; text-align: center; position: relative; transition: color 0.3s; }
-.skill-list li a:hover { color: #c9aa71; } /* gold hover for all */
+.skill-list li a:hover { color: #c9aa71; }
 .skill-list li a.locked::after {
   content: "🔒";
   position: absolute;
@@ -119,6 +119,14 @@ footer { margin-top: auto; text-align: center; padding: 18px 10px; font-size: 14
   #section-select { width: 95vw; font-size: 14px; padding: 8px 30px 8px 12px; }
   .skill-list li { width: 85vw; font-size: 16px; padding: 10px 14px; }
 }
+
+/* Modal styling */
+.modal{display:none;position:fixed;inset:0;background:rgba(0,0,0,.75);z-index:9999;justify-content:center;align-items:center}
+.modalContent{background:#161b22;padding:30px;border-radius:10px;text-align:center;max-width:400px;width:90%;border:1px solid #c9aa71}
+.modalContent h2{color:#c9aa71;margin-bottom:20px}
+.modalContent input{width:80%;max-width:300px;display:block;margin:8px auto;padding:8px;border-radius:4px;border:none;text-align:center}
+.modalContent button{margin-top:10px;background:none;border:none;color:#c9aa71;cursor:pointer;padding:8px 12px;border-radius:4px;transition:.3s}
+.modalContent button:hover{background:rgba(201,170,113,0.2)}
 </style>
 </head>
 <body>
@@ -129,7 +137,7 @@ footer { margin-top: auto; text-align: center; padding: 18px 10px; font-size: 14
 
 <div id="section-select-container">
   <select id="section-select">
-    <option value="Pre Game" selected>Pre Game</option>
+    <option value="Pre Game">Pre Game</option>
     <option value="Early Game">Early Game</option>
     <option value="Mid Game">Mid Game</option>
     <option value="Late Game">Late Game</option>
@@ -149,7 +157,23 @@ footer { margin-top: auto; text-align: center; padding: 18px 10px; font-size: 14
 
 <footer>© 2025 LoL Fundamentals · All rights reserved</footer>
 
-<script>
+<script type="module">
+import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
+import { getAuth, signInWithEmailAndPassword, createUserWithEmailAndPassword, sendPasswordResetEmail } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-auth.js";
+import { getFirestore, doc, setDoc, serverTimestamp, getDoc } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
+
+const firebaseConfig = {
+  apiKey: "AIzaSyCFRcEV7wdivqONnkjJubAZOjPMixrHMBI",
+  authDomain: "lol-fundamentals.firebaseapp.com",
+  projectId: "lol-fundamentals",
+  storageBucket: "lol-fundamentals.firebasestorage.app",
+  messagingSenderId: "1038440427584",
+  appId: "1:1038440427584:web:a82207151fd370dbedefa5"
+};
+const app = initializeApp(firebaseConfig);
+const auth = getAuth(app);
+const firestore = getFirestore(app);
+
 const skillData = {
   "Pre Game": ["Champion Select","Mouse Accuracy","Summoner Spells","Matchups","Communication","Build"],
   "Early Game": ["Level 1","Farming","Trading","Wave Control","Back Timings","Power Spikes","Pathing","Laning","Map Awareness","Ganking","Roaming"],
@@ -160,12 +184,10 @@ const skillData = {
 };
 
 let skillProgress = JSON.parse(localStorage.getItem("skillProgressFree") || "{}");
-
-// Initialize skills: only Champion Select unlocked
 Object.keys(skillData).forEach(section => {
   skillProgress[section] = skillProgress[section] || {};
   skillData[section].forEach(skill => {
-    skillProgress[section][skill] = skill === "Champion Select";
+    skillProgress[section][skill] = false;
   });
 });
 localStorage.setItem("skillProgressFree", JSON.stringify(skillProgress));
@@ -189,7 +211,7 @@ function updateProgress(section) {
 }
 
 function toggleCheck(section, skill, element) {
-  if(skill !== "Champion Select") return; 
+  if(skill === "Champion Select") return;
   skillProgress[section][skill] = !skillProgress[section][skill];
   saveProgress();
   element.classList.toggle("completed");
@@ -200,11 +222,18 @@ function toggleCheck(section, skill, element) {
 function renderSkills(section) {
   const skills = skillData[section];
   skillList.innerHTML = skills.map(skill => {
-    const completed = skillProgress[section][skill] ? "completed" : "";
-    const isLocked = skill !== "Champion Select";
+    let completed = skillProgress[section][skill] ? "completed" : "";
+    let href = "#";
+    let isLocked = skill !== "Champion Select";
+
+    if(skill === "Champion Select") {
+      href = "https://lolfundamentals.com/championselect";
+      isLocked = false;
+    }
+
     return `
       <li data-skill="${skill}">
-        <a href="#" class="${isLocked ? "locked" : ""}" onclick="${isLocked ? 'document.querySelector(\'#signup-modal\').classList.add(\'active\'); return false;' : ''}">
+        <a href="${href}" class="${isLocked ? "locked" : ""}" ${isLocked ? "onclick=\"alert('Sign up to unlock this skill'); return false;\"" : ""}>
           ${skill}
         </a>
         <div class="checkmark ${completed}" onclick="toggleCheck('${section}','${skill}', this)">
@@ -216,7 +245,6 @@ function renderSkills(section) {
   updateProgress(section);
 }
 
-// Section change
 sectionSelect.addEventListener('change', () => {
   const selected = sectionSelect.value;
   localStorage.setItem("lastSectionFree", selected);
@@ -229,12 +257,8 @@ sectionSelect.value = lastSection;
 renderSkills(lastSection);
 </script>
 
-<!-- Optional modal placeholder -->
-<div id="signup-modal" style="display:none;">
-  <!-- Your homepage signup modal content -->
-</div>
-
 </body>
 </html>
+
 
 
