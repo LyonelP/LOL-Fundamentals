@@ -190,6 +190,11 @@
 </footer>
 
 <script>
+/* REQUIRE LOGIN */
+if (localStorage.getItem('lolfundamentals_logged_in') !== 'true') {
+  window.location.href = 'index.html';
+}
+
 /* CSV URL (your sheet) */
 const CSV_URL = 'https://docs.google.com/spreadsheets/d/e/2PACX-1vRtIJeggpJ6cjGJt0OOds4OZDuHMMUxHCWzMiU1Bd4gJ8EvfZMXPE9p0X1K3yyeZs7bpFyQZHhHpnsu/pub?output=csv';
 
@@ -218,7 +223,7 @@ const IMG_NAME_OVERRIDES = {
   "Renata Glasc": "Renata",
   "Mel": "Mel",
   "Zac": "Zac",
-  "Zaahen": "Zaahen"
+  "Zaahen": "Zaahen" /* Add this if needed */
 };
 
 /* normalize champion names */
@@ -320,7 +325,6 @@ function renderTierGroups(champRanks, role) {
 </script>
 </body>
 </html>
-
 
 
 
