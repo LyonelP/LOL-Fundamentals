@@ -91,11 +91,10 @@ header {
   max-width: 900px;
   box-shadow: 0 4px 12px rgba(0,0,0,0.5);
   transition: transform 0.25s, box-shadow 0.3s;
-  position: relative;
 }
 .skill-list li:hover { background: rgba(0,0,0,0.95); transform: scale(1.03); box-shadow: 0 8px 20px rgba(0,0,0,0.7); }
-.skill-list li a { text-decoration: none; color: #fff; flex-grow: 1; text-align: center; position: relative; transition: color 0.3s; z-index: 1; }
-.skill-list li a:hover { color: #c9aa71; }
+.skill-list li a { text-decoration: none; color: #fff; flex-grow: 1; text-align: center; position: relative; transition: color 0.3s; }
+.skill-list li a:hover { color: #c9aa71; } /* gold hover for all */
 .skill-list li a.locked::after {
   content: "🔒";
   position: absolute;
@@ -112,9 +111,6 @@ header {
   display: flex; justify-content: center; align-items: center;
   color: #c9aa71; font-size: 18px; flex-shrink: 0;
   cursor: pointer;
-  z-index: 2;
-  background: rgba(0,0,0,0.8);
-  margin-left: 10px;
 }
 .checkmark.completed { background: #c9aa71; color: #000; }
 footer { margin-top: auto; text-align: center; padding: 18px 10px; font-size: 14px; color: #fff; }
@@ -133,7 +129,7 @@ footer { margin-top: auto; text-align: center; padding: 18px 10px; font-size: 14
 
 <div id="section-select-container">
   <select id="section-select">
-    <option value="Pre Game">Pre Game</option>
+    <option value="Pre Game" selected>Pre Game</option>
     <option value="Early Game">Early Game</option>
     <option value="Mid Game">Mid Game</option>
     <option value="Late Game">Late Game</option>
@@ -153,23 +149,7 @@ footer { margin-top: auto; text-align: center; padding: 18px 10px; font-size: 14
 
 <footer>© 2025 LoL Fundamentals · All rights reserved</footer>
 
-<script type="module">
-import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
-import { getAuth, signInWithEmailAndPassword, createUserWithEmailAndPassword, sendPasswordResetEmail } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-auth.js";
-import { getFirestore, doc, setDoc, serverTimestamp, getDoc } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
-
-const firebaseConfig = {
-  apiKey: "AIzaSyCFRcEV7wdivqONnkjJubAZOjPMixrHMBI",
-  authDomain: "lol-fundamentals.firebaseapp.com",
-  projectId: "lol-fundamentals",
-  storageBucket: "lol-fundamentals.firebasestorage.app",
-  messagingSenderId: "1038440427584",
-  appId: "1:1038440427584:web:a82207151fd370dbedefa5"
-};
-const app = initializeApp(firebaseConfig);
-const auth = getAuth(app);
-const firestore = getFirestore(app);
-
+<script>
 const skillData = {
   "Pre Game": ["Champion Select","Mouse Accuracy","Summoner Spells","Matchups","Communication","Build"],
   "Early Game": ["Level 1","Farming","Trading","Wave Control","Back Timings","Power Spikes","Pathing","Laning","Map Awareness","Ganking","Roaming"],
@@ -179,10 +159,11 @@ const skillData = {
   "Out of Game": ["Setup","Mindset","Not Raging/Blaming","Reaction Time","Meta"]
 };
 
+// All skills start unchecked
 let skillProgress = JSON.parse(localStorage.getItem("skillProgressFree") || "{}");
 Object.keys(skillData).forEach(section => {
   skillProgress[section] = skillProgress[section] || {};
-  skillData[section].forEach(skill => skillProgress[section][skill] = skillProgress[section][skill] || false);
+  skillData[section].forEach(skill => skillProgress[section][skill] = false);
 });
 localStorage.setItem("skillProgressFree", JSON.stringify(skillProgress));
 
@@ -215,18 +196,13 @@ function toggleCheck(section, skill, element) {
 function renderSkills(section) {
   const skills = skillData[section];
   skillList.innerHTML = skills.map(skill => {
-    let completed = skillProgress[section][skill] ? "completed" : "";
+    const completed = skillProgress[section][skill] ? "completed" : "";
     let href = "#";
     let isLocked = skill !== "Champion Select";
-
-    if(skill === "Champion Select") {
-      href = "https://lolfundamentals.com/championselect";
-      isLocked = false;
-    }
-
+    if(skill === "Champion Select") href = "https://lolfundamentals.com/championselect";
     return `
       <li data-skill="${skill}">
-        <a href="${href}" class="${isLocked ? "locked" : ""}" ${isLocked ? "onclick=\"alert('Sign up to unlock this skill'); return false;\"" : ""}>
+        <a href="${href}" class="${isLocked ? "locked" : ""}" ${isLocked ? "onclick='alert(\"Sign up to unlock this skill\"); return false;'" : ""}>
           ${skill}
         </a>
         <div class="checkmark ${completed}" onclick="toggleCheck('${section}','${skill}', this)"></div>
@@ -236,6 +212,7 @@ function renderSkills(section) {
   updateProgress(section);
 }
 
+// Section change
 sectionSelect.addEventListener('change', () => {
   const selected = sectionSelect.value;
   localStorage.setItem("lastSectionFree", selected);
@@ -248,7 +225,13 @@ sectionSelect.value = lastSection;
 renderSkills(lastSection);
 </script>
 
+<!-- Optional modal placeholder -->
+<div id="signup-modal" style="display:none;">
+  <!-- Your homepage signup modal content -->
+</div>
+
 </body>
 </html>
+
 
 
