@@ -23,7 +23,7 @@ body {
   overflow-x: hidden;
 }
 
-/* Overlay for readability */
+/* Overlay */
 body::before {
   content: "";
   position: fixed;
@@ -64,7 +64,7 @@ header {
   box-shadow: 0 0 15px rgba(255,215,0,0.8);
 }
 
-/* Layout container for text + minimap */
+/* Main layout */
 .main-section {
   display: flex;
   justify-content: center;
@@ -75,7 +75,7 @@ header {
   gap: 20px;
 }
 
-/* Content box */
+/* Content container */
 .content-container {
   flex: 1 1 600px;
   background: rgba(13,17,23,0.95);
@@ -86,6 +86,7 @@ header {
   color: #fff;
   font-size: 16px;
   line-height: 1.6;
+  position: relative;
 }
 .content-container h2 {
   color: #c9aa71;
@@ -98,7 +99,7 @@ header {
   margin-bottom: 10px;
 }
 
-/* Minimap */
+/* Minimap container */
 .minimap {
   flex: 0 0 350px;
   display: flex;
@@ -122,7 +123,7 @@ footer {
   color: #8b949e;
 }
 
-/* Mobile layout */
+/* Mobile adjustments */
 @media (max-width: 800px) {
   .main-section {
     flex-direction: column;
@@ -167,7 +168,6 @@ footer {
 
 </body>
 </html>
-
 
 
 
