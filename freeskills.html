@@ -199,7 +199,7 @@ function renderSkills(section) {
     const completed = skillProgress[section][skill] ? "completed" : "";
     let href = "#";
     let isLocked = skill !== "Champion Select";
-    if(skill === "Champion Select") href = "https://lolfundamentals.com/championselect";
+    if(skill === "Champion Select") href = "https://lolfundamentals.com/freechampionselect";
     return `
       <li data-skill="${skill}">
         <a href="${href}" class="${isLocked ? "locked" : ""}" ${isLocked ? "onclick='alert(\"Sign up to unlock this skill\"); return false;'" : ""}>
@@ -232,6 +232,7 @@ renderSkills(lastSection);
 
 </body>
 </html>
+
 
 
 
