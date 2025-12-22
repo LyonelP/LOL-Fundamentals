@@ -4,138 +4,131 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Diana Mid vs Ahri</title>
+
 <style>
-  :root {
-    --gold:#c9aa71;
-    --bg:#0a0f14;
-    --card:#161b22;
-    --muted:#8b949e;
-  }
+:root {
+  --gold:#c9aa71;
+  --bg:#0a0f14;
+  --card:#161b22;
+  --muted:#8b949e;
+  --yellow:#f9d949;
+}
 
-  body {
-    margin: 0;
-    font-family: "Beaufort for LOL", Arial, Helvetica, sans-serif;
-    background: var(--bg);
-    color: #e6edf3;
-    line-height: 1.4;
-    min-height: 100vh;
-    display: flex;
-    flex-direction: column;
-  }
+body {
+  margin: 0;
+  font-family: "Beaufort for LOL", Arial, Helvetica, sans-serif;
+  background: var(--bg);
+  color: #e6edf3;
+  line-height: 1.5;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
 
-  /* ===== HEADER ===== */
-  header {
-    background: rgba(13,17,23,0.9);
-    border-bottom: 2px solid var(--gold);
-    padding: 20px;
-    font-weight: bold;
-    font-size: 26px;
-    letter-spacing: 1px;
-    text-transform: uppercase;
-    text-align: center;
-    line-height: 1.2;
-    color: var(--gold);
-    box-sizing: border-box;
-  }
+/* ===== HEADER ===== */
+header {
+  background: rgba(13,17,23,0.9);
+  border-bottom: 2px solid var(--gold);
+  padding: 16px 20px;
+  font-size: 26px;
+  font-weight: 700;
+  text-transform: uppercase;
+  color: var(--gold);
+  text-align: center;
+  letter-spacing: 0.8px;
+}
 
-  /* ===== Back Button ===== */
-  .back-button {
-    display: block;
-    margin: 20px auto 20px; 
-    padding: 10px 20px;
-    background: linear-gradient(135deg, #c9aa71, #e0c77b);
-    color: #000;
-    text-decoration: none;
-    border-radius: 8px;
-    font-weight: bold;
-    font-size: 16px;
-    text-align: center;
-    box-shadow: 0 0 10px rgba(201,170,113,0.5);
-    transition: all 0.3s;
-    width: fit-content;
-  }
-  .back-button::before { content: "← "; }
-  .back-button:hover {
-    background: linear-gradient(135deg, #e6c97f, #f0d88b);
-    box-shadow: 0 0 15px rgba(255,215,0,0.8);
-  }
+/* ===== BACK BUTTON ===== */
+.back-button {
+  display: block;
+  margin: 18px auto;
+  padding: 9px 18px;
+  background: linear-gradient(135deg, #c9aa71, #e0c77b);
+  color: #000;
+  text-decoration: none;
+  border-radius: 8px;
+  font-weight: bold;
+  box-shadow: 0 0 10px rgba(201,170,113,0.5);
+  width: fit-content;
+}
+.back-button::before { content: "← "; }
 
-  /* ===== Matchup Container ===== */
+/* ===== MATCHUP CONTAINER ===== */
+.matchup-container {
+  display: flex;
+  max-width: 900px;
+  margin: 0 auto;
+  gap: 15px;
+  padding: 0 20px 10px 20px;
+}
+
+.matchup-left {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.matchup-left img {
+  width: 80px;
+  height: 80px;
+  border-radius: 8px;
+}
+
+.winrate-bubble {
+  background: rgba(249,217,73,0.18);
+  color: var(--yellow);
+  font-weight: bold;
+  padding: 8px 14px;
+  border-radius: 25px;
+  font-size: 16px;
+  white-space: nowrap;
+}
+
+.matchup-right {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+}
+
+.matchup-right h2 {
+  margin: 0 0 15px 0;
+  font-size: 22px;
+  color: var(--gold);
+}
+
+.matchup-right ul {
+  padding-left: 20px;
+  margin: 0;
+}
+
+.matchup-right li {
+  margin-bottom: 6px;
+}
+
+/* ===== FOOTER ===== */
+footer {
+  text-align: center;
+  padding: 15px 10px;
+  font-size: 14px;
+  color: var(--muted);
+  margin-top: auto;
+}
+
+/* ===== MOBILE ===== */
+@media (max-width: 600px) {
   .matchup-container {
-    display: flex;
-    max-width: 900px;
-    margin: 0 auto;
-    gap: 15px;
-    padding: 0 20px 10px 20px;
-  }
-
-  .matchup-left {
-    display: flex;
-    align-items: center;
-    gap: 10px;
-  }
-
-  .matchup-left img {
-    width: 80px;
-    height: 80px;
-    border-radius: 8px;
-  }
-
-  .winrate-bubble {
-    background: #F9D949; /* yellow for Ahri */
-    color: #0d1117;
-    font-weight: bold;
-    padding: 8px 14px;
-    border-radius: 25px;
-    font-size: 16px;
-    white-space: nowrap;
-  }
-
-  .matchup-right {
-    flex: 1;
-    display: flex;
     flex-direction: column;
+    align-items: center;
+    padding: 10px;
   }
-
-  .matchup-right h2 {
-    margin: 0 0 15px 0;
-    font-size: 22px;
-    color: var(--gold);
-  }
-
-  .matchup-right ul {
-    padding-left: 20px;
-    margin: 0;
-  }
-
-  .matchup-right li {
-    margin-bottom: 6px;
-  }
-
-  /* ===== FOOTER ===== */
-  footer {
-    text-align: center;
-    padding: 15px 10px;
-    font-size: 14px;
-    color: #8b949e;
-    margin-top: auto;
-  }
-
-  @media (max-width: 600px) {
-    .matchup-container {
-      flex-direction: column;
-      align-items: center;
-      padding: 10px;
-    }
-    .matchup-right { text-align: center; }
-  }
+  .matchup-right { text-align: center; }
+}
 </style>
 
-<!-- ===== LOGIN CHECK ===== -->
 <script>
-  if (localStorage.getItem('lolfundamentals_logged_in') !== 'true') {
-    window.location.href = 'login.html';
-  }
+if (localStorage.getItem('lolfundamentals_logged_in') !== 'true') {
+  window.location.href = 'login.html';
+}
 </script>
 
 </head>
@@ -165,28 +158,6 @@
 
 </body>
 </html>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 
