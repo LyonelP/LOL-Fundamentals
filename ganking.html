@@ -25,11 +25,10 @@ body {
   background-size: cover;
   display: flex;
   flex-direction: column;
-  text-align: center;
   min-height: 100vh;
 }
 
-/* Slight overlay for readability */
+/* Slight overlay */
 body::before {
   content: "";
   position: fixed;
@@ -70,7 +69,7 @@ header {
   box-shadow: 0 0 15px rgba(255,215,0,0.8);
 }
 
-/* Main content */
+/* Main content container */
 .main-content {
   flex: 1;
   display: flex;
@@ -79,32 +78,41 @@ header {
   flex-wrap: wrap;
   padding: 20px 10px;
   gap: 20px;
+  max-width: 1100px;
+  margin: 0 auto;
 }
 
-/* Video container with subheader */
-.video-container {
-  background: rgba(13,17,23,0.9);
-  border: 1px solid #c9aa71;
-  border-radius: 10px;
-  padding: 20px;
-  max-width: 900px;
-  width: 100%;
-  text-align: center;
-  transition: box-shadow 0.3s, transform 0.3s, border 0.3s;
+/* Left text section */
+.text-section {
+  flex: 1 1 350px;
+  text-align: left;
 }
-.video-container h2 {
+
+/* Subheader style like Champion Select */
+.text-section h2 {
   color: #c9aa71;
   margin-top: 0;
   margin-bottom: 15px;
+  border-bottom: 1px solid #c9aa71;
+  padding-bottom: 4px;
 }
-.video-container iframe {
+
+/* Video section on right */
+.video-section {
+  flex: 1 1 500px;
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+}
+.video-section iframe {
   width: 100%;
-  max-width: 800px;
-  height: 450px;
+  max-width: 500px;
+  height: 280px;
   border: none;
   border-radius: 10px;
+  transition: transform 0.3s, box-shadow 0.3s;
 }
-.video-container:hover {
+.video-section iframe:hover {
   transform: scale(1.02);
   box-shadow: 0 0 20px rgba(201,170,113,0.8);
   border: 2px solid #c9aa71;
@@ -120,10 +128,12 @@ footer {
 }
 
 /* Responsive */
-@media (max-width: 600px) {
-  header { font-size: 24px; padding: 15px; }
-  .video-container { padding: 15px; }
-  .video-container iframe { height: 250px; }
+@media (max-width: 800px) {
+  .main-content {
+    flex-direction: column;
+    align-items: center;
+  }
+  .video-section iframe { max-width: 90%; height: 250px; }
 }
 </style>
 </head>
@@ -133,8 +143,10 @@ footer {
 <a href="skills.html" class="back-button">Back to Skills Hub</a>
 
 <div class="main-content">
-  <div class="video-container">
+  <div class="text-section">
     <h2>Ganking</h2>
+  </div>
+  <div class="video-section">
     <iframe src="https://www.youtube.com/embed/J6f0mOCtqJY" 
             title="10 Tips for Ganking – LoL Fundamentals" 
             allowfullscreen>
