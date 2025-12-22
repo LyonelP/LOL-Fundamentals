@@ -1,6 +1,11 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+  <script>
+  if (localStorage.getItem('lolfundamentals_logged_in') !== 'true') {
+    window.location.href = 'index.html';
+  }
+</script>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Diana Rune Calculator</title>
@@ -259,11 +264,11 @@ const PRIMARY_PATHS = {
   domination:{ slot1:["Electrocute","Hail of Blades","Dark Harvest"], slot2:["Cheap Shot","Taste of Blood","Sudden Impact"], slot3:["Sixth Sense","Grisly Memories","Null"], slot4:["Treasure Hunter","Relentless Hunter","Ultimate Hunter"] },
   sorcery:{ slot1:["Aery","Comet","Phase Rush"], slot2:["Nimbus Cloak","Transcendence","Celerity"], slot3:["Scorch","Waterwalking","Null"], slot4:["Null","Null","Gathering Storm"] },
   precision:{ slot1:["Press the Attack","Lethal Tempo","Fleet Footwork"], slot2:["Presence of Mind","Triumph","Coup de Grace"], slot3:["Legend: Alacrity","Legend: Tenacity","Cut Down"], slot4:["Last Stand","Null","Null"] },
-  resolve:{ 
-    slot1:["Grasp of the Undying","Aftershock","Guardian"], 
-    slot2:["Demolish","Font of Life","Shield Bash"], 
-    slot3:["Conditioning","Second Wind","Bone Plating"], 
-    slot4:["Overgrowth","Revitalize","Unflinching"] 
+  resolve:{
+    slot1:["Grasp of the Undying","Aftershock","Guardian"],
+    slot2:["Demolish","Font of Life","Shield Bash"],
+    slot3:["Conditioning","Second Wind","Bone Plating"],
+    slot4:["Overgrowth","Revitalize","Unflinching"]
   },
   inspiration:{ slot1:["Glacial Augment","Unsealed Spellbook","First Strike"], slot2:["Hextech Flashtraption","Magical Footwear","Future's Market"], slot3:["Minion Dematerializer","Biscuit Delivery","Cosmic Insight"], slot4:["Approach Velocity","Time Warp Tonic","Null"] }
 };
@@ -334,10 +339,10 @@ function calcDamage(rune,level,ap,mr){
     dmg = Math.round(30 + (78-30)*(level-1)/17);
     dmg=Math.round(dmg*100/(100+mr));
   } else if(rune==="Cheap Shot"){
-    dmg=scaleDamage(10,45,level); 
+    dmg=scaleDamage(10,45,level);
     type="True";
   } else if(rune==="Sudden Impact"){
-    dmg=scaleDamage(20,80,level); 
+    dmg=scaleDamage(20,80,level);
     type="True";
   } else if(rune==="Scorch"){
     dmg=scaleDamage(20,40,level);
@@ -430,10 +435,14 @@ document.addEventListener("DOMContentLoaded",()=>{
 });
 </script>
 
+<script>
+if (localStorage.getItem('lolfundamentals_logged_in') !== 'true') {
+  window.location.href = 'index.html';
+}
+</script>
+
 </body>
 </html>
-
-
 
 
 
