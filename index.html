@@ -3,11 +3,8 @@
 <head>
 <meta charset="UTF-8"/>
 <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-<title>LoL Fundamentals – The Ultimate Diana & Ekko Guide</title>
+<title>LoL Fundamentals – Members Hub Lite</title>
 <link rel="icon" href="/favicon.ico">
-<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
-<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
-
 <style>
 body{margin:0;font-family:"Beaufort for LOL",Arial,Helvetica,sans-serif;background:radial-gradient(circle at top,#0f1620,#0a0f14 70%);color:#e6edf3;line-height:1.6}
 header{background:linear-gradient(90deg,#0a0f14,#1b2838);border-bottom:2px solid #c9aa71;padding:18px 20px;text-align:center;font-weight:bold;font-size:24px;letter-spacing:1.5px;text-transform:uppercase;color:#c9aa71;text-shadow:0 0 8px rgba(201,170,113,.4)}
@@ -24,34 +21,33 @@ header{background:linear-gradient(90deg,#0a0f14,#1b2838);border-bottom:2px solid
 .orangeBtn{background:#f2994a;border-color:#f2b96d;position:relative}
 .orangeBtn:hover{background:#ffb04d;box-shadow:0 0 25px rgba(242,153,74,.55)}
 
-.particles span{
-  position:absolute;
-  width:4px;
-  height:4px;
-  background:rgba(47,129,247,.9);
-  border-radius:50%;
-  animation:floatParticles 6s infinite ease-in-out
-}
+@keyframes auraPulse{0%{opacity:.25;transform:scale(1)}50%{opacity:.45;transform:scale(1.1)}100%{opacity:.25;transform:scale(1)}}
 
-@keyframes floatParticles{
-  0%{transform:translateY(0) translateX(0) scale(1);opacity:1}
-  50%{transform:translateY(-80px) translateX(20px) scale(1.2);opacity:.6}
-  100%{transform:translateY(0) translateX(0) scale(1);opacity:1}
-}
-
-@keyframes auraPulse{
-  0%{opacity:.25;transform:scale(1)}
-  50%{opacity:.45;transform:scale(1.1)}
-  100%{opacity:.25;transform:scale(1)}
-}
-
-.section{padding:40px 20px;max-width:950px;margin:auto;text-align:center}
+.section{padding:40px 20px;max-width:1000px;margin:auto;text-align:center}
 .section h2{color:#c9aa71;font-size:2.1em;display:inline-block;padding-bottom:12px;position:relative;margin-bottom:40px}
 .section h2::after{content:"";width:60%;height:2px;background:linear-gradient(90deg,transparent,#c9aa71,transparent);position:absolute;bottom:0;left:20%}
-.cards{display:flex;flex-wrap:wrap;justify-content:center;gap:25px}
-.card{background:#161b22;padding:22px;border-radius:10px;width:260px;border:1px solid rgba(47,129,247,.4);box-shadow:0 0 12px rgba(47,129,247,.18);text-align:center;transition:transform .25s ease,box-shadow .25s ease}
-.card:hover{transform:translateY(-6px);box-shadow:0 6px 18px rgba(47,129,247,.35)}
-.card h3{color:#c9aa71}
+.card-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:22px;align-items:start}
+.card{position:relative;background:#161b22;border:2px solid #c9aa71;border-radius:12px;padding:20px;text-decoration:none;color:#e6edf3;height:230px;display:flex;flex-direction:column;justify-content:center;align-items:center;overflow:hidden;transition:transform .25s,box-shadow .25s}
+.card h3{color:#c9aa71;margin:0 0 8px;z-index:2;font-size:1.25rem;text-align:center}
+.card p{margin:0;font-size:0.95rem;line-height:1.3;z-index:2;color:#e6edf3;opacity:0.95;text-align:center}
+.card::before{content:"";position:absolute;inset:0;width:100%;height:100%;background-size:cover;background-position:center;opacity:.15;z-index:0;border-radius:10px}
+
+.fundamentals::before{background-image:url('https://cdn.wallpapersafari.com/92/79/MYTD9q.png')}
+.diana-guide::before{background-image:url('https://ddragon.leagueoflegends.com/cdn/img/champion/splash/Diana_1.jpg')}
+.ekko-guide::before{background-image:url('https://ddragon.leagueoflegends.com/cdn/img/champion/splash/Ekko_0.jpg')}
+.diana-matchups::before{background-image:url('https://ddragon.leagueoflegends.com/cdn/img/champion/splash/Diana_0.jpg')}
+.build-calculator::before{background-image:url('https://i.imgur.com/uhLq29j.jpeg')}
+.rune-calculator::before{background-image:url('https://i.imgur.com/kcs90ta.jpeg')}
+.tierlist::before{ background: linear-gradient(to bottom, #1b2838 0%, #161b22 100%); }
+.coaching::before{background-image:url('https://m.media-amazon.com/images/I/71GlK3kDLJL.jpg'); opacity:0.20}
+.discord-card::before{background-image:url('https://i.imgur.com/fS2OKHV.jpeg');background-size:cover;background-position:center;opacity:0.15}
+
+.tier-bar{ margin-top:12px; width:100%; height:60px; border-radius:6px; display:flex; overflow:hidden; position:relative; z-index:2; }
+.tier-s{ background:#f94144; flex:1; } .tier-a{ background:#f3722c; flex:1; } .tier-b{ background:#f8961e; flex:1; }
+.tier-c{ background:#f9c74f; flex:1; } .tier-d{ background:#90be6d; flex:1; }
+
+.card:hover{transform:translateY(-6px);box-shadow:0 12px 26px rgba(47,129,247,0.22)}
+.unlock-icon{position:absolute;bottom:12px;z-index:2;font-size:1.5rem;color:#f2b96d;cursor:pointer}
 
 .modal{display:none;position:fixed;inset:0;background:rgba(0,0,0,.75);z-index:9999;justify-content:center;align-items:center}
 .modalContent{background:#161b22;padding:30px;border-radius:10px;text-align:center;max-width:400px;width:90%;border:1px solid #c9aa71}
@@ -66,7 +62,6 @@ footer a{color:#c9aa71;text-decoration:none}
 footer a:hover{text-decoration:underline}
 </style>
 </head>
-
 <body>
 
 <header>LoL Fundamentals</header>
@@ -83,6 +78,70 @@ footer a:hover{text-decoration:underline}
 </div>
 </section>
 
+<section class="section">
+<h2>Explore the Hub</h2>
+<div class="card-grid">
+
+<!-- Top row free cards -->
+<a href="https://lolfundamentals.com/dianaitems.html" class="card build-calculator">
+  <h3>Diana Combo Calculator</h3>
+  <p>Compare different item builds and ability combos for Diana at different stages of the game.</p>
+</a>
+
+<a href="https://lolfundamentals.com/dianarunes.html" class="card rune-calculator">
+  <h3>Diana Rune Calculator</h3>
+  <p>Compare rune pages against enemies to create your perfect Diana setup.</p>
+</a>
+
+<a href="https://lolfundamentals.com/tierlist.html" class="card tierlist">
+  <h3>Tierlist</h3>
+  <p>Current champion tierlist showing which champions dominate the meta.</p>
+  <div class="tier-bar" aria-hidden="true">
+    <div class="tier-s"></div><div class="tier-a"></div><div class="tier-b"></div><div class="tier-c"></div><div class="tier-d"></div>
+  </div>
+</a>
+
+<!-- Paid / locked cards -->
+<a href="#" class="card fundamentals locked">
+  <h3>Fundamentals</h3>
+  <p>Core skills including combos, wave management, positioning, and warding for consistent gameplay improvement.</p>
+  <div class="unlock-icon">🔒</div>
+</a>
+
+<a href="#" class="card diana-guide locked">
+  <h3>Diana Guide</h3>
+  <p>A comprehensive guide covering Diana's full kit, itemization, playstyle, and advanced strategies.</p>
+  <div class="unlock-icon">🔒</div>
+</a>
+
+<a href="#" class="card ekko-guide locked">
+  <h3>Ekko Guide</h3>
+  <p>Complete guide to playing Ekko Jungle, including combos, pathing, and advanced mechanics.</p>
+  <div class="unlock-icon">🔒</div>
+</a>
+
+<a href="#" class="card diana-matchups locked">
+  <h3>Diana Mid Matchups</h3>
+  <p>Detailed breakdowns for every mid lane champion, teaching optimal trades, wave control, and all-in timings.</p>
+  <div class="unlock-icon">🔒</div>
+</a>
+
+<a href="https://buy.stripe.com/6oU6oA9M08oQfvUgEOejK02" class="card coaching">
+  <h3>Coaching</h3>
+  <p>Book a personalized 1-hour coaching session. Members receive 25% off!</p>
+</a>
+
+<a href="https://discord.gg/Ze75xenn" class="card discord-card" target="_blank" rel="noopener noreferrer">
+  <h3>Join our Discord</h3>
+  <p>Connect with other members, share tips, and stay updated on guides.</p>
+</a>
+
+</div>
+</section>
+
+<footer>© 2025 LoL Fundamentals · Contact: <a href="mailto:arcsecond@lolfundamentals.com">arcsecond@lolfundamentals.com</a></footer>
+
+<!-- Modals -->
 <div id="signupModal" class="modal">
 <div class="modalContent">
 <h2>Create Account</h2>
@@ -100,16 +159,13 @@ footer a:hover{text-decoration:underline}
 <div id="planModal" class="modal">
 <div class="modalContent">
 <h2>Choose Your Plan</h2>
-
 <div class="plan-buttons">
 <button class="btn" id="monthlyBtn">$8.99 / Month</button>
-
 <div style="position:relative;display:inline-block;text-align:center">
 <div class="bestValueTag">Best Value</div>
 <button class="btn orangeBtn" id="yearlyBtn">$49 / Year</button>
 </div>
 </div>
-
 <button id="closePlanModal">Cancel</button>
 </div>
 </div>
@@ -126,20 +182,6 @@ footer a:hover{text-decoration:underline}
 </div>
 </div>
 
-<section class="section">
-<h2>What You’ll Learn</h2>
-<div class="cards">
-<div class="card"><h3>Fundamentals</h3><p>Core skills including combos, wave management, positioning, and warding for consistent gameplay improvement.</p></div>
-<div class="card"><h3>Diana Guide</h3><p>A comprehensive guide covering Diana's full kit, itemization, playstyle, and advanced strategies.</p></div>
-<div class="card"><h3>Ekko Guide</h3><p>Complete guide to playing Ekko Jungle, including combos, pathing, and advanced mechanics.</p></div>
-<div class="card"><h3>Diana Matchup Guide</h3><p>Detailed breakdowns for every mid lane champion, teaching optimal trades, wave control, and all-in timings.</p></div>
-<div class="card"><h3>Diana Rune & Build Calculator</h3><p>Compare rune pages and build paths against enemies with different stats to create your perfect Diana setup.</p></div>
-<div class="card"><h3>Tierlist</h3><p>Rankings for each role in the current meta.</p></div>
-</div>
-</section>
-
-<footer>© 2025 LoL Fundamentals · Contact: <a href="mailto:arcsecond@lolfundamentals.com">arcsecond@lolfundamentals.com</a></footer>
-
 <script type="module">
 import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
 import { getAuth, signInWithEmailAndPassword, createUserWithEmailAndPassword, sendPasswordResetEmail } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-auth.js";
@@ -148,10 +190,7 @@ import { getFirestore, doc, setDoc, serverTimestamp, getDoc } from "https://www.
 const firebaseConfig={apiKey:"AIzaSyCFRcEV7wdivqONnkjJubAZOjPMixrHMBI",authDomain:"lol-fundamentals.firebaseapp.com",projectId:"lol-fundamentals",storageBucket:"lol-fundamentals.firebasestorage.app",messagingSenderId:"1038440427584",appId:"1:1038440427584:web:a82207151fd370dbedefa5"};
 const app=initializeApp(firebaseConfig),auth=getAuth(app),firestore=getFirestore(app);
 
-const stripe={
-  monthly:"https://buy.stripe.com/8x28wIaQ4dJa4Rg88iejK0f",
-  yearly:"https://buy.stripe.com/cNi14g3nC48AerQ9cmejK07"
-};
+const stripe={monthly:"https://buy.stripe.com/8x28wIaQ4dJa4Rg88iejK0f",yearly:"https://buy.stripe.com/cNi14g3nC48AerQ9cmejK07"};
 
 signupHeroBtn.onclick=()=>signupModal.style.display="flex";
 loginHeroBtn.onclick=()=>loginModal.style.display="flex";
@@ -193,15 +232,33 @@ resetLinkModal.onclick=async(e)=>{
   loginMsgModal.textContent="Password reset email sent!";
 };
 
+// Particle effect
 for(let i=0;i<50;i++){
   const e=document.createElement("span");
   e.style.left=Math.random()*100+"%";
   e.style.top=Math.random()*100+"%";
-  e.style.animationDuration=4+4*Math.random()+"s";
-  e.style.animationDelay=4*Math.random()+"s";
+  e.style.width=e.style.height="4px";
+  e.style.background="rgba(47,129,247,.9)";
+  e.style.borderRadius="50%";
+  e.style.position="absolute";
+  e.style.animation=`floatParticles ${6+Math.random()*4}s infinite ease-in-out`;
   document.querySelector(".particles").appendChild(e);
 }
+
+// Locked card click opens signup modal
+document.querySelectorAll('.locked').forEach(card=>{
+  card.addEventListener('click',()=>{signupModal.style.display='flex'});
+});
 </script>
+
+<style>
+@keyframes floatParticles{
+  0%{transform:translateY(0) translateX(0) scale(1);opacity:1}
+  50%{transform:translateY(-80px) translateX(20px) scale(1.2);opacity:.6}
+  100%{transform:translateY(0) translateX(0) scale(1);opacity:1}
+}
+</style>
 
 </body>
 </html>
+
