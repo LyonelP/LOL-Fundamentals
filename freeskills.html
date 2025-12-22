@@ -94,7 +94,7 @@ header {
 }
 .skill-list li:hover { background: rgba(0,0,0,0.95); transform: scale(1.03); box-shadow: 0 8px 20px rgba(0,0,0,0.7); }
 .skill-list li a { text-decoration: none; color: #fff; flex-grow: 1; text-align: center; position: relative; transition: color 0.3s; }
-.skill-list li a:hover { color: #c9aa71; } /* gold hover for all */
+.skill-list li a:hover { color: #c9aa71; }
 .skill-list li a.locked::after {
   content: "🔒";
   position: absolute;
@@ -125,7 +125,10 @@ footer { margin-top: auto; text-align: center; padding: 18px 10px; font-size: 14
 .modalContent{background:#161b22;padding:30px;border-radius:10px;text-align:center;max-width:400px;width:90%;border:1px solid #c9aa71}
 .modalContent h2{color:#c9aa71;margin-bottom:20px}
 .modalContent input{width:80%;max-width:300px;display:block;margin:8px auto;padding:8px;border-radius:4px;border:none;text-align:center}
-.modalContent button{margin-top:10px;padding:10px 20px;font-weight:bold;border-radius:6px;border:none;cursor:pointer}
+.modalContent .btn{display:inline-block;background:#2f81f7;color:#fff;padding:12px 20px;border-radius:6px;text-decoration:none;font-weight:bold;font-size:1em;transition:.3s;border:1px solid #c9aa71;cursor:pointer}
+.modalContent .btn:hover{background:#4795ff;}
+.modalContent .orangeBtn{background:#f2994a;border-color:#f2b96d;}
+.modalContent .orangeBtn:hover{background:#ffb04d;}
 </style>
 </head>
 <body>
@@ -156,41 +159,47 @@ footer { margin-top: auto; text-align: center; padding: 18px 10px; font-size: 14
 
 <footer>© 2025 LoL Fundamentals · All rights reserved</footer>
 
-<!-- Signup / Login Modals -->
+<!-- Signup / Plan / Login Modals -->
 <div id="signup-modal" class="modal">
   <div class="modalContent">
     <h2>Create Account</h2>
     <input type="email" id="signupEmail" placeholder="Enter your email"/>
     <input type="password" id="signupPassword" placeholder="Enter your password"/>
-    <input type="password" id="signupPasswordConfirm" placeholder="Confirm password"/>
-    <button id="continueSignupBtn">Continue</button>
-    <button id="seePlansBtn">See Plans</button>
-    <button id="closeSignupModal">Cancel</button>
+    <input type="password" id="signupPasswordConfirm" placeholder="Confirm your password"/>
+    <div style="display:flex;justify-content:center;gap:15px;margin-top:10px;">
+      <button class="btn" id="continueSignupBtn">Continue</button>
+      <button class="btn orangeBtn" id="seePlansBtn">See Plans</button>
+    </div>
+    <button id="closeSignupModal" style="margin-top:10px;">Cancel</button>
   </div>
 </div>
 
 <div id="plan-modal" class="modal">
   <div class="modalContent">
     <h2>Choose Your Plan</h2>
-    <button id="monthlyBtn">$8.99 / Month</button>
-    <button id="yearlyBtn">$49 / Year</button>
+    <div style="display:flex;justify-content:center;gap:20px;flex-wrap:wrap;margin-bottom:20px;">
+      <button class="btn" id="monthlyBtn">$8.99 / Month</button>
+      <button class="btn orangeBtn" id="yearlyBtn">49 / Year</button>
+    </div>
     <button id="closePlanModal">Cancel</button>
   </div>
 </div>
 
 <div id="login-modal" class="modal">
   <div class="modalContent">
-    <h2>Login</h2>
+    <h2>Member Login</h2>
     <input type="email" id="loginEmail" placeholder="Enter your email"/>
     <input type="password" id="loginPassword" placeholder="Enter your password"/>
-    <button id="modalLoginBtn">Login</button>
+    <button class="btn" id="modalLoginBtn">Login</button>
     <button id="closeLoginModal">Cancel</button>
+    <p><a href="#" id="resetLinkModal" style="color:white;">Forgot your password?</a></p>
+    <p id="loginMsgModal"></p>
   </div>
 </div>
 
 <script type="module">
 import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
-import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-auth.js";
+import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword, sendPasswordResetEmail } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-auth.js";
 import { getFirestore, doc, setDoc, getDoc, serverTimestamp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
 
 const firebaseConfig = {
@@ -206,36 +215,20 @@ const app = initializeApp(firebaseConfig);
 const auth = getAuth(app);
 const firestore = getFirestore(app);
 
-const stripe = {
-  monthly: "https://buy.stripe.com/8x28wIaQ4dJa4Rg88iejK0f",
-  yearly: "https://buy.stripe.com/cNi14g3nC48AerQ9cmejK07"
-};
+const stripe = { monthly:"https://buy.stripe.com/8x28wIaQ4dJa4Rg88iejK0f", yearly:"https://buy.stripe.com/cNi14g3nC48AerQ9cmejK07" };
 
-// Modal buttons
-const signupModal = document.getElementById("signup-modal");
-const planModal = document.getElementById("plan-modal");
-const loginModal = document.getElementById("login-modal");
-const signupHeroBtn = document.createElement("button");
-signupHeroBtn.style.display="none"; // placeholder
-signupHeroBtn.onclick = () => signupModal.style.display="flex";
+// Modals
+const signupModal=document.getElementById("signup-modal");
+const planModal=document.getElementById("plan-modal");
+const loginModal=document.getElementById("login-modal");
 
-const continueSignupBtn = document.getElementById("continueSignupBtn");
-const seePlansBtn = document.getElementById("seePlansBtn");
-const closeSignupModal = document.getElementById("closeSignupModal");
-const closePlanModal = document.getElementById("closePlanModal");
-const modalLoginBtn = document.getElementById("modalLoginBtn");
-const closeLoginModal = document.getElementById("closeLoginModal");
-const monthlyBtn = document.getElementById("monthlyBtn");
-const yearlyBtn = document.getElementById("yearlyBtn");
+document.getElementById("closeSignupModal").onclick=()=>signupModal.style.display="none";
+document.getElementById("closePlanModal").onclick=()=>planModal.style.display="none";
+document.getElementById("closeLoginModal").onclick=()=>loginModal.style.display="none";
+document.getElementById("seePlansBtn").onclick=()=>{signupModal.style.display="none";planModal.style.display="flex"};
+document.getElementById("monthlyBtn").onclick=()=>window.open(stripe.monthly,"_blank");
+document.getElementById("yearlyBtn").onclick=()=>window.open(stripe.yearly,"_blank");
 
-closeSignupModal.onclick = () => signupModal.style.display="none";
-closePlanModal.onclick = () => planModal.style.display="none";
-closeLoginModal.onclick = () => loginModal.style.display="none";
-seePlansBtn.onclick = () => {signupModal.style.display="none"; planModal.style.display="flex"};
-monthlyBtn.onclick = () => window.open(stripe.monthly,"_blank");
-yearlyBtn.onclick = () => window.open(stripe.yearly,"_blank");
-
-// Skill Data
 const skillData = {
   "Pre Game": ["Champion Select","Mouse Accuracy","Summoner Spells","Matchups","Communication","Build"],
   "Early Game": ["Level 1","Farming","Trading","Wave Control","Back Timings","Power Spikes","Pathing","Laning","Map Awareness","Ganking","Roaming"],
@@ -247,12 +240,10 @@ const skillData = {
 
 let skillProgress = JSON.parse(localStorage.getItem("skillProgressFree")||"{}");
 
-// Initialize skills (Champion Select unlocked)
-Object.keys(skillData).forEach(section => {
-  skillProgress[section] = skillProgress[section] || {};
-  skillData[section].forEach(skill => {
-    skillProgress[section][skill] = skill === "Champion Select";
-  });
+// Initialize all skills as unchecked
+Object.keys(skillData).forEach(section=>{
+  skillProgress[section]=skillProgress[section]||{};
+  skillData[section].forEach(skill=>skillProgress[section][skill]=false);
 });
 localStorage.setItem("skillProgressFree", JSON.stringify(skillProgress));
 
@@ -261,8 +252,7 @@ const skillList = document.getElementById('skill-list');
 const progressFill = document.getElementById('progressFill');
 const progressLabel = document.getElementById('progressLabel');
 
-function saveProgress() { localStorage.setItem("skillProgressFree", JSON.stringify(skillProgress)); }
-
+function saveProgress(){ localStorage.setItem("skillProgressFree", JSON.stringify(skillProgress)); }
 function updateProgress(section){
   const skills = skillProgress[section];
   const total = Object.keys(skills).length;
@@ -302,8 +292,8 @@ sectionSelect.addEventListener('change', ()=>{
 
 renderSkills(localStorage.getItem("lastSectionFree")||"Pre Game");
 
-// Login / Signup logic
-continueSignupBtn.onclick = async ()=>{
+// Signup / Login logic
+document.getElementById("continueSignupBtn").onclick = async ()=>{
   const e=document.getElementById("signupEmail").value.trim();
   const p=document.getElementById("signupPassword").value.trim();
   const c=document.getElementById("signupPasswordConfirm").value.trim();
@@ -315,7 +305,7 @@ continueSignupBtn.onclick = async ()=>{
   planModal.style.display="flex";
 };
 
-modalLoginBtn.onclick = async ()=>{
+document.getElementById("modalLoginBtn").onclick = async ()=>{
   const e=document.getElementById("loginEmail").value.trim();
   const p=document.getElementById("loginPassword").value.trim();
   await signInWithEmailAndPassword(auth,e,p);
@@ -324,18 +314,22 @@ modalLoginBtn.onclick = async ()=>{
     localStorage.setItem("lolfundamentals_logged_in","true");
     localStorage.setItem("lolfundamentals_paid","true");
     window.location.href="membershub.html";
-  }else{
+  } else {
     planModal.style.display="flex";
   }
   loginModal.style.display="none";
 };
 
+document.getElementById("resetLinkModal").onclick = async(e)=>{
+  e.preventDefault();
+  await sendPasswordResetEmail(auth,document.getElementById("loginEmail").value);
+  document.getElementById("loginMsgModal").textContent="Password reset email sent!";
+};
+
 // Locked skill click opens signup modal
-document.querySelectorAll(".locked").forEach(card=>{card.addEventListener("click",()=>{signupModal.style.display='flex'})});
+document.querySelectorAll(".locked").forEach(card=>card.addEventListener("click",()=>signupModal.style.display="flex"));
 </script>
 
 </body>
 </html>
-
-
 
