@@ -2,227 +2,340 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title>LoL Fundamentals – Free Skills</title>
-
-<link rel="icon" href="/favicon.ico">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>LoL Fundamentals – Skills Hub (Free)</title>
 
 <style>
-body{
-  margin:0;
-  font-family:"Beaufort for LOL",Arial,Helvetica,sans-serif;
-  background:radial-gradient(circle at top,#0f1620,#0a0f14 70%);
-  color:#e6edf3;
-  min-height:100vh;
-  display:flex;
-  flex-direction:column;
+body {
+  margin: 0;
+  font-family: 'Beaufort for LOL', Arial, Helvetica, sans-serif;
+  color: #fff;
+  background: url('https://64.media.tumblr.com/594ac290bec6d5e9ad98b5f53404f00b/245c4c3ee469f81d-e4/s1280x1920/1cda4284320eb2031758a9859dfe14ff8bbc50ba.jpg') no-repeat center center fixed;
+  background-size: cover;
+  overflow-x: hidden;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
 }
-header{
-  background:linear-gradient(90deg,#0a0f14,#1b2838);
-  border-bottom:2px solid #c9aa71;
-  padding:18px;
-  text-align:center;
-  font-size:22px;
-  color:#c9aa71;
-  letter-spacing:1.2px;
-  text-transform:uppercase;
+body::before {
+  content: "";
+  position: fixed;
+  top:0; left:0;
+  width:100%; height:100%;
+  background: rgba(10,15,20,0.25);
+  z-index: -1;
 }
-.back{
-  text-align:center;
-  margin:20px;
+header {
+  background: rgba(13,17,23,0.9);
+  border-bottom: 2px solid #c9aa71;
+  padding: 20px;
+  font-weight: bold;
+  font-size: 26px;
+  text-transform: uppercase;
+  color: #c9aa71;
+  letter-spacing: 1px;
+  text-align: center;
+  line-height: 1.1;
+  box-sizing: border-box;
 }
-.back a{
-  color:#c9aa71;
-  text-decoration:none;
-  font-weight:bold;
+.back-button {
+  display: inline-block;
+  margin: 20px auto;
+  padding: 10px 20px;
+  background: linear-gradient(135deg, #c9aa71, #e0c77b);
+  color: #000;
+  text-decoration: none;
+  border-radius: 8px;
+  font-weight: bold;
+  font-size: 16px;
+  transition: all 0.3s;
+  box-shadow: 0 0 10px rgba(201,170,113,0.5);
 }
-.section-select{
-  display:block;
-  margin:0 auto 20px;
-  padding:8px 14px;
-  background:#161b22;
-  color:#c9aa71;
-  border-radius:6px;
-  border:none;
+.back-button::before { content: "← "; }
+.back-button:hover {
+  background: linear-gradient(135deg, #e6c97f, #f0d88b);
+  box-shadow: 0 0 15px rgba(255,215,0,0.8);
 }
-.progress-wrap{
-  max-width:280px;
-  margin:0 auto 25px;
-  text-align:center;
+#section-select-container { margin: 20px auto; text-align: center; }
+#section-select {
+  padding: 8px 12px;
+  font-size: 16px;
+  border-radius: 6px;
+  border: none;
+  background: #0f1722;
+  color: #c9aa71;
+  cursor: pointer;
+  width: 220px;
+  background-image: url("data:image/svg+xml;utf8,<svg fill='%23c9aa71' height='12' viewBox='0 0 24 24' width='12' xmlns='http://www.w3.org/2000/svg'><path d='M7 10l5 5 5-5z'/></svg>");
+  background-repeat: no-repeat;
+  background-position: right 10px center;
+  background-size: 12px;
+  appearance: none;
 }
-.progress-bar{
-  height:10px;
-  background:#161b22;
-  border-radius:20px;
-  overflow:hidden;
+.progress-wrap { width: 260px; max-width: 90vw; margin: 0 auto 20px; text-align: center; }
+.progress-label { font-size: 14px; color: #fff; margin-bottom: 6px; }
+.progress-bar { width: 100%; height: 10px; background: #0f1722; border-radius: 20px; overflow: hidden; }
+.progress-fill { height: 100%; width: 0%; background: linear-gradient(90deg, #c9aa71, #e6c77f); transition: width 0.45s ease; }
+.skill-list { list-style: none; padding: 0; width: 100%; margin-bottom: 40px; }
+.skill-list li {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background: rgba(0,0,0,0.85);
+  border: 2px solid #c9aa71;
+  border-radius: 12px;
+  padding: 14px 18px;
+  margin: 0 auto 20px auto;
+  font-size: 18px;
+  width: 56vw;
+  max-width: 900px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.5);
+  transition: transform 0.25s, box-shadow 0.3s;
 }
-.progress-fill{
-  height:100%;
-  width:0%;
-  background:linear-gradient(90deg,#c9aa71,#f2b96d);
-  transition:.4s;
+.skill-list li:hover { background: rgba(0,0,0,0.95); transform: scale(1.03); box-shadow: 0 8px 20px rgba(0,0,0,0.7); }
+.skill-list li a { text-decoration: none; color: #fff; flex-grow: 1; text-align: center; position: relative; transition: color 0.3s; }
+.skill-list li a:hover { color: #c9aa71; } /* gold hover for all */
+.skill-list li a.locked::after {
+  content: "🔒";
+  position: absolute;
+  right: 10px;
+  top: 50%;
+  transform: translateY(-50%);
+  font-size: 18px;
+  color: #c9aa71;
 }
-ul{
-  list-style:none;
-  padding:0;
-  margin:0 auto 40px;
-  max-width:900px;
+.checkmark {
+  width: 26px; height: 26px;
+  border-radius: 50%;
+  border: 2px solid #c9aa71;
+  display: flex; justify-content: center; align-items: center;
+  color: #c9aa71; font-size: 18px; flex-shrink: 0;
+  cursor: pointer;
 }
-li{
-  background:#161b22;
-  border:2px solid #c9aa71;
-  border-radius:12px;
-  padding:14px 18px;
-  margin:0 14px 18px;
-  display:flex;
-  align-items:center;
-  justify-content:space-between;
-  transition:.25s;
+.checkmark.completed { background: #c9aa71; color: #000; }
+footer { margin-top: auto; text-align: center; padding: 18px 10px; font-size: 14px; color: #fff; }
+@media(max-width: 700px){
+  header { font-size: 22px; padding: 15px 10px; }
+  #section-select { width: 95vw; font-size: 14px; padding: 8px 30px 8px 12px; }
+  .skill-list li { width: 85vw; font-size: 16px; padding: 10px 14px; }
 }
-li:hover{transform:scale(1.02)}
-.skill{
-  text-decoration:none;
-  color:#fff;
-  flex:1;
-  text-align:center;
-}
-.skill:hover{color:#c9aa71}
-.lock::after{
-  content:"🔒";
-  margin-left:10px;
-}
-.check{
-  width:26px;
-  height:26px;
-  border-radius:50%;
-  border:2px solid #c9aa71;
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  cursor:pointer;
-  color:#000;
-}
-.check.done{
-  background:#c9aa71;
-}
-footer{
-  margin-top:auto;
-  padding:20px;
-  text-align:center;
-  color:#8b949e;
-  font-size:14px;
-}
+
+/* Modal styles */
+.modal{display:none;position:fixed;inset:0;background:rgba(0,0,0,.75);z-index:9999;justify-content:center;align-items:center}
+.modalContent{background:#161b22;padding:30px;border-radius:10px;text-align:center;max-width:400px;width:90%;border:1px solid #c9aa71}
+.modalContent h2{color:#c9aa71;margin-bottom:20px}
+.modalContent input{width:80%;max-width:300px;display:block;margin:8px auto;padding:8px;border-radius:4px;border:none;text-align:center}
+.modalContent button{margin-top:10px;padding:10px 20px;font-weight:bold;border-radius:6px;border:none;cursor:pointer}
 </style>
 </head>
-
 <body>
 
-<header>Free Skills Hub</header>
+<header>Skills Hub (Free)</header>
 
-<div class="back">
-  <a href="https://lolfundamentals.com">← Back to Home</a>
+<a href="https://lolfundamentals.com" class="back-button">Back to LoL Fundamentals</a>
+
+<div id="section-select-container">
+  <select id="section-select">
+    <option value="Pre Game" selected>Pre Game</option>
+    <option value="Early Game">Early Game</option>
+    <option value="Mid Game">Mid Game</option>
+    <option value="Late Game">Late Game</option>
+    <option value="Advanced">Advanced</option>
+    <option value="Out of Game">Out of Game</option>
+  </select>
 </div>
 
-<select id="section" class="section-select">
-  <option>Pre Game</option>
-  <option>Early Game</option>
-  <option>Mid Game</option>
-  <option>Late Game</option>
-  <option>Advanced</option>
-  <option>Out of Game</option>
-</select>
-
 <div class="progress-wrap">
-  <div id="progressText">0% Complete</div>
+  <div class="progress-label" id="progressLabel">0% Complete</div>
   <div class="progress-bar">
-    <div id="progressFill" class="progress-fill"></div>
+    <div class="progress-fill" id="progressFill"></div>
   </div>
 </div>
 
-<ul id="list"></ul>
+<ul class="skill-list" id="skill-list"></ul>
 
-<footer>© 2025 LoL Fundamentals</footer>
+<footer>© 2025 LoL Fundamentals · All rights reserved</footer>
 
-<!-- ===== MODALS (REUSED) ===== -->
-<div id="signupModal" class="modal"></div>
-<div id="planModal" class="modal"></div>
-<div id="loginModal" class="modal"></div>
+<!-- Signup / Login Modals -->
+<div id="signup-modal" class="modal">
+  <div class="modalContent">
+    <h2>Create Account</h2>
+    <input type="email" id="signupEmail" placeholder="Enter your email"/>
+    <input type="password" id="signupPassword" placeholder="Enter your password"/>
+    <input type="password" id="signupPasswordConfirm" placeholder="Confirm password"/>
+    <button id="continueSignupBtn">Continue</button>
+    <button id="seePlansBtn">See Plans</button>
+    <button id="closeSignupModal">Cancel</button>
+  </div>
+</div>
 
-<!-- ===== FIREBASE + STRIPE (UNCHANGED) ===== -->
+<div id="plan-modal" class="modal">
+  <div class="modalContent">
+    <h2>Choose Your Plan</h2>
+    <button id="monthlyBtn">$8.99 / Month</button>
+    <button id="yearlyBtn">$49 / Year</button>
+    <button id="closePlanModal">Cancel</button>
+  </div>
+</div>
+
+<div id="login-modal" class="modal">
+  <div class="modalContent">
+    <h2>Login</h2>
+    <input type="email" id="loginEmail" placeholder="Enter your email"/>
+    <input type="password" id="loginPassword" placeholder="Enter your password"/>
+    <button id="modalLoginBtn">Login</button>
+    <button id="closeLoginModal">Cancel</button>
+  </div>
+</div>
+
 <script type="module">
 import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
-import { getAuth, signInWithEmailAndPassword, createUserWithEmailAndPassword } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-auth.js";
-import { getFirestore, doc, setDoc, serverTimestamp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
+import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-auth.js";
+import { getFirestore, doc, setDoc, getDoc, serverTimestamp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
 
-const firebaseConfig={
-  apiKey:"AIzaSyCFRcEV7wdivqONnkjJubAZOjPMixrHMBI",
-  authDomain:"lol-fundamentals.firebaseapp.com",
-  projectId:"lol-fundamentals",
-  storageBucket:"lol-fundamentals.firebasestorage.app",
-  messagingSenderId:"1038440427584",
-  appId:"1:1038440427584:web:a82207151fd370dbedefa5"
-};
-initializeApp(firebaseConfig);
-</script>
-
-<script>
-const skills={
- "Pre Game":["Champion Select","Mouse Accuracy","Summoner Spells","Matchups","Communication","Build"],
- "Early Game":["Level 1","Farming","Trading","Wave Control","Back Timings","Power Spikes","Pathing","Laning","Map Awareness","Ganking","Roaming"],
- "Mid Game":["Teamwork","Split Pushing","Sieging","Baiting","Lane Assignments","Vision"],
- "Late Game":["Damage","Target Selection","Tab Screen","Win Conditions","Rotations"],
- "Advanced":["Animation Cancelling","Reading Players","Kiting","Positioning"],
- "Out of Game":["Setup","Mindset","Not Raging/Blaming","Reaction Time","Meta"]
+const firebaseConfig = {
+  apiKey: "AIzaSyCFRcEV7wdivqONnkjJubAZOjPMixrHMBI",
+  authDomain: "lol-fundamentals.firebaseapp.com",
+  projectId: "lol-fundamentals",
+  storageBucket: "lol-fundamentals.firebasestorage.app",
+  messagingSenderId: "1038440427584",
+  appId: "1:1038440427584:web:a82207151fd370dbedefa5"
 };
 
-const list=document.getElementById("list");
-const section=document.getElementById("section");
-const fill=document.getElementById("progressFill");
-const text=document.getElementById("progressText");
+const app = initializeApp(firebaseConfig);
+const auth = getAuth(app);
+const firestore = getFirestore(app);
 
-let progress=JSON.parse(localStorage.getItem("freeProgress")||"{}");
+const stripe = {
+  monthly: "https://buy.stripe.com/8x28wIaQ4dJa4Rg88iejK0f",
+  yearly: "https://buy.stripe.com/cNi14g3nC48AerQ9cmejK07"
+};
 
-function render(){
-  const s=section.value;
-  progress[s]=progress[s]||{};
-  list.innerHTML="";
-  let done=0,total=skills[s].length;
+// Modal buttons
+const signupModal = document.getElementById("signup-modal");
+const planModal = document.getElementById("plan-modal");
+const loginModal = document.getElementById("login-modal");
+const signupHeroBtn = document.createElement("button");
+signupHeroBtn.style.display="none"; // placeholder
+signupHeroBtn.onclick = () => signupModal.style.display="flex";
 
-  skills[s].forEach(skill=>{
-    const unlocked=skill==="Champion Select";
-    const completed=progress[s][skill];
-    if(completed) done++;
+const continueSignupBtn = document.getElementById("continueSignupBtn");
+const seePlansBtn = document.getElementById("seePlansBtn");
+const closeSignupModal = document.getElementById("closeSignupModal");
+const closePlanModal = document.getElementById("closePlanModal");
+const modalLoginBtn = document.getElementById("modalLoginBtn");
+const closeLoginModal = document.getElementById("closeLoginModal");
+const monthlyBtn = document.getElementById("monthlyBtn");
+const yearlyBtn = document.getElementById("yearlyBtn");
 
-    const li=document.createElement("li");
-    const a=document.createElement("a");
-    a.className="skill"+(unlocked?"":" lock");
-    a.textContent=skill;
-    a.href="#";
-    if(!unlocked) a.onclick=()=>signupModal.style.display="flex";
+closeSignupModal.onclick = () => signupModal.style.display="none";
+closePlanModal.onclick = () => planModal.style.display="none";
+closeLoginModal.onclick = () => loginModal.style.display="none";
+seePlansBtn.onclick = () => {signupModal.style.display="none"; planModal.style.display="flex"};
+monthlyBtn.onclick = () => window.open(stripe.monthly,"_blank");
+yearlyBtn.onclick = () => window.open(stripe.yearly,"_blank");
 
-    const c=document.createElement("div");
-    c.className="check"+(completed?" done":"");
-    c.innerHTML=completed?"✔":"";
-    c.onclick=()=>{
-      if(!unlocked) return;
-      progress[s][skill]=!completed;
-      localStorage.setItem("freeProgress",JSON.stringify(progress));
-      render();
-    };
+// Skill Data
+const skillData = {
+  "Pre Game": ["Champion Select","Mouse Accuracy","Summoner Spells","Matchups","Communication","Build"],
+  "Early Game": ["Level 1","Farming","Trading","Wave Control","Back Timings","Power Spikes","Pathing","Laning","Map Awareness","Ganking","Roaming"],
+  "Mid Game": ["Teamwork","Split Pushing","Sieging","Baiting","Lane Assignments","Vision"],
+  "Late Game": ["Damage","Target Selection","Tab Screen","Win Conditions","Rotations"],
+  "Advanced": ["Animation Cancelling","Reading Players","Kiting","Positioning"],
+  "Out of Game": ["Setup","Mindset","Not Raging/Blaming","Reaction Time","Meta"]
+};
 
-    li.append(a,c);
-    list.appendChild(li);
+let skillProgress = JSON.parse(localStorage.getItem("skillProgressFree")||"{}");
+
+// Initialize skills (Champion Select unlocked)
+Object.keys(skillData).forEach(section => {
+  skillProgress[section] = skillProgress[section] || {};
+  skillData[section].forEach(skill => {
+    skillProgress[section][skill] = skill === "Champion Select";
   });
+});
+localStorage.setItem("skillProgressFree", JSON.stringify(skillProgress));
 
-  const pct=Math.round(done/total*100);
-  fill.style.width=pct+"%";
-  text.textContent=`${pct}% Complete`;
+const sectionSelect = document.getElementById('section-select');
+const skillList = document.getElementById('skill-list');
+const progressFill = document.getElementById('progressFill');
+const progressLabel = document.getElementById('progressLabel');
+
+function saveProgress() { localStorage.setItem("skillProgressFree", JSON.stringify(skillProgress)); }
+
+function updateProgress(section){
+  const skills = skillProgress[section];
+  const total = Object.keys(skills).length;
+  const done = Object.values(skills).filter(v=>v).length;
+  const pct = total===0?0:Math.round(done/total*100);
+  progressFill.style.width = pct+"%";
+  progressLabel.textContent = `${section}: ${pct}% Complete`;
 }
 
-section.onchange=render;
-render();
+function toggleCheck(section, skill, element){
+  if(skill!=="Champion Select") return;
+  skillProgress[section][skill] = !skillProgress[section][skill];
+  element.classList.toggle("completed");
+  element.innerHTML = element.classList.contains("completed")?"✔":"";
+  saveProgress();
+  updateProgress(section);
+}
+
+function renderSkills(section){
+  const skills = skillData[section];
+  skillList.innerHTML = skills.map(skill=>{
+    const completed = skillProgress[section][skill]?"completed":"";
+    const isLocked = skill!=="Champion Select";
+    return `<li data-skill="${skill}">
+      <a href="#" class="${isLocked?"locked":""}" onclick="${isLocked?'signupModal.style.display=\"flex\"; return false;':''}">${skill}</a>
+      <div class="checkmark ${completed}" onclick="toggleCheck('${section}','${skill}',this)">${completed?"✔":""}</div>
+    </li>`;
+  }).join('');
+  updateProgress(section);
+}
+
+sectionSelect.addEventListener('change', ()=>{
+  const selected = sectionSelect.value;
+  localStorage.setItem("lastSectionFree", selected);
+  renderSkills(selected);
+});
+
+renderSkills(localStorage.getItem("lastSectionFree")||"Pre Game");
+
+// Login / Signup logic
+continueSignupBtn.onclick = async ()=>{
+  const e=document.getElementById("signupEmail").value.trim();
+  const p=document.getElementById("signupPassword").value.trim();
+  const c=document.getElementById("signupPasswordConfirm").value.trim();
+  if(!e||!p||!c){alert("Fill all fields");return;}
+  if(p!==c){alert("Passwords do not match");return;}
+  await createUserWithEmailAndPassword(auth,e,p);
+  await setDoc(doc(firestore,"paidUsers",e),{paid:false,timestamp:serverTimestamp()});
+  signupModal.style.display="none";
+  planModal.style.display="flex";
+};
+
+modalLoginBtn.onclick = async ()=>{
+  const e=document.getElementById("loginEmail").value.trim();
+  const p=document.getElementById("loginPassword").value.trim();
+  await signInWithEmailAndPassword(auth,e,p);
+  const snap = await getDoc(doc(firestore,"paidUsers",e));
+  if(snap.exists() && snap.data().paid){
+    localStorage.setItem("lolfundamentals_logged_in","true");
+    localStorage.setItem("lolfundamentals_paid","true");
+    window.location.href="membershub.html";
+  }else{
+    planModal.style.display="flex";
+  }
+  loginModal.style.display="none";
+};
+
+// Locked skill click opens signup modal
+document.querySelectorAll(".locked").forEach(card=>{card.addEventListener("click",()=>{signupModal.style.display='flex'})});
 </script>
 
 </body>
 </html>
+
+
 
