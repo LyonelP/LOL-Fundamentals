@@ -81,37 +81,15 @@ header {
   gap: 20px;
 }
 
-/* Tip card */
-.tip-card {
+/* Video container */
+.video-container {
   background: rgba(13,17,23,0.9);
   border: 1px solid #c9aa71;
   border-radius: 10px;
-  padding: 18px 22px;
-  max-width: 600px;
-  flex: 1 1 600px;
-  text-align: left;
-  font-size: 16px;
-  line-height: 1.6;
-  opacity: 0;
-  transform: translateY(10px);
-  animation: fadeInUp 0.4s forwards;
-}
-.tip-card:nth-child(1) { animation-delay: 0.1s; }
-.tip-card h2 {
-  color: #c9aa71;
-  margin-top: 0;
-  margin-bottom: 10px;
-  font-size: 20px;
-  border-bottom: 1px solid #c9aa71;
-  padding-bottom: 4px;
-}
-
-/* Video container */
-.video-container {
+  padding: 20px;
+  max-width: 900px;
+  width: 100%;
   text-align: center;
-  margin: 20px 0;
-  border-radius: 10px;
-  overflow: hidden;
   transition: box-shadow 0.3s, transform 0.3s, border 0.3s;
 }
 .video-container iframe {
@@ -127,14 +105,6 @@ header {
   border: 2px solid #c9aa71;
 }
 
-/* Fade-in animation */
-@keyframes fadeInUp {
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
-}
-
 /* Footer */
 footer {
   text-align: center;
@@ -145,15 +115,10 @@ footer {
 }
 
 /* Responsive */
-@media (max-width: 800px) {
-  .main-content {
-    flex-direction: column;
-    align-items: center;
-  }
-}
 @media (max-width: 600px) {
   header { font-size: 24px; padding: 15px; }
-  .tip-card { padding: 14px 16px; font-size: 15px; }
+  .video-container { padding: 15px; }
+  .video-container iframe { height: 250px; }
 }
 </style>
 </head>
@@ -163,19 +128,11 @@ footer {
 <a href="skills.html" class="back-button">Back to Skills Hub</a>
 
 <div class="main-content">
-  <div class="tip-card">
-    <h2>Ganking Tips</h2>
-    <ul>
-      <li>Coordinate with your laners before attempting a gank.</li>
-      <li>Approach from the fog of war or from angles where the enemy can't see you.</li>
-      <li>Track enemy summoner spells and cooldowns for safer ganks.</li>
-      <li>Prioritize lanes that are overextended or have low health/mana.</li>
-      <li>Use vision control to ensure a successful gank.</li>
-    </ul>
-  </div>
-
   <div class="video-container">
-    <iframe src="https://www.youtube.com/embed/J6f0mOCtqJY" title="10 Tips for Ganking – LoL Fundamentals" allowfullscreen></iframe>
+    <iframe src="https://www.youtube.com/embed/J6f0mOCtqJY" 
+            title="10 Tips for Ganking – LoL Fundamentals" 
+            allowfullscreen>
+    </iframe>
   </div>
 </div>
 
@@ -183,8 +140,6 @@ footer {
 
 </body>
 </html>
-
-
 
 
 
