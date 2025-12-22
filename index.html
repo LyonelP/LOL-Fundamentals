@@ -82,15 +82,15 @@ footer a:hover{text-decoration:underline}
 <h2>Explore the Hub</h2>
 <div class="card-grid">
 
-<!-- Top row free cards -->
-<a href="https://lolfundamentals.com/dianaitems.html" class="card build-calculator">
-  <h3>Diana Combo Calculator</h3>
-  <p>Compare different item builds and ability combos for Diana at different stages of the game.</p>
+<!-- First row: unlocked first -->
+<a href="#" class="card fundamentals">
+  <h3>Fundamentals</h3>
+  <p>Core skills including combos, wave management, positioning, and warding for consistent gameplay improvement.</p>
 </a>
 
-<a href="https://lolfundamentals.com/dianarunes.html" class="card rune-calculator">
-  <h3>Diana Rune Calculator</h3>
-  <p>Compare rune pages against enemies to create your perfect Diana setup.</p>
+<a href="#" class="card diana-matchups">
+  <h3>Diana Mid Matchups</h3>
+  <p>Detailed breakdowns for every mid lane champion, teaching optimal trades, wave control, and all-in timings.</p>
 </a>
 
 <a href="https://lolfundamentals.com/tierlist.html" class="card tierlist">
@@ -101,10 +101,16 @@ footer a:hover{text-decoration:underline}
   </div>
 </a>
 
-<!-- Paid / locked cards -->
-<a href="#" class="card fundamentals locked">
-  <h3>Fundamentals</h3>
-  <p>Core skills including combos, wave management, positioning, and warding for consistent gameplay improvement.</p>
+<!-- Locked cards -->
+<a href="#" class="card build-calculator locked">
+  <h3>Diana Combo Calculator</h3>
+  <p>Compare different item builds and ability combos for Diana at different stages of the game.</p>
+  <div class="unlock-icon">🔒</div>
+</a>
+
+<a href="#" class="card rune-calculator locked">
+  <h3>Diana Rune Calculator</h3>
+  <p>Compare rune pages against enemies to create your perfect Diana setup.</p>
   <div class="unlock-icon">🔒</div>
 </a>
 
@@ -117,12 +123,6 @@ footer a:hover{text-decoration:underline}
 <a href="#" class="card ekko-guide locked">
   <h3>Ekko Guide</h3>
   <p>Complete guide to playing Ekko Jungle, including combos, pathing, and advanced mechanics.</p>
-  <div class="unlock-icon">🔒</div>
-</a>
-
-<a href="#" class="card diana-matchups locked">
-  <h3>Diana Mid Matchups</h3>
-  <p>Detailed breakdowns for every mid lane champion, teaching optimal trades, wave control, and all-in timings.</p>
   <div class="unlock-icon">🔒</div>
 </a>
 
@@ -261,5 +261,7 @@ document.querySelectorAll('.locked').forEach(card=>{
 
 </body>
 </html>
+
+
 
 
