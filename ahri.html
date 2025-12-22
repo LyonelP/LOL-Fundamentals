@@ -11,7 +11,6 @@
   --bg:#0a0f14;
   --card:#161b22;
   --muted:#8b949e;
-  --yellow:#f9d949;
 }
 
 body {
@@ -25,12 +24,12 @@ body {
   flex-direction: column;
 }
 
-/* ===== HEADER ===== */
+/* ===== HEADER (MATCHES HUB SCALE) ===== */
 header {
   background: rgba(13,17,23,0.9);
   border-bottom: 2px solid var(--gold);
   padding: 16px 20px;
-  font-size: 26px;
+  font-size: 26px; 
   font-weight: 700;
   text-transform: uppercase;
   color: var(--gold);
@@ -53,62 +52,81 @@ header {
 }
 .back-button::before { content: "← "; }
 
-/* ===== MATCHUP CONTAINER ===== */
-.matchup-container {
-  display: flex;
-  max-width: 900px;
+/* ===== SHARED WIDTH ===== */
+.content-width {
+  max-width: 920px;
   margin: 0 auto;
-  gap: 15px;
-  padding: 0 20px 10px 20px;
+  padding: 0 20px;
 }
 
+/* ===== MATCHUP CARD ===== */
+.matchup-container {
+  display: flex;
+  gap: 28px;
+  padding: 26px;
+  background: linear-gradient(180deg, #161b22, #12161d);
+  border-radius: 18px;
+  border: 1px solid rgba(201,170,113,0.18);
+  box-shadow:
+    0 15px 40px rgba(0,0,0,0.7),
+    inset 0 0 0 1px rgba(255,255,255,0.02);
+}
+
+/* ===== LEFT ===== */
 .matchup-left {
   display: flex;
+  flex-direction: column;
   align-items: center;
-  gap: 10px;
+  gap: 14px;
 }
 
 .matchup-left img {
-  width: 80px;
-  height: 80px;
-  border-radius: 8px;
+  width: 96px;
+  height: 96px;
+  border-radius: 14px;
+  border: 2px solid var(--gold);
+  box-shadow: 0 0 28px rgba(201,170,113,0.45);
 }
 
+/* ===== WINRATE ===== */
 .winrate-bubble {
-  background: rgba(249,217,73,0.18);
-  color: var(--yellow);
-  font-weight: bold;
-  padding: 8px 14px;
-  border-radius: 25px;
-  font-size: 16px;
-  white-space: nowrap;
+  background: rgba(249,115,22,0.15);
+  color: #f97316;
+  border: 1px solid rgba(249,115,22,0.45);
+  font-weight: 600;
+  padding: 6px 16px;
+  border-radius: 999px;
+  font-size: 14px;
+  letter-spacing: 0.5px;
 }
 
+/* ===== RIGHT ===== */
 .matchup-right {
   flex: 1;
-  display: flex;
-  flex-direction: column;
 }
 
 .matchup-right h2 {
-  margin: 0 0 15px 0;
+  margin: 0 0 14px 0;
   font-size: 22px;
   color: var(--gold);
+  padding-bottom: 8px;
+  border-bottom: 1px solid rgba(201,170,113,0.25);
 }
 
 .matchup-right ul {
-  padding-left: 20px;
+  padding-left: 18px;
   margin: 0;
 }
 
 .matchup-right li {
-  margin-bottom: 6px;
+  margin-bottom: 12px;
+  line-height: 1.65;
 }
 
 /* ===== FOOTER ===== */
 footer {
   text-align: center;
-  padding: 15px 10px;
+  padding: 18px 10px;
   font-size: 14px;
   color: var(--muted);
   margin-top: auto;
@@ -119,9 +137,11 @@ footer {
   .matchup-container {
     flex-direction: column;
     align-items: center;
-    padding: 10px;
   }
-  .matchup-right { text-align: center; }
+
+  .matchup-right {
+    text-align: center;
+  }
 }
 </style>
 
@@ -138,19 +158,21 @@ if (localStorage.getItem('lolfundamentals_logged_in') !== 'true') {
 
 <a href="matchuphub.html" class="back-button">Back to Matchup Hub</a>
 
-<div class="matchup-container">
-  <div class="matchup-left">
-    <img src="https://ddragon.leagueoflegends.com/cdn/14.23.1/img/champion/Ahri.png" alt="Ahri">
-    <div class="winrate-bubble">49%</div>
-  </div>
+<div class="content-width">
+  <div class="matchup-container">
+    <div class="matchup-left">
+      <img src="https://ddragon.leagueoflegends.com/cdn/14.23.1/img/champion/Ahri.png" alt="Ahri">
+      <div class="winrate-bubble">49%</div>
+    </div>
 
-  <div class="matchup-right">
-    <h2>Matchup Notes</h2>
-    <ul>
-      <li>Ahri’s best trade lvl 1 is to auto W auto towards the river bush (blue side) or top river side (red side) moving towards Diana with the movement speed from W. She often dodges Q by moving inside the Q arc. Counter this by throwing only max range Q’s and waiting for her to start autoing the wave.</li>
-      <li>It's crucial to thin out the wave against Ahri to prevent her from trading effectively with autos and landing easy charms.</li>
-      <li>Build Verdant Barrier or Banshee's Veil early in the matchup. Ahri doesn’t have high sustain damage, and the spell shield allows you to bypass Ahri’s E.</li>
-    </ul>
+    <div class="matchup-right">
+      <h2>Matchup Notes</h2>
+      <ul>
+        <li>Ahri’s best trade lvl 1 is to auto W auto towards the river bush (blue side) or top river side (red side) moving towards Diana with the movement speed from W. She often dodges Q by moving inside the Q arc. Counter this by throwing only max range Q’s and waiting for her to start autoing the wave.</li>
+        <li>It's crucial to thin out the wave against Ahri to prevent her from trading effectively with autos and landing easy charms.</li>
+        <li>Build Verdant Barrier or Banshee's Veil early in the matchup. Ahri doesn’t have high sustain damage, and the spell shield allows you to bypass Ahri’s E.</li>
+      </ul>
+    </div>
   </div>
 </div>
 
@@ -158,7 +180,6 @@ if (localStorage.getItem('lolfundamentals_logged_in') !== 'true') {
 
 </body>
 </html>
-
 
 
 
