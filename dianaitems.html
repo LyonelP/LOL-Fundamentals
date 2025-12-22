@@ -1,6 +1,11 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+<script>
+  if (localStorage.getItem('lolfundamentals_logged_in') !== 'true') {
+    window.location.href = 'index.html';
+  }
+</script>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Diana Combo Calculator</title>
@@ -480,13 +485,6 @@ document.addEventListener("DOMContentLoaded",()=>{
 
 </body>
 </html>
-
-
-
-
-
-
-
 
 
 
