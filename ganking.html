@@ -5,7 +5,6 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Ganking – LoL Fundamentals</title>
 
-<!-- Login check -->
 <script>
   if (localStorage.getItem('lolfundamentals_logged_in') !== 'true') {
     window.location.replace('login.html');
@@ -13,35 +12,29 @@
 </script>
 
 <style>
-html, body {
-  margin: 0;
-  padding: 0;
-  height: 100%;
-}
 body {
+  margin: 0;
   font-family: 'Beaufort for LOL', Arial, Helvetica, sans-serif;
+  text-align: center;
   color: #fff;
   background: url('https://64.media.tumblr.com/594ac290bec6d5e9ad98b5f53404f00b/245c4c3ee469f81d-e4/s1280x1920/1cda4284320eb2031758a9859dfe14ff8bbc50ba.jpg') no-repeat center center fixed;
   background-size: cover;
-  display: flex;
-  flex-direction: column;
-  text-align: center;
-  min-height: 100vh;
+  overflow-x: hidden;
 }
 
-/* Slight overlay */
+/* Overlay */
 body::before {
   content: "";
   position: fixed;
   top: 0; left: 0;
   width: 100%; height: 100%;
-  background: rgba(10,15,20,0.2);
+  background: rgba(10,15,20,0.75);
   z-index: -1;
 }
 
 /* Header */
 header {
-  background: rgba(13,17,23,0.85);
+  background: rgba(13,17,23,0.9);
   border-bottom: 2px solid #c9aa71;
   padding: 20px 10px;
   font-weight: bold;
@@ -70,26 +63,28 @@ header {
   box-shadow: 0 0 15px rgba(255,215,0,0.8);
 }
 
-/* Main content */
-.main-content {
-  flex: 1;
+/* Content container */
+.content-container {
   display: flex;
-  justify-content: center;
+  justify-content: space-between;
   align-items: flex-start;
   flex-wrap: wrap;
-  gap: 20px;
-  padding: 20px 10px;
+  margin: 20px auto 50px;
   max-width: 1100px;
-  margin: 0 auto;
+  background: rgba(13,17,23,0.95);
+  border: 1px solid #2f81f7;
+  border-radius: 10px;
+  padding: 20px;
+  color: #fff;
+  font-size: 16px;
+  line-height: 1.6;
 }
 
-/* Left text section */
+/* Left section */
 .text-section {
-  flex: 1 1 350px;
+  flex: 1 1 400px;
   text-align: left;
 }
-
-/* Subheader style like Champion Select */
 .text-section h2 {
   color: #c9aa71;
   margin-top: 0;
@@ -98,12 +93,13 @@ header {
   padding-bottom: 4px;
 }
 
-/* Video section on right */
+/* Right section (video) */
 .video-section {
   flex: 1 1 500px;
   display: flex;
   justify-content: center;
   align-items: flex-start;
+  margin-top: 10px;
 }
 .video-section iframe {
   width: 100%;
@@ -119,22 +115,26 @@ header {
   border: 2px solid #c9aa71;
 }
 
-/* Footer */
 footer {
   text-align: center;
-  margin-top: auto;
   padding: 15px 10px;
   font-size: 14px;
-  color: #fff;
+  color: #8b949e;
 }
 
-/* Responsive */
+/* Mobile layout */
 @media (max-width: 800px) {
-  .main-content {
+  .content-container {
     flex-direction: column;
     align-items: center;
   }
-  .video-section iframe { max-width: 90%; height: 250px; }
+  .video-section {
+    margin-top: 20px;
+  }
+  .video-section iframe {
+    max-width: 90%;
+    height: 250px;
+  }
 }
 </style>
 </head>
@@ -143,7 +143,7 @@ footer {
 <header>Ganking</header>
 <a href="skills.html" class="back-button">Back to Skills Hub</a>
 
-<div class="main-content">
+<div class="content-container">
   <div class="text-section">
     <h2>Ganking</h2>
   </div>
@@ -159,7 +159,6 @@ footer {
 
 </body>
 </html>
-
 
 
 
