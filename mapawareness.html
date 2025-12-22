@@ -79,24 +79,32 @@ header {
   padding: 20px 10px;
 }
 
-/* Tip cards */
+/* Tip-card section with text + minimap side by side */
+.tip-card-row {
+  display: flex;
+  justify-content: space-between;
+  gap: 20px;
+  flex-wrap: wrap;
+  width: 100%;
+  max-width: 900px;
+  margin: 15px 0;
+  opacity: 0;
+  transform: translateY(10px);
+  animation: fadeInUp 0.4s forwards;
+}
+.tip-card-row:nth-child(1) { animation-delay: 0.1s; }
+.tip-card-row:nth-child(2) { animation-delay: 0.3s; }
+
 .tip-card {
   background: rgba(13,17,23,0.9);
   border: 1px solid #c9aa71;
   border-radius: 10px;
   padding: 18px 22px;
-  margin: 15px 0;
-  max-width: 900px;
-  width: 90%;
   text-align: left;
   font-size: 16px;
   line-height: 1.6;
-  opacity: 0;
-  transform: translateY(10px);
-  animation: fadeInUp 0.4s forwards;
+  flex: 1 1 500px;
 }
-.tip-card:nth-child(1) { animation-delay: 0.1s; }
-.tip-card:nth-child(2) { animation-delay: 0.3s; }
 
 .tip-card h2 {
   color: #c9aa71;
@@ -107,15 +115,18 @@ header {
   padding-bottom: 4px;
 }
 
-/* Minimap inside a card */
-.tip-card img {
+/* Minimap styling */
+.minimap-card {
+  flex: 0 0 300px;
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+}
+.minimap-card img {
   width: 100%;
-  max-width: 350px;
   height: auto;
   border-radius: 10px;
   border: 2px solid #c9aa71;
-  display: block;
-  margin-top: 10px;
 }
 
 /* Fade-in animation */
@@ -136,6 +147,16 @@ footer {
 }
 
 /* Responsive */
+@media (max-width: 800px) {
+  .tip-card-row {
+    flex-direction: column;
+    align-items: center;
+  }
+  .minimap-card {
+    max-width: 90%;
+    margin-top: 10px;
+  }
+}
 @media (max-width: 600px) {
   header { font-size: 24px; padding: 15px; }
   .tip-card { padding: 14px 16px; font-size: 15px; }
@@ -148,31 +169,38 @@ footer {
 <a href="skills.html" class="back-button">Back to Skills Hub</a>
 
 <div class="main-content">
-  <div class="tip-card">
-    <h2>Map Awareness</h2>
-    <p>Map Awareness is your ability to check the minimap frequently and quickly while gathering all of the information presented. Strong map awareness allows you to anticipate plays, avoid ganks, and make better macro decisions.</p>
+
+  <div class="tip-card-row">
+    <div class="tip-card">
+      <h2>Map Awareness</h2>
+      <p>Map Awareness is your ability to check the minimap frequently and quickly while gathering all of the information presented. Strong map awareness allows you to anticipate plays, avoid ganks, and make better macro decisions.</p>
+    </div>
   </div>
 
-  <div class="tip-card">
-    <h2>Things to Look Out For</h2>
-    <ul>
-      <li><strong>Where your teammates are in lane:</strong> Did they just back, or are they playing up at the enemy tower? If they just recalled, playing aggressive is riskier. If they’re pushing up at tower, try to match their push. If you can’t, ping them back since you won't be able to capitalize off of them getting ganked.</li>
-      <li><strong>Flashes and abilities being used:</strong> Pay attention to sudden large icon movements on the minimap.</li>
-      <li><strong>Jungle camp respawn timers:</strong> Tracking these helps you track the enemy jungler.</li>
-      <li><strong>Teleport opportunities:</strong> Look for wards, minions and tower to TP to or enemy TPs being channeled.</li>
-      <li><strong>What’s warded:</strong> Check which areas have vision and when that vision will expire.</li>
-      <li><strong>What the enemy does after pushing in a wave:</strong> There is a short instance when you can usually tell what the enemy will do after they push the wave by their first movement. They'll either be looking to roam, ward, or reset.</li>
-      <li><strong>When the first tower falls bot lane:</strong> This usually means the enemy bot lane will rotate mid or top after resetting.</li>
-    </ul>
-    <img src="https://ddragon.leagueoflegends.com/cdn/14.23.1/img/map/map11.png" 
-         alt="League of Legends Summoner's Rift Minimap">
+  <div class="tip-card-row">
+    <div class="tip-card">
+      <h2>Things to Look Out For</h2>
+      <ul>
+        <li><strong>Where your teammates are in lane:</strong> Did they just back, or are they playing up at the enemy tower? If they just recalled, playing aggressive is riskier. If they’re pushing up at tower, try to match their push. If you can’t, ping them back since you won't be able to capitalize off of them getting ganked.</li>
+        <li><strong>Flashes and abilities being used:</strong> Pay attention to sudden large icon movements on the minimap.</li>
+        <li><strong>Jungle camp respawn timers:</strong> Tracking these helps you track the enemy jungler.</li>
+        <li><strong>Teleport opportunities:</strong> Look for wards, minions and tower to TP to or enemy TPs being channeled.</li>
+        <li><strong>What’s warded:</strong> Check which areas have vision and when that vision will expire.</li>
+        <li><strong>What the enemy does after pushing in a wave:</strong> There is a short instance when you can usually tell what the enemy will do after they push the wave by their first movement. They'll either be looking to roam, ward, or reset.</li>
+        <li><strong>When the first tower falls bot lane:</strong> This usually means the enemy bot lane will rotate mid or top after resetting.</li>
+      </ul>
+    </div>
+    <div class="minimap-card">
+      <img src="https://ddragon.leagueoflegends.com/cdn/14.23.1/img/map/map11.png" 
+           alt="League of Legends Summoner's Rift Minimap">
+    </div>
   </div>
+
 </div>
 
 <footer>© 2025 LoL Fundamentals · All rights reserved</footer>
 
 </body>
 </html>
-
 
 
