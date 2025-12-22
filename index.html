@@ -6,59 +6,17 @@
 <title>LoL Fundamentals – Members Hub Lite</title>
 <link rel="icon" href="/favicon.ico">
 <style>
-body {
-  margin:0;
-  font-family:"Beaufort for LOL",Arial,Helvetica,sans-serif;
-  background:radial-gradient(circle at top,#0f1620,#0a0f14 70%);
-  color:#e6edf3;
-  line-height:1.6
-}
-header {
-  background:linear-gradient(90deg,#0a0f14,#1b2838);
-  border-bottom:2px solid #c9aa71;
-  padding:18px 20px;
-  text-align:center;
-  font-weight:bold;
-  font-size:24px;
-  letter-spacing:1.5px;
-  text-transform:uppercase;
-  color:#c9aa71;
-  text-shadow:0 0 8px rgba(201,170,113,.4)
-}
-.hero {
-  position:relative;
-  text-align:center;
-  padding:140px 20px;
-  background:url("https://ddragon.leagueoflegends.com/cdn/img/champion/splash/Diana_0.jpg") center/cover no-repeat;
-  overflow:hidden;
-  border-bottom:1px solid #1f2937
-}
-.hero .blueOverlay {position:absolute;inset:0;background:rgba(47,129,247,.08);pointer-events:none;z-index:1}
-.hero .particles,.hero .aura {position:absolute;inset:0;pointer-events:none}
+body{margin:0;font-family:"Beaufort for LOL",Arial,Helvetica,sans-serif;background:radial-gradient(circle at top,#0f1620,#0a0f14 70%);color:#e6edf3;line-height:1.6}
+header{background:linear-gradient(90deg,#0a0f14,#1b2838);border-bottom:2px solid #c9aa71;padding:18px 20px;text-align:center;font-weight:bold;font-size:24px;letter-spacing:1.5px;text-transform:uppercase;color:#c9aa71;text-shadow:0 0 8px rgba(201,170,113,.4)}
+.hero{position:relative;text-align:center;padding:140px 20px;background:url("https://ddragon.leagueoflegends.com/cdn/img/champion/splash/Diana_0.jpg") center/cover no-repeat;overflow:hidden;border-bottom:1px solid #1f2937}
+.hero .blueOverlay{position:absolute;inset:0;background:rgba(47,129,247,.08);pointer-events:none;z-index:1}
+.hero .particles,.hero .aura{position:absolute;inset:0;pointer-events:none}
 .hero .particles{z-index:2}
-.hero .aura {
-  background:radial-gradient(circle at 50% 20%,rgba(47,129,247,.2),transparent 70%);
-  opacity:.3;
-  animation:auraPulse 7s infinite ease-in-out;
-  z-index:3
-}
+.hero .aura{background:radial-gradient(circle at 50% 20%,rgba(47,129,247,.2),transparent 70%);opacity:.3;animation:auraPulse 7s infinite ease-in-out;z-index:3}
 .hero h1,.hero p,.hero .btn{position:relative;z-index:5}
 .hero h1{font-size:3em;margin-bottom:10px;text-shadow:0 0 12px #2f81f7}
 .hero p{max-width:650px;margin:0 auto 20px;font-size:1.15em;color:#d0d8e0;text-shadow:0 0 14px rgba(0,0,0,.7)}
-.btn {
-  display:inline-block;
-  background:#2f81f7;
-  color:#fff;
-  padding:14px 26px;
-  border-radius:6px;
-  text-decoration:none;
-  font-weight:bold;
-  font-size:1.05em;
-  transition:.3s;
-  border:1px solid #c9aa71;
-  box-shadow:0 0 15px rgba(47,129,247,.4);
-  cursor:pointer
-}
+.btn{display:inline-block;background:#2f81f7;color:#fff;padding:14px 26px;border-radius:6px;text-decoration:none;font-weight:bold;font-size:1.05em;transition:.3s;border:1px solid #c9aa71;box-shadow:0 0 15px rgba(47,129,247,.4);cursor:pointer}
 .btn:hover{background:#4795ff;box-shadow:0 0 25px rgba(47,129,247,.55)}
 .orangeBtn{background:#f2994a;border-color:#f2b96d;position:relative}
 .orangeBtn:hover{background:#ffb04d;box-shadow:0 0 25px rgba(242,153,74,.55)}
@@ -69,42 +27,17 @@ header {
 .section h2{color:#c9aa71;font-size:2.1em;display:inline-block;padding-bottom:12px;position:relative;margin-bottom:40px}
 .section h2::after{content:"";width:60%;height:2px;background:linear-gradient(90deg,transparent,#c9aa71,transparent);position:absolute;bottom:0;left:20%}
 .card-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:22px;align-items:start}
-.card {
-  position:relative;
-  background:#161b22;
-  border:2px solid #c9aa71;
-  border-radius:12px;
-  padding:20px;
-  text-decoration:none;
-  color:#e6edf3;
-  height:230px;
-  display:flex;
-  flex-direction:column;
-  justify-content:center;
-  align-items:center;
-  overflow:hidden;
-  transition:transform .25s,box-shadow .25s;
-}
+.card{position:relative;background:#161b22;border:2px solid #c9aa71;border-radius:12px;padding:20px;text-decoration:none;color:#e6edf3;height:230px;display:flex;flex-direction:column;justify-content:center;align-items:center;overflow:hidden;transition:transform .25s,box-shadow .25s}
 .card h3{color:#c9aa71;margin:0 0 8px;z-index:2;font-size:1.25rem;text-align:center}
 .card p{margin:0;font-size:0.95rem;line-height:1.3;z-index:2;color:#e6edf3;opacity:0.95;text-align:center}
-.card::before {
-  content:"";
-  position:absolute;
-  inset:0;
-  width:100%;
-  height:100%;
-  background-size:cover;
-  background-position:center;
-  opacity:.15;
-  z-index:0;
-  border-radius:10px;
-}
+.card::before{content:"";position:absolute;inset:0;width:100%;height:100%;background-size:cover;background-position:center;opacity:.15;z-index:0;border-radius:10px}
+
 .fundamentals::before{background-image:url('https://cdn.wallpapersafari.com/92/79/MYTD9q.png')}
 .diana-guide::before{background-image:url('https://ddragon.leagueoflegends.com/cdn/img/champion/splash/Diana_1.jpg')}
 .ekko-guide::before{background-image:url('https://ddragon.leagueoflegends.com/cdn/img/champion/splash/Ekko_0.jpg')}
 .diana-matchups::before{background-image:url('https://ddragon.leagueoflegends.com/cdn/img/champion/splash/Diana_0.jpg')}
-.build-calculator::before{background-image:url('https://i.imgur.com/uhLq29j.jpeg'); background-size:cover; background-position:center;}
-.rune-calculator::before{background-image:url('https://i.imgur.com/kcs90ta.jpeg'); background-size:cover; background-position:center;}
+.build-calculator::before{background-image:url('https://i.imgur.com/uhLq29j.jpeg')}
+.rune-calculator::before{background-image:url('https://i.imgur.com/kcs90ta.jpeg')}
 .tierlist::before{ background: linear-gradient(to bottom, #1b2838 0%, #161b22 100%); }
 .coaching::before{background-image:url('https://m.media-amazon.com/images/I/71GlK3kDLJL.jpg'); opacity:0.20}
 .discord-card::before{background-image:url('https://i.imgur.com/fS2OKHV.jpeg');background-size:cover;background-position:center;opacity:0.15}
@@ -127,12 +60,6 @@ header {
 footer{text-align:center;padding:30px;color:#8b949e;font-size:14px;background:#0a0f14;border-top:1px solid #1f2937}
 footer a{color:#c9aa71;text-decoration:none}
 footer a:hover{text-decoration:underline}
-
-@keyframes floatParticles{
-  0%{transform:translateY(0) translateX(0) scale(1);opacity:1}
-  50%{transform:translateY(-80px) translateX(20px) scale(1.2);opacity:.6}
-  100%{transform:translateY(0) translateX(0) scale(1);opacity:1}
-}
 </style>
 </head>
 <body>
@@ -155,17 +82,15 @@ footer a:hover{text-decoration:underline}
 <h2>Explore the Hub</h2>
 <div class="card-grid">
 
-<!-- All locked cards -->
-<a href="#" class="card build-calculator locked">
+<!-- Top row free cards -->
+<a href="https://lolfundamentals.com/dianaitems.html" class="card build-calculator">
   <h3>Diana Combo Calculator</h3>
   <p>Compare different item builds and ability combos for Diana at different stages of the game.</p>
-  <div class="unlock-icon">🔒</div>
 </a>
 
-<a href="#" class="card rune-calculator locked">
+<a href="https://lolfundamentals.com/dianarunes.html" class="card rune-calculator">
   <h3>Diana Rune Calculator</h3>
   <p>Compare rune pages against enemies to create your perfect Diana setup.</p>
-  <div class="unlock-icon">🔒</div>
 </a>
 
 <a href="https://lolfundamentals.com/tierlist.html" class="card tierlist">
@@ -176,6 +101,7 @@ footer a:hover{text-decoration:underline}
   </div>
 </a>
 
+<!-- Paid / locked cards -->
 <a href="#" class="card fundamentals locked">
   <h3>Fundamentals</h3>
   <p>Core skills including combos, wave management, positioning, and warding for consistent gameplay improvement.</p>
@@ -266,18 +192,6 @@ const app=initializeApp(firebaseConfig),auth=getAuth(app),firestore=getFirestore
 
 const stripe={monthly:"https://buy.stripe.com/8x28wIaQ4dJa4Rg88iejK0f",yearly:"https://buy.stripe.com/cNi14g3nC48AerQ9cmejK07"};
 
-const updateLoginState=async()=>{
-  const email=localStorage.getItem("lolfundamentals_user");
-  const paid=localStorage.getItem("lolfundamentals_paid");
-  // Only paid users can access membershub.html
-  if(window.location.pathname.includes("membershub.html") && (!email || paid!=="true")){
-    window.location.href="/";
-  }
-}
-
-window.addEventListener("storage",()=>updateLoginState());
-window.addEventListener("load",()=>updateLoginState());
-
 signupHeroBtn.onclick=()=>signupModal.style.display="flex";
 loginHeroBtn.onclick=()=>loginModal.style.display="flex";
 closeSignupModal.onclick=()=>signupModal.style.display="none";
@@ -291,8 +205,6 @@ continueSignupBtn.onclick=async()=>{
   if(p!==c){alert("Passwords do not match");return}
   await createUserWithEmailAndPassword(auth,e,p);
   await setDoc(doc(firestore,"paidUsers",e),{paid:false,timestamp:serverTimestamp()});
-  localStorage.setItem("lolfundamentals_user", e);
-  localStorage.setItem("lolfundamentals_paid","false");
   signupModal.style.display="none";
   planModal.style.display="flex";
 };
@@ -305,12 +217,10 @@ modalLoginBtn.onclick=async()=>{
   await signInWithEmailAndPassword(auth,e,p);
   const snap=await getDoc(doc(firestore,"paidUsers",e));
   if(snap.exists() && snap.data().paid){
-    localStorage.setItem("lolfundamentals_user", e);
+    localStorage.setItem("lolfundamentals_logged_in","true");
     localStorage.setItem("lolfundamentals_paid","true");
     window.location.href="membershub.html";
-  } else {
-    localStorage.setItem("lolfundamentals_user", e);
-    localStorage.setItem("lolfundamentals_paid","false");
+  }else{
     planModal.style.display="flex";
   }
   loginModal.style.display="none";
@@ -341,9 +251,15 @@ document.querySelectorAll('.locked').forEach(card=>{
 });
 </script>
 
+<style>
+@keyframes floatParticles{
+  0%{transform:translateY(0) translateX(0) scale(1);opacity:1}
+  50%{transform:translateY(-80px) translateX(20px) scale(1.2);opacity:.6}
+  100%{transform:translateY(0) translateX(0) scale(1);opacity:1}
+}
+</style>
+
 </body>
 </html>
-
-
 
 
