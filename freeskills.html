@@ -119,6 +119,8 @@ footer { margin-top: auto; text-align: center; padding: 18px 10px; font-size: 14
   #section-select { width: 95vw; font-size: 14px; padding: 8px 30px 8px 12px; }
   .skill-list li { width: 85vw; font-size: 16px; padding: 10px 14px; }
 }
+.btn {display:inline-block;background:#2f81f7;color:#fff;padding:10px 20px;border-radius:6px;text-decoration:none;font-weight:bold;font-size:1em;transition:.3s;border:1px solid #c9aa71;cursor:pointer}
+.btn:hover{background:#4795ff}
 </style>
 </head>
 <body>
@@ -149,7 +151,7 @@ footer { margin-top: auto; text-align: center; padding: 18px 10px; font-size: 14
 
 <footer>© 2025 LoL Fundamentals · All rights reserved</footer>
 
-<!-- Login modal from your index -->
+<!-- Login modal -->
 <div id="login-modal" style="display:none;">
   <div style="background:#161b22;padding:30px;border-radius:10px;text-align:center;max-width:400px;margin:40px auto;border:1px solid #c9aa71;">
     <h2 style="color:#c9aa71;margin-bottom:20px;">Member Login</h2>
@@ -162,7 +164,25 @@ footer { margin-top: auto; text-align: center; padding: 18px 10px; font-size: 14
   </div>
 </div>
 
-<script>
+<!-- Firebase SDK -->
+<script type="module">
+import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
+import { getAuth, signInWithEmailAndPassword, sendPasswordResetEmail } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-auth.js";
+import { getFirestore, doc, getDoc } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
+
+const firebaseConfig={
+  apiKey:"AIzaSyCFRcEV7wdivqONnkjJubAZOjPMixrHMBI",
+  authDomain:"lol-fundamentals.firebaseapp.com",
+  projectId:"lol-fundamentals",
+  storageBucket:"lol-fundamentals.firebasestorage.app",
+  messagingSenderId:"1038440427584",
+  appId:"1:1038440427584:web:a82207151fd370dbedefa5"
+};
+
+const app=initializeApp(firebaseConfig);
+const auth=getAuth(app);
+const firestore=getFirestore(app);
+
 const skillData = {
   "Pre Game": ["Champion Select","Mouse Accuracy","Summoner Spells","Matchups","Communication","Build"],
   "Early Game": ["Level 1","Farming","Trading","Wave Control","Back Timings","Power Spikes","Pathing","Laning","Map Awareness","Ganking","Roaming"],
@@ -173,8 +193,6 @@ const skillData = {
 };
 
 let skillProgress = JSON.parse(localStorage.getItem("skillProgressFree") || "{}");
-
-// Initialize skills: all unchecked
 Object.keys(skillData).forEach(section=>{
   skillProgress[section] = skillProgress[section] || {};
   skillData[section].forEach(skill=>skillProgress[section][skill] = false);
@@ -185,19 +203,25 @@ const sectionSelect = document.getElementById('section-select');
 const skillList = document.getElementById('skill-list');
 const progressFill = document.getElementById('progressFill');
 const progressLabel = document.getElementById('progressLabel');
+const loginModal = document.getElementById('login-modal');
+const loginEmail = document.getElementById('loginEmail');
+const loginPassword = document.getElementById('loginPassword');
+const modalLoginBtn = document.getElementById('modalLoginBtn');
+const closeLoginModal = document.getElementById('closeLoginModal');
+const resetLinkModal = document.getElementById('resetLinkModal');
 
-function saveProgress() { localStorage.setItem("skillProgressFree", JSON.stringify(skillProgress)); }
+function saveProgress(){ localStorage.setItem("skillProgressFree", JSON.stringify(skillProgress)); }
 
-function updateProgress(section) {
+function updateProgress(section){
   const skills = skillProgress[section];
   const total = Object.keys(skills).length;
-  const done = Object.values(skills).filter(v => v).length;
-  const pct = total === 0 ? 0 : Math.round(done / total * 100);
+  const done = Object.values(skills).filter(v=>v).length;
+  const pct = total===0?0:Math.round(done/total*100);
   progressFill.style.width = pct + "%";
   progressLabel.textContent = `${section}: ${pct}% Complete`;
 }
 
-function toggleCheck(section, skill, element) {
+function toggleCheck(section, skill, element){
   skillProgress[section][skill] = !skillProgress[section][skill];
   saveProgress();
   element.classList.toggle("completed");
@@ -205,18 +229,18 @@ function toggleCheck(section, skill, element) {
   updateProgress(section);
 }
 
-function renderSkills(section) {
+function renderSkills(section){
   const skills = skillData[section];
-  skillList.innerHTML = skills.map(skill => {
+  skillList.innerHTML = skills.map(skill=>{
     const completed = skillProgress[section][skill] ? "completed" : "";
     const isLocked = skill !== "Champion Select";
     return `
       <li data-skill="${skill}">
-        <a href="#" class="${isLocked ? "locked" : ""}" onclick="${isLocked ? 'document.querySelector(\'#login-modal\').style.display=\'flex\'; return false;' : ''}">
+        <a href="#" class="${isLocked?"locked":""}" onclick="${isLocked?'loginModal.style.display=\'flex\'; return false;':''}">
           ${skill}
         </a>
         <div class="checkmark ${completed}" onclick="toggleCheck('${section}','${skill}', this)">
-          ${completed ? "✔" : ""}
+          ${completed?"✔":""}
         </div>
       </li>
     `;
@@ -224,20 +248,48 @@ function renderSkills(section) {
   updateProgress(section);
 }
 
-// Section change
-sectionSelect.addEventListener('change', () => {
+sectionSelect.addEventListener('change', ()=>{
   const selected = sectionSelect.value;
   localStorage.setItem("lastSectionFree", selected);
   renderSkills(selected);
 });
 
-// Initial render
-const lastSection = localStorage.getItem("lastSectionFree");
-const initialSection = lastSection || "Pre Game";
-sectionSelect.value = initialSection;
-renderSkills(initialSection);
+const lastSection = localStorage.getItem("lastSectionFree") || "Pre Game";
+sectionSelect.value = lastSection;
+renderSkills(lastSection);
+
+// Modal buttons
+closeLoginModal.onclick = ()=> loginModal.style.display = "none";
+
+// Firebase login
+modalLoginBtn.onclick = async ()=>{
+  try {
+    const email = loginEmail.value.trim();
+    const password = loginPassword.value.trim();
+    const userCred = await signInWithEmailAndPassword(auth,email,password);
+    const snap = await getDoc(doc(firestore,"paidUsers",email));
+    if(snap.exists() && snap.data().paid){
+      localStorage.setItem("lolfundamentals_logged_in","true");
+      localStorage.setItem("lolfundamentals_paid","true");
+      loginModal.style.display = "none";
+      alert("Login successful!"); 
+    }else{
+      alert("Account not paid. Upgrade on main site.");
+    }
+  } catch(err){
+    alert("Login failed: "+err.message);
+  }
+};
+
+resetLinkModal.onclick = async (e)=>{
+  e.preventDefault();
+  if(!loginEmail.value) return alert("Enter email first");
+  try{
+    await sendPasswordResetEmail(auth, loginEmail.value);
+    alert("Password reset email sent!");
+  }catch(err){ alert("Error: "+err.message); }
+};
 </script>
 
 </body>
 </html>
-
