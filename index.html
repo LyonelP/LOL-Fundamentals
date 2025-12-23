@@ -159,12 +159,15 @@ footer a:hover{text-decoration:underline}
 <div id="planModal" class="modal">
 <div class="modalContent">
 <h2>Choose Your Plan</h2>
-<div class="plan-buttons">
+<div class="plan-buttons" style="justify-content:center;gap:20px;flex-wrap:wrap;">
+  <!-- Yearly plan -->
+  <button class="btn" id="yearlyBtn">$49 / Year</button>
+
+  <!-- Lifetime plan -->
   <div style="position:relative;display:inline-block;text-align:center">
     <div class="bestValueTag">Best Value</div>
-    <button class="btn orangeBtn" id="yearlyBtn">$49 / Year</button>
+    <button class="btn orangeBtn" id="lifetimeBtn">$99 / Lifetime</button>
   </div>
-  <button class="btn" id="lifetimeBtn">$99 / Lifetime</button>
 </div>
 <button id="closePlanModal">Cancel</button>
 </div>
@@ -190,11 +193,6 @@ import { getFirestore, doc, setDoc, serverTimestamp, getDoc } from "https://www.
 const firebaseConfig={apiKey:"AIzaSyCFRcEV7wdivqONnkjJubAZOjPMixrHMBI",authDomain:"lol-fundamentals.firebaseapp.com",projectId:"lol-fundamentals",storageBucket:"lol-fundamentals.firebasestorage.app",messagingSenderId:"1038440427584",appId:"1:1038440427584:web:a82207151fd370dbedefa5"};
 const app=initializeApp(firebaseConfig),auth=getAuth(app),firestore=getFirestore(app);
 
-const stripe = {
-  yearly: "https://buy.stripe.com/cNi14g3nC48AerQ9cmejK07",
-  lifetime: "https://buy.stripe.com/fZu00c9M0awYgzYcoyejK06"
-};
-
 signupHeroBtn.onclick=()=>signupModal.style.display="flex";
 loginHeroBtn.onclick=()=>loginModal.style.display="flex";
 closeSignupModal.onclick=()=>signupModal.style.display="none";
@@ -212,8 +210,8 @@ continueSignupBtn.onclick=async()=>{
   planModal.style.display="flex";
 };
 
-yearlyBtn.onclick=()=>{window.open(stripe.yearly,"_blank");planModal.style.display="none";}
-lifetimeBtn.onclick=()=>{window.open(stripe.lifetime,"_blank");planModal.style.display="none";}
+document.getElementById("yearlyBtn").onclick=()=>{window.open("https://buy.stripe.com/cNi14g3nC48AerQ9cmejK07","_blank");planModal.style.display="none";}
+document.getElementById("lifetimeBtn").onclick=()=>{window.open("https://buy.stripe.com/fZu00c9M0awYgzYcoyejK06","_blank");planModal.style.display="none";}
 
 modalLoginBtn.onclick=async()=>{
   const e=loginEmail.value.trim(),p=loginPassword.value.trim();
@@ -270,7 +268,6 @@ document.querySelectorAll('.locked').forEach(card=>{
 
 </body>
 </html>
-
 
 
 
