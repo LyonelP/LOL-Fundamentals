@@ -95,9 +95,11 @@ header {
   transform: translateY(10px);
   animation: fadeInUp 0.4s forwards;
 }
+
 .tip-card:nth-child(1) { animation-delay: 0.1s; }
 .tip-card:nth-child(2) { animation-delay: 0.3s; }
 .tip-card:nth-child(3) { animation-delay: 0.5s; }
+.tip-card:nth-child(4) { animation-delay: 0.7s; }
 
 .tip-card h2 {
   color: #c9aa71;
@@ -108,26 +110,6 @@ header {
   padding-bottom: 4px;
 }
 
-/* Tooltip */
-.tip-card span.tooltip {
-  border-bottom: 1px dotted #c9aa71;
-  cursor: help;
-  position: relative;
-}
-.tip-card span.tooltip:hover::after {
-  content: attr(data-tooltip);
-  position: absolute;
-  left: 0;
-  bottom: 125%;
-  background: rgba(0,0,0,0.85);
-  color: #fff;
-  padding: 6px 10px;
-  border-radius: 6px;
-  white-space: nowrap;
-  font-size: 14px;
-  z-index: 10;
-}
-
 /* Fade-in animation */
 @keyframes fadeInUp {
   to {
@@ -136,7 +118,7 @@ header {
   }
 }
 
-/* Footer at bottom of page */
+/* Footer */
 footer {
   text-align: center;
   margin-top: auto;
@@ -158,26 +140,53 @@ footer {
 <a href="skills.html" class="back-button">Back to Skills Hub</a>
 
 <div class="main-content">
+
   <div class="tip-card">
     <h2>Champion Select</h2>
-    <p>The game starts in champion select. Have up to 5 bans ready in case your team happens to ban all of the other 4 most ban-worthy champions.</p>
+    <p>
+      The game starts in champion select. Have up to 5 bans ready in case your team
+      happens to ban all of the other 4 most ban-worthy champions.
+    </p>
   </div>
 
   <div class="tip-card">
     <h2>Check Side</h2>
-    <p>First pick is always blue side. This helps you anticipate lane matchups and draft accordingly.</p>
+    <p>
+      First pick is always blue side. This helps you anticipate lane matchups and
+      draft accordingly.
+    </p>
+  </div>
+
+  <div class="tip-card">
+    <h2>Team Composition</h2>
+    <p>
+      The single most important rule in champion select is to avoid having
+      <strong>both mid and jungle be AP champions</strong>.
+    </p>
+    <p>
+      When your mid and jungle are both AP, the enemy mid/jungle can rush null mantle and merc treads giving the other team complete control of the map. This rule can be ignored against certain champions with set builds that don't involve MR like Shaco or Karthus.
+    </p>
   </div>
 
   <div class="tip-card">
     <h2>Visualize the Game</h2>
-    <p>As each pick is locked in, think about how that champion interacts with your champion and others. Visualize how the game will play out before it starts. <a href="matchuphub.html" style="color:#c9aa71; text-decoration:underline;">View matchup guides</a> for reference.</p>
+    <p>
+      As each pick is locked in, think about how that champion interacts with your
+      champion and others. Visualize how the game will play out before it starts.
+      <a href="matchuphub.html" style="color:#c9aa71; text-decoration:underline;">
+        View matchup guides
+      </a>
+      for reference.
+    </p>
   </div>
+
 </div>
 
 <footer>© 2025 LoL Fundamentals · All rights reserved</footer>
 
 </body>
 </html>
+
 
 
 
