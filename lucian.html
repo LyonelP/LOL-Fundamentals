@@ -89,7 +89,7 @@ header {
   box-shadow: 0 0 28px rgba(201,170,113,0.45);
 }
 
-/* ===== WINRATE (LIGHT GREEN) ===== */
+/* ===== WINRATE ===== */
 .winrate-bubble {
   background: rgba(134,239,172,0.15);
   color: var(--light-green);
@@ -124,7 +124,7 @@ header {
   line-height: 1.65;
 }
 
-/* ===== VIDEO CARD ===== */
+/* ===== VIDEO / KEY MOMENT CARD ===== */
 .video-card {
   margin: 36px auto 40px;
   padding: 26px;
@@ -142,6 +142,15 @@ header {
   color: var(--gold);
   padding-bottom: 8px;
   border-bottom: 1px solid rgba(201,170,113,0.25);
+}
+
+.video-card ul {
+  padding-left: 18px;
+  margin: 0 0 20px 0;
+}
+
+.video-card li {
+  line-height: 1.65;
 }
 
 .video-card iframe {
@@ -191,6 +200,7 @@ if (localStorage.getItem('lolfundamentals_logged_in') !== 'true') {
 <a href="matchuphub.html" class="back-button">Back to Matchup Hub</a>
 
 <div class="content-width">
+
   <div class="matchup-container">
     <div class="matchup-left">
       <img src="https://ddragon.leagueoflegends.com/cdn/14.23.1/img/champion/Lucian.png" alt="Lucian">
@@ -200,23 +210,39 @@ if (localStorage.getItem('lolfundamentals_logged_in') !== 'true') {
     <div class="matchup-right">
       <h2>Matchup Notes</h2>
       <ul>
-        <li>Lucians will often look for autos on you level 1 which sets up an easy Q for you but try to avoid hitting the minion wave with it.(see the vod below)</li>
-        <li>You can now only interrupt Lucian’s E with Diana R, if it's cast at the very start of the animation.</li>
+        <li>Lucians will often look for autos on you level 1 which sets up an easy Q for you but try to avoid hitting the minion wave with it (see key moment below).</li>
+        <li>You can now only interrupt Lucian’s E with Diana R if it's cast at the very start of the animation.</li>
         <li>Diana R can interrupt Lucian's R.</li>
       </ul>
     </div>
   </div>
 
+  <!-- ===== KEY MOMENTS ===== -->
+  <div class="video-card">
+    <h2>Key Moments</h2>
+    <ul>
+      <li>
+        Lucian will look for autos level 1 and often walk straight into your Q.
+        Ideally, your Q should not hit the minions at all so your second Q can
+        cleanly clear the three melee creeps.
+      </li>
+    </ul>
+    <iframe src="https://www.youtube.com/embed/6TF90XY0HFk" allowfullscreen></iframe>
+  </div>
+
+  <!-- ===== VODS ===== -->
   <div class="video-card">
     <h2>VODs</h2>
     <iframe src="https://www.youtube.com/embed/A7e0dKrXxqw" allowfullscreen></iframe>
   </div>
+
 </div>
 
 <footer>© 2025 LoL Fundamentals · All rights reserved</footer>
 
 </body>
 </html>
+
 
 
 
