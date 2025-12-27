@@ -1,0 +1,269 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Diana Guide – Intro</title>
+
+<link rel="preload" as="image" href="https://ddragon.leagueoflegends.com/cdn/img/champion/splash/Diana_11.jpg">
+
+<style>
+:root {
+  --gold:#c9aa71;
+  --muted:#9da7b3;
+}
+
+html, body {
+  margin:0;
+  padding:0;
+  height:100%;
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+body {
+  display:flex;
+  flex-direction:column;
+  background:url('https://ddragon.leagueoflegends.com/cdn/img/champion/splash/Diana_11.jpg')
+    no-repeat center center fixed;
+  background-size:cover;
+  color:#e6edf3;
+  min-height:100vh;
+  overflow-y: auto;
+}
+
+body::before {
+  content:"";
+  position:fixed;
+  inset:0;
+  background:
+    radial-gradient(circle at top, rgba(120,0,0,0.25), transparent 60%),
+    rgba(10,15,20,0.82);
+  z-index:-1;
+  pointer-events:none;
+}
+
+/* HEADER */
+header {
+  background:rgba(13,17,23,0.9);
+  border-bottom:2px solid var(--gold);
+  padding:20px 10px;
+  font-size:26px;
+  font-weight:bold;
+  color:var(--gold);
+  text-transform:uppercase;
+  text-align:center;
+  position:sticky;
+  top:0;
+  z-index:10;
+}
+
+/* MAIN */
+.main {
+  flex:1 0 auto;
+  max-width:960px;
+  margin:0 auto;
+  padding:20px 16px 40px;
+}
+
+/* BACK BUTTON */
+.back-wrap {
+  display:flex;
+  justify-content:center;
+  margin:10px 0 32px;
+}
+
+.back-button {
+  padding:10px 22px;
+  background:linear-gradient(135deg,var(--gold),#e0c77b);
+  color:#000;
+  text-decoration:none;
+  border-radius:10px;
+  font-weight:bold;
+  box-shadow:0 0 10px rgba(201,170,113,.45);
+}
+.back-button::before { content:"← "; }
+
+/* NAV DROPDOWN */
+.nav-wrapper {
+  max-width:420px;
+  margin:0 auto 46px;
+  position:relative;
+}
+
+.nav-trigger {
+  width:100%;
+  padding:18px 22px;
+  font-size:16px;
+  font-weight:600;
+  color:#f0f6fc;
+  background:
+    linear-gradient(180deg, rgba(255,255,255,0.05), rgba(255,255,255,0.01));
+  border:none;
+  border-radius:20px;
+  cursor:pointer;
+  text-align:left;
+  box-shadow:0 12px 40px rgba(0,0,0,0.5), inset 0 1px 0 rgba(255,255,255,0.06);
+}
+
+.nav-menu {
+  position:absolute;
+  top:calc(100% + 16px);
+  left:0;
+  right:0;
+  background:
+    linear-gradient(180deg, rgba(22,27,34,0.98), rgba(13,17,23,0.98));
+  border-radius:24px;
+  padding:14px;
+  display:none;
+  backdrop-filter:blur(18px);
+  box-shadow:0 30px 90px rgba(0,0,0,0.7);
+  z-index:5;
+}
+
+/* sections */
+.nav-section + .nav-section {
+  border-top:1px solid rgba(255,255,255,0.06);
+  margin-top:10px;
+  padding-top:10px;
+}
+
+.nav-section-title {
+  font-size:11px;
+  letter-spacing:0.14em;
+  color:var(--muted);
+  padding:6px 14px;
+  text-transform:uppercase;
+}
+
+.nav-menu a {
+  display:block;
+  padding:14px 16px;
+  border-radius:16px;
+  text-decoration:none;
+  color:#e6edf3;
+}
+
+.nav-menu a:hover {
+  background:rgba(255,255,255,0.06);
+  color:var(--gold);
+}
+
+/* WELCOME CARD / CONTENT */
+.card {
+  background:
+    linear-gradient(180deg, rgba(255,255,255,0.035), rgba(255,255,255,0.01));
+  border-radius:26px;
+  padding:36px;
+  box-shadow:0 24px 70px rgba(0,0,0,0.55);
+  text-align:center;
+  opacity:0;
+  transform:translateY(30px);
+  animation: fadeInUp 1s forwards;
+  animation-delay:0.3s;
+}
+
+@keyframes fadeInUp {
+  to {
+    opacity:1;
+    transform:translateY(0);
+  }
+}
+
+.card h2 {
+  color:var(--gold);
+  margin-top:0;
+}
+
+.card p {
+  line-height:1.65;
+}
+
+/* FOOTER */
+footer {
+  flex-shrink:0;
+  padding:16px;
+  text-align:center;
+  font-size:13px;
+  color:var(--muted);
+}
+</style>
+</head>
+
+<body>
+
+<header>Diana Mid Guide</header>
+
+<div class="main">
+
+  <!-- BACK BUTTON -->
+  <div class="back-wrap">
+    <a href="membershub.html" class="back-button">Back to Members Hub</a>
+  </div>
+
+  <!-- NAV DROPDOWN -->
+  <div class="nav-wrapper">
+    <button class="nav-trigger" onclick="toggleMenu()">
+      Browse Diana Guide Sections ▾
+    </button>
+
+    <div class="nav-menu" id="navMenu">
+
+      <div class="nav-section">
+        <div class="nav-section-title">Core</div>
+        <a href="diana-intro.html">Intro</a>
+        <a href="diana-runes.html">Runes</a>
+        <a href="diana-build.html">Build</a>
+        <a href="diana-summoners.html">Summoner Spells</a>
+        <a href="diana-abilities.html">Abilities</a>
+        <a href="diana-combos.html">Combos</a>
+      </div>
+
+      <div class="nav-section">
+        <div class="nav-section-title">Gameplay</div>
+        <a href="diana-laning.html">Laning</a>
+        <a href="diana-warding.html">Warding</a>
+        <a href="diana-farming.html">Farming / Pushing</a>
+        <a href="diana-teamfighting.html">Teamfighting</a>
+        <a href="diana-splitpushing.html">Splitpushing</a>
+        <a href="diana-closing.html">Closing Out The Game</a>
+      </div>
+
+      <div class="nav-section">
+        <div class="nav-section-title">Advanced</div>
+        <a href="diana-threats.html">Threats & Synergies</a>
+        <a href="diana-proscons.html">Pros & Cons</a>
+        <a href="diana-extratips.html">Extra Tips</a>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- INTRO CONTENT -->
+  <div class="card">
+    <h2>Intro</h2>
+    <p><strong>Why Diana?</strong> Diana has numerous ways to carry a game. She has a strong early game, laning phase, and can transition well into the side lane in the mid game. She can make picks, teamfight well, splitpush, push waves quickly, farm jungle camps, and has great damage for dragons and barons. She’s also a pick that you can play pretty much every game as long as your team doesn’t need an AD mid laner.</p>
+  </div>
+
+</div>
+
+<footer>
+  © 2026 LoL Fundamentals · All rights reserved
+</footer>
+
+<script>
+function toggleMenu() {
+  const menu = document.getElementById('navMenu');
+  menu.style.display = menu.style.display === 'block' ? 'none' : 'block';
+}
+
+document.addEventListener('click', e => {
+  const wrap = document.querySelector('.nav-wrapper');
+  if (!wrap.contains(e.target)) {
+    document.getElementById('navMenu').style.display = 'none';
+  }
+});
+</script>
+
+</body>
+</html>
+
