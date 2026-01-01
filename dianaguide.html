@@ -18,6 +18,7 @@ html, body {
   padding:0;
   height:100%;
   font-family: Arial, Helvetica, sans-serif;
+  scroll-behavior: smooth;
 }
 
 body {
@@ -28,7 +29,7 @@ body {
   background-size:cover;
   color:#e6edf3;
   min-height:100vh;
-  overflow-y: auto;
+  overflow-y:auto;
 }
 
 body::before {
@@ -169,12 +170,10 @@ header {
   }
 }
 
-/* Intro card centered */
 .card.intro {
   text-align: center;
 }
 
-/* Extra tips card left-aligned */
 .card.extratips {
   text-align: left;
 }
@@ -226,45 +225,22 @@ footer {
     </button>
 
     <div class="nav-menu" id="navMenu">
-
       <div class="nav-section">
         <div class="nav-section-title">Core</div>
-        <a href="diana-intro.html">Intro</a>
-        <a href="diana-runes.html">Runes</a>
-        <a href="diana-build.html">Build</a>
-        <a href="diana-summoners.html">Summoner Spells</a>
-        <a href="diana-abilities.html">Abilities</a>
-        <a href="diana-combos.html">Combos</a>
+        <a href="#intro">Intro</a>
+        <a href="#extraTips">Extra Tips</a>
       </div>
-
-      <div class="nav-section">
-        <div class="nav-section-title">Gameplay</div>
-        <a href="diana-laning.html">Laning</a>
-        <a href="diana-warding.html">Warding</a>
-        <a href="diana-farming.html">Farming / Pushing</a>
-        <a href="diana-teamfighting.html">Teamfighting</a>
-        <a href="diana-splitpushing.html">Splitpushing</a>
-        <a href="diana-closing.html">Closing Out The Game</a>
-      </div>
-
-      <div class="nav-section">
-        <div class="nav-section-title">Advanced</div>
-        <a href="diana-threats.html">Threats & Synergies</a>
-        <a href="diana-proscons.html">Pros & Cons</a>
-        <a href="diana-extratips.html">Extra Tips</a>
-      </div>
-
     </div>
   </div>
 
   <!-- INTRO CONTENT -->
-  <div class="card intro">
+  <div class="card intro" id="intro">
     <h2>Intro</h2>
     <p><strong>Why Diana?</strong> Diana has numerous ways to carry a game. She has a strong early game, laning phase, and can transition well into the side lane in the mid game. She can make picks, teamfight well, splitpush, push waves quickly, farm jungle camps, and has great damage for dragons and barons. She’s also a pick that you can play pretty much every game as long as your team doesn’t need an AD mid laner.</p>
   </div>
 
   <!-- EXTRA TIPS CONTENT -->
-  <div class="card extratips">
+  <div class="card extratips" id="extraTips">
     <h2>Extra Tips</h2>
     <ul>
       <li>Diana’s passive applies only when standing close to the target or objective. Use this for faster tower, inhibitor, and nexus takedowns.</li>
