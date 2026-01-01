@@ -1,20 +1,19 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8" />
+<meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Diana Guide – Members Hub</title>
 <style>
-/* Body & background */
+/* Body and background */
 body {
   margin: 0;
   font-family: 'Beaufort for LOL', Arial, Helvetica, sans-serif;
   background: url('https://ddragon.leagueoflegends.com/cdn/img/champion/splash/Diana_0.jpg') no-repeat center center fixed;
   background-size: cover;
   color: #e6edf3;
-  text-align: center;
-  overflow-x: hidden;
   position: relative;
+  overflow-x: hidden;
 }
 
 /* Overlay */
@@ -26,47 +25,57 @@ body {
   z-index: 0;
 }
 
-/* Header */
-header {
-  background: rgba(13,17,23,0.9);
+/* New Taskbar */
+.taskbar {
+  position: fixed;
+  top: 0; left: 0;
+  width: 100%;
+  height: 60px;
+  background: rgba(13,17,23,0.95);
   border-bottom: 2px solid #c9aa71;
-  padding: 20px 10px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 20px;
+  z-index: 1;
+  box-shadow: 0 2px 10px rgba(0,0,0,0.5);
+}
+
+.taskbar .logo {
+  font-size: 24px;
   font-weight: bold;
-  font-size: 26px;
-  text-transform: uppercase;
   color: #c9aa71;
+  text-transform: uppercase;
   letter-spacing: 1px;
-  position: relative;
-  z-index: 1;
 }
 
-/* Back button */
-.back-button {
-  display: inline-block;
-  margin: 20px auto 10px;
-  padding: 10px 20px;
-  background: linear-gradient(135deg, #c9aa71, #e0c77b);
-  color: #000;
+.taskbar .nav-links {
+  display: flex;
+  gap: 15px;
+}
+
+.taskbar .nav-links a {
+  color: #e6edf3;
   text-decoration: none;
-  border-radius: 8px;
   font-weight: bold;
+  padding: 6px 12px;
+  border-radius: 6px;
   transition: all 0.3s;
-  box-shadow: 0 0 10px rgba(201,170,113,0.5);
-  position: relative;
-  z-index: 1;
-}
-.back-button::before { content: "← "; }
-.back-button:hover {
-  background: linear-gradient(135deg, #e6c97f, #f0d88b);
-  box-shadow: 0 0 15px rgba(255,215,0,0.8);
 }
 
-/* Dropdown */
+.taskbar .nav-links a:hover {
+  background: rgba(201,170,113,0.2);
+  color: #c9aa71;
+}
+
+/* Search / Section selector */
 #section-select-container {
-  margin: 20px auto;
+  margin: 80px auto 20px; /* pushed down below taskbar */
+  text-align: center;
   position: relative;
   z-index: 1;
 }
+
 #section-select {
   padding: 10px 15px;
   font-size: 16px;
@@ -77,9 +86,9 @@ header {
   cursor: pointer;
 }
 
-/* Section display */
+/* Section content box */
 #section-info {
-  margin: 30px auto;
+  margin: 20px auto 50px;
   max-width: 900px;
   background: rgba(13,17,23,0.95);
   border: 1px solid #2f81f7;
@@ -94,7 +103,7 @@ header {
   z-index: 1;
 }
 
-/* Section text */
+/* Section text styling */
 #section-info h2 { color: #c9aa71; margin-top: 0; }
 #section-info h3 { color: #c9aa71; margin-bottom: 0.2em; }
 #section-info p,
@@ -107,6 +116,8 @@ header {
 #section-info:hover { box-shadow: 0 0 15px rgba(47,129,247,0.5); }
 
 @media (max-width: 600px) {
+  .taskbar { flex-direction: column; height: auto; padding: 10px; }
+  .taskbar .nav-links { flex-wrap: wrap; justify-content: center; gap: 10px; margin-top: 5px; }
   #section-select { font-size: 14px; padding: 8px 10px; }
   #section-info { padding: 15px; max-height: 60vh; }
 }
@@ -114,12 +125,21 @@ header {
 </head>
 <body>
 
-<!-- Overlay div -->
 <div class="overlay"></div>
 
-<header>Diana Mid Guide</header>
-<a href="membershub.html" class="back-button">Back to Members Hub</a>
+<!-- Taskbar -->
+<div class="taskbar">
+  <div class="logo">Diana Guide</div>
+  <div class="nav-links">
+    <a href="membershub.html">Home</a>
+    <a href="#runes">Runes</a>
+    <a href="#build">Build</a>
+    <a href="#laning">Laning</a>
+    <a href="#teamfighting">Teamfighting</a>
+  </div>
+</div>
 
+<!-- Section selector -->
 <div id="section-select-container">
   <select id="section-select">
     <option disabled selected>Select a section</option>
@@ -141,12 +161,13 @@ header {
   </select>
 </div>
 
+<!-- Section content -->
 <div id="section-info">
   <p>Select a section from above to view details.</p>
 </div>
 
 <script>
-// Require login
+// Simple login redirect
 if (localStorage.getItem('lolfundamentals_logged_in') !== 'true') {
   window.location.href = 'index.html';
 }
@@ -155,101 +176,30 @@ const sectionSelect = document.getElementById('section-select');
 const sectionInfo = document.getElementById('section-info');
 
 const sections = {
-  "Intro": `
-    <h2>Intro</h2>
-    <p><strong>Why Diana?</strong> Diana has numerous ways to carry a game. She has a strong early game, laning phase, and can transition well into the side lane in the mid game. She can make picks, teamfight well, splitpush, push waves quickly, farm jungle camps, and has great damage for dragons and barons. She’s also a pick that you can play pretty much every game as long as your team doesn’t need an AD mid laner.</p>
-  `,
-  "Runes": `...`,  // insert your full Runes HTML here
-  "Build": `...`,  // insert your full Build HTML here
-  "Summoner Spells": `...`,
-  "Abilities": `...`,
-  "Combos": `...`,
-  "Laning": `...`,
-  "Warding": `...`,
-  "Farming / Pushing": `...`,
-  "Teamfighting": `...`,
-  "Splitpushing": `...`,
-  "Closing Out The Game": `...`,
-  "Threats & Synergies": `...`,
-  "Pros & Cons": `...`,
-  "Extra Tips": `...`
+  "Intro": `<h2>Intro</h2><p>Diana is a versatile mid laner...</p>`,
+  "Runes": `<h2>Runes</h2><p>Your rune setup...</p>`,
+  "Build": `<h2>Build</h2><p>Recommended items...</p>`,
+  "Summoner Spells": `<h2>Summoner Spells</h2><p>Flash + Teleport...</p>`,
+  "Abilities": `<h2>Abilities</h2><p>Passive: Moonsilver Blade...</p>`,
+  "Combos": `<h2>Combos</h2><p>Q -> E -> R...</p>`,
+  "Laning": `<h2>Laning</h2><p>How to trade in lane...</p>`,
+  "Warding": `<h2>Warding</h2><p>Best ward spots...</p>`,
+  "Farming / Pushing": `<h2>Farming / Pushing</h2><p>Tips for CS...</p>`,
+  "Teamfighting": `<h2>Teamfighting</h2><p>Positioning and timing...</p>`,
+  "Splitpushing": `<h2>Splitpushing</h2><p>When and how...</p>`,
+  "Closing Out The Game": `<h2>Closing Out The Game</h2><p>Objectives and pressure...</p>`,
+  "Threats & Synergies": `<h2>Threats & Synergies</h2><p>Who counters Diana...</p>`,
+  "Pros & Cons": `<h2>Pros & Cons</h2><p>Strengths and weaknesses...</p>`,
+  "Extra Tips": `<h2>Extra Tips</h2><p>Little-known tips...</p>`
 };
 
 sectionSelect.addEventListener('change', () => {
   const value = sectionSelect.value;
-  sectionInfo.innerHTML = sections[value] || '<p>No content for this section yet.</p>';
+  sectionInfo.innerHTML = sections[value] || '<p>No content yet.</p>';
 });
 </script>
 </body>
 </html>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 
