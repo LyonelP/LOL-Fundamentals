@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Diana Guide – Intro</title>
+<title>Diana Guide – Full</title>
 
 <link rel="preload" as="image" href="https://ddragon.leagueoflegends.com/cdn/img/champion/splash/Diana_11.jpg">
 
@@ -83,17 +83,11 @@ header {
 }
 .back-button::before { content:"← "; }
 
-/* TASKBAR / NAV DROPDOWN */
+/* NAV DROPDOWN */
 .nav-wrapper {
-  display:flex;
-  justify-content:center;
-  margin-bottom:40px;
-}
-
-.nav-container {
+  max-width:420px;
+  margin:0 auto 46px;
   position:relative;
-  width:100%;
-  max-width:480px;
 }
 
 .nav-trigger {
@@ -154,14 +148,26 @@ header {
   color:var(--gold);
 }
 
-/* WELCOME / CONTENT CARDS */
+/* WELCOME CARD / CONTENT */
 .card {
   background:
     linear-gradient(180deg, rgba(255,255,255,0.035), rgba(255,255,255,0.01));
   border-radius:26px;
   padding:36px;
   box-shadow:0 24px 70px rgba(0,0,0,0.55);
+  text-align:center;
   margin-bottom:40px;
+  opacity:0;
+  transform:translateY(30px);
+  animation: fadeInUp 1s forwards;
+  animation-delay:0.3s;
+}
+
+@keyframes fadeInUp {
+  to {
+    opacity:1;
+    transform:translateY(0);
+  }
 }
 
 .card h2 {
@@ -183,6 +189,7 @@ footer {
 }
 </style>
 </head>
+
 <body>
 
 <header>Diana Mid Guide</header>
@@ -194,86 +201,127 @@ footer {
     <a href="membershub.html" class="back-button">Back to Members Hub</a>
   </div>
 
-  <!-- NAV / TASKBAR -->
+  <!-- NAV DROPDOWN -->
   <div class="nav-wrapper">
-    <div class="nav-container">
-      <button class="nav-trigger" onclick="toggleMenu()">Browse Diana Guide Sections ▾</button>
+    <button class="nav-trigger" onclick="toggleMenu()">
+      Browse Diana Guide Sections ▾
+    </button>
 
-      <div class="nav-menu" id="navMenu">
-        <!-- Core Section -->
-        <div class="nav-section">
-          <div class="nav-section-title">Core</div>
-          <a href="diana-intro.html">Intro</a>
-          <a href="diana-runes.html">Runes</a>
-          <a href="diana-build.html">Build</a>
-          <a href="diana-summoners.html">Summoner Spells</a>
-          <a href="diana-abilities.html">Abilities</a>
-          <a href="diana-combos.html">Combos</a>
-        </div>
+    <div class="nav-menu" id="navMenu">
 
-        <!-- Gameplay Section -->
-        <div class="nav-section">
-          <div class="nav-section-title">Gameplay</div>
-          <a href="diana-laning.html">Laning</a>
-          <a href="diana-warding.html">Warding</a>
-          <a href="diana-farming.html">Farming / Pushing</a>
-          <a href="diana-teamfighting.html">Teamfighting</a>
-          <a href="diana-splitpushing.html">Splitpushing</a>
-          <a href="diana-closing.html">Closing Out The Game</a>
-        </div>
-
-        <!-- Advanced Section -->
-        <div class="nav-section">
-          <div class="nav-section-title">Advanced</div>
-          <a href="diana-threats.html">Threats & Synergies</a>
-          <a href="diana-proscons.html">Pros & Cons</a>
-          <a href="diana-extratips.html">Extra Tips</a>
-        </div>
+      <div class="nav-section">
+        <div class="nav-section-title">Core</div>
+        <a href="#intro">Intro</a>
+        <a href="#runes">Runes</a>
+        <a href="#build">Build</a>
+        <a href="#summoners">Summoner Spells</a>
+        <a href="#abilities">Abilities</a>
+        <a href="#combos">Combos</a>
       </div>
+
+      <div class="nav-section">
+        <div class="nav-section-title">Gameplay</div>
+        <a href="#laning">Laning</a>
+        <a href="#warding">Warding</a>
+        <a href="#farming">Farming / Pushing</a>
+        <a href="#teamfighting">Teamfighting</a>
+        <a href="#splitpushing">Splitpushing</a>
+        <a href="#closing">Closing Out The Game</a>
+      </div>
+
+      <div class="nav-section">
+        <div class="nav-section-title">Advanced</div>
+        <a href="#threats">Threats & Synergies</a>
+        <a href="#proscons">Pros & Cons</a>
+        <a href="#extratips">Extra Tips</a>
+      </div>
+
     </div>
   </div>
 
-  <!-- CONTENT CARDS -->
-
-  <!-- Intro Card -->
-  <div class="card">
+  <!-- CONTENT SECTIONS -->
+  <div id="intro" class="card">
     <h2>Intro</h2>
     <p><strong>Why Diana?</strong> Diana has numerous ways to carry a game. She has a strong early game, laning phase, and can transition well into the side lane in the mid game. She can make picks, teamfight well, splitpush, push waves quickly, farm jungle camps, and has great damage for dragons and barons. She’s also a pick that you can play pretty much every game as long as your team doesn’t need an AD mid laner.</p>
   </div>
 
-  <!-- Runes Card -->
-  <div class="card">
+  <div id="runes" class="card">
     <h2>Runes</h2>
-    <div style="margin-bottom:1.5em; font-size:0.95em; line-height:1.45; color:#d7d7d7; font-weight:400;">
-      <strong style="color:#c8aa6e;">Why grasp over another keystone?</strong>
-      It ultimately comes down to the value of the rune trees themselves...
-      <ul style="list-style:none; padding-left:0; margin-top:1em;">
-        <li style="margin-bottom:1em;">
-          <img src="https://raw.communitydragon.org/latest/plugins/rcp-be-lol-game-data/global/default/v1/perk-images/styles/resolve/graspoftheundying/graspoftheundying.png" width="32" style="vertical-align:middle; margin-right:8px;" alt="Grasp of the Undying">
-          <strong>Grasp Of The Undying:</strong> This is the only rune and tree that allows Diana to play the way she’s intended to be played.
-        </li>
-        <li style="margin-bottom:1em;">
-          <img src="https://raw.communitydragon.org/latest/plugins/rcp-be-lol-game-data/global/default/v1/perk-images/styles/resolve/mirrorshell/mirrorshell.png" width="32" style="vertical-align:middle; margin-right:8px;" alt="Shield Bash">
-          <strong>Shield Bash:</strong> Great early game damage that also scales extremely well.
-        </li>
-        <li style="margin-bottom:1em;">
-          <img src="https://raw.communitydragon.org/latest/plugins/rcp-be-lol-game-data/global/default/v1/perk-images/styles/resolve/boneplating/boneplating.png" width="32" style="vertical-align:middle; margin-right:8px;" alt="Bone Plating">
-          <strong>Bone Plating:</strong> Best sustain tool in lane.
-        </li>
-        <li style="margin-bottom:1em;">
-          <img src="https://raw.communitydragon.org/latest/plugins/rcp-be-lol-game-data/global/default/v1/perk-images/styles/resolve/overgrowth/overgrowth.png" width="32" style="vertical-align:middle; margin-right:8px;" alt="Overgrowth">
-          <strong>Overgrowth:</strong> Best way for Diana to gain health besides Grasp.
-        </li>
-        <li style="margin-bottom:1em;">
-          <img src="https://raw.communitydragon.org/latest/plugins/rcp-be-lol-game-data/global/default/v1/perk-images/styles/sorcery/manaflowband/manaflowband.png" width="32" style="vertical-align:middle; margin-right:8px;" alt="Manaflow Band">
-          <strong>Manaflow Band:</strong> Covers the amount of mana Diana requires to play the game.
-        </li>
-        <li style="margin-bottom:1em;">
-          <img src="https://raw.communitydragon.org/latest/plugins/rcp-be-lol-game-data/global/default/v1/perk-images/styles/sorcery/transcendence/transcendence.png" width="32" style="vertical-align:middle; margin-right:8px;" alt="Transcendence">
-          <strong>Transcendence:</strong> Provides cooldown reduction and efficient haste.
-        </li>
-      </ul>
-    </div>
+    <p><strong>Primary:</strong> Electrocute for burst damage; Sudden Impact and Eyeball Collection for additional lethality.</p>
+    <p><strong>Secondary:</strong> Manaflow Band + Transcendence for sustain and cooldown reduction.</p>
+  </div>
+
+  <div id="build" class="card">
+    <h2>Build</h2>
+    <p>Core Items: Hextech Rocketbelt, Nashor's Tooth, Zhonya's Hourglass.</p>
+    <p>Shoes: Sorcerer's Shoes for magic penetration.</p>
+    <p>Situational: Morello, Rabadon's, Void Staff depending on enemy team composition.</p>
+  </div>
+
+  <div id="summoners" class="card">
+    <h2>Summoner Spells</h2>
+    <p>Flash + Ignite are the standard for mid Diana.</p>
+  </div>
+
+  <div id="abilities" class="card">
+    <h2>Abilities</h2>
+    <p>Passive: Moonsilver Blade – Bonus attack speed after using abilities.</p>
+    <p>Q: Crescent Strike – Skillshot for poke and engage.</p>
+    <p>W: Pale Cascade – Shield and burst damage.</p>
+    <p>E: Lunar Rush – Gap closer and mobility.</p>
+    <p>R: Moonfall – AoE knockup and burst combo finisher.</p>
+  </div>
+
+  <div id="combos" class="card">
+    <h2>Combos</h2>
+    <p>Basic: Q → W → E → auto attacks.</p>
+    <p>All-in: Q → W → E → R → auto attacks.</p>
+  </div>
+
+  <div id="laning" class="card">
+    <h2>Laning</h2>
+    <p>Focus on hitting Q poke and timing your shield from W for trades. Watch enemy cooldowns and farm efficiently.</p>
+  </div>
+
+  <div id="warding" class="card">
+    <h2>Warding</h2>
+    <p>Keep river and jungle entrances warded. Prioritize control wards in bushes near objectives.</p>
+  </div>
+
+  <div id="farming" class="card">
+    <h2>Farming / Pushing</h2>
+    <p>Push waves after clearing jungle camps. Freeze only when safe to deny enemy CS.</p>
+  </div>
+
+  <div id="teamfighting" class="card">
+    <h2>Teamfighting</h2>
+    <p>Wait for your moment to engage; use R on clustered enemies and follow up with QWE combo.</p>
+  </div>
+
+  <div id="splitpushing" class="card">
+    <h2>Splitpushing</h2>
+    <p>Push side lanes only when your team can cover other objectives. Keep teleport ready if necessary.</p>
+  </div>
+
+  <div id="closing" class="card">
+    <h2>Closing Out The Game</h2>
+    <p>Prioritize objectives, force picks, and use your R combo to burst priority targets in teamfights.</p>
+  </div>
+
+  <div id="threats" class="card">
+    <h2>Threats & Synergies</h2>
+    <p>Be careful vs. assassins like Zed and Talon early. Diana synergizes well with tanks and engage supports.</p>
+  </div>
+
+  <div id="proscons" class="card">
+    <h2>Pros & Cons</h2>
+    <p><strong>Pros:</strong> High burst, good mobility, strong in mid-game skirmishes.</p>
+    <p><strong>Cons:</strong> Weak early levels vs ranged poke, can be kited if caught out.</p>
+  </div>
+
+  <div id="extratips" class="card">
+    <h2>Extra Tips</h2>
+    <p>Use passive on inhibitors or Nexus for bonus damage. Always look for isolated targets in side lanes for picks.</p>
   </div>
 
 </div>
@@ -289,7 +337,7 @@ function toggleMenu() {
 }
 
 document.addEventListener('click', e => {
-  const wrap = document.querySelector('.nav-container');
+  const wrap = document.querySelector('.nav-wrapper');
   if (!wrap.contains(e.target)) {
     document.getElementById('navMenu').style.display = 'none';
   }
@@ -298,6 +346,7 @@ document.addEventListener('click', e => {
 
 </body>
 </html>
+
 
 
 
