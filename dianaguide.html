@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Diana Mid Guide – Full Guide</title>
+<title>Diana Mid Guide</title>
 
 <link rel="preload" as="image" href="https://ddragon.leagueoflegends.com/cdn/img/champion/splash/Diana_11.jpg">
 
@@ -28,7 +28,6 @@ body {
   background-size:cover;
   color:#e6edf3;
   min-height:100vh;
-  overflow-y:auto;
 }
 
 body::before {
@@ -51,20 +50,17 @@ header {
   text-align:center;
   position:sticky;
   top:0;
-  z-index:10;
 }
 
 .main {
-  flex:1;
   max-width:960px;
   margin:0 auto;
   padding:20px 16px 40px;
 }
 
 .back-wrap {
-  display:flex;
-  justify-content:center;
-  margin:10px 0 32px;
+  text-align:center;
+  margin-bottom:32px;
 }
 
 .back-button {
@@ -117,13 +113,17 @@ header {
   padding:14px 16px;
   text-decoration:none;
   color:#e6edf3;
+  cursor:pointer;
+}
+
+.nav-menu a:hover {
+  color:var(--gold);
 }
 
 .card {
   background:rgba(255,255,255,0.03);
   border-radius:26px;
   padding:36px;
-  margin-bottom:40px;
   box-shadow:0 24px 70px rgba(0,0,0,0.55);
 }
 
@@ -132,13 +132,8 @@ header {
   margin-top:0;
 }
 
-.card p {
-  line-height:1.65;
-}
-
 .card ul {
   padding-left:22px;
-  line-height:1.6;
 }
 
 .card li {
@@ -165,161 +160,30 @@ footer {
 </div>
 
 <div class="nav-wrapper">
-  <button class="nav-trigger" onclick="toggleMenu()">Browse Diana Guide Sections ▾</button>
+  <button class="nav-trigger" onclick="toggleMenu()">Choose a section to explore ▾</button>
+
   <div class="nav-menu" id="navMenu">
     <div class="nav-section-title">Core</div>
-    <a href="#">Intro</a>
-    <a href="#">Runes</a>
-    <a href="#">Build</a>
-    <a href="#">Summoners</a>
-    <a href="#">Abilities</a>
-    <a href="#">Combos</a>
+    <a onclick="loadSection('intro')">Intro</a>
+    <a onclick="loadSection('runes')">Runes</a>
+    <a onclick="loadSection('build')">Build</a>
+    <a onclick="loadSection('summoners')">Summoners</a>
+    <a onclick="loadSection('abilities')">Abilities</a>
+    <a onclick="loadSection('combos')">Combos</a>
+
     <div class="nav-section-title">Gameplay</div>
-    <a href="#">Laning</a>
-    <a href="#">Warding</a>
-    <a href="#">Farming</a>
-    <a href="#">Teamfighting</a>
-    <a href="#">Splitpushing</a>
-    <a href="#">Closing</a>
+    <a onclick="loadSection('laning')">Laning</a>
+    <a onclick="loadSection('teamfighting')">Teamfighting</a>
+    <a onclick="loadSection('split')">Splitpushing</a>
+
     <div class="nav-section-title">Advanced</div>
-    <a href="#">Threats</a>
-    <a href="#">Pros & Cons</a>
-    <a href="#">Extra Tips</a>
+    <a onclick="loadSection('extra')">Extra Tips</a>
   </div>
 </div>
 
-<div class="card">
-<h2>Intro</h2>
-<p>Diana is a high-tempo AP melee carry who thrives on wave control, objective pressure, and explosive mid-game fights. She excels at punishing immobile champions, creating numbers advantages, and converting small leads into decisive map control.</p>
-</div>
-
-<div class="card">
-<h2>Runes</h2>
-<ul>
-<li>Conqueror for extended fights and scaling damage</li>
-<li>Electrocute when facing squishy, immobile lanes</li>
-<li>Resolve secondary when trading into poke or burst</li>
-<li>Attack speed shard is mandatory for passive uptime</li>
-</ul>
-</div>
-
-<div class="card">
-<h2>Build</h2>
-<ul>
-<li>Nashor’s Tooth is core for DPS and waveclear</li>
-<li>Rocketbelt enables gap closing and engage angles</li>
-<li>Zhonya’s is non-negotiable against burst or CC</li>
-<li>Void Staff scales extremely hard into mid-game fights</li>
-</ul>
-</div>
-
-<div class="card">
-<h2>Summoner Spells</h2>
-<ul>
-<li>Flash is required for engage and escape</li>
-<li>Ignite for kill pressure and snowball lanes</li>
-<li>Teleport only when side-lane pressure is critical</li>
-</ul>
-</div>
-
-<div class="card">
-<h2>Abilities</h2>
-<ul>
-<li>Max Q first for waveclear and poke</li>
-<li>W second for shield uptime and trading</li>
-<li>E last as it scales via resets, not ranks</li>
-<li>Always plan passive procs before trading</li>
-</ul>
-</div>
-
-<div class="card">
-<h2>Combos</h2>
-<ul>
-<li>Q → E → Auto → W for short trades</li>
-<li>Q → E → R → Auto reset for all-ins</li>
-<li>Flash R can catch backline carries off guard</li>
-</ul>
-</div>
-
-<div class="card">
-<h2>Laning</h2>
-<ul>
-<li>Control waves early to avoid jungle pressure</li>
-<li>Trade when passive is stacked</li>
-<li>Crash waves before roaming or resetting</li>
-</ul>
-</div>
-
-<div class="card">
-<h2>Warding</h2>
-<ul>
-<li>Ward raptors or pixel brush at level 3</li>
-<li>Deep wards after first crash enable roams</li>
-<li>Swap to sweeper once lane priority is secured</li>
-</ul>
-</div>
-
-<div class="card">
-<h2>Farming / Pushing</h2>
-<ul>
-<li>Q + passive clears waves extremely fast</li>
-<li>Take jungle camps when lanes are pushed</li>
-<li>Always prep waves before objectives</li>
-</ul>
-</div>
-
-<div class="card">
-<h2>Teamfighting</h2>
-<ul>
-<li>Flank whenever possible instead of front-to-back</li>
-<li>Track enemy CC before committing</li>
-<li>Zhonya’s timing decides fights</li>
-</ul>
-</div>
-
-<div class="card">
-<h2>Splitpushing</h2>
-<ul>
-<li>Diana melts towers with passive</li>
-<li>Pressure sides when teleport is available</li>
-<li>Disengage early if vision is lost</li>
-</ul>
-</div>
-
-<div class="card">
-<h2>Closing Out The Game</h2>
-<ul>
-<li>Force fights around objectives</li>
-<li>Deny vision before engaging</li>
-<li>Use Baron to split and collapse</li>
-</ul>
-</div>
-
-<div class="card">
-<h2>Threats & Synergies</h2>
-<ul>
-<li>Hard CC mages are difficult matchups</li>
-<li>Engage junglers amplify Diana’s strengths</li>
-<li>Peel-heavy teams reduce assassination angles</li>
-</ul>
-</div>
-
-<div class="card">
-<h2>Pros & Cons</h2>
-<ul>
-<li>Strong scaling and burst</li>
-<li>Excellent objective damage</li>
-<li>Vulnerable when cooldowns are down</li>
-</ul>
-</div>
-
-<div class="card">
-<h2>Extra Tips</h2>
-<ul>
-<li>Passive works on inhibitors and nexus only at specific angles</li>
-<li>Q minions before fights to preload passive</li>
-<li>Use fog of war to mask engage paths</li>
-</ul>
+<div id="content" class="card">
+  <h2>Choose a Section</h2>
+  <p>Select a section from the dropdown above to explore the Diana Mid guide.</p>
 </div>
 
 </div>
@@ -331,17 +195,90 @@ function toggleMenu() {
   const menu = document.getElementById('navMenu');
   menu.style.display = menu.style.display === 'block' ? 'none' : 'block';
 }
+
+function loadSection(section) {
+  const content = document.getElementById('content');
+  toggleMenu();
+
+  const sections = {
+    intro: `
+      <h2>Intro</h2>
+      <p>Diana is a high-tempo AP carry who thrives on wave control, objective pressure, and explosive mid-game fights.</p>
+    `,
+    runes: `
+      <h2>Runes</h2>
+      <ul>
+        <li>Conqueror for extended fights</li>
+        <li>Electrocute into squishy lanes</li>
+        <li>Attack speed shard is mandatory</li>
+      </ul>
+    `,
+    build: `
+      <h2>Build</h2>
+      <ul>
+        <li>Nashor’s Tooth core</li>
+        <li>Rocketbelt for engage</li>
+        <li>Zhonya’s for survivability</li>
+      </ul>
+    `,
+    summoners: `
+      <h2>Summoner Spells</h2>
+      <ul>
+        <li>Flash always</li>
+        <li>Ignite for kill pressure</li>
+      </ul>
+    `,
+    abilities: `
+      <h2>Abilities</h2>
+      <ul>
+        <li>Max Q first</li>
+        <li>W second</li>
+        <li>E last</li>
+      </ul>
+    `,
+    combos: `
+      <h2>Combos</h2>
+      <ul>
+        <li>Q → E → Auto → W</li>
+        <li>Q → E → R → Zhonya’s</li>
+      </ul>
+    `,
+    laning: `
+      <h2>Laning</h2>
+      <ul>
+        <li>Trade with passive stacked</li>
+        <li>Crash waves before roaming</li>
+      </ul>
+    `,
+    teamfighting: `
+      <h2>Teamfighting</h2>
+      <ul>
+        <li>Look for flanks</li>
+        <li>Track enemy CC</li>
+      </ul>
+    `,
+    split: `
+      <h2>Splitpushing</h2>
+      <ul>
+        <li>Diana melts towers</li>
+        <li>Use fog to disengage</li>
+      </ul>
+    `,
+    extra: `
+      <h2>Extra Tips</h2>
+      <ul>
+        <li>Preload passive before fights</li>
+        <li>Use fog to hide engage angles</li>
+      </ul>
+    `
+  };
+
+  content.innerHTML = sections[section];
+}
 </script>
 
 </body>
 </html>
-
-
-
-
-
-
-
 
 
 
