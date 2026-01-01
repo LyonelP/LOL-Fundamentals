@@ -28,7 +28,7 @@ body {
   background-size:cover;
   color:#e6edf3;
   min-height:100vh;
-  overflow-y:auto;
+  overflow-y: auto;
 }
 
 body::before {
@@ -57,14 +57,6 @@ header {
   z-index:10;
 }
 
-/* MAIN */
-.main {
-  flex:1 0 auto;
-  max-width:960px;
-  margin:0 auto;
-  padding:20px 16px 40px;
-}
-
 /* BACK BUTTON */
 .back-wrap {
   display:flex;
@@ -83,72 +75,47 @@ header {
 }
 .back-button::before { content:"← "; }
 
-/* NAV DROPDOWN */
+/* NAV TASKBAR */
 .nav-wrapper {
-  max-width:420px;
+  max-width:960px;
   margin:0 auto 46px;
-  position:relative;
-}
-
-.nav-trigger {
-  width:100%;
-  padding:18px 22px;
-  font-size:16px;
-  font-weight:600;
-  color:#f0f6fc;
-  background:
-    linear-gradient(180deg, rgba(255,255,255,0.05), rgba(255,255,255,0.01));
-  border:none;
+  position:sticky;
+  top:70px;
+  z-index:10;
+  background:rgba(13,17,23,0.9);
   border-radius:20px;
-  cursor:pointer;
-  text-align:left;
-  box-shadow:0 12px 40px rgba(0,0,0,0.5), inset 0 1px 0 rgba(255,255,255,0.06);
+  padding:10px 14px;
+  display:flex;
+  flex-wrap:wrap;
+  justify-content:center;
+  gap:6px;
 }
 
-.nav-menu {
-  position:absolute;
-  top:calc(100% + 16px);
-  left:0;
-  right:0;
-  background:
-    linear-gradient(180deg, rgba(22,27,34,0.98), rgba(13,17,23,0.98));
-  border-radius:24px;
-  padding:14px;
-  display:none;
-  backdrop-filter:blur(18px);
-  box-shadow:0 30px 90px rgba(0,0,0,0.7);
-  z-index:5;
-}
-
-/* sections */
-.nav-section + .nav-section {
-  border-top:1px solid rgba(255,255,255,0.06);
-  margin-top:10px;
-  padding-top:10px;
-}
-
-.nav-section-title {
-  font-size:11px;
-  letter-spacing:0.14em;
-  color:var(--muted);
-  padding:6px 14px;
-  text-transform:uppercase;
-}
-
-.nav-menu a {
-  display:block;
-  padding:14px 16px;
-  border-radius:16px;
+.nav-wrapper a {
+  padding:10px 18px;
   text-decoration:none;
   color:#e6edf3;
+  font-weight:600;
+  border-radius:16px;
+  background:linear-gradient(180deg, rgba(255,255,255,0.03), rgba(255,255,255,0.01));
+  box-shadow:0 12px 40px rgba(0,0,0,0.3), inset 0 1px 0 rgba(255,255,255,0.06);
+  transition:all 0.2s;
 }
 
-.nav-menu a:hover {
+.nav-wrapper a:hover {
   background:rgba(255,255,255,0.06);
   color:var(--gold);
 }
 
-/* CONTENT CARDS */
+/* MAIN */
+.main {
+  flex:1 0 auto;
+  max-width:960px;
+  margin:0 auto;
+  padding:20px 16px 40px;
+}
+
+/* CARDS */
 .card {
   background:
     linear-gradient(180deg, rgba(255,255,255,0.035), rgba(255,255,255,0.01));
@@ -156,32 +123,21 @@ header {
   padding:36px;
   box-shadow:0 24px 70px rgba(0,0,0,0.55);
   text-align:left;
+  margin-bottom:30px;
   opacity:0;
   transform:translateY(30px);
   animation: fadeInUp 1s forwards;
-  animation-delay:0.3s;
-  margin-bottom:30px;
 }
 
 @keyframes fadeInUp {
-  to {
-    opacity:1;
-    transform:translateY(0);
-  }
+  to { opacity:1; transform:translateY(0); }
 }
 
-.card h2 {
-  color:var(--gold);
-  margin-top:0;
-}
-
-.card p, .card li, .card ol, .card ul {
-  line-height:1.45;
-  color:#e6edf3;
-  margin-bottom:0.9em;
-}
-
+.card h2 { color:var(--gold); margin-top:0; }
+.card h3 { color:var(--gold); margin-bottom:0.3em; }
+.card p, .card li, .card ol, .card ul { color:#e6edf3; line-height:1.45; margin-bottom:0.9em; }
 .card ul { margin-left:1.1em; }
+.card li { margin-bottom:0.6em; }
 .card ol { margin-left:1.2em; }
 
 /* FOOTER */
@@ -199,52 +155,32 @@ footer {
 
 <header>Diana Mid Guide</header>
 
+<div class="back-wrap">
+  <a href="membershub.html" class="back-button">Back to Members Hub</a>
+</div>
+
+<!-- TASKBAR -->
+<div class="nav-wrapper">
+  <a href="#intro">Intro</a>
+  <a href="#runes">Runes</a>
+  <a href="#build">Build</a>
+  <a href="#summoners">Summoner Spells</a>
+  <a href="#abilities">Abilities</a>
+  <a href="#combos">Combos</a>
+  <a href="#laning">Laning</a>
+  <a href="#warding">Warding</a>
+  <a href="#farming">Farming / Pushing</a>
+  <a href="#teamfighting">Teamfighting</a>
+  <a href="#splitpushing">Splitpushing</a>
+  <a href="#closing">Closing Out The Game</a>
+  <a href="#threats">Threats & Synergies</a>
+  <a href="#proscons">Pros & Cons</a>
+  <a href="#extratips">Extra Tips</a>
+</div>
+
 <div class="main">
 
-  <!-- BACK BUTTON -->
-  <div class="back-wrap">
-    <a href="index.html" class="back-button">Back to Home</a>
-  </div>
-
-  <!-- NAV DROPDOWN -->
-  <div class="nav-wrapper">
-    <button class="nav-trigger" onclick="toggleMenu()">
-      Browse Diana Guide Sections ▾
-    </button>
-
-    <div class="nav-menu" id="navMenu">
-
-      <div class="nav-section">
-        <div class="nav-section-title">Core</div>
-        <a href="#intro">Intro</a>
-        <a href="#runes">Runes</a>
-        <a href="#build">Build</a>
-        <a href="#summoners">Summoner Spells</a>
-        <a href="#abilities">Abilities</a>
-        <a href="#combos">Combos</a>
-      </div>
-
-      <div class="nav-section">
-        <div class="nav-section-title">Gameplay</div>
-        <a href="#laning">Laning</a>
-        <a href="#warding">Warding</a>
-        <a href="#farming">Farming / Pushing</a>
-        <a href="#teamfighting">Teamfighting</a>
-        <a href="#splitpushing">Splitpushing</a>
-        <a href="#closing">Closing Out The Game</a>
-      </div>
-
-      <div class="nav-section">
-        <div class="nav-section-title">Advanced</div>
-        <a href="#threats">Threats & Synergies</a>
-        <a href="#proscons">Pros & Cons</a>
-        <a href="#extratips">Extra Tips</a>
-      </div>
-
-    </div>
-  </div>
-
-  <!-- CONTENT CARDS -->
+  <!-- SECTION CARDS -->
   <div id="intro" class="card">
     <h2>Intro</h2>
     <p><strong>Why Diana?</strong> Diana has numerous ways to carry a game. She has a strong early game, laning phase, and can transition well into the side lane in the mid game. She can make picks, teamfight well, splitpush, push waves quickly, farm jungle camps, and has great damage for dragons and barons. She’s also a pick that you can play pretty much every game as long as your team doesn’t need an AD mid laner.</p>
@@ -252,72 +188,73 @@ footer {
 
   <div id="runes" class="card">
     <h2>Runes</h2>
-    <p>Rune page content from your Members Hub goes here (all images, tables, etc).</p>
+    <!-- Paste the full Runes content from your JS here -->
+    <p>Content stays exactly as in your Members Hub Runes section...</p>
   </div>
 
   <div id="build" class="card">
     <h2>Build</h2>
-    <p>All item builds, elixirs, and example gold buys content goes here.</p>
+    <p>Content stays exactly as in your Members Hub Build section...</p>
   </div>
 
   <div id="summoners" class="card">
     <h2>Summoner Spells</h2>
-    <p>Summoner spells content goes here.</p>
+    <p>Content stays exactly as in your Members Hub Summoner Spells section...</p>
   </div>
 
   <div id="abilities" class="card">
     <h2>Abilities</h2>
-    <p>All ability details (passive, Q, W, E, R) go here.</p>
+    <p>Content stays exactly as in your Members Hub Abilities section...</p>
   </div>
 
   <div id="combos" class="card">
     <h2>Combos</h2>
-    <p>Combo examples go here.</p>
+    <p>Content stays exactly as in your Members Hub Combos section...</p>
   </div>
 
   <div id="laning" class="card">
     <h2>Laning</h2>
-    <p>Laning tips go here.</p>
+    <p>Content stays exactly as in your Members Hub Laning section...</p>
   </div>
 
   <div id="warding" class="card">
     <h2>Warding</h2>
-    <p>Warding info goes here.</p>
+    <p>Content stays exactly as in your Members Hub Warding section...</p>
   </div>
 
   <div id="farming" class="card">
     <h2>Farming / Pushing</h2>
-    <p>Wave management and pushing tips go here.</p>
+    <p>Content stays exactly as in your Members Hub Farming / Pushing section...</p>
   </div>
 
   <div id="teamfighting" class="card">
     <h2>Teamfighting</h2>
-    <p>Teamfight positioning, engages, etc go here.</p>
+    <p>Content stays exactly as in your Members Hub Teamfighting section...</p>
   </div>
 
   <div id="splitpushing" class="card">
     <h2>Splitpushing</h2>
-    <p>Splitpush tips go here.</p>
+    <p>Content stays exactly as in your Members Hub Splitpushing section...</p>
   </div>
 
   <div id="closing" class="card">
     <h2>Closing Out The Game</h2>
-    <p>Closing tips go here.</p>
+    <p>Content stays exactly as in your Members Hub Closing Out The Game section...</p>
   </div>
 
   <div id="threats" class="card">
     <h2>Threats & Synergies</h2>
-    <p>Counters and synergies go here.</p>
+    <p>Content stays exactly as in your Members Hub Threats & Synergies section...</p>
   </div>
 
   <div id="proscons" class="card">
     <h2>Pros & Cons</h2>
-    <p>Pros and cons go here.</p>
+    <p>Content stays exactly as in your Members Hub Pros & Cons section...</p>
   </div>
 
   <div id="extratips" class="card">
     <h2>Extra Tips</h2>
-    <p>Miscellaneous tips go here.</p>
+    <p>Content stays exactly as in your Members Hub Extra Tips section...</p>
   </div>
 
 </div>
@@ -327,31 +264,24 @@ footer {
 </footer>
 
 <script>
-function toggleMenu() {
-  const menu = document.getElementById('navMenu');
-  menu.style.display = menu.style.display === 'block' ? 'none' : 'block';
-}
-
-document.addEventListener('click', e => {
-  const wrap = document.querySelector('.nav-wrapper');
-  if (!wrap.contains(e.target)) {
-    document.getElementById('navMenu').style.display = 'none';
-  }
-});
-
-// Optional: auto-scroll to card when nav link clicked
-document.querySelectorAll('.nav-menu a').forEach(a => {
-  a.addEventListener('click', e => {
+// Optional: smooth scrolling for taskbar links
+document.querySelectorAll('.nav-wrapper a').forEach(link => {
+  link.addEventListener('click', e => {
     e.preventDefault();
-    const target = document.querySelector(a.getAttribute('href'));
-    target.scrollIntoView({ behavior: 'smooth' });
-    document.getElementById('navMenu').style.display = 'none';
+    const target = document.querySelector(link.getAttribute('href'));
+    target.scrollIntoView({ behavior: 'smooth', block: 'start' });
   });
 });
+
+// Require login
+if (localStorage.getItem('lolfundamentals_logged_in') !== 'true') {
+  window.location.href = 'index.html';
+}
 </script>
 
 </body>
 </html>
+
 
 
 
