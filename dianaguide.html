@@ -1,265 +1,184 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8" />
+<meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Diana Guide – [SECTION]</title>
-
-<link rel="preload" as="image" href="https://ddragon.leagueoflegends.com/cdn/img/champion/splash/Diana_11.jpg">
-
+<title>Diana Mid Guide</title>
 <style>
-:root {
-  --gold:#c9aa71;
-  --muted:#9da7b3;
-}
-
-html, body {
-  margin:0;
-  padding:0;
-  height:100%;
-  font-family: Arial, Helvetica, sans-serif;
-}
-
-body {
-  display:flex;
-  flex-direction:column;
-  background:url('https://ddragon.leagueoflegends.com/cdn/img/champion/splash/Diana_11.jpg') no-repeat center center fixed;
-  background-size:cover;
-  color:#e6edf3;
-  min-height:100vh;
-  overflow-y:auto;
-}
-
-body::before {
-  content:"";
-  position:fixed;
-  inset:0;
-  background:
-    radial-gradient(circle at top, rgba(120,0,0,0.25), transparent 60%),
-    rgba(10,15,20,0.82);
-  z-index:-1;
-  pointer-events:none;
-}
-
-/* HEADER */
-header {
-  background:rgba(13,17,23,0.9);
-  border-bottom:2px solid var(--gold);
-  padding:20px 10px;
-  font-size:26px;
-  font-weight:bold;
-  color:var(--gold);
-  text-transform:uppercase;
-  text-align:center;
-  position:sticky;
-  top:0;
-  z-index:10;
-}
-
-/* MAIN */
-.main {
-  flex:1 0 auto;
-  max-width:960px;
-  margin:0 auto;
-  padding:20px 16px 40px;
-}
-
-/* BACK BUTTON */
-.back-wrap {
-  display:flex;
-  justify-content:center;
-  margin:10px 0 32px;
-}
-
-.back-button {
-  padding:10px 22px;
-  background:linear-gradient(135deg,var(--gold),#e0c77b);
-  color:#000;
-  text-decoration:none;
-  border-radius:10px;
-  font-weight:bold;
-  box-shadow:0 0 10px rgba(201,170,113,.45);
-}
-.back-button::before { content:"← "; }
-
-/* NAV DROPDOWN */
-.nav-wrapper {
-  max-width:420px;
-  margin:0 auto 46px;
-  position:relative;
-}
-
-.nav-trigger {
-  width:100%;
-  padding:18px 22px;
-  font-size:16px;
-  font-weight:600;
-  color:#f0f6fc;
-  background:
-    linear-gradient(180deg, rgba(255,255,255,0.05), rgba(255,255,255,0.01));
-  border:none;
-  border-radius:20px;
-  cursor:pointer;
-  text-align:left;
-  box-shadow:0 12px 40px rgba(0,0,0,0.5), inset 0 1px 0 rgba(255,255,255,0.06);
-}
-
-.nav-menu {
-  position:absolute;
-  top:calc(100% + 16px);
-  left:0;
-  right:0;
-  background:
-    linear-gradient(180deg, rgba(22,27,34,0.98), rgba(13,17,23,0.98));
-  border-radius:24px;
-  padding:14px;
-  display:none;
-  backdrop-filter:blur(18px);
-  box-shadow:0 30px 90px rgba(0,0,0,0.7);
-  z-index:5;
-}
-
-.nav-section + .nav-section {
-  border-top:1px solid rgba(255,255,255,0.06);
-  margin-top:10px;
-  padding-top:10px;
-}
-
-.nav-section-title {
-  font-size:11px;
-  letter-spacing:0.14em;
-  color:var(--muted);
-  padding:6px 14px;
-  text-transform:uppercase;
-}
-
-.nav-menu a {
-  display:block;
-  padding:14px 16px;
-  border-radius:16px;
-  text-decoration:none;
-  color:#e6edf3;
-}
-
-.nav-menu a:hover {
-  background:rgba(255,255,255,0.06);
-  color:var(--gold);
-}
-
-/* CARD CONTENT */
-.card {
-  background:
-    linear-gradient(180deg, rgba(255,255,255,0.035), rgba(255,255,255,0.01));
-  border-radius:26px;
-  padding:36px;
-  box-shadow:0 24px 70px rgba(0,0,0,0.55);
-  opacity:0;
-  transform:translateY(30px);
-  animation: fadeInUp 1s forwards;
-  animation-delay:0.3s;
-}
-
-@keyframes fadeInUp {
-  to {
-    opacity:1;
-    transform:translateY(0);
+  body {
+    margin: 0;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background: #0d1117;
+    color: #e6edf3;
+    line-height: 1.5;
   }
-}
-
-.card h2 {
-  color:var(--gold);
-  margin-top:0;
-}
-
-.card p {
-  line-height:1.65;
-}
-
-/* FOOTER */
-footer {
-  flex-shrink:0;
-  padding:16px;
-  text-align:center;
-  font-size:13px;
-  color:var(--muted);
-}
+  h2, h3 {
+    color: #c9aa71;
+  }
+  p, li {
+    font-size: 0.95em;
+  }
+  ul {
+    padding-left: 0;
+  }
+  li {
+    margin-bottom: 0.5em;
+  }
+  img {
+    vertical-align: middle;
+  }
+  .build-section {
+    margin-bottom: 1.5em;
+  }
+  .video-wrapper {
+    position: relative;
+    padding-bottom: 56.25%;
+    height: 0;
+    margin-bottom: 1em;
+  }
+  .video-wrapper iframe {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+  }
+  table {
+    border-collapse: collapse;
+    width: 100%;
+    margin-top: 0.5em;
+    font-size: 0.9em;
+  }
+  th, td {
+    padding: 4px;
+    text-align: left;
+    border-bottom: 1px solid #444;
+  }
+  .rune-shards div {
+    margin-top: 0.5em;
+  }
 </style>
 </head>
-
 <body>
 
-<header>Diana Mid Guide</header>
+<h1>Diana Mid Guide</h1>
 
-<div class="main">
+<section id="intro">
+  <h2>Intro</h2>
+  <p><strong>Why Diana?</strong> Diana has numerous ways to carry a game. She has a strong early game, laning phase, and can transition well into the side lane in the mid game. She can make picks, teamfight well, splitpush, push waves quickly, farm jungle camps, and has great damage for dragons and barons. She’s also a pick that you can play pretty much every game as long as your team doesn’t need an AD mid laner.</p>
+</section>
 
-  <!-- BACK BUTTON -->
-  <div class="back-wrap">
-    <a href="membershub.html" class="back-button">Back to Members Hub</a>
+<section id="runes">
+  <h2>Runes</h2>
+  <div style="margin-bottom:1.5em; font-size:0.95em; line-height:1.45; color:#d7d7d7; font-weight:400;">
+    <strong style="color:#c8aa6e;">Why grasp over another keystone?</strong>
+    It ultimately comes down to the value of the rune trees themselves. The Sorcery tree is mandatory on Diana for Manaflow Band, and the Resolve tree provides essential sustain, health, and early game damage. By the time you hit level 3, bone plating will have blocked around 70 damage which is more than an Electrocute proc while the entire domination tree will have done absolutely nothing during the most crucial levels of the entire game. Electrocute also requires three separate hits to proc unlike old Thunderlords, which Diana could trigger with just her W. Now Electrocute is far stronger on ranged champions who can reliably proc it at level 1 with autos and spells.
   </div>
 
-  <!-- NAV DROPDOWN -->
-  <div class="nav-wrapper">
-    <button class="nav-trigger" onclick="toggleMenu()">
-      Browse Diana Guide Sections ▾
-    </button>
-
-    <div class="nav-menu" id="navMenu">
-
-      <div class="nav-section">
-        <div class="nav-section-title">Core</div>
-        <a href="diana-intro.html">Intro</a>
-        <a href="diana-runes.html">Runes</a>
-        <a href="diana-build.html">Build</a>
-        <a href="diana-summoners.html">Summoner Spells</a>
-        <a href="diana-abilities.html">Abilities</a>
-        <a href="diana-combos.html">Combos</a>
+  <ul style="list-style:none; padding-left:0;">
+    <li style="margin-bottom:1em;">
+      <img src="https://raw.communitydragon.org/latest/plugins/rcp-be-lol-game-data/global/default/v1/perk-images/styles/resolve/graspoftheundying/graspoftheundying.png" width="32" style="margin-right:8px;" alt="Grasp of the Undying">
+      <strong>Grasp Of The Undying:</strong> This is the only rune and tree that allows Diana to play the way she’s intended to be played.
+    </li>
+    <li style="margin-bottom:1em;">
+      <img src="https://raw.communitydragon.org/latest/plugins/rcp-be-lol-game-data/global/default/v1/perk-images/styles/resolve/mirrorshell/mirrorshell.png" width="32" style="margin-right:8px;" alt="Shield Bash">
+      <strong>Shield Bash:</strong> Great early game damage that also scales extremely well.
+    </li>
+    <li style="margin-bottom:1em;">
+      <img src="https://raw.communitydragon.org/latest/plugins/rcp-be-lol-game-data/global/default/v1/perk-images/styles/resolve/boneplating/boneplating.png" width="32" style="margin-right:8px;" alt="Bone Plating">
+      <strong>Bone Plating:</strong> Best sustain tool in lane.
+    </li>
+    <li style="margin-bottom:1em;">
+      <img src="https://raw.communitydragon.org/latest/plugins/rcp-be-lol-game-data/global/default/v1/perk-images/styles/resolve/overgrowth/overgrowth.png" width="32" style="margin-right:8px;" alt="Overgrowth">
+      <strong>Overgrowth:</strong> Best way for Diana to gain health besides Grasp.
+    </li>
+    <li style="margin-bottom:1em;">
+      <img src="https://raw.communitydragon.org/latest/plugins/rcp-be-lol-game-data/global/default/v1/perk-images/styles/sorcery/manaflowband/manaflowband.png" width="32" style="margin-right:8px;" alt="Manaflow Band">
+      <strong>Manaflow Band:</strong> Perfect mana sustain for Diana.
+    </li>
+    <li style="margin-bottom:1em;">
+      <img src="https://raw.communitydragon.org/latest/plugins/rcp-be-lol-game-data/global/default/v1/perk-images/styles/sorcery/transcendence/transcendence.png" width="32" style="margin-right:8px;" alt="Transcendence">
+      <strong>Transcendence:</strong> Cooldown reduction and balanced haste.
+    </li>
+    <li style="margin-top:2em; margin-bottom:1em;">
+      <strong>Rune Shards:</strong>
+      <div class="rune-shards">
+        <img src="https://raw.communitydragon.org/latest/plugins/rcp-be-lol-game-data/global/default/v1/perk-images/statmods/statmodsadaptiveforceicon.png" width="28" style="margin-right:6px;" alt="Adaptive Force"><span style="margin-right:12px;">Adaptive Force</span>
+        <img src="https://raw.communitydragon.org/latest/plugins/rcp-be-lol-game-data/global/default/v1/perk-images/statmods/statmodsadaptiveforceicon.png" width="28" style="margin-right:6px;" alt="Adaptive Force"><span style="margin-right:12px;">Adaptive Force</span>
+        <img src="https://raw.communitydragon.org/latest/plugins/rcp-be-lol-game-data/global/default/v1/perk-images/statmods/statmodshealthscalingicon.png" width="28" style="margin-right:6px;" alt="Scaling Health"><span>Scaling Health</span>
       </div>
+    </li>
+  </ul>
 
-      <div class="nav-section">
-        <div class="nav-section-title">Gameplay</div>
-        <a href="diana-laning.html">Laning</a>
-        <a href="diana-warding.html">Warding</a>
-        <a href="diana-farming.html">Farming / Pushing</a>
-        <a href="diana-teamfighting.html">Teamfighting</a>
-        <a href="diana-splitpushing.html">Splitpushing</a>
-        <a href="diana-closing.html">Closing Out The Game</a>
-      </div>
-
-      <div class="nav-section">
-        <div class="nav-section-title">Advanced</div>
-        <a href="diana-threats.html">Threats & Synergies</a>
-        <a href="diana-proscons.html">Pros & Cons</a>
-        <a href="diana-extratips.html">Extra Tips</a>
-      </div>
-
-    </div>
+  <div style="margin-top:2em;">
+    <h3>Rune Comparison</h3>
+    <p>This table shows realistic rune-only contribution for Diana at Level 4 against a 40 MR target.</p>
+    <table>
+      <thead>
+        <tr>
+          <th>Trade #</th>
+          <th>Grasp + Shield Bash Damage</th>
+          <th>Grasp Heal</th>
+          <th>Grasp HP Gain</th>
+          <th>Electrocute + Sudden Impact Damage</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr><td>1</td><td>52</td><td>14</td><td>5</td><td>102</td></tr>
+        <tr><td>2</td><td>80</td><td>28</td><td>10</td><td>102</td></tr>
+        <tr><td>3</td><td>132</td><td>42</td><td>15</td><td>132</td></tr>
+        <tr><td>4</td><td>160</td><td>56</td><td>20</td><td>132</td></tr>
+      </tbody>
+    </table>
+    <p><em>Note:</em> Bone Plating and Overgrowth are not included in this table.</p>
   </div>
+</section>
 
-  <!-- PAGE CONTENT -->
-  <div class="card">
-    <h2>[SECTION]</h2>
-    <p>[Insert your section content here]</p>
+<section id="build">
+  <h2>Build</h2>
+  <div class="build-section">
+    <h3>Starting Items</h3>
+    <ul style="list-style:none; padding-left:0;">
+      <li><img src="https://ddragon.leagueoflegends.com/cdn/13.23.1/img/item/1056.png" width="32" style="margin-right:8px;"> <strong>Doran’s Ring</strong></li>
+      <li><img src="https://ddragon.leagueoflegends.com/cdn/13.23.1/img/item/1082.png" width="32" style="margin-right:8px;"> <strong>Dark Seal</strong></li>
+      <li><img src="https://ddragon.leagueoflegends.com/cdn/13.23.1/img/item/1029.png" width="32" style="margin-right:8px;"> <strong>Cloth Armor</strong></li>
+    </ul>
   </div>
+  <div class="build-section">
+    <h3>Core Items</h3>
+    <ul style="list-style:none; padding-left:0;">
+      <li><img src="https://raw.communitydragon.org/latest/game/assets/items/icons2d/4646_stormsurge.png" width="32" style="margin-right:8px;"> <strong>Stormsurge</strong></li>
+      <li><img src="https://ddragon.leagueoflegends.com/cdn/13.23.1/img/item/3157.png" width="32" style="margin-right:8px;"> <strong>Zhonya’s Hourglass</strong></li>
+    </ul>
+  </div>
+</section>
 
-</div>
+<section id="summoners">
+  <h2>Summoner Spells</h2>
+  <ul style="list-style:none; padding-left:0;">
+    <li><img src="https://ddragon.leagueoflegends.com/cdn/13.23.1/img/spell/SummonerFlash.png" width="32" style="margin-right:8px;"> <strong>Flash</strong></li>
+    <li><img src="https://ddragon.leagueoflegends.com/cdn/13.23.1/img/spell/SummonerDot.png" width="32" style="margin-right:8px;"> <strong>Ignite</strong></li>
+  </ul>
+</section>
 
-<footer>
-  © 2026 LoL Fundamentals · All rights reserved
-</footer>
+<section id="abilities">
+  <h2>Abilities</h2>
+  <h3>Passive — Moonsilver Blade</h3>
+  <p>Diana’s passive has changed from a burst tool to an attack speed dps tool...</p>
+</section>
 
-<script>
-function toggleMenu() {
-  const menu = document.getElementById('navMenu');
-  menu.style.display = menu.style.display === 'block' ? 'none' : 'block';
-}
+<section id="combos">
+  <h2>Combos</h2>
+  <ul>
+    <li><strong>Q E W AA E</strong> Basic combo</li>
+    <li><strong>R W Q E AA E</strong> Best combo</li>
+  </ul>
+</section>
 
-document.addEventListener('click', e => {
-  const wrap = document.querySelector('.nav-wrapper');
-  if (!wrap.contains(e.target)) {
-    document.getElementById('navMenu').style.display = 'none';
-  }
-});
-</script>
+<section id="farming">
+  <h2>Farming / Pushing</h2>
+  <p>Diana clears waves and jungle camps quickly...</p>
+</section>
 
 </body>
 </html>
