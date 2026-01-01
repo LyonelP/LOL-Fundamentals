@@ -1,11 +1,9 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8" />
+<meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Diana Guide – Full</title>
-
-<link rel="preload" as="image" href="https://ddragon.leagueoflegends.com/cdn/img/champion/splash/Diana_11.jpg">
+<title>Diana Mid Guide</title>
 
 <style>
 :root {
@@ -13,160 +11,108 @@
   --muted:#9da7b3;
 }
 
-html, body {
-  margin:0;
-  padding:0;
-  height:100%;
-  font-family: Arial, Helvetica, sans-serif;
-}
+html { scroll-behavior: smooth; }
 
 body {
-  display:flex;
-  flex-direction:column;
+  margin:0;
+  font-family: Arial, sans-serif;
   background:url('https://ddragon.leagueoflegends.com/cdn/img/champion/splash/Diana_11.jpg')
-    no-repeat center center fixed;
-  background-size:cover;
+    center/cover fixed no-repeat;
   color:#e6edf3;
-  min-height:100vh;
-  overflow-y: auto;
 }
 
 body::before {
   content:"";
   position:fixed;
   inset:0;
-  background:
-    radial-gradient(circle at top, rgba(120,0,0,0.25), transparent 60%),
-    rgba(10,15,20,0.82);
+  background:rgba(10,15,20,0.85);
   z-index:-1;
-  pointer-events:none;
 }
 
 /* HEADER */
 header {
-  background:rgba(13,17,23,0.9);
-  border-bottom:2px solid var(--gold);
-  padding:20px 10px;
-  font-size:26px;
-  font-weight:bold;
-  color:var(--gold);
-  text-transform:uppercase;
-  text-align:center;
   position:sticky;
   top:0;
   z-index:10;
+  background:#0d1117;
+  border-bottom:2px solid var(--gold);
+  text-align:center;
+  padding:18px;
+  font-size:26px;
+  font-weight:bold;
+  color:var(--gold);
 }
 
-/* MAIN */
+/* LAYOUT */
 .main {
-  flex:1 0 auto;
   max-width:960px;
-  margin:0 auto;
-  padding:20px 16px 40px;
+  margin:auto;
+  padding:24px 16px 60px;
 }
 
-/* BACK BUTTON */
-.back-wrap {
-  display:flex;
-  justify-content:center;
-  margin:10px 0 32px;
+/* BACK */
+.back {
+  text-align:center;
+  margin-bottom:24px;
 }
 
-.back-button {
+.back a {
   padding:10px 22px;
   background:linear-gradient(135deg,var(--gold),#e0c77b);
   color:#000;
   text-decoration:none;
   border-radius:10px;
   font-weight:bold;
-  box-shadow:0 0 10px rgba(201,170,113,.45);
 }
-.back-button::before { content:"← "; }
 
-/* NAV DROPDOWN */
-.nav-wrapper {
+/* DROPDOWN */
+.nav {
   max-width:420px;
-  margin:0 auto 46px;
+  margin:0 auto 40px;
   position:relative;
 }
 
-.nav-trigger {
+.nav button {
   width:100%;
-  padding:18px 22px;
+  padding:16px 20px;
   font-size:16px;
-  font-weight:600;
-  color:#f0f6fc;
-  background:
-    linear-gradient(180deg, rgba(255,255,255,0.05), rgba(255,255,255,0.01));
   border:none;
-  border-radius:20px;
+  border-radius:18px;
+  background:#161b22;
+  color:#fff;
   cursor:pointer;
-  text-align:left;
-  box-shadow:0 12px 40px rgba(0,0,0,0.5), inset 0 1px 0 rgba(255,255,255,0.06);
 }
 
-.nav-menu {
-  position:absolute;
-  top:calc(100% + 16px);
-  left:0;
-  right:0;
-  background:
-    linear-gradient(180deg, rgba(22,27,34,0.98), rgba(13,17,23,0.98));
-  border-radius:24px;
-  padding:14px;
+.menu {
   display:none;
-  backdrop-filter:blur(18px);
-  box-shadow:0 30px 90px rgba(0,0,0,0.7);
-  z-index:5;
+  position:absolute;
+  top:110%;
+  width:100%;
+  background:#161b22;
+  border-radius:18px;
+  padding:12px;
 }
 
-.nav-section + .nav-section {
-  border-top:1px solid rgba(255,255,255,0.06);
-  margin-top:10px;
-  padding-top:10px;
-}
-
-.nav-section-title {
-  font-size:11px;
-  letter-spacing:0.14em;
-  color:var(--muted);
-  padding:6px 14px;
-  text-transform:uppercase;
-}
-
-.nav-menu a {
+.menu a {
   display:block;
-  padding:14px 16px;
-  border-radius:16px;
+  padding:12px 14px;
   text-decoration:none;
   color:#e6edf3;
+  border-radius:12px;
 }
 
-.nav-menu a:hover {
+.menu a:hover {
   background:rgba(255,255,255,0.06);
   color:var(--gold);
 }
 
-/* WELCOME CARD / CONTENT */
+/* CARDS */
 .card {
-  background:
-    linear-gradient(180deg, rgba(255,255,255,0.035), rgba(255,255,255,0.01));
-  border-radius:26px;
-  padding:36px;
-  box-shadow:0 24px 70px rgba(0,0,0,0.55);
-  text-align:center;
-  opacity:0;
-  transform:translateY(30px);
-  animation: fadeInUp 1s forwards;
-  animation-delay:0.3s;
+  background:rgba(22,27,34,0.9);
+  border-radius:24px;
+  padding:32px;
   margin-bottom:32px;
-}
-
-@keyframes fadeInUp {
-  to {
-    opacity:1;
-    transform:translateY(0);
-  }
+  box-shadow:0 20px 60px rgba(0,0,0,0.6);
 }
 
 .card h2 {
@@ -174,28 +120,15 @@ header {
   margin-top:0;
 }
 
-.card p {
-  line-height:1.65;
-  text-align:left;
-}
-
 .card ul {
-  list-style:none;
-  padding-left:0;
-  text-align:left;
+  padding-left:18px;
 }
 
-.card ul li {
-  margin:6px 0;
-}
-
-/* FOOTER */
 footer {
-  flex-shrink:0;
-  padding:16px;
   text-align:center;
-  font-size:13px;
+  padding:16px;
   color:var(--muted);
+  font-size:13px;
 }
 </style>
 </head>
@@ -206,174 +139,100 @@ footer {
 
 <div class="main">
 
-  <!-- BACK BUTTON -->
-  <div class="back-wrap">
-    <a href="membershub.html" class="back-button">Back to Members Hub</a>
+  <div class="back">
+    <a href="membershub.html">← Back to Members Hub</a>
   </div>
 
-  <!-- NAV DROPDOWN -->
-  <div class="nav-wrapper">
-    <button class="nav-trigger" onclick="toggleMenu()">
-      Browse Diana Guide Sections ▾
-    </button>
-
-    <div class="nav-menu" id="navMenu">
-
-      <div class="nav-section">
-        <div class="nav-section-title">Core</div>
-        <a href="#intro">Intro</a>
-        <a href="#runes">Runes</a>
-        <a href="#build">Build</a>
-        <a href="#summoners">Summoner Spells</a>
-        <a href="#abilities">Abilities</a>
-        <a href="#combos">Combos</a>
-      </div>
-
-      <div class="nav-section">
-        <div class="nav-section-title">Gameplay</div>
-        <a href="#laning">Laning</a>
-        <a href="#warding">Warding</a>
-        <a href="#farming">Farming / Pushing</a>
-        <a href="#teamfighting">Teamfighting</a>
-        <a href="#splitpushing">Splitpushing</a>
-        <a href="#closing">Closing Out The Game</a>
-      </div>
-
-      <div class="nav-section">
-        <div class="nav-section-title">Advanced</div>
-        <a href="#threats">Threats & Synergies</a>
-        <a href="#proscons">Pros & Cons</a>
-        <a href="#extratips">Extra Tips</a>
-      </div>
-
+  <!-- DROPDOWN NAV (NAVIGATION ONLY) -->
+  <div class="nav">
+    <button onclick="toggleMenu()">Browse Sections ▾</button>
+    <div class="menu" id="menu">
+      <a href="#intro">Intro</a>
+      <a href="#runes">Runes</a>
+      <a href="#build">Build</a>
+      <a href="#combos">Combos</a>
+      <a href="#laning">Laning</a>
+      <a href="#teamfighting">Teamfighting</a>
+      <a href="#extratips">Extra Tips</a>
     </div>
   </div>
 
-  <!-- SECTIONS -->
+  <!-- SECTIONS (ALL SEPARATE — NOTHING SHARED) -->
 
   <div class="card" id="intro">
     <h2>Intro</h2>
-    <p><strong>Why Diana?</strong> Diana has numerous ways to carry a game. She has a strong early game, laning phase, and can transition well into the side lane in the mid game. She can make picks, teamfight well, splitpush, push waves quickly, farm jungle camps, and has great damage for dragons and barons. She’s also a pick that you can play pretty much every game as long as your team doesn’t need an AD mid laner.</p>
+    <p>
+      Diana is a flexible AP carry with strong laning, great waveclear,
+      and powerful mid-game skirmishing. She can teamfight, splitpush,
+      take objectives quickly, and snowball hard with tempo.
+    </p>
   </div>
 
   <div class="card" id="runes">
     <h2>Runes</h2>
     <ul>
-      <li>⚡ Electrocute</li>
-      <li>💪 Sudden Impact</li>
-      <li>🩸 Eyeball Collection</li>
-      <li>🛡 Relentless Hunter</li>
-      <li>🌀 Manaflow Band</li>
-      <li>🌟 Transcendence</li>
+      <li>Electrocute</li>
+      <li>Sudden Impact</li>
+      <li>Eyeball Collection</li>
+      <li>Relentless Hunter</li>
     </ul>
   </div>
 
   <div class="card" id="build">
     <h2>Build</h2>
     <ul>
-      <li>Mythic: Night Harvester</li>
-      <li>Core Items: Zhonya's Hourglass, Nashor's Tooth, Hextech Rocketbelt</li>
-      <li>Boots: Sorcerer's Shoes</li>
-      <li>Situtationals: Void Staff, Morellonomicon, Rabadon's Deathcap</li>
-    </ul>
-  </div>
-
-  <div class="card" id="summoners">
-    <h2>Summoner Spells</h2>
-    <ul>
-      <li>Flash</li>
-      <li>Ignite (Aggressive) / Teleport (Splitpush)</li>
-    </ul>
-  </div>
-
-  <div class="card" id="abilities">
-    <h2>Abilities</h2>
-    <ul>
-      <li>Passive: Moonsilver Blade</li>
-      <li>Q: Crescent Strike</li>
-      <li>W: Pale Cascade</li>
-      <li>E: Lunar Rush</li>
-      <li>R: Moonfall</li>
+      <li>Rocketbelt / Night Harvester</li>
+      <li>Nashor’s Tooth</li>
+      <li>Zhonya’s Hourglass</li>
     </ul>
   </div>
 
   <div class="card" id="combos">
     <h2>Combos</h2>
     <ul>
-      <li>W → Q → E → R → Auto Attack</li>
-      <li>All-in: E → R → W → Q → Flash if needed</li>
-      <li>Quick poke: Q → Auto → W</li>
+      <li>Q → E → W → Auto</li>
+      <li>E → R → W → Q</li>
     </ul>
   </div>
 
   <div class="card" id="laning">
     <h2>Laning</h2>
-    <p>Focus on farming while poking with Q. Use W to shield trades and E for aggressive all-ins. Look for jungle gank setups.</p>
-  </div>
-
-  <div class="card" id="warding">
-    <h2>Warding</h2>
-    <p>Keep river and jungle entrances warded. Prioritize vision around mid lane and dragon.</p>
-  </div>
-
-  <div class="card" id="farming">
-    <h2>Farming / Pushing</h2>
-    <p>Clear waves with Q + W efficiently. Farm jungle camps when possible to maintain level advantage.</p>
+    <p>
+      Use Q to control the wave and punish last hits.
+      Hold E until you can force a winning trade.
+    </p>
   </div>
 
   <div class="card" id="teamfighting">
     <h2>Teamfighting</h2>
-    <p>Look for flanks and peel priority targets. Use R to pull enemies into your team. Use W defensively if needed.</p>
-  </div>
-
-  <div class="card" id="splitpushing">
-    <h2>Splitpushing</h2>
-    <p>Push sidelanes with Q + W. Teleport in for fights when your team needs help.</p>
-  </div>
-
-  <div class="card" id="closing">
-    <h2>Closing Out The Game</h2>
-    <p>Focus on objectives, baron, and inhibitors. Use vision control and force fights around your advantages.</p>
-  </div>
-
-  <div class="card" id="threats">
-    <h2>Threats & Synergies</h2>
-    <p>Diana struggles against ranged poke champions early. Synergizes well with engage supports and peel-heavy junglers.</p>
-  </div>
-
-  <div class="card" id="proscons">
-    <h2>Pros & Cons</h2>
-    <ul>
-      <li><strong>Pros:</strong> Strong burst, flexible mid-game, good objective damage.</li>
-      <li><strong>Cons:</strong> Weak vs ranged poke early, can be kited.</li>
-    </ul>
+    <p>
+      Look for flanks. Diana excels when pulling multiple targets with R
+      and bursting priority carries.
+    </p>
   </div>
 
   <div class="card" id="extratips">
     <h2>Extra Tips</h2>
     <ul>
-      <li>Use passive reset on jungle camps to clear faster.</li>
-      <li>W can be used to absorb turret shots while all-ining.</li>
-      <li>Always try to hit R through minions for AoE pulls.</li>
+      <li>Passive works on inhibitors and nexus at specific angles</li>
+      <li>W shield timing wins trades</li>
+      <li>Q through minions hides its arc</li>
     </ul>
   </div>
 
 </div>
 
-<footer>
-  © 2026 LoL Fundamentals · All rights reserved
-</footer>
+<footer>© 2026 LoL Fundamentals</footer>
 
 <script>
 function toggleMenu() {
-  const menu = document.getElementById('navMenu');
-  menu.style.display = menu.style.display === 'block' ? 'none' : 'block';
+  const m = document.getElementById("menu");
+  m.style.display = m.style.display === "block" ? "none" : "block";
 }
 
-document.addEventListener('click', e => {
-  const wrap = document.querySelector('.nav-wrapper');
-  if (!wrap.contains(e.target)) {
-    document.getElementById('navMenu').style.display = 'none';
+document.addEventListener("click", e => {
+  if (!e.target.closest(".nav")) {
+    document.getElementById("menu").style.display = "none";
   }
 });
 </script>
