@@ -3,181 +3,268 @@
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Diana Mid Guide – Members Hub</title>
+<title>Diana Guide – [SECTION]</title>
+
+<link rel="preload" as="image" href="https://ddragon.leagueoflegends.com/cdn/img/champion/splash/Diana_11.jpg">
+
 <style>
-/* Body & overlay */
+:root {
+  --gold:#c9aa71;
+  --muted:#9da7b3;
+}
+
+html, body {
+  margin:0;
+  padding:0;
+  height:100%;
+  font-family: Arial, Helvetica, sans-serif;
+}
+
 body {
-  margin: 0;
-  font-family: 'Beaufort for LOL', Arial, Helvetica, sans-serif;
-  background: url('https://ddragon.leagueoflegends.com/cdn/img/champion/splash/Diana_0.jpg') no-repeat center center fixed;
-  background-size: cover;
-  color: #e6edf3;
-  text-align: center;
-  overflow-x: hidden;
+  display:flex;
+  flex-direction:column;
+  background:url('https://ddragon.leagueoflegends.com/cdn/img/champion/splash/Diana_11.jpg') no-repeat center center fixed;
+  background-size:cover;
+  color:#e6edf3;
+  min-height:100vh;
+  overflow-y:auto;
 }
+
 body::before {
-  content: "";
-  position: fixed;
-  top: 0; left: 0;
-  width: 100%; height: 100%;
-  background: rgba(10,15,20,0.75);
-  z-index: -1;
+  content:"";
+  position:fixed;
+  inset:0;
+  background:
+    radial-gradient(circle at top, rgba(120,0,0,0.25), transparent 60%),
+    rgba(10,15,20,0.82);
+  z-index:-1;
+  pointer-events:none;
 }
 
-/* Header */
+/* HEADER */
 header {
-  background: rgba(13,17,23,0.9);
-  border-bottom: 2px solid #c9aa71;
-  padding: 20px 10px;
-  font-weight: bold;
-  font-size: 26px;
-  text-transform: uppercase;
-  color: #c9aa71;
-  letter-spacing: 1px;
+  background:rgba(13,17,23,0.9);
+  border-bottom:2px solid var(--gold);
+  padding:20px 10px;
+  font-size:26px;
+  font-weight:bold;
+  color:var(--gold);
+  text-transform:uppercase;
+  text-align:center;
+  position:sticky;
+  top:0;
+  z-index:10;
 }
 
-/* Back button */
+/* MAIN */
+.main {
+  flex:1 0 auto;
+  max-width:960px;
+  margin:0 auto;
+  padding:20px 16px 40px;
+}
+
+/* BACK BUTTON */
+.back-wrap {
+  display:flex;
+  justify-content:center;
+  margin:10px 0 32px;
+}
+
 .back-button {
-  display: inline-block;
-  margin: 20px auto 10px;
-  padding: 10px 20px;
-  background: linear-gradient(135deg, #c9aa71, #e0c77b);
-  color: #000;
-  text-decoration: none;
-  border-radius: 8px;
-  font-weight: bold;
-  transition: all 0.3s;
-  box-shadow: 0 0 10px rgba(201,170,113,0.5);
+  padding:10px 22px;
+  background:linear-gradient(135deg,var(--gold),#e0c77b);
+  color:#000;
+  text-decoration:none;
+  border-radius:10px;
+  font-weight:bold;
+  box-shadow:0 0 10px rgba(201,170,113,.45);
 }
-.back-button::before { content: "← "; }
-.back-button:hover {
-  background: linear-gradient(135deg, #e6c97f, #f0d88b);
-  box-shadow: 0 0 15px rgba(255,215,0,0.8);
+.back-button::before { content:"← "; }
+
+/* NAV DROPDOWN */
+.nav-wrapper {
+  max-width:420px;
+  margin:0 auto 46px;
+  position:relative;
 }
 
-/* Dropdown */
-#section-select-container {
-  margin: 20px auto;
-}
-#section-select {
-  padding: 10px 15px;
-  font-size: 16px;
-  border-radius: 6px;
-  border: none;
-  background: #0f1722;
-  color: #c9aa71;
-  cursor: pointer;
-}
-
-/* Section display */
-#section-info {
-  margin: 30px auto;
-  max-width: 900px;
-  background: rgba(13,17,23,0.95);
-  border: 1px solid #2f81f7;
-  padding: 20px;
-  border-radius: 10px;
-  text-align: left;
-  color: #c9aa71;
-  min-height: 200px;
-  overflow-y: auto;
-  max-height: 70vh;
+.nav-trigger {
+  width:100%;
+  padding:18px 22px;
+  font-size:16px;
+  font-weight:600;
+  color:#f0f6fc;
+  background:
+    linear-gradient(180deg, rgba(255,255,255,0.05), rgba(255,255,255,0.01));
+  border:none;
+  border-radius:20px;
+  cursor:pointer;
+  text-align:left;
+  box-shadow:0 12px 40px rgba(0,0,0,0.5), inset 0 1px 0 rgba(255,255,255,0.06);
 }
 
-/* Section content styling */
-#section-info h2 { color: #c9aa71; margin-top: 0; }
-#section-info h3 { color: #c9aa71; margin-bottom: 0.2em; }
-#section-info p, #section-info li, #section-info ol, #section-info ul { color: #e6edf3; line-height: 1.45; margin-bottom: 0.9em; }
-#section-info ul { margin-left: 1.1em; }
-#section-info ol { margin-left: 1.2em; }
-#section-info:hover { box-shadow: 0 0 15px rgba(47,129,247,0.5); }
+.nav-menu {
+  position:absolute;
+  top:calc(100% + 16px);
+  left:0;
+  right:0;
+  background:
+    linear-gradient(180deg, rgba(22,27,34,0.98), rgba(13,17,23,0.98));
+  border-radius:24px;
+  padding:14px;
+  display:none;
+  backdrop-filter:blur(18px);
+  box-shadow:0 30px 90px rgba(0,0,0,0.7);
+  z-index:5;
+}
 
-@media (max-width: 600px) {
-  #section-select { font-size: 14px; padding: 8px 10px; }
-  #section-info { padding: 15px; max-height: 60vh; }
+.nav-section + .nav-section {
+  border-top:1px solid rgba(255,255,255,0.06);
+  margin-top:10px;
+  padding-top:10px;
+}
+
+.nav-section-title {
+  font-size:11px;
+  letter-spacing:0.14em;
+  color:var(--muted);
+  padding:6px 14px;
+  text-transform:uppercase;
+}
+
+.nav-menu a {
+  display:block;
+  padding:14px 16px;
+  border-radius:16px;
+  text-decoration:none;
+  color:#e6edf3;
+}
+
+.nav-menu a:hover {
+  background:rgba(255,255,255,0.06);
+  color:var(--gold);
+}
+
+/* CARD CONTENT */
+.card {
+  background:
+    linear-gradient(180deg, rgba(255,255,255,0.035), rgba(255,255,255,0.01));
+  border-radius:26px;
+  padding:36px;
+  box-shadow:0 24px 70px rgba(0,0,0,0.55);
+  opacity:0;
+  transform:translateY(30px);
+  animation: fadeInUp 1s forwards;
+  animation-delay:0.3s;
+}
+
+@keyframes fadeInUp {
+  to {
+    opacity:1;
+    transform:translateY(0);
+  }
+}
+
+.card h2 {
+  color:var(--gold);
+  margin-top:0;
+}
+
+.card p {
+  line-height:1.65;
+}
+
+/* FOOTER */
+footer {
+  flex-shrink:0;
+  padding:16px;
+  text-align:center;
+  font-size:13px;
+  color:var(--muted);
 }
 </style>
 </head>
+
 <body>
 
 <header>Diana Mid Guide</header>
-<a href="membershub.html" class="back-button">Back to Members Hub</a>
 
-<div id="section-select-container">
-  <select id="section-select">
-    <option disabled selected>Select a section</option>
-    <option>Intro</option>
-    <option>Runes</option>
-    <option>Build</option>
-    <option>Summoner Spells</option>
-    <option>Abilities</option>
-    <option>Combos</option>
-    <option>Laning</option>
-    <option>Warding</option>
-    <option>Farming / Pushing</option>
-    <option>Teamfighting</option>
-    <option>Splitpushing</option>
-    <option>Closing Out The Game</option>
-    <option>Threats & Synergies</option>
-    <option>Pros & Cons</option>
-    <option>Extra Tips</option>
-  </select>
+<div class="main">
+
+  <!-- BACK BUTTON -->
+  <div class="back-wrap">
+    <a href="membershub.html" class="back-button">Back to Members Hub</a>
+  </div>
+
+  <!-- NAV DROPDOWN -->
+  <div class="nav-wrapper">
+    <button class="nav-trigger" onclick="toggleMenu()">
+      Browse Diana Guide Sections ▾
+    </button>
+
+    <div class="nav-menu" id="navMenu">
+
+      <div class="nav-section">
+        <div class="nav-section-title">Core</div>
+        <a href="diana-intro.html">Intro</a>
+        <a href="diana-runes.html">Runes</a>
+        <a href="diana-build.html">Build</a>
+        <a href="diana-summoners.html">Summoner Spells</a>
+        <a href="diana-abilities.html">Abilities</a>
+        <a href="diana-combos.html">Combos</a>
+      </div>
+
+      <div class="nav-section">
+        <div class="nav-section-title">Gameplay</div>
+        <a href="diana-laning.html">Laning</a>
+        <a href="diana-warding.html">Warding</a>
+        <a href="diana-farming.html">Farming / Pushing</a>
+        <a href="diana-teamfighting.html">Teamfighting</a>
+        <a href="diana-splitpushing.html">Splitpushing</a>
+        <a href="diana-closing.html">Closing Out The Game</a>
+      </div>
+
+      <div class="nav-section">
+        <div class="nav-section-title">Advanced</div>
+        <a href="diana-threats.html">Threats & Synergies</a>
+        <a href="diana-proscons.html">Pros & Cons</a>
+        <a href="diana-extratips.html">Extra Tips</a>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- PAGE CONTENT -->
+  <div class="card">
+    <h2>[SECTION]</h2>
+    <p>[Insert your section content here]</p>
+  </div>
+
 </div>
 
-<div id="section-info">
-  <p>Select a section from above to view details.</p>
-</div>
+<footer>
+  © 2026 LoL Fundamentals · All rights reserved
+</footer>
 
 <script>
-// Require login
-if (localStorage.getItem('lolfundamentals_logged_in') !== 'true') {
-  window.location.href = 'index.html';
+function toggleMenu() {
+  const menu = document.getElementById('navMenu');
+  menu.style.display = menu.style.display === 'block' ? 'none' : 'block';
 }
 
-// Dropdown functionality
-const sectionSelect = document.getElementById('section-select');
-const sectionInfo = document.getElementById('section-info');
-
-const sections = {
-  "Intro": `<h2>Intro</h2><p>Diana has strong early and mid-game potential, with good wave clear, jungle camp control, and teamfight impact.</p>`,
-
-  "Runes": `<h2>Runes</h2><p>Grasp + Shield Bash is ideal for early trades and sustain. Sorcery provides Manaflow Band and Transcendence for cooldown reduction.</p>`,
-
-  "Build": `<h2>Build</h2><p>Core: Stormsurge, Zhonya's Hourglass, Banshee's Veil, Deathcap, Cryptbloom. Boots: Sorcerer's Shoes.</p>`,
-
-  "Summoner Spells": `<h2>Summoner Spells</h2><ul><li>Flash: Essential for combos and escapes.</li><li>Ignite: Strong early kill pressure.</li><li>Teleport: Optional scaling tool.</li></ul>`,
-
-  "Abilities": `<h2>Abilities</h2><h3>Passive — Moonsilver Blade</h3><p>Attack speed passive triggered on abilities.</p><h3>Q — Crescent Strike</h3><p>Reveals targets; combo tool.</p><h3>W — Pale Cascade</h3><p>Instant shield + orbs; procs damage.</p><h3>E — Lunar Rush</h3><p>Targeted dash; resets on Q-marked targets.</p><h3>R — Moonfall</h3><p>AoE pull + knockup for teamfights and pickoffs.</p>`,
-
-  "Combos": `<h2>Combos</h2><ul><li>Q E W AA E: Basic trade combo.</li><li>R W Q E AA E: All-in combo.</li></ul>`,
-
-  "Laning": `<h2>Laning</h2><p>Use Q and W to control waves. Look for level 3 all-ins with Grasp + W trades. Push waves with two-Q after level 5.</p>`,
-
-  "Warding": `<h2>Warding</h2><p>Place pink wards in side bushes and river entrances. Adjust based on jungle position and wave timing.</p>`,
-
-  "Farming / Pushing": `<h2>Farming / Pushing</h2><p>Diana clears waves and jungle quickly. Use Q and W to secure ranged minions and maintain prio.</p>`,
-
-  "Teamfighting": `<h2>Teamfighting</h2><p>Look to flank and engage with E + R. Prioritize carries and use shields to survive focus.</p>`,
-
-  "Splitpushing": `<h2>Splitpushing</h2><p>Push side lanes with your waveclear, look for teleports to assist or objectives.</p>`,
-
-  "Closing Out The Game": `<h2>Closing Out The Game</h2><p>Focus on picks, objectives, and vision control. Avoid risky engages when behind.</p>`,
-
-  "Threats & Synergies": `<h2>Threats & Synergies</h2><p>Strong vs squishies, weak vs ranged poke. Synergizes with CC-heavy junglers and tanks.</p>`,
-
-  "Pros & Cons": `<h2>Pros & Cons</h2><p>Pros: High burst, strong waveclear. Cons: Vulnerable to kiting and poke.</p>`,
-
-  "Extra Tips": `<h2>Extra Tips</h2><ul><li>Use E resets wisely for trades.</li><li>Ward aggressively in early jungle paths.</li><li>Max Q or W first depending on matchup.</li></ul>`
-};
-
-sectionSelect.addEventListener('change', (e) => {
-  const selection = e.target.value;
-  sectionInfo.innerHTML = sections[selection] || '<p>Select a section from above to view details.</p>';
+document.addEventListener('click', e => {
+  const wrap = document.querySelector('.nav-wrapper');
+  if (!wrap.contains(e.target)) {
+    document.getElementById('navMenu').style.display = 'none';
+  }
 });
 </script>
 
 </body>
 </html>
+
+
 
 
 
