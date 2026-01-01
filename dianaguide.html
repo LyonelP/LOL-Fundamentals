@@ -85,13 +85,14 @@ header {
 
 /* NAV DROPDOWN TASKBAR */
 .nav-wrapper {
-  max-width:960px;
+  max-width:960px; /* match content width */
   margin:0 auto 46px;
   position:relative;
 }
 
 .nav-trigger {
   width:100%;
+  max-width:480px; /* narrower button width */
   padding:18px 22px;
   font-size:16px;
   font-weight:600;
@@ -106,13 +107,14 @@ header {
   position:sticky;
   top:70px; /* sticky under header */
   z-index:15;
+  margin:0 auto; /* center */
 }
 
 .nav-menu {
   position:absolute;
   top:calc(100% + 16px);
-  left:0;
-  right:0;
+  left:50%;
+  transform:translateX(-50%);
   background:
     linear-gradient(180deg, rgba(22,27,34,0.98), rgba(13,17,23,0.98));
   border-radius:24px;
@@ -121,6 +123,7 @@ header {
   backdrop-filter:blur(18px);
   box-shadow:0 30px 90px rgba(0,0,0,0.7);
   z-index:5;
+  min-width:280px;
 }
 
 /* sections inside dropdown */
@@ -158,11 +161,12 @@ header {
   border-radius:26px;
   padding:36px;
   box-shadow:0 24px 70px rgba(0,0,0,0.55);
-  text-align:center;
+  text-align:left;
   opacity:0;
   transform:translateY(30px);
   animation: fadeInUp 1s forwards;
   animation-delay:0.3s;
+  margin-bottom:32px;
 }
 
 @keyframes fadeInUp {
@@ -241,19 +245,49 @@ footer {
     </div>
   </div>
 
-  <!-- CONTENT CARD -->
+  <!-- CONTENT CARDS -->
   <div class="card">
     <h2>Intro</h2>
     <p><strong>Why Diana?</strong> Diana has numerous ways to carry a game. She has a strong early game, laning phase, and can transition well into the side lane in the mid game. She can make picks, teamfight well, splitpush, push waves quickly, farm jungle camps, and has great damage for dragons and barons. She’s also a pick that you can play pretty much every game as long as your team doesn’t need an AD mid laner.</p>
   </div>
 
-  <!-- Plug your sections here as new cards -->
-  <!-- Example:
   <div class="card">
     <h2>Runes</h2>
-    <p>Rune content goes here...</p>
+
+    <div style="margin-bottom:1.5em; font-size:0.95em; line-height:1.45; color:#d7d7d7; font-weight:400;">
+      <strong style="color:#c8aa6e;">Why grasp over another keystone?</strong>
+      It ultimately comes down to the value of the rune trees themselves. The Sorcery tree is mandatory on Diana for Manaflow Band, and the Resolve tree provides essential sustain, health, and early game damage. By the time you hit level 3, bone plating will have blocked around 70 damage which is more than an Electrocute proc while the entire domination tree will have done absolutely nothing during the most crucial levels of the entire game. Electrocute also requires three separate hits to proc unlike old Thunderlords, which Diana could trigger with just her W. Now Electrocute is far stronger on ranged champions who can reliably proc it at level 1 with autos and spells.<br><br>
+
+      Players often ask whether Grasp is viable into ranged matchups. Grasp and Shield Bash are much easier to use level 1 and 2 and then by level 3, they’re no more difficult to use than Electrocute or Phase Rush. The biggest problem with Electrocute is the last two rows of the domination tree offer Diana essentially no value. When running Electrocute, the entire tree often does nothing until level 3 which is the most important part of the game and the main purpose of runes in the first place. Meanwhile, when you run keystones like Grasp or Phase Rush you gain access to runes like Shield Bash and Scorch that perform great in the early game. The reason Grasp has overtaken phase rush as Diana’s main rune is because the game has been slowed down. Phase rush and scorch have extremely poor scaling especially compared to Grasp and Overgrowth which are the runes you're trading them for. These runes also provide Diana with health which is crucial for her playstyle and can’t be gained through her current ideal build path.
+
+      <ul style="list-style:none; padding-left:0;">
+        <li style="margin-bottom:1em;">
+          <img src="https://raw.communitydragon.org/latest/plugins/rcp-be-lol-game-data/global/default/v1/perk-images/styles/resolve/graspoftheundying/graspoftheundying.png" width="32" style="vertical-align:middle; margin-right:8px;" alt="Grasp of the Undying">
+          <strong>Grasp Of The Undying:</strong> This is the only rune and tree that allows Diana to play the way she’s intended to be played. It’s the rune that gives her the potential to win every matchup while also not falling off nearly as hard as another option like Phase Rush which is her second best tree.
+        </li>
+        <li style="margin-bottom:1em;">
+          <img src="https://raw.communitydragon.org/latest/plugins/rcp-be-lol-game-data/global/default/v1/perk-images/styles/resolve/mirrorshell/mirrorshell.png" width="32" style="vertical-align:middle; margin-right:8px;" alt="Shield Bash">
+          <strong>Shield Bash:</strong> Great early game damage that also scales extremely well. Diana can also sometimes proc it twice with W.
+        </li>
+        <li style="margin-bottom:1em;">
+          <img src="https://raw.communitydragon.org/latest/plugins/rcp-be-lol-game-data/global/default/v1/perk-images/styles/resolve/boneplating/boneplating.png" width="32" style="vertical-align:middle; margin-right:8px;" alt="Bone Plating">
+          <strong>Bone Plating:</strong> Best sustain tool in lane. Runes like Aery, Scorch, First Strike, and Comet all proc multiple plates. This also gives you the best chance of surviving a gank and winning a duel later on in the game.
+        </li>
+        <li style="margin-bottom:1em;">
+          <img src="https://raw.communitydragon.org/latest/plugins/rcp-be-lol-game-data/global/default/v1/perk-images/styles/resolve/overgrowth/overgrowth.png" width="32" style="vertical-align:middle; margin-right:8px;" alt="Overgrowth">
+          <strong>Overgrowth:</strong> Best way for Diana to gain health besides Grasp since the build doesn't include any health items. Diana requires health to engage melee champions and she has a 9% bonus health ratio on the shield strength that can be proc'd twice for a total ratio of 18%.
+        </li>
+        <li style="margin-bottom:1em;">
+          <img src="https://raw.communitydragon.org/latest/plugins/rcp-be-lol-game-data/global/default/v1/perk-images/styles/sorcery/manaflowband/manaflowband.png" width="32" style="vertical-align:middle; margin-right:8px;" alt="Manaflow Band">
+          <strong>Manaflow Band:</strong> This rune perfectly covers the amount of mana Diana requires to play the game...
+        </li>
+        <li style="margin-bottom:1em;">
+          <img src="https://raw.communitydragon.org/latest/plugins/rcp-be-lol-game-data/global/default/v1/perk-images/styles/sorcery/transcendence/transcendence.png" width="32" style="vertical-align:middle; margin-right:8px;" alt="Transcendence">
+          <strong>Transcendence:</strong> This is the only way for Diana to gain haste besides Cryptobloom later on...
+        </li>
+      </ul>
+    </div>
   </div>
-  -->
 
 </div>
 
