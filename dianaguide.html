@@ -3,226 +3,335 @@
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Diana Guide – Members Hub</title>
+<title>Diana Guide – Intro</title>
+
+<link rel="preload" as="image" href="https://ddragon.leagueoflegends.com/cdn/img/champion/splash/Diana_11.jpg">
+
 <style>
+:root {
+  --gold:#c9aa71;
+  --muted:#9da7b3;
+}
+
+html, body {
+  margin:0;
+  padding:0;
+  height:100%;
+  font-family: Arial, Helvetica, sans-serif;
+}
+
 body {
-  margin: 0;
-  font-family: 'Beaufort for LOL', Arial, Helvetica, sans-serif;
-  background: url('https://ddragon.leagueoflegends.com/cdn/img/champion/splash/Diana_0.jpg') no-repeat center center fixed;
-  background-size: cover;
-  color: #e6edf3;
-  text-align: center;
-  overflow-x: hidden;
+  display:flex;
+  flex-direction:column;
+  background:url('https://ddragon.leagueoflegends.com/cdn/img/champion/splash/Diana_11.jpg')
+    no-repeat center center fixed;
+  background-size:cover;
+  color:#e6edf3;
+  min-height:100vh;
+  overflow-y: auto;
 }
 
 body::before {
-  content: "";
-  position: fixed;
-  top: 0; left: 0;
-  width: 100%; height: 100%;
-  background: rgba(10,15,20,0.75);
-  z-index: -1;
+  content:"";
+  position:fixed;
+  inset:0;
+  background:
+    radial-gradient(circle at top, rgba(120,0,0,0.25), transparent 60%),
+    rgba(10,15,20,0.82);
+  z-index:-1;
+  pointer-events:none;
 }
 
+/* HEADER */
 header {
-  background: rgba(13,17,23,0.9);
-  border-bottom: 2px solid #c9aa71;
-  padding: 20px 10px;
-  font-weight: bold;
-  font-size: 26px;
-  text-transform: uppercase;
-  color: #c9aa71;
-  letter-spacing: 1px;
+  background:rgba(13,17,23,0.9);
+  border-bottom:2px solid var(--gold);
+  padding:20px 10px;
+  font-size:26px;
+  font-weight:bold;
+  color:var(--gold);
+  text-transform:uppercase;
+  text-align:center;
+  position:sticky;
+  top:0;
+  z-index:20;
+}
+
+/* MAIN */
+.main {
+  flex:1 0 auto;
+  max-width:960px;
+  margin:0 auto;
+  padding:20px 16px 40px;
+}
+
+/* BACK BUTTON */
+.back-wrap {
+  display:flex;
+  justify-content:center;
+  margin:10px 0 32px;
 }
 
 .back-button {
-  display: inline-block;
-  margin: 20px auto 10px;
-  padding: 10px 20px;
-  background: linear-gradient(135deg, #c9aa71, #e0c77b);
-  color: #000;
-  text-decoration: none;
-  border-radius: 8px;
-  font-weight: bold;
-  transition: all 0.3s;
-  box-shadow: 0 0 10px rgba(201,170,113,0.5);
+  padding:10px 22px;
+  background:linear-gradient(135deg,var(--gold),#e0c77b);
+  color:#000;
+  text-decoration:none;
+  border-radius:10px;
+  font-weight:bold;
+  box-shadow:0 0 10px rgba(201,170,113,.45);
 }
-.back-button::before { content: "← "; }
-.back-button:hover {
-  background: linear-gradient(135deg, #e6c97f, #f0d88b);
-  box-shadow: 0 0 15px rgba(255,215,0,0.8);
+.back-button::before { content:"← "; }
+
+/* TASKBAR */
+.taskbar {
+  display:flex;
+  justify-content:center;
+  background:rgba(13,17,23,0.9);
+  border-bottom:2px solid var(--gold);
+  border-radius:12px;
+  margin-bottom:32px;
+  overflow-x:auto;
+  padding:6px 0;
+  position:sticky;
+  top:70px; /* under header */
+  z-index:15;
 }
 
-#section-select-container {
-  margin: 20px auto;
-}
-#section-select {
-  padding: 10px 15px;
-  font-size: 16px;
-  border-radius: 6px;
-  border: none;
-  background: #0f1722;
-  color: #c9aa71;
-  cursor: pointer;
+.taskbar-section {
+  display:flex;
+  gap:16px;
+  margin:0 24px;
 }
 
-#section-info {
-  margin: 30px auto;
-  max-width: 900px;
-  background: rgba(13,17,23,0.95);
-  border: 1px solid #2f81f7;
-  padding: 20px;
-  border-radius: 10px;
-  text-align: left;
-  color: #c9aa71;
-  min-height: 200px;
-  overflow-y: auto;
-  max-height: 70vh;
+.taskbar-section-title {
+  font-size:12px;
+  color:var(--muted);
+  text-transform:uppercase;
+  font-weight:600;
+  margin-right:8px;
+  align-self:center;
 }
 
-#section-info h2 { color: #c9aa71; margin-top: 0; }
-#section-info h3 { color: #c9aa71; margin-bottom: 0.2em; }
-#section-info p,
-#section-info li,
-#section-info ol,
-#section-info ul { color: #e6edf3; margin-bottom: 0.9em; line-height: 1.45; }
-#section-info ul { margin-left: 1.1em; margin-bottom: 0.9em; }
-#section-info li { margin-bottom: 0.6em; }
-#section-info ol { margin-left: 1.2em; }
-#section-info:hover { box-shadow: 0 0 15px rgba(47,129,247,0.5); }
+.taskbar a {
+  padding:8px 14px;
+  border-radius:12px;
+  text-decoration:none;
+  color:#e6edf3;
+  font-weight:500;
+  white-space:nowrap;
+}
 
-@media (max-width: 600px) {
-  #section-select { font-size: 14px; padding: 8px 10px; }
-  #section-info { padding: 15px; max-height: 60vh; }
+.taskbar a:hover {
+  background:rgba(255,255,255,0.06);
+  color:var(--gold);
+}
+
+/* WELCOME CARD / CONTENT */
+.card {
+  background:
+    linear-gradient(180deg, rgba(255,255,255,0.035), rgba(255,255,255,0.01));
+  border-radius:26px;
+  padding:36px;
+  box-shadow:0 24px 70px rgba(0,0,0,0.55);
+  text-align:center;
+  opacity:0;
+  transform:translateY(30px);
+  animation: fadeInUp 1s forwards;
+  animation-delay:0.3s;
+}
+
+@keyframes fadeInUp {
+  to {
+    opacity:1;
+    transform:translateY(0);
+  }
+}
+
+.card h2 {
+  color:var(--gold);
+  margin-top:0;
+}
+
+.card p {
+  line-height:1.65;
+}
+
+/* FOOTER */
+footer {
+  flex-shrink:0;
+  padding:16px;
+  text-align:center;
+  font-size:13px;
+  color:var(--muted);
+}
+
+/* SCROLLBAR HIDE FOR TASKBAR */
+.taskbar::-webkit-scrollbar {
+  display:none;
 }
 </style>
 </head>
+
 <body>
 
 <header>Diana Mid Guide</header>
-<a href="membershub.html" class="back-button">Back to Members Hub</a>
 
-<div id="section-select-container">
-  <select id="section-select">
-    <option disabled selected>Select a section</option>
-    <option>Intro</option>
-    <option>Runes</option>
-    <option>Build</option>
-    <option>Summoner Spells</option>
-    <option>Abilities</option>
-    <option>Combos</option>
-    <option>Laning</option>
-    <option>Warding</option>
-    <option>Farming / Pushing</option>
-    <option>Teamfighting</option>
-    <option>Splitpushing</option>
-    <option>Closing Out The Game</option>
-    <option>Threats & Synergies</option>
-    <option>Pros & Cons</option>
-    <option>Extra Tips</option>
-  </select>
-</div>
+<div class="main">
 
-<div id="section-info">
-  <p>Select a section from above to view details.</p>
-</div>
+  <!-- BACK BUTTON -->
+  <div class="back-wrap">
+    <a href="membershub.html" class="back-button">Back to Members Hub</a>
+  </div>
 
-<script>
-// Require login
-if (localStorage.getItem('lolfundamentals_logged_in') !== 'true') {
-  window.location.href = 'index.html';
-}
+  <!-- TASKBAR -->
+  <div class="taskbar">
+    <div class="taskbar-section">
+      <div class="taskbar-section-title">Core</div>
+      <a href="diana-intro.html">Intro</a>
+      <a href="diana-runes.html">Runes</a>
+      <a href="diana-build.html">Build</a>
+      <a href="diana-summoners.html">Summoner Spells</a>
+      <a href="diana-abilities.html">Abilities</a>
+      <a href="diana-combos.html">Combos</a>
+    </div>
 
-const sectionSelect = document.getElementById('section-select');
-const sectionInfo = document.getElementById('section-info');
+    <div class="taskbar-section">
+      <div class="taskbar-section-title">Gameplay</div>
+      <a href="diana-laning.html">Laning</a>
+      <a href="diana-warding.html">Warding</a>
+      <a href="diana-farming.html">Farming / Pushing</a>
+      <a href="diana-teamfighting.html">Teamfighting</a>
+      <a href="diana-splitpushing.html">Splitpushing</a>
+      <a href="diana-closing.html">Closing Out The Game</a>
+    </div>
 
-const sections = {
-  "Intro": `
+    <div class="taskbar-section">
+      <div class="taskbar-section-title">Advanced</div>
+      <a href="diana-threats.html">Threats & Synergies</a>
+      <a href="diana-proscons.html">Pros & Cons</a>
+      <a href="diana-extratips.html">Extra Tips</a>
+    </div>
+  </div>
+
+  <!-- CONTENT CARD -->
+  <div class="card">
     <h2>Intro</h2>
     <p><strong>Why Diana?</strong> Diana has numerous ways to carry a game. She has a strong early game, laning phase, and can transition well into the side lane in the mid game. She can make picks, teamfight well, splitpush, push waves quickly, farm jungle camps, and has great damage for dragons and barons. She’s also a pick that you can play pretty much every game as long as your team doesn’t need an AD mid laner.</p>
-  `,
-  
-  "Runes": `
-    <h2>Runes</h2>
-    <p>Runes content here...</p>
-  `,
-  
-  "Build": `
-    <h2>Build</h2>
-    <p>Build content here...</p>
-  `,
+  </div>
 
-  "Summoner Spells": `
-    <h2>Summoner Spells</h2>
-    <p>Summoner spells content here...</p>
-  `,
+ <h2>Runes</h2>
 
-  "Abilities": `
-    <h2>Abilities</h2>
-    <p>Abilities content here...</p>
-  `,
+<div style="margin-bottom:1.5em; font-size:0.95em; line-height:1.45; color:#d7d7d7; font-weight:400;">
+  <strong style="color:#c8aa6e;">Why grasp over another keystone?</strong>
+  It ultimately comes down to the value of the rune trees themselves. The Sorcery tree is mandatory on Diana for Manaflow Band, and the Resolve tree provides essential sustain, health, and early game damage. By the time you hit level 3, bone plating will have blocked around 70 damage which is more than an Electrocute proc while the entire domination tree will have done absolutely nothing during the most crucial levels of the entire game. Electrocute also requires three separate hits to proc unlike old Thunderlords, which Diana could trigger with just her W. Now Electrocute is far stronger on ranged champions who can reliably proc it at level 1 with autos and spells.<br><br>
 
-  "Combos": `
-    <h2>Combos</h2>
-    <p>Combos content here...</p>
-  `,
+  Players often ask whether Grasp is viable into ranged matchups. Grasp and Shield Bash are much easier to use level 1 and 2 and then by level 3, they’re no more difficult to use than Electrocute or Phase Rush. The biggest problem with Electrocute is that the last two rows of the domination tree offer Diana essentially no value. When running Electrocute, the entire tree often does nothing until level 3 which is the most important part of the game and the main purpose of runes in the first place. Meanwhile, when you run keystones like Grasp or Phase Rush you gain access to runes like Shield Bash and Scorch that perform great in the early game. The reason Grasp has overtaken phase rush as Diana’s main rune is because the game has been slowed down. Phase rush and scorch have extremely poor scaling especially compared to Grasp and Overgrowth which are the runes you're trading them for. These runes also provide Diana with health which is crucial for her playstyle and can’t be gained through her current ideal build path.
 
-  "Laning": `
-    <h2>Laning</h2>
-    <p>Laning content here...</p>
-  `,
+<ul style="list-style:none; padding-left:0;">
+  <li style="margin-bottom:1em;">
+    <img src="https://raw.communitydragon.org/latest/plugins/rcp-be-lol-game-data/global/default/v1/perk-images/styles/resolve/graspoftheundying/graspoftheundying.png" width="32" style="vertical-align:middle; margin-right:8px;" alt="Grasp of the Undying">
+    <strong>Grasp Of The Undying:</strong> This is the only rune and tree that allows Diana to play the way she’s intended to be played. It’s the rune that gives her the potential to win every matchup while also not falling off nearly as hard as another option like Phase Rush which is her second best tree.
+  </li>
 
-  "Warding": `
-    <h2>Warding</h2>
-    <p>Warding content here...</p>
-  `,
+  <li style="margin-bottom:1em;">
+    <img src="https://raw.communitydragon.org/latest/plugins/rcp-be-lol-game-data/global/default/v1/perk-images/styles/resolve/mirrorshell/mirrorshell.png" width="32" style="vertical-align:middle; margin-right:8px;" alt="Shield Bash">
+    <strong>Shield Bash:</strong> Great early game damage that also scales extremely well. Diana can also sometimes proc it twice with W.
+  </li>
 
-  "Farming / Pushing": `
-    <h2>Farming / Pushing</h2>
-    <p>Farming/Pushing content here...</p>
-  `,
+  <li style="margin-bottom:1em;">
+    <img src="https://raw.communitydragon.org/latest/plugins/rcp-be-lol-game-data/global/default/v1/perk-images/styles/resolve/boneplating/boneplating.png" width="32" style="vertical-align:middle; margin-right:8px;" alt="Bone Plating">
+    <strong>Bone Plating:</strong> Best sustain tool in lane. Runes like Aery, Scorch, First Strike, and Comet all proc multiple plates. This also gives you the best chance of surviving a gank and winning a duel later on in the game.
+  </li>
 
-  "Teamfighting": `
-    <h2>Teamfighting</h2>
-    <p>Teamfighting content here...</p>
-  `,
+  <li style="margin-bottom:1em;">
+    <img src="https://raw.communitydragon.org/latest/plugins/rcp-be-lol-game-data/global/default/v1/perk-images/styles/resolve/overgrowth/overgrowth.png" width="32" style="vertical-align:middle; margin-right:8px;" alt="Overgrowth">
+    <strong>Overgrowth:</strong> Best way for Diana to gain health besides Grasp since the build doesn't include any health items. Diana requires health to engage melee champions and she has a 9% bonus health ratio on the shield strength that can be proc'd twice for a total ratio of 18%.
+  </li>
 
-  "Splitpushing": `
-    <h2>Splitpushing</h2>
-    <p>Splitpushing content here...</p>
-  `,
+  <li style="margin-bottom:1em;">
+    <img src="https://raw.communitydragon.org/latest/plugins/rcp-be-lol-game-data/global/default/v1/perk-images/styles/sorcery/manaflowband/manaflowband.png" width="32" style="vertical-align:middle; margin-right:8px;" alt="Manaflow Band">
+    <strong>Manaflow Band:</strong> This rune perfectly covers the amount of mana Diana requires to play the game. Without Manaflow Band you won’t be able to take full advantage of Diana’s side lane pressure. Diana should always be looking to take the enemy jungler’s camps and your camps when your jungler isn't able to farm them any time soon. Without Manaflow Band you won’t be able to deal with any champion that has resists since multiple damage rotations will be necessary to kill the enemy.
+  </li>
 
-  "Closing Out The Game": `
-    <h2>Closing Out The Game</h2>
-    <p>Closing content here...</p>
-  `,
+  <li style="margin-bottom:1em;">
+    <img src="https://raw.communitydragon.org/latest/plugins/rcp-be-lol-game-data/global/default/v1/perk-images/styles/sorcery/transcendence/transcendence.png" width="32" style="vertical-align:middle; margin-right:8px;" alt="Transcendence">
+    <strong>Transcendence:</strong> This is the only way for Diana to gain haste besides Cryptobloom later on. It’s the perfect balance of having a little haste which is more efficient at lower values and gaining big cooldown reductions at crucial moments in team fights.
+  </li>
 
-  "Threats & Synergies": `
-    <h2>Threats & Synergies</h2>
-    <p>Threats & Synergies content here...</p>
-  `,
+  <li style="margin-top:2em; margin-bottom:1em;">
+    <strong>Rune Shards:</strong>
+    <div style="margin-top:0.5em;">
+      <img src="https://raw.communitydragon.org/latest/plugins/rcp-be-lol-game-data/global/default/v1/perk-images/statmods/statmodsadaptiveforceicon.png" width="28" style="vertical-align:middle; margin-right:6px;" alt="Adaptive Force">
+      <span style="margin-right:12px;">Adaptive Force</span>
+      <img src="https://raw.communitydragon.org/latest/plugins/rcp-be-lol-game-data/global/default/v1/perk-images/statmods/statmodsadaptiveforceicon.png" width="28" style="vertical-align:middle; margin-right:6px;" alt="Adaptive Force">
+      <span style="margin-right:12px;">Adaptive Force</span>
+      <img src="https://raw.communitydragon.org/latest/plugins/rcp-be-lol-game-data/global/default/v1/perk-images/statmods/statmodshealthscalingicon.png" width="28" style="vertical-align:middle; margin-right:6px;" alt="Scaling Health">
+      <span>Scaling Health</span>
+    </div>
+  </li>
+</ul>
 
-  "Pros & Cons": `
-    <h2>Pros & Cons</h2>
-    <p>Pros & Cons content here...</p>
-  `,
+<div style="margin-top:2em;">
+  <h3>Rune Comparison: Grasp + Shield Bash vs Electrocute + Sudden Impact</h3>
+  <p style="font-size:0.95em;">
+    This table shows the realistic rune-only contribution for Diana at <strong>Level 4 against a 40 MR target</strong>. Shield Bash is assumed to proc every 8 seconds, Grasp every 4 seconds, Electrocute every 20 seconds, and Sudden Impact every 12 seconds.
+  </p>
 
-  "Extra Tips": `
-    <h2>Extra Tips</h2>
-    <p>Extra Tips content here...</p>
-  `
-};
+  <table style="width:100%; border-collapse:collapse; margin-top:0.5em; font-size:0.9em;">
+    <thead>
+      <tr style="text-align:left; border-bottom:1px solid #ccc;">
+        <th style="padding:4px;">Trade #</th>
+        <th style="padding:4px;">Grasp + Shield Bash Cumulative Damage</th>
+        <th style="padding:4px;">Grasp Cumulative Heal</th>
+        <th style="padding:4px;">Grasp Cumulative HP Gain</th>
+        <th style="padding:4px;">Electrocute + Sudden Impact Cumulative Damage</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td style="padding:4px;">1</td>
+        <td style="padding:4px;">52</td>
+        <td style="padding:4px;">14</td>
+        <td style="padding:4px;">5</td>
+        <td style="padding:4px;">102</td>
+      </tr>
+      <tr>
+        <td style="padding:4px;">2</td>
+        <td style="padding:4px;">80</td>
+        <td style="padding:4px;">28</td>
+        <td style="padding:4px;">10</td>
+        <td style="padding:4px;">102</td>
+      </tr>
+      <tr>
+        <td style="padding:4px;">3</td>
+        <td style="padding:4px;">132</td>
+        <td style="padding:4px;">42</td>
+        <td style="padding:4px;">15</td>
+        <td style="padding:4px;">132</td>
+      </tr>
+      <tr>
+        <td style="padding:4px;">4</td>
+        <td style="padding:4px;">160</td>
+        <td style="padding:4px;">56</td>
+        <td style="padding:4px;">20</td>
+        <td style="padding:4px;">132</td>
+      </tr>
+    </tbody>
+  </table>
 
-sectionSelect.addEventListener('change', (e) => {
-  const value = e.target.value;
-  if (sections[value]) {
-    sectionInfo.innerHTML = sections[value];
-  }
-});
-</script>
+  <p style="margin-top:0.5em; font-size:0.9em;">
+    <em>Note:</em> This table does <strong>not include Bone Plating and Overgrowth</strong>, which significantly outperform the 0s that the other two domination rows provide and are necessary for Diana's playstyle.
+  </p>
+</div>
+
+<footer>
+  © 2026 LoL Fundamentals · All rights reserved
+</footer>
 
 </body>
 </html>
+
 
 
 
