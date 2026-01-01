@@ -3,154 +3,174 @@
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Diana Mid Guide</title>
+<title>Diana Guide – Intro</title>
+
+<link rel="preload" as="image" href="https://ddragon.leagueoflegends.com/cdn/img/champion/splash/Diana_11.jpg">
 
 <style>
 :root {
   --gold:#c9aa71;
-  --bg:#0a0f14;
-  --card:#161b22;
   --muted:#9da7b3;
 }
 
-html,body{
+html, body {
   margin:0;
   padding:0;
-  min-height:100%;
-  font-family:system-ui,-apple-system,Segoe UI,Roboto;
-  font-size:17px;
+  height:100%;
+  font-family: Arial, Helvetica, sans-serif;
+  font-size:16px; /* LOCKED BACK TO ORIGINAL */
+}
+
+body {
+  display:flex;
+  flex-direction:column;
+  min-height:100vh;
+  background:url('https://ddragon.leagueoflegends.com/cdn/img/champion/splash/Diana_11.jpg')
+    no-repeat center center fixed;
+  background-size:cover;
   color:#e6edf3;
 }
 
-body{
-  display:flex;
-  flex-direction:column;
-  background:url('https://ddragon.leagueoflegends.com/cdn/img/champion/splash/Diana_11.jpg')
-    center/cover fixed no-repeat;
-}
-
-body::before{
+body::before {
   content:"";
   position:fixed;
   inset:0;
-  background:rgba(10,15,20,.82);
+  background:
+    radial-gradient(circle at top, rgba(120,0,0,0.25), transparent 60%),
+    rgba(10,15,20,0.82);
   z-index:-1;
+  pointer-events:none;
 }
 
 /* HEADER */
-header{
-  text-align:center;
-  padding:22px 10px;
-  font-size:28px;
-  font-weight:700;
-  color:var(--gold);
-  background:rgba(13,17,23,.9);
+header {
+  background:rgba(13,17,23,0.9);
   border-bottom:2px solid var(--gold);
+  padding:20px 10px;
+  font-size:26px;
+  font-weight:bold;
+  color:var(--gold);
+  text-transform:uppercase;
+  text-align:center;
 }
 
-/* MAIN */
-.main{
-  flex:1;
+/* MAIN — THIS IS THE FOOTER FIX */
+.main {
+  flex:1; /* ✅ THIS PUSHES FOOTER DOWN */
   max-width:960px;
   width:100%;
   margin:0 auto;
   padding:20px 16px 40px;
 }
 
-/* BACK */
-.back{
-  text-align:center;
-  margin-bottom:28px;
+/* BACK BUTTON */
+.back-wrap {
+  display:flex;
+  justify-content:center;
+  margin:10px 0 32px;
 }
-.back a{
-  text-decoration:none;
+
+.back-button {
   padding:10px 22px;
   background:linear-gradient(135deg,var(--gold),#e0c77b);
   color:#000;
+  text-decoration:none;
   border-radius:10px;
-  font-weight:600;
+  font-weight:bold;
+  box-shadow:0 0 10px rgba(201,170,113,.45);
 }
+.back-button::before { content:"← "; }
 
-/* DROPDOWN */
-.nav-wrap{
+/* NAV DROPDOWN */
+.nav-wrapper {
   max-width:420px;
-  margin:0 auto 36px;
+  margin:0 auto 46px;
   position:relative;
 }
 
-.nav-btn{
+.nav-trigger {
   width:100%;
-  padding:16px 20px;
+  padding:18px 22px;
   font-size:16px;
   font-weight:600;
-  border-radius:18px;
+  color:#f0f6fc;
+  background:
+    linear-gradient(180deg, rgba(255,255,255,0.05), rgba(255,255,255,0.01));
   border:none;
-  background:rgba(255,255,255,.06);
-  color:#fff;
+  border-radius:20px;
   cursor:pointer;
+  text-align:left;
+  box-shadow:0 12px 40px rgba(0,0,0,0.5), inset 0 1px 0 rgba(255,255,255,0.06);
 }
 
-.nav-menu{
-  display:none;
+.nav-menu {
   position:absolute;
-  top:calc(100% + 14px);
+  top:calc(100% + 16px);
   left:0;
   right:0;
-  background:rgba(15,20,26,.98);
-  border-radius:22px;
+  background:
+    linear-gradient(180deg, rgba(22,27,34,0.98), rgba(13,17,23,0.98));
+  border-radius:24px;
   padding:14px;
-  z-index:10;
+  display:none;
+  backdrop-filter:blur(18px);
+  box-shadow:0 30px 90px rgba(0,0,0,0.7);
+  z-index:5;
 }
 
-.nav-title{
-  font-size:12px;
+/* sections */
+.nav-section + .nav-section {
+  border-top:1px solid rgba(255,255,255,0.06);
+  margin-top:10px;
+  padding-top:10px;
+}
+
+.nav-section-title {
+  font-size:11px;
+  letter-spacing:0.14em;
   color:var(--muted);
-  padding:8px 14px 4px;
+  padding:6px 14px;
   text-transform:uppercase;
 }
 
-.nav-menu a{
+.nav-menu a {
   display:block;
-  padding:12px 14px;
-  color:#e6edf3;
+  padding:14px 16px;
+  border-radius:16px;
   text-decoration:none;
-  cursor:pointer;
+  color:#e6edf3;
 }
-.nav-menu a:hover{ color:var(--gold); }
+
+.nav-menu a:hover {
+  background:rgba(255,255,255,0.06);
+  color:var(--gold);
+}
 
 /* CONTENT CARD */
-.card{
-  width:100%;
-  background:rgba(255,255,255,.035);
+.card {
+  background:
+    linear-gradient(180deg, rgba(255,255,255,0.035), rgba(255,255,255,0.01));
   border-radius:26px;
-  padding:32px;
-  box-shadow:0 20px 60px rgba(0,0,0,.55);
-  overflow-x:auto;
+  padding:36px;
+  box-shadow:0 24px 70px rgba(0,0,0,0.55);
+  text-align:center;
 }
 
-.card h2{
-  margin-top:0;
+.card h2 {
   color:var(--gold);
-  font-size:24px;
+  margin-top:0;
 }
 
-.card p{ line-height:1.7; }
-.card ul{ padding-left:22px; }
-.card li{ margin-bottom:10px; }
+.card p {
+  line-height:1.6; /* original feel */
+}
 
 /* FOOTER */
-footer{
+footer {
+  padding:16px;
   text-align:center;
-  padding:14px;
   font-size:13px;
   color:var(--muted);
-}
-
-/* MOBILE */
-@media(max-width:600px){
-  html,body{ font-size:16px; }
-  header{ font-size:24px; }
-  .card{ padding:22px; }
 }
 </style>
 </head>
@@ -161,118 +181,74 @@ footer{
 
 <div class="main">
 
-<div class="back">
-  <a href="membershub.html">Back to Members Hub</a>
-</div>
-
-<div class="nav-wrap">
-  <button class="nav-btn" onclick="toggleMenu()">Choose a section to explore ▾</button>
-
-  <div class="nav-menu" id="menu">
-    <div class="nav-title">Core</div>
-    <a onclick="load('intro')">Intro</a>
-    <a onclick="load('runes')">Runes</a>
-    <a onclick="load('build')">Build</a>
-    <a onclick="load('summoners')">Summoners</a>
-    <a onclick="load('abilities')">Abilities</a>
-    <a onclick="load('combos')">Combos</a>
-
-    <div class="nav-title">Gameplay</div>
-    <a onclick="load('laning')">Laning</a>
-    <a onclick="load('teamfighting')">Teamfighting</a>
-    <a onclick="load('split')">Splitpushing</a>
-
-    <div class="nav-title">Advanced</div>
-    <a onclick="load('extra')">Extra Tips</a>
+  <div class="back-wrap">
+    <a href="membershub.html" class="back-button">Back to Members Hub</a>
   </div>
+
+  <div class="nav-wrapper">
+    <button class="nav-trigger" onclick="toggleMenu()">
+      Browse Diana Guide Sections ▾
+    </button>
+
+    <div class="nav-menu" id="navMenu">
+      <div class="nav-section">
+        <div class="nav-section-title">Core</div>
+        <a href="diana-intro.html">Intro</a>
+        <a href="diana-runes.html">Runes</a>
+        <a href="diana-build.html">Build</a>
+        <a href="diana-summoners.html">Summoner Spells</a>
+        <a href="diana-abilities.html">Abilities</a>
+        <a href="diana-combos.html">Combos</a>
+      </div>
+
+      <div class="nav-section">
+        <div class="nav-section-title">Gameplay</div>
+        <a href="diana-laning.html">Laning</a>
+        <a href="diana-warding.html">Warding</a>
+        <a href="diana-farming.html">Farming / Pushing</a>
+        <a href="diana-teamfighting.html">Teamfighting</a>
+        <a href="diana-splitpushing.html">Splitpushing</a>
+        <a href="diana-closing.html">Closing Out The Game</a>
+      </div>
+
+      <div class="nav-section">
+        <div class="nav-section-title">Advanced</div>
+        <a href="diana-threats.html">Threats & Synergies</a>
+        <a href="diana-proscons.html">Pros & Cons</a>
+        <a href="diana-extratips.html">Extra Tips</a>
+      </div>
+    </div>
+  </div>
+
+  <div class="card">
+    <h2>Intro</h2>
+    <p><strong>Why Diana?</strong> Diana has numerous ways to carry a game. She has a strong early game, laning phase, and can transition well into the side lane in the mid game.</p>
+  </div>
+
 </div>
 
-<div id="content" class="card">
-  <h2>Choose a Section</h2>
-  <p>Select a section from the dropdown above to load the guide content.</p>
-</div>
-
-</div>
-
-<footer>© 2026 LoL Fundamentals</footer>
+<footer>
+  © 2026 LoL Fundamentals · All rights reserved
+</footer>
 
 <script>
-function toggleMenu(){
-  const m=document.getElementById('menu');
-  m.style.display=m.style.display==='block'?'none':'block';
+function toggleMenu() {
+  const menu = document.getElementById('navMenu');
+  menu.style.display = menu.style.display === 'block' ? 'none' : 'block';
 }
 
-document.addEventListener('click',e=>{
-  if(!document.querySelector('.nav-wrap').contains(e.target)){
-    document.getElementById('menu').style.display='none';
+document.addEventListener('click', e => {
+  const wrap = document.querySelector('.nav-wrapper');
+  if (!wrap.contains(e.target)) {
+    document.getElementById('navMenu').style.display = 'none';
   }
 });
-
-function load(id){
-  toggleMenu();
-  const c=document.getElementById('content');
-
-  const sections={
-    intro:`<h2>Intro</h2><p>Diana is a high-tempo AP assassin/fighter that thrives on short trades, wave control, and explosive all-ins once level 6 is unlocked.</p>`,
-
-    runes:`<h2>Runes</h2>
-    <ul>
-      <li>Conqueror – extended trades & skirmishes</li>
-      <li>Triumph – resets after dives</li>
-      <li>Legend: Alacrity</li>
-      <li>Coup de Grace</li>
-    </ul>`,
-
-    build:`<h2>Build</h2>
-    <ul>
-      <li>Nashor’s Tooth</li>
-      <li>Hextech Rocketbelt</li>
-      <li>Zhonya’s Hourglass</li>
-    </ul>`,
-
-    summoners:`<h2>Summoner Spells</h2>
-    <ul><li>Flash</li><li>Ignite or Teleport</li></ul>`,
-
-    abilities:`<h2>Abilities</h2>
-    <ul><li>Max Q</li><li>W second</li><li>E last</li></ul>`,
-
-    combos:`<h2>Combos</h2>
-    <ul>
-      <li>Q → E → W</li>
-      <li>Q → E → R → Zhonya’s</li>
-    </ul>`,
-
-    laning:`<h2>Laning</h2>
-    <ul>
-      <li>Short Q + passive trades</li>
-      <li>Wave control before level 6</li>
-    </ul>`,
-
-    teamfighting:`<h2>Teamfighting</h2>
-    <ul>
-      <li>Flank, don’t front-to-back</li>
-      <li>Track enemy CC before engaging</li>
-    </ul>`,
-
-    split:`<h2>Splitpushing</h2>
-    <ul>
-      <li>Fast tower pressure</li>
-      <li>Threaten rotations with TP</li>
-    </ul>`,
-
-    extra:`<h2>Extra Tips</h2>
-    <ul>
-      <li>Pre-stack passive on waves</li>
-      <li>Use fog to hide Q animation</li>
-    </ul>`
-  };
-
-  c.innerHTML=sections[id];
-}
 </script>
 
 </body>
 </html>
+
+
 
 
 
