@@ -47,7 +47,6 @@ header{background:linear-gradient(90deg,#0a0f14,#1b2838);border-bottom:2px solid
 .tier-c{ background:#f9c74f; flex:1; } .tier-d{ background:#90be6d; flex:1; }
 
 .card:hover{transform:translateY(-6px);box-shadow:0 12px 26px rgba(201,170,113,0.5)}
-.unlock-icon{position:absolute;bottom:12px;z-index:2;font-size:1.5rem;color:#f2b96d;cursor:pointer}
 
 .modal{display:none;position:fixed;inset:0;background:rgba(0,0,0,.75);z-index:9999;justify-content:center;align-items:center}
 .modalContent{background:#161b22;padding:30px;border-radius:10px;text-align:center;max-width:400px;width:90%;border:1px solid #c9aa71}
@@ -82,7 +81,6 @@ footer a:hover{text-decoration:underline}
 <h2>Explore the Hub</h2>
 <div class="card-grid">
 
-<!-- Unlocked -->
 <a href="freeskills.html" class="card fundamentals">
   <h3>Fundamentals</h3>
   <p>Core skills including combos, wave management, positioning, and warding for consistent gameplay improvement.</p>
@@ -99,31 +97,6 @@ footer a:hover{text-decoration:underline}
   <div class="tier-bar" aria-hidden="true">
     <div class="tier-s"></div><div class="tier-a"></div><div class="tier-b"></div><div class="tier-c"></div><div class="tier-d"></div>
   </div>
-</a>
-
-<!-- Locked cards (still just open signup modal) -->
-<a href="#" class="card ekko-guide locked">
-  <h3>Ekko Guide</h3>
-  <p>Complete guide to playing Ekko Jungle, including combos, pathing, and advanced mechanics.</p>
-  <div class="unlock-icon">🔒</div>
-</a>
-
-<a href="#" class="card diana-guide locked">
-  <h3>Diana Guide</h3>
-  <p>A comprehensive guide covering Diana's full kit, itemization, playstyle, and advanced strategies.</p>
-  <div class="unlock-icon">🔒</div>
-</a>
-
-<a href="#" class="card build-calculator locked">
-  <h3>Diana Combo Calculator</h3>
-  <p>Compare different item builds and ability combos for Diana at different stages of the game.</p>
-  <div class="unlock-icon">🔒</div>
-</a>
-
-<a href="#" class="card rune-calculator locked">
-  <h3>Diana Rune Calculator</h3>
-  <p>Compare rune pages against enemies to create your perfect Diana setup.</p>
-  <div class="unlock-icon">🔒</div>
 </a>
 
 <a href="https://buy.stripe.com/6oU6oA9M08oQfvUgEOejK02" class="card coaching">
@@ -185,13 +158,12 @@ footer a:hover{text-decoration:underline}
 
 <script type="module">
 import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
-import { getAuth, onAuthStateChanged, signInWithEmailAndPassword, createUserWithEmailAndPassword, sendPasswordResetEmail } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-auth.js";
+import { getAuth, signInWithEmailAndPassword, createUserWithEmailAndPassword, sendPasswordResetEmail } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-auth.js";
 import { getFirestore, doc, setDoc, serverTimestamp, getDoc } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
 
 const firebaseConfig={apiKey:"AIzaSyCFRcEV7wdivqONnkjJubAZOjPMixrHMBI",authDomain:"lol-fundamentals.firebaseapp.com",projectId:"lol-fundamentals",storageBucket:"lol-fundamentals.firebasestorage.app",messagingSenderId:"1038440427584",appId:"1:1038440427584:web:a82207151fd370dbedefa5"};
 const app=initializeApp(firebaseConfig),auth=getAuth(app),firestore=getFirestore(app);
 
-// Hero buttons
 signupHeroBtn.onclick=()=>signupModal.style.display="flex";
 loginHeroBtn.onclick=()=>loginModal.style.display="flex";
 closeSignupModal.onclick=()=>signupModal.style.display="none";
@@ -199,7 +171,6 @@ closePlanModal.onclick=()=>planModal.style.display="none";
 closeLoginModal.onclick=()=>loginModal.style.display="none";
 seePlansBtn.onclick=()=>{signupModal.style.display="none";planModal.style.display="flex"};
 
-// Signup
 continueSignupBtn.onclick=async()=>{
   const e=signupEmail.value.trim(),p=signupPassword.value.trim(),c=signupPasswordConfirm.value.trim();
   if(!e||!p||!c){alert("Fill all fields");return}
@@ -210,22 +181,33 @@ continueSignupBtn.onclick=async()=>{
   planModal.style.display="flex";
 };
 
-// Stripe
-monthlyBtn.onclick=()=>{window.open("https://buy.stripe.com/8x28wIaQ4dJa4Rg88iejK0f","_blank");planModal.style.display="none";}
-yearlyBtn.onclick=()=>{window.open("https://buy.stripe.com/cNi14g3nC48AerQ9cmejK07","_blank");planModal.style.display="none";}
-lifetimeBtn.onclick=()=>{window.open("https://buy.stripe.com/fZu00c9M0awYgzYcoyejK06","_blank");planModal.style.display="none";}
+document.getElementById("monthlyBtn").onclick=()=>{window.open("https://buy.stripe.com/8x28wIaQ4dJa4Rg88iejK0f","_blank");planModal.style.display="none";}
+document.getElementById("yearlyBtn").onclick=()=>{window.open("https://buy.stripe.com/cNi14g3nC48AerQ9cmejK07","_blank");planModal.style.display="none";}
+document.getElementById("lifetimeBtn").onclick=()=>{window.open("https://buy.stripe.com/fZu00c9M0awYgzYcoyejK06","_blank");planModal.style.display="none";}
 
-// Login
+// Login flow with persistent localStorage
 modalLoginBtn.onclick=async()=>{
-  const e=loginEmail.value.trim(),p=loginPassword.value.trim();
-  await signInWithEmailAndPassword(auth,e,p);
-  loginModal.style.display="none";
-  planModal.style.display="flex"; // always show plan modal for new login if needed
+  const e = loginEmail.value.trim(),
+        p = loginPassword.value.trim();
+  if(!e||!p){alert("Enter both email and password");return;}
+  try{
+    await signInWithEmailAndPassword(auth,e,p);
+    const snap = await getDoc(doc(firestore,"paidUsers",e));
+    const isPaid = snap.exists() ? snap.data().paid : false;
+    localStorage.setItem("lolfundamentals_logged_in","true");
+    localStorage.setItem("lolfundamentals_paid", isPaid ? "true" : "false");
+    loginModal.style.display="none";
+    if(isPaid){ window.location.href="membershub.html"; } 
+    else{ planModal.style.display="flex"; }
+  } catch(err){
+    alert("Login failed: " + err.message);
+  }
 };
 
 // Password reset
 resetLinkModal.onclick=async(e)=>{
   e.preventDefault();
+  if(!loginEmail.value.trim()){alert("Enter your email to reset"); return;}
   await sendPasswordResetEmail(auth,loginEmail.value);
   loginMsgModal.textContent="Password reset email sent!";
 };
@@ -242,24 +224,6 @@ for(let i=0;i<50;i++){
   e.style.animation=`floatParticles ${6+Math.random()*4}s infinite ease-in-out`;
   document.querySelector(".particles").appendChild(e);
 }
-
-// Locked cards click
-document.querySelectorAll('.locked').forEach(card=>{
-  card.addEventListener('click',()=>{signupModal.style.display='flex'});
-});
-
-// Persistent login across tabs
-onAuthStateChanged(auth, async (user)=>{
-  if(user){
-    const snap = await getDoc(doc(firestore,"paidUsers",user.email));
-    const isPaid = snap.exists() ? snap.data().paid : false;
-    localStorage.setItem("lolfundamentals_logged_in","true");
-    localStorage.setItem("lolfundamentals_paid", isPaid ? "true" : "false");
-  } else {
-    localStorage.removeItem("lolfundamentals_logged_in");
-    localStorage.removeItem("lolfundamentals_paid");
-  }
-});
 </script>
 
 <style>
@@ -269,8 +233,7 @@ onAuthStateChanged(auth, async (user)=>{
   100%{transform:translateY(0) translateX(0) scale(1);opacity:1}
 }
 
-/* Gold hover effect for all unlocked cards */
-.card:not(.locked):hover {
+.card:hover {
   transform: translateY(-6px);
   box-shadow: 0 12px 26px rgba(201,170,113,0.5);
 }
@@ -278,6 +241,7 @@ onAuthStateChanged(auth, async (user)=>{
 
 </body>
 </html>
+
 
 
 
