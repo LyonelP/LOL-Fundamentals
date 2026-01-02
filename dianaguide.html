@@ -13,7 +13,7 @@
   --muted:#9da7b3;
 }
 
-/* Base Styles */
+/* Base styles */
 html, body {
   margin:0;
   padding:0;
@@ -22,12 +22,12 @@ html, body {
 }
 
 body {
-  display:flex;
-  flex-direction:column;
   background:url('https://ddragon.leagueoflegends.com/cdn/img/champion/splash/Diana_11.jpg') no-repeat center center fixed;
   background-size:cover;
   color:#e6edf3;
   min-height:100vh;
+  display:flex;
+  flex-direction:column;
 }
 
 body::before {
@@ -52,7 +52,7 @@ header {
   text-transform: uppercase;
 }
 
-/* Back button */
+/* Back button centered below header */
 .back-wrap {
   text-align:center;
   margin:16px 0 32px;
@@ -75,85 +75,6 @@ header {
   font-weight:bold;
 }
 
-/* Wrapper for sidebar + content */
-.wrapper {
-  display:flex;
-  flex:1;
-  min-height:calc(100vh - 120px); /* leave space for header + back button */
-}
-
-/* Sidebar for desktop */
-.nav-wrapper {
-  display:none; /* hidden by default, shown on desktop */
-  flex-direction:column;
-  width:220px;
-  background:rgba(15,20,26,0.95);
-  border-right:2px solid var(--gold);
-  padding-top:0;
-  padding-bottom:20px;
-  position:sticky;
-  top:0;
-  height:100%;
-  overflow-y:auto;
-  margin-left:0;
-}
-
-.nav-menu {
-  display:flex;
-  flex-direction:column;
-  padding:0 0 20px;
-}
-
-.nav-section-title {
-  font-size:11px;
-  color:var(--muted);
-  padding:14px 24px;
-  text-transform:uppercase;
-}
-
-.nav-menu a {
-  display:block;
-  padding:10px 24px;
-  text-decoration:none;
-  color:#e6edf3;
-  cursor:pointer;
-  border-radius:8px;
-}
-
-.nav-menu a:hover {
-  background:var(--gold);
-  color:#000;
-}
-
-/* Main content */
-.main {
-  flex:1;
-  display:flex;
-  justify-content:center;
-  padding:0 24px;
-}
-
-.card {
-  background:rgba(255,255,255,0.03);
-  border-radius:26px;
-  padding:36px;
-  box-shadow:0 24px 70px rgba(0,0,0,0.55);
-  max-width:800px;
-}
-
-.card h2 {
-  color:var(--gold);
-  margin-top:0;
-}
-
-.card ul {
-  padding-left:22px;
-}
-
-.card li {
-  margin-bottom:8px;
-}
-
 /* Footer */
 footer {
   padding:16px;
@@ -161,6 +82,68 @@ footer {
   font-size:13px;
   color:var(--muted);
   margin-top:auto;
+}
+
+/* Desktop layout */
+@media (min-width:1024px) {
+  .desktop-layout {
+    display:flex;
+    flex:1;
+    min-height:calc(100vh - 120px); /* leave space for header + back button */
+  }
+
+  /* Sidebar on far left under header/back button */
+  .nav-wrapper {
+    width:220px;
+    background:rgba(15,20,26,0.95);
+    border-right:2px solid var(--gold);
+    display:flex;
+    flex-direction:column;
+    position:sticky;
+    top:0;
+    height:100%;
+    overflow-y:auto;
+    padding-top:20px;
+  }
+
+  .nav-section-title {
+    font-size:11px;
+    color:var(--muted);
+    padding:14px 24px;
+    text-transform:uppercase;
+  }
+
+  .nav-menu a {
+    display:block;
+    padding:10px 24px;
+    text-decoration:none;
+    color:#e6edf3;
+    cursor:pointer;
+    border-radius:8px;
+  }
+
+  .nav-menu a:hover {
+    background:var(--gold);
+    color:#000;
+  }
+
+  /* Main content next to sidebar and centered */
+  .main {
+    flex:1;
+    display:flex;
+    justify-content:center;
+    align-items:flex-start;
+    padding:0 24px;
+  }
+
+  .card {
+    max-width:800px;
+    width:100%;
+    background:rgba(255,255,255,0.03);
+    border-radius:26px;
+    padding:36px;
+    box-shadow:0 24px 70px rgba(0,0,0,0.55);
+  }
 }
 
 /* Mobile dropdown */
@@ -186,35 +169,6 @@ footer {
   padding:14px;
   display:none;
 }
-
-/* Desktop layout */
-@media (min-width:1024px) {
-  .nav-wrapper {
-    display:flex;
-  }
-
-  .nav-trigger {
-    display:none;
-  }
-  
-  .wrapper {
-    gap:24px;
-    padding-left:16px;
-  }
-
-  /* Keep back button above sidebar and centered */
-  .back-wrap {
-    text-align:center;
-    margin-bottom:16px;
-  }
-
-  /* Sidebar starts at top-left under header/back button */
-  .nav-wrapper {
-    position:sticky;
-    top:0;
-    height:calc(100vh - 100px); /* adjust to header/back button height */
-  }
-}
 </style>
 </head>
 
@@ -227,7 +181,9 @@ footer {
   <a href="membershub.html" class="back-button">Back to Members Hub</a>
 </div>
 
-<div class="wrapper">
+<!-- Desktop layout -->
+<div class="desktop-layout">
+
   <!-- Sidebar / Taskbar -->
   <div class="nav-wrapper">
     <div class="nav-menu" id="navMenu">
@@ -257,6 +213,7 @@ footer {
       <p>Select a section from the menu to explore the Diana Mid guide.</p>
     </div>
   </div>
+
 </div>
 
 <footer>© 2026 LoL Fundamentals · All rights reserved</footer>
@@ -291,12 +248,6 @@ function loadSection(section) {
 
 </body>
 </html>
-
-
-
-
-
-
 
 
 
