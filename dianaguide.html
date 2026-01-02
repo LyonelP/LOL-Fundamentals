@@ -37,31 +37,28 @@ body::before {
   z-index:-1;
 }
 
-/* Header + Back Button */
-.header-wrap {
-  display:flex;
-  flex-direction:column;
-  align-items:center;
-  position:relative;
-  z-index:10;
-  background:rgba(13,17,23,0.9);
-  border-bottom:2px solid var(--gold);
-}
-
+/* Header */
 header {
   width:100%;
+  background:rgba(13,17,23,0.9);
+  border-bottom:2px solid var(--gold);
   padding:20px 0;
   font-size:26px;
   font-weight:bold;
   color:var(--gold);
   text-align:center;
   text-transform: uppercase;
+  z-index:10;
+  position:relative;
 }
 
+/* Back button */
 .back-wrap {
   width:100%;
   text-align:center;
-  padding-bottom:10px;
+  margin:16px 0 16px;
+  position:relative;
+  z-index:10;
 }
 
 .back-button {
@@ -80,6 +77,46 @@ header {
   content:"←";
 }
 
+/* Mobile nav trigger */
+.nav-trigger {
+  display:block;
+  width:90%;
+  max-width:360px;
+  margin:0 auto 16px;
+  padding:14px 18px;
+  font-size:16px;
+  font-weight:600;
+  background:rgba(255,255,255,0.05);
+  border:none;
+  border-radius:20px;
+  color:#fff;
+  cursor:pointer;
+  text-align:center;
+}
+
+.nav-menu-mobile {
+  display:none;
+  width:90%;
+  max-width:360px;
+  margin:0 auto 24px;
+  background:rgba(15,20,26,0.98);
+  border-radius:24px;
+  padding:12px 16px;
+}
+
+.nav-menu-mobile a {
+  display:block;
+  padding:10px 12px;
+  text-decoration:none;
+  color:#e6edf3;
+  border-radius:6px;
+}
+
+.nav-menu-mobile a:hover {
+  background:var(--gold);
+  color:#000;
+}
+
 /* Desktop Sidebar */
 .nav-wrapper {
   display:none;
@@ -89,7 +126,7 @@ header {
   .nav-wrapper {
     display:block;
     position:fixed;
-    top: calc(20px + 20px + 20px + 10px); /* header + back button height */
+    top:92px; /* header + back button */
     left:0;
     width:220px;
     bottom:0;
@@ -128,7 +165,7 @@ header {
   display:flex;
   justify-content:center;
   align-items:flex-start;
-  padding:20px 24px;
+  padding:0 24px;
   margin-top:0;
   position:relative;
   z-index:1;
@@ -156,7 +193,7 @@ header {
   margin-bottom:8px;
 }
 
-/* Footer always at bottom */
+/* Footer */
 footer {
   padding:16px;
   text-align:center;
@@ -164,72 +201,19 @@ footer {
   color:var(--muted);
   margin-top:auto;
 }
-
-/* Mobile menu trigger */
-.nav-trigger {
-  display:block;
-  width:calc(100% - 48px);
-  max-width:400px;
-  padding:14px 22px;
-  margin:16px auto;
-  font-size:16px;
-  font-weight:600;
-  background:rgba(255,255,255,0.05);
-  border:none;
-  border-radius:20px;
-  color:#fff;
-  cursor:pointer;
-  text-align:left;
-  z-index:11;
-  position:relative;
-}
-
-.nav-menu-mobile {
-  position:absolute;
-  top:calc(100% + 4px);
-  left:50%;
-  transform:translateX(-50%);
-  background:rgba(15,20,26,0.98);
-  border-radius:24px;
-  padding:14px;
-  display:none;
-  width:calc(100% - 48px);
-  max-width:400px;
-  z-index:15;
-}
-
-.nav-menu-mobile a {
-  display:block;
-  padding:10px 12px;
-  color:#e6edf3;
-  text-decoration:none;
-  border-radius:8px;
-}
-
-.nav-menu-mobile a:hover {
-  background:var(--gold);
-  color:#000;
-}
-
-@media(min-width:1024px) {
-  .nav-trigger, .nav-menu-mobile {
-    display:none;
-  }
-}
 </style>
 </head>
 <body>
 
-<div class="header-wrap">
-  <header>Diana Mid Guide</header>
-  <div class="back-wrap">
-    <a href="membershub.html" class="back-button">Back to Members Hub</a>
-  </div>
+<header>Diana Mid Guide</header>
+
+<div class="back-wrap">
+  <a href="membershub.html" class="back-button">Back to Members Hub</a>
 </div>
 
-<!-- Mobile dropdown trigger -->
-<button class="nav-trigger" onclick="toggleMobileMenu()">Menu</button>
-<div class="nav-menu-mobile" id="navMenuMobile">
+<!-- Mobile nav trigger -->
+<button class="nav-trigger" onclick="toggleMobileNav()">Menu</button>
+<div class="nav-menu-mobile" id="mobileMenu">
   <a onclick="loadSection('intro')">Intro</a>
   <a onclick="loadSection('runes')">Runes</a>
   <a onclick="loadSection('build')">Build</a>
@@ -284,9 +268,9 @@ footer {
 <footer>© 2026 LoL Fundamentals · All rights reserved</footer>
 
 <script>
-function toggleMobileMenu() {
-  const menu = document.getElementById('navMenuMobile');
-  menu.style.display = menu.style.display === 'block' ? 'none' : 'block';
+function toggleMobileNav() {
+  const menu = document.getElementById('mobileMenu');
+  menu.style.display = (menu.style.display === 'block') ? 'none' : 'block';
 }
 
 function loadSection(section){
@@ -308,7 +292,7 @@ function loadSection(section){
     splitpushing: `<h2>Splitpushing</h2><p>…your splitpushing content here…</p>`,
     closing: `<h2>Closing Out The Game</h2><p>…your closing content here…</p>`,
     threats: `<h2>Threats & Synergies</h2><p>…your threats content here…</p>`,
-    pros: `<h2>Pros & Cons</h2><p>…your pros/cons content here…</p>`,
+    pros: `<h2>Pros & Cons</h2><p>…your pros content here…</p>`,
     extra: `<h2>Extra Tips</h2><p>…your extra tips content here…</p>`
   };
   content.innerHTML = sections[section] || '<h2>Section not found</h2>';
@@ -317,7 +301,6 @@ function loadSection(section){
 
 </body>
 </html>
-
 
 
 
