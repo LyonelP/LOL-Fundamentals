@@ -56,7 +56,7 @@ header {
 .back-wrap {
   width:100%;
   text-align:center;
-  margin:16px 0 16px;
+  margin:16px 0;
   position:relative;
   z-index:10;
 }
@@ -94,6 +94,13 @@ header {
   text-align:center;
 }
 
+/* Hide mobile menu button on desktop */
+@media(min-width:1024px) {
+  .nav-trigger {
+    display:none;
+  }
+}
+
 .nav-menu-mobile {
   display:none;
   width:90%;
@@ -126,7 +133,7 @@ header {
   .nav-wrapper {
     display:block;
     position:fixed;
-    top:92px; /* header + back button */
+    top:62px; /* connect directly under header's gold line */
     left:0;
     width:220px;
     bottom:0;
@@ -212,7 +219,7 @@ footer {
 </div>
 
 <!-- Mobile nav trigger -->
-<button class="nav-trigger" onclick="toggleMobileNav()">Menu</button>
+<button class="nav-trigger" onclick="toggleMobileNav()">Select a Section</button>
 <div class="nav-menu-mobile" id="mobileMenu">
   <a onclick="loadSection('intro')">Intro</a>
   <a onclick="loadSection('runes')">Runes</a>
@@ -301,6 +308,7 @@ function loadSection(section){
 
 </body>
 </html>
+
 
 
 
