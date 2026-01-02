@@ -77,58 +77,7 @@ header {
   content:"←";
 }
 
-/* Mobile nav trigger */
-.nav-trigger {
-  display:block;
-  width:90%;
-  max-width:360px;
-  margin:0 auto;
-  padding:14px 18px;
-  font-size:16px;
-  font-weight:600;
-  background:rgba(255,255,255,0.05);
-  border:none;
-  border-radius:20px;
-  color:#fff;
-  cursor:pointer;
-  text-align:center;
-}
-
-/* Hide mobile menu button on desktop */
-@media(min-width:1024px) {
-  .nav-trigger {
-    display:none;
-  }
-}
-
-/* Mobile menu dropdown */
-.nav-menu-mobile {
-  display:none; /* hidden by default */
-  width:90%;
-  max-width:360px;
-  margin:8px auto 24px; /* add a small gap below header so line isn't in header */
-  background:rgba(15,20,26,0.98);
-  border-radius:24px;
-  padding:12px 16px;
-  box-shadow:0 8px 20px rgba(0,0,0,0.45);
-  z-index:9;
-  position:relative;
-}
-
-.nav-menu-mobile a {
-  display:block;
-  padding:10px 12px;
-  text-decoration:none;
-  color:#e6edf3;
-  border-radius:6px;
-}
-
-.nav-menu-mobile a:hover {
-  background:var(--gold);
-  color:#000;
-}
-
-/* Desktop Sidebar */
+/* Sidebar */
 .nav-wrapper {
   display:none;
 }
@@ -137,7 +86,7 @@ header {
   .nav-wrapper {
     display:block;
     position:fixed;
-    top:62px; /* connect directly under header's gold line */
+    top:70px; /* slightly lower so it doesn't touch header */
     left:0;
     width:220px;
     bottom:0;
@@ -204,13 +153,64 @@ header {
   margin-bottom:8px;
 }
 
-/* Footer */
+/* Footer always at bottom */
 footer {
   padding:16px;
   text-align:center;
   font-size:13px;
   color:var(--muted);
   margin-top:auto;
+}
+
+/* Mobile nav trigger */
+.nav-trigger {
+  display:block;
+  width:90%;
+  max-width:360px;
+  margin:16px auto;
+  padding:14px 18px;
+  font-size:16px;
+  font-weight:600;
+  background:rgba(255,255,255,0.05);
+  border:none;
+  border-radius:20px;
+  color:#fff;
+  cursor:pointer;
+  text-align:center;
+}
+
+/* Mobile dropdown menu */
+.nav-menu-mobile {
+  display:none;
+  position:absolute;
+  width:90%;
+  max-width:360px;
+  margin:0 auto;
+  left:0;
+  right:0;
+  background:rgba(15,20,26,0.95);
+  border-radius:20px;
+  padding:12px 0;
+  z-index:11;
+}
+
+.nav-menu-mobile a {
+  display:block;
+  padding:10px 20px;
+  text-decoration:none;
+  color:#e6edf3;
+}
+
+.nav-menu-mobile a:hover {
+  background:var(--gold);
+  color:#000;
+}
+
+/* Hide mobile menu button on desktop */
+@media(min-width:1024px) {
+  .nav-trigger {
+    display:none;
+  }
 }
 </style>
 </head>
@@ -222,8 +222,8 @@ footer {
   <a href="membershub.html" class="back-button">Back to Members Hub</a>
 </div>
 
-<!-- Mobile nav trigger -->
-<button class="nav-trigger" onclick="toggleMobileNav()">Select a Section</button>
+<!-- Mobile dropdown button -->
+<button class="nav-trigger" onclick="toggleMobileMenu()">Select a Section</button>
 <div class="nav-menu-mobile" id="mobileMenu">
   <a onclick="loadSection('intro')">Intro</a>
   <a onclick="loadSection('runes')">Runes</a>
@@ -242,7 +242,7 @@ footer {
   <a onclick="loadSection('extra')">Extra Tips</a>
 </div>
 
-<!-- Desktop Sidebar -->
+<!-- Sidebar for desktop -->
 <div class="nav-wrapper">
   <div class="nav-menu" id="navMenu">
     <div class="nav-section-title">Core</div>
@@ -252,7 +252,6 @@ footer {
     <a onclick="loadSection('summoners')">Summoners</a>
     <a onclick="loadSection('abilities')">Abilities</a>
     <a onclick="loadSection('combos')">Combos</a>
-
     <div class="nav-section-title">Gameplay</div>
     <a onclick="loadSection('laning')">Laning</a>
     <a onclick="loadSection('warding')">Warding</a>
@@ -260,7 +259,6 @@ footer {
     <a onclick="loadSection('teamfighting')">Teamfighting</a>
     <a onclick="loadSection('splitpushing')">Splitpushing</a>
     <a onclick="loadSection('closing')">Closing Out The Game</a>
-
     <div class="nav-section-title">Advanced</div>
     <a onclick="loadSection('threats')">Threats & Synergies</a>
     <a onclick="loadSection('pros')">Pros & Cons</a>
@@ -279,22 +277,16 @@ footer {
 <footer>© 2026 LoL Fundamentals · All rights reserved</footer>
 
 <script>
-function toggleMobileNav() {
+function toggleMobileMenu(){
   const menu = document.getElementById('mobileMenu');
-  if(menu.style.display === 'block') {
-    menu.style.display = 'none';
-  } else {
-    menu.style.display = 'block';
-  }
+  menu.style.display = (menu.style.display === 'block') ? 'none' : 'block';
 }
 
 function loadSection(section){
   const content = document.getElementById('content');
   const sections = {
-    intro: `
-      <h2>Intro</h2>
-      <p><strong>Why Diana?</strong> Diana has numerous ways to carry a game. She has a strong early game, laning phase, and can transition well into the side lane in the mid game. She can make picks, teamfight well, splitpush, push waves quickly, farm jungle camps, and has great damage for dragons and barons. She’s also a pick that you can play pretty much every game as long as your team doesn’t need an AD mid laner.</p>
-    `,
+    intro: `<h2>Intro</h2>
+      <p><strong>Why Diana?</strong> Diana has numerous ways to carry a game. She has a strong early game, laning phase, and can transition well into the side lane in the mid game. She can make picks, teamfight well, splitpush, push waves quickly, farm jungle camps, and has great damage for dragons and barons. She’s also a pick that you can play pretty much every game as long as your team doesn’t need an AD mid laner.</p>`,
     runes: `<h2>Runes</h2><p>…your runes content here…</p>`,
     build: `<h2>Build</h2><p>…your build content here…</p>`,
     summoners: `<h2>Summoners</h2><p>…your summoners content here…</p>`,
@@ -305,18 +297,21 @@ function loadSection(section){
     farming: `<h2>Farming / Pushing</h2><p>…your farming content here…</p>`,
     teamfighting: `<h2>Teamfighting</h2><p>…your teamfighting content here…</p>`,
     splitpushing: `<h2>Splitpushing</h2><p>…your splitpushing content here…</p>`,
-    closing: `<h2>Closing Out The Game</h2><p>…your closing content here…</p>`,
-    threats: `<h2>Threats & Synergies</h2><p>…your threats content here…</p>`,
-    pros: `<h2>Pros & Cons</h2><p>…your pros content here…</p>`,
+    closing: `<h2>Closing Out The Game</h2><p>…content…</p>`,
+    threats: `<h2>Threats & Synergies</h2><p>…content…</p>`,
+    pros: `<h2>Pros & Cons</h2><p>…content…</p>`,
     extra: `<h2>Extra Tips</h2><p>…your extra tips content here…</p>`
   };
   content.innerHTML = sections[section] || '<h2>Section not found</h2>';
+
+  // Close mobile menu after selection
+  const menu = document.getElementById('mobileMenu');
+  if(menu.style.display === 'block') menu.style.display = 'none';
 }
 </script>
 
 </body>
 </html>
-
 
 
 
