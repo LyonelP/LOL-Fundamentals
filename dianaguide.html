@@ -82,7 +82,7 @@ header {
   display:block;
   width:90%;
   max-width:360px;
-  margin:0 auto 16px;
+  margin:0 auto;
   padding:14px 18px;
   font-size:16px;
   font-weight:600;
@@ -101,14 +101,18 @@ header {
   }
 }
 
+/* Mobile menu dropdown */
 .nav-menu-mobile {
-  display:none;
+  display:none; /* hidden by default */
   width:90%;
   max-width:360px;
-  margin:0 auto 24px;
+  margin:8px auto 24px; /* add a small gap below header so line isn't in header */
   background:rgba(15,20,26,0.98);
   border-radius:24px;
   padding:12px 16px;
+  box-shadow:0 8px 20px rgba(0,0,0,0.45);
+  z-index:9;
+  position:relative;
 }
 
 .nav-menu-mobile a {
@@ -277,7 +281,11 @@ footer {
 <script>
 function toggleMobileNav() {
   const menu = document.getElementById('mobileMenu');
-  menu.style.display = (menu.style.display === 'block') ? 'none' : 'block';
+  if(menu.style.display === 'block') {
+    menu.style.display = 'none';
+  } else {
+    menu.style.display = 'block';
+  }
 }
 
 function loadSection(section){
@@ -308,6 +316,7 @@ function loadSection(section){
 
 </body>
 </html>
+
 
 
 
