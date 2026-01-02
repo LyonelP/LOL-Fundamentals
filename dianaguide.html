@@ -54,8 +54,10 @@ header {
 
 /* Back button */
 .back-wrap {
+  width:100%;
   text-align:center;
-  margin:16px 0 32px;
+  margin:16px 0;
+  position:relative;
   z-index:10;
 }
 
@@ -75,7 +77,7 @@ header {
   content:"←";
 }
 
-/* Sidebar for desktop */
+/* Sidebar */
 .nav-wrapper {
   display:none;
 }
@@ -84,7 +86,7 @@ header {
   .nav-wrapper {
     display:block;
     position:fixed;
-    top:62px;
+    top:70px; /* perfect distance from header */
     left:0;
     width:220px;
     bottom:0;
@@ -161,44 +163,51 @@ footer {
 }
 
 /* Mobile menu button */
-.mobile-menu-button {
+.nav-trigger {
   display:block;
-  width:100%;
-  padding:18px 22px;
+  width:90%;
+  max-width:360px;
+  margin:16px auto;
+  padding:14px 18px;
   font-size:16px;
   font-weight:600;
   background:rgba(13,17,23,0.9);
   border:none;
-  border-radius:0;
+  border-radius:20px;
   color:#fff;
   cursor:pointer;
-  text-align:left;
+  text-align:center;
+  position:relative;
   z-index:11;
 }
 
-@media(min-width:1024px) {
-  .mobile-menu-button { display:none; }
+.nav-trigger::after {
+  content:" ▼";
 }
 
-/* Mobile dropdown menu below button */
-.mobile-menu-dropdown {
+/* Mobile dropdown menu */
+.nav-menu-mobile {
   display:none;
+  position:relative;
+  width:85%;
+  max-width:320px;
+  margin:0 auto;
   background:rgba(13,17,23,0.9);
-  border-top:2px solid var(--gold);
-  padding:10px 0;
-  overflow-y:auto;
-  max-height:300px;
+  border-radius:20px;
+  padding:12px 0;
   z-index:10;
+  max-height:70vh;
+  overflow-y:auto;
 }
 
-.mobile-menu-dropdown .nav-section-title {
+.nav-menu-mobile .nav-section-title {
   font-size:12px;
   color:var(--muted);
   padding:8px 20px;
   text-transform:uppercase;
 }
 
-.mobile-menu-dropdown a {
+.nav-menu-mobile a {
   display:block;
   padding:10px 20px;
   text-decoration:none;
@@ -206,9 +215,16 @@ footer {
   border-radius:6px;
 }
 
-.mobile-menu-dropdown a:hover {
+.nav-menu-mobile a:hover {
   background:var(--gold);
   color:#000;
+}
+
+/* Hide mobile menu button on desktop */
+@media(min-width:1024px) {
+  .nav-trigger {
+    display:none;
+  }
 }
 </style>
 </head>
@@ -220,31 +236,29 @@ footer {
   <a href="membershub.html" class="back-button">Back to Members Hub</a>
 </div>
 
-<!-- Mobile menu button -->
-<button class="mobile-menu-button" onclick="toggleMobileDropdown()">Select a Section ▼</button>
-
-<!-- Mobile dropdown menu -->
-<div class="mobile-menu-dropdown" id="mobileDropdown">
+<!-- Mobile dropdown button -->
+<button class="nav-trigger" onclick="toggleMobileMenu()">Select a Section</button>
+<div class="nav-menu-mobile" id="mobileMenu">
   <div class="nav-section-title">Core</div>
-  <a onclick="loadSection('intro'); toggleMobileDropdown()">Intro</a>
-  <a onclick="loadSection('runes'); toggleMobileDropdown()">Runes</a>
-  <a onclick="loadSection('build'); toggleMobileDropdown()">Build</a>
-  <a onclick="loadSection('summoners'); toggleMobileDropdown()">Summoners</a>
-  <a onclick="loadSection('abilities'); toggleMobileDropdown()">Abilities</a>
-  <a onclick="loadSection('combos'); toggleMobileDropdown()">Combos</a>
+  <a onclick="loadSection('intro')">Intro</a>
+  <a onclick="loadSection('runes')">Runes</a>
+  <a onclick="loadSection('build')">Build</a>
+  <a onclick="loadSection('summoners')">Summoners</a>
+  <a onclick="loadSection('abilities')">Abilities</a>
+  <a onclick="loadSection('combos')">Combos</a>
 
   <div class="nav-section-title">Gameplay</div>
-  <a onclick="loadSection('laning'); toggleMobileDropdown()">Laning</a>
-  <a onclick="loadSection('warding'); toggleMobileDropdown()">Warding</a>
-  <a onclick="loadSection('farming'); toggleMobileDropdown()">Farming / Pushing</a>
-  <a onclick="loadSection('teamfighting'); toggleMobileDropdown()">Teamfighting</a>
-  <a onclick="loadSection('splitpushing'); toggleMobileDropdown()">Splitpushing</a>
-  <a onclick="loadSection('closing'); toggleMobileDropdown()">Closing Out The Game</a>
+  <a onclick="loadSection('laning')">Laning</a>
+  <a onclick="loadSection('warding')">Warding</a>
+  <a onclick="loadSection('farming')">Farming / Pushing</a>
+  <a onclick="loadSection('teamfighting')">Teamfighting</a>
+  <a onclick="loadSection('splitpushing')">Splitpushing</a>
+  <a onclick="loadSection('closing')">Closing Out The Game</a>
 
   <div class="nav-section-title">Advanced</div>
-  <a onclick="loadSection('threats'); toggleMobileDropdown()">Threats & Synergies</a>
-  <a onclick="loadSection('pros'); toggleMobileDropdown()">Pros & Cons</a>
-  <a onclick="loadSection('extra'); toggleMobileDropdown()">Extra Tips</a>
+  <a onclick="loadSection('threats')">Threats & Synergies</a>
+  <a onclick="loadSection('pros')">Pros & Cons</a>
+  <a onclick="loadSection('extra')">Extra Tips</a>
 </div>
 
 <!-- Sidebar for desktop -->
@@ -257,7 +271,6 @@ footer {
     <a onclick="loadSection('summoners')">Summoners</a>
     <a onclick="loadSection('abilities')">Abilities</a>
     <a onclick="loadSection('combos')">Combos</a>
-
     <div class="nav-section-title">Gameplay</div>
     <a onclick="loadSection('laning')">Laning</a>
     <a onclick="loadSection('warding')">Warding</a>
@@ -265,7 +278,6 @@ footer {
     <a onclick="loadSection('teamfighting')">Teamfighting</a>
     <a onclick="loadSection('splitpushing')">Splitpushing</a>
     <a onclick="loadSection('closing')">Closing Out The Game</a>
-
     <div class="nav-section-title">Advanced</div>
     <a onclick="loadSection('threats')">Threats & Synergies</a>
     <a onclick="loadSection('pros')">Pros & Cons</a>
@@ -284,38 +296,39 @@ footer {
 <footer>© 2026 LoL Fundamentals · All rights reserved</footer>
 
 <script>
+function toggleMobileMenu(){
+  const menu = document.getElementById('mobileMenu');
+  menu.style.display = (menu.style.display === 'block') ? 'none' : 'block';
+}
+
 function loadSection(section){
   const content = document.getElementById('content');
   const sections = {
-    intro: `
-      <h2>Intro</h2>
-      <p><strong>Why Diana?</strong> Diana has numerous ways to carry a game. She has a strong early game, laning phase, and can transition well into the side lane in the mid game. She can make picks, teamfight well, splitpush, push waves quickly, farm jungle camps, and has great damage for dragons and barons. She’s also a pick that you can play pretty much every game as long as your team doesn’t need an AD mid laner.</p>
-    `,
-    runes: `<h2>Runes</h2><p>…runes content…</p>`,
-    build: `<h2>Build</h2><p>…build content…</p>`,
-    summoners: `<h2>Summoners</h2><p>…summoners content…</p>`,
-    abilities: `<h2>Abilities</h2><p>…abilities content…</p>`,
-    combos: `<h2>Combos</h2><p>…combos content…</p>`,
-    laning: `<h2>Laning</h2><p>…laning content…</p>`,
-    warding: `<h2>Warding</h2><p>…warding content…</p>`,
-    farming: `<h2>Farming / Pushing</h2><p>…farming content…</p>`,
-    teamfighting: `<h2>Teamfighting</h2><p>…teamfighting content…</p>`,
-    splitpushing: `<h2>Splitpushing</h2><p>…splitpushing content…</p>`,
-    closing: `<h2>Closing Out The Game</h2><p>…closing content…</p>`,
-    threats: `<h2>Threats & Synergies</h2><p>…threats content…</p>`,
-    pros: `<h2>Pros & Cons</h2><p>…pros & cons content…</p>`,
-    extra: `<h2>Extra Tips</h2><p>…extra tips content…</p>`
+    intro: `<h2>Intro</h2>
+      <p><strong>Why Diana?</strong> Diana has numerous ways to carry a game. She has a strong early game, laning phase, and can transition well into the side lane in the mid game. She can make picks, teamfight well, splitpush, push waves quickly, farm jungle camps, and has great damage for dragons and barons. She’s also a pick that you can play pretty much every game as long as your team doesn’t need an AD mid laner.</p>`,
+    runes: `<h2>Runes</h2><p>…your runes content here…</p>`,
+    build: `<h2>Build</h2><p>…your build content here…</p>`,
+    summoners: `<h2>Summoners</h2><p>…your summoners content here…</p>`,
+    abilities: `<h2>Abilities</h2><p>…your abilities content here…</p>`,
+    combos: `<h2>Combos</h2><p>…your combos content here…</p>`,
+    laning: `<h2>Laning</h2><p>…your laning content here…</p>`,
+    warding: `<h2>Warding</h2><p>…your warding content here…</p>`,
+    farming: `<h2>Farming / Pushing</h2><p>…your farming content here…</p>`,
+    teamfighting: `<h2>Teamfighting</h2><p>…your teamfighting content here…</p>`,
+    splitpushing: `<h2>Splitpushing</h2><p>…your splitpushing content here…</p>`,
+    closing: `<h2>Closing Out The Game</h2><p>…content…</p>`,
+    threats: `<h2>Threats & Synergies</h2><p>…content…</p>`,
+    pros: `<h2>Pros & Cons</h2><p>…content…</p>`,
+    extra: `<h2>Extra Tips</h2><p>…your extra tips content here…</p>`
   };
   content.innerHTML = sections[section] || '<h2>Section not found</h2>';
-}
 
-function toggleMobileDropdown() {
-  const dropdown = document.getElementById('mobileDropdown');
-  dropdown.style.display = dropdown.style.display === 'block' ? 'none' : 'block';
+  // Close mobile menu after selection
+  const menu = document.getElementById('mobileMenu');
+  if(menu.style.display === 'block') menu.style.display = 'none';
 }
 </script>
 
 </body>
 </html>
-
 
