@@ -101,26 +101,26 @@ footer a:hover{text-decoration:underline}
   </div>
 </a>
 
-<!-- Locked cards -->
-<a href="#" class="card ekko-guide locked">
+<!-- Paid content -->
+<a href="ekko-guide.html" class="card ekko-guide locked">
   <h3>Ekko Guide</h3>
   <p>Complete guide to playing Ekko Jungle, including combos, pathing, and advanced mechanics.</p>
   <div class="unlock-icon">🔒</div>
 </a>
 
-<a href="#" class="card diana-guide locked">
+<a href="diana-guide.html" class="card diana-guide locked">
   <h3>Diana Guide</h3>
   <p>A comprehensive guide covering Diana's full kit, itemization, playstyle, and advanced strategies.</p>
   <div class="unlock-icon">🔒</div>
 </a>
 
-<a href="#" class="card build-calculator locked">
+<a href="build-calculator.html" class="card build-calculator locked">
   <h3>Diana Combo Calculator</h3>
   <p>Compare different item builds and ability combos for Diana at different stages of the game.</p>
   <div class="unlock-icon">🔒</div>
 </a>
 
-<a href="#" class="card rune-calculator locked">
+<a href="rune-calculator.html" class="card rune-calculator locked">
   <h3>Diana Rune Calculator</h3>
   <p>Compare rune pages against enemies to create your perfect Diana setup.</p>
   <div class="unlock-icon">🔒</div>
@@ -160,13 +160,8 @@ footer a:hover{text-decoration:underline}
 <div class="modalContent">
 <h2>Choose Your Plan</h2>
 <div class="plan-buttons" style="justify-content:center;gap:20px;flex-wrap:wrap;">
-  <!-- Monthly -->
   <button class="btn" id="monthlyBtn">$8.99 / Month</button>
-
-  <!-- Yearly plan -->
   <button class="btn" id="yearlyBtn">$49 / Year</button>
-
-  <!-- Lifetime plan -->
   <div style="position:relative;display:inline-block;text-align:center;margin-top:10px;">
     <div class="bestValueTag">Best Value</div>
     <button class="btn orangeBtn" id="lifetimeBtn">$99 / Lifetime</button>
@@ -190,11 +185,20 @@ footer a:hover{text-decoration:underline}
 
 <script type="module">
 import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
-import { getAuth, signInWithEmailAndPassword, createUserWithEmailAndPassword, sendPasswordResetEmail } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-auth.js";
-import { getFirestore, doc, setDoc, serverTimestamp, getDoc } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
+import { getAuth, signInWithEmailAndPassword, createUserWithEmailAndPassword, sendPasswordResetEmail, onAuthStateChanged, signOut } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-auth.js";
+import { getFirestore, doc, setDoc, getDoc, serverTimestamp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
 
 const firebaseConfig={apiKey:"AIzaSyCFRcEV7wdivqONnkjJubAZOjPMixrHMBI",authDomain:"lol-fundamentals.firebaseapp.com",projectId:"lol-fundamentals",storageBucket:"lol-fundamentals.firebasestorage.app",messagingSenderId:"1038440427584",appId:"1:1038440427584:web:a82207151fd370dbedefa5"};
 const app=initializeApp(firebaseConfig),auth=getAuth(app),firestore=getFirestore(app);
+
+const signupHeroBtn=document.getElementById("signupHeroBtn");
+const loginHeroBtn=document.getElementById("loginHeroBtn");
+const closeSignupModal=document.getElementById("closeSignupModal");
+const closePlanModal=document.getElementById("closePlanModal");
+const closeLoginModal=document.getElementById("closeLoginModal");
+const seePlansBtn=document.getElementById("seePlansBtn");
+const continueSignupBtn=document.getElementById("continueSignupBtn");
+const modalLoginBtn=document.getElementById("modalLoginBtn");
 
 signupHeroBtn.onclick=()=>signupModal.style.display="flex";
 loginHeroBtn.onclick=()=>loginModal.style.display="flex";
@@ -203,56 +207,80 @@ closePlanModal.onclick=()=>planModal.style.display="none";
 closeLoginModal.onclick=()=>loginModal.style.display="none";
 seePlansBtn.onclick=()=>{signupModal.style.display="none";planModal.style.display="flex"};
 
+// Signup
 continueSignupBtn.onclick=async()=>{
-  const e=signupEmail.value.trim(),p=signupPassword.value.trim(),c=signupPasswordConfirm.value.trim();
-  if(!e||!p||!c){alert("Fill all fields");return}
-  if(p!==c){alert("Passwords do not match");return}
+  const e=document.getElementById("signupEmail").value.trim(),
+        p=document.getElementById("signupPassword").value.trim(),
+        c=document.getElementById("signupPasswordConfirm").value.trim();
+  if(!e||!p||!c){alert("Fill all fields");return;}
+  if(p!==c){alert("Passwords do not match");return;}
   await createUserWithEmailAndPassword(auth,e,p);
   await setDoc(doc(firestore,"paidUsers",e),{paid:false,timestamp:serverTimestamp()});
   signupModal.style.display="none";
   planModal.style.display="flex";
 };
 
+// Stripe buttons
 document.getElementById("monthlyBtn").onclick=()=>{window.open("https://buy.stripe.com/8x28wIaQ4dJa4Rg88iejK0f","_blank");planModal.style.display="none";}
 document.getElementById("yearlyBtn").onclick=()=>{window.open("https://buy.stripe.com/cNi14g3nC48AerQ9cmejK07","_blank");planModal.style.display="none";}
 document.getElementById("lifetimeBtn").onclick=()=>{window.open("https://buy.stripe.com/fZu00c9M0awYgzYcoyejK06","_blank");planModal.style.display="none";}
 
+// Login
 modalLoginBtn.onclick=async()=>{
-  const e=loginEmail.value.trim(),p=loginPassword.value.trim();
+  const e=document.getElementById("loginEmail").value.trim(),
+        p=document.getElementById("loginPassword").value.trim();
   await signInWithEmailAndPassword(auth,e,p);
   const snap=await getDoc(doc(firestore,"paidUsers",e));
   if(snap.exists() && snap.data().paid){
     localStorage.setItem("lolfundamentals_logged_in","true");
     localStorage.setItem("lolfundamentals_paid","true");
-    window.location.href="membershub.html";
+    window.location.reload();
   }else{
     planModal.style.display="flex";
   }
   loginModal.style.display="none";
 };
 
-resetLinkModal.onclick=async(e)=>{
+// Password reset
+document.getElementById("resetLinkModal").onclick=async(e)=>{
   e.preventDefault();
-  await sendPasswordResetEmail(auth,loginEmail.value);
-  loginMsgModal.textContent="Password reset email sent!";
+  const email=document.getElementById("loginEmail").value;
+  if(email){await sendPasswordResetEmail(auth,email);document.getElementById("loginMsgModal").textContent="Password reset email sent!";}
 };
 
 // Particle effect
 for(let i=0;i<50;i++){
-  const e=document.createElement("span");
-  e.style.left=Math.random()*100+"%";
-  e.style.top=Math.random()*100+"%";
-  e.style.width=e.style.height="4px";
-  e.style.background="rgba(47,129,247,.9)";
-  e.style.borderRadius="50%";
-  e.style.position="absolute";
-  e.style.animation=`floatParticles ${6+Math.random()*4}s infinite ease-in-out`;
-  document.querySelector(".particles").appendChild(e);
+  const p=document.createElement("span");
+  p.style.left=Math.random()*100+"%";
+  p.style.top=Math.random()*100+"%";
+  p.style.width=p.style.height="4px";
+  p.style.background="rgba(47,129,247,.9)";
+  p.style.borderRadius="50%";
+  p.style.position="absolute";
+  p.style.animation=`floatParticles ${6+Math.random()*4}s infinite ease-in-out`;
+  document.querySelector(".particles").appendChild(p);
 }
 
-// Locked card click opens signup modal
+// Locked cards click opens signup/login modal
 document.querySelectorAll('.locked').forEach(card=>{
-  card.addEventListener('click',()=>{signupModal.style.display='flex'});
+  card.addEventListener('click',()=>signupModal.style.display='flex');
+});
+
+// Auto-redirect if not logged in
+onAuthStateChanged(auth,async user=>{
+  if(user){
+    const snap=await getDoc(doc(firestore,"paidUsers",user.email));
+    if(!snap.exists() || !snap.data().paid){
+      // Not paid yet, show plan modal
+      planModal.style.display="flex";
+    } else {
+      // Paid user stays on page
+      localStorage.setItem("lolfundamentals_logged_in","true");
+      localStorage.setItem("lolfundamentals_paid","true");
+    }
+  } else {
+    // Not logged in at all, show signup modal when clicking locked content
+  }
 });
 </script>
 
@@ -262,12 +290,7 @@ document.querySelectorAll('.locked').forEach(card=>{
   50%{transform:translateY(-80px) translateX(20px) scale(1.2);opacity:.6}
   100%{transform:translateY(0) translateX(0) scale(1);opacity:1}
 }
-
-/* Gold hover effect for all unlocked cards */
-.card:not(.locked):hover {
-  transform: translateY(-6px);
-  box-shadow: 0 12px 26px rgba(201,170,113,0.5);
-}
+.card:not(.locked):hover {transform: translateY(-6px);box-shadow: 0 12px 26px rgba(201,170,113,0.5);}
 </style>
 
 </body>
