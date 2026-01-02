@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8"/>
 <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-<title>LoL Fundamentals – Home</title>
+<title>LoL Fundamentals – Members Hub Lite</title>
 <link rel="icon" href="/favicon.ico">
 <style>
 body{margin:0;font-family:"Beaufort for LOL",Arial,Helvetica,sans-serif;background:radial-gradient(circle at top,#0f1620,#0a0f14 70%);color:#e6edf3;line-height:1.6}
@@ -33,7 +33,11 @@ header{background:linear-gradient(90deg,#0a0f14,#1b2838);border-bottom:2px solid
 .card::before{content:"";position:absolute;inset:0;width:100%;height:100%;background-size:cover;background-position:center;opacity:.15;z-index:0;border-radius:10px}
 
 .fundamentals::before{background-image:url('https://cdn.wallpapersafari.com/92/79/MYTD9q.png')}
+.diana-guide::before{background-image:url('https://ddragon.leagueoflegends.com/cdn/img/champion/splash/Diana_1.jpg')}
+.ekko-guide::before{background-image:url('https://ddragon.leagueoflegends.com/cdn/img/champion/splash/Ekko_0.jpg')}
 .diana-matchups::before{background-image:url('https://ddragon.leagueoflegends.com/cdn/img/champion/splash/Diana_0.jpg')}
+.build-calculator::before{background-image:url('https://i.imgur.com/uhLq29j.jpeg')}
+.rune-calculator::before{background-image:url('https://i.imgur.com/kcs90ta.jpeg')}
 .tierlist::before{ background: linear-gradient(to bottom, #1b2838 0%, #161b22 100%); }
 .coaching::before{background-image:url('https://m.media-amazon.com/images/I/71GlK3kDLJL.jpg'); opacity:0.20}
 .discord-card::before{background-image:url('https://i.imgur.com/fS2OKHV.jpeg');background-size:cover;background-position:center;opacity:0.15}
@@ -43,6 +47,7 @@ header{background:linear-gradient(90deg,#0a0f14,#1b2838);border-bottom:2px solid
 .tier-c{ background:#f9c74f; flex:1; } .tier-d{ background:#90be6d; flex:1; }
 
 .card:hover{transform:translateY(-6px);box-shadow:0 12px 26px rgba(201,170,113,0.5)}
+.unlock-icon{position:absolute;bottom:12px;z-index:2;font-size:1.5rem;color:#f2b96d;cursor:pointer}
 
 .modal{display:none;position:fixed;inset:0;background:rgba(0,0,0,.75);z-index:9999;justify-content:center;align-items:center}
 .modalContent{background:#161b22;padding:30px;border-radius:10px;text-align:center;max-width:400px;width:90%;border:1px solid #c9aa71}
@@ -77,6 +82,7 @@ footer a:hover{text-decoration:underline}
 <h2>Explore the Hub</h2>
 <div class="card-grid">
 
+<!-- Unlocked -->
 <a href="freeskills.html" class="card fundamentals">
   <h3>Fundamentals</h3>
   <p>Core skills including combos, wave management, positioning, and warding for consistent gameplay improvement.</p>
@@ -93,6 +99,31 @@ footer a:hover{text-decoration:underline}
   <div class="tier-bar" aria-hidden="true">
     <div class="tier-s"></div><div class="tier-a"></div><div class="tier-b"></div><div class="tier-c"></div><div class="tier-d"></div>
   </div>
+</a>
+
+<!-- Locked cards -->
+<a href="#" class="card ekko-guide locked">
+  <h3>Ekko Guide</h3>
+  <p>Complete guide to playing Ekko Jungle, including combos, pathing, and advanced mechanics.</p>
+  <div class="unlock-icon">🔒</div>
+</a>
+
+<a href="#" class="card diana-guide locked">
+  <h3>Diana Guide</h3>
+  <p>A comprehensive guide covering Diana's full kit, itemization, playstyle, and advanced strategies.</p>
+  <div class="unlock-icon">🔒</div>
+</a>
+
+<a href="#" class="card build-calculator locked">
+  <h3>Diana Combo Calculator</h3>
+  <p>Compare different item builds and ability combos for Diana at different stages of the game.</p>
+  <div class="unlock-icon">🔒</div>
+</a>
+
+<a href="#" class="card rune-calculator locked">
+  <h3>Diana Rune Calculator</h3>
+  <p>Compare rune pages against enemies to create your perfect Diana setup.</p>
+  <div class="unlock-icon">🔒</div>
 </a>
 
 <a href="https://buy.stripe.com/6oU6oA9M08oQfvUgEOejK02" class="card coaching">
@@ -129,8 +160,13 @@ footer a:hover{text-decoration:underline}
 <div class="modalContent">
 <h2>Choose Your Plan</h2>
 <div class="plan-buttons" style="justify-content:center;gap:20px;flex-wrap:wrap;">
+  <!-- Monthly -->
   <button class="btn" id="monthlyBtn">$8.99 / Month</button>
+
+  <!-- Yearly plan -->
   <button class="btn" id="yearlyBtn">$49 / Year</button>
+
+  <!-- Lifetime plan -->
   <div style="position:relative;display:inline-block;text-align:center;margin-top:10px;">
     <div class="bestValueTag">Best Value</div>
     <button class="btn orangeBtn" id="lifetimeBtn">$99 / Lifetime</button>
@@ -154,25 +190,11 @@ footer a:hover{text-decoration:underline}
 
 <script type="module">
 import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
-import { getAuth, signInWithEmailAndPassword, createUserWithEmailAndPassword, sendPasswordResetEmail, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-auth.js";
+import { getAuth, signInWithEmailAndPassword, createUserWithEmailAndPassword, sendPasswordResetEmail } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-auth.js";
 import { getFirestore, doc, setDoc, serverTimestamp, getDoc } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
 
-const firebaseConfig = {
-  apiKey:"AIzaSyCFRcEV7wdivqONnkjJubAZOjPMixrHMBI",
-  authDomain:"lol-fundamentals.firebaseapp.com",
-  projectId:"lol-fundamentals",
-  storageBucket:"lol-fundamentals.firebasestorage.app",
-  messagingSenderId:"1038440427584",
-  appId:"1:1038440427584:web:a82207151fd370dbedefa5"
-};
-const app = initializeApp(firebaseConfig);
-const auth = getAuth(app);
-const firestore = getFirestore(app);
-
-// Redirect if logged in
-onAuthStateChanged(auth, (user)=>{
-  if(user) window.location.href="membershub.html";
-});
+const firebaseConfig={apiKey:"AIzaSyCFRcEV7wdivqONnkjJubAZOjPMixrHMBI",authDomain:"lol-fundamentals.firebaseapp.com",projectId:"lol-fundamentals",storageBucket:"lol-fundamentals.firebasestorage.app",messagingSenderId:"1038440427584",appId:"1:1038440427584:web:a82207151fd370dbedefa5"};
+const app=initializeApp(firebaseConfig),auth=getAuth(app),firestore=getFirestore(app);
 
 signupHeroBtn.onclick=()=>signupModal.style.display="flex";
 loginHeroBtn.onclick=()=>loginModal.style.display="flex";
@@ -227,6 +249,11 @@ for(let i=0;i<50;i++){
   e.style.animation=`floatParticles ${6+Math.random()*4}s infinite ease-in-out`;
   document.querySelector(".particles").appendChild(e);
 }
+
+// Locked card click opens signup modal
+document.querySelectorAll('.locked').forEach(card=>{
+  card.addEventListener('click',()=>{signupModal.style.display='flex'});
+});
 </script>
 
 <style>
@@ -235,10 +262,17 @@ for(let i=0;i<50;i++){
   50%{transform:translateY(-80px) translateX(20px) scale(1.2);opacity:.6}
   100%{transform:translateY(0) translateX(0) scale(1);opacity:1}
 }
+
+/* Gold hover effect for all unlocked cards */
+.card:not(.locked):hover {
+  transform: translateY(-6px);
+  box-shadow: 0 12px 26px rgba(201,170,113,0.5);
+}
 </style>
 
 </body>
 </html>
+
 
 
 
