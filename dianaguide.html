@@ -86,7 +86,7 @@ header {
   .nav-wrapper {
     display:block;
     position:fixed;
-    top:70px; /* perfect distance from header */
+    top:70px;
     left:0;
     width:220px;
     bottom:0;
@@ -162,7 +162,7 @@ footer {
   margin-top:auto;
 }
 
-/* Mobile select button styled like card */
+/* Mobile select button styled like card (no extra border) */
 .nav-trigger {
   display:block;
   width:90%;
@@ -178,7 +178,6 @@ footer {
   text-align:left;
   position:relative;
   z-index:11;
-  box-shadow:0 12px 36px rgba(0,0,0,0.5);
 }
 
 .nav-trigger::after {
@@ -241,26 +240,7 @@ footer {
 <!-- Mobile dropdown button -->
 <button class="nav-trigger" onclick="toggleMobileMenu()">Select a Section</button>
 <div class="nav-menu-mobile" id="mobileMenu">
-  <div class="nav-section-title">Core</div>
-  <a onclick="loadSection('intro')">Intro</a>
-  <a onclick="loadSection('runes')">Runes</a>
-  <a onclick="loadSection('build')">Build</a>
-  <a onclick="loadSection('summoners')">Summoners</a>
-  <a onclick="loadSection('abilities')">Abilities</a>
-  <a onclick="loadSection('combos')">Combos</a>
-
-  <div class="nav-section-title">Gameplay</div>
-  <a onclick="loadSection('laning')">Laning</a>
-  <a onclick="loadSection('warding')">Warding</a>
-  <a onclick="loadSection('farming')">Farming / Pushing</a>
-  <a onclick="loadSection('teamfighting')">Teamfighting</a>
-  <a onclick="loadSection('splitpushing')">Splitpushing</a>
-  <a onclick="loadSection('closing')">Closing Out The Game</a>
-
-  <div class="nav-section-title">Advanced</div>
-  <a onclick="loadSection('threats')">Threats & Synergies</a>
-  <a onclick="loadSection('pros')">Pros & Cons</a>
-  <a onclick="loadSection('extra')">Extra Tips</a>
+  <!-- Menu items are generated dynamically -->
 </div>
 
 <!-- Sidebar for desktop -->
@@ -298,37 +278,63 @@ footer {
 <footer>© 2026 LoL Fundamentals · All rights reserved</footer>
 
 <script>
+// Sections content
+const sections = {
+  intro: `<h2>Intro</h2>
+      <p><strong>Why Diana?</strong> Diana has numerous ways to carry a game. She has a strong early game, laning phase, and can transition well into the side lane in the mid game. She can make picks, teamfight well, splitpush, push waves quickly, farm jungle camps, and has great damage for dragons and barons. She’s also a pick that you can play pretty much every game as long as your team doesn’t need an AD mid laner.</p>`,
+  runes: `<h2>Runes</h2><p>…your runes content here…</p>`,
+  build: `<h2>Build</h2><p>…your build content here…</p>`,
+  summoners: `<h2>Summoners</h2><p>…your summoners content here…</p>`,
+  abilities: `<h2>Abilities</h2><p>…your abilities content here…</p>`,
+  combos: `<h2>Combos</h2><p>…your combos content here…</p>`,
+  laning: `<h2>Laning</h2><p>…your laning content here…</p>`,
+  warding: `<h2>Warding</h2><p>…your warding content here…</p>`,
+  farming: `<h2>Farming / Pushing</h2><p>…your farming content here…</p>`,
+  teamfighting: `<h2>Teamfighting</h2><p>…your teamfighting content here…</p>`,
+  splitpushing: `<h2>Splitpushing</h2><p>…your splitpushing content here…</p>`,
+  closing: `<h2>Closing Out The Game</h2><p>…content…</p>`,
+  threats: `<h2>Threats & Synergies</h2><p>…content…</p>`,
+  pros: `<h2>Pros & Cons</h2><p>…content…</p>`,
+  extra: `<h2>Extra Tips</h2><p>…your extra tips content here…</p>`
+};
+
+// Load section content
+function loadSection(section){
+  const content = document.getElementById('content');
+  content.innerHTML = sections[section] || '<h2>Section not found</h2>';
+  updateMobileMenu(); // regenerate mobile menu with only available sections
+
+  // Scroll to top of content
+  content.scrollIntoView({behavior: "smooth"});
+
+  // Close mobile menu after selection
+  document.getElementById('mobileMenu').style.display = 'none';
+}
+
+// Toggle mobile menu
 function toggleMobileMenu(){
   const menu = document.getElementById('mobileMenu');
   menu.style.display = (menu.style.display === 'block') ? 'none' : 'block';
 }
 
-function loadSection(section){
-  const content = document.getElementById('content');
-  const sections = {
-    intro: `<h2>Intro</h2>
-      <p><strong>Why Diana?</strong> Diana has numerous ways to carry a game. She has a strong early game, laning phase, and can transition well into the side lane in the mid game. She can make picks, teamfight well, splitpush, push waves quickly, farm jungle camps, and has great damage for dragons and barons. She’s also a pick that you can play pretty much every game as long as your team doesn’t need an AD mid laner.</p>`,
-    runes: `<h2>Runes</h2><p>…your runes content here…</p>`,
-    build: `<h2>Build</h2><p>…your build content here…</p>`,
-    summoners: `<h2>Summoners</h2><p>…your summoners content here…</p>`,
-    abilities: `<h2>Abilities</h2><p>…your abilities content here…</p>`,
-    combos: `<h2>Combos</h2><p>…your combos content here…</p>`,
-    laning: `<h2>Laning</h2><p>…your laning content here…</p>`,
-    warding: `<h2>Warding</h2><p>…your warding content here…</p>`,
-    farming: `<h2>Farming / Pushing</h2><p>…your farming content here…</p>`,
-    teamfighting: `<h2>Teamfighting</h2><p>…your teamfighting content here…</p>`,
-    splitpushing: `<h2>Splitpushing</h2><p>…your splitpushing content here…</p>`,
-    closing: `<h2>Closing Out The Game</h2><p>…content…</p>`,
-    threats: `<h2>Threats & Synergies</h2><p>…content…</p>`,
-    pros: `<h2>Pros & Cons</h2><p>…content…</p>`,
-    extra: `<h2>Extra Tips</h2><p>…your extra tips content here…</p>`
-  };
-  content.innerHTML = sections[section] || '<h2>Section not found</h2>';
-
-  // Close mobile menu after selection
+// Update mobile menu to show only loaded sections
+function updateMobileMenu(){
   const menu = document.getElementById('mobileMenu');
-  if(menu.style.display === 'block') menu.style.display = 'none';
+  menu.innerHTML = '';
+  for(const key in sections){
+    // Only show sections that have content loaded
+    if(sections[key]){
+      const a = document.createElement('a');
+      a.textContent = key.charAt(0).toUpperCase() + key.slice(1);
+      a.href = 'javascript:void(0)';
+      a.onclick = ()=> loadSection(key);
+      menu.appendChild(a);
+    }
+  }
 }
+
+// Initial mobile menu
+updateMobileMenu();
 </script>
 
 </body>
