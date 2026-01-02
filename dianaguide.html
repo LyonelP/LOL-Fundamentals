@@ -39,6 +39,7 @@ body::before {
   z-index:-1;
 }
 
+/* Header spans full width */
 header {
   background:rgba(13,17,23,0.9);
   border-bottom:2px solid var(--gold);
@@ -47,20 +48,13 @@ header {
   font-weight:bold;
   color:var(--gold);
   text-align:center;
-  text-transform: uppercase; /* header all caps */
+  text-transform: uppercase;
 }
 
-.main {
-  max-width:960px;
-  margin:0 auto;
-  padding:20px 16px 40px;
-  flex:1;
-}
-
-/* Back button */
+/* Back button centered below header */
 .back-wrap {
   text-align:center;
-  margin-bottom:32px;
+  margin:16px 0 32px;
 }
 
 .back-button {
@@ -80,34 +74,23 @@ header {
   font-weight:bold;
 }
 
-/* Mobile Dropdown */
-.nav-wrapper {
-  max-width:420px;
-  margin:0 auto 46px;
-  position:relative;
+/* Main wrapper for sidebar + content */
+.wrapper {
+  display:flex;
+  flex:1;
+  max-width:1200px;
+  margin:0 auto;
+  padding:0 16px 40px;
 }
 
-.nav-trigger {
-  width:100%;
-  padding:18px 22px;
-  font-size:16px;
-  font-weight:600;
-  background:rgba(255,255,255,0.05);
-  border:none;
-  border-radius:20px;
-  color:#fff;
-  cursor:pointer;
+/* Sidebar for desktop taskbar */
+.nav-wrapper {
+  display:none; /* hide by default for mobile */
 }
 
 .nav-menu {
-  position:absolute;
-  top:calc(100% + 16px);
-  left:0;
-  right:0;
-  background:rgba(15,20,26,0.98);
-  border-radius:24px;
-  padding:14px;
-  display:none;
+  display:flex;
+  flex-direction:column;
 }
 
 .nav-section-title {
@@ -119,17 +102,23 @@ header {
 
 .nav-menu a {
   display:block;
-  padding:14px 16px;
+  padding:10px 14px;
   text-decoration:none;
   color:#e6edf3;
   cursor:pointer;
+  border-radius:8px;
 }
 
 .nav-menu a:hover {
-  color:var(--gold);
+  background:var(--gold);
+  color:#000;
 }
 
-/* Card */
+/* Card/content */
+.main {
+  flex:1;
+}
+
 .card {
   background:rgba(255,255,255,0.03);
   border-radius:26px;
@@ -150,57 +139,67 @@ header {
   margin-bottom:8px;
 }
 
+/* Footer centered */
 footer {
   padding:16px;
   text-align:center;
   font-size:13px;
   color:var(--muted);
+  margin-top:auto;
 }
 
-/* DESKTOP LAYOUT: vertical left taskbar */
+/* MOBILE LAYOUT: dropdown nav */
+.nav-trigger {
+  width:100%;
+  padding:18px 22px;
+  font-size:16px;
+  font-weight:600;
+  background:rgba(255,255,255,0.05);
+  border:none;
+  border-radius:20px;
+  color:#fff;
+  cursor:pointer;
+}
+
+.nav-menu-mobile {
+  position:absolute;
+  top:calc(100% + 16px);
+  left:0;
+  right:0;
+  background:rgba(15,20,26,0.98);
+  border-radius:24px;
+  padding:14px;
+  display:none;
+}
+
+/* DESKTOP TASKBAR */
 @media (min-width: 1024px) {
-  body {
+  .wrapper {
     flex-direction:row;
-  }
-
-  .main {
-    margin:0;
-    padding:40px;
-    flex:1;
-  }
-
-  .back-wrap {
-    text-align:left;
-    margin-bottom:20px;
+    gap:24px;
   }
 
   .nav-wrapper {
-    position:fixed;
-    top:0;
-    left:0;
-    bottom:0;
-    width:240px;
+    display:flex;
+    flex-direction:column;
+    width:220px;
+    flex-shrink:0;
     background:rgba(15,20,26,0.95);
     border-right:2px solid var(--gold);
     padding:20px 0;
-    display:flex;
-    flex-direction:column;
+    max-height:calc(100vh - 120px); /* leave space for header + back button */
     overflow-y:auto;
   }
 
   .nav-trigger {
-    display:none; /* hide dropdown */
+    display:none;
   }
 
   .nav-menu {
-    display:flex !important;
-    flex-direction:column;
     padding:0 0 20px;
-    position:static;
   }
 
   .nav-section-title {
-    display:block;
     padding:14px 24px;
   }
 
@@ -212,6 +211,12 @@ footer {
     background:var(--gold);
     color:#000;
   }
+
+  /* keep back button centered above sidebar content */
+  .back-wrap {
+    text-align:center;
+    margin-bottom:16px;
+  }
 }
 </style>
 </head>
@@ -220,36 +225,42 @@ footer {
 
 <header>Diana Mid Guide</header>
 
-<div class="nav-wrapper">
+<div class="back-wrap">
   <a href="membershub.html" class="back-button">Back to Members Hub</a>
-
-  <button class="nav-trigger" onclick="toggleMenu()">Choose a section to explore ▾</button>
-
-  <div class="nav-menu" id="navMenu">
-    <div class="nav-section-title">Core</div>
-    <a onclick="loadSection('intro')">Intro</a>
-    <a onclick="loadSection('runes')">Runes</a>
-    <a onclick="loadSection('build')">Build</a>
-    <a onclick="loadSection('summoners')">Summoners</a>
-    <a onclick="loadSection('abilities')">Abilities</a>
-    <a onclick="loadSection('combos')">Combos</a>
-
-    <div class="nav-section-title">Gameplay</div>
-    <a onclick="loadSection('laning')">Laning</a>
-    <a onclick="loadSection('warding')">Warding</a>
-    <a onclick="loadSection('farming')">Farming / Pushing</a>
-    <a onclick="loadSection('teamfighting')">Teamfighting</a>
-
-    <div class="nav-section-title">Advanced</div>
-    <a onclick="loadSection('extra')">Extra Tips</a>
-  </div>
 </div>
 
-<div class="main">
-  <div id="content" class="card">
-    <h2>Choose a Section</h2>
-    <p>Select a section from the menu to explore the Diana Mid guide.</p>
+<div class="wrapper">
+
+  <!-- Desktop sidebar -->
+  <div class="nav-wrapper">
+    <div class="nav-menu" id="navMenu">
+      <div class="nav-section-title">Core</div>
+      <a onclick="loadSection('intro')">Intro</a>
+      <a onclick="loadSection('runes')">Runes</a>
+      <a onclick="loadSection('build')">Build</a>
+      <a onclick="loadSection('summoners')">Summoners</a>
+      <a onclick="loadSection('abilities')">Abilities</a>
+      <a onclick="loadSection('combos')">Combos</a>
+
+      <div class="nav-section-title">Gameplay</div>
+      <a onclick="loadSection('laning')">Laning</a>
+      <a onclick="loadSection('warding')">Warding</a>
+      <a onclick="loadSection('farming')">Farming / Pushing</a>
+      <a onclick="loadSection('teamfighting')">Teamfighting</a>
+
+      <div class="nav-section-title">Advanced</div>
+      <a onclick="loadSection('extra')">Extra Tips</a>
+    </div>
   </div>
+
+  <!-- Main content -->
+  <div class="main">
+    <div id="content" class="card">
+      <h2>Choose a Section</h2>
+      <p>Select a section from the menu to explore the Diana Mid guide.</p>
+    </div>
+  </div>
+
 </div>
 
 <footer>© 2026 LoL Fundamentals · All rights reserved</footer>
