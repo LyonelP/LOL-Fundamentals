@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8"/>
 <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-<title>LoL Fundamentals – Members Hub Lite</title>
+<title>LoL Fundamentals – Home</title>
 <link rel="icon" href="/favicon.ico">
 <style>
 body{margin:0;font-family:"Beaufort for LOL",Arial,Helvetica,sans-serif;background:radial-gradient(circle at top,#0f1620,#0a0f14 70%);color:#e6edf3;line-height:1.6}
@@ -33,11 +33,7 @@ header{background:linear-gradient(90deg,#0a0f14,#1b2838);border-bottom:2px solid
 .card::before{content:"";position:absolute;inset:0;width:100%;height:100%;background-size:cover;background-position:center;opacity:.15;z-index:0;border-radius:10px}
 
 .fundamentals::before{background-image:url('https://cdn.wallpapersafari.com/92/79/MYTD9q.png')}
-.diana-guide::before{background-image:url('https://ddragon.leagueoflegends.com/cdn/img/champion/splash/Diana_1.jpg')}
-.ekko-guide::before{background-image:url('https://ddragon.leagueoflegends.com/cdn/img/champion/splash/Ekko_0.jpg')}
 .diana-matchups::before{background-image:url('https://ddragon.leagueoflegends.com/cdn/img/champion/splash/Diana_0.jpg')}
-.build-calculator::before{background-image:url('https://i.imgur.com/uhLq29j.jpeg')}
-.rune-calculator::before{background-image:url('https://i.imgur.com/kcs90ta.jpeg')}
 .tierlist::before{ background: linear-gradient(to bottom, #1b2838 0%, #161b22 100%); }
 .coaching::before{background-image:url('https://m.media-amazon.com/images/I/71GlK3kDLJL.jpg'); opacity:0.20}
 .discord-card::before{background-image:url('https://i.imgur.com/fS2OKHV.jpeg');background-size:cover;background-position:center;opacity:0.15}
@@ -74,7 +70,6 @@ footer a:hover{text-decoration:underline}
 <div style="margin-top:20px;">
 <button class="btn" id="signupHeroBtn">Sign Up</button>
 <button class="btn" id="loginHeroBtn" style="margin-left:10px;">Login</button>
-<button class="btn" id="logoutBtn" style="margin-left:10px;">Logout</button>
 </div>
 </section>
 
@@ -82,7 +77,6 @@ footer a:hover{text-decoration:underline}
 <h2>Explore the Hub</h2>
 <div class="card-grid">
 
-<!-- Unlocked -->
 <a href="freeskills.html" class="card fundamentals">
   <h3>Fundamentals</h3>
   <p>Core skills including combos, wave management, positioning, and warding for consistent gameplay improvement.</p>
@@ -160,11 +154,25 @@ footer a:hover{text-decoration:underline}
 
 <script type="module">
 import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
-import { getAuth, signInWithEmailAndPassword, createUserWithEmailAndPassword, sendPasswordResetEmail, onAuthStateChanged, signOut } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-auth.js";
+import { getAuth, signInWithEmailAndPassword, createUserWithEmailAndPassword, sendPasswordResetEmail, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-auth.js";
 import { getFirestore, doc, setDoc, serverTimestamp, getDoc } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
 
-const firebaseConfig={apiKey:"AIzaSyCFRcEV7wdivqONnkjJubAZOjPMixrHMBI",authDomain:"lol-fundamentals.firebaseapp.com",projectId:"lol-fundamentals",storageBucket:"lol-fundamentals.firebasestorage.app",messagingSenderId:"1038440427584",appId:"1:1038440427584:web:a82207151fd370dbedefa5"};
-const app=initializeApp(firebaseConfig),auth=getAuth(app),firestore=getFirestore(app);
+const firebaseConfig = {
+  apiKey:"AIzaSyCFRcEV7wdivqONnkjJubAZOjPMixrHMBI",
+  authDomain:"lol-fundamentals.firebaseapp.com",
+  projectId:"lol-fundamentals",
+  storageBucket:"lol-fundamentals.firebasestorage.app",
+  messagingSenderId:"1038440427584",
+  appId:"1:1038440427584:web:a82207151fd370dbedefa5"
+};
+const app = initializeApp(firebaseConfig);
+const auth = getAuth(app);
+const firestore = getFirestore(app);
+
+// Redirect if logged in
+onAuthStateChanged(auth, (user)=>{
+  if(user) window.location.href="membershub.html";
+});
 
 signupHeroBtn.onclick=()=>signupModal.style.display="flex";
 loginHeroBtn.onclick=()=>loginModal.style.display="flex";
@@ -190,31 +198,17 @@ document.getElementById("lifetimeBtn").onclick=()=>{window.open("https://buy.str
 modalLoginBtn.onclick=async()=>{
   const e=loginEmail.value.trim(),p=loginPassword.value.trim();
   await signInWithEmailAndPassword(auth,e,p);
+  const snap=await getDoc(doc(firestore,"paidUsers",e));
+  if(snap.exists() && snap.data().paid){
+    localStorage.setItem("lolfundamentals_logged_in","true");
+    localStorage.setItem("lolfundamentals_paid","true");
+    window.location.href="membershub.html";
+  }else{
+    planModal.style.display="flex";
+  }
   loginModal.style.display="none";
 };
 
-// Instant login redirect & persistent login
-onAuthStateChanged(auth, async(user)=>{
-  if(user){
-    localStorage.setItem("lolfundamentals_logged_in","true");
-    const snap=await getDoc(doc(firestore,"paidUsers",user.email));
-    localStorage.setItem("lolfundamentals_paid",(snap.exists() && snap.data().paid)?"true":"false");
-    if(!window.location.href.includes("membershub.html")){
-      window.location.href="membershub.html";
-    }
-  } else {
-    localStorage.removeItem("lolfundamentals_logged_in");
-    localStorage.removeItem("lolfundamentals_paid");
-  }
-});
-
-// Logout button
-logoutBtn.onclick = async()=>{
-  await signOut(auth);
-  window.location.href="index.html";
-};
-
-// Password reset
 resetLinkModal.onclick=async(e)=>{
   e.preventDefault();
   await sendPasswordResetEmail(auth,loginEmail.value);
@@ -245,6 +239,7 @@ for(let i=0;i<50;i++){
 
 </body>
 </html>
+
 
 
 
