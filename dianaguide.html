@@ -8,6 +8,15 @@
 <link rel="preload" as="image" href="https://ddragon.leagueoflegends.com/cdn/img/champion/splash/Diana_11.jpg">
 
 <style>
+*, *::before, *::after {
+  box-sizing: border-box;
+}
+
+html, body {
+  width: 100%;
+  overflow-x: hidden;
+}
+
 :root {
   --gold:#c9aa71;
   --muted:#9da7b3;
@@ -23,8 +32,8 @@ html, body {
 body {
   display:flex;
   flex-direction:column;
-  background:url('https://ddragon.leagueoflegends.com/cdn/img/champion/splash/Diana_11.jpg')
-    no-repeat center center fixed;
+background: url('https://ddragon.leagueoflegends.com/cdn/img/champion/splash/Diana_11.jpg')
+  no-repeat center center;
   background-size:cover;
   color:#e6edf3;
   min-height:100vh;
@@ -713,6 +722,7 @@ function loadSection(section) {
 
 </body>
 </html>
+
 
 
 
