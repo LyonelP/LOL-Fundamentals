@@ -87,16 +87,12 @@ header {
 @media(min-width:1024px) {
   .nav-wrapper {
     display:block;
-    position:fixed;
-    top:70px; /* below header */
-    left:0;
+    position: relative; /* scrolls with page */
     width:220px;
-    bottom:0;
     background:rgba(15,20,26,0.95);
     border-right:2px solid var(--gold);
     padding-top:20px;
-    overflow-y:auto;
-    z-index:9;
+    margin-top:70px; /* offset for header */
   }
 
   .nav-section-title {
@@ -528,6 +524,7 @@ function loadSection(section){
 
 </body>
 </html>
+
 
 
 
