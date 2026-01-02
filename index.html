@@ -101,7 +101,7 @@ footer a:hover{text-decoration:underline}
   </div>
 </a>
 
-<!-- Locked cards -->
+<!-- Locked cards (still just open signup modal) -->
 <a href="#" class="card ekko-guide locked">
   <h3>Ekko Guide</h3>
   <p>Complete guide to playing Ekko Jungle, including combos, pathing, and advanced mechanics.</p>
@@ -185,12 +185,13 @@ footer a:hover{text-decoration:underline}
 
 <script type="module">
 import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
-import { getAuth, signInWithEmailAndPassword, createUserWithEmailAndPassword, sendPasswordResetEmail } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-auth.js";
+import { getAuth, onAuthStateChanged, signInWithEmailAndPassword, createUserWithEmailAndPassword, sendPasswordResetEmail } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-auth.js";
 import { getFirestore, doc, setDoc, serverTimestamp, getDoc } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
 
 const firebaseConfig={apiKey:"AIzaSyCFRcEV7wdivqONnkjJubAZOjPMixrHMBI",authDomain:"lol-fundamentals.firebaseapp.com",projectId:"lol-fundamentals",storageBucket:"lol-fundamentals.firebasestorage.app",messagingSenderId:"1038440427584",appId:"1:1038440427584:web:a82207151fd370dbedefa5"};
 const app=initializeApp(firebaseConfig),auth=getAuth(app),firestore=getFirestore(app);
 
+// Hero buttons
 signupHeroBtn.onclick=()=>signupModal.style.display="flex";
 loginHeroBtn.onclick=()=>loginModal.style.display="flex";
 closeSignupModal.onclick=()=>signupModal.style.display="none";
@@ -198,6 +199,7 @@ closePlanModal.onclick=()=>planModal.style.display="none";
 closeLoginModal.onclick=()=>loginModal.style.display="none";
 seePlansBtn.onclick=()=>{signupModal.style.display="none";planModal.style.display="flex"};
 
+// Signup
 continueSignupBtn.onclick=async()=>{
   const e=signupEmail.value.trim(),p=signupPassword.value.trim(),c=signupPasswordConfirm.value.trim();
   if(!e||!p||!c){alert("Fill all fields");return}
@@ -208,37 +210,24 @@ continueSignupBtn.onclick=async()=>{
   planModal.style.display="flex";
 };
 
-document.getElementById("monthlyBtn").onclick=()=>{window.open("https://buy.stripe.com/8x28wIaQ4dJa4Rg88iejK0f","_blank");planModal.style.display="none";}
-document.getElementById("yearlyBtn").onclick=()=>{window.open("https://buy.stripe.com/cNi14g3nC48AerQ9cmejK07","_blank");planModal.style.display="none";}
-document.getElementById("lifetimeBtn").onclick=()=>{window.open("https://buy.stripe.com/fZu00c9M0awYgzYcoyejK06","_blank");planModal.style.display="none";}
+// Stripe
+monthlyBtn.onclick=()=>{window.open("https://buy.stripe.com/8x28wIaQ4dJa4Rg88iejK0f","_blank");planModal.style.display="none";}
+yearlyBtn.onclick=()=>{window.open("https://buy.stripe.com/cNi14g3nC48AerQ9cmejK07","_blank");planModal.style.display="none";}
+lifetimeBtn.onclick=()=>{window.open("https://buy.stripe.com/fZu00c9M0awYgzYcoyejK06","_blank");planModal.style.display="none";}
 
+// Login
 modalLoginBtn.onclick=async()=>{
   const e=loginEmail.value.trim(),p=loginPassword.value.trim();
-  try{
-    await signInWithEmailAndPassword(auth,e,p);
-    const snap=await getDoc(doc(firestore,"paidUsers",e));
-    if(snap.exists() && snap.data().paid){
-      localStorage.setItem("lolfundamentals_logged_in","true");
-      localStorage.setItem("lolfundamentals_paid","true");
-      window.location.href="membershub.html";
-    } else {
-      alert("You need a paid plan to access locked content.");
-      planModal.style.display="flex";
-    }
-    loginModal.style.display="none";
-  } catch(err){
-    alert("Login failed: " + err.message);
-  }
+  await signInWithEmailAndPassword(auth,e,p);
+  loginModal.style.display="none";
+  planModal.style.display="flex"; // always show plan modal for new login if needed
 };
 
+// Password reset
 resetLinkModal.onclick=async(e)=>{
   e.preventDefault();
-  try{
-    await sendPasswordResetEmail(auth,loginEmail.value);
-    loginMsgModal.textContent="Password reset email sent!";
-  } catch(err){
-    loginMsgModal.textContent="Error sending reset email.";
-  }
+  await sendPasswordResetEmail(auth,loginEmail.value);
+  loginMsgModal.textContent="Password reset email sent!";
 };
 
 // Particle effect
@@ -254,25 +243,21 @@ for(let i=0;i<50;i++){
   document.querySelector(".particles").appendChild(e);
 }
 
-// Locked card click opens login/signup based on login state
+// Locked cards click
 document.querySelectorAll('.locked').forEach(card=>{
-  card.addEventListener('click',async()=>{
-    const loggedIn = localStorage.getItem("lolfundamentals_logged_in");
-    const paid = localStorage.getItem("lolfundamentals_paid");
-    if(loggedIn && paid) window.location.href = card.classList.contains('ekko-guide') ? "ekko.html" : card.classList.contains('diana-guide') ? "diana.html" : card.classList.contains('build-calculator') ? "combo-calculator.html" : card.classList.contains('rune-calculator') ? "rune-calculator.html" : "#";
-    else signupModal.style.display='flex';
-  });
+  card.addEventListener('click',()=>{signupModal.style.display='flex'});
 });
 
-// On page load, restore login state if already authenticated
-import { onAuthStateChanged } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-auth.js";
-onAuthStateChanged(auth, async(user)=>{
+// Persistent login across tabs
+onAuthStateChanged(auth, async (user)=>{
   if(user){
-    const snap=await getDoc(doc(firestore,"paidUsers",user.email));
-    if(snap.exists()){
-      localStorage.setItem("lolfundamentals_logged_in","true");
-      localStorage.setItem("lolfundamentals_paid",snap.data().paid);
-    }
+    const snap = await getDoc(doc(firestore,"paidUsers",user.email));
+    const isPaid = snap.exists() ? snap.data().paid : false;
+    localStorage.setItem("lolfundamentals_logged_in","true");
+    localStorage.setItem("lolfundamentals_paid", isPaid ? "true" : "false");
+  } else {
+    localStorage.removeItem("lolfundamentals_logged_in");
+    localStorage.removeItem("lolfundamentals_paid");
   }
 });
 </script>
@@ -284,7 +269,11 @@ onAuthStateChanged(auth, async(user)=>{
   100%{transform:translateY(0) translateX(0) scale(1);opacity:1}
 }
 
-.card:not(.locked):hover {transform: translateY(-6px);box-shadow: 0 12px 26px rgba(201,170,113,0.5);}
+/* Gold hover effect for all unlocked cards */
+.card:not(.locked):hover {
+  transform: translateY(-6px);
+  box-shadow: 0 12px 26px rgba(201,170,113,0.5);
+}
 </style>
 
 </body>
