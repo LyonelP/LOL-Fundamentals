@@ -13,7 +13,7 @@
   --muted:#9da7b3;
 }
 
-/* Base styles */
+/* Base Styles */
 html, body {
   margin:0;
   padding:0;
@@ -55,7 +55,7 @@ header {
 /* Back button centered below header */
 .back-wrap {
   text-align:center;
-  margin:16px 0 32px;
+  margin:16px 0;
 }
 
 .back-button {
@@ -75,78 +75,90 @@ header {
   font-weight:bold;
 }
 
-/* Footer */
+/* Page layout: sidebar + content + footer */
+.page-container {
+  display:flex;
+  flex:1;
+  min-height:calc(100vh - 100px); /* leave space for header/back button */
+}
+
+/* Sidebar for desktop */
+.nav-wrapper {
+  display:none; /* show only on desktop */
+  width:220px;
+  background:rgba(15,20,26,0.95);
+  border-right:2px solid var(--gold);
+  flex-shrink:0;
+  display:flex;
+  flex-direction:column;
+  position:sticky;
+  top:0;
+  height:100%;
+  padding-top:0;
+  overflow-y:auto;
+}
+
+.nav-section-title {
+  font-size:11px;
+  color:var(--muted);
+  padding:14px 24px;
+  text-transform:uppercase;
+}
+
+.nav-menu a {
+  display:block;
+  padding:10px 24px;
+  text-decoration:none;
+  color:#e6edf3;
+  cursor:pointer;
+  border-radius:8px;
+}
+
+.nav-menu a:hover {
+  background:var(--gold);
+  color:#000;
+}
+
+/* Main content */
+.main {
+  flex:1;
+  display:flex;
+  justify-content:center;
+  align-items:flex-start;
+  padding:24px;
+}
+
+.card {
+  max-width:800px;
+  width:100%;
+  background:rgba(255,255,255,0.03);
+  border-radius:26px;
+  padding:36px;
+  box-shadow:0 24px 70px rgba(0,0,0,0.55);
+}
+
+.card h2 {
+  color:var(--gold);
+  margin-top:0;
+}
+
+.card ul {
+  padding-left:22px;
+}
+
+.card li {
+  margin-bottom:8px;
+}
+
+/* Footer always at bottom */
 footer {
   padding:16px;
   text-align:center;
   font-size:13px;
   color:var(--muted);
-  margin-top:auto;
 }
 
-/* Desktop layout */
-@media (min-width:1024px) {
-  .desktop-layout {
-    display:flex;
-    flex:1;
-    min-height:calc(100vh - 120px); /* leave space for header + back button */
-  }
-
-  /* Sidebar on far left under header/back button */
-  .nav-wrapper {
-    width:220px;
-    background:rgba(15,20,26,0.95);
-    border-right:2px solid var(--gold);
-    display:flex;
-    flex-direction:column;
-    position:sticky;
-    top:0;
-    height:100%;
-    overflow-y:auto;
-    padding-top:20px;
-  }
-
-  .nav-section-title {
-    font-size:11px;
-    color:var(--muted);
-    padding:14px 24px;
-    text-transform:uppercase;
-  }
-
-  .nav-menu a {
-    display:block;
-    padding:10px 24px;
-    text-decoration:none;
-    color:#e6edf3;
-    cursor:pointer;
-    border-radius:8px;
-  }
-
-  .nav-menu a:hover {
-    background:var(--gold);
-    color:#000;
-  }
-
-  /* Main content next to sidebar and centered */
-  .main {
-    flex:1;
-    display:flex;
-    justify-content:center;
-    align-items:flex-start;
-    padding:0 24px;
-  }
-
-  .card {
-    max-width:800px;
-    width:100%;
-    background:rgba(255,255,255,0.03);
-    border-radius:26px;
-    padding:36px;
-    box-shadow:0 24px 70px rgba(0,0,0,0.55);
-  }
-}
-
-/* Mobile dropdown */
+/* Mobile dropdown nav */
 .nav-trigger {
   width:100%;
   padding:18px 22px;
@@ -169,6 +181,13 @@ footer {
   padding:14px;
   display:none;
 }
+
+/* Desktop layout adjustments */
+@media(min-width:1024px) {
+  .nav-wrapper {
+    display:flex;
+  }
+}
 </style>
 </head>
 
@@ -181,10 +200,10 @@ footer {
   <a href="membershub.html" class="back-button">Back to Members Hub</a>
 </div>
 
-<!-- Desktop layout -->
-<div class="desktop-layout">
+<!-- Page container -->
+<div class="page-container">
 
-  <!-- Sidebar / Taskbar -->
+  <!-- Sidebar -->
   <div class="nav-wrapper">
     <div class="nav-menu" id="navMenu">
       <div class="nav-section-title">Core</div>
@@ -219,15 +238,9 @@ footer {
 <footer>© 2026 LoL Fundamentals · All rights reserved</footer>
 
 <script>
-function toggleMenu() {
-  const menu = document.getElementById('navMenu');
-  menu.style.display = menu.style.display === 'block' ? 'none' : 'block';
-}
-
 function loadSection(section) {
   const content = document.getElementById('content');
-  toggleMenu();
-
+  // Do not hide sidebar on desktop
   const sections = {
     intro: `<h2>Intro</h2><p>…your intro content here…</p>`,
     runes: `<h2>Runes</h2><p>…your runes content here…</p>`,
@@ -241,25 +254,12 @@ function loadSection(section) {
     teamfighting: `<h2>Teamfighting</h2><p>…your teamfighting content here…</p>`,
     extra: `<h2>Extra Tips</h2><p>…your extra tips content here…</p>`
   };
-
   content.innerHTML = sections[section] || '<h2>Section not found</h2>';
 }
 </script>
 
 </body>
 </html>
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 
