@@ -1,19 +1,15 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8" />
+<meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Diana Mid Guide</title>
-
-<link rel="preload" as="image" href="https://ddragon.leagueoflegends.com/cdn/img/champion/splash/Diana_11.jpg">
-
 <style>
 :root {
   --gold:#c9aa71;
   --muted:#9da7b3;
 }
 
-/* Base styles */
 html, body {
   margin:0;
   padding:0;
@@ -25,9 +21,6 @@ body {
   background:url('https://ddragon.leagueoflegends.com/cdn/img/champion/splash/Diana_11.jpg') no-repeat center center fixed;
   background-size:cover;
   color:#e6edf3;
-  display:grid;
-  grid-template-rows:auto 1fr auto; /* header/back, main, footer */
-  min-height:100vh;
 }
 
 body::before {
@@ -42,10 +35,10 @@ body::before {
 
 /* Header */
 header {
-  grid-row:1 / 2;
+  width:100%;
   background:rgba(13,17,23,0.9);
   border-bottom:2px solid var(--gold);
-  padding:20px 10px;
+  padding:20px 0;
   font-size:26px;
   font-weight:bold;
   color:var(--gold);
@@ -53,11 +46,10 @@ header {
   text-transform: uppercase;
 }
 
-/* Back button below header */
+/* Back button */
 .back-wrap {
-  grid-row:2 / 3;
   text-align:center;
-  margin:16px 0;
+  margin:16px 0 32px;
 }
 
 .back-button {
@@ -74,60 +66,58 @@ header {
 
 .back-button::before {
   content:"←";
-  font-weight:bold;
-}
-
-/* Main content area: sidebar + content */
-.main-container {
-  display:grid;
-  grid-template-columns:220px 1fr;
-  gap:24px;
-  padding:0 24px;
-  grid-row:3 / 4;
 }
 
 /* Sidebar */
 .nav-wrapper {
-  background:rgba(15,20,26,0.95);
-  border-right:2px solid var(--gold);
-  display:flex;
-  flex-direction:column;
-  padding-top:20px;
-  height:calc(100vh - 120px); /* header + back button space */
-  position:sticky;
-  top:0;
-  overflow-y:auto;
+  display:none;
 }
 
-.nav-section-title {
-  font-size:11px;
-  color:var(--muted);
-  padding:14px 24px;
-  text-transform:uppercase;
-}
+@media(min-width:1024px) {
+  .nav-wrapper {
+    display:block;
+    position:fixed;
+    top:84px; /* header + back button height */
+    left:0;
+    width:220px;
+    height:calc(100vh - 84px);
+    background:rgba(15,20,26,0.95);
+    border-right:2px solid var(--gold);
+    padding-top:20px;
+    overflow-y:auto;
+  }
 
-.nav-menu a {
-  display:block;
-  padding:10px 24px;
-  text-decoration:none;
-  color:#e6edf3;
-  cursor:pointer;
-  border-radius:8px;
-}
+  .nav-section-title {
+    font-size:11px;
+    color:var(--muted);
+    padding:14px 24px;
+    text-transform:uppercase;
+  }
 
-.nav-menu a:hover {
-  background:var(--gold);
-  color:#000;
+  .nav-menu a {
+    display:block;
+    padding:10px 24px;
+    text-decoration:none;
+    color:#e6edf3;
+    cursor:pointer;
+    border-radius:8px;
+  }
+
+  .nav-menu a:hover {
+    background:var(--gold);
+    color:#000;
+  }
+
+  /* Content shifted right of sidebar and centered */
+  .main {
+    margin-left:220px;
+    display:flex;
+    justify-content:center;
+    padding:0 24px;
+  }
 }
 
 /* Content card */
-.main {
-  display:flex;
-  justify-content:center;
-  align-items:flex-start;
-  padding-top:0;
-}
-
 .card {
   max-width:800px;
   width:100%;
@@ -152,27 +142,38 @@ header {
 
 /* Footer */
 footer {
-  grid-row:4 / 5;
   padding:16px;
   text-align:center;
   font-size:13px;
   color:var(--muted);
+  margin-top:32px;
 }
 
-/* Mobile layout */
-@media (max-width:1023px) {
-  .main-container {
-    display:block;
-    padding:0 16px;
-  }
+/* Mobile nav trigger */
+.nav-trigger {
+  width:100%;
+  padding:18px 22px;
+  font-size:16px;
+  font-weight:600;
+  background:rgba(255,255,255,0.05);
+  border:none;
+  border-radius:20px;
+  color:#fff;
+  cursor:pointer;
+}
 
-  .nav-wrapper {
-    display:none;
-  }
+.nav-menu-mobile {
+  position:absolute;
+  top:calc(100% + 16px);
+  left:0;
+  right:0;
+  background:rgba(15,20,26,0.98);
+  border-radius:24px;
+  padding:14px;
+  display:none;
 }
 </style>
 </head>
-
 <body>
 
 <header>Diana Mid Guide</header>
@@ -181,42 +182,40 @@ footer {
   <a href="membershub.html" class="back-button">Back to Members Hub</a>
 </div>
 
-<div class="main-container">
-  <!-- Sidebar -->
-  <div class="nav-wrapper">
-    <div class="nav-menu" id="navMenu">
-      <div class="nav-section-title">Core</div>
-      <a onclick="loadSection('intro')">Intro</a>
-      <a onclick="loadSection('runes')">Runes</a>
-      <a onclick="loadSection('build')">Build</a>
-      <a onclick="loadSection('summoners')">Summoners</a>
-      <a onclick="loadSection('abilities')">Abilities</a>
-      <a onclick="loadSection('combos')">Combos</a>
+<!-- Sidebar -->
+<div class="nav-wrapper">
+  <div class="nav-menu" id="navMenu">
+    <div class="nav-section-title">Core</div>
+    <a onclick="loadSection('intro')">Intro</a>
+    <a onclick="loadSection('runes')">Runes</a>
+    <a onclick="loadSection('build')">Build</a>
+    <a onclick="loadSection('summoners')">Summoners</a>
+    <a onclick="loadSection('abilities')">Abilities</a>
+    <a onclick="loadSection('combos')">Combos</a>
 
-      <div class="nav-section-title">Gameplay</div>
-      <a onclick="loadSection('laning')">Laning</a>
-      <a onclick="loadSection('warding')">Warding</a>
-      <a onclick="loadSection('farming')">Farming / Pushing</a>
-      <a onclick="loadSection('teamfighting')">Teamfighting</a>
+    <div class="nav-section-title">Gameplay</div>
+    <a onclick="loadSection('laning')">Laning</a>
+    <a onclick="loadSection('warding')">Warding</a>
+    <a onclick="loadSection('farming')">Farming / Pushing</a>
+    <a onclick="loadSection('teamfighting')">Teamfighting</a>
 
-      <div class="nav-section-title">Advanced</div>
-      <a onclick="loadSection('extra')">Extra Tips</a>
-    </div>
+    <div class="nav-section-title">Advanced</div>
+    <a onclick="loadSection('extra')">Extra Tips</a>
   </div>
+</div>
 
-  <!-- Main content -->
-  <div class="main">
-    <div id="content" class="card">
-      <h2>Choose a Section</h2>
-      <p>Select a section from the menu to explore the Diana Mid guide.</p>
-    </div>
+<!-- Main content -->
+<div class="main">
+  <div id="content" class="card">
+    <h2>Choose a Section</h2>
+    <p>Select a section from the menu to explore the Diana Mid guide.</p>
   </div>
 </div>
 
 <footer>© 2026 LoL Fundamentals · All rights reserved</footer>
 
 <script>
-function loadSection(section) {
+function loadSection(section){
   const content = document.getElementById('content');
   const sections = {
     intro: `<h2>Intro</h2><p>…your intro content here…</p>`,
@@ -237,26 +236,6 @@ function loadSection(section) {
 
 </body>
 </html>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 
