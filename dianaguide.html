@@ -77,7 +77,7 @@ header {
   content:"←";
 }
 
-/* Sidebar for desktop */
+/* Sidebar desktop */
 .nav-wrapper {
   display:none;
 }
@@ -86,7 +86,7 @@ header {
   .nav-wrapper {
     display:block;
     position:fixed;
-    top:70px; /* slightly below header */
+    top:70px; /* below header */
     left:0;
     width:220px;
     bottom:0;
@@ -153,7 +153,7 @@ header {
   margin-bottom:8px;
 }
 
-/* Footer always at bottom */
+/* Footer */
 footer {
   padding:16px;
   text-align:center;
@@ -162,7 +162,7 @@ footer {
   margin-top:auto;
 }
 
-/* Mobile nav trigger */
+/* Mobile menu button */
 .nav-trigger {
   display:block;
   width:90%;
@@ -181,28 +181,23 @@ footer {
   z-index:10;
 }
 
-/* Mobile dropdown menu */
+/* Mobile menu dropdown */
 .nav-menu-mobile {
   display:none;
-  opacity:0;
-  max-height:0;
-  overflow:hidden;
-  transition:all 0.3s ease;
   position:relative;
+  margin:0 auto 24px;
   width:90%;
   max-width:360px;
-  margin:0 auto;
+  max-height:300px; /* limit height for scrolling */
+  overflow-y:auto;
   background:rgba(15,20,26,0.95);
   border-radius:20px;
-  padding:0;
+  padding:12px 0;
   z-index:9;
 }
 
 .nav-menu-mobile.show {
   display:block;
-  opacity:1;
-  max-height:1000px;
-  padding:12px 0;
 }
 
 .nav-menu-mobile a {
@@ -218,7 +213,7 @@ footer {
   color:#000;
 }
 
-/* Hide mobile menu button on desktop */
+/* Hide mobile on desktop */
 @media(min-width:1024px) {
   .nav-trigger, .nav-menu-mobile {
     display:none;
@@ -234,7 +229,7 @@ footer {
   <a href="membershub.html" class="back-button">Back to Members Hub</a>
 </div>
 
-<!-- Mobile dropdown button -->
+<!-- Mobile Dropdown -->
 <button class="nav-trigger" onclick="toggleMobileMenu()">Select a Section</button>
 <div class="nav-menu-mobile" id="mobileMenu">
   <a onclick="loadSection('intro')">Intro</a>
@@ -254,7 +249,7 @@ footer {
   <a onclick="loadSection('extra')">Extra Tips</a>
 </div>
 
-<!-- Sidebar for desktop -->
+<!-- Desktop Sidebar -->
 <div class="nav-wrapper">
   <div class="nav-menu" id="navMenu">
     <div class="nav-section-title">Core</div>
@@ -264,6 +259,7 @@ footer {
     <a onclick="loadSection('summoners')">Summoners</a>
     <a onclick="loadSection('abilities')">Abilities</a>
     <a onclick="loadSection('combos')">Combos</a>
+
     <div class="nav-section-title">Gameplay</div>
     <a onclick="loadSection('laning')">Laning</a>
     <a onclick="loadSection('warding')">Warding</a>
@@ -271,6 +267,7 @@ footer {
     <a onclick="loadSection('teamfighting')">Teamfighting</a>
     <a onclick="loadSection('splitpushing')">Splitpushing</a>
     <a onclick="loadSection('closing')">Closing Out The Game</a>
+
     <div class="nav-section-title">Advanced</div>
     <a onclick="loadSection('threats')">Threats & Synergies</a>
     <a onclick="loadSection('pros')">Pros & Cons</a>
@@ -278,7 +275,7 @@ footer {
   </div>
 </div>
 
-<!-- Main content -->
+<!-- Main Content -->
 <div class="main">
   <div id="content" class="card">
     <h2>Choose a Section</h2>
@@ -290,8 +287,7 @@ footer {
 
 <script>
 function toggleMobileMenu(){
-  const menu = document.getElementById('mobileMenu');
-  menu.classList.toggle('show');
+  document.getElementById('mobileMenu').classList.toggle('show');
 }
 
 function loadSection(section){
@@ -316,15 +312,13 @@ function loadSection(section){
   };
   content.innerHTML = sections[section] || '<h2>Section not found</h2>';
 
-  // Close mobile menu after selection
-  const menu = document.getElementById('mobileMenu');
-  menu.classList.remove('show');
+  // close mobile menu after selection
+  document.getElementById('mobileMenu').classList.remove('show');
 }
 </script>
 
 </body>
 </html>
-
 
 
 
