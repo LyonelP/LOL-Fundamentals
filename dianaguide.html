@@ -588,7 +588,7 @@ function loadSection(section){
    <ul>
       <li><p>Tip: Diana R can be used in lane to draw your opponent into taking more minion hits after they've auto attacked you. Look to take advantage of this on cannon waves.</p></li>
       <li><p>Tip: Make sure you stay close to minions to proc the second shield from Diana W.</p></li>
-    </ul></p>`,
+    </ul></p>,
     warding: `<h2>Warding</h2><p> <img src="https://i.imgur.com/jS14khw.png" alt="Warding Example" style="float:right; width:425px; max-width:50%; height:auto; margin:0 0 1em 1em;">
    
     <p><strong>Level 1:</strong> On Diana you always want to place your wards on the side that your Q arcs back to. On the blue side this means warding top side and on red side bot side. Your first ward is placed after the first or second wave right above the entrance to the river. If they have a jungler who can gank lvl 1 then place this right before the first wave settles. After your first back you want to try to always have a pink in that side bush that you’ve been warding towards. As the game continues you'll be able to push faster and move the ward towards the enemy raptors. The other good ward to play is above the wall on the other side-bush.</p>
@@ -676,7 +676,8 @@ function loadSection(section){
     Diana’s W is great for assisting with last hits. Early game each sphere is about
     one auto and you can kite back between each sphere. The spheres last 5 seconds,
     as well as the shield if proc’d.
-  </p></p>`,
+  </p></p>,
+   
     teamfighting: `<h2>Teamfighting</h2><p> <p>Diana has great teamfighting. Look to deal enough damage to a priority target that they are required to leave the fight. Ideally they should be in execute range of your next Q. Teamfighting becomes a lot stronger on Diana with stopwatch or hourglass. Then you can look to pull in multiple targets with your R, then W Q R, and stopwatch.</p>
 
     <p>Keep track of enemy flash timers. If any enemy carry has flash, then you’ll want to hold the ult and look for an E W AA Q combo.</p></p>`,
@@ -695,7 +696,8 @@ function loadSection(section){
     </ul></p>`,
     closing: `<h2>Closing Out The Game</h2><p>    <p>Diana's best way of getting wins is by forcing early surrenders by successfully taking multiple mid towers in the early game. Otherwise closing out a game of league relies heavily on Baron as well as atakhan and dragons/elder. Baron spawn has been pushed back to 25 minutes. This gives Diana extra time to play for the split push. The split push has to be placed on hold if dragon or atakhan are up.</p>
 
-    <p>If you’re on blue side you can trade second dragon for the tier 2 tower.</p></p>`,
+    <p>If you’re on blue side you can trade second dragon for the tier 2 tower.</p></p>,
+    
     threats: `<h2>Threats & Synergies</h2><p> <h3>Threats</h3>
     <p>Any champion with high sustain damage and survivability counters Diana. Diana has to commit to the fight and if she can’t burst or out dps the enemy champion she’ll die.</p>
 
@@ -741,8 +743,9 @@ function loadSection(section){
       <li>Diana can jump to baron and dragon with E at these spots</li>
       <li>If you can get your passive and the enemy has flash available then R into auto with passive into a full q towards where they might flash to.</li>
     </ol>
-  `</p>`
+  </p>
   };
+ 
   content.innerHTML = sections[section] || '<h2>Section not found</h2>';
 
   // Close mobile menu
