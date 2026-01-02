@@ -13,6 +13,7 @@
   --muted:#9da7b3;
 }
 
+/* Base Styles */
 html, body {
   margin:0;
   padding:0;
@@ -39,7 +40,7 @@ body::before {
   z-index:-1;
 }
 
-/* Header spans full width */
+/* Header */
 header {
   background:rgba(13,17,23,0.9);
   border-bottom:2px solid var(--gold);
@@ -74,23 +75,34 @@ header {
   font-weight:bold;
 }
 
-/* Main wrapper for sidebar + content */
-.wrapper {
-  display:flex;
-  flex:1;
-  max-width:1200px;
-  margin:0 auto;
-  padding:0 16px 40px;
-}
-
-/* Sidebar for desktop taskbar */
+/* Mobile dropdown */
 .nav-wrapper {
-  display:none; /* hide by default for mobile */
+  max-width:420px;
+  margin:0 auto 46px;
+  position:relative;
 }
 
-.nav-menu {
-  display:flex;
-  flex-direction:column;
+.nav-trigger {
+  width:100%;
+  padding:18px 22px;
+  font-size:16px;
+  font-weight:600;
+  background:rgba(255,255,255,0.05);
+  border:none;
+  border-radius:20px;
+  color:#fff;
+  cursor:pointer;
+}
+
+.nav-menu-mobile {
+  position:absolute;
+  top:calc(100% + 16px);
+  left:0;
+  right:0;
+  background:rgba(15,20,26,0.98);
+  border-radius:24px;
+  padding:14px;
+  display:none;
 }
 
 .nav-section-title {
@@ -114,7 +126,7 @@ header {
   color:#000;
 }
 
-/* Card/content */
+/* Content Card */
 .main {
   flex:1;
 }
@@ -124,6 +136,8 @@ header {
   border-radius:26px;
   padding:36px;
   box-shadow:0 24px 70px rgba(0,0,0,0.55);
+  max-width:800px;
+  margin:0 auto; /* Center content horizontally */
 }
 
 .card h2 {
@@ -148,37 +162,21 @@ footer {
   margin-top:auto;
 }
 
-/* MOBILE LAYOUT: dropdown nav */
-.nav-trigger {
-  width:100%;
-  padding:18px 22px;
-  font-size:16px;
-  font-weight:600;
-  background:rgba(255,255,255,0.05);
-  border:none;
-  border-radius:20px;
-  color:#fff;
-  cursor:pointer;
-}
-
-.nav-menu-mobile {
-  position:absolute;
-  top:calc(100% + 16px);
-  left:0;
-  right:0;
-  background:rgba(15,20,26,0.98);
-  border-radius:24px;
-  padding:14px;
-  display:none;
-}
-
 /* DESKTOP TASKBAR */
 @media (min-width: 1024px) {
-  .wrapper {
-    flex-direction:row;
-    gap:24px;
+  body {
+    flex-direction:column;
   }
 
+  .wrapper {
+    display:flex;
+    flex-direction:row;
+    max-width:1200px;
+    margin:0 auto;
+    flex:1;
+  }
+
+  /* Sidebar on the far left below header */
   .nav-wrapper {
     display:flex;
     flex-direction:column;
@@ -189,6 +187,7 @@ footer {
     padding:20px 0;
     max-height:calc(100vh - 120px); /* leave space for header + back button */
     overflow-y:auto;
+    margin-left:16px;
   }
 
   .nav-trigger {
@@ -196,6 +195,8 @@ footer {
   }
 
   .nav-menu {
+    display:flex;
+    flex-direction:column;
     padding:0 0 20px;
   }
 
@@ -212,10 +213,19 @@ footer {
     color:#000;
   }
 
-  /* keep back button centered above sidebar content */
+  /* Back button stays centered above content */
   .back-wrap {
     text-align:center;
-    margin-bottom:16px;
+    margin:16px 0 32px;
+  }
+
+  /* Main content centered */
+  .main {
+    flex:1;
+    display:flex;
+    justify-content:center;
+    align-items:flex-start;
+    padding:0 24px;
   }
 }
 </style>
@@ -225,13 +235,14 @@ footer {
 
 <header>Diana Mid Guide</header>
 
+<!-- Back button -->
 <div class="back-wrap">
   <a href="membershub.html" class="back-button">Back to Members Hub</a>
 </div>
 
 <div class="wrapper">
 
-  <!-- Desktop sidebar -->
+  <!-- Desktop sidebar / taskbar -->
   <div class="nav-wrapper">
     <div class="nav-menu" id="navMenu">
       <div class="nav-section-title">Core</div>
@@ -295,50 +306,6 @@ function loadSection(section) {
 
 </body>
 </html>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 
