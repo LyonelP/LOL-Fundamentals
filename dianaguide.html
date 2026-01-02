@@ -190,7 +190,7 @@ footer {
 
 .nav-menu-mobile {
   display:none;
-  position:relative; /* make it push content down */
+  position:relative; /* pushes content down */
   width:90%;
   max-width:360px;
   margin:0 auto 16px auto;
@@ -198,6 +198,13 @@ footer {
   border-radius:26px;
   padding:12px 0;
   z-index:9;
+}
+
+.nav-menu-mobile .nav-section-title {
+  font-size:11px;
+  color:var(--muted);
+  padding:10px 20px;
+  text-transform:uppercase;
 }
 
 .nav-menu-mobile a {
@@ -231,24 +238,27 @@ footer {
 <!-- Mobile dropdown button -->
 <button class="nav-trigger" onclick="toggleMobileMenu()">Select a Section</button>
 <div class="nav-menu-mobile" id="mobileMenu">
+  <div class="nav-section-title">Core</div>
   <a onclick="loadSection('intro')">Intro</a>
   <a onclick="loadSection('runes')">Runes</a>
   <a onclick="loadSection('build')">Build</a>
   <a onclick="loadSection('summoners')">Summoners</a>
   <a onclick="loadSection('abilities')">Abilities</a>
   <a onclick="loadSection('combos')">Combos</a>
+  <div class="nav-section-title">Gameplay</div>
   <a onclick="loadSection('laning')">Laning</a>
   <a onclick="loadSection('warding')">Warding</a>
   <a onclick="loadSection('farming')">Farming / Pushing</a>
   <a onclick="loadSection('teamfighting')">Teamfighting</a>
   <a onclick="loadSection('splitpushing')">Splitpushing</a>
   <a onclick="loadSection('closing')">Closing Out The Game</a>
+  <div class="nav-section-title">Advanced</div>
   <a onclick="loadSection('threats')">Threats & Synergies</a>
   <a onclick="loadSection('pros')">Pros & Cons</a>
   <a onclick="loadSection('extra')">Extra Tips</a>
 </div>
 
-<!-- Sidebar for desktop -->
+<!-- Sidebar desktop -->
 <div class="nav-wrapper">
   <div class="nav-menu" id="navMenu">
     <div class="nav-section-title">Core</div>
@@ -314,13 +324,15 @@ function loadSection(section){
   const menu = document.getElementById('mobileMenu');
   if(menu.style.display === 'block') menu.style.display = 'none';
 
-  // Scroll to top of content on selection
-  content.scrollIntoView({behavior: 'smooth'});
+  // Scroll content into view without moving the page down
+  content.scrollIntoView({behavior:'smooth', block:'start'});
 }
 </script>
 
 </body>
 </html>
+
+
 
 
 
