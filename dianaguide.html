@@ -47,7 +47,7 @@ header {
   font-weight:bold;
   color:var(--gold);
   text-align:center;
-  text-transform: uppercase; /* HEADER ALL CAPS */
+  text-transform: uppercase; /* header all caps */
 }
 
 .main {
@@ -57,12 +57,16 @@ header {
   flex:1;
 }
 
+/* Back button */
 .back-wrap {
   text-align:center;
   margin-bottom:32px;
 }
 
 .back-button {
+  display:inline-flex;
+  align-items:center;
+  gap:8px;
   padding:10px 22px;
   background:linear-gradient(135deg,var(--gold),#e0c77b);
   color:#000;
@@ -71,13 +75,18 @@ header {
   font-weight:bold;
 }
 
+.back-button::before {
+  content:"←";
+  font-weight:bold;
+}
+
+/* Mobile Dropdown */
 .nav-wrapper {
   max-width:420px;
   margin:0 auto 46px;
   position:relative;
 }
 
-/* Mobile Dropdown Trigger */
 .nav-trigger {
   width:100%;
   padding:18px 22px;
@@ -90,7 +99,6 @@ header {
   cursor:pointer;
 }
 
-/* Nav Menu */
 .nav-menu {
   position:absolute;
   top:calc(100% + 16px);
@@ -121,6 +129,7 @@ header {
   color:var(--gold);
 }
 
+/* Card */
 .card {
   background:rgba(255,255,255,0.03);
   border-radius:26px;
@@ -148,42 +157,60 @@ footer {
   color:var(--muted);
 }
 
-/* DESKTOP TASKBAR */
+/* DESKTOP LAYOUT: vertical left taskbar */
 @media (min-width: 1024px) {
+  body {
+    flex-direction:row;
+  }
+
+  .main {
+    margin:0;
+    padding:40px;
+    flex:1;
+  }
+
+  .back-wrap {
+    text-align:left;
+    margin-bottom:20px;
+  }
+
   .nav-wrapper {
-    max-width:100%;
+    position:fixed;
+    top:0;
+    left:0;
+    bottom:0;
+    width:240px;
+    background:rgba(15,20,26,0.95);
+    border-right:2px solid var(--gold);
+    padding:20px 0;
     display:flex;
-    justify-content:center;
-    margin-bottom:40px;
+    flex-direction:column;
+    overflow-y:auto;
   }
 
   .nav-trigger {
-    display:none; /* hide dropdown button on desktop */
+    display:none; /* hide dropdown */
   }
 
   .nav-menu {
     display:flex !important;
+    flex-direction:column;
+    padding:0 0 20px;
     position:static;
-    flex-direction:row;
-    gap:16px;
-    background: rgba(15,20,26,0.95);
-    border-radius:20px;
-    padding:12px 24px;
-    box-shadow: 0 10px 40px rgba(0,0,0,0.5);
+  }
+
+  .nav-section-title {
+    display:block;
+    padding:14px 24px;
   }
 
   .nav-menu a {
-    padding:10px 14px;
-    border-radius:12px;
+    padding:10px 24px;
   }
 
   .nav-menu a:hover {
     background:var(--gold);
     color:#000;
-  }
-
-  .nav-section-title {
-    display:none; /* hide section titles on desktop */
   }
 }
 </style>
@@ -193,40 +220,36 @@ footer {
 
 <header>Diana Mid Guide</header>
 
+<div class="nav-wrapper">
+  <a href="membershub.html" class="back-button">Back to Members Hub</a>
+
+  <button class="nav-trigger" onclick="toggleMenu()">Choose a section to explore ▾</button>
+
+  <div class="nav-menu" id="navMenu">
+    <div class="nav-section-title">Core</div>
+    <a onclick="loadSection('intro')">Intro</a>
+    <a onclick="loadSection('runes')">Runes</a>
+    <a onclick="loadSection('build')">Build</a>
+    <a onclick="loadSection('summoners')">Summoners</a>
+    <a onclick="loadSection('abilities')">Abilities</a>
+    <a onclick="loadSection('combos')">Combos</a>
+
+    <div class="nav-section-title">Gameplay</div>
+    <a onclick="loadSection('laning')">Laning</a>
+    <a onclick="loadSection('warding')">Warding</a>
+    <a onclick="loadSection('farming')">Farming / Pushing</a>
+    <a onclick="loadSection('teamfighting')">Teamfighting</a>
+
+    <div class="nav-section-title">Advanced</div>
+    <a onclick="loadSection('extra')">Extra Tips</a>
+  </div>
+</div>
+
 <div class="main">
-
-  <div class="back-wrap">
-    <a href="membershub.html" class="back-button">Back to Members Hub</a>
-  </div>
-
-  <div class="nav-wrapper">
-    <button class="nav-trigger" onclick="toggleMenu()">Choose a section to explore ▾</button>
-
-    <div class="nav-menu" id="navMenu">
-      <div class="nav-section-title">Core</div>
-      <a onclick="loadSection('intro')">Intro</a>
-      <a onclick="loadSection('runes')">Runes</a>
-      <a onclick="loadSection('build')">Build</a>
-      <a onclick="loadSection('summoners')">Summoners</a>
-      <a onclick="loadSection('abilities')">Abilities</a>
-      <a onclick="loadSection('combos')">Combos</a>
-
-      <div class="nav-section-title">Gameplay</div>
-      <a onclick="loadSection('laning')">Laning</a>
-      <a onclick="loadSection('warding')">Warding</a>
-      <a onclick="loadSection('farming')">Farming / Pushing</a>
-      <a onclick="loadSection('teamfighting')">Teamfighting</a>
-
-      <div class="nav-section-title">Advanced</div>
-      <a onclick="loadSection('extra')">Extra Tips</a>
-    </div>
-  </div>
-
   <div id="content" class="card">
     <h2>Choose a Section</h2>
-    <p>Select a section from the dropdown above to explore the Diana Mid guide.</p>
+    <p>Select a section from the menu to explore the Diana Mid guide.</p>
   </div>
-
 </div>
 
 <footer>© 2026 LoL Fundamentals · All rights reserved</footer>
@@ -261,43 +284,6 @@ function loadSection(section) {
 
 </body>
 </html>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 
