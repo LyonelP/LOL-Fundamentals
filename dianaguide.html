@@ -162,7 +162,7 @@ footer {
   margin-top:auto;
 }
 
-/* Mobile select button styled like card (no extra border) */
+/* Mobile select button styled like card (no border) */
 .nav-trigger {
   display:block;
   width:90%;
@@ -172,6 +172,8 @@ footer {
   font-size:16px;
   font-weight:600;
   background:rgba(255,255,255,0.03);
+  border:none;
+  box-shadow:none;
   border-radius:26px;
   color:#fff;
   cursor:pointer;
@@ -185,31 +187,27 @@ footer {
   float:right;
 }
 
-/* Mobile dropdown menu pushes content down */
+/* Mobile dropdown overlay */
 .nav-menu-mobile {
   display:none;
+  position:absolute;
+  top:80px; /* below header */
+  left:50%;
+  transform:translateX(-50%);
   width:90%;
   max-width:800px;
-  margin:0 auto 16px auto;
   background:rgba(255,255,255,0.03);
   border-radius:26px;
   padding:12px 0;
   max-height:60vh;
   overflow-y:auto;
   box-shadow:0 12px 36px rgba(0,0,0,0.5);
-  z-index:10;
-}
-
-.nav-menu-mobile .nav-section-title {
-  font-size:12px;
-  color:var(--muted);
-  padding:8px 20px;
-  text-transform:uppercase;
+  z-index:12;
 }
 
 .nav-menu-mobile a {
   display:block;
-  padding:10px 20px;
+  padding:12px 24px;
   text-decoration:none;
   color:#e6edf3;
   border-radius:6px;
@@ -240,7 +238,7 @@ footer {
 <!-- Mobile dropdown button -->
 <button class="nav-trigger" onclick="toggleMobileMenu()">Select a Section</button>
 <div class="nav-menu-mobile" id="mobileMenu">
-  <!-- Menu items are generated dynamically -->
+  <!-- dynamically generated -->
 </div>
 
 <!-- Sidebar for desktop -->
@@ -280,52 +278,38 @@ footer {
 <script>
 // Sections content
 const sections = {
-  intro: `<h2>Intro</h2>
-      <p><strong>Why Diana?</strong> Diana has numerous ways to carry a game. She has a strong early game, laning phase, and can transition well into the side lane in the mid game. She can make picks, teamfight well, splitpush, push waves quickly, farm jungle camps, and has great damage for dragons and barons. She’s also a pick that you can play pretty much every game as long as your team doesn’t need an AD mid laner.</p>`,
-  runes: `<h2>Runes</h2><p>…your runes content here…</p>`,
-  build: `<h2>Build</h2><p>…your build content here…</p>`,
-  summoners: `<h2>Summoners</h2><p>…your summoners content here…</p>`,
-  abilities: `<h2>Abilities</h2><p>…your abilities content here…</p>`,
-  combos: `<h2>Combos</h2><p>…your combos content here…</p>`,
-  laning: `<h2>Laning</h2><p>…your laning content here…</p>`,
-  warding: `<h2>Warding</h2><p>…your warding content here…</p>`,
-  farming: `<h2>Farming / Pushing</h2><p>…your farming content here…</p>`,
-  teamfighting: `<h2>Teamfighting</h2><p>…your teamfighting content here…</p>`,
-  splitpushing: `<h2>Splitpushing</h2><p>…your splitpushing content here…</p>`,
-  closing: `<h2>Closing Out The Game</h2><p>…content…</p>`,
-  threats: `<h2>Threats & Synergies</h2><p>…content…</p>`,
-  pros: `<h2>Pros & Cons</h2><p>…content…</p>`,
-  extra: `<h2>Extra Tips</h2><p>…your extra tips content here…</p>`
+  intro: `<h2>Intro</h2><p><strong>Why Diana?</strong> Diana has numerous ways to carry a game...</p>`,
+  runes: `<h2>Runes</h2><p>…runes content…</p>`,
+  build: `<h2>Build</h2><p>…build content…</p>`,
+  summoners: `<h2>Summoners</h2><p>…summoners content…</p>`
+  // add other sections as needed
 };
 
-// Load section content
 function loadSection(section){
   const content = document.getElementById('content');
   content.innerHTML = sections[section] || '<h2>Section not found</h2>';
-  updateMobileMenu(); // regenerate mobile menu with only available sections
 
-  // Scroll to top of content
-  content.scrollIntoView({behavior: "smooth"});
-
-  // Close mobile menu after selection
+  // Close mobile menu
   document.getElementById('mobileMenu').style.display = 'none';
+
+  // Scroll content into view
+  content.scrollIntoView({behavior: 'smooth'});
 }
 
-// Toggle mobile menu
+// Mobile menu toggle
 function toggleMobileMenu(){
   const menu = document.getElementById('mobileMenu');
-  menu.style.display = (menu.style.display === 'block') ? 'none' : 'block';
+  menu.style.display = (menu.style.display==='block')?'none':'block';
 }
 
-// Update mobile menu to show only loaded sections
+// Populate mobile menu with only sections that have content
 function updateMobileMenu(){
   const menu = document.getElementById('mobileMenu');
   menu.innerHTML = '';
   for(const key in sections){
-    // Only show sections that have content loaded
     if(sections[key]){
       const a = document.createElement('a');
-      a.textContent = key.charAt(0).toUpperCase() + key.slice(1);
+      a.textContent = key.charAt(0).toUpperCase()+key.slice(1);
       a.href = 'javascript:void(0)';
       a.onclick = ()=> loadSection(key);
       menu.appendChild(a);
@@ -333,11 +317,12 @@ function updateMobileMenu(){
   }
 }
 
-// Initial mobile menu
+// initial mobile menu
 updateMobileMenu();
 </script>
 
 </body>
 </html>
+
 
 
