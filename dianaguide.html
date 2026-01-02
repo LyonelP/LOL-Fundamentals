@@ -10,13 +10,15 @@
   --muted:#9da7b3;
 }
 
-/* Base styles */
+/* Reset */
 html, body {
   margin:0;
   padding:0;
   height:100%;
   font-family: Arial, Helvetica, sans-serif;
 }
+
+/* Body and background */
 body {
   background:url('https://ddragon.leagueoflegends.com/cdn/img/champion/splash/Diana_11.jpg') no-repeat center center fixed;
   background-size:cover;
@@ -26,6 +28,7 @@ body {
   min-height:100vh;
   position:relative;
 }
+
 body::before {
   content:"";
   position:fixed;
@@ -59,6 +62,7 @@ header {
   position:relative;
   z-index:10;
 }
+
 .back-button {
   display:inline-flex;
   align-items:center;
@@ -70,12 +74,16 @@ header {
   border-radius:10px;
   font-weight:bold;
 }
-.back-button::before { content:"←"; }
+
+.back-button::before {
+  content:"←";
+}
 
 /* Sidebar desktop */
 .nav-wrapper {
   display:none;
 }
+
 @media(min-width:1024px) {
   .nav-wrapper {
     display:block;
@@ -90,12 +98,14 @@ header {
     overflow-y:auto;
     z-index:9;
   }
+
   .nav-section-title {
     font-size:11px;
     color:var(--muted);
     padding:14px 24px;
     text-transform:uppercase;
   }
+
   .nav-menu a {
     display:block;
     padding:10px 24px;
@@ -104,6 +114,7 @@ header {
     cursor:pointer;
     border-radius:8px;
   }
+
   .nav-menu a:hover {
     background:var(--gold);
     color:#000;
@@ -121,6 +132,7 @@ header {
   position:relative;
   z-index:1;
 }
+
 .card {
   max-width:800px;
   width:100%;
@@ -129,9 +141,19 @@ header {
   padding:36px;
   box-shadow:0 24px 70px rgba(0,0,0,0.55);
 }
-.card h2 { color:var(--gold); margin-top:0; }
-.card ul { padding-left:22px; }
-.card li { margin-bottom:8px; }
+
+.card h2 {
+  color:var(--gold);
+  margin-top:0;
+}
+
+.card ul {
+  padding-left:22px;
+}
+
+.card li {
+  margin-bottom:8px;
+}
 
 /* Footer */
 footer {
@@ -153,47 +175,56 @@ footer {
   font-weight:600;
   background:rgba(255,255,255,0.03);
   border:none;
-  border-radius:20px;
+  border-radius:26px;
   color:#fff;
   cursor:pointer;
-  text-align:left;
+  text-align:center;
   position:relative;
+  z-index:10;
 }
+
 .nav-trigger::after {
-  content:"▼";
-  position:absolute;
-  right:18px;
-  top:50%;
-  transform:translateY(-50%);
+  content: " ▼";
+  font-weight: bold;
 }
 
 .nav-menu-mobile {
   display:none;
-  position:relative;
-  width:90%;
+  position:relative; /* pushes content down naturally */
+  width:85%;
   max-width:360px;
   margin:0 auto 16px auto;
-  background:rgba(15,20,26,0.95);
-  border-radius:20px;
+  background:rgba(255,255,255,0.03);
+  border-radius:26px;
   padding:12px 0;
-  z-index:11;
+  z-index:9;
 }
+
+.nav-menu-mobile .nav-section-title {
+  font-size:11px;
+  color:var(--muted);
+  padding:10px 20px;
+  text-transform:uppercase;
+}
+
 .nav-menu-mobile a {
   display:block;
   padding:10px 20px;
   text-decoration:none;
   color:#e6edf3;
 }
+
 .nav-menu-mobile a:hover {
   background:var(--gold);
   color:#000;
 }
-@media(min-width:1024px) {
-  .nav-trigger { display:none; }
-}
 
-/* Push main content below mobile dropdown when open */
-.main.mobile-menu-open { margin-top:0; }
+/* Hide mobile menu button on desktop */
+@media(min-width:1024px) {
+  .nav-trigger {
+    display:none;
+  }
+}
 </style>
 </head>
 <body>
@@ -207,24 +238,27 @@ footer {
 <!-- Mobile dropdown button -->
 <button class="nav-trigger" onclick="toggleMobileMenu()">Select a Section</button>
 <div class="nav-menu-mobile" id="mobileMenu">
+  <div class="nav-section-title">Core</div>
   <a onclick="loadSection('intro')">Intro</a>
   <a onclick="loadSection('runes')">Runes</a>
   <a onclick="loadSection('build')">Build</a>
   <a onclick="loadSection('summoners')">Summoners</a>
   <a onclick="loadSection('abilities')">Abilities</a>
   <a onclick="loadSection('combos')">Combos</a>
+  <div class="nav-section-title">Gameplay</div>
   <a onclick="loadSection('laning')">Laning</a>
   <a onclick="loadSection('warding')">Warding</a>
   <a onclick="loadSection('farming')">Farming / Pushing</a>
   <a onclick="loadSection('teamfighting')">Teamfighting</a>
   <a onclick="loadSection('splitpushing')">Splitpushing</a>
   <a onclick="loadSection('closing')">Closing Out The Game</a>
+  <div class="nav-section-title">Advanced</div>
   <a onclick="loadSection('threats')">Threats & Synergies</a>
   <a onclick="loadSection('pros')">Pros & Cons</a>
   <a onclick="loadSection('extra')">Extra Tips</a>
 </div>
 
-<!-- Sidebar for desktop -->
+<!-- Sidebar desktop -->
 <div class="nav-wrapper">
   <div class="nav-menu" id="navMenu">
     <div class="nav-section-title">Core</div>
@@ -249,7 +283,7 @@ footer {
 </div>
 
 <!-- Main content -->
-<div class="main" id="mainContent">
+<div class="main">
   <div id="content" class="card">
     <h2>Choose a Section</h2>
     <p>Select a section from the menu to explore the Diana Mid guide.</p>
@@ -259,25 +293,13 @@ footer {
 <footer>© 2026 LoL Fundamentals · All rights reserved</footer>
 
 <script>
-// Toggle mobile dropdown
 function toggleMobileMenu(){
   const menu = document.getElementById('mobileMenu');
-  const main = document.getElementById('mainContent');
-  if(menu.style.display === 'block'){
-    menu.style.display = 'none';
-    main.classList.remove('mobile-menu-open');
-  } else {
-    menu.style.display = 'block';
-    main.classList.add('mobile-menu-open');
-  }
+  menu.style.display = (menu.style.display === 'block') ? 'none' : 'block';
 }
 
-// Load section content
 function loadSection(section){
   const content = document.getElementById('content');
-  const menu = document.getElementById('mobileMenu');
-  const main = document.getElementById('mainContent');
-
   const sections = {
     intro: `<h2>Intro</h2>
       <p><strong>Why Diana?</strong> Diana has numerous ways to carry a game. She has a strong early game, laning phase, and can transition well into the side lane in the mid game. She can make picks, teamfight well, splitpush, push waves quickly, farm jungle camps, and has great damage for dragons and barons. She’s also a pick that you can play pretty much every game as long as your team doesn’t need an AD mid laner.</p>`,
@@ -296,25 +318,16 @@ function loadSection(section){
     pros: `<h2>Pros & Cons</h2><p>…content…</p>`,
     extra: `<h2>Extra Tips</h2><p>…your extra tips content here…</p>`
   };
-
-  // Update content
   content.innerHTML = sections[section] || '<h2>Section not found</h2>';
 
   // Close mobile menu
-  menu.style.display = 'none';
-  main.classList.remove('mobile-menu-open');
-
-  // Scroll to top of content (smooth, avoids jump)
-  content.scrollIntoView({behavior:'smooth', block:'start'});
+  document.getElementById('mobileMenu').style.display = 'none';
+  // Remove automatic scroll to prevent jump
 }
 </script>
 
 </body>
 </html>
-
-
-
-
 
 
 
