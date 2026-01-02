@@ -87,12 +87,16 @@ header {
 @media(min-width:1024px) {
   .nav-wrapper {
     display:block;
-    position: relative; /* scrolls with page */
+    position:fixed;
+    top:70px; /* below header */
+    left:0;
     width:220px;
+    bottom:0;
     background:rgba(15,20,26,0.95);
     border-right:2px solid var(--gold);
     padding-top:20px;
-    margin-top:70px; /* offset for header */
+    overflow-y:auto;
+    z-index:9;
   }
 
   .nav-section-title {
@@ -501,8 +505,39 @@ function loadSection(section){
     </li>
   </ul>
 </div></p>`,
-    summoners: `<h2>Summoners</h2><p>…your summoners content here…</p>`,
-    abilities: `<h2>Abilities</h2><p>…your abilities content here…</p>`,
+    summoners: `<h2>Summoners</h2><p><ul style="list-style:none; padding-left:0;">
+  <li style="margin-bottom:1em;">
+    <img src="https://ddragon.leagueoflegends.com/cdn/13.23.1/img/spell/SummonerFlash.png" width="32" style="vertical-align:middle; margin-right:8px;" alt="Flash">
+    <strong>Flash:</strong> A must-have on Diana. Diana is too easy to lock down with CC to run Ghost. Flash also enables all of her flash combos.
+  </li>
+  <li style="margin-bottom:1em;">
+    <img src="https://ddragon.leagueoflegends.com/cdn/13.23.1/img/spell/SummonerTeleport.png" width="32" style="vertical-align:middle; margin-right:8px;" alt="Teleport">
+    <strong>Teleport:</strong> Teleport used to be a must on Diana and is still a good option, but with the addition of early game homeguards and the slow TP channel the early game strength is no longer there. Diana also doesn’t scale like she used to and Teleport is better on scaling champions.
+  </li>
+  <li style="margin-bottom:1em;">
+    <img src="https://ddragon.leagueoflegends.com/cdn/13.23.1/img/spell/SummonerDot.png" width="32" style="vertical-align:middle; margin-right:8px;" alt="Ignite">
+    <strong>Ignite:</strong> My new default spell because of Diana’s early kill pressure even at level 2 now. They have also buffed the scaling damage on this spell. The runes and build are also extremely aggressive and having Ignite fends off ganks better than TPing back to a frozen wave and then having to deal with the jungler.
+  </li>
+</ul></p>`,
+    abilities: `<h2>Abilities</h2><p> <h3>Passive — Moonsilver Blade</h3>
+    <p>Diana’s passive has changed from a burst tool to an attack speed dps tool. The Ratio is only .5 and Diana’s kit doesn’t enable her to get too many auto attacks off so it's best to prep the passive on other sources like minions, wards and towers. The attack speed is also conditional on using an ability and lasts for 5 seconds.</p>
+
+    <h3>Q — Crescent Strike</h3>
+    <p>Diana Q reveals targets and can be used to check an area and enable E dashes.<br>
+    <strong>Tip:</strong> Diana can Q flash. This combo is good when you need two E's to kill the opponent or when going into a fight against multiple enemies.</p>
+
+    <h3>W — Pale Cascade</h3>
+    <p>W gives an instant shield and three orbs that can be proced for damage. Procing all 3 resets the shield.<br>
+    <strong>Tip:</strong> Avoid using W when you’re unable to proc all orbs. There's also no reason to cast this ability early since the cooldown won’t start until all the orbs have been proced or the window to do so has passed.<br>
+    <strong>Tip:</strong> 1 orb can be used to safely last hit and the remaining two can be used to thin out the wave or to trade with the enemy.<br>
+    <strong>Tip:</strong> If the enemy can block one of w orbs from the first use then W won’t go on cooldown for around 5 seconds and Diana won’t receive the second shield. This is common against Yasuo’s windwall.</p>
+
+    <h3>E — Lunar Rush</h3>
+    <p>Quick targeted engage. E will reset if the target has moonlight from Q on them. E also resets now if a minion dies from Q if the E was cast immediately afterwards. Casting E places you behind your target. You can auto attack at the end of the animation as well.</p>
+
+    <h3>R — Moonfall</h3>
+    <p>AOE ability and knockup that is great for teamfights, and catching out opponents. The pull and slow also help Diana utilize her passive or guarantee a Q. Can be casted during E, and be animation canceled with E.<br>
+    <strong>Tip:</strong> Diana can R flash. Diana R also interrupts channels and dashes although the window to cancel a dash is smaller now and needs to be casted at the start of their dash.</p></p>`,
     combos: `<h2>Combos</h2><p>…your combos content here…</p>`,
     laning: `<h2>Laning</h2><p>…your laning content here…</p>`,
     warding: `<h2>Warding</h2><p>…your warding content here…</p>`,
@@ -524,8 +559,6 @@ function loadSection(section){
 
 </body>
 </html>
-
-
 
 
 
