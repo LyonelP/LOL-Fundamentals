@@ -193,6 +193,11 @@ import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.2/fireba
 import { getAuth, signInWithEmailAndPassword, createUserWithEmailAndPassword, sendPasswordResetEmail } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-auth.js";
 import { getFirestore, doc, setDoc, serverTimestamp, getDoc } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
 
+if(localStorage.getItem("lolfundamentals_logged_in")==="true" &&
+   localStorage.getItem("lolfundamentals_paid")==="true"){
+  window.location.href="membershub.html";
+}
+
 const firebaseConfig={apiKey:"AIzaSyCFRcEV7wdivqONnkjJubAZOjPMixrHMBI",authDomain:"lol-fundamentals.firebaseapp.com",projectId:"lol-fundamentals",storageBucket:"lol-fundamentals.firebasestorage.app",messagingSenderId:"1038440427584",appId:"1:1038440427584:web:a82207151fd370dbedefa5"};
 const app=initializeApp(firebaseConfig),auth=getAuth(app),firestore=getFirestore(app);
 
@@ -272,7 +277,6 @@ document.querySelectorAll('.locked').forEach(card=>{
 
 </body>
 </html>
-
 
 
 
