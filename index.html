@@ -47,6 +47,7 @@ header{background:linear-gradient(90deg,#0a0f14,#1b2838);border-bottom:2px solid
 .tier-c{ background:#f9c74f; flex:1; } .tier-d{ background:#90be6d; flex:1; }
 
 .card:hover{transform:translateY(-6px);box-shadow:0 12px 26px rgba(201,170,113,0.5)}
+.unlock-icon{position:absolute;bottom:12px;z-index:2;font-size:1.5rem;color:#f2b96d;cursor:pointer}
 
 .modal{display:none;position:fixed;inset:0;background:rgba(0,0,0,.75);z-index:9999;justify-content:center;align-items:center}
 .modalContent{background:#161b22;padding:30px;border-radius:10px;text-align:center;max-width:400px;width:90%;border:1px solid #c9aa71}
@@ -81,6 +82,7 @@ footer a:hover{text-decoration:underline}
 <h2>Explore the Hub</h2>
 <div class="card-grid">
 
+<!-- Unlocked -->
 <a href="freeskills.html" class="card fundamentals">
   <h3>Fundamentals</h3>
   <p>Core skills including combos, wave management, positioning, and warding for consistent gameplay improvement.</p>
@@ -158,57 +160,72 @@ footer a:hover{text-decoration:underline}
 
 <script type="module">
 import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
-import { getAuth, signInWithEmailAndPassword, createUserWithEmailAndPassword, sendPasswordResetEmail } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-auth.js";
+import { getAuth, signInWithEmailAndPassword, createUserWithEmailAndPassword, sendPasswordResetEmail, setPersistence, browserLocalPersistence, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-auth.js";
 import { getFirestore, doc, setDoc, serverTimestamp, getDoc } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
 
-const firebaseConfig={apiKey:"AIzaSyCFRcEV7wdivqONnkjJubAZOjPMixrHMBI",authDomain:"lol-fundamentals.firebaseapp.com",projectId:"lol-fundamentals",storageBucket:"lol-fundamentals.firebasestorage.app",messagingSenderId:"1038440427584",appId:"1:1038440427584:web:a82207151fd370dbedefa5"};
-const app=initializeApp(firebaseConfig),auth=getAuth(app),firestore=getFirestore(app);
+const firebaseConfig = {
+  apiKey:"AIzaSyCFRcEV7wdivqONnkjJubAZOjPMixrHMBI",
+  authDomain:"lol-fundamentals.firebaseapp.com",
+  projectId:"lol-fundamentals",
+  storageBucket:"lol-fundamentals.firebasestorage.app",
+  messagingSenderId:"1038440427584",
+  appId:"1:1038440427584:web:a82207151fd370dbedefa5"
+};
 
-signupHeroBtn.onclick=()=>signupModal.style.display="flex";
-loginHeroBtn.onclick=()=>loginModal.style.display="flex";
-closeSignupModal.onclick=()=>signupModal.style.display="none";
-closePlanModal.onclick=()=>planModal.style.display="none";
-closeLoginModal.onclick=()=>loginModal.style.display="none";
-seePlansBtn.onclick=()=>{signupModal.style.display="none";planModal.style.display="flex"};
+const app = initializeApp(firebaseConfig);
+const auth = getAuth(app);
+const firestore = getFirestore(app);
 
-continueSignupBtn.onclick=async()=>{
-  const e=signupEmail.value.trim(),p=signupPassword.value.trim(),c=signupPasswordConfirm.value.trim();
-  if(!e||!p||!c){alert("Fill all fields");return}
-  if(p!==c){alert("Passwords do not match");return}
-  await createUserWithEmailAndPassword(auth,e,p);
-  await setDoc(doc(firestore,"paidUsers",e),{paid:false,timestamp:serverTimestamp()});
+// Persist login across tabs
+await setPersistence(auth, browserLocalPersistence);
+
+// Check login on page load
+onAuthStateChanged(auth, async (user) => {
+  if(user){
+    const snap = await getDoc(doc(firestore, "paidUsers", user.email));
+    const isPaid = snap.exists() ? snap.data().paid : false;
+    localStorage.setItem("lolfundamentals_logged_in","true");
+    localStorage.setItem("lolfundamentals_paid", isPaid ? "true" : "false");
+    if(isPaid){ window.location.href="membershub.html"; }
+  }
+});
+
+signupHeroBtn.onclick = () => signupModal.style.display="flex";
+loginHeroBtn.onclick = () => loginModal.style.display="flex";
+closeSignupModal.onclick = () => signupModal.style.display="none";
+closePlanModal.onclick = () => planModal.style.display="none";
+closeLoginModal.onclick = () => loginModal.style.display="none";
+seePlansBtn.onclick = () => { signupModal.style.display="none"; planModal.style.display="flex"; };
+
+continueSignupBtn.onclick = async () => {
+  const e = signupEmail.value.trim(), p = signupPassword.value.trim(), c = signupPasswordConfirm.value.trim();
+  if(!e || !p || !c){ alert("Fill all fields"); return; }
+  if(p !== c){ alert("Passwords do not match"); return; }
+  await createUserWithEmailAndPassword(auth, e, p);
+  await setDoc(doc(firestore,"paidUsers",e), { paid:false, timestamp:serverTimestamp() });
   signupModal.style.display="none";
   planModal.style.display="flex";
 };
 
-document.getElementById("monthlyBtn").onclick=()=>{window.open("https://buy.stripe.com/8x28wIaQ4dJa4Rg88iejK0f","_blank");planModal.style.display="none";}
-document.getElementById("yearlyBtn").onclick=()=>{window.open("https://buy.stripe.com/cNi14g3nC48AerQ9cmejK07","_blank");planModal.style.display="none";}
-document.getElementById("lifetimeBtn").onclick=()=>{window.open("https://buy.stripe.com/fZu00c9M0awYgzYcoyejK06","_blank");planModal.style.display="none";}
+document.getElementById("monthlyBtn").onclick = () => { window.open("https://buy.stripe.com/8x28wIaQ4dJa4Rg88iejK0f","_blank"); planModal.style.display="none"; };
+document.getElementById("yearlyBtn").onclick = () => { window.open("https://buy.stripe.com/cNi14g3nC48AerQ9cmejK07","_blank"); planModal.style.display="none"; };
+document.getElementById("lifetimeBtn").onclick = () => { window.open("https://buy.stripe.com/fZu00c9M0awYgzYcoyejK06","_blank"); planModal.style.display="none"; };
 
-// Login flow with persistent localStorage
-modalLoginBtn.onclick=async()=>{
-  const e = loginEmail.value.trim(),
-        p = loginPassword.value.trim();
-  if(!e||!p){alert("Enter both email and password");return;}
-  try{
-    await signInWithEmailAndPassword(auth,e,p);
-    const snap = await getDoc(doc(firestore,"paidUsers",e));
-    const isPaid = snap.exists() ? snap.data().paid : false;
-    localStorage.setItem("lolfundamentals_logged_in","true");
-    localStorage.setItem("lolfundamentals_paid", isPaid ? "true" : "false");
-    loginModal.style.display="none";
-    if(isPaid){ window.location.href="membershub.html"; } 
-    else{ planModal.style.display="flex"; }
-  } catch(err){
-    alert("Login failed: " + err.message);
-  }
+modalLoginBtn.onclick = async () => {
+  const e = loginEmail.value.trim(), p = loginPassword.value.trim();
+  await signInWithEmailAndPassword(auth, e, p);
+  const snap = await getDoc(doc(firestore,"paidUsers",e));
+  const isPaid = snap.exists() ? snap.data().paid : false;
+  localStorage.setItem("lolfundamentals_logged_in","true");
+  localStorage.setItem("lolfundamentals_paid", isPaid ? "true" : "false");
+  loginModal.style.display="none";
+  if(isPaid){ window.location.href="membershub.html"; }
+  else { planModal.style.display="flex"; }
 };
 
-// Password reset
-resetLinkModal.onclick=async(e)=>{
-  e.preventDefault();
-  if(!loginEmail.value.trim()){alert("Enter your email to reset"); return;}
-  await sendPasswordResetEmail(auth,loginEmail.value);
+resetLinkModal.onclick = async (event) => {
+  event.preventDefault();
+  await sendPasswordResetEmail(auth, loginEmail.value);
   loginMsgModal.textContent="Password reset email sent!";
 };
 
@@ -233,7 +250,7 @@ for(let i=0;i<50;i++){
   100%{transform:translateY(0) translateX(0) scale(1);opacity:1}
 }
 
-.card:hover {
+.card:not(.locked):hover {
   transform: translateY(-6px);
   box-shadow: 0 12px 26px rgba(201,170,113,0.5);
 }
@@ -241,6 +258,7 @@ for(let i=0;i<50;i++){
 
 </body>
 </html>
+
 
 
 
