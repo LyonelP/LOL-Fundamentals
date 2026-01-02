@@ -3,233 +3,159 @@
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Diana Mid Guide</title>
-
-<link rel="preload" as="image" href="https://ddragon.leagueoflegends.com/cdn/img/champion/splash/Diana_11.jpg">
-
+<title>Diana Guide – Members Hub</title>
 <style>
-*, *::before, *::after {
-  box-sizing: border-box;
-}
-
-html {
-  width: 100%;
-}
-
 body {
   margin: 0;
-  width: 100%;
+  font-family: 'Beaufort for LOL', Arial, Helvetica, sans-serif;
+  background: url('https://ddragon.leagueoflegends.com/cdn/img/champion/splash/Diana_0.jpg') no-repeat center center fixed;
+  background-size: cover;
+  color: #e6edf3;
+  text-align: center;
+  overflow-x: hidden;
 }
 
-
-:root {
-  --gold:#c9aa71;
-  --muted:#9da7b3;
-}
-
-html, body {
-  margin:0;
-  padding:0;
-  font-family: Arial, Helvetica, sans-serif;
-}
-
-body {
-  display:flex;
-  flex-direction:column;
-background: url('https://ddragon.leagueoflegends.com/cdn/img/champion/splash/Diana_11.jpg')
-  no-repeat center center;
-  background-size: 1200px auto;
-background-position: center top;
-background-repeat: no-repeat;
-
-  color:#e6edf3;
-  min-height:100vh;
-}
-
+/* Overlay for readability */
 body::before {
-  content:"";
-  position:fixed;
-  inset:0;
-  background:
-    radial-gradient(circle at top, rgba(120,0,0,0.25), transparent 60%),
-    rgba(10,15,20,0.82);
-  z-index:-1;
+  content: "";
+  position: fixed;
+  top: 0; left: 0;
+  width: 100%; height: 100%;
+  background: rgba(10,15,20,0.75);
+  z-index: -1;
 }
 
+/* Header */
 header {
-  background:rgba(13,17,23,0.9);
-  border-bottom:2px solid var(--gold);
-  padding:20px 10px;
-  font-size:26px;
-  font-weight:bold;
-  color:var(--gold);
-  text-align:center;
+  background: rgba(13,17,23,0.9);
+  border-bottom: 2px solid #c9aa71;
+  padding: 20px 10px;
+  font-weight: bold;
+  font-size: 26px;
+  text-transform: uppercase;
+  color: #c9aa71;
+  letter-spacing: 1px;
 }
 
-.main {
-  max-width:960px;
-  margin:0 auto;
-  padding:20px 16px 40px;
-  flex:1;
-}
-
-.back-wrap {
-  text-align:center;
-  margin-bottom:32px;
-}
-
+/* Back button */
 .back-button {
-  padding:10px 22px;
-  background:linear-gradient(135deg,var(--gold),#e0c77b);
-  color:#000;
-  text-decoration:none;
-  border-radius:10px;
-  font-weight:bold;
+  display: inline-block;
+  margin: 20px auto 10px;
+  padding: 10px 20px;
+  background: linear-gradient(135deg, #c9aa71, #e0c77b);
+  color: #000;
+  text-decoration: none;
+  border-radius: 8px;
+  font-weight: bold;
+  transition: all 0.3s;
+  box-shadow: 0 0 10px rgba(201,170,113,0.5);
+}
+.back-button::before { content: "← "; }
+.back-button:hover {
+  background: linear-gradient(135deg, #e6c97f, #f0d88b);
+  box-shadow: 0 0 15px rgba(255,215,0,0.8);
 }
 
-.nav-wrapper {
-  max-width:420px;
-  margin:0 auto 46px;
-  position:relative;
+/* Dropdown */
+#section-select-container {
+  margin: 20px auto;
+}
+#section-select {
+  padding: 10px 15px;
+  font-size: 16px;
+  border-radius: 6px;
+  border: none;
+  background: #0f1722;
+  color: #c9aa71;
+  cursor: pointer;
 }
 
-.nav-trigger {
-  width:100%;
-  padding:18px 22px;
-  font-size:16px;
-  font-weight:600;
-  background:rgba(255,255,255,0.05);
-  border:none;
-  border-radius:20px;
-  color:#fff;
-  cursor:pointer;
+/* Section display */
+#section-info {
+  margin: 30px auto;
+  max-width: 900px;
+  background: rgba(13,17,23,0.95);
+  border: 1px solid #2f81f7;
+  padding: 20px;
+  border-radius: 10px;
+  text-align: left;
+  color: #c9aa71;
+  min-height: 200px;
+  overflow-y: auto;
+  max-height: 70vh;
 }
 
-.nav-menu {
-  position:absolute;
-  top:calc(100% + 16px);
-  left:0;
-  right:0;
-  background:rgba(15,20,26,0.98);
-  border-radius:24px;
-  padding:14px;
-  display:none;
-}
+/* section text styles */
+#section-info h2 { color: #c9aa71; margin-top: 0; }
+#section-info h3 { color: #c9aa71; margin-bottom: 0.2em; }
+#section-info p,
+#section-info li,
+#section-info ol,
+#section-info ul { color: #e6edf3; margin-bottom: 0.9em; line-height: 1.45; }
+#section-info ul { margin-left: 1.1em; margin-bottom: 0.9em; }
+#section-info li { margin-bottom: 0.6em; }
 
-.nav-section-title {
-  font-size:11px;
-  color:var(--muted);
-  padding:6px 14px;
-  text-transform:uppercase;
-}
+#section-info ol { margin-left: 1.2em; }
 
-.nav-menu a {
-  display:block;
-  padding:14px 16px;
-  text-decoration:none;
-  color:#e6edf3;
-  cursor:pointer;
-}
+#section-info:hover { box-shadow: 0 0 15px rgba(47,129,247,0.5); }
 
-.nav-menu a:hover {
-  color:var(--gold);
-}
-
-.card {
-  background:rgba(255,255,255,0.03);
-  border-radius:26px;
-  padding:36px;
-  box-shadow:0 24px 70px rgba(0,0,0,0.55);
-}
-
-.card h2 {
-  color:var(--gold);
-  margin-top:0;
-}
-
-.card ul {
-  padding-left:22px;
-}
-
-.card li {
-  margin-bottom:8px;
-}
-
-footer {
-  padding:16px;
-  text-align:center;
-  font-size:13px;
-  color:var(--muted);
+@media (max-width: 600px) {
+  #section-select { font-size: 14px; padding: 8px 10px; }
+  #section-info { padding: 15px; max-height: 60vh; }
 }
 </style>
 </head>
-
 <body>
 
 <header>Diana Mid Guide</header>
+<a href="membershub.html" class="back-button">Back to Members Hub</a>
 
-<div class="main">
-
-<div class="back-wrap">
-  <a href="membershub.html" class="back-button">Back to Members Hub</a>
+<div id="section-select-container">
+  <select id="section-select">
+    <option disabled selected>Select a section</option>
+    <option>Intro</option>
+    <option>Runes</option>
+    <option>Build</option>
+    <option>Summoner Spells</option>
+    <option>Abilities</option>
+    <option>Combos</option>
+    <option>Laning</option>
+    <option>Warding</option>
+    <option>Farming / Pushing</option>
+    <option>Teamfighting</option>
+    <option>Splitpushing</option>
+    <option>Closing Out The Game</option>
+    <option>Threats & Synergies</option>
+    <option>Pros & Cons</option>
+    <option>Extra Tips</option>
+  </select>
 </div>
 
-<div class="nav-wrapper">
-  <button class="nav-trigger" onclick="toggleMenu()">Choose a section to explore ▾</button>
-
-  <div class="nav-menu" id="navMenu">
-    <div class="nav-section-title">Core</div>
-    <a onclick="loadSection('intro')">Intro</a>
-    <a onclick="loadSection('runes')">Runes</a>
-    <a onclick="loadSection('build')">Build</a>
-    <a onclick="loadSection('summoners')">Summoners</a>
-    <a onclick="loadSection('abilities')">Abilities</a>
-    <a onclick="loadSection('combos')">Combos</a>
-
-    <div class="nav-section-title">Gameplay</div>
-    <a onclick="loadSection('laning')">Laning</a>
-    <a onclick="loadSection('warding')">Warding</a>
-    <a onclick="loadSection('farming / pushing')">Farming / Pushing</a>
-    <a onclick="loadSection('teamfighting')">Teamfighting</a>
-    <a onclick="loadSection('split')">Splitpushing</a>
-    <a onclick="loadSection('closing out the game')">Closing Out The Game</a>
-
-    <div class="nav-section-title">Advanced</div>
-    <a onclick="loadSection('threats & synergies')">Threats & Synergies</a>
-    <a onclick="loadSection('pros & cons')">Pros & Cons</a>
-    <a onclick="loadSection('extra')">Extra Tips</a>
-  </div>
+<div id="section-info">
+  <p>Select a section from above to view details.</p>
 </div>
-
-<div id="content" class="card">
-  <h2>Choose a Section</h2>
-  <p>Select a section from the dropdown above to explore the Diana Mid guide.</p>
-</div>
-
-</div>
-
-<footer>© 2026 LoL Fundamentals · All rights reserved</footer>
 
 <script>
-function toggleMenu() {
-  const menu = document.getElementById('navMenu');
-  menu.style.display = menu.style.display === 'block' ? 'none' : 'block';
+// Require login
+if (localStorage.getItem('lolfundamentals_logged_in') !== 'true') {
+  window.location.href = 'index.html';
 }
 
-function loadSection(section) {
-  const content = document.getElementById('content');
-  toggleMenu();
+const sectionSelect = document.getElementById('section-select');
+const sectionInfo = document.getElementById('section-info');
 
-  const sections = {
-    intro: `
-      <h2>Intro</h2>
-         <p><strong>Why Diana?</strong> Diana has numerous ways to carry a game. She has a strong early game, laning phase, and can transition well into the side lane in the mid game. She can make picks, teamfight well, splitpush, push waves quickly, farm jungle camps, and has great damage for dragons and barons. She’s also a pick that you can play pretty much every game as long as your team doesn’t need an AD mid laner.</p>
-    `,
-    runes: `
-      <h2>Runes</h2>
-      <div style="margin-bottom:1.5em; font-size:0.95em; line-height:1.45; color:#d7d7d7; font-weight:400;">
+const sections = {
+  "Intro": `
+    <h2>Intro</h2>
+    <p><strong>Why Diana?</strong> Diana has numerous ways to carry a game. She has a strong early game, laning phase, and can transition well into the side lane in the mid game. She can make picks, teamfight well, splitpush, push waves quickly, farm jungle camps, and has great damage for dragons and barons. She’s also a pick that you can play pretty much every game as long as your team doesn’t need an AD mid laner.</p>
+  `,
+
+  "Runes": `
+<h2>Runes</h2>
+
+<div style="margin-bottom:1.5em; font-size:0.95em; line-height:1.45; color:#d7d7d7; font-weight:400;">
   <strong style="color:#c8aa6e;">Why grasp over another keystone?</strong>
-  It ultimately comes down to the value of the rune trees themselves. The Sorcery tree is mandatory on Diana for Manaflow Band, and the Resolve tree provides essential sustain, health, and early game damage. By the time you hit level 3, bone plating will have blocked around 70 damage which is more than an Electrocute proc while the entire domination tree will have done absolutely nothing during the most crucial levels of the entire game. Electrocute also requires three separate hits to proc unlike old Thunderlords, which Diana could trigger with just her W. Now Electrocute is far stronger on ranged champions who can reliably proc it at level 1 with autos and spells.<br><br>
+  It ultimately comes down to the value of the rune trees themselves. The Sorcery tree is mandatory on Diana for Manaflow Band, and the Resolve tree provides essential sustain, health, and early game damage. Electrocute may seem appealing at first, but it requires three separate hits to proc unlike old Thunderlords, which Diana could trigger with just her W. Now Electrocute is far stronger on ranged champions who can reliably proc it at level 1 with autos and spells.<br><br>
 
   Players often ask whether Grasp is viable into ranged matchups. Grasp and Shield Bash are much easier to use level 1 and 2 and then by level 3, they’re no more difficult to use than Electrocute or Phase Rush. The biggest problem with Electrocute is that the last two rows of the domination tree offer Diana essentially no value. When running Electrocute, the entire tree often does nothing until level 3 which is the most important part of the game and the main purpose of runes in the first place. Meanwhile, when you run keystones like Grasp or Phase Rush you gain access to runes like Shield Bash and Scorch that perform great in the early game. The reason Grasp has overtaken phase rush as Diana’s main rune is because the game has been slowed down. Phase rush and scorch have extremely poor scaling especially compared to Grasp and Overgrowth which are the runes you're trading them for. These runes also provide Diana with health which is crucial for her playstyle and can’t be gained through her current ideal build path.
 
@@ -330,8 +256,9 @@ function loadSection(section) {
   </p>
 </div>
 
-    `,
-    build: `
+  `,
+
+  "Build": `
 <h2>Build</h2>
 
 <div class="build-section">
@@ -437,7 +364,7 @@ function loadSection(section) {
 
   `,
 
-  summoners: `
+  "Summoner Spells": `
 <h2>Summoner Spells</h2>
 <ul style="list-style:none; padding-left:0;">
   <li style="margin-bottom:1em;">
@@ -456,7 +383,7 @@ function loadSection(section) {
 
   `,
 
-  "abilities": `
+  "Abilities": `
     <h2>Abilities</h2>
     <h3>Passive — Moonsilver Blade</h3>
     <p>Diana’s passive has changed from a burst tool to an attack speed dps tool. The Ratio is only .5 and Diana’s kit doesn’t enable her to get too many auto attacks off so it's best to prep the passive on other sources like minions, wards and towers. The attack speed is also conditional on using an ability and lasts for 5 seconds.</p>
@@ -479,7 +406,7 @@ function loadSection(section) {
     <strong>Tip:</strong> Diana can R flash. Diana R also interrupts channels and dashes although the window to cancel a dash is smaller now and needs to be casted at the start of their dash.</p>
   `,
 
-  combos: `
+  "Combos": `
     <h2>Combos</h2>
     <p>Stack your passive before a combo. Diana is often strongest when there are more targets around to stack her passive on. This includes minion waves, jungle camps, and even enemy towers.</p>
 
@@ -502,7 +429,7 @@ function loadSection(section) {
     </ul>
   `,
 
-  laning: `
+  "Laning": `
     <h2>Laning</h2>
 
     <h3>Level 1:</h3>
@@ -536,7 +463,7 @@ function loadSection(section) {
     </ul>
   `,
 
- warding: `
+ "Warding": `
    <h2>Warding</h2>
     <img src="https://i.imgur.com/jS14khw.png" alt="Warding Example" style="float:right; width:425px; max-width:50%; height:auto; margin:0 0 1em 1em;">
    
@@ -578,7 +505,7 @@ function loadSection(section) {
 
   `,
 
- "farming / pushing": `
+ "Farming / Pushing": `
   <h2>Farming / Pushing</h2>
   <p>
     Diana is one of the best farming champs in the game. She clears both waves and
@@ -633,7 +560,7 @@ function loadSection(section) {
   </p>
 `,
 
-  teamfighting: `
+  "Teamfighting": `
     <h2>Teamfighting</h2>
     <p>Diana has great teamfighting. Look to deal enough damage to a priority target that they are required to leave the fight. Ideally they should be in execute range of your next Q. Teamfighting becomes a lot stronger on Diana with stopwatch or hourglass. Then you can look to pull in multiple targets with your R, then W Q R, and stopwatch.</p>
 
@@ -641,7 +568,7 @@ function loadSection(section) {
 
   `,
 
-  split: `
+  "Splitpushing": `
     <h2>Splitpushing</h2>
     <p>Diana is one of the best splitpushers in the game . She wins most 1v1’s, pushes waves insanely fast, and takes towers fast.</p>
 
@@ -658,14 +585,14 @@ function loadSection(section) {
     </ul>
   `,
 
-  "closing out the game": `
+  "Closing Out The Game": `
     <h2>Closing Out The Game</h2>
     <p>Diana's best way of getting wins is by forcing early surrenders by successfully taking multiple mid towers in the early game. Otherwise closing out a game of league relies heavily on Baron as well as atakhan and dragons/elder. Baron spawn has been pushed back to 25 minutes. This gives Diana extra time to play for the split push. The split push has to be placed on hold if dragon or atakhan are up.</p>
 
     <p>If you’re on blue side you can trade second dragon for the tier 2 tower.</p>
   `,
 
-  "threats & synergies": `
+  "Threats & Synergies": `
     <h2>Threats & Synergies</h2>
     <h3>Threats</h3>
     <p>Any champion with high sustain damage and survivability counters Diana. Diana has to commit to the fight and if she can’t burst or out dps the enemy champion she’ll die.</p>
@@ -689,7 +616,7 @@ function loadSection(section) {
     </ul>
   `,
 
-  'pros & cons': `
+  "Pros & Cons": `
     <h2>Pros & Cons</h2>
     <h3>Pros</h3>
     <ul>
@@ -708,7 +635,7 @@ function loadSection(section) {
     </ul>
   `,
 
-  "extra": `
+  "Extra Tips": `
     <h2>Extra Tips</h2>
     <ol>
       <li>Double switching with E</li>
@@ -723,12 +650,23 @@ function loadSection(section) {
   `
 };
 
-  content.innerHTML = sections[section];
-}
+sectionSelect.addEventListener('change', () => {
+  const val = sectionSelect.value;
+  sectionInfo.innerHTML = sections[val] || '<p>Coming soon!</p>';
+});
 </script>
 
 </body>
 </html>
+
+
+
+
+
+
+
+
+
 
 
 
