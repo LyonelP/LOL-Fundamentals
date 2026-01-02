@@ -180,40 +180,36 @@ footer {
   .mobile-menu-button { display:none; }
 }
 
-/* Mobile dropdown menu overlay */
-.mobile-menu-overlay {
+/* Mobile dropdown menu below button */
+.mobile-menu-dropdown {
   display:none;
-  position:fixed;
-  top:62px; /* below header */
-  left:0;
-  right:0;
-  bottom:0;
-  background:rgba(15,20,26,0.95);
+  background:rgba(13,17,23,0.9);
+  border-top:2px solid var(--gold);
+  padding:10px 0;
   overflow-y:auto;
-  z-index:12;
-  padding:20px 0;
+  max-height:300px;
+  z-index:10;
 }
 
-.mobile-menu-overlay .nav-section-title {
+.mobile-menu-dropdown .nav-section-title {
   font-size:12px;
   color:var(--muted);
-  padding:12px 20px;
+  padding:8px 20px;
   text-transform:uppercase;
 }
 
-.mobile-menu-overlay a {
+.mobile-menu-dropdown a {
   display:block;
-  padding:12px 20px;
+  padding:10px 20px;
   text-decoration:none;
   color:#e6edf3;
-  border-radius:8px;
+  border-radius:6px;
 }
 
-.mobile-menu-overlay a:hover {
+.mobile-menu-dropdown a:hover {
   background:var(--gold);
   color:#000;
 }
-
 </style>
 </head>
 <body>
@@ -225,30 +221,30 @@ footer {
 </div>
 
 <!-- Mobile menu button -->
-<button class="mobile-menu-button" onclick="toggleMobileMenu()">Select a Section ▼</button>
+<button class="mobile-menu-button" onclick="toggleMobileDropdown()">Select a Section ▼</button>
 
-<!-- Mobile menu overlay -->
-<div class="mobile-menu-overlay" id="mobileMenu">
+<!-- Mobile dropdown menu -->
+<div class="mobile-menu-dropdown" id="mobileDropdown">
   <div class="nav-section-title">Core</div>
-  <a onclick="loadSection('intro'); toggleMobileMenu()">Intro</a>
-  <a onclick="loadSection('runes'); toggleMobileMenu()">Runes</a>
-  <a onclick="loadSection('build'); toggleMobileMenu()">Build</a>
-  <a onclick="loadSection('summoners'); toggleMobileMenu()">Summoners</a>
-  <a onclick="loadSection('abilities'); toggleMobileMenu()">Abilities</a>
-  <a onclick="loadSection('combos'); toggleMobileMenu()">Combos</a>
+  <a onclick="loadSection('intro'); toggleMobileDropdown()">Intro</a>
+  <a onclick="loadSection('runes'); toggleMobileDropdown()">Runes</a>
+  <a onclick="loadSection('build'); toggleMobileDropdown()">Build</a>
+  <a onclick="loadSection('summoners'); toggleMobileDropdown()">Summoners</a>
+  <a onclick="loadSection('abilities'); toggleMobileDropdown()">Abilities</a>
+  <a onclick="loadSection('combos'); toggleMobileDropdown()">Combos</a>
 
   <div class="nav-section-title">Gameplay</div>
-  <a onclick="loadSection('laning'); toggleMobileMenu()">Laning</a>
-  <a onclick="loadSection('warding'); toggleMobileMenu()">Warding</a>
-  <a onclick="loadSection('farming'); toggleMobileMenu()">Farming / Pushing</a>
-  <a onclick="loadSection('teamfighting'); toggleMobileMenu()">Teamfighting</a>
-  <a onclick="loadSection('splitpushing'); toggleMobileMenu()">Splitpushing</a>
-  <a onclick="loadSection('closing'); toggleMobileMenu()">Closing Out The Game</a>
+  <a onclick="loadSection('laning'); toggleMobileDropdown()">Laning</a>
+  <a onclick="loadSection('warding'); toggleMobileDropdown()">Warding</a>
+  <a onclick="loadSection('farming'); toggleMobileDropdown()">Farming / Pushing</a>
+  <a onclick="loadSection('teamfighting'); toggleMobileDropdown()">Teamfighting</a>
+  <a onclick="loadSection('splitpushing'); toggleMobileDropdown()">Splitpushing</a>
+  <a onclick="loadSection('closing'); toggleMobileDropdown()">Closing Out The Game</a>
 
   <div class="nav-section-title">Advanced</div>
-  <a onclick="loadSection('threats'); toggleMobileMenu()">Threats & Synergies</a>
-  <a onclick="loadSection('pros'); toggleMobileMenu()">Pros & Cons</a>
-  <a onclick="loadSection('extra'); toggleMobileMenu()">Extra Tips</a>
+  <a onclick="loadSection('threats'); toggleMobileDropdown()">Threats & Synergies</a>
+  <a onclick="loadSection('pros'); toggleMobileDropdown()">Pros & Cons</a>
+  <a onclick="loadSection('extra'); toggleMobileDropdown()">Extra Tips</a>
 </div>
 
 <!-- Sidebar for desktop -->
@@ -313,17 +309,13 @@ function loadSection(section){
   content.innerHTML = sections[section] || '<h2>Section not found</h2>';
 }
 
-// Mobile menu toggle
-function toggleMobileMenu() {
-  const menu = document.getElementById('mobileMenu');
-  menu.style.display = menu.style.display === 'block' ? 'none' : 'block';
+function toggleMobileDropdown() {
+  const dropdown = document.getElementById('mobileDropdown');
+  dropdown.style.display = dropdown.style.display === 'block' ? 'none' : 'block';
 }
 </script>
 
 </body>
 </html>
-
-
-
 
 
