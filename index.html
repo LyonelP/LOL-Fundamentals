@@ -82,7 +82,6 @@ footer a:hover{text-decoration:underline}
 <h2>Explore the Hub</h2>
 <div class="card-grid">
 
-<!-- Unlocked -->
 <a href="freeskills.html" class="card fundamentals">
   <h3>Fundamentals</h3>
   <p>Core skills including combos, wave management, positioning, and warding for consistent gameplay improvement.</p>
@@ -160,72 +159,44 @@ footer a:hover{text-decoration:underline}
 
 <script type="module">
 import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
-import { getAuth, signInWithEmailAndPassword, createUserWithEmailAndPassword, sendPasswordResetEmail, setPersistence, browserLocalPersistence, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-auth.js";
+import { getAuth, signInWithEmailAndPassword, createUserWithEmailAndPassword, sendPasswordResetEmail, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-auth.js";
 import { getFirestore, doc, setDoc, serverTimestamp, getDoc } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
 
-const firebaseConfig = {
-  apiKey:"AIzaSyCFRcEV7wdivqONnkjJubAZOjPMixrHMBI",
-  authDomain:"lol-fundamentals.firebaseapp.com",
-  projectId:"lol-fundamentals",
-  storageBucket:"lol-fundamentals.firebasestorage.app",
-  messagingSenderId:"1038440427584",
-  appId:"1:1038440427584:web:a82207151fd370dbedefa5"
-};
+const firebaseConfig={apiKey:"AIzaSyCFRcEV7wdivqONnkjJubAZOjPMixrHMBI",authDomain:"lol-fundamentals.firebaseapp.com",projectId:"lol-fundamentals",storageBucket:"lol-fundamentals.firebasestorage.app",messagingSenderId:"1038440427584",appId:"1:1038440427584:web:a82207151fd370dbedefa5"};
+const app=initializeApp(firebaseConfig),auth=getAuth(app),firestore=getFirestore(app);
 
-const app = initializeApp(firebaseConfig);
-const auth = getAuth(app);
-const firestore = getFirestore(app);
+signupHeroBtn.onclick=()=>signupModal.style.display="flex";
+loginHeroBtn.onclick=()=>loginModal.style.display="flex";
+closeSignupModal.onclick=()=>signupModal.style.display="none";
+closePlanModal.onclick=()=>planModal.style.display="none";
+closeLoginModal.onclick=()=>loginModal.style.display="none";
+seePlansBtn.onclick=()=>{signupModal.style.display="none";planModal.style.display="flex"};
 
-// Persist login across tabs
-await setPersistence(auth, browserLocalPersistence);
-
-// Check login on page load
-onAuthStateChanged(auth, async (user) => {
-  if(user){
-    const snap = await getDoc(doc(firestore, "paidUsers", user.email));
-    const isPaid = snap.exists() ? snap.data().paid : false;
-    localStorage.setItem("lolfundamentals_logged_in","true");
-    localStorage.setItem("lolfundamentals_paid", isPaid ? "true" : "false");
-    if(isPaid){ window.location.href="membershub.html"; }
-  }
-});
-
-signupHeroBtn.onclick = () => signupModal.style.display="flex";
-loginHeroBtn.onclick = () => loginModal.style.display="flex";
-closeSignupModal.onclick = () => signupModal.style.display="none";
-closePlanModal.onclick = () => planModal.style.display="none";
-closeLoginModal.onclick = () => loginModal.style.display="none";
-seePlansBtn.onclick = () => { signupModal.style.display="none"; planModal.style.display="flex"; };
-
-continueSignupBtn.onclick = async () => {
-  const e = signupEmail.value.trim(), p = signupPassword.value.trim(), c = signupPasswordConfirm.value.trim();
-  if(!e || !p || !c){ alert("Fill all fields"); return; }
-  if(p !== c){ alert("Passwords do not match"); return; }
-  await createUserWithEmailAndPassword(auth, e, p);
-  await setDoc(doc(firestore,"paidUsers",e), { paid:false, timestamp:serverTimestamp() });
+continueSignupBtn.onclick=async()=>{
+  const e=signupEmail.value.trim(),p=signupPassword.value.trim(),c=signupPasswordConfirm.value.trim();
+  if(!e||!p||!c){alert("Fill all fields");return}
+  if(p!==c){alert("Passwords do not match");return}
+  await createUserWithEmailAndPassword(auth,e,p);
+  await setDoc(doc(firestore,"paidUsers",e),{paid:false,timestamp:serverTimestamp()});
   signupModal.style.display="none";
   planModal.style.display="flex";
 };
 
-document.getElementById("monthlyBtn").onclick = () => { window.open("https://buy.stripe.com/8x28wIaQ4dJa4Rg88iejK0f","_blank"); planModal.style.display="none"; };
-document.getElementById("yearlyBtn").onclick = () => { window.open("https://buy.stripe.com/cNi14g3nC48AerQ9cmejK07","_blank"); planModal.style.display="none"; };
-document.getElementById("lifetimeBtn").onclick = () => { window.open("https://buy.stripe.com/fZu00c9M0awYgzYcoyejK06","_blank"); planModal.style.display="none"; };
+document.getElementById("monthlyBtn").onclick=()=>{window.open("https://buy.stripe.com/8x28wIaQ4dJa4Rg88iejK0f","_blank");planModal.style.display="none";}
+document.getElementById("yearlyBtn").onclick=()=>{window.open("https://buy.stripe.com/cNi14g3nC48AerQ9cmejK07","_blank");planModal.style.display="none";}
+document.getElementById("lifetimeBtn").onclick=()=>{window.open("https://buy.stripe.com/fZu00c9M0awYgzYcoyejK06","_blank");planModal.style.display="none";}
 
-modalLoginBtn.onclick = async () => {
-  const e = loginEmail.value.trim(), p = loginPassword.value.trim();
-  await signInWithEmailAndPassword(auth, e, p);
-  const snap = await getDoc(doc(firestore,"paidUsers",e));
-  const isPaid = snap.exists() ? snap.data().paid : false;
-  localStorage.setItem("lolfundamentals_logged_in","true");
-  localStorage.setItem("lolfundamentals_paid", isPaid ? "true" : "false");
+modalLoginBtn.onclick=async()=>{
+  const e=loginEmail.value.trim(),p=loginPassword.value.trim();
+  await signInWithEmailAndPassword(auth,e,p);
   loginModal.style.display="none";
-  if(isPaid){ window.location.href="membershub.html"; }
-  else { planModal.style.display="flex"; }
+  // redirect immediately
+  window.location.href="membershub.html";
 };
 
-resetLinkModal.onclick = async (event) => {
-  event.preventDefault();
-  await sendPasswordResetEmail(auth, loginEmail.value);
+resetLinkModal.onclick=async(e)=>{
+  e.preventDefault();
+  await sendPasswordResetEmail(auth,loginEmail.value);
   loginMsgModal.textContent="Password reset email sent!";
 };
 
@@ -241,6 +212,19 @@ for(let i=0;i<50;i++){
   e.style.animation=`floatParticles ${6+Math.random()*4}s infinite ease-in-out`;
   document.querySelector(".particles").appendChild(e);
 }
+
+// Instant login redirect on page load
+onAuthStateChanged(auth,(user)=>{
+  if(user){
+    localStorage.setItem("lolfundamentals_logged_in","true");
+    // optional: fetch paid status
+    getDoc(doc(firestore,"paidUsers",user.email)).then(snap=>{
+      const paid = snap.exists() ? snap.data().paid : false;
+      localStorage.setItem("lolfundamentals_paid", paid ? "true" : "false");
+    });
+    window.location.href="membershub.html";
+  }
+});
 </script>
 
 <style>
@@ -258,6 +242,8 @@ for(let i=0;i<50;i++){
 
 </body>
 </html>
+
+
 
 
 
