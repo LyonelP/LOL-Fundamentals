@@ -10,6 +10,7 @@ body {
   margin: 0;
   font-family: 'Beaufort for LOL', Arial, Helvetica, sans-serif;
   color: #fff;
+  /* Direct Riot CDN splash for Winterblessed Diana */
   background: url('https://ddragon.leagueoflegends.com/cdn/img/champion/splash/Diana_21.jpg') no-repeat center center fixed;
   background-size: cover;
   min-height: 100vh;
@@ -17,11 +18,12 @@ body {
   flex-direction: column;
 }
 
+/* Slight dark overlay to make text readable */
 body::before {
   content: "";
   position: fixed;
   inset: 0;
-  background: rgba(10,15,20,0.25);
+  background: rgba(10,15,20,0.35);
   z-index: -1;
 }
 
@@ -147,7 +149,7 @@ footer {
 <a href="#" class="champion-card" onclick="alert('Sign up to unlock this champion'); return false;"><img src="https://ddragon.leagueoflegends.com/cdn/14.23.1/img/champion/AurelionSol.png" alt="Aurelion Sol"><div class="champion-name">Aurelion Sol</div><div class="lock-icon">🔒</div></a>
 <a href="#" class="champion-card" onclick="alert('Sign up to unlock this champion'); return false;"><img src="https://ddragon.leagueoflegends.com/cdn/14.23.1/img/champion/Aurora.png" alt="Aurora"><div class="champion-name">Aurora</div><div class="lock-icon">🔒</div></a>
 
-<!-- Add the rest of your champions here, unchanged -->
+<!-- Add the rest of your champions here -->
 
 </div>
 
