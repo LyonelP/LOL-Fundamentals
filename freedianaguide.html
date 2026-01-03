@@ -6,10 +6,13 @@
 <title>Diana Runes – Free Preview</title>
 
 <style>
+/* ===== BASE ===== */
 body {
   margin: 0;
   font-family: 'Beaufort for LOL', Arial, Helvetica, sans-serif;
   color: #e6edf3;
+  min-height: 100vh;
+  display: flex;
   background: url('https://ddragon.leagueoflegends.com/cdn/img/champion/splash/Diana_11.jpg') no-repeat center center fixed;
   background-size: cover;
 }
@@ -18,25 +21,52 @@ body::before {
   content: "";
   position: fixed;
   inset: 0;
-  background: rgba(10,15,20,0.6);
+  background: rgba(10,15,20,0.65);
   z-index: -1;
 }
 
+/* ===== LEFT TASKBAR ===== */
+.sidebar {
+  width: 240px;
+  background: rgba(13,17,23,0.95);
+  border-right: 2px solid #c9aa71;
+  padding: 24px;
+}
+
+.sidebar h2 {
+  color: #c9aa71;
+  margin-bottom: 20px;
+  font-size: 18px;
+}
+
+/* ===== MAIN COLUMN ===== */
+.main {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+}
+
+/* ===== HEADER ===== */
 header {
-  background: rgba(13,17,23,0.9);
-  border-bottom: 2px solid #c9aa71;
-  padding: 20px;
+  padding: 22px;
+  text-align: center;
   font-size: 26px;
   font-weight: bold;
   text-transform: uppercase;
   color: #c9aa71;
-  text-align: center;
+  background: rgba(13,17,23,0.9);
+  border-bottom: 2px solid #c9aa71;
+}
+
+/* ===== BACK BUTTON ===== */
+.back-wrap {
+  display: flex;
+  justify-content: center;
+  margin: 20px 0;
 }
 
 .back-button {
-  display: inline-block;
-  margin: 20px;
-  padding: 10px 18px;
+  padding: 10px 20px;
   background: linear-gradient(135deg, #c9aa71, #e0c77b);
   color: #000;
   text-decoration: none;
@@ -44,17 +74,18 @@ header {
   font-weight: bold;
 }
 
+/* ===== CONTENT ===== */
 .container {
   max-width: 900px;
-  margin: 0 auto 60px;
+  margin: 0 auto;
   padding: 20px;
+  flex: 1;
 }
 
-/* SECTION */
 .section {
-  background: rgba(22,27,34,0.9);
+  background: rgba(22,27,34,0.92);
   border-radius: 14px;
-  padding: 24px;
+  padding: 26px;
   box-shadow: 0 0 30px rgba(0,0,0,0.45);
 }
 
@@ -63,14 +94,21 @@ header {
   color: #c8aa6e;
   font-size: 22px;
   font-weight: bold;
-  margin-bottom: 12px;
+  margin-bottom: 14px;
 }
 
-/* LOCKED CONTENT */
+/* ===== FREE LINE ONLY ===== */
+.free-line {
+  font-size: 16px;
+  color: #d7d7d7;
+  line-height: 1.6;
+}
+
+/* ===== LOCKED CONTENT ===== */
 .locked {
   position: relative;
-  margin-top: 30px;
-  filter: blur(6px);
+  margin-top: 26px;
+  filter: blur(3px); /* softer blur */
   pointer-events: none;
   user-select: none;
 }
@@ -79,14 +117,13 @@ header {
 .lock-overlay {
   position: absolute;
   inset: 0;
-  background: rgba(10,15,20,0.65);
+  background: rgba(10,15,20,0.55);
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
   border-radius: 14px;
   z-index: 5;
-  filter: none;
   pointer-events: auto;
 }
 
@@ -104,7 +141,7 @@ header {
 }
 
 .unlock-btn {
-  margin-top: 15px;
+  margin-top: 16px;
   padding: 12px 22px;
   background: linear-gradient(135deg, #c9aa71, #e0c77b);
   color: #000;
@@ -113,54 +150,68 @@ header {
   text-decoration: none;
   box-shadow: 0 0 15px rgba(201,170,113,0.5);
 }
+
+/* ===== FOOTER ===== */
+footer {
+  text-align: center;
+  padding: 24px;
+  font-size: 14px;
+  background: rgba(13,17,23,0.9);
+}
 </style>
 </head>
 
 <body>
 
+<!-- LEFT TASKBAR -->
+<div class="sidebar">
+  <h2>LoL Fundamentals</h2>
+  Rune Theory<br>
+  Champion Guides<br>
+  Matchups<br>
+  Coaching
+</div>
+
+<!-- MAIN -->
+<div class="main">
+
 <header>Diana Runes – Free Preview</header>
-<a href="https://lolfundamentals.com" class="back-button">← Back to LoL Fundamentals</a>
+
+<div class="back-wrap">
+  <a href="https://lolfundamentals.com" class="back-button">
+    ← Back to LoL Fundamentals
+  </a>
+</div>
 
 <div class="container">
 
-  <!-- FREE CONTENT -->
-  <div class="section" id="runes">
+  <div class="section">
 
     <div class="section-title">Why grasp over another keystone?</div>
 
-    <p style="line-height:1.5; color:#d7d7d7;">
-      It ultimately comes down to the value of the rune trees themselves. The Sorcery
-      tree is mandatory on Diana for Manaflow Band, and the Resolve tree provides
-      essential sustain, health, and early game damage.
-      <br><br>
-      By level 3, Bone Plating will often block more damage than an Electrocute proc
-      while the entire Domination tree provides virtually no value during the most
-      important part of the game. Electrocute also requires three separate hits to
-      activate, unlike old Thunderlord’s, which Diana could proc instantly with W.
-      <br><br>
-      As the game has slowed down, scaling durability and health from Grasp and
-      Overgrowth have overtaken burst-only rune setups that fall off quickly.
+    <!-- ONLY FREE LINE -->
+    <p class="free-line">
+      It ultimately comes down to the value of the rune trees themselves.
     </p>
 
-    <!-- LOCKED CONTENT -->
+    <!-- LOCKED -->
     <div class="locked">
 
       <div class="lock-overlay">
         <h3>🔒 Full Rune Breakdown Locked</h3>
         <p>
-          The full Grasp setup, rune math, matchup logic,
-          damage tables, and videos are available in the
-          full Diana guide.
+          Full rune math, Electrocute comparisons,
+          damage tables, scaling logic, and videos
+          are available in the complete Diana guide.
         </p>
         <a href="https://lolfundamentals.com/signup" class="unlock-btn">
           Unlock Full Diana Guide
         </a>
       </div>
 
-      <!-- blurred filler (looks like real content behind lock) -->
-      <p>Lorem ipsum dolor sit amet, Grasp Shield Bash Bone Plating Overgrowth Manaflow Transcendence.</p>
-      <p>Damage tables, Electrocute comparison, rune math, scaling analysis.</p>
-      <p>Embedded videos, farming sections, graphs, and matchup explanations.</p>
+      <p>Bone Plating damage math, Grasp HP scaling, early lane graphs.</p>
+      <p>Electrocute proc timing, Domination value breakdown.</p>
+      <p>Matchup-specific rune swaps and video explanations.</p>
 
     </div>
 
@@ -168,9 +219,11 @@ header {
 
 </div>
 
-<footer style="text-align:center; padding:25px; font-size:14px;">
+<footer>
   © 2025 LoL Fundamentals · All rights reserved
 </footer>
 
+</div>
 </body>
 </html>
+
