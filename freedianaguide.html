@@ -176,14 +176,14 @@ header {
   display: block;
 }
 
-/* Desktop overlay */
+/* Overlay blur + text */
 .locked-overlay::after {
   content: "Sign up to unlock";
   position: absolute;
-  top: 0;
+  top: -10%;         /* extend blur above iframe */
+  bottom: -10%;      /* extend blur below iframe */
   left: 0;
-  width: 100%;
-  height: 115%;             /* full blur coverage */
+  right: 0;
   backdrop-filter: blur(6px);
   background: rgba(0,0,0,0.5);
   color: #fff;
@@ -195,15 +195,16 @@ header {
   text-align: center;
   padding: 0 12px;
   z-index: 5;
-  transform: translateY(-18%); /* desktop text perfect spot */
+  transform: translateY(-18%); /* desktop text position */
 }
 
 /* Mobile adjustments */
 @media(max-width:480px){
   .locked-overlay::after {
     font-size: 18px;
-    transform: translateY(-35%); /* slightly higher than desktop */
-    height: 130%;                /* extend blur more for mobile */
+    transform: translateY(-35%); /* higher text on mobile */
+    top: -15%;       /* extend blur more on mobile */
+    bottom: -15%;    /* extend blur more on mobile */
   }
 }
 
@@ -366,6 +367,7 @@ function lockedAlert() {
 
 </body>
 </html>
+
 
 
 
