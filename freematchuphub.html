@@ -11,11 +11,9 @@ body {
   font-family: 'Beaufort for LOL', Arial, Helvetica, sans-serif;
   color: #fff;
   background: url('https://ddragon.leagueoflegends.com/cdn/img/champion/splash/Diana_2.jpg') no-repeat center top;
-  background-size: cover;
+  background-size: contain; /* keeps full image without zooming */
   min-height: 100vh;
-  /* remove flex so header can stay at top naturally */
-  /* display: flex;
-  flex-direction: column; */
+  text-align: center; /* centers back button and search */
 }
 
 body::before {
@@ -35,11 +33,10 @@ header {
   text-transform: uppercase;
   color: #c9aa71;
   text-align: center;
-  /* remove any fixed positioning */
 }
 
-
 .back-button {
+  display: inline-block; /* centers inside text-align:center body */
   margin: 20px auto;
   padding: 10px 20px;
   background: linear-gradient(135deg, #c9aa71, #e0c77b);
@@ -54,13 +51,14 @@ header {
 #champion-search {
   width: 400px;
   max-width: 90%;
-  margin: 20px auto 30px;
+  margin: 20px auto 30px; /* centers it */
   padding: 8px 12px;
   border-radius: 6px;
   border: 2px solid #c084fc;
   background: #161b22;
   color: #e6edf3;
 }
+
 
 .champion-grid {
   display: grid;
@@ -230,6 +228,7 @@ input.addEventListener('input', () => {
 
 </body>
 </html>
+
 
 
 
