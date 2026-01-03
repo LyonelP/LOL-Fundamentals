@@ -6,224 +6,248 @@
 <title>Diana Runes – Free Preview</title>
 
 <style>
-/* ===== BASE ===== */
+:root {
+  --gold:#c9aa71;
+  --muted:#9da7b3;
+}
+
+html, body {
+  margin:0;
+  padding:0;
+  height:100%;
+  font-family: Arial, Helvetica, sans-serif;
+}
+
 body {
-  margin: 0;
-  font-family: 'Beaufort for LOL', Arial, Helvetica, sans-serif;
-  color: #e6edf3;
-  min-height: 100vh;
-  display: flex;
-  background: url('https://ddragon.leagueoflegends.com/cdn/img/champion/splash/Diana_11.jpg') no-repeat center center fixed;
-  background-size: cover;
+  background:url('https://ddragon.leagueoflegends.com/cdn/img/champion/splash/Diana_11.jpg') no-repeat center center fixed;
+  background-size:cover;
+  color:#e6edf3;
+  display:flex;
+  flex-direction:column;
+  min-height:100vh;
 }
 
 body::before {
-  content: "";
-  position: fixed;
-  inset: 0;
-  background: rgba(10,15,20,0.65);
-  z-index: -1;
+  content:"";
+  position:fixed;
+  inset:0;
+  background:
+    radial-gradient(circle at top, rgba(120,0,0,0.25), transparent 60%),
+    rgba(10,15,20,0.82);
+  z-index:-1;
 }
 
-/* ===== LEFT TASKBAR ===== */
-.sidebar {
-  width: 240px;
-  background: rgba(13,17,23,0.95);
-  border-right: 2px solid #c9aa71;
-  padding: 24px;
-}
-
-.sidebar h2 {
-  color: #c9aa71;
-  margin-bottom: 20px;
-  font-size: 18px;
-}
-
-/* ===== MAIN COLUMN ===== */
-.main {
-  flex: 1;
-  display: flex;
-  flex-direction: column;
-}
-
-/* ===== HEADER ===== */
+/* Header */
 header {
-  padding: 22px;
-  text-align: center;
-  font-size: 26px;
-  font-weight: bold;
-  text-transform: uppercase;
-  color: #c9aa71;
-  background: rgba(13,17,23,0.9);
-  border-bottom: 2px solid #c9aa71;
+  width:100%;
+  background:rgba(13,17,23,0.9);
+  border-bottom:2px solid var(--gold);
+  padding:20px 0;
+  font-size:26px;
+  font-weight:bold;
+  color:var(--gold);
+  text-align:center;
+  text-transform:uppercase;
 }
 
-/* ===== BACK BUTTON ===== */
+/* Back button */
 .back-wrap {
-  display: flex;
-  justify-content: center;
-  margin: 20px 0;
+  width:100%;
+  text-align:center;
+  margin:16px 0;
 }
 
 .back-button {
-  padding: 10px 20px;
-  background: linear-gradient(135deg, #c9aa71, #e0c77b);
-  color: #000;
-  text-decoration: none;
-  border-radius: 8px;
-  font-weight: bold;
+  display:inline-flex;
+  align-items:center;
+  gap:8px;
+  padding:10px 22px;
+  background:linear-gradient(135deg,var(--gold),#e0c77b);
+  color:#000;
+  text-decoration:none;
+  border-radius:10px;
+  font-weight:bold;
 }
 
-/* ===== CONTENT ===== */
-.container {
-  max-width: 900px;
-  margin: 0 auto;
-  padding: 20px;
-  flex: 1;
+.back-button::before {
+  content:"←";
 }
 
-.section {
-  background: rgba(22,27,34,0.92);
-  border-radius: 14px;
-  padding: 26px;
-  box-shadow: 0 0 30px rgba(0,0,0,0.45);
+/* Sidebar */
+.nav-wrapper {
+  display:none;
 }
 
-/* GOLD TITLE */
-.section-title {
-  color: #c8aa6e;
-  font-size: 22px;
-  font-weight: bold;
-  margin-bottom: 14px;
+@media(min-width:1024px) {
+  .nav-wrapper {
+    display:block;
+    position:fixed;
+    top:70px;
+    left:0;
+    width:220px;
+    bottom:0;
+    background:rgba(15,20,26,0.95);
+    border-right:2px solid var(--gold);
+    padding-top:20px;
+    overflow-y:auto;
+  }
+
+  .nav-section-title {
+    font-size:11px;
+    color:var(--muted);
+    padding:14px 24px;
+    text-transform:uppercase;
+  }
+
+  .nav-menu a {
+    display:block;
+    padding:10px 24px;
+    color:#e6edf3;
+    text-decoration:none;
+  }
 }
 
-/* ===== FREE LINE ONLY ===== */
-.free-line {
-  font-size: 16px;
-  color: #d7d7d7;
-  line-height: 1.6;
+/* Main */
+.main {
+  flex:1;
+  display:flex;
+  justify-content:center;
+  padding:0 24px;
 }
 
-/* ===== LOCKED CONTENT ===== */
-.locked {
-  position: relative;
-  margin-top: 26px;
-  filter: blur(3px); /* softer blur */
-  pointer-events: none;
-  user-select: none;
+.card {
+  max-width:800px;
+  width:100%;
+  background:rgba(255,255,255,0.03);
+  border-radius:26px;
+  padding:36px;
+  box-shadow:0 24px 70px rgba(0,0,0,0.55);
 }
 
-/* LOCK OVERLAY */
+.card h2 {
+  color:var(--gold);
+  margin-top:0;
+}
+
+/* LOCKED RUNES */
+.locked-runes {
+  position:relative;
+  margin-top:16px;
+}
+
+.locked-content {
+  filter:blur(3px);
+  pointer-events:none;
+  user-select:none;
+}
+
 .lock-overlay {
-  position: absolute;
-  inset: 0;
-  background: rgba(10,15,20,0.55);
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  border-radius: 14px;
-  z-index: 5;
-  pointer-events: auto;
+  position:absolute;
+  inset:0;
+  background:rgba(10,15,20,0.55);
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  justify-content:center;
+  border-radius:18px;
+  text-align:center;
 }
 
 .lock-overlay h3 {
-  color: #c9aa71;
-  font-size: 22px;
-  margin-bottom: 10px;
+  color:var(--gold);
+  margin-bottom:8px;
 }
 
 .lock-overlay p {
-  text-align: center;
-  max-width: 420px;
-  font-size: 15px;
-  color: #d7d7d7;
+  max-width:420px;
+  font-size:14px;
+  color:#d7d7d7;
 }
 
 .unlock-btn {
-  margin-top: 16px;
-  padding: 12px 22px;
-  background: linear-gradient(135deg, #c9aa71, #e0c77b);
-  color: #000;
-  font-weight: bold;
-  border-radius: 8px;
-  text-decoration: none;
-  box-shadow: 0 0 15px rgba(201,170,113,0.5);
+  margin-top:14px;
+  padding:12px 22px;
+  background:linear-gradient(135deg,var(--gold),#e0c77b);
+  color:#000;
+  font-weight:bold;
+  border-radius:10px;
+  text-decoration:none;
 }
 
-/* ===== FOOTER ===== */
+/* Footer */
 footer {
-  text-align: center;
-  padding: 24px;
-  font-size: 14px;
-  background: rgba(13,17,23,0.9);
+  padding:16px;
+  text-align:center;
+  font-size:13px;
+  color:var(--muted);
+  margin-top:auto;
 }
 </style>
 </head>
 
 <body>
 
-<!-- LEFT TASKBAR -->
-<div class="sidebar">
-  <h2>LoL Fundamentals</h2>
-  Rune Theory<br>
-  Champion Guides<br>
-  Matchups<br>
-  Coaching
-</div>
-
-<!-- MAIN -->
-<div class="main">
-
 <header>Diana Runes – Free Preview</header>
 
 <div class="back-wrap">
-  <a href="https://lolfundamentals.com" class="back-button">
-    ← Back to LoL Fundamentals
-  </a>
+  <a href="https://lolfundamentals.com" class="back-button">Back to LoL Fundamentals</a>
 </div>
 
-<div class="container">
+<div class="nav-wrapper">
+  <div class="nav-menu">
+    <div class="nav-section-title">Core</div>
+    <a>Intro</a>
+    <a style="color:var(--gold); font-weight:bold;">Runes</a>
+    <a>Build</a>
+  </div>
+</div>
 
-  <div class="section">
+<div class="main">
+  <div class="card">
 
-    <div class="section-title">Why grasp over another keystone?</div>
+    <h2>Runes</h2>
 
-    <!-- ONLY FREE LINE -->
-    <p class="free-line">
+    <!-- ONLY VISIBLE LINE -->
+    <p style="color:#d7d7d7;">
+      <strong style="color:#c8aa6e;">Why grasp over another keystone?</strong>
       It ultimately comes down to the value of the rune trees themselves.
     </p>
 
-    <!-- LOCKED -->
-    <div class="locked">
+    <!-- LOCKED CONTENT -->
+    <div class="locked-runes">
+
+      <div class="locked-content">
+        <p>
+          The Sorcery tree is mandatory on Diana for Manaflow Band, and the Resolve
+          tree provides essential sustain, health, and early game damage. By level 3,
+          Bone Plating often blocks more damage than Electrocute while the entire
+          Domination tree does nothing.
+        </p>
+
+        <p>
+          Rune math, damage tables, Electrocute comparisons, videos, and matchup logic.
+        </p>
+      </div>
 
       <div class="lock-overlay">
         <h3>🔒 Full Rune Breakdown Locked</h3>
         <p>
-          Full rune math, Electrocute comparisons,
-          damage tables, scaling logic, and videos
-          are available in the complete Diana guide.
+          Full rune math, graphs, early-game damage comparisons,
+          and matchup logic are available in the complete Diana guide.
         </p>
         <a href="https://lolfundamentals.com/signup" class="unlock-btn">
           Unlock Full Diana Guide
         </a>
       </div>
 
-      <p>Bone Plating damage math, Grasp HP scaling, early lane graphs.</p>
-      <p>Electrocute proc timing, Domination value breakdown.</p>
-      <p>Matchup-specific rune swaps and video explanations.</p>
-
     </div>
 
   </div>
-
 </div>
 
-<footer>
-  © 2025 LoL Fundamentals · All rights reserved
-</footer>
+<footer>© 2026 LoL Fundamentals · All rights reserved</footer>
 
-</div>
 </body>
 </html>
+
 
