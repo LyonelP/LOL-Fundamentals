@@ -27,10 +27,6 @@ body::before {
 }
 
 header {
-  position: fixed;      /* Fix it to the top */
-  top: 0;               /* Align with top */
-  left: 0;
-  width: 100%;          /* Full width */
   background: rgba(13,17,23,0.9);
   border-bottom: 2px solid #c9aa71;
   padding: 20px;
@@ -39,8 +35,9 @@ header {
   text-transform: uppercase;
   color: #c9aa71;
   text-align: center;
-  z-index: 10;          /* Sit above everything */
+  /* remove position: fixed and z-index */
 }
+
 
 
 .back-button {
@@ -234,6 +231,7 @@ input.addEventListener('input', () => {
 
 </body>
 </html>
+
 
 
 
