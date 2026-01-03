@@ -39,22 +39,28 @@ window.logout = function() {
   window.location.href = 'index.html';
 };
 
-// Cancel subscription logic
-window.cancelSubscription = async function() {
-  const user = auth.currentUser;
-  const userEmail = user?.email || 'Unknown email';
+// Cancel subscription logic (fixed)
+window.cancelSubscription = async function () {
+  onAuthStateChanged(auth, async (user) => {
+    if (!user) {
+      alert("Not logged in. Please refresh.");
+      return;
+    }
 
-  try {
-    await addDoc(collection(firestore, "cancellationRequests"), {
-      email: userEmail,
-      timestamp: serverTimestamp(),
-      status: "pending"
-    });
-    document.getElementById('confirmDialog').style.display = 'none';
-    document.getElementById('confirmMessage').style.display = 'block';
-  } catch (err) {
-    alert('Error submitting request: ' + err.message);
-  }
+    try {
+      await addDoc(collection(firestore, "cancellationRequests"), {
+        email: user.email,
+        timestamp: serverTimestamp(),
+        status: "pending"
+      });
+
+      document.getElementById('confirmDialog').style.display = 'none';
+      document.getElementById('confirmMessage').style.display = 'block';
+    } catch (err) {
+      alert("Error submitting request: " + err.message);
+      console.error(err);
+    }
+  });
 };
 </script>
 
@@ -215,5 +221,6 @@ footer a:hover { text-decoration:underline; }
 </footer>
 </body>
 </html>
+
 
 
