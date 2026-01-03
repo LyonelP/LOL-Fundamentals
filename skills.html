@@ -5,98 +5,102 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>LoL Fundamentals – Skills Hub</title>
 
+<script>
+if (localStorage.getItem('lolfundamentals_logged_in') !== 'true') {
+  window.location.replace('login.html');
+}
+</script>
+
 <style>
 body {
   margin: 0;
-  font-family: 'Beaufort for LOL', Arial, Helvetica, sans-serif;
+  font-family: 'Beaufort for LOL', Arial, sans-serif;
   color: #fff;
   background: url('https://64.media.tumblr.com/594ac290bec6d5e9ad98b5f53404f00b/245c4c3ee469f81d-e4/s1280x1920/1cda4284320eb2031758a9859dfe14ff8bbc50ba.jpg') no-repeat center center fixed;
   background-size: cover;
-  overflow-x: hidden;
   min-height: 100vh;
 }
 
 body::before {
   content: "";
   position: fixed;
-  top:0; left:0;
-  width:100%; height:100%;
+  inset: 0;
   background: rgba(10,15,20,0.25);
   z-index: -1;
 }
 
 header {
-  background: rgba(13,17,23,0.9);
+  background: rgba(13,17,23,0.95);
   border-bottom: 2px solid #c9aa71;
   padding: 20px;
-  font-weight: bold;
+  text-align: center;
   font-size: 26px;
-  text-transform: uppercase;
+  font-weight: bold;
   color: #c9aa71;
-  letter-spacing: 1px;
+  text-transform: uppercase;
+}
+
+.layout {
+  display: flex;
+  min-height: calc(100vh - 90px);
+}
+
+/* ===== SIDEBAR (DESKTOP) ===== */
+.sidebar {
+  width: 260px;
+  background: rgba(13,17,23,0.95);
+  border-right: 2px solid #c9aa71;
+  padding: 20px;
+  box-sizing: border-box;
+}
+
+.section-btn {
+  display: block;
+  width: 100%;
+  padding: 12px;
+  margin-bottom: 12px;
+  background: #0f1722;
+  color: #c9aa71;
+  border: 2px solid #c9aa71;
+  border-radius: 10px;
+  font-size: 16px;
+  cursor: pointer;
+  text-align: center;
+  transition: all 0.25s;
+}
+
+.section-btn.active,
+.section-btn:hover {
+  background: #c9aa71;
+  color: #000;
+}
+
+/* ===== MAIN CONTENT ===== */
+.content {
+  flex: 1;
+  padding: 30px 0 0;
   text-align: center;
 }
 
 .back-button {
   display: inline-block;
+  margin-bottom: 18px;
   padding: 10px 20px;
-  background: linear-gradient(135deg, #c9aa71, #e0c77b);
+  background: linear-gradient(135deg,#c9aa71,#e0c77b);
   color: #000;
   text-decoration: none;
   border-radius: 8px;
   font-weight: bold;
-  font-size: 16px;
-  transition: all 0.3s;
-  box-shadow: 0 0 10px rgba(201,170,113,0.5);
 }
 .back-button::before { content: "← "; }
-
-.back-button:hover {
-  background: linear-gradient(135deg, #e6c97f, #f0d88b);
-  box-shadow: 0 0 15px rgba(255,215,0,0.8);
-}
-
-/* Layout */
-.layout {
-  display: block;
-}
-
-/* Sidebar */
-.sidebar {
-  text-align: center;
-}
-
-/* Section Select */
-#section-select-container {
-  margin: 20px auto;
-  text-align: center;
-}
-
-#section-select {
-  padding: 8px 12px;
-  font-size: 16px;
-  border-radius: 6px;
-  border: none;
-  background: #0f1722;
-  color: #c9aa71;
-  cursor: pointer;
-  width: 220px;
-  background-image: url("data:image/svg+xml;utf8,<svg fill='%23c9aa71' height='12' viewBox='0 0 24 24' width='12' xmlns='http://www.w3.org/2000/svg'><path d='M7 10l5 5 5-5z'/></svg>");
-  background-repeat: no-repeat;
-  background-position: right 10px center;
-  background-size: 12px;
-  appearance: none;
-}
 
 /* Progress */
 .progress-wrap {
   width: 260px;
   margin: 0 auto 25px;
-  text-align: center;
 }
 
 .progress-bar {
-  width: 100%;
   height: 10px;
   background: #0f1722;
   border-radius: 20px;
@@ -106,15 +110,14 @@ header {
 .progress-fill {
   height: 100%;
   width: 0%;
-  background: linear-gradient(90deg, #c9aa71, #e6c97f);
-  transition: width 0.45s ease;
+  background: linear-gradient(90deg,#c9aa71,#e6c97f);
+  transition: width 0.4s ease;
 }
 
 /* Skills */
 .skill-list {
   list-style: none;
   padding: 0;
-  margin-bottom: 40px;
 }
 
 .skill-list li {
@@ -126,27 +129,19 @@ header {
   border-radius: 12px;
   padding: 14px 18px;
   margin: 0 auto 20px;
-  font-size: 18px;
   width: 56vw;
   max-width: 900px;
-  box-shadow: 0 4px 12px rgba(0,0,0,0.5);
-  transition: transform 0.25s, box-shadow 0.3s;
+  font-size: 18px;
 }
 
-.skill-list li:hover {
-  transform: scale(1.03);
-}
-
-.skill-list li a {
+.skill-list a {
+  flex: 1;
   color: #fff;
   text-decoration: none;
-  flex-grow: 1;
   text-align: center;
 }
 
-.skill-list li a:hover {
-  color: #c9aa71;
-}
+.skill-list a:hover { color: #c9aa71; }
 
 .checkmark {
   width: 26px;
@@ -154,10 +149,9 @@ header {
   border-radius: 50%;
   border: 2px solid #c9aa71;
   display: flex;
-  justify-content: center;
   align-items: center;
+  justify-content: center;
   color: #c9aa71;
-  font-size: 18px;
   cursor: pointer;
 }
 
@@ -166,46 +160,27 @@ header {
   color: #000;
 }
 
-/* Desktop Sidebar */
-@media (min-width: 900px) {
-  .layout {
-    display: flex;
-  }
-
-  .sidebar {
-    width: 260px;
-    background: rgba(13,17,23,0.92);
-    border-right: 2px solid #c9aa71;
-    padding: 20px;
-    position: sticky;
-    top: 0;
-    height: 100vh;
-  }
-
-  .content {
-    flex: 1;
-    padding-top: 30px;
-  }
-
-  #section-select {
-    width: 100%;
-  }
-
-  .back-button {
-    display: block;
-    margin-bottom: 25px;
-  }
+/* ===== MOBILE ===== */
+#mobile-select {
+  display: none;
+  margin: 20px auto;
+  width: 95vw;
+  padding: 10px;
+  background: #0f1722;
+  color: #c9aa71;
+  border-radius: 8px;
 }
 
-/* Mobile */
-@media(max-width: 700px){
-  #section-select { width: 95vw; }
+@media (max-width: 800px) {
+  .layout { flex-direction: column; }
+  .sidebar { display: none; }
+  #mobile-select { display: block; }
   .skill-list li { width: 85vw; font-size: 16px; }
 }
 
 footer {
   text-align: center;
-  padding: 18px 10px;
+  padding: 20px 10px;
   font-size: 14px;
 }
 </style>
@@ -215,21 +190,14 @@ footer {
 
 <header>Skills Hub</header>
 
+<select id="mobile-select"></select>
+
 <div class="layout">
 
-  <aside class="sidebar">
-    <a href="membershub.html" class="back-button">Back to Members Hub</a>
+  <aside class="sidebar" id="sidebar"></aside>
 
-    <div id="section-select-container">
-      <select id="section-select">
-        <option value="Pre Game">Pre Game</option>
-        <option value="Early Game">Early Game</option>
-        <option value="Mid Game">Mid Game</option>
-        <option value="Late Game">Late Game</option>
-        <option value="Advanced">Advanced</option>
-        <option value="Out of Game">Out of Game</option>
-      </select>
-    </div>
+  <main class="content">
+    <a href="membershub.html" class="back-button">Back to Members Hub</a>
 
     <div class="progress-wrap">
       <div id="progressLabel">0% Complete</div>
@@ -237,9 +205,7 @@ footer {
         <div class="progress-fill" id="progressFill"></div>
       </div>
     </div>
-  </aside>
 
-  <main class="content">
     <ul class="skill-list" id="skill-list"></ul>
   </main>
 
@@ -257,67 +223,70 @@ const skillData = {
   "Out of Game":["Setup","Mindset","Not Raging/Blaming","Reaction Time","Meta"]
 };
 
-let skillProgress = JSON.parse(localStorage.getItem("skillProgress") || "{}");
+let progress = JSON.parse(localStorage.getItem("skillProgress")||"{}");
 
-Object.keys(skillData).forEach(section => {
-  skillProgress[section] ??= {};
-  skillData[section].forEach(skill => {
-    skillProgress[section][skill] ??= false;
-  });
+Object.keys(skillData).forEach(s=>{
+  progress[s]??={};
+  skillData[s].forEach(k=>progress[s][k]??=false);
 });
 
-const sectionSelect = document.getElementById("section-select");
-const skillList = document.getElementById("skill-list");
-const progressFill = document.getElementById("progressFill");
-const progressLabel = document.getElementById("progressLabel");
+const sidebar = document.getElementById("sidebar");
+const mobileSelect = document.getElementById("mobile-select");
+const list = document.getElementById("skill-list");
+const fill = document.getElementById("progressFill");
+const label = document.getElementById("progressLabel");
 
-function updateProgress(section) {
-  const skills = skillProgress[section];
-  const total = Object.keys(skills).length;
-  const done = Object.values(skills).filter(Boolean).length;
-  const pct = Math.round(done / total * 100);
-  progressFill.style.width = pct + "%";
-  progressLabel.textContent = `${section}: ${pct}% Complete`;
-  localStorage.setItem("skillProgress", JSON.stringify(skillProgress));
-}
+Object.keys(skillData).forEach(s=>{
+  sidebar.innerHTML += `<button class="section-btn" onclick="load('${s}',this)">${s}</button>`;
+  mobileSelect.innerHTML += `<option value="${s}">${s}</option>`;
+});
 
-function toggleCheck(section, skill, el) {
-  skillProgress[section][skill] = !skillProgress[section][skill];
-  el.classList.toggle("completed");
-  el.textContent = el.classList.contains("completed") ? "✔" : "";
-  updateProgress(section);
-}
+function load(section,btn){
+  document.querySelectorAll(".section-btn").forEach(b=>b.classList.remove("active"));
+  if(btn) btn.classList.add("active");
+  mobileSelect.value = section;
+  localStorage.setItem("lastSection",section);
 
-function renderSkills(section) {
-  skillList.innerHTML = skillData[section].map(skill => {
-    const done = skillProgress[section][skill];
-    const link = skill.toLowerCase().replace(/[^a-z0-9]/g,'') + ".html";
+  list.innerHTML = skillData[section].map(k=>{
+    const done = progress[section][k];
+    const link = k.toLowerCase().replace(/[^a-z0-9]/g,'')+".html";
     return `
       <li>
-        <a href="${link}">${skill}</a>
-        <div class="checkmark ${done ? 'completed' : ''}"
-             onclick="toggleCheck('${section}','${skill}',this)">
-             ${done ? "✔" : ""}
+        <a href="${link}">${k}</a>
+        <div class="checkmark ${done?'completed':''}"
+          onclick="toggle('${section}','${k}',this)">
+          ${done?'✔':''}
         </div>
-      </li>
-    `;
+      </li>`;
   }).join("");
-  updateProgress(section);
+
+  update(section);
 }
 
-sectionSelect.addEventListener("change", e => {
-  localStorage.setItem("lastSection", e.target.value);
-  renderSkills(e.target.value);
-});
+function toggle(s,k,e){
+  progress[s][k]=!progress[s][k];
+  localStorage.setItem("skillProgress",JSON.stringify(progress));
+  e.classList.toggle("completed");
+  e.textContent = e.classList.contains("completed")?"✔":"";
+  update(s);
+}
 
-const last = localStorage.getItem("lastSection") || "Pre Game";
-sectionSelect.value = last;
-renderSkills(last);
+function update(s){
+  const total = Object.keys(progress[s]).length;
+  const done = Object.values(progress[s]).filter(Boolean).length;
+  const pct = Math.round(done/total*100);
+  fill.style.width = pct+"%";
+  label.textContent = `${s}: ${pct}% Complete`;
+}
+
+mobileSelect.onchange = e => load(e.target.value);
+
+const start = localStorage.getItem("lastSection") || "Pre Game";
+load(start, [...sidebar.children].find(b=>b.textContent===start));
 </script>
 
 </body>
 </html>
-
 
 
 
