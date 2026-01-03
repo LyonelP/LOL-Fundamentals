@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8" />
+<meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>LoL Fundamentals – Skills Hub</title>
 
@@ -12,11 +12,16 @@ if (localStorage.getItem('lolfundamentals_logged_in') !== 'true') {
 </script>
 
 <style>
-/* ================= BASE ================= */
-body {
+/* ===== RESET & BODY ===== */
+html, body {
   margin: 0;
+  padding: 0;
+  height: 100%;
   font-family: 'Beaufort for LOL', Arial, sans-serif;
   color: #fff;
+}
+
+body {
   background: url('https://64.media.tumblr.com/594ac290bec6d5e9ad98b5f53404f00b/245c4c3ee469f81d-e4/s1280x1920/1cda4284320eb2031758a9859dfe14ff8bbc50ba.jpg') no-repeat center center fixed;
   background-size: cover;
 }
@@ -29,6 +34,7 @@ body::before {
   z-index: -1;
 }
 
+/* ===== HEADER ===== */
 header {
   background: rgba(13,17,23,0.95);
   border-bottom: 2px solid #c9aa71;
@@ -40,17 +46,18 @@ header {
   text-transform: uppercase;
 }
 
-/* ================= SIDEBAR ================= */
+/* ===== FIXED SIDEBAR ===== */
 .sidebar {
   position: fixed;
-  top: 0;
+  top: 82px; /* adjust to match header height including borders/padding */
   left: 0;
   width: 260px;
-  height: 100vh;
+  bottom: 0;
   background: rgba(13,17,23,0.95);
   border-right: 2px solid #c9aa71;
-  padding: 100px 20px 20px; /* space for header */
+  padding: 20px;
   box-sizing: border-box;
+  overflow-y: auto;
 }
 
 .section-btn {
@@ -63,6 +70,7 @@ header {
   border-radius: 10px;
   font-size: 16px;
   cursor: pointer;
+  text-align: center;
 }
 
 .section-btn.active,
@@ -71,16 +79,20 @@ header {
   color: #000;
 }
 
-/* ================= MAIN CONTENT ================= */
+/* ===== MAIN CONTENT ===== */
 .main {
-  margin-left: 260px; /* centers relative to page, not sidebar */
-  padding-top: 40px;
+  margin-left: 260px; /* leave space for sidebar */
+  padding-top: 40px; /* spacing below header */
   text-align: center;
+  min-height: calc(100vh - 82px - 60px); /* header + footer approx */
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 
-/* Centered stack */
+/* Center stack */
 .center-stack {
-  margin: 0 auto 30px;
+  margin-bottom: 30px;
 }
 
 /* Back button */
@@ -115,18 +127,18 @@ header {
   background: linear-gradient(90deg,#c9aa71,#e6c97f);
 }
 
-/* ================= MOBILE DROPDOWN (ORIGINAL SIZE) ================= */
+/* Mobile dropdown */
 #mobile-select {
   display: none;
-  width: 220px;               /* ORIGINAL */
-  padding: 8px 12px;          /* ORIGINAL */
-  font-size: 16px;            /* ORIGINAL */
+  width: 220px;
+  padding: 8px 12px;
+  font-size: 16px;
   border-radius: 6px;
   border: none;
   background: #0f1722;
   color: #c9aa71;
   cursor: pointer;
-  margin: 0 auto 30px;
+  margin: 20px auto 30px;
   appearance: none;
   background-image: url("data:image/svg+xml;utf8,<svg fill='%23c9aa71' height='12' viewBox='0 0 24 24' width='12' xmlns='http://www.w3.org/2000/svg'><path d='M7 10l5 5 5-5z'/></svg>");
   background-repeat: no-repeat;
@@ -134,10 +146,11 @@ header {
   background-size: 12px;
 }
 
-/* ================= SKILLS ================= */
+/* Skills */
 .skill-list {
   list-style: none;
   padding: 0;
+  width: 100%;
 }
 
 .skill-list li {
@@ -179,7 +192,7 @@ header {
   color: #000;
 }
 
-/* ================= MOBILE ================= */
+/* ===== MOBILE ===== */
 @media (max-width: 800px) {
   .sidebar { display: none; }
   .main { margin-left: 0; }
@@ -187,11 +200,12 @@ header {
   .skill-list li { width: 85vw; font-size: 16px; }
 }
 
-/* ================= FOOTER ================= */
+/* ===== FOOTER ===== */
 footer {
   text-align: center;
   padding: 20px 10px;
   font-size: 14px;
+  margin-top: auto;
 }
 </style>
 </head>
@@ -203,7 +217,6 @@ footer {
 <aside class="sidebar" id="sidebar"></aside>
 
 <main class="main">
-
   <div class="center-stack">
     <a href="membershub.html" class="back-button">Back to Members Hub</a>
 
@@ -218,7 +231,6 @@ footer {
   </div>
 
   <ul class="skill-list" id="skill-list"></ul>
-
 </main>
 
 <footer>© 2025 LoL Fundamentals · All rights reserved</footer>
@@ -234,7 +246,6 @@ const skillData = {
 };
 
 let progress = JSON.parse(localStorage.getItem("skillProgress")||"{}");
-
 Object.keys(skillData).forEach(s=>{
   progress[s]??={};
   skillData[s].forEach(k=>progress[s][k]??=false);
@@ -259,14 +270,7 @@ function load(section,btn){
   list.innerHTML = skillData[section].map(k=>{
     const done = progress[section][k];
     const link = k.toLowerCase().replace(/[^a-z0-9]/g,'')+".html";
-    return `
-      <li>
-        <a href="${link}">${k}</a>
-        <div class="checkmark ${done?'completed':''}"
-          onclick="toggle('${section}','${k}',this)">
-          ${done?'✔':''}
-        </div>
-      </li>`;
+    return `<li><a href="${link}">${k}</a><div class="checkmark ${done?'completed':''}" onclick="toggle('${section}','${k}',this)">${done?'✔':''}</div></li>`;
   }).join("");
 
   update(section);
@@ -289,14 +293,11 @@ function update(s){
 }
 
 mobileSelect.onchange = e => load(e.target.value);
-load("Pre Game", sidebar.children[0]);
+const last = localStorage.getItem("lastSection") || "Pre Game";
+load(last,[...sidebar.children].find(b=>b.textContent===last));
 </script>
 
 </body>
 </html>
-
-
-
-
 
 
