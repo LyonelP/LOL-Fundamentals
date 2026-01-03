@@ -10,15 +10,14 @@ body {
   margin: 0;
   font-family: 'Beaufort for LOL', Arial, Helvetica, sans-serif;
   color: #fff;
-  /* Direct Riot CDN splash for Winterblessed Diana */
-  background: url('https://ddragon.leagueoflegends.com/cdn/img/champion/splash/Diana_21.jpg') no-repeat center center fixed;
+  /* Lunar Goddess Diana background that works */
+  background: url('https://www.wallpaperflare.com/league-of-legends-match-play-lunar-goddess-diana-splash-art-hd-wallpapers-for-mobile-phones-and-computer-1920x1080-wallpaper-bqxbi.jpg') no-repeat center center fixed;
   background-size: cover;
   min-height: 100vh;
   display: flex;
   flex-direction: column;
 }
 
-/* Slight dark overlay to make text readable */
 body::before {
   content: "";
   position: fixed;
@@ -90,16 +89,10 @@ header {
   text-align: center;
   text-decoration: none;
   color: inherit;
-  transition: transform .25s, box-shadow .25s;
   display: flex;
   flex-direction: column;
   align-items: center;
   position: relative;
-}
-
-.champion-card:hover {
-  transform: translateY(-4px);
-  box-shadow: 0 10px 25px rgba(0,0,0,.45);
 }
 
 .champion-card img {
@@ -142,14 +135,7 @@ footer {
 <div class="champion-grid" id="champion-grid">
 
 <a href="freeahri.html" class="champion-card"><img src="https://ddragon.leagueoflegends.com/cdn/14.23.1/img/champion/Ahri.png" alt="Ahri"><div class="champion-name">Ahri</div></a>
-<a href="#" class="champion-card" onclick="alert('Sign up to unlock this champion'); return false;"><img src="https://ddragon.leagueoflegends.com/cdn/14.23.1/img/champion/Akali.png" alt="Akali"><div class="champion-name">Akali</div><div class="lock-icon">🔒</div></a>
-<a href="#" class="champion-card" onclick="alert('Sign up to unlock this champion'); return false;"><img src="https://ddragon.leagueoflegends.com/cdn/14.23.1/img/champion/Akshan.png" alt="Akshan"><div class="champion-name">Akshan</div><div class="lock-icon">🔒</div></a>
-<a href="#" class="champion-card" onclick="alert('Sign up to unlock this champion'); return false;"><img src="https://ddragon.leagueoflegends.com/cdn/14.23.1/img/champion/Anivia.png" alt="Anivia"><div class="champion-name">Anivia</div><div class="lock-icon">🔒</div></a>
-<a href="#" class="champion-card" onclick="alert('Sign up to unlock this champion'); return false;"><img src="https://ddragon.leagueoflegends.com/cdn/14.23.1/img/champion/Annie.png" alt="Annie"><div class="champion-name">Annie</div><div class="lock-icon">🔒</div></a>
-<a href="#" class="champion-card" onclick="alert('Sign up to unlock this champion'); return false;"><img src="https://ddragon.leagueoflegends.com/cdn/14.23.1/img/champion/AurelionSol.png" alt="Aurelion Sol"><div class="champion-name">Aurelion Sol</div><div class="lock-icon">🔒</div></a>
-<a href="#" class="champion-card" onclick="alert('Sign up to unlock this champion'); return false;"><img src="https://ddragon.leagueoflegends.com/cdn/14.23.1/img/champion/Aurora.png" alt="Aurora"><div class="champion-name">Aurora</div><div class="lock-icon">🔒</div></a>
-
-<!-- Add the rest of your champions here -->
+<!-- … rest of champion cards … -->
 
 </div>
 
@@ -157,25 +143,19 @@ footer {
 
 <script>
 const input = document.getElementById('champion-search');
-const grid = document.getElementById('champion-grid');
-const cards = [...grid.getElementsByClassName('champion-card')];
+const cards = [...document.getElementsByClassName('champion-card')];
 
 input.addEventListener('input', () => {
   const q = input.value.toLowerCase().trim();
   cards.forEach(card => {
     const name = card.querySelector('.champion-name').textContent.toLowerCase();
-    card.style.display = name.includes(q) || q === '' ? 'flex' : 'none';
+    card.style.display = name.includes(q) ? 'flex' : 'none';
   });
 });
 </script>
 
 </body>
 </html>
-
-
-
-
-
 
 
 
