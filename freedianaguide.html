@@ -159,32 +159,41 @@ header {
 
 /* Locked overlay for blurred content */
 .locked-overlay {
-  position:relative;
-  pointer-events:none; /* disables video clicks */
+  position: relative;
+  pointer-events: none; /* disables video clicks */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 26px;
+  overflow: hidden;
 }
 
 .locked-overlay::after {
-  content:"Sign up to unlock";
-  position:absolute;
-  top:0;
-  left:0;
-  width:100%;
-  height:100%;
-  backdrop-filter:blur(6px);
-  background:rgba(0,0,0,0.5);
-  color:#fff;
-  font-size:22px;
-  font-weight:bold;
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  border-radius:26px;
-  z-index:5;
+  content: "Sign up to unlock";
+  position: absolute;
+  inset: 0;
+  backdrop-filter: blur(6px);
+  background: rgba(0,0,0,0.5);
+  color: #fff;
+  font-size: 22px;
+  font-weight: bold;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: 0 12px;
+  z-index: 5;
+  top: 5%; /* nudge slightly higher */
 }
 
-.locked-overlay iframe,
-.locked-overlay p {
-  pointer-events:none; /* disables interactions */
+/* Make iframe responsive */
+.locked-overlay iframe {
+  width: 100%;
+  height: 0;
+  aspect-ratio: 16/9;
+  border: none;
+  border-radius: 26px;
+  pointer-events: none; /* disables interactions */
 }
 
 /* Footer */
@@ -257,6 +266,14 @@ footer {
     display:none;
   }
 }
+
+/* Adjust font size on small screens */
+@media(max-width:480px){
+  .locked-overlay::after {
+    font-size: 18px;
+    top: 3%; /* slightly higher on small screens */
+  }
+}
 </style>
 </head>
 <body>
@@ -323,7 +340,7 @@ footer {
   
     <div class="locked-overlay">
       <!-- Embedded YouTube Video (blurred & not clickable) -->
-      <iframe width="100%" height="480" src="https://www.youtube.com/embed/mF2MJpekEXI" title="Why Grasp is Better on Diana" frameborder="0" allowfullscreen></iframe>
+      <iframe src="https://www.youtube.com/embed/mF2MJpekEXI" title="Why Grasp is Better on Diana" allowfullscreen></iframe>
 
       <p style="margin-top:1em; font-size:0.9em; color:#fff; line-height:1.5;">
         The Sorcery tree is mandatory on Diana for Manaflow Band, and the Resolve tree provides essential sustain, health, and early game damage. By the time you hit level 3, bone plating will have blocked around 70 damage which is more than an Electrocute proc while the entire domination tree will have done absolutely nothing during the most crucial levels of the entire game. Electrocute also requires three separate hits to proc unlike old Thunderlords, which Diana could trigger with just her W. Now Electrocute is far stronger on ranged champions who can reliably proc it at level 1 with autos and spells.<br><br>
@@ -348,5 +365,7 @@ function lockedAlert() {
 
 </body>
 </html>
+
+
 
 
