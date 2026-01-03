@@ -12,19 +12,13 @@ if (localStorage.getItem('lolfundamentals_logged_in') !== 'true') {
 </script>
 
 <style>
-/* ===== RESET & BODY ===== */
-html, body {
-  height: 100%;
-}
-
+/* ================= BASE ================= */
 body {
   margin: 0;
   font-family: 'Beaufort for LOL', Arial, sans-serif;
   color: #fff;
   background: url('https://64.media.tumblr.com/594ac290bec6d5e9ad98b5f53404f00b/245c4c3ee469f81d-e4/s1280x1920/1cda4284320eb2031758a9859dfe14ff8bbc50ba.jpg') no-repeat center center fixed;
   background-size: cover;
-  display: flex;
-  flex-direction: column;
 }
 
 body::before {
@@ -35,7 +29,6 @@ body::before {
   z-index: -1;
 }
 
-/* ===== HEADER ===== */
 header {
   background: rgba(13,17,23,0.95);
   border-bottom: 2px solid #c9aa71;
@@ -47,18 +40,16 @@ header {
   text-transform: uppercase;
 }
 
-/* ===== PAGE LAYOUT ===== */
-.page {
-  flex: 1;                 /* ← THIS makes sidebar reach footer */
-  display: flex;
-}
-
-/* ===== SIDEBAR (DESKTOP ONLY) ===== */
+/* ================= SIDEBAR ================= */
 .sidebar {
+  position: fixed;
+  top: 0;
+  left: 0;
   width: 260px;
+  height: 100vh;
   background: rgba(13,17,23,0.95);
   border-right: 2px solid #c9aa71;
-  padding: 20px;
+  padding: 100px 20px 20px; /* space for header */
   box-sizing: border-box;
 }
 
@@ -80,18 +71,16 @@ header {
   color: #000;
 }
 
-/* ===== MAIN COLUMN (TRUE CENTER) ===== */
+/* ================= MAIN CONTENT ================= */
 .main {
-  flex: 1;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
+  margin-left: 260px; /* centers relative to page, not sidebar */
+  padding-top: 40px;
+  text-align: center;
 }
 
-/* Center stack under header */
+/* Centered stack */
 .center-stack {
-  margin-top: 30px;
-  text-align: center;
+  margin: 0 auto 30px;
 }
 
 /* Back button */
@@ -124,25 +113,31 @@ header {
   height: 100%;
   width: 0%;
   background: linear-gradient(90deg,#c9aa71,#e6c97f);
-  transition: width 0.4s ease;
 }
 
-/* Mobile dropdown (POSITIONED CORRECTLY) */
+/* ================= MOBILE DROPDOWN (ORIGINAL SIZE) ================= */
 #mobile-select {
   display: none;
-  width: 260px;
-  margin: 10px auto 30px;
-  padding: 10px;
+  width: 220px;               /* ORIGINAL */
+  padding: 8px 12px;          /* ORIGINAL */
+  font-size: 16px;            /* ORIGINAL */
+  border-radius: 6px;
+  border: none;
   background: #0f1722;
   color: #c9aa71;
-  border-radius: 8px;
+  cursor: pointer;
+  margin: 0 auto 30px;
+  appearance: none;
+  background-image: url("data:image/svg+xml;utf8,<svg fill='%23c9aa71' height='12' viewBox='0 0 24 24' width='12' xmlns='http://www.w3.org/2000/svg'><path d='M7 10l5 5 5-5z'/></svg>");
+  background-repeat: no-repeat;
+  background-position: right 10px center;
+  background-size: 12px;
 }
 
-/* Skills */
+/* ================= SKILLS ================= */
 .skill-list {
   list-style: none;
   padding: 0;
-  width: 100%;
 }
 
 .skill-list li {
@@ -184,15 +179,15 @@ header {
   color: #000;
 }
 
-/* ===== MOBILE ===== */
+/* ================= MOBILE ================= */
 @media (max-width: 800px) {
-  .page { flex-direction: column; }
   .sidebar { display: none; }
+  .main { margin-left: 0; }
   #mobile-select { display: block; }
   .skill-list li { width: 85vw; font-size: 16px; }
 }
 
-/* ===== FOOTER ===== */
+/* ================= FOOTER ================= */
 footer {
   text-align: center;
   padding: 20px 10px;
@@ -205,31 +200,26 @@ footer {
 
 <header>Skills Hub</header>
 
-<div class="page">
+<aside class="sidebar" id="sidebar"></aside>
 
-  <aside class="sidebar" id="sidebar"></aside>
+<main class="main">
 
-  <main class="main">
+  <div class="center-stack">
+    <a href="membershub.html" class="back-button">Back to Members Hub</a>
 
-    <div class="center-stack">
-      <a href="membershub.html" class="back-button">Back to Members Hub</a>
-
-      <div class="progress-wrap">
-        <div id="progressLabel">0% Complete</div>
-        <div class="progress-bar">
-          <div class="progress-fill" id="progressFill"></div>
-        </div>
+    <div class="progress-wrap">
+      <div id="progressLabel">0% Complete</div>
+      <div class="progress-bar">
+        <div class="progress-fill" id="progressFill"></div>
       </div>
-
-      <!-- MOBILE DROPDOWN IS HERE (correct position) -->
-      <select id="mobile-select"></select>
     </div>
 
-    <ul class="skill-list" id="skill-list"></ul>
+    <select id="mobile-select"></select>
+  </div>
 
-  </main>
+  <ul class="skill-list" id="skill-list"></ul>
 
-</div>
+</main>
 
 <footer>© 2025 LoL Fundamentals · All rights reserved</footer>
 
@@ -265,7 +255,6 @@ function load(section,btn){
   document.querySelectorAll(".section-btn").forEach(b=>b.classList.remove("active"));
   if(btn) btn.classList.add("active");
   mobileSelect.value = section;
-  localStorage.setItem("lastSection",section);
 
   list.innerHTML = skillData[section].map(k=>{
     const done = progress[section][k];
@@ -300,9 +289,7 @@ function update(s){
 }
 
 mobileSelect.onchange = e => load(e.target.value);
-
-const start = localStorage.getItem("lastSection") || "Pre Game";
-load(start, [...sidebar.children].find(b=>b.textContent===start));
+load("Pre Game", sidebar.children[0]);
 </script>
 
 </body>
