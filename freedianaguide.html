@@ -160,7 +160,7 @@ header {
 /* Locked overlay for blurred content */
 .locked-overlay {
   position:relative;
-  cursor:pointer; /* indicate clickable */
+  pointer-events:none; /* disables video clicks */
 }
 
 .locked-overlay::after {
@@ -169,23 +169,22 @@ header {
   top:0;
   left:0;
   width:100%;
-  height:100%; /* full card coverage */
+  height:100%;
   backdrop-filter:blur(6px);
   background:rgba(0,0,0,0.5);
   color:#fff;
   font-size:22px;
   font-weight:bold;
   display:flex;
-  align-items:flex-start; /* slightly higher than center */
+  align-items:center;
   justify-content:center;
-  padding-top:12%; /* adjust vertical placement */
   border-radius:26px;
   z-index:5;
 }
 
 .locked-overlay iframe,
 .locked-overlay p {
-  pointer-events:none; /* disables interactions with content */
+  pointer-events:none; /* disables interactions */
 }
 
 /* Footer */
@@ -322,7 +321,7 @@ footer {
       Runes
     </div>
   
-    <div class="locked-overlay" onclick="lockedAlert()">
+    <div class="locked-overlay">
       <!-- Embedded YouTube Video (blurred & not clickable) -->
       <iframe width="100%" height="480" src="https://www.youtube.com/embed/mF2MJpekEXI" title="Why Grasp is Better on Diana" frameborder="0" allowfullscreen></iframe>
 
@@ -349,6 +348,5 @@ function lockedAlert() {
 
 </body>
 </html>
-
 
 
