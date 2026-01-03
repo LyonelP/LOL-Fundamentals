@@ -5,13 +5,6 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>LoL Fundamentals – Skills Hub</title>
 
-<script>
-  // Redirect if not logged in
-  if (localStorage.getItem('lolfundamentals_logged_in') !== 'true') {
-    window.location.replace('login.html');
-  }
-</script>
-
 <style>
 body {
   margin: 0;
@@ -21,8 +14,6 @@ body {
   background-size: cover;
   overflow-x: hidden;
   min-height: 100vh;
-  display: flex;
-  flex-direction: column;
 }
 
 body::before {
@@ -44,13 +35,10 @@ header {
   color: #c9aa71;
   letter-spacing: 1px;
   text-align: center;
-  line-height: 1.1;
-  box-sizing: border-box;
 }
 
 .back-button {
   display: inline-block;
-  margin: 20px auto;
   padding: 10px 20px;
   background: linear-gradient(135deg, #c9aa71, #e0c77b);
   color: #000;
@@ -62,15 +50,28 @@ header {
   box-shadow: 0 0 10px rgba(201,170,113,0.5);
 }
 .back-button::before { content: "← "; }
+
 .back-button:hover {
   background: linear-gradient(135deg, #e6c97f, #f0d88b);
   box-shadow: 0 0 15px rgba(255,215,0,0.8);
 }
 
+/* Layout */
+.layout {
+  display: block;
+}
+
+/* Sidebar */
+.sidebar {
+  text-align: center;
+}
+
+/* Section Select */
 #section-select-container {
   margin: 20px auto;
   text-align: center;
 }
+
 #section-select {
   padding: 8px 12px;
   font-size: 16px;
@@ -85,22 +86,15 @@ header {
   background-position: right 10px center;
   background-size: 12px;
   appearance: none;
-  -webkit-appearance: none;
-  -moz-appearance: none;
 }
 
-/* Progress Bars */
+/* Progress */
 .progress-wrap {
   width: 260px;
-  max-width: 90vw;
-  margin: 0 auto 20px;
+  margin: 0 auto 25px;
   text-align: center;
 }
-.progress-label {
-  font-size: 14px;
-  color: #fff;
-  margin-bottom: 6px;
-}
+
 .progress-bar {
   width: 100%;
   height: 10px;
@@ -108,6 +102,7 @@ header {
   border-radius: 20px;
   overflow: hidden;
 }
+
 .progress-fill {
   height: 100%;
   width: 0%;
@@ -119,7 +114,6 @@ header {
 .skill-list {
   list-style: none;
   padding: 0;
-  width: 100%;
   margin-bottom: 40px;
 }
 
@@ -131,7 +125,7 @@ header {
   border: 2px solid #c9aa71;
   border-radius: 12px;
   padding: 14px 18px;
-  margin: 0 auto 20px auto;
+  margin: 0 auto 20px;
   font-size: 18px;
   width: 56vw;
   max-width: 900px;
@@ -140,21 +134,18 @@ header {
 }
 
 .skill-list li:hover {
-  background: rgba(0,0,0,0.95);
   transform: scale(1.03);
-  box-shadow: 0 8px 20px rgba(0,0,0,0.7);
 }
 
 .skill-list li a {
-  text-decoration: none;
   color: #fff;
+  text-decoration: none;
   flex-grow: 1;
   text-align: center;
-  transition: color 0.3s;
 }
 
 .skill-list li a:hover {
-  color: #c9aa71; /* gold on hover */
+  color: #c9aa71;
 }
 
 .checkmark {
@@ -167,7 +158,6 @@ header {
   align-items: center;
   color: #c9aa71;
   font-size: 18px;
-  flex-shrink: 0;
   cursor: pointer;
 }
 
@@ -176,130 +166,158 @@ header {
   color: #000;
 }
 
+/* Desktop Sidebar */
+@media (min-width: 900px) {
+  .layout {
+    display: flex;
+  }
+
+  .sidebar {
+    width: 260px;
+    background: rgba(13,17,23,0.92);
+    border-right: 2px solid #c9aa71;
+    padding: 20px;
+    position: sticky;
+    top: 0;
+    height: 100vh;
+  }
+
+  .content {
+    flex: 1;
+    padding-top: 30px;
+  }
+
+  #section-select {
+    width: 100%;
+  }
+
+  .back-button {
+    display: block;
+    margin-bottom: 25px;
+  }
+}
+
+/* Mobile */
+@media(max-width: 700px){
+  #section-select { width: 95vw; }
+  .skill-list li { width: 85vw; font-size: 16px; }
+}
+
 footer {
-  margin-top: auto;
   text-align: center;
   padding: 18px 10px;
   font-size: 14px;
-  color: #fff;
-}
-
-@media(max-width: 700px){
-  header { font-size: 22px; padding: 15px 10px; }
-  #section-select { width: 95vw; font-size: 14px; padding: 8px 30px 8px 12px; }
-  .skill-list li { width: 85vw; font-size: 16px; padding: 10px 14px; }
 }
 </style>
 </head>
+
 <body>
 
 <header>Skills Hub</header>
 
-<a href="membershub.html" class="back-button">Back to Members Hub</a>
+<div class="layout">
 
-<div id="section-select-container">
-  <select id="section-select">
-    <option value="Pre Game" selected>Pre Game</option>
-    <option value="Early Game">Early Game</option>
-    <option value="Mid Game">Mid Game</option>
-    <option value="Late Game">Late Game</option>
-    <option value="Advanced">Advanced</option>
-    <option value="Out of Game">Out of Game</option>
-  </select>
+  <aside class="sidebar">
+    <a href="membershub.html" class="back-button">Back to Members Hub</a>
+
+    <div id="section-select-container">
+      <select id="section-select">
+        <option value="Pre Game">Pre Game</option>
+        <option value="Early Game">Early Game</option>
+        <option value="Mid Game">Mid Game</option>
+        <option value="Late Game">Late Game</option>
+        <option value="Advanced">Advanced</option>
+        <option value="Out of Game">Out of Game</option>
+      </select>
+    </div>
+
+    <div class="progress-wrap">
+      <div id="progressLabel">0% Complete</div>
+      <div class="progress-bar">
+        <div class="progress-fill" id="progressFill"></div>
+      </div>
+    </div>
+  </aside>
+
+  <main class="content">
+    <ul class="skill-list" id="skill-list"></ul>
+  </main>
+
 </div>
-
-<!-- Progress bar for current section only -->
-<div class="progress-wrap">
-  <div class="progress-label" id="progressLabel">0% Complete</div>
-  <div class="progress-bar">
-    <div class="progress-fill" id="progressFill"></div>
-  </div>
-</div>
-
-<ul class="skill-list" id="skill-list"></ul>
 
 <footer>© 2025 LoL Fundamentals · All rights reserved</footer>
 
 <script>
 const skillData = {
-  "Pre Game": ["Champion Select","Mouse Accuracy","Summoner Spells","Matchups","Communication","Build"],
-  "Early Game": ["Level 1","Farming","Trading","Wave Control","Back Timings","Power Spikes","Pathing","Laning","Map Awareness","Ganking","Roaming"],
-  "Mid Game": ["Teamwork","Split Pushing","Sieging","Baiting","Lane Assignments","Vision"],
-  "Late Game": ["Damage","Target Selection","Tab Screen","Win Conditions","Rotations"],
-  "Advanced": ["Animation Cancelling","Reading Players","Kiting","Positioning"],
-  "Out of Game": ["Setup","Mindset","Not Raging/Blaming","Reaction Time","Meta"]
+  "Pre Game":["Champion Select","Mouse Accuracy","Summoner Spells","Matchups","Communication","Build"],
+  "Early Game":["Level 1","Farming","Trading","Wave Control","Back Timings","Power Spikes","Pathing","Laning","Map Awareness","Ganking","Roaming"],
+  "Mid Game":["Teamwork","Split Pushing","Sieging","Baiting","Lane Assignments","Vision"],
+  "Late Game":["Damage","Target Selection","Tab Screen","Win Conditions","Rotations"],
+  "Advanced":["Animation Cancelling","Reading Players","Kiting","Positioning"],
+  "Out of Game":["Setup","Mindset","Not Raging/Blaming","Reaction Time","Meta"]
 };
 
 let skillProgress = JSON.parse(localStorage.getItem("skillProgress") || "{}");
 
-// Initialize all sections and skills
 Object.keys(skillData).forEach(section => {
-  skillProgress[section] = skillProgress[section] || {};
+  skillProgress[section] ??= {};
   skillData[section].forEach(skill => {
     skillProgress[section][skill] ??= false;
   });
 });
-localStorage.setItem("skillProgress", JSON.stringify(skillProgress));
 
-const sectionSelect = document.getElementById('section-select');
-const skillList = document.getElementById('skill-list');
-const progressFill = document.getElementById('progressFill');
-const progressLabel = document.getElementById('progressLabel');
+const sectionSelect = document.getElementById("section-select");
+const skillList = document.getElementById("skill-list");
+const progressFill = document.getElementById("progressFill");
+const progressLabel = document.getElementById("progressLabel");
 
-function saveProgress() {
-  localStorage.setItem("skillProgress", JSON.stringify(skillProgress));
-}
-
-// Update progress for the current section only
 function updateProgress(section) {
   const skills = skillProgress[section];
   const total = Object.keys(skills).length;
-  const done = Object.values(skills).filter(v => v).length;
-  const pct = total === 0 ? 0 : Math.round(done / total * 100);
+  const done = Object.values(skills).filter(Boolean).length;
+  const pct = Math.round(done / total * 100);
   progressFill.style.width = pct + "%";
   progressLabel.textContent = `${section}: ${pct}% Complete`;
+  localStorage.setItem("skillProgress", JSON.stringify(skillProgress));
 }
 
-function toggleCheck(section, skill, element) {
+function toggleCheck(section, skill, el) {
   skillProgress[section][skill] = !skillProgress[section][skill];
-  saveProgress();
-  element.classList.toggle("completed");
-  element.innerHTML = element.classList.contains("completed") ? "✔" : "";
+  el.classList.toggle("completed");
+  el.textContent = el.classList.contains("completed") ? "✔" : "";
   updateProgress(section);
 }
 
 function renderSkills(section) {
-  const skills = skillData[section];
-  skillList.innerHTML = skills.map(skill => {
-    const completed = skillProgress[section][skill] ? "completed" : "";
+  skillList.innerHTML = skillData[section].map(skill => {
+    const done = skillProgress[section][skill];
     const link = skill.toLowerCase().replace(/[^a-z0-9]/g,'') + ".html";
     return `
-      <li data-skill="${skill}">
+      <li>
         <a href="${link}">${skill}</a>
-        <div class="checkmark ${completed}" onclick="toggleCheck('${section}','${skill}', this)">
-          ${completed ? "✔" : ""}
+        <div class="checkmark ${done ? 'completed' : ''}"
+             onclick="toggleCheck('${section}','${skill}',this)">
+             ${done ? "✔" : ""}
         </div>
       </li>
     `;
-  }).join('');
+  }).join("");
   updateProgress(section);
 }
 
-// Section change
-sectionSelect.addEventListener('change', () => {
-  const selected = sectionSelect.value;
-  localStorage.setItem("lastSection", selected); // remember last section
-  renderSkills(selected);
+sectionSelect.addEventListener("change", e => {
+  localStorage.setItem("lastSection", e.target.value);
+  renderSkills(e.target.value);
 });
 
-// Initial render
-const lastSection = localStorage.getItem("lastSection") || "Pre Game";
-sectionSelect.value = lastSection;
-renderSkills(lastSection);
+const last = localStorage.getItem("lastSection") || "Pre Game";
+sectionSelect.value = last;
+renderSkills(last);
 </script>
 
 </body>
 </html>
+
 
 
 
