@@ -88,7 +88,7 @@ header {
   .nav-wrapper {
     display:block;
     position:fixed;
-    top:70px; /* below header */
+    top:70px;
     left:0;
     width:220px;
     bottom:0;
@@ -144,7 +144,7 @@ header {
 
 /* Top text unblurred */
 .top-text {
-  font-size:26px; /* same size as main guide header */
+  font-size:26px;
   line-height:1.3;
   margin-bottom:12px;
   color:var(--gold);
@@ -160,12 +160,18 @@ header {
 /* Locked overlay for blurred content */
 .locked-overlay {
   position: relative;
-  pointer-events: none; /* disables video clicks */
-  display: flex;
-  align-items: center;
-  justify-content: center;
+  pointer-events: none;
   border-radius: 26px;
   overflow: hidden;
+}
+
+.locked-overlay iframe {
+  width: 100%;
+  height: auto;          /* keep video visible */
+  aspect-ratio: 16/9;    /* maintain ratio */
+  border-radius: 26px;
+  pointer-events: none;
+  display: block;
 }
 
 .locked-overlay::after {
@@ -183,17 +189,15 @@ header {
   text-align: center;
   padding: 0 12px;
   z-index: 5;
-  top: 5%; /* nudge slightly higher */
+  top: 5%; /* slightly higher */
 }
 
-/* Make iframe responsive */
-.locked-overlay iframe {
-  width: 100%;
-  height: 0;
-  aspect-ratio: 16/9;
-  border: none;
-  border-radius: 26px;
-  pointer-events: none; /* disables interactions */
+/* Mobile font size */
+@media(max-width:480px){
+  .locked-overlay::after {
+    font-size: 18px;
+    top: 3%;
+  }
 }
 
 /* Footer */
@@ -266,14 +270,6 @@ footer {
     display:none;
   }
 }
-
-/* Adjust font size on small screens */
-@media(max-width:480px){
-  .locked-overlay::after {
-    font-size: 18px;
-    top: 3%; /* slightly higher on small screens */
-  }
-}
 </style>
 </head>
 <body>
@@ -334,12 +330,9 @@ footer {
 <!-- Main content -->
 <div class="main">
   <div id="content" class="card">
-    <div class="top-text">
-      Runes
-    </div>
-  
+    <div class="top-text">Runes</div>
+
     <div class="locked-overlay">
-      <!-- Embedded YouTube Video (blurred & not clickable) -->
       <iframe src="https://www.youtube.com/embed/mF2MJpekEXI" title="Why Grasp is Better on Diana" allowfullscreen></iframe>
 
       <p style="margin-top:1em; font-size:0.9em; color:#fff; line-height:1.5;">
@@ -365,6 +358,7 @@ function lockedAlert() {
 
 </body>
 </html>
+
 
 
 
