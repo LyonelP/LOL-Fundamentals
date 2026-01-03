@@ -1,253 +1,207 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8" />
+<meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Diana Runes – Free Preview</title>
-
+<title>Diana Mid Guide (Locked)</title>
 <style>
-:root {
-  --gold:#c9aa71;
-  --muted:#9da7b3;
-}
+  :root {
+    --gold: #c9aa71;
+    --bg: #0a0f14;
+    --card: #161b22;
+    --muted: #8b949e;
+    --yellow: #F9D949;
+  }
 
-html, body {
-  margin:0;
-  padding:0;
-  height:100%;
-  font-family: Arial, Helvetica, sans-serif;
-}
+  * {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    font-family: 'Beaufort for LOL', Arial, sans-serif;
+  }
 
-body {
-  background:url('https://ddragon.leagueoflegends.com/cdn/img/champion/splash/Diana_11.jpg') no-repeat center center fixed;
-  background-size:cover;
-  color:#e6edf3;
-  display:flex;
-  flex-direction:column;
-  min-height:100vh;
-}
+  body {
+    display: flex;
+    min-height: 100vh;
+    background-color: var(--bg);
+    color: #fff;
+  }
 
-body::before {
-  content:"";
-  position:fixed;
-  inset:0;
-  background:
-    radial-gradient(circle at top, rgba(120,0,0,0.25), transparent 60%),
-    rgba(10,15,20,0.82);
-  z-index:-1;
-}
-
-/* Header */
-header {
-  width:100%;
-  background:rgba(13,17,23,0.9);
-  border-bottom:2px solid var(--gold);
-  padding:20px 0;
-  font-size:26px;
-  font-weight:bold;
-  color:var(--gold);
-  text-align:center;
-  text-transform:uppercase;
-}
-
-/* Back button */
-.back-wrap {
-  width:100%;
-  text-align:center;
-  margin:16px 0;
-}
-
-.back-button {
-  display:inline-flex;
-  align-items:center;
-  gap:8px;
-  padding:10px 22px;
-  background:linear-gradient(135deg,var(--gold),#e0c77b);
-  color:#000;
-  text-decoration:none;
-  border-radius:10px;
-  font-weight:bold;
-}
-
-.back-button::before {
-  content:"←";
-}
-
-/* Sidebar */
-.nav-wrapper {
-  display:none;
-}
-
-@media(min-width:1024px) {
+  /* Sidebar */
   .nav-wrapper {
-    display:block;
-    position:fixed;
-    top:70px;
-    left:0;
-    width:220px;
-    bottom:0;
-    background:rgba(15,20,26,0.95);
-    border-right:2px solid var(--gold);
-    padding-top:20px;
-    overflow-y:auto;
+    width: 220px;
+    background-color: var(--card);
+    display: flex;
+    flex-direction: column;
+    padding: 20px 0;
+  }
+
+  .nav-menu {
+    display: flex;
+    flex-direction: column;
   }
 
   .nav-section-title {
-    font-size:11px;
-    color:var(--muted);
-    padding:14px 24px;
-    text-transform:uppercase;
+    padding: 0 24px 10px;
+    color: var(--gold);
+    font-weight: bold;
+    font-size: 14px;
+    text-transform: uppercase;
+    margin-bottom: 12px;
   }
 
   .nav-menu a {
-    display:block;
-    padding:10px 24px;
-    color:#e6edf3;
-    text-decoration:none;
+    display: block;
+    padding: 10px 24px;
+    color: #e6edf3;
+    text-decoration: none;
+    transition: background 0.15s ease, color 0.15s ease;
   }
-}
 
-/* Main */
-.main {
-  flex:1;
-  display:flex;
-  justify-content:center;
-  padding:0 24px;
-}
+  .nav-menu a:hover {
+    background: rgba(201,170,113,0.15);
+    color: var(--gold);
+  }
 
-.card {
-  max-width:800px;
-  width:100%;
-  background:rgba(255,255,255,0.03);
-  border-radius:26px;
-  padding:36px;
-  box-shadow:0 24px 70px rgba(0,0,0,0.55);
-}
+  .nav-menu a.active {
+    color: var(--gold);
+    font-weight: bold;
+  }
 
-.card h2 {
-  color:var(--gold);
-  margin-top:0;
-}
+  .locked-link {
+    cursor: pointer;
+  }
 
-/* LOCKED RUNES */
-.locked-runes {
-  position:relative;
-  margin-top:16px;
-}
+  /* Main content */
+  .content {
+    flex: 1;
+    padding: 40px 60px;
+    overflow-y: auto;
+    background: url('https://ddragon.leagueoflegends.com/cdn/img/champion/splash/Diana_11.jpg') center/cover no-repeat;
+    position: relative;
+  }
 
-.locked-content {
-  filter:blur(3px);
-  pointer-events:none;
-  user-select:none;
-}
+  .locked-runes {
+    position: relative;
+    max-width: 900px;
+    margin: auto;
+    background-color: rgba(10,15,20,0.6);
+    padding: 40px;
+    border-radius: 12px;
+    overflow: hidden;
+  }
 
-.lock-overlay {
-  position:absolute;
-  inset:0;
-  background:rgba(10,15,20,0.55);
-  display:flex;
-  flex-direction:column;
-  align-items:center;
-  justify-content:center;
-  border-radius:18px;
-  text-align:center;
-}
+  .full-blur {
+    filter: blur(2.5px);
+    line-height: 1.7;
+    color: #e6edf3;
+  }
 
-.lock-overlay h3 {
-  color:var(--gold);
-  margin-bottom:8px;
-}
+  .full-blur p {
+    margin-bottom: 22px;
+  }
 
-.lock-overlay p {
-  max-width:420px;
-  font-size:14px;
-  color:#d7d7d7;
-}
+  .full-blur h3 {
+    margin: 34px 0 12px;
+    color: var(--gold);
+  }
 
-.unlock-btn {
-  margin-top:14px;
-  padding:12px 22px;
-  background:linear-gradient(135deg,var(--gold),#e0c77b);
-  color:#000;
-  font-weight:bold;
-  border-radius:10px;
-  text-decoration:none;
-}
+  .lock-overlay {
+    position: absolute;
+    top: 0; left: 0; right: 0; bottom: 0;
+    background: rgba(10,15,20,0.7);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    padding: 20px;
+    border-radius: 12px;
+  }
 
-/* Footer */
-footer {
-  padding:16px;
-  text-align:center;
-  font-size:13px;
-  color:var(--muted);
-  margin-top:auto;
-}
+  .lock-overlay h3 {
+    font-size: 28px;
+    margin-bottom: 16px;
+    color: var(--gold);
+  }
+
+  .lock-overlay p {
+    font-size: 16px;
+    margin-bottom: 20px;
+    color: #e6edf3;
+  }
+
+  .unlock-btn {
+    display: inline-block;
+    background-color: var(--gold);
+    color: #0a0f14;
+    text-decoration: none;
+    padding: 10px 24px;
+    border-radius: 6px;
+    font-weight: bold;
+    transition: background 0.2s ease;
+  }
+
+  .unlock-btn:hover {
+    background-color: #f9d949;
+  }
+
+  video {
+    width: 100%;
+    border-radius: 8px;
+    margin-bottom: 22px;
+  }
 </style>
 </head>
-
 <body>
 
-<header>Diana Runes – Free Preview</header>
-
-<div class="back-wrap">
-  <a href="https://lolfundamentals.com" class="back-button">Back to LoL Fundamentals</a>
-</div>
-
-<div class="nav-wrapper">
-  <div class="nav-menu">
-    <div class="nav-section-title">Core</div>
-    <a>Intro</a>
-    <a style="color:var(--gold); font-weight:bold;">Runes</a>
-    <a>Build</a>
+  <!-- Sidebar -->
+  <div class="nav-wrapper">
+    <div class="nav-menu">
+      <div class="nav-section-title">Core</div>
+      <a href="#" class="locked-link">Introduction</a>
+      <a href="#" class="locked-link active">Runes</a>
+      <a href="#" class="locked-link">Build Path</a>
+      <a href="#" class="locked-link">Matchups</a>
+      <a href="#" class="locked-link">Farming</a>
+      <a href="#" class="locked-link">Teamfighting</a>
+    </div>
   </div>
-</div>
 
-<div class="main">
-  <div class="card">
-
-    <h2>Runes</h2>
-
-    <!-- ONLY VISIBLE LINE -->
-    <p style="color:#d7d7d7;">
-      <strong style="color:#c8aa6e;">Why grasp over another keystone?</strong>
-      It ultimately comes down to the value of the rune trees themselves.
-    </p>
-
-    <!-- LOCKED CONTENT -->
+  <!-- Main content -->
+  <div class="content">
     <div class="locked-runes">
+      <div class="full-blur">
+        <h3>Runes Overview</h3>
+        <p>Explore Diana’s key runes for mid-lane dominance and scaling into mid-to-late game.</p>
 
-      <div class="locked-content">
-        <p>
-          The Sorcery tree is mandatory on Diana for Manaflow Band, and the Resolve
-          tree provides essential sustain, health, and early game damage. By level 3,
-          Bone Plating often blocks more damage than Electrocute while the entire
-          Domination tree does nothing.
-        </p>
+        <video controls>
+          <source src="https://www.w3schools.com/html/mov_bbb.mp4" type="video/mp4">
+          Your browser does not support HTML video.
+        </video>
 
-        <p>
-          Rune math, damage tables, Electrocute comparisons, videos, and matchup logic.
-        </p>
+        <p>Check how different rune combinations affect trades, all-ins, and jungle skirmishes.</p>
       </div>
 
       <div class="lock-overlay">
-        <h3>🔒 Full Rune Breakdown Locked</h3>
-        <p>
-          Full rune math, graphs, early-game damage comparisons,
-          and matchup logic are available in the complete Diana guide.
-        </p>
-        <a href="https://lolfundamentals.com/signup" class="unlock-btn">
-          Unlock Full Diana Guide
-        </a>
+        <h3>🔒 Full Rune Section Locked</h3>
+        <p>Sign up to access the complete rune breakdown, graphs, and in-depth analysis.</p>
+        <a href="https://lolfundamentals.com/signup" class="unlock-btn">Unlock Full Diana Guide</a>
       </div>
-
     </div>
-
   </div>
-</div>
 
-<footer>© 2026 LoL Fundamentals · All rights reserved</footer>
+<script>
+  document.querySelectorAll('.locked-link').forEach(link => {
+    link.addEventListener('click', e => {
+      e.preventDefault();
+      alert('Sign up to unlock the full Diana guide.');
+    });
+  });
+</script>
 
 </body>
 </html>
+
 
 
