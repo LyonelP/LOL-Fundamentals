@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Diana Runes – Free Preview</title>
+
+<style>
+body {
+  margin: 0;
+  font-family: 'Beaufort for LOL', Arial, Helvetica, sans-serif;
+  color: #e6edf3;
+  background: url('https://ddragon.leagueoflegends.com/cdn/img/champion/splash/Diana_11.jpg') no-repeat center center fixed;
+  background-size: cover;
+}
+
+body::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  background: rgba(10,15,20,0.6);
+  z-index: -1;
+}
+
+header {
+  background: rgba(13,17,23,0.9);
+  border-bottom: 2px solid #c9aa71;
+  padding: 20px;
+  font-size: 26px;
+  font-weight: bold;
+  text-transform: uppercase;
+  color: #c9aa71;
+  text-align: center;
+}
+
+.back-button {
+  display: inline-block;
+  margin: 20px;
+  padding: 10px 18px;
+  background: linear-gradient(135deg, #c9aa71, #e0c77b);
+  color: #000;
+  text-decoration: none;
+  border-radius: 8px;
+  font-weight: bold;
+}
+
+.container {
+  max-width: 900px;
+  margin: 0 auto 60px;
+  padding: 20px;
+}
+
+/* SECTION */
+.section {
+  background: rgba(22,27,34,0.9);
+  border-radius: 14px;
+  padding: 24px;
+  box-shadow: 0 0 30px rgba(0,0,0,0.45);
+}
+
+/* GOLD TITLE */
+.section-title {
+  color: #c8aa6e;
+  font-size: 22px;
+  font-weight: bold;
+  margin-bottom: 12px;
+}
+
+/* LOCKED CONTENT */
+.locked {
+  position: relative;
+  margin-top: 30px;
+  filter: blur(6px);
+  pointer-events: none;
+  user-select: none;
+}
+
+/* LOCK OVERLAY */
+.lock-overlay {
+  position: absolute;
+  inset: 0;
+  background: rgba(10,15,20,0.65);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  border-radius: 14px;
+  z-index: 5;
+  filter: none;
+  pointer-events: auto;
+}
+
+.lock-overlay h3 {
+  color: #c9aa71;
+  font-size: 22px;
+  margin-bottom: 10px;
+}
+
+.lock-overlay p {
+  text-align: center;
+  max-width: 420px;
+  font-size: 15px;
+  color: #d7d7d7;
+}
+
+.unlock-btn {
+  margin-top: 15px;
+  padding: 12px 22px;
+  background: linear-gradient(135deg, #c9aa71, #e0c77b);
+  color: #000;
+  font-weight: bold;
+  border-radius: 8px;
+  text-decoration: none;
+  box-shadow: 0 0 15px rgba(201,170,113,0.5);
+}
+</style>
+</head>
+
+<body>
+
+<header>Diana Runes – Free Preview</header>
+<a href="https://lolfundamentals.com" class="back-button">← Back to LoL Fundamentals</a>
+
+<div class="container">
+
+  <!-- FREE CONTENT -->
+  <div class="section" id="runes">
+
+    <div class="section-title">Why grasp over another keystone?</div>
+
+    <p style="line-height:1.5; color:#d7d7d7;">
+      It ultimately comes down to the value of the rune trees themselves. The Sorcery
+      tree is mandatory on Diana for Manaflow Band, and the Resolve tree provides
+      essential sustain, health, and early game damage.
+      <br><br>
+      By level 3, Bone Plating will often block more damage than an Electrocute proc
+      while the entire Domination tree provides virtually no value during the most
+      important part of the game. Electrocute also requires three separate hits to
+      activate, unlike old Thunderlord’s, which Diana could proc instantly with W.
+      <br><br>
+      As the game has slowed down, scaling durability and health from Grasp and
+      Overgrowth have overtaken burst-only rune setups that fall off quickly.
+    </p>
+
+    <!-- LOCKED CONTENT -->
+    <div class="locked">
+
+      <div class="lock-overlay">
+        <h3>🔒 Full Rune Breakdown Locked</h3>
+        <p>
+          The full Grasp setup, rune math, matchup logic,
+          damage tables, and videos are available in the
+          full Diana guide.
+        </p>
+        <a href="https://lolfundamentals.com/signup" class="unlock-btn">
+          Unlock Full Diana Guide
+        </a>
+      </div>
+
+      <!-- blurred filler (looks like real content behind lock) -->
+      <p>Lorem ipsum dolor sit amet, Grasp Shield Bash Bone Plating Overgrowth Manaflow Transcendence.</p>
+      <p>Damage tables, Electrocute comparison, rune math, scaling analysis.</p>
+      <p>Embedded videos, farming sections, graphs, and matchup explanations.</p>
+
+    </div>
+
+  </div>
+
+</div>
+
+<footer style="text-align:center; padding:25px; font-size:14px;">
+  © 2025 LoL Fundamentals · All rights reserved
+</footer>
+
+</body>
+</html>
