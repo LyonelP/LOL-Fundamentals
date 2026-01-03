@@ -144,11 +144,17 @@ header {
 
 /* Top text unblurred */
 .top-text {
-  font-size:1em;
-  line-height:1.5;
-  margin-bottom:24px;
+  font-size:26px; /* same size as main guide header */
+  line-height:1.3;
+  margin-bottom:12px;
   color:var(--gold);
   font-weight:bold;
+}
+
+.top-subtext {
+  font-size:16px;
+  margin-bottom:24px;
+  color:#fff;
 }
 
 /* Locked overlay for blurred content */
@@ -165,7 +171,7 @@ header {
   width:100%;
   height:100%;
   backdrop-filter:blur(6px);
-  background:rgba(0,0,0,0.4);
+  background:rgba(0,0,0,0.5);
   color:#fff;
   font-size:22px;
   font-weight:bold;
@@ -174,6 +180,11 @@ header {
   justify-content:center;
   border-radius:26px;
   z-index:5;
+}
+
+.locked-overlay iframe,
+.locked-overlay p {
+  pointer-events:none; /* disables interactions */
 }
 
 /* Footer */
@@ -307,16 +318,20 @@ footer {
 <div class="main">
   <div id="content" class="card">
     <div class="top-text">
-      Runes<br>
-      Why grasp over another keystone?
+      Runes
+    </div>
+    <div class="top-subtext">
+      Why grasp over another keystone?<br>
+      <span style="color:#fff;">It ultimately comes down to the value of the rune trees themselves.</span>
     </div>
 
     <div class="locked-overlay">
       <!-- Embedded YouTube Video (blurred & not clickable) -->
       <iframe width="100%" height="480" src="https://www.youtube.com/embed/mF2MJpekEXI" title="Why Grasp is Better on Diana" frameborder="0" allowfullscreen></iframe>
 
-      <p style="margin-top:1em; font-size:0.9em;">
-        Additional content is blurred and locked until you sign up.
+      <p style="margin-top:1em; font-size:0.9em; color:#fff; line-height:1.5;">
+        The Sorcery tree is mandatory on Diana for Manaflow Band, and the Resolve tree provides essential sustain, health, and early game damage. By the time you hit level 3, bone plating will have blocked around 70 damage which is more than an Electrocute proc while the entire domination tree will have done absolutely nothing during the most crucial levels of the entire game. Electrocute also requires three separate hits to proc unlike old Thunderlords, which Diana could trigger with just her W. Now Electrocute is far stronger on ranged champions who can reliably proc it at level 1 with autos and spells.<br><br>
+        Players often ask whether Grasp is viable into ranged matchups. Grasp and Shield Bash are much easier to use level 1 and 2 and then by level 3, they’re no more difficult to use than Electrocute or Phase Rush. The biggest problem with Electrocute is that the last two rows of the domination tree offer Diana essentially no value. When running Electrocute, the entire tree often does nothing until level 3 which is the most important part of the game and the main purpose of runes in the first place. Meanwhile, when you run keystones like Grasp or Phase Rush you gain access to runes like Shield Bash and Scorch that perform great in the early game. The reason Grasp has overtaken phase rush as Diana’s main rune is because the game has been slowed down. Phase rush and scorch have extremely poor scaling especially compared to Grasp and Overgrowth which are the runes you're trading them for. These runes also provide Diana with health which is crucial for her playstyle and can’t be gained through her current ideal build path.
       </p>
     </div>
   </div>
@@ -337,5 +352,6 @@ function lockedAlert() {
 
 </body>
 </html>
+
 
 
