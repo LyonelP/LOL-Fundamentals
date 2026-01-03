@@ -45,18 +45,19 @@ header {
 /* ===== LAYOUT ===== */
 .layout {
   display: flex;
-  min-height: calc(100vh - 90px);
 }
 
-/* ===== SIDEBAR (DESKTOP) ===== */
+/* ===== SIDEBAR ===== */
 .sidebar {
   width: 260px;
   background: rgba(13,17,23,0.95);
   border-right: 2px solid #c9aa71;
   padding: 20px;
   box-sizing: border-box;
+  min-height: calc(100vh - 82px); /* header height offset */
 }
 
+/* Sidebar buttons */
 .section-btn {
   display: block;
   width: 100%;
@@ -81,10 +82,11 @@ header {
 /* ===== MAIN CONTENT ===== */
 .content {
   flex: 1;
-  padding-top: 20px; /* space under header */
+  padding-top: 20px;       /* padding inside content */
+  margin-top: 62px;        /* visual offset below header */
   display: flex;
   flex-direction: column;
-  align-items: center; /* center horizontally */
+  align-items: center;     /* center horizontally */
   text-align: center;
 }
 
@@ -298,6 +300,7 @@ load(start, [...sidebar.children].find(b=>b.textContent===start));
 
 </body>
 </html>
+
 
 
 
