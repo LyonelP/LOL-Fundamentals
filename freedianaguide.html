@@ -176,17 +176,16 @@ header {
   display: block;
 }
 
-/* Overlay blur + text */
+/* Overlay text */
 .locked-overlay::after {
   content: "Sign up to unlock";
   position: absolute;
   top: 0;
-  bottom: 0;
   left: 0;
-  right: 0;
+  width: 100%;
+  height: 100%;
   backdrop-filter: blur(6px);
   background: rgba(0,0,0,0.5);
-  box-shadow: inset 0 -50px 60px rgba(0,0,0,0.5); /* extra blur at bottom */
   color: #fff;
   font-size: 22px;
   font-weight: bold;
@@ -196,17 +195,35 @@ header {
   text-align: center;
   padding: 0 12px;
   z-index: 5;
-  transform: translateY(-18%); /* desktop text position */
+  transform: translateY(-18%); /* desktop text */
+}
+
+/* Extra bottom blur */
+.locked-overlay::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  height: 80px;                 /* how far the blur extends below the video */
+  backdrop-filter: blur(12px);  /* stronger blur for bottom */
+  background: rgba(0,0,0,0.3);
+  z-index: 4;
+  border-bottom-left-radius: 26px;
+  border-bottom-right-radius: 26px;
 }
 
 /* Mobile adjustments */
 @media(max-width:480px){
   .locked-overlay::after {
     font-size: 18px;
-    transform: translateY(-30%); /* slightly higher on mobile */
-    box-shadow: inset 0 -70px 80px rgba(0,0,0,0.5); /* more bottom blur on mobile */
+    transform: translateY(-30%); /* move text higher */
+  }
+  .locked-overlay::before {
+    height: 100px;                /* more bottom blur on mobile */
   }
 }
+
 
 /* Footer */
 footer {
@@ -366,6 +383,7 @@ function lockedAlert() {
 
 </body>
 </html>
+
 
 
 
