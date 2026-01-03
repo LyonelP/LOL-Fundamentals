@@ -14,12 +14,18 @@ body {
   display: flex;
   flex-direction: column;
 
-  /* Background image settings */
   background: url('https://ddragon.leagueoflegends.com/cdn/img/champion/splash/Diana_2.jpg') no-repeat center 30%;
   background-size: cover;
   background-attachment: fixed;
 }
 
+body::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  background: rgba(10,15,20,0.25);
+  z-index: -1;
+}
 
 header {
   background: rgba(13,17,23,0.9);
@@ -31,6 +37,7 @@ header {
   color: #c9aa71;
   text-align: center;
 }
+
 
 .back-button {
   margin: 20px auto;
@@ -223,6 +230,7 @@ input.addEventListener('input', () => {
 
 </body>
 </html>
+
 
 
 
