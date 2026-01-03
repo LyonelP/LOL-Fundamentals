@@ -33,8 +33,8 @@ body::before {
 header {
   background: rgba(13,17,23,0.95);
   border-bottom: 2px solid #c9aa71;
-  padding: 20px;
-  text-align: center;
+  padding: 20px 40px; /* left padding for alignment */
+  text-align: left;   /* align header text left */
   font-size: 26px;
   font-weight: bold;
   color: #c9aa71;
@@ -54,7 +54,7 @@ header {
   border-right: 2px solid #c9aa71;
   padding: 20px;
   box-sizing: border-box;
-  min-height: 100%; /* full height of layout */
+  min-height: 100%;
 }
 
 .section-btn {
@@ -79,19 +79,15 @@ header {
 
 /* MAIN CONTENT */
 .content-wrapper {
-  /* Align content horizontally with header text */
-  max-width: 800px; 
-  margin-left: auto;
-  margin-right: auto;
-  width: 100%;
-  padding-top: 20px; /* vertical spacing */
+  padding-left: 40px; /* match header text padding-left */
+  padding-top: 20px;  /* vertical spacing below header */
+  flex: 1;
 }
 
 .content {
   display: flex;
   flex-direction: column;
-  align-items: center;
-  text-align: center;
+  align-items: flex-start; /* align left with header */
 }
 
 /* Back button */
@@ -110,7 +106,7 @@ header {
 /* Progress */
 .progress-wrap {
   width: 260px;
-  margin: 0 auto 25px;
+  margin-bottom: 25px;
 }
 
 .progress-bar {
@@ -142,7 +138,7 @@ header {
   border: 2px solid #c9aa71;
   border-radius: 12px;
   padding: 14px 18px;
-  margin: 0 auto 20px;
+  margin-bottom: 20px;
   width: 100%;
   max-width: 900px;
   font-size: 18px;
@@ -152,7 +148,7 @@ header {
   flex: 1;
   color: #fff;
   text-decoration: none;
-  text-align: center;
+  text-align: left; /* align with left */
 }
 
 .skill-list a:hover { color: #c9aa71; }
@@ -177,8 +173,8 @@ header {
 /* MOBILE */
 #mobile-select {
   display: none;
-  margin: 20px auto;
-  width: 95vw;
+  margin: 20px 40px; /* match header left padding */
+  width: calc(100% - 80px);
   padding: 10px;
   background: #0f1722;
   color: #c9aa71;
@@ -189,7 +185,7 @@ header {
   .layout { flex-direction: column; }
   .sidebar { display: none; }
   #mobile-select { display: block; }
-  .skill-list li { width: 85vw; font-size: 16px; }
+  .skill-list li { width: 100%; font-size: 16px; }
 }
 
 /* FOOTER */
@@ -205,6 +201,7 @@ footer {
 
 <header>Skills Hub</header>
 
+<!-- Mobile Dropdown -->
 <select id="mobile-select"></select>
 
 <div class="layout">
@@ -305,6 +302,7 @@ load(start, [...sidebar.children].find(b=>b.textContent===start));
 
 </body>
 </html>
+
 
 
 
