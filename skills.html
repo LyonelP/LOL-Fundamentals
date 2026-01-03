@@ -12,7 +12,6 @@ if (localStorage.getItem('lolfundamentals_logged_in') !== 'true') {
 </script>
 
 <style>
-/* ===== RESET & BODY ===== */
 html, body {
   margin: 0;
   padding: 0;
@@ -34,28 +33,28 @@ body::before {
   z-index: -1;
 }
 
-/* ===== HEADER ===== */
+/* HEADER */
 header {
   background: rgba(13,17,23,0.95);
   border-bottom: 2px solid #c9aa71;
   padding: 20px;
-  text-align: left;
+  text-align: center;
   font-size: 26px;
   font-weight: bold;
   color: #c9aa71;
   text-transform: uppercase;
 }
 
-/* ===== FIXED SIDEBAR ===== */
+/* SIDEBAR */
 .sidebar {
   position: fixed;
-  top: 0; /* touches header top */
+  top: 62px; /* header height approx */
   left: 0;
   width: 260px;
-  height: 100%;
+  bottom: 0;
   background: rgba(13,17,23,0.95);
   border-right: 2px solid #c9aa71;
-  padding: 100px 20px 20px; /* 100px to push buttons below header visually */
+  padding: 20px;
   box-sizing: border-box;
   overflow-y: auto;
 }
@@ -70,7 +69,6 @@ header {
   border-radius: 10px;
   font-size: 16px;
   cursor: pointer;
-  text-align: center;
 }
 
 .section-btn.active,
@@ -79,12 +77,14 @@ header {
   color: #000;
 }
 
-/* ===== MAIN CONTENT ===== */
+/* MAIN CONTENT */
 .main {
-  margin-left: 260px; /* leave space for sidebar */
-  padding: 20px; /* spacing below header */
-  text-align: left; /* align content with header text */
-  min-height: calc(100vh - 60px); /* footer space */
+  margin-left: 260px; /* space for sidebar */
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: center; /* center horizontally */
+  min-height: calc(100vh - 62px); /* leave header space */
 }
 
 /* Back button */
@@ -130,7 +130,7 @@ header {
   background: #0f1722;
   color: #c9aa71;
   cursor: pointer;
-  margin: 20px 0;
+  margin: 20px 0 30px;
   appearance: none;
   background-image: url("data:image/svg+xml;utf8,<svg fill='%23c9aa71' height='12' viewBox='0 0 24 24' width='12' xmlns='http://www.w3.org/2000/svg'><path d='M7 10l5 5 5-5z'/></svg>");
   background-repeat: no-repeat;
@@ -183,7 +183,7 @@ header {
   color: #000;
 }
 
-/* ===== MOBILE ===== */
+/* MOBILE */
 @media (max-width: 800px) {
   .sidebar { display: none; }
   .main { margin-left: 0; }
@@ -191,9 +191,9 @@ header {
   .skill-list li { width: 85vw; font-size: 16px; }
 }
 
-/* ===== FOOTER ===== */
+/* FOOTER */
 footer {
-  text-align: left;
+  text-align: center;
   padding: 20px 10px;
   font-size: 14px;
   margin-top: 20px;
