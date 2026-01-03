@@ -6,14 +6,20 @@
 <title>Diana Mid – Matchup Hub (Free)</title>
 
 <style>
-body { margin: 0; font-family: 'Beaufort for LOL', Arial, Helvetica, sans-serif; color: #fff; background: url('https://ddragon.leagueoflegends.com/cdn/img/champion/splash/Diana_2.jpg') no-repeat center top fixed; background-size: cover; min-height: 100vh; display: flex; flex-direction: column; padding-top: 100px; /* space for the header */ }
-body::before {
-  content: "";
-  position: fixed;
-  inset: 0;
-  background: rgba(10,15,20,0.25);
-  z-index: -1;
+body {
+  margin: 0;
+  font-family: 'Beaufort for LOL', Arial, Helvetica, sans-serif;
+  color: #fff;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+
+  /* Background image settings */
+  background: url('https://ddragon.leagueoflegends.com/cdn/img/champion/splash/Diana_2.jpg') no-repeat center 30%;
+  background-size: cover;
+  background-attachment: fixed;
 }
+
 
 header {
   background: rgba(13,17,23,0.9);
@@ -217,6 +223,7 @@ input.addEventListener('input', () => {
 
 </body>
 </html>
+
 
 
 
