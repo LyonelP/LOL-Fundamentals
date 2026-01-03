@@ -12,17 +12,14 @@ if (localStorage.getItem('lolfundamentals_logged_in') !== 'true') {
 </script>
 
 <style>
-html, body {
+/* ===== BODY ===== */
+body {
   margin: 0;
-  padding: 0;
-  height: 100%;
   font-family: 'Beaufort for LOL', Arial, sans-serif;
   color: #fff;
-}
-
-body {
   background: url('https://64.media.tumblr.com/594ac290bec6d5e9ad98b5f53404f00b/245c4c3ee469f81d-e4/s1280x1920/1cda4284320eb2031758a9859dfe14ff8bbc50ba.jpg') no-repeat center center fixed;
   background-size: cover;
+  min-height: 100vh;
 }
 
 body::before {
@@ -33,7 +30,7 @@ body::before {
   z-index: -1;
 }
 
-/* HEADER */
+/* ===== HEADER ===== */
 header {
   background: rgba(13,17,23,0.95);
   border-bottom: 2px solid #c9aa71;
@@ -45,21 +42,23 @@ header {
   text-transform: uppercase;
 }
 
-/* SIDEBAR */
+/* ===== LAYOUT ===== */
+.layout {
+  display: flex;
+  min-height: calc(100vh - 90px);
+}
+
+/* ===== SIDEBAR (DESKTOP) ===== */
 .sidebar {
-  position: fixed;
-  top: 62px; /* header height approx */
-  left: 0;
   width: 260px;
-  bottom: 0;
   background: rgba(13,17,23,0.95);
   border-right: 2px solid #c9aa71;
   padding: 20px;
   box-sizing: border-box;
-  overflow-y: auto;
 }
 
 .section-btn {
+  display: block;
   width: 100%;
   padding: 12px;
   margin-bottom: 12px;
@@ -69,6 +68,8 @@ header {
   border-radius: 10px;
   font-size: 16px;
   cursor: pointer;
+  text-align: center;
+  transition: all 0.25s;
 }
 
 .section-btn.active,
@@ -77,14 +78,14 @@ header {
   color: #000;
 }
 
-/* MAIN CONTENT */
-.main {
-  margin-left: 260px; /* space for sidebar */
-  padding: 20px;
+/* ===== MAIN CONTENT ===== */
+.content {
+  flex: 1;
+  padding-top: 20px; /* space under header */
   display: flex;
   flex-direction: column;
   align-items: center; /* center horizontally */
-  min-height: calc(100vh - 62px); /* leave header space */
+  text-align: center;
 }
 
 /* Back button */
@@ -103,7 +104,7 @@ header {
 /* Progress */
 .progress-wrap {
   width: 260px;
-  margin-bottom: 20px;
+  margin: 0 auto 25px;
 }
 
 .progress-bar {
@@ -117,25 +118,7 @@ header {
   height: 100%;
   width: 0%;
   background: linear-gradient(90deg,#c9aa71,#e6c97f);
-}
-
-/* Mobile dropdown */
-#mobile-select {
-  display: none;
-  width: 220px;
-  padding: 8px 12px;
-  font-size: 16px;
-  border-radius: 6px;
-  border: none;
-  background: #0f1722;
-  color: #c9aa71;
-  cursor: pointer;
-  margin: 20px 0 30px;
-  appearance: none;
-  background-image: url("data:image/svg+xml;utf8,<svg fill='%23c9aa71' height='12' viewBox='0 0 24 24' width='12' xmlns='http://www.w3.org/2000/svg'><path d='M7 10l5 5 5-5z'/></svg>");
-  background-repeat: no-repeat;
-  background-position: right 10px center;
-  background-size: 12px;
+  transition: width 0.4s ease;
 }
 
 /* Skills */
@@ -153,7 +136,7 @@ header {
   border: 2px solid #c9aa71;
   border-radius: 12px;
   padding: 14px 18px;
-  margin-bottom: 20px;
+  margin: 0 auto 20px;
   width: 56vw;
   max-width: 900px;
   font-size: 18px;
@@ -161,8 +144,9 @@ header {
 
 .skill-list a {
   flex: 1;
-  text-decoration: none;
   color: #fff;
+  text-decoration: none;
+  text-align: center;
 }
 
 .skill-list a:hover { color: #c9aa71; }
@@ -175,6 +159,7 @@ header {
   display: flex;
   align-items: center;
   justify-content: center;
+  color: #c9aa71;
   cursor: pointer;
 }
 
@@ -183,20 +168,29 @@ header {
   color: #000;
 }
 
-/* MOBILE */
+/* ===== MOBILE ===== */
+#mobile-select {
+  display: none;
+  margin: 20px auto;
+  width: 95vw;
+  padding: 10px;
+  background: #0f1722;
+  color: #c9aa71;
+  border-radius: 8px;
+}
+
 @media (max-width: 800px) {
+  .layout { flex-direction: column; }
   .sidebar { display: none; }
-  .main { margin-left: 0; }
   #mobile-select { display: block; }
   .skill-list li { width: 85vw; font-size: 16px; }
 }
 
-/* FOOTER */
+/* ===== FOOTER ===== */
 footer {
   text-align: center;
   padding: 20px 10px;
   font-size: 14px;
-  margin-top: 20px;
 }
 </style>
 </head>
@@ -205,22 +199,27 @@ footer {
 
 <header>Skills Hub</header>
 
-<aside class="sidebar" id="sidebar"></aside>
+<!-- Mobile Dropdown -->
+<select id="mobile-select"></select>
 
-<main class="main">
-  <a href="membershub.html" class="back-button">Back to Members Hub</a>
+<div class="layout">
 
-  <div class="progress-wrap">
-    <div id="progressLabel">0% Complete</div>
-    <div class="progress-bar">
-      <div class="progress-fill" id="progressFill"></div>
+  <aside class="sidebar" id="sidebar"></aside>
+
+  <main class="content">
+    <a href="membershub.html" class="back-button">Back to Members Hub</a>
+
+    <div class="progress-wrap">
+      <div id="progressLabel">0% Complete</div>
+      <div class="progress-bar">
+        <div class="progress-fill" id="progressFill"></div>
+      </div>
     </div>
-  </div>
 
-  <select id="mobile-select"></select>
+    <ul class="skill-list" id="skill-list"></ul>
+  </main>
 
-  <ul class="skill-list" id="skill-list"></ul>
-</main>
+</div>
 
 <footer>© 2025 LoL Fundamentals · All rights reserved</footer>
 
@@ -235,6 +234,7 @@ const skillData = {
 };
 
 let progress = JSON.parse(localStorage.getItem("skillProgress")||"{}");
+
 Object.keys(skillData).forEach(s=>{
   progress[s]??={};
   skillData[s].forEach(k=>progress[s][k]??=false);
@@ -246,6 +246,7 @@ const list = document.getElementById("skill-list");
 const fill = document.getElementById("progressFill");
 const label = document.getElementById("progressLabel");
 
+// Populate sidebar and mobile select
 Object.keys(skillData).forEach(s=>{
   sidebar.innerHTML += `<button class="section-btn" onclick="load('${s}',this)">${s}</button>`;
   mobileSelect.innerHTML += `<option value="${s}">${s}</option>`;
@@ -255,11 +256,19 @@ function load(section,btn){
   document.querySelectorAll(".section-btn").forEach(b=>b.classList.remove("active"));
   if(btn) btn.classList.add("active");
   mobileSelect.value = section;
+  localStorage.setItem("lastSection",section);
 
   list.innerHTML = skillData[section].map(k=>{
     const done = progress[section][k];
     const link = k.toLowerCase().replace(/[^a-z0-9]/g,'')+".html";
-    return `<li><a href="${link}">${k}</a><div class="checkmark ${done?'completed':''}" onclick="toggle('${section}','${k}',this)">${done?'✔':''}</div></li>`;
+    return `
+      <li>
+        <a href="${link}">${k}</a>
+        <div class="checkmark ${done?'completed':''}"
+          onclick="toggle('${section}','${k}',this)">
+          ${done?'✔':''}
+        </div>
+      </li>`;
   }).join("");
 
   update(section);
@@ -282,8 +291,9 @@ function update(s){
 }
 
 mobileSelect.onchange = e => load(e.target.value);
-const last = localStorage.getItem("lastSection") || "Pre Game";
-load(last,[...sidebar.children].find(b=>b.textContent===last));
+
+const start = localStorage.getItem("lastSection") || "Pre Game";
+load(start, [...sidebar.children].find(b=>b.textContent===start));
 </script>
 
 </body>
