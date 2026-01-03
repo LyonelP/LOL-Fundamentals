@@ -157,14 +157,15 @@ header {
   color:#fff;
 }
 
+/* Locked overlay */
 .locked-overlay {
   position: relative;
-  pointer-events: none;
   border-radius: 26px;
   overflow: hidden;
   display: flex;
   flex-direction: column;
   justify-content: center;
+  cursor: pointer; /* entire overlay clickable */
 }
 
 .locked-overlay iframe {
@@ -172,58 +173,33 @@ header {
   height: auto;
   aspect-ratio: 16/9;
   border-radius: 26px;
-  pointer-events: none;
   display: block;
+  pointer-events: none; /* prevent iframe click */
 }
 
-/* Overlay text */
 .locked-overlay::after {
   content: "Sign up to unlock";
   position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
+  inset: 0; /* cover entire overlay */
   backdrop-filter: blur(6px);
-  background: rgba(0,0,0,0.5);
+  background: rgba(0, 50, 120, 0.5); /* bluish overlay */
   color: #fff;
   font-size: 22px;
   font-weight: bold;
   display: flex;
-  align-items: center;       /* vertical centering */
-  justify-content: center;   /* horizontal centering */
+  align-items: center;
+  justify-content: center;
   text-align: center;
   padding: 0 12px;
   z-index: 5;
-  transform: translateY(-18%); /* desktop text */
-}
-
-/* Extra bottom blur */
-.locked-overlay::before {
-  content: "";
-  position: absolute;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  height: 80px;                 /* how far the blur extends below the video */
-  backdrop-filter: blur(12px);  /* stronger blur for bottom */
-  background: rgba(0,0,0,0.3);
-  z-index: 4;
-  border-bottom-left-radius: 26px;
-  border-bottom-right-radius: 26px;
 }
 
 /* Mobile adjustments */
 @media(max-width:480px){
   .locked-overlay::after {
     font-size: 18px;
-    transform: translateY(-30%); /* move text higher */
-  }
-  .locked-overlay::before {
-    height: 100px;                /* more bottom blur on mobile */
   }
 }
-
 
 /* Footer */
 footer {
@@ -379,19 +355,15 @@ function toggleMobileMenu(){
 function lockedAlert() {
   alert('Sign up to unlock this section');
 }
+
+// Make the entire overlay clickable
+document.querySelectorAll('.locked-overlay').forEach(el => {
+  el.addEventListener('click', lockedAlert);
+});
 </script>
 
 </body>
 </html>
-
-
-
-
-
-
-
-
-
 
 
 
