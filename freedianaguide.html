@@ -1,207 +1,340 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
+<meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Diana Mid Guide (Locked)</title>
+<title>Diana Mid Guide</title>
 <style>
-  :root {
-    --gold: #c9aa71;
-    --bg: #0a0f14;
-    --card: #161b22;
-    --muted: #8b949e;
-    --yellow: #F9D949;
-  }
+:root {
+  --gold:#c9aa71;
+  --muted:#9da7b3;
+}
 
-  * {
-    box-sizing: border-box;
-    margin: 0;
-    padding: 0;
-    font-family: 'Beaufort for LOL', Arial, sans-serif;
-  }
+/* Reset */
+html, body {
+  margin:0;
+  padding:0;
+  height:100%;
+  font-family: Arial, Helvetica, sans-serif;
+}
 
-  body {
-    display: flex;
-    min-height: 100vh;
-    background-color: var(--bg);
-    color: #fff;
-  }
+/* Body and background */
+body {
+  background:url('https://ddragon.leagueoflegends.com/cdn/img/champion/splash/Diana_11.jpg') no-repeat center center fixed;
+  background-size:cover;
+  color:#e6edf3;
+  display:flex;
+  flex-direction:column;
+  min-height:100vh;
+  position:relative;
+}
 
-  /* Sidebar */
+body::before {
+  content:"";
+  position:fixed;
+  inset:0;
+  background:
+    radial-gradient(circle at top, rgba(120,0,0,0.25), transparent 60%),
+    rgba(10,15,20,0.82);
+  z-index:-1;
+}
+
+/* Header */
+header {
+  width:100%;
+  background:rgba(13,17,23,0.9);
+  border-bottom:2px solid var(--gold);
+  padding:20px 0;
+  font-size:26px;
+  font-weight:bold;
+  color:var(--gold);
+  text-align:center;
+  text-transform: uppercase;
+  z-index:10;
+  position:relative;
+}
+
+/* Back button */
+.back-wrap {
+  width:100%;
+  text-align:center;
+  margin:16px 0;
+  position:relative;
+  z-index:10;
+}
+
+.back-button {
+  display:inline-flex;
+  align-items:center;
+  gap:8px;
+  padding:10px 22px;
+  background:linear-gradient(135deg,var(--gold),#e0c77b);
+  color:#000;
+  text-decoration:none;
+  border-radius:10px;
+  font-weight:bold;
+}
+
+.back-button::before {
+  content:"←";
+}
+
+/* Sidebar desktop */
+.nav-wrapper {
+  display:none;
+}
+
+@media(min-width:1024px) {
   .nav-wrapper {
-    width: 220px;
-    background-color: var(--card);
-    display: flex;
-    flex-direction: column;
-    padding: 20px 0;
-  }
-
-  .nav-menu {
-    display: flex;
-    flex-direction: column;
+    display:block;
+    position:fixed;
+    top:70px; /* below header */
+    left:0;
+    width:220px;
+    bottom:0;
+    background:rgba(15,20,26,0.95);
+    border-right:2px solid var(--gold);
+    padding-top:20px;
+    overflow-y:auto;
+    z-index:9;
   }
 
   .nav-section-title {
-    padding: 0 24px 10px;
-    color: var(--gold);
-    font-weight: bold;
-    font-size: 14px;
-    text-transform: uppercase;
-    margin-bottom: 12px;
+    font-size:11px;
+    color:var(--muted);
+    padding:14px 24px;
+    text-transform:uppercase;
   }
 
   .nav-menu a {
-    display: block;
-    padding: 10px 24px;
-    color: #e6edf3;
-    text-decoration: none;
-    transition: background 0.15s ease, color 0.15s ease;
+    display:block;
+    padding:10px 24px;
+    text-decoration:none;
+    color:#e6edf3;
+    cursor:pointer;
+    border-radius:8px;
   }
 
   .nav-menu a:hover {
-    background: rgba(201,170,113,0.15);
-    color: var(--gold);
+    background:var(--gold);
+    color:#000;
   }
+}
 
-  .nav-menu a.active {
-    color: var(--gold);
-    font-weight: bold;
-  }
+/* Main content */
+.main {
+  flex:1;
+  display:flex;
+  justify-content:center;
+  padding:0 24px;
+  margin-top:0;
+  position:relative;
+  z-index:1;
+}
 
-  .locked-link {
-    cursor: pointer;
-  }
+.card {
+  max-width:800px;
+  width:100%;
+  background:rgba(255,255,255,0.03);
+  border-radius:26px;
+  padding:36px;
+  box-shadow:0 24px 70px rgba(0,0,0,0.55);
+  position:relative;
+}
 
-  /* Main content */
-  .content {
-    flex: 1;
-    padding: 40px 60px;
-    overflow-y: auto;
-    background: url('https://ddragon.leagueoflegends.com/cdn/img/champion/splash/Diana_11.jpg') center/cover no-repeat;
-    position: relative;
-  }
+/* Top text unblurred */
+.top-text {
+  font-size:0.95em;
+  line-height:1.5;
+  margin-bottom:24px;
+  color:#d7d7d7;
+}
 
-  .locked-runes {
-    position: relative;
-    max-width: 900px;
-    margin: auto;
-    background-color: rgba(10,15,20,0.6);
-    padding: 40px;
-    border-radius: 12px;
-    overflow: hidden;
-  }
+/* Locked overlay for blurred content */
+.locked-overlay {
+  position:relative;
+}
 
-  .full-blur {
-    filter: blur(2.5px);
-    line-height: 1.7;
-    color: #e6edf3;
-  }
+.locked-overlay::after {
+  content:"Sign up to unlock";
+  position:absolute;
+  top:0;
+  left:0;
+  width:100%;
+  height:100%;
+  backdrop-filter:blur(6px);
+  background:rgba(0,0,0,0.4);
+  color:#fff;
+  font-size:22px;
+  font-weight:bold;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  border-radius:26px;
+  z-index:5;
+  pointer-events:none;
+}
 
-  .full-blur p {
-    margin-bottom: 22px;
-  }
+/* Footer */
+footer {
+  padding:16px;
+  text-align:center;
+  font-size:13px;
+  color:var(--muted);
+  margin-top:auto;
+}
 
-  .full-blur h3 {
-    margin: 34px 0 12px;
-    color: var(--gold);
-  }
+/* Mobile dropdown */
+.nav-trigger {
+  display:block;
+  width:90%;
+  max-width:360px;
+  margin:16px auto;
+  padding:14px 18px;
+  font-size:16px;
+  font-weight:600;
+  background:rgba(255,255,255,0.03);
+  border:none;
+  border-radius:26px;
+  color:#fff;
+  cursor:pointer;
+  text-align:center;
+  position:relative;
+  z-index:10;
+}
 
-  .lock-overlay {
-    position: absolute;
-    top: 0; left: 0; right: 0; bottom: 0;
-    background: rgba(10,15,20,0.7);
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    text-align: center;
-    padding: 20px;
-    border-radius: 12px;
-  }
+.nav-trigger::after {
+  content: " ▼";
+  font-weight: bold;
+}
 
-  .lock-overlay h3 {
-    font-size: 28px;
-    margin-bottom: 16px;
-    color: var(--gold);
-  }
+.nav-menu-mobile {
+  display:none;
+  position:relative;
+  width:85%;
+  max-width:360px;
+  margin:0 auto 16px auto;
+  background:rgba(255,255,255,0.03);
+  border-radius:26px;
+  padding:12px 0;
+  z-index:9;
+}
 
-  .lock-overlay p {
-    font-size: 16px;
-    margin-bottom: 20px;
-    color: #e6edf3;
-  }
+.nav-menu-mobile .nav-section-title {
+  font-size:11px;
+  color:var(--muted);
+  padding:10px 20px;
+  text-transform:uppercase;
+}
 
-  .unlock-btn {
-    display: inline-block;
-    background-color: var(--gold);
-    color: #0a0f14;
-    text-decoration: none;
-    padding: 10px 24px;
-    border-radius: 6px;
-    font-weight: bold;
-    transition: background 0.2s ease;
-  }
+.nav-menu-mobile a {
+  display:block;
+  padding:10px 20px;
+  text-decoration:none;
+  color:#e6edf3;
+}
 
-  .unlock-btn:hover {
-    background-color: #f9d949;
-  }
+.nav-menu-mobile a:hover {
+  background:var(--gold);
+  color:#000;
+}
 
-  video {
-    width: 100%;
-    border-radius: 8px;
-    margin-bottom: 22px;
+/* Hide mobile menu button on desktop */
+@media(min-width:1024px) {
+  .nav-trigger {
+    display:none;
   }
+}
 </style>
 </head>
 <body>
 
-  <!-- Sidebar -->
-  <div class="nav-wrapper">
-    <div class="nav-menu">
-      <div class="nav-section-title">Core</div>
-      <a href="#" class="locked-link">Introduction</a>
-      <a href="#" class="locked-link active">Runes</a>
-      <a href="#" class="locked-link">Build Path</a>
-      <a href="#" class="locked-link">Matchups</a>
-      <a href="#" class="locked-link">Farming</a>
-      <a href="#" class="locked-link">Teamfighting</a>
+<header>Diana Mid Guide</header>
+
+<div class="back-wrap">
+  <a href="membershub.html" class="back-button">Back to Members Hub</a>
+</div>
+
+<!-- Mobile dropdown button -->
+<button class="nav-trigger" onclick="toggleMobileMenu()">Select a Section</button>
+<div class="nav-menu-mobile" id="mobileMenu">
+  <div class="nav-section-title">Core</div>
+  <a onclick="lockedAlert()">Intro</a>
+  <a onclick="lockedAlert()">Runes</a>
+  <a onclick="lockedAlert()">Build</a>
+  <a onclick="lockedAlert()">Summoners</a>
+  <a onclick="lockedAlert()">Abilities</a>
+  <a onclick="lockedAlert()">Combos</a>
+  <div class="nav-section-title">Gameplay</div>
+  <a onclick="lockedAlert()">Laning</a>
+  <a onclick="lockedAlert()">Warding</a>
+  <a onclick="lockedAlert()">Farming / Pushing</a>
+  <a onclick="lockedAlert()">Teamfighting</a>
+  <a onclick="lockedAlert()">Splitpushing</a>
+  <a onclick="lockedAlert()">Closing Out The Game</a>
+  <div class="nav-section-title">Advanced</div>
+  <a onclick="lockedAlert()">Threats & Synergies</a>
+  <a onclick="lockedAlert()">Pros & Cons</a>
+  <a onclick="lockedAlert()">Extra Tips</a>
+</div>
+
+<!-- Sidebar desktop -->
+<div class="nav-wrapper">
+  <div class="nav-menu">
+    <div class="nav-section-title">Core</div>
+    <a onclick="lockedAlert()">Intro</a>
+    <a onclick="lockedAlert()">Runes</a>
+    <a onclick="lockedAlert()">Build</a>
+    <a onclick="lockedAlert()">Summoners</a>
+    <a onclick="lockedAlert()">Abilities</a>
+    <a onclick="lockedAlert()">Combos</a>
+    <div class="nav-section-title">Gameplay</div>
+    <a onclick="lockedAlert()">Laning</a>
+    <a onclick="lockedAlert()">Warding</a>
+    <a onclick="lockedAlert()">Farming / Pushing</a>
+    <a onclick="lockedAlert()">Teamfighting</a>
+    <a onclick="lockedAlert()">Splitpushing</a>
+    <a onclick="lockedAlert()">Closing Out The Game</a>
+    <div class="nav-section-title">Advanced</div>
+    <a onclick="lockedAlert()">Threats & Synergies</a>
+    <a onclick="lockedAlert()">Pros & Cons</a>
+    <a onclick="lockedAlert()">Extra Tips</a>
+  </div>
+</div>
+
+<!-- Main content -->
+<div class="main">
+  <div id="content" class="card">
+    <div class="top-text">
+      <strong>Why grasp over another keystone?</strong><br>
+      It ultimately comes down to the value of the rune trees themselves.
+    </div>
+
+    <div class="locked-overlay">
+      <!-- Embedded YouTube Video -->
+      <iframe width="100%" height="480" src="https://www.youtube.com/embed/mF2MJpekEXI" title="Why Grasp is Better on Diana" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+
+      <p style="margin-top:1em; font-size:0.9em;">
+        Additional content is blurred and locked until you sign up.
+      </p>
     </div>
   </div>
+</div>
 
-  <!-- Main content -->
-  <div class="content">
-    <div class="locked-runes">
-      <div class="full-blur">
-        <h3>Runes Overview</h3>
-        <p>Explore Diana’s key runes for mid-lane dominance and scaling into mid-to-late game.</p>
-
-        <video controls>
-          <source src="https://www.w3schools.com/html/mov_bbb.mp4" type="video/mp4">
-          Your browser does not support HTML video.
-        </video>
-
-        <p>Check how different rune combinations affect trades, all-ins, and jungle skirmishes.</p>
-      </div>
-
-      <div class="lock-overlay">
-        <h3>🔒 Full Rune Section Locked</h3>
-        <p>Sign up to access the complete rune breakdown, graphs, and in-depth analysis.</p>
-        <a href="https://lolfundamentals.com/signup" class="unlock-btn">Unlock Full Diana Guide</a>
-      </div>
-    </div>
-  </div>
+<footer>© 2026 LoL Fundamentals · All rights reserved</footer>
 
 <script>
-  document.querySelectorAll('.locked-link').forEach(link => {
-    link.addEventListener('click', e => {
-      e.preventDefault();
-      alert('Sign up to unlock the full Diana guide.');
-    });
-  });
+function toggleMobileMenu(){
+  const menu = document.getElementById('mobileMenu');
+  menu.style.display = (menu.style.display === 'block') ? 'none' : 'block';
+}
+
+function lockedAlert() {
+  alert('Sign up to unlock this section');
+}
 </script>
 
 </body>
 </html>
-
 
 
