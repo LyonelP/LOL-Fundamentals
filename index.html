@@ -160,12 +160,12 @@ footer a:hover{text-decoration:underline}
 <h2>Choose Your Plan</h2>
 <div class="plan-buttons" style="justify-content:center;gap:20px;flex-wrap:wrap;">
   <!-- Yearly plan -->
-  <button class="btn plan-btn" id="yearlyBtn">$49 / Year</button>
+  <button class="btn" id="yearlyBtn">$49 / Year</button>
 
   <!-- Lifetime plan -->
-  <div class="plan-wrap" style="position:relative;text-align:center;">
+  <div style="position:relative;display:inline-block;text-align:center;margin-top:10px;">
     <div class="bestValueTag">Best Value</div>
-   <button class="btn orangeBtn plan-btn" id="lifetimeBtn">$99 / Lifetime</button>
+    <button class="btn orangeBtn" id="lifetimeBtn">$99 / Lifetime</button>
   </div>
 </div>
 
@@ -269,45 +269,10 @@ document.querySelectorAll('.locked').forEach(card=>{
   transform: translateY(-6px);
   box-shadow: 0 12px 26px rgba(201,170,113,0.5);
 }
-
-.plan-btn {
-  width: 200px;
-  height: 56px;
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-}
- .plan-wrap {
-  width: 200px;
-  display: flex;
-  justify-content: center;
-}
-
-
-/* Desktop: keep side by side */
-.modalContent .plan-buttons {
-  flex-wrap: nowrap;
-}
-
-/* Mobile: stack */
-@media (max-width: 520px) {
-  .modalContent .plan-buttons {
-    flex-wrap: wrap;
-  }
-}
-
-  
 </style>
 
 </body>
 </html>
-
-
-
-
-
-
-
 
 
 
