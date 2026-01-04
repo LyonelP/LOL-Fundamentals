@@ -158,12 +158,12 @@ footer a:hover{text-decoration:underline}
 <div id="planModal" class="modal">
 <div class="modalContent">
 <h2>Choose Your Plan</h2>
-<div class="plan-buttons" style="justify-content:center;gap:20px;flex-wrap:wrap;">
+<div class="plan-buttons">
   <!-- Yearly plan -->
   <button class="btn" id="yearlyBtn">$49 / Year</button>
 
   <!-- Lifetime plan -->
-  <div style="position:relative;display:inline-block;text-align:center;margin-top:10px;">
+  <div class="plan-wrap">
     <div class="bestValueTag">Best Value</div>
     <button class="btn orangeBtn" id="lifetimeBtn">$99 / Lifetime</button>
   </div>
@@ -264,6 +264,34 @@ document.querySelectorAll('.locked').forEach(card=>{
   100%{transform:translateY(0) translateX(0) scale(1);opacity:1}
 }
 
+.plan-buttons {
+  display: flex;
+  justify-content: center;
+  gap: 24px;
+  flex-wrap: nowrap;
+}
+
+.plan-wrap {
+  position: relative;
+  width: 180px;
+  display: flex;
+  justify-content: center;
+}
+
+.plan-buttons .btn {
+  width: 180px;
+  height: 48px;
+  padding: 0;
+  font-size: 0.95rem;
+}
+
+/* Mobile only */
+@media (max-width: 520px) {
+  .plan-buttons {
+    flex-wrap: wrap;
+  }
+}
+  
 /* Gold hover effect for all unlocked cards */
 .card:not(.locked):hover {
   transform: translateY(-6px);
@@ -273,6 +301,7 @@ document.querySelectorAll('.locked').forEach(card=>{
 
 </body>
 </html>
+
 
 
 
