@@ -277,11 +277,25 @@ document.querySelectorAll('.locked').forEach(card=>{
   align-items: center;
   justify-content: center;
 }
+
+/* Desktop: keep side by side */
+.modalContent .plan-buttons {
+  flex-wrap: nowrap;
+}
+
+/* Mobile: stack */
+@media (max-width: 520px) {
+  .modalContent .plan-buttons {
+    flex-wrap: wrap;
+  }
+}
+
   
 </style>
 
 </body>
 </html>
+
 
 
 
