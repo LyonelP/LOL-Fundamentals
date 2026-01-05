@@ -8,16 +8,17 @@
 <style>
 body{margin:0;font-family:"Beaufort for LOL",Arial,Helvetica,sans-serif;background:radial-gradient(circle at top,#0f1620,#0a0f14 70%);color:#e6edf3;line-height:1.6}
 header {
-  background: #0a0f14; /* dark, subtle */
-  border-bottom: 2px solid #c9aa71; /* gold line matches cards */
-  padding: 10px 20px; /* less tall, leaner */
+  background: #0a0f14;               /* matches footer / background, solid */
+  border-bottom: 2px solid #c9aa71;  /* gold line like cards */
+  padding: 12px 0;                    /* leaner, smaller height */
   text-align: center;
-  font-weight: 600; /* slightly lighter than bold */
-  font-size: 18px; /* smaller, professional */
+  font-weight: 600;                   /* professional, not too bold */
+  font-size: 20px;                    /* smaller than before, still readable */
   letter-spacing: 1px;
   text-transform: uppercase;
-  color: #c9aa71; /* gold text */
-  text-shadow: 0 0 6px rgba(201,170,113,.3); /* subtle glow, not too heavy */
+  color: #c9aa71;                     /* gold text */
+  text-shadow: 0 0 6px rgba(201,170,113,0.3); /* subtle glow */
+  margin: 0;
 }
 
 .hero .blueOverlay{position:absolute;inset:0;background:rgba(47,129,247,.08);pointer-events:none;z-index:1}
@@ -315,6 +316,7 @@ document.querySelectorAll('.locked').forEach(card=>{
 
 </body>
 </html>
+
 
 
 
