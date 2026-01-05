@@ -10,6 +10,12 @@
   --muted:#9da7b3;
 }
 
+<script>
+  if (localStorage.getItem('lolfundamentals_logged_in') !== 'true') {
+    window.location.replace('login.html');
+  }
+</script>
+
 /* Reset */
 html, body {
   margin:0;
@@ -761,6 +767,7 @@ function loadSection(section){
 
 </body>
 </html>
+
 
 
 
