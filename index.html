@@ -11,7 +11,7 @@ header{background:linear-gradient(90deg,#0a0f14,#1b2838);border-bottom:2px solid
 .hero{
   position:relative;
   text-align:center;
-  padding:90px 20px 75px; /* slightly taller */
+  padding:140px 20px 100px; /* top | sides | bottom */
   background:url("https://ddragon.leagueoflegends.com/cdn/img/champion/splash/Diana_0.jpg") center/cover no-repeat;
   overflow:hidden;
   border-bottom:1px solid #1f2937
@@ -29,12 +29,8 @@ header{background:linear-gradient(90deg,#0a0f14,#1b2838);border-bottom:2px solid
 .orangeBtn:hover{background:#ffb04d;box-shadow:0 0 25px rgba(242,153,74,.55)}
 
 @keyframes auraPulse{0%{opacity:.25;transform:scale(1)}50%{opacity:.45;transform:scale(1.1)}100%{opacity:.25;transform:scale(1)}}
-.section{
-  padding:24px 20px 40px; /* less top, same bottom */
-  max-width:1000px;
-  margin:auto;
-  text-align:center
-}
+
+.section{padding:40px 20px;max-width:1000px;margin:auto;text-align:center}
 .section h2{color:#c9aa71;font-size:2.1em;display:inline-block;padding-bottom:12px;position:relative;margin-bottom:40px}
 .section h2::after{content:"";width:60%;height:2px;background:linear-gradient(90deg,transparent,#c9aa71,transparent);position:absolute;bottom:0;left:20%}
 .card-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:22px;align-items:start}
@@ -312,13 +308,5 @@ document.querySelectorAll('.locked').forEach(card=>{
 
 </body>
 </html>
-
-
-
-
-
-
-
-
 
 
