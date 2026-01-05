@@ -8,28 +8,22 @@
 <style>
 body{margin:0;font-family:"Beaufort for LOL",Arial,Helvetica,sans-serif;background:radial-gradient(circle at top,#0f1620,#0a0f14 70%);color:#e6edf3;line-height:1.6}
 header {
-  position: fixed;                 /* floats on top */
+  position: fixed;                 /* stays at the top */
   top: 0;
   left: 0;
   width: 100%;
-  padding: 12px 30px;             /* slim, clean */
+  padding: 12px 0;                 /* slim, professional height */
   font-family: "Beaufort for LOL", Arial, Helvetica, sans-serif;
-  font-size: 18px;
-  font-weight: 500;
+  font-size: 20px;                 /* readable but lean */
+  font-weight: 600;                /* bold enough to stand out */
   text-align: center;
-  color: #c9aa71;                 /* gold text for LoL accent */
+  color: #c9aa71;                  /* gold text */
   text-transform: uppercase;
   letter-spacing: 1px;
-  background: rgba(15,22,32,0.8); /* dark semi-transparent base */
-  backdrop-filter: blur(6px);     /* frosted glass effect */
-  border-bottom: 1px solid rgba(201,170,113,0.25); /* subtle gold line */
+  background: #0a0f14;             /* dark solid background to match page */
+  border-bottom: 2px solid #c9aa71; /* gold line like cards */
+  margin: 0;
   z-index: 999;
-  transition: background 0.3s, color 0.3s;
-}
-
-/* Optional hover glow effect */
-header:hover {
-  color: #2f81f7;                  /* subtle blue highlight on hover */
 }
 
 .hero{position:relative;text-align:center;padding:140px 20px;background:url("https://ddragon.leagueoflegends.com/cdn/img/champion/splash/Diana_0.jpg") center/cover no-repeat;overflow:hidden;border-bottom:1px solid #1f2937}
@@ -330,6 +324,7 @@ document.querySelectorAll('.locked').forEach(card=>{
 
 </body>
 </html>
+
 
 
 
