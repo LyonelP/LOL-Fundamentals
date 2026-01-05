@@ -7,16 +7,19 @@
 <link rel="icon" href="/favicon.ico">
 <style>
 body{margin:0;font-family:"Beaufort for LOL",Arial,Helvetica,sans-serif;background:radial-gradient(circle at top,#0f1620,#0a0f14 70%);color:#e6edf3;line-height:1.6}
-.hero{
-  position:relative;
-  text-align:center;
-  padding:140px 20px;
-  background:url("https://ddragon.leagueoflegends.com/cdn/img/champion/splash/Diana_0.jpg") center/cover no-repeat;
-  overflow:hidden;
-
-  border-top:2px solid #c9aa71;
-  border-bottom:2px solid #c9aa71;
+header {
+  background: #0a0f14; /* dark, subtle */
+  border-bottom: 2px solid #c9aa71; /* gold line matches cards */
+  padding: 10px 20px; /* less tall, leaner */
+  text-align: center;
+  font-weight: 600; /* slightly lighter than bold */
+  font-size: 18px; /* smaller, professional */
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  color: #c9aa71; /* gold text */
+  text-shadow: 0 0 6px rgba(201,170,113,.3); /* subtle glow, not too heavy */
 }
+
 .hero .blueOverlay{position:absolute;inset:0;background:rgba(47,129,247,.08);pointer-events:none;z-index:1}
 .hero .particles,.hero .aura{position:absolute;inset:0;pointer-events:none}
 .hero .particles{z-index:2}
@@ -312,6 +315,7 @@ document.querySelectorAll('.locked').forEach(card=>{
 
 </body>
 </html>
+
 
 
 
