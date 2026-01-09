@@ -281,6 +281,7 @@ const AP_ITEMS = [
 {name:"Lich Bane", ap:100, flatPen:0, percPen:0, bonus:"lichbane"},
 {name:"Banshee's Veil", ap:105, flatPen:0, percPen:0},
 {name:"Liandry's Torment", ap:60, flatPen:0, percPen:0},
+{name:"Dusk and Dawn", ap:70, flatPen:0, percPen:0},
 ];
 
 function populateItems() {
@@ -420,6 +421,23 @@ function calcBonusItemDamage(totalAP, mr, flatPen, percPen, level) {
       bonusMagic += Math.round(raw * 100 / (100 + effectiveMR));
     }
 
+    if (item.bonus === "duskdawn") {
+  const aaBase = getAutoAttackBase(level);
+
+  // Spellblade damage:
+  // 100% base AD + 10% AP magic damage
+  let raw = aaBase + 0.10 * totalAP;
+
+  // Applies on-hit effects twice
+  raw *= 2;
+
+  let effectiveMR = mr - flatPen;
+  if (effectiveMR < 0) effectiveMR = 0;
+  effectiveMR *= 1 - percPen;
+
+  bonusMagic += Math.round(raw * 100 / (100 + effectiveMR));
+}
+
     if(item.bonus==="nashor"){
       let aaRaw = 15 + 0.15*totalAP;
       let effectiveMR = mr - flatPen;
@@ -485,6 +503,7 @@ document.addEventListener("DOMContentLoaded",()=>{
 
 </body>
 </html>
+
 
 
 
