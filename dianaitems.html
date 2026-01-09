@@ -381,6 +381,12 @@ const Q_BASE=[0,70,105,140,175,210], Q_RATIO=0.7;
 const W_BASE=[0,60,96,132,168,204], W_RATIO=0.54;
 const E_BASE=[0,50,70,90,110,130], E_RATIO=0.6;
 const R_BASE=[0,200,300,400], R_RATIO=0.6;
+const DIANA_BASE_AD = 57;
+const DIANA_AD_GROWTH = 3.5;
+
+function getBaseAD(level) {
+  return DIANA_BASE_AD + DIANA_AD_GROWTH * (level - 1);
+}
 
 function calcMagicDamage(base, ratio, ap, mr, count, flatPen, percPen){
   if(base===0 || count===0) return 0;
@@ -421,12 +427,11 @@ function calcBonusItemDamage(totalAP, mr, flatPen, percPen, level) {
       bonusMagic += Math.round(raw * 100 / (100 + effectiveMR));
     }
 
-    if (item.bonus === "duskdawn") {
-  const aaBase = getAutoAttackBase(level);
+  if (item.bonus === "duskdawn" && aaCount > 0) {
+  const baseAD = getBaseAD(level);
 
-  // Spellblade damage:
-  // 100% base AD + 10% AP magic damage
-  let raw = aaBase + 0.10 * totalAP;
+  // 100% base AD + 10% AP
+  let raw = baseAD + 0.10 * totalAP;
 
   // Applies on-hit effects twice
   raw *= 2;
@@ -503,6 +508,7 @@ document.addEventListener("DOMContentLoaded",()=>{
 
 </body>
 </html>
+
 
 
 
