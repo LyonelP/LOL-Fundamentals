@@ -428,13 +428,10 @@ function calcBonusItemDamage(totalAP, mr, flatPen, percPen, level) {
     }
 
  if (item.bonus === "duskdawn" && aaCount > 0) {
-  const aaBase = getAutoAttackBase(level);
+  const baseAD = getBaseAD(level);
 
-  // Spellblade: 100% base AD + 10% AP (magic)
-  let raw = aaBase + 0.10 * totalAP;
-
-  // Applies on-hit effects twice
-  raw *= 2;
+  let raw = baseAD + 0.10 * totalAP;
+  raw *= 2; // applies twice
 
   let effectiveMR = mr - flatPen;
   if (effectiveMR < 0) effectiveMR = 0;
@@ -508,6 +505,7 @@ document.addEventListener("DOMContentLoaded",()=>{
 
 </body>
 </html>
+
 
 
 
