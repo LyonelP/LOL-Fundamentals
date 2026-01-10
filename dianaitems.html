@@ -251,7 +251,7 @@ footer { text-align: center; margin-top: 20px; padding: 15px 0; color: #8b949e; 
 
 </div>
 
-<footer>© 2025 LoL Fundamentals · All rights reserved</footer>
+<footer>© 2026 LoL Fundamentals · All rights reserved</footer>
 
 <script>
 const AP_ITEMS = [
@@ -427,11 +427,14 @@ function calcBonusItemDamage(totalAP, mr, flatPen, percPen, level) {
       bonusMagic += Math.round(raw * 100 / (100 + effectiveMR));
     }
 
- if (item.bonus === "duskdawn" && aaCount > 0) {
+if (item.bonus === "duskdawn") {
   const baseAD = getBaseAD(level);
 
+  // 100% base AD + 10% AP
   let raw = baseAD + 0.10 * totalAP;
-  raw *= 2; // applies twice
+
+  // Applies on-hit effects twice
+  raw *= 2;
 
   let effectiveMR = mr - flatPen;
   if (effectiveMR < 0) effectiveMR = 0;
@@ -439,6 +442,7 @@ function calcBonusItemDamage(totalAP, mr, flatPen, percPen, level) {
 
   bonusMagic += Math.round(raw * 100 / (100 + effectiveMR));
 }
+
 
     if(item.bonus==="nashor"){
       let aaRaw = 15 + 0.15*totalAP;
@@ -505,6 +509,7 @@ document.addEventListener("DOMContentLoaded",()=>{
 
 </body>
 </html>
+
 
 
 
