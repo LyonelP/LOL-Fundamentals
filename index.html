@@ -161,13 +161,22 @@ footer a:hover{text-decoration:underline}
 </div>
 
 <div id="planModal" class="modal">
-  <div class="modalContent">
-   
-    <button class="btn orangeBtn" id="oneTimeBtn" style="width:220px;height:52px;font-size:1.05rem;">
-      $59 — Unlock All Content
-    </button>
+  <div class="modalContent unlockModal">
 
-    <p style="margin-top:14px;font-size:.85rem;opacity:.7;">
+    <h2>Unlock Full Access</h2>
+    <p class="unlockSub">
+      One-time purchase · Lifetime access
+    </p>
+
+    <div class="unlockWrap">
+      <div class="limitedTag">LIMITED TIME PRICE</div>
+
+      <button class="btn orangeBtn unlockBtn" id="oneTimeBtn">
+        $59 — Unlock Everything
+      </button>
+    </div>
+
+    <p class="unlockNote">
       Includes all current and future updates, guides & tools
     </p>
 
@@ -310,6 +319,53 @@ document.querySelectorAll('.locked').forEach(card=>{
     flex-wrap: wrap;
   }
 }
+
+/* One-time unlock modal polish */
+.unlockModal {
+  padding: 34px 28px;
+}
+
+.unlockModal h2 {
+  margin-bottom: 6px;
+}
+
+.unlockSub {
+  font-size: 0.9rem;
+  opacity: 0.8;
+  margin-bottom: 26px;
+}
+
+.unlockWrap {
+  position: relative;
+  display: flex;
+  justify-content: center;
+  margin-bottom: 16px;
+}
+
+.limitedTag {
+  position: absolute;
+  top: -18px;
+  background: #f2b96d;
+  color: #161b22;
+  font-size: 0.75rem;
+  font-weight: bold;
+  padding: 3px 8px;
+  border-radius: 4px;
+  box-shadow: 0 0 6px rgba(0,0,0,.45);
+  letter-spacing: 0.4px;
+}
+
+.unlockBtn {
+  width: 240px;
+  height: 54px;
+  font-size: 1.05rem;
+}
+
+.unlockNote {
+  font-size: 0.85rem;
+  opacity: 0.7;
+  margin-top: 10px;
+}
   
 /* Gold hover effect for all unlocked cards */
 .card:not(.locked):hover {
@@ -320,6 +376,7 @@ document.querySelectorAll('.locked').forEach(card=>{
 
 </body>
 </html>
+
 
 
 
