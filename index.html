@@ -351,16 +351,15 @@ document.querySelectorAll('.locked').forEach(card=>{
   letter-spacing: 0.4px;
 }
 
-.unlockBtn {
-  width: 240px;
-  height: 54px;
-  font-size: 1.05rem;
+.unlockModal h2 {
+  margin-bottom: 16px; /* separates title from description */
 }
 
 .unlockNote {
   font-size: 0.85rem;
   opacity: 0.7;
-  margin-top: 10px;
+  margin-top: 0;
+  margin-bottom: 26px; /* pushes CTA down instead */
 }
   
 /* Gold hover effect for all unlocked cards */
@@ -372,6 +371,7 @@ document.querySelectorAll('.locked').forEach(card=>{
 
 </body>
 </html>
+
 
 
 
