@@ -207,6 +207,31 @@ if(localStorage.getItem("lolfundamentals_logged_in")==="true" &&
   window.location.href="membershub.html";
 }
 
+const signupHeroBtn = document.getElementById("signupHeroBtn");
+const loginHeroBtn = document.getElementById("loginHeroBtn");
+
+const signupModal = document.getElementById("signupModal");
+const loginModal = document.getElementById("loginModal");
+const planModal = document.getElementById("planModal");
+
+const closeSignupModal = document.getElementById("closeSignupModal");
+const closeLoginModal = document.getElementById("closeLoginModal");
+const closePlanModal = document.getElementById("closePlanModal");
+
+const seePlansBtn = document.getElementById("seePlansBtn");
+const continueSignupBtn = document.getElementById("continueSignupBtn");
+const modalLoginBtn = document.getElementById("modalLoginBtn");
+
+const signupEmail = document.getElementById("signupEmail");
+const signupPassword = document.getElementById("signupPassword");
+const signupPasswordConfirm = document.getElementById("signupPasswordConfirm");
+
+const loginEmail = document.getElementById("loginEmail");
+const loginPassword = document.getElementById("loginPassword");
+
+const resetLinkModal = document.getElementById("resetLinkModal");
+const loginMsgModal = document.getElementById("loginMsgModal");
+
 const firebaseConfig={apiKey:"AIzaSyCFRcEV7wdivqONnkjJubAZOjPMixrHMBI",authDomain:"lol-fundamentals.firebaseapp.com",projectId:"lol-fundamentals",storageBucket:"lol-fundamentals.firebasestorage.app",messagingSenderId:"1038440427584",appId:"1:1038440427584:web:a82207151fd370dbedefa5"};
 const app=initializeApp(firebaseConfig),auth=getAuth(app),firestore=getFirestore(app);
 
@@ -383,6 +408,7 @@ document.querySelectorAll('.locked').forEach(card=>{
 
 </body>
 </html>
+
 
 
 
