@@ -229,9 +229,17 @@ continueSignupBtn.onclick=async()=>{
   planModal.style.display="flex";
 };
 
-document.getElementById("oneTimeBtn").onclick = () => {
+document.getElementById("monthlyBtn").onclick = () => {
   window.open(
-    "https://buy.stripe.com/cNi9AM0bq9sU6Zo88iejK0h",
+    "https://buy.stripe.com/8x28wIaQ4dJa4Rg88iejK0f",
+    "_blank"
+  );
+  planModal.style.display = "none";
+};
+
+document.getElementById("yearlyBtn").onclick = () => {
+  window.open(
+    "https://buy.stripe.com/cNi14g3nC48AerQ9cmejK07",
     "_blank"
   );
   planModal.style.display = "none";
@@ -377,6 +385,7 @@ document.querySelectorAll('.locked').forEach(card=>{
 
 </body>
 </html>
+
 
 
 
