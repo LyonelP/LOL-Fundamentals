@@ -7,7 +7,7 @@
 <link rel="icon" href="/favicon.ico">
 <style>
 body{margin:0;font-family:"Beaufort for LOL",Arial,Helvetica,sans-serif;background:radial-gradient(circle at top,#0f1620,#0a0f14 70%);color:#e6edf3;line-height:1.6}
-header{background:linear-gradient(90deg,#0a0f14,#1b2838);border-bottom:2px solid #c9aa71;padding:14px 20px;text-align:center;font-weight:bold;font-size:24px;letter-spacing:1.5px;text-transform:uppercase;color:#c9aa71;text-shadow:0 0 8px rgba(201,170,113,.4)}
+header{background:linear-gradient(90deg,#0a0f14,#1b2838);border-bottom:2px solid #c9aa71;padding:18px 20px;text-align:center;font-weight:bold;font-size:24px;letter-spacing:1.5px;text-transform:uppercase;color:#c9aa71;text-shadow:0 0 8px rgba(201,170,113,.4)}
 .hero{position:relative;text-align:center;padding:140px 20px;background:url("https://ddragon.leagueoflegends.com/cdn/img/champion/splash/Diana_0.jpg") center/cover no-repeat;overflow:hidden;border-bottom:1px solid #1f2937}
 .hero .blueOverlay{position:absolute;inset:0;background:rgba(47,129,247,.08);pointer-events:none;z-index:1}
 .hero .particles,.hero .aura{position:absolute;inset:0;pointer-events:none}
@@ -23,12 +23,7 @@ header{background:linear-gradient(90deg,#0a0f14,#1b2838);border-bottom:2px solid
 
 @keyframes auraPulse{0%{opacity:.25;transform:scale(1)}50%{opacity:.45;transform:scale(1.1)}100%{opacity:.25;transform:scale(1)}}
 
-.section{
-  padding:20px 20px 40px; /* less space above */
-  max-width:1000px;
-  margin:auto;
-  text-align:center
-}
+.section{padding:40px 20px;max-width:1000px;margin:auto;text-align:center}
 .section h2{color:#c9aa71;font-size:2.1em;display:inline-block;padding-bottom:12px;position:relative;margin-bottom:40px}
 .section h2::after{content:"";width:60%;height:2px;background:linear-gradient(90deg,transparent,#c9aa71,transparent);position:absolute;bottom:0;left:20%}
 .card-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:22px;align-items:start}
@@ -38,9 +33,9 @@ header{background:linear-gradient(90deg,#0a0f14,#1b2838);border-bottom:2px solid
 .card::before{content:"";position:absolute;inset:0;width:100%;height:100%;background-size:cover;background-position:center;opacity:.15;z-index:0;border-radius:10px}
 
 .fundamentals::before{background-image:url('https://cdn.wallpapersafari.com/92/79/MYTD9q.png')}
-.diana-guide::before{background-image:url('https://ddragon.leagueoflegends.com/cdn/img/champion/splash/Diana_11.jpg')}
+.diana-guide::before{background-image:url('https://ddragon.leagueoflegends.com/cdn/img/champion/splash/Diana_1.jpg')}
 .ekko-guide::before{background-image:url('https://ddragon.leagueoflegends.com/cdn/img/champion/splash/Ekko_0.jpg')}
-.diana-matchups::before{background-image:url('https://ddragon.leagueoflegends.com/cdn/img/champion/splash/Diana_2.jpg')}
+.diana-matchups::before{background-image:url('https://ddragon.leagueoflegends.com/cdn/img/champion/splash/Diana_0.jpg')}
 .build-calculator::before{background-image:url('https://i.imgur.com/uhLq29j.jpeg')}
 .rune-calculator::before{background-image:url('https://i.imgur.com/kcs90ta.jpeg')}
 .tierlist::before{ background: linear-gradient(to bottom, #1b2838 0%, #161b22 100%); }
@@ -59,7 +54,7 @@ header{background:linear-gradient(90deg,#0a0f14,#1b2838);border-bottom:2px solid
 .modalContent h2{color:#c9aa71;margin-bottom:20px}
 .modalContent input{width:80%;max-width:300px;display:block;margin:8px auto;padding:8px;border-radius:4px;border:none;text-align:center}
 .modalContent .plan-buttons{display:flex;justify-content:center;gap:20px;margin-bottom:20px;position:relative;flex-wrap:wrap}
-.modalContent .bestValueTag{position:absolute;top:-18px;left:50%;transform:translateX(-50%);background:#f2b96d;color:#161b22;font-size:.8em;font-weight:bold;padding:2px 6px;border-radius:4px;box-shadow:0 0 6px rgba(0,0,0,.4)}
+.modalContent .bestValueTag{position:absolute;top:-20px;left:50%;transform:translateX(-50%);background:#f2b96d;color:#161b22;font-size:.8em;font-weight:bold;padding:2px 6px;border-radius:4px;box-shadow:0 0 6px rgba(0,0,0,.4)}
 .modalContent #closePlanModal,.modalContent #closeSignupModal,.modalContent #closeLoginModal{margin-top:15px;background:none;border:none;color:#c9aa71;cursor:pointer}
 
 footer{text-align:center;padding:30px;color:#8b949e;font-size:14px;background:#0a0f14;border-top:1px solid #1f2937}
@@ -93,11 +88,11 @@ footer a:hover{text-decoration:underline}
   <p>Core skills including combos, wave management, positioning, and warding for consistent gameplay improvement.</p>
 </a>
 
-<a href="freedianaguide.html" class="card diana-guide">
-  <h3>Diana Guide</h3>
-  <p>A comprehensive guide covering Diana's full kit, itemization, playstyle, and advanced strategies.</p>
+<a href="https://lolfundamentals.com/freematchuphub" class="card diana-matchups">
+  <h3>Diana Mid Matchups</h3>
+  <p>Detailed breakdowns for every mid lane champion, teaching optimal trades, wave control, and all-in timings.</p>
 </a>
-  
+
 <a href="https://lolfundamentals.com/freetierlist.html" class="card tierlist">
   <h3>Tierlist</h3>
   <p>Current champion tierlist showing which champions dominate the meta.</p>
@@ -106,11 +101,6 @@ footer a:hover{text-decoration:underline}
   </div>
 </a>
 
-<a href="https://lolfundamentals.com/freematchuphub" class="card diana-matchups">
-  <h3>Diana Mid Matchups</h3>
-  <p>Detailed breakdowns for every mid lane champion, teaching optimal trades, wave control, and all-in timings.</p>
-</a>
-  
 <!-- Locked cards -->
 <a href="#" class="card ekko-guide locked">
   <h3>Ekko Guide</h3>
@@ -118,8 +108,14 @@ footer a:hover{text-decoration:underline}
   <div class="unlock-icon">🔒</div>
 </a>
 
+<a href="#" class="card diana-guide locked">
+  <h3>Diana Guide</h3>
+  <p>A comprehensive guide covering Diana's full kit, itemization, playstyle, and advanced strategies.</p>
+  <div class="unlock-icon">🔒</div>
+</a>
+
 <a href="#" class="card build-calculator locked">
-  <h3>Diana Build Calculator</h3>
+  <h3>Diana Combo Calculator</h3>
   <p>Compare different item builds and ability combos for Diana at different stages of the game.</p>
   <div class="unlock-icon">🔒</div>
 </a>
@@ -154,32 +150,28 @@ footer a:hover{text-decoration:underline}
 <input type="password" id="signupPasswordConfirm" placeholder="Confirm your password"/>
 <div style="display:flex;justify-content:center;gap:15px;margin-top:10px;">
 <button class="btn" id="continueSignupBtn">Continue</button>
-<button class="btn" id="seePlansBtn">Unlock Full Access</button>
+<button class="btn" id="seePlansBtn">See Plans</button>
 </div>
 <button id="closeSignupModal">Cancel</button>
 </div>
 </div>
 
 <div id="planModal" class="modal">
-  <div class="modalContent unlockModal">
+<div class="modalContent">
+<h2>Choose Your Plan</h2>
+<div class="plan-buttons" style="justify-content:center;gap:20px;flex-wrap:wrap;">
+  <!-- Yearly plan -->
+  <button class="btn" id="yearlyBtn">$49 / Year</button>
 
-    <h2>Unlock Full Access</h2>
-    <p class="unlockNote">
-      Includes all current and future updates, guides & tools
-    </p>
-
-    <div class="unlockWrap">
-      <div class="limitedTag">LIMITED TIME PRICE</div>
-
-      <button class="btn orangeBtn unlockBtn" id="oneTimeBtn">
-        $59 — Unlock Everything
-      </button>
-    </div>
-
-    <button id="closePlanModal">Cancel</button>
+  <!-- Lifetime plan -->
+  <div style="position:relative;display:inline-block;text-align:center">
+    <div class="bestValueTag">Best Value</div>
+    <button class="btn orangeBtn" id="lifetimeBtn">$99 / Lifetime</button>
   </div>
 </div>
-
+<button id="closePlanModal">Cancel</button>
+</div>
+</div>
 
 <div id="loginModal" class="modal">
 <div class="modalContent">
@@ -197,11 +189,6 @@ footer a:hover{text-decoration:underline}
 import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
 import { getAuth, signInWithEmailAndPassword, createUserWithEmailAndPassword, sendPasswordResetEmail } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-auth.js";
 import { getFirestore, doc, setDoc, serverTimestamp, getDoc } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
-
-if(localStorage.getItem("lolfundamentals_logged_in")==="true" &&
-   localStorage.getItem("lolfundamentals_paid")==="true"){
-  window.location.href="membershub.html";
-}
 
 const firebaseConfig={apiKey:"AIzaSyCFRcEV7wdivqONnkjJubAZOjPMixrHMBI",authDomain:"lol-fundamentals.firebaseapp.com",projectId:"lol-fundamentals",storageBucket:"lol-fundamentals.firebasestorage.app",messagingSenderId:"1038440427584",appId:"1:1038440427584:web:a82207151fd370dbedefa5"};
 const app=initializeApp(firebaseConfig),auth=getAuth(app),firestore=getFirestore(app);
@@ -223,13 +210,8 @@ continueSignupBtn.onclick=async()=>{
   planModal.style.display="flex";
 };
 
-document.getElementById("oneTimeBtn").onclick = () => {
-  window.open(
-    "https://buy.stripe.com/cNi9AM0bq9sU6Zo88iejK0h",
-    "_blank"
-  );
-  planModal.style.display = "none";
-};
+document.getElementById("yearlyBtn").onclick=()=>{window.open("https://buy.stripe.com/cNi14g3nC48AerQ9cmejK07","_blank");planModal.style.display="none";}
+document.getElementById("lifetimeBtn").onclick=()=>{window.open("https://buy.stripe.com/fZu00c9M0awYgzYcoyejK06","_blank");planModal.style.display="none";}
 
 modalLoginBtn.onclick=async()=>{
   const e=loginEmail.value.trim(),p=loginPassword.value.trim();
@@ -277,91 +259,6 @@ document.querySelectorAll('.locked').forEach(card=>{
   100%{transform:translateY(0) translateX(0) scale(1);opacity:1}
 }
 
-.plan-buttons {
-  display: flex;
-  justify-content: center;
-  gap: 24px;
-  flex-wrap: nowrap;
-}
-
-.plan-wrap {
-  position: relative;
-  width: 160px;
-  display: flex;
-  justify-content: center;
-}
-
-.plan-buttons .btn {
-  width: 160px;
-  height: 48px;
-  padding: 0;
-  font-size: 0.95rem;
-}
-
-#twitchTier3Btn {
-  background: #9146ff;
-  border-color: #b794f6;
-  box-shadow: 0 0 14px rgba(145,70,255,.45);
-}
-
-#twitchTier3Btn:hover {
-  background: #a970ff;
-  box-shadow: 0 0 24px rgba(145,70,255,.6);
-}
-
-/* Mobile only */
-@media (max-width: 520px) {
-  .plan-buttons {
-    flex-wrap: wrap;
-  }
-}
-
-/* One-time unlock modal polish */
-.unlockModal {
-  padding: 34px 28px;
-}
-
-.unlockModal h2 {
-  margin-bottom: 6px;
-}
-
-.unlockSub {
-  font-size: 0.9rem;
-  opacity: 0.8;
-  margin-bottom: 26px;
-}
-
-.unlockWrap {
-  position: relative;
-  display: flex;
-  justify-content: center;
-  margin-bottom: 16px;
-}
-
-.limitedTag {
-  position: absolute;
-  top: -18px;
-  background: #f2b96d;
-  color: #161b22;
-  font-size: 0.75rem;
-  font-weight: bold;
-  padding: 3px 8px;
-  border-radius: 4px;
-  box-shadow: 0 0 6px rgba(0,0,0,.45);
-  letter-spacing: 0.4px;
-}
-
-.unlockModal h2 {
-  margin-bottom: 16px; /* separates title from description */
-}
-
-.unlockNote {
-  font-size: 0.85rem;
-  opacity: 0.7;
-  margin-top: 0;
-  margin-bottom: 26px; /* pushes CTA down instead */
-}
-  
 /* Gold hover effect for all unlocked cards */
 .card:not(.locked):hover {
   transform: translateY(-6px);
@@ -371,9 +268,6 @@ document.querySelectorAll('.locked').forEach(card=>{
 
 </body>
 </html>
-
-
-
 
 
 
