@@ -153,8 +153,9 @@ footer a:hover{text-decoration:underline}
 <input type="password" id="signupPassword" placeholder="Enter your password"/>
 <input type="password" id="signupPasswordConfirm" placeholder="Confirm your password"/>
 <div style="display:flex;justify-content:center;gap:15px;margin-top:10px;">
-<button class="btn" id="continueSignupBtn">Continue</button>
-<button class="btn" id="seePlansBtn">Unlock Full Access</button>
+<button class="btn orangeBtn" id="seePlansBtn">
+  View Plans
+</button>
 </div>
 <button id="closeSignupModal">Cancel</button>
 </div>
@@ -164,8 +165,8 @@ footer a:hover{text-decoration:underline}
   <div class="modalContent">
     <h2>Unlock Full Access</h2>
     <p class="unlockNote">
-      Includes all current and future guides, tools & updates
-    </p>
+  Includes full access to all current guides and updates while subscribed
+</p>
 
     <div class="plan-buttons">
       <!-- Monthly -->
@@ -385,6 +386,7 @@ document.querySelectorAll('.locked').forEach(card=>{
 
 </body>
 </html>
+
 
 
 
