@@ -161,21 +161,18 @@ footer a:hover{text-decoration:underline}
 </div>
 
 <div id="planModal" class="modal">
-  <div class="modalContent unlockModal">
+  <div class="modalContent">
+    <h2>Choose Your Plan</h2>
+    <div class="plan-buttons" style="justify-content:center;gap:20px;flex-wrap:wrap;">
+      <!-- Monthly plan -->
+      <button class="btn" id="monthlyBtn">$8.99 / Month</button>
 
-    <h2>Unlock Full Access</h2>
-    <p class="unlockNote">
-      Includes all current and future updates, guides & tools
-    </p>
-
-    <div class="unlockWrap">
-      <div class="limitedTag">LIMITED TIME PRICE</div>
-
-      <button class="btn orangeBtn unlockBtn" id="oneTimeBtn">
-        $59 — Unlock Everything
-      </button>
+      <!-- Yearly plan -->
+      <div style="position:relative;display:inline-block;text-align:center">
+        <div class="bestValueTag">Best Value</div>
+        <button class="btn orangeBtn" id="yearlyBtn">$49 / Year</button>
+      </div>
     </div>
-
     <button id="closePlanModal">Cancel</button>
   </div>
 </div>
@@ -223,11 +220,13 @@ continueSignupBtn.onclick=async()=>{
   planModal.style.display="flex";
 };
 
-document.getElementById("oneTimeBtn").onclick = () => {
-  window.open(
-    "https://buy.stripe.com/cNi9AM0bq9sU6Zo88iejK0h",
-    "_blank"
-  );
+document.getElementById("monthlyBtn").onclick = () => {
+  window.open("https://buy.stripe.com/8x28wIaQ4dJa4Rg88iejK0f", "_blank");
+  planModal.style.display = "none";
+};
+
+document.getElementById("yearlyBtn").onclick = () => {
+  window.open("https://buy.stripe.com/cNi14g3nC48AerQ9cmejK07");
   planModal.style.display = "none";
 };
 
@@ -371,6 +370,7 @@ document.querySelectorAll('.locked').forEach(card=>{
 
 </body>
 </html>
+
 
 
 
