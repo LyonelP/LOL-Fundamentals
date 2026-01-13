@@ -230,18 +230,19 @@ document.getElementById("yearlyBtn").onclick = () => {
   planModal.style.display = "none";
 };
 
-modalLoginBtn.onclick=async()=>{
-  const e=loginEmail.value.trim(),p=loginPassword.value.trim();
-  await signInWithEmailAndPassword(auth,e,p);
-  const snap=await getDoc(doc(firestore,"paidUsers",e));
-  if(snap.exists() && snap.data().paid){
-    localStorage.setItem("lolfundamentals_logged_in","true");
-    localStorage.setItem("lolfundamentals_paid","true");
-    window.location.href="membershub.html";
-  }else{
-    planModal.style.display="flex";
+modalLoginBtn.onclick = async () => {
+  const e = loginEmail.value.trim(),
+        p = loginPassword.value.trim();
+  await signInWithEmailAndPassword(auth, e, p);
+  const snap = await getDoc(doc(firestore, "paidUsers", e));
+  if (snap.exists() && snap.data().paid) {
+    localStorage.setItem("lolfundamentals_logged_in", "true");
+    localStorage.setItem("lolfundamentals_paid", "true");
+    window.location.href = "membershub.html";
+  } else {
+    planModal.style.display = "flex";
   }
-  loginModal.style.display="none";
+  loginModal.style.display = "none";
 };
 
 resetLinkModal.onclick=async(e)=>{
@@ -370,6 +371,7 @@ document.querySelectorAll('.locked').forEach(card=>{
 
 </body>
 </html>
+
 
 
 
