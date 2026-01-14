@@ -132,7 +132,7 @@ footer a:hover{text-decoration:underline}
 
 <a href="https://buy.stripe.com/6oU6oA9M08oQfvUgEOejK02" class="card coaching">
   <h3>Coaching</h3>
-  <p>Book a personalized 1-hour coaching session. Members receive 25% off!</p>
+  <p>Book a personalized 1-hour coaching session. Members receive 50% off!</p>
 </a>
 
 <a href="https://discord.gg/Ze75xenn" class="card discord-card" target="_blank" rel="noopener noreferrer">
@@ -143,7 +143,7 @@ footer a:hover{text-decoration:underline}
 </div>
 </section>
 
-<footer>© 2026 LoL Fundamentals · Contact: <a href="mailto:arcsecond@lolfundamentals.com">arcsecond@lolfundamentals.com</a></footer>
+<footer>© 2025 LoL Fundamentals · Contact: <a href="mailto:arcsecond@lolfundamentals.com">arcsecond@lolfundamentals.com</a></footer>
 
 <!-- Modals -->
 <div id="signupModal" class="modal">
@@ -154,29 +154,38 @@ footer a:hover{text-decoration:underline}
 <input type="password" id="signupPasswordConfirm" placeholder="Confirm your password"/>
 <div style="display:flex;justify-content:center;gap:15px;margin-top:10px;">
 <button class="btn" id="continueSignupBtn">Continue</button>
-<button class="btn" id="seePlansBtn">View Plans</button>
+<button class="btn" id="seePlansBtn">See Plans</button>
 </div>
 <button id="closeSignupModal">Cancel</button>
 </div>
 </div>
 
 <div id="planModal" class="modal">
-  <div class="modalContent">
-    <h2>Choose Your Plan</h2>
-    <div class="plan-buttons" style="justify-content:center;gap:20px;flex-wrap:wrap;">
-      <!-- Monthly plan -->
-      <button class="btn" id="monthlyBtn">$8.99 / Month</button>
+<div class="modalContent">
+<h2>Choose Your Plan</h2>
+<div class="plan-buttons">
+  <!-- Twitch Tier 3 -->
+  <button class="btn" id="twitchTier3Btn">
+    Twitch Tier 3 Sub
+  </button>
 
-      <!-- Yearly plan -->
-      <div style="position:relative;display:inline-block;text-align:center">
-        <div class="bestValueTag">Best Value</div>
-        <button class="btn orangeBtn" id="yearlyBtn">$49 / Year</button>
-      </div>
-    </div>
-    <button id="closePlanModal">Cancel</button>
+  <!-- Yearly plan -->
+  <button class="btn" id="yearlyBtn">
+    $49 / Year
+  </button>
+
+  <!-- Lifetime plan -->
+  <div class="plan-wrap">
+    <div class="bestValueTag">Best Value</div>
+    <button class="btn orangeBtn" id="lifetimeBtn">
+      $99 / Lifetime
+    </button>
   </div>
 </div>
 
+<button id="closePlanModal">Cancel</button>
+</div>
+</div>
 
 <div id="loginModal" class="modal">
 <div class="modalContent">
@@ -220,29 +229,21 @@ continueSignupBtn.onclick=async()=>{
   planModal.style.display="flex";
 };
 
-document.getElementById("monthlyBtn").onclick = () => {
-  window.open("https://buy.stripe.com/8x28wIaQ4dJa4Rg88iejK0f", "_blank");
-  planModal.style.display = "none";
-};
+document.getElementById("yearlyBtn").onclick=()=>{window.open("https://buy.stripe.com/cNi14g3nC48AerQ9cmejK07","_blank");planModal.style.display="none";}
+document.getElementById("lifetimeBtn").onclick=()=>{window.open("https://buy.stripe.com/fZu00c9M0awYgzYcoyejK06","_blank");planModal.style.display="none";}
 
-document.getElementById("yearlyBtn").onclick = () => {
-  window.open("https://buy.stripe.com/cNi14g3nC48AerQ9cmejK07");
-  planModal.style.display = "none";
-};
-
-modalLoginBtn.onclick = async () => {
-  const e = loginEmail.value.trim(),
-        p = loginPassword.value.trim();
-  await signInWithEmailAndPassword(auth, e, p);
-  const snap = await getDoc(doc(firestore, "paidUsers", e));
-  if (snap.exists() && snap.data().paid) {
-    localStorage.setItem("lolfundamentals_logged_in", "true");
-    localStorage.setItem("lolfundamentals_paid", "true");
-    window.location.href = "membershub.html";
-  } else {
-    planModal.style.display = "flex";
+modalLoginBtn.onclick=async()=>{
+  const e=loginEmail.value.trim(),p=loginPassword.value.trim();
+  await signInWithEmailAndPassword(auth,e,p);
+  const snap=await getDoc(doc(firestore,"paidUsers",e));
+  if(snap.exists() && snap.data().paid){
+    localStorage.setItem("lolfundamentals_logged_in","true");
+    localStorage.setItem("lolfundamentals_paid","true");
+    window.location.href="membershub.html";
+  }else{
+    planModal.style.display="flex";
   }
-  loginModal.style.display = "none";
+  loginModal.style.display="none";
 };
 
 resetLinkModal.onclick=async(e)=>{
@@ -315,52 +316,6 @@ document.querySelectorAll('.locked').forEach(card=>{
     flex-wrap: wrap;
   }
 }
-
-/* One-time unlock modal polish */
-.unlockModal {
-  padding: 34px 28px;
-}
-
-.unlockModal h2 {
-  margin-bottom: 6px;
-}
-
-.unlockSub {
-  font-size: 0.9rem;
-  opacity: 0.8;
-  margin-bottom: 26px;
-}
-
-.unlockWrap {
-  position: relative;
-  display: flex;
-  justify-content: center;
-  margin-bottom: 16px;
-}
-
-.limitedTag {
-  position: absolute;
-  top: -18px;
-  background: #f2b96d;
-  color: #161b22;
-  font-size: 0.75rem;
-  font-weight: bold;
-  padding: 3px 8px;
-  border-radius: 4px;
-  box-shadow: 0 0 6px rgba(0,0,0,.45);
-  letter-spacing: 0.4px;
-}
-
-.unlockModal h2 {
-  margin-bottom: 16px; /* separates title from description */
-}
-
-.unlockNote {
-  font-size: 0.85rem;
-  opacity: 0.7;
-  margin-top: 0;
-  margin-bottom: 26px; /* pushes CTA down instead */
-}
   
 /* Gold hover effect for all unlocked cards */
 .card:not(.locked):hover {
@@ -371,13 +326,6 @@ document.querySelectorAll('.locked').forEach(card=>{
 
 </body>
 </html>
-
-
-
-
-
-
-
 
 
 
