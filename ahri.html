@@ -124,6 +124,44 @@ header {
   line-height: 1.65;
 }
 
+/* ===== VOD SECTION ===== */
+.vod-section {
+  margin-top: 28px;
+  background: linear-gradient(180deg, #161b22, #12161d);
+  border-radius: 18px;
+  border: 1px solid rgba(201,170,113,0.18);
+  padding: 20px;
+  box-shadow:
+    0 15px 40px rgba(0,0,0,0.7),
+    inset 0 0 0 1px rgba(255,255,255,0.02);
+}
+
+.vod-section h2 {
+  margin: 0 0 14px 0;
+  font-size: 22px;
+  color: var(--gold);
+  padding-bottom: 8px;
+  border-bottom: 1px solid rgba(201,170,113,0.25);
+  text-align: center;
+}
+
+.vod-wrapper {
+  position: relative;
+  padding-top: 56.25%;
+  border-radius: 14px;
+  overflow: hidden;
+  border: 1px solid rgba(201,170,113,0.25);
+  box-shadow: 0 0 30px rgba(0,0,0,0.6);
+}
+
+.vod-wrapper iframe {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  border: none;
+}
+
 /* ===== FOOTER ===== */
 footer {
   text-align: center;
@@ -175,12 +213,24 @@ if (localStorage.getItem('lolfundamentals_logged_in') !== 'true') {
       </ul>
     </div>
   </div>
+
+  <div class="vod-section">
+    <h2>VOD – Diana vs Ahri</h2>
+    <div class="vod-wrapper">
+      <iframe 
+        src="https://www.youtube.com/embed/go0ZxTER7VI"
+        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+        allowfullscreen>
+      </iframe>
+    </div>
+  </div>
 </div>
 
-<footer>© 2025 LoL Fundamentals · All rights reserved</footer>
+<footer>© 2026 LoL Fundamentals · All rights reserved</footer>
 
 </body>
 </html>
+
 
 
 
