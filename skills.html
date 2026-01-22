@@ -6,219 +6,306 @@
 <title>LoL Fundamentals – Skills Hub</title>
 
 <script>
-  // Redirect if not logged in
   if (localStorage.getItem('lolfundamentals_logged_in') !== 'true') {
     window.location.replace('login.html');
   }
 </script>
 
 <style>
+:root {
+  --gold:#c9aa71;
+  --muted:#8b949e;
+}
+
+/* ===== RESET ===== */
+html, body {
+  margin:0;
+  padding:0;
+  min-height:100%;
+  font-family: "Beaufort for LOL", Arial, Helvetica, sans-serif;
+}
+
+/* ===== BODY ===== */
 body {
-  margin: 0;
-  font-family: 'Beaufort for LOL', Arial, Helvetica, sans-serif;
-  color: #fff;
-  background: url('https://64.media.tumblr.com/594ac290bec6d5e9ad98b5f53404f00b/245c4c3ee469f81d-e4/s1280x1920/1cda4284320eb2031758a9859dfe14ff8bbc50ba.jpg') no-repeat center center fixed;
-  background-size: cover;
-  overflow-x: hidden;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
+  background:url('https://64.media.tumblr.com/594ac290bec6d5e9ad98b5f53404f00b/245c4c3ee469f81d-e4/s1280x1920/1cda4284320eb2031758a9859dfe14ff8bbc50ba.jpg')
+    no-repeat center center fixed;
+  background-size:cover;
+  color:#e6edf3;
+  display:flex;
+  flex-direction:column;
 }
 
 body::before {
-  content: "";
-  position: fixed;
-  top:0; left:0;
-  width:100%; height:100%;
-  background: rgba(10,15,20,0.25);
-  z-index: -1;
+  content:"";
+  position:fixed;
+  inset:0;
+  background:rgba(10,15,20,0.82);
+  z-index:-1;
 }
 
+/* ===== HEADER ===== */
 header {
-  background: rgba(13,17,23,0.9);
-  border-bottom: 2px solid #c9aa71;
-  padding: 20px;
-  font-weight: bold;
-  font-size: 26px;
-  text-transform: uppercase;
-  color: #c9aa71;
-  letter-spacing: 1px;
-  text-align: center;
-  line-height: 1.1;
-  box-sizing: border-box;
+  background:rgba(13,17,23,0.9);
+  border-bottom:2px solid var(--gold);
+  padding:20px;
+  font-size:26px;
+  font-weight:bold;
+  color:var(--gold);
+  text-align:center;
+  text-transform:uppercase;
+  z-index:10;
+}
+
+/* ===== BACK BUTTON ===== */
+.back-wrap {
+  text-align:center;
+  margin:16px 0;
+  z-index:10;
 }
 
 .back-button {
-  display: inline-block;
-  margin: 20px auto;
-  padding: 10px 20px;
-  background: linear-gradient(135deg, #c9aa71, #e0c77b);
-  color: #000;
-  text-decoration: none;
-  border-radius: 8px;
-  font-weight: bold;
-  font-size: 16px;
-  transition: all 0.3s;
-  box-shadow: 0 0 10px rgba(201,170,113,0.5);
+  display:inline-flex;
+  align-items:center;
+  gap:8px;
+  padding:10px 22px;
+  background:linear-gradient(135deg,var(--gold),#e0c77b);
+  color:#000;
+  text-decoration:none;
+  border-radius:10px;
+  font-weight:bold;
 }
-.back-button::before { content: "← "; }
-.back-button:hover {
-  background: linear-gradient(135deg, #e6c97f, #f0d88b);
-  box-shadow: 0 0 15px rgba(255,215,0,0.8);
+.back-button::before { content:"←"; }
+
+/* ===== SIDEBAR (DESKTOP) ===== */
+.nav-wrapper {
+  display:none;
 }
 
-#section-select-container {
-  margin: 20px auto;
-  text-align: center;
-}
-#section-select {
-  padding: 8px 12px;
-  font-size: 16px;
-  border-radius: 6px;
-  border: none;
-  background: #0f1722;
-  color: #c9aa71;
-  cursor: pointer;
-  width: 220px;
-  background-image: url("data:image/svg+xml;utf8,<svg fill='%23c9aa71' height='12' viewBox='0 0 24 24' width='12' xmlns='http://www.w3.org/2000/svg'><path d='M7 10l5 5 5-5z'/></svg>");
-  background-repeat: no-repeat;
-  background-position: right 10px center;
-  background-size: 12px;
-  appearance: none;
-  -webkit-appearance: none;
-  -moz-appearance: none;
+@media(min-width:1024px){
+  .nav-wrapper {
+    display:block;
+    position:fixed;
+    top:86px;
+    left:0;
+    width:220px;
+    bottom:0;
+    background:rgba(15,20,26,0.95);
+    border-right:2px solid var(--gold);
+    padding-top:20px;
+    z-index:9;
+  }
+
+  .nav-section-title {
+    font-size:11px;
+    color:var(--muted);
+    padding:14px 24px;
+    text-transform:uppercase;
+  }
+
+  .nav-menu a {
+    display:block;
+    padding:10px 24px;
+    color:#e6edf3;
+    text-decoration:none;
+    border-radius:8px;
+    cursor:pointer;
+  }
+
+  .nav-menu a:hover,
+  .nav-menu a.active {
+    background:var(--gold);
+    color:#000;
+  }
 }
 
-/* Progress Bars */
+/* ===== MOBILE DROPDOWN ===== */
+.nav-trigger {
+  display:block;
+  width:90%;
+  max-width:360px;
+  margin:16px auto;
+  padding:14px 18px;
+  font-size:16px;
+  font-weight:bold;
+  background:rgba(0,0,0,0.65);
+  border:2px solid var(--gold);
+  border-radius:12px;
+  color:#fff;
+  cursor:pointer;
+}
+.nav-trigger::after { content:" ▼"; }
+
+.nav-menu-mobile {
+  display:none;
+  width:90%;
+  max-width:360px;
+  margin:0 auto 16px;
+  background:rgba(0,0,0,0.85);
+  border-radius:12px;
+}
+
+.nav-menu-mobile a {
+  display:block;
+  padding:12px 18px;
+  color:#fff;
+  text-decoration:none;
+}
+.nav-menu-mobile a:hover {
+  background:var(--gold);
+  color:#000;
+}
+
+@media(min-width:1024px){
+  .nav-trigger,
+  .nav-menu-mobile { display:none!important; }
+}
+
+/* ===== MAIN CONTENT ===== */
+.main {
+  flex:1;
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  padding:0 16px 40px;
+}
+
+@media(min-width:1024px){
+  .main {
+    margin-left:240px;
+  }
+}
+
+/* ===== PROGRESS ===== */
 .progress-wrap {
-  width: 260px;
-  max-width: 90vw;
-  margin: 0 auto 20px;
-  text-align: center;
-}
-.progress-label {
-  font-size: 14px;
-  color: #fff;
-  margin-bottom: 6px;
-}
-.progress-bar {
-  width: 100%;
-  height: 10px;
-  background: #0f1722;
-  border-radius: 20px;
-  overflow: hidden;
-}
-.progress-fill {
-  height: 100%;
-  width: 0%;
-  background: linear-gradient(90deg, #c9aa71, #e6c97f);
-  transition: width 0.45s ease;
+  width:260px;
+  max-width:90vw;
+  text-align:center;
+  margin-bottom:20px;
 }
 
-/* Skills */
+.progress-label {
+  font-size:14px;
+  margin-bottom:6px;
+}
+
+.progress-bar {
+  width:100%;
+  height:10px;
+  background:#0f1722;
+  border-radius:20px;
+  overflow:hidden;
+}
+
+.progress-fill {
+  height:100%;
+  width:0%;
+  background:linear-gradient(90deg,var(--gold),#e6c97f);
+  transition:width 0.4s ease;
+}
+
+/* ===== SKILLS ===== */
 .skill-list {
-  list-style: none;
-  padding: 0;
-  width: 100%;
-  margin-bottom: 40px;
+  list-style:none;
+  padding:0;
+  width:100%;
 }
 
 .skill-list li {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  background: rgba(0,0,0,0.85);
-  border: 2px solid #c9aa71;
-  border-radius: 12px;
-  padding: 14px 18px;
-  margin: 0 auto 20px auto;
-  font-size: 18px;
-  width: 56vw;
-  max-width: 900px;
-  box-shadow: 0 4px 12px rgba(0,0,0,0.5);
-  transition: transform 0.25s, box-shadow 0.3s;
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  background:rgba(0,0,0,0.85);
+  border:2px solid var(--gold);
+  border-radius:14px;
+  padding:14px 18px;
+  margin:0 auto 18px;
+  max-width:900px;
+  font-size:18px;
+  box-shadow:0 4px 14px rgba(0,0,0,0.6);
 }
 
-.skill-list li:hover {
-  background: rgba(0,0,0,0.95);
-  transform: scale(1.03);
-  box-shadow: 0 8px 20px rgba(0,0,0,0.7);
+.skill-list a {
+  color:#fff;
+  text-decoration:none;
+  flex:1;
+  text-align:center;
 }
-
-.skill-list li a {
-  text-decoration: none;
-  color: #fff;
-  flex-grow: 1;
-  text-align: center;
-  transition: color 0.3s;
-}
-
-.skill-list li a:hover {
-  color: #c9aa71; /* gold on hover */
-}
+.skill-list a:hover { color:var(--gold); }
 
 .checkmark {
-  width: 26px;
-  height: 26px;
-  border-radius: 50%;
-  border: 2px solid #c9aa71;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  color: #c9aa71;
-  font-size: 18px;
-  flex-shrink: 0;
-  cursor: pointer;
+  width:26px;
+  height:26px;
+  border-radius:50%;
+  border:2px solid var(--gold);
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  cursor:pointer;
+  color:var(--gold);
 }
 
 .checkmark.completed {
-  background: #c9aa71;
-  color: #000;
+  background:var(--gold);
+  color:#000;
 }
 
+/* ===== FOOTER ===== */
 footer {
-  margin-top: auto;
-  text-align: center;
-  padding: 18px 10px;
-  font-size: 14px;
-  color: #fff;
-}
-
-@media(max-width: 700px){
-  header { font-size: 22px; padding: 15px 10px; }
-  #section-select { width: 95vw; font-size: 14px; padding: 8px 30px 8px 12px; }
-  .skill-list li { width: 85vw; font-size: 16px; padding: 10px 14px; }
+  text-align:center;
+  padding:18px;
+  font-size:13px;
+  color:var(--muted);
 }
 </style>
 </head>
+
 <body>
 
 <header>Skills Hub</header>
 
-<a href="membershub.html" class="back-button">Back to Members Hub</a>
-
-<div id="section-select-container">
-  <select id="section-select">
-    <option value="Pre Game" selected>Pre Game</option>
-    <option value="Early Game">Early Game</option>
-    <option value="Mid Game">Mid Game</option>
-    <option value="Late Game">Late Game</option>
-    <option value="Advanced">Advanced</option>
-    <option value="Out of Game">Out of Game</option>
-  </select>
+<div class="back-wrap">
+  <a href="membershub.html" class="back-button">Back to Members Hub</a>
 </div>
 
-<!-- Progress bar for current section only -->
-<div class="progress-wrap">
-  <div class="progress-label" id="progressLabel">0% Complete</div>
-  <div class="progress-bar">
-    <div class="progress-fill" id="progressFill"></div>
+<!-- Mobile -->
+<button class="nav-trigger" onclick="toggleMobileMenu()">Select Section</button>
+<div class="nav-menu-mobile" id="mobileMenu">
+  <a onclick="changeSection('Pre Game')">Pre Game</a>
+  <a onclick="changeSection('Early Game')">Early Game</a>
+  <a onclick="changeSection('Mid Game')">Mid Game</a>
+  <a onclick="changeSection('Late Game')">Late Game</a>
+  <a onclick="changeSection('Advanced')">Advanced</a>
+  <a onclick="changeSection('Out of Game')">Out of Game</a>
+</div>
+
+<!-- Desktop Sidebar -->
+<div class="nav-wrapper">
+  <div class="nav-menu" id="navMenu">
+    <div class="nav-section-title">Skills</div>
+    <a data-section="Pre Game">Pre Game</a>
+    <a data-section="Early Game">Early Game</a>
+    <a data-section="Mid Game">Mid Game</a>
+    <a data-section="Late Game">Late Game</a>
+    <a data-section="Advanced">Advanced</a>
+    <a data-section="Out of Game">Out of Game</a>
   </div>
 </div>
 
-<ul class="skill-list" id="skill-list"></ul>
+<!-- Main -->
+<div class="main">
 
-<footer>© 2025 LoL Fundamentals · All rights reserved</footer>
+  <div class="progress-wrap">
+    <div class="progress-label" id="progressLabel">0% Complete</div>
+    <div class="progress-bar">
+      <div class="progress-fill" id="progressFill"></div>
+    </div>
+  </div>
+
+  <ul class="skill-list" id="skill-list"></ul>
+
+</div>
+
+<footer>© 2026 LoL Fundamentals · All rights reserved</footer>
 
 <script>
 const skillData = {
@@ -232,73 +319,83 @@ const skillData = {
 
 let skillProgress = JSON.parse(localStorage.getItem("skillProgress") || "{}");
 
-// Initialize all sections and skills
-Object.keys(skillData).forEach(section => {
-  skillProgress[section] = skillProgress[section] || {};
-  skillData[section].forEach(skill => {
+Object.keys(skillData).forEach(section=>{
+  skillProgress[section] ||= {};
+  skillData[section].forEach(skill=>{
     skillProgress[section][skill] ??= false;
   });
 });
+
 localStorage.setItem("skillProgress", JSON.stringify(skillProgress));
 
-const sectionSelect = document.getElementById('section-select');
-const skillList = document.getElementById('skill-list');
-const progressFill = document.getElementById('progressFill');
-const progressLabel = document.getElementById('progressLabel');
+const skillList = document.getElementById("skill-list");
+const progressFill = document.getElementById("progressFill");
+const progressLabel = document.getElementById("progressLabel");
 
-function saveProgress() {
+function saveProgress(){
   localStorage.setItem("skillProgress", JSON.stringify(skillProgress));
 }
 
-// Update progress for the current section only
-function updateProgress(section) {
+function updateProgress(section){
   const skills = skillProgress[section];
   const total = Object.keys(skills).length;
-  const done = Object.values(skills).filter(v => v).length;
-  const pct = total === 0 ? 0 : Math.round(done / total * 100);
+  const done = Object.values(skills).filter(Boolean).length;
+  const pct = Math.round(done / total * 100);
   progressFill.style.width = pct + "%";
   progressLabel.textContent = `${section}: ${pct}% Complete`;
 }
 
-function toggleCheck(section, skill, element) {
+function toggleCheck(section, skill, el){
   skillProgress[section][skill] = !skillProgress[section][skill];
   saveProgress();
-  element.classList.toggle("completed");
-  element.innerHTML = element.classList.contains("completed") ? "✔" : "";
+  el.classList.toggle("completed");
+  el.textContent = el.classList.contains("completed") ? "✔" : "";
   updateProgress(section);
 }
 
-function renderSkills(section) {
-  const skills = skillData[section];
-  skillList.innerHTML = skills.map(skill => {
-    const completed = skillProgress[section][skill] ? "completed" : "";
+function renderSkills(section){
+  skillList.innerHTML = skillData[section].map(skill=>{
+    const completed = skillProgress[section][skill];
     const link = skill.toLowerCase().replace(/[^a-z0-9]/g,'') + ".html";
     return `
-      <li data-skill="${skill}">
+      <li>
         <a href="${link}">${skill}</a>
-        <div class="checkmark ${completed}" onclick="toggleCheck('${section}','${skill}', this)">
+        <div class="checkmark ${completed ? 'completed':''}"
+             onclick="toggleCheck('${section}','${skill}',this)">
           ${completed ? "✔" : ""}
         </div>
-      </li>
-    `;
-  }).join('');
+      </li>`;
+  }).join("");
+
+  document.querySelectorAll(".nav-menu a").forEach(a=>{
+    a.classList.toggle("active", a.dataset.section === section);
+  });
+
   updateProgress(section);
 }
 
-// Section change
-sectionSelect.addEventListener('change', () => {
-  const selected = sectionSelect.value;
-  localStorage.setItem("lastSection", selected); // remember last section
-  renderSkills(selected);
+function changeSection(section){
+  localStorage.setItem("lastSection", section);
+  renderSkills(section);
+  const mobile = document.getElementById("mobileMenu");
+  if(mobile) mobile.style.display="none";
+}
+
+function toggleMobileMenu(){
+  const menu = document.getElementById("mobileMenu");
+  menu.style.display = menu.style.display === "block" ? "none" : "block";
+}
+
+document.querySelectorAll(".nav-menu a").forEach(a=>{
+  a.onclick = ()=>changeSection(a.dataset.section);
 });
 
-// Initial render
-const lastSection = localStorage.getItem("lastSection") || "Pre Game";
-sectionSelect.value = lastSection;
-renderSkills(lastSection);
+const last = localStorage.getItem("lastSection") || "Pre Game";
+renderSkills(last);
 </script>
 
 </body>
 </html>
+
 
 
