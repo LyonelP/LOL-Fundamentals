@@ -223,16 +223,16 @@ localStorage.setItem("skillRatings", JSON.stringify(profile));
 
 // Rank calculation
 function calculateRank(avg){
-  if(avg<2) return ["Iron",10];
-  if(avg<3) return ["Bronze",20];
-  if(avg<4) return ["Silver",30];
-  if(avg<5) return ["Gold",40];
-  if(avg<6) return ["Platinum",50];
-  if(avg<7) return ["Emerald",60];
-  if(avg<8) return ["Diamond",70];
-  if(avg<8.5) return ["Master",80];
-  if(avg<9) return ["Grand Master",90];
-  return ["Challenger",100];
+  if (avg < 2)   return ["Iron", 10];
+  if (avg < 3)   return ["Bronze", 20];
+  if (avg < 4)   return ["Silver", 30];
+  if (avg < 5)   return ["Gold", 40];
+  if (avg < 6)   return ["Platinum", 50];
+  if (avg < 7)   return ["Emerald", 60];
+  if (avg < 7.5) return ["Diamond", 70];
+  if (avg < 7.8) return ["Master", 80];
+  if (avg < 8)   return ["Grandmaster", 90];
+  return ["Challenger", 100]; // 8.0–10.0
 }
 
 function updateRank(){
@@ -290,6 +290,7 @@ updateRank();
 
 </body>
 </html>
+
 
 
 
