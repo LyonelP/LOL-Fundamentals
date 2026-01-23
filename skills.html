@@ -11,7 +11,7 @@
     window.location.replace('login.html');
   }
 </script>
-  
+
 <style>
 html, body {
   margin: 0;
@@ -109,7 +109,7 @@ header {
   list-style:none;
   padding:0;
   margin:0;
-  flex-grow: 1; /* allow the list to take remaining space */
+  flex-grow: 1; /* take remaining space */
 }
 .skill-list li {
   width:56vw;
@@ -128,6 +128,11 @@ header {
   flex:1;
   text-align:center;
   font-size:18px;
+  text-decoration: none;
+  color: #fff;
+}
+.skill-name:hover {
+  color: #c9aa71;
 }
 .skill-select {
   background:#0f1722;
@@ -208,7 +213,7 @@ const skillList = document.getElementById("skill-list");
 const rankName = document.getElementById("rankName");
 const rankFill = document.getElementById("rankFill");
 
-/* ===== RANK CALC (SMOOTHED) ===== */
+/* ===== RANK CALC ===== */
 function calculateRank(avg){
   if(avg < 2) return ["Iron", 10];
   if(avg < 3) return ["Bronze", 20];
@@ -244,9 +249,10 @@ function updateRank(){
 function renderSection(section){
   skillList.innerHTML = skillData[section].map(skill => {
     const value = profile[section][skill];
+    const skillUrl = skill.toLowerCase().replace(/\s+/g,'-') + ".html"; 
     return `
       <li>
-        <div class="skill-name">${skill}</div>
+        <a href="${skillUrl}" class="skill-name">${skill}</a>
         <select class="skill-select" data-section="${section}" data-skill="${skill}">
           ${Array.from({length:10},(_,i)=>`
             <option value="${i+1}" ${value===i+1?"selected":""}>${i+1}</option>
@@ -285,3 +291,4 @@ updateRank();
 
 </body>
 </html>
+
