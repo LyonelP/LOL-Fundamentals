@@ -20,6 +20,7 @@ html, body {
   color: #fff;
   height: 100%;
 }
+
 body {
   display: flex;
   flex-direction: column;
@@ -28,10 +29,11 @@ body {
   background-size: cover;
   overflow-x: hidden;
 }
+
 body::before {
   content: "";
   position: fixed;
-  inset: 0;
+  inset:0;
   background: rgba(10,15,20,0.35);
   z-index: -1;
 }
@@ -46,8 +48,6 @@ header {
   color: #c9aa71;
   letter-spacing: 1px;
   text-align: center;
-  line-height: 1.1;
-  box-sizing: border-box;
 }
 
 .back-button {
@@ -92,7 +92,7 @@ header {
   -moz-appearance: none;
 }
 
-/* ===== RANK BAR ===== */
+/* ===== RANK PROGRESS BAR ===== */
 .rank-wrap {
   width: 85vw;
   max-width: 900px;
@@ -103,8 +103,15 @@ header {
   padding: 16px;
   text-align: center;
 }
-.rank-label { font-size: 14px; margin-bottom: 6px; }
-.rank-name { font-size: 28px; color: #c9aa71; margin-bottom: 10px; }
+.rank-label {
+  font-size: 14px;
+  margin-bottom: 6px;
+}
+.rank-name {
+  font-size: 28px;
+  color: #c9aa71;
+  margin-bottom: 10px;
+}
 .rank-bar {
   height: 10px;
   background: #0f1722;
@@ -118,12 +125,12 @@ header {
   transition: width 0.4s ease;
 }
 
-/* ===== SKILLS ===== */
+/* ===== SKILLS LIST ===== */
 .skill-list {
   list-style: none;
   padding: 0;
-  margin-bottom: 40px;
   flex-grow: 1;
+  margin-bottom: 40px;
 }
 
 .skill-list li {
@@ -134,14 +141,17 @@ header {
   border: 2px solid #c9aa71;
   border-radius: 12px;
   padding: 14px 18px;
-  margin: 0 auto 20px auto;
+  margin: 0 auto 16px auto;
   font-size: 18px;
   width: 56vw;
   max-width: 900px;
   box-shadow: 0 4px 12px rgba(0,0,0,0.5);
   transition: transform 0.25s, box-shadow 0.3s;
 }
-.skill-list li:hover { transform: scale(1.03); box-shadow: 0 8px 20px rgba(0,0,0,0.7); }
+.skill-list li:hover {
+  transform: scale(1.03);
+  box-shadow: 0 8px 20px rgba(0,0,0,0.7);
+}
 
 .skill-list li a {
   text-decoration: none;
@@ -150,22 +160,27 @@ header {
   text-align: center;
   transition: color 0.3s;
 }
-.skill-list li a:hover { color: #c9aa71; }
-
-.checkmark {
-  width: 26px;
-  height: 26px;
-  border-radius: 50%;
-  border: 2px solid #c9aa71;
-  display: flex;
-  justify-content: center;
-  align-items: center;
+.skill-list li a:hover {
   color: #c9aa71;
-  font-size: 18px;
-  flex-shrink: 0;
-  cursor: pointer;
 }
-.checkmark.completed { background: #c9aa71; color: #000; }
+
+/* ===== SKILL DROPDOWNS ===== */
+.skill-select {
+  background: #0f1722;
+  color: #c9aa71;
+  border: 1px solid #c9aa71;
+  border-radius: 6px;
+  padding: 6px 8px;
+  font-size: 15px;
+  cursor: pointer;
+  background-image: url("data:image/svg+xml;utf8,<svg fill='%23c9aa71' height='12' viewBox='0 0 24 24' width='12' xmlns='http://www.w3.org/2000/svg'><path d='M7 10l5 5 5-5z'/></svg>");
+  background-repeat: no-repeat;
+  background-position: right 6px center;
+  background-size: 12px;
+  appearance: none;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+}
 
 /* ===== FOOTER ===== */
 footer {
@@ -189,10 +204,12 @@ footer {
 
 <a href="membershub.html" class="back-button">Back to Members Hub</a>
 
+<!-- Section selector -->
 <div id="section-select-container">
   <select id="section-select"></select>
 </div>
 
+<!-- Rank progress bar -->
 <div class="rank-wrap">
   <div class="rank-label">Estimated Skill Tier</div>
   <div class="rank-name" id="rankName">—</div>
@@ -201,11 +218,13 @@ footer {
   </div>
 </div>
 
+<!-- Skills list -->
 <ul class="skill-list" id="skill-list"></ul>
 
 <footer>© 2025 LoL Fundamentals · All rights reserved</footer>
 
 <script>
+/* ===== SKILL DATA ===== */
 const skillData = {
   "Pre Game": ["Champion Select","Mouse Accuracy","Summoner Spells","Matchups","Communication","Build"],
   "Early Game": ["Level 1","Farming","Trading","Wave Control","Back Timings","Power Spikes","Pathing","Laning","Map Awareness","Ganking","Roaming"],
@@ -215,38 +234,38 @@ const skillData = {
   "Out of Game": ["Setup","Mindset","Not Raging/Blaming","Reaction Time","Meta"]
 };
 
-// 1-10 ratings for rank system
+/* ===== LOAD / INIT PROFILE ===== */
 let profile = JSON.parse(localStorage.getItem("skillRatings")) || {};
 Object.keys(skillData).forEach(section => {
   profile[section] ??= {};
   skillData[section].forEach(skill => {
-    profile[section][skill] ??= 5; // default 5/10
+    profile[section][skill] ??= 5; // default midpoint
   });
 });
 localStorage.setItem("skillRatings", JSON.stringify(profile));
 
+/* ===== UI ELEMENTS ===== */
 const sectionSelect = document.getElementById("section-select");
 const skillList = document.getElementById("skill-list");
 const rankName = document.getElementById("rankName");
 const rankFill = document.getElementById("rankFill");
 
-// Rank calculation (1-10 scale)
+/* ===== RANK CALC ===== */
 function calculateRank(avg){
-  if(avg < 2) return ["Iron",10];
-  if(avg < 3) return ["Bronze",20];
-  if(avg < 4) return ["Silver",30];
-  if(avg < 5) return ["Gold",40];
-  if(avg < 6) return ["Platinum",50];
-  if(avg < 7) return ["Emerald",60];
-  if(avg < 8) return ["Diamond",70];
-  if(avg < 8.5) return ["Master",80];
-  if(avg < 9) return ["Grand Master",90];
-  return ["Challenger",100];
+  if(avg < 2) return ["Iron", 10];
+  if(avg < 3) return ["Bronze", 20];
+  if(avg < 4) return ["Silver", 30];
+  if(avg < 5) return ["Gold", 40];
+  if(avg < 6) return ["Platinum", 50];
+  if(avg < 7) return ["Emerald", 60];
+  if(avg < 8) return ["Diamond", 70];
+  if(avg < 8.5) return ["Master", 80];
+  if(avg < 9) return ["Grand Master", 90];
+  return ["Challenger", 100];
 }
 
 function updateRank(){
-  let total = 0;
-  let count = 0;
+  let total = 0, count = 0;
   Object.values(profile).forEach(section => {
     Object.values(section).forEach(value => {
       total += value;
@@ -259,13 +278,13 @@ function updateRank(){
   rankFill.style.width = pct + "%";
 }
 
-// Render section with clickable cards + checkmarks
+/* ===== RENDER SECTION ===== */
 function renderSection(section){
   skillList.innerHTML = skillData[section].map(skill => {
     const value = profile[section][skill];
     const link = skill.toLowerCase().replace(/[^a-z0-9]/g,'') + ".html";
     return `
-      <li data-skill="${skill}">
+      <li>
         <a href="${link}">${skill}</a>
         <select class="skill-select" data-section="${section}" data-skill="${skill}">
           ${Array.from({length:10},(_,i)=>`
@@ -277,13 +296,15 @@ function renderSection(section){
   }).join("");
 }
 
+/* ===== EVENTS ===== */
 sectionSelect.innerHTML = Object.keys(skillData)
-  .map(s => `<option value="${s}">${s}</option>`).join("");
+  .map(section => `<option value="${section}">${section}</option>`)
+  .join("");
 
 sectionSelect.addEventListener("change", () => {
-  const s = sectionSelect.value;
-  localStorage.setItem("lastSection", s);
-  renderSection(s);
+  const selected = sectionSelect.value;
+  localStorage.setItem("lastSection", selected);
+  renderSection(selected);
 });
 
 skillList.addEventListener("change", e => {
@@ -304,4 +325,5 @@ updateRank();
 
 </body>
 </html>
+
 
