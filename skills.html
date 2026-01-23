@@ -29,32 +29,67 @@ body {
   overflow-x: hidden;
 }
 body::before {
-  content:"";
-  position:fixed;
-  inset:0;
-  background:rgba(10,15,20,0.35);
-  z-index:-1;
+  content: "";
+  position: fixed;
+  inset: 0;
+  background: rgba(10,15,20,0.35);
+  z-index: -1;
 }
 
 header {
   background: rgba(13,17,23,0.9);
   border-bottom: 2px solid #c9aa71;
   padding: 20px;
+  font-weight: bold;
   font-size: 26px;
+  text-transform: uppercase;
   color: #c9aa71;
+  letter-spacing: 1px;
   text-align: center;
+  line-height: 1.1;
+  box-sizing: border-box;
 }
 
 .back-button {
-  display:block;
-  margin:20px auto;
-  width:max-content;
-  padding:10px 20px;
-  background:linear-gradient(135deg,#c9aa71,#e0c77b);
-  color:#000;
-  border-radius:8px;
-  text-decoration:none;
-  font-weight:bold;
+  display: inline-block;
+  margin: 20px auto;
+  padding: 10px 20px;
+  background: linear-gradient(135deg, #c9aa71, #e0c77b);
+  color: #000;
+  text-decoration: none;
+  border-radius: 8px;
+  font-weight: bold;
+  font-size: 16px;
+  transition: all 0.3s;
+  box-shadow: 0 0 10px rgba(201,170,113,0.5);
+}
+.back-button::before { content: "← "; }
+.back-button:hover {
+  background: linear-gradient(135deg, #e6c97f, #f0d88b);
+  box-shadow: 0 0 15px rgba(255,215,0,0.8);
+}
+
+/* ===== SECTION SELECT ===== */
+#section-select-container {
+  margin: 20px auto;
+  text-align: center;
+}
+#section-select {
+  padding: 8px 12px;
+  font-size: 16px;
+  border-radius: 6px;
+  border: none;
+  background: #0f1722;
+  color: #c9aa71;
+  cursor: pointer;
+  width: 220px;
+  background-image: url("data:image/svg+xml;utf8,<svg fill='%23c9aa71' height='12' viewBox='0 0 24 24' width='12' xmlns='http://www.w3.org/2000/svg'><path d='M7 10l5 5 5-5z'/></svg>");
+  background-repeat: no-repeat;
+  background-position: right 10px center;
+  background-size: 12px;
+  appearance: none;
+  -webkit-appearance: none;
+  -moz-appearance: none;
 }
 
 /* ===== RANK BAR ===== */
@@ -68,15 +103,8 @@ header {
   padding: 16px;
   text-align: center;
 }
-.rank-label {
-  font-size: 14px;
-  margin-bottom: 6px;
-}
-.rank-name {
-  font-size: 28px;
-  color: #c9aa71;
-  margin-bottom: 10px;
-}
+.rank-label { font-size: 14px; margin-bottom: 6px; }
+.rank-name { font-size: 28px; color: #c9aa71; margin-bottom: 10px; }
 .rank-bar {
   height: 10px;
   background: #0f1722;
@@ -90,82 +118,81 @@ header {
   transition: width 0.4s ease;
 }
 
-/* ===== SECTION SELECT ===== */
-#section-select-container {
-  text-align:center;
-  margin-bottom:20px;
-}
-#section-select {
-  padding:8px 12px;
-  background:#0f1722;
-  color:#c9aa71;
-  border-radius:6px;
-  border:none;
-  font-size:16px;
+/* ===== SKILLS ===== */
+.skill-list {
+  list-style: none;
+  padding: 0;
+  margin-bottom: 40px;
+  flex-grow: 1;
 }
 
-/* ===== SKILLS LIST ===== */
-.skill-list {
-  list-style:none;
-  padding:0;
-  margin:0;
-  flex-grow: 1; /* take remaining space */
-}
 .skill-list li {
-  width:56vw;
-  max-width:900px;
-  margin:0 auto 16px;
-  padding:14px 18px;
-  background:rgba(0,0,0,0.85);
-  border:2px solid #c9aa71;
-  border-radius:12px;
-  display:flex;
-  align-items:center;
-  justify-content:space-between;
-  box-shadow:0 4px 12px rgba(0,0,0,0.5);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background: rgba(0,0,0,0.85);
+  border: 2px solid #c9aa71;
+  border-radius: 12px;
+  padding: 14px 18px;
+  margin: 0 auto 20px auto;
+  font-size: 18px;
+  width: 56vw;
+  max-width: 900px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.5);
+  transition: transform 0.25s, box-shadow 0.3s;
 }
-.skill-name {
-  flex:1;
-  text-align:center;
-  font-size:18px;
+.skill-list li:hover { transform: scale(1.03); box-shadow: 0 8px 20px rgba(0,0,0,0.7); }
+
+.skill-list li a {
   text-decoration: none;
   color: #fff;
+  flex-grow: 1;
+  text-align: center;
+  transition: color 0.3s;
 }
-.skill-name:hover {
+.skill-list li a:hover { color: #c9aa71; }
+
+.checkmark {
+  width: 26px;
+  height: 26px;
+  border-radius: 50%;
+  border: 2px solid #c9aa71;
+  display: flex;
+  justify-content: center;
+  align-items: center;
   color: #c9aa71;
+  font-size: 18px;
+  flex-shrink: 0;
+  cursor: pointer;
 }
-.skill-select {
-  background:#0f1722;
-  color:#c9aa71;
-  border:1px solid #c9aa71;
-  border-radius:6px;
-  padding:6px 8px;
-  font-size:15px;
-}
+.checkmark.completed { background: #c9aa71; color: #000; }
 
 /* ===== FOOTER ===== */
 footer {
   margin-top: auto;
-  text-align:center;
-  padding:18px;
-  font-size:14px;
-  color:#fff;
+  text-align: center;
+  padding: 18px 10px;
+  font-size: 14px;
+  color: #fff;
 }
 
 @media(max-width:700px){
-  .skill-list li { width:85vw; font-size:16px; }
-  .skill-name { font-size:16px; }
+  header { font-size: 22px; padding: 15px 10px; }
+  #section-select { width: 95vw; font-size: 14px; padding: 8px 30px 8px 12px; }
+  .skill-list li { width: 85vw; font-size: 16px; padding: 10px 14px; }
 }
 </style>
 </head>
-
 <body>
 
-<header>Skills Hub</header>
+<header>SKILLS HUB</header>
 
-<a href="membershub.html" class="back-button">← Back to Members Hub</a>
+<a href="membershub.html" class="back-button">Back to Members Hub</a>
 
-<!-- ===== RANK PROGRESS BAR ===== -->
+<div id="section-select-container">
+  <select id="section-select"></select>
+</div>
+
 <div class="rank-wrap">
   <div class="rank-label">Estimated Skill Tier</div>
   <div class="rank-name" id="rankName">—</div>
@@ -174,18 +201,11 @@ footer {
   </div>
 </div>
 
-<!-- ===== SECTION SELECT ===== -->
-<div id="section-select-container">
-  <select id="section-select"></select>
-</div>
-
-<!-- ===== SKILLS ===== -->
 <ul class="skill-list" id="skill-list"></ul>
 
 <footer>© 2025 LoL Fundamentals · All rights reserved</footer>
 
 <script>
-/* ===== SKILL DATA ===== */
 const skillData = {
   "Pre Game": ["Champion Select","Mouse Accuracy","Summoner Spells","Matchups","Communication","Build"],
   "Early Game": ["Level 1","Farming","Trading","Wave Control","Back Timings","Power Spikes","Pathing","Laning","Map Awareness","Ganking","Roaming"],
@@ -195,64 +215,58 @@ const skillData = {
   "Out of Game": ["Setup","Mindset","Not Raging/Blaming","Reaction Time","Meta"]
 };
 
-/* ===== LOAD / INIT PROFILE ===== */
+// 1-10 ratings for rank system
 let profile = JSON.parse(localStorage.getItem("skillRatings")) || {};
-
 Object.keys(skillData).forEach(section => {
   profile[section] ??= {};
   skillData[section].forEach(skill => {
-    profile[section][skill] ??= 5; // default midpoint 5/10
+    profile[section][skill] ??= 5; // default 5/10
   });
 });
-
 localStorage.setItem("skillRatings", JSON.stringify(profile));
 
-/* ===== UI ELEMENTS ===== */
 const sectionSelect = document.getElementById("section-select");
 const skillList = document.getElementById("skill-list");
 const rankName = document.getElementById("rankName");
 const rankFill = document.getElementById("rankFill");
 
-/* ===== RANK CALC ===== */
+// Rank calculation (1-10 scale)
 function calculateRank(avg){
-  if(avg < 2) return ["Iron", 10];
-  if(avg < 3) return ["Bronze", 20];
-  if(avg < 4) return ["Silver", 30];
-  if(avg < 5) return ["Gold", 40];
-  if(avg < 6) return ["Platinum", 50];
-  if(avg < 7) return ["Emerald", 60];
-  if(avg < 8) return ["Diamond", 70];
-  if(avg < 8.5) return ["Master", 80];
-  if(avg < 9) return ["Grand Master", 90];
-  return ["Challenger", 100];
+  if(avg < 2) return ["Iron",10];
+  if(avg < 3) return ["Bronze",20];
+  if(avg < 4) return ["Silver",30];
+  if(avg < 5) return ["Gold",40];
+  if(avg < 6) return ["Platinum",50];
+  if(avg < 7) return ["Emerald",60];
+  if(avg < 8) return ["Diamond",70];
+  if(avg < 8.5) return ["Master",80];
+  if(avg < 9) return ["Grand Master",90];
+  return ["Challenger",100];
 }
 
 function updateRank(){
   let total = 0;
   let count = 0;
-
   Object.values(profile).forEach(section => {
     Object.values(section).forEach(value => {
       total += value;
       count++;
     });
   });
-
   const avg = total / count;
   const [rank, pct] = calculateRank(avg);
-
   rankName.textContent = rank;
   rankFill.style.width = pct + "%";
 }
 
-/* ===== RENDER SECTION ===== */
+// Render section with clickable cards + checkmarks
 function renderSection(section){
   skillList.innerHTML = skillData[section].map(skill => {
     const value = profile[section][skill];
-    const skillUrl = skill.toLowerCase().replace(/\s+/g,'-') + ".html"; 
+    const link = skill.toLowerCase().replace(/[^a-z0-9]/g,'') + ".html";
     return `
-      <li>
-        <a href="${skillUrl}" class="skill-name">${skill}</a>
+      <li data-skill="${skill}">
+        <a href="${link}">${skill}</a>
         <select class="skill-select" data-section="${section}" data-skill="${skill}">
           ${Array.from({length:10},(_,i)=>`
             <option value="${i+1}" ${value===i+1?"selected":""}>${i+1}</option>
@@ -263,29 +277,28 @@ function renderSection(section){
   }).join("");
 }
 
-/* ===== EVENTS ===== */
 sectionSelect.innerHTML = Object.keys(skillData)
-  .map(section => `<option value="${section}">${section}</option>`)
-  .join("");
+  .map(s => `<option value="${s}">${s}</option>`).join("");
 
 sectionSelect.addEventListener("change", () => {
-  renderSection(sectionSelect.value);
+  const s = sectionSelect.value;
+  localStorage.setItem("lastSection", s);
+  renderSection(s);
 });
 
 skillList.addEventListener("change", e => {
   if(!e.target.classList.contains("skill-select")) return;
-
   const section = e.target.dataset.section;
   const skill = e.target.dataset.skill;
   profile[section][skill] = Number(e.target.value);
-
   localStorage.setItem("skillRatings", JSON.stringify(profile));
   updateRank();
 });
 
-/* ===== INIT ===== */
-sectionSelect.value = Object.keys(skillData)[0];
-renderSection(sectionSelect.value);
+// Initial render
+const lastSection = localStorage.getItem("lastSection") || "Pre Game";
+sectionSelect.value = lastSection;
+renderSection(lastSection);
 updateRank();
 </script>
 
