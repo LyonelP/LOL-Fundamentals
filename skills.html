@@ -3,282 +3,205 @@
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>LoL Fundamentals – Skills Hub</title>
+<title>LoL Fundamentals – Skill Evaluation</title>
 
 <script>
-  if (localStorage.getItem('lolfundamentals_logged_in') !== 'true') {
-    window.location.replace('login.html');
-  }
+if (localStorage.getItem('lolfundamentals_logged_in') !== 'true') {
+  window.location.replace('login.html');
+}
 </script>
 
 <style>
-/* ===== EXISTING STYLES UNCHANGED ===== */
 body {
   margin: 0;
   font-family: 'Beaufort for LOL', Arial, Helvetica, sans-serif;
   color: #fff;
   background: url('https://64.media.tumblr.com/594ac290bec6d5e9ad98b5f53404f00b/245c4c3ee469f81d-e4/s1280x1920/1cda4284320eb2031758a9859dfe14ff8bbc50ba.jpg') no-repeat center center fixed;
   background-size: cover;
-  overflow-x: hidden;
   min-height: 100vh;
-  display: flex;
-  flex-direction: column;
 }
 body::before {
-  content: "";
-  position: fixed;
-  inset: 0;
-  background: rgba(10,15,20,0.35);
-  z-index: -1;
+  content:"";
+  position:fixed;
+  inset:0;
+  background:rgba(10,15,20,0.35);
+  z-index:-1;
 }
 header {
   background: rgba(13,17,23,0.9);
   border-bottom: 2px solid #c9aa71;
   padding: 20px;
-  font-size: 26px;
-  color: #c9aa71;
-  text-align: center;
-}
-.back-button {
-  display: inline-block;
-  margin: 20px auto;
-  padding: 10px 20px;
-  background: linear-gradient(135deg, #c9aa71, #e0c77b);
-  color: #000;
-  text-decoration: none;
-  border-radius: 8px;
-  font-weight: bold;
+  text-align:center;
+  font-size:26px;
+  color:#c9aa71;
 }
 
-/* ===== PROFILE PANEL ===== */
-.profile-panel {
+.back-button {
+  display:block;
+  width:max-content;
+  margin:20px auto;
+  padding:10px 20px;
+  background:linear-gradient(135deg,#c9aa71,#e0c77b);
+  color:#000;
+  border-radius:8px;
+  text-decoration:none;
+  font-weight:bold;
+}
+
+.container {
   width: 85vw;
   max-width: 900px;
-  margin: 0 auto 30px;
+  margin: 0 auto 40px;
   background: rgba(0,0,0,0.85);
   border: 2px solid #c9aa71;
   border-radius: 14px;
-  padding: 20px;
-}
-.profile-panel h2 {
-  margin-top: 0;
-  color: #c9aa71;
-  text-align: center;
-}
-.profile-skill {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  margin-bottom: 14px;
-}
-.profile-skill label {
-  width: 40%;
-}
-.profile-skill input {
-  width: 50%;
-}
-.focus-box {
-  margin-top: 20px;
-  padding: 14px;
-  border: 1px dashed #c9aa71;
-  text-align: center;
-  font-size: 15px;
+  padding: 24px;
 }
 
-/* ===== EXISTING SKILLS HUB STYLES ===== */
-#section-select-container { text-align:center; }
-#section-select {
-  padding: 8px 12px;
-  background: #0f1722;
-  color: #c9aa71;
-  border-radius: 6px;
-}
-.progress-wrap { width:260px; margin:20px auto; text-align:center; }
-.progress-bar { height:10px; background:#0f1722; border-radius:20px; overflow:hidden; }
-.progress-fill { height:100%; background:linear-gradient(90deg,#c9aa71,#e6c97f); width:0%; }
-.skill-list { list-style:none; padding:0; }
-.skill-list li {
-  width: 56vw;
-  max-width: 900px;
-  margin: 0 auto 20px;
-  padding: 14px;
-  background: rgba(0,0,0,0.85);
-  border: 2px solid #c9aa71;
-  border-radius: 12px;
-  display:flex;
-  justify-content:space-between;
-}
-.checkmark {
-  width:26px; height:26px;
-  border:2px solid #c9aa71;
-  border-radius:50%;
+.skill-row {
   display:flex;
   align-items:center;
-  justify-content:center;
-  cursor:pointer;
+  justify-content:space-between;
+  margin-bottom:18px;
 }
-.checkmark.completed {
-  background:#c9aa71;
-  color:#000;
+.skill-row label {
+  width:40%;
+  font-size:18px;
 }
-footer { text-align:center; padding:18px; font-size:14px; }
+.skill-row input[type=range] {
+  width:45%;
+}
+.skill-value {
+  width:40px;
+  text-align:center;
+  font-weight:bold;
+  color:#c9aa71;
+}
+
+.tier-box {
+  margin-top:30px;
+  padding:20px;
+  text-align:center;
+  border:2px dashed #c9aa71;
+  border-radius:12px;
+}
+.tier-name {
+  font-size:32px;
+  color:#c9aa71;
+  margin:10px 0;
+}
+.tier-desc {
+  font-size:15px;
+  opacity:0.9;
+}
+
+footer {
+  text-align:center;
+  padding:18px;
+  font-size:14px;
+}
 </style>
 </head>
 
 <body>
 
-<header>Skills Hub</header>
+<header>Skill Evaluation</header>
 <a href="membershub.html" class="back-button">Back to Members Hub</a>
 
-<!-- ===== PROFILE PANEL ===== -->
-<div class="profile-panel">
-  <h2>Your Player Skill Profile</h2>
+<div class="container">
+  <h2 style="text-align:center;color:#c9aa71;">Rate Your Core Skills</h2>
 
-  <div class="profile-skill">
+  <div class="skill-row">
     <label>Laning Fundamentals</label>
-    <input type="range" min="1" max="5" data-skill="laning">
+    <input type="range" min="1" max="5" step="1" data-skill="laning">
+    <div class="skill-value"></div>
   </div>
-  <div class="profile-skill">
+
+  <div class="skill-row">
     <label>Wave Management</label>
-    <input type="range" min="1" max="5" data-skill="wave">
+    <input type="range" min="1" max="5" step="1" data-skill="wave">
+    <div class="skill-value"></div>
   </div>
-  <div class="profile-skill">
+
+  <div class="skill-row">
     <label>Trading & Cooldowns</label>
-    <input type="range" min="1" max="5" data-skill="trading">
+    <input type="range" min="1" max="5" step="1" data-skill="trading">
+    <div class="skill-value"></div>
   </div>
-  <div class="profile-skill">
+
+  <div class="skill-row">
+    <label>Jungle Tracking</label>
+    <input type="range" min="1" max="5" step="1" data-skill="jungle">
+    <div class="skill-value"></div>
+  </div>
+
+  <div class="skill-row">
     <label>Midgame Decisions</label>
-    <input type="range" min="1" max="5" data-skill="midgame">
+    <input type="range" min="1" max="5" step="1" data-skill="midgame">
+    <div class="skill-value"></div>
   </div>
-  <div class="profile-skill">
+
+  <div class="skill-row">
     <label>Teamfighting</label>
-    <input type="range" min="1" max="5" data-skill="teamfighting">
+    <input type="range" min="1" max="5" step="1" data-skill="teamfight">
+    <div class="skill-value"></div>
   </div>
 
-  <div class="focus-box" id="focusBox">
-    Set your skill levels to receive a personalized training focus.
-  </div>
-</div>
-
-<!-- ===== EXISTING SKILLS HUB ===== -->
-<div id="section-select-container">
-  <select id="section-select">
-    <option>Pre Game</option>
-    <option>Early Game</option>
-    <option>Mid Game</option>
-    <option>Late Game</option>
-    <option>Advanced</option>
-    <option>Out of Game</option>
-  </select>
-</div>
-
-<div class="progress-wrap">
-  <div id="progressLabel">0% Complete</div>
-  <div class="progress-bar">
-    <div class="progress-fill" id="progressFill"></div>
+  <div class="tier-box">
+    <div>Your Estimated Tier</div>
+    <div class="tier-name" id="tierName">—</div>
+    <div class="tier-desc" id="tierDesc"></div>
   </div>
 </div>
 
-<ul class="skill-list" id="skill-list"></ul>
 <footer>© 2025 LoL Fundamentals</footer>
 
 <script>
-/* ===== PLAYER PROFILE ===== */
 const defaultProfile = {
-  skills: {
-    laning: 3,
-    wave: 3,
-    trading: 3,
-    midgame: 3,
-    teamfighting: 3
-  }
+  laning:3, wave:3, trading:3, jungle:3, midgame:3, teamfight:3
 };
 
-let profile = JSON.parse(localStorage.getItem("playerProfile")) || defaultProfile;
-const sliders = document.querySelectorAll(".profile-skill input");
-const focusBox = document.getElementById("focusBox");
+let profile = JSON.parse(localStorage.getItem("skillProfile")) || defaultProfile;
+const sliders = document.querySelectorAll("input[type=range]");
+const tierName = document.getElementById("tierName");
+const tierDesc = document.getElementById("tierDesc");
 
-function updateProfile() {
-  sliders.forEach(slider => {
-    profile.skills[slider.dataset.skill] = Number(slider.value);
+function calculateTier(avg){
+  if (avg < 2) return ["Iron","Fundamental gaps across most skills"];
+  if (avg < 2.5) return ["Bronze","Inconsistent execution and awareness"];
+  if (avg < 3) return ["Silver","Understands basics but struggles to convert"];
+  if (avg < 3.5) return ["Gold","Solid fundamentals with decision leaks"];
+  if (avg < 4) return ["Platinum","Strong fundamentals, needs refinement"];
+  if (avg < 4.5) return ["Emerald","Advanced consistency and awareness"];
+  return ["Diamond+","High-level fundamentals across the board"];
+}
+
+function updateProfile(){
+  let total = 0;
+  sliders.forEach(slider=>{
+    profile[slider.dataset.skill] = Number(slider.value);
+    slider.nextElementSibling.textContent = slider.value;
+    total += Number(slider.value);
   });
-  localStorage.setItem("playerProfile", JSON.stringify(profile));
-  updateFocus();
+
+  const avg = total / sliders.length;
+  const [tier, desc] = calculateTier(avg);
+
+  tierName.textContent = tier;
+  tierDesc.textContent = desc;
+
+  localStorage.setItem("skillProfile", JSON.stringify(profile));
 }
 
-function updateFocus() {
-  const weak = Object.entries(profile.skills)
-    .filter(([_,v]) => v <= 2)
-    .map(([k]) => k);
-
-  focusBox.innerHTML = weak.length
-    ? `🎯 Recommended Focus: <strong>${weak.slice(0,2).join(" & ")}</strong><br>Follow the Skills Hub below in this order.`
-    : `✅ No major weaknesses detected. Focus on advanced consistency.`;
-}
-
-sliders.forEach(slider => {
-  slider.value = profile.skills[slider.dataset.skill];
+sliders.forEach(slider=>{
+  slider.value = profile[slider.dataset.skill];
   slider.addEventListener("input", updateProfile);
 });
-updateFocus();
 
-/* ===== EXISTING SKILLS HUB LOGIC (UNCHANGED) ===== */
-const skillData = {
-  "Pre Game":["Champion Select","Summoner Spells","Matchups"],
-  "Early Game":["Farming","Trading","Wave Control","Roaming"],
-  "Mid Game":["Vision","Lane Assignments","Teamwork"],
-  "Late Game":["Win Conditions","Target Selection"],
-  "Advanced":["Positioning","Kiting"],
-  "Out of Game":["Mindset","Meta"]
-};
-
-let skillProgress = JSON.parse(localStorage.getItem("skillProgress")||"{}");
-Object.keys(skillData).forEach(s=>{
-  skillProgress[s]=skillProgress[s]||{};
-  skillData[s].forEach(k=>skillProgress[s][k]??=false);
-});
-localStorage.setItem("skillProgress",JSON.stringify(skillProgress));
-
-const sectionSelect=document.getElementById("section-select");
-const skillList=document.getElementById("skill-list");
-const progressFill=document.getElementById("progressFill");
-const progressLabel=document.getElementById("progressLabel");
-
-function updateProgress(section){
-  const total=Object.keys(skillProgress[section]).length;
-  const done=Object.values(skillProgress[section]).filter(v=>v).length;
-  const pct=Math.round(done/total*100)||0;
-  progressFill.style.width=pct+"%";
-  progressLabel.textContent=`${section}: ${pct}% Complete`;
-}
-
-function toggleCheck(section,skill,el){
-  skillProgress[section][skill]=!skillProgress[section][skill];
-  localStorage.setItem("skillProgress",JSON.stringify(skillProgress));
-  el.classList.toggle("completed");
-  el.innerHTML=el.classList.contains("completed")?"✔":"";
-  updateProgress(section);
-}
-
-function renderSkills(section){
-  skillList.innerHTML=skillData[section].map(skill=>{
-    const c=skillProgress[section][skill];
-    return `<li>
-      <span>${skill}</span>
-      <div class="checkmark ${c?"completed":""}" onclick="toggleCheck('${section}','${skill}',this)">${c?"✔":""}</div>
-    </li>`;
-  }).join("");
-  updateProgress(section);
-}
-
-sectionSelect.addEventListener("change",()=>renderSkills(sectionSelect.value));
-renderSkills(sectionSelect.value);
+updateProfile();
 </script>
 
 </body>
 </html>
-
-
-
 
 
