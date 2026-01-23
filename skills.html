@@ -5,7 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>LoL Fundamentals – Skills Hub</title>
 
-  <script>
+<script>
   // Redirect if not logged in
   if (localStorage.getItem('lolfundamentals_logged_in') !== 'true') {
     window.location.replace('login.html');
@@ -13,13 +13,20 @@
 </script>
   
 <style>
-body {
+html, body {
   margin: 0;
+  padding: 0;
   font-family: 'Beaufort for LOL', Arial, Helvetica, sans-serif;
   color: #fff;
+  height: 100%;
+}
+body {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
   background: url('https://64.media.tumblr.com/594ac290bec6d5e9ad98b5f53404f00b/245c4c3ee469f81d-e4/s1280x1920/1cda4284320eb2031758a9859dfe14ff8bbc50ba.jpg') no-repeat center center fixed;
   background-size: cover;
-  min-height: 100vh;
+  overflow-x: hidden;
 }
 body::before {
   content:"";
@@ -102,6 +109,7 @@ header {
   list-style:none;
   padding:0;
   margin:0;
+  flex-grow: 1; /* allow the list to take remaining space */
 }
 .skill-list li {
   width:56vw;
@@ -132,7 +140,7 @@ header {
 
 /* ===== FOOTER ===== */
 footer {
-  margin-top:40px;
+  margin-top: auto;
   text-align:center;
   padding:18px;
   font-size:14px;
@@ -200,7 +208,7 @@ const skillList = document.getElementById("skill-list");
 const rankName = document.getElementById("rankName");
 const rankFill = document.getElementById("rankFill");
 
-/* ===== RANK CALC (1–10 SCALE) ===== */
+/* ===== RANK CALC (SMOOTHED) ===== */
 function calculateRank(avg){
   if(avg < 2) return ["Iron", 10];
   if(avg < 3) return ["Bronze", 20];
@@ -211,7 +219,7 @@ function calculateRank(avg){
   if(avg < 8) return ["Diamond", 70];
   if(avg < 8.5) return ["Master", 80];
   if(avg < 9) return ["Grand Master", 90];
-  return ["Challenger", 100]; // 9-10
+  return ["Challenger", 100];
 }
 
 function updateRank(){
@@ -277,4 +285,3 @@ updateRank();
 
 </body>
 </html>
-
