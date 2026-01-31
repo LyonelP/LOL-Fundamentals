@@ -21,7 +21,7 @@ body {
   color: #e6edf3;
   line-height: 1.5;
   min-height: 100vh;
-  display: none;
+  display: flex;
   flex-direction: column;
 }
 
@@ -149,8 +149,6 @@ footer {
 <script>
 if (localStorage.getItem('lolfundamentals_logged_in') !== 'true') {
   window.location.href = 'login.html';
-} else {
-  document.body.style.display = 'flex';
 }
 </script>
 
@@ -184,7 +182,6 @@ if (localStorage.getItem('lolfundamentals_logged_in') !== 'true') {
 
 </body>
 </html>
-
 
 
 
