@@ -430,16 +430,12 @@ function calcBonusItemDamage(totalAP, mr, flatPen, percPen, level) {
 if (item.bonus === "duskdawn") {
   const baseAD = getBaseAD(level);
 
-  // 100% base AD + 10% AP (RAW, pre-mitigation)
-  let raw = baseAD + 0.10 * totalAP;
-
-  // Applies twice
-  raw *= 2;
-
-  // Add RAW damage (no MR here)
-  bonusMagic += Math.round(raw);
+  let raw = 0.75 * baseAD + 0.10 * totalAP;
+  let effectiveMR = mr - flatPen;
+  if (effectiveMR < 0) effectiveMR = 0;
+  effectiveMR *= 1 - percPen;
+  bonusMagic += Math.round(raw * 100 / (100 + effectiveMR));
 }
-
 
     if(item.bonus==="nashor"){
       let aaRaw = 15 + 0.15*totalAP;
@@ -506,6 +502,7 @@ document.addEventListener("DOMContentLoaded",()=>{
 
 </body>
 </html>
+
 
 
 
