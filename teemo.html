@@ -11,86 +11,89 @@
   --bg:#0a0f14;
   --card:#161b22;
   --muted:#8b949e;
-  --orange:#f97316;
+  --yellow:#F9D949;
 }
 
-body { 
-  margin: 0; 
-  font-family: "Beaufort for LOL", Arial, Helvetica, sans-serif; 
-  background: var(--bg); 
-  color: #e6edf3; 
-  line-height: 1.5; 
-  min-height: 100vh; 
-  display: flex; 
+body {
+  margin: 0;
+  font-family: "Beaufort for LOL", Arial, Helvetica, sans-serif;
+  background: var(--bg);
+  color: #e6edf3;
+  line-height: 1.5;
+  min-height: 100vh;
+  display: flex;
   flex-direction: column;
 }
 
 /* ===== HEADER ===== */
-header { 
-  background: rgba(13,17,23,0.9); 
-  border-bottom: 2px solid var(--gold); 
-  padding: 16px 20px; 
-  font-size: 26px; 
-  font-weight: 700; 
-  text-transform: uppercase; 
-  color: var(--gold); 
-  text-align: center; 
-  letter-spacing: 0.8px; 
+header {
+  background: rgba(13,17,23,0.9);
+  border-bottom: 2px solid var(--gold);
+  padding: 16px 20px;
+  font-size: 26px;
+  font-weight: 700;
+  text-transform: uppercase;
+  color: var(--gold);
+  text-align: center;
+  letter-spacing: 0.8px;
 }
 
 /* ===== BACK BUTTON ===== */
 .back-button {
-  display: block; 
-  margin: 18px auto; 
-  padding: 9px 18px; 
-  background: linear-gradient(135deg, #c9aa71, #e0c77b); 
-  color: #000; 
-  text-decoration: none; 
-  border-radius: 8px; 
-  font-weight: bold; 
-  box-shadow: 0 0 10px rgba(201,170,113,0.5); 
-  width: fit-content; 
+  display: block;
+  margin: 18px auto;
+  padding: 9px 18px;
+  background: linear-gradient(135deg, #c9aa71, #e0c77b);
+  color: #000;
+  text-decoration: none;
+  border-radius: 8px;
+  font-weight: bold;
+  box-shadow: 0 0 10px rgba(201,170,113,0.5);
+  width: fit-content;
 }
 .back-button::before { content: "← "; }
 
 /* ===== CONTENT WIDTH ===== */
-.content-width { 
-  max-width: 920px; 
-  margin: 0 auto; 
-  padding: 0 20px; 
+.content-width {
+  max-width: 920px;
+  margin: 0 auto;
+  padding: 0 20px;
 }
 
 /* ===== MATCHUP CARD ===== */
-.matchup-container { 
-  display: flex; 
-  gap: 28px; 
-  padding: 26px; 
-  background: linear-gradient(180deg, #161b22, #12161d); 
-  border-radius: 18px; 
-  border: 1px solid rgba(201,170,113,0.18); 
-  box-shadow: 0 15px 40px rgba(0,0,0,0.7), inset 0 0 0 1px rgba(255,255,255,0.02); 
+.matchup-container {
+  display: flex;
+  gap: 28px;
+  padding: 26px;
+  background: linear-gradient(180deg, #161b22, #12161d);
+  border-radius: 18px;
+  border: 1px solid rgba(201,170,113,0.18);
+  box-shadow:
+    0 15px 40px rgba(0,0,0,0.7),
+    inset 0 0 0 1px rgba(255,255,255,0.02);
 }
 
-.matchup-left { 
-  display: flex; 
-  flex-direction: column; 
-  align-items: center; 
-  gap: 14px; 
+/* ===== LEFT ===== */
+.matchup-left {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 14px;
 }
 
-.matchup-left img { 
-  width: 96px; 
-  height: 96px; 
-  border-radius: 14px; 
-  border: 2px solid var(--gold); 
-  box-shadow: 0 0 28px rgba(201,170,113,0.45); 
+.matchup-left img {
+  width: 96px;
+  height: 96px;
+  border-radius: 14px;
+  border: 2px solid var(--gold);
+  box-shadow: 0 0 28px rgba(201,170,113,0.45);
 }
 
-/* ===== WINRATE ===== */
+/* ===== WINRATE (YELLOW LIKE AHRI) ===== */
 .winrate-bubble {
-  background: rgba(249,115,22,0.15);
-  color: var(--orange);
-  border: 1px solid rgba(249,115,22,0.45);
+  background: rgba(249,217,73,0.15);
+  color: var(--yellow);
+  border: 1px solid rgba(249,217,73,0.45);
   font-weight: 600;
   padding: 6px 16px;
   border-radius: 999px;
@@ -98,44 +101,47 @@ header {
   letter-spacing: 0.5px;
 }
 
-.matchup-right { flex: 1; }
-
-.matchup-right h2 { 
-  margin: 0 0 14px 0; 
-  font-size: 22px; 
-  color: var(--gold); 
-  padding-bottom: 8px; 
-  border-bottom: 1px solid rgba(201,170,113,0.25); 
+/* ===== RIGHT ===== */
+.matchup-right {
+  flex: 1;
 }
 
-.matchup-right ul { 
-  padding-left: 18px; 
-  margin: 0; 
+.matchup-right h2 {
+  margin: 0 0 14px 0;
+  font-size: 22px;
+  color: var(--gold);
+  padding-bottom: 8px;
+  border-bottom: 1px solid rgba(201,170,113,0.25);
 }
 
-.matchup-right li { 
-  margin-bottom: 12px; 
-  line-height: 1.65; 
+.matchup-right ul {
+  padding-left: 18px;
+  margin: 0;
+}
+
+.matchup-right li {
+  margin-bottom: 12px;
+  line-height: 1.65;
 }
 
 /* ===== FOOTER ===== */
-footer { 
-  text-align: center; 
-  padding: 18px 10px; 
-  font-size: 14px; 
-  color: var(--muted); 
-  margin-top: auto; 
+footer {
+  text-align: center;
+  padding: 18px 10px;
+  font-size: 14px;
+  color: var(--muted);
+  margin-top: auto;
 }
 
 /* ===== MOBILE ===== */
 @media (max-width: 600px) {
-  .matchup-container { 
-    flex-direction: column; 
-    align-items: center; 
+  .matchup-container {
+    flex-direction: column;
+    align-items: center;
   }
 
-  .matchup-right { 
-    text-align: center; 
+  .matchup-right {
+    text-align: center;
   }
 }
 </style>
@@ -149,7 +155,7 @@ if (localStorage.getItem('lolfundamentals_logged_in') !== 'true') {
 </head>
 <body>
 
-<header>Diana Mid Matchup – Teemo</header>
+<header>Teemo Mid Matchup</header>
 
 <a href="matchuphub.html" class="back-button">Back to Matchup Hub</a>
 
@@ -164,17 +170,19 @@ if (localStorage.getItem('lolfundamentals_logged_in') !== 'true') {
       <h2>Matchup Notes</h2>
       <ul>
         <li>Get to lane early so you can stop him from hiding in lane.</li>
-        <li>Your Q will outrade his Q since his Q will draw minion aggro but he can follow up with an additional auto if you're too close.</li>
+        <li>Your Q will outrade his Q since his Q draws minion aggro, but he can follow up with an additional auto if you're too close.</li>
         <li>The main thing you need to be careful of in this matchup is the blind blocking your passive damage.</li>
       </ul>
     </div>
   </div>
 </div>
 
-<footer>© 2025 LoL Fundamentals · All rights reserved</footer>
+<footer>© 2026 LoL Fundamentals · All rights reserved</footer>
 
 </body>
 </html>
+
+
 
 
 
