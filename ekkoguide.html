@@ -1,110 +1,188 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
+<meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Ekko Jungle Guide</title>
+<title>Ekko Jungle Guide – Members Hub</title>
 <style>
 body {
-  font-family: Arial, sans-serif;
   margin: 0;
-  padding: 0;
-  background: #0d1117;
+  font-family: 'Beaufort for LOL', Arial, Helvetica, sans-serif;
+  background: url('https://ddragon.leagueoflegends.com/cdn/img/champion/splash/Ekko_0.jpg') no-repeat center center fixed;
+  background-size: cover;
   color: #e6edf3;
-}
-
-header {
-  background: #0a0f14;
-  color: #c9aa71;
-  font-size: 28px;
   text-align: center;
-  padding: 20px;
-  font-weight: bold;
+  overflow-x: hidden;
 }
 
+/* Overlay */
+body::before {
+  content: "";
+  position: fixed;
+  top: 0; left: 0;
+  width: 100%; height: 100%;
+  background: rgba(10,15,20,0.75);
+  z-index: -1;
+}
+
+/* Header */
+header {
+  background: rgba(13,17,23,0.9);
+  border-bottom: 2px solid #c9aa71;
+  padding: 20px 10px;
+  font-weight: bold;
+  font-size: 26px;
+  text-transform: uppercase;
+  color: #c9aa71;
+  letter-spacing: 1px;
+}
+
+/* Back button */
 .back-button {
   display: inline-block;
-  margin: 16px auto;
-  padding: 10px 22px;
+  margin: 20px auto 10px;
+  padding: 10px 20px;
   background: linear-gradient(135deg, #c9aa71, #e0c77b);
   color: #000;
   text-decoration: none;
-  border-radius: 10px;
+  border-radius: 8px;
   font-weight: bold;
-  text-align: center;
+  transition: all 0.3s;
+  box-shadow: 0 0 10px rgba(201,170,113,0.5);
+}
+.back-button::before { content: "← "; }
+.back-button:hover {
+  background: linear-gradient(135deg, #e6c97f, #f0d88b);
+  box-shadow: 0 0 15px rgba(255,215,0,0.8);
 }
 
+/* Dropdown */
 #section-select-container {
-  width: 90%;
-  max-width: 400px;
   margin: 20px auto;
 }
-
 #section-select {
-  width: 100%;
-  padding: 12px 16px;
+  padding: 10px 15px;
   font-size: 16px;
-  border-radius: 12px;
+  border-radius: 6px;
   border: none;
-  background: #161b22;
-  color: #e6edf3;
+  background: #0f1722;
+  color: #c9aa71;
+  cursor: pointer;
 }
 
+/* Section display */
 #section-info {
-  max-width: 800px;
-  margin: 24px auto;
-  background: rgba(255, 255, 255, 0.03);
-  border-radius: 16px;
-  padding: 24px;
-  box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+  margin: 20px auto;
+  max-width: 900px;
+  background: rgba(13,17,23,0.95);
+  border: 1px solid #2f81f7;
+  padding: 15px 20px;
+  border-radius: 10px;
+  text-align: left;
+  color: #fff;
+  min-height: 200px;
+  position: relative;
 }
 
+#section-info:hover { box-shadow: 0 0 15px rgba(47,129,247,0.5); }
+
+#section-info h3 {
+  position: relative;
+  margin-top: 0;
+  color: #c9aa71;
+  font-size: 22px;
+  text-transform: capitalize;
+}
+
+#section-info p {
+  margin: 10px 0 14px;
+  line-height: 1.6;
+}
+
+#section-info ul {
+  margin-left: 20px;
+}
+
+/* Icons */
 .icon {
-  width: 32px;
+  width: 36px;
+  height: 36px;
   vertical-align: middle;
-  margin-right: 8px;
+  border-radius: 6px;
+  margin-right: 6px;
+  transition: 0.2s ease;
+}
+.icon:hover {
+  filter: drop-shadow(0 0 6px #c9aa71);
+  transform: scale(1.05);
 }
 
+/* Rune layout */
 .rune-container {
   display: flex;
-  flex-wrap: wrap;
+  flex-direction: column;
+  align-items: flex-start;
   gap: 12px;
+  margin-top: 15px;
 }
-
 .rune-info {
   display: flex;
   align-items: center;
-  margin-bottom: 8px;
 }
-
+.rune-info span {
+  margin-left: 8px;
+}
 .rune-row {
   display: flex;
   gap: 12px;
-  margin-top: 12px;
+  margin-top: 10px;
 }
 
-.build-flow {
-  display: flex;
-  align-items: center;
-  gap: 8px;
-  flex-wrap: wrap;
-}
-
+/* Build & Runes Cards */
 .card-container {
   display: flex;
   flex-direction: column;
-  gap: 16px;
+  gap: 12px;
+  margin-top: 20px;
 }
 
 .card {
-  background: #161b22;
-  border-radius: 12px;
-  padding: 12px;
+  background: rgba(20,25,35,0.85);
+  border: 1px solid #c9aa71;
+  border-radius: 10px;
+  padding: 15px;
+  text-align: center;
+  transition: all 0.3s;
+}
+.card strong { display: block; margin-bottom: 8px; color: #e0c77b; }
+
+/* Build flow */
+.build-flow {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+  gap: 8px;
+  margin-top: 10px;
+}
+.build-flow div {
+  border: 1px solid #c9aa71;
+  border-radius: 8px;
+  padding: 10px 12px;
+  min-width: 120px;
+  text-align: center;
+}
+.build-flow span {
+  font-size: 18px;
+  color: #c9aa71;
 }
 
-.card strong {
-  display: block;
-  margin-bottom: 8px;
+/* Media query */
+@media (max-width: 600px) {
+  #section-select { font-size: 14px; padding: 8px 10px; }
+  .card-container { flex-direction: column; gap: 10px; }
+  .build-flow { flex-direction: column; }
+  .build-flow span { display: none; }
 }
 </style>
 </head>
@@ -143,187 +221,242 @@ if (localStorage.getItem('lolfundamentals_logged_in') !== 'true') {
 const sectionSelect = document.getElementById('section-select');
 const sectionInfo = document.getElementById('section-info');
 
-const sections = {
-  "Intro": `
-    <h3>Intro</h3>
-    <p>Why Ekko jungle? Ekko excels in the jungle because his mobility, crowd control, and burst allow for strong ganks and objective control. Smite synergizes perfectly with his kit. The slow and burst from smite make connecting E's significantly easier and allows for easy objective steals. He's also really fun to play!</p>
-  `,
-  "Runes": `
-    <h3>Runes</h3>
-    <div class="rune-container">
-      <div class="rune-info">
-        <img src="https://ddragon.leagueoflegends.com/cdn/img/perk-images/Styles/Domination/DarkHarvest/DarkHarvest.png" class="icon">
-        <span><strong>Dark Harvest:</strong> Consistent damage that pairs well with E.</span>
-      </div>
-
-      <div class="rune-info">
-        <img src="https://ddragon.leagueoflegends.com/cdn/img/perk-images/Styles/Domination/SuddenImpact/SuddenImpact.png" class="icon">
-        <span><strong>Sudden Impact:</strong> Works with Ekko's E and R for extra magic penetration.</span>
-      </div>
-
-      <div class="rune-info">
-        <img src="https://raw.communitydragon.org/latest/plugins/rcp-be-lol-game-data/global/default/v1/perk-images/styles/domination/grislymementos/grislymementos.png" class="icon">
-        <span><strong>Grisly Mementos:</strong> Extra trinket haste from takedowns.</span>
-      </div>
-
-      <div class="rune-info">
-        <img src="https://ddragon.leagueoflegends.com/cdn/img/perk-images/Styles/Domination/TreasureHunter/TreasureHunter.png" class="icon">
-        <span><strong>Treasure Hunter:</strong> Extra gold on takedowns helps accelerate core item buys.</span>
-      </div>
-
-      <div class="rune-info">
-        <img src="https://ddragon.leagueoflegends.com/cdn/img/perk-images/Styles/Inspiration/MagicalFootwear/MagicalFootwear.png" class="icon">
-        <span><strong>Magical Footwear:</strong> Free boots with increased movement speed to help connect the E.</span>
-      </div>
-
-      <div class="rune-info">
-        <img src="https://raw.communitydragon.org/latest/plugins/rcp-be-lol-game-data/global/default/v1/perk-images/styles/inspiration/jackofalltrades/jackofalltrades2.png" class="icon">
-        <span><strong>Jack of All Trades:</strong> Gain ability haste + adaptive bonuses from diverse item stats.</span>
-      </div>
-
-      <div class="rune-row">
-        <div>
-          <img src="https://ddragon.leagueoflegends.com/cdn/img/perk-images/StatMods/StatModsAttackSpeedIcon.png" class="icon">
-          <span>Attack Speed</span>
-        </div>
-        <div>
-          <img src="https://ddragon.leagueoflegends.com/cdn/img/perk-images/StatMods/StatModsAdaptiveForceIcon.png" class="icon">
-          <span>Adaptive Force</span>
-        </div>
-        <div>
-          <img src="https://ddragon.leagueoflegends.com/cdn/img/perk-images/StatMods/StatModsHealthScalingIcon.png" class="icon">
-          <span>Scaling Health</span>
-        </div>
-      </div>
-    </div>
-  `,
-  "Build": `
-    <h3>Build</h3>
-    <div class="card-container">
-      <div class="card"><strong>Starting items</strong>
-        <div class="build-flow">
-          <div>
-            <img src="https://raw.communitydragon.org/latest/game/assets/items/icons2d/1103_jungle_t1_mosstomperseedling.png" class="icon">
-            Mosstomper Seedling
-          </div>
-          <span>→</span>
-          <div>
-            <img src="https://ddragon.leagueoflegends.com/cdn/14.21.1/img/item/1082.png" class="icon">
-            Dark Seal
-          </div>
-          <span>→</span>
-          <div>
-            <img src="https://ddragon.leagueoflegends.com/cdn/14.21.1/img/item/1052.png" class="icon">
-            Amp Tome
-          </div>
-        </div>
-      </div>
-
-      <div class="card"><strong>Core items</strong>
-        <div class="build-flow">
-          <div>
-            <img src="https://ddragon.leagueoflegends.com/cdn/14.21.1/img/item/2510.png" class="icon">
-            Dusk and Dawn
-          </div>
-          <span>→</span>
-          <div>
-            <img src="https://ddragon.leagueoflegends.com/cdn/14.21.1/img/item/3111.png" class="icon">
-            Mercury Treads
-          </div>
-          <span>→</span>
-          <div>
-            <img src="https://ddragon.leagueoflegends.com/cdn/14.21.1/img/item/3115.png" class="icon">
-            Nashor's Tooth
-          </div>
-          <span>→</span>
-          <div>
-            <img src="https://ddragon.leagueoflegends.com/cdn/14.21.1/img/item/3089.png" class="icon">
-            Rabadon's Deathcap
-          </div>
-        </div>
-      </div>
-
-      <div class="card"><strong>Final items</strong>
-        <div class="build-flow">
-          <div>
-            <img src="https://ddragon.leagueoflegends.com/cdn/14.21.1/img/item/3157.png" class="icon">
-            Zhonya's Hourglass
-          </div>
-          <span>→</span>
-          <div>
-            <img src="https://ddragon.leagueoflegends.com/cdn/14.21.1/img/item/3135.png" class="icon">
-            Void Staff
-          </div>
-          <span>→</span>
-          <div>
-            <img src="https://ddragon.leagueoflegends.com/cdn/14.21.1/img/item/2138.png" class="icon">
-            Elixir(s)
-          </div>
-        </div>
-      </div>
-    </div>
-  `,
-  "Summoner spells": `
-    <h3>Summoner Spells</h3>
-    <p><img src="https://ddragon.leagueoflegends.com/cdn/14.21.1/img/spell/SummonerFlash.png" class="icon"><strong>Flash:</strong> E Flash is one of Ekko's best combos.</p>
-    <p><img src="https://ddragon.leagueoflegends.com/cdn/14.21.1/img/spell/SummonerSmite.png" class="icon"><strong>Smite:</strong> I believe smite is the strongest summoner spell to take alongside flash on Ekko, especially once upgraded. The slow, burst, and the ability to secure objectives fits Ekko’s kit perfectly.</p>
-  `,
-  "Abilities": `
-    <h3>Abilities</h3>
-    <p><img src="https://ddragon.leagueoflegends.com/cdn/14.21.1/img/passive/Ekko_P.png" class="icon"><strong>Passive – Z‑Drive Resonance:</strong> Every 3rd hit deals bonus magic damage and grants movespeed. Use the movement speed to reposition while waiting for cooldowns.</p>
-    <p><img src="https://ddragon.leagueoflegends.com/cdn/14.21.1/img/spell/EkkoQ.png" class="icon"><strong>Q – Timewinder:</strong> Main damage and clear tool. Slows and applies passive stack.</p>
-    <p><img src="https://ddragon.leagueoflegends.com/cdn/14.21.1/img/spell/EkkoW.png" class="icon"><strong>W – Parallel Convergence:</strong> Use w to push enemies towards your location. Grants shield, vision, and can stun enemies.</p>
-    <p><img src="https://ddragon.leagueoflegends.com/cdn/14.21.1/img/spell/EkkoE.png" class="icon"><strong>E – Phase Dive:</strong> Great gap closer, auto reset, can go over walls, and connects easily for combos.</p>
-    <p><img src="https://ddragon.leagueoflegends.com/cdn/14.21.1/img/spell/EkkoR.png" class="icon"><strong>R – Chronobreak:</strong> Use to tower dive, initiate fights, or steal objectives. Gives Ekko a second chance in fights.</p>
-  `,
-  "Combos": `
-    <h3>Combos</h3>
-    <p><strong>W E E Q AA:</strong> Basic combo.</p>
-    <p><strong>E E Q AA W AA:</strong> Extended trades.</p>
-    <p><strong>E Q E AA:</strong> Animation cancels Q.</p>
-    <p><strong>Q AA E E:</strong> E resets Ekko's auto attack.</p>
-    <p><strong>W E Q E:</strong> Two slows to help land stun.</p>
-  `,
-  "Level 1": `
-    <h3>Level 1</h3>
-    <p>Ward the bush above red buff to spot late invades. Start Red Buff if stronger, else start Blue. Positioning affects early jungle success.</p>
-  `,
-  "Pathing": `
-    <h3>Pathing</h3>
-    <p><strong>Recommended full jungle path on Blue Side:</strong></p>
-    <p><em>Red side is mirrored.</em></p>
-    <ul>
-      <li>Blue side: Start Raptors → Krugs → Red Buff → Wolves → Check gank mid/top → Blue Buff → Check gank mid/top → Gromp → Scuttle Crab → Back to Raptors → Krugs.</li>
-      <li>Red side: Blue Buff → Gromp → Wolves → Raptors → Red Buff → Krugs → Scuttle Crab.</li>
-    </ul>
-    <p>After reset, go to wolf camp and then gromp.</p>
-    <img src="https://i.imgur.com/vQ5fbRn.png" alt="Jungle path routes" style="width:100%; max-width:700px; display:block; margin:20px auto; border:2px solid #c9aa71; border-radius:10px;">
-  `,
-  "Hardest matchups": `
-    <h3>Hardest Matchups</h3>
-    <p>Champions like Nidalee, Kha’Zix, and Lee Sin with high mobility and burst are challenging. They can force Ekko to ult early and punish him despite his mobility.</p>
-  `,
-  "Team fighting": `
-    <h3>Team Fighting</h3>
-    <p>Ekko can proc passive on multiple targets, use W to protect or stun priority targets, and ult for maximum damage or healing. Use movement speed from passive to dodge attacks. Save ult and shield strategically for trades and objectives.</p>
-  `,
-  "Closing out the game": `
-    <h3>Closing Out the Game</h3>
-    <p>Focus on Baron and Elder. Use Ekko's W to zone enemies and secure objectives. Fast push waves with Q and passive to pressure towers. Avoid overextending for kills; prioritize staying alive and securing objectives. Rotate efficiently between waves post-Baron.</p>
-  `
-};
-
 sectionSelect.addEventListener('change', () => {
-  const value = sectionSelect.value;
-  sectionInfo.innerHTML = sections[value] || "<p>Coming soon!</p>";
+  let value = sectionSelect.value;
+  let content = `<p>Coming soon!</p>`;
+  let header = `<h3>${value}</h3>`;
 
-  // Reset dropdown back to placeholder to mimic closing
-  sectionSelect.selectedIndex = 0;
+  if(value === "Intro"){
+    content = `
+      ${header}
+      <p>Why Ekko jungle? Ekko excels in the jungle because his mobility, crowd control, and burst allow for strong ganks and objective control. Smite synergizes perfectly with his kit. The slow and burst from smite make connecting E's significantly easier and allows for easy objectives steals. He's also really fun to play!</p>
+    `;
+  }
+
+  if(value === "Runes"){
+    content = `
+      ${header}
+    <div class="rune-container">
+  <div class="rune-info">
+    <img src="https://ddragon.leagueoflegends.com/cdn/img/perk-images/Styles/Domination/DarkHarvest/DarkHarvest.png" class="icon">
+    <span><strong>Dark Harvest:</strong> Consistent damage that pairs well with E.</span>
+  </div>
+
+  <div class="rune-info">
+    <img src="https://ddragon.leagueoflegends.com/cdn/img/perk-images/Styles/Domination/SuddenImpact/SuddenImpact.png" class="icon">
+    <span><strong>Sudden Impact:</strong> Works with Ekko's E and R for extra magic penetration.</span>
+  </div>
+
+  <div class="rune-info">
+    <img src="https://raw.communitydragon.org/latest/plugins/rcp-be-lol-game-data/global/default/v1/perk-images/styles/domination/grislymementos/grislymementos.png" class="icon">
+    <span><strong>Grisly Mementos:</strong> Extra trinket haste from takedowns.</span>
+  </div>
+
+  <div class="rune-info">
+    <img src="https://ddragon.leagueoflegends.com/cdn/img/perk-images/Styles/Domination/TreasureHunter/TreasureHunter.png" class="icon">
+    <span><strong>Treasure Hunter:</strong> Extra gold on takedowns helps accelerate core item buys.</span>
+  </div>
+
+  <div class="rune-info">
+    <img src="https://ddragon.leagueoflegends.com/cdn/img/perk-images/Styles/Inspiration/MagicalFootwear/MagicalFootwear.png" class="icon">
+    <span><strong>Magical Footwear:</strong> Free boots with increased movement speed to help connect the E.</span>
+  </div>
+
+  <div class="rune-info">
+    <img src="https://raw.communitydragon.org/latest/plugins/rcp-be-lol-game-data/global/default/v1/perk-images/styles/inspiration/jackofalltrades/jackofalltrades2.png" class="icon">
+    <span><strong>Jack of All Trades:</strong> Gain ability haste + adaptive bonuses from diverse item stats.</span>
+  </div>
+
+  <div class="rune-row">
+    <div>
+      <img src="https://ddragon.leagueoflegends.com/cdn/img/perk-images/StatMods/StatModsAttackSpeedIcon.png" class="icon">
+      <span>Attack Speed</span>
+    </div>
+    <div>
+      <img src="https://ddragon.leagueoflegends.com/cdn/img/perk-images/StatMods/StatModsAdaptiveForceIcon.png" class="icon">
+      <span>Adaptive Force</span>
+    </div>
+    <div>
+      <img src="https://ddragon.leagueoflegends.com/cdn/img/perk-images/StatMods/StatModsHealthScalingIcon.png" class="icon">
+      <span>Scaling Health</span>
+    </div>
+  </div>
+    `;
+  }
+
+  if(value === "Build"){
+    content = `
+      ${header}
+    <div class="card-container">
+  <div class="card"><strong>Starting items</strong>
+    <div class="build-flow">
+      <div>
+        <img src="https://raw.communitydragon.org/latest/game/assets/items/icons2d/1103_jungle_t1_mosstomperseedling.png" class="icon">
+        Mosstomper Seedling
+      </div>
+      <span>→</span>
+      <div>
+        <img src="https://ddragon.leagueoflegends.com/cdn/14.21.1/img/item/1082.png" class="icon">
+        Dark Seal
+      </div>
+      <span>→</span>
+      <div>
+        <img src="https://ddragon.leagueoflegends.com/cdn/14.21.1/img/item/1052.png" class="icon">
+        Amp Tome
+      </div>
+    </div>
+  </div>
+
+<div class="card"><strong>Core items</strong>
+  <div class="build-flow">
+
+    <div>
+      <img src="https://ddragon.leagueoflegends.com/cdn/14.21.1/img/item/2510.png" class="icon">
+      Dusk and Dawn
+    </div>
+
+    <span>→</span>
+
+    <div>
+      <img src="https://ddragon.leagueoflegends.com/cdn/14.21.1/img/item/3111.png" class="icon">
+      Mercury Treads
+    </div>
+
+    <span>→</span>
+
+    <div>
+      <img src="https://ddragon.leagueoflegends.com/cdn/14.21.1/img/item/3115.png" class="icon">
+      Nashor's Tooth
+    </div>
+
+    <span>→</span>
+
+    <div>
+      <img src="https://ddragon.leagueoflegends.com/cdn/14.21.1/img/item/3089.png" class="icon">
+      Rabadon's Deathcap
+    </div>
+
+  </div>
+</div>
+
+  <div class="card"><strong>Final items</strong>
+    <div class="build-flow">
+      <div>
+        <img src="https://ddragon.leagueoflegends.com/cdn/14.21.1/img/item/3157.png" class="icon">
+        Zhonya's Hourglass
+      </div>
+      <span>→</span>
+      <div>
+        <img src="https://ddragon.leagueoflegends.com/cdn/14.21.1/img/item/3135.png" class="icon">
+        Void Staff
+      </div>
+      <span>→</span>
+      <div>
+        <img src="https://ddragon.leagueoflegends.com/cdn/14.21.1/img/item/2138.png" class="icon">
+        Elixir(s)
+      </div>
+    </div>
+    `;
+  }
+
+  if(value === "Summoner spells"){
+    content = `
+      ${header}
+      <p><img src="https://ddragon.leagueoflegends.com/cdn/14.21.1/img/spell/SummonerFlash.png" class="icon"><strong>Flash:</strong> E Flash is one of Ekko's best combos.</p>
+      <p><img src="https://ddragon.leagueoflegends.com/cdn/14.21.1/img/spell/SummonerSmite.png" class="icon"><strong>Smite:</strong> I believe smite is the strongest summoner spell to take alongside flash on Ekko, especially once upgraded. The slow, burst, the ability to secure objectives fits Ekko’s kit perfectly.
+</p>
+    `;
+  }
+
+  if(value === "Abilities"){
+    content = `
+      ${header}
+      <p><img src="https://ddragon.leagueoflegends.com/cdn/14.21.1/img/passive/Ekko_P.png" class="icon"><strong>Passive – Z‑Drive Resonance:</strong> Every 3rd hit deals bonus magic damage and grants movespeed. Almost all trades in which you can proc the passive are worth it. With the increased movement speed, it’s very hard for the enemy to retaliate. Use the movement speed to reposition, while waiting for your cooldowns to come back up.</p>
+      <p><img src="https://ddragon.leagueoflegends.com/cdn/14.21.1/img/spell/EkkoQ.png" class="icon"><strong>Q – Timewinder:</strong> Main damage and clear tool. Also slows and applies one passive stack</p>
+      <p><img src="https://ddragon.leagueoflegends.com/cdn/14.21.1/img/spell/EkkoW.png" class="icon"><strong>W – Parallel Convergence:</strong> Use w to push your enemies towards your desired location. Always try to place the w in your path as well to always have the shield. The shield granted should also be used to tank damage. Use w to tank tower shots, and damage from the enemy team. Also grants vision.</p>
+      <p><img src="https://ddragon.leagueoflegends.com/cdn/14.21.1/img/spell/EkkoE.png" class="icon"><strong>E – Phase Dive:</strong> Ekko’s E is a great gap closer, and can be used over most walls. Ekko will travel faster if he can connect the second part of E. Always look for possible connectors like champions, minions, ward, and orbs. It's also an auto reset.</p>
+      <p><img src="https://ddragon.leagueoflegends.com/cdn/14.21.1/img/spell/EkkoR.png" class="icon"><strong>R – Chronobreak:</strong> Ekko’s ult is great for tower diving, initiating fights, and stealing objectives. Everyone deserves a second chance.</p>
+    `;
+  }
+
+  if(value === "Combos"){
+    content = `
+      ${header}
+      <p><strong>W E E Q AA:</strong> Basic combo.</p>
+      <p><strong>E E Q AA W AA:</strong> Best for extended trades.</p>
+      <p><strong>E Q E AA:</strong> Animation cancels the Q.</p>
+      <p><strong>Q AA E E:</strong> E resets Ekko's auto attack.</p>
+      <p><strong>W E Q E:</strong> Two slows to help get the stun.</p>
+    `;
+  }
+
+  if(value === "Level 1"){
+    content = `
+      ${header}
+      <p>Ward the bush above red buff to spot late inavdes and enemies trying to cheese your raptors. Reset and switch to sweeper.  Red start is always preferred as it is a stronger buff than blue, and it’s nearest two camps are raptors and golems which are extremely good camps for Ekko. Only start blue if the enemy team is looking to cheese red level 1. Having Red keeps you healthier, and makes you deal more damage. A jungler with red vs. a jungler with blue will almost always win. It also makes it easier to secure the other side of your jungle, and scuttle crab.</p>
+    `;
+  }
+
+  if(value === "Pathing"){
+    content = `
+      ${header}
+   <p><strong>Recommended full jungle path on Blue Side:</strong></p>
+<p><em>Paths from Red Side are mirrored</em></p>
+
+<ul>
+  <p>Blue side: Start Raptors → Krugs → Red Buff → Wolves → Check for gank mid or top → Blue Buff → Check for gank mid or top → Gromp → Scuttle Crab → Back to Raptors → Krugs which is exactly enough gold for dark seal and blasting wand.</p>
+  <p>Red side: Blue Buff → Gromp → Wolf Camp → Raptors → Red Buff → Krugs → Scuttle Crab (Use when the enemy team looks to invade your Red).</p>
+</ul>
+
+<p>After the reset look to go to wolf camp and then gromp.</p>
+
+<p><strong>These are the routes I’ll take out of base:</strong></p>
+<img 
+  src="https://i.imgur.com/vQ5fbRn.png" 
+  alt="Jungle path routes" 
+  style="width:100%; max-width:700px; display:block; margin:20px auto; border:2px solid #c9aa71; border-radius:10px;"
+>
+    `;
+  }
+
+  if(value === "Hardest matchups"){
+    content = `
+      ${header}
+      <p>Champions like Nidalee, Kha’Zix, and Lee Sin who have a lot of mobility and burst are really hard for Ekko to deal with. They can force Ekko to ult early, and still have the mobility, and damage to follow, and kill Ekko at his original position.</p>
+    `;
+  }
+
+  if(value === "Team fighting"){
+    content = `
+      ${header}
+      <p>Ekko has great teamfighting. Look to proc your passive on as many targets as possible, and to land your w on priority targets. The longer Ekko can delay his ult the better for max healing, damage, and the best position. If you are engaging against lot of enemies try to proc Ekko passive, and ult immediately after. Then look to follow up with the movement speed from Ekko’s passive. Use w passive, and ult very liberally, especially when you can proc your passive on a squishy target. They will lose a majority of their health while you will still be full health, and will have kill pressure once your next e q combo is available. It’s better to save your ult when possible, and use the shield from w and the movement speed from passive to win trades. Ekko has a lot of healing sources making most trades worth taking.
+
+*Tip: Use the movement speed from passive to dodge enemy melee auto attacks.</p>
+    `;
+  }
+
+  if(value === "Closing out the game"){
+    content = `
+      ${header}
+      <p>Most games are won through baron and elder. Ekko is great at setting up, protecting, and stealing those objectives. Ekko can zone the enemy team with parallel convergence, to gain, and clear out vision.The passive from parallel convergence also helps secure the last hit on objectives with the bonus damage to low health enemies. Ekko can fast push all waves with q, and passive to set up objectives. It’s very difficult for the enemy to gain big advantages against Ekko since he can clear waves against tower pushes, and can threaten stealing baron, and dragons with his kit. Avoid farming camps far away from the objectives. Item purchases past Ekko’s core items aren’t worth risking baron or dragon over. Prioritize staying alive and securing the objectives over kills. Once baron is secured, Ekko is great at rotating between waves, and bringing empowered waves to towers. Use Ekko’s w, and q to zone enemies away from their towers.</p>
+    `;
+  }
+
+  sectionInfo.innerHTML = content;
 });
 </script>
 
 </body>
 </html>
+
+
+ 
+
+
+
+
+
+
 
 
 
