@@ -15,15 +15,15 @@
 
   html,body{height:100%;margin:0;}
   body {
-    font-family: "Beaufort for LOL", Arial, Helvetica, sans-serif;
-    background: var(--bg);
-    color: #e6edf3;
+    font-family:"Beaufort for LOL",Arial,Helvetica,sans-serif;
+    background:var(--bg);
+    color:#e6edf3;
     line-height:1.6;
     text-align:center;
   }
 
   header{
-    background: linear-gradient(90deg, #0a0f14, #1b2838);
+    background:linear-gradient(90deg,#0a0f14,#1b2838);
     border-bottom:2px solid var(--gold);
     padding:14px 20px;
     color:var(--gold);
@@ -33,6 +33,7 @@
     text-transform:uppercase;
     position:relative;
   }
+
   .settings-btn{
     position:absolute;
     top:12px;
@@ -56,7 +57,7 @@
     display:grid;
     gap:22px;
     padding:0 4px;
-    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+    grid-template-columns: repeat(auto-fit,minmax(260px,1fr));
     align-items:start;
   }
 
@@ -67,7 +68,7 @@
     border-radius:12px;
     padding:20px;
     text-decoration:none;
-    color: #e6edf3;
+    color:#e6edf3;
     overflow:hidden;
     box-sizing:border-box;
     height:230px;
@@ -101,17 +102,11 @@
   .diana-matchups::before{ background-image:url('https://ddragon.leagueoflegends.com/cdn/img/champion/splash/Diana_2.jpg'); }
   .ekko-guide::before{ background-image:url('https://ddragon.leagueoflegends.com/cdn/img/champion/splash/Ekko_0.jpg'); }
   .fundamentals::before{ background-image:url('https://cdn.wallpapersafari.com/92/79/MYTD9q.png'); }
-  .tierlist::before{ background: linear-gradient(to bottom, #1b2838 0%, #161b22 100%); }
-  .coaching::before{ background-image:url('https://m.media-amazon.com/images/I/71GlK3kDLJL.jpg'); opacity:0.20; }
-
+  .tierlist::before{ background: linear-gradient(to bottom,#1b2838 0%,#161b22 100%); }
+  .coaching::before{ background-image:url('https://m.media-amazon.com/images/I/71GlK3kDLJL.jpg'); opacity:0.2; }
   .rune-calculator::before{ background-image:url('https://i.imgur.com/kcs90ta.jpeg'); }
   .build-calculator::before{ background-image:url('https://i.imgur.com/uhLq29j.jpeg'); }
-  .discord-card::before{
-    background-image:url('https://i.imgur.com/fS2OKHV.jpeg');
-    background-size:cover;
-    background-position:center;
-    opacity:0.15;
-  }
+  .discord-card::before{ background-image:url('https://i.imgur.com/fS2OKHV.jpeg'); background-size:cover; background-position:center; opacity:0.15; }
 
   .tier-bar{ margin-top:12px; width:100%; height:60px; border-radius:6px; display:flex; overflow:hidden; position:relative; z-index:2; }
   .tier-s{ background:#f94144; flex:1; } .tier-a{ background:#f3722c; flex:1; } .tier-b{ background:#f8961e; flex:1; }
@@ -119,7 +114,7 @@
 
   #logoutBtn{
     display:block;
-    margin:18px auto; 
+    margin:18px auto;
     padding:12px 26px;
     background:#f94144;
     color:#fff;
@@ -134,12 +129,8 @@
   footer a{ color:var(--gold); text-decoration:none;}
   footer a:hover{text-decoration:underline;}
 
-  @media(min-width:900px){
-    .card-grid{ grid-template-columns: repeat(3, 1fr); }
-  }
-  @media(max-width:420px){
-    .card{ height:220px; padding:16px; }
-  }
+  @media(min-width:900px){ .card-grid{ grid-template-columns: repeat(3,1fr); } }
+  @media(max-width:420px){ .card{ height:220px; padding:16px; } }
 </style>
 </head>
 <body>
@@ -153,7 +144,6 @@
 
 <section class="section">
   <p>Choose a section to explore:</p>
-
   <div class="card-grid">
 
     <a href="dianaguide.html" class="card diana-guide" aria-label="Diana Guide">
@@ -207,34 +197,64 @@
   </div>
 </section>
 
-<button id="logoutBtn" onclick="logout()">Logout</button>
+<button id="logoutBtn">Logout</button>
 
 <footer>
   © 2026 LoL Fundamentals · Contact:
   <a href="mailto:arcsecond@lolfundamentals.com">arcsecond@lolfundamentals.com</a>
 </footer>
 
-<script>
-document.addEventListener('DOMContentLoaded', () => {
-  const loggedIn = localStorage.getItem('lolfundamentals_logged_in');
-  const paid = localStorage.getItem('lolfundamentals_paid');
+<!-- Firebase -->
+<script type="module">
+import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
+import { getAuth, onAuthStateChanged, signOut } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-auth.js";
+import { getFirestore, doc, getDoc } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
 
-  if (loggedIn !== 'true' || paid !== 'true') {
-    // redirect to homepage if not logged in or not paid
-    window.location.href = 'index.html';
+const firebaseConfig = {
+  apiKey: "AIzaSyCFRcEV7wdivqONnkjJubAZOjPMixrHMBI",
+  authDomain: "lol-fundamentals.firebaseapp.com",
+  projectId: "lol-fundamentals",
+  storageBucket: "lol-fundamentals.firebasestorage.app",
+  messagingSenderId: "1038440427584",
+  appId: "1:1038440427584:web:a82207151fd370dbedefa5"
+};
+
+const app = initializeApp(firebaseConfig);
+const auth = getAuth(app);
+const firestore = getFirestore(app);
+
+function redirectToLogin() {
+  localStorage.removeItem('lolfundamentals_logged_in');
+  localStorage.removeItem('lolfundamentals_paid');
+  window.location.href = 'index.html';
+}
+
+// Check login & paid status
+onAuthStateChanged(auth, async user => {
+  if (!user) {
+    redirectToLogin();
+  } else {
+    const snap = await getDoc(doc(firestore, "paidUsers", user.email));
+    if (!snap.exists() || !snap.data().paid) {
+      redirectToLogin();
+    } else {
+      // User is logged in and paid
+      localStorage.setItem('lolfundamentals_logged_in', 'true');
+      localStorage.setItem('lolfundamentals_paid', 'true');
+    }
   }
 });
 
-function logout(){
-  localStorage.removeItem('lolfundamentals_logged_in');
-  localStorage.removeItem('lolfundamentals_paid');
-  localStorage.removeItem('lolfundamentals_email');
-  window.location.href='index.html';
-}
+// Logout
+document.getElementById('logoutBtn').addEventListener('click', async () => {
+  await signOut(auth);
+  redirectToLogin();
+});
 </script>
 
 </body>
 </html>
+
 
 
 
