@@ -119,7 +119,7 @@
 
   #logoutBtn{
     display:block;
-    margin:18px auto; /* matches spacing above cards */
+    margin:18px auto;
     padding:12px 26px;
     background:#f94144;
     color:#fff;
@@ -156,50 +156,50 @@
 
   <div class="card-grid">
 
-    <a href="dianaguide.html" class="card diana-guide" aria-label="Diana Guide">
+    <a href="dianaguide.html" class="card diana-guide">
       <h3>Diana Mid Guide</h3>
       <p>Comprehensive guide for mastering Diana, including combos, macro, and advanced tips.</p>
     </a>
 
-    <a href="matchuphub.html" class="card diana-matchups" aria-label="Diana Matchups">
+    <a href="matchuphub.html" class="card diana-matchups">
       <h3>Diana Mid Matchups</h3>
       <p>Detailed breakdowns for every mid lane matchup.</p>
     </a>
 
-    <a href="ekkoguide.html" class="card ekko-guide" aria-label="Ekko Guide">
+    <a href="ekkoguide.html" class="card ekko-guide">
       <h3>Ekko Jungle Guide</h3>
       <p>Complete guide to playing Ekko Jungle, including combos, pathing, and advanced mechanics.</p>
     </a>
 
-    <a href="skills.html" class="card fundamentals" aria-label="Fundamentals">
+    <a href="skills.html" class="card fundamentals">
       <h3>Fundamentals</h3>
       <p>Learn core League skills to help climb at any elo.</p>
     </a>
 
-    <a href="tierlist.html" class="card tierlist" aria-label="Tierlist">
+    <a href="tierlist.html" class="card tierlist">
       <h3>Tierlist</h3>
       <p>Current champion tierlist showing which champions dominate the meta.</p>
-      <div class="tier-bar" aria-hidden="true">
+      <div class="tier-bar">
         <div class="tier-s"></div><div class="tier-a"></div><div class="tier-b"></div><div class="tier-c"></div><div class="tier-d"></div>
       </div>
     </a>
 
-    <a href="https://buy.stripe.com/5kQeV6f6kgVmbfE88iejK03" class="card coaching" aria-label="Coaching">
+    <a href="https://buy.stripe.com/5kQeV6f6kgVmbfE88iejK03" class="card coaching">
       <h3>Coaching</h3>
       <p>Book a personalized 1-hour coaching session. Members receive 25% off!</p>
     </a>
 
-    <a href="dianarunes.html" class="card rune-calculator" aria-label="Rune Calculator">
+    <a href="dianarunes.html" class="card rune-calculator">
       <h3>Rune Calculator</h3>
       <p>Compare rune setups for Diana that enhance her playstyle.</p>
     </a>
 
-    <a href="dianaitems.html" class="card build-calculator" aria-label="Combo Calculator">
+    <a href="dianaitems.html" class="card build-calculator">
       <h3>Build Calculator</h3>
       <p>Compare different item builds and ability combos for Diana at different stages of the game.</p>
     </a>
 
-    <a href="https://discord.gg/Ze75xenn" class="card discord-card" target="_blank" rel="noopener noreferrer">
+    <a href="https://discord.gg/Ze75xenn" class="card discord-card" target="_blank">
       <h3>Join our Discord</h3>
       <p>Connect with other members, share tips, and stay updated on guides.</p>
     </a>
@@ -214,20 +214,54 @@
   <a href="mailto:arcsecond@lolfundamentals.com">arcsecond@lolfundamentals.com</a>
 </footer>
 
-<script>
-  if (localStorage.getItem('lolfundamentals_logged_in') !== 'true') {
-    window.location.href = 'index.html';
+<!-- Firebase Paid User Check -->
+<script type="module">
+import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
+import { getFirestore, doc, getDoc } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
+
+const firebaseConfig = {
+  apiKey:"AIzaSyCFRcEV7wdivqONnkjJubAZOjPMixrHMBI",
+  authDomain:"lol-fundamentals.firebaseapp.com",
+  projectId:"lol-fundamentals",
+  storageBucket:"lol-fundamentals.firebasestorage.app",
+  messagingSenderId:"1038440427584",
+  appId:"1:1038440427584:web:a82207151fd370dbedefa5"
+};
+
+const app = initializeApp(firebaseConfig);
+const firestore = getFirestore(app);
+
+async function checkPaidUser() {
+  const email = localStorage.getItem("lolfundamentals_email");
+  const loggedIn = localStorage.getItem("lolfundamentals_logged_in");
+
+  if (!loggedIn || !email) {
+    window.location.href = "index.html";
+    return;
   }
-  function logout(){
-    localStorage.removeItem('lolfundamentals_logged_in');
-    window.location.href = 'index.html';
+
+  const snap = await getDoc(doc(firestore, "paidUsers", email));
+  if (!snap.exists() || !snap.data().paid) {
+    // Not paid → kick back
+    localStorage.removeItem("lolfundamentals_logged_in");
+    localStorage.removeItem("lolfundamentals_paid");
+    localStorage.removeItem("lolfundamentals_email");
+    window.location.href = "index.html";
   }
+}
+
+checkPaidUser();
+
+function logout(){
+  localStorage.removeItem('lolfundamentals_logged_in');
+  localStorage.removeItem('lolfundamentals_paid');
+  localStorage.removeItem('lolfundamentals_email');
+  window.location.href='index.html';
+}
 </script>
 
 </body>
 </html>
-
-
 
 
 
