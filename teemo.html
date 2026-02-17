@@ -4,85 +4,178 @@
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 <title>Diana Mid vs Teemo</title>
+
 <style>
-  body { 
-    margin: 0; 
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; 
-    background: #0d1117; 
-    color: #e6edf3; 
-    line-height: 1.4; 
-    display: none; /* hide until login verified */
+:root {
+  --gold:#c9aa71;
+  --bg:#0a0f14;
+  --card:#161b22;
+  --muted:#8b949e;
+  --orange:#f97316;
+}
+
+body { 
+  margin: 0; 
+  font-family: "Beaufort for LOL", Arial, Helvetica, sans-serif; 
+  background: var(--bg); 
+  color: #e6edf3; 
+  line-height: 1.5; 
+  min-height: 100vh; 
+  display: flex; 
+  flex-direction: column;
+}
+
+/* ===== HEADER ===== */
+header { 
+  background: rgba(13,17,23,0.9); 
+  border-bottom: 2px solid var(--gold); 
+  padding: 16px 20px; 
+  font-size: 26px; 
+  font-weight: 700; 
+  text-transform: uppercase; 
+  color: var(--gold); 
+  text-align: center; 
+  letter-spacing: 0.8px; 
+}
+
+/* ===== BACK BUTTON ===== */
+.back-button {
+  display: block; 
+  margin: 18px auto; 
+  padding: 9px 18px; 
+  background: linear-gradient(135deg, #c9aa71, #e0c77b); 
+  color: #000; 
+  text-decoration: none; 
+  border-radius: 8px; 
+  font-weight: bold; 
+  box-shadow: 0 0 10px rgba(201,170,113,0.5); 
+  width: fit-content; 
+}
+.back-button::before { content: "← "; }
+
+/* ===== CONTENT WIDTH ===== */
+.content-width { 
+  max-width: 920px; 
+  margin: 0 auto; 
+  padding: 0 20px; 
+}
+
+/* ===== MATCHUP CARD ===== */
+.matchup-container { 
+  display: flex; 
+  gap: 28px; 
+  padding: 26px; 
+  background: linear-gradient(180deg, #161b22, #12161d); 
+  border-radius: 18px; 
+  border: 1px solid rgba(201,170,113,0.18); 
+  box-shadow: 0 15px 40px rgba(0,0,0,0.7), inset 0 0 0 1px rgba(255,255,255,0.02); 
+}
+
+.matchup-left { 
+  display: flex; 
+  flex-direction: column; 
+  align-items: center; 
+  gap: 14px; 
+}
+
+.matchup-left img { 
+  width: 96px; 
+  height: 96px; 
+  border-radius: 14px; 
+  border: 2px solid var(--gold); 
+  box-shadow: 0 0 28px rgba(201,170,113,0.45); 
+}
+
+/* ===== WINRATE ===== */
+.winrate-bubble {
+  background: rgba(249,115,22,0.15);
+  color: var(--orange);
+  border: 1px solid rgba(249,115,22,0.45);
+  font-weight: 600;
+  padding: 6px 16px;
+  border-radius: 999px;
+  font-size: 14px;
+  letter-spacing: 0.5px;
+}
+
+.matchup-right { flex: 1; }
+
+.matchup-right h2 { 
+  margin: 0 0 14px 0; 
+  font-size: 22px; 
+  color: var(--gold); 
+  padding-bottom: 8px; 
+  border-bottom: 1px solid rgba(201,170,113,0.25); 
+}
+
+.matchup-right ul { 
+  padding-left: 18px; 
+  margin: 0; 
+}
+
+.matchup-right li { 
+  margin-bottom: 12px; 
+  line-height: 1.65; 
+}
+
+/* ===== FOOTER ===== */
+footer { 
+  text-align: center; 
+  padding: 18px 10px; 
+  font-size: 14px; 
+  color: var(--muted); 
+  margin-top: auto; 
+}
+
+/* ===== MOBILE ===== */
+@media (max-width: 600px) {
+  .matchup-container { 
+    flex-direction: column; 
+    align-items: center; 
   }
-  header { background: #161b22; padding: 10px 20px; text-align: center; font-size: 28px; font-weight: bold; color: #58a6ff; }
 
-  .back-link {
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    background: #c9aa71; 
-    color: #0d1117;
-    font-weight: bold;
-    text-decoration: none;
-    padding: 10px 20px;
-    border-radius: 25px;
-    border: 1px solid #c9aa71;
-    margin: 20px auto 30px auto;
+  .matchup-right { 
+    text-align: center; 
   }
-  .back-link:hover { background: #e6c17c; color: #0d1117; }
-
-  .matchup-container { display: flex; max-width: 900px; margin: -15px auto 0 auto; gap: 15px; padding: 0 20px 10px 20px; }
-  .matchup-left { display: flex; align-items: center; gap: 10px; flex: 0 0 auto; }
-  .matchup-left img { width: 80px; height: 80px; border-radius: 8px; }
-  .winrate-bubble { background: #F9D949; color: #0d1117; font-weight: bold; padding: 8px 14px; border-radius: 25px; font-size: 16px; white-space: nowrap; }
-
-  .matchup-right { flex: 1; color: #e6edf3; display: flex; flex-direction: column; justify-content: flex-start; margin-top: 0px; }
-  .matchup-right h2 { margin: 0 0 15px 0; font-size: 22px; }
-  .matchup-right ul { padding-left: 20px; margin: 0; }
-  .matchup-right li { margin-bottom: 6px; }
-
-  footer { text-align: center; padding: 15px 10px; font-size: 14px; color: #8b949e; }
-
-  @media (max-width: 600px) {
-    .matchup-container { flex-direction: column; align-items: center; padding: 10px; margin-top: -15px; }
-    .matchup-left { justify-content: center; }
-    .matchup-right { text-align: center; margin-top: 0px; }
-  }
+}
 </style>
-</head>
-<body>
-<header>Diana Mid Matchup – Teemo</header>
-
-<div style="text-align: center;">
-  <a href="matchuphub.html" class="back-link">&larr; Back to Matchup Hub</a>
-</div>
-
-<div class="matchup-container">
-  <div class="matchup-left">
-    <img src="https://ddragon.leagueoflegends.com/cdn/14.23.1/img/champion/Teemo.png" alt="Teemo">
-    <div class="winrate-bubble">51%</div>
-  </div>
-  <div class="matchup-right">
-    <h2>Matchup Notes</h2>
-    <ul>
-      <li>Get to lane early so you can stop him from hiding in lane.</li>
-      <li> Your Q will outrade his Q since his Q will draw minion aggro but he can follow up with an additional auto, if you're too close. </li>
-      <li>The main thing you need to be careful of in this matchup is the blind blocking your passive damage.</li>
-    </ul>
-  </div>
-</div>
-
-<footer>© 2025 LoL Fundamentals · Contact: arcsecond@lolfundamentals.com</footer>
 
 <script>
 if (localStorage.getItem('lolfundamentals_logged_in') !== 'true') {
-  alert('You must be logged in to view this page.');
   window.location.href = 'login.html';
-} else {
-  document.body.style.display = 'block';
 }
 </script>
+
+</head>
+<body>
+
+<header>Diana Mid Matchup – Teemo</header>
+
+<a href="matchuphub.html" class="back-button">Back to Matchup Hub</a>
+
+<div class="content-width">
+  <div class="matchup-container">
+    <div class="matchup-left">
+      <img src="https://ddragon.leagueoflegends.com/cdn/14.23.1/img/champion/Teemo.png" alt="Teemo">
+      <div class="winrate-bubble">51%</div>
+    </div>
+
+    <div class="matchup-right">
+      <h2>Matchup Notes</h2>
+      <ul>
+        <li>Get to lane early so you can stop him from hiding in lane.</li>
+        <li>Your Q will outrade his Q since his Q will draw minion aggro but he can follow up with an additional auto if you're too close.</li>
+        <li>The main thing you need to be careful of in this matchup is the blind blocking your passive damage.</li>
+      </ul>
+    </div>
+  </div>
+</div>
+
+<footer>© 2025 LoL Fundamentals · All rights reserved</footer>
+
 </body>
 </html>
+
 
 
 
