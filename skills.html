@@ -48,6 +48,25 @@ header {
   box-sizing: border-box;
 }
 
+.back-button {
+  display: inline-block;
+  margin: 30px auto 20px; /* Increased top margin */
+  padding: 10px 20px;
+  background: linear-gradient(135deg, #c9aa71, #e0c77b);
+  color: #000;
+  text-decoration: none;
+  border-radius: 8px;
+  font-weight: bold;
+  font-size: 16px;
+  transition: all 0.3s;
+  box-shadow: 0 0 10px rgba(201,170,113,0.5);
+}
+.back-button::before { content: "← "; }
+.back-button:hover {
+  background: linear-gradient(135deg, #e6c97f, #f0d88b);
+  box-shadow: 0 0 15px rgba(255,215,0,0.8);
+}
+
 .tabs {
   display: flex;
   flex-wrap: wrap;
@@ -71,25 +90,6 @@ header {
   background: linear-gradient(135deg, #c9aa71, #e0c77b);
   color: #000;
   box-shadow: 0 0 12px rgba(201,170,113,0.7);
-}
-
-.back-button {
-  display: inline-block;
-  margin: 10px auto 20px;
-  padding: 10px 20px;
-  background: linear-gradient(135deg, #c9aa71, #e0c77b);
-  color: #000;
-  text-decoration: none;
-  border-radius: 8px;
-  font-weight: bold;
-  font-size: 16px;
-  transition: all 0.3s;
-  box-shadow: 0 0 10px rgba(201,170,113,0.5);
-}
-.back-button::before { content: "← "; }
-.back-button:hover {
-  background: linear-gradient(135deg, #e6c97f, #f0d88b);
-  box-shadow: 0 0 15px rgba(255,215,0,0.8);
 }
 
 /* Progress Bars */
@@ -298,9 +298,4 @@ document.querySelector(`[data-section="${lastSection}"]`).classList.add('active'
 
 </body>
 </html>
-
-
-
-
-
 
