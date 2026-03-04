@@ -50,7 +50,7 @@ header {
 
 .back-button {
   display: inline-block;
-  margin: 20px auto; /* Same as dropdown version */
+  margin: 20px auto; /* keeps same height as original dropdown version */
   padding: 10px 20px;
   background: linear-gradient(135deg, #c9aa71, #e0c77b);
   color: #000;
@@ -92,7 +92,7 @@ header {
   box-shadow: 0 0 12px rgba(201,170,113,0.7);
 }
 
-/* Progress Bars */
+/* Total Mastery Progress Bar */
 .progress-wrap {
   width: 260px;
   max-width: 90vw;
@@ -203,9 +203,9 @@ footer {
 
 <div class="tabs" id="tabs"></div>
 
-<!-- Progress bar for current section only -->
+<!-- Total Mastery Progress -->
 <div class="progress-wrap">
-  <div class="progress-label" id="progressLabel">0% Complete</div>
+  <div class="progress-label" id="progressLabel">0% Total Mastery</div>
   <div class="progress-bar">
     <div class="progress-fill" id="progressFill"></div>
   </div>
@@ -245,23 +245,30 @@ function saveProgress() {
   localStorage.setItem("skillProgress", JSON.stringify(skillProgress));
 }
 
-function updateProgress(section) {
-  const skills = skillProgress[section];
-  const total = Object.keys(skills).length;
-  const done = Object.values(skills).filter(v => v).length;
+// Update total mastery
+function updateMastery() {
+  let total = 0, done = 0;
+  Object.values(skillProgress).forEach(section => {
+    Object.values(section).forEach(v => {
+      total++;
+      if(v) done++;
+    });
+  });
   const pct = total === 0 ? 0 : Math.round(done / total * 100);
   progressFill.style.width = pct + "%";
-  progressLabel.textContent = `${section}: ${pct}% Complete`;
+  progressLabel.textContent = pct === 100 ? "🏆 Fundamentals Mastered" : `${pct}% Total Mastery`;
 }
 
+// Toggle skill check
 function toggleCheck(section, skill, el) {
   skillProgress[section][skill] = !skillProgress[section][skill];
   saveProgress();
   el.classList.toggle("completed");
   el.innerHTML = el.classList.contains("completed") ? "✔" : "";
-  updateProgress(section);
+  updateMastery();
 }
 
+// Render skills for section
 function renderSkills(section) {
   skillList.innerHTML = skillData[section].map(skill => {
     const completed = skillProgress[section][skill] ? "completed" : "";
@@ -273,7 +280,7 @@ function renderSkills(section) {
       </li>
     `;
   }).join('');
-  updateProgress(section);
+  updateMastery();
 }
 
 // Render tabs
@@ -294,6 +301,7 @@ tabs.addEventListener('click', e => {
 const lastSection = localStorage.getItem("lastSection") || "Pre Game";
 renderSkills(lastSection);
 document.querySelector(`[data-section="${lastSection}"]`).classList.add('active');
+updateMastery();
 </script>
 
 </body>
