@@ -17,144 +17,122 @@ body {
   margin: 0;
   font-family: 'Beaufort for LOL', Arial, Helvetica, sans-serif;
   color: #fff;
-  background: url('https://64.media.tumblr.com/594ac290bec6d5e9ad98b5f53404f00b/245c4c3ee469f81d-e4/s1280x1920/1cda4284320eb2031758a9859dfe14ff8bbc50ba.jpg') no-repeat center center fixed;
-  background-size: cover;
-  overflow-x: hidden;
+  background: linear-gradient(to bottom, #0b0f16, #111827);
   min-height: 100vh;
   display: flex;
   flex-direction: column;
 }
 
-body::before {
-  content: "";
-  position: fixed;
-  top:0; left:0;
-  width:100%; height:100%;
-  background: rgba(10,15,20,0.25);
-  z-index: -1;
+header {
+  padding: 28px 20px 20px;
+  text-align: center;
+  border-bottom: 4px solid #c9aa71; /* gold line */
 }
 
-header {
-  background: rgba(13,17,23,0.9);
-  border-bottom: 2px solid #c9aa71;
-  padding: 20px;
-  font-weight: bold;
-  font-size: 26px;
-  text-transform: uppercase;
+header h1 {
+  margin: 0;
+  font-size: 28px;
   color: #c9aa71;
   letter-spacing: 1px;
-  text-align: center;
-  line-height: 1.1;
+  text-transform: uppercase;
+}
+
+.container {
+  width: 100%;
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 30px 20px 60px;
   box-sizing: border-box;
 }
 
-.back-button {
-  display: inline-block;
-  margin: 20px auto;
-  padding: 10px 20px;
-  background: linear-gradient(135deg, #c9aa71, #e0c77b);
-  color: #000;
-  text-decoration: none;
-  border-radius: 8px;
-  font-weight: bold;
-  font-size: 16px;
-  transition: all 0.3s;
-  box-shadow: 0 0 10px rgba(201,170,113,0.5);
-}
-.back-button::before { content: "← "; }
-.back-button:hover {
-  background: linear-gradient(135deg, #e6c97f, #f0d88b);
-  box-shadow: 0 0 15px rgba(255,215,0,0.8);
+/* Mastery Bar */
+.mastery-wrap {
+  margin-bottom: 30px;
 }
 
-#section-select-container {
-  margin: 20px auto;
-  text-align: center;
-}
-#section-select {
-  padding: 8px 12px;
-  font-size: 16px;
-  border-radius: 6px;
-  border: none;
-  background: #0f1722;
-  color: #c9aa71;
-  cursor: pointer;
-  width: 220px;
-  background-image: url("data:image/svg+xml;utf8,<svg fill='%23c9aa71' height='12' viewBox='0 0 24 24' width='12' xmlns='http://www.w3.org/2000/svg'><path d='M7 10l5 5 5-5z'/></svg>");
-  background-repeat: no-repeat;
-  background-position: right 10px center;
-  background-size: 12px;
-  appearance: none;
-  -webkit-appearance: none;
-  -moz-appearance: none;
-}
-
-/* Progress Bars */
-.progress-wrap {
-  width: 260px;
-  max-width: 90vw;
-  margin: 0 auto 20px;
-  text-align: center;
-}
-.progress-label {
+.mastery-label {
   font-size: 14px;
-  color: #fff;
-  margin-bottom: 6px;
+  margin-bottom: 8px;
+  opacity: 0.8;
 }
-.progress-bar {
+
+.mastery-bar {
   width: 100%;
-  height: 10px;
-  background: #0f1722;
-  border-radius: 20px;
+  height: 14px;
+  background: #1f2937;
+  border-radius: 30px;
   overflow: hidden;
 }
-.progress-fill {
+
+.mastery-fill {
   height: 100%;
   width: 0%;
-  background: linear-gradient(90deg, #c9aa71, #e6c97f);
+  background: #c9aa71; /* gold fill */
   transition: width 0.45s ease;
+  border-radius: 30px;
 }
 
-/* Skills */
+/* Tabs */
+.tabs {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-bottom: 30px;
+}
+
+.tab {
+  padding: 8px 16px;
+  border-radius: 20px;
+  border: 1px solid rgba(201,170,113,0.4);
+  background: transparent;
+  color: #c9aa71;
+  cursor: pointer;
+  font-size: 14px;
+  transition: all 0.2s ease;
+}
+
+.tab.active {
+  background: #c9aa71;
+  color: #000;
+}
+
+/* Skills Grid */
 .skill-list {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 20px;
   list-style: none;
   padding: 0;
-  width: 100%;
-  margin-bottom: 40px;
+  margin: 0;
+}
+
+@media (min-width: 900px) {
+  .skill-list {
+    grid-template-columns: 1fr 1fr;
+  }
 }
 
 .skill-list li {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  background: rgba(0,0,0,0.85);
-  border: 2px solid #c9aa71;
+  background: #111827;
+  border: 1px solid rgba(201,170,113,0.2);
   border-radius: 12px;
-  padding: 14px 18px;
-  margin: 0 auto 20px auto;
-  font-size: 18px;
-  width: 56vw;
-  max-width: 900px;
-  box-shadow: 0 4px 12px rgba(0,0,0,0.5);
-  transition: transform 0.25s, box-shadow 0.3s;
+  padding: 16px 20px;
+  transition: 0.2s ease, box-shadow 0.3s;
+  cursor: pointer;
 }
 
 .skill-list li:hover {
-  background: rgba(0,0,0,0.95);
-  transform: scale(1.03);
-  box-shadow: 0 8px 20px rgba(0,0,0,0.7);
+  border-color: rgba(201,170,113,0.6);
+  transform: translateY(-2px);
 }
 
-.skill-list li a {
+.skill-name {
   text-decoration: none;
   color: #fff;
-  flex-grow: 1;
-  text-align: center;
-  transition: color 0.3s;
-}
-
-.skill-list li a:hover {
-  color: #c9aa71; /* gold on hover */
+  font-size: 16px;
 }
 
 .checkmark {
@@ -166,59 +144,52 @@ header {
   justify-content: center;
   align-items: center;
   color: #c9aa71;
-  font-size: 18px;
-  flex-shrink: 0;
-  cursor: pointer;
+  font-size: 16px;
+  transition: 0.2s ease, box-shadow 0.3s, transform 0.3s;
 }
 
 .checkmark.completed {
   background: #c9aa71;
   color: #000;
+  box-shadow: 0 0 12px rgba(201,170,113,0.8);
+  transform: scale(1.15);
 }
 
 footer {
   margin-top: auto;
   text-align: center;
-  padding: 18px 10px;
-  font-size: 14px;
-  color: #fff;
-}
-
-@media(max-width: 700px){
-  header { font-size: 22px; padding: 15px 10px; }
-  #section-select { width: 95vw; font-size: 14px; padding: 8px 30px 8px 12px; }
-  .skill-list li { width: 85vw; font-size: 16px; padding: 10px 14px; }
+  padding: 20px;
+  font-size: 13px;
+  opacity: 0.5;
 }
 </style>
 </head>
+
 <body>
 
-<header>Skills Hub</header>
+<header>
+  <h1>Skills Hub</h1>
+</header>
 
-<a href="membershub.html" class="back-button">Back to Members Hub</a>
+<div class="container">
 
-<div id="section-select-container">
-  <select id="section-select">
-    <option value="Pre Game" selected>Pre Game</option>
-    <option value="Early Game">Early Game</option>
-    <option value="Mid Game">Mid Game</option>
-    <option value="Late Game">Late Game</option>
-    <option value="Advanced">Advanced</option>
-    <option value="Out of Game">Out of Game</option>
-  </select>
-</div>
-
-<!-- Progress bar for current section only -->
-<div class="progress-wrap">
-  <div class="progress-label" id="progressLabel">0% Complete</div>
-  <div class="progress-bar">
-    <div class="progress-fill" id="progressFill"></div>
+  <!-- Total Mastery -->
+  <div class="mastery-wrap">
+    <div class="mastery-label" id="masteryLabel">0% Total Mastery</div>
+    <div class="mastery-bar">
+      <div class="mastery-fill" id="masteryFill"></div>
+    </div>
   </div>
+
+  <!-- Tabs -->
+  <div class="tabs" id="tabs"></div>
+
+  <!-- Skills -->
+  <ul class="skill-list" id="skill-list"></ul>
+
 </div>
 
-<ul class="skill-list" id="skill-list"></ul>
-
-<footer>© 2026 LoL Fundamentals · All rights reserved</footer>
+<footer>© 2026 LoL Fundamentals</footer>
 
 <script>
 const skillData = {
@@ -226,80 +197,86 @@ const skillData = {
   "Early Game": ["Level 1","Farming","Trading","Wave Control","Back Timings","Power Spikes","Pathing","Laning","Map Awareness","Ganking","Roaming"],
   "Mid Game": ["Teamwork","Split Pushing","Sieging","Baiting","Lane Assignments","Vision"],
   "Late Game": ["Damage","Target Selection","Tab Screen","Win Conditions","Rotations"],
-  "Advanced": ["Animation Cancelling","Reading Players","Kiting","Positioning","Red vs Blue Side"],
+  "Advanced": ["Animation Cancelling","Reading Players","Kiting","Positioning"],
   "Out of Game": ["Setup","Mindset","Not Raging/Blaming","Reaction Time","Meta"]
 };
 
 let skillProgress = JSON.parse(localStorage.getItem("skillProgress") || "{}");
 
-// Initialize all sections and skills
 Object.keys(skillData).forEach(section => {
   skillProgress[section] = skillProgress[section] || {};
-  skillData[section].forEach(skill => {
-    skillProgress[section][skill] ??= false;
-  });
+  skillData[section].forEach(skill => skillProgress[section][skill] ??= false);
 });
-localStorage.setItem("skillProgress", JSON.stringify(skillProgress));
-
-const sectionSelect = document.getElementById('section-select');
-const skillList = document.getElementById('skill-list');
-const progressFill = document.getElementById('progressFill');
-const progressLabel = document.getElementById('progressLabel');
 
 function saveProgress() {
   localStorage.setItem("skillProgress", JSON.stringify(skillProgress));
 }
 
-// Update progress for the current section only
-function updateProgress(section) {
-  const skills = skillProgress[section];
-  const total = Object.keys(skills).length;
-  const done = Object.values(skills).filter(v => v).length;
-  const pct = total === 0 ? 0 : Math.round(done / total * 100);
-  progressFill.style.width = pct + "%";
-  progressLabel.textContent = `${section}: ${pct}% Complete`;
+const masteryFill = document.getElementById("masteryFill");
+const masteryLabel = document.getElementById("masteryLabel");
+const skillList = document.getElementById("skill-list");
+const tabs = document.getElementById("tabs");
+
+function updateMastery() {
+  let total = 0, done = 0;
+  Object.values(skillProgress).forEach(section => {
+    Object.values(section).forEach(value => {
+      total++;
+      if (value) done++;
+    });
+  });
+  const pct = Math.round((done / total) * 100);
+  masteryFill.style.width = pct + "%";
+  masteryLabel.textContent = pct === 100
+    ? "🏆 Fundamentals Mastered"
+    : `${pct}% Total Mastery`;
 }
 
-function toggleCheck(section, skill, element) {
+function toggleCheck(section, skill, el) {
   skillProgress[section][skill] = !skillProgress[section][skill];
   saveProgress();
-  element.classList.toggle("completed");
-  element.innerHTML = element.classList.contains("completed") ? "✔" : "";
-  updateProgress(section);
+  el.classList.toggle("completed");
+  el.innerHTML = el.classList.contains("completed") ? "✔" : "";
+  updateMastery();
 }
 
 function renderSkills(section) {
-  const skills = skillData[section];
-  skillList.innerHTML = skills.map(skill => {
+  skillList.innerHTML = skillData[section].map(skill => {
     const completed = skillProgress[section][skill] ? "completed" : "";
     const link = skill.toLowerCase().replace(/[^a-z0-9]/g,'') + ".html";
     return `
-      <li data-skill="${skill}">
-        <a href="${link}">${skill}</a>
-        <div class="checkmark ${completed}" onclick="toggleCheck('${section}','${skill}', this)">
+      <li onclick="toggleCheck('${section}','${skill}', this.querySelector('.checkmark'))">
+        <a class="skill-name" href="${link}" onclick="event.stopPropagation()">${skill}</a>
+        <div class="checkmark ${completed}">
           ${completed ? "✔" : ""}
         </div>
       </li>
     `;
-  }).join('');
-  updateProgress(section);
+  }).join("");
 }
 
-// Section change
-sectionSelect.addEventListener('change', () => {
-  const selected = sectionSelect.value;
-  localStorage.setItem("lastSection", selected); // remember last section
-  renderSkills(selected);
+tabs.innerHTML = Object.keys(skillData).map(section =>
+  `<div class="tab" data-section="${section}">${section}</div>`
+).join("");
+
+tabs.addEventListener("click", e => {
+  if (!e.target.classList.contains("tab")) return;
+  document.querySelectorAll(".tab").forEach(t => t.classList.remove("active"));
+  e.target.classList.add("active");
+  const section = e.target.dataset.section;
+  localStorage.setItem("lastSection", section);
+  renderSkills(section);
 });
 
-// Initial render
 const lastSection = localStorage.getItem("lastSection") || "Pre Game";
-sectionSelect.value = lastSection;
 renderSkills(lastSection);
+document.querySelector(`[data-section="${lastSection}"]`).classList.add("active");
+updateMastery();
 </script>
 
 </body>
 </html>
+
 
 
 
