@@ -200,9 +200,30 @@ import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.2/fireba
 import { getAuth, signInWithEmailAndPassword, createUserWithEmailAndPassword, sendPasswordResetEmail } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-auth.js";
 import { getFirestore, doc, setDoc, serverTimestamp, getDoc } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
 
-if(localStorage.getItem("lolfundamentals_logged_in")==="true" &&
-   localStorage.getItem("lolfundamentals_paid")==="true"){
-  window.location.href="membershub.html";
+const isLoggedIn = localStorage.getItem("lolfundamentals_logged_in")==="true";
+const isPaid = localStorage.getItem("lolfundamentals_paid")==="true";
+
+if (isLoggedIn && isPaid) {
+  const hero = document.querySelector(".hero");
+
+  const welcomeBox = document.createElement("div");
+  welcomeBox.style.marginTop = "20px";
+
+  welcomeBox.innerHTML = `
+    <p style="color:#c9aa71;font-weight:bold;margin-bottom:10px;">
+      Welcome back 👋 Ready to keep climbing?
+    </p>
+    <a href="membershub.html" class="btn">
+      Go to Members Hub
+    </a>
+  `;
+
+  hero.appendChild(welcomeBox);
+}
+
+if (isLoggedIn && isPaid) {
+  document.getElementById("signupHeroBtn").style.display = "none";
+  document.getElementById("loginHeroBtn").style.display = "none";
 }
 
 const firebaseConfig={apiKey:"AIzaSyCFRcEV7wdivqONnkjJubAZOjPMixrHMBI",authDomain:"lol-fundamentals.firebaseapp.com",projectId:"lol-fundamentals",storageBucket:"lol-fundamentals.firebasestorage.app",messagingSenderId:"1038440427584",appId:"1:1038440427584:web:a82207151fd370dbedefa5"};
