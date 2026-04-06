@@ -57,7 +57,7 @@ header {
   box-shadow: 0 0 15px rgba(255,215,0,0.8);
 }
 
-/* Tabs (added) */
+/* Tabs */
 .tabs {
   display: none;
   justify-content: center;
@@ -73,7 +73,6 @@ header {
   color: #c9aa71;
   font-weight: bold;
   cursor: pointer;
-  transition: all 0.25s;
 }
 .tab.active {
   background: linear-gradient(135deg, #c9aa71, #e0c77b);
@@ -153,11 +152,7 @@ footer { margin-top: auto; text-align: center; padding: 18px 10px; font-size: 14
 
 <a href="https://lolfundamentals.com" class="back-button">Back to LoL Fundamentals</a>
 
-<!-- Tabs (added) -->
-
 <div class="tabs" id="tabs"></div>
-
-<!-- Dropdown (unchanged) -->
 
 <div id="section-select-container">
   <select id="section-select">
@@ -170,8 +165,10 @@ footer { margin-top: auto; text-align: center; padding: 18px 10px; font-size: 14
   </select>
 </div>
 
+<!-- TOTAL MASTERY -->
+
 <div class="progress-wrap">
-  <div class="progress-label" id="progressLabel">0% Complete</div>
+  <div class="progress-label" id="progressLabel">0% Total Mastery</div>
   <div class="progress-bar">
     <div class="progress-fill" id="progressFill"></div>
   </div>
@@ -179,7 +176,7 @@ footer { margin-top: auto; text-align: center; padding: 18px 10px; font-size: 14
 
 <ul class="skill-list" id="skill-list"></ul>
 
-<footer>© 2025 LoL Fundamentals · All rights reserved</footer>
+<footer>© 2026 LoL Fundamentals · All rights reserved</footer>
 
 <script>
 const skillData = {
@@ -205,7 +202,6 @@ const progressFill = document.getElementById('progressFill');
 const progressLabel = document.getElementById('progressLabel');
 const tabs = document.getElementById('tabs');
 
-/* Tabs build (added) */
 tabs.innerHTML = Object.keys(skillData).map(section =>
   `<div class="tab" data-section="${section}">${section}</div>`
 ).join('');
@@ -228,13 +224,23 @@ function saveProgress() {
   localStorage.setItem("skillProgressFree", JSON.stringify(skillProgress));
 }
 
-function updateProgress(section) {
-  const skills = skillProgress[section];
-  const total = Object.keys(skills).length;
-  const done = Object.values(skills).filter(v => v).length;
+/* TOTAL mastery (fixed) */
+function updateMastery() {
+  let total = 0, done = 0;
+
+  Object.values(skillProgress).forEach(section => {
+    Object.values(section).forEach(v => {
+      total++;
+      if(v) done++;
+    });
+  });
+
   const pct = total === 0 ? 0 : Math.round(done / total * 100);
+
   progressFill.style.width = pct + "%";
-  progressLabel.textContent = `${section}: ${pct}% Complete`;
+  progressLabel.textContent = pct === 100
+    ? "🏆 Fundamentals Mastered"
+    : `${pct}% Total Mastery`;
 }
 
 function toggleCheck(section, skill, element) {
@@ -242,7 +248,7 @@ function toggleCheck(section, skill, element) {
   saveProgress();
   element.classList.toggle("completed");
   element.innerHTML = element.classList.contains("completed") ? "✔" : "";
-  updateProgress(section);
+  updateMastery();
 }
 
 function renderSkills(section) {
@@ -263,10 +269,9 @@ function renderSkills(section) {
       </li>
     `;
   }).join('');
-  updateProgress(section);
+  updateMastery();
 }
 
-/* Sync dropdown → tabs */
 sectionSelect.addEventListener('change', () => {
   const selected = sectionSelect.value;
 
@@ -278,7 +283,6 @@ sectionSelect.addEventListener('change', () => {
   renderSkills(selected);
 });
 
-/* Initial load */
 const lastSection = localStorage.getItem("lastSectionFree") || "Pre Game";
 sectionSelect.value = lastSection;
 renderSkills(lastSection);
@@ -290,5 +294,3 @@ document.querySelectorAll('.tab').forEach(t => {
 
 </body>
 </html>
-
-
