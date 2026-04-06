@@ -1,4 +1,5 @@
 <!DOCTYPE html>
+
 <html lang="en">
 <head>
 <meta charset="UTF-8" />
@@ -17,6 +18,7 @@ body {
   display: flex;
   flex-direction: column;
 }
+
 body::before {
   content: "";
   position: fixed;
@@ -25,6 +27,7 @@ body::before {
   background: rgba(10,15,20,0.25);
   z-index: -1;
 }
+
 header {
   background: rgba(13,17,23,0.9);
   border-bottom: 2px solid #c9aa71;
@@ -35,9 +38,8 @@ header {
   color: #c9aa71;
   letter-spacing: 1px;
   text-align: center;
-  line-height: 1.1;
-  box-sizing: border-box;
 }
+
 .back-button {
   display: inline-block;
   margin: 20px auto;
@@ -54,8 +56,33 @@ header {
 .back-button::before { content: "← "; }
 .back-button:hover {
   background: linear-gradient(135deg, #e6c97f, #f0d88b);
-  box-shadow: 0 0 15px rgba(255,215,0,0.8);
 }
+
+/* Tabs */
+.tabs {
+  display: none;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin: 20px 0;
+}
+
+.tab {
+  padding: 10px 18px;
+  border-radius: 12px;
+  border: 2px solid #c9aa71;
+  background: rgba(0,0,0,0.85);
+  color: #c9aa71;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+.tab.active {
+  background: linear-gradient(135deg, #c9aa71, #e0c77b);
+  color: #000;
+}
+
+/* Dropdown */
 #section-select-container { margin: 20px auto; text-align: center; }
 #section-select {
   padding: 8px 12px;
@@ -65,18 +92,36 @@ header {
   background: #0f1722;
   color: #c9aa71;
   cursor: pointer;
-  width: 220px;
-  background-image: url("data:image/svg+xml;utf8,<svg fill='%23c9aa71' height='12' viewBox='0 0 24 24' width='12' xmlns='http://www.w3.org/2000/svg'><path d='M7 10l5 5 5-5z'/></svg>");
-  background-repeat: no-repeat;
-  background-position: right 10px center;
-  background-size: 12px;
-  appearance: none;
 }
-.progress-wrap { width: 260px; max-width: 90vw; margin: 0 auto 20px; text-align: center; }
-.progress-label { font-size: 14px; color: #fff; margin-bottom: 6px; }
-.progress-bar { width: 100%; height: 10px; background: #0f1722; border-radius: 20px; overflow: hidden; }
-.progress-fill { height: 100%; width: 0%; background: linear-gradient(90deg, #c9aa71, #e6c77f); transition: width 0.45s ease; }
-.skill-list { list-style: none; padding: 0; width: 100%; margin-bottom: 40px; }
+
+/* Desktop = tabs */
+@media(min-width: 701px){
+  .tabs { display: flex; }
+  #section-select-container { display: none; }
+}
+
+/* Mobile = dropdown */
+@media(max-width: 700px){
+  .tabs { display: none; }
+}
+
+.progress-wrap {
+  width: 260px;
+  margin: 0 auto 20px;
+  text-align: center;
+}
+.progress-bar {
+  height: 10px;
+  background: #0f1722;
+  border-radius: 20px;
+}
+.progress-fill {
+  height: 100%;
+  width: 0%;
+  background: linear-gradient(90deg, #c9aa71, #e6c77f);
+}
+
+.skill-list { list-style: none; padding: 0; }
 .skill-list li {
   display: flex;
   justify-content: space-between;
@@ -86,60 +131,63 @@ header {
   border-radius: 12px;
   padding: 14px 18px;
   margin: 0 auto 20px auto;
-  font-size: 18px;
   width: 56vw;
   max-width: 900px;
-  box-shadow: 0 4px 12px rgba(0,0,0,0.5);
-  transition: transform 0.25s, box-shadow 0.3s;
 }
-.skill-list li:hover { background: rgba(0,0,0,0.95); transform: scale(1.03); box-shadow: 0 8px 20px rgba(0,0,0,0.7); }
-.skill-list li a { text-decoration: none; color: #fff; flex-grow: 1; text-align: center; position: relative; transition: color 0.3s; }
-.skill-list li a:hover { color: #c9aa71; } /* gold hover for all */
+
+.skill-list li a {
+  text-decoration: none;
+  color: #fff;
+  flex-grow: 1;
+  text-align: center;
+}
+
 .skill-list li a.locked::after {
-  content: "🔒";
-  position: absolute;
-  right: 10px;
-  top: 50%;
-  transform: translateY(-50%);
-  font-size: 18px;
-  color: #c9aa71;
+  content: " 🔒";
 }
+
 .checkmark {
-  width: 26px; height: 26px;
+  width: 26px;
+  height: 26px;
   border-radius: 50%;
   border: 2px solid #c9aa71;
-  display: flex; justify-content: center; align-items: center;
-  color: #c9aa71; font-size: 18px; flex-shrink: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
   cursor: pointer;
 }
-.checkmark.completed { background: #c9aa71; color: #000; }
-footer { margin-top: auto; text-align: center; padding: 18px 10px; font-size: 14px; color: #fff; }
-@media(max-width: 700px){
-  header { font-size: 22px; padding: 15px 10px; }
-  #section-select { width: 95vw; font-size: 14px; padding: 8px 30px 8px 12px; }
-  .skill-list li { width: 85vw; font-size: 16px; padding: 10px 14px; }
+.checkmark.completed {
+  background: #c9aa71;
+  color: #000;
+}
+
+footer {
+  margin-top: auto;
+  text-align: center;
+  padding: 18px;
 }
 </style>
+
 </head>
+
 <body>
 
 <header>Skills Hub (Free)</header>
 
 <a href="https://lolfundamentals.com" class="back-button">Back to LoL Fundamentals</a>
 
+<!-- Tabs -->
+
+<div class="tabs" id="tabs"></div>
+
+<!-- Dropdown (mobile only) -->
+
 <div id="section-select-container">
-  <select id="section-select">
-    <option value="Pre Game" selected>Pre Game</option>
-    <option value="Early Game">Early Game</option>
-    <option value="Mid Game">Mid Game</option>
-    <option value="Late Game">Late Game</option>
-    <option value="Advanced">Advanced</option>
-    <option value="Out of Game">Out of Game</option>
-  </select>
+  <select id="section-select"></select>
 </div>
 
 <div class="progress-wrap">
-  <div class="progress-label" id="progressLabel">0% Complete</div>
+  <div id="progressLabel">0%</div>
   <div class="progress-bar">
     <div class="progress-fill" id="progressFill"></div>
   </div>
@@ -147,7 +195,7 @@ footer { margin-top: auto; text-align: center; padding: 18px 10px; font-size: 14
 
 <ul class="skill-list" id="skill-list"></ul>
 
-<footer>© 2025 LoL Fundamentals · All rights reserved</footer>
+<footer>© 2026 LoL Fundamentals</footer>
 
 <script>
 const skillData = {
@@ -159,20 +207,20 @@ const skillData = {
   "Out of Game": ["Setup","Mindset","Not Raging/Blaming","Reaction Time","Meta"]
 };
 
-// All skills start unchecked
-let skillProgress = JSON.parse(localStorage.getItem("skillProgressFree") || "{}");
-Object.keys(skillData).forEach(section => {
-  skillProgress[section] = skillProgress[section] || {};
-  skillData[section].forEach(skill => skillProgress[section][skill] = false);
-});
-localStorage.setItem("skillProgressFree", JSON.stringify(skillProgress));
-
-const sectionSelect = document.getElementById('section-select');
+const tabs = document.getElementById('tabs');
+const select = document.getElementById('section-select');
 const skillList = document.getElementById('skill-list');
 const progressFill = document.getElementById('progressFill');
 const progressLabel = document.getElementById('progressLabel');
 
-function saveProgress() {
+let skillProgress = JSON.parse(localStorage.getItem("skillProgressFree") || "{}");
+
+Object.keys(skillData).forEach(section => {
+  skillProgress[section] = skillProgress[section] || {};
+  skillData[section].forEach(skill => skillProgress[section][skill] ??= false);
+});
+
+function save() {
   localStorage.setItem("skillProgressFree", JSON.stringify(skillProgress));
 }
 
@@ -180,55 +228,80 @@ function updateProgress(section) {
   const skills = skillProgress[section];
   const total = Object.keys(skills).length;
   const done = Object.values(skills).filter(v => v).length;
-  const pct = total === 0 ? 0 : Math.round(done / total * 100);
+  const pct = Math.round(done / total * 100);
   progressFill.style.width = pct + "%";
-  progressLabel.textContent = `${section}: ${pct}% Complete`;
-}
-
-function toggleCheck(section, skill, element) {
-  skillProgress[section][skill] = !skillProgress[section][skill];
-  saveProgress();
-  element.classList.toggle("completed");
-  element.innerHTML = element.classList.contains("completed") ? "✔" : "";
-  updateProgress(section);
+  progressLabel.textContent = pct + "%";
 }
 
 function renderSkills(section) {
-  const skills = skillData[section];
-  skillList.innerHTML = skills.map(skill => {
+  skillList.innerHTML = skillData[section].map(skill => {
     const completed = skillProgress[section][skill] ? "completed" : "";
-    let href = "#";
-    let isLocked = skill !== "Champion Select";
-    if(skill === "Champion Select") href = "https://lolfundamentals.com/freechampionselect";
+    const locked = skill !== "Champion Select";
+
     return `
-      <li data-skill="${skill}">
-        <a href="${href}" class="${isLocked ? "locked" : ""}" ${isLocked ? "onclick='alert(\"Sign up to unlock this skill\"); return false;'" : ""}>
+      <li>
+        <a href="${locked ? "#" : "https://lolfundamentals.com/freechampionselect"}"
+           class="${locked ? "locked" : ""}"
+           ${locked ? "onclick='alert(\"Sign up to unlock this skill\"); return false;'" : ""}>
           ${skill}
         </a>
-        <div class="checkmark ${completed}" onclick="toggleCheck('${section}','${skill}', this)"></div>
+        <div class="checkmark ${completed}"
+          onclick="toggle('${section}','${skill}', this)">
+          ${completed ? "✔" : ""}
+        </div>
       </li>
     `;
   }).join('');
+
   updateProgress(section);
 }
 
-// Section change
-sectionSelect.addEventListener('change', () => {
-  const selected = sectionSelect.value;
-  localStorage.setItem("lastSectionFree", selected);
-  renderSkills(selected);
+function toggle(section, skill, el){
+  skillProgress[section][skill] = !skillProgress[section][skill];
+  el.classList.toggle("completed");
+  el.innerHTML = el.classList.contains("completed") ? "✔" : "";
+  save();
+  updateProgress(section);
+}
+
+function setSection(section){
+  renderSkills(section);
+
+  // sync dropdown
+  select.value = section;
+
+  // sync tabs
+  document.querySelectorAll('.tab').forEach(t=>{
+    t.classList.toggle('active', t.dataset.section === section);
+  });
+
+  localStorage.setItem("lastSectionFree", section);
+}
+
+/* Build Tabs */
+tabs.innerHTML = Object.keys(skillData)
+  .map(s => `<div class="tab" data-section="${s}">${s}</div>`)
+  .join('');
+
+tabs.addEventListener('click', e=>{
+  if(e.target.classList.contains('tab')){
+    setSection(e.target.dataset.section);
+  }
 });
 
-// Initial render
-const lastSection = localStorage.getItem("lastSectionFree") || "Pre Game";
-sectionSelect.value = lastSection;
-renderSkills(lastSection);
-</script>
+/* Build Dropdown */
+select.innerHTML = Object.keys(skillData)
+  .map(s => `<option value="${s}">${s}</option>`)
+  .join('');
 
-<!-- Optional modal placeholder -->
-<div id="signup-modal" style="display:none;">
-  <!-- Your homepage signup modal content -->
-</div>
+select.addEventListener('change', ()=>{
+  setSection(select.value);
+});
+
+/* Init */
+const start = localStorage.getItem("lastSectionFree") || "Pre Game";
+setSection(start);
+</script>
 
 </body>
 </html>
