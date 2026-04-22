@@ -24,12 +24,12 @@ body {
   flex-direction: column;
 }
 
-/* ===== HEADER (MATCHES HUB SCALE) ===== */
+/* ===== HEADER ===== */
 header {
   background: rgba(13,17,23,0.9);
   border-bottom: 2px solid var(--gold);
   padding: 16px 20px;
-  font-size: 26px; /* restored to hub size */
+  font-size: 26px;
   font-weight: 700;
   text-transform: uppercase;
   color: var(--gold);
@@ -52,7 +52,7 @@ header {
 }
 .back-button::before { content: "← "; }
 
-/* ===== SHARED WIDTH ===== */
+/* ===== CONTENT WIDTH ===== */
 .content-width {
   max-width: 920px;
   margin: 0 auto;
@@ -135,7 +135,6 @@ header {
     inset 0 0 0 1px rgba(255,255,255,0.02);
 }
 
-/* VODs header (matches Matchup Notes) */
 .video-card h2 {
   margin: 0 0 16px 0;
   font-size: 22px;
@@ -149,6 +148,7 @@ header {
   height: 480px;
   border: none;
   border-radius: 12px;
+  margin-bottom: 16px;
 }
 
 /* ===== FOOTER ===== */
@@ -213,10 +213,11 @@ if (localStorage.getItem('lolfundamentals_logged_in') !== 'true') {
   <div class="video-card">
     <h2>VODs</h2>
     <iframe src="https://www.youtube.com/embed/sd7DuyRakh8" allowfullscreen></iframe>
+    <iframe src="https://www.youtube.com/embed/5v0Iswlyw_k" allowfullscreen></iframe>
   </div>
 </div>
 
-<footer>© 2026 LoL Fundamentals · All rights reserved</footer>
+<footer>© 2026 LoL Fundamentals</footer>
 
 </body>
 </html>
