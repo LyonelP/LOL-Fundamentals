@@ -109,42 +109,21 @@
   .build-calculator::before{ background-image:url('https://i.imgur.com/uhLq29j.jpeg'); }
   .discord-card::before{ background-image:url('https://i.imgur.com/fS2OKHV.jpeg'); opacity:0.15; }
 
-  /* EKKO FLIP */
-  .ekko-flip { perspective:1000px; cursor:pointer; }
-
-  .ekko-side {
-    position:absolute;
-    inset:0;
-    display:flex;
-    flex-direction:column;
-    justify-content:center;
-    align-items:center;
-    backface-visibility:hidden;
-    padding:20px;
-    text-align:center;
-  }
-
-  .ekko-front { transform:rotateY(0deg); }
-  .ekko-back { transform:rotateY(180deg); }
-
-  .ekko-flip.flipped .ekko-front { transform:rotateY(180deg); }
-  .ekko-flip.flipped .ekko-back { transform:rotateY(360deg); }
-
-  .ekko-btn {
+  .tier-bar{
     margin-top:12px;
-    padding:8px 16px;
-    background:linear-gradient(135deg,#c9aa71,#e0c77b);
-    color:#000;
-    border:none;
+    width:100%;
+    height:60px;
     border-radius:6px;
-    font-weight:bold;
-    cursor:pointer;
-    z-index:3;
+    display:flex;
+    overflow:hidden;
+    position:relative;
+    z-index:2;
   }
-
-  .tier-bar{ margin-top:12px; width:100%; height:60px; border-radius:6px; display:flex; overflow:hidden; position:relative; z-index:2; }
-  .tier-s{ background:#f94144; flex:1; } .tier-a{ background:#f3722c; flex:1; } .tier-b{ background:#f8961e; flex:1; }
-  .tier-c{ background:#f9c74f; flex:1; } .tier-d{ background:#90be6d; flex:1; }
+  .tier-s{ background:#f94144; flex:1; }
+  .tier-a{ background:#f3722c; flex:1; }
+  .tier-b{ background:#f8961e; flex:1; }
+  .tier-c{ background:#f9c74f; flex:1; }
+  .tier-d{ background:#90be6d; flex:1; }
 
   #logoutBtn{
     display:block;
@@ -157,94 +136,181 @@
     font-weight:700;
     cursor:pointer;
   }
+  #logoutBtn:hover{ background:#ff5959; }
 
-  footer{ text-align:center; padding:26px 10px 40px; color:var(--muted); font-size:14px; border-top:1px solid #1f2937;}
+  footer{
+    text-align:center;
+    padding:26px 10px 40px;
+    color:var(--muted);
+    font-size:14px;
+    background:var(--bg);
+    border-top:1px solid #1f2937;
+  }
+  footer a{ color:var(--gold); text-decoration:none; }
+  footer a:hover{text-decoration:underline;}
+
+  @media(min-width:900px){
+    .card-grid{ grid-template-columns: repeat(3,1fr); }
+  }
+  @media(max-width:420px){
+    .card{ height:220px; padding:16px; }
+  }
+
+  /* ===== EKKO FIX (NO FLIP, SAFE) ===== */
+  .ekko-actions{
+    margin-top:14px;
+    display:flex;
+    gap:10px;
+    flex-wrap:wrap;
+    justify-content:center;
+    z-index:2;
+  }
+
+  .ekko-btn{
+    padding:8px 14px;
+    border-radius:6px;
+    text-decoration:none;
+    font-weight:bold;
+    font-size:14px;
+    z-index:3;
+    position:relative;
+  }
+
+  .ekko-btn.guide{
+    background:#c9aa71;
+    color:#000;
+  }
+
+  .ekko-btn.matchups{
+    background:#2f81f7;
+    color:#fff;
+  }
 </style>
 </head>
 
 <body>
 
-<header>Members Hub</header>
+<header>
+  Members Hub
+  <a href="https://lolfundamentals.com/settings" class="settings-btn" aria-label="Settings">
+    <svg viewBox="0 0 24 24" aria-hidden="true">
+      <path d="M12 15.5A3.5 3.5 0 1 0 12 8.5a3.5 3.5 0 0 0 0 7z"/>
+      <path d="M19.4 15a7.9 7.9 0 0 0 .1-1 7.9 7.9 0 0 0-.1-1l2.1-1.6a.5.5 0 0 0 .12-.65l-2-3.46a.5.5 0 0 0-.6-.22l-2.49 1a7.7 7.7 0 0 0-1.73-.99L14.9 2.9a.5.5 0 0 0-.5-.4h-4a.5.5 0 0 0-.5.4L8.2 6.1a7.7 7.7 0 0 0-1.73.99l-2.49-1a.5.5 0 0 0-.6.22L1.7 9.78a.5.5 0 0 0 .12.65L3.9 12a7.9 7.9 0 0 0-.1 1c0 .34.03.67.1 1L1.7 15.6a.5.5 0 0 0-.12.65l2 3.46c.14.25.44.36.7.27l2.49-1c.54.4 1.12.73 1.73.99l.7 3.2c.06.28.3.49.58.49h4c.28 0 .52-.21.58-.49l.7-3.2c.6-.26 1.19-.59 1.73-.99l2.49 1c.26.09.56-.02.7-.27l2-3.46a.5.5 0 0 0-.12-.65l-2.3-1.6z"/>
+    </svg>
+  </a>
+</header>
 
 <section class="section">
-  <p>Choose a section to explore:</p>
+<p>Choose a section to explore:</p>
 
-  <div class="card-grid">
+<div class="card-grid">
 
-    <a href="dianaguide6934.html" class="card diana-guide">
-      <h3>Diana Mid Guide</h3>
-      <p>Comprehensive guide for mastering Diana.</p>
-    </a>
+<a href="dianaguide6934.html" class="card diana-guide">
+  <h3>Diana Mid Guide</h3>
+  <p>Comprehensive guide for mastering Diana, including combos, macro, and advanced tips.</p>
+</a>
 
-    <a href="matchuphub.html" class="card diana-matchups">
-      <h3>Diana Mid Matchups</h3>
-      <p>Detailed breakdowns and VODs.</p>
-    </a>
+<a href="matchuphub.html" class="card diana-matchups">
+  <h3>Diana Mid Matchups</h3>
+  <p>Detailed breakdowns and VODs for every mid lane champion.</p>
+</a>
 
-    <!-- EKKO (REPLACED) -->
-    <div class="card ekko-guide ekko-flip" onclick="flipEkko(this)">
-      <div class="ekko-side ekko-front">
-        <h3>Ekko Jungle Guide</h3>
-        <p>Complete guide to playing Ekko Jungle.</p>
-        <button class="ekko-btn" onclick="goEkko(event,'ekkoguide.html')">Open Guide</button>
-      </div>
-      <div class="ekko-side ekko-back">
-        <h3>Ekko Jungle Matchups</h3>
-        <p>Matchups, invades, and tracking.</p>
-        <button class="ekko-btn" onclick="goEkko(event,'jgmatchups.html')">View Matchups</button>
-      </div>
-    </div>
+<!-- EKKO FIXED CARD -->
+<a href="ekkoguide.html" class="card ekko-guide">
+  <h3>Ekko Jungle Hub</h3>
+  <p>Master Ekko Jungle with full guide and matchup breakdowns.</p>
 
-    <a href="skills.html" class="card fundamentals">
-      <h3>Fundamentals</h3>
-      <p>Core League skills.</p>
-    </a>
-
-    <a href="tierlist.html" class="card tierlist">
-      <h3>Tierlist</h3>
-      <p>Current meta overview.</p>
-      <div class="tier-bar">
-        <div class="tier-s"></div><div class="tier-a"></div><div class="tier-b"></div><div class="tier-c"></div><div class="tier-d"></div>
-      </div>
-    </a>
-
-    <a href="https://buy.stripe.com/aFa6oAf6kcF61F4bkuejK0g" class="card coaching">
-      <h3>Coaching</h3>
-    </a>
-
-    <a href="dianarunes.html" class="card rune-calculator">
-      <h3>Rune Calculator</h3>
-    </a>
-
-    <a href="dianaitems.html" class="card build-calculator">
-      <h3>Build Calculator</h3>
-    </a>
-
-    <a href="https://discord.gg/Ze75xenn" class="card discord-card">
-      <h3>Discord</h3>
-    </a>
-
+  <div class="ekko-actions">
+    <a href="ekkoguide.html" class="ekko-btn guide">Guide</a>
+    <a href="jgmatchups.html" class="ekko-btn matchups">Matchups</a>
   </div>
+</a>
+
+<a href="skills.html" class="card fundamentals">
+  <h3>Fundamentals</h3>
+  <p>Learn core League skills to help climb at any elo.</p>
+</a>
+
+<a href="tierlist.html" class="card tierlist">
+  <h3>Tierlist</h3>
+  <p>Current champion tierlist showing which champions dominate the meta.</p>
+  <div class="tier-bar" aria-hidden="true">
+    <div class="tier-s"></div><div class="tier-a"></div><div class="tier-b"></div><div class="tier-c"></div><div class="tier-d"></div>
+  </div>
+</a>
+
+<a href="https://buy.stripe.com/aFa6oAf6kcF61F4bkuejK0g" class="card coaching">
+  <h3>Coaching</h3>
+  <p>Book a personalized 1-hour coaching session. Members receive a discount!</p>
+</a>
+
+<a href="dianarunes.html" class="card rune-calculator">
+  <h3>Rune Calculator</h3>
+  <p>Compare rune setups for Diana that enhance her playstyle.</p>
+</a>
+
+<a href="dianaitems.html" class="card build-calculator">
+  <h3>Build Calculator</h3>
+  <p>Compare different item builds and ability combos for Diana at different stages of the game.</p>
+</a>
+
+<a href="https://discord.gg/Ze75xenn" class="card discord-card" target="_blank">
+  <h3>Join our Discord</h3>
+  <p>Connect with other members, share tips, and stay updated on guides.</p>
+</a>
+
+</div>
 </section>
 
 <button id="logoutBtn">Logout</button>
 
-<footer>© 2026 LoL Fundamentals</footer>
+<footer>
+© 2026 LoL Fundamentals · Contact:
+<a href="mailto:arcsecond@lolfundamentals.com">arcsecond@lolfundamentals.com</a>
+</footer>
 
-<script>
-function flipEkko(card){
-  card.classList.toggle('flipped');
+<!-- Firebase (UNCHANGED) -->
+<script type="module">
+import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
+import { getAuth, onAuthStateChanged, signOut } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-auth.js";
+import { getFirestore, doc, getDoc } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
+
+const firebaseConfig = {
+  apiKey: "AIzaSyCFRcEV7wdivqONnkjJubAZOjPMixrHMBI",
+  authDomain: "lol-fundamentals.firebaseapp.com",
+  projectId: "lol-fundamentals",
+  storageBucket: "lol-fundamentals.firebasestorage.app",
+  messagingSenderId: "1038440427584",
+  appId: "1:1038440427584:web:a82207151fd370dbedefa5"
+};
+
+const app = initializeApp(firebaseConfig);
+const auth = getAuth(app);
+const firestore = getFirestore(app);
+
+function redirectToLogin(){
+  localStorage.removeItem('lolfundamentals_logged_in');
+  localStorage.removeItem('lolfundamentals_paid');
+  window.location.href = 'index.html';
 }
 
-function goEkko(e,url){
-  e.stopPropagation();
-  window.location.href = url;
-}
+onAuthStateChanged(auth, async user => {
+  if (!user) return redirectToLogin();
+
+  const snap = await getDoc(doc(firestore,"paidUsers",user.email));
+  if (!snap.exists() || !snap.data().paid) return redirectToLogin();
+
+  localStorage.setItem('lolfundamentals_logged_in','true');
+  localStorage.setItem('lolfundamentals_paid','true');
+});
+
+document.getElementById('logoutBtn').addEventListener('click', async () => {
+  await signOut(auth);
+  redirectToLogin();
+});
 </script>
 
 </body>
 </html>
-
-
 
 
