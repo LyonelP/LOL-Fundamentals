@@ -23,6 +23,7 @@ body {
   text-align:center;
 }
 
+/* ===== HEADER ===== */
 header{
   background:linear-gradient(90deg,#0a0f14,#1b2838);
   border-bottom:2px solid var(--gold);
@@ -35,30 +36,20 @@ header{
   position:relative;
 }
 
-.settings-btn{
-  position:absolute;
-  top:12px;
-  right:16px;
-  opacity:0.25;
-  color:var(--gold);
-  text-decoration:none;
-}
-
-/* SECTION */
+/* ===== GRID ===== */
 .section{
   padding:12px 20px;
   max-width:1000px;
   margin:8px auto;
 }
 
-/* GRID */
 .card-grid{
   display:grid;
   gap:22px;
   grid-template-columns: repeat(auto-fit,minmax(260px,1fr));
 }
 
-/* CARD BASE */
+/* ===== CARD ===== */
 .card{
   position:relative;
   background:var(--card);
@@ -81,19 +72,10 @@ header{
   box-shadow:0 12px 26px rgba(47,129,247,0.22);
 }
 
-.card h3{
-  color:var(--gold);
-  margin:0 0 8px;
-  z-index:2;
-}
+.card h3{ color:var(--gold); margin:0 0 8px; z-index:2; }
+.card p{ margin:0; z-index:2; opacity:0.95; }
 
-.card p{
-  margin:0;
-  z-index:2;
-  opacity:0.95;
-}
-
-/* BACKGROUND IMAGE */
+/* backgrounds */
 .card::before{
   content:"";
   position:absolute;
@@ -101,54 +83,25 @@ header{
   background-size:cover;
   background-position:center;
   opacity:0.15;
+  z-index:1;
 }
 
-/* IMAGES */
 .diana-guide::before{ background-image:url('https://ddragon.leagueoflegends.com/cdn/img/champion/splash/Diana_11.jpg'); }
 .diana-matchups::before{ background-image:url('https://ddragon.leagueoflegends.com/cdn/img/champion/splash/Diana_2.jpg'); }
 .ekko-guide::before{ background-image:url('https://ddragon.leagueoflegends.com/cdn/img/champion/splash/Ekko_0.jpg'); }
 
-/* ========================= */
-/* EKKO STACKED CARD SYSTEM  */
-/* ========================= */
-
-.ekko-stack{
-  position:relative;
-  height:230px;
-}
-
-/* front card (normal guide) */
-.ekko-front{
-  position:relative;
-  z-index:2;
-}
-
-/* back card (matchups) */
-.ekko-back{
-  position:absolute;
-  top:10px;
-  left:10px;
-  width:100%;
-  height:230px;
-  z-index:1;
-  transform:scale(0.98);
-  opacity:0.9;
+/* ===== EKKO TOGGLE BUTTON ===== */
+.ekko-toggle-btn{
+  margin-top:10px;
+  background:#2f81f7;
+  border:none;
+  color:white;
+  padding:6px 10px;
+  border-radius:6px;
   cursor:pointer;
-  transition: all .25s ease;
-  border:2px solid #2f81f7;
-}
-
-/* when activated, bring forward */
-.ekko-stack.active .ekko-back{
-  transform:translateY(-6px);
+  font-size:12px;
+  position:relative;
   z-index:3;
-  opacity:1;
-}
-
-/* when active, push front back slightly */
-.ekko-stack.active .ekko-front{
-  transform:scale(0.98);
-  opacity:0.8;
 }
 
 </style>
@@ -161,7 +114,6 @@ header{
 <section class="section">
 <div class="card-grid">
 
-  <!-- NORMAL CARDS -->
   <a href="dianaguide6934.html" class="card diana-guide">
     <h3>Diana Mid Guide</h3>
     <p>Comprehensive guide for mastering Diana.</p>
@@ -169,43 +121,46 @@ header{
 
   <a href="matchuphub.html" class="card diana-matchups">
     <h3>Diana Mid Matchups</h3>
-    <p>Breakdowns and VODs for every matchup.</p>
+    <p>Detailed breakdowns and VODs.</p>
   </a>
 
-  <!-- ================= EKKO STACK ================= -->
-  <div class="ekko-stack" id="ekkoStack">
+  <!-- ================= EKKO TOGGLE CARD ================= -->
+  <a id="ekkoCard" href="ekkoguide.html" class="card ekko-guide">
+    <h3 id="ekkoTitle">Ekko Jungle Guide</h3>
+    <p id="ekkoText">Pathing, combos, mechanics & jungle fundamentals.</p>
 
-    <!-- FRONT (JUNGLE GUIDE - ORIGINAL) -->
-    <a href="ekkoguide.html" class="card ekko-guide ekko-front">
-      <h3>Ekko Jungle Guide</h3>
-      <p>Pathing, combos, mechanics & jungle fundamentals.</p>
-    </a>
-
-    <!-- BACK (MATCHUPS CARD - NEW) -->
-    <a href="jgmatchups.html" class="card ekko-back">
-      <h3>Ekko Jungle Matchups</h3>
-      <p>How Ekko plays into every jungle matchup.</p>
-    </a>
-
-  </div>
-  <!-- ================= END STACK ================= -->
-
-  <a href="skills.html" class="card">
-    <h3>Fundamentals</h3>
-    <p>Core skills to climb in any elo.</p>
+    <button class="ekko-toggle-btn" id="ekkoBtn">Switch to Matchups</button>
   </a>
 
 </div>
 </section>
 
 <script>
-const stack = document.getElementById("ekkoStack");
+let mode = "guide";
 
-// ONLY click toggles (no hover)
-stack.addEventListener("click", (e) => {
-  // if clicking back card or container, toggle
-  if (e.target.closest(".ekko-stack")) {
-    stack.classList.toggle("active");
+const card = document.getElementById("ekkoCard");
+const title = document.getElementById("ekkoTitle");
+const text = document.getElementById("ekkoText");
+const btn = document.getElementById("ekkoBtn");
+
+btn.addEventListener("click", (e) => {
+  e.preventDefault();
+  e.stopPropagation();
+
+  if (mode === "guide") {
+    mode = "matchups";
+
+    card.href = "jgmatchups.html";
+    title.textContent = "Ekko Jungle Matchups";
+    text.textContent = "How Ekko plays into every jungle matchup.";
+    btn.textContent = "Switch to Guide";
+  } else {
+    mode = "guide";
+
+    card.href = "ekkoguide.html";
+    title.textContent = "Ekko Jungle Guide";
+    text.textContent = "Pathing, combos, mechanics & jungle fundamentals.";
+    btn.textContent = "Switch to Matchups";
   }
 });
 </script>
