@@ -53,16 +53,17 @@
     margin:8px auto;
   }
 
+  .section p{ margin:0 0 18px; color:#cfe1ee; opacity:0.9; }
+
   .card-grid{
     display:grid;
     gap:22px;
+    padding:0 4px;
     grid-template-columns: repeat(auto-fit,minmax(260px,1fr));
     align-items:start;
   }
 
-  /* =========================
-     NORMAL CARD STYLE
-  ========================= */
+  /* ================= BASE CARD ================= */
   .card{
     position:relative;
     background:var(--card);
@@ -104,80 +105,58 @@
   .fundamentals::before{ background-image:url('https://cdn.wallpapersafari.com/92/79/MYTD9q.png'); }
   .tierlist::before{ background:linear-gradient(to bottom,#1b2838,#161b22); }
 
-  /* =========================
-     EKKO STACKED TOGGLE CARD
-  ========================= */
+  /* ================= EKKO STACK SYSTEM ================= */
 
-  .ekko-wrapper{
+  .ekko-stack{
     position:relative;
     height:230px;
   }
 
-  .ekko-card{
-    position:absolute;
+  .ekko-stack .card{
+    position:absolute !important;
     inset:0;
-    border-radius:12px;
-    border:2px solid var(--gold);
-    overflow:hidden;
+    margin:0;
     cursor:pointer;
-    transition:transform .4s ease, opacity .4s ease;
-    display:flex;
-    align-items:center;
-    justify-content:center;
-    text-align:center;
   }
 
-  .ekko-card::before{
-    content:"";
-    position:absolute;
-    inset:0;
-    background-size:cover;
-    background-position:center;
-    opacity:0.18;
-  }
-
-  /* front = jungle guide */
-  .ekko-front::before{
-    background-image:url('https://ddragon.leagueoflegends.com/cdn/img/champion/splash/Ekko_0.jpg');
-  }
-
-  /* back = sandstorm style Ekko */
-  .ekko-back::before{
-    background-image:url('https://ddragon.leagueoflegends.com/cdn/img/champion/splash/Ekko_1.jpg');
-  }
-
-  .ekko-content{
-    position:relative;
+  .ekko-front{
     z-index:2;
+    transform:translateY(0) scale(1);
   }
 
-  /* stacking effect */
-  .ekko-wrapper .ekko-back{
-    transform:scale(0.95) translateY(8px);
-    opacity:0.7;
+  .ekko-back{
+    z-index:1;
+    transform:translateY(10px) scale(0.96);
+    opacity:0.6;
+  }
+
+  .ekko-stack.flipped .ekko-front{
+    transform:translateY(10px) scale(0.96);
+    opacity:0.6;
     z-index:1;
   }
 
-  .ekko-wrapper.active .ekko-front{
-    transform:scale(0.95) translateY(8px);
-    opacity:0.7;
-    z-index:1;
-  }
-
-  .ekko-wrapper.active .ekko-back{
-    transform:scale(1);
+  .ekko-stack.flipped .ekko-back{
+    transform:translateY(0) scale(1);
     opacity:1;
     z-index:2;
   }
 
-  /* keep link clean */
-  .ekko-link{
-    display:block;
-    text-decoration:none;
-    color:inherit;
+  /* sandstorm Ekko splash */
+  .ekko-back::before{
+    background-image:url('https://ddragon.leagueoflegends.com/cdn/img/champion/splash/Ekko_1.jpg');
+    opacity:0.18;
   }
 
-  /* rest of your styles untouched */
+  /* ================= OTHER UI ================= */
+
+  .tier-bar{ margin-top:12px; width:100%; height:60px; border-radius:6px; display:flex; overflow:hidden; position:relative; z-index:2; }
+  .tier-s{ background:#f94144; flex:1; }
+  .tier-a{ background:#f3722c; flex:1; }
+  .tier-b{ background:#f8961e; flex:1; }
+  .tier-c{ background:#f9c74f; flex:1; }
+  .tier-d{ background:#90be6d; flex:1; }
+
   #logoutBtn{
     display:block;
     margin:18px auto;
@@ -198,6 +177,7 @@
     background:var(--bg);
     border-top:1px solid #1f2937;
   }
+
 </style>
 </head>
 
@@ -225,23 +205,17 @@
       <p>Detailed breakdowns and VODs.</p>
     </a>
 
-    <!-- ================= EKKO TOGGLE CARD ================= -->
-    <div class="ekko-wrapper" id="ekkoToggle">
+    <!-- ================= EKKO STACK ================= -->
+    <div class="ekko-stack" id="ekkoStack">
 
-      <!-- FRONT (Ekko Jungle Guide) -->
-      <a href="ekkoguide.html" class="ekko-card ekko-front ekko-link">
-        <div class="ekko-content">
-          <h3>Ekko Jungle Guide</h3>
-          <p>Pathing, combos, mechanics</p>
-        </div>
+      <a href="ekkoguide.html" class="card ekko-front">
+        <h3>Ekko Jungle Guide</h3>
+        <p>Pathing, combos, mechanics</p>
       </a>
 
-      <!-- BACK (Jungle Matchups - sandstorm style) -->
-      <a href="jgmatchups.html" class="ekko-card ekko-back ekko-link">
-        <div class="ekko-content">
-          <h3>Ekko Jungle Matchups</h3>
-          <p>Click to explore matchups</p>
-        </div>
+      <a href="jgmatchups.html" class="card ekko-back">
+        <h3>Ekko Jungle Matchups</h3>
+        <p>Sandstorm matchups & counterplay</p>
       </a>
 
     </div>
@@ -254,6 +228,14 @@
     <a href="tierlist.html" class="card tierlist">
       <h3>Tierlist</h3>
       <p>Meta champion rankings.</p>
+
+      <div class="tier-bar">
+        <div class="tier-s"></div>
+        <div class="tier-a"></div>
+        <div class="tier-b"></div>
+        <div class="tier-c"></div>
+        <div class="tier-d"></div>
+      </div>
     </a>
 
   </div>
@@ -265,17 +247,16 @@
   © 2026 LoL Fundamentals
 </footer>
 
+<!-- TOGGLE SCRIPT -->
 <script>
-  // ONLY toggle on click (no hover)
-  const wrap = document.getElementById("ekkoToggle");
+const stack = document.getElementById("ekkoStack");
 
-  wrap.addEventListener("click", (e) => {
-    // if clicking a link, still allow navigation
-    if (e.target.closest("a")) {
-      return;
-    }
-    wrap.classList.toggle("active");
-  });
+stack.addEventListener("click", (e) => {
+  // allow normal link clicks
+  if (e.target.closest("a")) return;
+
+  stack.classList.toggle("flipped");
+});
 </script>
 
 </body>
