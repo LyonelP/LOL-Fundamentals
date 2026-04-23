@@ -19,7 +19,6 @@ body{
   font-family:"Beaufort for LOL",Arial,Helvetica,sans-serif;
   background:var(--bg);
   color:#e6edf3;
-  line-height:1.6;
   text-align:center;
 }
 
@@ -48,89 +47,97 @@ header{
   grid-template-columns: repeat(auto-fit,minmax(260px,1fr));
 }
 
-/* BASE CARD */
+/* NORMAL CARDS */
 .card{
   position:relative;
   height:230px;
   border-radius:12px;
   border:2px solid var(--gold);
+  background:var(--card);
   overflow:hidden;
-  cursor:pointer;
-  transform-style:preserve-3d;
-  transition: transform .6s;
-}
-
-/* FLIP STATE */
-.card.flipped{
-  transform: rotateY(180deg);
-}
-
-/* FRONT + BACK */
-.card-face{
-  position:absolute;
-  inset:0;
   display:flex;
   flex-direction:column;
   justify-content:center;
   align-items:center;
-  padding:20px;
-  box-sizing:border-box;
-  backface-visibility:hidden;
+  text-decoration:none;
+  color:#e6edf3;
+  transition:transform .25s, box-shadow .25s;
+  z-index:1;
 }
 
-/* FRONT */
-.card-front{
-  background:var(--card);
+.card:hover{
+  transform:translateY(-6px);
+  box-shadow:0 12px 26px rgba(47,129,247,0.22);
 }
 
-/* BACK */
-.card-back{
-  transform:rotateY(180deg);
-  background:var(--card);
+.card h3{ color:var(--gold); margin:0 0 8px; }
+.card p{ margin:0; font-size:0.95rem; opacity:0.95; }
+
+/* ========================= */
+/* EKKO STACKED CARD SYSTEM */
+/* ========================= */
+
+.ekko-stack{
+  position:relative;
+  height:230px;
 }
 
-/* TEXT */
-.card h3{
-  color:var(--gold);
-  margin:0 0 8px;
+/* base style for both layers */
+.ekko-card{
+  position:absolute;
+  inset:0;
+  border-radius:12px;
+  border:2px solid var(--gold);
+  overflow:hidden;
+  display:flex;
+  flex-direction:column;
+  justify-content:center;
+  align-items:center;
+  text-decoration:none;
+  transition:transform .3s ease, z-index .3s;
 }
 
-.card p{
-  margin:0;
-  font-size:0.95rem;
-  opacity:0.95;
-}
-
-/* SPLASHES */
+/* FRONT (Guide) */
 .ekko-front{
-  background-image:url('https://ddragon.leagueoflegends.com/cdn/img/champion/splash/Ekko_0.jpg');
+  background:url('https://ddragon.leagueoflegends.com/cdn/img/champion/splash/Ekko_0.jpg');
   background-size:cover;
   background-position:center;
+  z-index:2;
 }
 
+/* BACK (Matchups hidden behind) */
 .ekko-back{
-  background-image:url('https://ddragon.leagueoflegends.com/cdn/img/champion/splash/Ekko_1.jpg');
+  background:url('https://ddragon.leagueoflegends.com/cdn/img/champion/splash/Ekko_1.jpg');
   background-size:cover;
   background-position:center;
+  z-index:1;
+  transform:scale(0.97) translateY(10px);
+  opacity:0.9;
+  cursor:pointer;
 }
 
-/* DARK OVERLAY */
-.card-face::before{
+/* dark overlay */
+.ekko-card::before{
   content:"";
   position:absolute;
   inset:0;
   background:rgba(0,0,0,0.55);
-  z-index:0;
 }
 
-.card-face > *{
+.ekko-card > *{
   position:relative;
-  z-index:1;
+  z-index:2;
 }
 
-/* KEEP OTHER CARDS SIMPLE */
-.simple{
-  background:var(--card);
+/* hover lift ONLY visual (no swap) */
+.ekko-stack:hover .ekko-back{
+  transform:scale(0.99) translateY(6px);
+}
+
+/* clicked state */
+.ekko-stack.active .ekko-back{
+  transform:translateY(-240px);
+  z-index:5;
 }
 
 /* BUTTON */
@@ -145,6 +152,7 @@ header{
   font-weight:700;
   cursor:pointer;
 }
+
 </style>
 </head>
 
@@ -155,45 +163,36 @@ header{
 <section class="section">
 <div class="card-grid">
 
-  <!-- DIANA -->
-  <a href="dianaguide6934.html" class="card simple">
-    <div class="card-face card-front">
-      <h3>Diana Mid Guide</h3>
-      <p>Comprehensive guide for mastering Diana.</p>
-    </div>
+  <a href="dianaguide6934.html" class="card">
+    <h3>Diana Mid Guide</h3>
+    <p>Comprehensive guide for mastering Diana.</p>
   </a>
 
-  <!-- DIANA MATCHUPS -->
-  <a href="matchuphub.html" class="card simple">
-    <div class="card-face card-front">
-      <h3>Diana Matchups</h3>
-      <p>Breakdowns and VODs for every mid matchup.</p>
-    </div>
+  <a href="matchuphub.html" class="card">
+    <h3>Diana Matchups</h3>
+    <p>Breakdowns and VODs for every mid matchup.</p>
   </a>
 
-  <!-- EKKO FLIP CARD -->
-  <div class="card" id="ekkoCard">
+  <!-- ===================== -->
+  <!-- EKKO STACKED CARDS -->
+  <!-- ===================== -->
+  <div class="ekko-stack" id="ekkoStack">
 
-    <!-- FRONT (JUNGLE GUIDE) -->
-    <a href="ekkoguide.html" class="card-face card-front ekko-front">
+    <a href="ekkoguide.html" class="ekko-card ekko-front">
       <h3>Ekko Jungle Guide</h3>
-      <p>Pathing, mechanics, combos, fundamentals.</p>
+      <p>Pathing, mechanics, combos</p>
     </a>
 
-    <!-- BACK (MATCHUPS BEHIND) -->
-    <a href="jgmatchups.html" class="card-face card-back ekko-back">
+    <a href="jgmatchups.html" class="ekko-card ekko-back" id="ekkoBack">
       <h3>Ekko Jungle Matchups</h3>
       <p>Click to open matchup hub</p>
     </a>
 
   </div>
 
-  <!-- FUNDAMENTALS -->
-  <a href="skills.html" class="card simple">
-    <div class="card-face card-front">
-      <h3>Fundamentals</h3>
-      <p>Core skills for climbing.</p>
-    </div>
+  <a href="skills.html" class="card">
+    <h3>Fundamentals</h3>
+    <p>Core skills for climbing.</p>
   </a>
 
 </div>
@@ -202,17 +201,16 @@ header{
 <button id="logoutBtn">Logout</button>
 
 <script>
-const ekko = document.getElementById("ekkoCard");
+const stack = document.getElementById("ekkoStack");
+const back = document.getElementById("ekkoBack");
 
-ekko.addEventListener("click", (e) => {
-  // prevent link immediate navigation so flip is visible
-  if(!ekko.classList.contains("flipped")){
-    e.preventDefault();
-    ekko.classList.add("flipped");
-    setTimeout(() => {
-      window.location.href = "jgmatchups.html";
-    }, 500);
-  }
+back.addEventListener("click", (e) => {
+  e.preventDefault();
+  stack.classList.add("active");
+
+  setTimeout(() => {
+    window.location.href = "jgmatchups.html";
+  }, 400);
 });
 </script>
 
