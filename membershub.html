@@ -16,7 +16,7 @@
 
 html,body{height:100%;margin:0;}
 
-body{
+body {
   font-family:"Beaufort for LOL",Arial,Helvetica,sans-serif;
   background:var(--bg);
   color:#e6edf3;
@@ -24,7 +24,6 @@ body{
   text-align:center;
 }
 
-/* HEADER */
 header{
   background:linear-gradient(90deg,#0a0f14,#1b2838);
   border-bottom:2px solid var(--gold);
@@ -43,30 +42,22 @@ header{
   right:16px;
   opacity:0.25;
   color:var(--gold);
-  text-decoration:none;
 }
 
-/* SECTION */
+/* GRID */
 .section{
   padding:12px 20px;
   max-width:1000px;
   margin:8px auto;
 }
 
-.section p{
-  margin:0 0 18px;
-  color:#cfe1ee;
-  opacity:0.9;
-}
-
-/* GRID */
 .card-grid{
   display:grid;
   gap:22px;
   grid-template-columns: repeat(auto-fit,minmax(260px,1fr));
 }
 
-/* NORMAL CARDS */
+/* NORMAL CARD */
 .card{
   position:relative;
   height:230px;
@@ -92,7 +83,7 @@ header{
 .card p{ margin:0; font-size:0.95rem; opacity:0.95; }
 
 /* ===================== */
-/* EKKO STACKED SYSTEM   */
+/* EKKO STACK (FIXED)    */
 /* ===================== */
 
 .ekko-stack{
@@ -100,58 +91,60 @@ header{
   height:230px;
 }
 
-/* shared */
-.ekko-card{
+/* GUIDE CARD (REAL LINK - KEEP THIS WORKING) */
+.ekko-guide{
   position:absolute;
   inset:0;
+  z-index:2;
   border-radius:12px;
   border:2px solid var(--gold);
-  overflow:hidden;
+  background:url('https://ddragon.leagueoflegends.com/cdn/img/champion/splash/Ekko_0.jpg');
+  background-size:cover;
+  background-position:center;
+  text-decoration:none;
   display:flex;
   flex-direction:column;
   justify-content:center;
   align-items:center;
-  cursor:pointer;
-  transition: all .35s ease;
+  color:#fff;
 }
 
-/* FRONT (Guide) */
-.ekko-front{
-  background:url('https://ddragon.leagueoflegends.com/cdn/img/champion/splash/Ekko_0.jpg');
-  background-size:cover;
-  background-position:center;
-  z-index:2;
-}
-
-/* BACK (Matchups hidden behind) */
-.ekko-back{
+/* MATCHUP CARD (BEHIND) */
+.ekko-matchups{
+  position:absolute;
+  inset:0;
+  z-index:1;
+  border-radius:12px;
+  border:2px solid var(--gold);
   background:url('https://ddragon.leagueoflegends.com/cdn/img/champion/splash/Ekko_1.jpg');
   background-size:cover;
   background-position:center;
+  cursor:pointer;
   transform:scale(0.97) translateY(10px);
-  z-index:1;
+  display:flex;
+  flex-direction:column;
+  justify-content:center;
+  align-items:center;
+  color:#fff;
 }
 
 /* overlay */
-.ekko-card::before{
+.ekko-guide::before,
+.ekko-matchups::before{
   content:"";
   position:absolute;
   inset:0;
   background:rgba(0,0,0,0.55);
 }
 
-.ekko-card > *{
+.ekko-guide > *,
+.ekko-matchups > *{
   position:relative;
   z-index:2;
 }
 
-/* animation state */
-.ekko-stack.active .ekko-front{
-  transform:translateY(-12px);
-  opacity:0.6;
-}
-
-.ekko-stack.active .ekko-back{
+/* animation */
+.ekko-stack.active .ekko-matchups{
   transform:translateY(-240px);
   z-index:5;
 }
@@ -174,18 +167,13 @@ footer{
   padding:26px 10px 40px;
   color:var(--muted);
   font-size:14px;
-  background:var(--bg);
-  border-top:1px solid #1f2937;
 }
 </style>
 </head>
 
 <body>
 
-<header>
-  Members Hub
-  <a href="https://lolfundamentals.com/settings" class="settings-btn">⚙</a>
-</header>
+<header>Members Hub</header>
 
 <section class="section">
 <p>Choose a section to explore:</p>
@@ -203,18 +191,18 @@ footer{
   </a>
 
   <!-- ===================== -->
-  <!-- EKKO STACK (FIXED) -->
+  <!-- EKKO STACK FIXED -->
   <!-- ===================== -->
   <div class="ekko-stack" id="ekkoStack">
 
-    <!-- FRONT -->
-    <div class="ekko-card ekko-front">
+    <!-- REAL GUIDE (UNCHANGED LINK) -->
+    <a href="ekkoguide.html" class="ekko-guide">
       <h3>Ekko Jungle Guide</h3>
       <p>Pathing, mechanics, combos</p>
-    </div>
+    </a>
 
-    <!-- BACK -->
-    <div class="ekko-card ekko-back" id="ekkoBack">
+    <!-- HIDDEN MATCHUPS -->
+    <div class="ekko-matchups" id="ekkoMatchups">
       <h3>Ekko Jungle Matchups</h3>
       <p>Click to open matchup hub</p>
     </div>
@@ -238,14 +226,14 @@ footer{
 
 <script>
 const stack = document.getElementById("ekkoStack");
-const back = document.getElementById("ekkoBack");
+const matchups = document.getElementById("ekkoMatchups");
 
-back.addEventListener("click", () => {
+matchups.addEventListener("click", () => {
   stack.classList.add("active");
 
   setTimeout(() => {
     window.location.href = "jgmatchups.html";
-  }, 450);
+  }, 400);
 });
 </script>
 
