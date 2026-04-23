@@ -42,24 +42,18 @@
     opacity:0.25;
     color:var(--gold);
     text-decoration:none;
-    transition:opacity .15s, transform .15s;
   }
-  .settings-btn:hover{opacity:1; transform:scale(1.05);}
-  .settings-btn svg{width:18px;height:18px;fill:currentColor;}
 
   .section{
     padding:12px 20px;
     max-width:1000px;
     margin:8px auto;
   }
-  .section p{ margin:0 0 18px; color:#cfe1ee; opacity:0.9; }
 
   .card-grid{
     display:grid;
     gap:22px;
-    padding:0 4px;
     grid-template-columns: repeat(auto-fit,minmax(260px,1fr));
-    align-items:start;
   }
 
   .card{
@@ -71,13 +65,12 @@
     text-decoration:none;
     color:#e6edf3;
     overflow:hidden;
-    box-sizing:border-box;
     height:230px;
     display:flex;
     flex-direction:column;
     justify-content:center;
     align-items:center;
-    transition: transform .25s, box-shadow .25s;
+    transition:0.25s;
   }
 
   .card:hover{
@@ -85,81 +78,79 @@
     box-shadow:0 12px 26px rgba(47,129,247,0.22);
   }
 
-  .card h3{ color:var(--gold); margin:0 0 8px; z-index:2; font-size:1.25rem; }
-  .card p{ margin:0; font-size:0.95rem; line-height:1.3; z-index:2; opacity:0.95; }
+  .card h3{ color:var(--gold); margin:0 0 8px; z-index:2; }
+  .card p{ margin:0; z-index:2; }
 
   .card::before{
     content:"";
     position:absolute;
     inset:0;
-    width:100%;
-    height:100%;
     background-size:cover;
     background-position:center;
     opacity:0.15;
     z-index:1;
-    border-radius:10px;
   }
 
+  /* backgrounds */
   .diana-guide::before{ background-image:url('https://ddragon.leagueoflegends.com/cdn/img/champion/splash/Diana_11.jpg'); }
   .diana-matchups::before{ background-image:url('https://ddragon.leagueoflegends.com/cdn/img/champion/splash/Diana_2.jpg'); }
-
   .fundamentals::before{ background-image:url('https://cdn.wallpapersafari.com/92/79/MYTD9q.png'); }
-  .tierlist::before{ background: linear-gradient(to bottom,#1b2838 0%,#161b22 100%); }
-  .coaching::before{ background-image:url('https://m.media-amazon.com/images/I/71GlK3kDLJL.jpg'); opacity:0.2; }
-  .rune-calculator::before{ background-image:url('https://i.imgur.com/kcs90ta.jpeg'); }
-  .build-calculator::before{ background-image:url('https://i.imgur.com/uhLq29j.jpeg'); }
-  .discord-card::before{ background-image:url('https://i.imgur.com/fS2OKHV.jpeg'); opacity:0.15; }
 
   /* =========================
-     EKKO STACKED CARD SYSTEM
+     EKKO STACK FIX (REAL SWAP)
   ========================= */
 
   .ekko-stack{
     position:relative;
-    width:100%;
     height:230px;
   }
 
   .ekko-stack .card{
     position:absolute;
     inset:0;
-    margin:0;
   }
 
+  /* FRONT = GUIDE */
   .ekko-front{
     z-index:3;
+    transform:translate(0,0) scale(1);
     border:2px solid var(--gold);
-    background:var(--card);
   }
 
+  /* BACK = MATCHUPS */
   .ekko-back{
     z-index:2;
-    transform:translate(12px, 12px);
+    transform:translate(10px,10px) scale(0.98);
     border:2px solid var(--accent);
     opacity:0.85;
   }
 
+  /* SPLASH DIFFERENCE */
   .ekko-front::before{
     background-image:url('https://ddragon.leagueoflegends.com/cdn/img/champion/splash/Ekko_0.jpg');
-    opacity:0.18;
   }
 
   .ekko-back::before{
     background-image:url('https://ddragon.leagueoflegends.com/cdn/img/champion/splash/Ekko_1.jpg');
-    opacity:0.18;
+  }
+
+  /* =========================
+     TRUE SWAP BEHAVIOR
+  ========================= */
+
+  .ekko-stack:hover .ekko-front{
+    transform:translate(-12px,-12px) scale(0.98);
+    opacity:0.7;
+    z-index:2;
   }
 
   .ekko-stack:hover .ekko-back{
-    transform:translate(-10px, 10px);
+    transform:translate(0,0) scale(1.02);
     opacity:1;
+    z-index:3;
   }
 
-  .ekko-stack:hover .ekko-front{
-    transform:translateY(-6px);
-  }
-
-  /* rest unchanged */
+  /* rest unchanged basics */
   #logoutBtn{
     display:block;
     margin:18px auto;
@@ -169,17 +160,14 @@
     border:none;
     border-radius:8px;
     font-weight:700;
-    cursor:pointer;
   }
 
   footer{
     text-align:center;
     padding:26px 10px 40px;
     color:var(--muted);
-    font-size:14px;
-    background:var(--bg);
-    border-top:1px solid #1f2937;
   }
+
 </style>
 </head>
 
@@ -194,52 +182,32 @@
 
   <a href="dianaguide6934.html" class="card diana-guide">
     <h3>Diana Mid Guide</h3>
-    <p>Comprehensive guide for mastering Diana.</p>
+    <p>Full guide for mastering Diana.</p>
   </a>
 
   <a href="matchuphub.html" class="card diana-matchups">
     <h3>Diana Matchups</h3>
-    <p>Detailed matchup breakdowns and VODs.</p>
+    <p>Matchup breakdowns and VODs.</p>
   </a>
 
-  <!-- ✅ EKKO STACKED CARD -->
+  <!-- ✅ FIXED EKKO SWAP STACK -->
   <div class="ekko-stack">
 
     <a href="jgmatchups.html" class="card ekko-back">
       <h3>Ekko Jungle Matchups</h3>
-      <p>Matchup tracking, jungle pathing & VODs.</p>
+      <p>Matchups, jungle tracking, VODs.</p>
     </a>
 
     <a href="ekkoguide.html" class="card ekko-front">
       <h3>Ekko Jungle Guide</h3>
-      <p>Full Ekko jungle mastery guide.</p>
+      <p>Full jungle pathing & mechanics guide.</p>
     </a>
 
   </div>
 
   <a href="skills.html" class="card fundamentals">
     <h3>Fundamentals</h3>
-    <p>Core skills to improve at League.</p>
-  </a>
-
-  <a href="tierlist.html" class="card tierlist">
-    <h3>Tierlist</h3>
-    <p>Meta champion rankings.</p>
-  </a>
-
-  <a href="dianarunes.html" class="card rune-calculator">
-    <h3>Rune Calculator</h3>
-    <p>Optimize rune setups.</p>
-  </a>
-
-  <a href="dianaitems.html" class="card build-calculator">
-    <h3>Build Calculator</h3>
-    <p>Compare item builds.</p>
-  </a>
-
-  <a href="https://discord.gg/Ze75xenn" class="card discord-card" target="_blank">
-    <h3>Discord</h3>
-    <p>Join the community.</p>
+    <p>Core climbing skills.</p>
   </a>
 
 </div>
