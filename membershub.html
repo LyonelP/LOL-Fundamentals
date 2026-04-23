@@ -15,10 +15,12 @@
 }
 
 html,body{height:100%;margin:0;}
+
 body{
   font-family:"Beaufort for LOL",Arial,Helvetica,sans-serif;
   background:var(--bg);
   color:#e6edf3;
+  line-height:1.6;
   text-align:center;
 }
 
@@ -30,17 +32,34 @@ header{
   color:var(--gold);
   font-weight:bold;
   font-size:20px;
+  letter-spacing:1px;
   text-transform:uppercase;
   position:relative;
 }
 
-/* GRID */
+.settings-btn{
+  position:absolute;
+  top:12px;
+  right:16px;
+  opacity:0.25;
+  color:var(--gold);
+  text-decoration:none;
+}
+
+/* SECTION */
 .section{
   padding:12px 20px;
   max-width:1000px;
   margin:8px auto;
 }
 
+.section p{
+  margin:0 0 18px;
+  color:#cfe1ee;
+  opacity:0.9;
+}
+
+/* GRID */
 .card-grid{
   display:grid;
   gap:22px;
@@ -61,8 +80,7 @@ header{
   align-items:center;
   text-decoration:none;
   color:#e6edf3;
-  transition:transform .25s, box-shadow .25s;
-  z-index:1;
+  transition:.25s;
 }
 
 .card:hover{
@@ -73,16 +91,16 @@ header{
 .card h3{ color:var(--gold); margin:0 0 8px; }
 .card p{ margin:0; font-size:0.95rem; opacity:0.95; }
 
-/* ========================= */
-/* EKKO STACKED CARD SYSTEM */
-/* ========================= */
+/* ===================== */
+/* EKKO STACKED SYSTEM   */
+/* ===================== */
 
 .ekko-stack{
   position:relative;
   height:230px;
 }
 
-/* base style for both layers */
+/* shared */
 .ekko-card{
   position:absolute;
   inset:0;
@@ -93,8 +111,8 @@ header{
   flex-direction:column;
   justify-content:center;
   align-items:center;
-  text-decoration:none;
-  transition:transform .3s ease, z-index .3s;
+  cursor:pointer;
+  transition: all .35s ease;
 }
 
 /* FRONT (Guide) */
@@ -110,13 +128,11 @@ header{
   background:url('https://ddragon.leagueoflegends.com/cdn/img/champion/splash/Ekko_1.jpg');
   background-size:cover;
   background-position:center;
-  z-index:1;
   transform:scale(0.97) translateY(10px);
-  opacity:0.9;
-  cursor:pointer;
+  z-index:1;
 }
 
-/* dark overlay */
+/* overlay */
 .ekko-card::before{
   content:"";
   position:absolute;
@@ -129,12 +145,12 @@ header{
   z-index:2;
 }
 
-/* hover lift ONLY visual (no swap) */
-.ekko-stack:hover .ekko-back{
-  transform:scale(0.99) translateY(6px);
+/* animation state */
+.ekko-stack.active .ekko-front{
+  transform:translateY(-12px);
+  opacity:0.6;
 }
 
-/* clicked state */
 .ekko-stack.active .ekko-back{
   transform:translateY(-240px);
   z-index:5;
@@ -153,14 +169,27 @@ header{
   cursor:pointer;
 }
 
+footer{
+  text-align:center;
+  padding:26px 10px 40px;
+  color:var(--muted);
+  font-size:14px;
+  background:var(--bg);
+  border-top:1px solid #1f2937;
+}
 </style>
 </head>
 
 <body>
 
-<header>Members Hub</header>
+<header>
+  Members Hub
+  <a href="https://lolfundamentals.com/settings" class="settings-btn">⚙</a>
+</header>
 
 <section class="section">
+<p>Choose a section to explore:</p>
+
 <div class="card-grid">
 
   <a href="dianaguide6934.html" class="card">
@@ -174,19 +203,21 @@ header{
   </a>
 
   <!-- ===================== -->
-  <!-- EKKO STACKED CARDS -->
+  <!-- EKKO STACK (FIXED) -->
   <!-- ===================== -->
   <div class="ekko-stack" id="ekkoStack">
 
-    <a href="ekkoguide.html" class="ekko-card ekko-front">
+    <!-- FRONT -->
+    <div class="ekko-card ekko-front">
       <h3>Ekko Jungle Guide</h3>
       <p>Pathing, mechanics, combos</p>
-    </a>
+    </div>
 
-    <a href="jgmatchups.html" class="ekko-card ekko-back" id="ekkoBack">
+    <!-- BACK -->
+    <div class="ekko-card ekko-back" id="ekkoBack">
       <h3>Ekko Jungle Matchups</h3>
       <p>Click to open matchup hub</p>
-    </a>
+    </div>
 
   </div>
 
@@ -200,17 +231,21 @@ header{
 
 <button id="logoutBtn">Logout</button>
 
+<footer>
+© 2026 LoL Fundamentals · Contact:
+<a href="mailto:arcsecond@lolfundamentals.com">arcsecond@lolfundamentals.com</a>
+</footer>
+
 <script>
 const stack = document.getElementById("ekkoStack");
 const back = document.getElementById("ekkoBack");
 
-back.addEventListener("click", (e) => {
-  e.preventDefault();
+back.addEventListener("click", () => {
   stack.classList.add("active");
 
   setTimeout(() => {
     window.location.href = "jgmatchups.html";
-  }, 400);
+  }, 450);
 });
 </script>
 
