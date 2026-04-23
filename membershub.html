@@ -6,131 +6,145 @@
 <title>LoL Fundamentals – Members Hub</title>
 
 <style>
-  :root{
-    --gold:#c9aa71;
-    --bg:#0a0f14;
-    --card:#161b22;
-    --muted:#8b949e;
-    --accent:#2f81f7;
-  }
+:root{
+  --gold:#c9aa71;
+  --bg:#0a0f14;
+  --card:#161b22;
+  --muted:#8b949e;
+  --accent:#2f81f7;
+}
 
-  html,body{height:100%;margin:0;}
-  body {
-    font-family:"Beaufort for LOL",Arial,Helvetica,sans-serif;
-    background:var(--bg);
-    color:#e6edf3;
-    text-align:center;
-  }
+html,body{height:100%;margin:0;}
+body{
+  font-family:"Beaufort for LOL",Arial,Helvetica,sans-serif;
+  background:var(--bg);
+  color:#e6edf3;
+  line-height:1.6;
+  text-align:center;
+}
 
-  header{
-    background:linear-gradient(90deg,#0a0f14,#1b2838);
-    border-bottom:2px solid var(--gold);
-    padding:14px 20px;
-    color:var(--gold);
-    font-weight:bold;
-    text-transform:uppercase;
-  }
+/* HEADER */
+header{
+  background:linear-gradient(90deg,#0a0f14,#1b2838);
+  border-bottom:2px solid var(--gold);
+  padding:14px 20px;
+  color:var(--gold);
+  font-weight:bold;
+  font-size:20px;
+  text-transform:uppercase;
+  position:relative;
+}
 
-  .section{
-    padding:12px 20px;
-    max-width:1000px;
-    margin:auto;
-  }
+/* GRID */
+.section{
+  padding:12px 20px;
+  max-width:1000px;
+  margin:8px auto;
+}
 
-  .card-grid{
-    display:grid;
-    gap:22px;
-    grid-template-columns:repeat(auto-fit,minmax(260px,1fr));
-  }
+.card-grid{
+  display:grid;
+  gap:22px;
+  grid-template-columns: repeat(auto-fit,minmax(260px,1fr));
+}
 
-  .card{
-    position:relative;
-    background:var(--card);
-    border:2px solid var(--gold);
-    border-radius:12px;
-    padding:20px;
-    text-decoration:none;
-    color:#e6edf3;
-    height:230px;
-    display:flex;
-    flex-direction:column;
-    justify-content:center;
-    align-items:center;
-    overflow:hidden;
-    transition:0.25s;
-  }
+/* BASE CARD */
+.card{
+  position:relative;
+  height:230px;
+  border-radius:12px;
+  border:2px solid var(--gold);
+  overflow:hidden;
+  cursor:pointer;
+  transform-style:preserve-3d;
+  transition: transform .6s;
+}
 
-  .card::before{
-    content:"";
-    position:absolute;
-    inset:0;
-    background-size:cover;
-    background-position:center;
-    opacity:0.15;
-    z-index:1;
-  }
+/* FLIP STATE */
+.card.flipped{
+  transform: rotateY(180deg);
+}
 
-  .card h3,.card p{z-index:2;margin:0;}
+/* FRONT + BACK */
+.card-face{
+  position:absolute;
+  inset:0;
+  display:flex;
+  flex-direction:column;
+  justify-content:center;
+  align-items:center;
+  padding:20px;
+  box-sizing:border-box;
+  backface-visibility:hidden;
+}
 
-  .diana-guide::before{ background-image:url('https://ddragon.leagueoflegends.com/cdn/img/champion/splash/Diana_11.jpg'); }
-  .diana-matchups::before{ background-image:url('https://ddragon.leagueoflegends.com/cdn/img/champion/splash/Diana_2.jpg'); }
+/* FRONT */
+.card-front{
+  background:var(--card);
+}
 
-  /* =========================
-     EKKO CLICK SWAP SYSTEM
-  ========================= */
+/* BACK */
+.card-back{
+  transform:rotateY(180deg);
+  background:var(--card);
+}
 
-  .ekko-stack{
-    position:relative;
-    height:230px;
-    cursor:pointer;
-  }
+/* TEXT */
+.card h3{
+  color:var(--gold);
+  margin:0 0 8px;
+}
 
-  .ekko-card{
-    position:absolute;
-    inset:0;
-    transition:0.35s ease;
-  }
+.card p{
+  margin:0;
+  font-size:0.95rem;
+  opacity:0.95;
+}
 
-  /* FRONT (default guide) */
-  .ekko-front{
-    z-index:3;
-    transform:translate(0,0);
-    border:2px solid var(--gold);
-  }
+/* SPLASHES */
+.ekko-front{
+  background-image:url('https://ddragon.leagueoflegends.com/cdn/img/champion/splash/Ekko_0.jpg');
+  background-size:cover;
+  background-position:center;
+}
 
-  /* BACK (matchups hidden underneath) */
-  .ekko-back{
-    z-index:2;
-    transform:translate(10px,10px);
-    border:2px solid var(--accent);
-    opacity:0.7;
-  }
+.ekko-back{
+  background-image:url('https://ddragon.leagueoflegends.com/cdn/img/champion/splash/Ekko_1.jpg');
+  background-size:cover;
+  background-position:center;
+}
 
-  .ekko-front::before{
-    background-image:url('https://ddragon.leagueoflegends.com/cdn/img/champion/splash/Ekko_0.jpg');
-  }
+/* DARK OVERLAY */
+.card-face::before{
+  content:"";
+  position:absolute;
+  inset:0;
+  background:rgba(0,0,0,0.55);
+  z-index:0;
+}
 
-  .ekko-back::before{
-    background-image:url('https://ddragon.leagueoflegends.com/cdn/img/champion/splash/Ekko_1.jpg');
-  }
+.card-face > *{
+  position:relative;
+  z-index:1;
+}
 
-  /* ACTIVE STATE (clicked swap) */
-  .ekko-stack.swapped .ekko-front{
-    transform:translate(10px,10px);
-    opacity:0.6;
-    z-index:2;
-  }
+/* KEEP OTHER CARDS SIMPLE */
+.simple{
+  background:var(--card);
+}
 
-  .ekko-stack.swapped .ekko-back{
-    transform:translate(0,0);
-    opacity:1;
-    z-index:3;
-  }
-
-  footer{
-    padding:26px;
-    color:var(--muted);
-  }
+/* BUTTON */
+#logoutBtn{
+  display:block;
+  margin:18px auto;
+  padding:12px 26px;
+  background:#f94144;
+  color:#fff;
+  border:none;
+  border-radius:8px;
+  font-weight:700;
+  cursor:pointer;
+}
 </style>
 </head>
 
@@ -139,50 +153,68 @@
 <header>Members Hub</header>
 
 <section class="section">
-<p>Choose a section to explore:</p>
-
 <div class="card-grid">
 
-  <a href="dianaguide6934.html" class="card diana-guide">
-    <h3>Diana Mid Guide</h3>
-    <p>Master Diana mechanics and macro.</p>
+  <!-- DIANA -->
+  <a href="dianaguide6934.html" class="card simple">
+    <div class="card-face card-front">
+      <h3>Diana Mid Guide</h3>
+      <p>Comprehensive guide for mastering Diana.</p>
+    </div>
   </a>
 
-  <a href="matchuphub.html" class="card diana-matchups">
-    <h3>Diana Matchups</h3>
-    <p>Matchup breakdowns and VODs.</p>
+  <!-- DIANA MATCHUPS -->
+  <a href="matchuphub.html" class="card simple">
+    <div class="card-face card-front">
+      <h3>Diana Matchups</h3>
+      <p>Breakdowns and VODs for every mid matchup.</p>
+    </div>
   </a>
 
-  <!-- ========================= -->
-  <!-- EKKO CLICK SWAP CARD -->
-  <!-- ========================= -->
-  <div class="ekko-stack" id="ekkoStack">
+  <!-- EKKO FLIP CARD -->
+  <div class="card" id="ekkoCard">
 
-    <a href="ekkoguide.html" class="card ekko-card ekko-front">
+    <!-- FRONT (JUNGLE GUIDE) -->
+    <a href="ekkoguide.html" class="card-face card-front ekko-front">
       <h3>Ekko Jungle Guide</h3>
-      <p>Pathing, mechanics, combos.</p>
+      <p>Pathing, mechanics, combos, fundamentals.</p>
     </a>
 
-    <a href="jgmatchups.html" class="card ekko-card ekko-back">
+    <!-- BACK (MATCHUPS BEHIND) -->
+    <a href="jgmatchups.html" class="card-face card-back ekko-back">
       <h3>Ekko Jungle Matchups</h3>
-      <p>Matchup tracking + VODs.</p>
+      <p>Click to open matchup hub</p>
     </a>
 
   </div>
 
+  <!-- FUNDAMENTALS -->
+  <a href="skills.html" class="card simple">
+    <div class="card-face card-front">
+      <h3>Fundamentals</h3>
+      <p>Core skills for climbing.</p>
+    </div>
+  </a>
+
 </div>
 </section>
 
-<footer>© 2026 LoL Fundamentals</footer>
+<button id="logoutBtn">Logout</button>
 
 <script>
-const stack = document.getElementById("ekkoStack");
+const ekko = document.getElementById("ekkoCard");
 
-stack.addEventListener("click", () => {
-  stack.classList.toggle("swapped");
+ekko.addEventListener("click", (e) => {
+  // prevent link immediate navigation so flip is visible
+  if(!ekko.classList.contains("flipped")){
+    e.preventDefault();
+    ekko.classList.add("flipped");
+    setTimeout(() => {
+      window.location.href = "jgmatchups.html";
+    }, 500);
+  }
 });
 </script>
 
 </body>
 </html>
-
