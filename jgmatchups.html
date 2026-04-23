@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Ekko Jungle – Matchup Hub</title>
+
+<script>
+if (localStorage.getItem('lolfundamentals_logged_in') !== 'true') {
+  window.location.replace('login.html');
+}
+</script>
+
+<style>
+body {
+  margin: 0;
+  font-family: 'Beaufort for LOL', Arial, Helvetica, sans-serif;
+  color: #fff;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+
+  background: linear-gradient(rgba(10,15,20,0.25), rgba(10,15,20,0.25)),
+              url('https://ddragon.leagueoflegends.com/cdn/img/champion/splash/Ekko_0.jpg') no-repeat center top;
+  background-size: cover;
+  background-attachment: fixed;
+}
+
+header {
+  background: rgba(13,17,23,0.9);
+  border-bottom: 2px solid #00ffd5;
+  padding: 20px;
+  font-size: 26px;
+  font-weight: bold;
+  text-transform: uppercase;
+  color: #00ffd5;
+  text-align: center;
+}
+
+.back-button {
+  margin: 20px auto;
+  padding: 10px 20px;
+  background: linear-gradient(135deg, #00ffd5, #00bfa5);
+  color: #000;
+  text-decoration: none;
+  border-radius: 8px;
+  font-weight: bold;
+  box-shadow: 0 0 10px rgba(0,255,213,0.5);
+}
+.back-button::before { content: "← "; }
+
+#champion-search {
+  width: 400px;
+  max-width: 90%;
+  margin: 20px auto 30px;
+  padding: 8px 12px;
+  border-radius: 6px;
+  border: 2px solid #00ffd5;
+  background: #161b22;
+  color: #e6edf3;
+}
+
+.champion-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+  gap: 20px;
+  max-width: 1000px;
+  margin: 0 auto 50px;
+  padding: 0 20px;
+}
+
+.champion-card {
+  background: linear-gradient(135deg, #161b22, #21262d);
+  border-radius: 12px;
+  border-left: 6px solid #00ffd5;
+  padding: 15px;
+  text-align: center;
+  text-decoration: none;
+  color: inherit;
+  transition: transform .25s, box-shadow .25s;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.champion-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 10px 25px rgba(0,0,0,.45);
+}
+
+.champion-card img {
+  width: 80px;
+  height: 80px;
+  border-radius: 8px;
+}
+
+.champion-name {
+  margin-top: 8px;
+  font-size: 16px;
+  color: #00ffd5;
+  font-weight: bold;
+}
+
+.champion-tag {
+  margin-top: 6px;
+  font-size: 11px;
+  font-weight: 700;
+  text-transform: uppercase;
+  color: #000;
+  background: linear-gradient(135deg, #c9aa71, #e0c77b);
+  border-radius: 999px;
+  padding: 4px 10px;
+}
+
+footer {
+  margin-top: auto;
+  padding: 25px;
+  text-align: center;
+  font-size: 14px;
+}
+</style>
+</head>
+
+<body>
+
+<header>Ekko Jungle Matchups</header>
+<a href="membershub.html" class="back-button">Back to Members Hub</a>
+
+<input id="champion-search" placeholder="Search junglers or type 'new'...">
+
+<div class="champion-grid" id="champion-grid">
+
+  <!-- Meta Junglers -->
+  <a href="lee-sin.html" class="champion-card"><img src="https://ddragon.leagueoflegends.com/cdn/14.23.1/img/champion/LeeSin.png"><div class="champion-name">Lee Sin</div></a>
+  <a href="elise.html" class="champion-card"><img src="https://ddragon.leagueoflegends.com/cdn/14.23.1/img/champion/Elise.png"><div class="champion-name">Elise</div></a>
+  <a href="nidalee.html" class="champion-card"><img src="https://ddragon.leagueoflegends.com/cdn/14.23.1/img/champion/Nidalee.png"><div class="champion-name">Nidalee</div></a>
+  <a href="kindred.html" class="champion-card"><img src="https://ddragon.leagueoflegends.com/cdn/14.23.1/img/champion/Kindred.png"><div class="champion-name">Kindred</div></a>
+  <a href="kha-zix.html" class="champion-card"><img src="https://ddragon.leagueoflegends.com/cdn/14.23.1/img/champion/Khazix.png"><div class="champion-name">Kha'Zix</div></a>
+  <a href="rek-sai.html" class="champion-card"><img src="https://ddragon.leagueoflegends.com/cdn/14.23.1/img/champion/RekSai.png"><div class="champion-name">Rek'Sai</div></a>
+  <a href="jarvan.html" class="champion-card"><img src="https://ddragon.leagueoflegends.com/cdn/14.23.1/img/champion/JarvanIV.png"><div class="champion-name">Jarvan IV</div></a>
+  <a href="vi.html" class="champion-card"><img src="https://ddragon.leagueoflegends.com/cdn/14.23.1/img/champion/Vi.png"><div class="champion-name">Vi</div></a>
+  <a href="xin-zhao.html" class="champion-card"><img src="https://ddragon.leagueoflegends.com/cdn/14.23.1/img/champion/XinZhao.png"><div class="champion-name">Xin Zhao</div></a>
+
+  <!-- Farming Junglers -->
+  <a href="karthus.html" class="champion-card"><img src="https://ddragon.leagueoflegends.com/cdn/14.23.1/img/champion/Karthus.png"><div class="champion-name">Karthus</div></a>
+  <a href="lillia.html" class="champion-card"><img src="https://ddragon.leagueoflegends.com/cdn/14.23.1/img/champion/Lillia.png"><div class="champion-name">Lillia</div></a>
+  <a href="shyvana.html" class="champion-card"><img src="https://ddragon.leagueoflegends.com/cdn/14.23.1/img/champion/Shyvana.png"><div class="champion-name">Shyvana</div></a>
+  <a href="masteryi.html" class="champion-card"><img src="https://ddragon.leagueoflegends.com/cdn/14.23.1/img/champion/MasterYi.png"><div class="champion-name">Master Yi</div></a>
+
+  <!-- Tanks / Utility -->
+  <a href="sejuani.html" class="champion-card"><img src="https://ddragon.leagueoflegends.com/cdn/14.23.1/img/champion/Sejuani.png"><div class="champion-name">Sejuani</div></a>
+  <a href="zac.html" class="champion-card"><img src="https://ddragon.leagueoflegends.com/cdn/14.23.1/img/champion/Zac.png"><div class="champion-name">Zac</div></a>
+  <a href="rammus.html" class="champion-card"><img src="https://ddragon.leagueoflegends.com/cdn/14.23.1/img/champion/Rammus.png"><div class="champion-name">Rammus</div></a>
+  <a href="amumu.html" class="champion-card"><img src="https://ddragon.leagueoflegends.com/cdn/14.23.1/img/champion/Amumu.png"><div class="champion-name">Amumu</div></a>
+
+</div>
+
+<footer>© 2026 LoL Fundamentals · All rights reserved</footer>
+
+<script>
+const input = document.getElementById('champion-search');
+const grid = document.getElementById('champion-grid');
+const cards = [...grid.getElementsByClassName('champion-card')];
+
+input.addEventListener('input', () => {
+  const q = input.value.toLowerCase().trim();
+
+  const matching = [];
+  cards.forEach(card => {
+    const name = card.querySelector('.champion-name').textContent.toLowerCase();
+    if (name.includes(q)) {
+      card.style.display = 'flex';
+      matching.push(card);
+    } else {
+      card.style.display = 'none';
+    }
+  });
+
+  matching.forEach(card => grid.appendChild(card));
+});
+</script>
+
+</body>
+</html>
