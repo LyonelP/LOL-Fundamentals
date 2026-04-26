@@ -197,5 +197,31 @@ footer {
 
 <footer>© 2026 LoL Fundamentals</footer>
 
+<script>
+const input = document.getElementById('champion-search');
+const grid = document.getElementById('champion-grid');
+const cards = [...grid.getElementsByClassName('champion-card')];
+
+input.addEventListener('input', () => {
+  const q = input.value.toLowerCase().trim();
+
+  // Filter matching cards
+  const matching = [];
+  cards.forEach(card => {
+    const name = card.querySelector('.champion-name').textContent.toLowerCase();
+    const isNew = card.dataset.new === 'true';
+    if ((q === 'new' && isNew) || (q !== 'new' && name.includes(q))) {
+      card.style.display = 'flex'; // show
+      matching.push(card);
+    } else {
+      card.style.display = 'none'; // hide non-matching
+    }
+  });
+
+  // Reorder matching cards to top
+  matching.forEach(card => grid.appendChild(card));
+});
+</script>  
+  
 </body>
 </html>
