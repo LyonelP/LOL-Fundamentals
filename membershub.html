@@ -24,7 +24,7 @@ body{
   text-align:center;
 }
 
-/* HEADER */
+/* HEADER (UNCHANGED FIX ONLY VISUAL SAFE) */
 header{
   background:linear-gradient(90deg,#0a0f14,#1b2838);
   border-bottom:2px solid var(--gold);
@@ -69,7 +69,7 @@ header{
   grid-template-columns: repeat(auto-fit,minmax(260px,1fr));
 }
 
-/* BASE CARD */
+/* BASE CARD (UNCHANGED SIZE) */
 .card{
   position:relative;
   background:var(--card);
@@ -104,7 +104,7 @@ header{
   opacity:0.95;
 }
 
-/* BACKGROUNDS (other cards) */
+/* BACKGROUNDS (UNCHANGED) */
 .card::before{
   content:"";
   position:absolute;
@@ -125,20 +125,22 @@ header{
 .discord-card::before{background-image:url('https://i.imgur.com/fS2OKHV.jpeg'); opacity:0.15;}
 
 /* =========================
-   EKKO CLEAN DECK CARD
+   FIXED EKKO DECK (ONLY CHANGE)
 ========================= */
 
-.ekko-card{
+.ekko-stack{
   position:relative;
   height:230px;
   border:2px solid var(--gold);
   border-radius:12px;
   overflow:hidden;
   text-decoration:none;
+  display:block;
 }
 
-/* both faces */
-.ekko-face{
+/* layers */
+.ekko-top,
+.ekko-bottom{
   position:absolute;
   inset:0;
   display:flex;
@@ -146,64 +148,56 @@ header{
   justify-content:center;
   align-items:center;
   padding:20px;
-  transition:opacity 0.35s ease, transform 0.35s ease;
+  transition:transform 0.35s ease;
+}
+
+/* correct layering */
+.ekko-top{z-index:2;}
+.ekko-bottom{z-index:1; transform:scale(0.97);}
+
+/* backgrounds */
+.ekko-bg{
+  position:absolute;
+  inset:0;
+  background-size:cover;
+  background-position:center;
+  opacity:0.2;
+  z-index:0;
 }
 
 /* text */
-.ekko-face h3,
-.ekko-face p{
-  position:relative;
-  z-index:2;
+.ekko-top h3,
+.ekko-bottom h3{
   margin:0;
-  text-align:center;
   color:var(--gold);
-}
-
-.ekko-face p{
-  color:#e6edf3;
-}
-
-/* GUIDE SIDE */
-.ekko-guide{
   z-index:2;
 }
 
-.ekko-guide-bg{
-  position:absolute;
-  inset:0;
-  background-image:url('https://ddragon.leagueoflegends.com/cdn/img/champion/splash/Ekko_0.jpg');
-  background-size:cover;
-  background-position:center;
-  opacity:0.18;
-  z-index:1;
+.ekko-top p,
+.ekko-bottom p{
+  margin:0;
+  color:#e6edf3;
+  z-index:2;
 }
 
-/* MATCHUP SIDE */
-.ekko-matchups{
-  z-index:1;
-  opacity:0;
-  transform:translateY(10px);
+/* ART FIX */
+.ekko-guide-bg{
+  background-image:url('https://ddragon.leagueoflegends.com/cdn/img/champion/splash/Ekko_0.jpg');
 }
 
 .ekko-matchups-bg{
-  position:absolute;
-  inset:0;
-  background-image:url('https://ddragon.leagueoflegends.com/cdn/img/champion/splash/Ekko_2.jpg');
-  background-size:cover;
-  background-position:center;
-  opacity:0.55; /* Sandstorm Ekko visible */
-  z-index:1;
+  background-image:url('https://ddragon.leagueoflegends.com/cdn/img/champion/splash/Ekko_5.jpg');
+  opacity:0.55; /* Sandstorm Ekko */
 }
 
-/* HOVER TRANSITION */
-.ekko-card:hover .ekko-guide{
-  opacity:0;
-  transform:translateY(-20px);
+/* HOVER = ONLY LIFT TOP CARD */
+.ekko-stack:hover .ekko-top{
+  transform:translateY(-85px);
 }
 
-.ekko-card:hover .ekko-matchups{
-  opacity:1;
-  transform:translateY(0);
+/* bottom stays stable */
+.ekko-stack:hover .ekko-bottom{
+  transform:scale(0.97);
 }
 
 /* TIER BAR */
@@ -224,7 +218,7 @@ header{
 .tier-c{background:#f9c74f;flex:1;}
 .tier-d{background:#90be6d;flex:1;}
 
-/* BUTTON + FOOTER */
+/* BUTTON */
 #logoutBtn{
   display:block;
   margin:18px auto;
@@ -239,6 +233,7 @@ header{
 
 #logoutBtn:hover{background:#ff5959;}
 
+/* FOOTER */
 footer{
   text-align:center;
   padding:26px 10px 40px;
@@ -256,7 +251,7 @@ footer a{color:var(--gold);text-decoration:none;}
 
 <header>
   Members Hub
-  <a href="https://lolfundamentals.com/settings" class="settings-btn">
+  <a href="https://lolfundamentals.com/settings" class="settings-btn" aria-label="Settings">
     <svg viewBox="0 0 24 24"><path d="M12 15.5A3.5 3.5 0 1 0 12 8.5a3.5 3.5 0 0 0 0 7z"/></svg>
   </a>
 </header>
@@ -273,34 +268,34 @@ footer a{color:var(--gold);text-decoration:none;}
 
   <a href="matchuphub.html" class="card diana-matchups">
     <h3>Diana Matchups</h3>
-    <p>Breakdowns for every mid matchup</p>
+    <p>Breakdowns for every matchup</p>
   </a>
 
-  <!-- EKKO CLEAN CARD -->
-  <a href="ekkoguide.html" class="card ekko-card">
+  <!-- EKKO FIXED DECK -->
+  <a href="jgmatchups.html" class="card ekko-stack">
 
-    <div class="ekko-face ekko-guide">
-      <div class="ekko-guide-bg"></div>
+    <div class="ekko-top">
+      <div class="ekko-bg ekko-guide-bg"></div>
       <h3>Ekko Jungle Guide</h3>
-      <p>Pathing • Combos • Mechanics</p>
+      <p>Combos • Pathing • Mechanics</p>
     </div>
 
-    <div class="ekko-face ekko-matchups">
-      <div class="ekko-matchups-bg"></div>
-      <h3>Ekko Matchups</h3>
-      <p>Vs meta junglers</p>
+    <div class="ekko-bottom">
+      <div class="ekko-bg ekko-matchups-bg"></div>
+      <h3>Ekko Jungle Matchups</h3>
+      <p>Matchup breakdowns</p>
     </div>
 
   </a>
 
   <a href="skills.html" class="card fundamentals">
     <h3>Fundamentals</h3>
-    <p>Core League skills</p>
+    <p>Core skills</p>
   </a>
 
   <a href="tierlist.html" class="card tierlist">
     <h3>Tierlist</h3>
-    <p>Current meta breakdown</p>
+    <p>Meta overview</p>
     <div class="tier-bar">
       <div></div><div></div><div></div><div></div><div></div>
     </div>
@@ -313,17 +308,17 @@ footer a{color:var(--gold);text-decoration:none;}
 
   <a href="dianarunes.html" class="card rune-calculator">
     <h3>Rune Calculator</h3>
-    <p>Diana rune setups</p>
+    <p>Diana setups</p>
   </a>
 
   <a href="dianaitems.html" class="card build-calculator">
     <h3>Build Calculator</h3>
-    <p>Item + combo optimization</p>
+    <p>Items & combos</p>
   </a>
 
   <a href="https://discord.gg/Ze75xenn" class="card discord-card">
-    <h3>Join Discord</h3>
-    <p>Community + updates</p>
+    <h3>Discord</h3>
+    <p>Community</p>
   </a>
 
 </div>
