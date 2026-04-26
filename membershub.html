@@ -120,10 +120,12 @@
     background-position:center;
     opacity:0.15;
     z-index:1;
-    border-radius:10px;
   }
 
-  /* existing cards */
+  /* =========================
+     OTHER CARDS
+  ========================= */
+
   .diana-guide::before{ background-image:url('https://ddragon.leagueoflegends.com/cdn/img/champion/splash/Diana_11.jpg'); }
   .diana-matchups::before{ background-image:url('https://ddragon.leagueoflegends.com/cdn/img/champion/splash/Diana_2.jpg'); }
   .fundamentals::before{ background-image:url('https://cdn.wallpapersafari.com/92/79/MYTD9q.png'); }
@@ -134,59 +136,49 @@
   .discord-card::before{ background-image:url('https://i.imgur.com/fS2OKHV.jpeg'); opacity:0.15; }
 
   /* =========================
-     EKKO 2-CARD SYSTEM (FIXED)
+     EKKO DECK CARD (FIXED)
   ========================= */
 
-  .ekko-split{
-    display:grid;
-    grid-template-columns:1fr 1fr;
-    gap:22px;
-  }
-
-  .ekko-card{
+  .ekko-deck{
     position:relative;
     height:230px;
     border:2px solid var(--gold);
     border-radius:12px;
-    background:var(--card);
-    text-decoration:none;
-    color:#e6edf3;
     overflow:hidden;
+    cursor:pointer;
+  }
+
+  /* shared layer */
+  .ekko-layer{
+    position:absolute;
+    inset:0;
     display:flex;
     flex-direction:column;
     justify-content:center;
     align-items:center;
     padding:20px;
-    transition:transform 0.25s ease, box-shadow 0.25s ease;
+    transition:all 0.35s ease;
   }
 
-  .ekko-card:hover{
-    transform:translateY(-6px);
-    box-shadow:0 16px 30px rgba(47,129,247,0.22);
-  }
-
-  .ekko-card h3{
-    position:relative;
-    z-index:2;
-    color:var(--gold);
-    margin:0 0 8px;
-  }
-
-  .ekko-card p{
-    position:relative;
-    z-index:2;
-    margin:0;
-    opacity:0.95;
-    text-align:center;
-  }
-
-  /* BACKGROUNDS */
+  /* backgrounds */
   .ekko-bg{
     position:absolute;
     inset:0;
     background-size:cover;
     background-position:center;
-    z-index:1;
+    z-index:0;
+  }
+
+  .ekko-layer h3,
+  .ekko-layer p{
+    z-index:2;
+    margin:0;
+    text-align:center;
+  }
+
+  /* MAIN (GUIDE) */
+  .ekko-main{
+    z-index:2;
   }
 
   .ekko-guide-bg{
@@ -194,17 +186,31 @@
     opacity:0.18;
   }
 
-  .ekko-matchups-bg{
-    background-image:url('https://ddragon.leagueoflegends.com/cdn/img/champion/splash/Ekko_5.jpg');
-    opacity:0.55; /* FIX: clearly visible Sandstorm Ekko */
+  /* HIDDEN (MATCHUPS) */
+  .ekko-hover{
+    z-index:1;
+    opacity:0;
+    transform:translateY(25px);
   }
 
-  .ekko-matchups-card{
-    border-color:rgba(201,170,113,0.9);
+  .ekko-matchups-bg{
+    background-image:url('https://ddragon.leagueoflegends.com/cdn/img/champion/splash/Ekko_2.jpg');
+    opacity:0.6; /* Sandstorm Ekko now clearly visible */
+  }
+
+  /* HOVER ANIMATION */
+  .ekko-deck:hover .ekko-main{
+    transform:translateY(-40px);
+    opacity:0;
+  }
+
+  .ekko-deck:hover .ekko-hover{
+    opacity:1;
+    transform:translateY(0);
   }
 
   /* =========================
-     OTHER UI
+     TIER BAR
   ========================= */
 
   .tier-bar{
@@ -256,7 +262,6 @@
 
   @media(max-width:420px){
     .card{ height:220px; padding:16px; }
-    .ekko-split{ grid-template-columns:1fr; }
   }
 
 </style>
@@ -286,22 +291,22 @@
       <p>Detailed breakdowns and VODs for every mid lane champion.</p>
     </a>
 
-    <!-- EKKO 2-CARD SYSTEM -->
-    <div class="ekko-split">
+    <!-- EKKO DECK CARD -->
+    <a href="ekkoguide.html" class="card ekko-deck">
 
-      <a href="ekkoguide.html" class="ekko-card">
+      <div class="ekko-layer ekko-main">
         <div class="ekko-bg ekko-guide-bg"></div>
         <h3>Ekko Jungle Guide</h3>
-        <p>Combos, pathing, mechanics & fundamentals</p>
-      </a>
+        <p>Pathing • Combos • Mechanics</p>
+      </div>
 
-      <a href="jgmatchups.html" class="ekko-card ekko-matchups-card">
+      <div class="ekko-layer ekko-hover">
         <div class="ekko-bg ekko-matchups-bg"></div>
-        <h3>Ekko Jungle Matchups</h3>
-        <p>Matchup breakdowns vs meta junglers</p>
-      </a>
+        <h3>Ekko Matchups</h3>
+        <p>Vs meta junglers</p>
+      </div>
 
-    </div>
+    </a>
 
     <a href="skills.html" class="card fundamentals">
       <h3>Fundamentals</h3>
@@ -328,12 +333,12 @@
 
     <a href="dianaitems.html" class="card build-calculator">
       <h3>Build Calculator</h3>
-      <p>Compare different item builds and ability combos for Diana at different stages.</p>
+      <p>Compare different item builds and ability combos for Diana.</p>
     </a>
 
     <a href="https://discord.gg/Ze75xenn" class="card discord-card" target="_blank">
       <h3>Join our Discord</h3>
-      <p>Connect with other members, share tips, and stay updated on guides.</p>
+      <p>Connect with other members, share tips, and stay updated.</p>
     </a>
 
   </div>
