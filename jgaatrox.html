@@ -130,22 +130,6 @@ header {
   border: 1px solid rgba(201,170,113,0.18);
 }
 
-/* VIDEO */
-.video-card {
-  margin: 36px auto 40px;
-  padding: 26px;
-  background: linear-gradient(180deg, #161b22, #12161d);
-  border-radius: 18px;
-  border: 1px solid rgba(201,170,113,0.18);
-}
-
-.video-card iframe {
-  width: 100%;
-  height: 480px;
-  border: none;
-  border-radius: 12px;
-}
-
 /* FOOTER */
 footer {
   text-align: center;
@@ -160,10 +144,6 @@ footer {
   .matchup-container {
     flex-direction: column;
     align-items: center;
-  }
-
-  .video-card iframe {
-    height: 240px;
   }
 }
 </style>
@@ -188,16 +168,13 @@ if (localStorage.getItem('lolfundamentals_logged_in') !== 'true') {
   <div class="matchup-container">
     <div class="matchup-left">
       <img src="https://ddragon.leagueoflegends.com/cdn/14.23.1/img/champion/Aatrox.png" alt="Aatrox">
-      <div class="winrate-bubble">50%</div>
+      <div class="winrate-bubble">51%</div>
     </div>
 
     <div class="matchup-right">
       <h2>Matchup Notes</h2>
       <ul>
-        <li>Aatrox relies heavily on hitting his Q sweet spots — dodging these removes most of his damage.</li>
-        <li>His early clear is not very fast, making him vulnerable to tempo invades.</li>
-        <li>He excels in extended fights where he can sustain with passive and abilities.</li>
-        <li>Be careful fighting him when his ultimate is active — he gains massive healing and movement speed.</li>
+        <li>Aatrox is an easy passive target and has a hard time returning damage.</li>
       </ul>
     </div>
   </div>
@@ -206,9 +183,9 @@ if (localStorage.getItem('lolfundamentals_logged_in') !== 'true') {
   <div class="section-card">
     <h2 style="color: var(--gold); margin-top:0;">Level 1 Ward</h2>
     <p>
-      Aatrox typically full clears early. Ward his raptors or opposite buff to track his pathing and look for invade opportunities.
+     Ward above red to spot late a late invade from Aatrox.
     </p>
-    <img src="https://i.imgur.com/vaXNQ53.png"
+    <img src="https://i.imgur.com/uadxCY8.png"
          alt="Level 1 ward spots"
          style="width:100%; border-radius:12px; border:1px solid rgba(201,170,113,0.25);">
   </div>
@@ -217,14 +194,8 @@ if (localStorage.getItem('lolfundamentals_logged_in') !== 'true') {
   <div class="section-card">
     <h2 style="color: var(--gold); margin-top:0;">Where to Start</h2>
     <p>
-      Start opposite side if you want to avoid early skirmishes, or path towards Aatrox if your champion can punish his slower clear and lack of early pressure.
+     Raptor start is best since you can get a clear advantage and win early jungle skirmishes.
     </p>
-  </div>
-
-  <!-- VOD -->
-  <div class="video-card">
-    <h2 style="color: var(--gold); margin-top:0;">VODs</h2>
-    <iframe src="https://www.youtube.com/embed/yfAkwSYTLM8" allowfullscreen></iframe>
   </div>
 
 </div>
