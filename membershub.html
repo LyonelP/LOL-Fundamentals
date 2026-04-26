@@ -44,7 +44,6 @@
     text-decoration:none;
     transition:opacity .15s, transform .15s;
   }
-
   .settings-btn:hover{opacity:1; transform:scale(1.05);}
   .settings-btn svg{width:18px;height:18px;fill:currentColor;}
 
@@ -117,19 +116,18 @@
     border-radius:10px;
   }
 
-  /* backgrounds */
   .diana-guide::before{ background-image:url('https://ddragon.leagueoflegends.com/cdn/img/champion/splash/Diana_11.jpg'); }
   .diana-matchups::before{ background-image:url('https://ddragon.leagueoflegends.com/cdn/img/champion/splash/Diana_2.jpg'); }
-
   .ekko-guide::before{ background-image:url('https://ddragon.leagueoflegends.com/cdn/img/champion/splash/Ekko_0.jpg'); }
 
-  /* ✅ DIFFERENT IMAGE FOR MATCHUPS */
+  /* FIXED ART FOR MATCHUPS */
   .ekko-matchups::before{
     background-image:url('https://ddragon.leagueoflegends.com/cdn/img/champion/splash/Ekko_7.jpg');
   }
 
   .fundamentals::before{ background-image:url('https://cdn.wallpapersafari.com/92/79/MYTD9q.png'); }
   .tierlist::before{ background: linear-gradient(to bottom,#1b2838 0%,#161b22 100%); }
+
   .coaching::before{ background-image:url('https://m.media-amazon.com/images/I/71GlK3kDLJL.jpg'); opacity:0.2; }
   .rune-calculator::before{ background-image:url('https://i.imgur.com/kcs90ta.jpeg'); }
   .build-calculator::before{ background-image:url('https://i.imgur.com/uhLq29j.jpeg'); }
@@ -207,12 +205,6 @@
       <p>Complete guide to playing Ekko Jungle, including combos, pathing, and mechanics.</p>
     </a>
 
-    <!-- NEW EKKO CARD -->
-    <a href="ekkomatchups.html" class="card ekko-matchups">
-      <h3>Ekko Jungle Matchups</h3>
-      <p>Matchup breakdowns, jungle win conditions, pathing routes, and matchup VOD analysis.</p>
-    </a>
-
     <a href="skills.html" class="card fundamentals">
       <h3>Fundamentals</h3>
       <p>Learn core League skills to help climb at any elo.</p>
@@ -222,6 +214,12 @@
       <h3>Tierlist</h3>
       <p>Current champion tierlist showing which champions dominate the meta.</p>
       <div class="tier-bar"></div>
+    </a>
+
+    <!-- ✅ MOVED HERE (after tierlist) -->
+    <a href="jgmatchups.html" class="card ekko-matchups">
+      <h3>Ekko Jungle Matchups</h3>
+      <p>Matchup breakdowns, jungle win conditions, pathing routes, and champion-specific strategies.</p>
     </a>
 
     <a href="https://buy.stripe.com/aFa6oAf6kcF61F4bkuejK0g" class="card coaching">
@@ -236,7 +234,7 @@
 
     <a href="dianaitems.html" class="card build-calculator">
       <h3>Build Calculator</h3>
-      <p>Compare different item builds and ability combos for Diana at different stages.</p>
+      <p>Compare different item builds and ability combos for Diana at different stages of the game.</p>
     </a>
 
     <a href="https://discord.gg/Ze75xenn" class="card discord-card" target="_blank" rel="noopener noreferrer">
@@ -254,7 +252,7 @@
   <a href="mailto:arcsecond@lolfundamentals.com">arcsecond@lolfundamentals.com</a>
 </footer>
 
-<!-- Firebase (UNCHANGED LOGIN LOGIC) -->
+<!-- Firebase login (UNCHANGED) -->
 <script type="module">
 import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
 import { getAuth, onAuthStateChanged, signOut } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-auth.js";
