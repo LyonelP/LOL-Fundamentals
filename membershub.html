@@ -15,6 +15,7 @@
   }
 
   html,body{height:100%;margin:0;}
+
   body {
     font-family:"Beaufort for LOL",Arial,Helvetica,sans-serif;
     background:var(--bg);
@@ -66,6 +67,10 @@
     grid-template-columns: repeat(auto-fit,minmax(260px,1fr));
     align-items:start;
   }
+
+  /* =========================
+     BASE CARD
+  ========================= */
 
   .card{
     position:relative;
@@ -128,6 +133,80 @@
   .build-calculator::before{ background-image:url('https://i.imgur.com/uhLq29j.jpeg'); }
   .discord-card::before{ background-image:url('https://i.imgur.com/fS2OKHV.jpeg'); opacity:0.15; }
 
+  /* =========================
+     EKKO 2-CARD SYSTEM (FIXED)
+  ========================= */
+
+  .ekko-split{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:22px;
+  }
+
+  .ekko-card{
+    position:relative;
+    height:230px;
+    border:2px solid var(--gold);
+    border-radius:12px;
+    background:var(--card);
+    text-decoration:none;
+    color:#e6edf3;
+    overflow:hidden;
+    display:flex;
+    flex-direction:column;
+    justify-content:center;
+    align-items:center;
+    padding:20px;
+    transition:transform 0.25s ease, box-shadow 0.25s ease;
+  }
+
+  .ekko-card:hover{
+    transform:translateY(-6px);
+    box-shadow:0 16px 30px rgba(47,129,247,0.22);
+  }
+
+  .ekko-card h3{
+    position:relative;
+    z-index:2;
+    color:var(--gold);
+    margin:0 0 8px;
+  }
+
+  .ekko-card p{
+    position:relative;
+    z-index:2;
+    margin:0;
+    opacity:0.95;
+    text-align:center;
+  }
+
+  /* BACKGROUNDS */
+  .ekko-bg{
+    position:absolute;
+    inset:0;
+    background-size:cover;
+    background-position:center;
+    z-index:1;
+  }
+
+  .ekko-guide-bg{
+    background-image:url('https://ddragon.leagueoflegends.com/cdn/img/champion/splash/Ekko_0.jpg');
+    opacity:0.18;
+  }
+
+  .ekko-matchups-bg{
+    background-image:url('https://ddragon.leagueoflegends.com/cdn/img/champion/splash/Ekko_5.jpg');
+    opacity:0.55; /* FIX: clearly visible Sandstorm Ekko */
+  }
+
+  .ekko-matchups-card{
+    border-color:rgba(201,170,113,0.9);
+  }
+
+  /* =========================
+     OTHER UI
+  ========================= */
+
   .tier-bar{
     margin-top:12px;
     width:100%;
@@ -156,6 +235,7 @@
     font-weight:700;
     cursor:pointer;
   }
+
   #logoutBtn:hover{ background:#ff5959; }
 
   footer{
@@ -176,89 +256,7 @@
 
   @media(max-width:420px){
     .card{ height:220px; padding:16px; }
-  }
-
-  /* =========================
-     EKKO 2-CARD SPLIT SYSTEM
-  ========================= */
-
-  .ekko-split{
-    position:relative;
-    height:230px;
-  }
-
-  .ekko-card{
-    position:absolute;
-    inset:0;
-    border:2px solid var(--gold);
-    border-radius:12px;
-    background:var(--card);
-    text-decoration:none;
-    color:#e6edf3;
-    display:flex;
-    flex-direction:column;
-    justify-content:center;
-    align-items:center;
-    padding:20px;
-    overflow:hidden;
-    transition:transform 0.35s ease, box-shadow 0.35s ease;
-  }
-
-  .ekko-card h3{
-    color:var(--gold);
-    margin:0 0 8px;
-    z-index:2;
-  }
-
-  .ekko-card p{
-    margin:0;
-    opacity:0.95;
-    z-index:2;
-    text-align:center;
-  }
-
-  /* GUIDE */
-  .ekko-guide-card{
-    z-index:2;
-    transform:translateY(0);
-  }
-
-  .ekko-guide-card::before{
-    content:"";
-    position:absolute;
-    inset:0;
-    background-image:url('https://ddragon.leagueoflegends.com/cdn/img/champion/splash/Ekko_0.jpg');
-    background-size:cover;
-    background-position:center;
-    opacity:0.15;
-  }
-
-  /* MATCHUPS (Sandstorm Ekko - IMPORTANT VISIBILITY BOOST) */
-  .ekko-matchups-card{
-    z-index:1;
-    transform:translateY(10px);
-  }
-
-  .ekko-matchups-card::before{
-    content:"";
-    position:absolute;
-    inset:0;
-    background-image:url('https://ddragon.leagueoflegends.com/cdn/img/champion/splash/Ekko_5.jpg');
-    background-size:cover;
-    background-position:center;
-    opacity:0.35; /* stronger so Sandstorm Ekko is clearly visible */
-  }
-
-  /* HOVER EFFECT */
-  .ekko-split:hover .ekko-guide-card{
-    transform:translateY(-18px);
-    box-shadow:0 18px 40px rgba(47,129,247,0.25);
-  }
-
-  .ekko-split:hover .ekko-matchups-card{
-    transform:translateY(0px);
-    z-index:3;
-    box-shadow:0 18px 45px rgba(201,170,113,0.25);
+    .ekko-split{ grid-template-columns:1fr; }
   }
 
 </style>
@@ -288,15 +286,17 @@
       <p>Detailed breakdowns and VODs for every mid lane champion.</p>
     </a>
 
-    <!-- EKKO SPLIT -->
+    <!-- EKKO 2-CARD SYSTEM -->
     <div class="ekko-split">
 
-      <a href="ekkoguide.html" class="ekko-card ekko-guide-card">
+      <a href="ekkoguide.html" class="ekko-card">
+        <div class="ekko-bg ekko-guide-bg"></div>
         <h3>Ekko Jungle Guide</h3>
         <p>Combos, pathing, mechanics & fundamentals</p>
       </a>
 
       <a href="jgmatchups.html" class="ekko-card ekko-matchups-card">
+        <div class="ekko-bg ekko-matchups-bg"></div>
         <h3>Ekko Jungle Matchups</h3>
         <p>Matchup breakdowns vs meta junglers</p>
       </a>
