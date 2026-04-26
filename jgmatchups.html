@@ -20,7 +20,6 @@ body {
   display: flex;
   flex-direction: column;
 
-  /* TRUE DAMAGE SPLASH (FIXED 19) */
   background:
     linear-gradient(rgba(10,10,15,0.55), rgba(10,10,15,0.85)),
     url('https://ddragon.leagueoflegends.com/cdn/img/champion/splash/Ekko_19.jpg')
@@ -64,6 +63,7 @@ header {
   color: #fff;
 }
 
+/* RESTORED GRID */
 .champion-grid {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
@@ -106,12 +106,14 @@ header {
   font-weight: bold;
 }
 
+/* RESTORED FOOTER */
 footer {
   margin-top: auto;
   padding: 25px;
   text-align: center;
   font-size: 14px;
   color: #888;
+  border-top: 1px solid rgba(255,255,255,0.08);
 }
 </style>
 </head>
@@ -122,7 +124,8 @@ footer {
 
 <a href="membershub.html" class="back-button">Back to Members Hub</a>
 
-<input id="champion-search" placeholder="Search junglers...">
+<!-- FIXED PLACEHOLDER -->
+<input id="champion-search" placeholder="Search junglers or type 'new'...">
 
 <div class="champion-grid">
 
@@ -152,6 +155,8 @@ footer {
 </a>
 
 </div>
+
+<footer>© 2026 LoL Fundamentals</footer>
 
 </body>
 </html>
