@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8" />
-<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>True Damage Ekko – Matchup Hub</title>
 
 <script>
@@ -13,117 +13,121 @@ if (localStorage.getItem('lolfundamentals_logged_in') !== 'true') {
 
 <style>
 :root{
-  --gold:#00ffd5;
-  --bg:#05070a;
-  --card:#0d1117;
-  --muted:#7aa6b8;
-  --accent:#00ffd5;
-}
-
-html,body{
-  height:100%;
-  margin:0;
+  --bg-dark:#07060a;
+  --panel:#0f0b14;
+  --neon-pink:#ff3df2;
+  --neon-purple:#7c3aed;
+  --neon-cyan:#00ffd5;
+  --text:#e9e6ff;
 }
 
 body {
-  font-family:"Beaufort for LOL",Arial,Helvetica,sans-serif;
-  color:#e6edf3;
-  min-height:100vh;
-  display:flex;
-  flex-direction:column;
+  margin: 0;
+  font-family: 'Beaufort for LOL', Arial, Helvetica, sans-serif;
+  color: var(--text);
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
 
+  /* TRUE DAMAGE EKKO VIBE */
   background:
-    linear-gradient(rgba(5,10,15,0.65), rgba(5,10,15,0.85)),
-    url('https://ddragon.leagueoflegends.com/cdn/img/champion/splash/Ekko_5.jpg')
+    linear-gradient(135deg, rgba(124,58,237,0.35), rgba(255,61,242,0.18), rgba(0,0,0,0.85)),
+    url('https://ddragon.leagueoflegends.com/cdn/img/champion/splash/Ekko_19.jpg')
     no-repeat center top;
-  background-size:cover;
-  background-attachment:fixed;
+  background-size: cover;
+  background-attachment: fixed;
 }
 
 header {
-  background:rgba(10,10,15,0.85);
-  border-bottom:2px solid #00ffd5;
-  padding:20px;
-  font-size:26px;
-  font-weight:bold;
-  text-transform:uppercase;
-  color:#00ffd5;
-  text-align:center;
-  letter-spacing:2px;
-  text-shadow:0 0 10px rgba(0,255,213,0.25);
+  background: rgba(7, 6, 10, 0.92);
+  border-bottom: 2px solid var(--neon-pink);
+  padding: 20px;
+  font-size: 26px;
+  font-weight: bold;
+  text-transform: uppercase;
+  color: var(--neon-cyan);
+  text-align: center;
+  letter-spacing: 2px;
+  box-shadow: 0 0 25px rgba(255,61,242,0.15);
 }
 
 .back-button {
-  margin:20px auto;
-  padding:10px 20px;
-  background:linear-gradient(135deg,#00ffd5,#00bfa5);
-  color:#000;
-  text-decoration:none;
-  border-radius:8px;
-  font-weight:bold;
-  box-shadow:0 0 12px rgba(0,255,213,0.4);
+  margin: 20px auto;
+  padding: 10px 20px;
+  background: linear-gradient(135deg, var(--neon-pink), var(--neon-purple));
+  color: #000;
+  text-decoration: none;
+  border-radius: 8px;
+  font-weight: bold;
+  box-shadow: 0 0 18px rgba(255,61,242,0.25);
 }
-.back-button::before { content:"← "; }
+.back-button::before { content: "← "; }
 
 #champion-search {
-  width:400px;
-  max-width:90%;
-  margin:20px auto 30px;
-  padding:10px 12px;
-  border-radius:6px;
-  border:2px solid #00ffd5;
-  background:#0d1117;
-  color:#e6edf3;
+  width: 400px;
+  max-width: 90%;
+  margin: 20px auto 30px;
+  padding: 10px 12px;
+  border-radius: 6px;
+  border: 2px solid var(--neon-pink);
+  background: #0b0810;
+  color: var(--text);
+  outline: none;
 }
 
 .champion-grid {
-  display:grid;
-  grid-template-columns:repeat(auto-fit,minmax(120px,1fr));
-  gap:20px;
-  max-width:1100px;
-  margin:0 auto 50px;
-  padding:0 20px;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+  gap: 20px;
+  max-width: 1100px;
+  margin: 0 auto 50px;
+  padding: 0 20px;
 }
 
 .champion-card {
-  background:linear-gradient(135deg,#0d1117,#161b22);
-  border-radius:12px;
-  border-left:4px solid #00ffd5;
-  padding:15px;
-  text-align:center;
-  text-decoration:none;
-  color:inherit;
-  transition:transform .25s, box-shadow .25s, border-color .25s;
-  display:flex;
-  flex-direction:column;
-  align-items:center;
+  background: linear-gradient(135deg, #120b18, #0a0710);
+  border-radius: 12px;
+  border-left: 4px solid var(--neon-pink);
+  padding: 15px;
+  text-align: center;
+  text-decoration: none;
+  color: inherit;
+  transition: transform .25s, box-shadow .25s;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  box-shadow: 0 0 0 rgba(0,0,0,0);
 }
 
 .champion-card:hover {
-  transform:translateY(-4px);
-  box-shadow:0 0 25px rgba(0,255,213,0.25);
-  border-color:#00ffd5;
+  transform: translateY(-5px);
+  box-shadow: 0 0 25px rgba(255,61,242,0.18);
+  border-left: 4px solid var(--neon-cyan);
 }
 
 .champion-card img {
-  width:80px;
-  height:80px;
-  border-radius:8px;
+  width: 80px;
+  height: 80px;
+  border-radius: 8px;
+  box-shadow: 0 0 12px rgba(124,58,237,0.35);
 }
 
 .champion-name {
-  margin-top:8px;
-  font-size:14px;
-  color:#00ffd5;
-  font-weight:bold;
+  margin-top: 8px;
+  font-size: 14px;
+  color: var(--neon-cyan);
+  font-weight: bold;
+  letter-spacing: 0.5px;
 }
 
 footer {
-  margin-top:auto;
-  padding:25px;
-  text-align:center;
-  font-size:14px;
-  color:#7aa6b8;
+  margin-top: auto;
+  padding: 25px;
+  text-align: center;
+  font-size: 14px;
+  color: #9aa0b4;
+  background: rgba(0,0,0,0.4);
+  border-top: 1px solid rgba(255,61,242,0.15);
 }
 </style>
 </head>
@@ -138,39 +142,24 @@ footer {
 
 <div class="champion-grid" id="champion-grid">
 
-<!-- Jungle Pool (unchanged) -->
-<a href="jgamumu.html" class="champion-card"><img src="https://ddragon.leagueoflegends.com/cdn/14.23.1/img/champion/Amumu.png"><div class="champion-name">Amumu</div></a>
-<a href="jgaatrox.html" class="champion-card"><img src="https://ddragon.leagueoflegends.com/cdn/14.23.1/img/champion/Aatrox.png"><div class="champion-name">Aatrox</div></a>
-<a href="jgbrand.html" class="champion-card"><img src="https://ddragon.leagueoflegends.com/cdn/14.23.1/img/champion/Brand.png"><div class="champion-name">Brand</div></a>
-<a href="jgbelveth.html" class="champion-card"><img src="https://ddragon.leagueoflegends.com/cdn/14.23.1/img/champion/Belveth.png"><div class="champion-name">Bel'Veth</div></a>
-<!-- (rest unchanged) -->
+<a href="jgamumu.html" class="champion-card">
+  <img src="https://ddragon.leagueoflegends.com/cdn/14.23.1/img/champion/Amumu.png">
+  <div class="champion-name">Amumu</div>
+</a>
+
+<a href="jgaatrox.html" class="champion-card">
+  <img src="https://ddragon.leagueoflegends.com/cdn/14.23.1/img/champion/Aatrox.png">
+  <div class="champion-name">Aatrox</div>
+</a>
+
+<a href="jgekko.html" class="champion-card">
+  <img src="https://ddragon.leagueoflegends.com/cdn/14.23.1/img/champion/Ekko.png">
+  <div class="champion-name">Ekko</div>
+</a>
 
 </div>
 
 <footer>© 2026 LoL Fundamentals · All rights reserved</footer>
-
-<script>
-const input = document.getElementById('champion-search');
-const grid = document.getElementById('champion-grid');
-const cards = [...grid.getElementsByClassName('champion-card')];
-
-input.addEventListener('input', () => {
-  const q = input.value.toLowerCase().trim();
-
-  const matching = [];
-  cards.forEach(card => {
-    const name = card.querySelector('.champion-name').textContent.toLowerCase();
-    if (name.includes(q)) {
-      card.style.display = 'flex';
-      matching.push(card);
-    } else {
-      card.style.display = 'none';
-    }
-  });
-
-  matching.forEach(card => grid.appendChild(card));
-});
-</script>
 
 </body>
 </html>
