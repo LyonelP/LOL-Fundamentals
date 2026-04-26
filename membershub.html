@@ -53,11 +53,7 @@
     margin:8px auto;
   }
 
-  .section p{
-    margin:0 0 18px;
-    color:#cfe1ee;
-    opacity:0.9;
-  }
+  .section p{ margin:0 0 18px; color:#cfe1ee; opacity:0.9; }
 
   .card-grid{
     display:grid;
@@ -115,38 +111,36 @@
     height:100%;
     background-size:cover;
     background-position:center;
-    opacity:0.15;
+    opacity:0.18;
     z-index:1;
     border-radius:10px;
   }
 
-  /* ===== IMAGES ===== */
+  /* =======================
+     CHAMPION BACKGROUNDS
+  ======================= */
+
   .diana-guide::before{ background-image:url('https://ddragon.leagueoflegends.com/cdn/img/champion/splash/Diana_11.jpg'); }
   .diana-matchups::before{ background-image:url('https://ddragon.leagueoflegends.com/cdn/img/champion/splash/Diana_2.jpg'); }
-
   .ekko-guide::before{ background-image:url('https://ddragon.leagueoflegends.com/cdn/img/champion/splash/Ekko_0.jpg'); }
 
-  /* FIXED EKKO MATCHUPS VISIBILITY */
+  /* FIXED EKKO MATCHUPS ART */
   .ekko-matchups::before{
     background-image:url('https://ddragon.leagueoflegends.com/cdn/img/champion/splash/Ekko_7.jpg');
-    opacity:0.25;
-    filter:contrast(1.1) saturate(1.1);
+    opacity:0.30;
+    filter:contrast(1.15) saturate(1.1);
   }
 
-  /* FIXED TIERLIST ART */
+  /* FIXED TIERLIST ART (NO MORE GRADIENT) */
   .tierlist::before{
-    background-image:url('https://cdn.wallpapersafari.com/92/79/MYTD9q.png');
-    background-size:cover;
-    background-position:center;
-    opacity:0.18;
+    background-image:url('https://ddragon.leagueoflegends.com/cdn/img/champion/splash/Ahri_0.jpg');
   }
 
   .fundamentals::before{ background-image:url('https://cdn.wallpapersafari.com/92/79/MYTD9q.png'); }
-
   .coaching::before{ background-image:url('https://m.media-amazon.com/images/I/71GlK3kDLJL.jpg'); opacity:0.2; }
   .rune-calculator::before{ background-image:url('https://i.imgur.com/kcs90ta.jpeg'); }
   .build-calculator::before{ background-image:url('https://i.imgur.com/uhLq29j.jpeg'); }
-  .discord-card::before{ background-image:url('https://i.imgur.com/fS2OKHV.jpeg'); opacity:0.15; }
+  .discord-card::before{ background-image:url('https://i.imgur.com/fS2OKHV.jpeg'); background-size:cover; background-position:center; opacity:0.15; }
 
   .tier-bar{
     margin-top:12px;
@@ -199,6 +193,9 @@
 
 <header>
   Members Hub
+  <a href="https://lolfundamentals.com/settings" class="settings-btn" aria-label="Settings">
+    <svg viewBox="0 0 24 24"><path d="M12 15.5A3.5 3.5 0 1 0 12 8.5a3.5 3.5 0 0 0 0 7z"/></svg>
+  </a>
 </header>
 
 <section class="section">
@@ -208,54 +205,54 @@
 
     <a href="dianaguide6934.html" class="card diana-guide">
       <h3>Diana Mid Guide</h3>
-      <p>Comprehensive guide for mastering Diana, including combos, macro, and advanced tips.</p>
+      <p>Comprehensive guide for mastering Diana.</p>
     </a>
 
     <a href="matchuphub.html" class="card diana-matchups">
       <h3>Diana Mid Matchups</h3>
-      <p>Detailed breakdowns and VODs for every mid lane champion.</p>
+      <p>Detailed breakdowns and VODs for mid lane matchups.</p>
     </a>
 
     <a href="ekkoguide.html" class="card ekko-guide">
       <h3>Ekko Jungle Guide</h3>
-      <p>Complete guide to playing Ekko Jungle, including combos, pathing, and mechanics.</p>
+      <p>Full Ekko jungle guide with mechanics and pathing.</p>
+    </a>
+
+    <!-- AFTER TIERLIST (as you wanted) -->
+    <a href="tierlist.html" class="card tierlist">
+      <h3>Tierlist</h3>
+      <p>Current champion tierlist and meta overview.</p>
+      <div class="tier-bar"></div>
+    </a>
+
+    <a href="jgmatchups.html" class="card ekko-matchups">
+      <h3>Ekko Jungle Matchups</h3>
+      <p>Matchups, jungle pathing, and win conditions.</p>
     </a>
 
     <a href="skills.html" class="card fundamentals">
       <h3>Fundamentals</h3>
-      <p>Learn core League skills to help climb at any elo.</p>
-    </a>
-
-    <a href="tierlist.html" class="card tierlist">
-      <h3>Tierlist</h3>
-      <p>Current champion tierlist showing which champions dominate the meta.</p>
-      <div class="tier-bar"></div>
-    </a>
-
-    <!-- FIXED + MOVED AFTER TIERLIST -->
-    <a href="jgmatchups.html" class="card ekko-matchups">
-      <h3>Ekko Jungle Matchups</h3>
-      <p>Matchup breakdowns, jungle win conditions, pathing routes, and champion-specific strategies.</p>
+      <p>Core League skills to climb faster.</p>
     </a>
 
     <a href="https://buy.stripe.com/aFa6oAf6kcF61F4bkuejK0g" class="card coaching">
       <h3>Coaching</h3>
-      <p>Book a personalized 1-hour coaching session. Members receive a discount!</p>
+      <p>1-hour coaching session (members discount).</p>
     </a>
 
     <a href="dianarunes.html" class="card rune-calculator">
       <h3>Rune Calculator</h3>
-      <p>Compare rune setups for Diana that enhance her playstyle.</p>
+      <p>Compare optimal rune setups.</p>
     </a>
 
     <a href="dianaitems.html" class="card build-calculator">
       <h3>Build Calculator</h3>
-      <p>Compare different item builds and ability combos for Diana at different stages of the game.</p>
+      <p>Compare item builds and combos.</p>
     </a>
 
-    <a href="https://discord.gg/Ze75xenn" class="card discord-card" target="_blank" rel="noopener noreferrer">
-      <h3>Join our Discord</h3>
-      <p>Connect with other members, share tips, and stay updated on guides.</p>
+    <a href="https://discord.gg/Ze75xenn" class="card discord-card" target="_blank">
+      <h3>Join Discord</h3>
+      <p>Community, tips, and updates.</p>
     </a>
 
   </div>
@@ -268,7 +265,7 @@
   <a href="mailto:arcsecond@lolfundamentals.com">arcsecond@lolfundamentals.com</a>
 </footer>
 
-<!-- Firebase -->
+<!-- FIREBASE (UNCHANGED) -->
 <script type="module">
 import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
 import { getAuth, onAuthStateChanged, signOut } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-auth.js";
