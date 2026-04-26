@@ -12,54 +12,45 @@ if (localStorage.getItem('lolfundamentals_logged_in') !== 'true') {
 </script>
 
 <style>
-:root{
-  --bg-dark:#07060a;
-  --panel:#0f0b14;
-  --neon-pink:#ff3df2;
-  --neon-purple:#7c3aed;
-  --neon-cyan:#00ffd5;
-  --text:#e9e6ff;
-}
-
 body {
   margin: 0;
   font-family: 'Beaufort for LOL', Arial, Helvetica, sans-serif;
-  color: var(--text);
+  color: #fff;
   min-height: 100vh;
   display: flex;
   flex-direction: column;
 
-  /* TRUE DAMAGE EKKO VIBE */
   background:
-    linear-gradient(135deg, rgba(124,58,237,0.35), rgba(255,61,242,0.18), rgba(0,0,0,0.85)),
-    url('https://ddragon.leagueoflegends.com/cdn/img/champion/splash/Ekko_19.jpg')
+    linear-gradient(rgba(10,10,15,0.55), rgba(10,10,15,0.85)),
+    url('https://ddragon.leagueoflegends.com/cdn/img/champion/splash/Ekko_TrueDamage.jpg')
     no-repeat center top;
   background-size: cover;
   background-attachment: fixed;
 }
 
+/* TRUE DAMAGE HEADER */
 header {
-  background: rgba(7, 6, 10, 0.92);
-  border-bottom: 2px solid var(--neon-pink);
+  background: rgba(10,10,15,0.92);
+  border-bottom: 2px solid #00f5ff;
   padding: 20px;
   font-size: 26px;
   font-weight: bold;
   text-transform: uppercase;
-  color: var(--neon-cyan);
+  color: #00f5ff;
   text-align: center;
   letter-spacing: 2px;
-  box-shadow: 0 0 25px rgba(255,61,242,0.15);
+  text-shadow: 0 0 10px rgba(0,245,255,0.5);
 }
 
 .back-button {
   margin: 20px auto;
   padding: 10px 20px;
-  background: linear-gradient(135deg, var(--neon-pink), var(--neon-purple));
+  background: linear-gradient(135deg, #00f5ff, #ff3df2);
   color: #000;
   text-decoration: none;
   border-radius: 8px;
   font-weight: bold;
-  box-shadow: 0 0 18px rgba(255,61,242,0.25);
+  box-shadow: 0 0 15px rgba(0,245,255,0.4);
 }
 .back-button::before { content: "← "; }
 
@@ -69,9 +60,9 @@ header {
   margin: 20px auto 30px;
   padding: 10px 12px;
   border-radius: 6px;
-  border: 2px solid var(--neon-pink);
-  background: #0b0810;
-  color: var(--text);
+  border: 2px solid #ff3df2;
+  background: #0b0f14;
+  color: #e6edf3;
   outline: none;
 }
 
@@ -85,9 +76,9 @@ header {
 }
 
 .champion-card {
-  background: linear-gradient(135deg, #120b18, #0a0710);
+  background: linear-gradient(135deg, #0b0f14, #121826);
   border-radius: 12px;
-  border-left: 4px solid var(--neon-pink);
+  border-left: 6px solid #00f5ff;
   padding: 15px;
   text-align: center;
   text-decoration: none;
@@ -96,28 +87,26 @@ header {
   display: flex;
   flex-direction: column;
   align-items: center;
-  box-shadow: 0 0 0 rgba(0,0,0,0);
 }
 
 .champion-card:hover {
-  transform: translateY(-5px);
-  box-shadow: 0 0 25px rgba(255,61,242,0.18);
-  border-left: 4px solid var(--neon-cyan);
+  transform: translateY(-4px);
+  box-shadow: 0 0 25px rgba(255,61,242,0.25);
+  border-left: 6px solid #ff3df2;
 }
 
 .champion-card img {
   width: 80px;
   height: 80px;
   border-radius: 8px;
-  box-shadow: 0 0 12px rgba(124,58,237,0.35);
 }
 
 .champion-name {
   margin-top: 8px;
   font-size: 14px;
-  color: var(--neon-cyan);
+  color: #00f5ff;
   font-weight: bold;
-  letter-spacing: 0.5px;
+  text-shadow: 0 0 8px rgba(0,245,255,0.3);
 }
 
 footer {
@@ -125,9 +114,7 @@ footer {
   padding: 25px;
   text-align: center;
   font-size: 14px;
-  color: #9aa0b4;
-  background: rgba(0,0,0,0.4);
-  border-top: 1px solid rgba(255,61,242,0.15);
+  color: #aaa;
 }
 </style>
 </head>
@@ -138,18 +125,29 @@ footer {
 
 <a href="membershub.html" class="back-button">Back to Members Hub</a>
 
-<input id="champion-search" placeholder="Search junglers or type 'new'...">
+<input id="champion-search" placeholder="Search junglers...">
 
 <div class="champion-grid" id="champion-grid">
 
-<a href="jgamumu.html" class="champion-card">
-  <img src="https://ddragon.leagueoflegends.com/cdn/14.23.1/img/champion/Amumu.png">
-  <div class="champion-name">Amumu</div>
+<!-- Example Jungle Pool -->
+<a href="jgdiana.html" class="champion-card">
+  <img src="https://ddragon.leagueoflegends.com/cdn/14.23.1/img/champion/Diana.png">
+  <div class="champion-name">Diana</div>
 </a>
 
-<a href="jgaatrox.html" class="champion-card">
-  <img src="https://ddragon.leagueoflegends.com/cdn/14.23.1/img/champion/Aatrox.png">
-  <div class="champion-name">Aatrox</div>
+<a href="jgzed.html" class="champion-card">
+  <img src="https://ddragon.leagueoflegends.com/cdn/14.23.1/img/champion/Zed.png">
+  <div class="champion-name">Zed</div>
+</a>
+
+<a href="jgevelynn.html" class="champion-card">
+  <img src="https://ddragon.leagueoflegends.com/cdn/14.23.1/img/champion/Evelynn.png">
+  <div class="champion-name">Evelynn</div>
+</a>
+
+<a href="jgkha-zix.html" class="champion-card">
+  <img src="https://ddragon.leagueoflegends.com/cdn/14.23.1/img/champion/Khazix.png">
+  <div class="champion-name">Kha'Zix</div>
 </a>
 
 <a href="jgekko.html" class="champion-card">
@@ -159,7 +157,31 @@ footer {
 
 </div>
 
-<footer>© 2026 LoL Fundamentals · All rights reserved</footer>
+<footer>© 2026 LoL Fundamentals</footer>
+
+<script>
+const input = document.getElementById('champion-search');
+const grid = document.getElementById('champion-grid');
+const cards = [...grid.getElementsByClassName('champion-card')];
+
+input.addEventListener('input', () => {
+  const q = input.value.toLowerCase().trim();
+
+  const matching = [];
+  cards.forEach(card => {
+    const name = card.querySelector('.champion-name').textContent.toLowerCase();
+
+    if (name.includes(q)) {
+      card.style.display = 'flex';
+      matching.push(card);
+    } else {
+      card.style.display = 'none';
+    }
+  });
+
+  matching.forEach(card => grid.appendChild(card));
+});
+</script>
 
 </body>
 </html>
