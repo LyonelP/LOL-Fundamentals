@@ -53,7 +53,11 @@
     margin:8px auto;
   }
 
-  .section p{ margin:0 0 18px; color:#cfe1ee; opacity:0.9; }
+  .section p{
+    margin:0 0 18px;
+    color:#cfe1ee;
+    opacity:0.9;
+  }
 
   .card-grid{
     display:grid;
@@ -116,17 +120,28 @@
     border-radius:10px;
   }
 
+  /* ===== IMAGES ===== */
   .diana-guide::before{ background-image:url('https://ddragon.leagueoflegends.com/cdn/img/champion/splash/Diana_11.jpg'); }
   .diana-matchups::before{ background-image:url('https://ddragon.leagueoflegends.com/cdn/img/champion/splash/Diana_2.jpg'); }
+
   .ekko-guide::before{ background-image:url('https://ddragon.leagueoflegends.com/cdn/img/champion/splash/Ekko_0.jpg'); }
 
-  /* FIXED ART FOR MATCHUPS */
+  /* FIXED EKKO MATCHUPS VISIBILITY */
   .ekko-matchups::before{
     background-image:url('https://ddragon.leagueoflegends.com/cdn/img/champion/splash/Ekko_7.jpg');
+    opacity:0.25;
+    filter:contrast(1.1) saturate(1.1);
+  }
+
+  /* FIXED TIERLIST ART */
+  .tierlist::before{
+    background-image:url('https://cdn.wallpapersafari.com/92/79/MYTD9q.png');
+    background-size:cover;
+    background-position:center;
+    opacity:0.18;
   }
 
   .fundamentals::before{ background-image:url('https://cdn.wallpapersafari.com/92/79/MYTD9q.png'); }
-  .tierlist::before{ background: linear-gradient(to bottom,#1b2838 0%,#161b22 100%); }
 
   .coaching::before{ background-image:url('https://m.media-amazon.com/images/I/71GlK3kDLJL.jpg'); opacity:0.2; }
   .rune-calculator::before{ background-image:url('https://i.imgur.com/kcs90ta.jpeg'); }
@@ -143,6 +158,7 @@
     position:relative;
     z-index:2;
   }
+
   .tier-s{ background:#f94144; flex:1; }
   .tier-a{ background:#f3722c; flex:1; }
   .tier-b{ background:#f8961e; flex:1; }
@@ -216,7 +232,7 @@
       <div class="tier-bar"></div>
     </a>
 
-    <!-- ✅ MOVED HERE (after tierlist) -->
+    <!-- FIXED + MOVED AFTER TIERLIST -->
     <a href="jgmatchups.html" class="card ekko-matchups">
       <h3>Ekko Jungle Matchups</h3>
       <p>Matchup breakdowns, jungle win conditions, pathing routes, and champion-specific strategies.</p>
@@ -252,7 +268,7 @@
   <a href="mailto:arcsecond@lolfundamentals.com">arcsecond@lolfundamentals.com</a>
 </footer>
 
-<!-- Firebase login (UNCHANGED) -->
+<!-- Firebase -->
 <script type="module">
 import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
 import { getAuth, onAuthStateChanged, signOut } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-auth.js";
