@@ -20,100 +20,115 @@ body {
   display: flex;
   flex-direction: column;
 
-  background:
-    linear-gradient(rgba(10,10,15,0.55), rgba(10,10,15,0.85)),
-    url('https://ddragon.leagueoflegends.com/cdn/img/champion/splash/Ekko_19.jpg')
-    no-repeat center top;
-
+  background: linear-gradient(rgba(10,15,20,0.30), rgba(10,15,20,0.30)),
+              url('https://ddragon.leagueoflegends.com/cdn/img/champion/splash/Ekko_19.jpg') no-repeat center top;
   background-size: cover;
   background-attachment: fixed;
 }
 
+/* HEADER */
 header {
-  background: rgba(10,10,15,0.92);
-  border-bottom: 2px solid #00f5ff;
+  background: rgba(13,17,23,0.92);
+  border-bottom: 2px solid #00ffd5;
   padding: 20px;
   font-size: 26px;
   font-weight: bold;
   text-transform: uppercase;
-  color: #00f5ff;
+  color: #00ffd5;
   text-align: center;
-  letter-spacing: 2px;
 }
 
+/* BACK BUTTON */
 .back-button {
   margin: 20px auto;
   padding: 10px 20px;
-  background: linear-gradient(135deg, #00f5ff, #ff3df2);
+  background: linear-gradient(135deg, #00ffd5, #00bfa5);
   color: #000;
   text-decoration: none;
   border-radius: 8px;
   font-weight: bold;
+  box-shadow: 0 0 10px rgba(0,255,213,0.5);
 }
 .back-button::before { content: "← "; }
 
+/* SEARCH */
 #champion-search {
-  width: 400px;
+  width: 420px;
   max-width: 90%;
-  margin: 20px auto 30px;
-  padding: 8px 12px;
+  margin: 20px auto 10px;
+  padding: 10px 12px;
   border-radius: 6px;
-  border: 2px solid #ff3df2;
-  background: #0b0f14;
-  color: #fff;
+  border: 2px solid #00ffd5;
+  background: #161b22;
+  color: #e6edf3;
 }
 
-/* RESTORED GRID */
+/* helper text under search */
+.search-hint {
+  text-align: center;
+  font-size: 12px;
+  color: rgba(255,255,255,0.65);
+  margin-bottom: 20px;
+}
+
+/* GRID — SINGLE LINE (like your Diana page) */
 .champion-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
-  gap: 20px;
-  max-width: 1100px;
-  margin: 0 auto 50px;
-  padding: 0 20px;
+  grid-auto-flow: column;
+  grid-auto-columns: 120px;
+  gap: 18px;
+
+  overflow-x: auto;
+  padding: 10px 20px 30px;
+  max-width: 100%;
+  margin: 0 auto;
 }
 
+/* CARD */
 .champion-card {
-  background: linear-gradient(135deg, #0b0f14, #141824);
+  background: linear-gradient(135deg, #161b22, #21262d);
   border-radius: 12px;
-  border-left: 5px solid #00f5ff;
-  padding: 15px;
+  border-left: 5px solid #00ffd5;
+  padding: 12px;
   text-align: center;
   text-decoration: none;
   color: inherit;
-  transition: 0.2s ease;
+
   display: flex;
   flex-direction: column;
   align-items: center;
+
+  transition: transform .2s, box-shadow .2s;
+  min-width: 120px;
 }
 
 .champion-card:hover {
-  transform: translateY(-4px);
-  box-shadow: 0 0 20px rgba(255,61,242,0.25);
-  border-left: 5px solid #ff3df2;
+  transform: translateY(-3px);
+  box-shadow: 0 8px 20px rgba(0,0,0,.45);
 }
 
 .champion-card img {
-  width: 80px;
-  height: 80px;
+  width: 75px;
+  height: 75px;
   border-radius: 8px;
 }
 
 .champion-name {
   margin-top: 8px;
-  font-size: 14px;
-  color: #00f5ff;
+  font-size: 13px;
+  color: #00ffd5;
   font-weight: bold;
 }
 
-/* RESTORED FOOTER */
+/* FOOTER BOX */
 footer {
   margin-top: auto;
-  padding: 25px;
+  background: rgba(13,17,23,0.92);
+  border-top: 2px solid #00ffd5;
+  padding: 20px;
   text-align: center;
-  font-size: 14px;
-  color: #888;
-  border-top: 1px solid rgba(255,255,255,0.08);
+  font-size: 13px;
+  color: rgba(255,255,255,0.8);
 }
 </style>
 </head>
@@ -124,39 +139,42 @@ footer {
 
 <a href="membershub.html" class="back-button">Back to Members Hub</a>
 
-<!-- FIXED PLACEHOLDER -->
 <input id="champion-search" placeholder="Search junglers or type 'new'...">
+<div class="search-hint">Scroll sideways • Type to filter • Type “new” to see new champs</div>
 
-<div class="champion-grid">
+<div class="champion-grid" id="champion-grid">
 
-<a href="jgdiana.html" class="champion-card">
-  <img src="https://ddragon.leagueoflegends.com/cdn/14.23.1/img/champion/Diana.png">
-  <div class="champion-name">Diana</div>
-</a>
-
-<a href="jgzed.html" class="champion-card">
-  <img src="https://ddragon.leagueoflegends.com/cdn/14.23.1/img/champion/Zed.png">
-  <div class="champion-name">Zed</div>
-</a>
-
-<a href="jgevelynn.html" class="champion-card">
-  <img src="https://ddragon.leagueoflegends.com/cdn/14.23.1/img/champion/Evelynn.png">
-  <div class="champion-name">Evelynn</div>
-</a>
-
-<a href="jgkha-zix.html" class="champion-card">
-  <img src="https://ddragon.leagueoflegends.com/cdn/14.23.1/img/champion/Khazix.png">
-  <div class="champion-name">Kha'Zix</div>
-</a>
-
-<a href="jgekko.html" class="champion-card">
-  <img src="https://ddragon.leagueoflegends.com/cdn/14.23.1/img/champion/Ekko.png">
-  <div class="champion-name">Ekko</div>
-</a>
+<a href="jgamumu.html" class="champion-card"><img src="https://ddragon.leagueoflegends.com/cdn/14.23.1/img/champion/Amumu.png"><div class="champion-name">Amumu</div></a>
+<a href="jgaatrox.html" class="champion-card"><img src="https://ddragon.leagueoflegends.com/cdn/14.23.1/img/champion/Aatrox.png"><div class="champion-name">Aatrox</div></a>
+<a href="jgbrand.html" class="champion-card"><img src="https://ddragon.leagueoflegends.com/cdn/14.23.1/img/champion/Brand.png"><div class="champion-name">Brand</div></a>
+<a href="jgbelveth.html" class="champion-card"><img src="https://ddragon.leagueoflegends.com/cdn/14.23.1/img/champion/Belveth.png"><div class="champion-name">Bel'Veth</div></a>
+<a href="jgcamille.html" class="champion-card"><img src="https://ddragon.leagueoflegends.com/cdn/14.23.1/img/champion/Camille.png"><div class="champion-name">Camille</div></a>
+<a href="jgdiana.html" class="champion-card"><img src="https://ddragon.leagueoflegends.com/cdn/14.23.1/img/champion/Diana.png"><div class="champion-name">Diana</div></a>
+<a href="jgekko.html" class="champion-card"><img src="https://ddragon.leagueoflegends.com/cdn/14.23.1/img/champion/Ekko.png"><div class="champion-name">Ekko</div></a>
 
 </div>
 
-<footer>© 2026 LoL Fundamentals</footer>
+<footer>© 2026 LoL Fundamentals · All rights reserved</footer>
+
+<script>
+const input = document.getElementById('champion-search');
+const grid = document.getElementById('champion-grid');
+const cards = [...grid.getElementsByClassName('champion-card')];
+
+input.addEventListener('input', () => {
+  const q = input.value.toLowerCase().trim();
+
+  cards.forEach(card => {
+    const name = card.querySelector('.champion-name').textContent.toLowerCase();
+
+    if (q === '' || name.includes(q) || (q === 'new' && card.dataset.new)) {
+      card.style.display = 'flex';
+    } else {
+      card.style.display = 'none';
+    }
+  });
+});
+</script>
 
 </body>
 </html>
