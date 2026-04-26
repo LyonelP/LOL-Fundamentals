@@ -5,6 +5,12 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>True Damage Ekko – Matchup Hub</title>
 
+<script>
+if (localStorage.getItem('lolfundamentals_logged_in') !== 'true') {
+  window.location.replace('login.html');
+}
+</script>
+
 <style>
 body {
   margin: 0;
@@ -14,31 +20,21 @@ body {
   display: flex;
   flex-direction: column;
 
-  /* TRUE DAMAGE EKKO FIXED SPLASH */
-  background:
-    radial-gradient(circle at top, rgba(0,255,213,0.10), transparent 60%),
-    linear-gradient(rgba(5,8,12,0.55), rgba(5,8,12,0.88)),
-    url('https://ddragon.leagueoflegends.com/cdn/img/champion/splash/Ekko_5.jpg') no-repeat center top;
-
+  background: linear-gradient(rgba(10,15,20,0.35), rgba(10,15,20,0.35)),
+              url('https://ddragon.leagueoflegends.com/cdn/img/champion/splash/Ekko_TrueDamage.jpg') no-repeat center top;
   background-size: cover;
   background-attachment: fixed;
 }
 
 header {
-  background: rgba(10,12,18,0.92);
+  background: rgba(13,17,23,0.9);
   border-bottom: 2px solid #00ffd5;
   padding: 20px;
   font-size: 26px;
   font-weight: bold;
   text-transform: uppercase;
-
-  color: transparent;
-  background-image: linear-gradient(90deg, #00ffd5, #7c3aed, #00bfa5);
-  -webkit-background-clip: text;
-  background-clip: text;
-
+  color: #00ffd5;
   text-align: center;
-  letter-spacing: 1px;
 }
 
 .back-button {
@@ -117,13 +113,13 @@ footer {
 <body>
 
 <header>True Damage Ekko Matchups</header>
-
 <a href="membershub.html" class="back-button">Back to Members Hub</a>
 
 <input id="champion-search" placeholder="Search junglers or type 'new'...">
 
 <div class="champion-grid" id="champion-grid">
 
+<!-- Jungle Pool -->
 <a href="jgamumu.html" class="champion-card"><img src="https://ddragon.leagueoflegends.com/cdn/14.23.1/img/champion/Amumu.png"><div class="champion-name">Amumu</div></a>
 <a href="jgaatrox.html" class="champion-card"><img src="https://ddragon.leagueoflegends.com/cdn/14.23.1/img/champion/Aatrox.png"><div class="champion-name">Aatrox</div></a>
 <a href="jgbrand.html" class="champion-card"><img src="https://ddragon.leagueoflegends.com/cdn/14.23.1/img/champion/Brand.png"><div class="champion-name">Brand</div></a>
@@ -134,47 +130,80 @@ footer {
 <a href="jgdiana.html" class="champion-card"><img src="https://ddragon.leagueoflegends.com/cdn/14.23.1/img/champion/Diana.png"><div class="champion-name">Diana</div></a>
 <a href="jgdrmundo.html" class="champion-card"><img src="https://ddragon.leagueoflegends.com/cdn/14.23.1/img/champion/DrMundo.png"><div class="champion-name">Dr. Mundo</div></a>
 <a href="jgekko.html" class="champion-card"><img src="https://ddragon.leagueoflegends.com/cdn/14.23.1/img/champion/Ekko.png"><div class="champion-name">Ekko</div></a>
-
-<!-- (rest of your champions unchanged exactly as you pasted them) -->
+<a href="jgelise.html" class="champion-card"><img src="https://ddragon.leagueoflegends.com/cdn/14.23.1/img/champion/Elise.png"><div class="champion-name">Elise</div></a>
+<a href="jgevelynn.html" class="champion-card"><img src="https://ddragon.leagueoflegends.com/cdn/14.23.1/img/champion/Evelynn.png"><div class="champion-name">Evelynn</div></a>
+<a href="jgfiddlesticks.html" class="champion-card"><img src="https://ddragon.leagueoflegends.com/cdn/14.23.1/img/champion/Fiddlesticks.png"><div class="champion-name">Fiddlesticks</div></a>
+<a href="jggaren.html" class="champion-card"><img src="https://ddragon.leagueoflegends.com/cdn/14.23.1/img/champion/Garen.png"><div class="champion-name">Garen</div></a>
+<a href="jggragas.html" class="champion-card"><img src="https://ddragon.leagueoflegends.com/cdn/14.23.1/img/champion/Gragas.png"><div class="champion-name">Gragas</div></a>
+<a href="jggraves.html" class="champion-card"><img src="https://ddragon.leagueoflegends.com/cdn/14.23.1/img/champion/Graves.png"><div class="champion-name">Graves</div></a>
+<a href="jggwen.html" class="champion-card"><img src="https://ddragon.leagueoflegends.com/cdn/14.23.1/img/champion/Gwen.png"><div class="champion-name">Gwen</div></a>
+<a href="jghecarim.html" class="champion-card"><img src="https://ddragon.leagueoflegends.com/cdn/14.23.1/img/champion/Hecarim.png"><div class="champion-name">Hecarim</div></a>
+<a href="jgivern.html" class="champion-card"><img src="https://ddragon.leagueoflegends.com/cdn/14.23.1/img/champion/Ivern.png"><div class="champion-name">Ivern</div></a>
+<a href="jgjarvan.html" class="champion-card"><img src="https://ddragon.leagueoflegends.com/cdn/14.23.1/img/champion/JarvanIV.png"><div class="champion-name">Jarvan IV</div></a>
+<a href="jgjax.html" class="champion-card"><img src="https://ddragon.leagueoflegends.com/cdn/14.23.1/img/champion/Jax.png"><div class="champion-name">Jax</div></a>
+<a href="jgkarthus.html" class="champion-card"><img src="https://ddragon.leagueoflegends.com/cdn/14.23.1/img/champion/Karthus.png"><div class="champion-name">Karthus</div></a>
+<a href="jgkayn.html" class="champion-card"><img src="https://ddragon.leagueoflegends.com/cdn/14.23.1/img/champion/Kayn.png"><div class="champion-name">Kayn</div></a>
+<a href="jgkha-zix.html" class="champion-card"><img src="https://ddragon.leagueoflegends.com/cdn/14.23.1/img/champion/Khazix.png"><div class="champion-name">Kha'Zix</div></a>
+<a href="jgkindred.html" class="champion-card"><img src="https://ddragon.leagueoflegends.com/cdn/14.23.1/img/champion/Kindred.png"><div class="champion-name">Kindred</div></a>
+<a href="jglee-sin.html" class="champion-card"><img src="https://ddragon.leagueoflegends.com/cdn/14.23.1/img/champion/LeeSin.png"><div class="champion-name">Lee Sin</div></a>
+<a href="jgmaokai.html" class="champion-card"><img src="https://ddragon.leagueoflegends.com/cdn/14.23.1/img/champion/Maokai.png"><div class="champion-name">Maokai</div></a>
+<a href="jgmasteryi.html" class="champion-card"><img src="https://ddragon.leagueoflegends.com/cdn/14.23.1/img/champion/MasterYi.png"><div class="champion-name">Master Yi</div></a>
+<a href="jgmordekaiser.html" class="champion-card"><img src="https://ddragon.leagueoflegends.com/cdn/14.23.1/img/champion/Mordekaiser.png"><div class="champion-name">Mordekaiser</div></a>
+<a href="jgmorgana.html" class="champion-card"><img src="https://ddragon.leagueoflegends.com/cdn/14.23.1/img/champion/Morgana.png"><div class="champion-name">Morgana</div></a>
+<a href="jgnidalee.html" class="champion-card"><img src="https://ddragon.leagueoflegends.com/cdn/14.23.1/img/champion/Nidalee.png"><div class="champion-name">Nidalee</div></a>
+<a href="jgnunu.html" class="champion-card"><img src="https://ddragon.leagueoflegends.com/cdn/14.23.1/img/champion/Nunu.png"><div class="champion-name">Nunu & Willump</div></a>
+<a href="jgolaf.html" class="champion-card"><img src="https://ddragon.leagueoflegends.com/cdn/14.23.1/img/champion/Olaf.png"><div class="champion-name">Olaf</div></a>
+<a href="jgpantheon.html" class="champion-card"><img src="https://ddragon.leagueoflegends.com/cdn/14.23.1/img/champion/Pantheon.png"><div class="champion-name">Pantheon</div></a>
+<a href="jgpoppy.html" class="champion-card"><img src="https://ddragon.leagueoflegends.com/cdn/14.23.1/img/champion/Poppy.png"><div class="champion-name">Poppy</div></a>
+<a href="jgqiyana.html" class="champion-card"><img src="https://ddragon.leagueoflegends.com/cdn/14.23.1/img/champion/Qiyana.png"><div class="champion-name">Qiyana</div></a>
+<a href="jgrammus.html" class="champion-card"><img src="https://ddragon.leagueoflegends.com/cdn/14.23.1/img/champion/Rammus.png"><div class="champion-name">Rammus</div></a>
+<a href="jgreksai.html" class="champion-card"><img src="https://ddragon.leagueoflegends.com/cdn/14.23.1/img/champion/RekSai.png"><div class="champion-name">Rek'Sai</div></a>
+<a href="jgrengar.html" class="champion-card"><img src="https://ddragon.leagueoflegends.com/cdn/14.23.1/img/champion/Rengar.png"><div class="champion-name">Rengar</div></a>
+<a href="jgrumble.html" class="champion-card"><img src="https://ddragon.leagueoflegends.com/cdn/14.23.1/img/champion/Rumble.png"><div class="champion-name">Rumble</div></a>
+<a href="jgsejuani.html" class="champion-card"><img src="https://ddragon.leagueoflegends.com/cdn/14.23.1/img/champion/Sejuani.png"><div class="champion-name">Sejuani</div></a>
+<a href="jgsett.html" class="champion-card"><img src="https://ddragon.leagueoflegends.com/cdn/14.23.1/img/champion/Sett.png"><div class="champion-name">Sett</div></a>
+<a href="jgshyvana.html" class="champion-card"><img src="https://ddragon.leagueoflegends.com/cdn/14.23.1/img/champion/Shyvana.png"><div class="champion-name">Shyvana</div></a>
+<a href="jgsion.html" class="champion-card"><img src="https://ddragon.leagueoflegends.com/cdn/14.23.1/img/champion/Sion.png"><div class="champion-name">Sion</div></a>
+<a href="jgskarner.html" class="champion-card"><img src="https://ddragon.leagueoflegends.com/cdn/14.23.1/img/champion/Skarner.png"><div class="champion-name">Skarner</div></a>
+<a href="jgsylas.html" class="champion-card"><img src="https://ddragon.leagueoflegends.com/cdn/14.23.1/img/champion/Sylas.png"><div class="champion-name">Sylas</div></a>
+<a href="jgtaliyah.html" class="champion-card"><img src="https://ddragon.leagueoflegends.com/cdn/14.23.1/img/champion/Taliyah.png"><div class="champion-name">Taliyah</div></a>
+<a href="jgtalon.html" class="champion-card"><img src="https://ddragon.leagueoflegends.com/cdn/14.23.1/img/champion/Talon.png"><div class="champion-name">Talon</div></a>
+<a href="jgtrundle.html" class="champion-card"><img src="https://ddragon.leagueoflegends.com/cdn/14.23.1/img/champion/Trundle.png"><div class="champion-name">Trundle</div></a>
+<a href="jgtryndamere.html" class="champion-card"><img src="https://ddragon.leagueoflegends.com/cdn/14.23.1/img/champion/Tryndamere.png"><div class="champion-name">Tryndamere</div></a>
+<a href="jguidr.html" class="champion-card"><img src="https://ddragon.leagueoflegends.com/cdn/14.23.1/img/champion/Udyr.png"><div class="champion-name">Udyr</div></a>
+<a href="jgvi.html" class="champion-card"><img src="https://ddragon.leagueoflegends.com/cdn/14.23.1/img/champion/Vi.png"><div class="champion-name">Vi</div></a>
+<a href="jgviego.html" class="champion-card"><img src="https://ddragon.leagueoflegends.com/cdn/14.23.1/img/champion/Viego.png"><div class="champion-name">Viego</div></a>
+<a href="jgvolibear.html" class="champion-card"><img src="https://ddragon.leagueoflegends.com/cdn/14.23.1/img/champion/Volibear.png"><div class="champion-name">Volibear</div></a>
+<a href="jgwarwick.html" class="champion-card"><img src="https://ddragon.leagueoflegends.com/cdn/14.23.1/img/champion/Warwick.png"><div class="champion-name">Warwick</div></a>
+<a href="jgxin-zhao.html" class="champion-card"><img src="https://ddragon.leagueoflegends.com/cdn/14.23.1/img/champion/XinZhao.png"><div class="champion-name">Xin Zhao</div></a>
+<a href="jgzac.html" class="champion-card"><img src="https://ddragon.leagueoflegends.com/cdn/14.23.1/img/champion/Zac.png"><div class="champion-name">Zac</div></a>
+<a href="jgzed.html" class="champion-card"><img src="https://ddragon.leagueoflegends.com/cdn/14.23.1/img/champion/Zed.png"><div class="champion-name">Zed</div></a>
+<a href="jgzyra.html" class="champion-card"><img src="https://ddragon.leagueoflegends.com/cdn/14.23.1/img/champion/Zyra.png"><div class="champion-name">Zyra</div></a>
 
 </div>
 
 <footer>© 2026 LoL Fundamentals · All rights reserved</footer>
 
-<!-- LOGIN REQUIREMENT (Firebase) -->
-<script type="module">
-import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
-import { getAuth, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-auth.js";
-import { getFirestore, doc, getDoc } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
+<script>
+const input = document.getElementById('champion-search');
+const grid = document.getElementById('champion-grid');
+const cards = [...grid.getElementsByClassName('champion-card')];
 
-const firebaseConfig = {
-  apiKey: "AIzaSyCFRcEV7wdivqONnkjJubAZOjPMixrHMBI",
-  authDomain: "lol-fundamentals.firebaseapp.com",
-  projectId: "lol-fundamentals",
-  storageBucket: "lol-fundamentals.firebasestorage.app",
-  messagingSenderId: "1038440427584",
-  appId: "1:1038440427584:web:a82207151fd370dbedefa5"
-};
+input.addEventListener('input', () => {
+  const q = input.value.toLowerCase().trim();
 
-const app = initializeApp(firebaseConfig);
-const auth = getAuth(app);
-const db = getFirestore(app);
+  const matching = [];
+  cards.forEach(card => {
+    const name = card.querySelector('.champion-name').textContent.toLowerCase();
+    if (name.includes(q)) {
+      card.style.display = 'flex';
+      matching.push(card);
+    } else {
+      card.style.display = 'none';
+    }
+  });
 
-function redirect() {
-  localStorage.removeItem('lolfundamentals_logged_in');
-  localStorage.removeItem('lolfundamentals_paid');
-  window.location.href = 'login.html';
-}
-
-onAuthStateChanged(auth, async (user) => {
-  if (!user) return redirect();
-
-  const snap = await getDoc(doc(db, "paidUsers", user.email));
-
-  if (!snap.exists() || !snap.data().paid) return redirect();
-
-  localStorage.setItem('lolfundamentals_logged_in', 'true');
-  localStorage.setItem('lolfundamentals_paid', 'true');
+  matching.forEach(card => grid.appendChild(card));
 });
 </script>
 
