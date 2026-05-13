@@ -33,10 +33,7 @@ body {
 body::before {
   content: "";
   position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
+  inset: 0;
   background: rgba(10,15,20,0.2);
   z-index: -1;
 }
@@ -163,6 +160,11 @@ header {
   flex-shrink: 0;
 }
 
+/* Bronze icon compensation */
+.bronze .rank-header img {
+  transform: scale(1.18);
+}
+
 .rank-header h3 {
   margin: 0;
   font-size: 24px;
@@ -227,6 +229,10 @@ footer {
   .rank-header img {
     width: 82px;
     height: auto;
+  }
+
+  .bronze .rank-header img {
+    transform: scale(1.12);
   }
 
   .rank-header h3 {
@@ -449,4 +455,3 @@ footer {
 
 </body>
 </html>
-
