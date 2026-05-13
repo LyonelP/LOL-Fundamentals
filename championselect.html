@@ -3,8 +3,9 @@
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Draft Fundamentals – LoL Fundamentals</title>
+<title>Champion Select – LoL Fundamentals</title>
 
+<!-- Login check -->
 <script>
   if (localStorage.getItem('lolfundamentals_logged_in') !== 'true') {
     window.location.replace('login.html');
@@ -25,41 +26,45 @@ body {
   background-size: cover;
   display: flex;
   flex-direction: column;
+  text-align: center;
 }
 
+/* Original lighter overlay */
 body::before {
   content: "";
   position: fixed;
-  inset: 0;
-  background: rgba(10,15,20,0.45);
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(10,15,20,0.2);
   z-index: -1;
 }
 
 /* Header */
 header {
-  background: rgba(13,17,23,0.9);
+  background: rgba(13,17,23,0.85);
   border-bottom: 2px solid #c9aa71;
-  padding: 22px 10px;
-  text-align: center;
-  font-size: 30px;
+  padding: 20px 10px;
   font-weight: bold;
-  letter-spacing: 1px;
+  font-size: 26px;
   text-transform: uppercase;
   color: #c9aa71;
+  letter-spacing: 1px;
 }
 
 /* Back button */
 .back-button {
   display: inline-block;
-  margin: 20px auto 0;
-  padding: 10px 22px;
+  margin: 20px auto 10px;
+  padding: 10px 20px;
   background: linear-gradient(135deg, #c9aa71, #e0c77b);
   color: #000;
   text-decoration: none;
   border-radius: 8px;
   font-weight: bold;
-  transition: 0.3s;
-  box-shadow: 0 0 12px rgba(201,170,113,0.4);
+  transition: all 0.3s;
+  box-shadow: 0 0 10px rgba(201,170,113,0.5);
 }
 
 .back-button::before {
@@ -67,15 +72,15 @@ header {
 }
 
 .back-button:hover {
-  transform: translateY(-2px);
-  box-shadow: 0 0 18px rgba(255,215,0,0.8);
+  background: linear-gradient(135deg, #e6c97f, #f0d88b);
+  box-shadow: 0 0 15px rgba(255,215,0,0.8);
 }
 
 /* Main */
 .main-content {
   width: 100%;
   max-width: 1300px;
-  margin: 30px auto 60px;
+  margin: 10px auto 50px;
   padding: 0 20px;
   box-sizing: border-box;
 }
@@ -88,44 +93,52 @@ header {
 
 .topic-title {
   text-align: center;
-  font-size: 30px;
+  font-size: 26px;
   color: #c9aa71;
-  margin-bottom: 25px;
+  margin-bottom: 22px;
   text-transform: uppercase;
   letter-spacing: 1px;
 }
 
-/* Rank Grid */
+/* Grid */
 .rank-grid {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
   gap: 20px;
 }
 
-/* Rank Card */
+/* Cards */
 .rank-card {
-  border-radius: 14px;
-  padding: 24px;
+  border-radius: 10px;
+  padding: 20px;
+  text-align: left;
   backdrop-filter: blur(3px);
-  border: 1px solid rgba(255,255,255,0.08);
   transition: 0.3s;
-  min-height: 280px;
+  border: 1px solid rgba(255,255,255,0.08);
+  opacity: 0;
+  transform: translateY(10px);
+  animation: fadeInUp 0.4s forwards;
 }
 
 .rank-card:hover {
-  transform: translateY(-4px);
+  transform: translateY(-3px);
 }
+
+/* Animation delay */
+.rank-card:nth-child(1) { animation-delay: 0.1s; }
+.rank-card:nth-child(2) { animation-delay: 0.2s; }
+.rank-card:nth-child(3) { animation-delay: 0.3s; }
 
 /* Bronze */
 .bronze {
-  background: rgba(70,40,25,0.88);
+  background: rgba(70,40,25,0.9);
   border: 1px solid #9b6b43;
   box-shadow: 0 0 15px rgba(155,107,67,0.25);
 }
 
-/* Plat */
+/* Platinum */
 .plat {
-  background: rgba(20,55,45,0.88);
+  background: rgba(20,55,45,0.9);
   border: 1px solid #4fd1a1;
   box-shadow: 0 0 15px rgba(79,209,161,0.25);
 }
@@ -134,20 +147,20 @@ header {
 .challenger {
   background: rgba(20,35,65,0.9);
   border: 1px solid #6ecbff;
-  box-shadow: 0 0 18px rgba(110,203,255,0.3);
+  box-shadow: 0 0 18px rgba(110,203,255,0.25);
 }
 
-/* Rank Header */
+/* Rank header */
 .rank-header {
   display: flex;
   align-items: center;
-  gap: 12px;
+  gap: 14px;
   margin-bottom: 18px;
 }
 
 .rank-header img {
-  width: 52px;
-  height: 52px;
+  width: 72px;
+  height: 72px;
 }
 
 .rank-header h3 {
@@ -156,37 +169,42 @@ header {
 }
 
 /* Text */
-.rank-card p,
+.rank-card ul {
+  margin: 0;
+  padding-left: 20px;
+}
+
 .rank-card li {
   font-size: 15px;
   line-height: 1.7;
+  margin-bottom: 8px;
   color: #f1f1f1;
 }
 
-.rank-card ul {
-  padding-left: 18px;
-  margin: 0;
-}
-
-/* Footer */
-footer {
-  margin-top: auto;
-  text-align: center;
-  padding: 18px;
-  font-size: 14px;
-  color: #ddd;
-}
-
-/* Animation */
-@keyframes fadeIn {
-  from {
-    opacity: 0;
-    transform: translateY(12px);
-  }
+/* Animations */
+@keyframes fadeInUp {
   to {
     opacity: 1;
     transform: translateY(0);
   }
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+/* Footer */
+footer {
+  text-align: center;
+  margin-top: auto;
+  padding: 15px 10px;
+  font-size: 14px;
+  color: #fff;
 }
 
 /* Mobile */
@@ -194,26 +212,36 @@ footer {
   .rank-grid {
     grid-template-columns: 1fr;
   }
-
-  .rank-card {
-    min-height: auto;
-  }
 }
 
 @media (max-width: 600px) {
   header {
     font-size: 24px;
+    padding: 15px;
   }
 
   .topic-title {
-    font-size: 24px;
+    font-size: 22px;
+  }
+
+  .rank-header img {
+    width: 60px;
+    height: 60px;
+  }
+
+  .rank-header h3 {
+    font-size: 22px;
+  }
+
+  .rank-card {
+    padding: 16px;
   }
 }
 </style>
 </head>
 <body>
 
-<header>Draft Fundamentals</header>
+<header>Champion Select</header>
 
 <a href="skills.html" class="back-button">Back to Skills Hub</a>
 
@@ -235,7 +263,7 @@ footer {
           <li>Bans champions they recently lost to.</li>
           <li>Usually emotional or random bans.</li>
           <li>Often ignores current meta picks.</li>
-          <li>May not even know what champions are strongest.</li>
+          <li>May not know what champions are strongest.</li>
         </ul>
       </div>
 
@@ -246,7 +274,7 @@ footer {
         </div>
 
         <ul>
-          <li>Bans meta champions more consistently.</li>
+          <li>Bans strong meta champions more consistently.</li>
           <li>Understands matchup bans.</li>
           <li>Protects comfort picks.</li>
           <li>Starts adapting bans based on role.</li>
@@ -319,7 +347,7 @@ footer {
     </div>
   </section>
 
-  <!-- TEAM COMP -->
+  <!-- TEAM COMPOSITION -->
   <section class="topic-section">
     <h2 class="topic-title">Team Composition</h2>
 
@@ -368,7 +396,7 @@ footer {
     </div>
   </section>
 
-  <!-- VISUALIZATION -->
+  <!-- VISUALIZE -->
   <section class="topic-section">
     <h2 class="topic-title">Visualizing the Game</h2>
 
@@ -421,12 +449,6 @@ footer {
 
 </body>
 </html>
-
-
-
-
-
-
 
 
 
