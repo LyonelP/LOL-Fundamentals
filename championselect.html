@@ -29,7 +29,7 @@ body {
   text-align: center;
 }
 
-/* Original lighter overlay */
+/* Overlay */
 body::before {
   content: "";
   position: fixed;
@@ -76,7 +76,7 @@ header {
   box-shadow: 0 0 15px rgba(255,215,0,0.8);
 }
 
-/* Main */
+/* Main content */
 .main-content {
   width: 100%;
   max-width: 1300px;
@@ -85,7 +85,7 @@ header {
   box-sizing: border-box;
 }
 
-/* Topic Section */
+/* Sections */
 .topic-section {
   margin-bottom: 45px;
   animation: fadeIn 0.5s ease forwards;
@@ -124,26 +124,23 @@ header {
   transform: translateY(-3px);
 }
 
-/* Animation delay */
 .rank-card:nth-child(1) { animation-delay: 0.1s; }
 .rank-card:nth-child(2) { animation-delay: 0.2s; }
 .rank-card:nth-child(3) { animation-delay: 0.3s; }
 
-/* Bronze */
+/* Rank themes */
 .bronze {
   background: rgba(70,40,25,0.9);
   border: 1px solid #9b6b43;
   box-shadow: 0 0 15px rgba(155,107,67,0.25);
 }
 
-/* Platinum */
 .plat {
   background: rgba(20,55,45,0.9);
   border: 1px solid #4fd1a1;
   box-shadow: 0 0 15px rgba(79,209,161,0.25);
 }
 
-/* Challenger */
 .challenger {
   background: rgba(20,35,65,0.9);
   border: 1px solid #6ecbff;
@@ -154,13 +151,16 @@ header {
 .rank-header {
   display: flex;
   align-items: center;
-  gap: 14px;
+  gap: 16px;
   margin-bottom: 18px;
 }
 
 .rank-header img {
-  width: 88px;
-  height: 88px;
+  width: 110px;
+  height: auto;
+  object-fit: contain;
+  display: block;
+  flex-shrink: 0;
 }
 
 .rank-header h3 {
@@ -225,8 +225,8 @@ footer {
   }
 
   .rank-header img {
-    width: 72px;
-    height: 72px;
+    width: 82px;
+    height: auto;
   }
 
   .rank-header h3 {
@@ -255,7 +255,7 @@ footer {
 
       <div class="rank-card bronze">
         <div class="rank-header">
-          <img src="https://raw.communitydragon.org/latest/plugins/rcp-fe-lol-static-assets/global/default/images/ranked-emblem/emblem-bronze.png">
+          <img src="https://raw.communitydragon.org/latest/plugins/rcp-fe-lol-static-assets/global/default/images/ranked-emblem/emblem-bronze.png" alt="Bronze Rank">
           <h3>Bronze</h3>
         </div>
 
@@ -269,7 +269,7 @@ footer {
 
       <div class="rank-card plat">
         <div class="rank-header">
-          <img src="https://raw.communitydragon.org/latest/plugins/rcp-fe-lol-static-assets/global/default/images/ranked-emblem/emblem-platinum.png">
+          <img src="https://raw.communitydragon.org/latest/plugins/rcp-fe-lol-static-assets/global/default/images/ranked-emblem/emblem-platinum.png" alt="Platinum Rank">
           <h3>Platinum</h3>
         </div>
 
@@ -283,7 +283,7 @@ footer {
 
       <div class="rank-card challenger">
         <div class="rank-header">
-          <img src="https://raw.communitydragon.org/latest/plugins/rcp-fe-lol-static-assets/global/default/images/ranked-emblem/emblem-challenger.png">
+          <img src="https://raw.communitydragon.org/latest/plugins/rcp-fe-lol-static-assets/global/default/images/ranked-emblem/emblem-challenger.png" alt="Challenger Rank">
           <h3>Challenger</h3>
         </div>
 
@@ -307,7 +307,7 @@ footer {
 
       <div class="rank-card bronze">
         <div class="rank-header">
-          <img src="https://raw.communitydragon.org/latest/plugins/rcp-fe-lol-static-assets/global/default/images/ranked-emblem/emblem-bronze.png">
+          <img src="https://raw.communitydragon.org/latest/plugins/rcp-fe-lol-static-assets/global/default/images/ranked-emblem/emblem-bronze.png" alt="Bronze Rank">
           <h3>Bronze</h3>
         </div>
 
@@ -319,7 +319,7 @@ footer {
 
       <div class="rank-card plat">
         <div class="rank-header">
-          <img src="https://raw.communitydragon.org/latest/plugins/rcp-fe-lol-static-assets/global/default/images/ranked-emblem/emblem-platinum.png">
+          <img src="https://raw.communitydragon.org/latest/plugins/rcp-fe-lol-static-assets/global/default/images/ranked-emblem/emblem-platinum.png" alt="Platinum Rank">
           <h3>Platinum</h3>
         </div>
 
@@ -332,7 +332,7 @@ footer {
 
       <div class="rank-card challenger">
         <div class="rank-header">
-          <img src="https://raw.communitydragon.org/latest/plugins/rcp-fe-lol-static-assets/global/default/images/ranked-emblem/emblem-challenger.png">
+          <img src="https://raw.communitydragon.org/latest/plugins/rcp-fe-lol-static-assets/global/default/images/ranked-emblem/emblem-challenger.png" alt="Challenger Rank">
           <h3>Challenger</h3>
         </div>
 
@@ -355,7 +355,7 @@ footer {
 
       <div class="rank-card bronze">
         <div class="rank-header">
-          <img src="https://raw.communitydragon.org/latest/plugins/rcp-fe-lol-static-assets/global/default/images/ranked-emblem/emblem-bronze.png">
+          <img src="https://raw.communitydragon.org/latest/plugins/rcp-fe-lol-static-assets/global/default/images/ranked-emblem/emblem-bronze.png" alt="Bronze Rank">
           <h3>Bronze</h3>
         </div>
 
@@ -368,7 +368,7 @@ footer {
 
       <div class="rank-card plat">
         <div class="rank-header">
-          <img src="https://raw.communitydragon.org/latest/plugins/rcp-fe-lol-static-assets/global/default/images/ranked-emblem/emblem-platinum.png">
+          <img src="https://raw.communitydragon.org/latest/plugins/rcp-fe-lol-static-assets/global/default/images/ranked-emblem/emblem-platinum.png" alt="Platinum Rank">
           <h3>Platinum</h3>
         </div>
 
@@ -381,7 +381,7 @@ footer {
 
       <div class="rank-card challenger">
         <div class="rank-header">
-          <img src="https://raw.communitydragon.org/latest/plugins/rcp-fe-lol-static-assets/global/default/images/ranked-emblem/emblem-challenger.png">
+          <img src="https://raw.communitydragon.org/latest/plugins/rcp-fe-lol-static-assets/global/default/images/ranked-emblem/emblem-challenger.png" alt="Challenger Rank">
           <h3>Challenger</h3>
         </div>
 
@@ -396,7 +396,7 @@ footer {
     </div>
   </section>
 
-  <!-- VISUALIZE -->
+  <!-- VISUALIZING THE GAME -->
   <section class="topic-section">
     <h2 class="topic-title">Visualizing the Game</h2>
 
@@ -404,7 +404,7 @@ footer {
 
       <div class="rank-card bronze">
         <div class="rank-header">
-          <img src="https://raw.communitydragon.org/latest/plugins/rcp-fe-lol-static-assets/global/default/images/ranked-emblem/emblem-bronze.png">
+          <img src="https://raw.communitydragon.org/latest/plugins/rcp-fe-lol-static-assets/global/default/images/ranked-emblem/emblem-bronze.png" alt="Bronze Rank">
           <h3>Bronze</h3>
         </div>
 
@@ -416,7 +416,7 @@ footer {
 
       <div class="rank-card plat">
         <div class="rank-header">
-          <img src="https://raw.communitydragon.org/latest/plugins/rcp-fe-lol-static-assets/global/default/images/ranked-emblem/emblem-platinum.png">
+          <img src="https://raw.communitydragon.org/latest/plugins/rcp-fe-lol-static-assets/global/default/images/ranked-emblem/emblem-platinum.png" alt="Platinum Rank">
           <h3>Platinum</h3>
         </div>
 
@@ -428,7 +428,7 @@ footer {
 
       <div class="rank-card challenger">
         <div class="rank-header">
-          <img src="https://raw.communitydragon.org/latest/plugins/rcp-fe-lol-static-assets/global/default/images/ranked-emblem/emblem-challenger.png">
+          <img src="https://raw.communitydragon.org/latest/plugins/rcp-fe-lol-static-assets/global/default/images/ranked-emblem/emblem-challenger.png" alt="Challenger Rank">
           <h3>Challenger</h3>
         </div>
 
@@ -449,7 +449,4 @@ footer {
 
 </body>
 </html>
-
-
-
 
