@@ -16,8 +16,9 @@
 html, body {
   margin: 0;
   padding: 0;
-  height: 100%;
+  min-height: 100%;
 }
+
 body {
   font-family: 'Beaufort for LOL', Arial, Helvetica, sans-serif;
   color: #fff;
@@ -26,15 +27,13 @@ body {
   display: flex;
   flex-direction: column;
   text-align: center;
-  min-height: 100vh;
 }
 
 /* Overlay */
 body::before {
   content: "";
   position: fixed;
-  top:0; left:0;
-  width:100%; height:100%;
+  inset: 0;
   background: rgba(10,15,20,0.2);
   z-index: -1;
 }
@@ -64,7 +63,11 @@ header {
   transition: all 0.3s;
   box-shadow: 0 0 10px rgba(201,170,113,0.5);
 }
-.back-button::before { content: "← "; }
+
+.back-button::before {
+  content: "← ";
+}
+
 .back-button:hover {
   background: linear-gradient(135deg, #e6c97f, #f0d88b);
   box-shadow: 0 0 15px rgba(255,215,0,0.8);
@@ -72,69 +75,154 @@ header {
 
 /* Main content */
 .main-content {
-  flex: 1;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  padding: 20px 10px;
+  width: 100%;
+  max-width: 1300px;
+  margin: 10px auto 50px;
+  padding: 0 20px;
+  box-sizing: border-box;
 }
 
-/* Content cards */
-.wave-card {
-  background: rgba(13,17,23,0.9);
-  border: 1px solid #c9aa71;
+/* Sections */
+.topic-section {
+  margin-bottom: 45px;
+  animation: fadeIn 0.5s ease forwards;
+}
+
+.topic-title {
+  text-align: center;
+  font-size: 26px;
+  color: #c9aa71;
+  margin-bottom: 22px;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+/* Grid */
+.rank-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 20px;
+}
+
+/* Cards */
+.rank-card {
   border-radius: 10px;
-  padding: 18px 22px;
-  margin: 12px 0;
-  max-width: 950px;
-  width: 90%;
+  padding: 20px;
   text-align: left;
-  font-size: 16px;
-  line-height: 1.6;
+  backdrop-filter: blur(3px);
+  transition: 0.3s;
+  border: 1px solid rgba(255,255,255,0.08);
   opacity: 0;
   transform: translateY(10px);
   animation: fadeInUp 0.4s forwards;
 }
 
-.wave-card h2, .wave-card h3 {
-  color: #c9aa71;
-  margin-top: 0;
-  margin-bottom: 10px;
+.rank-card:hover {
+  transform: translateY(-3px);
 }
 
-.wave-card h2 {
-  border-bottom: 2px solid #c9aa71;
-  padding-bottom: 4px;
+.rank-card:nth-child(1) { animation-delay: 0.1s; }
+.rank-card:nth-child(2) { animation-delay: 0.2s; }
+.rank-card:nth-child(3) { animation-delay: 0.3s; }
+
+/* Rank themes */
+.bronze {
+  background: rgba(70,40,25,0.9);
+  border: 1px solid #9b6b43;
+  box-shadow: 0 0 15px rgba(155,107,67,0.25);
 }
 
-/* Video container */
-.video-container {
-  text-align: center;
-  margin: 20px 0;
+.plat {
+  background: rgba(20,55,45,0.9);
+  border: 1px solid #4fd1a1;
+  box-shadow: 0 0 15px rgba(79,209,161,0.25);
 }
-.video-container iframe {
-  width: 100%;
-  max-width: 800px;
-  height: 450px;
-  border: none;
-  border-radius: 8px;
+
+.challenger {
+  background: rgba(20,35,65,0.9);
+  border: 1px solid #6ecbff;
+  box-shadow: 0 0 18px rgba(110,203,255,0.25);
+}
+
+/* Rank header */
+.rank-header {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  margin-bottom: 18px;
+}
+
+.rank-header img {
+  width: 110px;
+  height: auto;
+  object-fit: contain;
+  display: block;
+  flex-shrink: 0;
+}
+
+/* Bronze emblem compensation */
+.bronze .rank-header img {
+  transform: scale(1.15);
+}
+
+.rank-header h3 {
+  margin: 0;
+  font-size: 24px;
+}
+
+/* Text */
+.rank-card p,
+.rank-card li {
+  font-size: 15px;
+  line-height: 1.7;
+  color: #f1f1f1;
+}
+
+.rank-card ul {
+  margin-top: 10px;
+  padding-left: 20px;
+}
+
+.rank-card li {
+  margin-bottom: 8px;
 }
 
 /* Images */
-.wave-card img {
+.rank-card img {
   width: 100%;
-  max-width: 700px;
+  max-width: 100%;
   display: block;
-  margin: 20px auto;
-  border: 2px solid #c9aa71;
+  margin: 18px auto 8px;
+  border-radius: 10px;
+  border: 2px solid rgba(255,255,255,0.12);
+}
+
+/* Video */
+.video-container {
+  margin-top: 18px;
+}
+
+.video-container iframe {
+  width: 100%;
+  height: 250px;
+  border: none;
   border-radius: 10px;
 }
 
-/* Fade-in animation */
+/* Animations */
 @keyframes fadeInUp {
   to {
     opacity: 1;
     transform: translateY(0);
+  }
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
   }
 }
 
@@ -147,98 +235,385 @@ footer {
   color: #fff;
 }
 
-/* Responsive */
+/* Mobile */
+@media (max-width: 1000px) {
+  .rank-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
 @media (max-width: 600px) {
-  header { font-size: 24px; padding: 15px; }
-  .wave-card { padding: 14px 16px; font-size: 15px; }
+  header {
+    font-size: 24px;
+    padding: 15px;
+  }
+
+  .topic-title {
+    font-size: 22px;
+  }
+
+  .rank-header img {
+    width: 82px;
+  }
+
+  .bronze .rank-header img {
+    transform: scale(1.12);
+  }
+
+  .rank-header h3 {
+    font-size: 22px;
+  }
+
+  .rank-card {
+    padding: 16px;
+  }
+
+  .video-container iframe {
+    height: 210px;
+  }
 }
 </style>
 </head>
 <body>
 
 <header>Wave Control</header>
+
 <a href="skills.html" class="back-button">Back to Skills Hub</a>
 
 <div class="main-content">
 
-  <!-- Wave Control Overview -->
-  <div class="wave-card" style="animation-delay:0.1s;">
-    <h2>Wave Control</h2>
-    <p>The goal of wave control is to crash your wave into the enemy tower with your minions as healthy as possible. 
-      It's actually almost always best to push, if you can do so safely, quickly, and without spending too many resources.</p>
-    <p>Cannon waves take much longer to clear and are harder to fast push.   
-      Pulling the wave before a cannon wave arrives is often the best strategy.</p>
-  </div>
+  <!-- OVERVIEW -->
+  <section class="topic-section">
+    <h2 class="topic-title">Wave Control Overview</h2>
 
-  <!-- Early Game -->
-  <div class="wave-card" style="animation-delay:0.2s;">
-    <h3>Early Game Wave Control</h3>
-    <p>In the early game, pulling the wave and slow pushing is the most common because it allows you to trade, zone your opponent, 
-      and play with the safety of your tower. It's also the time when you’re most likely to be ganked since you have to stay in lane longer to last hit.</p>
-    <p>To pull the wave, the enemy wave must be larger. The number of extra enemy minions needed depends on where the wave currently is. 
-      The closer the wave is to your tower, the more enemy minions are needed because your minions arrive sooner.</p>
-    <ul>
-      <li>Mid lane needs the least minions because it’s the shortest lane.</li>
-      <li>In the center of lane, around +1 enemy minion is enough to pull.</li>
-      <li>Near your tower, you need about +3 enemy minions.</li>
-    </ul>
-  </div>
+    <div class="rank-grid">
 
-  <!-- Maintaining Wave Position -->
-  <div class="wave-card" style="animation-delay:0.3s;">
-    <h3>Maintaining Wave Position</h3>
-    <p>You can keep the wave close to your tower without needing a large enemy wave by killing all enemy minions except one and 
-      tanking that last minion just outside tower range.  
-      This prevents the wave from crashing and creates a controlled position to trade safely.</p>
-  </div>
+      <div class="rank-card bronze">
+        <div class="rank-header">
+          <img src="https://raw.communitydragon.org/latest/plugins/rcp-fe-lol-static-assets/global/default/images/ranked-emblem/emblem-bronze.png" alt="Bronze Rank">
+          <h3>Bronze</h3>
+        </div>
 
-  <!-- Mid Game -->
-  <div class="wave-card" style="animation-delay:0.4s;">
-    <h3>Mid Game Wave Control</h3>
-    <p>In the mid game, pushing becomes the default pattern because it becomes easier for most champions to clear waves quickly while still trading.</p>
-    <p>When you push the enemy out of lane and want to recall or roam, always push the wave fully into the tower. 
-      A large wave can finish the last few minions on its own if needed. </p>
-    <p>The faster you push, the more CS the enemy loses to tower because their minions reach the wave sooner when they return.</p>
-  </div>
+        <p>
+          Usually hits the wave randomly and doesn’t think about where the wave will end up.
+          Often pushes accidentally or misses opportunities to crash the wave.
+        </p>
 
-  <!-- Freezing -->
-  <div class="wave-card" style="animation-delay:0.5s;">
-    <h3>Freezing</h3>
-    <p>Freezing isn’t very common in mid lane anymore due to faster game pace, large XP range, and difficulty tanking waves. 
-      Still, it's strong in some matchups:</p>
-    <ul>
-      <li>Against melee champions who can’t walk up safely.</li>
-      <li>Against champions who struggle to roam or clear jungle camps.</li>
-    </ul>
+        <ul>
+          <li>Rarely thinks about wave states.</li>
+          <li>Focuses mostly on last hitting.</li>
+          <li>May stay in lane too long with bad recalls.</li>
+        </ul>
+      </div>
 
-    <p><strong>This is the amount of minions it takes to freeze the wave mid lane on the blue side:</strong></p>
-    <img src="https://i.imgur.com/kHu90dX.png" alt="Mid Lane Freeze Minion Count">
+      <div class="rank-card plat">
+        <div class="rank-header">
+          <img src="https://raw.communitydragon.org/latest/plugins/rcp-fe-lol-static-assets/global/default/images/ranked-emblem/emblem-platinum.png" alt="Platinum Rank">
+          <h3>Platinum</h3>
+        </div>
 
-    <p><strong>This is the amount of minions it takes to freeze the wave bot lane on the red side:</strong></p>
-    <img src="https://i.imgur.com/W32sWIn.png" alt="Bot Lane Freeze Minion Count">
+        <p>
+          Understands basic slow pushing and crashing.
+          Starts recognizing when to push for recalls or roams.
+        </p>
 
-    <p><strong>This is the amount of minions it takes to freeze the wave top lane on the blue side:</strong></p>
-    <img src="https://i.imgur.com/ETB9Oq4.png" alt="Top Lane Freeze Minion Count">
-  </div>
+        <ul>
+          <li>Can build larger waves.</li>
+          <li>Uses cannon waves for recalls.</li>
+          <li>Starts thinking about jungle pressure.</li>
+        </ul>
+      </div>
 
-  <!-- Tips -->
-  <div class="wave-card" style="animation-delay:0.6s;">
-    <h3>Tips</h3>
-    <ul>
-      <li>You can freeze behind the side bush wall to make last hitting easier.</li>
-      <li>In top and bot lane you can step into the side bushes to drop minion aggro, just don't let the minions move too far up.</li>
-    </ul>
-  </div>
+      <div class="rank-card challenger">
+        <div class="rank-header">
+          <img src="https://raw.communitydragon.org/latest/plugins/rcp-fe-lol-static-assets/global/default/images/ranked-emblem/emblem-challenger.png" alt="Challenger Rank">
+          <h3>Challenger</h3>
+        </div>
 
-  <!-- Late Game -->
-  <div class="wave-card" style="animation-delay:0.7s;">
-    <h3>Late Game Strategy</h3>
-    <p>Late game wave control is simple: push mid as fast as possible.  
-      Fast pushing gives your team deep vision and lets you set up picks, objectives, and map control.</p>
-    <div class="video-container">
-      <iframe src="https://www.youtube.com/embed/edDOUuxFaH8" title="Wave Control Guide Video" allowfullscreen></iframe>
+        <p>
+          The goal of wave control is usually to crash the wave with your minions as healthy as possible.
+          Most high elo wave control revolves around pushing efficiently while staying safe.
+        </p>
+
+        <ul>
+          <li>Understands push timings and crash windows.</li>
+          <li>Uses cannon waves to create tempo advantages.</li>
+          <li>Controls recalls, roams, and vision through wave states.</li>
+        </ul>
+      </div>
+
     </div>
-  </div>
+  </section>
+
+  <!-- EARLY GAME -->
+  <section class="topic-section">
+    <h2 class="topic-title">Early Game</h2>
+
+    <div class="rank-grid">
+
+      <div class="rank-card bronze">
+        <div class="rank-header">
+          <img src="https://raw.communitydragon.org/latest/plugins/rcp-fe-lol-static-assets/global/default/images/ranked-emblem/emblem-bronze.png" alt="Bronze Rank">
+          <h3>Bronze</h3>
+        </div>
+
+        <ul>
+          <li>Usually doesn’t intentionally pull waves.</li>
+          <li>Gets ganked often while pushing randomly.</li>
+          <li>May trade into large enemy waves.</li>
+        </ul>
+      </div>
+
+      <div class="rank-card plat">
+        <div class="rank-header">
+          <img src="https://raw.communitydragon.org/latest/plugins/rcp-fe-lol-static-assets/global/default/images/ranked-emblem/emblem-platinum.png" alt="Platinum Rank">
+          <h3>Platinum</h3>
+        </div>
+
+        <ul>
+          <li>Starts slow pushing to trade safely.</li>
+          <li>Understands that bigger enemy waves pull toward you.</li>
+          <li>Uses wave position to avoid jungle pressure.</li>
+        </ul>
+      </div>
+
+      <div class="rank-card challenger">
+        <div class="rank-header">
+          <img src="https://raw.communitydragon.org/latest/plugins/rcp-fe-lol-static-assets/global/default/images/ranked-emblem/emblem-challenger.png" alt="Challenger Rank">
+          <h3>Challenger</h3>
+        </div>
+
+        <p>
+          Early game wave control is usually based around pulling and slow pushing.
+          This allows safer trading, zoning, and protection from ganks.
+        </p>
+
+        <ul>
+          <li>Mid lane usually only needs +1 enemy minion to pull in center lane.</li>
+          <li>Closer to tower requires more enemy minions.</li>
+          <li>Understands exact pull thresholds by lane length and position.</li>
+        </ul>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- MAINTAINING WAVE -->
+  <section class="topic-section">
+    <h2 class="topic-title">Maintaining Wave Position</h2>
+
+    <div class="rank-grid">
+
+      <div class="rank-card bronze">
+        <div class="rank-header">
+          <img src="https://raw.communitydragon.org/latest/plugins/rcp-fe-lol-static-assets/global/default/images/ranked-emblem/emblem-bronze.png" alt="Bronze Rank">
+          <h3>Bronze</h3>
+        </div>
+
+        <ul>
+          <li>Lets waves crash too often.</li>
+          <li>Usually resets the wave accidentally.</li>
+        </ul>
+      </div>
+
+      <div class="rank-card plat">
+        <div class="rank-header">
+          <img src="https://raw.communitydragon.org/latest/plugins/rcp-fe-lol-static-assets/global/default/images/ranked-emblem/emblem-platinum.png" alt="Platinum Rank">
+          <h3>Platinum</h3>
+        </div>
+
+        <ul>
+          <li>Can hold waves near tower temporarily.</li>
+          <li>Starts tanking waves outside tower range.</li>
+        </ul>
+      </div>
+
+      <div class="rank-card challenger">
+        <div class="rank-header">
+          <img src="https://raw.communitydragon.org/latest/plugins/rcp-fe-lol-static-assets/global/default/images/ranked-emblem/emblem-challenger.png" alt="Challenger Rank">
+          <h3>Challenger</h3>
+        </div>
+
+        <p>
+          High elo players maintain wave position by leaving one enemy minion alive and tanking it outside tower range.
+        </p>
+
+        <ul>
+          <li>Prevents unwanted crashes.</li>
+          <li>Creates safe trading positions.</li>
+          <li>Controls lane spacing and recall timings.</li>
+        </ul>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- MID GAME -->
+  <section class="topic-section">
+    <h2 class="topic-title">Mid Game</h2>
+
+    <div class="rank-grid">
+
+      <div class="rank-card bronze">
+        <div class="rank-header">
+          <img src="https://raw.communitydragon.org/latest/plugins/rcp-fe-lol-static-assets/global/default/images/ranked-emblem/emblem-bronze.png" alt="Bronze Rank">
+          <h3>Bronze</h3>
+        </div>
+
+        <ul>
+          <li>Leaves waves in bad positions before roaming.</li>
+          <li>Recalls without crashing waves.</li>
+        </ul>
+      </div>
+
+      <div class="rank-card plat">
+        <div class="rank-header">
+          <img src="https://raw.communitydragon.org/latest/plugins/rcp-fe-lol-static-assets/global/default/images/ranked-emblem/emblem-platinum.png" alt="Platinum Rank">
+          <h3>Platinum</h3>
+        </div>
+
+        <ul>
+          <li>Pushes before roaming more consistently.</li>
+          <li>Starts using fast pushes to deny CS.</li>
+        </ul>
+      </div>
+
+      <div class="rank-card challenger">
+        <div class="rank-header">
+          <img src="https://raw.communitydragon.org/latest/plugins/rcp-fe-lol-static-assets/global/default/images/ranked-emblem/emblem-challenger.png" alt="Challenger Rank">
+          <h3>Challenger</h3>
+        </div>
+
+        <p>
+          Mid game wave control becomes heavily push-focused because most champions clear waves faster.
+        </p>
+
+        <ul>
+          <li>Always crashes before roaming or recalling.</li>
+          <li>Uses fast pushing to maximize CS denial.</li>
+          <li>Controls tempo through wave speed.</li>
+        </ul>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- FREEZING -->
+  <section class="topic-section">
+    <h2 class="topic-title">Freezing</h2>
+
+    <div class="rank-grid">
+
+      <div class="rank-card bronze">
+        <div class="rank-header">
+          <img src="https://raw.communitydragon.org/latest/plugins/rcp-fe-lol-static-assets/global/default/images/ranked-emblem/emblem-bronze.png" alt="Bronze Rank">
+          <h3>Bronze</h3>
+        </div>
+
+        <ul>
+          <li>Rarely freezes intentionally.</li>
+          <li>Usually breaks freezes by overpushing.</li>
+        </ul>
+      </div>
+
+      <div class="rank-card plat">
+        <div class="rank-header">
+          <img src="https://raw.communitydragon.org/latest/plugins/rcp-fe-lol-static-assets/global/default/images/ranked-emblem/emblem-platinum.png" alt="Platinum Rank">
+          <h3>Platinum</h3>
+        </div>
+
+        <ul>
+          <li>Can freeze in certain matchups.</li>
+          <li>Uses freezes more against melee champions.</li>
+        </ul>
+      </div>
+
+      <div class="rank-card challenger">
+        <div class="rank-header">
+          <img src="https://raw.communitydragon.org/latest/plugins/rcp-fe-lol-static-assets/global/default/images/ranked-emblem/emblem-challenger.png" alt="Challenger Rank">
+          <h3>Challenger</h3>
+        </div>
+
+        <p>
+          Freezing is less common mid due to faster game pace and larger XP range,
+          but still extremely strong in some matchups.
+        </p>
+
+        <ul>
+          <li>Strong against melee champions.</li>
+          <li>Useful against champions with weak roaming or jungle clear.</li>
+          <li>Understands exact freeze thresholds.</li>
+        </ul>
+
+        <img src="https://i.imgur.com/kHu90dX.png" alt="Mid Lane Freeze">
+
+        <img src="https://i.imgur.com/W32sWIn.png" alt="Bot Lane Freeze">
+
+        <img src="https://i.imgur.com/ETB9Oq4.png" alt="Top Lane Freeze">
+      </div>
+
+    </div>
+  </section>
+
+  <!-- LATE GAME -->
+  <section class="topic-section">
+    <h2 class="topic-title">Late Game</h2>
+
+    <div class="rank-grid">
+
+      <div class="rank-card bronze">
+        <div class="rank-header">
+          <img src="https://raw.communitydragon.org/latest/plugins/rcp-fe-lol-static-assets/global/default/images/ranked-emblem/emblem-bronze.png" alt="Bronze Rank">
+          <h3>Bronze</h3>
+        </div>
+
+        <ul>
+          <li>Often ignores side waves completely.</li>
+          <li>Groups too early without pushing.</li>
+        </ul>
+      </div>
+
+      <div class="rank-card plat">
+        <div class="rank-header">
+          <img src="https://raw.communitydragon.org/latest/plugins/rcp-fe-lol-static-assets/global/default/images/ranked-emblem/emblem-platinum.png" alt="Platinum Rank">
+          <h3>Platinum</h3>
+        </div>
+
+        <ul>
+          <li>Starts pushing side lanes before objectives.</li>
+          <li>Recognizes mid priority importance.</li>
+        </ul>
+      </div>
+
+      <div class="rank-card challenger">
+        <div class="rank-header">
+          <img src="https://raw.communitydragon.org/latest/plugins/rcp-fe-lol-static-assets/global/default/images/ranked-emblem/emblem-challenger.png" alt="Challenger Rank">
+          <h3>Challenger</h3>
+        </div>
+
+        <p>
+          Late game wave control is usually simple:
+          push mid as fast as possible to gain deep vision and objective control.
+        </p>
+
+        <ul>
+          <li>Uses wave priority to set up picks.</li>
+          <li>Creates vision pressure before objectives.</li>
+          <li>Controls map tempo through mid push.</li>
+        </ul>
+
+        <div class="video-container">
+          <iframe
+            src="https://www.youtube.com/embed/edDOUuxFaH8"
+            title="Wave Control Guide"
+            allowfullscreen>
+          </iframe>
+        </div>
+
+      </div>
+
+    </div>
+  </section>
 
 </div>
 
@@ -246,7 +621,6 @@ footer {
 
 </body>
 </html>
-
 
 
 
