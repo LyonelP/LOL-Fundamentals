@@ -1,8 +1,8 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
 <title>Diana Mid vs Vladimir</title>
 
 <style>
@@ -11,6 +11,7 @@
   --bg:#0a0f14;
   --card:#161b22;
   --muted:#8b949e;
+  --yellow:#F9D949;
 }
 
 body {
@@ -24,6 +25,7 @@ body {
   flex-direction: column;
 }
 
+/* HEADER */
 header {
   background: rgba(13,17,23,0.9);
   border-bottom: 2px solid var(--gold);
@@ -36,6 +38,7 @@ header {
   letter-spacing: 0.8px;
 }
 
+/* BACK BUTTON */
 .back-button {
   display: block;
   margin: 18px auto;
@@ -50,12 +53,14 @@ header {
 }
 .back-button::before { content: "← "; }
 
+/* CONTENT */
 .content-width {
   max-width: 920px;
   margin: 0 auto;
   padding: 0 20px;
 }
 
+/* MATCHUP */
 .matchup-container {
   display: flex;
   gap: 28px;
@@ -63,7 +68,9 @@ header {
   background: linear-gradient(180deg, #161b22, #12161d);
   border-radius: 18px;
   border: 1px solid rgba(201,170,113,0.18);
-  box-shadow: 0 15px 40px rgba(0,0,0,0.7), inset 0 0 0 1px rgba(255,255,255,0.02);
+  box-shadow:
+    0 15px 40px rgba(0,0,0,0.7),
+    inset 0 0 0 1px rgba(255,255,255,0.02);
 }
 
 .matchup-left {
@@ -81,6 +88,7 @@ header {
   box-shadow: 0 0 28px rgba(201,170,113,0.45);
 }
 
+/* WINRATE */
 .winrate-bubble {
   background: rgba(127,29,29,0.2);
   color: #fca5a5;
@@ -114,13 +122,16 @@ header {
   line-height: 1.65;
 }
 
+/* VIDEO CARD (ZOE STYLE) */
 .video-card {
   margin: 36px auto 40px;
   padding: 26px;
   background: linear-gradient(180deg, #161b22, #12161d);
   border-radius: 18px;
   border: 1px solid rgba(201,170,113,0.18);
-  box-shadow: 0 15px 40px rgba(0,0,0,0.7), inset 0 0 0 1px rgba(255,255,255,0.02);
+  box-shadow:
+    0 15px 40px rgba(0,0,0,0.7),
+    inset 0 0 0 1px rgba(255,255,255,0.02);
 }
 
 .video-card h2 {
@@ -136,8 +147,10 @@ header {
   height: 480px;
   border: none;
   border-radius: 12px;
+  margin-bottom: 16px;
 }
 
+/* FOOTER */
 footer {
   text-align: center;
   padding: 18px 10px;
@@ -146,6 +159,7 @@ footer {
   margin-top: auto;
 }
 
+/* MOBILE */
 @media (max-width: 600px) {
   .matchup-container {
     flex-direction: column;
@@ -177,6 +191,7 @@ if (localStorage.getItem('lolfundamentals_logged_in') !== 'true') {
 <a href="matchuphub.html" class="back-button">Back to Matchup Hub</a>
 
 <div class="content-width">
+
   <div class="matchup-container">
     <div class="matchup-left">
       <img src="https://ddragon.leagueoflegends.com/cdn/14.23.1/img/champion/Vladimir.png" alt="Vladimir">
@@ -197,24 +212,15 @@ if (localStorage.getItem('lolfundamentals_logged_in') !== 'true') {
   </div>
 
   <div class="video-card">
-    <h2>VOD</h2>
+    <h2>VODs</h2>
     <iframe src="https://www.youtube.com/embed/ZNqdBJCNzJw" allowfullscreen></iframe>
-  </div>
-
-  <div class="video-card">
-    <h2>Additional VOD</h2>
     <iframe src="https://www.youtube.com/embed/5SonmAno87w" allowfullscreen></iframe>
   </div>
 
 </div>
 
-<footer>© 2026 LoL Fundamentals</footer>
+<footer>© 2026</footer>
 
 </body>
 </html>
-
-
-
-
-
 
