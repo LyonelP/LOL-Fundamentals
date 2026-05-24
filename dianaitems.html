@@ -420,7 +420,7 @@ function calcBonusItemDamage(totalAP, mr, flatPen, percPen, level) {
 
     if(item.bonus==="lichbane"){
       let aaBase = getAutoAttackBase(level);
-      let raw = 0.75*aaBase + 0.4*totalAP;
+      let raw = 0.75*aaBase + 0.45*totalAP;
       let effectiveMR = mr - flatPen;
       if (effectiveMR < 0) effectiveMR = 0;
       effectiveMR *= 1 - percPen;
