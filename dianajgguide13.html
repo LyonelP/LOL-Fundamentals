@@ -4,114 +4,189 @@
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Diana Jungle Guide – Members Hub</title>
+
 <style>
 body {
-margin: 0;
-font-family: 'Beaufort for LOL', Arial, Helvetica, sans-serif;
-background: url('https://ddragon.leagueoflegends.com/cdn/img/champion/splash/Diana_0.jpg') no-repeat center center fixed;
-background-size: cover;
-color: #e6edf3;
-text-align: center;
-overflow-x: hidden;
+  margin: 0;
+  font-family: 'Beaufort for LOL', Arial, Helvetica, sans-serif;
+  background: url('https://ddragon.leagueoflegends.com/cdn/img/champion/splash/Diana_0.jpg') no-repeat center center fixed;
+  background-size: cover;
+  color: #e6edf3;
+  text-align: center;
+  overflow-x: hidden;
 }
 
 body::before {
-content: "";
-position: fixed;
-top: 0; left: 0;
-width: 100%; height: 100%;
-background: rgba(10,15,20,0.75);
-z-index: -1;
+  content: "";
+  position: fixed;
+  top: 0; left: 0;
+  width: 100%; height: 100%;
+  background: rgba(10,15,20,0.78);
+  z-index: -1;
 }
 
 header {
-background: rgba(13,17,23,0.9);
-border-bottom: 2px solid #c9aa71;
-padding: 20px 10px;
-font-weight: bold;
-font-size: 26px;
-text-transform: uppercase;
-color: #c9aa71;
-letter-spacing: 1px;
+  background: rgba(13,17,23,0.92);
+  border-bottom: 2px solid #c9aa71;
+  padding: 20px 10px;
+  font-weight: bold;
+  font-size: 26px;
+  text-transform: uppercase;
+  color: #c9aa71;
+  letter-spacing: 1px;
 }
 
 .back-button {
-display: inline-block;
-margin: 20px auto 10px;
-padding: 10px 20px;
-background: linear-gradient(135deg, #c9aa71, #e0c77b);
-color: #000;
-text-decoration: none;
-border-radius: 8px;
-font-weight: bold;
-transition: all 0.3s;
-box-shadow: 0 0 10px rgba(201,170,113,0.5);
+  display: inline-block;
+  margin: 20px auto 10px;
+  padding: 10px 20px;
+  background: linear-gradient(135deg, #c9aa71, #e0c77b);
+  color: #000;
+  text-decoration: none;
+  border-radius: 8px;
+  font-weight: bold;
+  transition: all 0.3s;
+  box-shadow: 0 0 10px rgba(201,170,113,0.5);
 }
-.back-button::before { content: "← "; }
 
-#section-select-container { margin: 20px auto; }
+.back-button::before {
+  content: "← ";
+}
+
+.back-button:hover {
+  box-shadow: 0 0 15px rgba(255,215,0,0.7);
+}
+
+#section-select-container {
+  margin: 20px auto;
+}
 
 #section-select {
-padding: 10px 15px;
-font-size: 16px;
-border-radius: 6px;
-border: none;
-background: #0f1722;
-color: #c9aa71;
-cursor: pointer;
+  padding: 10px 15px;
+  font-size: 16px;
+  border-radius: 6px;
+  border: none;
+  background: #0f1722;
+  color: #c9aa71;
+  cursor: pointer;
 }
 
 #section-info {
-margin: 20px auto;
-max-width: 900px;
-background: rgba(13,17,23,0.95);
-border: 1px solid #2f81f7;
-padding: 15px 20px;
-border-radius: 10px;
-text-align: left;
-color: #fff;
-min-height: 200px;
+  margin: 20px auto;
+  max-width: 950px;
+  background: rgba(13,17,23,0.96);
+  border: 1px solid #2f81f7;
+  padding: 20px 24px;
+  border-radius: 12px;
+  text-align: left;
+  color: #fff;
+  min-height: 220px;
 }
 
-#section-info h3 { color: #c9aa71; }
+#section-info h3 {
+  color: #c9aa71;
+  margin-top: 0;
+  font-size: 24px;
+}
+
+#section-info p {
+  line-height: 1.7;
+}
+
 .icon {
-width: 36px; height: 36px;
-vertical-align: middle;
-border-radius: 6px;
-margin-right: 6px;
+  width: 36px;
+  height: 36px;
+  vertical-align: middle;
+  border-radius: 6px;
+  margin-right: 6px;
 }
-.rune-container { display: flex; flex-direction: column; gap: 12px; }
-.rune-info { display: flex; align-items: center; }
-.rune-row { display: flex; gap: 12px; }
 
-.card-container { display: flex; flex-direction: column; gap: 12px; margin-top: 20px; }
+.rune-container {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.rune-info {
+  display: flex;
+  align-items: center;
+}
+
+.rune-row {
+  display: flex;
+  gap: 14px;
+  margin-top: 12px;
+}
+
+.card-container {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  margin-top: 20px;
+}
+
 .card {
-background: rgba(20,25,35,0.85);
-border: 1px solid #c9aa71;
-border-radius: 10px;
-padding: 15px;
-text-align: center;
+  background: rgba(20,25,35,0.85);
+  border: 1px solid #c9aa71;
+  border-radius: 10px;
+  padding: 16px;
 }
+
+.card strong {
+  color: #e0c77b;
+}
+
 .build-flow {
-display: flex; flex-wrap: wrap; justify-content: center; gap: 8px;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+  margin-top: 12px;
 }
+
 .build-flow div {
-border: 1px solid #c9aa71;
-border-radius: 8px;
-padding: 10px 12px;
-min-width: 120px;
-text-align: center;
+  border: 1px solid #c9aa71;
+  border-radius: 8px;
+  padding: 10px 12px;
+  min-width: 120px;
+  text-align: center;
+}
+
+.build-flow span {
+  color: #c9aa71;
+  font-size: 18px;
+}
+
+.tip {
+  margin-top: 15px;
+  padding: 12px;
+  border-left: 3px solid #c9aa71;
+  background: rgba(255,255,255,0.04);
 }
 
 @media (max-width: 600px) {
-.build-flow { flex-direction: column; }
+
+  .build-flow {
+    flex-direction: column;
+  }
+
+  .build-flow span {
+    display: none;
+  }
+
+  .rune-row {
+    flex-direction: column;
+  }
+
 }
 </style>
 </head>
 
 <body>
 
-<header>Diana Jungle – Members Hub Guide</header>
+<header>Diana Jungle Guide</header>
+
 <a href="membershub.html" class="back-button">Back to Members Hub</a>
 
 <div id="section-select-container">
@@ -121,8 +196,11 @@ text-align: center;
 <option>Runes</option>
 <option>Build</option>
 <option>Summoner spells</option>
+<option>Abilities</option>
+<option>Combos</option>
 <option>Level 1</option>
 <option>Pathing</option>
+<option>Preferred Camps</option>
 <option>Hardest matchups</option>
 <option>Team fighting</option>
 <option>Closing out the game</option>
@@ -135,182 +213,426 @@ text-align: center;
 </div>
 
 <script>
+
 const sectionSelect = document.getElementById('section-select');
 const sectionInfo = document.getElementById('section-info');
 
 sectionSelect.addEventListener('change', () => {
+
 let value = sectionSelect.value;
 let header = `<h3>${value}</h3>`;
 let content = "";
 
 if(value === "Intro"){
+
 content = `
 ${header}
-<p>Diana Jungle is one of the fastest full-clear junglers in the game. She excels at:</p>
+
+<p>Diana jungle is one of the fastest full-clear junglers in the game because of how hard her passive scales with AP. She converts gold into clear speed, objective damage, and teamfight threat extremely efficiently.</p>
+
+<p>Taking Diana into the jungle also enables her to consistently run <strong>Conqueror</strong>. Since she doesn’t need lane sustain runes, she can fully optimize for extended fights, scaling, and jungle tempo.</p>
+
 <ul>
-<li>Fast and healthy clears</li>
-<li>Multiplying tempo through full clears</li>
-<li>Devastating level 6 ganks</li>
-<li>Insane objective damage</li>
+<li>Extremely fast full clears</li>
+<li>Strong objective control</li>
+<li>Massive level 6 spike</li>
+<li>AoE engage and teamfighting</li>
+<li>Excellent scaling with gold</li>
 </ul>
-<p>Option B playstyle: <strong>Conqueror, full clear, Nashor → Rocketbelt</strong>.</p>
+
+<p>Diana performs best when she is accelerating tempo through efficient clears and arriving first to objectives. Falling behind early against heavy duelists can make the game difficult.</p>
+
 `;
+
 }
 
 if(value === "Runes"){
+
 content = `
 ${header}
+
 <div class="rune-container">
+
 <div class="rune-info">
 <img src="https://ddragon.leagueoflegends.com/cdn/img/perk-images/Styles/Precision/Conqueror/Conqueror.png" class="icon">
-<span><strong>Conqueror:</strong> Best for sustained jungle fights & full clears.</span>
+<span><strong>Conqueror:</strong> Best keystone for extended fights, clears, and skirmishes.</span>
 </div>
+
 <div class="rune-info">
 <img src="https://ddragon.leagueoflegends.com/cdn/img/perk-images/Styles/Precision/Triumph.png" class="icon">
-<span><strong>Triumph:</strong> Helps in 2v2/3v3 skirmishes.</span>
+<span><strong>Triumph:</strong> Helps survive dives and extended fights.</span>
 </div>
+
 <div class="rune-info">
 <img src="https://ddragon.leagueoflegends.com/cdn/img/perk-images/Styles/Precision/LegendAlacrity/LegendAlacrity.png" class="icon">
-<span><strong>Alacrity:</strong> Speeds up attack/cast cadence for clears and duels.</span>
+<span><strong>Alacrity:</strong> Increases clear speed and passive DPS.</span>
 </div>
+
 <div class="rune-info">
 <img src="https://ddragon.leagueoflegends.com/cdn/img/perk-images/Styles/Precision/CoupDeGrace.png" class="icon">
-<span><strong>Coup de Grace:</strong> Helps secure kills during dives.</span>
+<span><strong>Coup de Grace:</strong> Helps finish targets during engages.</span>
 </div>
+
 <div class="rune-info">
 <img src="https://ddragon.leagueoflegends.com/cdn/img/perk-images/Styles/Inspiration/MagicalFootwear/MagicalFootwear.png" class="icon">
-<span><strong>Magical Footwear:</strong> Free boots to help with early mobility.</span>
+<span><strong>Magical Footwear:</strong> Free boots allow faster item spikes.</span>
 </div>
+
 <div class="rune-info">
 <img src="https://ddragon.leagueoflegends.com/cdn/img/perk-images/Styles/Inspiration/CosmicInsight/CosmicInsight.png" class="icon">
-<span><strong>Cosmic Insight:</strong> Extra summoner spell cooldown and item haste.</span>
+<span><strong>Cosmic Insight:</strong> Lower Flash and Smite cooldowns are extremely valuable.</span>
 </div>
+
 <div class="rune-row">
-<div><img src="https://ddragon.leagueoflegends.com/cdn/img/perk-images/StatMods/StatModsAttackSpeedIcon.png" class="icon">AS</div>
-<div><img src="https://ddragon.leagueoflegends.com/cdn/img/perk-images/StatMods/StatModsAdaptiveForceIcon.png" class="icon">AP</div>
-<div><img src="https://ddragon.leagueoflegends.com/cdn/img/perk-images/StatMods/StatModsHealthScalingIcon.png" class="icon">HP</div>
+
+<div>
+<img src="https://ddragon.leagueoflegends.com/cdn/img/perk-images/StatMods/StatModsAttackSpeedIcon.png" class="icon">
+Attack Speed
 </div>
+
+<div>
+<img src="https://ddragon.leagueoflegends.com/cdn/img/perk-images/StatMods/StatModsAdaptiveForceIcon.png" class="icon">
+Adaptive Force
 </div>
+
+<div>
+<img src="https://ddragon.leagueoflegends.com/cdn/img/perk-images/StatMods/StatModsHealthScalingIcon.png" class="icon">
+Scaling Health
+</div>
+
+</div>
+
+</div>
+
 `;
+
 }
 
 if(value === "Build"){
+
 content = `
 ${header}
+
 <div class="card-container">
-<div class="card"><strong>Starting items</strong>
+
+<div class="card">
+
+<strong>Starting Items</strong>
+
 <div class="build-flow">
-<div><img src="https://raw.communitydragon.org/latest/game/assets/items/icons2d/1103_jungle_t1_mosstomperseedling.png" class="icon">Mosstomper</div>
-<div><img src="https://ddragon.leagueoflegends.com/cdn/14.21.1/img/item/1082.png" class="icon">Dark Seal</div>
-</div>
+
+<div>
+<img src="https://raw.communitydragon.org/latest/game/assets/items/icons2d/1103_jungle_t1_mosstomperseedling.png" class="icon">
+Mosstomper
 </div>
 
-<div class="card"><strong>Core items</strong>
-<div class="build-flow">
-<div><img src="https://raw.communitydragon.org/latest/game/assets/items/icons2d/3115_nashorstooth.png" class="icon">Nashor's</div>
-<div><img src="https://raw.communitydragon.org/latest/game/assets/items/icons2d/3152_rocketbelt.png" class="icon">Rocketbelt</div>
-<div><img src="https://raw.communitydragon.org/latest/game/assets/items/icons2d/3157_zhonyashourglass.png" class="icon">Zhonya</div>
-</div>
+<span>+</span>
+
+<div>
+<img src="https://ddragon.leagueoflegends.com/cdn/14.21.1/img/item/1082.png" class="icon">
+Dark Seal
 </div>
 
-<div class="card"><strong>Final items</strong>
+</div>
+
+<p style="margin-top:15px;">
+Dark Seal is one of Diana's best early purchases because of the health, AP, and snowball potential. I almost always buy it unless I can complete a massive item spike immediately.
+</p>
+
+</div>
+
+<div class="card">
+
+<strong>Core Build</strong>
+
 <div class="build-flow">
-<div><img src="https://raw.communitydragon.org/latest/game/assets/items/icons2d/3135_voidstaff.png" class="icon">Void Staff</div>
-<div><img src="https://raw.communitydragon.org/latest/game/assets/items/icons2d/3089_rabadonsdeathcap.png" class="icon">Rabadon’s</div>
+
+<div>
+<img src="https://raw.communitydragon.org/latest/game/assets/items/icons2d/3152_rocketbelt.png" class="icon">
+Rocketbelt
 </div>
+
+<span>→</span>
+
+<div>
+<img src="https://ddragon.leagueoflegends.com/cdn/14.21.1/img/item/3020.png" class="icon">
+Sorcerer's Shoes
 </div>
+
+<span>/</span>
+
+<div>
+<img src="https://ddragon.leagueoflegends.com/cdn/14.21.1/img/item/3111.png" class="icon">
+Mercury Treads
 </div>
+
+<span>→</span>
+
+<div>
+<img src="https://raw.communitydragon.org/latest/game/assets/items/icons2d/3157_zhonyashourglass.png" class="icon">
+Hourglass
+</div>
+
+<span>→</span>
+
+<div>
+<img src="https://raw.communitydragon.org/latest/game/assets/items/icons2d/3115_nashorstooth.png" class="icon">
+Nashor's
+</div>
+
+</div>
+
+</div>
+
+<div class="card">
+
+<strong>Final Items</strong>
+
+<div class="build-flow">
+
+<div>
+<img src="https://raw.communitydragon.org/latest/game/assets/items/icons2d/3089_rabadonsdeathcap.png" class="icon">
+Deathcap
+</div>
+
+<span>→</span>
+
+<div>
+<img src="https://raw.communitydragon.org/latest/game/assets/items/icons2d/3135_voidstaff.png" class="icon">
+Void Staff
+</div>
+
+</div>
+
+</div>
+
+<div class="card">
+
+<strong>Boot Choices</strong>
+
+<p><strong>Sorcerer's Shoes:</strong> Diana's best default boots. Her base damages are still extremely important and magic penetration massively increases burst.</p>
+
+<p><strong>Mercury Treads:</strong> Buy against heavy AP and CC comps, especially when you already purchased an early Null Magic Mantle.</p>
+
+<p><strong>Never buy Tabis:</strong> Sorc Shoes + Hourglass is almost always significantly stronger.</p>
+
+</div>
+
+<div class="card">
+
+<strong>Important Components</strong>
+
+<p><strong>Cloth Armor:</strong> Strong early purchase into AD mid/jungle combinations like Graves + Qiyana.</p>
+
+<p><strong>Null Magic Mantle:</strong> Extremely efficient component versus AP poke and AP jungle/mid combinations.</p>
+
+<p><strong>Alternator vs Pen Boots:</strong> If you already have tier 1 boots and need tempo to return to the map faster, prioritize finishing boots first.</p>
+
+</div>
+
+</div>
+
 `;
+
 }
 
 if(value === "Summoner spells"){
+
 content = `
 ${header}
-<p><img src="https://ddragon.leagueoflegends.com/cdn/14.21.1/img/spell/SummonerFlash.png" class="icon"><strong>Flash</strong></p>
-<p><img src="https://ddragon.leagueoflegends.com/cdn/14.21.1/img/spell/SummonerSmite.png" class="icon"><strong>Smite</strong></p>
+
+<p>
+<img src="https://ddragon.leagueoflegends.com/cdn/14.21.1/img/spell/SummonerFlash.png" class="icon">
+<strong>Flash:</strong> Necessary for engages, escaping, and jumping walls.
+</p>
+
+<p>
+<img src="https://ddragon.leagueoflegends.com/cdn/14.21.1/img/spell/SummonerSmite.png" class="icon">
+<strong>Smite:</strong> Required for jungle tempo, objectives, and secure.
+</p>
+
 `;
+
+}
+
+if(value === "Abilities"){
+
+content = `
+${header}
+
+<p><strong>Passive – Moonsilver Blade:</strong> Diana gains attack speed and cleave damage every third auto. This is the main reason her clear speed is so fast.</p>
+
+<p><strong>Q – Crescent Strike:</strong> Main poke and engage setup tool. Always try to tag targets before using E reset.</p>
+
+<p><strong>W – Pale Cascade:</strong> Shield and burst damage. Important for surviving engages and early clears.</p>
+
+<p><strong>E – Lunar Rush:</strong> Main engage ability. Resets when consuming Moonlight from Q.</p>
+
+<p><strong>R – Moonfall:</strong> Massive AoE engage tool. Diana's entire teamfight identity revolves around finding strong ultimates.</p>
+
+`;
+
+}
+
+if(value === "Combos"){
+
+content = `
+${header}
+
+<p><strong>Q → E → W → AA → R:</strong> Standard engage combo.</p>
+
+<p><strong>Q → Flash → E → R:</strong> Long range engage.</p>
+
+<p><strong>Rocketbelt → Q → E → R → Hourglass:</strong> Core late game engage combo.</p>
+
+<p><strong>Q → E → AA → E:</strong> Fast burst combo with reset.</p>
+
+`;
+
 }
 
 if(value === "Level 1"){
+
 content = `
 ${header}
-<p>Start <strong>Red Buff every game</strong> unless invaded.</p>
-<p>Red → Krugs → Raptors is her strongest opening.</p>
+
+<p>Red start is almost always preferred because Red Buff is significantly stronger for early fighting and healthier clears.</p>
+
+<p>Use W on the camp around 1:27 for maximum shield value and clear speed.</p>
+
+<p>Ward against early invades before camps spawn and be careful against aggressive level 1 junglers.</p>
+
 `;
+
 }
 
 if(value === "Pathing"){
+
 content = `
 ${header}
-<p><strong>Blue Side:</strong></p>
+
+<p><strong>Main Full Clear:</strong></p>
+
 <ul>
 <li>Red → Krugs → Raptors → Wolves → Blue → Gromp → Scuttle</li>
 </ul>
-<p><strong>Red Side:</strong></p>
+
+<p>This is Diana's strongest and most consistent clear path.</p>
+
+<p><strong>Alternative Path:</strong></p>
+
 <ul>
 <li>Blue → Gromp → Wolves → Raptors → Red → Krugs → Scuttle</li>
 </ul>
-<p>This is the fastest full clear in the game at high skill.</p>
+
+<p>Use this route if the enemy team threatens your Red Buff level 1.</p>
+
+<div class="tip">
+<strong>Tip:</strong> Diana becomes significantly stronger once level 6 is unlocked. Prioritize efficient clears and avoid low percentage fights early.
+</div>
+
 `;
+
+}
+
+if(value === "Preferred Camps"){
+
+content = `
+${header}
+
+<p><strong>Krugs:</strong> Extremely high experience camp but time consuming to clear.</p>
+
+<p><strong>Raptors:</strong> One of Diana's best camps because passive cleave clears it extremely fast.</p>
+
+<p><strong>Wolves:</strong> Efficient and easy to path toward after reset.</p>
+
+<p><strong>Gromp:</strong> Higher health camp that usually gets cleared later in the route.</p>
+
+<p><strong>Scuttle Crab:</strong> Diana clears Scuttle quickly once passive and abilities are available.</p>
+
+<p><strong>Dragon:</strong> Diana has extremely high objective DPS once Nashor's Tooth is completed.</p>
+
+`;
+
 }
 
 if(value === "Hardest matchups"){
+
 content = `
 ${header}
-<p>Difficult opponents:</p>
+
 <ul>
 <li>Olaf</li>
 <li>Udyr</li>
 <li>Trundle</li>
 <li>Volibear</li>
 </ul>
-<p>They beat her early and ignore her burst.</p>
+
+<p>These champions either outduel Diana early or can survive her burst while continuing extended fights.</p>
+
+<p>Avoid forcing early fights before item spikes unless you have strong lane priority.</p>
+
 `;
+
 }
 
 if(value === "Team fighting"){
+
 content = `
 ${header}
-<p>Diana’s best teamfighting is:</p>
+
+<p>Diana performs best when engaging from fog of war or flanking from angles.</p>
+
 <ul>
-<li>Flanking from fog</li>
-<li>Q tagging multiple targets</li>
-<li>R hitting 2+ priority targets</li>
+<li>Look for grouped targets</li>
+<li>Avoid front-to-back fighting</li>
+<li>Track enemy flashes before engaging</li>
+<li>Hourglass immediately after strong ultimates</li>
 </ul>
-<p>Never front-to-back. Engage from angle.</p>
+
 `;
+
 }
 
 if(value === "Closing out the game"){
+
 content = `
 ${header}
-<p>Diana excels at Baron setups, objective DPS, and AoE fights.</p>
-<p>After Baron, hover mid → push sides → group for tower dives with R.</p>
+
+<p>Diana jungle closes out the game by have a strong teamfight prescence which she can easily lead to baron or a strong tower push.</p>
+
 `;
+
 }
 
 if(value === "Pros & Cons"){
+
 content = `
 ${header}
+
 <p><strong>Pros:</strong></p>
+
 <ul>
-<li>Fast jungle clears</li>
-<li>Strong level 6 ganks</li>
-<li>High AoE damage and objective control</li>
-<li>Scales well into mid/late game with items</li>
+<li>Can take conqueror</li>
+<li>Fast clear</li>
 </ul>
+
 <p><strong>Cons:</strong></p>
+
 <ul>
-<li>Weak early dueling vs tanky junglers (Olaf, Udyr)</li>
-<li>Requires good positioning for teamfights</li>
-<li>Vulnerable to invades before level 6</li>
-<li>Dependent on landing Q for full combos</li>
+<li>Weak before level 6</li>
+<li>Struggles in river and enemy jungle</li>
+<li>Falls off latemgame</li>
 </ul>
+
 `;
+
 }
 
 sectionInfo.innerHTML = content;
+
 });
+
 </script>
 
 </body>
