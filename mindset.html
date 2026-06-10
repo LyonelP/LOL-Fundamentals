@@ -95,9 +95,11 @@ header {
   transform: translateY(10px);
   animation: fadeInUp 0.4s forwards;
 }
+
 .tip-card:nth-child(1) { animation-delay: 0.1s; }
 .tip-card:nth-child(2) { animation-delay: 0.3s; }
 .tip-card:nth-child(3) { animation-delay: 0.5s; }
+.tip-card:nth-child(4) { animation-delay: 0.7s; }
 
 .tip-card h2 {
   color: #c9aa71;
@@ -116,7 +118,25 @@ header {
   }
 }
 
-/* Footer at bottom */
+/* YouTube responsive container */
+.video-wrapper {
+  position: relative;
+  padding-bottom: 56.25%;
+  height: 0;
+  overflow: hidden;
+  border-radius: 10px;
+  margin-top: 10px;
+}
+
+.video-wrapper iframe {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+}
+
+/* Footer */
 footer {
   text-align: center;
   margin-top: auto;
@@ -132,12 +152,28 @@ footer {
 }
 </style>
 </head>
+
 <body>
 
 <header>Mindset</header>
 <a href="skills.html" class="back-button">Back to Skills Hub</a>
 
 <div class="main-content">
+
+  <!-- YouTube Video -->
+  <div class="tip-card">
+    <h2>How to deal with a loss streak</h2>
+    <div class="video-wrapper">
+      <iframe 
+        src="https://www.youtube.com/embed/RX8oOrTYTaI"
+        title="YouTube video player"
+        frameborder="0"
+        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+        allowfullscreen>
+      </iframe>
+    </div>
+  </div>
+
   <div class="tip-card">
     <h2>Mindset</h2>
     <p>In my opinion, there are three reasons to play League of Legends: for fun, to improve at the game, or for a specific goal.</p>
@@ -152,13 +188,12 @@ footer {
     <h2>Stay Calm</h2>
     <p>If something tilting happens, try to absorb that frustration as quickly as possible and continue executing the best plays throughout the game.</p>
   </div>
+
 </div>
 
-<footer>© 2025 LoL Fundamentals · All rights reserved</footer>
+<footer>© 2026 LoL Fundamentals</footer>
 
 </body>
 </html>
-
-
 
 
