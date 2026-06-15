@@ -25,6 +25,7 @@ body {
   flex-direction: column;
 }
 
+/* HEADER */
 header {
   background: rgba(13,17,23,0.9);
   border-bottom: 2px solid var(--gold);
@@ -37,6 +38,7 @@ header {
   letter-spacing: 0.8px;
 }
 
+/* BACK BUTTON */
 .back-button {
   display: block;
   margin: 18px auto;
@@ -51,12 +53,14 @@ header {
 }
 .back-button::before { content: "← "; }
 
+/* CONTENT WIDTH */
 .content-width {
   max-width: 920px;
   margin: 0 auto;
   padding: 0 20px;
 }
 
+/* MATCHUP CARD */
 .matchup-container {
   display: flex;
   gap: 28px;
@@ -64,8 +68,12 @@ header {
   background: linear-gradient(180deg, #161b22, #12161d);
   border-radius: 18px;
   border: 1px solid rgba(201,170,113,0.18);
+  box-shadow:
+    0 15px 40px rgba(0,0,0,0.7),
+    inset 0 0 0 1px rgba(255,255,255,0.02);
 }
 
+/* LEFT */
 .matchup-left {
   display: flex;
   flex-direction: column;
@@ -81,6 +89,7 @@ header {
   box-shadow: 0 0 28px rgba(201,170,113,0.45);
 }
 
+/* WINRATE */
 .winrate-bubble {
   background: rgba(134,239,172,0.15);
   color: var(--light-green);
@@ -89,8 +98,10 @@ header {
   padding: 6px 16px;
   border-radius: 999px;
   font-size: 14px;
+  letter-spacing: 0.5px;
 }
 
+/* RIGHT */
 .matchup-right {
   flex: 1;
 }
@@ -110,15 +121,19 @@ header {
 
 .matchup-right li {
   margin-bottom: 12px;
+  line-height: 1.65;
 }
 
-/* VIDEO */
+/* VIDEO CARD */
 .video-card {
   margin: 36px auto 40px;
   padding: 26px;
   background: linear-gradient(180deg, #161b22, #12161d);
   border-radius: 18px;
   border: 1px solid rgba(201,170,113,0.18);
+  box-shadow:
+    0 15px 40px rgba(0,0,0,0.7),
+    inset 0 0 0 1px rgba(255,255,255,0.02);
 }
 
 .video-card h2 {
@@ -136,6 +151,7 @@ header {
   border-radius: 12px;
 }
 
+/* FOOTER */
 footer {
   text-align: center;
   padding: 18px 10px;
@@ -144,6 +160,7 @@ footer {
   margin-top: auto;
 }
 
+/* MOBILE */
 @media (max-width: 600px) {
   .matchup-container {
     flex-direction: column;
@@ -170,7 +187,7 @@ footer {
 
 <body>
 
-<header>GRAGAS MID MATCHUP</header>
+<header>Gragas Mid Matchup</header>
 
 <a href="matchuphub.html" class="back-button">Back to Matchup Hub</a>
 
@@ -195,11 +212,7 @@ footer {
 
   <div class="video-card">
     <h2>VODs</h2>
-    <iframe
-      src="https://www.youtube-nocookie.com/embed/8yhQi6LBljI"
-      allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-      allowfullscreen>
-    </iframe>
+    <iframe src="https://www.youtube-nocookie.com/embed/8yhQi6LBljI" allowfullscreen></iframe>
   </div>
 
 </div>
