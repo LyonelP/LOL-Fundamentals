@@ -5,31 +5,26 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Champion Select – LoL Fundamentals</title>
 
-<!-- Login check -->
-<script>
-  if (localStorage.getItem('lolfundamentals_logged_in') !== 'true') {
-    window.location.replace('login.html');
-  }
-</script>
-
 <style>
 html, body {
   margin: 0;
   padding: 0;
-  min-height: 100%;
+  height: 100%;
 }
 
 body {
   font-family: 'Beaufort for LOL', Arial, Helvetica, sans-serif;
   color: #fff;
-  background: url('https://64.media.tumblr.com/594ac290bec6d5e9ad98b5f53404f00b/245c4c3ee469f81d-e4/s1280x1920/1cda4284320eb2031758a9859dfe14ff8bbc50ba.jpg') no-repeat center center fixed;
+  background: url('https://64.media.tumblr.com/594ac290bec6d5e9ad98b5f53404f00b/245c4c3ee469f81d-e4/s1280x1920/1cda4284320eb2031758a9859dfe14ff8bbc50ba.jpg')
+    no-repeat center center fixed;
   background-size: cover;
   display: flex;
   flex-direction: column;
   text-align: center;
+  min-height: 100vh;
 }
 
-/* Overlay */
+/* Slight overlay for readability */
 body::before {
   content: "";
   position: fixed;
@@ -63,11 +58,7 @@ header {
   transition: all 0.3s;
   box-shadow: 0 0 10px rgba(201,170,113,0.5);
 }
-
-.back-button::before {
-  content: "← ";
-}
-
+.back-button::before { content: "← "; }
 .back-button:hover {
   background: linear-gradient(135deg, #e6c97f, #f0d88b);
   box-shadow: 0 0 15px rgba(255,215,0,0.8);
@@ -75,128 +66,49 @@ header {
 
 /* Main content */
 .main-content {
-  width: 100%;
-  max-width: 1300px;
-  margin: 10px auto 50px;
-  padding: 0 20px;
-  box-sizing: border-box;
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 20px 10px;
 }
 
-/* Sections */
-.topic-section {
-  margin-bottom: 45px;
-  animation: fadeIn 0.5s ease forwards;
-}
-
-.topic-title {
-  text-align: center;
-  font-size: 26px;
-  color: #c9aa71;
-  margin-bottom: 22px;
-  text-transform: uppercase;
-  letter-spacing: 1px;
-}
-
-/* Grid */
-.rank-grid {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 20px;
-}
-
-/* Cards */
-.rank-card {
+/* Tip cards */
+.tip-card {
+  background: rgba(13,17,23,0.9);
+  border: 1px solid #c9aa71;
   border-radius: 10px;
-  padding: 20px;
+  padding: 18px 22px;
+  margin: 15px 0;
+  max-width: 900px;
+  width: 90%;
   text-align: left;
-  backdrop-filter: blur(3px);
-  transition: 0.3s;
-  border: 1px solid rgba(255,255,255,0.08);
+  font-size: 16px;
+  line-height: 1.6;
   opacity: 0;
   transform: translateY(10px);
   animation: fadeInUp 0.4s forwards;
 }
 
-.rank-card:hover {
-  transform: translateY(-3px);
+.tip-card:nth-child(1) { animation-delay: 0.1s; }
+.tip-card:nth-child(2) { animation-delay: 0.3s; }
+.tip-card:nth-child(3) { animation-delay: 0.5s; }
+.tip-card:nth-child(4) { animation-delay: 0.7s; }
+
+.tip-card h2 {
+  color: #c9aa71;
+  margin-top: 0;
+  margin-bottom: 10px;
+  font-size: 20px;
+  border-bottom: 1px solid #c9aa71;
+  padding-bottom: 4px;
 }
 
-.rank-card:nth-child(1) { animation-delay: 0.1s; }
-.rank-card:nth-child(2) { animation-delay: 0.2s; }
-.rank-card:nth-child(3) { animation-delay: 0.3s; }
-
-/* Rank themes */
-.bronze {
-  background: rgba(70,40,25,0.9);
-  border: 1px solid #9b6b43;
-  box-shadow: 0 0 15px rgba(155,107,67,0.25);
-}
-
-.plat {
-  background: rgba(20,55,45,0.9);
-  border: 1px solid #4fd1a1;
-  box-shadow: 0 0 15px rgba(79,209,161,0.25);
-}
-
-.challenger {
-  background: rgba(20,35,65,0.9);
-  border: 1px solid #6ecbff;
-  box-shadow: 0 0 18px rgba(110,203,255,0.25);
-}
-
-/* Rank header */
-.rank-header {
-  display: flex;
-  align-items: center;
-  gap: 16px;
-  margin-bottom: 18px;
-}
-
-.rank-header img {
-  width: 110px;
-  height: auto;
-  object-fit: contain;
-  display: block;
-  flex-shrink: 0;
-}
-
-/* Fix original Bronze emblem padding */
-.bronze .rank-header img {
-  transform: scale(1.15);
-}
-
-.rank-header h3 {
-  margin: 0;
-  font-size: 24px;
-}
-
-/* Text */
-.rank-card ul {
-  margin: 0;
-  padding-left: 20px;
-}
-
-.rank-card li {
-  font-size: 15px;
-  line-height: 1.7;
-  margin-bottom: 8px;
-  color: #f1f1f1;
-}
-
-/* Animations */
+/* Fade-in animation */
 @keyframes fadeInUp {
   to {
     opacity: 1;
     transform: translateY(0);
-  }
-}
-
-@keyframes fadeIn {
-  from {
-    opacity: 0;
-  }
-  to {
-    opacity: 1;
   }
 }
 
@@ -209,235 +121,60 @@ footer {
   color: #fff;
 }
 
-/* Mobile */
-@media (max-width: 1000px) {
-  .rank-grid {
-    grid-template-columns: 1fr;
-  }
-}
-
+/* Responsive */
 @media (max-width: 600px) {
-  header {
-    font-size: 24px;
-    padding: 15px;
-  }
-
-  .topic-title {
-    font-size: 22px;
-  }
-
-  .rank-header img {
-    width: 82px;
-  }
-
-  .bronze .rank-header img {
-    transform: scale(1.12);
-  }
-
-  .rank-header h3 {
-    font-size: 22px;
-  }
-
-  .rank-card {
-    padding: 16px;
-  }
+  header { font-size: 24px; padding: 15px; }
+  .tip-card { padding: 14px 16px; font-size: 15px; }
 }
 </style>
 </head>
+
 <body>
 
 <header>Champion Select</header>
-
-<a href="skills.html" class="back-button">Back to Skills Hub</a>
+<a href="freeskills.html" class="back-button">Back to Skills Hub</a>
 
 <div class="main-content">
 
-  <!-- BANS -->
-  <section class="topic-section">
-    <h2 class="topic-title">Bans</h2>
+  <div class="tip-card">
+    <h2>Champion Select</h2>
+    <p>
+      The game starts in champion select. Have up to 5 bans ready in case your team
+      happens to ban all of the other 4 most ban-worthy champions.
+    </p>
+  </div>
 
-    <div class="rank-grid">
+  <div class="tip-card">
+    <h2>Check Side</h2>
+    <p>
+      First pick is always blue side. This helps you anticipate lane matchups and
+      draft accordingly.
+    </p>
+  </div>
 
-      <div class="rank-card bronze">
-        <div class="rank-header">
-          <img src="https://raw.communitydragon.org/latest/plugins/rcp-fe-lol-static-assets/global/default/images/ranked-emblem/emblem-bronze.png" alt="Bronze Rank">
-          <h3>Bronze</h3>
-        </div>
+  <div class="tip-card">
+    <h2>Team Composition</h2>
+    <p>
+      The single most important rule in champion select is to avoid having
+      <strong>both mid and jungle be AP champions</strong>.
+      When your mid and jungle are both AP, the enemy mid/jungle can rush
+      Null-Magic Mantle and Merc Treads, giving the other team complete control
+      of the map. This rule can be ignored against certain champions with set
+      builds that don’t involve magic resist, like Shaco or Karthus.
+    </p>
+  </div>
 
-        <ul>
-          <li>Bans champions they recently lost to.</li>
-          <li>May not know what champions are strongest at their elo.</li>
-        </ul>
-      </div>
-
-      <div class="rank-card plat">
-        <div class="rank-header">
-          <img src="https://raw.communitydragon.org/latest/plugins/rcp-fe-lol-static-assets/global/default/images/ranked-emblem/emblem-platinum.png" alt="Platinum Rank">
-          <h3>Platinum</h3>
-        </div>
-
-        <ul>
-          <li>Bans strong meta champions more consistently.</li>
-          <li>Understands matchup bans.</li>
-          <li>Starts adapting bans based on role.</li>
-        </ul>
-      </div>
-
-      <div class="rank-card challenger">
-        <div class="rank-header">
-          <img src="https://raw.communitydragon.org/latest/plugins/rcp-fe-lol-static-assets/global/default/images/ranked-emblem/emblem-challenger.png" alt="Challenger Rank">
-          <h3>Challenger</h3>
-        </div>
-
-        <ul>
-          <li>Bans the strongest high pick rate champions.</li>
-          <li>Bans high pick rate counter champions.</li>
-          <li>Removes champions that counter teammates hovers.</li>
-          <li>Adapts bans based on side selection and pick order.</li>
-          <li>Always has multiple bans prepared.</li>
-        </ul>
-      </div>
-
-    </div>
-  </section>
-
-  <!-- SIDE SELECTION -->
-  <section class="topic-section">
-    <h2 class="topic-title">Side Selection</h2>
-
-    <div class="rank-grid">
-
-      <div class="rank-card bronze">
-        <div class="rank-header">
-          <img src="https://raw.communitydragon.org/latest/plugins/rcp-fe-lol-static-assets/global/default/images/ranked-emblem/emblem-bronze.png" alt="Bronze Rank">
-          <h3>Bronze</h3>
-        </div>
-
-        <ul>
-          <li>Usually doesn’t notice side selection.</li>
-          <li>Blind picks without thinking about draft order.</li>
-          <li>Won't swap with teammates to get the proper order.</li>
-        </ul>
-      </div>
-
-      <div class="rank-card plat">
-        <div class="rank-header">
-          <img src="https://raw.communitydragon.org/latest/plugins/rcp-fe-lol-static-assets/global/default/images/ranked-emblem/emblem-platinum.png" alt="Platinum Rank">
-          <h3>Platinum</h3>
-        </div>
-
-        <ul>
-          <li>Knows which side is blue side.</li>
-          <li>Understands counterpick value.</li>
-          <li>Starts considering safer blind picks.</li>
-        </ul>
-      </div>
-
-      <div class="rank-card challenger">
-        <div class="rank-header">
-          <img src="https://raw.communitydragon.org/latest/plugins/rcp-fe-lol-static-assets/global/default/images/ranked-emblem/emblem-challenger.png" alt="Challenger Rank">
-          <h3>Challenger</h3>
-        </div>
-
-        <ul>
-          <li>Immediately identifies draft flow from side selection.</li>
-          <li>Red side prioritizes counterpick lanes.</li>
-          <li>Understands which roles need last pick most.</li>
-        </ul>
-      </div>
-
-    </div>
-  </section>
-
-  <!-- TEAM COMPOSITION -->
-  <section class="topic-section">
-    <h2 class="topic-title">Team Composition</h2>
-
-    <div class="rank-grid">
-
-      <div class="rank-card bronze">
-        <div class="rank-header">
-          <img src="https://raw.communitydragon.org/latest/plugins/rcp-fe-lol-static-assets/global/default/images/ranked-emblem/emblem-bronze.png" alt="Bronze Rank">
-          <h3>Bronze</h3>
-        </div>
-
-        <ul>
-          <li>Doesn’t think about team composition.</li>
-          <li>Often drafts full AD or double AP accidentally.</li>
-        </ul>
-      </div>
-
-      <div class="rank-card plat">
-        <div class="rank-header">
-          <img src="https://raw.communitydragon.org/latest/plugins/rcp-fe-lol-static-assets/global/default/images/ranked-emblem/emblem-platinum.png" alt="Platinum Rank">
-          <h3>Platinum</h3>
-        </div>
-
-        <ul>
-          <li>Understands basic AD/AP balance.</li>
-          <li>Recognizes some bad draft combinations.</li>
-        </ul>
-      </div>
-
-      <div class="rank-card challenger">
-        <div class="rank-header">
-          <img src="https://raw.communitydragon.org/latest/plugins/rcp-fe-lol-static-assets/global/default/images/ranked-emblem/emblem-challenger.png" alt="Challenger Rank">
-          <h3>Challenger</h3>
-        </div>
-
-        <ul>
-          <li>Avoids double AP mid/jungle in most games.</li>
-          <li>Builds a balanced team comp.</li>
-        </ul>
-      </div>
-
-    </div>
-  </section>
-
-  <!-- VISUALIZING THE GAME -->
-  <section class="topic-section">
-    <h2 class="topic-title">Visualizing the Game</h2>
-
-    <div class="rank-grid">
-
-      <div class="rank-card bronze">
-        <div class="rank-header">
-          <img src="https://raw.communitydragon.org/latest/plugins/rcp-fe-lol-static-assets/global/default/images/ranked-emblem/emblem-bronze.png" alt="Bronze Rank">
-          <h3>Bronze</h3>
-        </div>
-
-        <ul>
-          <li>Doesn’t think about how champions interact.</li>
-        </ul>
-      </div>
-
-      <div class="rank-card plat">
-        <div class="rank-header">
-          <img src="https://raw.communitydragon.org/latest/plugins/rcp-fe-lol-static-assets/global/default/images/ranked-emblem/emblem-platinum.png" alt="Platinum Rank">
-          <h3>Platinum</h3>
-        </div>
-
-        <ul>
-          <li>Starts recognizing lane matchups.</li>
-          <li>Can predict some jungle routes.</li>
-        </ul>
-      </div>
-
-      <div class="rank-card challenger">
-        <div class="rank-header">
-          <img src="https://raw.communitydragon.org/latest/plugins/rcp-fe-lol-static-assets/global/default/images/ranked-emblem/emblem-challenger.png" alt="Challenger Rank">
-          <h3>Challenger</h3>
-        </div>
-
-        <ul>
-          <li>Visualizes the game before it starts.</li>
-          <li>Predicts lane states, jungle paths, and priority lanes.</li>
-          <li>Understands win conditions from champion select alone.</li>
-        </ul>
-      </div>
-
-    </div>
-  </section>
+  <div class="tip-card">
+    <h2>Visualize the Game</h2>
+    <p>
+      As each pick is locked in, think about how that champion interacts with your
+      champion and others. Visualize how the game will play out before it starts.
+      <a href="matchuphub.html" style="color:#c9aa71; text-decoration:underline;">
+        View matchup guides
+      </a>
+      for reference.
+    </p>
+  </div>
 
 </div>
 
@@ -445,6 +182,7 @@ footer {
 
 </body>
 </html>
+
 
 
 
