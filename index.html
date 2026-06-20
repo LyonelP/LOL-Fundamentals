@@ -293,18 +293,6 @@ if (isLoggedIn && isPaid) {
       Go to Members Hub
     </a>
 
-const trailerModal = document.getElementById("trailerModal");
-const trailerFrame = document.getElementById("trailerFrame");
-
-document.getElementById("trailerBtn").onclick = () => {
-  trailerFrame.src = "https://www.youtube.com/embed/SaDZnW2lEFM?autoplay=1";
-  trailerModal.style.display = "flex";
-};
-
-document.getElementById("closeTrailerModal").onclick = () => {
-  trailerModal.style.display = "none";
-  trailerFrame.src = ""; // stops video when closed
-};
   `;
 
   hero.appendChild(welcomeBox);
@@ -314,6 +302,21 @@ if (isLoggedIn && isPaid) {
   document.getElementById("signupHeroBtn").style.display = "none";
   document.getElementById("loginHeroBtn").style.display = "none";
 }
+
+const trailerModal = document.getElementById("trailerModal");
+const trailerFrame = document.getElementById("trailerFrame");
+const trailerBtn = document.getElementById("trailerBtn");
+const closeTrailerModal = document.getElementById("closeTrailerModal");
+
+trailerBtn.onclick = () => {
+  trailerFrame.src = "https://www.youtube.com/embed/SaDZnW2lEFM?autoplay=1";
+  trailerModal.style.display = "flex";
+};
+
+closeTrailerModal.onclick = () => {
+  trailerModal.style.display = "none";
+  trailerFrame.src = "";
+};
 
 const firebaseConfig={apiKey:"AIzaSyCFRcEV7wdivqONnkjJubAZOjPMixrHMBI",authDomain:"lol-fundamentals.firebaseapp.com",projectId:"lol-fundamentals",storageBucket:"lol-fundamentals.firebasestorage.app",messagingSenderId:"1038440427584",appId:"1:1038440427584:web:a82207151fd370dbedefa5"};
 const app=initializeApp(firebaseConfig),auth=getAuth(app),firestore=getFirestore(app);
