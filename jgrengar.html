@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Rengar Jungle Matchup</title>
+
+<style>
+:root {
+  --gold:#c9aa71;
+  --bg:#0a0f14;
+  --card:#161b22;
+  --muted:#8b949e;
+  --red:#ff4d4d;
+}
+
+body {
+  margin: 0;
+  font-family: "Beaufort for LOL", Arial, Helvetica, sans-serif;
+  background: var(--bg);
+  color: #e6edf3;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  line-height: 1.5;
+}
+
+/* HEADER */
+header {
+  background: rgba(13,17,23,0.9);
+  border-bottom: 2px solid var(--gold);
+  padding: 16px 20px;
+  font-size: 26px;
+  font-weight: 700;
+  text-transform: uppercase;
+  color: var(--gold);
+  text-align: center;
+}
+
+/* BACK */
+.back-button {
+  display:block;
+  margin:18px auto;
+  padding:9px 18px;
+  background:linear-gradient(135deg,#c9aa71,#e0c77b);
+  color:#000;
+  text-decoration:none;
+  border-radius:8px;
+  font-weight:bold;
+  width:fit-content;
+}
+.back-button::before { content:"← "; }
+
+/* CONTAINER */
+.content-width {
+  max-width: 920px;
+  margin: 0 auto;
+  padding: 0 20px;
+}
+
+/* MATCHUP CARD */
+.matchup-container {
+  display:flex;
+  gap:28px;
+  padding:26px;
+  background:linear-gradient(180deg,#161b22,#12161d);
+  border-radius:18px;
+  border:1px solid rgba(201,170,113,0.18);
+}
+
+/* LEFT */
+.matchup-left {
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  gap:12px;
+}
+
+.matchup-left img {
+  width:96px;
+  height:96px;
+  border-radius:14px;
+  border:2px solid var(--gold);
+  box-shadow:0 0 20px rgba(201,170,113,0.4);
+}
+
+/* BADGE */
+.winrate-bubble {
+  background: rgba(255,77,77,0.15);
+  color: var(--red);
+  border:1px solid rgba(255,77,77,0.4);
+  padding:6px 14px;
+  border-radius:999px;
+  font-size:14px;
+  font-weight:600;
+}
+
+/* RIGHT */
+.matchup-right {
+  flex:1;
+}
+
+.matchup-right h2 {
+  margin:0 0 14px 0;
+  font-size:22px;
+  color:var(--gold);
+  border-bottom:1px solid rgba(201,170,113,0.25);
+  padding-bottom:8px;
+}
+
+.matchup-right ul {
+  margin:0;
+  padding-left:18px;
+}
+
+.matchup-right li {
+  margin-bottom:10px;
+}
+
+/* SECTION */
+.section-card {
+  margin-top:28px;
+  padding:26px;
+  background:linear-gradient(180deg,#161b22,#12161d);
+  border-radius:18px;
+  border:1px solid rgba(201,170,113,0.18);
+}
+
+.section-card h2 {
+  margin-top:0;
+  color:var(--gold);
+}
+
+/* VIDEO */
+.video-card {
+  margin:36px auto 40px;
+  padding:26px;
+  background:linear-gradient(180deg,#161b22,#12161d);
+  border-radius:18px;
+  border:1px solid rgba(201,170,113,0.18);
+}
+
+.video-card iframe {
+  width:100%;
+  height:480px;
+  border:none;
+  border-radius:12px;
+}
+
+/* MOBILE */
+@media (max-width:600px){
+  .matchup-container {
+    flex-direction:column;
+    align-items:center;
+  }
+
+  .video-card iframe {
+    height:240px;
+  }
+}
+</style>
+</head>
+
+<body>
+
+<header>Rengar Jungle Matchup</header>
+
+<a href="jgmatchups.html" class="back-button">Back to Matchup Hub</a>
+
+<div class="content-width">
+
+  <!-- MATCHUP -->
+  <div class="matchup-container">
+
+    <div class="matchup-left">
+      <img src="https://ddragon.leagueoflegends.com/cdn/14.23.1/img/champion/Rengar.png" alt="Rengar">
+      <div class="winrate-bubble">48%</div>
+    </div>
+
+    <div class="matchup-right">
+      <h2>Matchup Notes</h2>
+      <ul>
+        <li>Track his ferocity stacks — don’t fight when he has 4.</li>
+        <li>Ward bushes, not paths. Rengar only cares about angles.</li>
+        <li>Hold CC for after his leap, not before.</li>
+        <li>If he ults, group slightly to deny isolation picks.</li>
+      </ul>
+    </div>
+
+  </div>
+
+  <!-- LEVEL 1 WARD -->
+  <div class="section-card">
+    <h2>Level 1 Ward</h2>
+    <p>
+      Rengar cheese paths revolve around top-side river and tri-bush angles. Early warding bushes is higher value than river vision.
+    </p>
+
+    <img src="https://i.imgur.com/tgHD1Ug.png"
+         style="width:100%;border-radius:12px;border:1px solid rgba(201,170,113,0.25);">
+  </div>
+
+  <!-- PATHING -->
+  <div class="section-card">
+    <h2>Where to Start</h2>
+    <p>
+      Start opposite side of Rengar and path toward lanes with CC. Avoid early isolated 1v1s unless you have vision control.
+    </p>
+  </div>
+
+<!-- VOD -->
+<div class="video-card">
+  <h2 style="color: var(--gold); margin-top:0;">VODs</h2>
+
+  <iframe
+    src="https://www.youtube.com/embed/9puzvTdr6x0"
+    allowfullscreen>
+  </iframe>
+
+</div>
+
+</div>
+
+</body>
+</html>
