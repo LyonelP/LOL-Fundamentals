@@ -85,6 +85,9 @@ footer a:hover{text-decoration:underline}
 <div style="margin-top:20px;">
 <button class="btn" id="signupHeroBtn">Sign Up</button>
 <button class="btn" id="loginHeroBtn" style="margin-left:10px;">Login</button>
+<button class="btn orangeBtn" id="trailerBtn" style="margin-left:10px;">
+    Watch Trailer
+  </button> 
 </div>
 </section>
 
@@ -245,6 +248,29 @@ All guides, matchups, VODS & tools for just <b>$3.33/month</b>!
 </div>
 </div>
 
+<div id="trailerModal" class="modal">
+  <div class="modalContent" style="max-width:800px;">
+    
+    <h2>LoL Fundamentals Trailer</h2>
+
+    <div style="position:relative;padding-bottom:56.25%;height:0;overflow:hidden;border-radius:8px;border:1px solid #c9aa71;">
+      <iframe
+        id="trailerFrame"
+        src=""
+        frameborder="0"
+        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+        allowfullscreen
+        style="position:absolute;top:0;left:0;width:100%;height:100%;">
+      </iframe>
+    </div>
+
+    <button id="closeTrailerModal" style="margin-top:15px;background:none;border:none;color:#c9aa71;cursor:pointer;">
+      Close
+    </button>
+
+  </div>
+</div>
+
 <script type="module">
 import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
 import { getAuth, signInWithEmailAndPassword, createUserWithEmailAndPassword, sendPasswordResetEmail } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-auth.js";
@@ -266,6 +292,19 @@ if (isLoggedIn && isPaid) {
     <a href="membershub.html" class="btn">
       Go to Members Hub
     </a>
+
+const trailerModal = document.getElementById("trailerModal");
+const trailerFrame = document.getElementById("trailerFrame");
+
+document.getElementById("trailerBtn").onclick = () => {
+  trailerFrame.src = "https://www.youtube.com/embed/SaDZnW2lEFM?autoplay=1";
+  trailerModal.style.display = "flex";
+};
+
+document.getElementById("closeTrailerModal").onclick = () => {
+  trailerModal.style.display = "none";
+  trailerFrame.src = ""; // stops video when closed
+};
   `;
 
   hero.appendChild(welcomeBox);
