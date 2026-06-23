@@ -299,7 +299,15 @@ function populateItems() {
       o.textContent=it.name;
       select.appendChild(o);
     });
-    if(i===1) select.value=0;
+    if(i===1){
+  const doransIndex = AP_ITEMS.findIndex(
+    item => item.name === "Doran's Ring"
+  );
+
+  if(doransIndex !== -1){
+    select.value = doransIndex;
+  }
+}
     select.addEventListener("change",updateItemStats);
   }
 }
