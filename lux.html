@@ -124,6 +124,33 @@ header {
   line-height: 1.65;
 }
 
+/* VIDEO CARD */
+.video-card {
+  margin: 36px auto 40px;
+  padding: 26px;
+  background: linear-gradient(180deg, #161b22, #12161d);
+  border-radius: 18px;
+  border: 1px solid rgba(201,170,113,0.18);
+  box-shadow:
+    0 15px 40px rgba(0,0,0,0.7),
+    inset 0 0 0 1px rgba(255,255,255,0.02);
+}
+
+.video-card h2 {
+  margin: 0 0 16px 0;
+  font-size: 22px;
+  color: var(--gold);
+  padding-bottom: 8px;
+  border-bottom: 1px solid rgba(201,170,113,0.25);
+}
+
+.video-card iframe {
+  width: 100%;
+  height: 480px;
+  border: none;
+  border-radius: 12px;
+}
+
 /* FOOTER */
 footer {
   text-align: center;
@@ -142,6 +169,10 @@ footer {
 
   .matchup-right {
     text-align: center;
+  }
+
+  .video-card iframe {
+    height: 240px;
   }
 }
 </style>
@@ -171,11 +202,16 @@ if (localStorage.getItem('lolfundamentals_logged_in') !== 'true') {
     <div class="matchup-right">
       <h2>Matchup Notes</h2>
       <ul>
-        <li>Riot has buffed lux a few times now so don't underestimate her mid. Her passive damage is much higher now so make sure she's out of range of an e auto combo.</li>
-        <li>It's best to play the majority of the early very far back and wait for her to run oom and for a possible jungle gank.</li>
+        <li>Riot has buffed lux a few times now so don't underestimate her mid. Her passive damage is much higher now so make sure she's out of range of an E auto combo.</li>
+        <li>It's best to play the majority of the early very far back and wait for her to run out of mana and for a possible jungle gank.</li>
         <li>Past 6 she’ll also keep the mid wave cleared which counters your tower taking abilities. Baiting her to skirmishes and keeping wards above the side walls is the main way to win this matchup.</li>
       </ul>
     </div>
+  </div>
+
+  <div class="video-card">
+    <h2>VODs</h2>
+    <iframe src="https://www.youtube.com/embed/J4TdJJAjAhM" allowfullscreen></iframe>
   </div>
 
 </div>
