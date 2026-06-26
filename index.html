@@ -370,7 +370,7 @@ continueSignupBtn.onclick=async()=>{
   await createUserWithEmailAndPassword(auth,e,p);
   await setDoc(doc(firestore,"paidUsers",e),{paid:false,timestamp:serverTimestamp()});
   signupModal.style.display="none";
-  planModal.style.display="flex";
+  showPlanModal("signup");
 };
 
 document.getElementById("yearlyBtn").onclick=()=>{window.open("https://buy.stripe.com/3cI3co1fufRi5Vk3S2ejK0k");planModal.style.display="none";}
