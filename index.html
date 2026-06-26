@@ -353,14 +353,21 @@ modalLoginBtn.onclick=async()=>{
   loginModal.style.display="none";
 };
 
+let resetInProgress = false;
+
 resetLinkModal.onclick = async (e) => {
   e.preventDefault();
 
-  const email = loginEmail.value.trim();
+  // 🔒 prevent double-click / double-send
+  if (resetInProgress) return;
+  resetInProgress = true;
+
+  const email = (loginEmail.value || "").trim();
 
   if (!email) {
     loginMsgModal.style.color = "#f2994a";
     loginMsgModal.textContent = "Enter your email first.";
+    resetInProgress = false;
     return;
   }
 
@@ -383,6 +390,9 @@ resetLinkModal.onclick = async (e) => {
       loginMsgModal.textContent = "Failed to send reset email.";
     }
   }
+
+  // 🔓 re-enable button after request finishes
+  resetInProgress = false;
 };
 
 // Particle effect
