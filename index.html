@@ -356,11 +356,11 @@ modalLoginBtn.onclick=async()=>{
 resetLinkModal.onclick = async (e) => {
   e.preventDefault();
 
-  const email = document.getElementById("resetEmailInput").value.trim();
+  const email = loginEmail.value.trim();
 
   if (!email) {
     loginMsgModal.style.color = "#f2994a";
-    loginMsgModal.textContent = "Enter your email above to reset password.";
+    loginMsgModal.textContent = "Enter your email first.";
     return;
   }
 
@@ -375,18 +375,12 @@ resetLinkModal.onclick = async (e) => {
 
     loginMsgModal.style.color = "#f94144";
 
-    switch (error.code) {
-      case "auth/user-not-found":
-        loginMsgModal.textContent = "No account found.";
-        break;
-      case "auth/invalid-email":
-        loginMsgModal.textContent = "Invalid email.";
-        break;
-      case "auth/too-many-requests":
-        loginMsgModal.textContent = "Too many attempts. Try later.";
-        break;
-      default:
-        loginMsgModal.textContent = "Failed to send reset email.";
+    if (error.code === "auth/user-not-found") {
+      loginMsgModal.textContent = "No account found with this email.";
+    } else if (error.code === "auth/invalid-email") {
+      loginMsgModal.textContent = "Invalid email format.";
+    } else {
+      loginMsgModal.textContent = "Failed to send reset email.";
     }
   }
 };
