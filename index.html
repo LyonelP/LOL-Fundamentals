@@ -211,26 +211,49 @@ All guides, matchups, VODS & tools for just <b>$3.33/month</b>!
 </div>
 
 <div id="planModal" class="modal">
-<div class="modalContent">
-<h2>Choose Your Plan</h2>
-<div class="plan-buttons">
 
-  <!-- Yearly plan -->
-  <button class="btn" id="yearlyBtn">
-    $39.99 / Year (3.33/Month)
-  </button>
+  <div id="planNormal" class="modalContent">
+    <h2>Choose Your Plan</h2>
 
-  <!-- Yearly plan -->
-  <div class="plan-wrap">
-    <div class="bestValueTag">Best Value</div>
-    <button class="btn orangeBtn" id="lifeBtn">
-      $99.99 / Lifetime
-    </button>
+    <div class="plan-buttons">
+      <button class="btn" id="yearlyBtn">
+        $39.99 / Year (3.33/Month)
+      </button>
+
+      <div class="plan-wrap">
+        <div class="bestValueTag">Best Value</div>
+        <button class="btn orangeBtn" id="lifeBtn">
+          $99.99 / Lifetime
+        </button>
+      </div>
+    </div>
+
+    <button id="closePlanModal">Cancel</button>
   </div>
-</div>
 
-<button id="closePlanModal">Cancel</button>
-</div>
+  <div id="planSignup" class="modalContent" style="display:none;">
+    <h2>Choose Your Plan</h2>
+
+    <p style="color:#90be6d; margin-top:-10px; margin-bottom:15px; font-size:0.95rem;">
+      Your account has been created. Continue to payment to unlock access.
+    </p>
+
+    <div class="plan-buttons">
+      <button class="btn" id="yearlyBtn2">
+        $39.99 / Year (3.33/Month)
+      </button>
+
+      <div class="plan-wrap">
+        <div class="bestValueTag">Best Value</div>
+        <button class="btn orangeBtn" id="lifeBtn2">
+          $99.99 / Lifetime
+        </button>
+      </div>
+    </div>
+
+    <button id="closePlanModal2">Cancel</button>
+  </div>
+
 </div>
 
 <div id="loginModal" class="modal">
@@ -348,7 +371,9 @@ modalLoginBtn.onclick=async()=>{
     localStorage.setItem("lolfundamentals_paid","true");
     window.location.href="membershub.html";
   }else{
-    planModal.style.display="flex";
+    document.getElementById("planNormal").style.display = "none";
+    document.getElementById("planSignup").style.display = "block";
+    planModal.style.display = "flex";
   }
   loginModal.style.display="none";
 };
