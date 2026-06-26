@@ -238,6 +238,7 @@ All guides, matchups, VODS & tools for just <b>$3.33/month</b>!
 <h2>Member Login</h2>
 <input type="email" id="loginEmail" placeholder="Enter your email"/>
 <input type="password" id="loginPassword" placeholder="Enter your password"/>
+<input type="email" id="resetEmailInput" placeholder="Enter email for password reset"/>
 <button class="btn" id="modalLoginBtn">Login</button>
 <button id="closeLoginModal">Cancel</button>
 <p><a href="#" id="resetLinkModal" style="color:white;">Forgot your password?</a></p>
@@ -355,36 +356,38 @@ modalLoginBtn.onclick=async()=>{
 
 resetLinkModal.onclick = async (e) => {
   e.preventDefault();
-  
-  const email = loginEmail.value.trim();
-  
+
+  const email = document.getElementById("resetEmailInput").value.trim();
+
   if (!email) {
-    loginMsgModal.style.color = "#f2994a"; // Soft orange warning
-    loginMsgModal.textContent = "Please enter your email address first.";
+    loginMsgModal.style.color = "#f2994a";
+    loginMsgModal.textContent = "Enter your email above to reset password.";
     return;
   }
 
   try {
     await sendPasswordResetEmail(auth, email);
-    loginMsgModal.style.color = "#90be6d"; // Green success
-    loginMsgModal.textContent = "Password reset email sent! Check your inbox.";
+
+    loginMsgModal.style.color = "#90be6d";
+    loginMsgModal.textContent = "Reset email sent. Check inbox/spam.";
+
   } catch (error) {
-    console.error("Password reset error details:", error);
-    loginMsgModal.style.color = "#f94144"; // Red error
-    
+    console.error(error);
+
+    loginMsgModal.style.color = "#f94144";
+
     switch (error.code) {
-      case 'auth/user-not-found':
-        loginMsgModal.textContent = "No account found with this email.";
+      case "auth/user-not-found":
+        loginMsgModal.textContent = "No account found.";
         break;
-      case 'auth/unauthorized-domain':
-        loginMsgModal.textContent = "Domain unauthorized. Add this domain to your Firebase settings.";
+      case "auth/invalid-email":
+        loginMsgModal.textContent = "Invalid email.";
         break;
-      case 'auth/invalid-email':
-        loginMsgModal.textContent = "Please enter a valid email address.";
+      case "auth/too-many-requests":
+        loginMsgModal.textContent = "Too many attempts. Try later.";
         break;
       default:
-        loginMsgModal.textContent = `Error: ${error.message || "Please try again."}`;
-        break;
+        loginMsgModal.textContent = "Failed to send reset email.";
     }
   }
 };
