@@ -353,10 +353,31 @@ modalLoginBtn.onclick=async()=>{
   loginModal.style.display="none";
 };
 
-resetLinkModal.onclick=async(e)=>{
+resetLinkModal.onclick = async (e) => {
   e.preventDefault();
-  await sendPasswordResetEmail(auth,loginEmail.value);
-  loginMsgModal.textContent="Password reset email sent!";
+  
+  const email = loginEmail.value.trim();
+  
+  if (!email) {
+    loginMsgModal.style.color = "#f2994a"; // Soft orange warning
+    loginMsgModal.textContent = "Please enter your email address first.";
+    return;
+  }
+
+  try {
+    await sendPasswordResetEmail(auth, email);
+    loginMsgModal.style.color = "#90be6d"; // Green success
+    loginMsgModal.textContent = "Password reset email sent! Check your inbox.";
+  } catch (error) {
+    console.error("Password reset error:", error);
+    loginMsgModal.style.color = "#f94144"; // Red error
+    
+    if (error.code === 'auth/user-not-found') {
+      loginMsgModal.textContent = "No account found with this email.";
+    } else {
+      loginMsgModal.textContent = "Error sending email. Please try again.";
+    }
+  }
 };
 
 // Particle effect
