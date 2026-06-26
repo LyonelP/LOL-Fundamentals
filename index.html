@@ -211,49 +211,26 @@ All guides, matchups, VODS & tools for just <b>$3.33/month</b>!
 </div>
 
 <div id="planModal" class="modal">
+<div class="modalContent">
+<h2>Choose Your Plan</h2>
+<div class="plan-buttons">
 
-  <div id="planNormal" class="modalContent">
-    <h2>Choose Your Plan</h2>
+  <!-- Yearly plan -->
+  <button class="btn" id="yearlyBtn">
+    $39.99 / Year (3.33/Month)
+  </button>
 
-    <div class="plan-buttons">
-      <button class="btn" id="yearlyBtn">
-        $39.99 / Year (3.33/Month)
-      </button>
-
-      <div class="plan-wrap">
-        <div class="bestValueTag">Best Value</div>
-        <button class="btn orangeBtn" id="lifeBtn">
-          $99.99 / Lifetime
-        </button>
-      </div>
-    </div>
-
-    <button id="closePlanModal">Cancel</button>
+  <!-- Yearly plan -->
+  <div class="plan-wrap">
+    <div class="bestValueTag">Best Value</div>
+    <button class="btn orangeBtn" id="lifeBtn">
+      $99.99 / Lifetime
+    </button>
   </div>
+</div>
 
-  <div id="planSignup" class="modalContent" style="display:none;">
-    <h2>Choose Your Plan</h2>
-
-    <p style="color:#90be6d; margin-top:-10px; margin-bottom:15px; font-size:0.95rem;">
-      Your account has been created. Continue to payment to unlock access.
-    </p>
-
-    <div class="plan-buttons">
-      <button class="btn" id="yearlyBtn2">
-        $39.99 / Year (3.33/Month)
-      </button>
-
-      <div class="plan-wrap">
-        <div class="bestValueTag">Best Value</div>
-        <button class="btn orangeBtn" id="lifeBtn2">
-          $99.99 / Lifetime
-        </button>
-      </div>
-    </div>
-
-    <button id="closePlanModal2">Cancel</button>
-  </div>
-
+<button id="closePlanModal">Cancel</button>
+</div>
 </div>
 
 <div id="loginModal" class="modal">
@@ -263,7 +240,7 @@ All guides, matchups, VODS & tools for just <b>$3.33/month</b>!
 <input type="password" id="loginPassword" placeholder="Enter your password"/>
 <button class="btn" id="modalLoginBtn">Login</button>
 <button id="closeLoginModal">Cancel</button>
-<p><a href="reset-password.html" style="color:white;">Forgot your password?</a></p>
+<p><a href="#" id="resetLinkModal" style="color:white;">Forgot your password?</a></p>
 <p id="loginMsgModal"></p>
 </div>
 </div>
@@ -342,20 +319,6 @@ closeTrailerModal.onclick = () => {
 const firebaseConfig={apiKey:"AIzaSyCFRcEV7wdivqONnkjJubAZOjPMixrHMBI",authDomain:"lol-fundamentals.firebaseapp.com",projectId:"lol-fundamentals",storageBucket:"lol-fundamentals.firebasestorage.app",messagingSenderId:"1038440427584",appId:"1:1038440427584:web:a82207151fd370dbedefa5"};
 const app=initializeApp(firebaseConfig),auth=getAuth(app),firestore=getFirestore(app);
 
-const planModal = document.getElementById("planModal");
-
-function showPlanModal(mode) {
-  planModal.style.display = "flex";
-
-  if (mode === "signup") {
-    document.getElementById("planSignup").style.display = "block";
-    document.getElementById("planNormal").style.display = "none";
-  } else {
-    document.getElementById("planSignup").style.display = "none";
-    document.getElementById("planNormal").style.display = "block";
-  }
-}
-
 signupHeroBtn.onclick=()=>signupModal.style.display="flex";
 loginHeroBtn.onclick=()=>loginModal.style.display="flex";
 closeSignupModal.onclick=()=>signupModal.style.display="none";
@@ -370,7 +333,7 @@ continueSignupBtn.onclick=async()=>{
   await createUserWithEmailAndPassword(auth,e,p);
   await setDoc(doc(firestore,"paidUsers",e),{paid:false,timestamp:serverTimestamp()});
   signupModal.style.display="none";
-  showPlanModal("signup");
+  planModal.style.display="flex";
 };
 
 document.getElementById("yearlyBtn").onclick=()=>{window.open("https://buy.stripe.com/3cI3co1fufRi5Vk3S2ejK0k");planModal.style.display="none";}
@@ -385,51 +348,15 @@ modalLoginBtn.onclick=async()=>{
     localStorage.setItem("lolfundamentals_paid","true");
     window.location.href="membershub.html";
   }else{
-    showPlanModal("signup");
+    planModal.style.display="flex";
   }
   loginModal.style.display="none";
 };
 
-let resetInProgress = false;
-
-resetLinkModal.onclick = async (e) => {
+resetLinkModal.onclick=async(e)=>{
   e.preventDefault();
-
-  // 🔒 prevent double-click / double-send
-  if (resetInProgress) return;
-  resetInProgress = true;
-
-  const email = (loginEmail.value || "").trim();
-
-  if (!email) {
-    loginMsgModal.style.color = "#f2994a";
-    loginMsgModal.textContent = "Enter your email first.";
-    resetInProgress = false;
-    return;
-  }
-
-  try {
-    await sendPasswordResetEmail(auth, email);
-
-    loginMsgModal.style.color = "#90be6d";
-    loginMsgModal.textContent = "Reset email sent. Check inbox/spam.";
-
-  } catch (error) {
-    console.error(error);
-
-    loginMsgModal.style.color = "#f94144";
-
-    if (error.code === "auth/user-not-found") {
-      loginMsgModal.textContent = "No account found with this email.";
-    } else if (error.code === "auth/invalid-email") {
-      loginMsgModal.textContent = "Invalid email format.";
-    } else {
-      loginMsgModal.textContent = "Failed to send reset email.";
-    }
-  }
-
-  // 🔓 re-enable button after request finishes
-  resetInProgress = false;
+  await sendPasswordResetEmail(auth,loginEmail.value);
+  loginMsgModal.textContent="Password reset email sent!";
 };
 
 // Particle effect
@@ -506,8 +433,6 @@ document.querySelectorAll('.locked').forEach(card=>{
 
 </body>
 </html>
-
-
 
 
 
