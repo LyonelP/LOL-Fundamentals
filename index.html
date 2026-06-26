@@ -369,13 +369,22 @@ resetLinkModal.onclick = async (e) => {
     loginMsgModal.style.color = "#90be6d"; // Green success
     loginMsgModal.textContent = "Password reset email sent! Check your inbox.";
   } catch (error) {
-    console.error("Password reset error:", error);
+    console.error("Password reset error details:", error);
     loginMsgModal.style.color = "#f94144"; // Red error
     
-    if (error.code === 'auth/user-not-found') {
-      loginMsgModal.textContent = "No account found with this email.";
-    } else {
-      loginMsgModal.textContent = "Error sending email. Please try again.";
+    switch (error.code) {
+      case 'auth/user-not-found':
+        loginMsgModal.textContent = "No account found with this email.";
+        break;
+      case 'auth/unauthorized-domain':
+        loginMsgModal.textContent = "Domain unauthorized. Add this domain to your Firebase settings.";
+        break;
+      case 'auth/invalid-email':
+        loginMsgModal.textContent = "Please enter a valid email address.";
+        break;
+      default:
+        loginMsgModal.textContent = `Error: ${error.message || "Please try again."}`;
+        break;
     }
   }
 };
