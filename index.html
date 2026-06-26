@@ -353,10 +353,41 @@ modalLoginBtn.onclick=async()=>{
   loginModal.style.display="none";
 };
 
-resetLinkModal.onclick=async(e)=>{
+let resetInProgress = false;
+
+resetLinkModal.onclick = async (e) => {
   e.preventDefault();
-  await sendPasswordResetEmail(auth,loginEmail.value);
-  loginMsgModal.textContent="Password reset email sent!";
+
+  if (resetInProgress) return;
+
+  const email = (loginEmail.value || "").trim().toLowerCase();
+
+  if (!email) {
+    loginMsgModal.textContent = "Please enter your email first.";
+    return;
+  }
+
+  try {
+    resetInProgress = true;
+    resetLinkModal.style.pointerEvents = "none";
+    resetLinkModal.style.opacity = "0.5";
+
+    await sendPasswordResetEmail(auth, email);
+
+    loginMsgModal.textContent =
+      "Password reset email sent! Please check inbox + spam folder.";
+
+  } catch (err) {
+    console.error(err);
+    loginMsgModal.textContent =
+      "Error sending reset email. Please try again.";
+  }
+
+  setTimeout(() => {
+    resetInProgress = false;
+    resetLinkModal.style.pointerEvents = "auto";
+    resetLinkModal.style.opacity = "1";
+  }, 5000);
 };
 
 // Particle effect
