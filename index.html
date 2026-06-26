@@ -342,6 +342,20 @@ closeTrailerModal.onclick = () => {
 const firebaseConfig={apiKey:"AIzaSyCFRcEV7wdivqONnkjJubAZOjPMixrHMBI",authDomain:"lol-fundamentals.firebaseapp.com",projectId:"lol-fundamentals",storageBucket:"lol-fundamentals.firebasestorage.app",messagingSenderId:"1038440427584",appId:"1:1038440427584:web:a82207151fd370dbedefa5"};
 const app=initializeApp(firebaseConfig),auth=getAuth(app),firestore=getFirestore(app);
 
+const planModal = document.getElementById("planModal");
+
+function showPlanModal(mode) {
+  planModal.style.display = "flex";
+
+  if (mode === "signup") {
+    document.getElementById("planSignup").style.display = "block";
+    document.getElementById("planNormal").style.display = "none";
+  } else {
+    document.getElementById("planSignup").style.display = "none";
+    document.getElementById("planNormal").style.display = "block";
+  }
+}
+
 signupHeroBtn.onclick=()=>signupModal.style.display="flex";
 loginHeroBtn.onclick=()=>loginModal.style.display="flex";
 closeSignupModal.onclick=()=>signupModal.style.display="none";
@@ -371,9 +385,7 @@ modalLoginBtn.onclick=async()=>{
     localStorage.setItem("lolfundamentals_paid","true");
     window.location.href="membershub.html";
   }else{
-    document.getElementById("planNormal").style.display = "none";
-    document.getElementById("planSignup").style.display = "block";
-    planModal.style.display = "flex";
+    showPlanModal("signup");
   }
   loginModal.style.display="none";
 };
