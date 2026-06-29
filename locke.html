@@ -124,6 +124,22 @@ header {
   line-height: 1.65;
 }
 
+/* VIDEO */
+.video-card {
+  margin: 36px auto 40px;
+  padding: 26px;
+  background: linear-gradient(180deg, #161b22, #12161d);
+  border-radius: 18px;
+  border: 1px solid rgba(201,170,113,0.18);
+}
+
+.video-card iframe {
+  width: 100%;
+  height: 480px;
+  border: none;
+  border-radius: 12px;
+}
+
 /* FOOTER */
 footer {
   text-align: center;
@@ -140,8 +156,8 @@ footer {
     align-items: center;
   }
 
-  .matchup-right {
-    text-align: center;
+  .video-card iframe {
+    height: 240px;
   }
 }
 </style>
@@ -174,9 +190,15 @@ if (localStorage.getItem('lolfundamentals_logged_in') !== 'true') {
         <li>Locke can dodge your Q with his E.</li>
         <li>Diana can interrupt the second part of Locke's E with her ult.</li>
         <li>E trades are often too quick for him to respond with W on time.</li>
-        <li>Look to trade back agressively with autos if Locke jumps on you. It's only worth trying to dodge his q to prevent stacks but at close range he'll be weaving autos in between Q's which you can out DPS.</li>
+        <li>Look to trade back aggressively with autos if Locke jumps on you. It's only worth trying to dodge his Q to prevent stacks but at close range he'll be weaving autos in between Q's which you can out DPS.</li>
       </ul>
     </div>
+  </div>
+
+  <!-- VOD -->
+  <div class="video-card">
+    <h2 style="color: var(--gold); margin-top:0;">VOD</h2>
+    <iframe src="https://www.youtube.com/embed/4Ok-bnFwItM" allowfullscreen></iframe>
   </div>
 
 </div>
