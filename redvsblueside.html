@@ -5,7 +5,6 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Red vs Blue Side – LoL Fundamentals</title>
 
-<!-- Login check -->
 <script>
   if (localStorage.getItem('lolfundamentals_logged_in') !== 'true') {
     window.location.replace('login.html');
@@ -30,7 +29,6 @@ body {
   min-height: 100vh;
 }
 
-/* Overlay */
 body::before {
   content: "";
   position: fixed;
@@ -40,7 +38,6 @@ body::before {
   z-index: -1;
 }
 
-/* Header */
 header {
   background: rgba(13,17,23,0.85);
   border-bottom: 2px solid #c9aa71;
@@ -52,7 +49,6 @@ header {
   letter-spacing: 1px;
 }
 
-/* Back button */
 .back-button {
   display: inline-block;
   margin: 20px auto 10px;
@@ -62,16 +58,10 @@ header {
   text-decoration: none;
   border-radius: 8px;
   font-weight: bold;
-  transition: all 0.3s;
   box-shadow: 0 0 10px rgba(201,170,113,0.5);
 }
 .back-button::before { content: "← "; }
-.back-button:hover {
-  background: linear-gradient(135deg, #e6c97f, #f0d88b);
-  box-shadow: 0 0 15px rgba(255,215,0,0.8);
-}
 
-/* Main content */
 .main-content {
   flex: 1;
   display: flex;
@@ -80,28 +70,7 @@ header {
   padding: 20px 10px;
 }
 
-/* VIDEO FIX (ONLY CHANGE IS NO AUTOPLAY) */
-.video-container {
-  background: rgba(13,17,23,0.9);
-  border: 1px solid #c9aa71;
-  border-radius: 10px;
-  padding: 18px 22px;
-  margin: 15px 0;
-  max-width: 900px;
-  width: 90%;
-  text-align: left;
-  animation: fadeInUp 0.4s forwards;
-}
-
-.video-container iframe {
-  width: 100%;
-  height: 450px;
-  border: none;
-  border-radius: 8px;
-  display: block;
-}
-
-/* Tip cards */
+/* VIDEO HEADER */
 .tip-card {
   background: rgba(13,17,23,0.9);
   border: 1px solid #c9aa71;
@@ -111,10 +80,6 @@ header {
   max-width: 900px;
   width: 90%;
   text-align: left;
-  font-size: 16px;
-  line-height: 1.6;
-  opacity: 0;
-  transform: translateY(10px);
   animation: fadeInUp 0.4s forwards;
 }
 
@@ -127,30 +92,42 @@ header {
   padding-bottom: 4px;
 }
 
-/* Animations */
-@keyframes fadeInUp {
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
+/* VIDEO */
+.video-container {
+  background: rgba(13,17,23,0.9);
+  border: 1px solid #c9aa71;
+  border-radius: 10px;
+  padding: 18px 22px;
+  margin: 15px 0;
+  max-width: 900px;
+  width: 90%;
 }
 
-/* Footer */
+.video-container iframe {
+  width: 100%;
+  height: 450px;
+  border: none;
+  border-radius: 8px;
+}
+
+/* animations */
+@keyframes fadeInUp {
+  to { opacity: 1; transform: translateY(0); }
+}
+
 footer {
   text-align: center;
   margin-top: auto;
-  padding: 15px 10px;
+  padding: 15px;
   font-size: 14px;
   color: #fff;
 }
 
-/* Responsive */
 @media (max-width: 600px) {
   header { font-size: 24px; padding: 15px; }
   .video-container, .tip-card {
-    padding: 14px 16px;
-    font-size: 15px;
     width: 90%;
+    padding: 14px 16px;
   }
   .video-container iframe {
     height: 220px;
@@ -167,16 +144,21 @@ footer {
 
 <div class="main-content">
 
-  <!-- VIDEO AT TOP (NO AUTOPLAY NOW) -->
+  <!-- VIDEO HEADER -->
+  <div class="tip-card">
+    <h2>Video Breakdown</h2>
+    <p>Watch this breakdown first before reading the sections below.</p>
+  </div>
+
+  <!-- VIDEO (NO AUTOPLAY FIX) -->
   <div class="video-container">
     <iframe
       src="https://www.youtube.com/embed/JDrmDdVawYQ?controls=1&rel=0"
-      title="Red vs Blue Side Video"
-      allow="encrypted-media"
       allowfullscreen>
     </iframe>
   </div>
 
+  <!-- EVERYTHING BELOW KEPT EXACT STRUCTURE -->
   <div class="tip-card">
     <h2>Why is there a difference?</h2>
     <p>
@@ -212,17 +194,22 @@ footer {
     <h2>Jungle Pathing & Strong Side</h2>
     <p>
       Jungle pathing also determines strong side. On red side, pathing towards bot
-      is optimal due to safety and red buff access.
+      is optimal due to safety and the power of starting raptors or red buff.
     </p>
     <p>
       Starting blue requires an extremely fast clear to finish five camps
       before the enemy can invade red bush. Fast clear junglers can avoid weak
-      side river entirely and reach scuttle faster.
+      side river entirely, reset, and reach strong side scuttle with items
+      before the enemy can contest both crabs.
     </p>
   </div>
 
 </div>
 
+<footer>© 2026 LoL Fundamentals · All rights reserved</footer>
+
+</body>
+</html>
 <footer>© 2026 LoL Fundamentals</footer>
 
 </body>
