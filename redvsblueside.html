@@ -18,6 +18,7 @@ html, body {
   padding: 0;
   height: 100%;
 }
+
 body {
   font-family: 'Beaufort for LOL', Arial, Helvetica, sans-serif;
   color: #fff;
@@ -70,7 +71,7 @@ header {
   box-shadow: 0 0 15px rgba(255,215,0,0.8);
 }
 
-/* Main */
+/* Main content */
 .main-content {
   flex: 1;
   display: flex;
@@ -79,22 +80,25 @@ header {
   padding: 20px 10px;
 }
 
-/* VIDEO HERO */
-.hero-video {
+/* VIDEO FIX (same width system as cards) */
+.video-container {
+  background: rgba(13,17,23,0.9);
+  border: 1px solid #c9aa71;
+  border-radius: 10px;
+  padding: 18px 22px;
+  margin: 15px 0;
+  max-width: 900px;
   width: 90%;
-  max-width: 1000px;
-  margin: 20px auto 30px;
-  border-radius: 12px;
-  overflow: hidden;
-  border: 2px solid #c9aa71;
-  box-shadow: 0 0 25px rgba(201,170,113,0.3);
+  text-align: left;
+  animation: fadeInUp 0.4s forwards;
 }
 
-.hero-video iframe {
+.video-container iframe {
   width: 100%;
-  height: 500px;
-  display: block;
+  height: 450px;
   border: none;
+  border-radius: 8px;
+  display: block;
 }
 
 /* Tip cards */
@@ -114,11 +118,6 @@ header {
   animation: fadeInUp 0.4s forwards;
 }
 
-.tip-card:nth-child(1) { animation-delay: 0.1s; }
-.tip-card:nth-child(2) { animation-delay: 0.3s; }
-.tip-card:nth-child(3) { animation-delay: 0.5s; }
-.tip-card:nth-child(4) { animation-delay: 0.7s; }
-
 .tip-card h2 {
   color: #c9aa71;
   margin-top: 0;
@@ -128,7 +127,7 @@ header {
   padding-bottom: 4px;
 }
 
-/* Animation */
+/* Animations */
 @keyframes fadeInUp {
   to {
     opacity: 1;
@@ -148,8 +147,14 @@ footer {
 /* Responsive */
 @media (max-width: 600px) {
   header { font-size: 24px; padding: 15px; }
-  .hero-video iframe { height: 220px; }
-  .tip-card { padding: 14px 16px; font-size: 15px; }
+  .video-container, .tip-card {
+    padding: 14px 16px;
+    font-size: 15px;
+    width: 90%;
+  }
+  .video-container iframe {
+    height: 220px;
+  }
 }
 </style>
 </head>
@@ -157,12 +162,13 @@ footer {
 <body>
 
 <header>Red vs Blue Side</header>
+
 <a href="skills.html" class="back-button">Back to Skills Hub</a>
 
 <div class="main-content">
 
-  <!-- VIDEO AT TOP -->
-  <div class="hero-video">
+  <!-- VIDEO AT TOP (FIXED, FULL WIDTH ALIGNMENT) -->
+  <div class="video-container">
     <iframe
       src="https://www.youtube.com/embed/JDrmDdVawYQ?autoplay=1&mute=1&controls=1&rel=0"
       title="Red vs Blue Side Video"
@@ -186,13 +192,20 @@ footer {
       starting from the mid lane side bush, which is also far easier to defend
       and play from than the top side equivalent.
     </p>
+    <p>
+      This leads to pink wards being heavily favored towards bot lane. The
+      banana bush is another powerful red side control point, especially with
+      new Faelight interactions. Retreat paths to river are also much safer
+      on bot side due to shorter distances to bushes and towers.
+    </p>
   </div>
 
   <div class="tip-card">
     <h2>Walls and Pathing</h2>
     <p>
       A crucial jump plant above Krugs allows mid laners to safely move behind
-      the bot tower.
+      the bot tower. There is no position bot lane can hold on red side that
+      keeps them fully safe from coordinated ganks and dives.
     </p>
   </div>
 
@@ -202,11 +215,17 @@ footer {
       Jungle pathing also determines strong side. On red side, pathing towards bot
       is optimal due to safety and the power of starting raptors or red buff.
     </p>
+    <p>
+      Starting blue requires an extremely fast clear to finish five camps
+      before the enemy can invade red bush. Fast clear junglers can avoid weak
+      side river entirely, reset, and reach strong side scuttle with items
+      before the enemy can contest both crabs.
+    </p>
   </div>
 
 </div>
 
-<footer>© 2026 LoL Fundamentals</footer>
+<footer>© 2026 LoL Fundamentals · All rights reserved</footer>
 
 </body>
 </html>
