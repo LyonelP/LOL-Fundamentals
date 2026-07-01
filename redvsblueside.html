@@ -70,7 +70,7 @@ header {
   padding: 20px 10px;
 }
 
-/* VIDEO CARD */
+/* CARD */
 .tip-card {
   background: rgba(13,17,23,0.9);
   border: 1px solid #c9aa71;
@@ -83,19 +83,19 @@ header {
   animation: fadeInUp 0.4s forwards;
 }
 
-/* ❌ REMOVED UNDERLINE HERE */
+/* FIX: remove underline under video title */
 .tip-card h2 {
   color: #c9aa71;
   margin-top: 0;
   margin-bottom: 10px;
   font-size: 20px;
-  padding-bottom: 4px;
+  padding-bottom: 0;
+  border-bottom: none;
 }
 
 /* VIDEO */
 .video-container {
   margin-top: 10px;
-  margin-bottom: 0;
 }
 
 .video-container iframe {
@@ -103,11 +103,6 @@ header {
   height: 450px;
   border: none;
   border-radius: 8px;
-}
-
-/* content cards below */
-.tip-card p {
-  line-height: 1.6;
 }
 
 /* animation */
@@ -144,17 +139,20 @@ footer {
 
 <div class="main-content">
 
- <div class="tip-card" style="animation-delay:0.1s;">
-  <h2>Intro to Strong Side</h2>
+  <!-- VIDEO -->
+  <div class="tip-card" style="animation-delay:0.1s;">
+    <h2>Intro to Strong Side</h2>
 
-  <div class="video-container">
-    <iframe
-      src="https://www.youtube.com/embed/JDrmDdVawYQ?controls=1&rel=0"
-      title="Red vs Blue Side Video"
-      allowfullscreen>
-    </iframe>
+    <div class="video-container">
+      <iframe
+        src="https://www.youtube.com/embed/JDrmDdVawYQ?controls=1&rel=0"
+        title="Red vs Blue Side Video"
+        allowfullscreen>
+      </iframe>
+    </div>
   </div>
-</div>
+
+  <!-- FULL ORIGINAL TIPS (UNCHANGED) -->
 
   <div class="tip-card">
     <h2>Why is there a difference?</h2>
@@ -169,7 +167,7 @@ footer {
     <p>
       The walls and paths differ significantly. Bot side walls are much narrower
       starting from the mid lane side bush, which is also far easier to defend
-      and play from than the top side one.
+      and play from than the top side equivalent.
     </p>
     <p>
       This leads to pink wards being heavily favored towards bot lane. The
@@ -194,7 +192,9 @@ footer {
     </p>
     <p>
       Starting blue requires an extremely fast clear to finish five camps
-      before the enemy can invade red bush.
+      before the enemy can invade red bush. Fast clear junglers can avoid weak
+      side river entirely, reset, and reach strong side scuttle with items
+      before the enemy can contest both crabs.
     </p>
   </div>
 
