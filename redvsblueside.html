@@ -70,7 +70,7 @@ header {
   padding: 20px 10px;
 }
 
-/* VIDEO HEADER */
+/* VIDEO CARD */
 .tip-card {
   background: rgba(13,17,23,0.9);
   border: 1px solid #c9aa71;
@@ -83,24 +83,19 @@ header {
   animation: fadeInUp 0.4s forwards;
 }
 
+/* ❌ REMOVED UNDERLINE HERE */
 .tip-card h2 {
   color: #c9aa71;
   margin-top: 0;
   margin-bottom: 10px;
   font-size: 20px;
-  border-bottom: 1px solid #c9aa71;
   padding-bottom: 4px;
 }
 
 /* VIDEO */
 .video-container {
-  background: rgba(13,17,23,0.9);
-  border: 1px solid #c9aa71;
-  border-radius: 10px;
-  padding: 18px 22px;
-  margin: 15px 0;
-  max-width: 900px;
-  width: 90%;
+  margin-top: 10px;
+  margin-bottom: 0;
 }
 
 .video-container iframe {
@@ -110,7 +105,12 @@ header {
   border-radius: 8px;
 }
 
-/* animations */
+/* content cards below */
+.tip-card p {
+  line-height: 1.6;
+}
+
+/* animation */
 @keyframes fadeInUp {
   to { opacity: 1; transform: translateY(0); }
 }
@@ -125,7 +125,7 @@ footer {
 
 @media (max-width: 600px) {
   header { font-size: 24px; padding: 15px; }
-  .video-container, .tip-card {
+  .tip-card {
     width: 90%;
     padding: 14px 16px;
   }
@@ -146,6 +146,7 @@ footer {
 
  <div class="tip-card" style="animation-delay:0.1s;">
   <h2>Intro to Strong Side</h2>
+
   <div class="video-container">
     <iframe
       src="https://www.youtube.com/embed/JDrmDdVawYQ?controls=1&rel=0"
@@ -155,7 +156,6 @@ footer {
   </div>
 </div>
 
-  <!-- EVERYTHING BELOW KEPT EXACT STRUCTURE -->
   <div class="tip-card">
     <h2>Why is there a difference?</h2>
     <p>
@@ -182,8 +182,7 @@ footer {
     <h2>Walls and Pathing</h2>
     <p>
       A crucial jump plant above Krugs allows mid laners to safely move behind
-      the bot tower. There is no position bot lane can hold on red side that
-      keeps them fully safe from coordinated ganks and dives.
+      the bot tower.
     </p>
   </div>
 
@@ -195,9 +194,7 @@ footer {
     </p>
     <p>
       Starting blue requires an extremely fast clear to finish five camps
-      before the enemy can invade red bush. Fast clear junglers can avoid weak
-      side river entirely, reset, and reach strong side scuttle with items
-      before the enemy can contest both crabs.
+      before the enemy can invade red bush.
     </p>
   </div>
 
