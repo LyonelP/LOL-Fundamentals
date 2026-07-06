@@ -332,7 +332,8 @@ closeLoginModal.onclick=()=>loginModal.style.display="none";
 seePlansBtn.onclick=()=>{signupModal.style.display="none";planModal.style.display="flex"};
 
 continueSignupBtn.onclick=async()=>{
-  const e=signupEmail.value.trim(),p=signupPassword.value.trim(),c=signupPasswordConfirm.value.trim();
+  // Added .toLowerCase() to the email input variable
+  const e=signupEmail.value.trim().toLowerCase(),p=signupPassword.value.trim(),c=signupPasswordConfirm.value.trim();
   if(!e||!p||!c){alert("Fill all fields");return}
   if(p!==c){alert("Passwords do not match");return}
   await createUserWithEmailAndPassword(auth,e,p);
@@ -345,7 +346,8 @@ document.getElementById("yearlyBtn").onclick=()=>{window.open("https://buy.strip
 document.getElementById("lifeBtn").onclick=()=>{window.open("https://buy.stripe.com/fZu9AMcYc48AgzY1JUejK0j","_blank");planModal.style.display="none";}
 
 modalLoginBtn.onclick=async()=>{
-  const e=loginEmail.value.trim(),p=loginPassword.value.trim();
+  // Added .toLowerCase() to the email input variable
+  const e=loginEmail.value.trim().toLowerCase(),p=loginPassword.value.trim();
   await signInWithEmailAndPassword(auth,e,p);
   const snap=await getDoc(doc(firestore,"paidUsers",e));
   if(snap.exists() && snap.data().paid){
