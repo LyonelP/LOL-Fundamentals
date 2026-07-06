@@ -329,15 +329,24 @@ loginHeroBtn.onclick=()=>loginModal.style.display="flex";
 closeSignupModal.onclick=()=>signupModal.style.display="none";
 closePlanModal.onclick=()=>planModal.style.display="none";
 closeLoginModal.onclick=()=>loginModal.style.display="none";
-seePlansBtn.onclick=()=>{signupModal.style.display="none";planModal.style.display="flex"};
+seePlansBtn.onclick=()=>{
+  // Keep the header normal if they just click "See Plans"
+  document.querySelector("#planModal h2").textContent = "Choose Your Plan";
+  
+  signupModal.style.display="none";
+  planModal.style.display="flex";
+};
 
 continueSignupBtn.onclick=async()=>{
-  // Added .toLowerCase() to the email input variable
   const e=signupEmail.value.trim().toLowerCase(),p=signupPassword.value.trim(),c=signupPasswordConfirm.value.trim();
   if(!e||!p||!c){alert("Fill all fields");return}
   if(p!==c){alert("Passwords do not match");return}
   await createUserWithEmailAndPassword(auth,e,p);
   await setDoc(doc(firestore,"paidUsers",e),{paid:false,timestamp:serverTimestamp()});
+  
+  // Update header text for successful signup
+  document.querySelector("#planModal h2").textContent = "Account Created! Choose Your Plan";
+  
   signupModal.style.display="none";
   planModal.style.display="flex";
 };
