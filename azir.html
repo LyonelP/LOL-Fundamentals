@@ -51,7 +51,10 @@ header {
   box-shadow: 0 0 10px rgba(201,170,113,0.5);
   width: fit-content;
 }
-.back-button::before { content: "← "; }
+
+.back-button::before { 
+  content: "← "; 
+}
 
 /* ===== CONTENT WIDTH ===== */
 .content-width {
@@ -124,6 +127,33 @@ header {
   line-height: 1.65;
 }
 
+/* ===== VIDEO CARD ===== */
+.video-card {
+  margin: 36px auto 40px;
+  padding: 26px;
+  background: linear-gradient(180deg, #161b22, #12161d);
+  border-radius: 18px;
+  border: 1px solid rgba(201,170,113,0.18);
+  box-shadow:
+    0 15px 40px rgba(0,0,0,0.7),
+    inset 0 0 0 1px rgba(255,255,255,0.02);
+}
+
+.video-card h2 {
+  margin: 0 0 16px 0;
+  font-size: 22px;
+  color: var(--gold);
+  padding-bottom: 8px;
+  border-bottom: 1px solid rgba(201,170,113,0.25);
+}
+
+.video-card iframe {
+  width: 100%;
+  height: 480px;
+  border: none;
+  border-radius: 12px;
+}
+
 /* ===== FOOTER ===== */
 footer {
   text-align: center;
@@ -143,6 +173,10 @@ footer {
   .matchup-right {
     text-align: center;
   }
+
+  .video-card iframe {
+    height: 240px;
+  }
 }
 </style>
 
@@ -153,6 +187,7 @@ if (localStorage.getItem('lolfundamentals_logged_in') !== 'true') {
 </script>
 
 </head>
+
 <body>
 
 <header>Azir Mid Matchup</header>
@@ -160,6 +195,7 @@ if (localStorage.getItem('lolfundamentals_logged_in') !== 'true') {
 <a href="matchuphub.html" class="back-button">Back to Matchup Hub</a>
 
 <div class="content-width">
+
   <div class="matchup-container">
     <div class="matchup-left">
       <img src="https://ddragon.leagueoflegends.com/cdn/14.23.1/img/champion/Azir.png" alt="Azir">
@@ -176,13 +212,18 @@ if (localStorage.getItem('lolfundamentals_logged_in') !== 'true') {
       </ul>
     </div>
   </div>
+
+  <div class="video-card">
+    <h2>VODs</h2>
+    <iframe src="https://www.youtube.com/embed/R2e2JG6sQo0" allowfullscreen></iframe>
+  </div>
+
 </div>
 
-<footer>© 2026 LoL Fundamentals · All rights reserved</footer>
+<footer>
+© 2026 LoL Fundamentals · All rights reserved
+</footer>
 
 </body>
 </html>
-
-
-
 
