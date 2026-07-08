@@ -414,11 +414,11 @@ onAuthStateChanged(auth, async (user) => {
   document.getElementById("trailerBtn").onclick = bindTrailer;
 });
 
-// Trailer logic
-const bindTrailer = () => {
+// Trailer logic (Using a hoisted function so it's registered immediately)
+function bindTrailer() {
   trailerFrame.src = "https://www.youtube.com/embed/SaDZnW2lEFM?autoplay=1";
   trailerModal.style.display = "flex";
-};
+}
 
 document.getElementById("closeTrailerModal").onclick = () => {
   trailerModal.style.display = "none";
