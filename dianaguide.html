@@ -11,8 +11,7 @@
   header { background:linear-gradient(90deg,#0a0f14,#1b2838); border-bottom:2px solid var(--gold); padding:14px 20px; color:var(--gold); font-weight:bold; text-transform:uppercase; text-align:center; font-size:20px; letter-spacing:1px; }
   .loading-status { text-align:center; color:var(--gold); font-size:1.2rem; margin-top:100px; font-weight:bold; }
 
-  /* 2. Paste Your Original Guide Layout CSS Classes Below */
-  /* (Copy your .card-grid, .card, animations, and background splash image links from your old file here) */
+  /* 2. Original Guide Layout CSS Classes */
   .section { padding:20px 20px 40px; max-width:1000px; margin:auto; text-align:center; }
   .card-grid { display:grid; grid-template-columns:repeat(auto-fit,minmax(260px,1fr)); gap:22px; align-items:start; }
   .card { position:relative; background:#161b22; border:2px solid #c9aa71; border-radius:12px; padding:20px; text-decoration:none; color:#e6edf3; height:230px; display:flex; flex-direction:column; justify-content:center; align-items:center; overflow:hidden; transition:transform .25s,box-shadow .25s; }
@@ -20,14 +19,14 @@
   .card p { margin:0; font-size:0.95rem; line-height:1.3; z-index:2; text-align:center; opacity:0.95; }
   .card::before { content:""; position:absolute; inset:0; width:100%; height:100%; background-size:cover; background-position:center; opacity:.15; z-index:0; border-radius:10px; }
   
-  /* Add any specific guide background headers or layout columns below */
-
+  /* Feel free to drop any additional custom classes down here */
 </style>
 </head>
 <body>
 
 <header>Diana Mid Guide</header>
 
+<!-- Completely empty core workspace that shows nothing but verification status initially -->
 <div id="guideContent" class="loading-status">Verifying membership status...</div>
 
 <script type="module">
@@ -60,8 +59,8 @@ document.addEventListener("DOMContentLoaded", () => {
         const snap = await getDoc(docRef);
         
         if (snap.exists()) {
-          contentContainer.className = ""; // Wipe out loading wrapper spacing
-          contentContainer.innerHTML = snap.data().text;
+          contentContainer.className = ""; // Drop the heavy loading alignment
+          contentContainer.innerHTML = snap.data().text; // Purely inject the layout from database
         } else {
           contentContainer.innerHTML = "<div class='loading-status'>Guide record not found in database.</div>";
         }
@@ -82,7 +81,6 @@ document.addEventListener("DOMContentLoaded", () => {
 
 </body>
 </html>
-
 
 
 
