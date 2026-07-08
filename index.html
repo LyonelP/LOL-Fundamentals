@@ -280,124 +280,252 @@ All guides, matchups, VODS & tools for just <b>$3.33/month</b>!
   </div>
 </div>
 
+<div id="signupModal" class="modal">
+  <div class="modalContent">
+    <h2>Unlock Full Access</h2>
+    <p style="margin-top:-8px; color:#cfe1ee; font-size:0.95rem;">
+      All guides, matchups, VODS & tools for just <b>$3.33/month</b>!
+    </p>
+    <input type="email" id="signupEmail" placeholder="Enter your email"/>
+    <input type="password" id="signupPassword" placeholder="Enter your password"/>
+    <input type="password" id="signupPasswordConfirm" placeholder="Confirm your password"/>
+    <div style="display:flex;justify-content:center;gap:15px;margin-top:10px;">
+      <button class="btn" id="continueSignupBtn">Continue</button>
+      <button class="btn" id="seePlansBtn">See Plans</button>
+    </div>
+    <button id="closeSignupModal">Cancel</button>
+  </div>
+</div>
+
+<div id="planModal" class="modal">
+  <div class="modalContent">
+    <h2>Choose Your Plan</h2>
+    <div class="plan-buttons">
+      <button class="btn" id="yearlyBtn">
+        $39.99 / Year (3.33/Month)
+      </button>
+
+      <div class="plan-wrap">
+        <div class="bestValueTag">Best Value</div>
+        <button class="btn orangeBtn" id="lifeBtn">
+          $99.99 / Lifetime
+        </button>
+      </div>
+
+      <button class="btn" id="twitchTier3Btn" onclick="window.open('https://twitch.tv/subs', '_blank')">
+        Twitch Tier 3
+      </button>
+    </div>
+    <button id="closePlanModal" style="margin-top: 25px;">Cancel</button>
+  </div>
+</div>
+
+<div id="loginModal" class="modal">
+  <div class="modalContent">
+    <h2>Member Login</h2>
+    <input type="email" id="loginEmail" placeholder="Enter your email"/>
+    <input type="password" id="loginPassword" placeholder="Enter your password"/>
+    <button class="btn" id="modalLoginBtn">Login</button>
+    <button id="closeLoginModal">Cancel</button>
+    <p style="margin-top: 15px;"><a href="#" id="resetLinkModal" style="color:#c9aa71; text-decoration: none; font-size: 0.9em;">Forgot your password?</a></p>
+    <p id="loginMsgModal" style="margin-top: 10px; font-size: 0.9em; font-weight: bold;"></p>
+  </div>
+</div>
+
+<div id="trailerModal" class="modal">
+  <div class="modalContent" style="max-width:800px;">
+    <h2>LoL Fundamentals Trailer</h2>
+    <div style="position:relative;padding-bottom:56.25%;height:0;overflow:hidden;border-radius:8px;border:1px solid #c9aa71;">
+      <iframe
+        id="trailerFrame"
+        src=""
+        frameborder="0"
+        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+        allowfullscreen
+        style="position:absolute;top:0;left:0;width:100%;height:100%;">
+      </iframe>
+    </div>
+    <button id="closeTrailerModal" style="margin-top:15px;background:none;border:none;color:#c9aa71;cursor:pointer;">
+      Close
+    </button>
+  </div>
+</div>
+
 <script type="module">
 import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
-import { getAuth, signInWithEmailAndPassword, createUserWithEmailAndPassword, sendPasswordResetEmail } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-auth.js";
+import { getAuth, onAuthStateChanged, signInWithEmailAndPassword, createUserWithEmailAndPassword, sendPasswordResetEmail } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-auth.js";
 import { getFirestore, doc, setDoc, serverTimestamp, getDoc } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
 
-const isLoggedIn = localStorage.getItem("lolfundamentals_logged_in")==="true";
-const isPaid = localStorage.getItem("lolfundamentals_paid")==="true";
+const firebaseConfig = {
+  apiKey: "AIzaSyCFRcEV7wdivqONnkjJubAZOjPMixrHMBI",
+  authDomain: "lol-fundamentals.firebaseapp.com",
+  projectId: "lol-fundamentals",
+  storageBucket: "lol-fundamentals.firebasestorage.app",
+  messagingSenderId: "1038440427584",
+  appId: "1:1038440427584:web:a82207151fd370dbedefa5"
+};
+const app = initializeApp(firebaseConfig);
+const auth = getAuth(app);
+const firestore = getFirestore(app);
 
-if (isLoggedIn && isPaid) {
-  const hero = document.querySelector(".hero");
-
-  const welcomeBox = document.createElement("div");
-  welcomeBox.style.marginTop = "20px";
-
-  welcomeBox.innerHTML = `
-    <p style="color:#c9aa71;font-weight:bold;margin-bottom:10px;">
-      Welcome back 👋
-    </p>
-    <a href="membershub.html" class="btn">
-      Go to Members Hub
-    </a>
-
-  `;
-
-  hero.appendChild(welcomeBox);
-}
-
-if (isLoggedIn && isPaid) {
-  document.getElementById("signupHeroBtn").style.display = "none";
-  document.getElementById("loginHeroBtn").style.display = "none";
-  document.getElementById("trailerBtn").style.display = "none";
-}
-
+// Modals
+const signupModal = document.getElementById("signupModal");
+const planModal = document.getElementById("planModal");
+const loginModal = document.getElementById("loginModal");
 const trailerModal = document.getElementById("trailerModal");
 const trailerFrame = document.getElementById("trailerFrame");
-const trailerBtn = document.getElementById("trailerBtn");
-const closeTrailerModal = document.getElementById("closeTrailerModal");
 
-trailerBtn.onclick = () => {
+// Securely monitor authentication state
+onAuthStateChanged(auth, async (user) => {
+  const heroActionArea = document.querySelector(".hero div[style*='margin-top:20px;']");
+  if (!heroActionArea) return;
+
+  if (user) {
+    try {
+      const snap = await getDoc(doc(firestore, "paidUsers", user.email.toLowerCase()));
+      if (snap.exists() && snap.data().paid === true) {
+        localStorage.setItem("lolfundamentals_logged_in", "true");
+        localStorage.setItem("lolfundamentals_paid", "true");
+
+        heroActionArea.innerHTML = `
+          <p style="color:#c9aa71;font-weight:bold;margin-bottom:10px;">Welcome back 👋</p>
+          <a href="membershub.html" class="btn">Go to Members Hub</a>
+        `;
+        return;
+      }
+    } catch (err) {
+      console.error("Error validating subscriber status:", err);
+    }
+  }
+
+  // Fallback / Logged out / Not Paid
+  localStorage.removeItem("lolfundamentals_logged_in");
+  localStorage.removeItem("lolfundamentals_paid");
+  
+  heroActionArea.innerHTML = `
+    <button class="btn" id="signupHeroBtn">Sign Up</button>
+    <button class="btn" id="loginHeroBtn" style="margin-left:10px;">Login</button>
+    <button class="btn orangeBtn" id="trailerBtn" style="margin-left:10px;">Watch Trailer</button>
+  `;
+
+  // Re-bind click events since the DOM elements were fresh-rendered
+  document.getElementById("signupHeroBtn").onclick = () => signupModal.style.display = "flex";
+  document.getElementById("loginHeroBtn").onclick = () => loginModal.style.display = "flex";
+  document.getElementById("trailerBtn").onclick = bindTrailer;
+});
+
+// Trailer logic
+const bindTrailer = () => {
   trailerFrame.src = "https://www.youtube.com/embed/SaDZnW2lEFM?autoplay=1";
   trailerModal.style.display = "flex";
 };
 
-closeTrailerModal.onclick = () => {
+document.getElementById("closeTrailerModal").onclick = () => {
   trailerModal.style.display = "none";
   trailerFrame.src = "";
 };
 
-const firebaseConfig={apiKey:"AIzaSyCFRcEV7wdivqONnkjJubAZOjPMixrHMBI",authDomain:"lol-fundamentals.firebaseapp.com",projectId:"lol-fundamentals",storageBucket:"lol-fundamentals.firebasestorage.app",messagingSenderId:"1038440427584",appId:"1:1038440427584:web:a82207151fd370dbedefa5"};
-const app=initializeApp(firebaseConfig),auth=getAuth(app),firestore=getFirestore(app);
+// Modal closers
+document.getElementById("closeSignupModal").onclick = () => signupModal.style.display = "none";
+document.getElementById("closePlanModal").onclick = () => planModal.style.display = "none";
+document.getElementById("closeLoginModal").onclick = () => loginModal.style.display = "none";
 
-signupHeroBtn.onclick=()=>signupModal.style.display="flex";
-loginHeroBtn.onclick=()=>loginModal.style.display="flex";
-closeSignupModal.onclick=()=>signupModal.style.display="none";
-closePlanModal.onclick=()=>planModal.style.display="none";
-closeLoginModal.onclick=()=>loginModal.style.display="none";
-seePlansBtn.onclick=()=>{
-  // Keep the header normal if they just click "See Plans"
+document.getElementById("seePlansBtn").onclick = () => {
   document.querySelector("#planModal h2").textContent = "Available Plans";
-  
-  signupModal.style.display="none";
-  planModal.style.display="flex";
+  signupModal.style.display = "none";
+  planModal.style.display = "flex";
 };
 
-continueSignupBtn.onclick=async()=>{
-  const e=signupEmail.value.trim().toLowerCase(),p=signupPassword.value.trim(),c=signupPasswordConfirm.value.trim();
-  if(!e||!p||!c){alert("Fill all fields");return}
-  if(p!==c){alert("Passwords do not match");return}
-  await createUserWithEmailAndPassword(auth,e,p);
-  await setDoc(doc(firestore,"paidUsers",e),{paid:false,timestamp:serverTimestamp()});
+// Signup execution
+document.getElementById("continueSignupBtn").onclick = async () => {
+  const e = document.getElementById("signupEmail").value.trim().toLowerCase();
+  const p = document.getElementById("signupPassword").value.trim();
+  const c = document.getElementById("signupPasswordConfirm").value.trim();
   
-  // Update header text for successful signup
-  document.querySelector("#planModal h2").textContent = "Account Created! Choose Your Plan";
+  if (!e || !p || !c) { alert("Fill all fields"); return; }
+  if (p !== c) { alert("Passwords do not match"); return; }
   
-  signupModal.style.display="none";
-  planModal.style.display="flex";
-};
-
-document.getElementById("yearlyBtn").onclick=()=>{window.open("https://buy.stripe.com/3cI3co1fufRi5Vk3S2ejK0k");planModal.style.display="none";}
-document.getElementById("lifeBtn").onclick=()=>{window.open("https://buy.stripe.com/fZu9AMcYc48AgzY1JUejK0j","_blank");planModal.style.display="none";}
-
-modalLoginBtn.onclick=async()=>{
-  // Added .toLowerCase() to the email input variable
-  const e=loginEmail.value.trim().toLowerCase(),p=loginPassword.value.trim();
-  await signInWithEmailAndPassword(auth,e,p);
-  const snap=await getDoc(doc(firestore,"paidUsers",e));
-  if(snap.exists() && snap.data().paid){
-    localStorage.setItem("lolfundamentals_logged_in","true");
-    localStorage.setItem("lolfundamentals_paid","true");
-    window.location.href="membershub.html";
-  }else{
-    planModal.style.display="flex";
+  try {
+    await createUserWithEmailAndPassword(auth, e, p);
+    await setDoc(doc(firestore, "paidUsers", e), { paid: false, email: e, timestamp: serverTimestamp() });
+    
+    document.querySelector("#planModal h2").textContent = "Account Created! Choose Your Plan";
+    signupModal.style.display = "none";
+    planModal.style.display = "flex";
+  } catch (err) {
+    alert(err.message);
   }
-  loginModal.style.display="none";
 };
 
-resetLinkModal.onclick=async(e)=>{
+// Stripe redirection hooks
+document.getElementById("yearlyBtn").onclick = () => { window.open("https://buy.stripe.com/3cI3co1fufRi5Vk3S2ejK0k"); planModal.style.display = "none"; };
+document.getElementById("lifeBtn").onclick = () => { window.open("https://buy.stripe.com/fZu9AMcYc48AgzY1JUejK0j", "_blank"); planModal.style.display = "none"; };
+
+// Login execution
+document.getElementById("modalLoginBtn").onclick = async () => {
+  const e = document.getElementById("loginEmail").value.trim().toLowerCase();
+  const p = document.getElementById("loginPassword").value.trim();
+  const msg = document.getElementById("loginMsgModal");
+  
+  try {
+    await signInWithEmailAndPassword(auth, e, p);
+    const snap = await getDoc(doc(firestore, "paidUsers", e));
+    
+    if (snap.exists() && snap.data().paid === true) {
+      localStorage.setItem("lolfundamentals_logged_in", "true");
+      localStorage.setItem("lolfundamentals_paid", "true");
+      window.location.href = "membershub.html";
+    } else {
+      loginModal.style.display = "none";
+      planModal.style.display = "flex";
+    }
+  } catch (err) {
+    msg.style.color = "#ff4a4a";
+    msg.textContent = "Invalid login credentials.";
+  }
+};
+
+document.getElementById("resetLinkModal").onclick = async (e) => {
   e.preventDefault();
-  await sendPasswordResetEmail(auth,loginEmail.value);
-  loginMsgModal.textContent="Password reset email sent!";
+  const emailVal = document.getElementById("loginEmail").value.trim();
+  const msg = document.getElementById("loginMsgModal");
+  if (!emailVal) { 
+    msg.style.color = "#ff4a4a";
+    msg.textContent = "Please enter your email above first."; 
+    return; 
+  }
+  try {
+    await sendPasswordResetEmail(auth, emailVal);
+    msg.style.color = "#4aff4a";
+    msg.textContent = "Password reset email sent!";
+  } catch (err) {
+    msg.style.color = "#ff4a4a";
+    msg.textContent = err.message;
+  }
 };
 
-// Particle effect
-for(let i=0;i<50;i++){
-  const e=document.createElement("span");
-  e.style.left=Math.random()*100+"%";
-  e.style.top=Math.random()*100+"%";
-  e.style.width=e.style.height="4px";
-  e.style.background="rgba(47,129,247,.9)";
-  e.style.borderRadius="50%";
-  e.style.position="absolute";
-  e.style.animation=`floatParticles ${6+Math.random()*4}s infinite ease-in-out`;
-  document.querySelector(".particles").appendChild(e);
+// Particle setup
+const particlesContainer = document.querySelector(".particles");
+if (particlesContainer) {
+  for (let i = 0; i < 50; i++) {
+    const p = document.createElement("span");
+    p.style.left = Math.random() * 100 + "%";
+    p.style.top = Math.random() * 100 + "%";
+    p.style.width = p.style.height = "4px";
+    p.style.background = "rgba(47,129,247,.9)";
+    p.style.borderRadius = "50%";
+    p.style.position = "absolute";
+    p.style.animation = `floatParticles ${6 + Math.random() * 4}s infinite ease-in-out`;
+    particlesContainer.appendChild(p);
+  }
 }
 
-// Locked card click opens signup modal
-document.querySelectorAll('.locked').forEach(card=>{
-  card.addEventListener('click',()=>{signupModal.style.display='flex'});
+// Global modal triggers for locked layout nodes
+document.querySelectorAll('.locked').forEach(card => {
+  card.addEventListener('click', (e) => {
+    e.preventDefault();
+    signupModal.style.display = 'flex';
+  });
 });
 </script>
 
@@ -444,6 +572,7 @@ document.querySelectorAll('.locked').forEach(card=>{
 @media (max-width: 520px) {
   .plan-buttons {
     flex-wrap: wrap;
+    gap: 16px;
   }
 }
   
@@ -456,8 +585,6 @@ document.querySelectorAll('.locked').forEach(card=>{
 
 </body>
 </html>
-
-
 
 
 
