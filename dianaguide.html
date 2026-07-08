@@ -309,16 +309,17 @@ function toggleMobileMenu(){
 </script>
 
 <!-- Firebase Data Integration Script -->
+<!-- Firebase Data Integration Script -->
 <script type="module">
   import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
   import { getFirestore, doc, getDoc } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
   
-  // REPLACE THIS WITH YOUR ACTUAL CONFIG FROM THE HUB OR LOGIN PAGE
+  // 1. paste your real keys from your login page or firebase console here!
   const firebaseConfig = {
     apiKey: "YOUR_API_KEY",
-    authDomain: "YOUR_PROJECT.firebaseapp.js",
+    authDomain: "YOUR_PROJECT_ID.firebaseapp.com",
     projectId: "YOUR_PROJECT_ID",
-    storageBucket: "YOUR_STORAGE_BUCKET",
+    storageBucket: "YOUR_PROJECT_ID.appspot.com",
     messagingSenderId: "YOUR_SENDER_ID",
     appId: "YOUR_APP_ID"
   };
@@ -330,8 +331,9 @@ function toggleMobileMenu(){
 
   async function initializeGuide() {
     try {
-      // Pulling just the clean content database document
-      const docRef = doc(db, "premiumContent", "diana_mid_guide");
+      // 2. Since diana_mid_guide is your COLLECTION, change "guide_data" 
+      // below to match the exact Document ID string in your middle console column!
+      const docRef = doc(db, "diana_mid_guide", "guide_data");
       const docSnap = await getDoc(docRef);
       
       if (docSnap.exists()) {
@@ -339,7 +341,7 @@ function toggleMobileMenu(){
         // Load default starting section
         showSection('intro');
       } else {
-        document.getElementById('content').innerHTML = `<h2>Error</h2><p>Guide content document missing from database.</p>`;
+        document.getElementById('content').innerHTML = `<h2>Error</h2><p>Guide content document missing from database. Double check your collection name and document ID path.</p>`;
       }
     } catch (e) {
       console.error(e);
@@ -352,7 +354,7 @@ function toggleMobileMenu(){
     if (cachedData && cachedData[sectionKey]) {
       contentBox.innerHTML = cachedData[sectionKey];
     } else {
-      contentBox.innerHTML = `<h2>Section Blank</h2><p>This section hasn't been written or populated yet in your Firestore fields.</p>`;
+      contentBox.innerHTML = `<h2>Section Blank</h2><p>The field key <strong>"${sectionKey}"</strong> hasn't been written or populated yet inside your Firestore document.</p>`;
     }
     // Close mobile menu layout cleanly if it's open
     document.getElementById('mobileMenu').style.display = 'none';
@@ -369,9 +371,6 @@ function toggleMobileMenu(){
   // Execute on load
   initializeGuide();
 </script>
-</body>
-</html>
-
 
 
 
