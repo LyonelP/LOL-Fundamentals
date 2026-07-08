@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>LoL Fundamentals – Diana Mid Guide</title>
+<style>
+  :root{ --gold:#c9aa71; --bg:#0a0f14; --card:#161b22; }
+  body { font-family:"Beaufort for LOL",Arial,sans-serif; background:var(--bg); color:#e6edf3; text-align:center; margin:0; }
+  header { background:linear-gradient(90deg,#0a0f14,#1b2838); border-bottom:2px solid var(--gold); padding:14px 20px; color:var(--gold); font-weight:bold; text-transform:uppercase; }
+  .section { padding:40px 20px; max-width:800px; margin:auto; text-align:left; }
+  .loading-status { text-align:center; color:var(--gold); font-size:1.2rem; margin-top:50px; }
+</style>
+</head>
+<body>
+
+<header>Diana Mid Guide</header>
+
+<section class="section">
+  <div id="guideContent" class="loading-status">Verifying membership status...</div>
+</section>
+
+<script type="module">
+import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
+import { getAuth, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-auth.js";
+import { getFirestore, doc, getDoc } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
+
+const firebaseConfig = {
+  apiKey: "AIzaSyCFRcEV7wdivqONnkjJubAZOjPMixrHMBI",
+  authDomain: "lol-fundamentals.firebaseapp.com",
+  projectId: "lol-fundamentals",
+  storageBucket: "lol-fundamentals.firebasestorage.app",
+  messagingSenderId: "1038440427584",
+  appId: "1:1038440427584:web:a82207151fd370dbedefa5"
+};
+
+const app = initializeApp(firebaseConfig);
+const auth = getAuth(app);
+const firestore = getFirestore(app);
+
+onAuthStateChanged(auth, async user => {
+  const contentContainer = document.getElementById("guideContent");
+
+  if (!user) {
+    // No active session found
+    window.location.href = 'index.html';
+  } else {
+    try {
+      // Fetch data straight from the backend vending machine
+      const docRef = doc(firestore, "premiumContent", "diana_mid_guide");
+      const snap = await getDoc(docRef);
+      
+      if (snap.exists()) {
+        // Safe to inject content—the server validated this request
+        contentContainer.className = ""; 
+        contentContainer.innerHTML = snap.data().text;
+      } else {
+        contentContainer.innerHTML = "Guide database record not found.";
+      }
+    } catch (error) {
+      // If server rules catch a non-paid user manipulating code, it throws permission-denied here
+      console.error("Security access blocked:", error);
+      contentContainer.innerHTML = `
+        <div style="text-align:center; padding:40px;">
+          <h2 style="color:#f94144;">Access Denied</h2>
+          <p>You need an active premium membership to view this guide.</p>
+          <a href="index.html" style="color:var(--gold); text-decoration:none; font-weight:bold;">Return Home</a>
+        </div>
+      `;
+    }
+  }
+});
+</script>
+
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
