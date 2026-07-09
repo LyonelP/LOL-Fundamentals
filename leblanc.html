@@ -11,7 +11,7 @@
   --bg:#0a0f14;
   --card:#161b22;
   --muted:#8b949e;
-  --green:#86efac;
+  --light-green:#86efac;
 }
 
 body {
@@ -25,9 +25,8 @@ body {
   flex-direction: column;
 }
 
-/* HEADER */
 header {
-  background: rgba(22,27,34,0.95);
+  background: rgba(13,17,23,0.9);
   border-bottom: 2px solid var(--gold);
   padding: 16px 20px;
   font-size: 26px;
@@ -38,7 +37,6 @@ header {
   letter-spacing: 0.8px;
 }
 
-/* BACK BUTTON */
 .back-button {
   display: block;
   margin: 18px auto;
@@ -51,16 +49,15 @@ header {
   box-shadow: 0 0 10px rgba(201,170,113,0.5);
   width: fit-content;
 }
+
 .back-button::before { content: "← "; }
 
-/* CONTENT */
 .content-width {
   max-width: 920px;
   margin: 0 auto;
   padding: 0 20px;
 }
 
-/* MATCHUP CARD */
 .matchup-container {
   display: flex;
   gap: 28px;
@@ -73,7 +70,6 @@ header {
     inset 0 0 0 1px rgba(255,255,255,0.02);
 }
 
-/* LEFT */
 .matchup-left {
   display: flex;
   flex-direction: column;
@@ -89,10 +85,9 @@ header {
   box-shadow: 0 0 28px rgba(201,170,113,0.45);
 }
 
-/* WINRATE */
 .winrate-bubble {
   background: rgba(134,239,172,0.15);
-  color: var(--green);
+  color: var(--light-green);
   border: 1px solid rgba(134,239,172,0.45);
   font-weight: 600;
   padding: 6px 16px;
@@ -101,7 +96,6 @@ header {
   letter-spacing: 0.5px;
 }
 
-/* RIGHT */
 .matchup-right {
   flex: 1;
 }
@@ -124,7 +118,6 @@ header {
   line-height: 1.65;
 }
 
-/* VIDEO CARD */
 .video-card {
   margin: 36px auto 40px;
   padding: 26px;
@@ -144,15 +137,22 @@ header {
   border-bottom: 1px solid rgba(201,170,113,0.25);
 }
 
+.video-card ul {
+  padding-left: 18px;
+  margin: 0 0 20px 0;
+}
+
+.video-card li {
+  line-height: 1.65;
+}
+
 .video-card iframe {
   width: 100%;
   height: 480px;
   border: none;
   border-radius: 12px;
-  margin-bottom: 16px;
 }
 
-/* FOOTER */
 footer {
   text-align: center;
   padding: 18px 10px;
@@ -161,7 +161,6 @@ footer {
   margin-top: auto;
 }
 
-/* MOBILE */
 @media (max-width: 600px) {
   .matchup-container {
     flex-direction: column;
@@ -206,21 +205,38 @@ if (localStorage.getItem('lolfundamentals_logged_in') !== 'true') {
         <li>Always try to get the auto on LeBlanc if you’re going to be hit by her W.</li>
         <li>Your R can be used to cancel her first W but not the second one, so it's only good on engage.</li>
         <li>Don’t panic if you die to an all-in or gank. You'll outscale and can 1v1 her later in the game.</li>
-        <li>If you're about to be rooted by LeBlanc's chain, it can be best to gap close with E. This lets you counter the trade before the CC lands.</li>
       </ul>
     </div>
   </div>
 
+
+  <!-- ===== KEY MOMENTS ===== -->
   <div class="video-card">
-    <h2>VODs</h2>
-    <iframe src="https://www.youtube.com/embed/cCYv2EgDbgg" allowfullscreen></iframe>
+    <h2>Key Moments</h2>
+    <ul>
+      <li>
+        If you're about to be rooted by LeBlanc's chain, it can be best to gap close with E.
+        This lets you counter the trade before the CC lands.
+      </li>
+    </ul>
+
+    <iframe src="https://www.youtube.com/embed/adNYWz7uSP0" allowfullscreen></iframe>
   </div>
 
+
+<!-- ===== VODS ===== -->
+<div class="video-card">
+  <h2>VODs</h2>
+
+  <iframe src="https://www.youtube.com/embed/cCYv2EgDbgg" allowfullscreen></iframe>
+
+  <br><br>
+
+  <iframe src="https://www.youtube.com/embed/22uVZfv4-Xs" allowfullscreen></iframe>
 </div>
 
 <footer>© 2026 LoL Fundamentals</footer>
 
 </body>
 </html>
-
 
