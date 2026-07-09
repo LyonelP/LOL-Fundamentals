@@ -18,6 +18,7 @@ html, body {
   padding: 0;
   height: 100%;
 }
+
 body {
   font-family: 'Beaufort for LOL', Arial, Helvetica, sans-serif;
   color: #fff;
@@ -29,12 +30,13 @@ body {
   min-height: 100vh;
 }
 
-/* Slight overlay for readability */
 body::before {
   content: "";
   position: fixed;
-  top: 0; left: 0;
-  width: 100%; height: 100%;
+  top: 0; 
+  left: 0;
+  width: 100%; 
+  height: 100%;
   background: rgba(10,15,20,0.2);
   z-index: -1;
 }
@@ -64,7 +66,11 @@ header {
   transition: all 0.3s;
   box-shadow: 0 0 10px rgba(201,170,113,0.5);
 }
-.back-button::before { content: "← "; }
+
+.back-button::before {
+  content: "← ";
+}
+
 .back-button:hover {
   background: linear-gradient(135deg, #e6c97f, #f0d88b);
   box-shadow: 0 0 15px rgba(255,215,0,0.8);
@@ -95,7 +101,6 @@ header {
   transform: translateY(10px);
   animation: fadeInUp 0.4s forwards;
 }
-.tip-card:nth-child(1) { animation-delay: 0.1s; }
 
 .tip-card h2 {
   color: #c9aa71;
@@ -106,7 +111,11 @@ header {
   padding-bottom: 4px;
 }
 
-/* Video container inside tip card */
+.tip-card p {
+  margin-bottom: 15px;
+}
+
+/* Video container */
 .tip-card .video-container {
   text-align: center;
   margin-top: 15px;
@@ -115,10 +124,12 @@ header {
   border: 2px solid transparent;
   transition: all 0.3s;
 }
+
 .tip-card .video-container:hover {
   border: 2px solid #c9aa71;
   box-shadow: 0 0 20px rgba(201,170,113,0.8);
 }
+
 .tip-card .video-container iframe {
   width: 100%;
   max-width: 800px;
@@ -146,27 +157,54 @@ footer {
 
 /* Responsive */
 @media (max-width: 600px) {
-  header { font-size: 24px; padding: 15px; }
-  .tip-card { padding: 14px 16px; font-size: 15px; }
-  .tip-card .video-container iframe { height: 250px; }
+  header {
+    font-size: 24px;
+    padding: 15px;
+  }
+
+  .tip-card {
+    padding: 14px 16px;
+    font-size: 15px;
+  }
+
+  .tip-card .video-container iframe {
+    height: 250px;
+  }
 }
 </style>
 </head>
+
 <body>
 
 <header>Split Pushing</header>
+
 <a href="skills.html" class="back-button">Back to Skills Hub</a>
 
 <div class="main-content">
+
   <div class="tip-card">
     <h2>Split Pushing</h2>
+
+    <p>
+      When split pushing a tower, wait until the last possible second to show on the tower
+      so the enemy team has the least amount of time to react.
+    </p>
+
     <div class="video-container">
-      <iframe src="https://www.youtube.com/embed/LqW3U48yhE4" title="Split Pushing Guide Video" allowfullscreen></iframe>
+      <iframe 
+        src="https://www.youtube.com/embed/KHB_ZAPYgOE" 
+        title="Split Pushing Guide Video" 
+        allowfullscreen>
+      </iframe>
     </div>
+
   </div>
+
 </div>
 
-<footer>© 2025 LoL Fundamentals · All rights reserved</footer>
+<footer>
+© 2026 LoL Fundamentals · All rights reserved
+</footer>
 
 </body>
 </html>
