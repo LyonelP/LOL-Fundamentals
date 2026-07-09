@@ -315,7 +315,6 @@ function toggleMobileMenu(){
   import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
   import { getFirestore, doc, getDoc } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
   
-  // Your real project configuration values applied directly
   const firebaseConfig = {
     apiKey: "AIzaSyCFRcEV7wdivqONnkjJubAZOjPMixrHMBI",
     authDomain: "lol-fundamentals.firebaseapp.com",
@@ -332,18 +331,25 @@ function toggleMobileMenu(){
 
   async function initializeGuide() {
     try {
-      // FIX: Adjust the collection name (first parameter) to match the leftmost column in your console
-      // where the "diana_mid_guide" document is saved.
       const docRef = doc(db, "premiumContent", "diana_mid_guide");
       const docSnap = await getDoc(docRef);
       
       if (docSnap.exists()) {
         cachedData = docSnap.data();
-        showSection('intro');
+        
+        // AUTO-DETECT RUN: Finds your intro text even if it has a typo, capital letter, or hidden space
+        const documentKeys = Object.keys(cachedData);
+        const activeIntroKey = documentKeys.find(k => k.trim().toLowerCase() === 'intro') || documentKeys[0];
+        
+        if (activeIntroKey) {
+          showSection(activeIntroKey);
+        } else {
+          showSection('intro');
+        }
       } else {
         document.getElementById('content').innerHTML = `
           <h2>Path Mismatch</h2>
-          <p>Could not find the document <strong>"diana_mid_guide"</strong> inside the collection path.</p>
+          <p>Could not find the document <strong>"diana_mid_guide"</strong> inside "premiumContent".</p>
         `;
       }
     } catch (e) {
@@ -354,8 +360,12 @@ function toggleMobileMenu(){
 
   function showSection(sectionKey) {
     const contentBox = document.getElementById('content');
-    if (cachedData && cachedData[sectionKey]) {
-      contentBox.innerHTML = cachedData[sectionKey];
+    
+    // Loose key matching: looks for matching keys ignoring case and whitespace
+    const actualKey = cachedData ? Object.keys(cachedData).find(k => k.trim().toLowerCase() === sectionKey.trim().toLowerCase()) : null;
+    
+    if (actualKey && cachedData[actualKey]) {
+      contentBox.innerHTML = cachedData[actualKey];
     } else {
       const keysList = cachedData ? Object.keys(cachedData).map(k => `"${k}"`).join(', ') : 'none';
       contentBox.innerHTML = `
