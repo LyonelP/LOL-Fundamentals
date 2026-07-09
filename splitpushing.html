@@ -73,7 +73,7 @@ header {
 
 .back-button:hover {
   background: linear-gradient(135deg, #e6c97f, #f0d88b);
-  box-shadow: 0 0 15px rgba(255,215,0,0.8);
+  box-shadow: 0 0 15px rgba(255,215,gold,0.8);
 }
 
 /* Main content */
@@ -97,9 +97,6 @@ header {
   text-align: left;
   font-size: 16px;
   line-height: 1.6;
-  opacity: 0;
-  transform: translateY(10px);
-  animation: fadeInUp 0.4s forwards;
 }
 
 .tip-card h2 {
@@ -111,39 +108,28 @@ header {
   padding-bottom: 4px;
 }
 
-.tip-card p {
-  margin-bottom: 15px;
-}
-
 /* Video container */
-.tip-card .video-container {
+.video-container {
   text-align: center;
   margin-top: 15px;
+  margin-bottom: 20px;
   border-radius: 10px;
   overflow: hidden;
   border: 2px solid transparent;
   transition: all 0.3s;
 }
 
-.tip-card .video-container:hover {
+.video-container:hover {
   border: 2px solid #c9aa71;
   box-shadow: 0 0 20px rgba(201,170,113,0.8);
 }
 
-.tip-card .video-container iframe {
+.video-container iframe {
   width: 100%;
   max-width: 800px;
   height: 450px;
   border: none;
   border-radius: 8px;
-}
-
-/* Fade-in animation */
-@keyframes fadeInUp {
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
 }
 
 /* Footer */
@@ -167,7 +153,7 @@ footer {
     font-size: 15px;
   }
 
-  .tip-card .video-container iframe {
+  .video-container iframe {
     height: 250px;
   }
 }
@@ -185,37 +171,42 @@ footer {
   <div class="tip-card">
     <h2>Split Pushing</h2>
 
+    <!-- Original video -->
+    <div class="video-container">
+      <iframe 
+        src="https://www.youtube.com/embed/LqW3U48yhE4" 
+        title="Split Pushing Guide Video" 
+        allowfullscreen>
+      </iframe>
+    </div>
+
+    <!-- New tip below original video -->
+    <h2>Split Push Tower Vision</h2>
+
     <p>
       When split pushing a tower, wait until the last possible second to show on the tower
       so the enemy team has the least amount of time to react.
     </p>
 
- <div class="video-container">
-  <iframe src="https://www.youtube.com/embed/LqW3U48yhE4" 
-    title="Split Pushing Guide Video" 
-    allowfullscreen>
-  </iframe>
-</div>
-
-<div class="video-container">
-  <iframe src="https://www.youtube.com/embed/KHB_ZAPYgOE" 
-    title="Split Push Tower Vision Tip Video" 
-    allowfullscreen>
-  </iframe>
-</div>
+    <!-- New video below tip -->
+    <div class="video-container">
+      <iframe 
+        src="https://www.youtube.com/embed/KHB_ZAPYgOE" 
+        title="Split Push Tower Vision Tip Video" 
+        allowfullscreen>
+      </iframe>
+    </div>
 
   </div>
 
 </div>
 
 <footer>
-© 2026 LoL Fundamentals · All rights reserved
+© 2025 LoL Fundamentals · All rights reserved
 </footer>
 
 </body>
 </html>
-
-
 
 
 
