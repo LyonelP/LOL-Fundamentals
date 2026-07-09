@@ -310,18 +310,19 @@ function toggleMobileMenu(){
 
 <!-- Firebase Data Integration Script -->
 <!-- Firebase Data Integration Script -->
+<!-- Firebase Data Integration Script -->
 <script type="module">
   import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
   import { getFirestore, doc, getDoc } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
   
-  // 1. paste your real keys from your login page or firebase console here!
+  // Your real project configuration values applied directly
   const firebaseConfig = {
-    apiKey: "YOUR_API_KEY",
-    authDomain: "YOUR_PROJECT_ID.firebaseapp.com",
-    projectId: "YOUR_PROJECT_ID",
-    storageBucket: "YOUR_PROJECT_ID.appspot.com",
-    messagingSenderId: "YOUR_SENDER_ID",
-    appId: "YOUR_APP_ID"
+    apiKey: "AIzaSyCFRcEV7wdivqONnkjJubAZOjPMixrHMBI",
+    authDomain: "lol-fundamentals.firebaseapp.com",
+    projectId: "lol-fundamentals",
+    storageBucket: "lol-fundamentals.firebasestorage.app",
+    messagingSenderId: "1038440427584",
+    appId: "1:1038440427584:web:a82207151fd370dbedefa5"
   };
 
   const app = initializeApp(firebaseConfig);
@@ -331,17 +332,19 @@ function toggleMobileMenu(){
 
   async function initializeGuide() {
     try {
-      // 2. Since diana_mid_guide is your COLLECTION, change "guide_data" 
-      // below to match the exact Document ID string in your middle console column!
-      const docRef = doc(db, "diana_mid_guide", "guide_data");
+      // FIX: Adjust the collection name (first parameter) to match the leftmost column in your console
+      // where the "diana_mid_guide" document is saved.
+      const docRef = doc(db, "premiumContent", "diana_mid_guide");
       const docSnap = await getDoc(docRef);
       
       if (docSnap.exists()) {
         cachedData = docSnap.data();
-        // Load default starting section
         showSection('intro');
       } else {
-        document.getElementById('content').innerHTML = `<h2>Error</h2><p>Guide content document missing from database. Double check your collection name and document ID path.</p>`;
+        document.getElementById('content').innerHTML = `
+          <h2>Path Mismatch</h2>
+          <p>Could not find the document <strong>"diana_mid_guide"</strong> inside the collection path.</p>
+        `;
       }
     } catch (e) {
       console.error(e);
@@ -354,13 +357,19 @@ function toggleMobileMenu(){
     if (cachedData && cachedData[sectionKey]) {
       contentBox.innerHTML = cachedData[sectionKey];
     } else {
-      contentBox.innerHTML = `<h2>Section Blank</h2><p>The field key <strong>"${sectionKey}"</strong> hasn't been written or populated yet inside your Firestore document.</p>`;
+      const keysList = cachedData ? Object.keys(cachedData).map(k => `"${k}"`).join(', ') : 'none';
+      contentBox.innerHTML = `
+        <h2>Section Blank</h2>
+        <p>The layout looked for the field <strong>"${sectionKey}"</strong>, but it wasn't found.</p>
+        <hr style="border:0; border-top:1px solid rgba(255,255,255,0.1); margin:15px 0;">
+        <p style="font-size:14px; color:var(--muted);">
+          <strong>Available keys inside this document:</strong> [ ${keysList} ]
+        </p>
+      `;
     }
-    // Close mobile menu layout cleanly if it's open
     document.getElementById('mobileMenu').style.display = 'none';
   }
 
-  // Hooking up your navigation click actions cleanly across desktop & mobile
   document.querySelectorAll('[data-section]').forEach(link => {
     link.addEventListener('click', (e) => {
       const targetSection = e.target.getAttribute('data-section');
@@ -368,12 +377,5 @@ function toggleMobileMenu(){
     });
   });
 
-  // Execute on load
   initializeGuide();
 </script>
-
-
-
-
-
-
