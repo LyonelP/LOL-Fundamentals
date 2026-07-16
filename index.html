@@ -229,10 +229,10 @@ All guides, matchups, VODS & tools for just <b>$3.33/month</b>!
 
     <div class="plan-buttons">
 
-      <button class="btn" id="yearlyStripeBtn">
+     <button class="btn stripeBtn" id="yearlyStripeBtn">
         $39.99 / Year<br>
-        💳 Card
-      </button>
+        💳 Stripe
+        </button>
 
       <button class="btn paypalBtn" id="yearlyPaypalBtn">
       $39.99 / Year<br>
@@ -480,16 +480,27 @@ document.querySelectorAll('.locked').forEach(card=>{
 }
 
 .paypalBtn {
-  background:#ffc439;
-  border-color:#ffc439;
-  color:#111;
-  box-shadow:0 0 15px rgba(255,196,57,.4);
+  background:#2f81f7;
+  border-color:#c9aa71;
+  color:#fff;
+  box-shadow:0 0 15px rgba(47,129,247,.4);
 }
 
 .paypalBtn:hover {
-  background:#ffda70;
-  border-color:#ffda70;
-  box-shadow:0 0 25px rgba(255,196,57,.6);
+  background:#4795ff;
+  box-shadow:0 0 25px rgba(47,129,247,.55);
+}
+
+.stripeBtn {
+  background:#f2994a;
+  border-color:#f2b96d;
+  color:#fff;
+  box-shadow:0 0 15px rgba(242,153,74,.4);
+}
+
+.stripeBtn:hover {
+  background:#ffb04d;
+  box-shadow:0 0 25px rgba(242,153,74,.55);
 }
 
 #twitchTier3Btn {
