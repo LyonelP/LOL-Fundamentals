@@ -461,7 +461,7 @@ document.querySelectorAll('.locked').forEach(card=>{
 
 .bestValueTag {
   position:absolute;
-  top:-18px;
+  top:-10px;
   left:50%;
   transform:translateX(-50%);
   background:#f2b96d;
@@ -471,19 +471,25 @@ document.querySelectorAll('.locked').forEach(card=>{
   padding:3px 8px;
   border-radius:4px;
   white-space:nowrap;
+  z-index:0;
 }
 
- .paypalBtn {
-  background:#fff;
-  border-color:#fff;
+.plan-buttons .btn {
+  position:relative;
+  z-index:2;
+}
+
+.paypalBtn {
+  background:#ffc439;
+  border-color:#ffc439;
   color:#111;
-  box-shadow:0 0 15px rgba(255,255,255,.3);
+  box-shadow:0 0 15px rgba(255,196,57,.4);
 }
 
 .paypalBtn:hover {
-  background:#e6e6e6;
-  border-color:#e6e6e6;
-  box-shadow:0 0 25px rgba(255,255,255,.5);
+  background:#ffda70;
+  border-color:#ffda70;
+  box-shadow:0 0 25px rgba(255,196,57,.6);
 }
 
 #twitchTier3Btn {
