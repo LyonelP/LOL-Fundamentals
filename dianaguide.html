@@ -312,8 +312,9 @@ function toggleMobileMenu(){
 <!-- Firebase Data Integration Script -->
 <!-- Firebase Data Integration Script -->
 <script type="module">
-  import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
-  import { getFirestore, doc, getDoc } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
+import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
+import { getFirestore, doc, getDoc } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
+import { getAuth, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-auth.js";
   
   const firebaseConfig = {
     apiKey: "AIzaSyCFRcEV7wdivqONnkjJubAZOjPMixrHMBI",
@@ -387,5 +388,13 @@ function toggleMobileMenu(){
     });
   });
 
-  initializeGuide();
+  onAuthStateChanged(auth, (user) => {
+  if (user) {
+    console.log("Firebase logged in:", user.email);
+    initializeGuide();
+  } else {
+    console.log("No Firebase user");
+    window.location.replace("login.html");
+  }
+});
 </script>
