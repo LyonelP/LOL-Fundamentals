@@ -384,13 +384,42 @@ import { getAuth, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/
     });
   });
 
-  onAuthStateChanged(auth, (user) => {
-  if (user) {
-    console.log("Firebase logged in:", user.email);
-    initializeGuide();
-  } else {
-    console.log("No Firebase user");
-    window.location.replace("login.html");
+ onAuthStateChanged(auth, async (user) => {
+  const contentBox = document.getElementById('content');
+
+  if (!user) {
+    contentBox.innerHTML = `
+      <h2>Membership Required</h2>
+      <p>You need an active LoL Fundamentals membership to access this guide.</p>
+      <p>Please login or subscribe to continue.</p>
+    `;
+    return;
+  }
+
+  const email = user.email.toLowerCase();
+
+  try {
+    const paidRef = doc(db, "paidUsers", email);
+    const paidSnap = await getDoc(paidRef);
+
+    if (paidSnap.exists() && paidSnap.data().paid === true) {
+      console.log("Paid user verified:", email);
+      initializeGuide();
+    } else {
+      contentBox.innerHTML = `
+        <h2>Membership Required</h2>
+        <p>Your account does not have an active membership.</p>
+        <p>Please subscribe to access this guide.</p>
+      `;
+    }
+
+  } catch (error) {
+    console.error("Paid check failed:", error);
+    contentBox.innerHTML = `
+      <h2>Error Checking Membership</h2>
+      <p>Unable to verify your membership. Please try again.</p>
+    `;
   }
 });
+  
 </script>
