@@ -5,10 +5,71 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Diana Mid Guide</title>
 
-<script>
-  if (localStorage.getItem('lolfundamentals_logged_in') !== 'true') {
-    window.location.replace('login.html');
+<script type="module">
+  import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
+  import { getFirestore, doc, getDoc } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
+  import { getAuth, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-auth.js";
+
+  const firebaseConfig = {
+    apiKey: "AIzaSyCFRcEV7wdivqONnkjJubAZOjPMixrHMBI",
+    authDomain: "lol-fundamentals.firebaseapp.com",
+    projectId: "lol-fundamentals",
+    storageBucket: "lol-fundamentals.firebasestorage.app",
+    messagingSenderId: "1038440427584",
+    appId: "1:1038440427584:web:a82207151fd370dbedefa5"
+  };
+
+  const app = initializeApp(firebaseConfig);
+  const db = getFirestore(app);
+  const auth = getAuth(app);
+
+  let cachedData = null;
+
+  // New: Only initialize the guide if the user is logged in
+  onAuthStateChanged(auth, (user) => {
+    if (user) {
+      initializeGuide();
+    } else {
+      window.location.replace('login.html');
+    }
+  });
+
+  async function initializeGuide() {
+    try {
+      const docRef = doc(db, "premiumContent", "diana_mid_guide");
+      const docSnap = await getDoc(docRef);
+      
+      if (docSnap.exists()) {
+        cachedData = docSnap.data();
+        const documentKeys = Object.keys(cachedData);
+        const activeIntroKey = documentKeys.find(k => k.trim().toLowerCase() === 'intro') || documentKeys[0];
+        showSection(activeIntroKey);
+      } else {
+        document.getElementById('content').innerHTML = `<h2>Error</h2><p>Guide not found.</p>`;
+      }
+    } catch (e) {
+      console.error(e);
+      document.getElementById('content').innerHTML = `
+        <h2>Access Denied</h2>
+        <p>You do not have permission to view this guide. Make sure you are signed in as a paid member.</p>
+      `;
+    }
   }
+
+  function showSection(sectionKey) {
+    const contentBox = document.getElementById('content');
+    const actualKey = cachedData ? Object.keys(cachedData).find(k => k.trim().toLowerCase() === sectionKey.trim().toLowerCase()) : null;
+    
+    if (actualKey && cachedData[actualKey]) {
+      contentBox.innerHTML = cachedData[actualKey];
+    }
+  }
+
+  document.querySelectorAll('[data-section]').forEach(link => {
+    link.addEventListener('click', (e) => {
+      showSection(e.target.getAttribute('data-section'));
+    });
+  });
 </script>
   
 <style>
