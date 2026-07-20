@@ -206,6 +206,7 @@ header {
     <option>Hardest matchups</option>
     <option>Team fighting</option>
     <option>Closing out the game</option>
+    <option>Outro</option>
   </select>
 </div>
 
@@ -492,6 +493,24 @@ sectionSelect.addEventListener('change', () => {
       <p>Most games are won through baron and elder. Ekko is great at setting up, protecting, and stealing those objectives. Ekko can zone the enemy team with parallel convergence, to gain, and clear out vision.The passive from parallel convergence also helps secure the last hit on objectives with the bonus damage to low health enemies. Ekko can fast push all waves with q, and passive to set up objectives. It’s very difficult for the enemy to gain big advantages against Ekko since he can clear waves against tower pushes, and can threaten stealing baron, and dragons with his kit. Avoid farming camps far away from the objectives. Item purchases past Ekko’s core items aren’t worth risking baron or dragon over. Prioritize staying alive and securing the objectives over kills. Once baron is secured, Ekko is great at rotating between waves, and bringing empowered waves to towers. Use Ekko’s w, and q to zone enemies away from their towers.</p>
     `;
   }
+
+if(value === "Outro"){
+  content = `
+    ${header}
+
+    <p>
+Thank you so much for checking out my Ekko jungle guide and being a member of LoL Fundamentals. 
+</p>
+
+<p>
+What's next? Check out the Ekko Jungle matchup VODs. This is one of the best ways to improve. I used to study Dopa and Faker's VODs the same way. The goal was to be able to pause the game at any point and be able to predict what they would do in the next few seconds. Once you can consistently do this, you'll have an easier time executing the same actions in your own games.
+</p>
+
+<p>
+Good luck on your climb and thank you again for the support!
+</p>
+  `;
+}
 
   sectionInfo.innerHTML = content;
 });
