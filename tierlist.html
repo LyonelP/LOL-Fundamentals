@@ -218,28 +218,13 @@ const IMG_NAME_OVERRIDES = {
   "Twisted Fate": "TwistedFate",
   "Xin Zhao": "XinZhao",
   "Lee Sin": "LeeSin",
+  "Vel'Koz": "Velkoz",
   "Bel'Beth": "Belveth",
   "Renata Glasc": "Renata",
   "Mel": "Mel",
   "Zac": "Zac",
-  "Zaahen": "Zaahen",
-  "Locke": "Locke"
+  "Zaahen": "Zaahen" /* Add this if needed */
 };
-
-// Global variable to store the dynamic patch version
-let currentPatch = 'latest';
-
-/* Fetch latest Data Dragon version directly from Riot */
-async function fetchLatestPatch() {
-  try {
-    const res = await fetch('https://ddragon.leagueoflegends.com/api/versions.json');
-    const versions = await res.json();
-    return versions[0]; // Returns the newest patch string (e.g., "15.x.x" or "16.x.x")
-  } catch (err) {
-    console.error('Could not fetch latest patch version, falling back:', err);
-    return '15.1.1'; // Fallback if Riot API fails
-  }
-}
 
 /* normalize champion names */
 function getImageName(champName) {
@@ -248,6 +233,50 @@ function getImageName(champName) {
   const normalized = champName.normalize('NFD').replace(/[\u0300-\u036f]/g, '');
   const cleaned = normalized.replace(/[\s'’&\.\-]/g, '');
   return cleaned;
+}
+
+/* fallback placeholder */
+const PLACEHOLDER =
+  'data:image/svg+xml;charset=UTF-8,' +
+  encodeURIComponent(
+    `<svg xmlns="http://www.w3.org/2000/svg" width="240" height="240"><rect width="100%" height="100%" fill="#0f1722"/><text x="50%" y="50%" fill="#c9aa71" font-size="20" font-family="Arial" dominant-baseline="middle" text-anchor="middle">No Image</text></svg>`
+  );
+
+/* Always use the latest Riot Data Dragon version */
+let PATCH = "16.13.1"; // fallback if Riot API is temporarily unavailable
+
+async function getLatestPatch() {
+  try {
+    const versions = await fetch(
+      "https://ddragon.leagueoflegends.com/api/versions.json"
+    ).then(r => r.json());
+
+    if (Array.isArray(versions) && versions.length) {
+      PATCH = versions[0];
+    }
+  } catch (e) {
+    console.warn("Couldn't fetch latest patch, using fallback:", PATCH);
+  }
+}
+
+/* parse CSV */
+async function loadCSV(url) {
+  const txt = await fetch(url).then((r) => r.text());
+  const lines = txt.trim().split('\n').map((l) => l.replace(/\r/g, ''));
+  const header = lines[0].split(',').map((h) => h.trim());
+  const champions = {};
+  for (let i = 1; i < lines.length; i++) {
+    if (!lines[i].trim()) continue;
+    const cols = lines[i].split(',');
+    const champRaw = (cols[0] || '').trim();
+    if (!champRaw) continue;
+    champions[champRaw] = {};
+    for (let j = 1; j < header.length && j < cols.length; j++) {
+      const colName = header[j].trim();
+      champions[champRaw][colName] = (cols[j] || '').trim();
+    }
+  }
+  return champions;
 }
 
 /* render champions grouped by tier */
@@ -277,11 +306,9 @@ function renderTierGroups(champRanks, role) {
 
     champsInRank.forEach(champName => {
       const imgName = getImageName(champName);
-      // Dynamic patch version applied here:
       const imgURL = imgName
-        ? `https://ddragon.leagueoflegends.com/cdn/${currentPatch}/img/champion/${imgName}.png`
-        : PLACEHOLDER;
-        
+    ? `https://ddragon.leagueoflegends.com/cdn/${PATCH}/img/champion/${imgName}.png`
+    : PLACEHOLDER;
       const card = document.createElement('div');
       card.className = 'card';
       card.innerHTML = `
@@ -300,15 +327,20 @@ function renderTierGroups(champRanks, role) {
 /* Initialize page */
 (async function init() {
   try {
-    currentPatch = await fetchLatestPatch(); // Get the latest patch first
+    await getLatestPatch();
+
     const champRanks = await loadCSV(CSV_URL);
+
     const roleSelect = document.getElementById('roleSelect');
     roleSelect.addEventListener('change', () =>
       renderTierGroups(champRanks, roleSelect.value)
     );
+
     renderTierGroups(champRanks, roleSelect.value || 'Top');
   } catch (err) {
-    console.error('Initialization failed:', err);
+    console.error('Failed to load CSV', err);
+    document.getElementById('championCards').innerHTML =
+      '<p style="color:#f88">Failed to load tierlist — check your CSV link.</p>';
   }
 })();
 </script>
