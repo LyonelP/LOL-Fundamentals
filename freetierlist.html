@@ -237,6 +237,23 @@ const PLACEHOLDER =
     `<svg xmlns="http://www.w3.org/2000/svg" width="240" height="240"><rect width="100%" height="100%" fill="#0f1722"/><text x="50%" y="50%" fill="#c9aa71" font-size="20" font-family="Arial" dominant-baseline="middle" text-anchor="middle">No Image</text></svg>`
   );
 
+/* Always use the latest Riot Data Dragon version */
+let PATCH = "16.13.1"; // fallback if Riot API is temporarily unavailable
+
+async function getLatestPatch() {
+  try {
+    const versions = await fetch(
+      "https://ddragon.leagueoflegends.com/api/versions.json"
+    ).then(r => r.json());
+
+    if (Array.isArray(versions) && versions.length) {
+      PATCH = versions[0];
+    }
+  } catch (e) {
+    console.warn("Couldn't fetch latest patch, using fallback:", PATCH);
+  }
+}
+  
 /* parse CSV */
 async function loadCSV(url) {
   const txt = await fetch(url).then((r) => r.text());
@@ -285,8 +302,8 @@ function renderTierGroups(champRanks, role) {
     champsInRank.forEach(champName => {
       const imgName = getImageName(champName);
       const imgURL = imgName
-        ? `https://ddragon.leagueoflegends.com/cdn/14.23.1/img/champion/${imgName}.png`
-        : PLACEHOLDER;
+  ? `https://ddragon.leagueoflegends.com/cdn/${PATCH}/img/champion/${imgName}.png`
+  : PLACEHOLDER;
       const card = document.createElement('div');
       card.className = 'card';
       card.innerHTML = `
@@ -305,11 +322,15 @@ function renderTierGroups(champRanks, role) {
 /* Initialize page */
 (async function init() {
   try {
+    await getLatestPatch();
+
     const champRanks = await loadCSV(CSV_URL);
+
     const roleSelect = document.getElementById('roleSelect');
     roleSelect.addEventListener('change', () =>
       renderTierGroups(champRanks, roleSelect.value)
     );
+
     renderTierGroups(champRanks, roleSelect.value || 'Top');
   } catch (err) {
     console.error('Failed to load CSV', err);
