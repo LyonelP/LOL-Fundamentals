@@ -1,0 +1,291 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+
+<title>LoL Fundamentals - Tip of the Day</title>
+
+<style>
+:root{
+  --gold:#c9aa71;
+  --bg:#0a0f14;
+  --card:#161b22;
+  --muted:#8b949e;
+}
+
+*{
+  box-sizing:border-box;
+}
+
+body{
+  margin:0;
+  font-family:"Beaufort for LOL",Arial,Helvetica,sans-serif;
+  background:var(--bg);
+  color:#e6edf3;
+  min-height:100vh;
+  display:flex;
+  flex-direction:column;
+}
+
+/* ===== HEADER ===== */
+
+header{
+  background:linear-gradient(90deg,#0a0f14,#1b2838);
+  border-bottom:2px solid var(--gold);
+  padding:18px;
+  color:var(--gold);
+  font-weight:bold;
+  font-size:22px;
+  letter-spacing:1px;
+  text-transform:uppercase;
+  text-align:center;
+}
+
+/* ===== BACK BUTTON ===== */
+
+.back-button{
+  display:block;
+  margin:18px auto;
+  padding:9px 18px;
+  background:linear-gradient(135deg,#c9aa71,#e0c77b);
+  color:#000;
+  text-decoration:none;
+  border-radius:8px;
+  font-weight:bold;
+  box-shadow:0 0 10px rgba(201,170,113,.5);
+  width:fit-content;
+}
+
+.back-button::before{
+  content:"← ";
+}
+
+/* ===== CONTENT ===== */
+
+.container{
+  flex:1;
+  max-width:900px;
+  width:100%;
+  margin:0 auto;
+  padding:0 20px 40px;
+}
+
+.card{
+  background:linear-gradient(180deg,#161b22,#12161d);
+  border-radius:18px;
+  border:1px solid rgba(201,170,113,.18);
+  box-shadow:
+    0 15px 40px rgba(0,0,0,.7),
+    inset 0 0 0 1px rgba(255,255,255,.02);
+  padding:40px 30px;
+  text-align:center;
+}
+
+.card h1{
+  color:var(--gold);
+  margin-top:0;
+  margin-bottom:20px;
+  font-size:32px;
+}
+
+.day{
+  color:var(--muted);
+  margin-bottom:30px;
+  font-size:15px;
+}
+
+.tip{
+  font-size:22px;
+  line-height:1.8;
+  max-width:650px;
+  margin:0 auto;
+}
+
+.timer{
+  margin-top:35px;
+  color:#cfe1ee;
+  font-size:15px;
+}
+
+/* ===== FOOTER ===== */
+
+footer{
+  text-align:center;
+  padding:18px 10px;
+  font-size:14px;
+  color:var(--muted);
+  margin-top:auto;
+}
+
+/* ===== MOBILE ===== */
+
+@media(max-width:600px){
+
+header{
+  font-size:20px;
+}
+
+.card{
+  padding:30px 20px;
+}
+
+.card h1{
+  font-size:26px;
+}
+
+.tip{
+  font-size:18px;
+}
+
+}
+</style>
+
+</head>
+
+<body>
+
+<header>
+Tip of the Day
+</header>
+
+
+<a href="membershub.html" class="back-button">
+Back to Members Hub
+</a>
+
+
+<div class="container">
+
+<div class="card">
+
+<h1>🔭 Tip of the Day</h1>
+
+<div class="day" id="day"></div>
+
+<div class="tip" id="tip"></div>
+
+<div class="timer" id="timer"></div>
+
+</div>
+
+</div>
+
+
+<footer>
+© 2026 LoL Fundamentals
+</footer>
+
+
+<script>
+
+const tips = [
+
+{
+tip:" It's better for you to be strong than for you and your opponent to be weaker. Avoid trading 1 for 1 and giving up too much cs to harass your opponent."
+},
+
+{
+tip:"Check to see if your teammates are gankable and ping the spots that the enemy jungler would come from to pull off the gank."
+},
+
+{
+tip:"If your enemy hasn't been playing aggressively for a long time and then switches, chances are they have backup."
+},
+
+{
+tip:"Plan your recalls ahead of time. Decide on which gold amount, on which wave, and at what map state you want to back at. Generally it's best to reset with your teammates."
+},
+
+{
+tip:"If your team has low health bars in other lanes they are more likely to be ganked which makes it more rewarding to play aggressively."
+},
+
+{
+tip:"Targeted abilities won' be executed if you're losing vision of your target. Wait until you have regained vision to attack."
+},
+
+{
+tip:" If a lane isn't safe and you want the enemy laner to push, get out of his range of vision. He'll have to assume you could be roaming or buying and will be more likely to push."
+},
+
+{
+tip:"Whenever scuttle crab is damaged it will run away from the source of the damage. ."
+},
+
+{
+tip:"Build Mercury Treads if you’re against double AP: AP Top/JG AP Mid/JG AP ADC/Support."
+},
+
+{
+tip:"Check the enemy jungler's CS to figure out which camps they've cleared."
+},
+
+{
+tip:"You only need to take away one thing from a game to improve at league of legends."
+},
+
+{
+tip:"Watch for the speed of the player icons and the distance in between them on the minimap. Generally the faster they are moving and the closer the players are the more aggressive the area. This can also be used to see a flash cooldown being burned."
+},
+
+{
+tip:"Don't ward spots that could potentially be dangerous. It's better to assume a player is there and play safe."
+}
+
+];
+
+
+const now = new Date();
+
+const start = new Date(now.getFullYear(),0,0);
+
+const diff = now - start;
+
+const oneDay = 1000 * 60 * 60 * 24;
+
+const day = Math.floor(diff / oneDay);
+
+
+const index = (day - 1) % tips.length;
+
+
+document.getElementById("day").textContent =
+"Day " + day + " of 365";
+
+
+document.getElementById("tip").textContent =
+tips[index].tip;
+
+
+
+function updateTimer(){
+
+const tomorrow = new Date();
+
+tomorrow.setHours(24,0,0,0);
+
+const remaining = tomorrow - new Date();
+
+
+const hours = Math.floor(remaining / 1000 / 60 / 60);
+
+const minutes = Math.floor((remaining / 1000 / 60) % 60);
+
+const seconds = Math.floor((remaining / 1000) % 60);
+
+
+document.getElementById("timer").textContent =
+"Next tip in " + hours + "h " + minutes + "m " + seconds + "s";
+
+}
+
+
+updateTimer();
+
+setInterval(updateTimer,1000);
+
+</script>
+
+</body>
+</html>
