@@ -13,248 +13,350 @@
 <link rel="icon" type="image/png" sizes="16x16" href="https://i.imgur.com/NFO4uNP.png">
 <link rel="apple-touch-icon" href="https://i.imgur.com/NFO4uNP.png">
 <style>
-body {
-  margin: 0;
-  padding: 0;
-  font-family: "Beaufort for LOL", serif;
-  background: #0a0f1a;
-  color: #d8c48a;
-  text-align: center;
-}
-header {
-  font-size: 36px;
-  font-weight: 700;
-  padding: 5px 0;
-  letter-spacing: 2px;
-}
-header::after {
-  content: "";
-  display: block;
-  width: 100%;
-  height: 2px;
-  background: #d8c48a;
-  margin-top: 10px;
-}
-.return-btn {
-  display: inline-block;
-  margin: 10px auto 20px;
-  padding: 10px 24px;
-  background: linear-gradient(135deg, #d8c48a, #f0d88b);
-  color: #000;
-  border-radius: 6px;
-  text-decoration: none;
-  font-weight: bold;
-}
-.return-btn:hover {
-  background: linear-gradient(135deg, #f0d88b, #ffd66f);
-}
-.container {
-  width: 90%;
-  max-width: 900px;
-  margin: 0 auto 20px;
-}
-.card {
-  background: rgba(12,18,30,0.8);
-  border: 1px solid rgba(255,255,255,0.08);
-  padding: 16px 20px;
-  border-radius: 10px;
-  text-align: left;
-  margin-bottom: 20px;
-}
-.card label {
-  display: block;
-  margin-bottom: 6px;
-  font-size: 16px;
-}
-input[type=number], select {
-  padding: 10px;
-  border-radius: 8px;
-  border: 1px solid rgba(255,255,255,0.08);
-  background: rgba(15,22,35,0.9);
-  color: white;
-  font-size: 16px;
-  appearance: none;
-  background-image: url("data:image/svg+xml,%3Csvg fill='white' height='32' viewBox='0 0 24 24' width='32' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M7 10l5 5 5-5z'/%3E%3C/svg%3E");
-  background-repeat: no-repeat;
-  background-position: right 12px center;
-  background-size: 24px;
-  width: 100%;
-  box-sizing: border-box;
-}
-.top-row {
-  display: flex;
-  gap: 10px;
-  margin-bottom: 10px;
-  flex-wrap: wrap;
-}
-.top-row .top-item {
-  flex: 1 1 30%;
-  min-width: 120px;
-}
-.ability-card { margin-bottom: 20px; }
-.ability-row { display: flex; flex-direction: column; margin-bottom: 12px; }
-.ability-row .first-line { display: flex; justify-content: space-between; align-items: center; }
-.ability-row .first-line span { font-weight: bold; }
-.ability-row select.rank-select { width: 60px; }
-.ability-row select.uses-select { width: 100%; margin-top: 6px; }
-button#calculate-btn {
-  padding: 12px 26px;
-  font-size: 16px;
-  font-weight: bold;
-  background: #2f81f7;
-  color: #fff;
-  border: none;
-  border-radius: 8px;
-  cursor: pointer;
-  margin-bottom: 20px;
-}
-button#calculate-btn:hover { background: #1b5fc7; }
-table {
-  width: 100%;
-  border-collapse: collapse;
-  table-layout: fixed;
-}
-th, td {
-  padding: 12px;
-  border-bottom: 1px solid rgba(255,255,255,0.05);
-  word-wrap: break-word;
-}
-th { color: #d8c48a; font-size: 16px; }
-td { color: white; font-size: 15px; text-align: center; }
-#total-damage {
-  font-size: 18px;
-  font-weight: bold;
-  color: #d8c48a;
-}
-footer { text-align: center; margin-top: 20px; padding: 15px 0; color: #8b949e; font-size: 14px; }
-.items-grid {
-  display: flex;
-  gap: 10px;
-  flex-wrap: wrap;
-}
-.items-grid select { flex: 1 1 30%; min-width: 100px; }
-#item-stats p span { color: white; }
-@media(max-width:600px){
-  .top-row .top-item { flex: 1 1 100%; }
-  .ability-row .first-line { flex-direction: row; justify-content: space-between; }
-  .ability-row select.uses-select { width: 100%; margin-top: 6px; }
-}
+  :root {
+    --gold: #c9aa71;
+    --muted: #9da7b3;
+  }
+
+  html, body {
+    margin: 0;
+    padding: 0;
+    height: 100%;
+    font-family: Arial, Helvetica, sans-serif;
+  }
+
+  body {
+    background: url('https://ddragon.leagueoflegends.com/cdn/img/champion/splash/Diana_77.jpg') no-repeat center center fixed;
+    background-size: cover;
+    color: #e6edf3;
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+    position: relative;
+  }
+
+  body::before {
+    content: "";
+    position: fixed;
+    inset: 0;
+    background: 
+      radial-gradient(circle at top, rgba(200,120,40,0.22), transparent 60%),
+      rgba(10,12,18,0.84);
+    z-index: -1;
+  }
+
+  header {
+    width: 100%;
+    background: rgba(13,17,23,0.9);
+    border-bottom: 2px solid var(--gold);
+    padding: 20px 0;
+    font-size: 26px;
+    font-weight: bold;
+    color: var(--gold);
+    text-align: center;
+    text-transform: uppercase;
+    z-index: 10;
+    position: relative;
+  }
+
+  .return-wrap {
+    width: 100%;
+    text-align: center;
+    margin: 16px 0;
+    position: relative;
+    z-index: 10;
+  }
+
+  .return-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 10px 22px;
+    background: linear-gradient(135deg, var(--gold), #e0c77b);
+    color: #000;
+    text-decoration: none;
+    border-radius: 10px;
+    font-weight: bold;
+    transition: filter 0.2s;
+  }
+
+  .return-btn:hover {
+    filter: brightness(1.1);
+  }
+
+  .return-btn::before {
+    content: "←";
+  }
+
+  .container {
+    width: 85%;
+    max-width: 900px;
+    margin: 0 auto 40px;
+    position: relative;
+    z-index: 1;
+  }
+
+  .card {
+    background: rgba(255, 255, 255, 0.03);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    padding: 20px;
+    border-radius: 16px;
+    text-align: left;
+    margin-bottom: 20px;
+    box-sizing: border-box;
+    box-shadow: 0 12px 40px rgba(0, 0, 0, 0.4);
+  }
+
+  .card label {
+    display: block;
+    margin-bottom: 6px;
+    font-size: 14px;
+    color: #cfe1ee;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+  }
+
+  input[type=number], select {
+    padding: 10px;
+    border-radius: 8px;
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    background: rgba(15,22,35,0.9);
+    color: white;
+    font-size: 15px;
+    appearance: none;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    background-image: url("data:image/svg+xml,%3Csvg fill='white' height='24' viewBox='0 0 24 24' width='24' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M7 10l5 5 5-5z'/%3E%3C/svg%3E");
+    background-repeat: no-repeat;
+    background-position: right 10px center;
+    background-size: 20px;
+    width: 100%;
+    box-sizing: border-box;
+  }
+
+  input[type=number]:focus, select:focus {
+    border-color: var(--gold);
+    outline: none;
+  }
+
+  .top-row {
+    display: flex;
+    gap: 15px;
+    margin-bottom: 0;
+    flex-wrap: wrap;
+  }
+  .top-row .top-item {
+    flex: 1 1 30%;
+    min-width: 120px;
+  }
+
+  .ability-card { margin-bottom: 20px; }
+  .ability-row { display: flex; flex-direction: column; margin-bottom: 14px; }
+  .ability-row:last-child { margin-bottom: 0; }
+  .ability-row .first-line { display: flex; justify-content: space-between; align-items: center; margin-bottom: 6px; }
+  .ability-row .first-line span { font-weight: bold; color: #cfe1ee; font-size: 14px; }
+  .ability-row select.rank-select { width: 70px; margin-bottom: 0; padding: 6px; }
+  .ability-row select.uses-select { width: 100%; margin-top: 0; }
+
+  button#calculate-btn {
+    margin: 20px auto 30px;
+    display: block;
+    padding: 12px 30px;
+    font-size: 16px;
+    font-weight: bold;
+    background: linear-gradient(135deg, var(--gold), #e0c77b);
+    color: #000;
+    border: none;
+    border-radius: 10px;
+    cursor: pointer;
+    transition: filter 0.2s;
+  }
+  button#calculate-btn:hover {
+    filter: brightness(1.1);
+  }
+
+  .table-card {
+    margin-top: 10px;
+    background: rgba(255, 255, 255, 0.03);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    border-radius: 16px;
+    padding: 20px;
+    box-shadow: 0 12px 40px rgba(0, 0, 0, 0.4);
+  }
+
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    table-layout: fixed;
+  }
+  th, td {
+    padding: 14px 8px;
+    border-bottom: 1px solid rgba(255,255,255,0.05);
+    word-wrap: break-word;
+  }
+  th { 
+    color: var(--gold); 
+    font-size: 15px; 
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+  }
+  td { color: #e6edf3; font-size: 14px; text-align: center; }
+  
+  #total-damage {
+    font-size: 16px;
+    font-weight: bold;
+    color: var(--gold);
+  }
+
+  footer { 
+    text-align: center; 
+    padding: 16px; 
+    color: var(--muted); 
+    font-size: 13px; 
+    margin-top: auto;
+  }
+
+  .items-grid {
+    display: flex;
+    gap: 10px;
+    flex-wrap: wrap;
+  }
+  .items-grid select { flex: 1 1 30%; min-width: 100px; margin-bottom: 0; }
+  
+  #item-stats p {
+    margin: 6px 0;
+    color: var(--muted);
+  }
+  #item-stats p span { color: white; font-weight: bold; }
+
+  @media(max-width:700px){
+    .top-row .top-item { flex: 1 1 100%; }
+    .ability-row .first-line { flex-direction: row; justify-content: space-between; }
+    .ability-row select.uses-select { width: 100%; margin-top: 0; }
+    .container {
+      width: 94%;
+      margin: 0 auto 20px;
+    }
+  }
 </style>
 </head>
 <body>
 
-<header>DIANA COMBO CALCULATOR</header>
-<a class="return-btn" href="membershub.html">BACK TO MEMBERS HUB</a>
+<header>Diana Combo Calculator</header>
+<div class="return-wrap">
+  <a class="return-btn" href="membershub.html">Back to Members Hub</a>
+</div>
 
 <div class="container">
 
 <div class="card">
-<div class="top-row">
-  <div class="top-item">
-    <label>Enemy HP</label>
-    <input type="number" id="enemy-hp" value="1000">
+  <div class="top-row">
+    <div class="top-item">
+      <label>Enemy HP</label>
+      <input type="number" id="enemy-hp" value="1000">
+    </div>
+    <div class="top-item">
+      <label>Enemy Armor</label>
+      <input type="number" id="enemy-armor" value="30">
+    </div>
+    <div class="top-item">
+      <label>Enemy MR</label>
+      <input type="number" id="enemy-mr" value="30">
+    </div>
   </div>
-  <div class="top-item">
-    <label>Enemy Armor</label>
-    <input type="number" id="enemy-armor" value="30">
-  </div>
-  <div class="top-item">
-    <label>Enemy MR</label>
-    <input type="number" id="enemy-mr" value="30">
-  </div>
-</div>
 </div>
 
 <div class="card">
-<label>Items</label>
-<div class="items-grid">
-  <select id="item-1"></select>
-  <select id="item-2"></select>
-  <select id="item-3"></select>
-  <select id="item-4"></select>
-  <select id="item-5"></select>
-  <select id="item-6"></select>
-</div>
+  <label>Items</label>
+  <div class="items-grid">
+    <select id="item-1"></select>
+    <select id="item-2"></select>
+    <select id="item-3"></select>
+    <select id="item-4"></select>
+    <select id="item-5"></select>
+    <select id="item-6"></select>
+  </div>
 </div>
 
 <div class="card" id="item-stats">
-<strong>Item Stats:</strong>
-<p>Total AP: <span id="total-ap">0</span></p>
-<p>Flat Pen: <span id="total-flat-pen">0</span></p>
-<p>% Pen: <span id="total-perc-pen">0%</span></p>
+  <label style="margin-bottom:10px;">Item Stats</label>
+  <p>Total AP: <span id="total-ap">0</span></p>
+  <p>Flat Pen: <span id="total-flat-pen">0</span></p>
+  <p>% Pen: <span id="total-perc-pen">0%</span></p>
 </div>
 
 <div class="card">
-<label>Diana Level</label>
-<select id="diana-level"></select>
+  <label>Diana Level</label>
+  <select id="diana-level"></select>
 </div>
 
 <div class="card ability-card">
-<label>Ability Usage</label>
+  <label style="margin-bottom: 14px;">Ability Usage</label>
 
-<div class="ability-row">
-  <div class="first-line"><span>Auto Attack</span></div>
-  <select class="uses-select" id="aa-count"></select>
-</div>
-
-<div class="ability-row">
-  <div class="first-line"><span>Passive</span></div>
-  <select class="uses-select" id="passive-count"></select>
-</div>
-
-<div class="ability-row">
-  <div class="first-line"><span>Q Rank</span>
-    <select class="rank-select" id="q-rank"></select>
+  <div class="ability-row">
+    <div class="first-line"><span>Auto Attack</span></div>
+    <select class="uses-select" id="aa-count"></select>
   </div>
-  <select class="uses-select" id="q-count"></select>
-</div>
 
-<div class="ability-row">
-  <div class="first-line"><span>W Rank</span>
-    <select class="rank-select" id="w-rank"></select>
+  <div class="ability-row">
+    <div class="first-line"><span>Passive</span></div>
+    <select class="uses-select" id="passive-count"></select>
   </div>
-  <select class="uses-select" id="w-count"></select>
-</div>
 
-<div class="ability-row">
-  <div class="first-line"><span>E Rank</span>
-    <select class="rank-select" id="e-rank"></select>
+  <div class="ability-row">
+    <div class="first-line"><span>Q Rank</span>
+      <select class="rank-select" id="q-rank"></select>
+    </div>
+    <select class="uses-select" id="q-count"></select>
   </div>
-  <select class="uses-select" id="e-count"></select>
-</div>
 
-<div class="ability-row">
-  <div class="first-line"><span>R Rank</span>
-    <select class="rank-select" id="r-rank"></select>
+  <div class="ability-row">
+    <div class="first-line"><span>W Rank</span>
+      <select class="rank-select" id="w-rank"></select>
+    </div>
+    <select class="uses-select" id="w-count"></select>
   </div>
-  <select class="uses-select" id="r-count"></select>
-</div>
 
+  <div class="ability-row">
+    <div class="first-line"><span>E Rank</span>
+      <select class="rank-select" id="e-rank"></select>
+    </div>
+    <select class="uses-select" id="e-count"></select>
+  </div>
+
+  <div class="ability-row">
+    <div class="first-line"><span>R Rank</span>
+      <select class="rank-select" id="r-rank"></select>
+    </div>
+    <select class="uses-select" id="r-count"></select>
+  </div>
 </div>
 
 <button id="calculate-btn">Calculate Combo Damage</button>
 
-<div class="card">
-<table>
-<thead>
-<tr><th>Ability</th><th>Damage</th><th>Damage Type</th></tr>
-</thead>
-<tbody id="damage-table">
-<tr><td>Auto Attack</td><td>—</td><td>Physical</td></tr>
-<tr><td>Passive</td><td>—</td><td>Magic</td></tr>
-<tr><td>Q</td><td>—</td><td>Magic</td></tr>
-<tr><td>W</td><td>—</td><td>Magic</td></tr>
-<tr><td>E</td><td>—</td><td>Magic</td></tr>
-<tr><td>R</td><td>—</td><td>Magic</td></tr>
-<tr><td>Item Effects</td><td id="bonus-items-dmg">—</td><td>Magic</td></tr>
-<tr><td><strong>Total Damage</strong></td><td id="total-damage">—</td><td id="total-damage-type">—</td></tr>
-</tbody>
-</table>
+<div class="table-card">
+  <table>
+    <thead>
+      <tr><th>Ability</th><th>Damage</th><th>Damage Type</th></tr>
+    </thead>
+    <tbody id="damage-table">
+      <tr><td>Auto Attack</td><td>—</td><td>Physical</td></tr>
+      <tr><td>Passive</td><td>—</td><td>Magic</td></tr>
+      <tr><td>Q</td><td>—</td><td>Magic</td></tr>
+      <tr><td>W</td><td>—</td><td>Magic</td></tr>
+      <tr><td>E</td><td>—</td><td>Magic</td></tr>
+      <tr><td>R</td><td>—</td><td>Magic</td></tr>
+      <tr><td>Item Effects</td><td id="bonus-items-dmg">—</td><td>Magic</td></tr>
+      <tr><td><strong>Total</strong></td><td id="total-damage">—</td><td id="total-damage-type">—</td></tr>
+    </tbody>
+  </table>
 </div>
 
 </div>
 
-<footer>© 2026 LoL Fundamentals · All rights reserved</footer>
+<footer>© 2026 LoL Fundamentals</footer>
 
 <script>
 const AP_ITEMS = [
@@ -303,15 +405,14 @@ function populateItems() {
       select.appendChild(o);
     });
     if(i===1){
-  const doransIndex = AP_ITEMS.findIndex(
-    item => item.name === "Doran's Ring"
-  );
-
-  if(doransIndex !== -1){
-    select.value = doransIndex;
-  }
-}
-    select.addEventListener("change",updateItemStats);
+      const doransIndex = AP_ITEMS.findIndex(
+        item => item.name === "Doran's Ring"
+      );
+      if(doransIndex !== -1){
+        select.value = doransIndex;
+      }
+    }
+    select.addEventListener("change", updateItemStats);
   }
 }
 
@@ -414,7 +515,6 @@ function calcPhysicalDamage(base, count, armor){
   return Math.round(base * count * 100 / (100 + armor));
 }
 
-// Bonus item effects
 function calcBonusItemDamage(totalAP, mr, flatPen, percPen, level) {
   let bonusMagic = 0;
   for (let i = 1; i <= 6; i++) {
@@ -439,15 +539,14 @@ function calcBonusItemDamage(totalAP, mr, flatPen, percPen, level) {
       bonusMagic += Math.round(raw * 100 / (100 + effectiveMR));
     }
 
-if (item.bonus === "duskdawn") {
-  const baseAD = getBaseAD(level);
-
-  let raw = 0.75 * baseAD + 0.10 * totalAP;
-  let effectiveMR = mr - flatPen;
-  if (effectiveMR < 0) effectiveMR = 0;
-  effectiveMR *= 1 - percPen;
-  bonusMagic += Math.round(raw * 100 / (100 + effectiveMR));
-}
+    if (item.bonus === "duskdawn") {
+      const baseAD = getBaseAD(level);
+      let raw = 0.75 * baseAD + 0.10 * totalAP;
+      let effectiveMR = mr - flatPen;
+      if (effectiveMR < 0) effectiveMR = 0;
+      effectiveMR *= 1 - percPen;
+      bonusMagic += Math.round(raw * 100 / (100 + effectiveMR));
+    }
 
     if(item.bonus==="nashor"){
       let aaRaw = 15 + 0.15*totalAP;
@@ -490,17 +589,16 @@ function calculateCombo(){
       dmg = calcPhysicalDamage(ab.base, ab.count, armor);
       totalPhysical += dmg;
     }
-    rows[i].cells[1].textContent=dmg;
+    rows[i].cells[1].textContent=dmg || "—";
   });
 
-  // Bonus items
   const bonus = calcBonusItemDamage(totalAP, mr, flatPen, percPen, level);
-  document.getElementById("bonus-items-dmg").textContent = bonus;
+  document.getElementById("bonus-items-dmg").textContent = bonus || "—";
   totalMagic += bonus;
 
   const total = totalMagic + totalPhysical;
   document.getElementById("total-damage").textContent = total;
-  document.getElementById("total-damage-type").textContent = `Magic: ${totalMagic} | Physical: ${totalPhysical}`;
+  document.getElementById("total-damage-type").textContent = `Magic: ${totalMagic} • Physical: ${totalPhysical}`;
 }
 
 document.addEventListener("DOMContentLoaded",()=>{
@@ -508,18 +606,14 @@ document.addEventListener("DOMContentLoaded",()=>{
   populateLevels();
   populateRanksAndUses();
   updateItemStats();
-  document.getElementById("calculate-btn").addEventListener("click",calculateCombo);
+  
+  // Item stats still update live when selecting items, but damage output is restricted to button click only.
+  document.getElementById("calculate-btn").addEventListener("click", calculateCombo);
 });
 </script>
 
 </body>
 </html>
-
-
-
-
-
-
 
 
 
