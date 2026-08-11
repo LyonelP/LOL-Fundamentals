@@ -366,7 +366,7 @@
         <label>Secondary Path</label>
         <select id="secondary-path">
           <option value="domination">Domination</option>
-          <option value="sorcery">Sorcery</option>
+          <option value="sorcery" selected>Sorcery</option>
           <option value="precision">Precision</option>
           <option value="resolve">Resolve</option>
           <option value="inspiration">Inspiration</option>
@@ -414,7 +414,9 @@ const RUNE_DAMAGE = {
   "Grasp of the Undying": { type:"Magic" },
   "Shield Bash": { type:"Magic" },
   "Scorch": { type:"Magic", min:20, max:40 },
-  "Comet": { type:"Magic", min:30, max:130, ratio:0.1 }
+  "Comet": { type:"Magic", min:30, max:130, ratio:0.1 },
+  "Deathfire Touch": { type:"Magic", min:1.5, max:6.53, adRatio:0.035, apRatio:0.0125 },
+  "Press the Attack": { type:"Physical", min:40, max:174.12 }
 };
 
 const RUNE_ICONS = {
@@ -435,6 +437,7 @@ const RUNE_ICONS = {
   "Aery": "https://raw.communitydragon.org/latest/plugins/rcp-be-lol-game-data/global/default/v1/perk-images/styles/sorcery/summonaery/summonaery.png",
   "Comet": "https://raw.communitydragon.org/latest/plugins/rcp-be-lol-game-data/global/default/v1/perk-images/styles/sorcery/arcanecomet/arcanecomet.png",
   "Phase Rush": "https://raw.communitydragon.org/latest/plugins/rcp-be-lol-game-data/global/default/v1/perk-images/styles/sorcery/phaserush/phaserush.png",
+  "Deathfire Touch": "https://raw.communitydragon.org/latest/plugins/rcp-be-lol-game-data/global/default/v1/perk-images/styles/sorcery/deathfiretouch/deathfiretouch.png",
   "Manaflow Band": "https://raw.communitydragon.org/latest/plugins/rcp-be-lol-game-data/global/default/v1/perk-images/styles/sorcery/manaflowband/manaflowband.png",
   "Nimbus Cloak": "https://raw.communitydragon.org/latest/plugins/rcp-be-lol-game-data/global/default/v1/perk-images/styles/sorcery/nimbuscloak/nimbuscloak.png",
   "Transcendence": "https://raw.communitydragon.org/latest/plugins/rcp-be-lol-game-data/global/default/v1/perk-images/styles/sorcery/transcendence/transcendence.png",
@@ -452,6 +455,8 @@ const RUNE_ICONS = {
   "Coup de Grace": "https://raw.communitydragon.org/latest/plugins/rcp-be-lol-game-data/global/default/v1/perk-images/styles/precision/coupdegrace/coupdegrace.png",
   "Legend: Alacrity": "https://raw.communitydragon.org/latest/plugins/rcp-be-lol-game-data/global/default/v1/perk-images/styles/precision/legendalacrity/legendalacrity.png",
   "Legend: Tenacity": "https://raw.communitydragon.org/latest/plugins/rcp-be-lol-game-data/global/default/v1/perk-images/styles/precision/legendtenacity/legendtenacity.png",
+  "Legend: Bloodline": "https://raw.communitydragon.org/latest/plugins/rcp-be-lol-game-data/global/default/v1/perk-images/styles/precision/legendbloodline/bloodline.png",
+  "Coup De Grace": "https://raw.communitydragon.org/latest/plugins/rcp-be-lol-game-data/global/default/v1/perk-images/styles/precision/coupdegrace/coupdegrace.png",
   "Cut Down": "https://raw.communitydragon.org/latest/plugins/rcp-be-lol-game-data/global/default/v1/perk-images/styles/precision/cutdown/cutdown.png",
   "Last Stand": "https://raw.communitydragon.org/latest/plugins/rcp-be-lol-game-data/global/default/v1/perk-images/styles/precision/laststand/laststand.png",
 
@@ -504,7 +509,7 @@ const PATH_ROWS = {
     ["Treasure Hunter","Relentless Hunter","Ultimate Hunter"]
   ],
   sorcery: [
-    ["Aery","Comet","Stormraider's Surge"],
+    ["Aery","Comet","Stormraider's Surge","Deathfire Touch"],
     ["Axiom Arcanist","Manaflow Band","Nimbus Cloak"],
     ["Transcendence","Celerity","Absolute Focus"],
     ["Scorch","Waterwalking","Gathering Storm"]
@@ -646,7 +651,7 @@ function populatePrimary(path){
   populateSelect(document.getElementById("primary-slot-4"),data.slot4);
 }
 
-function populateSecondary(path){
+function populateSecondary(path, emptySelection = false){
   const data = getSecondaryList(path);
   const slot1El = document.getElementById("secondary-slot-1");
   const slot2El = document.getElementById("secondary-slot-2");
@@ -654,7 +659,10 @@ function populateSecondary(path){
   populateSelect(slot1El, data);
   populateSelect(slot2El, data);
 
-  if(path === "sorcery") {
+  if (emptySelection) {
+    slot1El.value = "";
+    slot2El.value = "";
+  } else if(path === "sorcery") {
     slot1El.value = "Manaflow Band";
     slot2El.value = "Transcendence";
   } else if(data.length >= 2) {
@@ -699,7 +707,7 @@ function scaleDamage(min,max,level){ return Math.round(min + (max-min)*(level-1)
 
 function getDianaHP(level){ return Math.round(740 + (2674 - 740) * (level - 1) / 17); }
 
-function calcDamage(rune,level,ap,mr){
+function calcDamage(rune,level,ap,armor,mr){
   if(!rune || rune==="Null" || rune==="—") return {damage:0,type:""};
   let dmg=0, type="Magic";
   const hp = getDianaHP(level);
@@ -722,6 +730,19 @@ function calcDamage(rune,level,ap,mr){
   } else if(rune==="Comet"){
     dmg=scaleDamage(30,130,level) + Math.round(0.1*ap);
     dmg=Math.round(dmg*100/(100+mr));
+  } else if(rune==="Deathfire Touch"){
+    const baseTick = 1.5 + (6.53 - 1.5) * (level - 1) / 17;
+    const bonusAD = 0; 
+    const tickDmg = baseTick + (0.035 * bonusAD) + (0.0125 * ap);
+    let totalBurn = tickDmg * 8;
+    totalBurn *= 1.75; 
+    dmg = Math.round(totalBurn);
+    dmg = Math.round(dmg * 100 / (100 + mr));
+    type = "Magic";
+  } else if(rune==="Press the Attack"){
+    dmg = scaleDamage(40, 174.12, level);
+    dmg = Math.round(dmg * 100 / (100 + armor));
+    type = "Physical";
   } else {
     const meta=RUNE_DAMAGE[rune];
     if(!meta) return {damage:0,type:""};
@@ -734,6 +755,7 @@ function calcDamage(rune,level,ap,mr){
 
 function calculateDamage(){
   const level = parseInt(document.getElementById("diana-level").value, 10);
+  const enemyArmor = parseFloat(document.getElementById("enemy-armor").value)||30;
   const enemyMR = parseFloat(document.getElementById("enemy-mr").value)||30;
   const ap = 18;
 
@@ -755,7 +777,7 @@ function calculateDamage(){
 
   for(let i=0;i<6;i++){
     const rune = slots[i]||"—";
-    const {damage,type} = calcDamage(rune,level,ap,enemyMR);
+    const {damage,type} = calcDamage(rune,level,ap,enemyArmor,enemyMR);
 
     if(type==="Magic") totalMagic += damage;
     else if(type==="Physical") totalPhysical += damage;
@@ -779,15 +801,25 @@ function calculateDamage(){
 }
 
 function enforcePaths(){
-  const primary=document.getElementById("primary-path").value;
-  const secondary=document.getElementById("secondary-path");
-  for(let i=0;i<secondary.options.length;i++){
-    secondary.options[i].disabled=(secondary.options[i].value===primary);
-  }
-  if(secondary.value===primary){
-    for(let i=0;i<secondary.options.length;i++){
-      if(!secondary.options[i].disabled){ secondary.selectedIndex=i; break; }
+  const primary = document.getElementById("primary-path").value;
+  const secondary = document.getElementById("secondary-path");
+  
+  for(let i=0; i<secondary.options.length; i++){
+    if(secondary.options[i].value === primary){
+      secondary.options[i].disabled = true;
+    } else {
+      secondary.options[i].disabled = false;
     }
+  }
+
+  if(secondary.value === primary){
+    for(let i=0; i<secondary.options.length; i++){
+      if(!secondary.options[i].disabled){
+        secondary.selectedIndex = i;
+        break;
+      }
+    }
+    populateSecondary(secondary.value, true);
   }
 }
 
@@ -807,24 +839,21 @@ document.addEventListener("DOMContentLoaded",()=>{
   });
 
   document.getElementById("primary-path").addEventListener("change",e=>{
-    populatePrimary(e.target.value); enforcePaths();
+    populatePrimary(e.target.value); 
+    enforcePaths();
   });
   
   document.getElementById("secondary-path").addEventListener("change",e=>{
-    populateSecondary(e.target.value); enforcePaths();
+    populateSecondary(e.target.value); 
+    enforcePaths();
   });
 
-  document.getElementById("secondary-slot-1").addEventListener("change", () => {
-    validateSecondarySlots('secondary-slot-1');
-  });
-  
-  document.getElementById("secondary-slot-2").addEventListener("change", () => {
-    validateSecondarySlots('secondary-slot-2');
-  });
+  document.getElementById("secondary-slot-1").addEventListener("change", () => validateSecondarySlots('secondary-slot-1'));
+  document.getElementById("secondary-slot-2").addEventListener("change", () => validateSecondarySlots('secondary-slot-2'));
 
   document.getElementById("calculate-btn").addEventListener("click", calculateDamage);
+  calculateDamage();
 });
 </script>
-
 </body>
 </html>
