@@ -298,7 +298,7 @@
     border: 1px solid rgba(255, 255, 255, 0.12);
     border-radius: 8px;
     box-shadow: 0 8px 24px rgba(0,0,0,0.6);
-    max-height: 520px;
+    max-height: 600px;
     overflow-y: auto;
     z-index: 100;
     display: none;
@@ -469,6 +469,7 @@ const AP_ITEMS = [
 
   // 2. Boots
   {name:"Sorcerer's Shoes", id:3020, ap:0, flatPen:12, percPen:0},
+  {name:"Spellslinger's Shoes", id:3020, customIcon:"https://raw.communitydragon.org/latest/game/assets/items/icons2d/3020_sorcerershoes.png", ap:0, flatPen:18, percPen:0.08},
   {name:"Mercury's Treads", id:3111, ap:0, flatPen:0, percPen:0},
   {name:"Plated Steelcaps", id:3047, ap:0, flatPen:0, percPen:0},
 
@@ -622,7 +623,8 @@ function getItemStats(){
 
     totalAP+=item.ap;
     flatPen+=item.flatPen;
-    percPen+=item.percPen;
+    // Stack percentage penetration multiplicatively or additively depending on standard convention (here combined or stacked)
+    percPen = 1 - (1 - percPen) * (1 - item.percPen);
   }
 
   if(hasDeathcap){
