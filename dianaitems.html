@@ -223,13 +223,106 @@
     gap: 10px;
     flex-wrap: wrap;
   }
-  .items-grid select { flex: 1 1 30%; min-width: 100px; margin-bottom: 0; }
+  .items-grid .custom-select-wrapper { flex: 1 1 30%; min-width: 140px; margin-bottom: 0; }
   
   #item-stats p {
     margin: 6px 0;
     color: var(--muted);
   }
   #item-stats p span { color: white; font-weight: bold; }
+
+  /* Custom Item Select Dropdown Styling */
+  .custom-select-wrapper {
+    position: relative;
+    user-select: none;
+    box-sizing: border-box;
+  }
+
+  .custom-select {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 8px 10px;
+    border-radius: 8px;
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    background: rgba(15,22,35,0.9);
+    color: white;
+    font-size: 14px;
+    cursor: pointer;
+    box-sizing: border-box;
+    min-height: 40px;
+  }
+
+  .custom-select:hover, .custom-select.open {
+    border-color: var(--gold);
+  }
+
+  .custom-select .selected-value {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+
+  .custom-select img.item-icon,
+  .custom-option img.item-icon {
+    width: 22px;
+    height: 22px;
+    border-radius: 4px;
+    object-fit: contain;
+    background: rgba(0,0,0,0.2);
+    flex-shrink: 0;
+  }
+
+  .custom-select::after {
+    content: "";
+    width: 20px;
+    height: 20px;
+    background-image: url("data:image/svg+xml,%3Csvg fill='white' height='24' viewBox='0 0 24 24' width='24' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M7 10l5 5 5-5z'/%3E%3C/svg%3E");
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: 20px;
+    flex-shrink: 0;
+    margin-left: 5px;
+  }
+
+  .custom-options {
+    position: absolute;
+    top: calc(100% + 4px);
+    left: 0;
+    right: 0;
+    background: rgba(13,17,23,0.98);
+    border: 1px solid rgba(255, 255, 255, 0.12);
+    border-radius: 8px;
+    box-shadow: 0 8px 24px rgba(0,0,0,0.6);
+    max-height: 520px;
+    overflow-y: auto;
+    z-index: 100;
+    display: none;
+  }
+
+  .custom-select-wrapper.open .custom-options {
+    display: block;
+  }
+
+  .custom-option {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 8px 10px;
+    cursor: pointer;
+    font-size: 14px;
+    color: #e6edf3;
+    transition: background 0.15s;
+  }
+
+  .custom-option:hover {
+    background: rgba(201, 170, 113, 0.15);
+    color: var(--gold);
+  }
 
   @media(max-width:700px){
     .top-row .top-item { flex: 1 1 100%; }
@@ -239,6 +332,7 @@
       width: 94%;
       margin: 0 auto 20px;
     }
+    .items-grid .custom-select-wrapper { flex: 1 1 100%; }
   }
 </style>
 </head>
@@ -271,12 +365,12 @@
 <div class="card">
   <label>Items</label>
   <div class="items-grid">
-    <select id="item-1"></select>
-    <select id="item-2"></select>
-    <select id="item-3"></select>
-    <select id="item-4"></select>
-    <select id="item-5"></select>
-    <select id="item-6"></select>
+    <div class="custom-select-wrapper" id="wrapper-item-1"><div class="custom-select" data-id="item-1"><div class="selected-value"></div></div><div class="custom-options"></div><input type="hidden" id="item-1" value=""></div>
+    <div class="custom-select-wrapper" id="wrapper-item-2"><div class="custom-select" data-id="item-2"><div class="selected-value"></div></div><div class="custom-options"></div><input type="hidden" id="item-2" value=""></div>
+    <div class="custom-select-wrapper" id="wrapper-item-3"><div class="custom-select" data-id="item-3"><div class="selected-value"></div></div><div class="custom-options"></div><input type="hidden" id="item-3" value=""></div>
+    <div class="custom-select-wrapper" id="wrapper-item-4"><div class="custom-select" data-id="item-4"><div class="selected-value"></div></div><div class="custom-options"></div><input type="hidden" id="item-4" value=""></div>
+    <div class="custom-select-wrapper" id="wrapper-item-5"><div class="custom-select" data-id="item-5"><div class="selected-value"></div></div><div class="custom-options"></div><input type="hidden" id="item-5" value=""></div>
+    <div class="custom-select-wrapper" id="wrapper-item-6"><div class="custom-select" data-id="item-6"><div class="selected-value"></div></div><div class="custom-options"></div><input type="hidden" id="item-6" value=""></div>
   </div>
 </div>
 
@@ -359,61 +453,119 @@
 <footer>© 2026 LoL Fundamentals</footer>
 
 <script>
+const PATCH_VERSION = "13.23.1"; // Data Dragon version for item IDs
+
 const AP_ITEMS = [
-{name:"Doran's Ring", ap:18, flatPen:0, percPen:0},
-{name:"Amplifying Tome", ap:20, flatPen:0, percPen:0},
-{name:"Lost Chapter", ap:40, flatPen:0, percPen:0},
-{name:"Needlessly Large Rod", ap:65, flatPen:0, percPen:0},
-{name:"Sorcerer's Shoes", ap:0, flatPen:12, percPen:0},
-{name:"Fiendish Codex", ap:25, flatPen:0, percPen:0},
-{name:"Blasting Wand", ap:45, flatPen:0, percPen:0},
-{name:"Hextech Rocketbelt", ap:70, flatPen:0, percPen:0},
-{name:"Luden's Companion", ap:100, flatPen:0, percPen:0},
-{name:"Shadowflame", ap:110, flatPen:15, percPen:0},
-{name:"Rabadon's Deathcap", ap:130, flatPen:0, percPen:0},
-{name:"Void Staff", ap:95, flatPen:0, percPen:0.4},
-{name:"Horizon Focus", ap:125, flatPen:0, percPen:0},
-{name:"Zhonya's Hourglass", ap:105, flatPen:0, percPen:0},
-{name:"Liandry's Anguish", ap:90, flatPen:0, percPen:0},
-{name:"Demonic Embrace", ap:80, flatPen:0, percPen:0},
-{name:"Morellonomicon", ap:70, flatPen:0, percPen:0},
-{name:"Cryptbloom", ap:80, flatPen:0, percPen:0.3},
-{name:"Stormsurge", ap:90, flatPen:15, percPen:0, bonus:"stormsurge"},
-{name:"Bloodletter's Curse", ap:65, flatPen:10, percPen:0.1},
-{name:"Dark Seal", ap:15, flatPen:0, percPen:0},
-{name:"Mejai's Soulstealer", ap:20, flatPen:0, percPen:0},
-{name:"Nashor's Tooth", ap:80, flatPen:0, percPen:0, bonus:"nashor"},
-{name:"Lich Bane", ap:100, flatPen:0, percPen:0, bonus:"lichbane"},
-{name:"Banshee's Veil", ap:105, flatPen:0, percPen:0},
-{name:"Liandry's Torment", ap:60, flatPen:0, percPen:0},
-{name:"Dusk and Dawn", ap:60, flatPen:0, percPen:0, bonus:"duskdawn"},
+  // 1. Components first
+  {name:"Doran's Ring", id:1056, ap:18, flatPen:0, percPen:0},
+  {name:"Dark Seal", id:1082, ap:15, flatPen:0, percPen:0},
+  {name:"Amplifying Tome", id:1052, ap:20, flatPen:0, percPen:0},
+  {name:"Blasting Wand", id:1026, ap:45, flatPen:0, percPen:0},
+  {name:"Fiendish Codex", id:3108, ap:25, flatPen:0, percPen:0},
+  {name:"Lost Chapter", id:3802, ap:40, flatPen:0, percPen:0},
+  {name:"Needlessly Large Rod", id:1058, ap:65, flatPen:0, percPen:0},
+  {name:"Cloth Armor", id:1029, ap:0, flatPen:0, percPen:0},
+  {name:"Null Magic Mantle", id:1033, ap:0, flatPen:0, percPen:0},
+
+  // 2. Boots
+  {name:"Sorcerer's Shoes", id:3020, ap:0, flatPen:12, percPen:0},
+  {name:"Mercury's Treads", id:3111, ap:0, flatPen:0, percPen:0},
+  {name:"Plated Steelcaps", id:3047, ap:0, flatPen:0, percPen:0},
+
+  // 3. Main AP items
+  {name:"Stormsurge", id:4646, customIcon:"https://raw.communitydragon.org/latest/game/assets/items/icons2d/4646_stormsurge.png", ap:90, flatPen:15, percPen:0, bonus:"stormsurge"},
+  {name:"Lich Bane", id:3100, ap:100, flatPen:0, percPen:0, bonus:"lichbane"},
+  {name:"Shadowflame", id:4645, customIcon:"https://raw.communitydragon.org/latest/game/assets/items/icons2d/4645_shadowflame.png", ap:110, flatPen:15, percPen:0},
+  {name:"Zhonya's Hourglass", id:3157, ap:105, flatPen:0, percPen:0},
+  {name:"Banshee's Veil", id:3102, ap:105, flatPen:0, percPen:0},
+  {name:"Rabadon's Deathcap", id:3089, ap:130, flatPen:0, percPen:0},
+  {name:"Cryptbloom", id:4643, customIcon:"https://raw.communitydragon.org/latest/game/assets/items/icons2d/4643_cryptbloom.png", ap:80, flatPen:0, percPen:0.3},
+  {name:"Void Staff", id:3135, ap:95, flatPen:0, percPen:0.4},
+  
+  // Previously requested items
+  {name:"Riftmaker", id:4646, customIcon:"https://raw.communitydragon.org/latest/game/assets/items/icons2d/4646_riftmaker.png", ap:70, flatPen:0, percPen:0},
+  {name:"Cosmic Drive", id:4629, customIcon:"https://raw.communitydragon.org/latest/game/assets/items/icons2d/4629_cosmicdrive.png", ap:80, flatPen:0, percPen:0},
+  {name:"Hextech Gunblade", id:3146, customIcon:"https://raw.communitydragon.org/latest/game/assets/items/icons2d/3146_hextechgunblade.png", ap:40, flatPen:0, percPen:0},
+  {name:"Malignance", id:3116, customIcon:"https://raw.communitydragon.org/latest/game/assets/items/icons2d/3116_malignance.png", ap:80, flatPen:0, percPen:0},
+  {name:"Rod of Ages", id:3027, customIcon:"https://raw.communitydragon.org/latest/game/assets/items/icons2d/3027_rodofages.png", ap:50, flatPen:0, percPen:0},
+  {name:"Rylai's Crystal Scepter", id:3116, customIcon:"https://raw.communitydragon.org/latest/game/assets/items/icons2d/3116_rylai.png", ap:75, flatPen:0, percPen:0},
+  {name:"Blackfire Torch", id:4642, customIcon:"https://raw.communitydragon.org/latest/game/assets/items/icons2d/4642_blackfire_torch.png", ap:90, flatPen:0, percPen:0},
+  {name:"Archangel's Staff", id:3003, customIcon:"https://raw.communitydragon.org/latest/game/assets/items/icons2d/3003_archangelsstaff.png", ap:80, flatPen:0, percPen:0},
+  {name:"Actualizer", id:3003, customIcon:"https://raw.communitydragon.org/latest/game/assets/items/icons2d/3003_archangelsstaff.png", ap:80, flatPen:0, percPen:0},
+
+  // 4. Other options & Nashor's Tooth after Dusk and Dawn
+  {name:"Bloodletter's Curse", id:6657, ap:65, flatPen:10, percPen:0.1},
+  {name:"Dusk and Dawn", id:4644, customIcon:"https://raw.communitydragon.org/latest/game/assets/items/icons2d/dusk_and_dawn.png", ap:60, flatPen:0, percPen:0, bonus:"duskdawn"},
+  {name:"Nashor's Tooth", id:3115, ap:80, flatPen:0, percPen:0, bonus:"nashor"},
+  {name:"Hextech Rocketbelt", id:3152, ap:70, flatPen:0, percPen:0},
+  {name:"Horizon Focus", id:4628, ap:125, flatPen:0, percPen:0},
+  {name:"Liandry's Torment", id:6653, ap:60, flatPen:0, percPen:0},
+  {name:"Luden's Echo", id:3285, ap:80, flatPen:0, percPen:0},
+  {name:"Mejai's Soulstealer", id:3041, ap:20, flatPen:0, percPen:0},
+  {name:"Morellonomicon", id:3165, ap:70, flatPen:0, percPen:0}
 ];
 
 function populateItems() {
-   AP_ITEMS.sort((a, b) => a.name.localeCompare(b.name));
-  for(let i=1;i<=6;i++){
-    const select=document.getElementById(`item-${i}`);
-    select.innerHTML="";
-    const emptyOpt=document.createElement("option");
-    emptyOpt.value="";
-    emptyOpt.textContent="";
-    select.appendChild(emptyOpt);
-    AP_ITEMS.forEach((it,idx)=>{
-      const o=document.createElement("option");
-      o.value=idx;
-      o.textContent=it.name;
-      select.appendChild(o);
+  for(let i=1; i<=6; i++){
+    const hiddenInput = document.getElementById(`item-${i}`);
+    const wrapper = document.getElementById(`wrapper-item-${i}`);
+    const selectBox = wrapper.querySelector('.custom-select');
+    const optionsContainer = wrapper.querySelector('.custom-options');
+    
+    optionsContainer.innerHTML = "";
+    
+    // Empty option
+    const emptyOpt = document.createElement("div");
+    emptyOpt.className = "custom-option";
+    emptyOpt.innerHTML = `<span style="color:var(--muted)">— None —</span>`;
+    emptyOpt.addEventListener("click", () => {
+      hiddenInput.value = "";
+      selectBox.querySelector('.selected-value').innerHTML = "";
+      wrapper.classList.remove("open");
+      updateItemStats();
     });
-    if(i===1){
-      const doransIndex = AP_ITEMS.findIndex(
-        item => item.name === "Doran's Ring"
-      );
+    optionsContainer.appendChild(emptyOpt);
+
+    AP_ITEMS.forEach((it, idx) => {
+      const opt = document.createElement("div");
+      opt.className = "custom-option";
+      const iconUrl = it.customIcon || `https://ddragon.leagueoflegends.com/cdn/${PATCH_VERSION}/img/item/${it.id}.png`;
+      opt.innerHTML = `<img src="${iconUrl}" class="item-icon" alt="${it.name}"><span>${it.name}</span>`;
+      
+      opt.addEventListener("click", () => {
+        hiddenInput.value = idx;
+        selectBox.querySelector('.selected-value').innerHTML = `<img src="${iconUrl}" class="item-icon" alt="${it.name}"><span>${it.name}</span>`;
+        wrapper.classList.remove("open");
+        updateItemStats();
+      });
+      optionsContainer.appendChild(opt);
+    });
+
+    // Default Doran's Ring on item 1
+    if(i === 1){
+      const doransIndex = AP_ITEMS.findIndex(item => item.name === "Doran's Ring");
       if(doransIndex !== -1){
-        select.value = doransIndex;
+        hiddenInput.value = doransIndex;
+        const it = AP_ITEMS[doransIndex];
+        const iconUrl = it.customIcon || `https://ddragon.leagueoflegends.com/cdn/${PATCH_VERSION}/img/item/${it.id}.png`;
+        selectBox.querySelector('.selected-value').innerHTML = `<img src="${iconUrl}" class="item-icon" alt="${it.name}"><span>${it.name}</span>`;
       }
     }
-    select.addEventListener("change", updateItemStats);
+
+    // Toggle dropdown
+    selectBox.addEventListener("click", (e) => {
+      e.stopPropagation();
+      document.querySelectorAll(".custom-select-wrapper").forEach(w => {
+        if(w !== wrapper) w.classList.remove("open");
+      });
+      wrapper.classList.toggle("open");
+    });
   }
+
+  // Close dropdowns when clicking outside
+  document.addEventListener("click", () => {
+    document.querySelectorAll(".custom-select-wrapper").forEach(w => w.classList.remove("open"));
+  });
 }
 
 function populateRanksAndUses(){
@@ -607,16 +759,9 @@ document.addEventListener("DOMContentLoaded",()=>{
   populateRanksAndUses();
   updateItemStats();
   
-  // Item stats still update live when selecting items, but damage output is restricted to button click only.
   document.getElementById("calculate-btn").addEventListener("click", calculateCombo);
 });
 </script>
 
 </body>
 </html>
-
-
-
-
-
-
