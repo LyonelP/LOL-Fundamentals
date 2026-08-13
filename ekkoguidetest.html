@@ -3,8 +3,8 @@
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Diana Mid Guide</title>
-<link rel="icon" type="image/png" href="https://i.imgur.com/XOKDiWc.png">
+<title>Ekko Jungle Guide</title>
+<link rel="icon" type="image/png" href="https://i.imgur.com/NFO4uNP.png">
 
 <style>
 :root {
@@ -142,7 +142,7 @@ header {
   box-shadow: 0 24px 70px rgba(0,0,0,0.55);
 }
 
-.card h2 {
+.card h2, .card h3 {
   color: var(--gold);
   margin-top: 0;
 }
@@ -220,17 +220,93 @@ footer {
   color: #000;
 }
 
+/* Icons & Additional Elements */
+.icon {
+  width: 36px;
+  height: 36px;
+  vertical-align: middle;
+  border-radius: 6px;
+  margin-right: 6px;
+  transition: 0.2s ease;
+}
+.icon:hover {
+  filter: drop-shadow(0 0 6px #c9aa71);
+  transform: scale(1.05);
+}
+
+.rune-container {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 12px;
+  margin-top: 15px;
+}
+.rune-info {
+  display: flex;
+  align-items: center;
+}
+.rune-info span {
+  margin-left: 8px;
+}
+.rune-row {
+  display: flex;
+  gap: 12px;
+  margin-top: 10px;
+}
+
+.card-container {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  margin-top: 20px;
+}
+
+.build-card {
+  background: rgba(20,25,35,0.85);
+  border: 1px solid #c9aa71;
+  border-radius: 10px;
+  padding: 15px;
+  text-align: center;
+}
+.build-card strong { display: block; margin-bottom: 8px; color: #e0c77b; }
+
+.build-flow {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+  gap: 8px;
+  margin-top: 10px;
+}
+.build-flow div {
+  border: 1px solid #c9aa71;
+  border-radius: 8px;
+  padding: 10px 12px;
+  min-width: 120px;
+  text-align: center;
+}
+.build-flow span {
+  font-size: 18px;
+  color: #c9aa71;
+}
+
 /* Hide mobile menu button on desktop */
 @media(min-width: 1024px) {
   .nav-trigger {
     display: none;
   }
 }
+
+@media (max-width: 600px) {
+  .card-container { flex-direction: column; gap: 10px; }
+  .build-flow { flex-direction: column; }
+  .build-flow span { display: none; }
+}
 </style>
 </head>
 <body>
 
-<header>Diana Mid Guide</header>
+<header>Ekko Jungle Guide</header>
 
 <div class="back-wrap">
   <a href="membershub.html" class="back-button">Back to Members Hub</a>
@@ -243,20 +319,17 @@ footer {
   <a data-section="intro">Intro</a>
   <a data-section="runes">Runes</a>
   <a data-section="build">Build</a>
-  <a data-section="summoners">Summoners</a>
+  <a data-section="summoner spells">Summoner Spells</a>
   <a data-section="abilities">Abilities</a>
   <a data-section="combos">Combos</a>
   <div class="nav-section-title">Gameplay</div>
-  <a data-section="laning">Laning</a>
-  <a data-section="warding">Warding</a>
-  <a data-section="farming">Farming / Pushing</a>
-  <a data-section="teamfighting">Teamfighting</a>
-  <a data-section="splitpushing">Splitpushing</a>
-  <a data-section="closing">Closing Out The Game</a>
-  <div class="nav-section-title">Advanced</div>
-  <a data-section="bans">Pick/Ban</a>
-  <a data-section="pros">Pros & Cons</a>
-  <a data-section="extra">Extra Tips</a>
+  <a data-section="level 1">Level 1</a>
+  <a data-section="pathing">Pathing</a>
+  <a data-section="invades">Invades</a>
+  <a data-section="hardest matchups">Hardest Matchups</a>
+  <a data-section="team fighting">Team Fighting</a>
+  <a data-section="closing out the game">Closing Out The Game</a>
+  <div class="nav-section-title">Outro</div>
   <a data-section="outro">Outro</a>
 </div>
 
@@ -267,20 +340,17 @@ footer {
     <a data-section="intro">Intro</a>
     <a data-section="runes">Runes</a>
     <a data-section="build">Build</a>
-    <a data-section="summoners">Summoners</a>
+    <a data-section="summoner spells">Summoner Spells</a>
     <a data-section="abilities">Abilities</a>
     <a data-section="combos">Combos</a>
     <div class="nav-section-title">Gameplay</div>
-    <a data-section="laning">Laning</a>
-    <a data-section="warding">Warding</a>
-    <a data-section="farming">Farming / Pushing</a>
-    <a data-section="teamfighting">Teamfighting</a>
-    <a data-section="splitpushing">Splitpushing</a>
-    <a data-section="closing">Closing Out The Game</a>
-    <div class="nav-section-title">Advanced</div>
-    <a data-section="bans">Pick/Ban</a>
-    <a data-section="pros">Pros & Cons</a>
-    <a data-section="extra">Extra Tips</a>
+    <a data-section="level 1">Level 1</a>
+    <a data-section="pathing">Pathing</a>
+    <a data-section="invades">Invades</a>
+    <a data-section="hardest matchups">Hardest Matchups</a>
+    <a data-section="team fighting">Team Fighting</a>
+    <a data-section="closing out the game">Closing Out The Game</a>
+    <div class="nav-section-title">Outro</div>
     <a data-section="outro">Outro</a>
   </div>
 </div>
@@ -326,13 +396,12 @@ import { getAuth, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/
 
   async function initializeGuide() {
     try {
-      const docRef = doc(db, "premiumContent", "diana_mid_guide");
+      const docRef = doc(db, "premiumContent", "ekko_jungle_guide");
       const docSnap = await getDoc(docRef);
       
       if (docSnap.exists()) {
         cachedData = docSnap.data();
         
-        // AUTO-DETECT RUN: Finds your intro text even if it has a typo, capital letter, or hidden space
         const documentKeys = Object.keys(cachedData);
         const activeIntroKey = documentKeys.find(k => k.trim().toLowerCase() === 'intro') || documentKeys[0];
         
@@ -344,7 +413,7 @@ import { getAuth, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/
       } else {
         document.getElementById('content').innerHTML = `
           <h2>Path Mismatch</h2>
-          <p>Could not find the document <strong>"diana_mid_guide"</strong> inside "premiumContent".</p>
+          <p>Could not find the document <strong>"ekko_jungle_guide"</strong> inside "premiumContent".</p>
         `;
       }
     } catch (e) {
@@ -356,7 +425,6 @@ import { getAuth, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/
   function showSection(sectionKey) {
     const contentBox = document.getElementById('content');
     
-    // Loose key matching: looks for matching keys ignoring case and whitespace
     const actualKey = cachedData ? Object.keys(cachedData).find(k => k.trim().toLowerCase() === sectionKey.trim().toLowerCase()) : null;
     
     if (actualKey && cachedData[actualKey]) {
@@ -383,14 +451,15 @@ import { getAuth, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/
   });
 
   onAuthStateChanged(auth, (user) => {
-  if (user) {
-    console.log("Firebase logged in:", user.email);
-    initializeGuide();
-  } else {
-    console.log("No Firebase user");
-    window.location.replace("login.html");
-  }
-});
+    if (user) {
+      console.log("Firebase logged in:", user.email);
+      initializeGuide();
+    } else {
+      console.log("No Firebase user");
+      window.location.replace("login.html");
+    }
+  });
 </script>
+
 </body>
 </html>
