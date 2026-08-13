@@ -1,666 +1,90 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<script>
-  if (localStorage.getItem('lolfundamentals_logged_in') !== 'true') {
-    window.location.href = 'index.html';
-  }
-</script>
-<meta charset="UTF-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Diana Jungle Guide – Members Hub</title>
-<link rel="icon" type="image/png" sizes="32x32" href="https://i.imgur.com/NFO4uNP.png">
-<link rel="icon" type="image/png" sizes="16x16" href="https://i.imgur.com/NFO4uNP.png">
-<link rel="apple-touch-icon" href="https://i.imgur.com/NFO4uNP.png">
-
-<style>
-body {
-  margin: 0;
-  font-family: 'Beaufort for LOL', Arial, Helvetica, sans-serif;
-  background: url('https://ddragon.leagueoflegends.com/cdn/img/champion/splash/Diana_0.jpg') no-repeat center center fixed;
-  background-size: cover;
-  color: #e6edf3;
-  text-align: center;
-  overflow-x: hidden;
-}
-
-body::before {
-  content: "";
-  position: fixed;
-  top: 0; left: 0;
-  width: 100%; height: 100%;
-  background: rgba(10,15,20,0.78);
-  z-index: -1;
-}
-
-header {
-  background: rgba(13,17,23,0.92);
-  border-bottom: 2px solid #c9aa71;
-  padding: 20px 10px;
-  font-weight: bold;
-  font-size: 26px;
-  text-transform: uppercase;
-  color: #c9aa71;
-  letter-spacing: 1px;
-}
-
-.back-button {
-  display: inline-block;
-  margin: 20px auto 10px;
-  padding: 10px 20px;
-  background: linear-gradient(135deg, #c9aa71, #e0c77b);
-  color: #000;
-  text-decoration: none;
-  border-radius: 8px;
-  font-weight: bold;
-  transition: all 0.3s;
-  box-shadow: 0 0 10px rgba(201,170,113,0.5);
-}
-
-.back-button::before {
-  content: "← ";
-}
-
-.back-button:hover {
-  box-shadow: 0 0 15px rgba(255,215,0,0.7);
-}
-
-#section-select-container {
-  margin: 20px auto;
-}
-
-#section-select {
-  padding: 10px 15px;
-  font-size: 16px;
-  border-radius: 6px;
-  border: none;
-  background: #0f1722;
-  color: #c9aa71;
-  cursor: pointer;
-}
-
-#section-info {
-  margin: 20px auto;
-  max-width: 950px;
-  background: rgba(13,17,23,0.96);
-  border: 1px solid #2f81f7;
-  padding: 20px 24px;
-  border-radius: 12px;
-  text-align: left;
-  color: #fff;
-  min-height: 220px;
-}
-
-#section-info h3 {
-  color: #c9aa71;
-  margin-top: 0;
-  font-size: 24px;
-}
-
-#section-info p {
-  line-height: 1.7;
-}
-
-.icon {
-  width: 36px;
-  height: 36px;
-  vertical-align: middle;
-  border-radius: 6px;
-  margin-right: 6px;
-}
-
-.rune-container {
-  display: flex;
-  flex-direction: column;
-  gap: 12px;
-}
-
-.rune-info {
-  display: flex;
-  align-items: center;
-}
-
-.rune-row {
-  display: flex;
-  gap: 14px;
-  margin-top: 12px;
-}
-
-.card-container {
-  display: flex;
-  flex-direction: column;
-  gap: 14px;
-  margin-top: 20px;
-}
-
-.card {
-  background: rgba(20,25,35,0.85);
-  border: 1px solid #c9aa71;
-  border-radius: 10px;
-  padding: 16px;
-}
-
-.card strong {
-  color: #e0c77b;
-}
-
-.build-flow {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
-  align-items: center;
-  gap: 10px;
-  margin-top: 12px;
-}
-
-.build-flow div {
-  border: 1px solid #c9aa71;
-  border-radius: 8px;
-  padding: 10px 12px;
-  min-width: 120px;
-  text-align: center;
-}
-
-.build-flow span {
-  color: #c9aa71;
-  font-size: 18px;
-}
-
-.tip {
-  margin-top: 15px;
-  padding: 12px;
-  border-left: 3px solid #c9aa71;
-  background: rgba(255,255,255,0.04);
-}
-
-@media (max-width: 600px) {
-
-  .build-flow {
-    flex-direction: column;
-  }
-
-  .build-flow span {
-    display: none;
-  }
-
-  .rune-row {
-    flex-direction: column;
-  }
-
-}
-</style>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Diana Jungle Guide</title>
+    <link rel="icon" type="image/png" href="https://i.imgur.com/NFO4uNP.png">
+    <!-- Include the same CSS styles as your Mid Guide for consistency -->
+    <style>
+        /* (Use the exact same CSS as your Diana Mid Guide provided) */
+    </style>
 </head>
-
 <body>
 
 <header>Diana Jungle Guide</header>
 
-<a href="membershub.html" class="back-button">Back to Members Hub</a>
-
-<div id="section-select-container">
-<select id="section-select">
-<option disabled selected>Select a section</option>
-<option>Intro</option>
-<option>Runes</option>
-<option>Build</option>
-<option>Summoner spells</option>
-<option>Abilities</option>
-<option>Combos</option>
-<option>Level 1</option>
-<option>Pathing</option>
-<option>Hardest matchups</option>
-<option>Team fighting</option>
-<option>Closing out the game</option>
-<option>Pros & Cons</option>
-<option>Outro</option>
-</select>
+<div class="back-wrap">
+    <a href="membershub.html" class="back-button">Back to Members Hub</a>
 </div>
 
-<div id="section-info">
-<p>Select a section from above to view details.</p>
+<!-- Navigation (Same as Mid Guide) -->
+<button class="nav-trigger" id="mobileTrigger" onclick="toggleMobileMenu()">Select a Section</button>
+<div class="nav-menu-mobile" id="mobileMenu">
+    <!-- List your sections here, ensure data-section matches Firestore field names -->
+    <a data-section="intro">Intro</a>
+    <a data-section="runes">Runes</a>
+    <a data-section="build">Build</a>
+    <a data-section="summoners">Summoner spells</a>
+    <a data-section="abilities">Abilities</a>
+    <a data-section="combos">Combos</a>
+    <a data-section="level1">Level 1</a>
+    <a data-section="pathing">Pathing</a>
+    <a data-section="matchups">Hardest matchups</a>
+    <a data-section="teamfighting">Team fighting</a>
+    <a data-section="closing">Closing out the game</a>
+    <a data-section="proscons">Pros & Cons</a>
+    <a data-section="outro">Outro</a>
 </div>
 
-<script>
-
-const sectionSelect = document.getElementById('section-select');
-const sectionInfo = document.getElementById('section-info');
-
-sectionSelect.addEventListener('change', () => {
-
-let value = sectionSelect.value;
-let header = `<h3>${value}</h3>`;
-let content = "";
-
-if(value === "Intro"){
-
-content = `
-${header}
-
-<p>Why Diana jungle? Diana has an extremely fast clear because her passive AP ratio is currently sitting at 270% AP. Taking Diana into the jungle also enables her to take the rune Conqueror which opens a variety of different builds. She is able to take conqueror in the jungle and not mid lane because she doesn’t require the runes necessary to lane in the junge and can take full advantage of runes like alacrity.</p>
-
-`;
-
-}
-
-if(value === "Runes"){
-
-content = `
-${header}
-
-<div class="rune-container">
-
-<div class="rune-info">
-<img src="https://ddragon.leagueoflegends.com/cdn/img/perk-images/Styles/Precision/Conqueror/Conqueror.png" class="icon">
-<span><strong>Conqueror:</strong> Best keystone for extended fights, clears, and skirmishes.</span>
+<div class="nav-wrapper">
+    <div class="nav-menu" id="navMenu">
+        <!-- Replicate links here for desktop -->
+    </div>
 </div>
 
-<div class="rune-info">
-<img src="https://ddragon.leagueoflegends.com/cdn/img/perk-images/Styles/Precision/Triumph.png" class="icon">
-<span><strong>Triumph:</strong> Helps survive dives and extended fights.</span>
+<div class="main">
+    <div id="content" class="card">
+        <h2>Loading Guide...</h2>
+    </div>
 </div>
 
-<div class="rune-info">
-<img src="https://ddragon.leagueoflegends.com/cdn/img/perk-images/Styles/Precision/LegendAlacrity/LegendAlacrity.png" class="icon">
-<span><strong>Alacrity:</strong> Increases clear speed and passive DPS.</span>
-</div>
-
-<div class="rune-info">
-  <img src="https://ddragon.leagueoflegends.com/cdn/img/perk-images/Styles/Precision/CoupDeGrace/CoupDeGrace.png" class="icon">
-  <span><strong>Coup de Grace:</strong> Helps execute low health enemies which are your main target as a jungler.</span>
-</div>
-
-<div class="rune-info">
-<img src="https://ddragon.leagueoflegends.com/cdn/img/perk-images/Styles/Inspiration/MagicalFootwear/MagicalFootwear.png" class="icon">
-<span><strong>Magical Footwear:</strong> Free boots allow faster item spikes.</span>
-</div>
-
-<div class="rune-info">
-<img src="https://ddragon.leagueoflegends.com/cdn/img/perk-images/Styles/Inspiration/CosmicInsight/CosmicInsight.png" class="icon">
-<span><strong>Cosmic Insight:</strong> Lower Flash, Smite and Protobelt cooldowns.</span>
-</div>
-
-<div class="rune-row">
-
-<div>
-<img src="https://ddragon.leagueoflegends.com/cdn/img/perk-images/StatMods/StatModsAttackSpeedIcon.png" class="icon">
-Attack Speed
-</div>
-
-<div>
-<img src="https://ddragon.leagueoflegends.com/cdn/img/perk-images/StatMods/StatModsAdaptiveForceIcon.png" class="icon">
-Adaptive Force
-</div>
-
-<div>
-<img src="https://ddragon.leagueoflegends.com/cdn/img/perk-images/StatMods/StatModsHealthScalingIcon.png" class="icon">
-Scaling Health
-</div>
-
-</div>
-
-</div>
-
-`;
-
-}
-
-if(value === "Build"){
-
-content = `
-${header}
-
-<div class="card-container">
-
-<div class="card">
-
-<strong>Starting Items</strong>
-
-<div class="build-flow">
-
-<div>
-<img src="https://raw.communitydragon.org/latest/game/assets/items/icons2d/1103_jungle_t1_mosstomperseedling.png" class="icon">
-Mosstomper
-</div>
-
-<span>+</span>
-
-<div>
-<img src="https://ddragon.leagueoflegends.com/cdn/14.21.1/img/item/1082.png" class="icon">
-Dark Seal
-</div>
-
-</div>
-
-<p style="margin-top:15px;">
-Mosstomper greatly outperforms the other two options since it gives Diana better engage and dueling.
-</p>
-
-</div>
-
-<div class="card">
-
-<strong>Core Build</strong>
-
-<div class="build-flow">
-
-<div>
-  <img src="https://ddragon.leagueoflegends.com/cdn/13.23.1/img/item/3100.png" class="icon">
-  Lich Bane
-</div>
-
-<span>/</span>
-
-<div>
- <img src="https://ddragon.leagueoflegends.com/cdn/13.23.1/img/item/3152.png" class="icon">
-  Rocketbelt
-</div>
-
-<span>→</span>
-
-<div>
-<img src="https://ddragon.leagueoflegends.com/cdn/14.21.1/img/item/3020.png" class="icon">
-Sorcerer's Shoes
-</div>
-
-<span>/</span>
-
-<div>
-<img src="https://ddragon.leagueoflegends.com/cdn/14.21.1/img/item/3111.png" class="icon">
-Mercury Treads
-</div>
-
-<span>→</span>
-
-<div>
-<img src="https://ddragon.leagueoflegends.com/cdn/13.23.1/img/item/3157.png" class="icon">
-Hourglass
-</div>
-
-<span>/</span>
-
-<div>
-  <img src="https://ddragon.leagueoflegends.com/cdn/13.23.1/img/item/4645.png" class="icon">
-  Shadowflame
-</div>
-
-<span>→</span>
-
-<div>
-<img src="https://ddragon.leagueoflegends.com/cdn/14.21.1/img/item/3102.png" class="icon">
-Banshee's Veil
-</div>
-
-<span>/</span>
-
-<div>
-  <img src="https://ddragon.leagueoflegends.com/cdn/13.23.1/img/item/4645.png" class="icon">
-  Shadowflame
-</div>
-
-</div>
-
-</div>
-
-<div class="card">
-
-<strong>Final Items</strong>
-
-<div class="build-flow">
-
-<div>
-<img src="https://ddragon.leagueoflegends.com/cdn/13.23.1/img/item/3089.png" class="icon">
-Deathcap
-</div>
-
-<span>/</span>
-
-<div>
-<img src="https://ddragon.leagueoflegends.com/cdn/13.23.1/img/item/3135.png" class="icon">
-Void Staff
-</div>
-
-</div>
-
-</div>
-
-<div class="card">
-
-<strong>Boot Choices</strong>
-
-<p><strong>Sorcerer's Shoes:</strong> Diana's best default boots. Her base damages are still extremely important and magic penetration massively increases burst.</p>
-
-<p><strong>Mercury Treads:</strong> Buy against heavy AP and CC comps, especially when you already purchased an early Null Magic Mantle.</p>
-
-<p><strong>Plated Steelcaps:</strong> Only buy these, if the enemy team is truly 5 AD otherwise Sorc Shoes + Hourglass is significantly stronger. AD champions have the DPS do deal with armor so you need damage to be a threat.</p>
-
-</div>
-
-<div class="card">
-
-<strong>Build Explanation</strong>
-
-<p>Lich Bane performs better than Stormsurge in the jungle because of the additional clear speed.</p>
-
-<p>Hextech Rocketbelt received a small nerf and Lich Bane has been buffed so I'm mostly building Lich Bane now but Rocketbelt allows Diana to Rocketbelt into a gank and then Q E a target. It also gives her extra mobility in the jungle which she desperatly needs.</p>
-
-<p>Hourglass is still Diana's most core item and delaying it all doesn't make sense in most situations.</p>
-
-<p>Banshee's Veil pairs the best with pen boots and gives Diana more safety when roaming through the jungle. It also helps guarantee her engage.</p>
-
-</div>
-
-</div>
-
-`;
-
-}
-
-if(value === "Summoner spells"){
-
-content = `
-${header}
-
-<p>
-<img src="https://ddragon.leagueoflegends.com/cdn/14.21.1/img/spell/SummonerFlash.png" class="icon">
-<strong>Flash:</strong> Necessary for engages, escaping, and jumping walls.
-</p>
-
-<p>
-<img src="https://ddragon.leagueoflegends.com/cdn/14.21.1/img/spell/SummonerSmite.png" class="icon">
-<strong>Smite:</strong> Required
-</p>
-
-`;
-
-}
-
-if(value === "Abilities"){
-
-content = `
-${header}
-
-<p><strong>Passive – Moonsilver Blade:</strong> Diana gains attack speed and cleave damage every third auto. Space abilities to take full advantage of this.</p>
-
-<p><strong>Q – Crescent Strike:</strong> Use Q to pull camps and jump to with E.</p>
-
-<p><strong>W – Pale Cascade:</strong> Shield that gives Diana a healthy clear.</p>
-
-<p><strong>E – Lunar Rush:</strong> Can wait to E if you're already on the camp to regain the passive attack speed.</p>
-
-<p><strong>R – Moonfall:</strong> Only form of CC but can easily be flashed so keep track of timers.</p>
-
-`;
-
-}
-
-if(value === "Combos"){
-
-content = `
-${header}
-
-<p><strong>Q → E → W → AA → R:</strong> Standard engage combo.</p>
-
-<p><strong>Q → Flash → E → R:</strong> Long range engage.</p>
-
-<p><strong>Flash → E → W →R → Q → Hourglass:</strong> Fast engage combo.</p>
-
-<p><strong>Rocketbelt → Q → E → R:</strong> Main gank combo.</p>
-
-`;
-
-}
-
-if(value === "Level 1"){
-
-content = `
-${header}
-
-<p>Raptor/Red start is almost always preferred because Red Buff is significantly stronger for early fighting and healthier clears.</p>
-
-<p>Ward against early invades before camps spawn and be careful against aggressive level 1 junglers.</p>
-
-`;
-
-}
-
-if(value === "Pathing"){
-
-content = `
-${header}
-
-<p><strong>Main Full Clear:</strong></p>
-
-<ul>
-<li>Raptors → Krugs → Red → Wolves → Blue → Gromp → Scuttle</li>
-</ul>
-
-<p>This is Diana's strongest and most consistent clear path.</p>
-
-<p><strong>Alternative Paths:</strong></p>
-
-<ul>
-<li>Raptors → Red → Krugs → Reset for Dark Seal → Wolves → Blue → Gromp → Scuttle</li>
-</ul>
-
-<ul>
-<li>Blue → Gromp → Wolves → Raptors → Red → Krugs → Scuttle</li>
-</ul>
-
-<p>Use this route if the enemy team threatens your red side level 1.</p>
-
-`;
-
-}
-
-
-if(value === "Hardest matchups"){
-
-content = `
-${header}
-
-<ul>
-<li>Kindred</li>
-<li>Viego</li>
-<li>Bel'Veth</li>
-<li>Master Yi</li>
-</ul>
-
-<p>Any champion that can build wits end is a hard counter to Diana.</p>
-
-`;
-
-}
-
-if (value === "Team fighting") {
-
-content = `
-${header}
-
-<p>Look for front targets that you can Q then E to without being interrupted and then E onto a priority target or a large group of enemies to ult.</p>
-
-<ul>
-  <li>Track enemy flashes before engaging</li>
-</ul>
-
-<div style="margin-top:20px; text-align:center;">
-  <iframe
-    width="100%"
-    height="400"
-    src="https://www.youtube.com/embed/3LH68L1lyGE"
-    title="Diana Team Fighting Guide"
-    frameborder="0"
-    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-    allowfullscreen
-    style="max-width:800px; border-radius:8px;">
-  </iframe>
-</div>
-
-`;
-
-}
-
-if(value === "Closing out the game"){
-
-content = `
-${header}
-
-<p>Diana jungle closes out the game by forcing favorable teamfights which she can easily be converted into baron or a strong tower push.</p>
-
-`;
-
-}
-
-if(value === "Pros & Cons"){
-
-content = `
-${header}
-
-<p><strong>Pros:</strong></p>
-
-<ul>
-<li>Can take conqueror</li>
-<li>Fast clear</li>
-</ul>
-
-<p><strong>Cons:</strong></p>
-
-<ul>
-<li>Weak before level 6</li>
-<li>Struggles in river and enemy jungle</li>
-<li>Falls off late game</li>
-</ul>
-
-`;
-}
-
-if(value === "Outro"){
-  content = `
-    ${header}
-
-    <p>
-Thank you so much for checking out my Diana jungle guide and being a member of LoL Fundamentals. 
-</p>
-
-<p>
-What's next? Check out the Diana/Ekko Jungle matchup VODs. This is one of the best ways to improve. I used to study Dopa and Faker's VODs the same way. The goal was to be able to pause the game at any point and be able to predict what they would do in the next few seconds. Once you can consistently do this, you'll have an easier time executing the same actions in your own games.
-</p>
-
-<p>
-Good luck on your climb and thank you again for the support!
-</p>
-  `;
-}
-
-sectionInfo.innerHTML = content;
-
-});
-
+<script type="module">
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
+    import { getFirestore, doc, getDoc } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
+    import { getAuth, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-auth.js";
+      
+    const firebaseConfig = { /* Use your existing config */ };
+    const app = initializeApp(firebaseConfig);
+    const db = getFirestore(app);
+    const auth = getAuth(app);
+
+    let cachedData = null;
+
+    async function initializeGuide() {
+        const docRef = doc(db, "premiumContent", "diana_jungle_guide");
+        const docSnap = await getDoc(docRef);
+        if (docSnap.exists()) {
+            cachedData = docSnap.data();
+            showSection('intro');
+        }
+    }
+
+    function showSection(sectionKey) {
+        const contentBox = document.getElementById('content');
+        const actualKey = cachedData ? Object.keys(cachedData).find(k => k.toLowerCase() === sectionKey.toLowerCase()) : null;
+        if (actualKey) contentBox.innerHTML = cachedData[actualKey];
+        document.getElementById('mobileMenu').style.display = 'none';
+    }
+
+    document.querySelectorAll('[data-section]').forEach(link => {
+        link.addEventListener('click', (e) => showSection(e.target.getAttribute('data-section')));
+    });
+
+    onAuthStateChanged(auth, (user) => {
+        if (user) initializeGuide();
+        else window.location.replace("index.html");
+    });
 </script>
-
 </body>
 </html>
-
-
-
-
-
