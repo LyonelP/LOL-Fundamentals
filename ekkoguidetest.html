@@ -3,8 +3,10 @@
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Ekko Jungle Guide</title>
-<link rel="icon" type="image/png" href="https://i.imgur.com/NFO4uNP.png">
+<title>Ekko Jungle Guide – Members Hub</title>
+<link rel="icon" type="image/png" sizes="32x32" href="https://i.imgur.com/NFO4uNP.png">
+<link rel="icon" type="image/png" sizes="16x16" href="https://i.imgur.com/NFO4uNP.png">
+<link rel="apple-touch-icon" href="https://i.imgur.com/NFO4uNP.png">
 
 <style>
 :root {
@@ -35,9 +37,7 @@ body::before {
   content: "";
   position: fixed;
   inset: 0;
-  background: 
-    radial-gradient(circle at top, rgba(0,100,150,0.2), transparent 60%),
-    rgba(10,15,20,0.82);
+  background: rgba(10,15,20,0.82);
   z-index: -1;
 }
 
@@ -75,10 +75,17 @@ header {
   text-decoration: none;
   border-radius: 10px;
   font-weight: bold;
+  box-shadow: 0 0 10px rgba(201,170,113,0.5);
+  transition: all 0.3s;
 }
 
 .back-button::before {
-  content: "←";
+  content: "← ";
+}
+
+.back-button:hover {
+  background: linear-gradient(135deg, #e6c97f, #f0d88b);
+  box-shadow: 0 0 15px rgba(255,215,0,0.8);
 }
 
 /* Sidebar desktop */
@@ -90,9 +97,9 @@ header {
   .nav-wrapper {
     display: block;
     position: fixed;
-    top: 70px; /* below header */
+    top: 70px;
     left: 0;
-    width: 220px;
+    width: 160px; /* Reduced width */
     bottom: 0;
     background: rgba(15,20,26,0.95);
     border-right: 2px solid var(--gold);
@@ -102,19 +109,22 @@ header {
   }
 
   .nav-section-title {
-    font-size: 11px;
+    font-size: 10px;
     color: var(--muted);
-    padding: 14px 24px;
+    padding: 12px 16px;
     text-transform: uppercase;
+    letter-spacing: 0.5px;
   }
 
   .nav-menu a {
     display: block;
-    padding: 10px 24px;
+    padding: 8px 16px;
+    font-size: 14px;
     text-decoration: none;
     color: #e6edf3;
     cursor: pointer;
-    border-radius: 8px;
+    border-radius: 6px;
+    transition: background 0.2s, color 0.2s;
   }
 
   .nav-menu a:hover {
@@ -129,41 +139,49 @@ header {
   display: flex;
   justify-content: center;
   align-items: flex-start;
-  padding: 0 24px;
-  margin-top: 0;
+  padding: 0 24px 24px 24px;
   position: relative;
   z-index: 1;
 }
 
 @media(min-width: 1024px) {
   .main {
-    margin-left: 220px;
+    margin-left: 160px; /* Matches the reduced sidebar width */
   }
 }
 
 .card {
-  max-width: 800px;
+  max-width: 900px;
   width: 100%;
-  background: rgba(255,255,255,0.03);
-  border-radius: 26px;
-  padding: 36px;
+  background: rgba(13,17,23,0.95);
+  border: 1px solid #2f81f7;
+  border-radius: 10px;
+  padding: 30px;
   box-shadow: 0 24px 70px rgba(0,0,0,0.55);
+  text-align: left;
 }
 
-.card h2, .card h3 {
-  color: var(--gold);
+.card:hover {
+  box-shadow: 0 0 15px rgba(47,129,247,0.5);
+}
+
+.card h3 {
   margin-top: 0;
+  color: var(--gold);
+  font-size: 22px;
+  text-transform: capitalize;
+}
+
+.card p {
+  margin: 10px 0 14px;
+  line-height: 1.6;
 }
 
 .card ul {
-  padding-left: 22px;
+  margin-left: 20px;
 }
 
-.card li {
-  margin-bottom: 8px;
-}
-
-/* Icons & Layout extras */
+/* Icons */
 .icon {
   width: 36px;
   height: 36px;
@@ -176,6 +194,8 @@ header {
   filter: drop-shadow(0 0 6px var(--gold));
   transform: scale(1.05);
 }
+
+/* Rune layout */
 .rune-container {
   display: flex;
   flex-direction: column;
@@ -195,20 +215,26 @@ header {
   gap: 12px;
   margin-top: 10px;
 }
+
+/* Build & Runes Cards */
 .card-container {
   display: flex;
   flex-direction: column;
   gap: 12px;
   margin-top: 20px;
 }
+
 .sub-card {
   background: rgba(20,25,35,0.85);
   border: 1px solid var(--gold);
   border-radius: 10px;
   padding: 15px;
   text-align: center;
+  transition: all 0.3s;
 }
 .sub-card strong { display: block; margin-bottom: 8px; color: #e0c77b; }
+
+/* Build flow */
 .build-flow {
   display: flex;
   flex-wrap: wrap;
@@ -242,7 +268,7 @@ footer {
 
 @media(min-width: 1024px) {
   footer {
-    margin-left: 220px;
+    margin-left: 160px;
   }
 }
 
@@ -255,8 +281,8 @@ footer {
   padding: 14px 18px;
   font-size: 16px;
   font-weight: 600;
-  background: rgba(255,255,255,0.03);
-  border: none;
+  background: rgba(13,17,23,0.95);
+  border: 1px solid var(--gold);
   border-radius: 26px;
   color: #fff;
   cursor: pointer;
@@ -276,8 +302,9 @@ footer {
   width: 85%;
   max-width: 360px;
   margin: 0 auto 16px auto;
-  background: rgba(255,255,255,0.03);
-  border-radius: 26px;
+  background: rgba(13,17,23,0.95);
+  border: 1px solid var(--gold);
+  border-radius: 20px;
   padding: 12px 0;
   z-index: 9;
 }
@@ -302,9 +329,8 @@ footer {
   color: #000;
 }
 
-/* Hide mobile menu button on desktop */
 @media(min-width: 1024px) {
-  .nav-trigger {
+  .nav-trigger, .nav-menu-mobile {
     display: none;
   }
 }
@@ -364,7 +390,7 @@ footer {
 <!-- Main content -->
 <div class="main">
   <div id="content" class="card">
-    <h2>Loading Guide...</h2>
+    <h3>Loading Guide...</h3>
     <p>Connecting to Firebase database to pull data.</p>
   </div>
 </div>
@@ -385,86 +411,86 @@ import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.2/fireba
 import { getFirestore, doc, getDoc } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
 import { getAuth, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-auth.js";
   
-  const firebaseConfig = {
-    apiKey: "AIzaSyCFRcEV7wdivqONnkjJubAZOjPMixrHMBI",
-    authDomain: "lol-fundamentals.firebaseapp.com",
-    projectId: "lol-fundamentals",
-    storageBucket: "lol-fundamentals.firebasestorage.app",
-    messagingSenderId: "1038440427584",
-    appId: "1:1038440427584:web:a82207151fd370dbedefa5"
-  };
+const firebaseConfig = {
+  apiKey: "AIzaSyCFRcEV7wdivqONnkjJubAZOjPMixrHMBI",
+  authDomain: "lol-fundamentals.firebaseapp.com",
+  projectId: "lol-fundamentals",
+  storageBucket: "lol-fundamentals.firebasestorage.app",
+  messagingSenderId: "1038440427584",
+  appId: "1:1038440427584:web:a82207151fd370dbedefa5"
+};
 
-  const app = initializeApp(firebaseConfig);
-  const db = getFirestore(app);
-  const auth = getAuth(app);
+const app = initializeApp(firebaseConfig);
+const db = getFirestore(app);
+const auth = getAuth(app);
 
-  let cachedData = null;
+let cachedData = null;
 
-  async function initializeGuide() {
-    try {
-      const docRef = doc(db, "premiumContent", "ekko_jungle_guide");
-      const docSnap = await getDoc(docRef);
+async function initializeGuide() {
+  try {
+    const docRef = doc(db, "premiumContent", "ekko_jungle_guide");
+    const docSnap = await getDoc(docRef);
+    
+    if (docSnap.exists()) {
+      cachedData = docSnap.data();
       
-      if (docSnap.exists()) {
-        cachedData = docSnap.data();
-        
-        const documentKeys = Object.keys(cachedData);
-        const activeIntroKey = documentKeys.find(k => k.trim().toLowerCase() === 'intro') || documentKeys[0];
-        
-        if (activeIntroKey) {
-          showSection(activeIntroKey);
-        } else {
-          showSection('intro');
-        }
+      const documentKeys = Object.keys(cachedData);
+      const activeIntroKey = documentKeys.find(k => k.trim().toLowerCase() === 'intro') || documentKeys[0];
+      
+      if (activeIntroKey) {
+        showSection(activeIntroKey);
       } else {
-        document.getElementById('content').innerHTML = `
-          <h2>Path Mismatch</h2>
-          <p>Could not find the document <strong>"ekko_jungle_guide"</strong> inside "premiumContent".</p>
-        `;
+        showSection('intro');
       }
-    } catch (e) {
-      console.error(e);
-      document.getElementById('content').innerHTML = `<h2>Connection Error</h2><p>Could not retrieve data from Firestore.</p>`;
-    }
-  }
-
-  function showSection(sectionKey) {
-    const contentBox = document.getElementById('content');
-    
-    const actualKey = cachedData ? Object.keys(cachedData).find(k => k.trim().toLowerCase() === sectionKey.trim().toLowerCase()) : null;
-    
-    if (actualKey && cachedData[actualKey]) {
-      contentBox.innerHTML = cachedData[actualKey];
     } else {
-      const keysList = cachedData ? Object.keys(cachedData).map(k => `"${k}"`).join(', ') : 'none';
-      contentBox.innerHTML = `
-        <h2>Section Blank</h2>
-        <p>The layout looked for the field <strong>"${sectionKey}"</strong>, but it wasn't found.</p>
-        <hr style="border:0; border-top:1px solid rgba(255,255,255,0.1); margin:15px 0;">
-        <p style="font-size:14px; color:var(--muted);">
-          <strong>Available keys inside this document:</strong> [ ${keysList} ]
-        </p>
+      document.getElementById('content').innerHTML = `
+        <h3>Path Mismatch</h3>
+        <p>Could not find the document <strong>"ekko_jungle_guide"</strong> inside "premiumContent".</p>
       `;
     }
-    document.getElementById('mobileMenu').style.display = 'none';
+  } catch (e) {
+    console.error(e);
+    document.getElementById('content').innerHTML = `<h3>Connection Error</h3><p>Could not retrieve data from Firestore.</p>`;
   }
+}
 
-  document.querySelectorAll('[data-section]').forEach(link => {
-    link.addEventListener('click', (e) => {
-      const targetSection = e.target.getAttribute('data-section');
-      showSection(targetSection);
-    });
-  });
+function showSection(sectionKey) {
+  const contentBox = document.getElementById('content');
+  
+  const actualKey = cachedData ? Object.keys(cachedData).find(k => k.trim().toLowerCase() === sectionKey.trim().toLowerCase()) : null;
+  
+  if (actualKey && cachedData[actualKey]) {
+    contentBox.innerHTML = cachedData[actualKey];
+  } else {
+    const keysList = cachedData ? Object.keys(cachedData).map(k => `"${k}"`).join(', ') : 'none';
+    contentBox.innerHTML = `
+      <h3>Section Blank</h3>
+      <p>The layout looked for the field <strong>"${sectionKey}"</strong>, but it wasn't found.</p>
+      <hr style="border:0; border-top:1px solid rgba(255,255,255,0.1); margin:15px 0;">
+      <p style="font-size:14px; color:var(--muted);">
+        <strong>Available keys inside this document:</strong> [ ${keysList} ]
+      </p>
+    `;
+  }
+  document.getElementById('mobileMenu').style.display = 'none';
+}
 
-  onAuthStateChanged(auth, (user) => {
-    if (user) {
-      console.log("Firebase logged in:", user.email);
-      initializeGuide();
-    } else {
-      console.log("No Firebase user");
-      window.location.replace("login.html");
-    }
+document.querySelectorAll('[data-section]').forEach(link => {
+  link.addEventListener('click', (e) => {
+    const targetSection = e.target.getAttribute('data-section');
+    showSection(targetSection);
   });
+});
+
+onAuthStateChanged(auth, (user) => {
+  if (user) {
+    console.log("Firebase logged in:", user.email);
+    initializeGuide();
+  } else {
+    console.log("No Firebase user");
+    window.location.replace("login.html");
+  }
+});
 </script>
 
 </body>
