@@ -35,9 +35,7 @@ body::before {
   content: "";
   position: fixed;
   inset: 0;
-  background: 
-    radial-gradient(circle at top, rgba(0,100,150,0.2), transparent 60%),
-    rgba(10,15,20,0.82);
+  background: rgba(10,15,20,0.82);
   z-index: -1;
 }
 
@@ -123,7 +121,7 @@ header {
   }
 }
 
-/* Main content with proper left margin offset so sidebar doesn't overlap centered card */
+/* Main content */
 .main {
   flex: 1;
   display: flex;
@@ -142,29 +140,17 @@ header {
 }
 
 .card {
-  max-width: 900px;
+  max-width: 800px;
   width: 100%;
-  background: rgba(13,17,23,0.95);
-  border: 1px solid #2f81f7;
-  border-radius: 10px;
-  padding: 30px;
+  background: rgba(255,255,255,0.03);
+  border-radius: 26px;
+  padding: 36px;
   box-shadow: 0 24px 70px rgba(0,0,0,0.55);
-  text-align: left;
-}
-
-.card:hover {
-  box-shadow: 0 0 15px rgba(47,129,247,0.5);
 }
 
 .card h2, .card h3 {
   color: var(--gold);
   margin-top: 0;
-  font-size: 22px;
-}
-
-.card p {
-  margin: 10px 0 14px;
-  line-height: 1.6;
 }
 
 .card ul {
@@ -267,8 +253,8 @@ footer {
   padding: 14px 18px;
   font-size: 16px;
   font-weight: 600;
-  background: rgba(13,17,23,0.95);
-  border: 1px solid var(--gold);
+  background: rgba(255,255,255,0.03);
+  border: none;
   border-radius: 26px;
   color: #fff;
   cursor: pointer;
@@ -288,9 +274,8 @@ footer {
   width: 85%;
   max-width: 360px;
   margin: 0 auto 16px auto;
-  background: rgba(13,17,23,0.95);
-  border: 1px solid var(--gold);
-  border-radius: 20px;
+  background: rgba(255,255,255,0.03);
+  border-radius: 26px;
   padding: 12px 0;
   z-index: 9;
 }
@@ -317,7 +302,7 @@ footer {
 
 /* Hide mobile menu button on desktop */
 @media(min-width: 1024px) {
-  .nav-trigger, .nav-menu-mobile {
+  .nav-trigger {
     display: none;
   }
 }
@@ -377,7 +362,7 @@ footer {
 <!-- Main content -->
 <div class="main">
   <div id="content" class="card">
-    <h3>Loading Guide...</h3>
+    <h2>Loading Guide...</h2>
     <p>Connecting to Firebase database to pull data.</p>
   </div>
 </div>
@@ -431,13 +416,13 @@ import { getAuth, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/
         }
       } else {
         document.getElementById('content').innerHTML = `
-          <h3>Path Mismatch</h3>
+          <h2>Path Mismatch</h2>
           <p>Could not find the document <strong>"ekko_jungle_guide"</strong> inside "premiumContent".</p>
         `;
       }
     } catch (e) {
       console.error(e);
-      document.getElementById('content').innerHTML = `<h3>Connection Error</h3><p>Could not retrieve data from Firestore.</p>`;
+      document.getElementById('content').innerHTML = `<h2>Connection Error</h2><p>Could not retrieve data from Firestore.</p>`;
     }
   }
 
@@ -451,7 +436,7 @@ import { getAuth, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/
     } else {
       const keysList = cachedData ? Object.keys(cachedData).map(k => `"${k}"`).join(', ') : 'none';
       contentBox.innerHTML = `
-        <h3>Section Blank</h3>
+        <h2>Section Blank</h2>
         <p>The layout looked for the field <strong>"${sectionKey}"</strong>, but it wasn't found.</p>
         <hr style="border:0; border-top:1px solid rgba(255,255,255,0.1); margin:15px 0;">
         <p style="font-size:14px; color:var(--muted);">
