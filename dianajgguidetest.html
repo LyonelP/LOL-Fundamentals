@@ -39,11 +39,26 @@
             z-index:-1;
         }
 
+        /* Header */
+        header {
+            width:100%;
+            background:rgba(13,17,23,0.9);
+            border-bottom:2px solid var(--gold);
+            padding:20px 0;
+            font-size:26px;
+            font-weight:bold;
+            color:var(--gold);
+            text-align:center;
+            text-transform: uppercase;
+            z-index:10;
+            position:relative;
+        }
+
         /* Back button */
         .back-wrap {
             width:100%;
             text-align:center;
-            margin:20px 0 10px 0;
+            margin:16px 0;
             position:relative;
             z-index:10;
         }
@@ -73,26 +88,15 @@
             .nav-wrapper {
                 display:block;
                 position:fixed;
-                top:0;
+                top:70px;
                 left:0;
-                width:240px;
+                width:220px;
                 bottom:0;
                 background:rgba(15,20,26,0.95);
                 border-right:2px solid var(--gold);
-                padding-top:0;
+                padding-top:20px;
                 overflow-y:auto;
                 z-index:9;
-            }
-
-            .sidebar-title {
-                font-size: 16px;
-                font-weight: bold;
-                color: var(--gold);
-                text-transform: uppercase;
-                padding: 24px 24px 16px 24px;
-                border-bottom: 1px solid rgba(201, 170, 113, 0.2);
-                letter-spacing: 1px;
-                text-align: left;
             }
 
             .nav-section-title {
@@ -109,7 +113,6 @@
                 color:#e6edf3;
                 cursor:pointer;
                 border-radius:8px;
-                margin: 0 12px;
             }
 
             .nav-menu a:hover {
@@ -293,6 +296,8 @@
 </head>
 <body>
 
+<header>Diana Jungle Guide</header>
+
 <div class="back-wrap">
     <a href="membershub.html" class="back-button">Back to Members Hub</a>
 </div>
@@ -320,7 +325,6 @@
 
 <!-- Sidebar desktop -->
 <div class="nav-wrapper">
-    <div class="sidebar-title">Diana Jungle Guide</div>
     <div class="nav-menu" id="navMenu">
         <div class="nav-section-title">Core</div>
         <a data-section="intro">Intro</a>
