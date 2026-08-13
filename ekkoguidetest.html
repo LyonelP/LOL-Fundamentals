@@ -146,6 +146,7 @@ header {
   border-radius: 26px;
   padding: 36px;
   box-shadow: 0 24px 70px rgba(0,0,0,0.55);
+  text-align: center;
 }
 
 .card h2, .card h3 {
@@ -154,7 +155,10 @@ header {
 }
 
 .card ul {
-  padding-left: 22px;
+  padding-left: 0;
+  list-style-position: inside;
+  display: inline-block;
+  text-align: left;
 }
 
 .card li {
@@ -177,25 +181,28 @@ header {
 .rune-container {
   display: flex;
   flex-direction: column;
-  align-items: flex-start;
+  align-items: center;
   gap: 12px;
   margin-top: 15px;
 }
 .rune-info {
   display: flex;
   align-items: center;
+  justify-content: center;
 }
 .rune-info span {
   margin-left: 8px;
 }
 .rune-row {
   display: flex;
+  justify-content: center;
   gap: 12px;
   margin-top: 10px;
 }
 .card-container {
   display: flex;
   flex-direction: column;
+  align-items: center;
   gap: 12px;
   margin-top: 20px;
 }
@@ -205,6 +212,9 @@ header {
   border-radius: 10px;
   padding: 15px;
   text-align: center;
+  width: 100%;
+  max-width: 500px;
+  box-sizing: border-box;
 }
 .sub-card strong { display: block; margin-bottom: 8px; color: #e0c77b; }
 .build-flow {
@@ -285,6 +295,7 @@ footer {
   color: var(--muted);
   padding: 10px 20px;
   text-transform: uppercase;
+  text-align: center;
 }
 
 .nav-menu-mobile a {
@@ -293,6 +304,7 @@ footer {
   text-decoration: none;
   color: #e6edf3;
   cursor: pointer;
+  text-align: center;
 }
 
 .nav-menu-mobile a:hover {
