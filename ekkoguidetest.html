@@ -3,274 +3,187 @@
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Ekko Jungle Guide</title>
-<link rel="icon" type="image/png" href="https://i.imgur.com/NFO4uNP.png">
+<title>Diana Mid Guide</title>
+<link rel="icon" type="image/png" href="https://i.imgur.com/XOKDiWc.png">
 
+  
 <style>
 :root {
-  --gold: #c9aa71;
-  --muted: #9da7b3;
+  --gold:#c9aa71;
+  --muted:#9da7b3;
 }
 
 /* Reset */
 html, body {
-  margin: 0;
-  padding: 0;
-  height: 100%;
+  margin:0;
+  padding:0;
+  height:100%;
   font-family: Arial, Helvetica, sans-serif;
 }
 
 /* Body and background */
 body {
-  background: url('https://ddragon.leagueoflegends.com/cdn/img/champion/splash/Ekko_0.jpg') no-repeat center center fixed;
-  background-size: cover;
-  color: #e6edf3;
-  display: flex;
-  flex-direction: column;
-  min-height: 100vh;
-  position: relative;
+  background:url('https://ddragon.leagueoflegends.com/cdn/img/champion/splash/Diana_11.jpg') no-repeat center center fixed;
+  background-size:cover;
+  color:#e6edf3;
+  display:flex;
+  flex-direction:column;
+  min-height:100vh;
+  position:relative;
 }
 
 body::before {
-  content: "";
-  position: fixed;
-  inset: 0;
-  background: rgba(10,15,20,0.82);
-  z-index: -1;
+  content:"";
+  position:fixed;
+  inset:0;
+  background:
+    radial-gradient(circle at top, rgba(120,0,0,0.25), transparent 60%),
+    rgba(10,15,20,0.82);
+  z-index:-1;
 }
 
 /* Header */
 header {
-  width: 100%;
-  background: rgba(13,17,23,0.9);
-  border-bottom: 2px solid var(--gold);
-  padding: 20px 0;
-  font-size: 26px;
-  font-weight: bold;
-  color: var(--gold);
-  text-align: center;
+  width:100%;
+  background:rgba(13,17,23,0.9);
+  border-bottom:2px solid var(--gold);
+  padding:20px 0;
+  font-size:26px;
+  font-weight:bold;
+  color:var(--gold);
+  text-align:center;
   text-transform: uppercase;
-  z-index: 10;
-  position: relative;
+  z-index:10;
+  position:relative;
 }
 
 /* Back button */
 .back-wrap {
-  width: 100%;
-  text-align: center;
-  margin: 16px 0;
-  position: relative;
-  z-index: 10;
+  width:100%;
+  text-align:center;
+  margin:16px 0;
+  position:relative;
+  z-index:10;
 }
 
 .back-button {
-  display: inline-flex;
-  align-items: center;
-  gap: 8px;
-  padding: 10px 22px;
-  background: linear-gradient(135deg, var(--gold), #e0c77b);
-  color: #000;
-  text-decoration: none;
-  border-radius: 10px;
-  font-weight: bold;
+  display:inline-flex;
+  align-items:center;
+  gap:8px;
+  padding:10px 22px;
+  background:linear-gradient(135deg,var(--gold),#e0c77b);
+  color:#000;
+  text-decoration:none;
+  border-radius:10px;
+  font-weight:bold;
 }
 
 .back-button::before {
-  content: "←";
+  content:"←";
 }
 
 /* Sidebar desktop */
 .nav-wrapper {
-  display: none;
+  display:none;
 }
 
-@media(min-width: 1024px) {
+@media(min-width:1024px) {
   .nav-wrapper {
-    display: block;
-    position: fixed;
-    top: 70px; /* below header */
-    left: 0;
-    width: 220px;
-    bottom: 0;
-    background: rgba(15,20,26,0.95);
-    border-right: 2px solid var(--gold);
-    padding-top: 20px;
-    overflow-y: auto;
-    z-index: 9;
+    display:block;
+    position:fixed;
+    top:70px; /* below header */
+    left:0;
+    width:220px;
+    bottom:0;
+    background:rgba(15,20,26,0.95);
+    border-right:2px solid var(--gold);
+    padding-top:20px;
+    overflow-y:auto;
+    z-index:9;
   }
 
   .nav-section-title {
-    font-size: 11px;
-    color: var(--muted);
-    padding: 14px 24px;
-    text-transform: uppercase;
+    font-size:11px;
+    color:var(--muted);
+    padding:14px 24px;
+    text-transform:uppercase;
   }
 
   .nav-menu a {
-    display: block;
-    padding: 10px 24px;
-    text-decoration: none;
-    color: #e6edf3;
-    cursor: pointer;
-    border-radius: 8px;
+    display:block;
+    padding:10px 24px;
+    text-decoration:none;
+    color:#e6edf3;
+    cursor:pointer;
+    border-radius:8px;
   }
 
   .nav-menu a:hover {
-    background: var(--gold);
-    color: #000;
+    background:var(--gold);
+    color:#000;
   }
 }
 
 /* Main content */
 .main {
-  flex: 1;
-  display: flex;
-  justify-content: center;
-  align-items: flex-start;
-  padding: 0 24px;
-  margin-top: 0;
-  position: relative;
-  z-index: 1;
-}
-
-@media(min-width: 1024px) {
-  .main {
-    margin-left: 220px;
-  }
+  flex:1;
+  display:flex;
+  justify-content:center;
+  align-items:flex-start;
+  padding:0 24px;
+  margin-top:0;
+  position:relative;
+  z-index:1;
 }
 
 .card {
-  max-width: 800px;
-  width: 100%;
-  background: rgba(255,255,255,0.03);
-  border-radius: 26px;
-  padding: 36px;
-  box-shadow: 0 24px 70px rgba(0,0,0,0.55);
-  text-align: center;
+  max-width:800px;
+  width:100%;
+  background:rgba(255,255,255,0.03);
+  border-radius:26px;
+  padding:36px;
+  box-shadow:0 24px 70px rgba(0,0,0,0.55);
 }
 
-.card h2, .card h3 {
-  color: var(--gold);
-  margin-top: 0;
+.card h2 {
+  color:var(--gold);
+  margin-top:0;
 }
 
 .card ul {
-  padding-left: 0;
-  list-style-position: inside;
-  display: inline-block;
-  text-align: left;
+  padding-left:22px;
 }
 
 .card li {
-  margin-bottom: 8px;
-}
-
-/* Icons & Layout extras */
-.icon {
-  width: 36px;
-  height: 36px;
-  vertical-align: middle;
-  border-radius: 6px;
-  margin-right: 6px;
-  transition: 0.2s ease;
-}
-.icon:hover {
-  filter: drop-shadow(0 0 6px var(--gold));
-  transform: scale(1.05);
-}
-.rune-container {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 12px;
-  margin-top: 15px;
-}
-.rune-info {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-.rune-info span {
-  margin-left: 8px;
-}
-.rune-row {
-  display: flex;
-  justify-content: center;
-  gap: 12px;
-  margin-top: 10px;
-}
-.card-container {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 12px;
-  margin-top: 20px;
-}
-.sub-card {
-  background: rgba(20,25,35,0.85);
-  border: 1px solid var(--gold);
-  border-radius: 10px;
-  padding: 15px;
-  text-align: center;
-  width: 100%;
-  max-width: 500px;
-  box-sizing: border-box;
-}
-.sub-card strong { display: block; margin-bottom: 8px; color: #e0c77b; }
-.build-flow {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
-  align-items: center;
-  gap: 8px;
-  margin-top: 10px;
-}
-.build-flow div {
-  border: 1px solid var(--gold);
-  border-radius: 8px;
-  padding: 10px 12px;
-  min-width: 120px;
-  text-align: center;
-}
-.build-flow span {
-  font-size: 18px;
-  color: var(--gold);
+  margin-bottom:8px;
 }
 
 /* Footer */
 footer {
-  padding: 16px;
-  text-align: center;
-  font-size: 13px;
-  color: var(--muted);
-  margin-top: auto;
-  position: relative;
-  z-index: 10;
-}
-
-@media(min-width: 1024px) {
-  footer {
-    margin-left: 220px;
-  }
+  padding:16px;
+  text-align:center;
+  font-size:13px;
+  color:var(--muted);
+  margin-top:auto;
 }
 
 /* Mobile dropdown */
 .nav-trigger {
-  display: block;
-  width: 90%;
-  max-width: 360px;
-  margin: 16px auto;
-  padding: 14px 18px;
-  font-size: 16px;
-  font-weight: 600;
-  background: rgba(255,255,255,0.03);
-  border: none;
-  border-radius: 26px;
-  color: #fff;
-  cursor: pointer;
-  text-align: center;
-  position: relative;
-  z-index: 10;
+  display:block;
+  width:90%;
+  max-width:360px;
+  margin:16px auto;
+  padding:14px 18px;
+  font-size:16px;
+  font-weight:600;
+  background:rgba(255,255,255,0.03);
+  border:none;
+  border-radius:26px;
+  color:#fff;
+  cursor:pointer;
+  text-align:center;
+  position:relative;
+  z-index:10;
 }
 
 .nav-trigger::after {
@@ -279,50 +192,48 @@ footer {
 }
 
 .nav-menu-mobile {
-  display: none;
-  position: relative;
-  width: 85%;
-  max-width: 360px;
-  margin: 0 auto 16px auto;
-  background: rgba(255,255,255,0.03);
-  border-radius: 26px;
-  padding: 12px 0;
-  z-index: 9;
+  display:none;
+  position:relative; /* pushes content down naturally */
+  width:85%;
+  max-width:360px;
+  margin:0 auto 16px auto;
+  background:rgba(255,255,255,0.03);
+  border-radius:26px;
+  padding:12px 0;
+  z-index:9;
 }
 
 .nav-menu-mobile .nav-section-title {
-  font-size: 11px;
-  color: var(--muted);
-  padding: 10px 20px;
-  text-transform: uppercase;
-  text-align: center;
+  font-size:11px;
+  color:var(--muted);
+  padding:10px 20px;
+  text-transform:uppercase;
 }
 
 .nav-menu-mobile a {
-  display: block;
-  padding: 10px 20px;
-  text-decoration: none;
-  color: #e6edf3;
-  cursor: pointer;
-  text-align: center;
+  display:block;
+  padding:10px 20px;
+  text-decoration:none;
+  color:#e6edf3;
+  cursor:pointer;
 }
 
 .nav-menu-mobile a:hover {
-  background: var(--gold);
-  color: #000;
+  background:var(--gold);
+  color:#000;
 }
 
 /* Hide mobile menu button on desktop */
-@media(min-width: 1024px) {
+@media(min-width:1024px) {
   .nav-trigger {
-    display: none;
+    display:none;
   }
 }
 </style>
 </head>
 <body>
 
-<header>Ekko Jungle Guide</header>
+<header>Diana Mid Guide</header>
 
 <div class="back-wrap">
   <a href="membershub.html" class="back-button">Back to Members Hub</a>
@@ -335,17 +246,20 @@ footer {
   <a data-section="intro">Intro</a>
   <a data-section="runes">Runes</a>
   <a data-section="build">Build</a>
-  <a data-section="summoner spells">Summoner Spells</a>
+  <a data-section="summoners">Summoners</a>
   <a data-section="abilities">Abilities</a>
   <a data-section="combos">Combos</a>
   <div class="nav-section-title">Gameplay</div>
-  <a data-section="level 1">Level 1</a>
-  <a data-section="pathing">Pathing</a>
-  <a data-section="invades">Invades</a>
-  <a data-section="hardest matchups">Hardest Matchups</a>
-  <a data-section="team fighting">Team Fighting</a>
-  <a data-section="closing out the game">Closing Out The Game</a>
-  <div class="nav-section-title">Outro</div>
+  <a data-section="laning">Laning</a>
+  <a data-section="warding">Warding</a>
+  <a data-section="farming">Farming / Pushing</a>
+  <a data-section="teamfighting">Teamfighting</a>
+  <a data-section="splitpushing">Splitpushing</a>
+  <a data-section="closing">Closing Out The Game</a>
+  <div class="nav-section-title">Advanced</div>
+  <a data-section="bans">Pick/Ban</a>
+  <a data-section="pros">Pros & Cons</a>
+  <a data-section="extra">Extra Tips</a>
   <a data-section="outro">Outro</a>
 </div>
 
@@ -356,17 +270,20 @@ footer {
     <a data-section="intro">Intro</a>
     <a data-section="runes">Runes</a>
     <a data-section="build">Build</a>
-    <a data-section="summoner spells">Summoner Spells</a>
+    <a data-section="summoners">Summoners</a>
     <a data-section="abilities">Abilities</a>
     <a data-section="combos">Combos</a>
     <div class="nav-section-title">Gameplay</div>
-    <a data-section="level 1">Level 1</a>
-    <a data-section="pathing">Pathing</a>
-    <a data-section="invades">Invades</a>
-    <a data-section="hardest matchups">Hardest Matchups</a>
-    <a data-section="team fighting">Team Fighting</a>
-    <a data-section="closing out the game">Closing Out The Game</a>
-    <div class="nav-section-title">Outro</div>
+    <a data-section="laning">Laning</a>
+    <a data-section="warding">Warding</a>
+    <a data-section="farming">Farming / Pushing</a>
+    <a data-section="teamfighting">Teamfighting</a>
+    <a data-section="splitpushing">Splitpushing</a>
+    <a data-section="closing">Closing Out The Game</a>
+    <div class="nav-section-title">Advanced</div>
+    <a data-section="bans">Pick/Ban</a>
+    <a data-section="pros">Pros & Cons</a>
+    <a data-section="extra">Extra Tips</a>
     <a data-section="outro">Outro</a>
   </div>
 </div>
@@ -390,6 +307,8 @@ function toggleMobileMenu(){
 </script>
 
 <!-- Firebase Data Integration Script -->
+<!-- Firebase Data Integration Script -->
+<!-- Firebase Data Integration Script -->
 <script type="module">
 import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
 import { getFirestore, doc, getDoc } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
@@ -412,12 +331,13 @@ import { getAuth, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/
 
   async function initializeGuide() {
     try {
-      const docRef = doc(db, "premiumContent", "ekko_jungle_guide");
+      const docRef = doc(db, "premiumContent", "diana_mid_guide");
       const docSnap = await getDoc(docRef);
       
       if (docSnap.exists()) {
         cachedData = docSnap.data();
         
+        // AUTO-DETECT RUN: Finds your intro text even if it has a typo, capital letter, or hidden space
         const documentKeys = Object.keys(cachedData);
         const activeIntroKey = documentKeys.find(k => k.trim().toLowerCase() === 'intro') || documentKeys[0];
         
@@ -429,7 +349,7 @@ import { getAuth, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/
       } else {
         document.getElementById('content').innerHTML = `
           <h2>Path Mismatch</h2>
-          <p>Could not find the document <strong>"ekko_jungle_guide"</strong> inside "premiumContent".</p>
+          <p>Could not find the document <strong>"diana_mid_guide"</strong> inside "premiumContent".</p>
         `;
       }
     } catch (e) {
@@ -441,6 +361,7 @@ import { getAuth, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/
   function showSection(sectionKey) {
     const contentBox = document.getElementById('content');
     
+    // Loose key matching: looks for matching keys ignoring case and whitespace
     const actualKey = cachedData ? Object.keys(cachedData).find(k => k.trim().toLowerCase() === sectionKey.trim().toLowerCase()) : null;
     
     if (actualKey && cachedData[actualKey]) {
@@ -467,15 +388,13 @@ import { getAuth, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/
   });
 
   onAuthStateChanged(auth, (user) => {
-    if (user) {
-      console.log("Firebase logged in:", user.email);
-      initializeGuide();
-    } else {
-      console.log("No Firebase user");
-      window.location.replace("login.html");
-    }
-  });
+  if (user) {
+    console.log("Firebase logged in:", user.email);
+    initializeGuide();
+  } else {
+    console.log("No Firebase user");
+    window.location.replace("login.html");
+  }
+});
 </script>
 
-</body>
-</html>
