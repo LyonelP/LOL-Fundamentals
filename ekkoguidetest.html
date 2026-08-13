@@ -7,102 +7,176 @@
 <link rel="icon" type="image/png" sizes="32x32" href="https://i.imgur.com/NFO4uNP.png">
 <link rel="icon" type="image/png" sizes="16x16" href="https://i.imgur.com/NFO4uNP.png">
 <link rel="apple-touch-icon" href="https://i.imgur.com/NFO4uNP.png">
+
 <style>
-body {
+:root {
+  --gold: #c9aa71;
+  --muted: #9da7b3;
+}
+
+/* Reset */
+html, body {
   margin: 0;
-  font-family: 'Beaufort for LOL', Arial, Helvetica, sans-serif;
+  padding: 0;
+  height: 100%;
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+/* Body and background */
+body {
   background: url('https://ddragon.leagueoflegends.com/cdn/img/champion/splash/Ekko_0.jpg') no-repeat center center fixed;
   background-size: cover;
   color: #e6edf3;
-  text-align: center;
-  overflow-x: hidden;
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+  position: relative;
 }
 
-/* Overlay */
 body::before {
   content: "";
   position: fixed;
-  top: 0; left: 0;
-  width: 100%; height: 100%;
-  background: rgba(10,15,20,0.75);
+  inset: 0;
+  background: rgba(10,15,20,0.82);
   z-index: -1;
 }
 
 /* Header */
 header {
+  width: 100%;
   background: rgba(13,17,23,0.9);
-  border-bottom: 2px solid #c9aa71;
-  padding: 20px 10px;
-  font-weight: bold;
+  border-bottom: 2px solid var(--gold);
+  padding: 20px 0;
   font-size: 26px;
+  font-weight: bold;
+  color: var(--gold);
+  text-align: center;
   text-transform: uppercase;
-  color: #c9aa71;
-  letter-spacing: 1px;
+  z-index: 10;
+  position: relative;
 }
 
 /* Back button */
+.back-wrap {
+  width: 100%;
+  text-align: center;
+  margin: 16px 0;
+  position: relative;
+  z-index: 10;
+}
+
 .back-button {
-  display: inline-block;
-  margin: 20px auto 10px;
-  padding: 10px 20px;
-  background: linear-gradient(135deg, #c9aa71, #e0c77b);
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 10px 22px;
+  background: linear-gradient(135deg, var(--gold), #e0c77b);
   color: #000;
   text-decoration: none;
-  border-radius: 8px;
+  border-radius: 10px;
   font-weight: bold;
-  transition: all 0.3s;
   box-shadow: 0 0 10px rgba(201,170,113,0.5);
+  transition: all 0.3s;
 }
-.back-button::before { content: "← "; }
+
+.back-button::before {
+  content: "← ";
+}
+
 .back-button:hover {
   background: linear-gradient(135deg, #e6c97f, #f0d88b);
   box-shadow: 0 0 15px rgba(255,215,0,0.8);
 }
 
-/* Dropdown */
-#section-select-container {
-  margin: 20px auto;
-}
-#section-select {
-  padding: 10px 15px;
-  font-size: 16px;
-  border-radius: 6px;
-  border: none;
-  background: #0f1722;
-  color: #c9aa71;
-  cursor: pointer;
+/* Sidebar desktop */
+.nav-wrapper {
+  display: none;
 }
 
-/* Section display */
-#section-info {
-  margin: 20px auto;
+@media(min-width: 1024px) {
+  .nav-wrapper {
+    display: block;
+    position: fixed;
+    top: 70px;
+    left: 0;
+    width: 240px;
+    bottom: 0;
+    background: rgba(15,20,26,0.95);
+    border-right: 2px solid var(--gold);
+    padding-top: 20px;
+    overflow-y: auto;
+    z-index: 9;
+  }
+
+  .nav-section-title {
+    font-size: 11px;
+    color: var(--muted);
+    padding: 14px 24px;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+  }
+
+  .nav-menu a {
+    display: block;
+    padding: 10px 24px;
+    text-decoration: none;
+    color: #e6edf3;
+    cursor: pointer;
+    border-radius: 8px;
+    transition: background 0.2s, color 0.2s;
+  }
+
+  .nav-menu a:hover {
+    background: var(--gold);
+    color: #000;
+  }
+}
+
+/* Main content */
+.main {
+  flex: 1;
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  padding: 0 24px 24px 24px;
+  position: relative;
+  z-index: 1;
+}
+
+@media(min-width: 1024px) {
+  .main {
+    margin-left: 240px;
+  }
+}
+
+.card {
   max-width: 900px;
+  width: 100%;
   background: rgba(13,17,23,0.95);
   border: 1px solid #2f81f7;
-  padding: 15px 20px;
   border-radius: 10px;
+  padding: 30px;
+  box-shadow: 0 24px 70px rgba(0,0,0,0.55);
   text-align: left;
-  color: #fff;
-  min-height: 200px;
-  position: relative;
 }
 
-#section-info:hover { box-shadow: 0 0 15px rgba(47,129,247,0.5); }
+.card:hover {
+  box-shadow: 0 0 15px rgba(47,129,247,0.5);
+}
 
-#section-info h3 {
-  position: relative;
+.card h3 {
   margin-top: 0;
-  color: #c9aa71;
+  color: var(--gold);
   font-size: 22px;
   text-transform: capitalize;
 }
 
-#section-info p {
+.card p {
   margin: 10px 0 14px;
   line-height: 1.6;
 }
 
-#section-info ul {
+.card ul {
   margin-left: 20px;
 }
 
@@ -116,7 +190,7 @@ header {
   transition: 0.2s ease;
 }
 .icon:hover {
-  filter: drop-shadow(0 0 6px #c9aa71);
+  filter: drop-shadow(0 0 6px var(--gold));
   transform: scale(1.05);
 }
 
@@ -149,15 +223,15 @@ header {
   margin-top: 20px;
 }
 
-.card {
+.sub-card {
   background: rgba(20,25,35,0.85);
-  border: 1px solid #c9aa71;
+  border: 1px solid var(--gold);
   border-radius: 10px;
   padding: 15px;
   text-align: center;
   transition: all 0.3s;
 }
-.card strong { display: block; margin-bottom: 8px; color: #e0c77b; }
+.sub-card strong { display: block; margin-bottom: 8px; color: #e0c77b; }
 
 /* Build flow */
 .build-flow {
@@ -169,7 +243,7 @@ header {
   margin-top: 10px;
 }
 .build-flow div {
-  border: 1px solid #c9aa71;
+  border: 1px solid var(--gold);
   border-radius: 8px;
   padding: 10px 12px;
   min-width: 120px;
@@ -177,370 +251,246 @@ header {
 }
 .build-flow span {
   font-size: 18px;
-  color: #c9aa71;
+  color: var(--gold);
 }
 
-/* Media query */
-@media (max-width: 600px) {
-  #section-select { font-size: 14px; padding: 8px 10px; }
-  .card-container { flex-direction: column; gap: 10px; }
-  .build-flow { flex-direction: column; }
-  .build-flow span { display: none; }
+/* Footer */
+footer {
+  padding: 16px;
+  text-align: center;
+  font-size: 13px;
+  color: var(--muted);
+  margin-top: auto;
+  position: relative;
+  z-index: 10;
+}
+
+@media(min-width: 1024px) {
+  footer {
+    margin-left: 240px;
+  }
+}
+
+/* Mobile dropdown */
+.nav-trigger {
+  display: block;
+  width: 90%;
+  max-width: 360px;
+  margin: 16px auto;
+  padding: 14px 18px;
+  font-size: 16px;
+  font-weight: 600;
+  background: rgba(13,17,23,0.95);
+  border: 1px solid var(--gold);
+  border-radius: 26px;
+  color: #fff;
+  cursor: pointer;
+  text-align: center;
+  position: relative;
+  z-index: 10;
+}
+
+.nav-trigger::after {
+  content: " ▼";
+  font-weight: bold;
+}
+
+.nav-menu-mobile {
+  display: none;
+  position: relative;
+  width: 85%;
+  max-width: 360px;
+  margin: 0 auto 16px auto;
+  background: rgba(13,17,23,0.95);
+  border: 1px solid var(--gold);
+  border-radius: 20px;
+  padding: 12px 0;
+  z-index: 9;
+}
+
+.nav-menu-mobile .nav-section-title {
+  font-size: 11px;
+  color: var(--muted);
+  padding: 10px 20px;
+  text-transform: uppercase;
+}
+
+.nav-menu-mobile a {
+  display: block;
+  padding: 10px 20px;
+  text-decoration: none;
+  color: #e6edf3;
+  cursor: pointer;
+}
+
+.nav-menu-mobile a:hover {
+  background: var(--gold);
+  color: #000;
+}
+
+@media(min-width: 1024px) {
+  .nav-trigger, .nav-menu-mobile {
+    display: none;
+  }
 }
 </style>
 </head>
 <body>
 
 <header>Ekko Jungle Guide</header>
-<a href="membershub.html" class="back-button">Back to Members Hub</a>
 
-<div id="section-select-container">
-  <select id="section-select">
-    <option disabled selected>Select a section</option>
-    <option>Intro</option>
-    <option>Runes</option>
-    <option>Build</option>
-    <option>Summoner spells</option>
-    <option>Abilities</option>
-    <option>Combos</option>
-    <option>Level 1</option>
-    <option>Pathing</option>
-    <option>Invades</option>
-    <option>Hardest matchups</option>
-    <option>Team fighting</option>
-    <option>Closing out the game</option>
-    <option>Outro</option>
-  </select>
+<div class="back-wrap">
+  <a href="membershub.html" class="back-button">Back to Members Hub</a>
 </div>
 
-<div id="section-info">
-  <p>Select a section from above to view details.</p>
+<!-- Mobile dropdown button -->
+<button class="nav-trigger" id="mobileTrigger" onclick="toggleMobileMenu()">Select a Section</button>
+<div class="nav-menu-mobile" id="mobileMenu">
+  <div class="nav-section-title">Core</div>
+  <a data-section="intro">Intro</a>
+  <a data-section="runes">Runes</a>
+  <a data-section="build">Build</a>
+  <a data-section="summoner spells">Summoner Spells</a>
+  <a data-section="abilities">Abilities</a>
+  <a data-section="combos">Combos</a>
+  <div class="nav-section-title">Gameplay</div>
+  <a data-section="level 1">Level 1</a>
+  <a data-section="pathing">Pathing</a>
+  <a data-section="invades">Invades</a>
+  <a data-section="hardest matchups">Hardest Matchups</a>
+  <a data-section="team fighting">Team Fighting</a>
+  <a data-section="closing out the game">Closing Out The Game</a>
+  <div class="nav-section-title">Outro</div>
+  <a data-section="outro">Outro</a>
 </div>
 
+<!-- Sidebar desktop -->
+<div class="nav-wrapper">
+  <div class="nav-menu" id="navMenu">
+    <div class="nav-section-title">Core</div>
+    <a data-section="intro">Intro</a>
+    <a data-section="runes">Runes</a>
+    <a data-section="build">Build</a>
+    <a data-section="summoner spells">Summoner Spells</a>
+    <a data-section="abilities">Abilities</a>
+    <a data-section="combos">Combos</a>
+    <div class="nav-section-title">Gameplay</div>
+    <a data-section="level 1">Level 1</a>
+    <a data-section="pathing">Pathing</a>
+    <a data-section="invades">Invades</a>
+    <a data-section="hardest matchups">Hardest Matchups</a>
+    <a data-section="team fighting">Team Fighting</a>
+    <a data-section="closing out the game">Closing Out The Game</a>
+    <div class="nav-section-title">Outro</div>
+    <a data-section="outro">Outro</a>
+  </div>
+</div>
+
+<!-- Main content -->
+<div class="main">
+  <div id="content" class="card">
+    <h3>Loading Guide...</h3>
+    <p>Connecting to Firebase database to pull data.</p>
+  </div>
+</div>
+
+<footer>© 2026 LoL Fundamentals</footer>
+
+<!-- UI Toggle Logic -->
 <script>
-// Require login
-if (localStorage.getItem('lolfundamentals_logged_in') !== 'true') {
-  window.location.href = 'index.html';
+function toggleMobileMenu(){
+  const menu = document.getElementById('mobileMenu');
+  menu.style.display = (menu.style.display === 'block') ? 'none' : 'block';
 }
+</script>
 
-const sectionSelect = document.getElementById('section-select');
-const sectionInfo = document.getElementById('section-info');
-
-sectionSelect.addEventListener('change', () => {
-  let value = sectionSelect.value;
-  let content = `<p>Coming soon!</p>`;
-  let header = `<h3>${value}</h3>`;
-
-  if(value === "Intro"){
-    content = `
-      ${header}
-      <p>Why Ekko jungle? Ekko excels in the jungle because his mobility, crowd control, and burst allow for strong ganks and objective control. Smite synergizes perfectly with his kit. The slow and burst from smite make connecting E's significantly easier and allows for easy objectives steals. He's also really fun to play!</p>
-    `;
-  }
-
-  if(value === "Runes"){
-    content = `
-      ${header}
-    <div class="rune-container">
-  <div class="rune-info">
-    <img src="https://ddragon.leagueoflegends.com/cdn/img/perk-images/Styles/Domination/DarkHarvest/DarkHarvest.png" class="icon">
-    <span><strong>Dark Harvest:</strong> Consistent damage that pairs well with E.</span>
-  </div>
-
-  <div class="rune-info">
-    <img src="https://ddragon.leagueoflegends.com/cdn/img/perk-images/Styles/Domination/SuddenImpact/SuddenImpact.png" class="icon">
-    <span><strong>Sudden Impact:</strong> Works with Ekko's E and R for extra magic penetration.</span>
-  </div>
-
-  <div class="rune-info">
-    <img src="https://raw.communitydragon.org/latest/plugins/rcp-be-lol-game-data/global/default/v1/perk-images/styles/domination/grislymementos/grislymementos.png" class="icon">
-    <span><strong>Grisly Mementos:</strong> Extra trinket haste from takedowns.</span>
-  </div>
-
-  <div class="rune-info">
-    <img src="https://ddragon.leagueoflegends.com/cdn/img/perk-images/Styles/Domination/TreasureHunter/TreasureHunter.png" class="icon">
-    <span><strong>Treasure Hunter:</strong> Extra gold on takedowns helps accelerate core item buys.</span>
-  </div>
-
-  <div class="rune-info">
-    <img src="https://ddragon.leagueoflegends.com/cdn/img/perk-images/Styles/Inspiration/MagicalFootwear/MagicalFootwear.png" class="icon">
-    <span><strong>Magical Footwear:</strong> Free boots with increased movement speed to help connect the E.</span>
-  </div>
-
-  <div class="rune-info">
-    <img src="https://raw.communitydragon.org/latest/plugins/rcp-be-lol-game-data/global/default/v1/perk-images/styles/inspiration/jackofalltrades/jackofalltrades2.png" class="icon">
-    <span><strong>Jack of All Trades:</strong> Gain ability haste + adaptive bonuses from diverse item stats.</span>
-  </div>
-
-  <div class="rune-row">
-    <div>
-      <img src="https://ddragon.leagueoflegends.com/cdn/img/perk-images/StatMods/StatModsAttackSpeedIcon.png" class="icon">
-      <span>Attack Speed</span>
-    </div>
-    <div>
-      <img src="https://ddragon.leagueoflegends.com/cdn/img/perk-images/StatMods/StatModsAdaptiveForceIcon.png" class="icon">
-      <span>Adaptive Force</span>
-    </div>
-    <div>
-      <img src="https://ddragon.leagueoflegends.com/cdn/img/perk-images/StatMods/StatModsHealthScalingIcon.png" class="icon">
-      <span>Scaling Health</span>
-    </div>
-  </div>
-    `;
-  }
-
-  if(value === "Build"){
-  content = `
-    ${header}
-
-    <div class="card-container">
-
-      <div class="card"><strong>Starting items</strong>
-        <div class="build-flow">
-
-          <div>
-            <img src="https://raw.communitydragon.org/latest/game/assets/items/icons2d/1103_jungle_t1_mosstomperseedling.png" class="icon">
-            Mosstomper Seedling
-          </div>
-
-          <span>→</span>
-
-          <div>
-            <img src="https://ddragon.leagueoflegends.com/cdn/14.21.1/img/item/1082.png" class="icon">
-            Dark Seal
-          </div>
-
-          <span>+</span>
-
-          <div>
-            <img src="https://ddragon.leagueoflegends.com/cdn/14.21.1/img/item/1026.png" class="icon">
-            Blasting Wand
-          </div>
-
-          <span>/</span>
-
-          <div>
-            <img src="https://ddragon.leagueoflegends.com/cdn/14.21.1/img/item/1028.png" class="icon">
-            Ruby Crystal
-          </div>
-
-        </div>
-      </div>
-
-
-      <div class="card"><strong>Core items</strong>
-        <div class="build-flow">
-
-          <div>
-            <img src="https://ddragon.leagueoflegends.com/cdn/14.21.1/img/item/2510.png" class="icon">
-            Dusk and Dawn
-          </div>
-
-          <span>→</span>
-
-          <div>
-            <img src="https://ddragon.leagueoflegends.com/cdn/14.21.1/img/item/3111.png" class="icon">
-            Mercury Treads
-          </div>
-
-          <span>→</span>
-
-          <div>
-            <img src="https://ddragon.leagueoflegends.com/cdn/14.21.1/img/item/3115.png" class="icon">
-            Nashor's Tooth
-          </div>
-
-          <span>→</span>
-
-          <div>
-            <img src="https://ddragon.leagueoflegends.com/cdn/14.21.1/img/item/3089.png" class="icon">
-            Rabadon's Deathcap
-          </div>
-
-        </div>
-      </div>
-
-
-      <div class="card"><strong>Final items</strong>
-        <div class="build-flow">
-
-          <div>
-            <img src="https://ddragon.leagueoflegends.com/cdn/14.21.1/img/item/3157.png" class="icon">
-            Zhonya's Hourglass
-          </div>
-
-          <span>→</span>
-
-          <div>
-            <img src="https://ddragon.leagueoflegends.com/cdn/14.21.1/img/item/3135.png" class="icon">
-            Void Staff
-          </div>
-
-          <span>→</span>
-
-          <div>
-            <img src="https://ddragon.leagueoflegends.com/cdn/14.21.1/img/item/2138.png" class="icon">
-            Elixir(s)
-          </div>
-
-        </div>
-      </div>
-
-
-      <div class="card">
-        <strong>Why Nashor's Tooth over Shadowflame?</strong>
-        <p>
-          Nashor's Tooth gives Ekko more consistent DPS and jungle tempo compared to Shadowflame. The haste and attack speed provide Ekko with more outplay potential compared to shadowflame which only provides damage in sutuations that often don't require the crit anyways.
-        </p>
+<!-- Firebase Data Integration Script -->
+<script type="module">
+import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
+import { getFirestore, doc, getDoc } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
+import { getAuth, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-auth.js";
   
-      </div>
+const firebaseConfig = {
+  apiKey: "AIzaSyCFRcEV7wdivqONnkjJubAZOjPMixrHMBI",
+  authDomain: "lol-fundamentals.firebaseapp.com",
+  projectId: "lol-fundamentals",
+  storageBucket: "lol-fundamentals.firebasestorage.app",
+  messagingSenderId: "1038440427584",
+  appId: "1:1038440427584:web:a82207151fd370dbedefa5"
+};
 
-    </div>
-  `;
+const app = initializeApp(firebaseConfig);
+const db = getFirestore(app);
+const auth = getAuth(app);
+
+let cachedData = null;
+
+async function initializeGuide() {
+  try {
+    const docRef = doc(db, "premiumContent", "ekko_jungle_guide");
+    const docSnap = await getDoc(docRef);
+    
+    if (docSnap.exists()) {
+      cachedData = docSnap.data();
+      
+      const documentKeys = Object.keys(cachedData);
+      const activeIntroKey = documentKeys.find(k => k.trim().toLowerCase() === 'intro') || documentKeys[0];
+      
+      if (activeIntroKey) {
+        showSection(activeIntroKey);
+      } else {
+        showSection('intro');
+      }
+    } else {
+      document.getElementById('content').innerHTML = `
+        <h3>Path Mismatch</h3>
+        <p>Could not find the document <strong>"ekko_jungle_guide"</strong> inside "premiumContent".</p>
+      `;
+    }
+  } catch (e) {
+    console.error(e);
+    document.getElementById('content').innerHTML = `<h3>Connection Error</h3><p>Could not retrieve data from Firestore.</p>`;
+  }
 }
 
-  if(value === "Summoner spells"){
-    content = `
-      ${header}
-      <p><img src="https://ddragon.leagueoflegends.com/cdn/14.21.1/img/spell/SummonerFlash.png" class="icon"><strong>Flash:</strong> E Flash is one of Ekko's best combos.</p>
-      <p><img src="https://ddragon.leagueoflegends.com/cdn/14.21.1/img/spell/SummonerSmite.png" class="icon"><strong>Smite:</strong> I believe smite is the strongest summoner spell to take alongside flash on Ekko, especially once upgraded. The slow, burst, the ability to secure objectives fits Ekko’s kit perfectly. Also using smite on camps activates Ekko's W passive quicker.
-</p>
+function showSection(sectionKey) {
+  const contentBox = document.getElementById('content');
+  
+  const actualKey = cachedData ? Object.keys(cachedData).find(k => k.trim().toLowerCase() === sectionKey.trim().toLowerCase()) : null;
+  
+  if (actualKey && cachedData[actualKey]) {
+    contentBox.innerHTML = cachedData[actualKey];
+  } else {
+    const keysList = cachedData ? Object.keys(cachedData).map(k => `"${k}"`).join(', ') : 'none';
+    contentBox.innerHTML = `
+      <h3>Section Blank</h3>
+      <p>The layout looked for the field <strong>"${sectionKey}"</strong>, but it wasn't found.</p>
+      <hr style="border:0; border-top:1px solid rgba(255,255,255,0.1); margin:15px 0;">
+      <p style="font-size:14px; color:var(--muted);">
+        <strong>Available keys inside this document:</strong> [ ${keysList} ]
+      </p>
     `;
   }
-
-  if(value === "Abilities"){
-    content = `
-      ${header}
-      <p><img src="https://ddragon.leagueoflegends.com/cdn/14.21.1/img/passive/Ekko_P.png" class="icon"><strong>Passive – Z‑Drive Resonance:</strong> Every 3rd hit deals bonus magic damage and grants movespeed. Almost all trades in which you can proc the passive are worth it. With the increased movement speed, it’s very hard for the enemy to retaliate. Use the movement speed to reposition, while waiting for your cooldowns to come back up.</p>
-      <p><img src="https://ddragon.leagueoflegends.com/cdn/14.21.1/img/spell/EkkoQ.png" class="icon"><strong>Q – Timewinder:</strong> Main damage and clear tool. Also slows and applies one passive stack</p>
-      <p><img src="https://ddragon.leagueoflegends.com/cdn/14.21.1/img/spell/EkkoW.png" class="icon"><strong>W – Parallel Convergence:</strong> Use w to push your enemies towards your desired location. Always try to place the w in your path as well to always have the shield. The shield granted should also be used to tank damage. Use w to tank tower shots, and damage from the enemy team. Also grants vision.</p>
-      <p><img src="https://ddragon.leagueoflegends.com/cdn/14.21.1/img/spell/EkkoE.png" class="icon"><strong>E – Phase Dive:</strong> Ekko’s E is a great gap closer, and can be used over most walls. Ekko will travel faster if he can connect the second part of E. Always look for possible connectors like champions, minions, ward, and orbs. It's also an auto reset.</p>
-      <p><img src="https://ddragon.leagueoflegends.com/cdn/14.21.1/img/spell/EkkoR.png" class="icon"><strong>R – Chronobreak:</strong> Ekko’s ult is great for tower diving, initiating fights, and stealing objectives. Everyone deserves a second chance.</p>
-    `;
-  }
-
-  if(value === "Combos"){
-    content = `
-      ${header}
-      <p><strong>W E E Q AA:</strong> Basic combo.</p>
-      <p><strong>E E Q AA W AA:</strong> Best for extended trades.</p>
-      <p><strong>E Q E AA:</strong> Animation cancels the Q.</p>
-      <p><strong>Q AA E E:</strong> E resets Ekko's auto attack.</p>
-      <p><strong>W E Q E:</strong> Two slows to help get the stun.</p>
-    `;
-  }
-
-  if(value === "Level 1"){
-    content = `
-      ${header}
-      <p>Ward the bush above red buff or the mid side bush in front of raptors to spot late inavdes and enemies trying to cheese your raptors. The side bush ward spots invades and discourages the enemy mid laner from warding your raptors. Red start is always preferred as it is a stronger buff than blue, and it’s nearest two camps are raptors and golems which are extremely good camps for Ekko. Only start blue if the enemy team is looking to cheese red level 1. Having Red keeps you healthier, and makes you deal more damage. A jungler with red vs. a jungler with blue will almost always win. It also makes it easier to secure the other side of your jungle, and scuttle crab.</p>
-    `;
-  }
-
-  if(value === "Pathing"){
-    content = `
-      ${header}
-   <p><strong>Recommended full jungle path on Blue Side:</strong></p>
-<p>Start Raptors unless youre planning on spending a lot of time forcing a gank at the end of your path. Starting red makes raptors respawn later removing counter play from the enemy jungler who can look to take them after scuttle crab. This can also lead to you taking their raptors and them not being able to trade. Only start blue buff if you're completely kicked out of your red side jungle.</p>
-<p>Paths from Red Side are mirrored</p>
-
-<ul>
-  <p>Blue side: Start Raptors → Krugs → Red Buff → Wolves → Check for gank mid or top → Blue Buff → Check for gank mid or top → Gromp → Scuttle Crab → Back to Raptors → Krugs which is exactly enough gold for dark seal and blasting wand.</p>
-  <p>Blue Buff → Gromp → Wolf Camp → Raptors → Red Buff → Krugs → Scuttle Crab.</p>
-</ul>
-
-<p>After the reset look to go to wolf camp and then gromp.</p>
-
-<p><strong>These are the routes I’ll take out of base:</strong></p>
-<img 
-  src="https://i.imgur.com/vQ5fbRn.png" 
-  alt="Jungle path routes" 
-  style="width:100%; max-width:700px; display:block; margin:20px auto; border:2px solid #c9aa71; border-radius:10px;"
->
-    `;
-  }
-
-  if(value === "Invades"){
-  content = `
-    ${header}
-    <p><strong>When to invade:</strong></p>
-    <p>There are two main scenarios in which to look to cross the river on your first clear. 1. When you know the enemy is starting blue buff and you can make it to their red on time to steal it and go for the fight. Normally wolf camp has to be skipped for this invade and works best if your mid laner warded their raptors. 2 If you know they’re starting your blue. Still don’t look to cross the river until you’ve hit 3. It’s very easy for the enemy team to collapse on you as that’s their strong side. Most of the time it’s actually better to finish raptors and then move to their red side to contest their camps with the red buff advantage.</p>
-    <p><strong>What to do when they invade:</strong></p>
-    <p>There are also two main invades that you'll have to deal with. The first is when they try to contest your start on red side. Always start Q to help fight invades, and pull the camp into the raptor bush to help stall for mid to join. You can also outsmite the raptor camp with a well timed passive auto and smite.</p>
-    <p>The second common invade that happens is when they look to go to your blue after they do their red or raptors especially if their mid laner wards your raptors and sees you starting there. Most of the time its best to still path to your blue side because they'll do blue then gromp and you can finish wolf camp which puts you 1 camp ahead for the time being. After that they'll either look for the top gank, look at mid gank which is less common or finish their red or raptors whichever camp they didn't do first. This leaves their krugs up and you can look to take those and then look for top or mid gank and top scuttle. Eventually this can put the enemy jungler one camp ahead but your start is completely safe. You also get to back first and still have a chance to contest the bot scuttle.</p>
-  <p> When they look for this invade you'll have complete knowledge of where they are, and they have to sacrifice ganks to finish this clear. The worst gank that can happen is the top after they finish your raptors, but this lets you contest their red or raptors and look for the kill on them, if they enter back into their red side.</p>
-  `;
+  document.getElementById('mobileMenu').style.display = 'none';
 }
 
-  if(value === "Hardest matchups"){
-    content = `
-      ${header}
-     <p>Champions like Evelynn, Kha’Zix, and Lee Sin who have a lot of mobility and burst are really hard for Ekko to deal with. They can force Ekko to ult early, and still have the mobility, and damage to follow, and kill Ekko at his original position.<p>
-     <p>Some blue start junglers like Udyr and Hecarim can also be annoying for Ekko because their clear speed allows them to full clear and make it to your Gromp or Blue at level 4 while you're still level 3. In these matchups I'll save smite to secure the last camp and potentially scuttle crab.<p>
-     <p>Other difficult matchups are against champs who can build wits ends and can kite Ekko's passive like Kindred and Bel'veth. Luckily Dusk and Dawn helps proc the passive easier and shortens the time in which you need to trade with them since their dps will always be higher. Look to fight early in these matchups and play around your AD damage more to deal with them late game.<p>
-    `;
+document.querySelectorAll('[data-section]').forEach(link => {
+  link.addEventListener('click', (e) => {
+    const targetSection = e.target.getAttribute('data-section');
+    showSection(targetSection);
+  });
+});
+
+onAuthStateChanged(auth, (user) => {
+  if (user) {
+    console.log("Firebase logged in:", user.email);
+    initializeGuide();
+  } else {
+    console.log("No Firebase user");
+    window.location.replace("login.html");
   }
-
-  if(value === "Team fighting"){
-    content = `
-      ${header}
-      <p>Ekko has great teamfighting. Look to proc your passive on as many targets as possible, and to land your w on priority targets. The longer Ekko can delay his ult the better for max healing, damage, and the best position. If you are engaging against lot of enemies try to proc Ekko passive, and ult immediately after. Then look to follow up with the movement speed from Ekko’s passive. Use w passive, and ult very liberally, especially when you can proc your passive on a squishy target. They will lose a majority of their health while you will still be full health, and will have kill pressure once your next e q combo is available. It’s better to save your ult when possible, and use the shield from w and the movement speed from passive to win trades. Ekko has a lot of healing sources making most trades worth taking.
-
-*Tip: Use the movement speed from passive to dodge enemy melee auto attacks.</p>
-    `;
-  }
-
-  if(value === "Closing out the game"){
-    content = `
-      ${header}
-      <p>Most games are won through baron and elder. Ekko is great at setting up, protecting, and stealing those objectives. Ekko can zone the enemy team with parallel convergence, to gain, and clear out vision.The passive from parallel convergence also helps secure the last hit on objectives with the bonus damage to low health enemies. Ekko can fast push all waves with q, and passive to set up objectives. It’s very difficult for the enemy to gain big advantages against Ekko since he can clear waves against tower pushes, and can threaten stealing baron, and dragons with his kit. Avoid farming camps far away from the objectives. Item purchases past Ekko’s core items aren’t worth risking baron or dragon over. Prioritize staying alive and securing the objectives over kills. Once baron is secured, Ekko is great at rotating between waves, and bringing empowered waves to towers. Use Ekko’s w, and q to zone enemies away from their towers.</p>
-    `;
-  }
-
-if(value === "Outro"){
-  content = `
-    ${header}
-
-    <p>
-Thank you so much for checking out my Ekko jungle guide and being a member of LoL Fundamentals. 
-</p>
-
-<p>
-What's next? Check out the Ekko Jungle matchup VODs. This is one of the best ways to improve. I used to study Dopa and Faker's VODs the same way. The goal was to be able to pause the game at any point and be able to predict what they would do in the next few seconds. Once you can consistently do this, you'll have an easier time executing the same actions in your own games.
-</p>
-
-<p>
-Good luck on your climb and thank you again for the support!
-</p>
-  `;
-}
-
-  sectionInfo.innerHTML = content;
 });
 </script>
 
 </body>
 </html>
-
-
- 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
