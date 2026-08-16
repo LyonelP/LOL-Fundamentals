@@ -29,6 +29,7 @@ body {
   flex-direction:column;
   min-height:100vh;
   position:relative;
+  padding-top:60px; /* Offset for top bar */
 }
 
 body::before {
@@ -41,40 +42,42 @@ body::before {
   z-index:-1;
 }
 
-/* Header */
-header {
-  width:100%;
-  background:rgba(13,17,23,0.9);
+/* Top Task Bar */
+.top-bar {
+  position:fixed;
+  top:0;
+  left:0;
+  right:0;
+  height:50px;
+  background:rgba(13,17,23,0.95);
   border-bottom:2px solid var(--gold);
-  padding:20px 0;
-  font-size:26px;
-  font-weight:bold;
-  color:var(--gold);
-  text-align:center;
-  text-transform: uppercase;
-  z-index:10;
-  position:relative;
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  padding:0 24px;
+  z-index:100;
+  box-sizing:border-box;
 }
 
-/* Back button */
-.back-wrap {
-  width:100%;
-  text-align:center;
-  margin:16px 0;
-  position:relative;
-  z-index:10;
+.top-bar-title {
+  font-size:18px;
+  font-weight:bold;
+  color:var(--gold);
+  text-transform:uppercase;
+  letter-spacing:0.5px;
 }
 
 .back-button {
   display:inline-flex;
   align-items:center;
-  gap:8px;
-  padding:10px 22px;
+  gap:6px;
+  padding:6px 14px;
   background:linear-gradient(135deg,var(--gold),#e0c77b);
   color:#000;
   text-decoration:none;
-  border-radius:10px;
+  border-radius:6px;
   font-weight:bold;
+  font-size:13px;
 }
 
 .back-button::before {
@@ -90,7 +93,7 @@ header {
   .nav-wrapper {
     display:block;
     position:fixed;
-    top:70px; /* below header */
+    top:50px; /* below top bar */
     left:0;
     width:220px;
     bottom:0;
@@ -129,7 +132,7 @@ header {
   display:flex;
   justify-content:center;
   align-items:flex-start;
-  padding:0 24px;
+  padding:24px;
   margin-top:0;
   position:relative;
   z-index:1;
@@ -232,9 +235,9 @@ footer {
 </head>
 <body>
 
-<header>Fizz Mid Guide</header>
-
-<div class="back-wrap">
+<!-- Top Navigation Bar -->
+<div class="top-bar">
+  <div class="top-bar-title">Fizz Mid Guide</div>
   <a href="membershub.html" class="back-button">Back to Members Hub</a>
 </div>
 
@@ -328,7 +331,6 @@ import { getAuth, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/
 
   async function initializeGuide() {
     try {
-      // Changed collection document to "fizz_mid_guide"
       const docRef = doc(db, "premiumContent", "fizz_mid_guide");
       const docSnap = await getDoc(docRef);
       
