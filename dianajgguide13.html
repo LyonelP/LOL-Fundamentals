@@ -41,25 +41,39 @@
             z-index:-1;
         }
 
-        /* Back button - centered at top */
-        .back-wrap {
+        /* Top Taskbar */
+        .taskbar {
             width:100%;
-            text-align:center;
-            margin:16px 0;
+            background:rgba(13,17,23,0.95);
+            border-bottom:2px solid var(--gold);
+            padding:10px 24px;
+            display:flex;
+            justify-content:space-between;
+            align-items:center;
             position:relative;
             z-index:10;
+            box-sizing:border-box;
+        }
+
+        .taskbar-title {
+            font-size:18px;
+            font-weight:bold;
+            color:var(--gold);
+            text-transform:uppercase;
+            letter-spacing:1px;
         }
 
         .back-button {
             display:inline-flex;
             align-items:center;
             gap:8px;
-            padding:10px 22px;
+            padding:8px 18px;
             background:linear-gradient(135deg,var(--gold),#e0c77b);
             color:#000;
             text-decoration:none;
-            border-radius:10px;
+            border-radius:8px;
             font-weight:bold;
+            font-size:14px;
         }
 
         .back-button::before {
@@ -75,7 +89,7 @@
             .nav-wrapper {
                 display:block;
                 position:fixed;
-                top:0;
+                top:53px;
                 left:0;
                 width:220px;
                 bottom:0;
@@ -123,7 +137,7 @@
             display:flex;
             justify-content:center;
             align-items:flex-start;
-            padding:0 24px 24px 24px;
+            padding:24px;
             margin-top:0;
             position:relative;
             z-index:1;
@@ -238,7 +252,7 @@
             display:block;
             width:90%;
             max-width:360px;
-            margin:16px auto;
+            margin:16px auto 0 auto;
             padding:14px 18px;
             font-size:16px;
             font-weight:600;
@@ -300,8 +314,9 @@
 
 <body>
 
-<!-- Back button centered at the top -->
-<div class="back-wrap">
+<!-- Taskbar at top -->
+<div class="taskbar">
+    <div class="taskbar-title">Diana JG Guide</div>
     <a href="membershub.html" class="back-button">Back to Members Hub</a>
 </div>
 
