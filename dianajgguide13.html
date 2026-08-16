@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Diana Jungle Guide</title>
     <link rel="icon" type="image/png" href="https://i.imgur.com/NFO4uNP.png">
-   
+    
     <style>
         :root {
             --gold:#c9aa71;
@@ -39,22 +39,7 @@
             z-index:-1;
         }
 
-        /* Header */
-        header {
-            width:100%;
-            background:rgba(13,17,23,0.9);
-            border-bottom:2px solid var(--gold);
-            padding:20px 0;
-            font-size:26px;
-            font-weight:bold;
-            color:var(--gold);
-            text-align:center;
-            text-transform: uppercase;
-            z-index:10;
-            position:relative;
-        }
-
-        /* Back button */
+        /* Back button - centered at top */
         .back-wrap {
             width:100%;
             text-align:center;
@@ -88,21 +73,30 @@
             .nav-wrapper {
                 display:block;
                 position:fixed;
-                top:70px;
+                top:0; /* Extends all the way to top */
                 left:0;
                 width:220px;
                 bottom:0;
                 background:rgba(15,20,26,0.95);
                 border-right:2px solid var(--gold);
-                padding-top:20px;
                 overflow-y:auto;
                 z-index:9;
+            }
+
+            .nav-sidebar-header {
+                padding:20px 24px 14px 24px;
+                font-size:16px;
+                font-weight:bold;
+                color:var(--gold);
+                text-transform:uppercase;
+                letter-spacing:0.5px;
+                border-bottom:1px solid rgba(201,170,113,0.2);
             }
 
             .nav-section-title {
                 font-size:11px;
                 color:var(--muted);
-                padding:14px 24px;
+                padding:14px 24px 6px 24px;
                 text-transform:uppercase;
             }
 
@@ -127,7 +121,7 @@
             display:flex;
             justify-content:center;
             align-items:flex-start;
-            padding:0 24px;
+            padding:0 24px 24px 24px;
             margin-top:0;
             position:relative;
             z-index:1;
@@ -142,7 +136,7 @@
             box-shadow:0 24px 70px rgba(0,0,0,0.55);
         }
 
-        .card h3 {
+        .card h3, .card h2 {
             color: var(--gold);
             margin-top: 0;
             font-size: 24px;
@@ -296,8 +290,7 @@
 </head>
 <body>
 
-<header>Diana Jungle Guide</header>
-
+<!-- Back button centered at the top -->
 <div class="back-wrap">
     <a href="membershub.html" class="back-button">Back to Members Hub</a>
 </div>
@@ -323,8 +316,9 @@
     <a data-section="outro">Outro</a>
 </div>
 
-<!-- Sidebar desktop -->
+<!-- Sidebar desktop extending to the top -->
 <div class="nav-wrapper">
+    <div class="nav-sidebar-header">Diana JG Guide</div>
     <div class="nav-menu" id="navMenu">
         <div class="nav-section-title">Core</div>
         <a data-section="intro">Intro</a>
@@ -391,7 +385,15 @@ function toggleMobileMenu(){
            
             if (docSnap.exists()) {
                 cachedData = docSnap.data();
-                showSection('intro');
+                
+                const documentKeys = Object.keys(cachedData);
+                const activeIntroKey = documentKeys.find(k => k.trim().toLowerCase() === 'intro') || documentKeys[0];
+                
+                if (activeIntroKey) {
+                    showSection(activeIntroKey);
+                } else {
+                    showSection('intro');
+                }
             } else {
                 document.getElementById('content').innerHTML = `
                     <h2>Path Mismatch</h2>
@@ -406,6 +408,7 @@ function toggleMobileMenu(){
 
     function showSection(sectionKey) {
         const contentBox = document.getElementById('content');
+        
         const actualKey = cachedData ? Object.keys(cachedData).find(k => k.trim().toLowerCase() === sectionKey.trim().toLowerCase()) : null;
        
         if (actualKey && cachedData[actualKey]) {
