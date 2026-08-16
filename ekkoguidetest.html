@@ -73,21 +73,32 @@ body::before {
   .nav-wrapper {
     display: block;
     position: fixed;
-    top: 20px;
+    top: 0;
     left: 0;
     width: 220px;
     bottom: 0;
     background: rgba(15,20,26,0.95);
     border-right: 2px solid var(--gold);
-    padding-top: 20px;
+    padding-top: 0;
     overflow-y: auto;
     z-index: 9;
+  }
+
+  .nav-brand {
+    padding: 20px 24px 10px 24px;
+    font-size: 18px;
+    font-weight: bold;
+    color: var(--gold);
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    border-bottom: 1px solid rgba(201, 170, 113, 0.2);
+    margin-bottom: 10px;
   }
 
   .nav-section-title {
     font-size: 11px;
     color: var(--muted);
-    padding: 14px 24px;
+    padding: 14px 24px 6px 24px;
     text-transform: uppercase;
   }
 
@@ -318,6 +329,7 @@ footer {
 
 <!-- Sidebar desktop -->
 <div class="nav-wrapper">
+  <div class="nav-brand">Ekko JG Guide</div>
   <div class="nav-menu" id="navMenu">
     <div class="nav-section-title">Core</div>
     <a data-section="intro">Intro</a>
