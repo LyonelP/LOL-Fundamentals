@@ -25,42 +25,60 @@ body {
   overflow-x: hidden;
   min-height: 100vh;
   display: flex;
-  flex-direction: column;
 }
 
 body::before {
   content: "";
   position: fixed;
-  top:0; left:0;
-  width:100%; height:100%;
+  top: 0; left: 0;
+  width: 100%; height: 100%;
   background: rgba(10,15,20,0.25);
   z-index: -1;
 }
 
-header {
-  background: rgba(13,17,23,0.9);
-  border-bottom: 2px solid #c9aa71;
+/* Left Taskbar / Sidebar */
+.sidebar {
+  width: 280px;
+  min-width: 280px;
+  background: rgba(13,17,23,0.95);
+  border-right: 2px solid #c9aa71;
+  display: flex;
+  flex-direction: column;
   padding: 20px;
+  box-sizing: border-box;
+  height: 100vh;
+  position: sticky;
+  top: 0;
+  overflow-y: auto;
+  box-shadow: 4px 0 15px rgba(0,0,0,0.5);
+  z-index: 10;
+}
+
+/* App Header inside Sidebar */
+.sidebar-header {
+  border-bottom: 2px solid #c9aa71;
+  padding-bottom: 15px;
+  margin-bottom: 20px;
   font-weight: bold;
-  font-size: 26px;
+  font-size: 22px;
   text-transform: uppercase;
   color: #c9aa71;
   letter-spacing: 1px;
   text-align: center;
   line-height: 1.1;
-  box-sizing: border-box;
 }
 
 .back-button {
-  display: inline-block;
-  margin: 20px auto; /* keeps same height as original dropdown version */
-  padding: 10px 20px;
+  display: block;
+  text-align: center;
+  margin-bottom: 20px;
+  padding: 10px 15px;
   background: linear-gradient(135deg, #c9aa71, #e0c77b);
   color: #000;
   text-decoration: none;
   border-radius: 8px;
   font-weight: bold;
-  font-size: 16px;
+  font-size: 15px;
   transition: all 0.3s;
   box-shadow: 0 0 10px rgba(201,170,113,0.5);
 }
@@ -70,23 +88,28 @@ header {
   box-shadow: 0 0 15px rgba(255,215,0,0.8);
 }
 
+/* Vertical Tabs Navigation */
 .tabs {
   display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
-  margin: 20px 0;
+  flex-direction: column;
   gap: 10px;
+  margin-bottom: 25px;
 }
 
 .tab {
-  padding: 10px 18px;
-  border-radius: 12px;
+  padding: 12px 16px;
+  border-radius: 10px;
   border: 2px solid #c9aa71;
   background: rgba(0,0,0,0.85);
   color: #c9aa71;
   font-weight: bold;
   cursor: pointer;
   transition: all 0.25s;
+  text-align: left;
+}
+
+.tab:hover {
+  background: rgba(201,170,113,0.15);
 }
 
 .tab.active {
@@ -95,17 +118,19 @@ header {
   box-shadow: 0 0 12px rgba(201,170,113,0.7);
 }
 
-/* Total Mastery Progress Bar */
+/* Total Mastery Progress Bar in Sidebar */
 .progress-wrap {
-  width: 260px;
-  max-width: 90vw;
-  margin: 0 auto 20px;
+  width: 100%;
+  margin-top: auto;
+  padding-top: 15px;
+  border-top: 1px solid rgba(201,170,113,0.3);
   text-align: center;
 }
 .progress-label {
-  font-size: 14px;
+  font-size: 13px;
   color: #fff;
-  margin-bottom: 6px;
+  margin-bottom: 8px;
+  font-weight: bold;
 }
 .progress-bar {
   width: 100%;
@@ -113,6 +138,7 @@ header {
   background: #0f1722;
   border-radius: 20px;
   overflow: hidden;
+  border: 1px solid #c9aa71;
 }
 .progress-fill {
   height: 100%;
@@ -121,12 +147,23 @@ header {
   transition: width 0.45s ease;
 }
 
-/* Skills */
+/* Main Content Wrapper */
+.main-content {
+  flex-grow: 1;
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+  box-sizing: border-box;
+  padding: 40px 20px 20px;
+}
+
+/* Skills List */
 .skill-list {
   list-style: none;
   padding: 0;
   width: 100%;
-  margin-bottom: 40px;
+  margin: 0 auto 40px auto;
+  max-width: 900px;
 }
 
 .skill-list li {
@@ -137,17 +174,15 @@ header {
   border: 2px solid #c9aa71;
   border-radius: 12px;
   padding: 14px 18px;
-  margin: 0 auto 20px auto;
+  margin-bottom: 20px;
   font-size: 18px;
-  width: 56vw;
-  max-width: 900px;
   box-shadow: 0 4px 12px rgba(0,0,0,0.5);
   transition: transform 0.25s, box-shadow 0.3s;
 }
 
 .skill-list li:hover {
   background: rgba(0,0,0,0.95);
-  transform: scale(1.03);
+  transform: scale(1.02);
   box-shadow: 0 8px 20px rgba(0,0,0,0.7);
 }
 
@@ -190,33 +225,51 @@ footer {
   color: #fff;
 }
 
-@media(max-width: 700px){
-  header { font-size: 22px; padding: 15px 10px; }
-  .skill-list li { width: 85vw; font-size: 16px; padding: 10px 14px; }
-  .tabs { gap: 5px; }
-  .tab { padding: 8px 12px; font-size: 14px; }
+/* Responsive adjustment for mobile devices */
+@media(max-width: 768px){
+  body {
+    flex-direction: column;
+  }
+  .sidebar {
+    width: 100%;
+    min-width: 100%;
+    height: auto;
+    position: relative;
+    border-right: none;
+    border-bottom: 2px solid #c9aa71;
+  }
+  .main-content {
+    padding: 20px 10px;
+  }
+  .skill-list li { font-size: 16px; padding: 10px 14px; }
 }
 </style>
 </head>
 <body>
 
-<header>Skills Hub</header>
+<!-- Left Sidebar Navigation -->
+<aside class="sidebar">
+  <div class="sidebar-header">Skills Hub</div>
 
-<a href="membershub.html" class="back-button">Back to Members Hub</a>
+  <a href="membershub.html" class="back-button">Back to Members Hub</a>
 
-<div class="tabs" id="tabs"></div>
+  <div class="tabs" id="tabs"></div>
 
-<!-- Total Mastery Progress -->
-<div class="progress-wrap">
-  <div class="progress-label" id="progressLabel">0% Total Mastery</div>
-  <div class="progress-bar">
-    <div class="progress-fill" id="progressFill"></div>
+  <!-- Total Mastery Progress -->
+  <div class="progress-wrap">
+    <div class="progress-label" id="progressLabel">0% Total Mastery</div>
+    <div class="progress-bar">
+      <div class="progress-fill" id="progressFill"></div>
+    </div>
   </div>
-</div>
+</aside>
 
-<ul class="skill-list" id="skill-list"></ul>
+<!-- Main Content Area -->
+<main class="main-content">
+  <ul class="skill-list" id="skill-list"></ul>
 
-<footer>© 2026 LoL Fundamentals · All rights reserved</footer>
+  <footer>© 2026 LoL Fundamentals · All rights reserved</footer>
+</main>
 
 <script>
 const skillData = {
@@ -309,4 +362,3 @@ updateMastery();
 
 </body>
 </html>
-
