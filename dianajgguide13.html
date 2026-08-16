@@ -1,409 +1,327 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Diana Jungle Guide</title>
-    <link rel="icon" type="image/png" href="https://i.imgur.com/NFO4uNP.png">
-    
-    <style>
-        :root {
-            --gold:#c9aa71;
-            --muted:#9da7b3;
-        }
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Diana Jungle Guide</title>
+<link rel="icon" type="image/png" href="https://i.imgur.com/NFO4uNP.png">
 
-        /* Reset */
-        html, body {
-            margin:0;
-            padding:0;
-            height:100%;
-            font-family: Arial, Helvetica, sans-serif;
-        }
+<style>
+:root {
+  --gold:#c9aa71;
+  --muted:#9da7b3;
+}
 
-        /* Body and background */
-        body {
-            background:url('https://ddragon.leagueoflegends.com/cdn/img/champion/splash/Diana_0.jpg') no-repeat center center fixed;
-            background-size:cover;
-            color:#e6edf3;
-            display:flex;
-            flex-direction:column;
-            min-height:100vh;
-            position:relative;
-        }
+/* Reset */
+html, body {
+  margin:0;
+  padding:0;
+  height:100%;
+  font-family: Arial, Helvetica, sans-serif;
+}
 
-        body::before {
-            content:"";
-            position:fixed;
-            inset:0;
-            background: rgba(10,15,20,0.82);
-            z-index:-1;
-        }
+/* Body and background */
+body {
+  background:url('https://ddragon.leagueoflegends.com/cdn/img/champion/splash/Diana_0.jpg') no-repeat center center fixed;
+  background-size:cover;
+  color:#e6edf3;
+  display:flex;
+  flex-direction:column;
+  min-height:100vh;
+  position:relative;
+}
 
-        /* Header */
-        header {
-            width: 100%;
-            background: rgba(13,17,23,0.9);
-            border-bottom: 2px solid var(--gold);
-            padding: 16px 24px;
-            font-size: 24px;
-            font-weight: bold;
-            color: var(--gold);
-            text-transform: uppercase;
-            z-index: 10;
-            position: relative;
-            box-sizing: border-box;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
+body::before {
+  content:"";
+  position:fixed;
+  inset:0;
+  background:
+    radial-gradient(circle at top, rgba(0, 80, 120, 0.35), transparent 60%),
+    rgba(10,15,20,0.85);
+  z-index:-1;
+}
 
-        .header-title {
-            letter-spacing: 1px;
-        }
+/* Header User Controls Bar */
+.user-bar {
+  width: 100%;
+  background: rgba(13,17,23,0.9);
+  border-bottom: 1px solid rgba(201,170,113,0.3);
+  padding: 10px 24px;
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  gap: 12px;
+  font-size: 14px;
+  z-index: 10;
+  box-sizing: border-box;
+}
 
-        .user-controls {
-            display: flex;
-            align-items: center;
-            gap: 12px;
-            font-size: 14px;
-            text-transform: none;
-            font-weight: normal;
-        }
+.user-email {
+  color: var(--muted);
+}
 
-        .user-email {
-            color: var(--muted);
-        }
+.logout-btn {
+  background: transparent;
+  border: 1px solid var(--gold);
+  color: var(--gold);
+  padding: 4px 12px;
+  border-radius: 6px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
 
-        .logout-btn {
-            background: transparent;
-            border: 1px solid var(--gold);
-            color: var(--gold);
-            padding: 6px 14px;
-            border-radius: 6px;
-            font-weight: bold;
-            cursor: pointer;
-            transition: all 0.2s ease;
-        }
+.logout-btn:hover {
+  background: var(--gold);
+  color: #000;
+}
 
-        .logout-btn:hover {
-            background: var(--gold);
-            color: #000;
-        }
+/* Back button - centered at top */
+.back-wrap {
+  width:100%;
+  text-align:center;
+  margin:16px 0;
+  position:relative;
+  z-index:10;
+}
 
-        /* Back button */
-        .back-wrap {
-            width:100%;
-            text-align:center;
-            margin:16px 0;
-            position:relative;
-            z-index:10;
-        }
+.back-button {
+  display:inline-flex;
+  align-items:center;
+  gap:8px;
+  padding:10px 22px;
+  background:linear-gradient(135deg,var(--gold),#e0c77b);
+  color:#000;
+  text-decoration:none;
+  border-radius:10px;
+  font-weight:bold;
+}
 
-        .back-button {
-            display:inline-flex;
-            align-items:center;
-            gap:8px;
-            padding:10px 22px;
-            background:linear-gradient(135deg,var(--gold),#e0c77b);
-            color:#000;
-            text-decoration:none;
-            border-radius:10px;
-            font-weight:bold;
-        }
+.back-button::before {
+  content:"←";
+}
 
-        .back-button::before {
-            content:"←";
-        }
+/* Sidebar desktop */
+.nav-wrapper {
+  display:none;
+}
 
-        /* Sidebar desktop */
-        .nav-wrapper {
-            display:none;
-        }
+@media(min-width:1024px) {
+  .nav-wrapper {
+    display:block;
+    position:fixed;
+    top:0; /* Extends all the way to top */
+    left:0;
+    width:220px;
+    bottom:0;
+    background:rgba(15,20,26,0.95);
+    border-right:2px solid var(--gold);
+    overflow-y:auto;
+    z-index:9;
+  }
 
-        @media(min-width:1024px) {
-            .nav-wrapper {
-                display:block;
-                position:fixed;
-                top:70px;
-                left:0;
-                width:220px;
-                bottom:0;
-                background:rgba(15,20,26,0.95);
-                border-right:2px solid var(--gold);
-                padding-top:20px;
-                overflow-y:auto;
-                z-index:9;
-            }
+  .nav-sidebar-header {
+    padding:20px 24px 14px 24px;
+    font-size:16px;
+    font-weight:bold;
+    color:var(--gold);
+    text-transform:uppercase;
+    letter-spacing:0.5px;
+    border-bottom:1px solid rgba(201,170,113,0.2);
+  }
 
-            .nav-section-title {
-                font-size:11px;
-                color:var(--muted);
-                padding:14px 24px;
-                text-transform:uppercase;
-            }
+  .nav-section-title {
+    font-size:11px;
+    color:var(--muted);
+    padding:14px 24px 6px 24px;
+    text-transform:uppercase;
+  }
 
-            .nav-menu a {
-                display:block;
-                padding:10px 24px;
-                text-decoration:none;
-                color:#e6edf3;
-                cursor:pointer;
-                border-radius:8px;
-            }
+  .nav-menu a {
+    display:block;
+    padding:10px 24px;
+    text-decoration:none;
+    color:#e6edf3;
+    cursor:pointer;
+    border-radius:8px;
+  }
 
-            .nav-menu a:hover {
-                background:var(--gold);
-                color:#000;
-            }
-        }
+  .nav-menu a:hover {
+    background:var(--gold);
+    color:#000;
+  }
+}
 
-        /* Main content */
-        .main {
-            flex:1;
-            display:flex;
-            justify-content:center;
-            align-items:flex-start;
-            padding:0 24px;
-            margin-top:0;
-            position:relative;
-            z-index:1;
-        }
+/* Main content */
+.main {
+  flex:1;
+  display:flex;
+  justify-content:center;
+  align-items:flex-start;
+  padding:0 24px 24px 24px;
+  margin-top:0;
+  position:relative;
+  z-index:1;
+}
 
-        .card {
-            max-width:800px;
-            width:100%;
-            background:rgba(255,255,255,0.03);
-            border-radius:26px;
-            padding:36px;
-            box-shadow:0 24px 70px rgba(0,0,0,0.55);
-        }
+.card {
+  max-width:800px;
+  width:100%;
+  background:rgba(255,255,255,0.03);
+  border-radius:26px;
+  padding:36px;
+  box-shadow:0 24px 70px rgba(0,0,0,0.55);
+}
 
-        .card h3 {
-            color: var(--gold);
-            margin-top: 0;
-            font-size: 24px;
-        }
+.card h2 {
+  color:var(--gold);
+  margin-top:0;
+}
 
-        .card ul {
-            padding-left:22px;
-        }
+.card ul {
+  padding-left:22px;
+}
 
-        .card li {
-            margin-bottom:8px;
-        }
+.card li {
+  margin-bottom:8px;
+}
 
-        /* Custom Content Styling Support */
-        .icon {
-            width: 36px;
-            height: 36px;
-            vertical-align: middle;
-            border-radius: 6px;
-            margin-right: 6px;
-        }
+/* Footer */
+footer {
+  padding:16px;
+  text-align:center;
+  font-size:13px;
+  color:var(--muted);
+  margin-top:auto;
+}
 
-        .rune-container {
-            display: flex;
-            flex-direction: column;
-            gap: 12px;
-        }
+/* Mobile dropdown */
+.nav-trigger {
+  display:block;
+  width:90%;
+  max-width:360px;
+  margin:16px auto;
+  padding:14px 18px;
+  font-size:16px;
+  font-weight:600;
+  background:rgba(255,255,255,0.03);
+  border:none;
+  border-radius:26px;
+  color:#fff;
+  cursor:pointer;
+  text-align:center;
+  position:relative;
+  z-index:10;
+}
 
-        .rune-info {
-            display: flex;
-            align-items: center;
-        }
+.nav-trigger::after {
+  content: " ▼";
+  font-weight: bold;
+}
 
-        .rune-row {
-            display: flex;
-            gap: 14px;
-            margin-top: 12px;
-        }
+.nav-menu-mobile {
+  display:none;
+  position:relative;
+  width:85%;
+  max-width:360px;
+  margin:0 auto 16px auto;
+  background:rgba(255,255,255,0.03);
+  border-radius:26px;
+  padding:12px 0;
+  z-index:9;
+}
 
-        .card-container {
-            display: flex;
-            flex-direction: column;
-            gap: 14px;
-            margin-top: 20px;
-        }
+.nav-menu-mobile .nav-section-title {
+  font-size:11px;
+  color:var(--muted);
+  padding:10px 20px;
+  text-transform:uppercase;
+}
 
-        .card .card {
-            background: rgba(20,25,35,0.85);
-            border: 1px solid #c9aa71;
-            border-radius: 10px;
-            padding: 16px;
-        }
+.nav-menu-mobile a {
+  display:block;
+  padding:10px 20px;
+  text-decoration:none;
+  color:#e6edf3;
+  cursor:pointer;
+}
 
-        .card strong {
-            color: #e0c77b;
-        }
+.nav-menu-mobile a:hover {
+  background:var(--gold);
+  color:#000;
+}
 
-        .build-flow {
-            display: flex;
-            flex-wrap: wrap;
-            justify-content: center;
-            align-items: center;
-            gap: 10px;
-            margin-top: 12px;
-        }
-
-        .build-flow div {
-            border: 1px solid #c9aa71;
-            border-radius: 8px;
-            padding: 10px 12px;
-            min-width: 120px;
-            text-align: center;
-        }
-
-        .build-flow span {
-            color: #c9aa71;
-            font-size: 18px;
-        }
-
-        /* Footer */
-        footer {
-            padding:16px;
-            text-align:center;
-            font-size:13px;
-            color:var(--muted);
-            margin-top:auto;
-        }
-
-        /* Mobile dropdown */
-        .nav-trigger {
-            display:block;
-            width:90%;
-            max-width:360px;
-            margin:16px auto;
-            padding:14px 18px;
-            font-size:16px;
-            font-weight:600;
-            background:rgba(255,255,255,0.03);
-            border:none;
-            border-radius:26px;
-            color:#fff;
-            cursor:pointer;
-            text-align:center;
-            position:relative;
-            z-index:10;
-        }
-
-        .nav-trigger::after {
-            content: " ▼";
-            font-weight: bold;
-        }
-
-        .nav-menu-mobile {
-            display:none;
-            position:relative;
-            width:85%;
-            max-width:360px;
-            margin:0 auto 16px auto;
-            background:rgba(255,255,255,0.03);
-            border-radius:26px;
-            padding:12px 0;
-            z-index:9;
-        }
-
-        .nav-menu-mobile .nav-section-title {
-            font-size:11px;
-            color:var(--muted);
-            padding:10px 20px;
-            text-transform:uppercase;
-        }
-
-        .nav-menu-mobile a {
-            display:block;
-            padding:10px 20px;
-            text-decoration:none;
-            color:#e6edf3;
-            cursor:pointer;
-        }
-
-        .nav-menu-mobile a:hover {
-            background:var(--gold);
-            color:#000;
-        }
-
-        @media(max-width: 600px) {
-            header {
-                flex-direction: column;
-                gap: 8px;
-                padding: 12px;
-            }
-            .user-controls {
-                font-size: 12px;
-            }
-        }
-
-        @media(min-width:1024px) {
-            .nav-trigger {
-                display:none;
-            }
-        }
-    </style>
+/* Hide mobile menu button on desktop */
+@media(min-width:1024px) {
+  .nav-trigger {
+    display:none;
+  }
+}
+</style>
 </head>
 <body>
 
-<header>
-    <div class="header-title">Diana Jungle Guide</div>
-    <div class="user-controls" id="userControls">
-        <span class="user-email" id="userEmail">Loading...</span>
-        <button class="logout-btn" id="logoutBtn">Logout</button>
-    </div>
-</header>
+<!-- User Controls Header -->
+<div class="user-bar">
+  <span class="user-email" id="userEmail">Loading...</span>
+  <button class="logout-btn" id="logoutBtn">Logout</button>
+</div>
 
+<!-- Back button centered at the top -->
 <div class="back-wrap">
-    <a href="membershub.html" class="back-button">Back to Members Hub</a>
+  <a href="membershub.html" class="back-button">Back to Members Hub</a>
 </div>
 
 <!-- Mobile dropdown button -->
 <button class="nav-trigger" id="mobileTrigger" onclick="toggleMobileMenu()">Select a Section</button>
 <div class="nav-menu-mobile" id="mobileMenu">
+  <div class="nav-section-title">Core</div>
+  <a data-section="intro">Intro</a>
+  <a data-section="runes">Runes</a>
+  <a data-section="build">Build</a>
+  <a data-section="summoners">Summoners</a>
+  <a data-section="abilities">Abilities</a>
+  <a data-section="combos">Combos</a>
+  <div class="nav-section-title">Gameplay</div>
+  <a data-section="level1">Level 1</a>
+  <a data-section="pathing">Pathing</a>
+  <a data-section="matchups">Hardest Matchups</a>
+  <a data-section="teamfighting">Teamfighting</a>
+  <a data-section="closing">Closing Out The Game</a>
+  <div class="nav-section-title">Advanced</div>
+  <a data-section="proscons">Pros & Cons</a>
+  <a data-section="outro">Outro</a>
+</div>
+
+<!-- Sidebar desktop extending to the top -->
+<div class="nav-wrapper">
+  <div class="nav-sidebar-header">Diana Jungle Guide</div>
+  <div class="nav-menu" id="navMenu">
     <div class="nav-section-title">Core</div>
     <a data-section="intro">Intro</a>
     <a data-section="runes">Runes</a>
     <a data-section="build">Build</a>
-    <a data-section="summoners">Summoner spells</a>
+    <a data-section="summoners">Summoners</a>
     <a data-section="abilities">Abilities</a>
     <a data-section="combos">Combos</a>
     <div class="nav-section-title">Gameplay</div>
     <a data-section="level1">Level 1</a>
     <a data-section="pathing">Pathing</a>
-    <a data-section="matchups">Hardest matchups</a>
-    <a data-section="teamfighting">Team fighting</a>
-    <a data-section="closing">Closing out the game</a>
+    <a data-section="matchups">Hardest Matchups</a>
+    <a data-section="teamfighting">Teamfighting</a>
+    <a data-section="closing">Closing Out The Game</a>
     <div class="nav-section-title">Advanced</div>
     <a data-section="proscons">Pros & Cons</a>
     <a data-section="outro">Outro</a>
-</div>
-
-<!-- Sidebar desktop -->
-<div class="nav-wrapper">
-    <div class="nav-menu" id="navMenu">
-        <div class="nav-section-title">Core</div>
-        <a data-section="intro">Intro</a>
-        <a data-section="runes">Runes</a>
-        <a data-section="build">Build</a>
-        <a data-section="summoners">Summoner spells</a>
-        <a data-section="abilities">Abilities</a>
-        <a data-section="combos">Combos</a>
-        <div class="nav-section-title">Gameplay</div>
-        <a data-section="level1">Level 1</a>
-        <a data-section="pathing">Pathing</a>
-        <a data-section="matchups">Hardest matchups</a>
-        <a data-section="teamfighting">Team fighting</a>
-        <a data-section="closing">Closing out the game</a>
-        <div class="nav-section-title">Advanced</div>
-        <a data-section="proscons">Pros & Cons</a>
-        <a data-section="outro">Outro</a>
-    </div>
+  </div>
 </div>
 
 <!-- Main content -->
 <div class="main">
-    <div id="content" class="card">
-        <h2>Loading Guide...</h2>
-        <p>Connecting to Firebase database to pull data.</p>
-    </div>
+  <div id="content" class="card">
+    <h2>Loading Guide...</h2>
+    <p>Connecting to Firebase database to pull data.</p>
+  </div>
 </div>
 
 <footer>© 2026 LoL Fundamentals</footer>
@@ -411,96 +329,105 @@
 <!-- UI Toggle Logic -->
 <script>
 function toggleMobileMenu(){
-    const menu = document.getElementById('mobileMenu');
-    menu.style.display = (menu.style.display === 'block') ? 'none' : 'block';
+  const menu = document.getElementById('mobileMenu');
+  menu.style.display = (menu.style.display === 'block') ? 'none' : 'block';
 }
 </script>
 
 <!-- Firebase Data Integration Script -->
 <script type="module">
-    import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
-    import { getFirestore, doc, getDoc } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
-    import { getAuth, onAuthStateChanged, signOut } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-auth.js";
+import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
+import { getFirestore, doc, getDoc } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
+import { getAuth, onAuthStateChanged, signOut } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-auth.js";
+  
+  const firebaseConfig = {
+    apiKey: "AIzaSyCFRcEV7wdivqONnkjJubAZOjPMixrHMBI",
+    authDomain: "lol-fundamentals.firebaseapp.com",
+    projectId: "lol-fundamentals",
+    storageBucket: "lol-fundamentals.firebasestorage.app",
+    messagingSenderId: "1038440427584",
+    appId: "1:1038440427584:web:a82207151fd370dbedefa5"
+  };
+
+  const app = initializeApp(firebaseConfig);
+  const db = getFirestore(app);
+  const auth = getAuth(app);
+
+  let cachedData = null;
+
+  // Logout Handler
+  document.getElementById('logoutBtn').addEventListener('click', () => {
+    signOut(auth).then(() => {
+      window.location.replace("index.html");
+    }).catch((error) => {
+      console.error("Logout Error:", error);
+    });
+  });
+
+  async function initializeGuide() {
+    try {
+      const docRef = doc(db, "premiumContent", "diana_jungle_guide");
+      const docSnap = await getDoc(docRef);
       
-    const firebaseConfig = {
-        apiKey: "AIzaSyCFRcEV7wdivqONnkjJubAZOjPMixrHMBI",
-        authDomain: "lol-fundamentals.firebaseapp.com",
-        projectId: "lol-fundamentals",
-        storageBucket: "lol-fundamentals.firebasestorage.app",
-        messagingSenderId: "1038440427584",
-        appId: "1:1038440427584:web:a82207151fd370dbedefa5"
-    };
-
-    const app = initializeApp(firebaseConfig);
-    const db = getFirestore(app);
-    const auth = getAuth(app);
-
-    let cachedData = null;
-
-    // Logout Event Listener
-    document.getElementById('logoutBtn').addEventListener('click', () => {
-        signOut(auth).then(() => {
-            window.location.replace("index.html");
-        }).catch((error) => {
-            console.error("Sign out error:", error);
-        });
-    });
-
-    async function initializeGuide() {
-        try {
-            const docRef = doc(db, "premiumContent", "diana_jungle_guide");
-            const docSnap = await getDoc(docRef);
-            
-            if (docSnap.exists()) {
-                cachedData = docSnap.data();
-                showSection('intro');
-            } else {
-                document.getElementById('content').innerHTML = `
-                    <h2>Path Mismatch</h2>
-                    <p>Could not find the document <strong>"diana_jungle_guide"</strong> inside "premiumContent".</p>
-                `;
-            }
-        } catch (e) {
-            console.error(e);
-            document.getElementById('content').innerHTML = `<h2>Connection Error</h2><p>Could not retrieve data from Firestore.</p>`;
-        }
-    }
-
-    function showSection(sectionKey) {
-        const contentBox = document.getElementById('content');
-        const actualKey = cachedData ? Object.keys(cachedData).find(k => k.trim().toLowerCase() === sectionKey.trim().toLowerCase()) : null;
+      if (docSnap.exists()) {
+        cachedData = docSnap.data();
         
-        if (actualKey && cachedData[actualKey]) {
-            contentBox.innerHTML = cachedData[actualKey];
+        const documentKeys = Object.keys(cachedData);
+        const activeIntroKey = documentKeys.find(k => k.trim().toLowerCase() === 'intro') || documentKeys[0];
+        
+        if (activeIntroKey) {
+          showSection(activeIntroKey);
         } else {
-            const keysList = cachedData ? Object.keys(cachedData).map(k => `"${k}"`).join(', ') : 'none';
-            contentBox.innerHTML = `
-                <h2>Section Blank</h2>
-                <p>The layout looked for the field <strong>"${sectionKey}"</strong>, but it wasn't found.</p>
-                <hr style="border:0; border-top:1px solid rgba(255,255,255,0.1); margin:15px 0;">
-                <p style="font-size:14px; color:var(--muted);">
-                    <strong>Available keys inside this document:</strong> [ ${keysList} ]
-                </p>
-            `;
+          showSection('intro');
         }
-        document.getElementById('mobileMenu').style.display = 'none';
+      } else {
+        document.getElementById('content').innerHTML = `
+          <h2>Path Mismatch</h2>
+          <p>Could not find the document <strong>"diana_jungle_guide"</strong> inside "premiumContent".</p>
+        `;
+      }
+    } catch (e) {
+      console.error(e);
+      document.getElementById('content').innerHTML = `<h2>Connection Error</h2><p>Could not retrieve data from Firestore.</p>`;
     }
+  }
 
-    document.querySelectorAll('[data-section]').forEach(link => {
-        link.addEventListener('click', (e) => {
-            const targetSection = e.target.getAttribute('data-section');
-            showSection(targetSection);
-        });
-    });
+  function showSection(sectionKey) {
+    const contentBox = document.getElementById('content');
+    
+    const actualKey = cachedData ? Object.keys(cachedData).find(k => k.trim().toLowerCase() === sectionKey.trim().toLowerCase()) : null;
+    
+    if (actualKey && cachedData[actualKey]) {
+      contentBox.innerHTML = cachedData[actualKey];
+    } else {
+      const keysList = cachedData ? Object.keys(cachedData).map(k => `"${k}"`).join(', ') : 'none';
+      contentBox.innerHTML = `
+        <h2>Section Blank</h2>
+        <p>The layout looked for the field <strong>"${sectionKey}"</strong>, but it wasn't found.</p>
+        <hr style="border:0; border-top:1px solid rgba(255,255,255,0.1); margin:15px 0;">
+        <p style="font-size:14px; color:var(--muted);">
+          <strong>Available keys inside this document:</strong> [ ${keysList} ]
+        </p>
+      `;
+    }
+    document.getElementById('mobileMenu').style.display = 'none';
+  }
 
-    onAuthStateChanged(auth, (user) => {
-        if (user) {
-            document.getElementById('userEmail').textContent = user.email || "Authenticated";
-            initializeGuide();
-        } else {
-            window.location.replace("index.html");
-        }
+  document.querySelectorAll('[data-section]').forEach(link => {
+    link.addEventListener('click', (e) => {
+      const targetSection = e.target.getAttribute('data-section');
+      showSection(targetSection);
     });
+  });
+
+  onAuthStateChanged(auth, (user) => {
+    if (user) {
+      document.getElementById('userEmail').textContent = user.email || "Authenticated";
+      initializeGuide();
+    } else {
+      window.location.replace("index.html");
+    }
+  });
 </script>
 </body>
 </html>
