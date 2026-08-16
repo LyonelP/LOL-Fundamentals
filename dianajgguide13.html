@@ -35,25 +35,39 @@ body::before {
   content:"";
   position:fixed;
   inset:0;
-  background:
-    radial-gradient(circle at top, rgba(0, 80, 120, 0.35), transparent 60%),
-    rgba(10,15,20,0.85);
+  background: rgba(10,15,20,0.82);
   z-index:-1;
 }
 
-/* Header User Controls Bar */
-.user-bar {
+/* Header */
+header {
   width: 100%;
   background: rgba(13,17,23,0.9);
-  border-bottom: 1px solid rgba(201,170,113,0.3);
-  padding: 10px 24px;
+  border-bottom: 2px solid var(--gold);
+  padding: 16px 24px;
+  font-size: 24px;
+  font-weight: bold;
+  color: var(--gold);
+  text-transform: uppercase;
+  z-index: 10;
+  position: relative;
+  box-sizing: border-box;
   display: flex;
-  justify-content: flex-end;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.header-title {
+  letter-spacing: 1px;
+}
+
+.user-controls {
+  display: flex;
   align-items: center;
   gap: 12px;
   font-size: 14px;
-  z-index: 10;
-  box-sizing: border-box;
+  text-transform: none;
+  font-weight: normal;
 }
 
 .user-email {
@@ -64,7 +78,7 @@ body::before {
   background: transparent;
   border: 1px solid var(--gold);
   color: var(--gold);
-  padding: 4px 12px;
+  padding: 6px 14px;
   border-radius: 6px;
   font-weight: bold;
   cursor: pointer;
@@ -76,7 +90,7 @@ body::before {
   color: #000;
 }
 
-/* Back button - centered at top */
+/* Back button */
 .back-wrap {
   width:100%;
   text-align:center;
@@ -110,24 +124,15 @@ body::before {
   .nav-wrapper {
     display:block;
     position:fixed;
-    top:0; /* Extends all the way to top */
+    top:70px;
     left:0;
     width:220px;
     bottom:0;
     background:rgba(15,20,26,0.95);
     border-right:2px solid var(--gold);
+    padding-top:20px;
     overflow-y:auto;
     z-index:9;
-  }
-
-  .nav-sidebar-header {
-    padding:20px 24px 14px 24px;
-    font-size:16px;
-    font-weight:bold;
-    color:var(--gold);
-    text-transform:uppercase;
-    letter-spacing:0.5px;
-    border-bottom:1px solid rgba(201,170,113,0.2);
   }
 
   .nav-section-title {
@@ -173,7 +178,7 @@ body::before {
   box-shadow:0 24px 70px rgba(0,0,0,0.55);
 }
 
-.card h2 {
+.card h2, .card h3 {
   color:var(--gold);
   margin-top:0;
 }
@@ -251,6 +256,17 @@ footer {
   color:#000;
 }
 
+@media(max-width: 600px) {
+  header {
+    flex-direction: column;
+    gap: 8px;
+    padding: 12px;
+  }
+  .user-controls {
+    font-size: 12px;
+  }
+}
+
 /* Hide mobile menu button on desktop */
 @media(min-width:1024px) {
   .nav-trigger {
@@ -261,13 +277,14 @@ footer {
 </head>
 <body>
 
-<!-- User Controls Header -->
-<div class="user-bar">
-  <span class="user-email" id="userEmail">Loading...</span>
-  <button class="logout-btn" id="logoutBtn">Logout</button>
-</div>
+<header>
+  <div class="header-title">Diana Jungle Guide</div>
+  <div class="user-controls" id="userControls">
+    <span class="user-email" id="userEmail">Loading...</span>
+    <button class="logout-btn" id="logoutBtn">Logout</button>
+  </div>
+</header>
 
-<!-- Back button centered at the top -->
 <div class="back-wrap">
   <a href="membershub.html" class="back-button">Back to Members Hub</a>
 </div>
@@ -279,37 +296,36 @@ footer {
   <a data-section="intro">Intro</a>
   <a data-section="runes">Runes</a>
   <a data-section="build">Build</a>
-  <a data-section="summoners">Summoners</a>
+  <a data-section="summoners">Summoner spells</a>
   <a data-section="abilities">Abilities</a>
   <a data-section="combos">Combos</a>
   <div class="nav-section-title">Gameplay</div>
   <a data-section="level1">Level 1</a>
   <a data-section="pathing">Pathing</a>
-  <a data-section="matchups">Hardest Matchups</a>
-  <a data-section="teamfighting">Teamfighting</a>
-  <a data-section="closing">Closing Out The Game</a>
+  <a data-section="matchups">Hardest matchups</a>
+  <a data-section="teamfighting">Team fighting</a>
+  <a data-section="closing">Closing out the game</a>
   <div class="nav-section-title">Advanced</div>
   <a data-section="proscons">Pros & Cons</a>
   <a data-section="outro">Outro</a>
 </div>
 
-<!-- Sidebar desktop extending to the top -->
+<!-- Sidebar desktop -->
 <div class="nav-wrapper">
-  <div class="nav-sidebar-header">Diana Jungle Guide</div>
   <div class="nav-menu" id="navMenu">
     <div class="nav-section-title">Core</div>
     <a data-section="intro">Intro</a>
     <a data-section="runes">Runes</a>
     <a data-section="build">Build</a>
-    <a data-section="summoners">Summoners</a>
+    <a data-section="summoners">Summoner spells</a>
     <a data-section="abilities">Abilities</a>
     <a data-section="combos">Combos</a>
     <div class="nav-section-title">Gameplay</div>
     <a data-section="level1">Level 1</a>
     <a data-section="pathing">Pathing</a>
-    <a data-section="matchups">Hardest Matchups</a>
-    <a data-section="teamfighting">Teamfighting</a>
-    <a data-section="closing">Closing Out The Game</a>
+    <a data-section="matchups">Hardest matchups</a>
+    <a data-section="teamfighting">Team fighting</a>
+    <a data-section="closing">Closing out the game</a>
     <div class="nav-section-title">Advanced</div>
     <a data-section="proscons">Pros & Cons</a>
     <a data-section="outro">Outro</a>
@@ -360,7 +376,7 @@ import { getAuth, onAuthStateChanged, signOut } from "https://www.gstatic.com/fi
     signOut(auth).then(() => {
       window.location.replace("index.html");
     }).catch((error) => {
-      console.error("Logout Error:", error);
+      console.error("Sign out error:", error);
     });
   });
 
