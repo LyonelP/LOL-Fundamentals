@@ -6,7 +6,6 @@
 <title>Diana Mid Guide</title>
 <link rel="icon" type="image/png" href="https://i.imgur.com/XOKDiWc.png">
 
-  
 <style>
 :root {
   --gold:#c9aa71;
@@ -42,22 +41,7 @@ body::before {
   z-index:-1;
 }
 
-/* Header */
-header {
-  width:100%;
-  background:rgba(13,17,23,0.9);
-  border-bottom:2px solid var(--gold);
-  padding:20px 0;
-  font-size:26px;
-  font-weight:bold;
-  color:var(--gold);
-  text-align:center;
-  text-transform: uppercase;
-  z-index:10;
-  position:relative;
-}
-
-/* Back button */
+/* Back button - centered at top */
 .back-wrap {
   width:100%;
   text-align:center;
@@ -91,21 +75,30 @@ header {
   .nav-wrapper {
     display:block;
     position:fixed;
-    top:70px; /* below header */
+    top:0; /* Extends all the way to top */
     left:0;
     width:220px;
     bottom:0;
     background:rgba(15,20,26,0.95);
     border-right:2px solid var(--gold);
-    padding-top:20px;
     overflow-y:auto;
     z-index:9;
+  }
+
+  .nav-sidebar-header {
+    padding:20px 24px 14px 24px;
+    font-size:16px;
+    font-weight:bold;
+    color:var(--gold);
+    text-transform:uppercase;
+    letter-spacing:0.5px;
+    border-bottom:1px solid rgba(201,170,113,0.2); /* Restored dividing line */
   }
 
   .nav-section-title {
     font-size:11px;
     color:var(--muted);
-    padding:14px 24px;
+    padding:14px 24px 6px 24px;
     text-transform:uppercase;
   }
 
@@ -130,7 +123,7 @@ header {
   display:flex;
   justify-content:center;
   align-items:flex-start;
-  padding:0 24px;
+  padding:0 24px 24px 24px;
   margin-top:0;
   position:relative;
   z-index:1;
@@ -193,7 +186,7 @@ footer {
 
 .nav-menu-mobile {
   display:none;
-  position:relative; /* pushes content down naturally */
+  position:relative;
   width:85%;
   max-width:360px;
   margin:0 auto 16px auto;
@@ -233,8 +226,7 @@ footer {
 </head>
 <body>
 
-<header>Diana Mid Guide</header>
-
+<!-- Back button centered at the top -->
 <div class="back-wrap">
   <a href="membershub.html" class="back-button">Back to Members Hub</a>
 </div>
@@ -263,8 +255,9 @@ footer {
   <a data-section="outro">Outro</a>
 </div>
 
-<!-- Sidebar desktop -->
+<!-- Sidebar desktop extending to the top -->
 <div class="nav-wrapper">
+  <div class="nav-sidebar-header">Diana Mid Guide</div>
   <div class="nav-menu" id="navMenu">
     <div class="nav-section-title">Core</div>
     <a data-section="intro">Intro</a>
@@ -307,8 +300,6 @@ function toggleMobileMenu(){
 </script>
 
 <!-- Firebase Data Integration Script -->
-<!-- Firebase Data Integration Script -->
-<!-- Firebase Data Integration Script -->
 <script type="module">
 import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
 import { getFirestore, doc, getDoc } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
@@ -337,7 +328,6 @@ import { getAuth, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/
       if (docSnap.exists()) {
         cachedData = docSnap.data();
         
-        // AUTO-DETECT RUN: Finds your intro text even if it has a typo, capital letter, or hidden space
         const documentKeys = Object.keys(cachedData);
         const activeIntroKey = documentKeys.find(k => k.trim().toLowerCase() === 'intro') || documentKeys[0];
         
@@ -361,7 +351,6 @@ import { getAuth, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/
   function showSection(sectionKey) {
     const contentBox = document.getElementById('content');
     
-    // Loose key matching: looks for matching keys ignoring case and whitespace
     const actualKey = cachedData ? Object.keys(cachedData).find(k => k.trim().toLowerCase() === sectionKey.trim().toLowerCase()) : null;
     
     if (actualKey && cachedData[actualKey]) {
@@ -388,13 +377,14 @@ import { getAuth, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/
   });
 
   onAuthStateChanged(auth, (user) => {
-  if (user) {
-    console.log("Firebase logged in:", user.email);
-    initializeGuide();
-  } else {
-    console.log("No Firebase user");
-    window.location.replace("login.html");
-  }
-});
+    if (user) {
+      console.log("Firebase logged in:", user.email);
+      initializeGuide();
+    } else {
+      console.log("No Firebase user");
+      window.location.replace("login.html");
+    }
+  });
 </script>
-
+</body>
+</html>
