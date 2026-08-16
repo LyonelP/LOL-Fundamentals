@@ -39,21 +39,6 @@ body::before {
   z-index: -1;
 }
 
-/* Header */
-header {
-  width: 100%;
-  background: rgba(13,17,23,0.9);
-  border-bottom: 2px solid var(--gold);
-  padding: 20px 0;
-  font-size: 26px;
-  font-weight: bold;
-  color: var(--gold);
-  text-align: center;
-  text-transform: uppercase;
-  z-index: 10;
-  position: relative;
-}
-
 /* Back button */
 .back-wrap {
   width: 100%;
@@ -88,7 +73,7 @@ header {
   .nav-wrapper {
     display: block;
     position: fixed;
-    top: 70px; /* below header */
+    top: 20px;
     left: 0;
     width: 220px;
     bottom: 0;
@@ -190,7 +175,7 @@ footer {
 
 .nav-menu-mobile {
   display: none;
-  position: relative; /* pushes content down naturally */
+  position: relative;
   width: 85%;
   max-width: 360px;
   margin: 0 auto 16px auto;
@@ -305,8 +290,6 @@ footer {
 </style>
 </head>
 <body>
-
-<header>Ekko Jungle Guide</header>
 
 <div class="back-wrap">
   <a href="membershub.html" class="back-button">Back to Members Hub</a>
