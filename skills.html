@@ -29,6 +29,7 @@ html, body {
   font-family: 'Beaufort for LOL', Arial, Helvetica, sans-serif;
 }
 
+/* Original background brightness */
 body {
   background: url('https://64.media.tumblr.com/594ac290bec6d5e9ad98b5f53404f00b/245c4c3ee469f81d-e4/s1280x1920/1cda4284320eb2031758a9859dfe14ff8bbc50ba.jpg') no-repeat center center fixed;
   background-size: cover;
@@ -42,7 +43,7 @@ body::before {
   content: "";
   position: fixed;
   inset: 0;
-  background: rgba(10,15,20,0.85);
+  background: rgba(10,15,20,0.25); /* Restored original lightness */
   z-index: -1;
 }
 
@@ -50,7 +51,7 @@ body::before {
 .back-wrap {
   width: 100%;
   text-align: center;
-  margin: 16px 0;
+  margin: 20px 0;
   position: relative;
   z-index: 10;
 }
@@ -63,7 +64,7 @@ body::before {
   background: linear-gradient(135deg, var(--gold), #e0c77b);
   color: #000;
   text-decoration: none;
-  border-radius: 10px;
+  border-radius: 8px;
   font-weight: bold;
   font-size: 16px;
   transition: all 0.3s;
@@ -98,33 +99,34 @@ body::before {
     overflow-y: auto;
     z-index: 9;
     box-shadow: 4px 0 15px rgba(0,0,0,0.5);
-    padding-bottom: 20px;
     box-sizing: border-box;
   }
 
+  /* Exact header style and line matching reference */
   .nav-sidebar-header {
-    padding: 20px 20px 10px 20px;
-    font-size: 20px;
+    padding: 20px 24px 14px 24px;
+    font-size: 18px;
     font-weight: bold;
     color: var(--gold);
     text-transform: uppercase;
-    letter-spacing: 1px;
-    text-align: center;
+    letter-spacing: 0.5px;
+    border-bottom: 1px solid rgba(201,170,113,0.2);
+    text-align: left;
   }
 
-  /* Progress Bar directly under Skills Hub in sidebar */
+  /* Progress bar placed below header line */
   .progress-wrap {
-    width: 85%;
-    margin: 10px auto 15px auto;
+    width: 100%;
+    box-sizing: border-box;
+    padding: 16px 24px;
     text-align: center;
-    padding-bottom: 15px;
     border-bottom: 1px solid rgba(201,170,113,0.2);
   }
 
   .progress-label {
     font-size: 13px;
     color: #fff;
-    margin-bottom: 6px;
+    margin-bottom: 8px;
     font-weight: bold;
   }
 
@@ -148,12 +150,12 @@ body::before {
     display: flex;
     flex-direction: column;
     gap: 8px;
-    padding: 10px 16px;
+    padding: 16px;
   }
 
   .tab {
     padding: 10px 16px;
-    border-radius: 10px;
+    border-radius: 8px;
     border: 2px solid var(--gold);
     background: rgba(0,0,0,0.85);
     color: var(--gold);
@@ -174,30 +176,33 @@ body::before {
   }
 }
 
-/* Main content */
+/* Main Content Alignment */
 .main {
   flex: 1;
   display: flex;
-  justify-content: center;
-  align-items: flex-start;
+  flex-direction: column;
+  align-items: center;
   padding: 0 24px 24px 24px;
   position: relative;
   z-index: 1;
+  width: 100%;
+  box-sizing: border-box;
 }
 
 @media(min-width: 1024px) {
   .main {
-    margin-left: 240px; /* Offset for desktop sidebar */
+    padding-left: 264px; /* Offset to center content properly with sidebar present */
   }
 }
 
-/* Skills List */
+/* Skills List Items */
 .skill-list {
   list-style: none;
   padding: 0;
   width: 100%;
   max-width: 800px;
   margin: 0 auto 40px auto;
+  box-sizing: border-box;
 }
 
 .skill-list li {
@@ -212,6 +217,7 @@ body::before {
   font-size: 18px;
   box-shadow: 0 4px 12px rgba(0,0,0,0.5);
   transition: transform 0.25s, box-shadow 0.3s;
+  box-sizing: border-box;
 }
 
 .skill-list li:hover {
@@ -335,7 +341,7 @@ footer {
 
 <!-- Mobile Dropdown Navigation -->
 <div class="mobile-controls">
-  <div class="progress-wrap" style="width:100%; margin-bottom: 5px;">
+  <div class="progress-wrap" style="width:100%; margin-bottom: 5px; padding: 0;">
     <div class="progress-label" id="mobileProgressLabel">0% Total Mastery</div>
     <div class="progress-bar">
       <div class="progress-fill" id="mobileProgressFill"></div>
@@ -345,11 +351,11 @@ footer {
   <div class="tabs-mobile" id="mobileTabs"></div>
 </div>
 
-<!-- Desktop Sidebar (Extends to top) -->
+<!-- Desktop Sidebar (Extends all the way to top) -->
 <div class="nav-wrapper">
   <div class="nav-sidebar-header">Skills Hub</div>
   
-  <!-- Total Mastery Progress inside Sidebar directly under Skills Hub -->
+  <!-- Total Mastery Progress Bar directly below Header Divider Line -->
   <div class="progress-wrap">
     <div class="progress-label" id="progressLabel">0% Total Mastery</div>
     <div class="progress-bar">
@@ -400,7 +406,7 @@ function saveProgress() {
   localStorage.setItem("skillProgress", JSON.stringify(skillProgress));
 }
 
-// Update total mastery for desktop and mobile
+// Update total mastery
 function updateMastery() {
   let total = 0, done = 0;
   Object.values(skillProgress).forEach(section => {
@@ -428,7 +434,7 @@ function toggleCheck(section, skill, el) {
   updateMastery();
 }
 
-// Render skills for active section
+// Render skills for section
 function renderSkills(section) {
   skillList.innerHTML = skillData[section].map(skill => {
     const completed = skillProgress[section][skill] ? "completed" : "";
@@ -443,7 +449,7 @@ function renderSkills(section) {
   updateMastery();
 }
 
-// Render tab buttons
+// Render tabs
 const tabButtonsHTML = Object.keys(skillData).map(section =>
   `<div class="tab" data-section="${section}">${section}</div>`
 ).join('');
