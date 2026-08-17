@@ -46,33 +46,24 @@ body::before {
   z-index: -1;
 }
 
-/* Back button - centered at top */
-.back-wrap {
-  width: 100%;
-  text-align: center;
-  margin: 20px 0 10px 0;
-  position: relative;
-  z-index: 10;
-  box-sizing: border-box;
-}
-
+/* Back Button inside Sidebar */
 .back-button {
-  display: inline-flex;
-  align-items: center;
-  gap: 8px;
-  padding: 10px 22px;
+  display: block;
+  text-align: center;
+  margin: 16px;
+  padding: 10px 16px;
   background: linear-gradient(135deg, var(--gold), #e0c77b);
   color: #000;
   text-decoration: none;
   border-radius: 8px;
   font-weight: bold;
-  font-size: 16px;
+  font-size: 15px;
   transition: all 0.3s;
   box-shadow: 0 0 10px rgba(201,170,113,0.5);
 }
 
 .back-button::before {
-  content: "←";
+  content: "← ";
 }
 
 .back-button:hover {
@@ -102,26 +93,23 @@ body::before {
     box-sizing: border-box;
   }
 
-  /* Centered Sidebar Header containing Skills Hub + Mastery */
+  /* Centered Header with Bottom Line */
   .nav-sidebar-header {
-    padding: 20px 16px 10px 16px;
-    text-align: center;
-  }
-
-  .nav-title {
+    padding: 20px 16px 14px 16px;
     font-size: 18px;
     font-weight: bold;
     color: var(--gold);
     text-transform: uppercase;
     letter-spacing: 0.5px;
-    margin-bottom: 12px;
+    border-bottom: 1px solid rgba(201,170,113,0.2);
+    text-align: center;
   }
 
-  /* Progress bar centered under Skills Hub without a bottom line */
+  /* Progress Bar directly under header line */
   .progress-wrap {
     width: 100%;
     box-sizing: border-box;
-    padding: 0 10px;
+    padding: 16px 16px 0 16px;
     text-align: center;
   }
 
@@ -152,7 +140,7 @@ body::before {
     display: flex;
     flex-direction: column;
     gap: 8px;
-    padding: 16px;
+    padding: 0 16px 16px 16px;
   }
 
   .tab {
@@ -178,13 +166,13 @@ body::before {
   }
 }
 
-/* Main Content Alignment (Aligned directly with the back-button wrapper above) */
+/* Main Content Alignment */
 .main {
   flex: 1;
   display: flex;
   flex-direction: column;
   align-items: center;
-  padding: 10px 24px 24px 24px;
+  padding: 40px 24px 24px 24px;
   position: relative;
   z-index: 1;
   width: 100%;
@@ -192,8 +180,8 @@ body::before {
 }
 
 @media(min-width: 1024px) {
-  .back-wrap, .main {
-    padding-left: 240px; /* Aligns both the Back button and Skills list centrally in the main viewport area */
+  .main {
+    padding-left: 264px; /* Offsets main content to center skill list in viewport */
   }
 }
 
@@ -265,9 +253,15 @@ body::before {
   flex-direction: column;
   align-items: center;
   gap: 12px;
-  margin: 0 auto 16px auto;
+  margin: 16px auto;
   width: 90%;
   max-width: 360px;
+}
+
+.mobile-controls .back-button {
+  width: 100%;
+  box-sizing: border-box;
+  margin: 0;
 }
 
 .nav-trigger {
@@ -336,36 +330,35 @@ footer {
 </head>
 <body>
 
-<!-- Centered Back Button Top -->
-<div class="back-wrap">
-  <a href="membershub.html" class="back-button">Back to Members Hub</a>
-</div>
-
-<!-- Mobile Dropdown Navigation -->
+<!-- Mobile Header / Navigation Controls -->
 <div class="mobile-controls">
+  <a href="membershub.html" class="back-button">Back to Members Hub</a>
+  
   <div class="progress-wrap" style="width:100%; margin-bottom: 5px; padding: 0;">
     <div class="progress-label" id="mobileProgressLabel">0% Total Mastery</div>
     <div class="progress-bar">
       <div class="progress-fill" id="mobileProgressFill"></div>
     </div>
   </div>
+  
   <button class="nav-trigger" id="mobileTrigger" onclick="toggleMobileMenu()">Select Section</button>
   <div class="tabs-mobile" id="mobileTabs"></div>
 </div>
 
 <!-- Desktop Sidebar -->
 <div class="nav-wrapper">
-  <div class="nav-sidebar-header">
-    <div class="nav-title">Skills Hub</div>
-    
-    <!-- Total Mastery Progress centered below Skills Hub Title -->
-    <div class="progress-wrap">
-      <div class="progress-label" id="progressLabel">0% Total Mastery</div>
-      <div class="progress-bar">
-        <div class="progress-fill" id="progressFill"></div>
-      </div>
+  <div class="nav-sidebar-header">Skills Hub</div>
+  
+  <!-- Total Mastery Progress centered below Header Divider Line -->
+  <div class="progress-wrap">
+    <div class="progress-label" id="progressLabel">0% Total Mastery</div>
+    <div class="progress-bar">
+      <div class="progress-fill" id="progressFill"></div>
     </div>
   </div>
+
+  <!-- Back to Members Hub Button in Sidebar -->
+  <a href="membershub.html" class="back-button">Back to Members Hub</a>
 
   <div class="tabs" id="desktopTabs"></div>
 </div>
