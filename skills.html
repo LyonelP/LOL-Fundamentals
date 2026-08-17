@@ -29,7 +29,6 @@ html, body {
   font-family: 'Beaufort for LOL', Arial, Helvetica, sans-serif;
 }
 
-/* Original background brightness */
 body {
   background: url('https://64.media.tumblr.com/594ac290bec6d5e9ad98b5f53404f00b/245c4c3ee469f81d-e4/s1280x1920/1cda4284320eb2031758a9859dfe14ff8bbc50ba.jpg') no-repeat center center fixed;
   background-size: cover;
@@ -43,7 +42,7 @@ body::before {
   content: "";
   position: fixed;
   inset: 0;
-  background: rgba(10,15,20,0.25); /* Restored original lightness */
+  background: rgba(10,15,20,0.25);
   z-index: -1;
 }
 
@@ -51,9 +50,10 @@ body::before {
 .back-wrap {
   width: 100%;
   text-align: center;
-  margin: 20px 0;
+  margin: 20px 0 10px 0;
   position: relative;
   z-index: 10;
+  box-sizing: border-box;
 }
 
 .back-button {
@@ -102,25 +102,27 @@ body::before {
     box-sizing: border-box;
   }
 
-  /* Exact header style and line matching reference */
+  /* Centered Sidebar Header containing Skills Hub + Mastery */
   .nav-sidebar-header {
-    padding: 20px 24px 14px 24px;
+    padding: 20px 16px 10px 16px;
+    text-align: center;
+  }
+
+  .nav-title {
     font-size: 18px;
     font-weight: bold;
     color: var(--gold);
     text-transform: uppercase;
     letter-spacing: 0.5px;
-    border-bottom: 1px solid rgba(201,170,113,0.2);
-    text-align: left;
+    margin-bottom: 12px;
   }
 
-  /* Progress bar placed below header line */
+  /* Progress bar centered under Skills Hub without a bottom line */
   .progress-wrap {
     width: 100%;
     box-sizing: border-box;
-    padding: 16px 24px;
+    padding: 0 10px;
     text-align: center;
-    border-bottom: 1px solid rgba(201,170,113,0.2);
   }
 
   .progress-label {
@@ -176,13 +178,13 @@ body::before {
   }
 }
 
-/* Main Content Alignment */
+/* Main Content Alignment (Aligned directly with the back-button wrapper above) */
 .main {
   flex: 1;
   display: flex;
   flex-direction: column;
   align-items: center;
-  padding: 0 24px 24px 24px;
+  padding: 10px 24px 24px 24px;
   position: relative;
   z-index: 1;
   width: 100%;
@@ -190,8 +192,8 @@ body::before {
 }
 
 @media(min-width: 1024px) {
-  .main {
-    padding-left: 264px; /* Offset to center content properly with sidebar present */
+  .back-wrap, .main {
+    padding-left: 240px; /* Aligns both the Back button and Skills list centrally in the main viewport area */
   }
 }
 
@@ -351,15 +353,17 @@ footer {
   <div class="tabs-mobile" id="mobileTabs"></div>
 </div>
 
-<!-- Desktop Sidebar (Extends all the way to top) -->
+<!-- Desktop Sidebar -->
 <div class="nav-wrapper">
-  <div class="nav-sidebar-header">Skills Hub</div>
-  
-  <!-- Total Mastery Progress Bar directly below Header Divider Line -->
-  <div class="progress-wrap">
-    <div class="progress-label" id="progressLabel">0% Total Mastery</div>
-    <div class="progress-bar">
-      <div class="progress-fill" id="progressFill"></div>
+  <div class="nav-sidebar-header">
+    <div class="nav-title">Skills Hub</div>
+    
+    <!-- Total Mastery Progress centered below Skills Hub Title -->
+    <div class="progress-wrap">
+      <div class="progress-label" id="progressLabel">0% Total Mastery</div>
+      <div class="progress-bar">
+        <div class="progress-fill" id="progressFill"></div>
+      </div>
     </div>
   </div>
 
