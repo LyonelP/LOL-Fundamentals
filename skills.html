@@ -16,183 +16,117 @@
 </script>
 
 <style>
-:root {
-  --gold: #c9aa71;
-  --muted: #9da7b3;
-}
-
-/* Reset */
-html, body {
-  margin: 0;
-  padding: 0;
-  min-height: 100vh;
-  font-family: 'Beaufort for LOL', Arial, Helvetica, sans-serif;
-}
-
 body {
+  margin: 0;
+  font-family: 'Beaufort for LOL', Arial, Helvetica, sans-serif;
+  color: #fff;
   background: url('https://64.media.tumblr.com/594ac290bec6d5e9ad98b5f53404f00b/245c4c3ee469f81d-e4/s1280x1920/1cda4284320eb2031758a9859dfe14ff8bbc50ba.jpg') no-repeat center center fixed;
   background-size: cover;
-  color: #fff;
+  overflow-x: hidden;
+  min-height: 100vh;
   display: flex;
   flex-direction: column;
-  position: relative;
 }
 
 body::before {
   content: "";
   position: fixed;
-  inset: 0;
+  top:0; left:0;
+  width:100%; height:100%;
   background: rgba(10,15,20,0.25);
   z-index: -1;
 }
 
-/* Back Button inside Sidebar */
-.back-button {
-  display: block;
+header {
+  background: rgba(13,17,23,0.9);
+  border-bottom: 2px solid #c9aa71;
+  padding: 20px;
+  font-weight: bold;
+  font-size: 26px;
+  text-transform: uppercase;
+  color: #c9aa71;
+  letter-spacing: 1px;
   text-align: center;
-  margin: 16px;
-  padding: 10px 16px;
-  background: linear-gradient(135deg, var(--gold), #e0c77b);
+  line-height: 1.1;
+  box-sizing: border-box;
+}
+
+.back-button {
+  display: inline-block;
+  margin: 20px auto; /* keeps same height as original dropdown version */
+  padding: 10px 20px;
+  background: linear-gradient(135deg, #c9aa71, #e0c77b);
   color: #000;
   text-decoration: none;
   border-radius: 8px;
   font-weight: bold;
-  font-size: 15px;
+  font-size: 16px;
   transition: all 0.3s;
   box-shadow: 0 0 10px rgba(201,170,113,0.5);
 }
-
-.back-button::before {
-  content: "← ";
-}
-
+.back-button::before { content: "← "; }
 .back-button:hover {
   background: linear-gradient(135deg, #e6c97f, #f0d88b);
   box-shadow: 0 0 15px rgba(255,215,0,0.8);
 }
 
-/* Sidebar Desktop */
-.nav-wrapper {
-  display: none;
-}
-
-@media(min-width: 1024px) {
-  .nav-wrapper {
-    display: flex;
-    flex-direction: column;
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 240px;
-    bottom: 0;
-    background: rgba(15,20,26,0.95);
-    border-right: 2px solid var(--gold);
-    overflow-y: auto;
-    z-index: 9;
-    box-shadow: 4px 0 15px rgba(0,0,0,0.5);
-    box-sizing: border-box;
-  }
-
-  /* Centered Header with Bottom Line */
-  .nav-sidebar-header {
-    padding: 20px 16px 14px 16px;
-    font-size: 18px;
-    font-weight: bold;
-    color: var(--gold);
-    text-transform: uppercase;
-    letter-spacing: 0.5px;
-    border-bottom: 1px solid rgba(201,170,113,0.2);
-    text-align: center;
-  }
-
-  /* Progress Bar directly under header line */
-  .progress-wrap {
-    width: 100%;
-    box-sizing: border-box;
-    padding: 16px 16px 0 16px;
-    text-align: center;
-  }
-
-  .progress-label {
-    font-size: 13px;
-    color: #fff;
-    margin-bottom: 8px;
-    font-weight: bold;
-  }
-
-  .progress-bar {
-    width: 100%;
-    height: 10px;
-    background: #0f1722;
-    border-radius: 20px;
-    overflow: hidden;
-    border: 1px solid var(--gold);
-  }
-
-  .progress-fill {
-    height: 100%;
-    width: 0%;
-    background: linear-gradient(90deg, var(--gold), #e6c77b);
-    transition: width 0.45s ease;
-  }
-
-  .tabs {
-    display: flex;
-    flex-direction: column;
-    gap: 8px;
-    padding: 0 16px 16px 16px;
-  }
-
-  .tab {
-    padding: 10px 16px;
-    border-radius: 8px;
-    border: 2px solid var(--gold);
-    background: rgba(0,0,0,0.85);
-    color: var(--gold);
-    font-weight: bold;
-    cursor: pointer;
-    transition: all 0.25s;
-    text-align: center;
-  }
-
-  .tab:hover {
-    background: rgba(201,170,113,0.15);
-  }
-
-  .tab.active {
-    background: linear-gradient(135deg, var(--gold), #e0c77b);
-    color: #000;
-    box-shadow: 0 0 12px rgba(201,170,113,0.7);
-  }
-}
-
-/* Main Content Alignment */
-.main {
-  flex: 1;
+.tabs {
   display: flex;
-  flex-direction: column;
-  align-items: center;
-  padding: 40px 24px 24px 24px;
-  position: relative;
-  z-index: 1;
+  flex-wrap: wrap;
+  justify-content: center;
+  margin: 20px 0;
+  gap: 10px;
+}
+
+.tab {
+  padding: 10px 18px;
+  border-radius: 12px;
+  border: 2px solid #c9aa71;
+  background: rgba(0,0,0,0.85);
+  color: #c9aa71;
+  font-weight: bold;
+  cursor: pointer;
+  transition: all 0.25s;
+}
+
+.tab.active {
+  background: linear-gradient(135deg, #c9aa71, #e0c77b);
+  color: #000;
+  box-shadow: 0 0 12px rgba(201,170,113,0.7);
+}
+
+/* Total Mastery Progress Bar */
+.progress-wrap {
+  width: 260px;
+  max-width: 90vw;
+  margin: 0 auto 20px;
+  text-align: center;
+}
+.progress-label {
+  font-size: 14px;
+  color: #fff;
+  margin-bottom: 6px;
+}
+.progress-bar {
   width: 100%;
-  box-sizing: border-box;
+  height: 10px;
+  background: #0f1722;
+  border-radius: 20px;
+  overflow: hidden;
+}
+.progress-fill {
+  height: 100%;
+  width: 0%;
+  background: linear-gradient(90deg, #c9aa71, #e6c77b);
+  transition: width 0.45s ease;
 }
 
-@media(min-width: 1024px) {
-  .main {
-    padding-left: 264px; /* Offsets main content to center skill list in viewport */
-  }
-}
-
-/* Skills List Items */
+/* Skills */
 .skill-list {
   list-style: none;
   padding: 0;
   width: 100%;
-  max-width: 800px;
-  margin: 0 auto 40px auto;
-  box-sizing: border-box;
+  margin-bottom: 40px;
 }
 
 .skill-list li {
@@ -200,19 +134,20 @@ body::before {
   justify-content: space-between;
   align-items: center;
   background: rgba(0,0,0,0.85);
-  border: 2px solid var(--gold);
+  border: 2px solid #c9aa71;
   border-radius: 12px;
   padding: 14px 18px;
-  margin-bottom: 20px;
+  margin: 0 auto 20px auto;
   font-size: 18px;
+  width: 56vw;
+  max-width: 900px;
   box-shadow: 0 4px 12px rgba(0,0,0,0.5);
   transition: transform 0.25s, box-shadow 0.3s;
-  box-sizing: border-box;
 }
 
 .skill-list li:hover {
   background: rgba(0,0,0,0.95);
-  transform: scale(1.02);
+  transform: scale(1.03);
   box-shadow: 0 8px 20px rgba(0,0,0,0.7);
 }
 
@@ -225,148 +160,61 @@ body::before {
 }
 
 .skill-list li a:hover {
-  color: var(--gold);
+  color: #c9aa71;
 }
 
 .checkmark {
   width: 26px;
   height: 26px;
   border-radius: 50%;
-  border: 2px solid var(--gold);
+  border: 2px solid #c9aa71;
   display: flex;
   justify-content: center;
   align-items: center;
-  color: var(--gold);
+  color: #c9aa71;
   font-size: 18px;
   flex-shrink: 0;
   cursor: pointer;
 }
 
 .checkmark.completed {
-  background: var(--gold);
+  background: #c9aa71;
   color: #000;
-}
-
-/* Mobile Controls */
-.mobile-controls {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 12px;
-  margin: 16px auto;
-  width: 90%;
-  max-width: 360px;
-}
-
-.mobile-controls .back-button {
-  width: 100%;
-  box-sizing: border-box;
-  margin: 0;
-}
-
-.nav-trigger {
-  width: 100%;
-  padding: 14px 18px;
-  font-size: 16px;
-  font-weight: 600;
-  background: rgba(0,0,0,0.85);
-  border: 2px solid var(--gold);
-  border-radius: 12px;
-  color: var(--gold);
-  cursor: pointer;
-  text-align: center;
-  position: relative;
-  z-index: 10;
-}
-
-.nav-trigger::after {
-  content: " ▼";
-  font-weight: bold;
-}
-
-.tabs-mobile {
-  display: none;
-  width: 100%;
-  flex-direction: column;
-  gap: 8px;
-  background: rgba(15,20,26,0.95);
-  border: 2px solid var(--gold);
-  border-radius: 12px;
-  padding: 12px;
-  box-sizing: border-box;
-  z-index: 9;
-}
-
-.tabs-mobile .tab {
-  padding: 10px;
-  text-align: center;
-  border-radius: 8px;
-  border: 1px solid var(--gold);
-  background: rgba(0,0,0,0.85);
-  color: var(--gold);
-  font-weight: bold;
-  cursor: pointer;
-}
-
-.tabs-mobile .tab.active {
-  background: linear-gradient(135deg, var(--gold), #e0c77b);
-  color: #000;
-}
-
-@media(min-width: 1024px) {
-  .mobile-controls {
-    display: none;
-  }
 }
 
 footer {
-  padding: 16px;
-  text-align: center;
-  font-size: 13px;
-  color: var(--muted);
   margin-top: auto;
+  text-align: center;
+  padding: 18px 10px;
+  font-size: 14px;
+  color: #fff;
+}
+
+@media(max-width: 700px){
+  header { font-size: 22px; padding: 15px 10px; }
+  .skill-list li { width: 85vw; font-size: 16px; padding: 10px 14px; }
+  .tabs { gap: 5px; }
+  .tab { padding: 8px 12px; font-size: 14px; }
 }
 </style>
 </head>
 <body>
 
-<!-- Mobile Header / Navigation Controls -->
-<div class="mobile-controls">
-  <a href="membershub.html" class="back-button">Back to Members Hub</a>
-  
-  <div class="progress-wrap" style="width:100%; margin-bottom: 5px; padding: 0;">
-    <div class="progress-label" id="mobileProgressLabel">0% Total Mastery</div>
-    <div class="progress-bar">
-      <div class="progress-fill" id="mobileProgressFill"></div>
-    </div>
+<header>Skills Hub</header>
+
+<a href="membershub.html" class="back-button">Back to Members Hub</a>
+
+<div class="tabs" id="tabs"></div>
+
+<!-- Total Mastery Progress -->
+<div class="progress-wrap">
+  <div class="progress-label" id="progressLabel">0% Total Mastery</div>
+  <div class="progress-bar">
+    <div class="progress-fill" id="progressFill"></div>
   </div>
-  
-  <button class="nav-trigger" id="mobileTrigger" onclick="toggleMobileMenu()">Select Section</button>
-  <div class="tabs-mobile" id="mobileTabs"></div>
 </div>
 
-<!-- Desktop Sidebar -->
-<div class="nav-wrapper">
-  <div class="nav-sidebar-header">Skills Hub</div>
-  
-  <!-- Total Mastery Progress centered below Header Divider Line -->
-  <div class="progress-wrap">
-    <div class="progress-label" id="progressLabel">0% Total Mastery</div>
-    <div class="progress-bar">
-      <div class="progress-fill" id="progressFill"></div>
-    </div>
-  </div>
-
-  <!-- Back to Members Hub Button in Sidebar -->
-  <a href="membershub.html" class="back-button">Back to Members Hub</a>
-
-  <div class="tabs" id="desktopTabs"></div>
-</div>
-
-<!-- Main Content Area -->
-<div class="main">
-  <ul class="skill-list" id="skill-list"></ul>
-</div>
+<ul class="skill-list" id="skill-list"></ul>
 
 <footer>© 2026 LoL Fundamentals · All rights reserved</footer>
 
@@ -394,10 +242,7 @@ localStorage.setItem("skillProgress", JSON.stringify(skillProgress));
 const skillList = document.getElementById('skill-list');
 const progressFill = document.getElementById('progressFill');
 const progressLabel = document.getElementById('progressLabel');
-const mobileProgressFill = document.getElementById('mobileProgressFill');
-const mobileProgressLabel = document.getElementById('mobileProgressLabel');
-const desktopTabs = document.getElementById('desktopTabs');
-const mobileTabs = document.getElementById('mobileTabs');
+const tabs = document.getElementById('tabs');
 
 function saveProgress() {
   localStorage.setItem("skillProgress", JSON.stringify(skillProgress));
@@ -413,13 +258,8 @@ function updateMastery() {
     });
   });
   const pct = total === 0 ? 0 : Math.round(done / total * 100);
-  const text = pct === 100 ? "🏆 Fundamentals Mastered" : `${pct}% Total Mastery`;
-  
   progressFill.style.width = pct + "%";
-  progressLabel.textContent = text;
-  
-  mobileProgressFill.style.width = pct + "%";
-  mobileProgressLabel.textContent = text;
+  progressLabel.textContent = pct === 100 ? "🏆 Fundamentals Mastered" : `${pct}% Total Mastery`;
 }
 
 // Toggle skill check
@@ -447,38 +287,26 @@ function renderSkills(section) {
 }
 
 // Render tabs
-const tabButtonsHTML = Object.keys(skillData).map(section =>
+tabs.innerHTML = Object.keys(skillData).map(section =>
   `<div class="tab" data-section="${section}">${section}</div>`
 ).join('');
 
-desktopTabs.innerHTML = tabButtonsHTML;
-mobileTabs.innerHTML = tabButtonsHTML;
-
-function handleTabClick(e) {
+tabs.addEventListener('click', e => {
   if (!e.target.classList.contains('tab')) return;
-  const section = e.target.dataset.section;
-  
   document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
-  document.querySelectorAll(`[data-section="${section}"]`).forEach(t => t.classList.add('active'));
-  
+  e.target.classList.add('active');
+  const section = e.target.dataset.section;
   localStorage.setItem('lastSection', section);
   renderSkills(section);
-  mobileTabs.style.display = 'none';
-}
-
-desktopTabs.addEventListener('click', handleTabClick);
-mobileTabs.addEventListener('click', handleTabClick);
-
-function toggleMobileMenu(){
-  mobileTabs.style.display = (mobileTabs.style.display === 'flex') ? 'none' : 'flex';
-}
+});
 
 // Initial render
 const lastSection = localStorage.getItem("lastSection") || "Pre Game";
 renderSkills(lastSection);
-document.querySelectorAll(`[data-section="${lastSection}"]`).forEach(t => t.classList.add('active'));
+document.querySelector(`[data-section="${lastSection}"]`).classList.add('active');
 updateMastery();
 </script>
 
 </body>
 </html>
+
