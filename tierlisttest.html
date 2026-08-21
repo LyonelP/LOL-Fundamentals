@@ -93,53 +93,32 @@
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
-    gap: 18px;
+    gap: 14px;
   }
 
-  /* Card resized to fit descriptions */
+  /* Compact card style */
   .card {
     background: #161b22;
     border: 2px solid var(--gold);
     border-radius: 10px;
-    width: 180px;
-    padding: 12px;
+    width: 136px;
+    padding: 8px;
     text-align: center;
     color: #e6edf3;
     transition: transform 0.22s, box-shadow 0.22s;
     display: flex;
     flex-direction: column;
     align-items: center;
-    position: relative;
-  }
-
-  .card-img-container {
-    position: relative;
-    width: 100px;
-    height: 100px;
-    margin-bottom: 8px;
   }
 
   .card img {
-    width: 100%;
-    height: 100%;
+    width: 84px;
+    height: 84px;
     border-radius: 8px;
     object-fit: cover;
     display: block;
+    margin: 0 auto 6px auto;
     background: linear-gradient(180deg, #0f1722, #12161c);
-  }
-
-  /* Numerical rank badge */
-  .rank-badge {
-    position: absolute;
-    top: -6px;
-    left: -6px;
-    background: var(--gold);
-    color: #0a0f14;
-    font-weight: 800;
-    font-size: 11px;
-    padding: 2px 6px;
-    border-radius: 10px;
-    box-shadow: 0 2px 5px rgba(0,0,0,0.5);
   }
 
   .card:hover {
@@ -149,25 +128,25 @@
 
   .champ-name {
     font-weight: 700;
-    font-size: 14px;
+    font-size: 13px;
     margin-bottom: 2px;
   }
 
   .champ-rank {
-    font-size: 12px;
+    font-size: 11px;
     color: var(--gold);
     font-weight: bold;
-    margin-bottom: 6px;
+    margin-bottom: 4px;
   }
 
   .champ-desc {
-    font-size: 11px;
+    font-size: 10.5px;
     color: var(--muted);
-    line-height: 1.3;
+    line-height: 1.25;
     text-align: left;
     width: 100%;
     border-top: 1px solid rgba(201, 170, 113, 0.2);
-    padding-top: 6px;
+    padding-top: 4px;
     margin-top: auto;
   }
 
@@ -191,18 +170,18 @@
 
   @media (max-width: 600px) {
     .card {
-      width: 140px;
-      padding: 8px;
+      width: 110px;
+      padding: 6px;
     }
-    .card-img-container {
-      width: 76px;
-      height: 76px;
+    .card img {
+      width: 68px;
+      height: 68px;
     }
     .champ-name {
-      font-size: 12px;
+      font-size: 11px;
     }
     .champ-desc {
-      font-size: 10px;
+      font-size: 9.5px;
     }
   }
 </style>
@@ -287,7 +266,7 @@ async function getLatestPatch() {
   }
 }
 
-/* CSV Line Splitter supporting quoted values */
+/* CSV parser capable of reading quoted description text */
 function parseCSVLine(line) {
   const values = [];
   let currentVal = '';
@@ -308,7 +287,6 @@ function parseCSVLine(line) {
   return values;
 }
 
-/* Parse CSV */
 async function loadCSV(url) {
   const txt = await fetch(url).then((r) => r.text());
   const lines = txt.trim().split(/\r?\n/);
@@ -332,13 +310,10 @@ async function loadCSV(url) {
   return champions;
 }
 
-/* Render function */
 function renderTierGroups(champRanks, role) {
   const container = document.getElementById('championCards');
   container.innerHTML = '';
   const rankOrder = ['OP','S','A','B','C','D'];
-  
-  let overallRankCounter = 1; // Tracks global numerical rank for current role
 
   rankOrder.forEach((rank) => {
     const champsInRank = Object.keys(champRanks).filter(name => {
@@ -365,7 +340,6 @@ function renderTierGroups(champRanks, role) {
         ? `https://ddragon.leagueoflegends.com/cdn/${PATCH}/img/champion/${imgName}.png`
         : PLACEHOLDER;
 
-      // Column lookup for description (e.g., "Top_Desc" or fallback "Desc")
       const descKey = `${role}_Desc`;
       const description = champRanks[champName]?.[descKey] || champRanks[champName]?.['Desc'] || '';
 
@@ -373,17 +347,13 @@ function renderTierGroups(champRanks, role) {
       card.className = 'card';
       
       card.innerHTML = `
-        <div class="card-img-container">
-          <span class="rank-badge">#${overallRankCounter}</span>
-          <img src="${imgURL}" alt="${champName}" onerror="this.onerror=null;this.src='${PLACEHOLDER}';">
-        </div>
+        <img src="${imgURL}" alt="${champName}" onerror="this.onerror=null;this.src='${PLACEHOLDER}';">
         <div class="champ-name">${champName}</div>
         <div class="champ-rank">${rank} Tier</div>
         ${description ? `<div class="champ-desc">${description}</div>` : ''}
       `;
       
       tierCards.appendChild(card);
-      overallRankCounter++;
     });
 
     tierGroup.appendChild(tierCards);
