@@ -289,11 +289,16 @@ sectionSelect.addEventListener('change', () => {
     `;
   }
 
-  if(value === "Build"){
+ if(value === "Build"){
   content = `
     ${header}
 
     <div class="card-container">
+
+      <!-- ASSASSIN EKKO -->
+      <div class="card">
+        <h3>Assassin Build</h3>
+      </div>
 
       <div class="card"><strong>Starting items</strong>
         <div class="build-flow">
@@ -327,7 +332,6 @@ sectionSelect.addEventListener('change', () => {
         </div>
       </div>
 
-
       <div class="card"><strong>Core items</strong>
         <div class="build-flow">
 
@@ -360,7 +364,6 @@ sectionSelect.addEventListener('change', () => {
         </div>
       </div>
 
-
       <div class="card"><strong>Final items</strong>
         <div class="build-flow">
 
@@ -386,13 +389,99 @@ sectionSelect.addEventListener('change', () => {
         </div>
       </div>
 
-
       <div class="card">
         <strong>Why Nashor's Tooth over Shadowflame?</strong>
         <p>
           Nashor's Tooth gives Ekko more consistent DPS and jungle tempo compared to Shadowflame. The haste and attack speed provide Ekko with more outplay potential compared to shadowflame which only provides damage in sutuations that often don't require the crit anyways.
         </p>
-  
+      </div>
+
+
+      <!-- BRUISER EKKO -->
+      <div class="card">
+        <h3>Bruiser Build</h3>
+      </div>
+
+      <div class="card"><strong>Starting & Early items</strong>
+        <div class="build-flow">
+
+          <div>
+            <img src="https://raw.communitydragon.org/latest/game/assets/items/icons2d/1103_jungle_t1_mosstomperseedling.png" class="icon">
+            Mosstomper Seedling
+          </div>
+
+          <span>→</span>
+
+          <div>
+            <img src="https://ddragon.leagueoflegends.com/cdn/14.21.1/img/item/1082.png" class="icon">
+            Dark Seal
+          </div>
+
+          <span>→</span>
+
+          <div>
+            <img src="https://ddragon.leagueoflegends.com/cdn/14.21.1/img/item/3101.png" class="icon">
+            Aether Wisp
+          </div>
+
+        </div>
+      </div>
+
+      <div class="card"><strong>Core items</strong>
+        <div class="build-flow">
+
+          <div>
+            <img src="https://ddragon.leagueoflegends.com/cdn/14.21.1/img/item/2900.png" class="icon">
+            Stormsurge
+          </div>
+
+          <span>→</span>
+
+          <div>
+            <img src="https://ddragon.leagueoflegends.com/cdn/14.21.1/img/item/3020.png" class="icon">
+            Sorcerer's Shoes
+          </div>
+
+          <span>→</span>
+
+          <div>
+            <img src="https://ddragon.leagueoflegends.com/cdn/14.21.1/img/item/6662.png" class="icon">
+            Iceborn Gauntlet
+          </div>
+
+          <span>→</span>
+
+          <div>
+            <img src="https://ddragon.leagueoflegends.com/cdn/14.21.1/img/item/8020.png" class="icon">
+            Abyssal Mask
+          </div>
+
+        </div>
+      </div>
+
+      <div class="card"><strong>Final items</strong>
+        <div class="build-flow">
+
+          <div>
+            <img src="https://ddragon.leagueoflegends.com/cdn/14.21.1/img/item/3151.png" class="icon">
+            Liandry's Torment
+          </div>
+
+          <span>→</span>
+
+          <div>
+            <img src="https://ddragon.leagueoflegends.com/cdn/14.21.1/img/item/8010.png" class="icon">
+            Bloodletter's Curse
+          </div>
+
+        </div>
+      </div>
+
+      <div class="card">
+        <strong>Why Bruiser Ekko?</strong>
+        <p>
+          Bruiser Ekko trades pure burst assassination for high survivability, sustained combat potential, and heavy team control. Items like Iceborn Gauntlet and Abyssal Mask make Ekko much harder to burst down, allowing you to trigger multiple passive procs and stay in skirmishes longer. Additionally, Liandry's Torment and Bloodletter's Curse melt tanks while shredding Magic Resist for your entire team, making this build ideal against heavy crowd-control or multi-tank team compositions where full AP Ekko gets burst before landing Phase Dive.
+        </p>
       </div>
 
     </div>
