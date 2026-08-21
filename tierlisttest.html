@@ -4,10 +4,10 @@
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width,initial-scale=1" />
 <title>LoL Fundamentals – Tierlist</title>
-<link rel="icon" type="image/png" href="/favicon.png">
-<link rel="apple-touch-icon" href="/favicon.png">
-
-  <style>
+<link rel="icon" type="image/png" sizes="32x32" href="https://i.imgur.com/NFO4uNP.png">
+<link rel="icon" type="image/png" sizes="16x16" href="https://i.imgur.com/NFO4uNP.png">
+<link rel="apple-touch-icon" href="https://i.imgur.com/NFO4uNP.png">
+<style>
   :root{
     --gold:#c9aa71;
     --bg:#0a0f14;
@@ -93,15 +93,15 @@
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
-    gap: 18px;
+    gap: 16px;
   }
 
-  /* Exact Original Card Sizing */
+  /* Slightly wider cards for easier reading */
   .card {
     background: #161b22;
     border: 2px solid var(--gold);
     border-radius: 10px;
-    width: 124px;
+    width: 160px;
     padding: 10px;
     text-align: center;
     color: #e6edf3;
@@ -112,8 +112,8 @@
   }
 
   .card img {
-    width: 100px;
-    height: 100px;
+    width: 90px;
+    height: 90px;
     border-radius: 8px;
     object-fit: cover;
     display: block;
@@ -128,24 +128,26 @@
 
   .champ-name {
     font-weight: 700;
-    font-size: 13px;
-    margin-bottom: 4px;
+    font-size: 13.5px;
+    margin-bottom: 2px;
   }
 
   .champ-rank {
-    font-size: 12px;
+    font-size: 11.5px;
     color: var(--gold);
+    font-weight: bold;
+    margin-bottom: 4px;
   }
 
   .champ-desc {
-    font-size: 10px;
+    font-size: 10.5px;
     color: var(--muted);
     line-height: 1.25;
     text-align: left;
     width: 100%;
     border-top: 1px solid rgba(201, 170, 113, 0.2);
-    padding-top: 4px;
-    margin-top: 6px;
+    padding-top: 5px;
+    margin-top: auto;
   }
 
   footer {
@@ -168,18 +170,18 @@
 
   @media (max-width: 600px) {
     .card {
-      width: 96px;
-      padding: 8px;
+      width: 120px;
+      padding: 7px;
     }
     .card img {
-      width: 76px;
-      height: 76px;
+      width: 72px;
+      height: 72px;
     }
     .champ-name {
-      font-size: 12px;
+      font-size: 11.5px;
     }
     .champ-desc {
-      font-size: 9px;
+      font-size: 9.5px;
     }
   }
 </style>
@@ -188,7 +190,7 @@
 
 <header>Solo Queue Tierlist</header>
 
-<a href="https://lolfundamentals.com" class="back-button">Back to LoL Fundamentals</a>
+<a href="membershub.html" class="back-button">Back to Members Hub</a>
 
 <select id="roleSelect" aria-label="Select role">
   <option value="Top">Top</option>
@@ -201,11 +203,15 @@
 <div id="championCards" aria-live="polite"></div>
 
 <footer>
-  © 2025 LoL Fundamentals · Contact:
-  <a href="mailto:arcsecond@lolfundamentals.com">arcsecond@lolfundamentals.com</a>
+  © 2026 LoL Fundamentals · Contact:
+  <a href="mailto:support@lolfundamentals.com">support@lolfundamentals.com</a>
 </footer>
 
 <script>
+if (localStorage.getItem('lolfundamentals_logged_in') !== 'true') {
+  window.location.href = 'index.html';
+}
+
 const CSV_URL = 'https://docs.google.com/spreadsheets/d/e/2PACX-1vRtIJeggpJ6cjGJt0OOds4OZDuHMMUxHCWzMiU1Bd4gJ8EvfZMXPE9p0X1K3yyeZs7bpFyQZHhHpnsu/pub?output=csv';
 
 const IMG_NAME_OVERRIDES = {
@@ -264,6 +270,7 @@ async function getLatestPatch() {
   }
 }
 
+/* CSV parser capable of handling quotes/commas in descriptions */
 function parseCSVLine(line) {
   const values = [];
   let currentVal = '';
@@ -346,7 +353,7 @@ function renderTierGroups(champRanks, role) {
       card.innerHTML = `
         <img src="${imgURL}" alt="${champName}" onerror="this.onerror=null;this.src='${PLACEHOLDER}';">
         <div class="champ-name">${champName}</div>
-        <div class="champ-rank">${rank}</div>
+        <div class="champ-rank">${rank} Tier</div>
         ${description ? `<div class="champ-desc">${description}</div>` : ''}
       `;
       
