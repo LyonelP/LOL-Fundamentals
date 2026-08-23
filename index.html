@@ -66,12 +66,14 @@ header{background:linear-gradient(90deg,#0a0f14,#1b2838);border-bottom:2px solid
   display: flex;
   flex-direction: column;
   align-items: center;
+  width: 100%;
 }
 
 .testimonial-container {
   width: 100%;
   position: relative;
   height: 160px;
+  transition: height 0.3s ease;
 }
 
 .testimonial-slide {
@@ -110,7 +112,7 @@ header{background:linear-gradient(90deg,#0a0f14,#1b2838);border-bottom:2px solid
 
 .review-body {
   font-size: 1.05rem;
-  line-height: 1.5;
+  line-height: 1.45;
   color: #e6edf3;
   text-align: center;
   margin: 0;
@@ -149,9 +151,21 @@ header{background:linear-gradient(90deg,#0a0f14,#1b2838);border-bottom:2px solid
 footer{text-align:center;padding:30px;color:#8b949e;font-size:14px;background:#0a0f14;border-top:1px solid #1f2937}
 footer a{color:#c9aa71;text-decoration:none}
 footer a:hover{text-decoration:underline}
+
 @media (max-width: 768px) {
   #trailerBtn {
     margin-top: 8px !important;
+  }
+}
+
+/* Mobile adjustments */
+@media (max-width: 600px) {
+  .testimonial-slide {
+    padding: 18px 20px;
+    height: auto;
+  }
+  .review-body {
+    font-size: 0.98rem;
   }
 }
 </style>
@@ -394,11 +408,21 @@ All guides, matchups, VODS & tools for just <b>$3.33/month</b>!
 </div>
 
 <script>
-// Testimonial Rotation Logic
+// Testimonial Rotation Logic with Dynamic Height Adjustment for Mobile
 let currentSlide = 0;
 const slides = document.querySelectorAll('.testimonial-slide');
 const dots = document.querySelectorAll('.dot');
+const container = document.getElementById('testimonialContainer');
 let slideInterval;
+
+function updateContainerHeight() {
+  if (window.innerWidth <= 600) {
+    const activeSlide = slides[currentSlide];
+    container.style.height = activeSlide.offsetHeight + 'px';
+  } else {
+    container.style.height = '160px';
+  }
+}
 
 function showSlide(index) {
   slides.forEach((slide, i) => {
@@ -406,6 +430,7 @@ function showSlide(index) {
     dots[i].classList.toggle('active', i === index);
   });
   currentSlide = index;
+  updateContainerHeight();
 }
 
 function nextSlide() {
@@ -428,8 +453,9 @@ function resetTimer() {
 }
 
 startTimer();
+window.addEventListener('resize', updateContainerHeight);
+window.addEventListener('load', updateContainerHeight);
 
-const container = document.getElementById('testimonialContainer');
 container.addEventListener('mouseenter', () => clearInterval(slideInterval));
 container.addEventListener('mouseleave', () => startTimer());
 </script>
