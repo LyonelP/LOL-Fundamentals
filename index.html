@@ -59,6 +59,85 @@ header{background:linear-gradient(90deg,#0a0f14,#1b2838);border-bottom:2px solid
 .card:hover{transform:translateY(-6px);box-shadow:0 12px 26px rgba(201,170,113,0.5)}
 .unlock-icon{position:absolute;bottom:12px;z-index:2;font-size:1.5rem;color:#f2b96d;cursor:pointer}
 
+/* Testimonial Slider Styling */
+.testimonial-wrapper {
+  max-width: 650px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.testimonial-container {
+  width: 100%;
+  position: relative;
+  height: 160px;
+}
+
+.testimonial-slide {
+  position: absolute;
+  inset: 0;
+  opacity: 0;
+  transform: translateY(10px) scale(0.98);
+  transition: opacity 0.5s ease, transform 0.5s ease;
+  pointer-events: none;
+  background: #161b22;
+  border: 2px solid #c9aa71;
+  border-radius: 12px;
+  padding: 24px 30px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.4);
+  box-sizing: border-box;
+}
+
+.testimonial-slide.active {
+  opacity: 1;
+  transform: translateY(0) scale(1);
+  pointer-events: auto;
+}
+
+.review-author {
+  font-weight: bold;
+  color: #c9aa71;
+  font-size: 1.2rem;
+  text-align: center;
+  margin-bottom: 10px;
+  border-bottom: 1px solid rgba(201, 170, 113, 0.2);
+  padding-bottom: 6px;
+}
+
+.review-body {
+  font-size: 1.05rem;
+  line-height: 1.5;
+  color: #e6edf3;
+  text-align: center;
+  margin: 0;
+}
+
+.slider-dots {
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+  margin-top: 20px;
+}
+
+.dot {
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  background: rgba(201, 170, 113, 0.3);
+  cursor: pointer;
+  transition: background 0.3s, transform 0.3s;
+}
+
+.dot.active {
+  background: #c9aa71;
+  transform: scale(1.2);
+  box-shadow: 0 0 8px rgba(201, 170, 113, 0.6);
+}
+
 .modal{display:none;position:fixed;inset:0;background:rgba(0,0,0,.75);z-index:9999;justify-content:center;align-items:center}
 .modalContent{background:#161b22;padding:30px;border-radius:10px;text-align:center;max-width:440px;width:90%;border:1px solid #c9aa71}
 .modalContent h2{color:#c9aa71;margin-bottom:20px}
@@ -172,39 +251,38 @@ footer a:hover{text-decoration:underline}
 </div>
 </section>
 
-<!-- Raised Reviews section slightly -->
+<!-- Animated Rotating Testimonials Section -->
 <section class="section" style="padding-top:10px; margin-top:-20px;">
-  <h2>Reviews</h2>
+  <h2>What Members Say</h2>
 
-  <div class="card-grid">
-    <div class="card" style="height:auto; padding:16px;">
+  <div class="testimonial-wrapper">
+    <div class="testimonial-container" id="testimonialContainer">
+      <div class="testimonial-slide active">
+        <div class="review-author">Yuniel</div>
+        <p class="review-body">"Hi, I just hit Masters for the first time. Thanks for your LoLFundamentals."</p>
+      </div>
 
-      <p style="margin:0 0 10px 0;">
-        <strong>Yuniel</strong><br>
-        "Hi, I just hit Masters for the first time. Thanks for your LoLFundamentals."
-      </p>
+      <div class="testimonial-slide">
+        <div class="review-author">Cheap</div>
+        <p class="review-body">"Climbed from Gold 2 to Emerald 4. Gotta love LoL Fundamentals. It definitely helped with that climb."</p>
+      </div>
 
-      <hr style="border-color:#c9aa71; opacity:0.3; margin:10px 0; width:100%;">
+      <div class="testimonial-slide">
+        <div class="review-author">Alex</div>
+        <p class="review-body">"I have been peeking at your matchup notes before games and they are fire! Hoping to get to the point that I remember them by heart."</p>
+      </div>
 
-      <p style="margin:0 0 10px 0;">
-        <strong>Cheap</strong><br>
-        "Climbed from Gold 2 to Emerald 4. Gotta love LoL Fundamentals. It definitely helped with that climb."
-      </p>
+      <div class="testimonial-slide">
+        <div class="review-author">Nightmare</div>
+        <p class="review-body">"I just became a member on lolfundamentals and was driving back from a work call (2hour drive) just listening to the stuff in there. -sublime-"</p>
+      </div>
+    </div>
 
-      <hr style="border-color:#c9aa71; opacity:0.3; margin:10px 0; width:100%;">
-
-      <p style="margin:0;">
-        <strong>Alex</strong><br>
-        "I have been peeking at your matchup notes before games and they are fire! Hoping to get to the point that I remember them by heart."
-      </p>
-
-      <hr style="border-color:#c9aa71; opacity:0.3; margin:10px 0; width:100%;">
-
-        <p style="margin:0;">
-        <strong>Nightmare</strong><br>
-        "I just became a member on lolfundamentals and was driving back from a work call (2hour drive) just listening to the stuff in there. -sublime-"
-      </p>
-
+    <div class="slider-dots" id="sliderDots">
+      <span class="dot active" onclick="goToSlide(0)"></span>
+      <span class="dot" onclick="goToSlide(1)"></span>
+      <span class="dot" onclick="goToSlide(2)"></span>
+      <span class="dot" onclick="goToSlide(3)"></span>
     </div>
   </div>
 </section>
@@ -315,6 +393,47 @@ All guides, matchups, VODS & tools for just <b>$3.33/month</b>!
   </div>
 </div>
 
+<script>
+// Testimonial Rotation Logic
+let currentSlide = 0;
+const slides = document.querySelectorAll('.testimonial-slide');
+const dots = document.querySelectorAll('.dot');
+let slideInterval;
+
+function showSlide(index) {
+  slides.forEach((slide, i) => {
+    slide.classList.toggle('active', i === index);
+    dots[i].classList.toggle('active', i === index);
+  });
+  currentSlide = index;
+}
+
+function nextSlide() {
+  let next = (currentSlide + 1) % slides.length;
+  showSlide(next);
+}
+
+function goToSlide(index) {
+  showSlide(index);
+  resetTimer();
+}
+
+function startTimer() {
+  slideInterval = setInterval(nextSlide, 5000);
+}
+
+function resetTimer() {
+  clearInterval(slideInterval);
+  startTimer();
+}
+
+startTimer();
+
+const container = document.getElementById('testimonialContainer');
+container.addEventListener('mouseenter', () => clearInterval(slideInterval));
+container.addEventListener('mouseleave', () => startTimer());
+</script>
+
 <script type="module">
 import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
 import { getAuth, signInWithEmailAndPassword, createUserWithEmailAndPassword, sendPasswordResetEmail } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-auth.js";
@@ -372,9 +491,7 @@ closeSignupModal.onclick=()=>signupModal.style.display="none";
 closePlanModal.onclick=()=>planModal.style.display="none";
 closeLoginModal.onclick=()=>loginModal.style.display="none";
 seePlansBtn.onclick=()=>{
-  // Keep the header normal if they just click "See Plans"
   document.querySelector("#planModal h2").textContent = "Available Plans";
-  
   signupModal.style.display="none";
   planModal.style.display="flex";
 };
@@ -386,9 +503,7 @@ continueSignupBtn.onclick=async()=>{
   await createUserWithEmailAndPassword(auth,e,p);
   await setDoc(doc(firestore,"paidUsers",e),{paid:false,timestamp:serverTimestamp()});
   
-  // Update header text for successful signup
   document.querySelector("#planModal h2").textContent = "Account Created! Choose Your Plan";
-  
   signupModal.style.display="none";
   planModal.style.display="flex";
 };
@@ -397,7 +512,6 @@ document.getElementById("yearlyBtn").onclick=()=>{window.open("https://buy.strip
 document.getElementById("lifeBtn").onclick=()=>{window.open("https://buy.stripe.com/fZu9AMcYc48AgzY1JUejK0j","_blank");planModal.style.display="none";}
 
 modalLoginBtn.onclick=async()=>{
-  // Added .toLowerCase() to the email input variable
   const e=loginEmail.value.trim().toLowerCase(),p=loginPassword.value.trim();
   await signInWithEmailAndPassword(auth,e,p);
   const snap=await getDoc(doc(firestore,"paidUsers",e));
