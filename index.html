@@ -141,47 +141,45 @@ header{background:linear-gradient(90deg,#0a0f14,#1b2838);border-bottom:2px solid
   box-shadow: 0 0 8px rgba(201, 170, 113, 0.6);
 }
 
-/* Scrollable Modal Container */
+/* Scroll Fix: Use block with auto margins for modal scroll support */
 .modal {
   display: none;
   position: fixed;
   inset: 0;
   background: rgba(0,0,0,.75);
   z-index: 9999;
-  justify-content: center;
-  align-items: center;
-  padding: 20px;
-  box-sizing: border-box;
   overflow-y: auto;
+  -webkit-overflow-scrolling: touch;
+  padding: 20px 10px;
+  box-sizing: border-box;
 }
 
 .modalContent {
   background: #161b22;
-  padding: 24px 20px;
+  padding: 30px;
   border-radius: 10px;
   text-align: center;
-  max-width: 540px;
+  max-width: 580px;
   width: 100%;
   border: 1px solid #c9aa71;
-  max-height: 90vh;
-  overflow-y: auto;
+  margin: 40px auto;
   box-sizing: border-box;
 }
 
 .modalContent h2{color:#c9aa71;margin-bottom:20px}
 .modalContent input[type="email"], .modalContent input[type="password"]{width:80%;max-width:300px;display:block;margin:8px auto;padding:8px;border-radius:4px;border:none;text-align:center}
-.modalContent .plan-buttons{display:flex;justify-content:center;gap:15px;margin-top:15px;margin-bottom:15px;position:relative;flex-wrap:nowrap;align-items:stretch}
-.modalContent .planBadge{position:absolute;top:-12px;left:50%;transform:translateX(-50%);background:#c9aa71;color:#0d1117;font-size:.68em;font-weight:bold;padding:2px 8px;border-radius:4px;box-shadow:0 0 6px rgba(0,0,0,.4);z-index:10;white-space:nowrap;letter-spacing:0.5px}
+.modalContent .plan-buttons{display:flex;justify-content:center;gap:20px;margin-bottom:20px;position:relative;flex-wrap:nowrap;align-items:stretch}
+.modalContent .planBadge{position:absolute;top:-14px;left:50%;transform:translateX(-50%);background:#c9aa71;color:#0d1117;font-size:.72em;font-weight:bold;padding:3px 10px;border-radius:4px;box-shadow:0 0 6px rgba(0,0,0,.4);z-index:10;white-space:nowrap;letter-spacing:0.5px}
 .modalContent .planBadge.bestValue{background:#c9aa71;color:#0d1117;}
 .modalContent #closePlanModal,.modalContent #closeSignupModal,.modalContent #closeLoginModal,.modalContent #closeLegalModal{margin-top:15px;background:none;border:none;color:#c9aa71;cursor:pointer}
 
-/* Compact Plan Card Styling (Compact Membershub style) */
+/* Plan Card Styling */
 .plan-card {
   background: #0d1117;
   border: 2px solid #30363d;
   border-radius: 10px;
-  padding: 14px 12px 12px;
-  width: 200px;
+  padding: 20px 16px 16px;
+  width: 240px;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
@@ -204,20 +202,20 @@ header{background:linear-gradient(90deg,#0a0f14,#1b2838);border-bottom:2px solid
   margin-top: auto;
 }
 
-/* Compact Modern Purple Stripe Button */
+/* Modern Purple Stripe Button Styling */
 .stripe-btn {
   background: linear-gradient(135deg, #635bff 0%, #4b45e4 100%);
   color: #ffffff;
   border: none;
   border-radius: 6px;
   font-weight: 700;
-  font-size: 0.85rem;
+  font-size: 0.95rem;
   width: 100%;
-  height: 36px;
+  height: 42px;
   display: flex;
   align-items: center;
   justify-content: center;
-  gap: 6px;
+  gap: 8px;
   cursor: pointer;
   box-shadow: 0 4px 12px rgba(99, 91, 255, 0.35);
   transition: transform 0.2s ease, box-shadow 0.2s ease, background 0.2s ease;
@@ -231,8 +229,8 @@ header{background:linear-gradient(90deg,#0a0f14,#1b2838);border-bottom:2px solid
 }
 
 .stripe-icon {
-  width: 16px;
-  height: 16px;
+  width: 18px;
+  height: 18px;
   fill: #ffffff;
 }
 
@@ -314,6 +312,10 @@ footer a:hover{text-decoration:underline}
   }
   .review-body {
     font-size: 0.98rem;
+  }
+  .modalContent {
+    margin: 20px auto;
+    padding: 20px 15px;
   }
 }
 </style>
@@ -506,13 +508,13 @@ All guides, matchups, VODS & tools for just <b>$3.33/month</b>!
   <div class="plan-card" style="position: relative;">
     <div class="planBadge">Most Popular</div>
     <div class="plan-card-body">
-      <div style="font-weight: bold; color: #c9aa71; font-size: 0.95rem; margin-bottom: 2px; margin-top: 4px;">ANNUAL MEMBERSHIP</div>
-      <div style="font-size: 1.2rem; font-weight: bold; color: #fff; margin-bottom: 4px;">$39.99 <span style="font-size: 0.75rem; font-weight: normal; color: #8b949e;">/ year</span></div>
-      <div style="font-size: 0.7rem; color: #cfe1ee; margin-bottom: 10px;">($3.33 / Month • Cancel anytime)</div>
+      <div style="font-weight: bold; color: #c9aa71; font-size: 1.1rem; margin-bottom: 2px; margin-top: 4px;">ANNUAL MEMBERSHIP</div>
+      <div style="font-size: 1.35rem; font-weight: bold; color: #fff; margin-bottom: 4px;">$39.99 <span style="font-size: 0.8rem; font-weight: normal; color: #8b949e;">/ year</span></div>
+      <div style="font-size: 0.75rem; color: #cfe1ee; margin-bottom: 14px;">($3.33 / Month • Cancel anytime)</div>
       
-      <div style="font-size: 0.7rem; text-align: left; color: #cfe1ee; line-height: 1.4; border-top: 1px solid rgba(255,255,255,0.1); padding-top: 8px; margin-bottom: 14px;">
-        ✔ 1 Full Year Access<br>
-        ✔ 50+ Matchup VODs & Guides<br>
+      <div style="font-size: 0.75rem; text-align: left; color: #cfe1ee; line-height: 1.5; border-top: 1px solid rgba(255,255,255,0.1); padding-top: 12px; margin-bottom: 20px;">
+        ✔ 1 Full Year of Access<br>
+        ✔ All 50+ Matchup VODs & Guides<br>
         ✔ All In-Season Updates<br>
         ✔ Build & Rune Calculators
       </div>
@@ -531,11 +533,11 @@ All guides, matchups, VODS & tools for just <b>$3.33/month</b>!
   <div class="plan-card featured" style="position: relative;">
     <div class="planBadge bestValue">Best Value</div>
     <div class="plan-card-body">
-      <div style="font-weight: bold; color: #c9aa71; font-size: 0.95rem; margin-bottom: 2px; margin-top: 4px;">LIFETIME ACCESS</div>
-      <div style="font-size: 1.2rem; font-weight: bold; color: #fff; margin-bottom: 4px;">$99.99 <span style="font-size: 0.75rem; font-weight: normal; color: #8b949e;">/ once</span></div>
-      <div style="font-size: 0.7rem; color: #cfe1ee; margin-bottom: 10px;">(One-time payment • Never expires)</div>
+      <div style="font-weight: bold; color: #c9aa71; font-size: 1.1rem; margin-bottom: 2px; margin-top: 4px;">LIFETIME ACCESS</div>
+      <div style="font-size: 1.35rem; font-weight: bold; color: #fff; margin-bottom: 4px;">$99.99 <span style="font-size: 0.8rem; font-weight: normal; color: #8b949e;">/ once</span></div>
+      <div style="font-size: 0.75rem; color: #cfe1ee; margin-bottom: 14px;">(One-time payment • Never expires)</div>
       
-      <div style="font-size: 0.7rem; text-align: left; color: #cfe1ee; line-height: 1.4; border-top: 1px solid rgba(255,255,255,0.1); padding-top: 8px; margin-bottom: 14px;">
+      <div style="font-size: 0.75rem; text-align: left; color: #cfe1ee; line-height: 1.5; border-top: 1px solid rgba(255,255,255,0.1); padding-top: 12px; margin-bottom: 20px;">
         ✔ Unlimited Lifetime Access<br>
         ✔ Current & Future Guides/VODs<br>
         ✔ All Future Patches Included<br>
@@ -686,7 +688,7 @@ const closeTrailerModal = document.getElementById("closeTrailerModal");
 
 trailerBtn.onclick = () => {
   trailerFrame.src = "https://www.youtube.com/embed/bDWycppYdxI?autoplay=1";
-  trailerModal.style.display = "flex";
+  trailerModal.style.display = "block";
 };
 
 closeTrailerModal.onclick = () => {
@@ -697,15 +699,15 @@ closeTrailerModal.onclick = () => {
 const firebaseConfig={apiKey:"AIzaSyCFRcEV7wdivqONnkjJubAZOjPMixrHMBI",authDomain:"lol-fundamentals.firebaseapp.com",projectId:"lol-fundamentals",storageBucket:"lol-fundamentals.firebasestorage.app",messagingSenderId:"1038440427584",appId:"1:1038440427584:web:a82207151fd370dbedefa5"};
 const app=initializeApp(firebaseConfig),auth=getAuth(app),firestore=getFirestore(app);
 
-signupHeroBtn.onclick=()=>signupModal.style.display="flex";
-loginHeroBtn.onclick=()=>loginModal.style.display="flex";
+signupHeroBtn.onclick=()=>signupModal.style.display="block";
+loginHeroBtn.onclick=()=>loginModal.style.display="block";
 closeSignupModal.onclick=()=>signupModal.style.display="none";
 closePlanModal.onclick=()=>planModal.style.display="none";
 closeLoginModal.onclick=()=>loginModal.style.display="none";
 seePlansBtn.onclick=()=>{
   document.querySelector("#planModal h2").textContent = "Available Plans";
   signupModal.style.display="none";
-  planModal.style.display="flex";
+  planModal.style.display="block";
 };
 
 /* Legal Popup Handlers */
@@ -743,7 +745,7 @@ const tabTerms = document.getElementById("tabTerms");
 const tabPrivacy = document.getElementById("tabPrivacy");
 
 function openLegalModal(tab) {
-  legalModal.style.display = "flex";
+  legalModal.style.display = "block";
   if (tab === 'terms') {
     tabTerms.classList.add('active');
     tabPrivacy.classList.remove('active');
@@ -775,7 +777,7 @@ continueSignupBtn.onclick=async()=>{
   localStorage.setItem("pendingUserEmail", e);
   document.querySelector("#planModal h2").textContent = "Account Created! Choose Your Plan";
   signupModal.style.display="none";
-  planModal.style.display="flex";
+  planModal.style.display="block";
 };
 
 document.getElementById("yearlyBtn").onclick=()=>{window.open("https://buy.stripe.com/3cI3co1fufRi5Vk3S2ejK0k");planModal.style.display="none";}
@@ -790,7 +792,7 @@ modalLoginBtn.onclick=async()=>{
     localStorage.setItem("lolfundamentals_paid","true");
     window.location.href="membershub.html";
   }else{
-    planModal.style.display="flex";
+    planModal.style.display="block";
   }
   loginModal.style.display="none";
 };
@@ -816,7 +818,7 @@ for(let i=0;i<50;i++){
 
 // Locked card click opens signup modal
 document.querySelectorAll('.locked').forEach(card=>{
-  card.addEventListener('click',()=>{signupModal.style.display='flex'});
+  card.addEventListener('click',()=>{signupModal.style.display='block'});
 });
 </script>
 
@@ -835,7 +837,7 @@ document.querySelectorAll('.locked').forEach(card=>{
   }
   .plan-card {
     width: 100%;
-    max-width: 260px;
+    max-width: 290px;
     margin-bottom: 12px;
   }
 }
