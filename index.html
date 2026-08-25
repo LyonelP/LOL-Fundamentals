@@ -334,15 +334,25 @@ footer a:hover{text-decoration:underline}
 
 /* Mobile adjustments */
 @media (max-width: 600px) {
+  .modalContent {
+    width: 96%;
+    padding: 24px 14px;
+  }
+  .modalContent .plan-buttons {
+    flex-direction: column;
+    align-items: center;
+    gap: 24px;
+  }
+  .plan-card {
+    width: 100%;
+    max-width: 320px;
+  }
   .testimonial-slide {
     padding: 18px 20px;
     height: auto;
   }
   .review-body {
     font-size: 0.98rem;
-  }
-  .modalContent {
-    padding: 20px 15px;
   }
 }
 </style>
