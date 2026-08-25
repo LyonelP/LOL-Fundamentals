@@ -9,31 +9,16 @@
   body { margin: 0; font-family: "Beaufort for LOL", Arial, sans-serif; background: radial-gradient(circle at top, #0f1620, #0a0f14 70%); color: #e6edf3; line-height: 1.6; }
   header { background: linear-gradient(90deg, #0a0f14, #1b2838); border-bottom: 2px solid #c9aa71; padding: 14px 20px; text-align: center; font-weight: bold; font-size: 24px; letter-spacing: 1.5px; text-transform: uppercase; color: #c9aa71; text-shadow: 0 0 8px rgba(201,170,113,.4); }
   header a { color: #c9aa71; text-decoration: none; }
-  
-  .back-button {
-    display: inline-block;
-    margin: 24px auto;
-    padding: 8px 16px;
-    background: linear-gradient(135deg, #c9aa71, #e0c77b);
-    color: #000 !important;
-    text-decoration: none !important;
-    border-radius: 8px;
-    font-weight: bold;
-    font-size: 15px;
-    transition: all 0.3s;
-    box-shadow: 0 0 10px rgba(201,170,113,0.5);
-  }
-  .back-button::before { content: "← "; }
-  .back-button:hover {
-    background: linear-gradient(135deg, #e6c97f, #f0d88b);
-    box-shadow: 0 0 15px rgba(255,215,0,0.8);
-    text-decoration: none !important;
-  }
 
-  .legal-container { max-width: 800px; margin: 0 auto 40px auto; padding: 30px; background: #161b22; border: 1px solid #c9aa71; border-radius: 10px; box-shadow: 0 8px 24px rgba(0,0,0,0.5); }
-  h1, h2 { color: #c9aa71; margin-top: 24px; }
-  h1 { border-bottom: 1px solid rgba(201,170,113,0.3); padding-bottom: 10px; }
+  /* Maintains outer container gap below main navigation header */
+  .legal-container { max-width: 800px; margin: 30px auto 40px auto; padding: 30px; background: #161b22; border: 1px solid #c9aa71; border-radius: 10px; box-shadow: 0 8px 24px rgba(0,0,0,0.5); }
+  h1, h2 { color: #c9aa71; }
+  /* Pulled title up to top of container */
+  h1 { margin-top: 0; border-bottom: 1px solid rgba(201,170,113,0.3); padding-bottom: 10px; }
+  h2 { margin-top: 24px; font-size: 1.2rem; }
   p, li { color: #d0d8e0; font-size: 0.98rem; }
+  ul { padding-left: 20px; }
+  li { margin-bottom: 4px; }
   a { color: #2f81f7; text-decoration: none; }
   a:hover { text-decoration: underline; }
   footer { text-align: center; padding: 30px; color: #8b949e; font-size: 14px; background: #0a0f14; border-top: 1px solid #1f2937; margin-top: 40px; }
@@ -43,31 +28,34 @@
 
 <header><a href="index.html">LoL Fundamentals</a></header>
 
-<div style="text-align: center;">
-  <a href="https://lolfundamentals.com" class="back-button">Back to LoL Fundamentals</a>
-</div>
-
 <div class="legal-container">
   <h1>Terms and Conditions</h1>
   <p><strong>Effective Date:</strong> January 1, 2026</p>
 
   <h2>1. Acceptance of Terms</h2>
-  <p>By accessing or using LoL Fundamentals, you agree to be bound by these Terms and Conditions. If you do not agree, please do not use the site.</p>
+  <p>By accessing or purchasing services on LoL Fundamentals, you agree to these Terms and Conditions. If you do not agree, please discontinue using the site.</p>
 
-  <h2>2. Memberships & Purchases</h2>
-  <p>We offer subscription and lifetime access packages. Subscriptions auto-renew unless canceled prior to the renewal date. Payments are securely processed via Stripe or PayPal.</p>
+  <h2>2. Memberships & Services</h2>
+  <p>We provide digital content, features, and platform access via recurring subscriptions and one-time purchases processed through Stripe and PayPal.</p>
+  <ul>
+    <li><strong>Subscriptions:</strong> Plans auto-renew at the end of each billing cycle unless canceled prior to the renewal date via your account settings.</li>
+    <li><strong>Pricing Updates:</strong> Any modifications to recurring subscription prices will be communicated to active members in advance.</li>
+  </ul>
 
-  <h2>3. Intellectual Property</h2>
-  <p>All proprietary coaching content, guides, and text created by LoL Fundamentals belong strictly to LoL Fundamentals. League of Legends assets, artwork, and trademarks belong to Riot Games Inc.</p>
+  <h2>3. Cancellations & Refund Policy</h2>
+  <p>Because instant access to digital features and proprietary content is granted upon purchase, all sales are final. You may cancel recurring subscriptions at any time to halt future charges, but past payments are non-refundable unless required by law.</p>
 
-  <h2>4. Disclaimer</h2>
-  <p>LoL Fundamentals is an independent platform and is not endorsed by, directly affiliated with, maintained, authorized, or sponsored by Riot Games, Inc.</p>
+  <h2>4. Account Sharing & Usage</h2>
+  <p>Accounts are strictly for single-user individual use. Sharing member credentials, broadcasting subscriber content publicly, or reselling site access will result in immediate termination without refund eligibility.</p>
 
-  <h2>5. Account Sharing</h2>
-  <p>Accounts are for individual use only. Sharing member credentials with unauthorized third parties may result in account termination without refund.</p>
+  <h2>5. Intellectual Property & Disclaimer</h2>
+  <p>All original guides, tools, graphics, and site content belong exclusively to LoL Fundamentals. League of Legends® and Riot Games® are registered trademarks of Riot Games, Inc. LoL Fundamentals is an independent platform and is not affiliated with or endorsed by Riot Games.</p>
 
-  <h2>6. Contact</h2>
-  <p>For questions regarding these Terms, reach out to <a href="mailto:support@lolfundamentals.com">support@lolfundamentals.com</a>.</p>
+  <h2>6. Limitation of Liability</h2>
+  <p>Our resources and platform services are provided "as is." We do not guarantee specific in-game rank outcomes or uninterrupted uptime, and shall not be held liable for indirect damages related to site usage.</p>
+
+  <h2>7. Contact Us</h2>
+  <p>For questions or assistance regarding these Terms, reach out to <a href="mailto:support@lolfundamentals.com">support@lolfundamentals.com</a>.</p>
 </div>
 
 <footer>© 2026 LoL Fundamentals · Not affiliated with Riot Games.</footer>
