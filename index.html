@@ -499,14 +499,16 @@ footer a:hover{text-decoration:underline}
 All guides, matchups, VODS & tools for just <b>$3.33/month</b>!
 </p>
 
-<input type="email" id="signupEmail" placeholder="Enter your email"/>
-<input type="password" id="signupPassword" placeholder="Enter your password"/>
-<input type="password" id="signupPasswordConfirm" placeholder="Confirm your password"/>
+<form id="signupForm" autocomplete="off" onsubmit="return false;">
+  <input type="email" id="signupEmail" placeholder="Enter your email" autocomplete="off"/>
+  <input type="password" id="signupPassword" placeholder="Enter your password" autocomplete="new-password"/>
+  <input type="password" id="signupPasswordConfirm" placeholder="Confirm your password" autocomplete="new-password"/>
 
-<div class="terms-checkbox-container">
-  <input type="checkbox" id="agreeTerms" />
-  <label for="agreeTerms">I agree to the <a id="termsLink">Terms of Service</a> & <a id="privacyLink">Privacy Policy</a></label>
-</div>
+  <div class="terms-checkbox-container">
+    <input type="checkbox" id="agreeTerms" autocomplete="off" />
+    <label for="agreeTerms">I agree to the <a id="termsLink">Terms of Service</a> & <a id="privacyLink">Privacy Policy</a></label>
+  </div>
+</form>
 
 <div style="display:flex;justify-content:center;gap:15px;margin-top:10px;">
   <button class="btn" id="continueSignupBtn">Continue</button>
@@ -635,7 +637,16 @@ All guides, matchups, VODS & tools for just <b>$3.33/month</b>!
 </div>
 
 <script>
-// Particle effect (Original Dynamic JS Particle Generator)
+// Force immediate checkbox uncheck on initial script parsing
+document.addEventListener("DOMContentLoaded", () => {
+  const chk = document.getElementById("agreeTerms");
+  if (chk) {
+    chk.checked = false;
+    chk.removeAttribute("checked");
+  }
+});
+
+// Particle effect
 for(let i=0;i<50;i++){
   const e=document.createElement("span");
   e.style.left=Math.random()*100+"%";
@@ -750,8 +761,20 @@ closeTrailerModal.onclick = () => {
 const firebaseConfig={apiKey:"AIzaSyCFRcEV7wdivqONnkjJubAZOjPMixrHMBI",authDomain:"lol-fundamentals.firebaseapp.com",projectId:"lol-fundamentals",storageBucket:"lol-fundamentals.firebasestorage.app",messagingSenderId:"1038440427584",appId:"1:1038440427584:web:a82207151fd370dbedefa5"};
 const app=initializeApp(firebaseConfig),auth=getAuth(app),firestore=getFirestore(app);
 
+// Helper function to force uncheck box reset
+function resetTermsCheckbox() {
+  const termsBox = document.getElementById("agreeTerms");
+  if (termsBox) {
+    termsBox.checked = false;
+    termsBox.removeAttribute("checked");
+  }
+}
+
+// Initial reset
+resetTermsCheckbox();
+
 signupHeroBtn.onclick=()=>{
-  document.getElementById("agreeTerms").checked = false;
+  resetTermsCheckbox();
   signupModal.style.display="flex";
 };
 loginHeroBtn.onclick=()=>loginModal.style.display="flex";
@@ -860,7 +883,7 @@ resetLinkModal.onclick=async(e)=>{
 // Locked card click opens signup modal
 document.querySelectorAll('.locked').forEach(card=>{
   card.addEventListener('click',()=>{
-    document.getElementById("agreeTerms").checked = false;
+    resetTermsCheckbox();
     signupModal.style.display='flex';
   });
 });
