@@ -8,6 +8,9 @@
 <link rel="icon" type="image/png" sizes="16x16" href="https://i.imgur.com/NFO4uNP.png">
 <link rel="apple-touch-icon" href="https://i.imgur.com/NFO4uNP.png">
 
+<!-- PayPal SDK (Vault enabled for subscription & standard one-time payments) -->
+<script src="https://www.paypal.com/sdk/js?client-id=BAAtEntN8Ld9QbEW216fgK5JXM-HQqChNE3EyLGCgX85uo4BZ3w8scKdOhvmqrKGX3yzCzgOHHdSsfna3o&currency=USD&vault=true&disable-funding=credit,card,venmo,paylater"></script>
+
 <style>
 body{margin:0;font-family:"Beaufort for LOL",Arial,Helvetica,sans-serif;background:radial-gradient(circle at top,#0f1620,#0a0f14 70%);color:#e6edf3;line-height:1.6}
 header{background:linear-gradient(90deg,#0a0f14,#1b2838);border-bottom:2px solid #c9aa71;padding:14px 20px;text-align:center;font-weight:bold;font-size:24px;letter-spacing:1.5px;text-transform:uppercase;color:#c9aa71;text-shadow:0 0 8px rgba(201,170,113,.4)}
@@ -25,6 +28,12 @@ header{background:linear-gradient(90deg,#0a0f14,#1b2838);border-bottom:2px solid
 .orangeBtn:hover{background:#ffb04d;box-shadow:0 0 25px rgba(242,153,74,.55)}
 
 @keyframes auraPulse{0%{opacity:.25;transform:scale(1)}50%{opacity:.45;transform:scale(1.1)}100%{opacity:.25;transform:scale(1)}}
+
+@keyframes floatParticles{
+  0%{transform:translateY(0) translateX(0) scale(1);opacity:1}
+  50%{transform:translateY(-80px) translateX(20px) scale(1.2);opacity:.6}
+  100%{transform:translateY(0) translateX(0) scale(1);opacity:1}
+}
 
 .section{
   padding:20px 20px 40px;
@@ -141,20 +150,19 @@ header{background:linear-gradient(90deg,#0a0f14,#1b2838);border-bottom:2px solid
   box-shadow: 0 0 8px rgba(201, 170, 113, 0.6);
 }
 
-/* FIX: Enable overlay scrolling so overflow on mobile is scrollable */
+/* Enable overlay scrolling */
 .modal{
   display:none;
   position:fixed;
   inset:0;
   background:rgba(0,0,0,.75);
   z-index:9999;
-  overflow-y:auto; /* Key fix for mobile scroll */
+  overflow-y:auto;
   -webkit-overflow-scrolling:touch;
-  padding:20px 10px; /* Ensures space above/below popup on small screens */
+  padding:20px 10px;
   box-sizing:border-box;
 }
 
-/* FIX: Centering inside scrollable overlay */
 .modalContent{
   background:#161b22;
   padding:30px;
@@ -163,7 +171,7 @@ header{background:linear-gradient(90deg,#0a0f14,#1b2838);border-bottom:2px solid
   max-width:580px;
   width:90%;
   border:1px solid #c9aa71;
-  margin:auto; /* Centers vertically and horizontally inside overflow container */
+  margin:auto;
   position:relative;
   box-sizing:border-box;
 }
@@ -174,7 +182,6 @@ header{background:linear-gradient(90deg,#0a0f14,#1b2838);border-bottom:2px solid
 .modalContent .planBadge{position:absolute;top:-14px;left:50%;transform:translateX(-50%);background:#c9aa71;color:#0d1117;font-size:.72em;font-weight:bold;padding:3px 10px;border-radius:4px;box-shadow:0 0 6px rgba(0,0,0,.4);z-index:10;white-space:nowrap;letter-spacing:0.5px}
 .modalContent .planBadge.bestValue{background:#c9aa71;color:#0d1117;}
 
-/* FIX: Larger padding/hit box for cancel buttons on mobile */
 .modalContent #closePlanModal,.modalContent #closeSignupModal,.modalContent #closeLoginModal,.modalContent #closeLegalModal{
   margin-top:15px;
   background:none;
@@ -212,6 +219,7 @@ header{background:linear-gradient(90deg,#0a0f14,#1b2838);border-bottom:2px solid
 
 .plan-card-footer {
   margin-top: auto;
+  width: 100%;
 }
 
 /* Modern Purple Stripe Button Styling */
@@ -244,6 +252,14 @@ header{background:linear-gradient(90deg,#0a0f14,#1b2838);border-bottom:2px solid
   width: 18px;
   height: 18px;
   fill: #ffffff;
+}
+
+.payment-separator {
+  font-size: 0.75rem;
+  color: #8b949e;
+  margin: 10px 0 6px;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
 }
 
 /* Terms & Privacy Checkbox Styles */
@@ -401,7 +417,7 @@ footer a:hover{text-decoration:underline}
   <div class="unlock-icon">🔒</div>
 </a>
 
-  <a href="#" class="card ekko-jungle-matchups locked" aria-label="Ekko Jungle Matchups">
+<a href="#" class="card ekko-jungle-matchups locked" aria-label="Ekko Jungle Matchups">
   <h3>Ekko Jungle Matchups</h3>
   <p>Growing VODs library with tips for every jungle matchup.</p>
   <div class="unlock-icon">🔒</div>
@@ -531,12 +547,15 @@ All guides, matchups, VODS & tools for just <b>$3.33/month</b>!
       </div>
     </div>
 
-    <!-- Yearly Payment Action (Stripe Only) -->
     <div class="plan-card-footer">
       <button class="stripe-btn" id="yearlyBtn">
         <svg class="stripe-icon" viewBox="0 0 24 24"><path d="M20 4H4c-1.11 0-1.99.89-1.99 2L2 18c0 1.11.89 2 2 2h16c1.11 0 2-.89 2-2V6c0-1.11-.89-2-2-2zm0 14H4v-6h16v6zm0-10H4V6h16v2z"/></svg>
         Pay with Stripe
       </button>
+
+      <div class="payment-separator">— OR —</div>
+      
+      <div id="paypal-button-container-yearly" style="width: 100%;"></div>
     </div>
   </div>
 
@@ -556,12 +575,15 @@ All guides, matchups, VODS & tools for just <b>$3.33/month</b>!
       </div>
     </div>
 
-    <!-- Lifetime Payment Action (Stripe Only) -->
     <div class="plan-card-footer">
       <button class="stripe-btn" id="lifeBtn">
         <svg class="stripe-icon" viewBox="0 0 24 24"><path d="M20 4H4c-1.11 0-1.99.89-1.99 2L2 18c0 1.11.89 2 2 2h16c1.11 0 2-.89 2-2V6c0-1.11-.89-2-2-2zm0 14H4v-6h16v6zm0-10H4V6h16v2z"/></svg>
         Pay with Stripe
       </button>
+
+      <div class="payment-separator">— OR —</div>
+      
+      <div id="paypal-button-container-lifetime" style="width: 100%;"></div>
     </div>
   </div>
 
@@ -585,9 +607,7 @@ All guides, matchups, VODS & tools for just <b>$3.33/month</b>!
 
 <div id="trailerModal" class="modal">
   <div class="modalContent" style="max-width:800px;">
-    
     <h2>LoL Fundamentals Trailer</h2>
-
     <div style="position:relative;padding-bottom:56.25%;height:0;overflow:hidden;border-radius:8px;border:1px solid #c9aa71;">
       <iframe
         id="trailerFrame"
@@ -598,16 +618,27 @@ All guides, matchups, VODS & tools for just <b>$3.33/month</b>!
         style="position:absolute;top:0;left:0;width:100%;height:100%;">
       </iframe>
     </div>
-
     <button id="closeTrailerModal" style="margin-top:15px;background:none;border:none;color:#c9aa71;cursor:pointer;">
       Close
     </button>
-
   </div>
 </div>
 
 <script>
-// Testimonial Rotation Logic with Dynamic Height Adjustment for Mobile
+// Particle effect (Original Dynamic JS Particle Generator)
+for(let i=0;i<50;i++){
+  const e=document.createElement("span");
+  e.style.left=Math.random()*100+"%";
+  e.style.top=Math.random()*100+"%";
+  e.style.width=e.style.height="4px";
+  e.style.background="rgba(47,129,247,.9)";
+  e.style.borderRadius="50%";
+  e.style.position="absolute";
+  e.style.animation=`floatParticles ${6+Math.random()*4}s infinite ease-in-out`;
+  document.querySelector(".particles").appendChild(e);
+}
+
+// Testimonial Rotation Logic
 let currentSlide = 0;
 const slides = document.querySelectorAll('.testimonial-slide');
 const dots = document.querySelectorAll('.dot');
@@ -680,7 +711,6 @@ if (isLoggedIn && isPaid) {
     <a href="membershub.html" class="btn">
       Go to Members Hub
     </a>
-
   `;
 
   hero.appendChild(welcomeBox);
@@ -743,7 +773,7 @@ const privacyText = `
   <h4>1. Information Collected</h4>
   <p>We collect your email address and authentication details via Firebase to maintain your membership identity and provide access.</p>
   <h4>2. Payment Processing</h4>
-  <p>All financial billing transactions are securely processed via Stripe. We do not store raw credit card credentials on our servers.</p>
+  <p>All financial billing transactions are securely processed via Stripe and PayPal. We do not store raw credit card credentials on our servers.</p>
   <h4>3. Data Sharing</h4>
   <p>We do not sell, rent, or trade user personal data to third parties. Data is exclusively utilized to enable service functionality and member support.</p>
   <hr style="border:0; border-top:1px solid #1f2937; margin:15px 0;">
@@ -814,51 +844,96 @@ resetLinkModal.onclick=async(e)=>{
   loginMsgModal.textContent="Password reset email sent!";
 };
 
-// Particle effect
-for(let i=0;i<50;i++){
-  const e=document.createElement("span");
-  e.style.left=Math.random()*100+"%";
-  e.style.top=Math.random()*100+"%";
-  e.style.width=e.style.height="4px";
-  e.style.background="rgba(47,129,247,.9)";
-  e.style.borderRadius="50%";
-  e.style.position="absolute";
-  e.style.animation=`floatParticles ${6+Math.random()*4}s infinite ease-in-out`;
-  document.querySelector(".particles").appendChild(e);
-}
-
 // Locked card click opens signup modal
 document.querySelectorAll('.locked').forEach(card=>{
   card.addEventListener('click',()=>{signupModal.style.display='flex'});
 });
+
+// PayPal Button Initializer Routine
+function initPayPal() {
+  if (!window.paypal) {
+    setTimeout(initPayPal, 100);
+    return;
+  }
+
+  // 1. Annual Plan PayPal Subscription Button
+  const yearlyContainer = document.getElementById('paypal-button-container-yearly');
+  if (yearlyContainer && !yearlyContainer.hasChildNodes()) {
+    paypal.Buttons({
+      style: { shape: 'rect', color: 'gold', layout: 'vertical', height: 40, label: 'subscribe' },
+      createSubscription: function(data, actions) {
+        return actions.subscription.create({
+          'plan_id': 'P-87574744Y2341233KNJMJGCQ'
+        });
+      },
+      onApprove: async function(data, actions) {
+        const currentUser = auth.currentUser;
+        const targetEmail = currentUser ? currentUser.email : localStorage.getItem("pendingUserEmail");
+
+        if (targetEmail) {
+          await setDoc(doc(firestore, "paidUsers", targetEmail.toLowerCase()), {
+            email: targetEmail.toLowerCase(),
+            paid: true,
+            provider: "paypal",
+            isLifetime: false,
+            productId: "PROD-98S6431562918140K",
+            planId: "P-87574744Y2341233KNJMJGCQ",
+            productName: "Annual Membership $39.99/yr",
+            subscriptionId: data.subscriptionID,
+            updatedAt: serverTimestamp()
+          }, { merge: true });
+
+          localStorage.setItem("lolfundamentals_logged_in", "true");
+          localStorage.setItem("lolfundamentals_paid", "true");
+          window.location.href = "membershub.html";
+        }
+      }
+    }).render('#paypal-button-container-yearly');
+  }
+
+  // 2. Lifetime Access PayPal One-Time Payment Button
+  const lifetimeContainer = document.getElementById('paypal-button-container-lifetime');
+  if (lifetimeContainer && !lifetimeContainer.hasChildNodes()) {
+    paypal.Buttons({
+      style: { shape: 'rect', color: 'gold', layout: 'vertical', height: 40, label: 'paypal' },
+      createOrder: function(data, actions) {
+        return actions.order.create({
+          purchase_units: [{
+            description: "LoL Fundamentals - Lifetime Access",
+            amount: { value: "99.99" },
+            custom_id: "lifetime_access_9999"
+          }]
+        });
+      },
+      onApprove: async function(data, actions) {
+        const details = await actions.order.capture();
+        const currentUser = auth.currentUser;
+        const targetEmail = currentUser ? currentUser.email : localStorage.getItem("pendingUserEmail");
+
+        if (targetEmail) {
+          await setDoc(doc(firestore, "paidUsers", targetEmail.toLowerCase()), {
+            email: targetEmail.toLowerCase(),
+            paid: true,
+            provider: "paypal",
+            isLifetime: true,
+            productId: "lifetime_access_9999",
+            productName: "Lifetime Access $99.99",
+            orderId: details.id,
+            updatedAt: serverTimestamp()
+          }, { merge: true });
+
+          localStorage.setItem("lolfundamentals_logged_in", "true");
+          localStorage.setItem("lolfundamentals_paid", "true");
+          window.location.href = "membershub.html";
+        }
+      }
+    }).render('#paypal-button-container-lifetime');
+  }
+}
+
+// Execute PayPal rendering
+initPayPal();
+
 </script>
-
-<style>
-@keyframes floatParticles{
-  0%{transform:translateY(0) translateX(0) scale(1);opacity:1}
-  50%{transform:translateY(-80px) translateX(20px) scale(1.2);opacity:.6}
-  100%{transform:translateY(0) translateX(0) scale(1);opacity:1}
-}
-
-/* Mobile responsive fixes */
-@media (max-width: 580px) {
-  .modalContent .plan-buttons {
-    flex-direction: column;
-    align-items: center;
-  }
-  .plan-card {
-    width: 100%;
-    max-width: 290px;
-    margin-bottom: 12px;
-  }
-}
-  
-/* Gold hover effect for all unlocked cards */
-.card:not(.locked):hover {
-  transform: translateY(-6px);
-  box-shadow: 0 12px 26px rgba(201,170,113,0.5);
-}
-</style>
-
 </body>
 </html>
