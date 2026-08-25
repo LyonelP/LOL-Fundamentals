@@ -153,8 +153,8 @@ header{background:linear-gradient(90deg,#0a0f14,#1b2838);border-bottom:2px solid
   z-index:9999;
   justify-content:center;
   align-items:center;
-  padding:24px 16px 40px; /* Added extra bottom padding so full modal lifts off screen bottom */
-  overflow-y:auto;         /* Allows entire modal viewport to scroll */
+  padding:24px 16px 40px;
+  overflow-y:auto;
   -webkit-overflow-scrolling:touch;
 }
 .modalContent{
@@ -164,7 +164,7 @@ header{background:linear-gradient(90deg,#0a0f14,#1b2838);border-bottom:2px solid
   text-align:center;
   max-width:580px;
   width:100%;
-  max-height:80vh;        /* Restricted height so cancel button stays visible & scrollable */
+  max-height:80vh;
   overflow-y:auto;
   -webkit-overflow-scrolling:touch;
   border:1px solid #c9aa71;
@@ -176,21 +176,20 @@ header{background:linear-gradient(90deg,#0a0f14,#1b2838);border-bottom:2px solid
 .modalContent .planBadge{position:absolute;top:-14px;left:50%;transform:translateX(-50%);background:#c9aa71;color:#0d1117;font-size:.72em;font-weight:bold;padding:3px 10px;border-radius:4px;box-shadow:0 0 6px rgba(0,0,0,.4);z-index:10;white-space:nowrap;letter-spacing:0.5px}
 .modalContent .planBadge.bestValue{background:#c9aa71;color:#0d1117;}
 
-/* Button Sizing & Touch Clearance */
+/* Clean Text-Only Cancel Buttons */
 .modalContent #closePlanModal,
 .modalContent #closeSignupModal,
 .modalContent #closeLoginModal,
 .modalContent #closeLegalModal,
 #closeTrailerModal {
   margin-top: 12px;
-  margin-bottom: 12px;         /* Gives clearance above the modal frame border */
+  margin-bottom: 12px;
   background: none;
-  border: 1px solid rgba(201, 170, 113, 0.4); /* Added soft border so user easily sees target */
-  border-radius: 6px;
+  border: none;
   color: #c9aa71;
   cursor: pointer;
   font-size: 1rem;
-  font-weight: bold;
+  font-weight: normal;
   min-height: 48px;
   min-width: 140px;
   padding: 10px 24px;
@@ -201,12 +200,12 @@ header{background:linear-gradient(90deg,#0a0f14,#1b2838);border-bottom:2px solid
   -webkit-tap-highlight-color: rgba(201, 170, 113, 0.2);
 }
 
-.modalContent #closePlanModal:active,
-.modalContent #closeSignupModal:active,
-.modalContent #closeLoginModal:active,
-.modalContent #closeLegalModal:active,
-#closeTrailerModal:active {
-  background: rgba(201, 170, 113, 0.2);
+.modalContent #closePlanModal:hover,
+.modalContent #closeSignupModal:hover,
+.modalContent #closeLoginModal:hover,
+.modalContent #closeLegalModal:hover,
+#closeTrailerModal:hover {
+  text-decoration: underline;
 }
 
 /* Uniform Plan Card Styling */
@@ -351,7 +350,7 @@ footer a:hover{text-decoration:underline}
   }
   .modalContent {
     padding: 20px 14px 20px;
-    max-height: 75vh;     /* Shrink slightly more on phones to force lift above screen edge */
+    max-height: 75vh;
   }
   .modalContent .plan-buttons {
     flex-direction: column;
