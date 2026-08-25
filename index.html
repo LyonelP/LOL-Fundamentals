@@ -141,7 +141,7 @@ header{background:linear-gradient(90deg,#0a0f14,#1b2838);border-bottom:2px solid
   box-shadow: 0 0 8px rgba(201, 170, 113, 0.6);
 }
 
-/* Modal Layout Adjustments */
+/* Modal Popup Base */
 .modal {
   display: none;
   position: fixed;
@@ -154,15 +154,7 @@ header{background:linear-gradient(90deg,#0a0f14,#1b2838);border-bottom:2px solid
   box-sizing: border-box;
 }
 
-/* Flex centering container on desktop to keep modal centered vertically without pushing it high */
-@media (min-width: 601px) {
-  .modal {
-    display: none;
-    align-items: center;
-    justify-content: center;
-  }
-}
-
+/* Modal Content - Moved further down on desktop */
 .modalContent {
   background: #161b22;
   padding: 30px;
@@ -171,39 +163,16 @@ header{background:linear-gradient(90deg,#0a0f14,#1b2838);border-bottom:2px solid
   max-width: 580px;
   width: 100%;
   border: 1px solid #c9aa71;
-  margin: 20px auto;
+  margin: 100px auto 40px; /* Shifted down on desktop */
   box-sizing: border-box;
-  position: relative;
 }
 
 .modalContent h2{color:#c9aa71;margin-bottom:20px}
 .modalContent input[type="email"], .modalContent input[type="password"]{width:80%;max-width:300px;display:block;margin:8px auto;padding:8px;border-radius:4px;border:none;text-align:center}
-.modalContent .plan-buttons{display:flex;justify-content:center;gap:20px;margin-bottom:12px;position:relative;flex-wrap:nowrap;align-items:stretch}
+.modalContent .plan-buttons{display:flex;justify-content:center;gap:20px;margin-bottom:20px;position:relative;flex-wrap:nowrap;align-items:stretch}
 .modalContent .planBadge{position:absolute;top:-14px;left:50%;transform:translateX(-50%);background:#c9aa71;color:#0d1117;font-size:.72em;font-weight:bold;padding:3px 10px;border-radius:4px;box-shadow:0 0 6px rgba(0,0,0,.4);z-index:10;white-space:nowrap;letter-spacing:0.5px}
 .modalContent .planBadge.bestValue{background:#c9aa71;color:#0d1117;}
-
-/* Larger, tighter positioned Cancel / Back buttons */
-.modalContent #closePlanModal,
-.modalContent #closeSignupModal,
-.modalContent #closeLoginModal,
-.modalContent #closeLegalModal {
-  margin-top: 4px;
-  padding: 6px 12px;
-  background: none;
-  border: none;
-  color: #c9aa71;
-  cursor: pointer;
-  font-size: 1.05rem;
-  font-weight: 600;
-  transition: color 0.2s ease, transform 0.2s ease;
-}
-
-.modalContent #closePlanModal:hover,
-.modalContent #closeSignupModal:hover,
-.modalContent #closeLoginModal:hover,
-.modalContent #closeLegalModal:hover {
-  color: #fff;
-}
+.modalContent #closePlanModal,.modalContent #closeSignupModal,.modalContent #closeLoginModal,.modalContent #closeLegalModal{margin-top:15px;background:none;border:none;color:#c9aa71;cursor:pointer}
 
 /* Plan Card Styling */
 .plan-card {
@@ -346,7 +315,7 @@ footer a:hover{text-decoration:underline}
     font-size: 0.98rem;
   }
   .modalContent {
-    margin: 10px auto;
+    margin: 20px auto;
     padding: 20px 15px;
   }
 }
@@ -620,7 +589,7 @@ All guides, matchups, VODS & tools for just <b>$3.33/month</b>!
       </iframe>
     </div>
 
-    <button id="closeTrailerModal" style="margin-top:15px;background:none;border:none;color:#c9aa71;cursor:pointer;font-size:1.05rem;font-weight:600;">
+    <button id="closeTrailerModal" style="margin-top:15px;background:none;border:none;color:#c9aa71;cursor:pointer;">
       Close
     </button>
 
@@ -720,7 +689,7 @@ const closeTrailerModal = document.getElementById("closeTrailerModal");
 
 trailerBtn.onclick = () => {
   trailerFrame.src = "https://www.youtube.com/embed/bDWycppYdxI?autoplay=1";
-  trailerModal.style.display = "flex";
+  trailerModal.style.display = "block";
 };
 
 closeTrailerModal.onclick = () => {
@@ -731,15 +700,15 @@ closeTrailerModal.onclick = () => {
 const firebaseConfig={apiKey:"AIzaSyCFRcEV7wdivqONnkjJubAZOjPMixrHMBI",authDomain:"lol-fundamentals.firebaseapp.com",projectId:"lol-fundamentals",storageBucket:"lol-fundamentals.firebasestorage.app",messagingSenderId:"1038440427584",appId:"1:1038440427584:web:a82207151fd370dbedefa5"};
 const app=initializeApp(firebaseConfig),auth=getAuth(app),firestore=getFirestore(app);
 
-signupHeroBtn.onclick=()=>signupModal.style.display="flex";
-loginHeroBtn.onclick=()=>loginModal.style.display="flex";
+signupHeroBtn.onclick=()=>signupModal.style.display="block";
+loginHeroBtn.onclick=()=>loginModal.style.display="block";
 closeSignupModal.onclick=()=>signupModal.style.display="none";
 closePlanModal.onclick=()=>planModal.style.display="none";
 closeLoginModal.onclick=()=>loginModal.style.display="none";
 seePlansBtn.onclick=()=>{
   document.querySelector("#planModal h2").textContent = "Available Plans";
   signupModal.style.display="none";
-  planModal.style.display="flex";
+  planModal.style.display="block";
 };
 
 /* Legal Popup Handlers */
@@ -777,7 +746,7 @@ const tabTerms = document.getElementById("tabTerms");
 const tabPrivacy = document.getElementById("tabPrivacy");
 
 function openLegalModal(tab) {
-  legalModal.style.display = "flex";
+  legalModal.style.display = "block";
   if (tab === 'terms') {
     tabTerms.classList.add('active');
     tabPrivacy.classList.remove('active');
@@ -809,7 +778,7 @@ continueSignupBtn.onclick=async()=>{
   localStorage.setItem("pendingUserEmail", e);
   document.querySelector("#planModal h2").textContent = "Account Created! Choose Your Plan";
   signupModal.style.display="none";
-  planModal.style.display="flex";
+  planModal.style.display="block";
 };
 
 document.getElementById("yearlyBtn").onclick=()=>{window.open("https://buy.stripe.com/3cI3co1fufRi5Vk3S2ejK0k");planModal.style.display="none";}
@@ -824,7 +793,7 @@ modalLoginBtn.onclick=async()=>{
     localStorage.setItem("lolfundamentals_paid","true");
     window.location.href="membershub.html";
   }else{
-    planModal.style.display="flex";
+    planModal.style.display="block";
   }
   loginModal.style.display="none";
 };
@@ -850,7 +819,7 @@ for(let i=0;i<50;i++){
 
 // Locked card click opens signup modal
 document.querySelectorAll('.locked').forEach(card=>{
-  card.addEventListener('click',()=>{signupModal.style.display='flex'});
+  card.addEventListener('click',()=>{signupModal.style.display='block'});
 });
 </script>
 
@@ -873,13 +842,6 @@ document.querySelectorAll('.locked').forEach(card=>{
     margin-bottom: 12px;
   }
 }
-  
-/* Gold hover effect for all unlocked cards */
-.card:not(.locked):hover {
-  transform: translateY(-6px);
-  box-shadow: 0 12px 26px rgba(201,170,113,0.5);
-}
 </style>
-
 </body>
 </html>
