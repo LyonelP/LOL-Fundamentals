@@ -606,18 +606,22 @@ seePlansBtn.onclick=()=>{
 
 /* Legal Popup Handlers */
 const termsText = `
-  <h3 style="color:#c9aa71;margin-top:0;">Terms of Service</h3>
+  <h3 style="color:#c9aa71;margin-top:0;">Terms of Service Summary</h3>
   <p>Welcome to LoL Fundamentals. By creating an account or using our platform, you agree to comply with the following terms:</p>
   <h4>1. Account Responsibilities</h4>
   <p>You are responsible for safeguarding your login credentials. Shared membership accounts are strictly prohibited.</p>
   <h4>2. Digital Goods & Access</h4>
   <p>Purchases provide non-exclusive digital access to guides, calculators, and VOD libraries. Subscriptions can be canceled at any time prior to the next billing cycle.</p>
   <h4>3. Intellectual Property</h4>
-  <p>All proprietary coaching material, guides, and strategic media remain the sole intellectual property of LoL Fundamentals. Reproduction or redistribution without consent is prohibited.</p>
+  <p>All proprietary coaching content, guides, and text created by LoL Fundamentals belong strictly to LoL Fundamentals. League of Legends assets, artwork, and trademarks belong to Riot Games Inc.</p>
+  <h4>4. Disclaimer</h4>
+  <p>LoL Fundamentals is an independent platform and is not endorsed by, directly affiliated with, maintained, authorized, or sponsored by Riot Games, Inc.</p>
+  <hr style="border:0; border-top:1px solid #1f2937; margin:15px 0;">
+  <p style="text-align:center;"><a href="terms.html" target="_blank" style="color:#c9aa71;">Read Full Terms of Service →</a></p>
 `;
 
 const privacyText = `
-  <h3 style="color:#c9aa71;margin-top:0;">Privacy Policy</h3>
+  <h3 style="color:#c9aa71;margin-top:0;">Privacy Policy Summary</h3>
   <p>Your privacy is vital to us. This policy describes how we handle user information:</p>
   <h4>1. Information Collected</h4>
   <p>We collect your email address and authentication details via Firebase to maintain your membership identity and provide access.</p>
@@ -625,6 +629,8 @@ const privacyText = `
   <p>All financial billing transactions are securely processed via Stripe. We do not store raw credit card credentials on our servers.</p>
   <h4>3. Data Sharing</h4>
   <p>We do not sell, rent, or trade user personal data to third parties. Data is exclusively utilized to enable service functionality and member support.</p>
+  <hr style="border:0; border-top:1px solid #1f2937; margin:15px 0;">
+  <p style="text-align:center;"><a href="privacy.html" target="_blank" style="color:#c9aa71;">Read Full Privacy Policy →</a></p>
 `;
 
 const legalModal = document.getElementById("legalModal");
