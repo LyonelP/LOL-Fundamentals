@@ -750,7 +750,10 @@ closeTrailerModal.onclick = () => {
 const firebaseConfig={apiKey:"AIzaSyCFRcEV7wdivqONnkjJubAZOjPMixrHMBI",authDomain:"lol-fundamentals.firebaseapp.com",projectId:"lol-fundamentals",storageBucket:"lol-fundamentals.firebasestorage.app",messagingSenderId:"1038440427584",appId:"1:1038440427584:web:a82207151fd370dbedefa5"};
 const app=initializeApp(firebaseConfig),auth=getAuth(app),firestore=getFirestore(app);
 
-signupHeroBtn.onclick=()=>signupModal.style.display="flex";
+signupHeroBtn.onclick=()=>{
+  document.getElementById("agreeTerms").checked = false;
+  signupModal.style.display="flex";
+};
 loginHeroBtn.onclick=()=>loginModal.style.display="flex";
 closeSignupModal.onclick=()=>signupModal.style.display="none";
 closePlanModal.onclick=()=>planModal.style.display="none";
@@ -856,7 +859,10 @@ resetLinkModal.onclick=async(e)=>{
 
 // Locked card click opens signup modal
 document.querySelectorAll('.locked').forEach(card=>{
-  card.addEventListener('click',()=>{signupModal.style.display='flex'});
+  card.addEventListener('click',()=>{
+    document.getElementById("agreeTerms").checked = false;
+    signupModal.style.display='flex';
+  });
 });
 
 // PayPal Button Initializer Routine
