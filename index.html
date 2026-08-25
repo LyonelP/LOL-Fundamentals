@@ -901,6 +901,43 @@ resetLinkModal.onclick=async(e)=>{
     alert(err.message);
   }
 };
+
+// Render PayPal Buttons on SDK Load
+if (window.paypal) {
+  // Yearly Plan Button
+  paypal.Buttons({
+    style: { layout: 'vertical', color: 'gold', shape: 'rect', label: 'paypal' },
+    createOrder: (data, actions) => {
+      return actions.order.create({
+        purchase_units: [{ amount: { value: '39.99' } }]
+      });
+    },
+    onApprove: (data, actions) => {
+      return actions.order.capture().then(details => {
+        alert(`Payment completed for ${details.payer.name.given_name}`);
+        localStorage.setItem("lolfundamentals_paid", "true");
+        window.location.href = "membershub.html";
+      });
+    }
+  }).render('#paypal-button-container-yearly');
+
+  // Lifetime Plan Button
+  paypal.Buttons({
+    style: { layout: 'vertical', color: 'gold', shape: 'rect', label: 'paypal' },
+    createOrder: (data, actions) => {
+      return actions.order.create({
+        purchase_units: [{ amount: { value: '99.99' } }]
+      });
+    },
+    onApprove: (data, actions) => {
+      return actions.order.capture().then(details => {
+        alert(`Payment completed for ${details.payer.name.given_name}`);
+        localStorage.setItem("lolfundamentals_paid", "true");
+        window.location.href = "membershub.html";
+      });
+    }
+  }).render('#paypal-button-container-lifetime');
+}
 </script>
 </body>
 </html>
