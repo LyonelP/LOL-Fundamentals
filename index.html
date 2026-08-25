@@ -8,8 +8,8 @@
 <link rel="icon" type="image/png" sizes="16x16" href="https://i.imgur.com/NFO4uNP.png">
 <link rel="apple-touch-icon" href="https://i.imgur.com/NFO4uNP.png">
 
-<!-- PayPal SDK (Configured for Subscriptions & Vaulting) -->
-<script src="https://www.paypal.com/sdk/js?client-id=BAAtEntN8Ld9QbEW216fgK5JXM-HQqChNE3EyLGCgX85uo4BZ3w8scKdOhvmqrKGX3yzCzgOHHdSsfna3o&currency=USD&vault=true&intent=subscription&disable-funding=credit,card,venmo,paylater"></script>
+<!-- PayPal SDK (Configured for Subscriptions, Standard Buttons & Vaulting) -->
+<script src="https://www.paypal.com/sdk/js?client-id=BAAtEntN8Ld9QbEW216fgK5JXM-HQqChNE3EyLGCgX85uo4BZ3w8scKdOhvmqrKGX3yzCzgOHHdSsfna3o&currency=USD&vault=true&intent=subscription&components=buttons&disable-funding=credit,card,venmo,paylater"></script>
 
 <style>
 body{margin:0;font-family:"Beaufort for LOL",Arial,Helvetica,sans-serif;background:radial-gradient(circle at top,#0f1620,#0a0f14 70%);color:#e6edf3;line-height:1.6}
@@ -699,43 +699,45 @@ window.addEventListener('load', updateContainerHeight);
 container.addEventListener('mouseenter', () => clearInterval(slideInterval));
 container.addEventListener('mouseleave', () => startTimer());
 
-// PayPal Buttons Setup
-if (window.paypal) {
-  // Yearly Plan (Subscription)
-  paypal.Buttons({
-    style: { shape: 'rect', color: 'gold', layout: 'vertical', label: 'subscribe' },
-    createSubscription: function(data, actions) {
-      return actions.subscription.create({
-        'plan_id': 'YOUR_PAYPAL_ANNUAL_PLAN_ID' // Replace with your actual PayPal Subscription Plan ID
-      });
-    },
-    onApprove: function(data, actions) {
-      localStorage.setItem("lolfundamentals_logged_in", "true");
-      localStorage.setItem("lolfundamentals_paid", "true");
-      window.location.href = "membershub.html";
-    }
-  }).render('#paypal-button-container-yearly');
-
-  // Lifetime Plan (One-Time Order)
-  paypal.Buttons({
-    style: { shape: 'rect', color: 'gold', layout: 'vertical', label: 'pay' },
-    createOrder: function(data, actions) {
-      return actions.order.create({
-        purchase_units: [{
-          amount: { value: '99.99' },
-          description: 'LoL Fundamentals Lifetime Membership'
-        }]
-      });
-    },
-    onApprove: function(data, actions) {
-      return actions.order.capture().then(function(details) {
+// Render PayPal buttons after load to ensure containers are present
+window.addEventListener('load', () => {
+  if (window.paypal) {
+    // Yearly Plan (Subscription)
+    paypal.Buttons({
+      style: { shape: 'rect', color: 'gold', layout: 'vertical', label: 'subscribe' },
+      createSubscription: function(data, actions) {
+        return actions.subscription.create({
+          'plan_id': 'YOUR_PAYPAL_ANNUAL_PLAN_ID' // Replace with your actual PayPal Subscription Plan ID
+        });
+      },
+      onApprove: function(data, actions) {
         localStorage.setItem("lolfundamentals_logged_in", "true");
         localStorage.setItem("lolfundamentals_paid", "true");
         window.location.href = "membershub.html";
-      });
-    }
-  }).render('#paypal-button-container-lifetime');
-}
+      }
+    }).render('#paypal-button-container-yearly');
+
+    // Lifetime Plan (One-Time Payment with Explicit "Pay with PayPal" Text)
+    paypal.Buttons({
+      style: { shape: 'rect', color: 'gold', layout: 'vertical', label: 'pay' },
+      createOrder: function(data, actions) {
+        return actions.order.create({
+          purchase_units: [{
+            amount: { value: '99.99' },
+            description: 'LoL Fundamentals Lifetime Access'
+          }]
+        });
+      },
+      onApprove: function(data, actions) {
+        return actions.order.capture().then(function(details) {
+          localStorage.setItem("lolfundamentals_logged_in", "true");
+          localStorage.setItem("lolfundamentals_paid", "true");
+          window.location.href = "membershub.html";
+        });
+      }
+    }).render('#paypal-button-container-lifetime');
+  }
+});
 </script>
 
 <script type="module">
@@ -801,7 +803,10 @@ const continueSignupBtn = document.getElementById("continueSignupBtn");
 const modalLoginBtn = document.getElementById("modalLoginBtn");
 const resetLinkModal = document.getElementById("resetLinkModal");
 
-signupHeroBtn.onclick=()=>signupModal.style.display="flex";
+signupHeroBtn.onclick=()=>{
+  document.getElementById("agreeTerms").checked = false; // Reset checkbox on open
+  signupModal.style.display="flex";
+};
 loginHeroBtn.onclick=()=>loginModal.style.display="flex";
 closeSignupModal.onclick=()=>signupModal.style.display="none";
 closePlanModal.onclick=()=>planModal.style.display="none";
