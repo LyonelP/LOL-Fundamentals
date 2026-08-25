@@ -637,13 +637,19 @@ All guides, matchups, VODS & tools for just <b>$3.33/month</b>!
 </div>
 
 <script>
+// Helper function to force uncheck box reset & clear active focus
+function resetTermsCheckbox() {
+  const termsBox = document.getElementById("agreeTerms");
+  if (termsBox) {
+    termsBox.checked = false;
+    termsBox.removeAttribute("checked");
+    termsBox.blur();
+  }
+}
+
 // Force immediate checkbox uncheck on initial script parsing
 document.addEventListener("DOMContentLoaded", () => {
-  const chk = document.getElementById("agreeTerms");
-  if (chk) {
-    chk.checked = false;
-    chk.removeAttribute("checked");
-  }
+  resetTermsCheckbox();
 });
 
 // Particle effect
@@ -761,15 +767,6 @@ closeTrailerModal.onclick = () => {
 const firebaseConfig={apiKey:"AIzaSyCFRcEV7wdivqONnkjJubAZOjPMixrHMBI",authDomain:"lol-fundamentals.firebaseapp.com",projectId:"lol-fundamentals",storageBucket:"lol-fundamentals.firebasestorage.app",messagingSenderId:"1038440427584",appId:"1:1038440427584:web:a82207151fd370dbedefa5"};
 const app=initializeApp(firebaseConfig),auth=getAuth(app),firestore=getFirestore(app);
 
-// Helper function to force uncheck box reset
-function resetTermsCheckbox() {
-  const termsBox = document.getElementById("agreeTerms");
-  if (termsBox) {
-    termsBox.checked = false;
-    termsBox.removeAttribute("checked");
-  }
-}
-
 // Initial reset
 resetTermsCheckbox();
 
@@ -834,11 +831,23 @@ function openLegalModal(tab) {
   }
 }
 
-document.getElementById("termsLink").onclick = () => openLegalModal('terms');
-document.getElementById("privacyLink").onclick = () => openLegalModal('privacy');
+document.getElementById("termsLink").onclick = (e) => {
+  e.preventDefault();
+  openLegalModal('terms');
+};
+
+document.getElementById("privacyLink").onclick = (e) => {
+  e.preventDefault();
+  openLegalModal('privacy');
+};
+
 tabTerms.onclick = () => openLegalModal('terms');
 tabPrivacy.onclick = () => openLegalModal('privacy');
-document.getElementById("closeLegalModal").onclick = () => legalModal.style.display = "none";
+
+document.getElementById("closeLegalModal").onclick = () => {
+  legalModal.style.display = "none";
+  resetTermsCheckbox();
+};
 
 continueSignupBtn.onclick=async()=>{
   const e=signupEmail.value.trim().toLowerCase(),p=signupPassword.value.trim(),c=signupPasswordConfirm.value.trim();
@@ -848,131 +857,50 @@ continueSignupBtn.onclick=async()=>{
   if(p!==c){alert("Passwords do not match");return}
   if(!agreeTerms){alert("You must agree to the Terms of Service & Privacy Policy to create an account.");return}
 
-  await createUserWithEmailAndPassword(auth,e,p);
-  await setDoc(doc(firestore,"paidUsers",e),{paid:false,timestamp:serverTimestamp()});
-  
-  localStorage.setItem("pendingUserEmail", e);
-  document.querySelector("#planModal h2").textContent = "Account Created! Choose Your Plan";
-  signupModal.style.display="none";
-  planModal.style.display="flex";
+  try {
+    await createUserWithEmailAndPassword(auth,e,p);
+    await setDoc(doc(firestore,"paidUsers",e),{paid:false,timestamp:serverTimestamp()});
+    
+    localStorage.setItem("pendingUserEmail", e);
+    document.querySelector("#planModal h2").textContent = "Account Created! Choose Your Plan";
+    signupModal.style.display="none";
+    planModal.style.display="flex";
+  } catch (err) {
+    alert(err.message);
+  }
 };
-
-document.getElementById("yearlyBtn").onclick=()=>{window.open("https://buy.stripe.com/3cI3co1fufRi5Vk3S2ejK0k");planModal.style.display="none";}
-document.getElementById("lifeBtn").onclick=()=>{window.open("https://buy.stripe.com/fZu9AMcYc48AgzY1JUejK0j","_blank");planModal.style.display="none";}
 
 modalLoginBtn.onclick=async()=>{
   const e=loginEmail.value.trim().toLowerCase(),p=loginPassword.value.trim();
-  await signInWithEmailAndPassword(auth,e,p);
-  const snap=await getDoc(doc(firestore,"paidUsers",e));
-  if(snap.exists() && snap.data().paid){
-    localStorage.setItem("lolfundamentals_logged_in","true");
-    localStorage.setItem("lolfundamentals_paid","true");
-    window.location.href="membershub.html";
-  }else{
-    planModal.style.display="flex";
+  if(!e||!p){loginMsgModal.textContent="Please fill out all fields.";return}
+  try {
+    await signInWithEmailAndPassword(auth,e,p);
+    const userDoc = await getDoc(doc(firestore,"paidUsers",e));
+    if(userDoc.exists() && userDoc.data().paid) {
+      localStorage.setItem("lolfundamentals_logged_in","true");
+      localStorage.setItem("lolfundamentals_paid","true");
+      window.location.href="membershub.html";
+    } else {
+      localStorage.setItem("pendingUserEmail", e);
+      loginModal.style.display="none";
+      planModal.style.display="flex";
+    }
+  } catch(err) {
+    loginMsgModal.textContent=err.message;
   }
-  loginModal.style.display="none";
 };
 
 resetLinkModal.onclick=async(e)=>{
   e.preventDefault();
-  await sendPasswordResetEmail(auth,loginEmail.value);
-  loginMsgModal.textContent="Password reset email sent!";
+  const email=loginEmail.value.trim().toLowerCase();
+  if(!email){alert("Enter your email address first.");return}
+  try {
+    await sendPasswordResetEmail(auth, email);
+    alert("Password reset email sent!");
+  } catch(err) {
+    alert(err.message);
+  }
 };
-
-// Locked card click opens signup modal
-document.querySelectorAll('.locked').forEach(card=>{
-  card.addEventListener('click',()=>{
-    resetTermsCheckbox();
-    signupModal.style.display='flex';
-  });
-});
-
-// PayPal Button Initializer Routine
-function initPayPal() {
-  if (!window.paypal) {
-    setTimeout(initPayPal, 100);
-    return;
-  }
-
-  // 1. Annual Plan PayPal Subscription Button
-  const yearlyContainer = document.getElementById('paypal-button-container-yearly');
-  if (yearlyContainer && !yearlyContainer.hasChildNodes()) {
-    paypal.Buttons({
-      style: { shape: 'rect', color: 'gold', layout: 'vertical', height: 40, label: 'subscribe' },
-      createSubscription: function(data, actions) {
-        return actions.subscription.create({
-          'plan_id': 'P-87574744Y2341233KNJMJGCQ'
-        });
-      },
-      onApprove: async function(data, actions) {
-        const currentUser = auth.currentUser;
-        const targetEmail = currentUser ? currentUser.email : localStorage.getItem("pendingUserEmail");
-
-        if (targetEmail) {
-          await setDoc(doc(firestore, "paidUsers", targetEmail.toLowerCase()), {
-            email: targetEmail.toLowerCase(),
-            paid: true,
-            provider: "paypal",
-            isLifetime: false,
-            productId: "PROD-98S6431562918140K",
-            planId: "P-87574744Y2341233KNJMJGCQ",
-            productName: "Annual Membership $39.99/yr",
-            subscriptionId: data.subscriptionID,
-            updatedAt: serverTimestamp()
-          }, { merge: true });
-
-          localStorage.setItem("lolfundamentals_logged_in", "true");
-          localStorage.setItem("lolfundamentals_paid", "true");
-          window.location.href = "membershub.html";
-        }
-      }
-    }).render('#paypal-button-container-yearly');
-  }
-
-  // 2. Lifetime Access PayPal One-Time Payment Button
-  const lifetimeContainer = document.getElementById('paypal-button-container-lifetime');
-  if (lifetimeContainer && !lifetimeContainer.hasChildNodes()) {
-    paypal.Buttons({
-      style: { shape: 'rect', color: 'gold', layout: 'vertical', height: 40, label: 'paypal' },
-      createOrder: function(data, actions) {
-        return actions.order.create({
-          purchase_units: [{
-            description: "LoL Fundamentals - Lifetime Access",
-            amount: { value: "99.99" },
-            custom_id: "lifetime_access_9999"
-          }]
-        });
-      },
-      onApprove: async function(data, actions) {
-        const details = await actions.order.capture();
-        const currentUser = auth.currentUser;
-        const targetEmail = currentUser ? currentUser.email : localStorage.getItem("pendingUserEmail");
-
-        if (targetEmail) {
-          await setDoc(doc(firestore, "paidUsers", targetEmail.toLowerCase()), {
-            email: targetEmail.toLowerCase(),
-            paid: true,
-            provider: "paypal",
-            isLifetime: true,
-            productId: "lifetime_access_9999",
-            productName: "Lifetime Access $99.99",
-            orderId: details.id,
-            updatedAt: serverTimestamp()
-          }, { merge: true });
-
-          localStorage.setItem("lolfundamentals_logged_in", "true");
-          localStorage.setItem("lolfundamentals_paid", "true");
-          window.location.href = "membershub.html";
-        }
-      }
-    }).render('#paypal-button-container-lifetime');
-  }
-}
-
-// Execute PayPal rendering
-initPayPal();
-
 </script>
 </body>
 </html>
