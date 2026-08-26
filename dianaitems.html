@@ -154,8 +154,9 @@
   .ability-card { margin-bottom: 20px; }
   .ability-row { display: flex; flex-direction: column; margin-bottom: 14px; }
   .ability-row:last-child { margin-bottom: 0; }
-  .ability-row .first-line { display: flex; justify-content: space-between; align-items: center; margin-bottom: 6px; }
-  .ability-row .first-line span { font-weight: bold; color: #cfe1ee; font-size: 14px; }
+  .ability-row .first-line { display: flex; justify-content: space-between; align-items: center; margin-bottom: 6px; position: relative; width: 100%; }
+  .ability-row .first-line span.ability-title { font-weight: bold; color: #cfe1ee; font-size: 14px; padding-left: 10px; }
+  .ability-row .rank-group { display: flex; align-items: center; gap: 8px; }
   .ability-row select.rank-select { width: 70px; margin-bottom: 0; padding: 6px; }
   .ability-row select.uses-select { width: 100%; margin-top: 0; }
 
@@ -231,7 +232,6 @@
   }
   #item-stats p span { color: white; font-weight: bold; }
 
-  /* Custom Item Select Dropdown Styling */
   .custom-select-wrapper {
     position: relative;
     user-select: none;
@@ -390,39 +390,55 @@
   <label style="margin-bottom: 14px;">Ability Usage</label>
 
   <div class="ability-row">
-    <div class="first-line"><span>Auto Attack</span></div>
+    <div class="first-line"><span class="ability-title">Auto Attacks</span></div>
     <select class="uses-select" id="aa-count"></select>
   </div>
 
   <div class="ability-row">
-    <div class="first-line"><span>Passive</span></div>
+    <div class="first-line"><span class="ability-title">Passive</span></div>
     <select class="uses-select" id="passive-count"></select>
   </div>
 
   <div class="ability-row">
-    <div class="first-line"><span>Q Rank</span>
-      <select class="rank-select" id="q-rank"></select>
+    <div class="first-line">
+      <span class="ability-title">Q Casts</span>
+      <div class="rank-group">
+        <span>Rank</span>
+        <select class="rank-select" id="q-rank"></select>
+      </div>
     </div>
     <select class="uses-select" id="q-count"></select>
   </div>
 
   <div class="ability-row">
-    <div class="first-line"><span>W Rank</span>
-      <select class="rank-select" id="w-rank"></select>
+    <div class="first-line">
+      <span class="ability-title">W Casts</span>
+      <div class="rank-group">
+        <span>Rank</span>
+        <select class="rank-select" id="w-rank"></select>
+      </div>
     </div>
     <select class="uses-select" id="w-count"></select>
   </div>
 
   <div class="ability-row">
-    <div class="first-line"><span>E Rank</span>
-      <select class="rank-select" id="e-rank"></select>
+    <div class="first-line">
+      <span class="ability-title">E Casts</span>
+      <div class="rank-group">
+        <span>Rank</span>
+        <select class="rank-select" id="e-rank"></select>
+      </div>
     </div>
     <select class="uses-select" id="e-count"></select>
   </div>
 
   <div class="ability-row">
-    <div class="first-line"><span>R Rank</span>
-      <select class="rank-select" id="r-rank"></select>
+    <div class="first-line">
+      <span class="ability-title">R Casts</span>
+      <div class="rank-group">
+        <span>Rank</span>
+        <select class="rank-select" id="r-rank"></select>
+      </div>
     </div>
     <select class="uses-select" id="r-count"></select>
   </div>
@@ -453,27 +469,24 @@
 <footer>© 2026 LoL Fundamentals</footer>
 
 <script>
-const PATCH_VERSION = "13.23.1"; // Data Dragon version for item IDs
+const PATCH_VERSION = "13.23.1";
 
 const AP_ITEMS = [
-  // 1. Components first
   {name:"Doran's Ring", id:1056, ap:18, flatPen:0, percPen:0},
   {name:"Dark Seal", id:1082, ap:15, flatPen:0, percPen:0},
   {name:"Amplifying Tome", id:1052, ap:20, flatPen:0, percPen:0},
+  {name:"Aether Wisp", id:3113, ap:30, flatPen:0, percPen:0},
+  {name:"Hextech Alternator", id:3145, ap:50, flatPen:0, percPen:0, bonus:"revved"},
   {name:"Blasting Wand", id:1026, ap:45, flatPen:0, percPen:0},
   {name:"Fiendish Codex", id:3108, ap:25, flatPen:0, percPen:0},
   {name:"Lost Chapter", id:3802, ap:40, flatPen:0, percPen:0},
   {name:"Needlessly Large Rod", id:1058, ap:65, flatPen:0, percPen:0},
   {name:"Cloth Armor", id:1029, ap:0, flatPen:0, percPen:0},
   {name:"Null Magic Mantle", id:1033, ap:0, flatPen:0, percPen:0},
-
-  // 2. Boots
   {name:"Sorcerer's Shoes", id:3020, ap:0, flatPen:12, percPen:0},
   {name:"Spellslinger's Shoes", id:3020, customIcon:"https://raw.communitydragon.org/latest/plugins/rcp-be-lol-game-data/global/default/assets/items/icons2d/boots_tier3_sorceror_64.png", ap:0, flatPen:20, percPen:0.08},
   {name:"Mercury's Treads", id:3111, ap:0, flatPen:0, percPen:0},
   {name:"Plated Steelcaps", id:3047, ap:0, flatPen:0, percPen:0},
-
-  // 3. Main AP items
   {name:"Stormsurge", id:4646, customIcon:"https://raw.communitydragon.org/latest/game/assets/items/icons2d/4646_stormsurge.png", ap:90, flatPen:15, percPen:0, bonus:"stormsurge"},
   {name:"Lich Bane", id:3100, ap:100, flatPen:0, percPen:0, bonus:"lichbane"},
   {name:"Shadowflame", id:4645, customIcon:"https://raw.communitydragon.org/latest/game/assets/items/icons2d/4645_shadowflame.png", ap:110, flatPen:15, percPen:0},
@@ -482,20 +495,16 @@ const AP_ITEMS = [
   {name:"Rabadon's Deathcap", id:3089, ap:130, flatPen:0, percPen:0},
   {name:"Cryptbloom", id:4643, customIcon:"https://raw.communitydragon.org/latest/game/assets/items/icons2d/3137_cryptbloom.png", ap:80, flatPen:0, percPen:0.3},
   {name:"Void Staff", id:3135, ap:95, flatPen:0, percPen:0.4},
-  
-  // Previously requested items
-  {name:"Riftmaker",id:4633,customIcon:"https://raw.communitydragon.org/latest/game/assets/items/icons2d/4633_mage_t4_riftmaker.png",ap:70,flatPen:0,percPen:0},
-  {name:"Cosmic Drive",id:4629,customIcon:"https://raw.communitydragon.org/latest/game/assets/items/icons2d/4629_mage_t3_cosmicdrive.png",ap:70,flatPen:0,percPen:0},
-  {name:"Hextech Gunblade",id:3146,customIcon:"https://raw.communitydragon.org/latest/game/assets/items/icons2d/3146_hextechgunblade.png",ap:65,flatPen:0,percPen:0},
+  {name:"Riftmaker", id:4633, customIcon:"https://raw.communitydragon.org/latest/game/assets/items/icons2d/4633_mage_t4_riftmaker.png", ap:70, flatPen:0, percPen:0},
+  {name:"Cosmic Drive", id:4629, customIcon:"https://raw.communitydragon.org/latest/game/assets/items/icons2d/4629_mage_t3_cosmicdrive.png", ap:70, flatPen:0, percPen:0},
+  {name:"Hextech Gunblade", id:3146, customIcon:"https://raw.communitydragon.org/latest/game/assets/items/icons2d/3146_hextechgunblade.png", ap:65, flatPen:0, percPen:0},
   {name:"Luden's Echo", id:3285, customIcon:"https://raw.communitydragon.org/latest/game/assets/items/icons2d/6655_mage_t4_ludenstempest.png", ap:80, flatPen:0, percPen:0},
-  {name:"Blackfire Torch",id:2503,customIcon:"https://raw.communitydragon.org/latest/game/assets/items/icons2d/2503_blackfiretorch64.png",ap:90,flatPen:0,percPen:0},
-  {name:"Malignance",id:3118,customIcon:"https://raw.communitydragon.org/latest/game/assets/items/icons2d/3118_malignance.png",ap:80,flatPen:0,percPen:0},
-  {name:"Rod of Ages",id:6657,customIcon:"https://raw.communitydragon.org/latest/game/assets/items/icons2d/6657_mage_t4_rodofages.png",ap:50,flatPen:0,percPen:0},
-  {name:"Archangel's Staff",id:3003,customIcon:"https://raw.communitydragon.org/latest/game/assets/items/icons2d/3003_mage_t3_archangelstaff.png",ap:80,flatPen:0,percPen:0},
-  {name:"Actualizer",id:2522,customIcon:"https://raw.communitydragon.org/latest/game/assets/items/icons2d/2522_manaactive.png",ap:90,flatPen:0,percPen:0},
-  {name:"Rylai's Crystal Scepter",id:3116,customIcon:"https://raw.communitydragon.org/latest/game/assets/items/icons2d/3116_mage_t3_rylajscrystalscepter.png",ap:65,flatPen:0,percPen:0},
-
-  // 4. Other options & Nashor's Tooth after Dusk and Dawn
+  {name:"Blackfire Torch", id:2503, customIcon:"https://raw.communitydragon.org/latest/game/assets/items/icons2d/2503_blackfiretorch64.png", ap:90, flatPen:0, percPen:0},
+  {name:"Malignance", id:3118, customIcon:"https://raw.communitydragon.org/latest/game/assets/items/icons2d/3118_malignance.png", ap:80, flatPen:0, percPen:0},
+  {name:"Rod of Ages", id:6657, customIcon:"https://raw.communitydragon.org/latest/game/assets/items/icons2d/6657_mage_t4_rodofages.png", ap:50, flatPen:0, percPen:0},
+  {name:"Archangel's Staff", id:3003, customIcon:"https://raw.communitydragon.org/latest/game/assets/items/icons2d/3003_mage_t3_archangelstaff.png", ap:80, flatPen:0, percPen:0},
+  {name:"Actualizer", id:2522, customIcon:"https://raw.communitydragon.org/latest/game/assets/items/icons2d/2522_manaactive.png", ap:90, flatPen:0, percPen:0},
+  {name:"Rylai's Crystal Scepter", id:3116, customIcon:"https://raw.communitydragon.org/latest/game/assets/items/icons2d/3116_mage_t3_rylajscrystalscepter.png", ap:65, flatPen:0, percPen:0},
   {name:"Bloodletter's Curse", id:3118, customIcon:"https://raw.communitydragon.org/latest/game/assets/items/icons2d/8010_bloodletterscurse.png", ap:65, flatPen:0, percPen:0.075},
   {name:"Dusk and Dawn", id:4644, customIcon:"https://raw.communitydragon.org/latest/game/assets/items/icons2d/2510_apfightersheen.png", ap:60, flatPen:0, percPen:0, bonus:"duskdawn"},
   {name:"Nashor's Tooth", id:3115, ap:80, flatPen:0, percPen:0, bonus:"nashor"},
@@ -515,7 +524,6 @@ function populateItems() {
     
     optionsContainer.innerHTML = "";
     
-    // Empty option
     const emptyOpt = document.createElement("div");
     emptyOpt.className = "custom-option";
     emptyOpt.innerHTML = `<span style="color:var(--muted)">— None —</span>`;
@@ -542,7 +550,6 @@ function populateItems() {
       optionsContainer.appendChild(opt);
     });
 
-    // Default Doran's Ring on item 1
     if(i === 1){
       const doransIndex = AP_ITEMS.findIndex(item => item.name === "Doran's Ring");
       if(doransIndex !== -1){
@@ -553,7 +560,6 @@ function populateItems() {
       }
     }
 
-    // Toggle dropdown
     selectBox.addEventListener("click", (e) => {
       e.stopPropagation();
       document.querySelectorAll(".custom-select-wrapper").forEach(w => {
@@ -563,7 +569,6 @@ function populateItems() {
     });
   }
 
-  // Close dropdowns when clicking outside
   document.addEventListener("click", () => {
     document.querySelectorAll(".custom-select-wrapper").forEach(w => w.classList.remove("open"));
   });
@@ -623,7 +628,6 @@ function getItemStats(){
 
     totalAP+=item.ap;
     flatPen+=item.flatPen;
-    // Stack percentage penetration multiplicatively or additively depending on standard convention (here combined or stacked)
     percPen = 1 - (1 - percPen) * (1 - item.percPen);
   }
 
@@ -708,6 +712,14 @@ function calcBonusItemDamage(totalAP, mr, flatPen, percPen, level) {
       if (effectiveMR < 0) effectiveMR = 0;
       effectiveMR *= 1 - percPen;
       bonusMagic += Math.round(aaRaw * 100 / (100 + effectiveMR));
+    }
+
+    if (item.bonus === "revved") {
+      let raw = 65;
+      let effectiveMR = mr - flatPen;
+      if (effectiveMR < 0) effectiveMR = 0;
+      effectiveMR *= 1 - percPen;
+      bonusMagic += Math.round(raw * 100 / (100 + effectiveMR));
     }
   }
   return bonusMagic;
