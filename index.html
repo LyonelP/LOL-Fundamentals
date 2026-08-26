@@ -504,7 +504,7 @@ All guides, matchups, VODS & tools for just <b>$3.33/month</b>!
 <input type="password" id="signupPasswordConfirm" placeholder="Confirm your password"/>
 
 <div class="terms-checkbox-container">
-  <input type="checkbox" id="agreeTerms" />
+  <input type="checkbox" id="agreeTerms" autocomplete="off" />
   <label for="agreeTerms">I agree to the <a id="termsLink">Terms of Service</a> & <a id="privacyLink">Privacy Policy</a></label>
 </div>
 
@@ -804,7 +804,8 @@ const modalLoginBtn = document.getElementById("modalLoginBtn");
 const resetLinkModal = document.getElementById("resetLinkModal");
 
 signupHeroBtn.onclick=()=>{
-  document.getElementById("agreeTerms").checked = false; // Reset checkbox on open
+  const checkbox = document.getElementById("agreeTerms");
+  checkbox.checked = false; // Reset checkbox state every time modal opens
   signupModal.style.display="flex";
 };
 loginHeroBtn.onclick=()=>loginModal.style.display="flex";
@@ -876,11 +877,9 @@ continueSignupBtn.onclick=async()=>{
   const signupPasswordConfirm = document.getElementById("signupPasswordConfirm");
   
   const e=signupEmail.value.trim().toLowerCase(),p=signupPassword.value.trim(),c=signupPasswordConfirm.value.trim();
-  const agreeTerms = document.getElementById("agreeTerms").checked;
 
   if(!e||!p||!c){alert("Fill all fields");return}
   if(p!==c){alert("Passwords do not match");return}
-  if(!agreeTerms){alert("You must agree to the Terms of Service & Privacy Policy to create an account.");return}
 
   await createUserWithEmailAndPassword(auth,e,p);
   await setDoc(doc(firestore,"paidUsers",e),{paid:false,timestamp:serverTimestamp()});
