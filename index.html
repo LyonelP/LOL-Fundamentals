@@ -44,7 +44,7 @@ header{background:linear-gradient(90deg,#0a0f14,#1b2838);border-bottom:2px solid
 .section h2{color:#c9aa71;font-size:2.1em;display:inline-block;padding-bottom:12px;position:relative;margin-bottom:40px}
 .section h2::after{content:"";width:60%;height:2px;background:linear-gradient(90deg,transparent,#c9aa71,transparent);position:absolute;bottom:0;left:20%}
 .card-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:22px;align-items:start}
-.card{position:relative;background:#161b22;border:2px solid #c9aa71;border-radius:12px;padding:20px;text-decoration:none;color:#e6edf3;height:230px;display:flex;flex-direction:column;justify-content:center;align-items:center;overflow:hidden;transition:transform .25s,box-shadow .25s}
+.card{position:relative;background:#161b22;border:2px solid #c9aa71;border-radius:12px;padding:20px;text-decoration:none;color:#e6edf3;height:230px;display:flex;flex-direction:column;justify-content:center;align-items:center;overflow:hidden;transition:transform .25s,box-shadow .25s;cursor:pointer;}
 .card h3{color:#c9aa71;margin:0 0 8px;z-index:2;font-size:1.25rem;text-align:center}
 .card p{margin:0;font-size:0.95rem;line-height:1.3;z-index:2;color:#e6edf3;opacity:0.95;text-align:center}
 .card::before{content:"";position:absolute;inset:0;width:100%;height:100%;background-size:cover;background-position:center;opacity:.15;z-index:0;border-radius:10px}
@@ -150,7 +150,6 @@ header{background:linear-gradient(90deg,#0a0f14,#1b2838);border-bottom:2px solid
   box-shadow: 0 0 8px rgba(201, 170, 113, 0.6);
 }
 
-/* Enable overlay scrolling */
 .modal{
   display:none;
   position:fixed;
@@ -192,7 +191,6 @@ header{background:linear-gradient(90deg,#0a0f14,#1b2838);border-bottom:2px solid
   font-size:0.95rem;
 }
 
-/* Uniform Plan Card Styling */
 .plan-card {
   background: #0d1117;
   border: 2px solid #30363d;
@@ -222,7 +220,6 @@ header{background:linear-gradient(90deg,#0a0f14,#1b2838);border-bottom:2px solid
   width: 100%;
 }
 
-/* Modern Purple Stripe Button Styling */
 .stripe-btn {
   background: linear-gradient(135deg, #635bff 0%, #4b45e4 100%);
   color: #ffffff;
@@ -262,7 +259,6 @@ header{background:linear-gradient(90deg,#0a0f14,#1b2838);border-bottom:2px solid
   letter-spacing: 0.5px;
 }
 
-/* Terms & Privacy Checkbox Styles */
 .terms-checkbox-container {
   display: flex;
   align-items: center;
@@ -284,7 +280,6 @@ header{background:linear-gradient(90deg,#0a0f14,#1b2838);border-bottom:2px solid
   cursor: pointer;
 }
 
-/* Legal Modal Styling */
 .legal-modal-content {
   max-width: 600px;
   width: 90%;
@@ -332,7 +327,6 @@ footer a:hover{text-decoration:underline}
   }
 }
 
-/* Mobile adjustments */
 @media (max-width: 600px) {
   .modalContent {
     width: 96%;
@@ -378,7 +372,6 @@ footer a:hover{text-decoration:underline}
 <h2>Explore the Hub</h2>
 <div class="card-grid">
 
-<!-- Unlocked -->
 <a href="freeskills.html" class="card fundamentals">
   <h3>Fundamentals</h3>
   <p>All skills that comprise your rank including laning, wave management, positioning, and way more!</p>
@@ -402,7 +395,6 @@ footer a:hover{text-decoration:underline}
   <p>Growing library of 50+ VODs with tips for every mid lane matchup.</p>
 </a>
   
-<!-- Locked cards -->
 <a href="#" class="card ekko-guide locked">
   <h3>Ekko Guide</h3>
   <p>Comprehensive guide to playing Ekko Jungle, including combos, pathing, and advanced mechanics.</p>
@@ -439,10 +431,10 @@ footer a:hover{text-decoration:underline}
   <div class="unlock-icon">🔒</div>
 </a>
 
-<a href="https://buy.stripe.com/6oU6oA9M08oQfvUgEOejK02" class="card coaching">
+<div class="card coaching" id="coachingCard">
   <h3>Coaching</h3>
   <p>Book a personalized 1 hour coaching session. Discounted for members!</p>
-</a>
+</div>
 
 <a href="https://discord.gg/j57bKh5TVX" class="card discord-card" target="_blank" rel="noopener noreferrer">
   <h3>Join our Discord</h3>
@@ -452,7 +444,6 @@ footer a:hover{text-decoration:underline}
 </div>
 </section>
 
-<!-- Animated Rotating Testimonials Section -->
 <section class="section" style="padding-top:10px; margin-top:-20px;">
   <h2>What Members Say</h2>
 
@@ -525,9 +516,7 @@ All guides, matchups, VODS & tools for just <b>$3.33/month</b>!
     <button class="legal-tab-btn" id="tabPrivacy">Privacy Policy</button>
   </div>
   
-  <div class="legal-scroll-body" id="legalContent">
-    <!-- Dynamic Text Content Loaded via JS -->
-  </div>
+  <div class="legal-scroll-body" id="legalContent"></div>
   
   <div style="text-align:center;">
     <button id="closeLegalModal">Back to Sign Up</button>
@@ -635,7 +624,7 @@ All guides, matchups, VODS & tools for just <b>$3.33/month</b>!
 </div>
 
 <script>
-// Particle effect (Original Dynamic JS Particle Generator)
+// Particle effect Generator
 for(let i=0;i<50;i++){
   const e=document.createElement("span");
   e.style.left=Math.random()*100+"%";
@@ -698,6 +687,15 @@ window.addEventListener('load', updateContainerHeight);
 
 container.addEventListener('mouseenter', () => clearInterval(slideInterval));
 container.addEventListener('mouseleave', () => startTimer());
+
+// Secure Popup Window Helper for External Stripe Checkout
+function openStripePopup(url) {
+  const width = 600;
+  const height = 750;
+  const left = (window.innerWidth / 2) - (width / 2);
+  const top = (window.innerHeight / 2) - (height / 2);
+  window.open(url, 'StripeCheckout', `width=${width},height=${height},top=${top},left=${left},resizable=yes,scrollbars=yes,status=yes`);
+}
 </script>
 
 <script type="module">
@@ -794,13 +792,9 @@ const legalModal = document.getElementById("legalModal");
 const legalContent = document.getElementById("legalContent");
 const tabTerms = document.getElementById("tabTerms");
 const tabPrivacy = document.getElementById("tabPrivacy");
-const agreeTermsCheckbox = document.getElementById("agreeTerms");
 
 function openLegalModal(tab) {
-  // Hide signup modal while viewing the Terms/Privacy
   signupModal.style.display = "none";
-
-  // Open legal modal
   legalModal.style.display = "flex";
 
   if (tab === 'terms') {
@@ -814,19 +808,16 @@ function openLegalModal(tab) {
   }
 }
 
-// Terms link
 document.getElementById("termsLink").onclick = (e) => {
   e.preventDefault();
   openLegalModal('terms');
 };
 
-// Privacy link
 document.getElementById("privacyLink").onclick = (e) => {
   e.preventDefault();
   openLegalModal('privacy');
 };
 
-// Tabs
 tabTerms.onclick = (e) => {
   e.preventDefault();
   openLegalModal('terms');
@@ -837,18 +828,9 @@ tabPrivacy.onclick = (e) => {
   openLegalModal('privacy');
 };
 
-// Back to Sign Up
 document.getElementById("closeLegalModal").onclick = () => {
-  // Close legal modal
   legalModal.style.display = "none";
-
-  // Return to signup
   signupModal.style.display = "flex";
-
-  // IMPORTANT:
-  // Do not change agreeTermsCheckbox.checked here.
-  // This preserves exactly whatever state the user had before
-  // opening the Terms or Privacy Policy.
 };
 
 continueSignupBtn.onclick=async()=>{
@@ -868,8 +850,20 @@ continueSignupBtn.onclick=async()=>{
   planModal.style.display="flex";
 };
 
-document.getElementById("yearlyBtn").onclick=()=>{window.open("https://buy.stripe.com/3cI3co1fufRi5Vk3S2ejK0k");planModal.style.display="none";}
-document.getElementById("lifeBtn").onclick=()=>{window.open("https://buy.stripe.com/fZu9AMcYc48AgzY1JUejK0j","_blank");planModal.style.display="none";}
+// Original Stripe Links setup to open via Popups
+document.getElementById("yearlyBtn").onclick = () => {
+  openStripePopup("https://buy.stripe.com/3cI3co1fufRi5Vk3S2ejK0k");
+  planModal.style.display = "none";
+};
+
+document.getElementById("lifeBtn").onclick = () => {
+  openStripePopup("https://buy.stripe.com/fZu9AMcYc48AgzY1JUejK0j");
+  planModal.style.display = "none";
+};
+
+document.getElementById("coachingCard").onclick = () => {
+  openStripePopup("https://buy.stripe.com/6oU6oA9M08oQfvUgEOejK02");
+};
 
 modalLoginBtn.onclick=async()=>{
   const e=loginEmail.value.trim().toLowerCase(),p=loginPassword.value.trim();
@@ -891,19 +885,17 @@ resetLinkModal.onclick=async(e)=>{
   loginMsgModal.textContent="Password reset email sent!";
 };
 
-// Locked card click opens signup modal
 document.querySelectorAll('.locked').forEach(card=>{
   card.addEventListener('click',()=>{signupModal.style.display='flex'});
 });
 
-// PayPal Button Initializer Routine
+// Original PayPal Button Initializer Routine Restored
 function initPayPal() {
   if (!window.paypal) {
     setTimeout(initPayPal, 100);
     return;
   }
 
-  // 1. Annual Plan PayPal Subscription Button
   const yearlyContainer = document.getElementById('paypal-button-container-yearly');
   if (yearlyContainer && !yearlyContainer.hasChildNodes()) {
     paypal.Buttons({
@@ -938,7 +930,6 @@ function initPayPal() {
     }).render('#paypal-button-container-yearly');
   }
 
-  // 2. Lifetime Access PayPal One-Time Payment Button
   const lifetimeContainer = document.getElementById('paypal-button-container-lifetime');
   if (lifetimeContainer && !lifetimeContainer.hasChildNodes()) {
     paypal.Buttons({
@@ -978,9 +969,7 @@ function initPayPal() {
   }
 }
 
-// Execute PayPal rendering
 initPayPal();
-
 </script>
 </body>
 </html>
