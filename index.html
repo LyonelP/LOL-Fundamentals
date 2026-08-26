@@ -8,8 +8,8 @@
 <link rel="icon" type="image/png" sizes="16x16" href="https://i.imgur.com/NFO4uNP.png">
 <link rel="apple-touch-icon" href="https://i.imgur.com/NFO4uNP.png">
 
-<!-- PayPal SDK (Configured with standard sandbox/live client parameter) -->
-<script src="https://www.paypal.com/sdk/js?client-id=BAAtEntN8Ld9QbEW216fgK5JXM-HQqChNE3EyLGCgX85uo4BZ3w8scKdOhvmqrKGX3yzCzgOHHdSsfna3o&currency=USD&vault=true&intent=subscription"></script>
+<!-- PayPal SDK (Vault enabled for subscription & standard one-time payments) -->
+<script src="https://www.paypal.com/sdk/js?client-id=BAAtEntN8Ld9QbEW216fgK5JXM-HQqChNE3EyLGCgX85uo4BZ3w8scKdOhvmqrKGX3yzCzgOHHdSsfna3o&currency=USD&vault=true&disable-funding=credit,card,venmo,paylater"></script>
 
 <style>
 body{margin:0;font-family:"Beaufort for LOL",Arial,Helvetica,sans-serif;background:radial-gradient(circle at top,#0f1620,#0a0f14 70%);color:#e6edf3;line-height:1.6}
@@ -69,6 +69,7 @@ header{background:linear-gradient(90deg,#0a0f14,#1b2838);border-bottom:2px solid
 .card:hover{transform:translateY(-6px);box-shadow:0 12px 26px rgba(201,170,113,0.5)}
 .unlock-icon{position:absolute;bottom:12px;z-index:2;font-size:1.5rem;color:#f2b96d;cursor:pointer}
 
+/* Testimonial Slider Styling */
 .testimonial-wrapper {
   max-width: 650px;
   margin: 0 auto;
@@ -149,6 +150,7 @@ header{background:linear-gradient(90deg,#0a0f14,#1b2838);border-bottom:2px solid
   box-shadow: 0 0 8px rgba(201, 170, 113, 0.6);
 }
 
+/* Enable overlay scrolling */
 .modal{
   display:none;
   position:fixed;
@@ -190,6 +192,7 @@ header{background:linear-gradient(90deg,#0a0f14,#1b2838);border-bottom:2px solid
   font-size:0.95rem;
 }
 
+/* Uniform Plan Card Styling */
 .plan-card {
   background: #0d1117;
   border: 2px solid #30363d;
@@ -219,6 +222,7 @@ header{background:linear-gradient(90deg,#0a0f14,#1b2838);border-bottom:2px solid
   width: 100%;
 }
 
+/* Modern Purple Stripe Button Styling */
 .stripe-btn {
   background: linear-gradient(135deg, #635bff 0%, #4b45e4 100%);
   color: #ffffff;
@@ -258,6 +262,7 @@ header{background:linear-gradient(90deg,#0a0f14,#1b2838);border-bottom:2px solid
   letter-spacing: 0.5px;
 }
 
+/* Terms & Privacy Checkbox Styles */
 .terms-checkbox-container {
   display: flex;
   align-items: center;
@@ -279,6 +284,7 @@ header{background:linear-gradient(90deg,#0a0f14,#1b2838);border-bottom:2px solid
   cursor: pointer;
 }
 
+/* Legal Modal Styling */
 .legal-modal-content {
   max-width: 600px;
   width: 90%;
@@ -326,6 +332,7 @@ footer a:hover{text-decoration:underline}
   }
 }
 
+/* Mobile adjustments */
 @media (max-width: 600px) {
   .modalContent {
     width: 96%;
@@ -371,6 +378,7 @@ footer a:hover{text-decoration:underline}
 <h2>Explore the Hub</h2>
 <div class="card-grid">
 
+<!-- Unlocked -->
 <a href="freeskills.html" class="card fundamentals">
   <h3>Fundamentals</h3>
   <p>All skills that comprise your rank including laning, wave management, positioning, and way more!</p>
@@ -394,6 +402,7 @@ footer a:hover{text-decoration:underline}
   <p>Growing library of 50+ VODs with tips for every mid lane matchup.</p>
 </a>
   
+<!-- Locked cards -->
 <a href="#" class="card ekko-guide locked">
   <h3>Ekko Guide</h3>
   <p>Comprehensive guide to playing Ekko Jungle, including combos, pathing, and advanced mechanics.</p>
@@ -443,6 +452,7 @@ footer a:hover{text-decoration:underline}
 </div>
 </section>
 
+<!-- Animated Rotating Testimonials Section -->
 <section class="section" style="padding-top:10px; margin-top:-20px;">
   <h2>What Members Say</h2>
 
@@ -494,7 +504,7 @@ All guides, matchups, VODS & tools for just <b>$3.33/month</b>!
 <input type="password" id="signupPasswordConfirm" placeholder="Confirm your password"/>
 
 <div class="terms-checkbox-container">
-  <input type="checkbox" id="agreeTerms" autocomplete="off" />
+  <input type="checkbox" id="agreeTerms" />
   <label for="agreeTerms">I agree to the <a id="termsLink">Terms of Service</a> & <a id="privacyLink">Privacy Policy</a></label>
 </div>
 
@@ -515,7 +525,9 @@ All guides, matchups, VODS & tools for just <b>$3.33/month</b>!
     <button class="legal-tab-btn" id="tabPrivacy">Privacy Policy</button>
   </div>
   
-  <div class="legal-scroll-body" id="legalContent"></div>
+  <div class="legal-scroll-body" id="legalContent">
+    <!-- Dynamic Text Content Loaded via JS -->
+  </div>
   
   <div style="text-align:center;">
     <button id="closeLegalModal">Back to Sign Up</button>
@@ -529,6 +541,7 @@ All guides, matchups, VODS & tools for just <b>$3.33/month</b>!
 
 <div class="plan-buttons">
 
+  <!-- Yearly Plan Card -->
   <div class="plan-card" style="position: relative;">
     <div class="planBadge">Most Popular</div>
     <div class="plan-card-body">
@@ -552,10 +565,11 @@ All guides, matchups, VODS & tools for just <b>$3.33/month</b>!
 
       <div class="payment-separator">— OR —</div>
       
-      <div id="paypal-button-container-yearly" style="width: 100%; min-height: 45px;"></div>
+      <div id="paypal-button-container-yearly" style="width: 100%;"></div>
     </div>
   </div>
 
+  <!-- Lifetime Plan Card -->
   <div class="plan-card featured" style="position: relative;">
     <div class="planBadge bestValue">Best Value</div>
     <div class="plan-card-body">
@@ -579,7 +593,7 @@ All guides, matchups, VODS & tools for just <b>$3.33/month</b>!
 
       <div class="payment-separator">— OR —</div>
       
-      <div id="paypal-button-container-lifetime" style="width: 100%; min-height: 45px;"></div>
+      <div id="paypal-button-container-lifetime" style="width: 100%;"></div>
     </div>
   </div>
 
@@ -621,6 +635,7 @@ All guides, matchups, VODS & tools for just <b>$3.33/month</b>!
 </div>
 
 <script>
+// Particle effect (Original Dynamic JS Particle Generator)
 for(let i=0;i<50;i++){
   const e=document.createElement("span");
   e.style.left=Math.random()*100+"%";
@@ -633,6 +648,7 @@ for(let i=0;i<50;i++){
   document.querySelector(".particles").appendChild(e);
 }
 
+// Testimonial Rotation Logic
 let currentSlide = 0;
 const slides = document.querySelectorAll('.testimonial-slide');
 const dots = document.querySelectorAll('.dot');
@@ -682,49 +698,6 @@ window.addEventListener('load', updateContainerHeight);
 
 container.addEventListener('mouseenter', () => clearInterval(slideInterval));
 container.addEventListener('mouseleave', () => startTimer());
-
-let paypalInitialized = false;
-function initPayPalButtons() {
-  if (paypalInitialized || !window.paypal) return;
-  paypalInitialized = true;
-
-  try {
-    paypal.Buttons({
-      style: { shape: 'rect', color: 'gold', layout: 'vertical', label: 'subscribe' },
-      createSubscription: function(data, actions) {
-        return actions.subscription.create({
-          'plan_id': 'P-YOUR-SUBSCRIPTION-PLAN-ID'
-        });
-      },
-      onApprove: function(data, actions) {
-        localStorage.setItem("lolfundamentals_logged_in", "true");
-        localStorage.setItem("lolfundamentals_paid", "true");
-        window.location.href = "membershub.html";
-      }
-    }).render('#paypal-button-container-yearly');
-
-    paypal.Buttons({
-      style: { shape: 'rect', color: 'gold', layout: 'vertical', label: 'pay' },
-      createOrder: function(data, actions) {
-        return actions.order.create({
-          purchase_units: [{
-            amount: { value: '99.99' },
-            description: 'LoL Fundamentals Lifetime Access'
-          }]
-        });
-      },
-      onApprove: function(data, actions) {
-        return actions.order.capture().then(function(details) {
-          localStorage.setItem("lolfundamentals_logged_in", "true");
-          localStorage.setItem("lolfundamentals_paid", "true");
-          window.location.href = "membershub.html";
-        });
-      }
-    }).render('#paypal-button-container-lifetime');
-  } catch(err) {
-    console.error("PayPal button render error:", err);
-  }
-}
 </script>
 
 <script type="module">
@@ -777,37 +750,18 @@ closeTrailerModal.onclick = () => {
 const firebaseConfig={apiKey:"AIzaSyCFRcEV7wdivqONnkjJubAZOjPMixrHMBI",authDomain:"lol-fundamentals.firebaseapp.com",projectId:"lol-fundamentals",storageBucket:"lol-fundamentals.firebasestorage.app",messagingSenderId:"1038440427584",appId:"1:1038440427584:web:a82207151fd370dbedefa5"};
 const app=initializeApp(firebaseConfig),auth=getAuth(app),firestore=getFirestore(app);
 
-const signupHeroBtn = document.getElementById("signupHeroBtn");
-const loginHeroBtn = document.getElementById("loginHeroBtn");
-const signupModal = document.getElementById("signupModal");
-const loginModal = document.getElementById("loginModal");
-const planModal = document.getElementById("planModal");
-const closeSignupModal = document.getElementById("closeSignupModal");
-const closePlanModal = document.getElementById("closePlanModal");
-const closeLoginModal = document.getElementById("closeLoginModal");
-const seePlansBtn = document.getElementById("seePlansBtn");
-const continueSignupBtn = document.getElementById("continueSignupBtn");
-const modalLoginBtn = document.getElementById("modalLoginBtn");
-const resetLinkModal = document.getElementById("resetLinkModal");
-
-signupHeroBtn.onclick=()=>{
-  const checkbox = document.getElementById("agreeTerms");
-  checkbox.checked = false; // Always clear on click open
-  signupModal.style.display="flex";
-};
-
+signupHeroBtn.onclick=()=>signupModal.style.display="flex";
 loginHeroBtn.onclick=()=>loginModal.style.display="flex";
 closeSignupModal.onclick=()=>signupModal.style.display="none";
 closePlanModal.onclick=()=>planModal.style.display="none";
 closeLoginModal.onclick=()=>loginModal.style.display="none";
-
 seePlansBtn.onclick=()=>{
   document.querySelector("#planModal h2").textContent = "Available Plans";
   signupModal.style.display="none";
   planModal.style.display="flex";
-  initPayPalButtons(); // Deferred render ensures container elements exist
 };
 
+/* Legal Popup Handlers */
 const termsText = `
   <h3 style="color:#c9aa71;margin-top:0;">Terms of Service Summary</h3>
   <p>Welcome to LoL Fundamentals. By creating an account or using our platform, you agree to comply with the following terms:</p>
@@ -861,21 +815,12 @@ tabPrivacy.onclick = () => openLegalModal('privacy');
 document.getElementById("closeLegalModal").onclick = () => legalModal.style.display = "none";
 
 continueSignupBtn.onclick=async()=>{
-  const signupEmail = document.getElementById("signupEmail");
-  const signupPassword = document.getElementById("signupPassword");
-  const signupPasswordConfirm = document.getElementById("signupPasswordConfirm");
-  const checkbox = document.getElementById("agreeTerms");
-  
-  // Explicit Checkbox validation check on form submit
-  if (!checkbox.checked) {
-    alert("Please check the terms and privacy policy checkbox before continuing.");
-    return;
-  }
-
   const e=signupEmail.value.trim().toLowerCase(),p=signupPassword.value.trim(),c=signupPasswordConfirm.value.trim();
+  const agreeTerms = document.getElementById("agreeTerms").checked;
 
   if(!e||!p||!c){alert("Fill all fields");return}
   if(p!==c){alert("Passwords do not match");return}
+  if(!agreeTerms){alert("You must agree to the Terms of Service & Privacy Policy to create an account.");return}
 
   await createUserWithEmailAndPassword(auth,e,p);
   await setDoc(doc(firestore,"paidUsers",e),{paid:false,timestamp:serverTimestamp()});
@@ -884,16 +829,12 @@ continueSignupBtn.onclick=async()=>{
   document.querySelector("#planModal h2").textContent = "Account Created! Choose Your Plan";
   signupModal.style.display="none";
   planModal.style.display="flex";
-  initPayPalButtons(); // Deferred render ensures container elements exist
 };
 
 document.getElementById("yearlyBtn").onclick=()=>{window.open("https://buy.stripe.com/3cI3co1fufRi5Vk3S2ejK0k");planModal.style.display="none";}
 document.getElementById("lifeBtn").onclick=()=>{window.open("https://buy.stripe.com/fZu9AMcYc48AgzY1JUejK0j","_blank");planModal.style.display="none";}
 
 modalLoginBtn.onclick=async()=>{
-  const loginEmail = document.getElementById("loginEmail");
-  const loginPassword = document.getElementById("loginPassword");
-  
   const e=loginEmail.value.trim().toLowerCase(),p=loginPassword.value.trim();
   await signInWithEmailAndPassword(auth,e,p);
   const snap=await getDoc(doc(firestore,"paidUsers",e));
@@ -901,16 +842,108 @@ modalLoginBtn.onclick=async()=>{
     localStorage.setItem("lolfundamentals_logged_in","true");
     localStorage.setItem("lolfundamentals_paid","true");
     window.location.href="membershub.html";
+  }else{
+    planModal.style.display="flex";
   }
+  loginModal.style.display="none";
 };
 
 resetLinkModal.onclick=async(e)=>{
   e.preventDefault();
-  const email = document.getElementById("loginEmail").value.trim().toLowerCase();
-  if(!email){alert("Please enter your email above first.");return}
-  await sendPasswordResetEmail(auth, email);
-  alert("Password reset email sent!");
+  await sendPasswordResetEmail(auth,loginEmail.value);
+  loginMsgModal.textContent="Password reset email sent!";
 };
+
+// Locked card click opens signup modal
+document.querySelectorAll('.locked').forEach(card=>{
+  card.addEventListener('click',()=>{signupModal.style.display='flex'});
+});
+
+// PayPal Button Initializer Routine
+function initPayPal() {
+  if (!window.paypal) {
+    setTimeout(initPayPal, 100);
+    return;
+  }
+
+  // 1. Annual Plan PayPal Subscription Button
+  const yearlyContainer = document.getElementById('paypal-button-container-yearly');
+  if (yearlyContainer && !yearlyContainer.hasChildNodes()) {
+    paypal.Buttons({
+      style: { shape: 'rect', color: 'gold', layout: 'vertical', height: 40, label: 'subscribe' },
+      createSubscription: function(data, actions) {
+        return actions.subscription.create({
+          'plan_id': 'P-87574744Y2341233KNJMJGCQ'
+        });
+      },
+      onApprove: async function(data, actions) {
+        const currentUser = auth.currentUser;
+        const targetEmail = currentUser ? currentUser.email : localStorage.getItem("pendingUserEmail");
+
+        if (targetEmail) {
+          await setDoc(doc(firestore, "paidUsers", targetEmail.toLowerCase()), {
+            email: targetEmail.toLowerCase(),
+            paid: true,
+            provider: "paypal",
+            isLifetime: false,
+            productId: "PROD-98S6431562918140K",
+            planId: "P-87574744Y2341233KNJMJGCQ",
+            productName: "Annual Membership $39.99/yr",
+            subscriptionId: data.subscriptionID,
+            updatedAt: serverTimestamp()
+          }, { merge: true });
+
+          localStorage.setItem("lolfundamentals_logged_in", "true");
+          localStorage.setItem("lolfundamentals_paid", "true");
+          window.location.href = "membershub.html";
+        }
+      }
+    }).render('#paypal-button-container-yearly');
+  }
+
+  // 2. Lifetime Access PayPal One-Time Payment Button
+  const lifetimeContainer = document.getElementById('paypal-button-container-lifetime');
+  if (lifetimeContainer && !lifetimeContainer.hasChildNodes()) {
+    paypal.Buttons({
+      style: { shape: 'rect', color: 'gold', layout: 'vertical', height: 40, label: 'paypal' },
+      createOrder: function(data, actions) {
+        return actions.order.create({
+          purchase_units: [{
+            description: "LoL Fundamentals - Lifetime Access",
+            amount: { value: "99.99" },
+            custom_id: "lifetime_access_9999"
+          }]
+        });
+      },
+      onApprove: async function(data, actions) {
+        const details = await actions.order.capture();
+        const currentUser = auth.currentUser;
+        const targetEmail = currentUser ? currentUser.email : localStorage.getItem("pendingUserEmail");
+
+        if (targetEmail) {
+          await setDoc(doc(firestore, "paidUsers", targetEmail.toLowerCase()), {
+            email: targetEmail.toLowerCase(),
+            paid: true,
+            provider: "paypal",
+            isLifetime: true,
+            productId: "lifetime_access_9999",
+            productName: "Lifetime Access $99.99",
+            orderId: details.id,
+            updatedAt: serverTimestamp()
+          }, { merge: true });
+
+          localStorage.setItem("lolfundamentals_logged_in", "true");
+          localStorage.setItem("lolfundamentals_paid", "true");
+          window.location.href = "membershub.html";
+        }
+      }
+    }).render('#paypal-button-container-lifetime');
+  }
+}
+
+// Execute PayPal rendering
+initPayPal();
+
 </script>
 </body>
 </html>
