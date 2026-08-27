@@ -220,11 +220,6 @@ header{background:linear-gradient(90deg,#0a0f14,#1b2838);border-bottom:2px solid
   width: 100%;
 }
 
-/* Hide payment options when view-only class is applied */
-#planModal.view-only .plan-card-footer {
-  display: none;
-}
-
 .stripe-btn {
   background: linear-gradient(135deg, #635bff 0%, #4b45e4 100%);
   color: #ffffff;
@@ -760,7 +755,6 @@ closePlanModal.onclick=()=>planModal.style.display="none";
 closeLoginModal.onclick=()=>loginModal.style.display="none";
 seePlansBtn.onclick=()=>{
   document.querySelector("#planModal h2").textContent = "Available Plans";
-  planModal.classList.add("view-only");
   signupModal.style.display="none";
   planModal.style.display="flex";
 };
@@ -852,7 +846,6 @@ continueSignupBtn.onclick=async()=>{
   
   localStorage.setItem("pendingUserEmail", e);
   document.querySelector("#planModal h2").textContent = "Account Created! Choose Your Plan";
-  planModal.classList.remove("view-only");
   signupModal.style.display="none";
   planModal.style.display="flex";
 };
@@ -881,7 +874,6 @@ modalLoginBtn.onclick=async()=>{
     localStorage.setItem("lolfundamentals_paid","true");
     window.location.href="membershub.html";
   }else{
-    planModal.classList.remove("view-only");
     planModal.style.display="flex";
   }
   loginModal.style.display="none";
