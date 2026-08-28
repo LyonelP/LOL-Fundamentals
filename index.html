@@ -188,6 +188,7 @@ header{background:linear-gradient(90deg,#0a0f14,#1b2838);border-bottom:2px solid
 .modalContent #closeSignupModal,
 .modalContent #closeLoginModal,
 .modalContent #closeLegalModal,
+.modalContent #closeResetModal,
 #closeTrailerModal {
   margin-top:15px;
   background:none;
@@ -204,6 +205,7 @@ header{background:linear-gradient(90deg,#0a0f14,#1b2838);border-bottom:2px solid
 .modalContent #closeSignupModal:hover,
 .modalContent #closeLoginModal:hover,
 .modalContent #closeLegalModal:hover,
+.modalContent #closeResetModal:hover,
 #closeTrailerModal:hover {
   text-decoration:underline;
 }
@@ -650,9 +652,35 @@ footer a:hover{text-decoration:underline}
 <input type="password" id="loginPassword" placeholder="Enter your password"/>
 <button class="btn" id="modalLoginBtn">Login</button>
 <button id="closeLoginModal">Cancel</button>
-<p><a href="#" id="resetLinkModal">Forgot your password?</a></p>
-<p id="loginMsgModal"></p>
+<p style="margin-top:15px;"><a href="#" id="resetLinkModal">Forgot your password?</a></p>
 </div>
+</div>
+
+<!-- Password Reset Modal -->
+<div id="resetModal" class="modal">
+  <div class="modalContent">
+    <h2>Reset Your Password</h2>
+    <p style="color:#cfe1ee; font-size:0.95rem; margin-top:-8px;">
+      Enter your account email address below and we'll send you a link to reset your password.
+    </p>
+    
+    <div id="resetFormArea">
+      <input type="email" id="resetEmailInput" placeholder="Enter your email" />
+      <button class="btn" id="sendResetBtn" style="margin-top:10px;">Send Reset Link</button>
+    </div>
+
+    <!-- Success View -->
+    <div id="resetSuccessArea" style="display:none; margin-top:15px;">
+      <p style="color:#64b5f6; font-weight:bold; font-size:1.05rem;">
+        ✓ Reset Link Sent!
+      </p>
+      <p style="color:#d0d8e0; font-size:0.9rem;">
+        Check your inbox (and spam folder) for instructions to reset your password.
+      </p>
+    </div>
+
+    <button id="closeResetModal">Cancel</button>
+  </div>
 </div>
 
 <div id="trailerModal" class="modal">
@@ -811,6 +839,54 @@ seePlansBtn.onclick=()=>{
   planModal.style.display="flex";
 };
 
+/* Password Reset Modal Logic */
+const resetModal = document.getElementById("resetModal");
+const resetLinkModal = document.getElementById("resetLinkModal");
+const closeResetModal = document.getElementById("closeResetModal");
+const sendResetBtn = document.getElementById("sendResetBtn");
+const resetEmailInput = document.getElementById("resetEmailInput");
+const resetFormArea = document.getElementById("resetFormArea");
+const resetSuccessArea = document.getElementById("resetSuccessArea");
+
+resetLinkModal.onclick = (e) => {
+  e.preventDefault();
+  loginModal.style.display = "none";
+  
+  const existingEmail = document.getElementById("loginEmail").value.trim();
+  if (existingEmail) {
+    resetEmailInput.value = existingEmail;
+  }
+  
+  resetFormArea.style.display = "block";
+  resetSuccessArea.style.display = "none";
+  closeResetModal.textContent = "Cancel";
+  
+  resetModal.style.display = "flex";
+};
+
+closeResetModal.onclick = () => {
+  resetModal.style.display = "none";
+  loginModal.style.display = "flex";
+};
+
+sendResetBtn.onclick = async () => {
+  const email = resetEmailInput.value.trim().toLowerCase();
+  
+  if (!email) {
+    alert("Please enter your email address.");
+    return;
+  }
+
+  try {
+    await sendPasswordResetEmail(auth, email);
+    resetFormArea.style.display = "none";
+    resetSuccessArea.style.display = "block";
+    closeResetModal.textContent = "Back to Login";
+  } catch (error) {
+    alert("Error sending reset email: " + error.message);
+  }
+};
+
 /* Legal Popup Handlers */
 const termsText = `
   <h3 style="color:#c9aa71;margin-top:0;">Terms of Service Summary</h3>
@@ -932,12 +1008,6 @@ modalLoginBtn.onclick=async()=>{
     planModal.style.display="flex";
   }
   loginModal.style.display="none";
-};
-
-resetLinkModal.onclick=async(e)=>{
-  e.preventDefault();
-  await sendPasswordResetEmail(auth,loginEmail.value);
-  loginMsgModal.textContent="Password reset email sent!";
 };
 
 document.querySelectorAll('.locked').forEach(card=>{
