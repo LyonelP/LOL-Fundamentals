@@ -193,7 +193,7 @@ header{background:linear-gradient(90deg,#0a0f14,#1b2838);border-bottom:2px solid
   font-size:0.95rem;
 }
 
-/* Plan Card Base & Hover Styling matching Hub Cards */
+/* Base Plan Card Style */
 .plan-card {
   background: #0d1117;
   border: 2px solid #30363d;
@@ -206,11 +206,20 @@ header{background:linear-gradient(90deg,#0a0f14,#1b2838);border-bottom:2px solid
   box-shadow: 0 4px 15px rgba(0,0,0,0.3);
   transition: transform .25s ease, box-shadow .25s ease, border-color 0.25s ease;
   box-sizing: border-box;
-  cursor: pointer;
 }
 
 .plan-card.featured {
   border-color: #c9aa71;
+}
+
+/* Hover effect active ONLY when modal has the .view-only class (View Plans mode) */
+#planModal.view-only .plan-card {
+  cursor: pointer;
+}
+
+#planModal.view-only .plan-card:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 12px 26px rgba(201,170,113,0.5);
 }
 
 .plan-card-body {
