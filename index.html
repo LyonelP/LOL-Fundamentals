@@ -24,8 +24,10 @@ header{background:linear-gradient(90deg,#0a0f14,#1b2838);border-bottom:2px solid
 .hero p{max-width:650px;margin:0 auto 20px;font-size:1.15em;color:#d0d8e0;text-shadow:0 0 14px rgba(0,0,0,.7)}
 .btn{display:inline-block;background:#2f81f7;color:#fff;padding:14px 26px;border-radius:6px;text-decoration:none;font-weight:bold;font-size:1.05em;transition:.3s;border:1px solid #c9aa71;box-shadow:0 0 15px rgba(47,129,247,.4);cursor:pointer}
 .btn:hover{background:#4795ff;box-shadow:0 0 25px rgba(47,129,247,.55)}
-.orangeBtn{background:#f2994a;border-color:#f2b96d;position:relative}
-.orangeBtn:hover{background:#ffb04d;box-shadow:0 0 25px rgba(242,153,74,.55)}
+
+/* Gold Trailer Button Styling */
+.orangeBtn{background:#c9aa71;color:#0a0f14;border-color:#f2b96d;position:relative}
+.orangeBtn:hover{background:#e0c187;color:#0a0f14;box-shadow:0 0 25px rgba(201,170,113,.6)}
 
 @keyframes auraPulse{0%{opacity:.25;transform:scale(1)}50%{opacity:.45;transform:scale(1.1)}100%{opacity:.25;transform:scale(1)}}
 
@@ -191,6 +193,7 @@ header{background:linear-gradient(90deg,#0a0f14,#1b2838);border-bottom:2px solid
   font-size:0.95rem;
 }
 
+/* Plan Card Base & Hover Styling matching Hub Cards */
 .plan-card {
   background: #0d1117;
   border: 2px solid #30363d;
@@ -201,8 +204,14 @@ header{background:linear-gradient(90deg,#0a0f14,#1b2838);border-bottom:2px solid
   flex-direction: column;
   justify-content: space-between;
   box-shadow: 0 4px 15px rgba(0,0,0,0.3);
-  transition: border-color 0.25s ease;
+  transition: transform .25s ease, box-shadow .25s ease, border-color 0.25s ease;
   box-sizing: border-box;
+  cursor: pointer;
+}
+
+.plan-card:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 12px 26px rgba(201,170,113,0.5);
 }
 
 .plan-card.featured {
@@ -368,8 +377,8 @@ footer a:hover{text-decoration:underline}
 <button class="btn" id="signupHeroBtn">Sign Up</button>
 <button class="btn" id="loginHeroBtn" style="margin-left:10px;">Login</button>
 <button class="btn orangeBtn" id="trailerBtn" style="margin-left:10px;">
-    Watch Trailer
-  </button>
+    <span style="font-size:0.85em; margin-right:4px;">▶</span> Watch Trailer
+</button>
 </div>
 </section>
 
