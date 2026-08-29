@@ -60,9 +60,14 @@ header {
   text-decoration: none;
   border-radius: 8px;
   font-weight: bold;
+  transition: all 0.3s;
   box-shadow: 0 0 10px rgba(201,170,113,0.5);
 }
 .back-button::before { content: "← "; }
+.back-button:hover {
+  background: linear-gradient(135deg, #e6c97f, #f0d88b);
+  box-shadow: 0 0 15px rgba(255,215,0,0.8);
+}
 
 .main-content {
   flex: 1;
@@ -82,8 +87,19 @@ header {
   max-width: 900px;
   width: 90%;
   text-align: left;
+  font-size: 16px;
+  line-height: 1.6;
+  opacity: 0;
+  transform: translateY(10px);
   animation: fadeInUp 0.4s forwards;
 }
+
+/* Staggered animation delays */
+.tip-card:nth-child(1) { animation-delay: 0.1s; }
+.tip-card:nth-child(2) { animation-delay: 0.25s; }
+.tip-card:nth-child(3) { animation-delay: 0.4s; }
+.tip-card:nth-child(4) { animation-delay: 0.55s; }
+.tip-card:nth-child(5) { animation-delay: 0.7s; }
 
 /* DEFAULT HEADER = UNDERLINED */
 .tip-card h2 {
@@ -100,27 +116,38 @@ header {
   border-bottom: none;
 }
 
-/* VIDEO */
-.video-container {
-  margin-top: 10px;
+/* VIDEO CONTAINER */
+.tip-card .video-container {
+  text-align: center;
+  margin-top: 15px;
 }
 
-.video-container iframe {
+.tip-card .video-container iframe {
   width: 100%;
+  max-width: 800px;
   height: 450px;
   border: none;
   border-radius: 8px;
+  transition: all 0.3s;
 }
 
-/* animation */
+.tip-card .video-container:hover {
+  box-shadow: 0 0 20px rgba(201,170,113,0.8);
+  border-radius: 8px;
+}
+
+/* Animation */
 @keyframes fadeInUp {
-  to { opacity: 1; transform: translateY(0); }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
 
 footer {
   text-align: center;
   margin-top: auto;
-  padding: 15px;
+  padding: 15px 10px;
   font-size: 14px;
   color: #fff;
 }
@@ -130,9 +157,10 @@ footer {
   .tip-card {
     width: 90%;
     padding: 14px 16px;
+    font-size: 15px;
   }
-  .video-container iframe {
-    height: 220px;
+  .tip-card .video-container iframe {
+    height: 250px;
   }
 }
 </style>
@@ -154,8 +182,8 @@ footer {
     </p>
   </div>
 
-   <!-- VIDEO CARD -->
-  <div class="tip-card video" style="animation-delay:0.1s;">
+  <!-- VIDEO CARD -->
+  <div class="tip-card video">
     <h2>Intro to Strong Side</h2>
 
     <div class="video-container">
