@@ -75,6 +75,7 @@ header {
   color: #c9aa71;
   font-weight: bold;
   cursor: pointer;
+  transition: all 0.25s;
 }
 .tab.active {
   background: linear-gradient(135deg, #c9aa71, #e0c77b);
@@ -126,8 +127,27 @@ header {
   width: 56vw;
   max-width: 900px;
   box-shadow: 0 4px 12px rgba(0,0,0,0.5);
+  transition: transform 0.25s, box-shadow 0.3s;
 }
-.skill-list li a { text-decoration: none; color: #fff; flex-grow: 1; text-align: center; }
+
+.skill-list li:hover {
+  background: rgba(0,0,0,0.95);
+  transform: scale(1.03);
+  box-shadow: 0 8px 20px rgba(0,0,0,0.7);
+}
+
+.skill-list li a { 
+  text-decoration: none; 
+  color: #fff; 
+  flex-grow: 1; 
+  text-align: center; 
+  transition: color 0.3s;
+}
+
+.skill-list li a:hover {
+  color: #c9aa71;
+}
+
 .skill-list li a.locked::after { content: "🔒"; margin-left: 10px; }
 .checkmark {
   width: 26px; height: 26px;
@@ -135,6 +155,7 @@ header {
   border: 2px solid #c9aa71;
   display: flex; justify-content: center; align-items: center;
   color: #c9aa71; font-size: 18px; cursor: pointer;
+  flex-shrink: 0;
 }
 .checkmark.completed { background: #c9aa71; color: #000; }
 
@@ -296,5 +317,3 @@ document.querySelectorAll('.tab').forEach(t => {
 
 </body>
 </html>
-
-
