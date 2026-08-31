@@ -145,7 +145,8 @@ header {
 
 .video-card iframe {
   width: 100%;
-  height: 480px;
+  aspect-ratio: 16 / 9;
+  height: auto;
   border: none;
   border-radius: 12px;
 }
@@ -166,8 +167,11 @@ footer {
     align-items: center;
   }
 
-  .video-card iframe {
-    height: 240px;
+  .video-card {
+    padding: 12px;
+    margin: 20px 8px;
+    width: calc(100% - 16px);
+    box-sizing: border-box;
   }
 }
 </style>
