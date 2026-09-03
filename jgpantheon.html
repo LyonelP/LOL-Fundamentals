@@ -1,11 +1,9 @@
 <!DOCTYPE html>
-
 <html lang="en">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Pantheon Jungle Matchup</title>
-
 <link rel="icon" type="image/png" href="/favicon.png">
 <link rel="apple-touch-icon" href="/favicon.png">
 
@@ -29,6 +27,7 @@ body {
   flex-direction: column;
 }
 
+/* HEADER */
 header {
   background: rgba(13,17,23,0.9);
   border-bottom: 2px solid var(--gold);
@@ -41,6 +40,7 @@ header {
   letter-spacing: 0.8px;
 }
 
+/* BACK BUTTON */
 .back-button {
   display: block;
   margin: 18px auto;
@@ -53,17 +53,16 @@ header {
   box-shadow: 0 0 10px rgba(201,170,113,0.5);
   width: fit-content;
 }
+.back-button::before { content: "← "; }
 
-.back-button::before {
-  content: "← ";
-}
-
+/* CONTENT WIDTH */
 .content-width {
   max-width: 920px;
   margin: 0 auto;
   padding: 0 20px;
 }
 
+/* MATCHUP CARD */
 .matchup-container {
   display: flex;
   gap: 28px;
@@ -76,6 +75,7 @@ header {
     inset 0 0 0 1px rgba(255,255,255,0.02);
 }
 
+/* LEFT */
 .matchup-left {
   display: flex;
   flex-direction: column;
@@ -91,6 +91,7 @@ header {
   box-shadow: 0 0 28px rgba(201,170,113,0.45);
 }
 
+/* WINRATE (LIGHT GREEN STYLE) */
 .winrate-bubble {
   background: rgba(134,239,172,0.15);
   color: var(--light-green);
@@ -102,6 +103,7 @@ header {
   letter-spacing: 0.5px;
 }
 
+/* RIGHT */
 .matchup-right {
   flex: 1;
 }
@@ -124,6 +126,7 @@ header {
   line-height: 1.65;
 }
 
+/* SECTION CARD */
 .section-card {
   margin-top: 28px;
   padding: 26px;
@@ -132,120 +135,79 @@ header {
   border: 1px solid rgba(201,170,113,0.18);
 }
 
-.section-card h2 {
-  margin: 0 0 16px 0;
-  font-size: 22px;
-  color: var(--gold);
-  padding-bottom: 8px;
-  border-bottom: 1px solid rgba(201,170,113,0.25);
-}
-
-.section-card p {
-  margin: 0;
-  line-height: 1.65;
-}
-
-.ward-image {
-  display: block;
-  width: 100%;
-  max-width: 700px;
-  height: auto;
-  margin: 10px auto 0;
-  border-radius: 12px;
-}
-
+/* FOOTER */
 footer {
-  margin-top: auto;
-  padding: 28px 20px;
   text-align: center;
+  padding: 18px 10px;
+  font-size: 14px;
   color: var(--muted);
-  font-size: 12px;
+  margin-top: auto;
 }
 
+/* MOBILE */
 @media (max-width: 600px) {
   .matchup-container {
     flex-direction: column;
-    gap: 20px;
+    align-items: center;
   }
 
-  .matchup-left {
-    align-items: flex-start;
-  }
-
-  .matchup-left img {
-    width: 82px;
-    height: 82px;
+  .matchup-right {
+    text-align: center;
   }
 }
 </style>
-
-</head>
-
-<body>
-
-<header>
-  Pantheon Jungle Matchup
-</header>
-
-<a href="jgmatchups.html" class="back-button">Back to Jungle Matchups</a>
-
-<main class="content-width">
-
-  <div class="matchup-container">
-
-<div class="matchup-left">
-  <img
-    src="https://ddragon.leagueoflegends.com/cdn/14.23.1/img/champion/Pantheon.png"
-    alt="Pantheon"
-  >
-
-  <div class="winrate-bubble">
-    52% Winrate
-  </div>
-</div>
-
-<div class="matchup-right">
-  <h2>Matchup Notes</h2>
-
-  <ul>
-    <li>This is a great matchup for Ekko. If he tries to jump on you, you can throw your Q. When he uses shield, you can hold your E and passive proc until its over and you have the ult advantage.</li>
-    <li>His best play is using his ult behind you especially as a counter gank. This makes it hard to find a good ult.</li>
-  </ul>
-</div>
-
-  </div>
-
-  <div class="section-card">
-    <h2>Level 1 Ward</h2>
-
-<img
-  class="ward-image"
-  src="bananaward.png"
-  alt="Level 1 Ward"
->
-
-  </div>
-
-  <div class="section-card">
-    <h2>Where to Start</h2>
-
-<p>
-  Start raptors or red
-</p>
-
-  </div>
-
-</main>
-
-<footer>
-  © 2026 LoL Fundamentals. Not affiliated with or endorsed by Riot Games. League of Legends is a trademark of Riot Games, Inc.
-</footer>
 
 <script>
 if (localStorage.getItem('lolfundamentals_logged_in') !== 'true') {
   window.location.href = 'login.html';
 }
 </script>
+
+</head>
+<body>
+
+<header>Pantheon Jungle Matchup</header>
+
+<a href="jgmatchups.html" class="back-button">Back to Matchup Hub</a>
+
+<div class="content-width">
+
+  <div class="matchup-container">
+    <div class="matchup-left">
+      <img src="https://ddragon.leagueoflegends.com/cdn/14.23.1/img/champion/Pantheon.png" alt="Pantheon">
+      <div class="winrate-bubble">50%</div>
+    </div>
+
+    <div class="matchup-right">
+      <h2>Matchup Notes</h2>
+      <ul>
+        <ul>
+    <li>This is a great matchup for Ekko. If he tries to jump on you, you can throw your Q. When he uses shield, you can hold your E and passive proc until its over and you have the ult advantage.</li>
+    <li>His best play is using his ult behind you especially as a counter gank. This makes it hard to find a good ult.</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="section-card">
+    <h2 style="color: var(--gold); margin-top:0;">Level 1 Ward</h2>
+    <p>
+      Ward blue side entrance
+    </p>
+    <img src="bananaward.png"
+         alt="Pantheon warding setup"
+         style="width:100%; border-radius:12px; border:1px solid rgba(201,170,113,0.25);">
+  </div>
+
+  <div class="section-card">
+    <h2 style="color: var(--gold); margin-top:0;">Where to Start</h2>
+    <p>
+      Start raptors or red
+    </p>
+  </div>
+
+</div>
+
+<footer>© 2026 LoL Fundamentals · All rights reserved</footer>
 
 </body>
 </html>
