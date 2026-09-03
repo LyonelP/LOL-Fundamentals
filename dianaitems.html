@@ -140,6 +140,24 @@
     outline: none;
   }
 
+  .checkbox-label {
+    display: flex !important;
+    align-items: center;
+    gap: 10px;
+    cursor: pointer;
+    user-select: none;
+    text-transform: none !important;
+    font-size: 15px !important;
+    margin-bottom: 0 !important;
+  }
+
+  .checkbox-label input[type="checkbox"] {
+    width: 18px;
+    height: 18px;
+    accent-color: var(--gold);
+    cursor: pointer;
+  }
+
   .top-row {
     display: flex;
     gap: 15px;
@@ -384,6 +402,14 @@
 <div class="card">
   <label>Diana Level</label>
   <select id="diana-level"></select>
+</div>
+
+<!-- Added Mid Lane Quest Checkbox Card -->
+<div class="card">
+  <label class="checkbox-label">
+    <input type="checkbox" id="mid-quest-check">
+    <span>Mid Lane Quest (+8% AP)</span>
+  </label>
 </div>
 
 <div class="card ability-card">
@@ -635,6 +661,11 @@ function getItemStats(){
     totalAP = (totalAP + 130) * 1.30;
   }
 
+  const midQuestActive = document.getElementById("mid-quest-check")?.checked;
+  if(midQuestActive){
+    totalAP = totalAP * 1.08;
+  }
+
   return {totalAP:Math.round(totalAP), flatPen, percPen};
 }
 
@@ -773,6 +804,7 @@ document.addEventListener("DOMContentLoaded",()=>{
   populateRanksAndUses();
   updateItemStats();
   
+  document.getElementById("mid-quest-check").addEventListener("change", updateItemStats);
   document.getElementById("calculate-btn").addEventListener("click", calculateCombo);
 });
 </script>
