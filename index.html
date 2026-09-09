@@ -840,6 +840,12 @@ function closeAllModalsDirect() {
   });
 }
 
+function switchModal(fromModal, toModal) {
+  fromModal.style.display = "none";
+  if (fromModal === trailerModal && trailerFrame) trailerFrame.src = "";
+  toModal.style.display = "flex";
+}
+
 window.addEventListener("popstate", (e) => {
   isClosingModalByHistory = true;
   closeAllModalsDirect();
@@ -872,8 +878,7 @@ closeLoginModal.onclick=()=>hideModal(loginModal);
 seePlansBtn.onclick=()=>{
   document.querySelector("#planModal h2").textContent = "Available Plans";
   planModal.classList.add("view-only");
-  hideModal(signupModal);
-  showModal(planModal);
+  switchModal(signupModal, planModal);
 };
 
 /* Enter Key Handlers for Login, Signup, and Reset */
@@ -906,7 +911,6 @@ const resetSuccessArea = document.getElementById("resetSuccessArea");
 
 resetLinkModal.onclick = (e) => {
   e.preventDefault();
-  hideModal(loginModal);
   
   const existingEmail = document.getElementById("loginEmail").value.trim();
   if (existingEmail) {
@@ -917,12 +921,11 @@ resetLinkModal.onclick = (e) => {
   resetSuccessArea.style.display = "none";
   closeResetModal.textContent = "Cancel";
   
-  showModal(resetModal);
+  switchModal(loginModal, resetModal);
 };
 
 closeResetModal.onclick = () => {
-  hideModal(resetModal);
-  showModal(loginModal);
+  switchModal(resetModal, loginModal);
 };
 
 sendResetBtn.onclick = async () => {
@@ -978,8 +981,7 @@ const tabTerms = document.getElementById("tabTerms");
 const tabPrivacy = document.getElementById("tabPrivacy");
 
 function openLegalModal(tab) {
-  hideModal(signupModal);
-  showModal(legalModal);
+  switchModal(signupModal, legalModal);
 
   if (tab === 'terms') {
     tabTerms.classList.add('active');
@@ -1013,8 +1015,7 @@ tabPrivacy.onclick = (e) => {
 };
 
 document.getElementById("closeLegalModal").onclick = () => {
-  hideModal(legalModal);
-  showModal(signupModal);
+  switchModal(legalModal, signupModal);
 };
 
 continueSignupBtn.onclick=async()=>{
@@ -1025,14 +1026,17 @@ continueSignupBtn.onclick=async()=>{
   if(p!==c){alert("Passwords do not match");return}
   if(!agreeTerms){alert("You must agree to the Terms of Service & Privacy Policy to create an account.");return}
 
-  await createUserWithEmailAndPassword(auth,e,p);
-  await setDoc(doc(firestore,"paidUsers",e),{paid:false,timestamp:serverTimestamp()});
-  
-  localStorage.setItem("pendingUserEmail", e);
-  document.querySelector("#planModal h2").textContent = "Account Created! Choose Your Plan";
-  planModal.classList.remove("view-only");
-  hideModal(signupModal);
-  showModal(planModal);
+  try {
+    await createUserWithEmailAndPassword(auth,e,p);
+    await setDoc(doc(firestore,"paidUsers",e),{paid:false,timestamp:serverTimestamp()});
+    
+    localStorage.setItem("pendingUserEmail", e);
+    document.querySelector("#planModal h2").textContent = "Account Created! Choose Your Plan";
+    planModal.classList.remove("view-only");
+    switchModal(signupModal, planModal);
+  } catch (err) {
+    alert("Signup Error: " + err.message);
+  }
 };
 
 // Original Stripe Links setup to open via Popups
@@ -1052,18 +1056,26 @@ document.getElementById("coachingCard").onclick = () => {
 
 modalLoginBtn.onclick=async()=>{
   const e=loginEmail.value.trim().toLowerCase(),p=loginPassword.value.trim();
-  await signInWithEmailAndPassword(auth,e,p);
-  const snap=await getDoc(doc(firestore,"paidUsers",e));
-  if(snap.exists() && snap.data().paid){
-    localStorage.setItem("lolfundamentals_logged_in","true");
-    localStorage.setItem("lolfundamentals_paid","true");
-    window.location.href="membershub.html";
-  }else{
-    document.querySelector("#planModal h2").textContent = "Account Created! Choose Your Plan";
-    planModal.classList.remove("view-only");
-    showModal(planModal);
+  if(!e || !p) {
+    alert("Please enter both email and password.");
+    return;
   }
-  hideModal(loginModal);
+
+  try {
+    await signInWithEmailAndPassword(auth,e,p);
+    const snap=await getDoc(doc(firestore,"paidUsers",e));
+    if(snap.exists() && snap.data().paid){
+      localStorage.setItem("lolfundamentals_logged_in","true");
+      localStorage.setItem("lolfundamentals_paid","true");
+      window.location.href="membershub.html";
+    }else{
+      document.querySelector("#planModal h2").textContent = "Account Created! Choose Your Plan";
+      planModal.classList.remove("view-only");
+      switchModal(loginModal, planModal);
+    }
+  } catch (err) {
+    alert("Login Error: " + err.message);
+  }
 };
 
 document.querySelectorAll('.locked').forEach(card=>{
