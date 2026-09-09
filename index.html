@@ -809,6 +809,43 @@ if (isLoggedIn && isPaid) {
   document.getElementById("trailerBtn").style.display = "none";
 }
 
+/* History / Back Navigation Management for Modals */
+let isClosingModalByHistory = false;
+
+function showModal(modalElement) {
+  modalElement.style.display = "flex";
+  history.pushState({ modalOpen: true, modalId: modalElement.id }, "");
+}
+
+function hideModal(modalElement) {
+  if (modalElement.style.display === "none" || !modalElement.style.display) return;
+  modalElement.style.display = "none";
+  if (modalElement === trailerModal && trailerFrame) {
+    trailerFrame.src = "";
+  }
+  if (!isClosingModalByHistory) {
+    if (history.state && history.state.modalOpen) {
+      history.back();
+    }
+  }
+}
+
+function closeAllModalsDirect() {
+  const modals = document.querySelectorAll(".modal");
+  modals.forEach(m => {
+    if (m.style.display === "flex") {
+      m.style.display = "none";
+      if (m === trailerModal && trailerFrame) trailerFrame.src = "";
+    }
+  });
+}
+
+window.addEventListener("popstate", (e) => {
+  isClosingModalByHistory = true;
+  closeAllModalsDirect();
+  isClosingModalByHistory = false;
+});
+
 const trailerModal = document.getElementById("trailerModal");
 const trailerFrame = document.getElementById("trailerFrame");
 const trailerBtn = document.getElementById("trailerBtn");
@@ -816,28 +853,47 @@ const closeTrailerModal = document.getElementById("closeTrailerModal");
 
 trailerBtn.onclick = () => {
   trailerFrame.src = "https://www.youtube.com/embed/bDWycppYdxI?autoplay=1";
-  trailerModal.style.display = "flex";
+  showModal(trailerModal);
 };
 
 closeTrailerModal.onclick = () => {
-  trailerModal.style.display = "none";
-  trailerFrame.src = "";
+  hideModal(trailerModal);
 };
 
 const firebaseConfig={apiKey:"AIzaSyCFRcEV7wdivqONnkjJubAZOjPMixrHMBI",authDomain:"lol-fundamentals.firebaseapp.com",projectId:"lol-fundamentals",storageBucket:"lol-fundamentals.firebasestorage.app",messagingSenderId:"1038440427584",appId:"1:1038440427584:web:a82207151fd370dbedefa5"};
 const app=initializeApp(firebaseConfig),auth=getAuth(app),firestore=getFirestore(app);
 
-signupHeroBtn.onclick=()=>signupModal.style.display="flex";
-loginHeroBtn.onclick=()=>loginModal.style.display="flex";
-closeSignupModal.onclick=()=>signupModal.style.display="none";
-closePlanModal.onclick=()=>planModal.style.display="none";
-closeLoginModal.onclick=()=>loginModal.style.display="none";
+signupHeroBtn.onclick=()=>showModal(signupModal);
+loginHeroBtn.onclick=()=>showModal(loginModal);
+closeSignupModal.onclick=()=>hideModal(signupModal);
+closePlanModal.onclick=()=>hideModal(planModal);
+closeLoginModal.onclick=()=>hideModal(loginModal);
+
 seePlansBtn.onclick=()=>{
   document.querySelector("#planModal h2").textContent = "Available Plans";
   planModal.classList.add("view-only");
-  signupModal.style.display="none";
-  planModal.style.display="flex";
+  hideModal(signupModal);
+  showModal(planModal);
 };
+
+/* Enter Key Handlers for Login, Signup, and Reset */
+function addEnterKeyHandler(inputIds, buttonId) {
+  inputIds.forEach(id => {
+    const el = document.getElementById(id);
+    if (el) {
+      el.addEventListener("keydown", (e) => {
+        if (e.key === "Enter") {
+          e.preventDefault();
+          document.getElementById(buttonId).click();
+        }
+      });
+    }
+  });
+}
+
+addEnterKeyHandler(["loginEmail", "loginPassword"], "modalLoginBtn");
+addEnterKeyHandler(["signupEmail", "signupPassword", "signupPasswordConfirm"], "continueSignupBtn");
+addEnterKeyHandler(["resetEmailInput"], "sendResetBtn");
 
 /* Password Reset Modal Logic */
 const resetModal = document.getElementById("resetModal");
@@ -850,7 +906,7 @@ const resetSuccessArea = document.getElementById("resetSuccessArea");
 
 resetLinkModal.onclick = (e) => {
   e.preventDefault();
-  loginModal.style.display = "none";
+  hideModal(loginModal);
   
   const existingEmail = document.getElementById("loginEmail").value.trim();
   if (existingEmail) {
@@ -861,12 +917,12 @@ resetLinkModal.onclick = (e) => {
   resetSuccessArea.style.display = "none";
   closeResetModal.textContent = "Cancel";
   
-  resetModal.style.display = "flex";
+  showModal(resetModal);
 };
 
 closeResetModal.onclick = () => {
-  resetModal.style.display = "none";
-  loginModal.style.display = "flex";
+  hideModal(resetModal);
+  showModal(loginModal);
 };
 
 sendResetBtn.onclick = async () => {
@@ -922,8 +978,8 @@ const tabTerms = document.getElementById("tabTerms");
 const tabPrivacy = document.getElementById("tabPrivacy");
 
 function openLegalModal(tab) {
-  signupModal.style.display = "none";
-  legalModal.style.display = "flex";
+  hideModal(signupModal);
+  showModal(legalModal);
 
   if (tab === 'terms') {
     tabTerms.classList.add('active');
@@ -957,8 +1013,8 @@ tabPrivacy.onclick = (e) => {
 };
 
 document.getElementById("closeLegalModal").onclick = () => {
-  legalModal.style.display = "none";
-  signupModal.style.display = "flex";
+  hideModal(legalModal);
+  showModal(signupModal);
 };
 
 continueSignupBtn.onclick=async()=>{
@@ -975,19 +1031,19 @@ continueSignupBtn.onclick=async()=>{
   localStorage.setItem("pendingUserEmail", e);
   document.querySelector("#planModal h2").textContent = "Account Created! Choose Your Plan";
   planModal.classList.remove("view-only");
-  signupModal.style.display="none";
-  planModal.style.display="flex";
+  hideModal(signupModal);
+  showModal(planModal);
 };
 
 // Original Stripe Links setup to open via Popups
 document.getElementById("yearlyBtn").onclick = () => {
   openStripePopup("https://buy.stripe.com/3cI3co1fufRi5Vk3S2ejK0k");
-  planModal.style.display = "none";
+  hideModal(planModal);
 };
 
 document.getElementById("lifeBtn").onclick = () => {
   openStripePopup("https://buy.stripe.com/fZu9AMcYc48AgzY1JUejK0j");
-  planModal.style.display = "none";
+  hideModal(planModal);
 };
 
 document.getElementById("coachingCard").onclick = () => {
@@ -1005,13 +1061,13 @@ modalLoginBtn.onclick=async()=>{
   }else{
     document.querySelector("#planModal h2").textContent = "Account Created! Choose Your Plan";
     planModal.classList.remove("view-only");
-    planModal.style.display="flex";
+    showModal(planModal);
   }
-  loginModal.style.display="none";
+  hideModal(loginModal);
 };
 
 document.querySelectorAll('.locked').forEach(card=>{
-  card.addEventListener('click',()=>{signupModal.style.display='flex'});
+  card.addEventListener('click',()=>{showModal(signupModal)});
 });
 
 // Original PayPal Button Initializer Routine Restored
