@@ -14,7 +14,9 @@
   --card:#161b22;
   --muted:#8b949e;
 
-  --green:#86efac;
+  --green:#4ade80;
+  --dark-green-bg: rgba(46, 125, 50, 0.25);
+  --dark-green-border: rgba(74, 222, 128, 0.4);
   --red:#f87171;
   --yellow:#F9D949;
 }
@@ -95,9 +97,9 @@ header {
 
 /* WINRATE */
 .winrate-bubble {
-  background: rgba(249,217,73,0.15);
-  color: var(--yellow);
-  border: 1px solid rgba(249,217,73,0.45);
+  background: var(--dark-green-bg);
+  color: var(--green);
+  border: 1px solid var(--dark-green-border);
   font-weight: 600;
   padding: 6px 16px;
   border-radius: 999px;
@@ -204,7 +206,7 @@ if (localStorage.getItem('lolfundamentals_logged_in') !== 'true') {
       <h2>Matchup Notes</h2>
       <ul>
         <li>This is one of Ekko's best matchups. Your passive remains on him so you always know which one is the real one.</li>
-        <li>You can pretty much take any E against him. Shaco's hardly ever build MR and he'll have to Q away immediately which you can follow with your Q.</li>
+        <li>You can pretty much take any E against him. Shacos hardly ever build MR and he'll have to Q away immediately which you can follow with your Q.</li>
         <li>Shaco has one of the fastest early clears but then falls off dramatically. Don't be concerned if he's ahead early.</li>
       </ul>
     </div>
