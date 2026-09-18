@@ -135,6 +135,31 @@ header {
   border: 1px solid rgba(201,170,113,0.18);
 }
 
+/* VIDEO */
+.video-card {
+  margin: 36px auto 40px;
+  padding: 26px;
+  background: linear-gradient(180deg, #161b22, #12161d);
+  border-radius: 18px;
+  border: 1px solid rgba(201,170,113,0.18);
+}
+
+.video-card h2 {
+  margin: 0 0 16px 0;
+  font-size: 22px;
+  color: var(--gold);
+  padding-bottom: 8px;
+  border-bottom: 1px solid rgba(201,170,113,0.25);
+}
+
+.video-card iframe {
+  width: 100%;
+  aspect-ratio: 16 / 9;
+  height: auto;
+  border: none;
+  border-radius: 12px;
+}
+
 /* FOOTER */
 footer {
   text-align: center;
@@ -153,6 +178,13 @@ footer {
 
   .matchup-right {
     text-align: center;
+  }
+
+  .video-card {
+    padding: 12px;
+    margin: 20px 8px;
+    width: calc(100% - 16px);
+    box-sizing: border-box;
   }
 }
 </style>
@@ -184,7 +216,7 @@ if (localStorage.getItem('lolfundamentals_logged_in') !== 'true') {
       <h2>Matchup Notes</h2>
       <ul>
         <li>If you E through her E, you can still connect with E2 but you'll land stunned.</li>
-        <li>If she ults away, your Q will be to slow after the E to hit her.</li>
+        <li>If she ults away, your Q will be too slow after the E to hit her.</li>
         <li>It's often worth it to use ult to dodge her W, otherwise you can end up completely stuck.</li>
       </ul>
     </div>
@@ -207,6 +239,12 @@ if (localStorage.getItem('lolfundamentals_logged_in') !== 'true') {
     <p>
       Start red. Taliyah is good at contesting your raptors and if she starts raptors, then you can look to catch her above the side bush in front of raptors.
     </p>
+  </div>
+
+  <!-- VOD -->
+  <div class="video-card">
+    <h2>VODs</h2>
+    <iframe src="https://www.youtube.com/embed/d9vn1vqf_Aw" allowfullscreen></iframe>
   </div>
 
 </div>
