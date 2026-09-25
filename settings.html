@@ -175,62 +175,26 @@ button {
   transform: translateY(-2px);
 }
 
-/* Upgrade Buttons Styling (Index Style) */
+/* Upgrade Section Styling (Original) */
 .upgrade-section {
   display: none;
   margin-top: 15px;
 }
 
 .upgrade-btn {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  padding: 12px 20px;
-  font-size: 0.95rem;
-  border-radius: 6px;
+  display: inline-block;
+  padding: 12px 24px;
+  font-size: 16px;
+  border-radius: 8px;
   text-decoration: none;
-  font-weight: 700;
-  flex: 1;
-  min-width: 180px;
-  box-sizing: border-box;
-  transition: transform 0.2s ease, box-shadow 0.2s ease, background 0.2s ease;
+  font-weight: bold;
+  color: #fff;
+  background: #2ea043;
+  transition: all 0.3s;
 }
-
-.stripe-upgrade-btn {
-  background: linear-gradient(135deg, #635bff 0%, #4b45e4 100%);
-  color: #ffffff;
-  box-shadow: 0 4px 12px rgba(99, 91, 255, 0.35);
-}
-.stripe-upgrade-btn:hover {
-  background: linear-gradient(135deg, #7a73ff 0%, #5a54f3 100%);
-  box-shadow: 0 6px 16px rgba(99, 91, 255, 0.5);
-  transform: translateY(-1px);
-}
-
-.paypal-upgrade-btn {
-  background: linear-gradient(180deg, #ffdb4d 0%, #ffc439 100%);
-  color: #111111;
-  border: 1px solid #e5ad2b;
-  box-shadow: 0 4px 12px rgba(255, 196, 57, 0.35);
-}
-.paypal-upgrade-btn:hover {
-  background: linear-gradient(180deg, #ffdf5c 0%, #ffcc4d 100%);
-  color: #000000;
-  box-shadow: 0 6px 16px rgba(255, 196, 57, 0.5);
-  transform: translateY(-1px);
-}
-
-/* Specific Index PayPal font coloring styling */
-.paypal-text-blue {
-  color: #003087;
-  font-weight: 800;
-  font-style: italic;
-  margin-right: 2px;
-}
-.paypal-text-light {
-  color: #0079c1;
-  font-weight: 800;
-  font-style: italic;
+.upgrade-btn:hover {
+  background: #3fb950;
+  transform: translateY(-2px);
 }
 
 #confirmDialog {
@@ -265,11 +229,11 @@ footer a:hover { text-decoration:underline; }
 
 <div class="settings-container">
   <h2>Manage Account</h2>
-  <p>Use the options below to log out, upgrade to a lifetime membership for permanent access, or manage your current subscription.</p>
+  <p>Use the options below to log out, upgrade to a lifetime membership for permanent access, or cancel your current subscription.</p>
 
   <div class="btn-row">
     <button id="logoutBtn" onclick="logout()">Logout</button>
-    <button id="initUpgradeBtn" onclick="document.getElementById('upgradeSection').style.display='block'; document.getElementById('confirmDialog').style.display='none';">Upgrade to Lifetime</button>
+    <button id="initUpgradeBtn" onclick="document.getElementById('upgradeSection').style.display='block'; document.getElementById('confirmDialog').style.display='none';">Upgrade</button>
     <button id="cancelBtn" onclick="document.getElementById('confirmDialog').style.display='block'; document.getElementById('upgradeSection').style.display='none';">Cancel Subscription</button>
   </div>
 
@@ -278,7 +242,7 @@ footer a:hover { text-decoration:underline; }
     <button id="confirmYes" onclick="cancelSubscription()">Yes</button>
     <button id="confirmNo" onclick="document.getElementById('confirmDialog').style.display='none'">No</button>
   </div>
-  <div id="confirmMessage">Your membership cancellation request has been received. Remember, you can upgrade to a lifetime membership at any time for permanent access without recurring bills!</div>
+  <div id="confirmMessage">Your membership has been cancelled. You can upgrade to a lifetime membership at any time for permanent access without recurring bills!</div>
 
   <!-- Expandable Upgrade Popup Section -->
   <div id="upgradeSection" class="upgrade-section">
@@ -286,13 +250,8 @@ footer a:hover { text-decoration:underline; }
     
     <div class="btn-row">
       <!-- Stripe Lifetime Link ($79.99) -->
-      <a href="https://buy.stripe.com/5kA5w65u4gV86pObIJ" target="_blank" rel="noopener noreferrer" class="upgrade-btn stripe-upgrade-btn">
-        Pay with Stripe
-      </a>
-
-      <!-- PayPal Lifetime Link with Index Colors -->
-      <a href="https://www.paypal.com/ncp/payment/4PMMGAA7BP8PC" target="_blank" rel="noopener noreferrer" class="upgrade-btn paypal-upgrade-btn">
-        <span><span class="paypal-text-blue">Pay</span><span class="paypal-text-light">Pal</span></span>
+      <a href="https://buy.stripe.com/5kA5w65u4gV86pObIJ" target="_blank" rel="noopener noreferrer" class="upgrade-btn">
+        Upgrade to Lifetime ($79.99)
       </a>
     </div>
   </div>
