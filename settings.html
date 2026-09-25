@@ -41,7 +41,7 @@ window.logout = function() {
   window.location.href = 'index.html';
 };
 
-// Cancel subscription logic (fixed)
+// Cancel subscription logic
 window.cancelSubscription = async function () {
   onAuthStateChanged(auth, async (user) => {
     if (!user) {
@@ -173,7 +173,7 @@ button {
   transform: translateY(-2px);
 }
 
-/* Upgrade Buttons Styling (No Logo) */
+/* Upgrade Buttons Styling */
 .upgrade-btn {
   display: flex;
   align-items: center;
@@ -200,17 +200,17 @@ button {
   transform: translateY(-1px);
 }
 
-/* Official PayPal Button Yellow/Gold Color (#ffc439) */
+/* Official PayPal Blue Button Color (#0070ba) with White Text */
 .paypal-upgrade-btn {
-  background: linear-gradient(180deg, #ffdb4d 0%, #ffc439 100%);
-  color: #111111;
-  border: 1px solid #e5ad2b;
-  box-shadow: 0 4px 12px rgba(255, 196, 57, 0.35);
+  background: linear-gradient(180deg, #0079c1 0%, #00457c 100%);
+  color: #ffffff;
+  border: 1px solid #005ea6;
+  box-shadow: 0 4px 12px rgba(0, 112, 186, 0.35);
 }
 .paypal-upgrade-btn:hover {
-  background: linear-gradient(180deg, #ffdf5c 0%, #ffcc4d 100%);
-  color: #000000;
-  box-shadow: 0 6px 16px rgba(255, 196, 57, 0.5);
+  background: linear-gradient(180deg, #0088d9 0%, #005396 100%);
+  color: #ffffff;
+  box-shadow: 0 6px 16px rgba(0, 112, 186, 0.5);
   transform: translateY(-1px);
 }
 
@@ -269,7 +269,7 @@ footer a:hover { text-decoration:underline; }
       Upgrade with Stripe
     </a>
 
-    <!-- PayPal Lifetime Link (Official PayPal Gold/Yellow Color) -->
+    <!-- PayPal Lifetime Link (Official PayPal Blue styling) -->
     <a href="https://www.paypal.com/ncp/payment/4PMMGAA7BP8PC" target="_blank" rel="noopener noreferrer" class="upgrade-btn paypal-upgrade-btn">
       Upgrade with PayPal
     </a>
