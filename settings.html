@@ -121,14 +121,6 @@ body::before {
   color: #c9aa71;
   margin-bottom: 20px;
 }
-.settings-container h3 {
-  color: #c9aa71;
-  font-size: 1.15rem;
-  margin-top: 25px;
-  margin-bottom: 15px;
-  border-top: 1px solid rgba(201, 170, 113, 0.2);
-  padding-top: 20px;
-}
 .settings-container p {
   color: #e6edf3;
   margin-bottom: 20px;
@@ -183,7 +175,7 @@ button {
   transform: translateY(-2px);
 }
 
-/* Upgrade Buttons Styling (No Box, Just Buttons) */
+/* Upgrade Buttons Styling (Index Style) */
 .upgrade-section {
   display: none;
   margin-top: 15px;
@@ -226,6 +218,19 @@ button {
   color: #000000;
   box-shadow: 0 6px 16px rgba(255, 196, 57, 0.5);
   transform: translateY(-1px);
+}
+
+/* Specific Index PayPal font coloring styling */
+.paypal-text-blue {
+  color: #003087;
+  font-weight: 800;
+  font-style: italic;
+  margin-right: 2px;
+}
+.paypal-text-light {
+  color: #0079c1;
+  font-weight: 800;
+  font-style: italic;
 }
 
 #confirmDialog {
@@ -275,20 +280,19 @@ footer a:hover { text-decoration:underline; }
   </div>
   <div id="confirmMessage">Your membership has been cancelled. You will continue to have access until the end of your current billing period. Thank you for being a member of LoL Fundamentals!</div>
 
-  <!-- Expandable Upgrade Section -->
+  <!-- Expandable Upgrade Popup Section -->
   <div id="upgradeSection" class="upgrade-section">
-    <h3>Upgrade to Lifetime Access</h3>
-    <p style="font-size: 0.9rem; color: #cfe1ee; margin-bottom: 15px;">Never worry about recurring bills again. Get permanent access to all current and future content!</p>
+    <p>Never worry about recurring bills again. Get permanent access to all current and future content!</p>
     
     <div class="btn-row">
       <!-- Stripe Lifetime Link ($79.99) -->
       <a href="https://buy.stripe.com/5kA5w65u4gV86pObIJ" target="_blank" rel="noopener noreferrer" class="upgrade-btn stripe-upgrade-btn">
-        Upgrade with Stripe
+        Pay with Stripe
       </a>
 
-      <!-- PayPal Lifetime Link -->
+      <!-- PayPal Lifetime Link with Index Colors -->
       <a href="https://www.paypal.com/ncp/payment/4PMMGAA7BP8PC" target="_blank" rel="noopener noreferrer" class="upgrade-btn paypal-upgrade-btn">
-        Upgrade with PayPal
+        <span><span class="paypal-text-blue">Pay</span><span class="paypal-text-light">Pal</span></span>
       </a>
     </div>
   </div>
