@@ -173,7 +173,17 @@ button {
   transform: translateY(-2px);
 }
 
-/* Upgrade Buttons Styling */
+#initUpgradeBtn {
+  padding: 12px 24px;
+  background: #2ea043;
+  color: #fff;
+}
+#initUpgradeBtn:hover {
+  background: #3fb950;
+  transform: translateY(-2px);
+}
+
+/* Upgrade Buttons Styling (Yellow with White Text) */
 .upgrade-btn {
   display: flex;
   align-items: center;
@@ -200,7 +210,6 @@ button {
   transform: translateY(-1px);
 }
 
-/* Yellow Button with White Text */
 .paypal-upgrade-btn {
   background: linear-gradient(135deg, #f1c40f 0%, #d4ac0d 100%);
   color: #ffffff;
@@ -229,6 +238,11 @@ button {
   font-weight: bold;
 }
 
+#upgradeDialog {
+  display: none;
+  margin-top: 15px;
+}
+
 footer {
   margin-top: auto;
   padding: 20px;
@@ -246,7 +260,7 @@ footer a:hover { text-decoration:underline; }
 
 <div class="settings-container">
   <h2>Manage Account</h2>
-  <p>Use the options below to log out, upgrade to a lifetime membership, or cancel your current subscription.</p>
+  <p>Use the options below to log out, upgrade your membership, or cancel your current subscription.</p>
 
   <div class="btn-row">
     <button id="logoutBtn" onclick="logout()">Logout</button>
@@ -260,19 +274,23 @@ footer a:hover { text-decoration:underline; }
   </div>
   <div id="confirmMessage">Your membership has been cancelled. You will continue to have access until the end of your current billing period. Thank you for being a member of LoL Fundamentals!</div>
 
-  <h3>Upgrade to Lifetime Access</h3>
-  <p style="font-size: 0.9rem; color: #cfe1ee; margin-bottom: 15px;">Never worry about recurring bills again. Get permanent access to all current and future content!</p>
-  
+  <h3>Membership</h3>
   <div class="btn-row">
-    <!-- Stripe Lifetime Link -->
-    <a href="https://buy.stripe.com/8x2fZa5vK5cE1F49cmejK0n" target="_blank" rel="noopener noreferrer" class="upgrade-btn stripe-upgrade-btn">
-      Upgrade with Stripe
-    </a>
+    <button id="initUpgradeBtn" onclick="document.getElementById('upgradeDialog').style.display='block'">Upgrade</button>
+  </div>
 
-    <!-- PayPal Lifetime Link (Yellow with White Text) -->
-    <a href="https://www.paypal.com/ncp/payment/4PMMGAA7BP8PC" target="_blank" rel="noopener noreferrer" class="upgrade-btn paypal-upgrade-btn">
-      Upgrade with PayPal
-    </a>
+  <div id="upgradeDialog">
+    <div class="btn-row" style="margin-top: 15px;">
+      <!-- Stripe Lifetime Link -->
+      <a href="https://buy.stripe.com/8x2fZa5vK5cE1F49cmejK0n" target="_blank" rel="noopener noreferrer" class="upgrade-btn stripe-upgrade-btn">
+        Stripe
+      </a>
+
+      <!-- PayPal Lifetime Link -->
+      <a href="https://www.paypal.com/ncp/payment/4PMMGAA7BP8PC" target="_blank" rel="noopener noreferrer" class="upgrade-btn paypal-upgrade-btn">
+        PayPal
+      </a>
+    </div>
   </div>
 </div>
 
