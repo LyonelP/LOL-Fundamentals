@@ -265,11 +265,11 @@ footer a:hover { text-decoration:underline; }
 
 <div class="settings-container">
   <h2>Manage Account</h2>
-  <p>Use the options below to log out, upgrade, or cancel your current subscription.</p>
+  <p>Use the options below to log out, upgrade to a lifetime membership for permanent access, or manage your current subscription.</p>
 
   <div class="btn-row">
     <button id="logoutBtn" onclick="logout()">Logout</button>
-    <button id="initUpgradeBtn" onclick="document.getElementById('upgradeSection').style.display='block'; document.getElementById('confirmDialog').style.display='none';">Upgrade</button>
+    <button id="initUpgradeBtn" onclick="document.getElementById('upgradeSection').style.display='block'; document.getElementById('confirmDialog').style.display='none';">Upgrade to Lifetime</button>
     <button id="cancelBtn" onclick="document.getElementById('confirmDialog').style.display='block'; document.getElementById('upgradeSection').style.display='none';">Cancel Subscription</button>
   </div>
 
@@ -278,11 +278,11 @@ footer a:hover { text-decoration:underline; }
     <button id="confirmYes" onclick="cancelSubscription()">Yes</button>
     <button id="confirmNo" onclick="document.getElementById('confirmDialog').style.display='none'">No</button>
   </div>
-  <div id="confirmMessage">Your membership has been cancelled. You will continue to have access until the end of your current billing period. Thank you for being a member of LoL Fundamentals!</div>
+  <div id="confirmMessage">Your membership cancellation request has been received. Remember, you can upgrade to a lifetime membership at any time for permanent access without recurring bills!</div>
 
   <!-- Expandable Upgrade Popup Section -->
   <div id="upgradeSection" class="upgrade-section">
-    <p>Never worry about recurring bills again. Get permanent access to all current and future content!</p>
+    <p>Never worry about recurring bills again. Upgrade to a lifetime membership for permanent access to all current and future content!</p>
     
     <div class="btn-row">
       <!-- Stripe Lifetime Link ($79.99) -->
