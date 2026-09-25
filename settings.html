@@ -288,14 +288,14 @@ footer a:hover { text-decoration:underline; }
 
   <div id="upgradeDialog">
     <div style="font-weight: bold; color: #c9aa71; font-size: 1.1rem; margin-bottom: 2px;">LIFETIME ACCESS</div>
-    <div style="font-size: 1.35rem; font-weight: bold; color: #fff; margin-bottom: 4px;">$99.99 <span style="font-size: 0.8rem; font-weight: normal; color: #8b949e;">/ once</span></div>
+    <div style="font-size: 1.35rem; font-weight: bold; color: #fff; margin-bottom: 4px;">$79.99 <span style="font-size: 0.8rem; font-weight: normal; color: #8b949e;">/ once</span></div>
     
     <p style="color: #ffffff; font-size: 0.9rem; margin: 10px 0 15px; line-height: 1.4; text-align: left;">
       Upgrade to lifetime for permanent access to all current and future content
     </p>
 
-    <!-- Pay with Stripe Button -->
-    <a href="javascript:void(0);" onclick="openStripePopup('https://buy.stripe.com/fZu9AMcYc48AgzY1JUejK0j')" class="stripe-btn">
+    <!-- Pay with Stripe Button ($79.99 Link) -->
+    <a href="javascript:void(0);" onclick="openStripePopup('https://buy.stripe.com/5kA5w65u4gV86pObIJ')" class="stripe-btn">
       <svg class="stripe-icon" viewBox="0 0 24 24"><path d="M20 4H4c-1.11 0-1.99.89-1.99 2L2 18c0 1.11.89 2 2 2h16c1.11 0 2-.89 2-2V6c0-1.11-.89-2-2-2zm0 14H4v-6h16v6zm0-10H4V6h16v2z"/></svg>
       Pay with Stripe
     </a>
@@ -316,10 +316,10 @@ footer a:hover { text-decoration:underline; }
 </footer>
 
 <script type="module">
-import { getAuth } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js"; // handles module scope safely
+import { getAuth } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
 import { getFirestore, doc, setDoc, serverTimestamp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
 
-// Initialize PayPal SDK button matching the index implementation
+// Initialize PayPal SDK button for $79.99 Lifetime Access
 function initPayPal() {
   if (!window.paypal) {
     setTimeout(initPayPal, 100);
@@ -334,8 +334,8 @@ function initPayPal() {
         return actions.order.create({
           purchase_units: [{
             description: "LoL Fundamentals - Lifetime Access",
-            amount: { value: "99.99" },
-            custom_id: "lifetime_access_9999"
+            amount: { value: "79.99" },
+            custom_id: "lifetime_access_7999"
           }]
         });
       },
@@ -352,8 +352,8 @@ function initPayPal() {
             paid: true,
             provider: "paypal",
             isLifetime: true,
-            productId: "lifetime_access_9999",
-            productName: "Lifetime Access $99.99",
+            productId: "lifetime_access_7999",
+            productName: "Lifetime Access $79.99",
             orderId: details.id,
             updatedAt: serverTimestamp()
           }, { merge: true });
