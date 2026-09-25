@@ -173,7 +173,7 @@ button {
   transform: translateY(-2px);
 }
 
-/* Upgrade Buttons Styling (No Logo, Matching Color Themes) */
+/* Upgrade Buttons Styling (No Logo) */
 .upgrade-btn {
   display: flex;
   align-items: center;
@@ -200,16 +200,17 @@ button {
   transform: translateY(-1px);
 }
 
+/* Official PayPal Gold/Yellow Style */
 .paypal-upgrade-btn {
-  background: #c9aa71;
-  color: #0a0f14;
-  border: 1px solid #f2b96d;
-  box-shadow: 0 0 15px rgba(201,170,113,0.4);
+  background: linear-gradient(180deg, #ffdb4d 0%, #ffc439 100%);
+  color: #003087;
+  border: 1px solid #e5ad2b;
+  box-shadow: 0 4px 12px rgba(255, 196, 57, 0.35);
 }
 .paypal-upgrade-btn:hover {
-  background: #e0c187;
-  color: #0a0f14;
-  box-shadow: 0 0 25px rgba(201,170,113,0.6);
+  background: linear-gradient(180deg, #ffdf5c 0%, #ffcc4d 100%);
+  color: #002266;
+  box-shadow: 0 6px 16px rgba(255, 196, 57, 0.5);
   transform: translateY(-1px);
 }
 
@@ -268,7 +269,7 @@ footer a:hover { text-decoration:underline; }
       Upgrade with Stripe
     </a>
 
-    <!-- PayPal Lifetime Link (Yellow/Gold Theme matching index) -->
+    <!-- PayPal Lifetime Link (True PayPal Yellow/Gold) -->
     <a href="https://www.paypal.com/ncp/payment/4PMMGAA7BP8PC" target="_blank" rel="noopener noreferrer" class="upgrade-btn paypal-upgrade-btn">
       Upgrade with PayPal
     </a>
