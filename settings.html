@@ -7,11 +7,14 @@
 <link rel="icon" type="image/png" href="/favicon.png">
 <link rel="apple-touch-icon" href="/favicon.png">
 
+<!-- PayPal SDK (Vault enabled for subscription & standard one-time payments) -->
+<script src="https://www.paypal.com/sdk/js?client-id=BAAtEntN8Ld9QbEW216fgK5JXM-HQqChNE3EyLGCgX85uo4BZ3w8scKdOhvmqrKGX3yzCzgOHHdSsfna3o&currency=USD&vault=true&disable-funding=credit,card,venmo,paylater"></script>
+
 <!-- Firebase -->
 <script type="module">
 import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
 import { getAuth, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-auth.js";
-import { getFirestore, collection, addDoc, serverTimestamp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
+import { getFirestore, collection, addDoc, serverTimestamp, setDoc, doc } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
 
 // --- FIREBASE CONFIG ---
 const firebaseConfig = {
@@ -39,6 +42,15 @@ onAuthStateChanged(auth, (user) => {
 window.logout = function() {
   localStorage.removeItem('lolfundamentals_logged_in');
   window.location.href = 'index.html';
+};
+
+// Secure Popup Window Helper for External Stripe Checkout
+window.openStripePopup = function(url) {
+  const width = 600;
+  const height = 750;
+  const left = (window.innerWidth / 2) - (width / 2);
+  const top = (window.innerHeight / 2) - (height / 2);
+  window.open(url, 'StripeCheckout', `width=${width},height=${height},top=${top},left=${left},resizable=yes,scrollbars=yes,status=yes`);
 };
 
 // Cancel subscription logic
@@ -175,44 +187,46 @@ button {
   transform: translateY(-2px);
 }
 
-/* Index-matching Lifetime Buttons Styling */
-.upgrade-btn {
+/* Index-matching Stripe Button Styling */
+.stripe-btn {
+  background: linear-gradient(135deg, #635bff 0%, #4b45e4 100%);
+  color: #ffffff;
+  border: none;
+  border-radius: 6px;
+  font-weight: 700;
+  font-size: 0.95rem;
+  width: 100%;
+  height: 42px;
   display: flex;
   align-items: center;
   justify-content: center;
-  padding: 12px 20px;
-  font-size: 0.95rem;
-  border-radius: 6px;
-  text-decoration: none;
-  font-weight: 700;
-  flex: 1;
-  min-width: 180px;
-  box-sizing: border-box;
+  gap: 8px;
+  cursor: pointer;
+  box-shadow: 0 4px 12px rgba(99, 91, 255, 0.35);
   transition: transform 0.2s ease, box-shadow 0.2s ease, background 0.2s ease;
+  letter-spacing: 0.3px;
+  text-decoration: none;
+  box-sizing: border-box;
 }
 
-.stripe-upgrade-btn {
-  background: linear-gradient(135deg, #635bff 0%, #4b45e4 100%);
-  color: #ffffff;
-  box-shadow: 0 4px 12px rgba(99, 91, 255, 0.35);
-}
-.stripe-upgrade-btn:hover {
+.stripe-btn:hover {
   background: linear-gradient(135deg, #7a73ff 0%, #5a54f3 100%);
   box-shadow: 0 6px 16px rgba(99, 91, 255, 0.5);
   transform: translateY(-1px);
 }
 
-.paypal-upgrade-btn {
-  background: linear-gradient(135deg, #f1c40f 0%, #d4ac0d 100%);
-  color: #ffffff;
-  border: 1px solid #b7950b;
-  box-shadow: 0 4px 12px rgba(241, 196, 15, 0.35);
+.stripe-icon {
+  width: 18px;
+  height: 18px;
+  fill: #ffffff;
 }
-.paypal-upgrade-btn:hover {
-  background: linear-gradient(135deg, #f4d03f 0%, #d4ac0d 100%);
-  color: #ffffff;
-  box-shadow: 0 6px 16px rgba(241, 196, 15, 0.5);
-  transform: translateY(-1px);
+
+.payment-separator {
+  font-size: 0.75rem;
+  color: #8b949e;
+  margin: 10px 0 6px;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
 }
 
 #confirmDialog {
@@ -233,6 +247,11 @@ button {
 #upgradeDialog {
   display: none;
   margin-top: 15px;
+  background: #0d1117;
+  border: 1px solid #c9aa71;
+  border-radius: 10px;
+  padding: 20px;
+  text-align: left;
 }
 
 footer {
@@ -268,16 +287,26 @@ footer a:hover { text-decoration:underline; }
   <div id="confirmMessage">Your membership has been cancelled. You will continue to have access until the end of your current billing period. Thank you for being a member of LoL Fundamentals!</div>
 
   <div id="upgradeDialog">
-    <div class="btn-row" style="margin-top: 15px;">
-      <!-- Pay with Stripe Link -->
-      <a href="https://buy.stripe.com/8x2fZa5vK5cE1F49cmejK0n" target="_blank" rel="noopener noreferrer" class="upgrade-btn stripe-upgrade-btn">
-        Pay with Stripe
-      </a>
+    <div style="font-weight: bold; color: #c9aa71; font-size: 1.1rem; margin-bottom: 2px;">LIFETIME ACCESS</div>
+    <div style="font-size: 1.35rem; font-weight: bold; color: #fff; margin-bottom: 4px;">$99.99 <span style="font-size: 0.8rem; font-weight: normal; color: #8b949e;">/ once</span></div>
+    
+    <p style="color: #ffffff; font-size: 0.9rem; margin: 10px 0 15px; line-height: 1.4; text-align: left;">
+      Upgrade to lifetime for permanent access to all current and future content
+    </p>
 
-      <!-- PayPal Button Link -->
-      <a href="https://www.paypal.com/ncp/payment/4PMMGAA7BP8PC" target="_blank" rel="noopener noreferrer" class="upgrade-btn paypal-upgrade-btn">
-        PayPal
-      </a>
+    <!-- Pay with Stripe Button -->
+    <a href="javascript:void(0);" onclick="openStripePopup('https://buy.stripe.com/fZu9AMcYc48AgzY1JUejK0j')" class="stripe-btn">
+      <svg class="stripe-icon" viewBox="0 0 24 24"><path d="M20 4H4c-1.11 0-1.99.89-1.99 2L2 18c0 1.11.89 2 2 2h16c1.11 0 2-.89 2-2V6c0-1.11-.89-2-2-2zm0 14H4v-6h16v6zm0-10H4V6h16v2z"/></svg>
+      Pay with Stripe
+    </a>
+
+    <div class="payment-separator" style="text-align: center;">— OR —</div>
+    
+    <!-- PayPal Button Container -->
+    <div id="paypal-button-container-lifetime" style="width: 100%;"></div>
+
+    <div style="text-align: center; margin-top: 15px;">
+      <button onclick="document.getElementById('upgradeDialog').style.display='none'" style="background:none; border:none; color:#c9aa71; cursor:pointer; font-size:0.9rem;">Close</button>
     </div>
   </div>
 </div>
@@ -285,5 +314,60 @@ footer a:hover { text-decoration:underline; }
 <footer>
 © 2026 LoL Fundamentals · <a href="termssettings.html">Terms of Service</a> · <a href="privacysettings.html">Privacy Policy</a> · Contact: <a href="mailto:billing@lolfundamentals.com">billing@lolfundamentals.com</a>
 </footer>
+
+<script type="module">
+import { getAuth } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js"; // handles module scope safely
+import { getFirestore, doc, setDoc, serverTimestamp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
+
+// Initialize PayPal SDK button matching the index implementation
+function initPayPal() {
+  if (!window.paypal) {
+    setTimeout(initPayPal, 100);
+    return;
+  }
+
+  const lifetimeContainer = document.getElementById('paypal-button-container-lifetime');
+  if (lifetimeContainer && !lifetimeContainer.hasChildNodes()) {
+    paypal.Buttons({
+      style: { shape: 'rect', color: 'gold', layout: 'vertical', height: 40, label: 'paypal' },
+      createOrder: function(data, actions) {
+        return actions.order.create({
+          purchase_units: [{
+            description: "LoL Fundamentals - Lifetime Access",
+            amount: { value: "99.99" },
+            custom_id: "lifetime_access_9999"
+          }]
+        });
+      },
+      onApprove: async function(data, actions) {
+        const details = await actions.order.capture();
+        const authInstance = window.firebaseAuth || getAuth();
+        const currentUser = authInstance.currentUser;
+        const targetEmail = currentUser ? currentUser.email : localStorage.getItem("pendingUserEmail");
+
+        if (targetEmail) {
+          const db = window.firebaseFirestore || getFirestore();
+          await setDoc(doc(db, "paidUsers", targetEmail.toLowerCase()), {
+            email: targetEmail.toLowerCase(),
+            paid: true,
+            provider: "paypal",
+            isLifetime: true,
+            productId: "lifetime_access_9999",
+            productName: "Lifetime Access $99.99",
+            orderId: details.id,
+            updatedAt: serverTimestamp()
+          }, { merge: true });
+
+          localStorage.setItem("lolfundamentals_logged_in", "true");
+          localStorage.setItem("lolfundamentals_paid", "true");
+          window.location.href = "membershub.html";
+        }
+      }
+    }).render('#paypal-button-container-lifetime');
+  }
+}
+
+initPayPal();
+</script>
 </body>
 </html>
