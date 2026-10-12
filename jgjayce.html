@@ -3,18 +3,17 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title> Jungle Matchup</title>
+<title>Jayce Jungle Matchup</title>
 <link rel="icon" type="image/png" href="/favicon.png">
 <link rel="apple-touch-icon" href="/favicon.png">
 
 <style>
 :root {
-  --gold:#c9aa71;
-  --bg:#0a0f14;
-  --card:#161b22;
-  --muted:#8b949e;
-  --yellow:#F9D949;
-  --red:#f87171;
+  --gold: #c9aa71;
+  --bg: #0a0f14;
+  --card: #161b22;
+  --muted: #8b949e;
+  --light-green: #86efac;
 }
 
 body {
@@ -91,15 +90,16 @@ header {
   box-shadow: 0 0 28px rgba(201,170,113,0.45);
 }
 
-/* WINRATE */
+/* WINRATE (LIGHT GREEN STYLE) */
 .winrate-bubble {
-  background: rgba(249,217,73,0.15);
-  color: var(--yellow);
-  border: 1px solid rgba(249,217,73,0.45);
+  background: rgba(134,239,172,0.15);
+  color: var(--light-green);
+  border: 1px solid rgba(134,239,172,0.45);
   font-weight: 600;
   padding: 6px 16px;
   border-radius: 999px;
   font-size: 14px;
+  letter-spacing: 0.5px;
 }
 
 /* RIGHT */
@@ -116,8 +116,9 @@ header {
 }
 
 .matchup-right ul {
-  padding-left: 18px;
+  padding-left: 20px;
   margin: 0;
+  list-style-type: disc;
 }
 
 .matchup-right li {
@@ -176,6 +177,11 @@ footer {
   }
 
   .matchup-right {
+    width: 100%;
+    text-align: left;
+  }
+
+  .matchup-right h2 {
     text-align: center;
   }
 
@@ -208,7 +214,7 @@ if (localStorage.getItem('lolfundamentals_logged_in') !== 'true') {
   <div class="matchup-container">
     <div class="matchup-left">
       <img src="https://ddragon.leagueoflegends.com/cdn/14.23.1/img/champion/Jayce.png" alt="Jayce">
-      <div class="winrate-bubble">Matchup</div>
+      <div class="winrate-bubble">52%</div>
     </div>
 
     <div class="matchup-right">
@@ -249,9 +255,4 @@ if (localStorage.getItem('lolfundamentals_logged_in') !== 'true') {
 </div>
 
 <footer>
-© 2026 LoL Fundamentals. Not affiliated with or endorsed by Riot Games.
-League of Legends is a trademark of Riot Games, Inc.
-</footer>
-
-</body>
-</html>
+© 2026 Lo
