@@ -135,6 +135,31 @@ header {
   border: 1px solid rgba(201,170,113,0.18);
 }
 
+/* VIDEO */
+.video-card {
+  margin: 36px auto 40px;
+  padding: 26px;
+  background: linear-gradient(180deg, #161b22, #12161d);
+  border-radius: 18px;
+  border: 1px solid rgba(201,170,113,0.18);
+}
+
+.video-card h2 {
+  margin: 0 0 16px 0;
+  font-size: 22px;
+  color: var(--gold);
+  padding-bottom: 8px;
+  border-bottom: 1px solid rgba(201,170,113,0.25);
+}
+
+.video-card iframe {
+  width: 100%;
+  aspect-ratio: 16 / 9;
+  height: auto;
+  border: none;
+  border-radius: 12px;
+}
+
 /* FOOTER */
 footer {
   text-align: center;
@@ -153,6 +178,13 @@ footer {
 
   .matchup-right {
     text-align: center;
+  }
+
+  .video-card {
+    padding: 12px;
+    margin: 20px 8px;
+    width: calc(100% - 16px);
+    box-sizing: border-box;
   }
 }
 </style>
@@ -186,8 +218,7 @@ if (localStorage.getItem('lolfundamentals_logged_in') !== 'true') {
         <li>Zyra has one of the most consistent fast clears in the game right now. She can be done with her clear while your still on wolf camp. This makes her invade threat at blue and gromp very strong.</li>
         <li>Eventually you will have favorable fights against her, so it's best to play it slow.</li>
         <li>She usually doesn't build MR making her one of your primary targets.</li>
-	<li>Watch out for her Baron takes past 20 minutes.</li>
-
+        <li>Watch out for her Baron takes past 20 minutes.</li>
       </ul>
     </div>
   </div>
@@ -209,6 +240,12 @@ if (localStorage.getItem('lolfundamentals_logged_in') !== 'true') {
     <p>
       I actually try to path away from Zyra
     </p>
+  </div>
+
+  <!-- VOD -->
+  <div class="video-card">
+    <h2>VODs</h2>
+    <iframe src="https://www.youtube.com/embed/P5RwQHkf4Ik" allowfullscreen></iframe>
   </div>
 
 </div>
