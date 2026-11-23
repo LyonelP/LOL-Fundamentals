@@ -141,6 +141,14 @@ header {
   border: 1px solid rgba(201,170,113,0.18);
 }
 
+.video-card h2 {
+  margin: 0 0 16px 0;
+  font-size: 22px;
+  color: var(--gold);
+  padding-bottom: 8px;
+  border-bottom: 1px solid rgba(201,170,113,0.25);
+}
+
 .video-card iframe {
   width: 100%;
   aspect-ratio: 16 / 9;
@@ -219,6 +227,12 @@ if (localStorage.getItem('lolfundamentals_logged_in') !== 'true') {
     <p>
       Raptors, red and blue start are all viable
     </p>
+  </div>
+
+  <!-- VOD -->
+  <div class="video-card">
+    <h2>VODs</h2>
+    <iframe src="https://www.youtube.com/embed/iFETcQLQJH8" allowfullscreen></iframe>
   </div>
 
 </div>
