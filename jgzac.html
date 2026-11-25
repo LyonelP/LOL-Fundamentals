@@ -145,6 +145,14 @@ header {
   border: 1px solid rgba(201,170,113,0.18);
 }
 
+.video-card h2 {
+  margin: 0 0 16px 0;
+  font-size: 22px;
+  color: var(--gold);
+  padding-bottom: 8px;
+  border-bottom: 1px solid rgba(201,170,113,0.25);
+}
+
 .video-card iframe {
   width: 100%;
   height: 480px;
@@ -201,8 +209,8 @@ if (localStorage.getItem('lolfundamentals_logged_in') !== 'true') {
       <h2>Matchup Notes</h2>
       <ul>
         <li>Either land E early before his E or hold it to dodge it.</li>
-	<li>The second part of Zac's Q can interrupt Ekko's E.</li>
-             </ul>
+        <li>The second part of Zac's Q can interrupt Ekko's E.</li>
+      </ul>
     </div>
   </div>
 
@@ -225,6 +233,13 @@ if (localStorage.getItem('lolfundamentals_logged_in') !== 'true') {
     </p>
   </div>
 
+  <!-- VOD -->
+  <div class="video-card">
+    <h2>VODs</h2>
+    <iframe src="https://www.youtube.com/embed/PD7Y1Xpet40" allowfullscreen></iframe>
+  </div>
+
+</div>
 
 <footer>
 © 2026 LoL Fundamentals. Not affiliated with or endorsed by Riot Games.
